@@ -29,27 +29,6 @@ Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah
 
 ---
 
-## 🇬🇧 English (Original)
-
-<details>
-<summary>📖 Klik untuk melihat teks asli (collapse)</summary>
-
-<div style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2); padding: 15px; border-radius: 12px; border-left: 6px solid #007BFF; font-family: 'Segoe UI', sans-serif; margin-top:10px;">
-This is free and unencumbered software released into the public domain. 🆓
-
-Anyone is free to <strong>copy, modify, publish, use, compile, sell, or distribute</strong> this software, either in source code form or as a compiled binary, for <strong>any purpose</strong>, commercial or non-commercial, and by any means. 🔄
-
-In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>all copyright interest to the public domain</strong>. This is done <strong>for the benefit of the public</strong>, not heirs or successors. This dedication <strong>perpetually relinquishes all present and future rights</strong> under copyright law. ⚖️
-
-<strong>THE SOFTWARE IS PROVIDED "AS IS"</strong> without warranty of any kind, express or implied. Authors are <strong>not liable</strong> for any claims, damages, or issues arising from the use of this software. ⚠️
-
-🔗 More info: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #007BFF;">unlicense.org</a>
-</div>
-
-</details>
-
----
-
 ## 📝 Ringkasan Penting ⬇️
 
 <details>
@@ -73,6 +52,26 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 ⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Aku tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain. ❌
 </div>
 
+</div>
+
+</details>
+---
+
+## 🇬🇧 English (Original)
+
+<details>
+<summary>📖 Klik untuk melihat teks asli (collapse)</summary>
+
+<div style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2); padding: 15px; border-radius: 12px; border-left: 6px solid #007BFF; font-family: 'Segoe UI', sans-serif; margin-top:10px;">
+This is free and unencumbered software released into the public domain. 🆓
+
+Anyone is free to <strong>copy, modify, publish, use, compile, sell, or distribute</strong> this software, either in source code form or as a compiled binary, for <strong>any purpose</strong>, commercial or non-commercial, and by any means. 🔄
+
+In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>all copyright interest to the public domain</strong>. This is done <strong>for the benefit of the public</strong>, not heirs or successors. This dedication <strong>perpetually relinquishes all present and future rights</strong> under copyright law. ⚖️
+
+<strong>THE SOFTWARE IS PROVIDED "AS IS"</strong> without warranty of any kind, express or implied. Authors are <strong>not liable</strong> for any claims, damages, or issues arising from the use of this software. ⚠️
+
+🔗 More info: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #007BFF;">unlicense.org</a>
 </div>
 
 </details>
