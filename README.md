@@ -8,7 +8,7 @@
 
 <div align=center>
 
-<img src="thumbnail.jpg">
+<img src="/thumbnail.jpg">
 
 </div>
 
