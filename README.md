@@ -5,8 +5,7 @@
 ![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
 
 ---
-# Screenshot
-<div align=center>
+<div align=center> # rm -fr /
 
   ![screenshot](/preview.png?raw=true)
 ![screenshot](/thumbnail.jpg)
