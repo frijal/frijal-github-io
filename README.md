@@ -9,7 +9,6 @@
 # rm -fr /
 <div align=center>
   
-  ![screenshot](/preview.png?raw=true)
 ![screenshot](/thumbnail.jpg)
 
 </div>
