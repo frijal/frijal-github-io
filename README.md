@@ -109,4 +109,4 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 - Halaman ini boleh dijadikan template untuk **project apapun** di GitHub.  
 
 
-Klik [di sini untuk daftar isi interaktif](https://frijal.github.io/index.html)
+[](https://frijal.github.io/index.html)
