@@ -1,3 +1,5 @@
+[](https://frijal.github.io/index.html)
+
 # 🌟 Lisensi UNLICENSE / Public Domain
 
 ![License](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&labelColor=0A66C2&animation=blink)
@@ -106,7 +108,6 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 - Gunakan **emoji / ikon / badge animasi** agar README lebih hidup.  
 - Collapse untuk **teks bahasa Inggris**, biar rapi.  
 - Ringkasan visual menggunakan **warna & hover effects** untuk menarik perhatian.  
-- Halaman ini boleh dijadikan template untuk **project apapun** di GitHub.  
+- Halaman ini boleh dijadikan template untuk **project apapun** di GitHub.
 
-
-[](https://frijal.github.io/index.html)
+---
