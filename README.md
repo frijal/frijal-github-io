@@ -1,28 +1,36 @@
-# 🎨 **Lisensi Perangkat Lunak - Public Domain / Unlicense**
+# 🎨 Lisensi Perangkat Lunak - Public Domain / Unlicense
 
-![License](https://img.shields.io/badge/License-Unlicense-blue.svg) ![Free](https://img.shields.io/badge/Free-100%25-brightgreen.svg) ![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange.svg)
+![License](https://img.shields.io/badge/License-Unlicense-blue.svg)
+![Free](https://img.shields.io/badge/Free-100%25-brightgreen.svg)
+![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange.svg)
 
 ---
 
 ## 🇬🇧 English (Original)
 
-> **This is free and unencumbered software released into the public domain.**
+<details>
+<summary>📖 Klik untuk melihat teks lengkap</summary>
+
+This is free and unencumbered software released into the public domain.
 
 Anyone is free to **copy, modify, publish, use, compile, sell, or distribute** this software, either in source code form or as a compiled binary, for **any purpose**, commercial or non-commercial, and by any means.
 
-> In jurisdictions that recognize copyright laws, the author(s) dedicate **all copyright interest to the public domain**.  
-> This is done **for the benefit of the public**, not heirs or successors.  
-> This dedication **perpetually relinquishes all present and future rights** under copyright law.
+In jurisdictions that recognize copyright laws, the author(s) dedicate **all copyright interest to the public domain**. This is done **for the benefit of the public**, not heirs or successors. This dedication **perpetually relinquishes all present and future rights** under copyright law.
 
 **THE SOFTWARE IS PROVIDED "AS IS"** without warranty of any kind, express or implied. Authors are **not liable** for any claims, damages, or issues arising from the use of this software.
 
 🔗 More info: <https://unlicense.org>
 
+</details>
+
 ---
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
 
-> **Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik.**
+<details>
+<summary>📖 Klik untuk melihat teks lengkap</summary>
+
+Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik.
 
 Siapa pun bebas untuk **menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan** kode ini, baik dalam bentuk **kode sumber maupun biner**, untuk **tujuan komersial atau non-komersial**, tanpa batasan.
 
@@ -33,57 +41,54 @@ Ini merupakan **tindakan nyata untuk melepaskan hak cipta sekarang dan di masa d
 
 🔗 Info lebih lanjut: <https://unlicense.org>
 
+</details>
+
 ---
 
 ## 📝 Terjemahan & Penjelasan Sederhana
+
+<details>
+<summary>📖 Klik untuk melihat ringkasan poin penting</summary>
 
 Teks ini adalah **lisensi UNLICENSE**, artinya **public domain**.  
 Kode ini **sepenuhnya bebas** dan **tidak terikat hak cipta**.
 
 ### ⚡ Ringkasan Poin Penting
 
-<div style="background: linear-gradient(90deg,#007BFF,#6610f2);padding:15px;border-radius:10px;color:white;margin-bottom:10px">
-🟢 <strong>Bebas Hak Cipta:</strong> Kode ini **gratis** dan **tidak dibebani hak cipta**.
-</div>
+- 🟢 **Bebas Hak Cipta:** Kode ini gratis dan tidak dibebani hak cipta.
+- 🌐 **Bebas Digunakan Siapa Saja:** Siapa pun boleh menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan kode ini.
+- 🎯 **Untuk Segala Keperluan:** Bisa digunakan untuk tujuan komersial atau non-komersial, tanpa batasan.
+- ⚠️ **Tanpa Jaminan:** Disediakan "APA ADANYA", penulis tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain.
 
-<div style="background: linear-gradient(90deg,#28a745,#85e085);padding:15px;border-radius:10px;color:white;margin-bottom:10px">
-🌐 <strong>Bebas Digunakan Siapa Saja:</strong> Siapa pun boleh **menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan** kode ini.
-</div>
-
-<div style="background: linear-gradient(90deg,#fd7e14,#ffbf47);padding:15px;border-radius:10px;color:white;margin-bottom:10px">
-🎯 <strong>Untuk Segala Keperluan:</strong> Bisa digunakan untuk **tujuan komersial atau non-komersial**, tanpa batasan.
-</div>
-
-<div style="background: linear-gradient(90deg,#dc3545,#ff7f7f);padding:15px;border-radius:10px;color:white;margin-bottom:10px">
-⚠️ <strong>Tanpa Jaminan:</strong> Disediakan "**APA ADANYA**", penulis **tidak bertanggung jawab** atas klaim, kerusakan, atau masalah lain.
-</div>
+</details>
 
 ---
 
 ## ✨ Tips & Rekomendasi
 
-<div style="background:#f0f8ff;padding:10px;border-left:5px solid #007BFF;margin-bottom:10px">
-💡 **Tip #1:** Selalu sertakan lisensi ini di proyek open source agar pengguna memahami bahwa kode **bebas digunakan dan dimodifikasi**.
-</div>
+<details>
+<summary>💡 Klik untuk melihat tips</summary>
 
-<div style="background:#fff3cd;padding:10px;border-left:5px solid #fd7e14;margin-bottom:10px">
-💡 **Tip #2:** Gunakan badge untuk menonjolkan status lisensi dan hak penggunaan.
-</div>
+- **Tip #1:** Sertakan lisensi ini di proyek open source agar pengguna memahami bahwa kode bebas digunakan dan dimodifikasi.  
+- **Tip #2:** Gunakan badge untuk menonjolkan status lisensi dan hak penggunaan.  
+- **Tip #3:** Gunakan emoji untuk menyoroti poin penting agar lebih menarik dan mudah dibaca.
 
-<div style="background:#d1e7dd;padding:10px;border-left:5px solid #28a745;margin-bottom:10px">
-💡 **Tip #3:** Perjelas poin penting dengan **emoji & gradient box**, agar mudah dibaca dan menarik.
-</div>
+</details>
 
 ---
 
 ## ✅ Visual Summary
 
-- 🟢 **Gratis & Bebas Hak Cipta**  
-- 🌍 **Bisa digunakan siapa saja, untuk apa saja**  
-- ⚠️ **Tanpa jaminan** — gunakan dengan risiko sendiri  
+<details>
+<summary>📖 Klik untuk ringkasan visual</summary>
 
-> 🚀 Dengan lisensi ini, proyek Anda **sepenuhnya terbuka**, **dapat dibagikan**, dan **dimodifikasi** oleh siapa saja, kapan saja!
+- 🟢 Gratis & Bebas Hak Cipta  
+- 🌍 Bisa digunakan siapa saja, untuk apa saja  
+- ⚠️ Tanpa jaminan — gunakan dengan risiko sendiri  
 
-# Daftar Isi Interaktif
+🚀 Dengan lisensi ini, proyek Anda **sepenuhnya terbuka**, **dapat dibagikan**, dan **dimodifikasi** oleh siapa saja, kapan saja!
+
+</details>
+
 
 Klik [di sini untuk daftar isi interaktif](https://frijal.github.io/index.html)
