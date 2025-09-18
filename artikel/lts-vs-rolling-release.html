@@ -1,0 +1,630 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTS vs Rolling Release: Manakah yang Lebih Baik?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #4a5568;
+            --secondary-color: #2d3748;
+            --accent-color: #3182ce;
+            --text-color: #1a202c;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --muted: #a0aec0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #e2e8f0;
+                --secondary-color: #a0aec0;
+                --accent-color: #63b3ed;
+                --text-color: #f7fafc;
+                --bg-color: #1a202c;
+                --card-bg: #2d3748;
+                --border-color: #4a5568;
+                --muted: #718096;
+            }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .prose {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-top: 2rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p, li {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .image-container {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        pre {
+            background-color: var(--secondary-color);
+            color: #f7fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        pre code {
+            display: block;
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .copy-button:hover {
+            opacity: 1;
+        }
+        .share-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .share-buttons a:hover {
+            transform: translateY(-2px);
+        }
+        .share-buttons svg {
+            width: 20px;
+            height: 20px;
+        }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .info-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .info-card h3 {
+            margin: 0;
+            color: var(--accent-color);
+        }
+        .info-card .icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+        }
+        .info-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .info-row svg {
+            width: 24px;
+            height: 24px;
+        }
+        .info-row p {
+            margin: 0;
+        }
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+        /* Prism.js theme (Okaidia) */
+        code[class*="language-"], pre[class*="language-"] {
+            color: #f8f8f2;
+            background: none;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            text-align: left;
+            white-space: pre;
+            word-spacing: normal;
+            word-break: normal;
+            word-wrap: normal;
+            line-height: 1.5;
+            -moz-tab-size: 4;
+            -o-tab-size: 4;
+            tab-size: 4;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+            hyphens: none;
+        }
+        pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection, code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+            text-shadow: none;
+            background: #b3d4fc;
+        }
+        pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[class*="language-"]::selection, code[class*="language-"] ::selection {
+            text-shadow: none;
+            background: #b3d4fc;
+        }
+        @media print {
+            code[class*="language-"], pre[class*="language-"] {
+                text-shadow: none;
+            }
+        }
+        /* Code block styling */
+        .token.comment, .token.prolog, .token.doctype, .token.cdata { color: slategray; }
+        .token.punctuation { color: #f8f8f2; }
+        .namespace { opacity: 0.7; }
+        .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: #ff9d00; }
+        .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: #a6e22e; }
+        .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string, .token.variable { color: #f8f8f2; }
+        .token.atrule, .token.attr-value, .token.function, .token.class-name { color: #e6db74; }
+        .token.keyword { color: #66d9ef; }
+        .token.regex, .token.important { color: #fd971f; }
+        .token.important, .token.bold { font-weight: bold; }
+        .token.italic { font-style: italic; }
+        .token.entity { cursor: help; }
+        .share-buttons a.facebook { background-color: #1877f2; }
+        .share-buttons a.twitter { background-color: #1da1f2; }
+        .share-buttons a.whatsapp { background-color: #25d366; }
+        .share-buttons a.telegram { background-color: #0088cc; }
+    </style>
+    
+    <!-- SEO Metadata -->
+    <meta name="description" content="Pelajari perbedaan mendalam antara Release LTS (Long Term Support) dan Rolling Release. Temukan kelebihan, kekurangan, dan contoh distro Linux yang menggunakannya.">
+    <link rel="canonical" href="https://frijal.github.io.com/artikel/lts-vs-rolling-release.html">
+    
+    <!-- Open Graph (for Facebook) -->
+    <meta property="og:title" content="LTS vs Rolling Release: Manakah yang Lebih Baik untuk Anda?">
+    <meta property="og:description" content="Pelajari perbedaan mendalam antara Release LTS (Long Term Support) dan Rolling Release. Temukan kelebihan, kekurangan, dan contoh distro Linux yang menggunakannya.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io.com/artikel/lts-vs-rolling-release.html">
+    <meta property="og:image" content="https://placehold.co/1200x630/3182ce/ffffff?text=LTS+vs+Rolling+Release">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LTS vs Rolling Release: Manakah yang Lebih Baik untuk Anda?">
+    <meta name="twitter:description" content="Pelajari perbedaan mendalam antara Release LTS (Long Term Support) dan Rolling Release. Temukan kelebihan, kekurangan, dan contoh distro Linux yang menggunakannya.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/3182ce/ffffff?text=LTS+vs+Rolling+Release">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "LTS vs Rolling Release: Manakah yang Lebih Baik untuk Anda?",
+        "image": "https://placehold.co/1200x630/3182ce/ffffff?text=LTS+vs+Rolling+Release",
+        "datePublished": "2025-09-15T12:00:00+07:00",
+        "dateModified": "2025-09-15T12:00:00+07:00",
+        "author": {
+            "@type": "Person",
+            "name": "Gemini AI"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Gemini AI",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://placehold.co/60x60/3182ce/ffffff?text=AI"
+            }
+        },
+        "description": "Pelajari perbedaan mendalam antara Release LTS (Long Term Support) dan Rolling Release. Temukan kelebihan, kekurangan, dan contoh distro Linux yang menggunakannya."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://example.com"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://example.com/blog"
+        },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "LTS vs Rolling Release",
+            "item": "https://frijal.github.io.com/artikel/lts-vs-rolling-release.html"
+        }]
+    }
+    </script>
+
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+    <main class="container">
+        <article class="prose">
+            <header class="text-center mb-12">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight">LTS vs Rolling Release: Memahami Strategi Rilis Perangkat Lunak</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Memilih antara stabilitas dan pembaruan terkini.</p>
+                <div class="flex-center mt-6 share-buttons">
+                    <a href="#" class="facebook-share" target="_blank" title="Bagikan ke Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="text-white bg-blue-600 rounded-full p-1"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.876v-6.987h-2.54V12h2.54V9.797c0-2.505 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.77L15.3 14.885h-2.14v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a href="#" class="twitter-share" target="_blank" title="Bagikan ke X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="text-white bg-black rounded-full p-1"><path d="M18.901 1.127h3.805l-6.287 7.262 7.781 10.364h-6.197l-4.733-6.276-5.46 6.276h-3.804l6.551-7.568-7.85-10.363h6.2l4.872 6.457 5.09-6.457zm-1.895 16.142h2.09l-7.467-9.362-7.536 9.362h-2.09l7.536-9.362 7.467 9.362z"/></svg>
+                    </a>
+                    <a href="#" class="whatsapp-share" target="_blank" title="Bagikan ke WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="text-white bg-green-500 rounded-full p-1"><path d="M12.039 2.001c-5.503 0-9.982 4.479-9.982 9.982S6.536 21.965 12.039 21.965c2.686 0 5.176-1.071 7.037-2.932l2.91 1.006-1.011-2.951c1.944-2.193 2.871-4.908 2.871-7.093-.001-5.503-4.479-9.981-9.982-9.981zm.001 2.5c4.136 0 7.48 3.344 7.48 7.481 0 1.956-.757 3.8-2.131 5.241l-.22.253.072 1.346-1.393.479-.997-.577-.665-.386c-1.383 1.09-3.084 1.744-4.887 1.744-4.135 0-7.48-3.344-7.48-7.48s3.345-7.48 7.48-7.48zM9.5 7.5c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm3 0c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm-6 2c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm3 0c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm6 0c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm-6 3c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm3 0c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5zm3 0c-.292 0-.5.208-.5.5s.208.5.5.5c.292 0 .5-.208.5-.5s-.208-.5-.5-.5z"/></svg>
+                    </a>
+                    <a href="#" class="telegram-share" target="_blank" title="Bagikan ke Telegram">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="text-white bg-blue-400 rounded-full p-1"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm2.25 8.5l-3.25 8.5c-.25 0-.5-.25-.25-.5l1.5-4.5-5.25-2.5c-.25-.25-.25-.5 0-.75l1.25-.5 8.5-5.25c.25-.25.5-.25.75 0l-.25.25z"/></svg>
+                    </a>
+                    <!-- Instagram and Threads are not supported for sharing directly via URL -->
+                    <a href="#" onclick="alert('Maaf, Instagram tidak mendukung berbagi artikel melalui URL.')" title="Bagikan ke Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-600"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                     <a href="#" onclick="alert('Maaf, Threads tidak mendukung berbagi artikel melalui URL.')" title="Bagikan ke Threads">
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm-1 15.5H8.5V11h-1v6.5H5v-7h2.5c0-.83.67-1.5 1.5-1.5h1.5c.83 0 1.5.67 1.5 1.5v7zm4 0h-3v-7h3v7zm-5-10.5h-1v1.5h1v-1.5zm0 2h-1v1.5h1v-1.5z"></path></svg>
+                    </a>
+                    <a href="#" onclick="alert('Maaf, Tiktok tidak mendukung berbagi artikel melalui URL.')" title="Bagikan ke Tiktok">
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M17.5 7.5V12h-2V7.5H17.5zm-5 0V12h-2V7.5h2zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm-5 7.5h2V12H7V9.5zM15 15.5h-2V12h-2v3.5h-2V12h2v-2h-2v-1.5h2v-2.5h2v2.5h2V12h-2v3.5zm-4 0h-2V12h2v3.5z"/></svg>
+                    </a>
+                </div>
+            </header>
+
+            <section class="card">
+                <h2>Pengertian Release LTS (Long Term Support)</h2>
+                <p>Release LTS atau <em>Long Term Support</em> adalah versi perangkat lunak yang dirancang untuk stabilitas dan keandalan dalam jangka panjang. Versi ini menerima pembaruan keamanan dan perbaikan bug secara berkala, tetapi jarang mendapatkan fitur baru yang besar. Tujuannya adalah untuk menyediakan platform yang stabil dan dapat diandalkan, ideal untuk lingkungan produksi atau pengguna yang tidak ingin sering-sering melakukan pembaruan sistem besar.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/800x450/38a169/ffffff?text=Ilustrasi+Stabilitas+LTS" alt="Ilustrasi yang menggambarkan stabilitas dari LTS">
+                </div>
+                <h3>Karakteristik Utama LTS</h3>
+                <ul>
+                    <li><strong>Stabilitas:</strong> Perubahan pada sistem sangat minim, menjadikannya pilihan aman untuk server, perusahaan, atau pengguna yang memprioritaskan konsistensi.</li>
+                    <li><strong>Dukungan Jangka Panjang:</strong> Versi LTS biasanya didukung selama beberapa tahun, misalnya 2 hingga 5 tahun atau lebih.</li>
+                    <li><strong>Pembaruan Terfokus:</strong> Pembaruan hanya untuk patch keamanan dan perbaikan bug penting.</li>
+                </ul>
+                <h3>Distro yang Menggunakan LTS</h3>
+                <p>Contoh distro Linux yang sangat terkenal dengan model rilis LTS adalah <strong>Ubuntu</strong>.  Setiap dua tahun sekali, Ubuntu merilis versi LTS, seperti <strong>Ubuntu 24.04 LTS 'Noble Numbat'</strong>, yang akan didukung hingga tahun 2029.</p>
+            </section>
+
+            <section class="card mt-8">
+                <h2>Pengertian Rolling Release</h2>
+                <p>Rolling Release adalah model rilis di mana perangkat lunak diperbarui secara terus-menerus. Alih-alih merilis versi baru secara berkala, sistem akan selalu berada dalam keadaan "terbaru" dengan menerima pembaruan kecil yang berisi fitur baru, perbaikan bug, dan patch keamanan secara langsung. Tidak ada versi mayor, hanya satu versi yang terus bergulir.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/800x450/4299e1/ffffff?text=Ilustrasi+Inovasi+Rolling+Release" alt="Ilustrasi yang menggambarkan inovasi dari Rolling Release">
+                </div>
+                <h3>Karakteristik Utama Rolling Release</h3>
+                <ul>
+                    <li><strong>Selalu Terkini:</strong> Pengguna selalu mendapatkan versi perangkat lunak dan kernel terbaru.</li>
+                    <li><strong>Pembaruan Konstan:</strong> Pembaruan datang dalam porsi kecil dan sering, mengurangi risiko "syok" dari pembaruan besar.</li>
+                    <li><strong>Memerlukan Perhatian:</strong> Pengguna perlu lebih proaktif dalam mengelola pembaruan untuk menghindari potensi masalah.</li>
+                </ul>
+                <h3>Distro yang Menggunakan Rolling Release</h3>
+                <p>Contoh distro yang paling terkenal dengan model ini adalah <strong>Arch Linux</strong>.  Pengguna Arch Linux selalu menjalankan paket-paket versi terbaru, yang menjadikannya pilihan populer bagi mereka yang ingin mengikuti perkembangan teknologi terkini.</p>
+            </section>
+
+            <section class="card mt-8">
+                <h2>Persamaan dan Perbedaan Keduanya</h2>
+                <p>Meskipun memiliki pendekatan yang berbeda, keduanya bertujuan untuk menyediakan sistem operasi yang fungsional dan aman. Persamaan utamanya adalah keduanya menawarkan pembaruan keamanan. Perbedaan mendasarnya terletak pada frekuensi dan jenis pembaruan.</p>
+                <div class="grid-3 mt-4">
+                    <div class="info-card">
+                        <h3>LTS</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Stabilitas, Prediktabilitas, Minim Pembaruan Fitur</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Persamaan</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Menyediakan pembaruan keamanan, bertujuan untuk keandalan</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Rolling Release</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Inovasi, Selalu Terkini, Sering Pembaruan</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card mt-8">
+                <h2>Mana yang Lebih Baik?</h2>
+                <p>Jawaban ini sangat bergantung pada kebutuhan dan preferensi Anda:</p>
+                <ul>
+                    <li><strong>Pilih LTS jika:</strong> Anda adalah server administrator, pengguna korporat, atau pengguna yang menginginkan sistem yang "pasang dan lupakan". Anda membutuhkan platform yang sangat stabil dan dapat diandalkan untuk jangka waktu yang lama tanpa kejutan.</li>
+                    <li><strong>Pilih Rolling Release jika:</strong> Anda adalah <em>power user</em>, pengembang, atau pengguna yang selalu ingin mencoba fitur dan teknologi terbaru. Anda tidak keberatan dengan pembaruan yang sering dan siap untuk menghadapi potensi masalah kecil yang mungkin muncul.</li>
+                </ul>
+            </section>
+
+            <section class="card mt-8">
+                <h2>Perkembangan di Tahun 2025</h2>
+                <p>Di tahun 2025, tren rilis perangkat lunak semakin beradaptasi dengan kebutuhan pengguna modern. Model hibrida semakin populer, di mana distro Rolling Release seperti Arch mulai menawarkan <em>snapshot</em> stabil untuk memudahkan instalasi, sementara distro LTS seperti Ubuntu mulai menyediakan akses yang lebih mudah ke paket-paket terbaru melalui repositori tambahan (misalnya, PPA atau Flatpak).</p>
+                <p>Model rilis hibrida ini menunjukkan evolusi, menggabungkan stabilitas LTS dengan inovasi Rolling Release. Tujuannya adalah memberikan fleksibilitas lebih bagi pengguna untuk memilih tingkat kebaruan yang mereka inginkan tanpa harus beralih distro.</p>
+            </section>
+
+            <section class="card mt-8">
+                <h2>Contoh Sintaks untuk Memahami Perbedaan</h2>
+                <p>Berikut adalah contoh perintah terminal di Linux untuk memperbarui sistem, yang mencerminkan perbedaan antara kedua model rilis:</p>
+                <div class="mt-4">
+                    <h3>Memperbarui Sistem LTS (Ubuntu)</h3>
+                    <p>Setelah instalasi, Anda hanya perlu menjalankan perintah ini untuk mendapatkan pembaruan keamanan dan perbaikan bug, bukan versi baru:</p>
+                    <pre><code class="language-bash">sudo apt update
+sudo apt upgrade</code></pre>
+                </div>
+                <div class="mt-4">
+                    <h3>Memperbarui Sistem Rolling Release (Arch Linux)</h3>
+                    <p>Perintah ini akan memperbarui semua paket, termasuk kernel dan fitur baru, kapan pun Anda menjalankannya:</p>
+                    <pre><code class="language-bash">sudo pacman -Syu</code></pre>
+                </div>
+            </section>
+        </article>
+
+        <footer class="mt-12 text-center text-gray-600 dark:text-gray-400">
+            <div class="grid-3 mb-8">
+                <div class="info-card">
+                    <h3>Versi Browser</h3>
+                    <div class="info-row">
+                        <svg id="browser-icon" class="icon" viewBox="0 0 24 24" fill="currentColor"></svg>
+                        <p id="browser-version">Mendeteksi...</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>Versi OS</h3>
+                    <div class="info-row">
+                        <svg id="os-icon" class="icon" viewBox="0 0 24 24" fill="currentColor"></svg>
+                        <p id="os-version">Mendeteksi...</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>Lokasi Anda</h3>
+                    <div class="info-row">
+                        <span id="country-flag" class="mr-2"></span>
+                        <p id="ip-address">Mendeteksi...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+            <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+            <!-- Facebook Comments Plugin (user-provided) -->
+            <div style="margin-top:18px">
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous"
+                    src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+                </script>
+                <div class="fb-comments"
+                        id="fb-comments"
+                        data-href=""
+                        data-width="100%"
+                        data-numposts="5"></div>
+                <script>
+                    const currentUrl = window.location.href;
+                    document.getElementById("current-url").textContent = currentUrl;
+                    document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+                    window.fbAsyncInit = function() {
+                        if (typeof FB !== 'undefined') {
+                            try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+                        }
+                    }
+                </script>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Prism.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('pre').forEach(function(pre) {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.textContent = 'Salin';
+            pre.appendChild(button);
+
+            button.addEventListener('click', function() {
+                const code = pre.querySelector('code').textContent;
+                const textarea = document.createElement('textarea');
+                textarea.textContent = code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    button.textContent = 'Tersalin!';
+                    setTimeout(() => {
+                        button.textContent = 'Salin';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    button.textContent = 'Gagal';
+                }
+                document.body.removeChild(textarea);
+            });
+        });
+
+        // Social sharing URLs
+        const articleUrl = encodeURIComponent(window.location.href);
+        const articleTitle = encodeURIComponent(document.title);
+        const twitterShare = document.querySelector('.twitter-share');
+        const facebookShare = document.querySelector('.facebook-share');
+        const whatsappShare = document.querySelector('.whatsapp-share');
+        const telegramShare = document.querySelector('.telegram-share');
+
+        twitterShare.href = `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`;
+        facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`;
+        whatsappShare.href = `https://api.whatsapp.com/send?text=${articleTitle}%20-%20${articleUrl}`;
+        telegramShare.href = `https://t.me/share/url?url=${articleUrl}&text=${articleTitle}`;
+
+        // Get User Agent and IP Info
+        async function getUserInfo() {
+            // User Agent Info
+            const userAgent = navigator.userAgent;
+            let os = 'Tidak dikenal', browser = 'Tidak dikenal', browserIcon = '';
+            
+            const osIcons = {
+                'Windows': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.625 15.688l.006 4.904c0 .351.272.639.61.64h6.046c.338 0 .61-.289.61-.64l.007-4.904h-7.279zm0-11.375h7.279l.006 4.903c0 .351-.272.64-.61.64H5.241c-.338 0-.61-.289-.61-.64l.006-4.903zm8.286 0h7.279c.338 0 .61.289.61.64l.007 4.903h-7.896c-.338 0-.61-.289-.61-.64l.007-4.903zm-.016 6.185h7.896l.007 4.904c0 .351-.272.64-.61.64h-7.279c-.338 0-.61-.289-.61-.64l.006-4.904zM24 12c0 6.627-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0s12 5.373 12 12z"/></svg>',
+                'Mac': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-1.39 0-2.8.5-3.8 1.5-1.1 1-1.7 2.4-1.7 3.8 0 1.4.6 2.8 1.7 3.8 1 1 2.4 1.7 3.8 1.7s2.8-.6 3.8-1.7c1.1-1 1.7-2.4 1.7-3.8 0-1.4-.6-2.8-1.7-3.8-1-1-2.4-1.7-3.8-1.7zM16.5 14h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5h1c.55 0 1-.45 1-1V7.5c0-.55.45-1 1-1h1c.55 0 1-.45 1-1V3.5c0-.55.45-1 1-1h1c.55 0 1 .45 1 1V5c0-.55.45-1 1-1h1c.55 0 1 .45 1 1V6.5c0-.55.45-1 1-1h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>',
+                'Linux': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM9.5 7.5c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm5 0c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm-2.5 5c-1.657 0-3 1.343-3 3h6c0-1.657-1.343-3-3-3z"/></svg>',
+                'Android': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm.5 16h-1c-.28 0-.5-.22-.5-.5v-1c0-.28.22-.5.5-.5h1c.28 0 .5.22.5.5v1c0 .28-.22.5-.5.5zm1.5-6h-3c-.55 0-1-.45-1-1V8.5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1V11c0 .55-.45 1-1 1z"/></svg>',
+                'iOS': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.82 5.09c.3.17.4.52.23.82l-2.73 4.73c-.22.38-.68.5-.96.22l-.76-.76c-.28-.28-.36-.72-.18-1.05l2.73-4.73c.17-.3.52-.4.82-.23zM9.9 14.8c-.28.28-.72.36-1.05.18L6.12 12.25c-.3-.17-.4-.52-.23-.82l2.73-4.73c.17-.3.52-.4.82-.23l2.73 4.73c.18.33.1.77-.18 1.05l-.76.76c-.28.28-.36.72-.18 1.05l2.73 4.73c.17.3.52.4.82.23l2.73-4.73c.17-.3.52-.4.82-.23l2.73-4.73c.3-.17.4-.52.23-.82l-2.73-4.73c-.17-.3-.52-.4-.82-.23zM12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm-4 4h-2v2h2v-2zM12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm-2 2h-2v2h2v-2zm4 0h-2v2h2v-2zM12 6h-2v2h2v-2z"/></svg>',
+                'Unknown': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM11 11h2v-2h-2v2zm0 4h2v-2h-2v2z"/></svg>'
+            };
+            
+            const browserIcons = {
+                'Chrome': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm.08 1.564c-.452 0-.819.366-.819.819s.366.819.819.819h.565c.452 0 .819-.366.819-.819s-.366-.819-.819-.819h-.565zM12 4.453c-4.17 0-7.547 3.377-7.547 7.547S7.83 19.547 12 19.547s7.547-3.377 7.547-7.547S16.17 4.453 12 4.453zm0 1.5c2.25 0 4.08 1.83 4.08 4.08S14.25 14.113 12 14.113s-4.08-1.83-4.08-4.08S9.75 5.953 12 5.953zm0 2.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/></svg>',
+                'Firefox': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm.01 1.5c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zM12 5c-3.866 0-7 3.134-7 7s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7zM8.5 7.5c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm5 0c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm-2.5 5c-1.657 0-3 1.343-3 3h6c0-1.657-1.343-3-3-3z"/></svg>',
+                'Safari': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm.5 16.5c-3.033 0-5.5-2.467-5.5-5.5s2.467-5.5 5.5-5.5 5.5 2.467 5.5 5.5-2.467 5.5-5.5 5.5zm0-9c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zm0 2.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg>',
+                'Edge': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm.08 1.564c-.452 0-.819.366-.819.819s.366.819.819.819h.565c.452 0 .819-.366.819-.819s-.366-.819-.819-.819h-.565zM12 4.453c-4.17 0-7.547 3.377-7.547 7.547S7.83 19.547 12 19.547s7.547-3.377 7.547-7.547S16.17 4.453 12 4.453zm0 1.5c2.25 0 4.08 1.83 4.08 4.08S14.25 14.113 12 14.113s-4.08-1.83-4.08-4.08S9.75 5.953 12 5.953zm0 2.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/></svg>',
+                'Unknown': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM11 11h2v-2h-2v2zm0 4h2v-2h-2v2z"/></svg>'
+            };
+
+            if (userAgent.includes('Win')) os = 'Windows';
+            if (userAgent.includes('Mac')) os = 'Mac';
+            if (userAgent.includes('Linux')) os = 'Linux';
+            if (userAgent.includes('Android')) os = 'Android';
+            if (userAgent.includes('iPhone') || userAgent.includes('iPad')) os = 'iOS';
+            
+            if (userAgent.includes('Edg')) { browser = 'Edge'; browserIcon = browserIcons['Edge']; }
+            else if (userAgent.includes('Chrome')) { browser = 'Chrome'; browserIcon = browserIcons['Chrome']; }
+            else if (userAgent.includes('Safari')) { browser = 'Safari'; browserIcon = browserIcons['Safari']; }
+            else if (userAgent.includes('Firefox')) { browser = 'Firefox'; browserIcon = browserIcons['Firefox']; }
+            else { browserIcon = browserIcons['Unknown']; }
+
+            document.getElementById('browser-version').textContent = `${browser}`;
+            document.getElementById('browser-icon').innerHTML = browserIcon;
+            document.getElementById('os-version').textContent = os;
+            document.getElementById('os-icon').innerHTML = osIcons[os] || osIcons['Unknown'];
+
+            // IP Address and Country
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                document.getElementById('ip-address').textContent = `${data.ip} (${data.country_name})`;
+                document.getElementById('country-flag').innerHTML = `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="Flag of ${data.country_name}" class="inline-block rounded-sm" />`;
+            } catch (error) {
+                document.getElementById('ip-address').textContent = 'Gagal mendapatkan data IP.';
+                console.error('Error fetching IP info:', error);
+            }
+        }
+        
+        getUserInfo();
+
+    </script>
+    <!-- Tombol Home Kiri -->
+<a href="https://frijal.github.io/" target="_blank" id="btn-home-left" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<!-- Tombol Home Kanan -->
+<a href="https://frijal.github.io/" target="_blank" id="btn-home-right" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<style>
+  /* Style umum tombol */
+  #btn-home-left, #btn-home-right {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 9999;
+  }
+
+  #btn-home-left:hover, #btn-home-right:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* Tombol kiri */
+  #btn-home-left {
+    left: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+
+  /* Tombol kanan */
+  #btn-home-right {
+    right: 10px;
+    bottom: 20%;
+    transform: translateY(50%);
+  }
+
+  #btn-home-left svg, #btn-home-right svg {
+    flex-shrink: 0;
+  }
+</style>
+</body>
+</html>
