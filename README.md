@@ -7,9 +7,11 @@
 ---
 
 # rm -fr /
-<div align=center> 
+<div align=center>
+  
   ![screenshot](/preview.png?raw=true)
 ![screenshot](/thumbnail.jpg)
+
 </div>
 
 ---
