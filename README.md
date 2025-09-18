@@ -55,6 +55,7 @@ Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah
 </div>
 
 </details>
+
 ---
 
 ## 🇬🇧 English (Original)
