@@ -9,7 +9,7 @@
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
 
 <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 15px; border-radius: 12px; border-left: 6px solid #fd7e14; font-family: 'Segoe UI', sans-serif; margin-top:10px;">
-Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik. 🆓
+Ini adalah konten GRATIS yang dilepaskan ke domain publik. 🆓
 
 Siapa pun bebas untuk <strong>menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikannya</strong>, baik dalam bentuk <strong>kode sumber atau apapun juga</strong>, untuk <strong>tujuan komersial atau non-komersial</strong>, tanpa batasan. 🔄
 
