@@ -1,0 +1,29 @@
+ <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">URL halaman: <span id="current-url" class="small-muted"></span></div>
+        </article>
+
+        <!-- Facebook Comments Plugin (user-provided) -->
+        <div style="margin-top:18px">
+          <!-- Facebook Comments Plugin -->
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+          </script>
+          <div class="fb-comments"
+               id="fb-comments"
+               data-href=""
+               data-width="100%"
+               data-numposts="5"></div>
+          <script>
+            // Ambil URL unik halaman saat ini
+            const currentUrl = window.location.href;
+            document.getElementById("current-url").textContent = currentUrl;
+            // Set data-href FB Comments ke URL halaman ini
+            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+            // Reload plugin FB agar data-href diperbarui (jika SDK sudahh siap)
+            window.fbAsyncInit = function() {
+              if (typeof FB !== 'undefined') {
+                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+              }
+            }
+          </script
