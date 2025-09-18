@@ -19,15 +19,11 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 <strong>SEGALA YANG ADA DISINI, DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun.
 Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain yang mungkin saja bisa timbul, tentang segala isi, atau sesuatu apapun dari tempat ini. ⚠️
 
----
-
 <div align=center>
 
 ![thumbnail](/thumbnail.jpg?raw=true)
 
 </div>
-
----
 
 ## 📝 Ringkasan Penting ⬇️
 
