@@ -23,7 +23,7 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 
 ---
 
-## 🇬🇧 English (Original) ⬇️
+## 🇬🇧 English (Original)
 
 <details>
 <summary>📖 Klik untuk melihat teks asli (collapse)</summary>
@@ -44,7 +44,7 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 
 ---
 
-## 📝 Ringkasan Penting
+## 📝 Ringkasan Penting ⬇️
 
 <details>
 <summary>📊 Klik untuk melihat ringkasan interaktif</summary>
