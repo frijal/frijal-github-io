@@ -34,7 +34,7 @@ Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik. 🆓
 
 Siapa pun bebas untuk <strong>menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan</strong> kode ini, baik dalam bentuk <strong>kode sumber maupun biner</strong>, untuk <strong>tujuan komersial atau non-komersial</strong>, tanpa batasan. 🔄
 
-Aku berikan <strong>seluruh hak cipta</strong> ketikan ini ke <strong>domain publik</strong> untuk <strong>kepentingan publik</strong>.
+Aku berikan <strong>seluruh hak cipta</strong> ketikan ini, ke <strong>domain publik</strong> untuk <strong>kepentingan publik</strong>.
 Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di masa depan</strong>. ⚖️
 
 <strong>PERANGKAT LUNAK INI DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun. Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain dari penggunaan kode ini. ⚠️
@@ -64,7 +64,7 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 </div>
 
 <div style="background: linear-gradient(90deg, #dc3545, #f8b0b0); padding: 12px; border-radius: 10px; font-weight: bold; color: white; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Penulis tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain. ❌
+⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Aku tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain. ❌
 </div>
 
 </div>
@@ -94,7 +94,7 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 </tr>
 <tr style="background: linear-gradient(90deg, #dc3545, #f8b0b0); color:white;" title="Tanpa Jaminan ❌">
 <td style="padding: 8px;">⚠️ Tanpa Jaminan</td>
-<td style="padding: 8px;">Penulis tidak bertanggung jawab ❌</td>
+<td style="padding: 8px;">Aku tidak bertanggung jawab ❌</td>
 </tr>
 </table>
 
