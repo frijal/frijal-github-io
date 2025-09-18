@@ -45,7 +45,7 @@ Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah
 </div>
 
 <div style="background: linear-gradient(90deg, #dc3545, #f8b0b0); padding: 12px; border-radius: 10px; font-weight: bold; color: white; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Aku tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain. ❌
+⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Aku tidak bertanggung jawab atas klaim, kerusakan, atau jika ada terjadi sesuatu yang lainnya. ❌
 </div>
 
 </div>
