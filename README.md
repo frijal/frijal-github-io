@@ -25,7 +25,7 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 
 <div align=center>
 
-![rm -fr /](/thumbnail.jpg?raw=true)
+![thumbnail](/thumbnail.jpg?raw=true)
 
 </div>
 
