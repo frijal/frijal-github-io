@@ -16,7 +16,8 @@ Siapa pun bebas untuk <strong>menyalin, memodifikasi, menerbitkan, menggunakan, 
 Aku berikan <strong>seluruh hak cipta</strong> ketikan ini, ke <strong>domain publik</strong> untuk <strong>kepentingan publik</strong>.
 Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di masa depan</strong>. ⚖️
 
-<strong>SEGALA YANG ADA DISINI, DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun. Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain yang mungkin saja bisa timbul, tentang segala isi, atau sesuatu apapun dari tempat ini. ⚠️
+<strong>SEGALA YANG ADA DISINI, DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun.
+Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain yang mungkin saja bisa timbul, tentang segala isi, atau sesuatu apapun dari tempat ini. ⚠️
 
 ---
 
