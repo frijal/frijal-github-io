@@ -8,9 +8,6 @@
 
 ## 📖 English (Original)
 
-<details>
-<summary>🔹 Klik untuk melihat teks lengkap</summary>
-
 <div style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2); padding: 15px; border-radius: 12px; border-left: 6px solid #007BFF; font-family: 'Segoe UI', sans-serif;">
 This is free and unencumbered software released into the public domain.
 
@@ -23,14 +20,9 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 🔗 More info: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #007BFF;">unlicense.org</a>
 </div>
 
-</details>
-
 ---
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
-
-<details>
-<summary>🔹 Klik untuk melihat teks lengkap</summary>
 
 <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 15px; border-radius: 12px; border-left: 6px solid #fd7e14; font-family: 'Segoe UI', sans-serif;">
 Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik.
@@ -45,58 +37,43 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 🔗 Info lebih lanjut: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #fd7e14;">unlicense.org</a>
 </div>
 
-</details>
-
 ---
 
 ## 📝 Ringkasan & Poin Penting
 
-<details>
-<summary>🔹 Klik untuk melihat ringkasan interaktif</summary>
-
 <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
 
-<div style="background: linear-gradient(90deg, #28a745, #85e085); padding: 12px; border-radius: 10px; font-weight: bold; color: white; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+<div style="background: linear-gradient(90deg, #28a745, #85e085); padding: 12px; border-radius: 10px; font-weight: bold; color: white;">
 🟢 Bebas Hak Cipta: Kode ini gratis dan tidak dibebani hak cipta.
 </div>
 
-<div style="background: linear-gradient(90deg, #007BFF, #00d4ff); padding: 12px; border-radius: 10px; font-weight: bold; color: white; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+<div style="background: linear-gradient(90deg, #007BFF, #00d4ff); padding: 12px; border-radius: 10px; font-weight: bold; color: white;">
 🌐 Bebas Digunakan Siapa Saja: Siapa pun boleh menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan kode ini.
 </div>
 
-<div style="background: linear-gradient(90deg, #ffc107, #ffec99); padding: 12px; border-radius: 10px; font-weight: bold; color: black; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+<div style="background: linear-gradient(90deg, #ffc107, #ffec99); padding: 12px; border-radius: 10px; font-weight: bold; color: black;">
 🎯 Untuk Segala Keperluan: Bisa digunakan untuk tujuan komersial atau non-komersial, tanpa batasan.
 </div>
 
-<div style="background: linear-gradient(90deg, #dc3545, #f8b0b0); padding: 12px; border-radius: 10px; font-weight: bold; color: white; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+<div style="background: linear-gradient(90deg, #dc3545, #f8b0b0); padding: 12px; border-radius: 10px; font-weight: bold; color: white;">
 ⚠️ Tanpa Jaminan: Disediakan "APA ADANYA". Penulis tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain.
 </div>
 
 </div>
-</details>
 
 ---
 
 ## 💡 Tips Penggunaan
 
-<details>
-<summary>🔹 Klik untuk tips</summary>
-
 <div style="padding: 12px; border-radius: 10px; background: #f0f0f0; font-family: 'Segoe UI', sans-serif;">
 - Gunakan **badge** untuk menonjolkan status lisensi.  
 - Gunakan **emoji & box warna-warni** agar poin penting lebih terlihat.  
-- Sertakan **collapsible sections** agar README tetap rapi.  
 - Bisa dijadikan **template README open source**.
 </div>
 
-</details>
-
 ---
 
-## 🚀 Visual Mini Summary
-
-<details>
-<summary>🔹 Klik untuk ringkasan visual</summary>
+## 🚀 Ringkasan Visual
 
 <table style="width:100%; border-collapse: collapse; text-align: left;">
 <tr>
@@ -116,8 +93,4 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 <td style="padding: 8px;">Penulis tidak bertanggung jawab</td>
 </tr>
 </table>
-
-</details>
-
-
 Klik [di sini untuk daftar isi interaktif](https://frijal.github.io/index.html)
