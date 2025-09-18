@@ -6,9 +6,7 @@
 
 ---
 # rm -fr /
-<div align=center>
- ![rm -fr /](/thumbnail.jpg)
-</div>
+ ![image](/thumbnail.jpg)
 
 ---
 
