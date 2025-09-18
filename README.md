@@ -6,7 +6,6 @@
 
 ---
 
-# rm -fr /
 <div align=center>
   
 ![screenshot](/thumbnail.jpg)
