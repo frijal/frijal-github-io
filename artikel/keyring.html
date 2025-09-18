@@ -1,0 +1,143 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KeyRing: Menyimpan Kata Sandi di Ubuntu</title>
+<link rel="icon" href="https://frijal.github.io/favicon.ico">
+<meta name="description" content="Panduan lengkap menggunakan aplikasi KeyRing di Ubuntu untuk menyimpan kata sandi jaringan, SSH, dan situs.">
+<link rel="canonical" href="https://frijal.github.io/artikel/keyring.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="KeyRing: Menyimpan Kata Sandi di Ubuntu">
+<meta property="og:description" content="Panduan lengkap menggunakan aplikasi KeyRing di Ubuntu untuk menyimpan kata sandi jaringan, SSH, dan situs.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.github.io/artikel/keyring.html">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWAVKSHaXnbrs0akwFYHU5NKq36WE5rUumtx8G2i_cNscjLk-WTG21L6HgtmNaPhoO9qKnBQODWxrUdBccDPiCpl_FT_eLnqA5P-q3dLaIlCIBAPWI1Axgx2Rk9uHOvj0XqAxbs5khttEr/s320/keyring.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KeyRing: Menyimpan Kata Sandi di Ubuntu">
+<meta name="twitter:description" content="Panduan lengkap menggunakan aplikasi KeyRing di Ubuntu untuk menyimpan kata sandi jaringan, SSH, dan situs.">
+<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWAVKSHaXnbrs0akwFYHU5NKq36WE5rUumtx8G2i_cNscjLk-WTG21L6HgtmNaPhoO9qKnBQODWxrUdBccDPiCpl_FT_eLnqA5P-q3dLaIlCIBAPWI1Axgx2Rk9uHOvj0XqAxbs5khttEr/s320/keyring.png">
+
+<!-- Prism.js untuk syntax highlighting -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+<style>
+  body {margin:0; font-family: Arial, sans-serif; line-height:1.6; background:#f5f5f5; color:#333;}
+  .container {max-width:1200px; margin:auto; padding:1em;}
+  img {max-width:100%; height:auto; border-radius:6px; transition: transform 0.3s; cursor:pointer;}
+  img:hover {transform: scale(1.05);}
+  h1,h2,h3 {color:#2c3e50;}
+  .share-buttons {display:flex; gap:0.5em; margin:1em 0;}
+  .share-btn svg{width:32px;height:32px;transition: transform 0.2s;}
+  .share-btn:hover svg{transform:scale(1.2);}
+  pre {background:#2d2d2d; color:#f8f8f2; padding:1em; border-radius:6px; overflow:auto;}
+  /* Tombol Home */
+  #btn-home-left, #btn-home-right {position:fixed; display:flex; align-items:center; justify-content:center; background:#3498db; color:#fff; padding:0.6em 1em; border-radius:6px; text-decoration:none; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.3); transition:transform 0.2s;}
+  #btn-home-left:hover, #btn-home-right:hover{transform:scale(1.1);}
+  #btn-home-left {left:10px; top:50%; transform:translateY(-50%);}
+  #btn-home-right {right:10px; bottom:20%; transform:translateY(50%);}
+  #btn-home-left svg,#btn-home-right svg{width:20px; height:20px; margin-right:6px;}
+  .info-section {display:flex; flex-wrap:wrap; gap:1em; margin-top:2em; padding:1em; background:#fff; border-radius:8px;}
+  .info-item {display:flex; align-items:center; gap:0.5em; background:#ecf0f1; padding:0.5em 1em; border-radius:6px; flex:1 1 200px;}
+  @media(max-width:768px){.share-buttons{flex-wrap:wrap;}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>KeyRing: Menyimpan Kata Sandi di Ubuntu</h1>
+  <p>Apa itu KeyRing? Ini adalah sebuah aplikasi yang bertugas menyimpan seluruh kata sandi di mesin Ubuntu, termasuk koneksi jaringan nirkabel, SSH, dan situs internet. Sangat berguna bagi mereka yang sering lupa password. :)</p>
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWAVKSHaXnbrs0akwFYHU5NKq36WE5rUumtx8G2i_cNscjLk-WTG21L6HgtmNaPhoO9qKnBQODWxrUdBccDPiCpl_FT_eLnqA5P-q3dLaIlCIBAPWI1Axgx2Rk9uHOvj0XqAxbs5khttEr/s320/keyring.png" loading="lazy" alt="KeyRing Ubuntu">
+
+  <p>KeyRing tersedia hampir di semua distro Linux. Misal di BlankOn, jalankan <code>seahorse</code> untuk membuka jendela KeyRing.</p>
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgb-6Vufa6BfsQBjXRQR7jn2akadRl69Y1UtAnPnDjLBrp2SWs48jyz1G_vsTwCM2GfUZCytKM-_Sju0PycYcwodxNY6NOFOMrL7bwvqf7fO04_2IPjqsrlUYesSRqIvX4QWBMIxAaAPhps/s800/selection002.jpg" loading="lazy" alt="KeyRing error">
+
+  <h2>Mematikan KeyRing saat startup</h2>
+  <p>Buka Menu → System → Preferences → Startup Applications, lalu hapus centang pada:</p>
+  <ul>
+    <li>Certificate and Keyring Storage</li>
+    <li>Secret Storage Service</li>
+    <li>SSH Key Agent</li>
+  </ul>
+
+  <p>Jika masih bermasalah, gunakan terminal:</p>
+  <pre><code>cd .gnome2/keyrings/
+sudo rm *.keyring
+sudo reboot</code></pre>
+
+  <div class="share-buttons">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/keyring.html" class="share-btn" target="_blank" title="Share ke Facebook">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-3h2.4V9.5c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .1 2 .1v2.2h-1.1c-1.1 0-1.5.7-1.5 1.4v1.7H18l-.4 3h-2.1v7A10 10 0 0 0 22 12z"/></svg>
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/keyring.html&text=Panduan KeyRing" class="share-btn" target="_blank" title="Share ke Twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.46 6c-.77.35-1.6.59-2.46.7a4.28 4.28 0 0 0 1.88-2.36 8.6 8.6 0 0 1-2.71 1.04 4.27 4.27 0 0 0-7.3 3.9A12.12 12.12 0 0 1 3 4.79a4.27 4.27 0 0 0 1.32 5.7 4.2 4.2 0 0 1-1.94-.54v.05a4.27 4.27 0 0 0 3.43 4.18 4.3 4.3 0 0 1-1.93.07 4.27 4.27 0 0 0 3.99 2.97A8.57 8.57 0 0 1 2 19.54 12.08 12.08 0 0 0 8.29 21c7.55 0 11.68-6.25 11.68-11.68 0-.18-.01-.36-.02-.53A8.36 8.36 0 0 0 22.46 6z"/></svg>
+    </a>
+    <a href="https://wa.me/?text=https://frijal.github.io/artikel/keyring.html" class="share-btn" target="_blank" title="Share ke WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366"><path d="M20.5 3.5A10.5 10.5 0 0 0 3.5 20.5L3 21l2.2-.6A10.5 10.5 0 0 0 20.5 3.5zM12 19a7 7 0 0 1-3.5-1l-.3-.2-2.1.6.6-2.1-.2-.3A7 7 0 1 1 12 19zm3.1-4.3c-.1-.1-.5-.2-1.2-.6-.7-.4-1-0.7-1.1-.8-.1-.1-.4-.1-.6 0s-.7.2-.9.3c-.2.1-.4.1-.5.2-.1.1-.2.4-.3.5-.1.1-.3.4-.5.3-.1 0-.7-.2-1.3-.8-.5-.5-.9-1.2-1-1.3-.1-.1-.1-.3 0-.5.1-.1.3-.3.4-.5s.2-.2.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.3-.1-.5-.1-.2-1-2.3-1.4-3.2-.4-.8-.8-.7-1-.7-.2 0-.3 0-.5 0-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2 0 1.3 1 2.5 1.2 2.7.2.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.3-.6.3-1.1.2-1.3-.1-.2-.2-.2-.4-.3z"/></svg>
+    </a>
+    <a href="https://t.me/share/url?url=https://frijal.github.io/artikel/keyring.html" class="share-btn" target="_blank" title="Share ke Telegram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0088cc"><path d="M9.5 16.5l-.5 4.5 4.5-2.1 4.1 3.1c.7.4 1.2.2 1.4-.6l2.5-11c.2-.8-.3-1.2-1-1l-16 6c-.8.3-.7.9-.1 1.1l4.2 1.3 9.7-6.1c.5-.3.9-.1.5.2l-7.7 7z"/></svg>
+    </a>
+  </div>
+
+  <!-- Facebook Comments -->
+  <div style="margin-top:16px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+  <div style="margin-top:18px">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+    <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+    <script>
+      const currentUrl = window.location.href;
+      document.getElementById("current-url").textContent = currentUrl;
+      document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+      window.fbAsyncInit = function() { if (typeof FB !== 'undefined') { try { FB.XFBML.parse(); } catch(e) {} } };
+    </script>
+  </div>
+
+  <!-- Tombol Home -->
+  <a href="https://frijal.github.io/" target="_blank" id="btn-home-left" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z"/></svg>Home
+  </a>
+  <a href="https://frijal.github.io/" target="_blank" id="btn-home-right" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z"/></svg>Home
+  </a>
+
+  <!-- Info Browser & OS -->
+  <div class="info-section">
+    <div class="info-item"><svg width="20" height="20" fill="#3498db"><circle cx="10" cy="10" r="10"/></svg>Browser: <span id="browser-info"></span></div>
+    <div class="info-item"><svg width="20" height="20" fill="#2ecc71"><rect width="20" height="20"/></svg>OS: <span id="os-info"></span></div>
+    <div class="info-item"><svg width="20" height="20" fill="#e74c3c"><polygon points="0,0 20,0 20,20 0,20"/></svg>IP: <span id="ip-info"></span></div>
+    <div class="info-item"><img id="ip-flag" src="" alt="Bendera" width="24" height="16"></div>
+  </div>
+
+</div>
+
+<script>
+  // Browser & OS info
+  const ua = navigator.userAgent;
+  let browser = "Unknown", os = "Unknown";
+  if(ua.includes("Firefox")) browser="Firefox";
+  else if(ua.includes("Chrome")) browser="Chrome";
+  else if(ua.includes("Safari")) browser="Safari";
+  if(ua.includes("Windows")) os="Windows";
+  else if(ua.includes("Linux")) os="Linux";
+  else if(ua.includes("Mac")) os="MacOS";
+  document.getElementById("browser-info").textContent=browser;
+  document.getElementById("os-info").textContent=os;
+
+  // Get public IP & country
+  fetch('https://ipapi.co/json/')
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById("ip-info").textContent=data.ip;
+    document.getElementById("ip-flag").src="https://flagcdn.com/24x18/"+data.country_code.toLowerCase()+".png";
+  });
+</script>
+</body>
+</html>
