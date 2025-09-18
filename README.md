@@ -93,4 +93,5 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 <td style="padding: 8px;">Penulis tidak bertanggung jawab</td>
 </tr>
 </table>
+
 Klik [di sini untuk daftar isi interaktif](https://frijal.github.io/index.html)
