@@ -1,0 +1,205 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/69/69939.png" type="image/png">
+  <meta name="description" content="Artikel tentang paket SL di Linux. Awalnya karena salah ketik perintah LS menjadi SL, ternyata menghadirkan animasi kereta api di terminal.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/artikel-sl-linux.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan">
+  <meta property="og:description" content="Awalnya salah ketik perintah LS jadi SL, ternyata memunculkan animasi kereta api di terminal Linux.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.github.io/artikel/artikel-sl-linux.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan">
+  <meta name="twitter:description" content="Awalnya salah ketik perintah LS jadi SL, ternyata memunculkan animasi kereta api di terminal Linux.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif">
+
+  <!-- CSS Prism -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f9fafc; color:#222;}
+    header {background:#004080; color:#fff; padding:20px; text-align:center;}
+    main {max-width:1000px; margin:auto; padding:20px;}
+    img {max-width:100%; height:auto; border-radius:6px;}
+    .code-container {position: relative;}
+    .copy-btn {
+      position: absolute; top:8px; right:8px;
+      background:#004080; color:#fff; border:none;
+      padding:4px 8px; border-radius:4px; cursor:pointer;
+    }
+    footer {margin-top:40px; padding:20px; background:#222; color:#fff; text-align:center;}
+    .share-buttons a {margin:0 6px; text-decoration:none;}
+  </style>
+
+  <!-- JSON-LD Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan",
+    "description": "Awalnya salah ketik perintah LS jadi SL, ternyata memunculkan animasi kereta api di terminal Linux.",
+    "author": {"@type": "Person","name": "Admin Linux"},
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pelan Kiri",
+      "logo": {"@type": "ImageObject","url": "https://cdn-icons-png.flaticon.com/512/69/69939.png"}
+    },
+    "datePublished": "2025-09-15"
+  }
+  </script>
+
+  <!-- JSON-LD Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem","position": 1,"name": "Home","item": "https://frijal.github.io"},
+      {"@type": "ListItem","position": 2,"name": "Artikel Linux","item": "https://frijal.github.io/"},
+      {"@type": "ListItem","position": 3,"name": "Mengenal Paket SL","item": "https://frijal.github.io/artikel/artikel-sl-linux.html"}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>Mengenal Paket SL di Linux</h1>
+  <p>Salah ketik jadi hiburan: dari <code>ls</code> ke <code>sl</code></p>
+</header>
+
+<!-- Tombol Home Kiri -->
+<a href="https://frijal.github.io/" target="_blank" id="btn-home-left" title="Kembali ke Home">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M280.37 148.26L96 300.11V464c0 8.84 7.16 16 16 16l112-.3c8.84 0 16-7.16 16-16V368c0-8.84 7.16-16 16-16h64c8.84 0 16 7.16 16 16v95.7c0 8.84 7.16 16 16 16l112 .3c8.84 0 16-7.16 16-16V300L295.67 148.3c-6.23-5.27-15.05-5.27-21.3-.04z"/>
+  </svg> Home
+</a>
+
+<!-- Tombol Home Kanan -->
+<a href="https://frijal.github.io/" target="_blank" id="btn-home-right" title="Kembali ke Home">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M280.37 148.26L96 300.11V464c0 8.84 7.16 16 16 16l112-.3c8.84 0 16-7.16 16-16V368c0-8.84 7.16-16 16-16h64c8.84 0 16 7.16 16 16v95.7c0 8.84 7.16 16 16 16l112 .3c8.84 0 16-7.16 16-16V300L295.67 148.3c-6.23-5.27-15.05-5.27-21.3-.04z"/>
+  </svg> Home
+</a>
+
+<main>
+  <p>Siapa sangka, salah ketik perintah di terminal Linux bisa menjadi hiburan tersendiri. Saat bermaksud mengetik <code>ls</code> untuk melihat isi direktori, jari bisa saja terpeleset menjadi <code>sl</code>. Biasanya akan muncul pesan:</p>
+
+  <div class="code-container">
+    <button class="copy-btn" onclick="copyCode('code1')">Copy</button>
+    <pre><code id="code1" class="language-bash">The program 'sl' is currently not installed.
+You can install it by typing: sudo apt install sl</code></pre>
+  </div>
+
+  <p>Karena penasaran, coba saja ikuti saran tersebut dengan memasang paket SL:</p>
+
+  <div class="code-container">
+    <button class="copy-btn" onclick="copyCode('code2')">Copy</button>
+    <pre><code id="code2" class="language-bash">sudo apt install sl</code></pre>
+  </div>
+
+  <p>Setelah terpasang, coba jalankan perintah:</p>
+
+  <div class="code-container">
+    <button class="copy-btn" onclick="copyCode('code3')">Copy</button>
+    <pre><code id="code3" class="language-bash">sl</code></pre>
+  </div>
+
+  <p>Hasilnya? Terminal Anda menampilkan animasi kereta api yang sedang melintas:</p>
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif" alt="Animasi kereta SL di Linux">
+
+  <p>Lucu bukan? Dari salah ketik justru menghadirkan "stasiun" hiburan di terminal Linux Anda.</p>
+
+  <div class="share-buttons">
+    <p>Bagikan artikel ini:</p>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/artikel-sl-linux.html" target="_blank">Facebook</a> |
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/artikel-sl-linux.html" target="_blank">Twitter</a> |
+    <a href="https://wa.me/?text=https://frijal.github.io/artikel/artikel-sl-linux.html" target="_blank">WhatsApp</a> |
+    <a href="https://t.me/share/url?url=https://frijal.github.io/artikel/artikel-sl-linux.html" target="_blank">Telegram</a>
+  </div>
+
+  <!-- FB Comments -->
+  <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+  <div style="margin-top:18px">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+    <div class="fb-comments"
+         id="fb-comments"
+         data-href=""
+         data-width="100%"
+         data-numposts="5"></div>
+    <script>
+      const currentUrl = window.location.href;
+      document.getElementById("current-url").textContent = currentUrl;
+      document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+      window.fbAsyncInit = function() {
+        if (typeof FB !== 'undefined') {try { FB.XFBML.parse(); } catch(e) {}}
+      }
+    </script>
+  </div>
+</main>
+
+<footer>
+  <p>Informasi Sistem:</p>
+  <div id="system-info"></div>
+  <div id="ip-info"></div>
+</footer>
+
+<!-- Prism JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<script>
+function copyCode(id){
+  const code=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(code).then(()=>alert("Kode disalin!"));
+}
+// Deteksi Browser & OS
+function getBrowserOS(){
+  let ua=navigator.userAgent;
+  let browser="Unknown", os="Unknown";
+  if(/firefox|fxios/i.test(ua)) browser="Firefox";
+  else if(/chrome|chromium|crios/i.test(ua)) browser="Chrome";
+  else if(/safari/i.test(ua)) browser="Safari";
+  else if(/edg/i.test(ua)) browser="Edge";
+  if(/windows/i.test(ua)) os="Windows";
+  else if(/linux/i.test(ua)) os="Linux";
+  else if(/android/i.test(ua)) os="Android";
+  else if(/iphone|ipad|ipod/i.test(ua)) os="iOS";
+  document.getElementById("system-info").innerHTML=`<p>Browser: ${browser} | OS: ${os}</p>`;
+}
+getBrowserOS();
+
+// IP + Bendera
+fetch("https://ipapi.co/json/")
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById("ip-info").innerHTML=
+      `<p>IP Anda: ${data.ip} <img src="https://flagcdn.com/24x18/${data.country.toLowerCase()}.png"> ${data.country_name}</p>`;
+  });
+</script>
+
+<style>
+  #btn-home-left, #btn-home-right {
+    position: fixed; display:flex; align-items:center;
+    background-color:#004080; color:#fff;
+    padding:12px 18px; border-radius:8px; text-decoration:none;
+    font-family: Arial; font-size:14px; font-weight:bold;
+    box-shadow:0 4px 8px rgba(0,0,0,0.2);
+    transition:background 0.3s ease, transform 0.2s ease; z-index:9999;
+  }
+  #btn-home-left:hover, #btn-home-right:hover {background-color:#0066cc; transform:scale(1.05);}
+  #btn-home-left {left:10px; top:30%; transform:translateY(-50%);}
+  #btn-home-right {right:10px; bottom:20%; transform:translateY(50%);}
+  #btn-home-left svg, #btn-home-right svg {flex-shrink:0;}
+</style>
+
+</body>
+</html>
