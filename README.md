@@ -44,10 +44,10 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 
 ---
 
-## 📝 Ringkasan Interaktif & Poin Penting
+## 📝 Ringkasan Penting
 
-<details open>
-<summary>📊 Klik untuk melihat ringkasan visual interaktif</summary>
+<details>
+<summary>📊 Klik untuk melihat ringkasan interaktif</summary>
 
 <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
 
