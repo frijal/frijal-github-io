@@ -6,7 +6,7 @@
 
 ---
 # rm -fr /
- ![image](/thumbnail.jpg)
+ ![image](thumbnail.jpg)
 
 ---
 
