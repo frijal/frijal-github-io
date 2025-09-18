@@ -11,12 +11,12 @@
 <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 15px; border-radius: 12px; border-left: 6px solid #fd7e14; font-family: 'Segoe UI', sans-serif; margin-top:10px;">
 Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik. 🆓
 
-Siapa pun bebas untuk <strong>menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan</strong> kode ini, baik dalam bentuk <strong>kode sumber maupun biner</strong>, untuk <strong>tujuan komersial atau non-komersial</strong>, tanpa batasan. 🔄
+Siapa pun bebas untuk <strong>menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikannya</strong>, baik dalam bentuk <strong>kode sumber atau apapun juga</strong>, untuk <strong>tujuan komersial atau non-komersial</strong>, tanpa batasan. 🔄
 
 Aku berikan <strong>seluruh hak cipta</strong> ketikan ini, ke <strong>domain publik</strong> untuk <strong>kepentingan publik</strong>.
 Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di masa depan</strong>. ⚖️
 
-<strong>PERANGKAT LUNAK INI DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun. Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain dari penggunaan kode ini. ⚠️
+<strong>SEGALA YANG ADA DISINI, DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun. Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain yang mungkin saja bisa timbul, tentang segala isi, atau sesuatu apapun dari tempat ini. ⚠️
 
 ---
 
