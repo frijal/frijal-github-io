@@ -68,7 +68,6 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 
 <strong>THE SOFTWARE IS PROVIDED "AS IS"</strong> without warranty of any kind, express or implied. Authors are <strong>not liable</strong> for any claims, damages, or issues arising from the use of this software. ⚠️
 
-🔗 More info: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #007BFF;">unlicense.org</a>
 </div>
 
 </details>
