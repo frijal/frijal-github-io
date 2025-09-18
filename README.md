@@ -8,7 +8,7 @@
 
 <div align=center>
   
-![screenshot](/thumbnail.jpg)
+![screenshot](thumbnail.jpg)
 
 </div>
 
