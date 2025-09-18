@@ -6,10 +6,10 @@
 
 ---
 
-## 🇬🇧 English (Original)
+## 📖 English / Original
 
 <details>
-<summary>📖 Klik untuk melihat teks lengkap</summary>
+<summary>🔹 Klik untuk melihat teks lengkap</summary>
 
 This is free and unencumbered software released into the public domain.
 
@@ -25,10 +25,10 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate **all cop
 
 ---
 
-## 🇮🇩 Bahasa Indonesia (Terjemahan)
+## 🇮🇩 Bahasa Indonesia / Terjemahan
 
 <details>
-<summary>📖 Klik untuk melihat teks lengkap</summary>
+<summary>🔹 Klik untuk melihat teks lengkap</summary>
 
 Ini adalah perangkat lunak GRATIS yang dilepaskan ke domain publik.
 
@@ -48,17 +48,19 @@ Ini merupakan **tindakan nyata untuk melepaskan hak cipta sekarang dan di masa d
 ## 📝 Terjemahan & Penjelasan Sederhana
 
 <details>
-<summary>📖 Klik untuk melihat ringkasan poin penting</summary>
+<summary>🔹 Klik untuk ringkasan dan poin penting</summary>
 
 Teks ini adalah **lisensi UNLICENSE**, artinya **public domain**.  
 Kode ini **sepenuhnya bebas** dan **tidak terikat hak cipta**.
 
 ### ⚡ Ringkasan Poin Penting
 
-- 🟢 **Bebas Hak Cipta:** Kode ini gratis dan tidak dibebani hak cipta.
-- 🌐 **Bebas Digunakan Siapa Saja:** Siapa pun boleh menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan kode ini.
-- 🎯 **Untuk Segala Keperluan:** Bisa digunakan untuk tujuan komersial atau non-komersial, tanpa batasan.
-- ⚠️ **Tanpa Jaminan:** Disediakan "APA ADANYA", penulis tidak bertanggung jawab atas klaim, kerusakan, atau masalah lain.
+| Emoji | Poin Utama | Penjelasan |
+|-------|------------|------------|
+| 🟢 | **Bebas Hak Cipta** | Kode ini **gratis** dan **tidak dibebani hak cipta**. |
+| 🌐 | **Bebas Digunakan Siapa Saja** | Siapa pun boleh menyalin, memodifikasi, menerbitkan, menggunakan, menjual, atau mendistribusikan kode ini. |
+| 🎯 | **Untuk Segala Keperluan** | Bisa digunakan untuk tujuan komersial atau non-komersial, tanpa batasan. |
+| ⚠️ | **Tanpa Jaminan** | Disediakan "**APA ADANYA**", penulis **tidak bertanggung jawab** atas klaim, kerusakan, atau masalah lain. |
 
 </details>
 
@@ -67,28 +69,39 @@ Kode ini **sepenuhnya bebas** dan **tidak terikat hak cipta**.
 ## ✨ Tips & Rekomendasi
 
 <details>
-<summary>💡 Klik untuk melihat tips</summary>
+<summary>💡 Klik untuk tips penggunaan</summary>
 
 - **Tip #1:** Sertakan lisensi ini di proyek open source agar pengguna memahami bahwa kode bebas digunakan dan dimodifikasi.  
-- **Tip #2:** Gunakan badge untuk menonjolkan status lisensi dan hak penggunaan.  
-- **Tip #3:** Gunakan emoji untuk menyoroti poin penting agar lebih menarik dan mudah dibaca.
+- **Tip #2:** Gunakan **badge** untuk menonjolkan status lisensi dan hak penggunaan.  
+- **Tip #3:** Gunakan emoji & tabel untuk menampilkan poin penting agar mudah dibaca dan menarik.
 
 </details>
 
 ---
 
-## ✅ Visual Summary
+## ✅ Visual Summary (Mini Webpage Style)
 
 <details>
-<summary>📖 Klik untuk ringkasan visual</summary>
+<summary>🔹 Klik untuk ringkasan visual</summary>
 
-- 🟢 Gratis & Bebas Hak Cipta  
-- 🌍 Bisa digunakan siapa saja, untuk apa saja  
-- ⚠️ Tanpa jaminan — gunakan dengan risiko sendiri  
+| Status | Deskripsi |
+|--------|-----------|
+| 🟢 Gratis & Bebas Hak Cipta | Tidak terikat hak cipta, sepenuhnya open. |
+| 🌍 Bebas Digunakan | Bisa digunakan siapa saja, untuk apa saja. |
+| ⚠️ Tanpa Jaminan | Gunakan dengan risiko sendiri. |
 
-🚀 Dengan lisensi ini, proyek Anda **sepenuhnya terbuka**, **dapat dibagikan**, dan **dimodifikasi** oleh siapa saja, kapan saja!
+> 🚀 Dengan lisensi ini, proyek Anda **sepenuhnya terbuka**, **dapat dibagikan**, dan **dimodifikasi** oleh siapa saja, kapan saja!
 
 </details>
+
+---
+
+## 🌈 Kenapa Interaktif?
+
+- Menggunakan `<details>` + `<summary>` → collapsible agar README **lebih rapi dan profesional**.  
+- Badge dari [Shields.io](https://shields.io/) → **interaktif dan klik-able**.  
+- Emoji & tabel → mempermudah visualisasi dan pembacaan.  
+- Bisa dijadikan template untuk **README proyek open source** yang menarik dan informatif.  
 
 
 Klik [di sini untuk daftar isi interaktif](https://frijal.github.io/index.html)
