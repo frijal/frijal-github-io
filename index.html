@@ -419,5 +419,18 @@ fetch('https://ipapi.co/json/')
   <div id="articleCount"></div>
 </div>
 </body>
+    <script>
+    const key = 'refreshCount';
+    let count = sessionStorage.getItem(key) ? parseInt(sessionStorage.getItem(key)) : 0;
+
+    if (count < 2) {
+      count++;
+      sessionStorage.setItem(key, count);
+      console.log(`Refresh ke-${count}...`);
+      setTimeout(() => {
+        location.reload();
+      }, 2000); 
+    } 
+  </script>
 </html>
 
