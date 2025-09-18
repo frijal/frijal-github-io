@@ -6,14 +6,6 @@
 
 ---
 
-<div align=center>
-
-<img src="/thumbnail.jpg">
-
-</div>
-
----
-
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
 
 <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 15px; border-radius: 12px; border-left: 6px solid #fd7e14; font-family: 'Segoe UI', sans-serif; margin-top:10px;">
@@ -27,6 +19,14 @@ Ini merupakan <strong>tindakan nyata untuk melepaskan hak cipta sekarang dan di 
 <strong>PERANGKAT LUNAK INI DISEDIAKAN "APA ADANYA"</strong> tanpa jaminan apa pun. Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah lain dari penggunaan kode ini. ⚠️
 
 🔗 Info lebih lanjut: <a href="https://unlicense.org" target="_blank" style="text-decoration: underline; color: #fd7e14;">unlicense.org</a>
+</div>
+
+---
+
+<div align=center>
+
+<img src="/thumbnail.jpg">
+
 </div>
 
 ---
