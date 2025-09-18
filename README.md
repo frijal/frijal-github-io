@@ -5,6 +5,12 @@
 ![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
 
 ---
+# rm-rf /
+<div align=center>
+
+ ![screenshot](/thumbnail.jpeg)
+
+</div>
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
 
