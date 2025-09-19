@@ -134,148 +134,73 @@ const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
 
 async function loadTOC() {
   try {
-    const res = await fetch("artikel.json");
-    const data = await res.json();
+    const data = await (await fetch("artikel.json")).json();
     const toc = document.getElementById("toc");
     toc.innerHTML = "";
-
     const totalCount = document.getElementById("totalCount");
-    totalCount.textContent = `Total artikel: ${data.length}`;
 
-    // Kelompokkan per kategori
-    const grouped = {};
-    data.forEach(d => {
-      if(!grouped[d.category]) grouped[d.category] = [];
-      grouped[d.category].push(d);
-    });
+    let totalArticles = 0;
+    Object.values(data).forEach(arr => totalArticles += arr.length);
+    totalCount.textContent = `Total artikel: ${totalArticles}`;
 
-    // Tombol global status
-    let tocCollapsed = false;
     const tocToggleBtn = document.getElementById("tocToggle");
-
+    let tocCollapsed = false;
     function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-        .every(list => list.style.display === "none");
-      tocCollapsed = allCollapsed;
+      tocCollapsed = Array.from(document.querySelectorAll(".toc-list")).every(l => l.style.display==="none");
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     }
 
-    Object.keys(grouped).sort().forEach(cat => {
+    Object.entries(data).forEach(([cat, articles]) => {
       const catDiv = document.createElement("div");
       catDiv.className = "category";
-
-      // Hitung jumlah artikel di kategori
-      const count = grouped[cat].length;
-
-      // Header kategori + badge jumlah
       catDiv.innerHTML = `
-        <div class="category-header">
-          ${cat} <span class="badge">${count}</span>
-        </div>
+        <div class="category-header">${cat} <span class="badge">${articles.length}</span></div>
         <div class="toc-list"></div>
       `;
-
       const catList = catDiv.querySelector(".toc-list");
       catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
-      // Tambahkan artikel
-      grouped[cat].forEach((item, i) => {
-        const el = document.createElement("div");
-        el.className = "toc-item";
-        el.dataset.text = item.title.toLowerCase();
-
-        const a = document.createElement("a");
-        a.href = `artikel/${item.file}`;
-        a.target = "_blank";
-        a.textContent = `${i+1}. ${item.title}`;
-
-        const statusSpan = document.createElement("span");
-        if(visitedLinks.includes(item.file)){
-          statusSpan.className = "label-visited";
-          statusSpan.textContent = "sudah dibaca 👍";
-          a.classList.add("visited");
-        } else {
-          statusSpan.className = "label-new";
-          statusSpan.textContent = "📚 belum dibaca";
-        }
-
-        a.addEventListener("click", () => {
-          if(!visitedLinks.includes(item.file)){
-            visitedLinks.push(item.file);
-            localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-            statusSpan.className = "label-visited";
-            statusSpan.textContent = "sudah dibaca 👍";
-            a.classList.add("visited");
-          }
-        });
-
-        const titleDiv = document.createElement("div");
-        titleDiv.className = "toc-title";
-        titleDiv.appendChild(a);
-        titleDiv.appendChild(statusSpan);
-        el.appendChild(titleDiv);
-        catList.appendChild(el);
+      articles.forEach(([title,file],i)=>{
+        const el = document.createElement("div"); el.className="toc-item"; el.dataset.text=title.toLowerCase();
+        const a=document.createElement("a"); a.href=`artikel/${file}`; a.target="_blank"; a.textContent=`${i+1}. ${title}`;
+        const span=document.createElement("span");
+        if(visitedLinks.includes(file)){span.className="label-visited"; span.textContent="sudah dibaca 👍"; a.classList.add("visited");}
+        else{span.className="label-new"; span.textContent="📚 belum dibaca";}
+        a.onclick=()=>{if(!visitedLinks.includes(file)){visitedLinks.push(file); localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks)); span.className="label-visited"; span.textContent="sudah dibaca 👍"; a.classList.add("visited");}};
+        const div=document.createElement("div"); div.className="toc-title"; div.append(a,span); el.appendChild(div); catList.appendChild(el);
       });
 
-      // Toggle kategori individu
-      catDiv.querySelector(".category-header").addEventListener("click", () => {
-        catList.style.display = catList.style.display==="block" ? "none" : "block";
-        updateTOCToggleText(); // update tombol global otomatis
-      });
-
+      catDiv.querySelector(".category-header").onclick = () => { catList.style.display = catList.style.display==="block"?"none":"block"; updateTOCToggleText(); };
       toc.appendChild(catDiv);
     });
 
     // Marquee
     const m = document.getElementById("marquee-content");
-    m.innerHTML = data.map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+    m.innerHTML = Object.values(data).flat().map(([t,f])=>`<a href="artikel/${f}" target="_blank">${t}</a>`).join(" • ");
 
-    // Search + highlight + update total + auto-expand kategori
-    document.getElementById("search").addEventListener("input", function() {
-      const term = this.value.toLowerCase();
-      let countVisible = 0;
-
-      document.querySelectorAll(".category").forEach(category => {
-        let catVisible = false;
-        category.querySelectorAll(".toc-item").forEach(item => {
-          const text = item.dataset.text;
-          const link = item.querySelector("a");
-          if(term && text.includes(term)) {
-            item.style.display = "flex";
-            catVisible = true;
-            countVisible++;
-            const regex = new RegExp(`(${term})`, "gi");
-            link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
-          } else {
-            item.style.display = term ? "none" : "flex";
-            link.innerHTML = link.textContent;
-            if(!term) countVisible++;
-          }
+    // Search
+    document.getElementById("search").oninput = function(){
+      const term=this.value.toLowerCase(); let count=0;
+      document.querySelectorAll(".category").forEach(cat=>{
+        let catVisible=false;
+        cat.querySelectorAll(".toc-item").forEach(item=>{
+          const link=item.querySelector("a");
+          if(term && item.dataset.text.includes(term)){item.style.display="flex"; catVisible=true; count++; link.innerHTML=link.textContent.replace(new RegExp(`(${term})`,"gi"), '<span class="highlight">$1</span>');}
+          else{item.style.display=term?"none":"flex"; link.innerHTML=link.textContent; if(!term) count++;}
         });
-        category.style.display = catVisible ? "block" : (term ? "none" : "block");
-        const tocList = category.querySelector(".toc-list");
-        tocList.style.display = catVisible ? "block" : tocList.style.display;
+        cat.style.display=catVisible?"block":(term?"none":"block");
+        cat.querySelector(".toc-list").style.display=catVisible?"block":cat.querySelector(".toc-list").style.display;
       });
+      totalCount.textContent=`Total artikel: ${count}`;
+      updateTOCToggleText();
+    };
 
-      totalCount.textContent = `Total artikel: ${countVisible}`;
-      updateTOCToggleText(); // update tombol global jika search collapse semua
-    });
-
-    // Tombol Expand/Collapse TOC Global
-    tocToggleBtn.addEventListener("click", () => {
-      tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list => {
-        list.style.display = tocCollapsed ? "none" : "block";
-      });
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    });
-
-    // Inisialisasi tombol sesuai kondisi awal TOC
+    // Tombol global
+    tocToggleBtn.onclick=()=>{tocCollapsed=!tocCollapsed; document.querySelectorAll(".toc-list").forEach(l=>l.style.display=tocCollapsed?"none":"block"); tocToggleBtn.textContent=tocCollapsed?"Buka":"Tutup";};
     updateTOCToggleText();
 
-  } catch(e) { console.error("Gagal load artikel.json:", e); }
+  } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
-
 
 loadTOC();
 
