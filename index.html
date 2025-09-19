@@ -189,11 +189,11 @@ async function loadTOC() {
       totalCount.textContent = `Total artikel: ${countVisible}`;
     });
 
-    // Tombol Expand/pse TOC
+    // Tombol Expand/Collapse TOC
     document.getElementById("tocToggle").addEventListener("click",()=>{
-      tocpsed = !tocpsed;
+      tocCollapsed = !tocCollapsed;
       document.querySelectorAll(".toc-list").forEach(list=>{
-        list.style.display = tocpsed ? "none" : "block";
+        list.style.display = tocCollapsed ? "none" : "block";
       });
       document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
     });
