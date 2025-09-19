@@ -5,34 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Artikel</title>
 <style>
-body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0 10px; }
-h1 { text-align:center; margin-top: 20px; }
-#search { width: 100%; padding:8px; font-size:14px; margin-bottom:10px; }
-.category { margin-bottom: 10px; border-radius:5px; overflow:hidden; }
-.category-header { padding:10px; color:white; font-weight:bold; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
-.toc-list { display:block; padding:5px 10px; background:#fff; }
-.toc-item { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee; }
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+header { background:#333; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+header h1 { margin:0; font-size:20px; }
+#search { padding:5px 10px; font-size:14px; width:250px; }
+#tocToggle { padding:5px 10px; cursor:pointer; }
+#totalCount { margin-left:10px; font-weight:bold; }
+#toc { padding:20px; }
+.category { margin-bottom:10px; border-radius:6px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+.category-header { padding:10px; color:#fff; font-weight:bold; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.toc-list { display:block; background:#fff; }
+.toc-item { display:flex; justify-content:space-between; padding:6px 10px; border-bottom:1px solid #eee; align-items:center; }
 .toc-item a { text-decoration:none; color:#333; }
-.toc-item a.visited { text-decoration: line-through; color: #999; }
-.label-new, .label-visited { font-size:12px; margin-left:5px; }
-.badge { background: rgba(0,0,0,0.2); border-radius:12px; padding:2px 8px; font-size:12px; }
-#tocToggle { padding:8px 12px; margin-bottom:10px; cursor:pointer; }
-.highlight { background: yellow; }
-#marquee { background:#222; color:white; padding:5px 0; overflow:hidden; white-space:nowrap; }
-#marquee a { color:white; margin-right:10px; text-decoration:none; }
+.toc-item a.visited { color:#999; }
+.label-new, .label-visited, .badge-count { font-size:12px; padding:2px 6px; border-radius:12px; }
+.label-new { background:#FFD700; color:#000; margin-left:6px; }
+.label-visited { background:#90EE90; color:#000; margin-left:6px; }
+.badge-count { background:rgba(0,0,0,0.2); color:#fff; margin-left:6px; }
+.highlight { background:yellow; color:#000; }
+#marquee { background:#eee; padding:5px 20px; overflow:hidden; white-space:nowrap; }
+#marquee-content a { margin-right:15px; text-decoration:none; color:#333; }
 </style>
 </head>
 <body>
 
-<h1>Daftar Artikel</h1>
-<div id="marquee"><span id="marquee-content"></span></div>
-<input type="text" id="search" placeholder="Cari artikel...">
-<button id="tocToggle">Tutup</button>
+<header>
+  <h1>Daftar Artikel</h1>
+  <div>
+    <input type="text" id="search" placeholder="Cari artikel...">
+    <button id="tocToggle">Buka</button>
+    <span id="totalCount"></span>
+  </div>
+</header>
+
+<div id="marquee"><div id="marquee-content"></div></div>
+
+<div id="footerInfo" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;font-size:14px;text-align:center;margin:10px auto;max-width:900px;"></div>
 <div id="toc"></div>
 
 <script>
-const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-
+// --- Gradient Map ---
 const gradientMap = {
   "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
   "Debian": "linear-gradient(180deg, #A80030, #D23759)",
@@ -56,6 +68,9 @@ const gradientMap = {
   "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
 };
 
+// --- Load TOC ---
+const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
+
 async function loadTOC() {
   try {
     const res = await fetch("artikel.json");
@@ -63,43 +78,35 @@ async function loadTOC() {
     const toc = document.getElementById("toc");
     toc.innerHTML = "";
 
-    // Urutkan kategori berdasarkan jumlah artikel terbanyak
-    const sortedCats = Object.keys(data).sort((a,b)=>data[b].length - data[a].length);
+    // Hitung total artikel
+    let totalArticles = 0;
+    Object.values(data).forEach(arr => totalArticles += arr.length);
+    document.getElementById("totalCount").textContent = `Total artikel: ${totalArticles}`;
 
-    sortedCats.forEach(cat => {
+    // Urutkan kategori berdasarkan jumlah artikel terbanyak
+    const sortedCategories = Object.keys(data).sort((a,b)=>data[b].length - data[a].length);
+
+    sortedCategories.forEach(cat => {
       const catDiv = document.createElement("div");
       catDiv.className = "category";
-
-      const count = data[cat].length;
-      catDiv.innerHTML = `
-        <div class="category-header">
-          ${cat} <span class="badge">${count}</span>
-        </div>
-        <div class="toc-list"></div>
-      `;
+      catDiv.innerHTML = `<div class="category-header">${cat} <span class="badge-count">${data[cat].length}</span></div><div class="toc-list"></div>`;
       const catList = catDiv.querySelector(".toc-list");
-      const header = catDiv.querySelector(".category-header");
-      header.style.background = gradientMap[cat] || gradientMap["Lainnya"];
+      catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
       data[cat].forEach((item,i)=>{
-        const el = document.createElement("div");
-        el.className = "toc-item";
+        const el=document.createElement("div");
+        el.className="toc-item";
         el.dataset.text = item[0].toLowerCase();
 
-        const a = document.createElement("a");
-        a.href = `artikel/${item[1]}`;
+        const a=document.createElement("a");
+        a.href=`artikel/${item[1]}`;
         a.target="_blank";
         a.textContent = `${i+1}. ${item[0]}`;
 
-        const statusSpan = document.createElement("span");
+        const statusSpan=document.createElement("span");
         if(visitedLinks.includes(item[1])){
-          statusSpan.className="label-visited"; 
-          statusSpan.textContent="sudah dibaca 👍"; 
-          a.classList.add("visited");
-        } else { 
-          statusSpan.className="label-new"; 
-          statusSpan.textContent="📚 belum dibaca"; 
-        }
+          statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
+        } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
 
         a.addEventListener("click",()=>{
           if(!visitedLinks.includes(item[1])){
@@ -111,16 +118,15 @@ async function loadTOC() {
           }
         });
 
-        const titleDiv = document.createElement("div");
-        titleDiv.className="toc-title";
+        const titleDiv=document.createElement("div");
         titleDiv.appendChild(a);
         titleDiv.appendChild(statusSpan);
         el.appendChild(titleDiv);
         catList.appendChild(el);
       });
 
-      // Toggle kategori
-      header.addEventListener("click", ()=>{
+      // Toggle kategori individu
+      catDiv.querySelector(".category-header").addEventListener("click",()=>{
         catList.style.display = catList.style.display==="block" ? "none" : "block";
         updateTOCToggleText();
       });
@@ -130,11 +136,13 @@ async function loadTOC() {
 
     // Marquee
     const m = document.getElementById("marquee-content");
-    m.innerHTML = sortedCats.flatMap(cat=>data[cat].map(d=>`<a href="artikel/${d[1]}" target="_blank">${d[0]}</a>`)).join(" • ");
+    m.innerHTML = Object.values(data).flat().map(d=>`<a href="artikel/${d[1]}" target="_blank">${d[0]}</a>`).join(" • ");
 
     // Search
     document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
+      let countVisible = 0;
+
       document.querySelectorAll(".category").forEach(category => {
         let catVisible = false;
         category.querySelectorAll(".toc-item").forEach(item => {
@@ -143,32 +151,40 @@ async function loadTOC() {
           if(term && text.includes(term)) {
             item.style.display = "flex";
             catVisible = true;
-            const regex = new RegExp(`(${term})`,"gi");
-            link.innerHTML = link.textContent.replace(regex,'<span class="highlight">$1</span>');
+            countVisible++;
+            const regex = new RegExp(`(${term})`, "gi");
+            link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
           } else {
             item.style.display = term ? "none" : "flex";
             link.innerHTML = link.textContent;
+            if(!term) countVisible++;
           }
         });
         category.style.display = catVisible ? "block" : (term ? "none" : "block");
         const tocList = category.querySelector(".toc-list");
         tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
+
+      document.getElementById("totalCount").textContent = `Total artikel: ${countVisible}`;
+      updateTOCToggleText();
     });
 
-    // Tombol Expand/Collapse Global
+    // Global TOC toggle
     let tocCollapsed = false;
     const tocToggleBtn = document.getElementById("tocToggle");
 
     function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list")).every(list => list.style.display === "none");
+      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
+        .every(list => list.style.display === "none");
       tocCollapsed = allCollapsed;
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     }
 
-    tocToggleBtn.addEventListener("click", ()=>{
+    tocToggleBtn.addEventListener("click", () => {
       tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list => list.style.display = tocCollapsed ? "none" : "block");
+      document.querySelectorAll(".toc-list").forEach(list => {
+        list.style.display = tocCollapsed ? "none" : "block";
+      });
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     });
 
@@ -177,9 +193,87 @@ async function loadTOC() {
   } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
 
-// Jalankan TOC
+// Jalankan
 loadTOC();
 </script>
 
+<script>
+// --- Ikon SVG untuk Browser ---
+const browserIcons = {
+    "Firefox": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FF7139"><circle cx="12" cy="12" r="10"/></svg>`,
+    "Chrome": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#4285F4"><circle cx="12" cy="12" r="10"/></svg>`,
+    "Edge": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><circle cx="12" cy="12" r="10"/></svg>`,
+    "Safari": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#00A1F1"><circle cx="12" cy="12" r="10"/></svg>`,
+    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><circle cx="12" cy="12" r="10"/></svg>`
+};
+
+// --- Ikon SVG untuk OS ---
+const osIcons = {
+    "Windows": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><rect width="24" height="24"/></svg>`,
+    "macOS": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><rect width="24" height="24"/></svg>`,
+    "Linux": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FCC624"><rect width="24" height="24"/></svg>`,
+    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#ccc"><rect width="24" height="24"/></svg>`
+};
+
+// --- Ikon Globe SVG untuk IP ---
+const globeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#28a745"><circle cx="12" cy="12" r="10"/></svg>`;
+
+// --- Fungsi deteksi Browser ---
+function getBrowserInfo(){
+    const ua = navigator.userAgent;
+    let name="Unknown", version="N/A";
+    if(ua.includes("Firefox")) { name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; }
+    else if(ua.includes("Chrome") && !ua.includes("Edg")) { name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; }
+    else if(ua.includes("Edg")) { name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; }
+    else if(ua.includes("Safari")) { name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; }
+    return {name, version, icon: browserIcons[name] || browserIcons["Unknown"]};
+}
+
+// --- Fungsi deteksi OS ---
+function getOSInfo(){
+    const platform = navigator.platform.toLowerCase();
+    let name="Unknown";
+    if(platform.includes("win")) name="Windows";
+    else if(platform.includes("mac")) name="macOS";
+    else if(platform.includes("linux")) name="Linux";
+    return {name, icon: osIcons[name] || osIcons["Unknown"]};
+}
+
+// --- Ambil IP dan info lokasi + bendera ---
+fetch('https://ipapi.co/json/')
+.then(res => res.json())
+.then(data => {
+    const footer = document.getElementById('footerInfo');
+    const browser = getBrowserInfo();
+    const os = getOSInfo();
+    const countryCode = data.country_code.toLowerCase();
+
+    // Gunakan FlagCDN untuk bendera
+    const flagImg = `<img src="https://flagcdn.com/48x36/${countryCode}.png" alt="${data.country_name}" width="24" height="18" style="vertical-align:middle;border:1px solid #ccc;border-radius:2px;">`;
+
+    // Tampilkan semua info dengan animasi hover
+    footer.innerHTML = `
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
+            ${browser.icon} <span> ${browser.name} ${browser.version}</span>
+        </div>
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
+            ${os.icon} <span> ${os.name}</span>
+        </div>
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
+            ${globeSVG} <span> ${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
+        </div>
+    `;
+
+    // Tambahkan animasi hover
+    document.querySelectorAll('.info-item').forEach(el=>{
+        el.addEventListener('mouseenter', ()=>{ el.style.transform='scale(1.05)'; el.style.color='#007BFF'; });
+        el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
+    });
+})
+.catch(err=>{
+    document.getElementById('footerInfo').textContent='Tidak dapat mengambil data IP';
+    console.error(err);
+});
+</script>
 </body>
 </html>
