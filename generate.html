@@ -3,178 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auto Update artikel.json Canggih</title>
-<style>
-body { font-family: Arial, sans-serif; padding:20px; background:#f7f7f7; }
-h1 { text-align:center; }
-textarea { width:100%; height:400px; margin-top:10px; }
-input, button { width:100%; padding:8px; margin:5px 0; }
-button { cursor:pointer; }
-</style>
+<title>Generate JSON Artikel</title>
 </head>
 <body>
-
-<h1>Auto Update artikel.json - Pintar & Efisien</h1>
-
-<label>Token GitHub (public_repo):</label>
-<input type="password" id="ghToken" placeholder="Masukkan GitHub token Anda">
-
-<label>Username GitHub:</label>
-<input type="text" id="ghUser" placeholder="USERNAME_GITHUB">
-
-<label>Nama Repo:</label>
-<input type="text" id="ghRepo" placeholder="NAMA_REPO">
-
-<label>Branch:</label>
-<input type="text" id="ghBranch" placeholder="main" value="main">
-
-<label>Interval (detik):</label>
-<input type="number" id="intervalSec" value="60">
-
-<button id="startBtn">Mulai Auto-Update</button>
-
-<h2>Status & Output</h2>
-<textarea id="statusOutput" readonly></textarea>
+<h1>Generate artikel.json</h1>
+<button id="generate">Generate JSON</button>
+<pre id="output"></pre>
 
 <script>
-const folderPath = "artikel";
-let lastFileList = []; // Track perubahan file
+const folderArtikel = "artikel/";
 
-function logStatus(text){
-    const status = document.getElementById("statusOutput");
-    status.value += `[${new Date().toLocaleTimeString()}] ${text}\n`;
-    status.scrollTop = status.scrollHeight;
+async function generateJSON() {
+  try {
+    // Ambil daftar file HTML dari folder artikel
+    const res = await fetch(folderArtikel);
+    const text = await res.text();
+    // Parsing href dari listing folder GitHub Pages (jika GitHub Pages menampilkan index)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    const links = Array.from(doc.querySelectorAll("a"))
+      .map(a => a.getAttribute("href"))
+      .filter(h => h.endsWith(".html"));
+
+    // Buat array JSON
+    const data = links.map(file => {
+      const title = file
+        .replace(".html","")
+        .replace(/[-_]/g," ")
+        .replace(/\b\w/g, l => l.toUpperCase());
+      // Tentukan kategori otomatis
+      const category = title.toLowerCase().includes("linux") ? "OS/Linux" :
+                       title.toLowerCase().includes("hijab") ? "Religi" :
+                       "Lainnya";
+      return { title, file, category };
+    });
+
+    document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    console.log(data);
+    alert("JSON berhasil dibuat! Silakan commit & push menggunakan GitHub Actions.");
+  } catch(e) {
+    console.error(e);
+    alert("Gagal generate JSON");
+  }
 }
 
-function titleToCategory(title){
-    const t = title.toLowerCase();
-    const cats=[
-      {name:"Arch", k:["manjaro", "cachy", "arch", "endeavouros", "artix", "parabola", "blackarch", "garuda"]},
-    {name:"Debian", k:["debian", "ubuntu", "mint", "mx", "elementary", "puppy", "kali", "kubuntu", "xubuntu", "lubuntu", "zorin", "popos", "deepin", "tails"]},
-    {name:"Desktop", k:["kde", "hyperland", "caja", "ukui", "pantheon", "deepin", "lxde", "budgie", "mate", "gnome", "cinnamon", "xfce", "desktop", "fluxbox", "openbox", "i3", "sway", "awesome", "dwm", "enlightenment"]},
-    {name:"Kehidupan", k:["hidup", "uang", "dosa", "alasan", "bapak", "ibu", "anak", "kehidupan", "tidur", "sahabat", "teman", "sombong", "wanita", "pria", "perempuan", "laki", "silaturahim", "daily", "rutinitas", "bahagia", "sedih", "cinta", "emosi", "keluarga", "sosial", "masalah"]},
-    {name:"Kerja", k:["kerja", "kantor", "dokumen", "strategi", "pdf", "psikotes", "karir", "bisnis", "proyek", "meeting", "wawancara", "resign", "gaji", "promosi", "lembur", "freelance", "startup"]},
-    {name:"Kuliner", k:["resep", "makan", "minum", "bumbu", "kuliner", "masak", "restoran", "kafe", "jajanan", "sarapan", "makan siang", "makan malam", "diet"]},
-    {name:"Multimedia", k:["video", "foto", "audio", "film", "ffmpeg", "imagemagick", "photoshop", "gimp", "audacity", "blender", "premiere", "davinci", "lightroom", "kdenlive", "shotcut"]},
-    {name:"NixOS", k:["nixos","nix"]},
-    {name:"OpenSUSE", k:["opensuse", "suse", "leap", "tumbleweed"]},
-    {name:"OS Linux", k:["grub", "autoremove", "cron", "reinstall", "dd", "troubleshooting", "skrip", "rsync", "system", "sudo", "backup", "plugin", "ssh", "symlinks", "mount", "samba", "linux", "bootloader", "distro", "release", "rilis", "kernel", "cli", "shell", "bash", "zsh", "systemd", "init", "pacman", "yay", "apt-get", "dpkg", "yum", "dnf", "zypper", "aptitude"]},
-    {name:"OS Windows", k:["windows", "windows10", "windows11", "powershell", "cmd", "registry", "boot", "update"]},
-    {name:"Redhat", k:["fedora", "centos", "redhat", "rhel", "scientific linux", "alma", "rocky"]},
-    {name:"Religi", k:["allah", "shalat", "sholat", "agama", "puasa", "nabi", "islam", "madinah", "religi", "ghibah", "muslim", "quran", "hadits", "dakwah", "doa", "surga", "neraka", "masjid"]},
-    {name:"Repository", k:["repository", "dnf", "apt", "repo", "snap", "synaptic", "octopi", "flatpak", "netselect", "mirror", "reflector", "aur", "ppa", "github", "gitlab", "bitbucket", "dockerhub"]},
-    {name:"Slackware", k:["slackware", "slac", "sbopkg"]},
-    {name:"Jaringan", k:["jaringan", "internet", "wifi", "router", "modem", "ethernet", "ip", "dns", "firewall", "tcp", "udp", "http", "https", "proxy", "vpn", "port"]},
-    {name:"Pemrograman", k:["pemrograman", "program", "coding", "javascript", "python", "php", "java", "c++", "c", "html", "css", "database", "sql", "mysql", "mongodb", "framework", "library", "api", "bug", "compiler", "debugging"]},
-    {name:"Perangkat Keras", k:["perangkat keras", "hardware", "cpu", "gpu", "ram", "hardisk", "ssd", "motherboard", "power supply", "monitor", "keyboard", "mouse", "printer", "usb", "driver"]},
-    {name:"Keuangan", k:["keuangan", "investasi", "saham", "crypto", "bitcoin", "uang", "bank", "tabungan", "kredit", "pinjaman", "pajak", "anggaran", "ekonomi"]}
-    ];
-    return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
-}
-
-async function generateArtikelJSON(token, user, repo, branch){
-    try{
-        // Ambil daftar file di folder artikel/
-        const apiFolder = `https://api.github.com/repos/${user}/${repo}/contents/${folderPath}?ref=${branch}`;
-        const resFolder = await fetch(apiFolder, { headers:{Authorization:`token ${token}`} });
-        const files = await resFolder.json();
-        const htmlFiles = files.filter(f => f.type==="file" && f.name.endsWith(".html"));
-        
-        // Cek perubahan file baru atau dihapus
-        const currentFiles = htmlFiles.map(f=>f.name);
-        const addedFiles = currentFiles.filter(f => !lastFileList.includes(f));
-        const removedFiles = lastFileList.filter(f => !currentFiles.includes(f));
-        lastFileList = currentFiles;
-
-        if(addedFiles.length===0 && removedFiles.length===0){
-            logStatus("Tidak ada perubahan file, artikel.json tetap sama.");
-            return;
-        }
-
-        logStatus(`File baru: ${addedFiles.join(", ") || "Tidak ada"}`);
-        logStatus(`File dihapus: ${removedFiles.join(", ") || "Tidak ada"}`);
-
-        const result = [];
-        for(const f of htmlFiles){
-            try{
-                const rawUrl = f.download_url;
-                const resFile = await fetch(rawUrl);
-                const text = await resFile.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text,'text/html');
-                const title = doc.querySelector("title")?.innerText || f.name;
-                const category = titleToCategory(title);
-                result.push({title, file:`${folderPath}/${f.name}`, category});
-            }catch(e){
-                result.push({title:f.name, file:`${folderPath}/${f.name}`, category:"Lainnya"});
-            }
-        }
-
-        const jsonContent = JSON.stringify(result, null, 2);
-
-        // Ambil SHA artikel.json lama jika ada
-        let sha = null;
-        const jsonFileUrl = `https://api.github.com/repos/${user}/${repo}/contents/artikel.json?ref=${branch}`;
-        const resJson = await fetch(jsonFileUrl, { headers:{ Authorization:`token ${token}` } });
-        if(resJson.status === 200){
-            const dataJson = await resJson.json();
-            sha = dataJson.sha;
-            logStatus("artikel.json lama ditemukan, update...");
-        }else{
-            logStatus("artikel.json belum ada, membuat baru...");
-        }
-
-        // Push ke GitHub
-        const pushRes = await fetch(jsonFileUrl, {
-            method:"PUT",
-            headers:{
-                Authorization:`token ${token}`,
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify({
-                message:`Update artikel.json otomatis - ${new Date().toISOString()}`,
-                content:btoa(unescape(encodeURIComponent(jsonContent))),
-                branch: branch,
-                sha: sha
-            })
-        });
-
-        if(pushRes.ok){
-            logStatus("artikel.json berhasil diupdate!");
-        }else{
-            const err = await pushRes.json();
-            logStatus(`Gagal push artikel.json: ${JSON.stringify(err)}`);
-        }
-
-    }catch(e){
-        logStatus(`Terjadi error: ${e}`);
-    }
-}
-
-document.getElementById("startBtn").addEventListener("click", ()=>{
-    const token = document.getElementById("ghToken").value.trim();
-    const user = document.getElementById("ghUser").value.trim();
-    const repo = document.getElementById("ghRepo").value.trim();
-    const branch = document.getElementById("ghBranch").value.trim();
-    const intervalSec = parseInt(document.getElementById("intervalSec").value.trim()) || 60;
-
-    if(!token || !user || !repo){
-        alert("Lengkapi semua field!");
-        return;
-    }
-
-    // Simpan token di sessionStorage
-    sessionStorage.setItem("ghToken", token);
-
-    logStatus(`Memulai auto-update setiap ${intervalSec} detik...`);
-
-    // Jalankan pertama kali
-    generateArtikelJSON(token,user,repo,branch);
-
-    // Interval otomatis
-    setInterval(()=>generateArtikelJSON(token,user,repo,branch), intervalSec*1000);
-});
+document.getElementById("generate").addEventListener("click", generateJSON);
 </script>
-
 </body>
 </html>
