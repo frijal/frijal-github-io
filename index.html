@@ -275,13 +275,13 @@ fetch('https://ipapi.co/json/')
     // Tampilkan semua info dengan animasi hover
     footer.innerHTML = `
         <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${browser.icon} <span>Browser: ${browser.name} ${browser.version}</span>
+            ${browser.icon} <span> ${browser.name} ${browser.version}</span>
         </div>
         <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${os.icon} <span>OS: ${os.name}</span>
+            ${os.icon} <span> ${os.name}</span>
         </div>
         <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${globeSVG} <span>IP: ${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
+            ${globeSVG} <span> ${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
         </div>
     `;
 
