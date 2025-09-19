@@ -12,147 +12,59 @@
   #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
   #marquee-content { display:inline-block; padding-left:100%; animation:marquee 600s linear infinite; will-change:transform; }
   #marquee-container:hover #marquee-content { animation-play-state:paused; }
-  #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
-  #marquee-content a:hover { color:yellow; text-decoration:underline; }
+  #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: all 0.3s ease; }
+  #marquee-content a:hover { color: yellow; text-shadow: 0 0 5px #fff; transform: scale(1.1); }
   @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
   #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
 
-    /* Expand/Collapse Button */
   #tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
-  
-  /* TOC */
+
   #toc { max-width:900px; margin:10px auto; }
   #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
 
   .category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
+  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:#333; }
   .toc-list { display:none; padding:0 16px; }
   .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
   .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
   .toc-title a { text-decoration:none; color:#333; transition:all 0.3s; font-weight:bold; position:relative; }
   .toc-title a.visited { color: gray; }
-  .toc-title a::after { content:""; position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); width:0; height:2px; background:#fff; transition:width 0.3s ease; }
-  .toc-title a:hover::after { width:100%; }
   .label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
   .label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
-  .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
+  .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; background: rgba(0,0,0,0.3); }
 
-  /* Highlight fade-in */
   .highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
   @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
 
   @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
-
- /* Badge jumlah artikel di kategori TOC */
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  border-radius: 6px;
-}
-
-.category-header .badge {
-  background: #ffc107; /* kuning emas */
-  color: #333;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-  
-  /* Efek pada judul artikel TOC */
-.toc-title a {
-  position: relative;
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-/* Efek hover: scale, shadow, gradient text */
-.toc-title a:hover {
-  transform: scale(1.05); /* sedikit membesar */
-  color: transparent;
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
-  background-clip: text;
-  -webkit-background-clip: text; /* untuk browser Webkit */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
-
-/* Efek underline animasi */
-.toc-title a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background: #007BFF;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.toc-title a:hover::after {
-  width: 100%;
-}
-
-/* Efek highlight saat diklik atau visited */
-.toc-title a.visited {
-  color: gray;
-  text-decoration: none;
-  opacity: 0.8;
-}
-
 </style>
 </head>
 <body>
 
-<!-- Marquee -->
 <div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
-
 <div id="footerInfo" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;font-size:14px;text-align:center;margin:10px auto;max-width:900px;"></div>
-  
-<!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
-
-<!-- Expand/Collapse TOC -->
-<button id="tocToggle">Collapse TOC</button>
-
-<!-- TOC -->
+<button id="tocToggle">Tutup</button>
 <div id="toc"></div>
 <div id="totalCount">Total artikel: 0</div>
 
 <script>
-const gradientMap = {
-  "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
-  "Debian": "linear-gradient(180deg, #A80030, #D23759)",
-  "Desktop": "linear-gradient(180deg, #4A2E78, #6B4E9A)",
-  "Kehidupan": "linear-gradient(180deg, #F9D030, #FFEA8D)",
-  "Kerja": "linear-gradient(180deg, #2B3D4F, #576F86)",
-  "Kuliner": "linear-gradient(180deg, #D44E4E, #E58484)",
-  "Multimedia": "linear-gradient(180deg, #9C4D9A, #C972C7)",
-  "NixOS": "linear-gradient(180deg, #5277C3, #7D9FDE)",
-  "OpenSUSE": "linear-gradient(180deg, #74A82F, #9AC16B)",
-  "OS Linux": "linear-gradient(180deg, #333333, #666666)",
-  "OS Windows": "linear-gradient(180deg, #0078D7, #459DEB)",
-  "Redhat": "linear-gradient(180deg, #EE0000, #F84949)",
-  "Religi": "linear-gradient(180deg, #6A0DAD, #9D4EDD)",
-  "Repository": "linear-gradient(180deg, #8B949E, #B2BDC9)",
-  "Slackware": "linear-gradient(180deg, #4B859D, #7AB1C8)",
-  "Jaringan": "linear-gradient(180deg, #FF6600, #FF9933)",
-  "Pemrograman": "linear-gradient(180deg, #3D886D, #67AE91)",
-  "Perangkat Keras": "linear-gradient(180deg, #375A7F, #6A86A8)",
-  "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
-  "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
-};
-
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
+
+// Gradient pastel otomatis
+function getCategoryPastelGradient(count) {
+  const hue = (count * 40) % 360;
+  const color1 = `hsl(${hue}, 70%, 85%)`;
+  const color2 = `hsl(${hue}, 70%, 95%)`;
+  return `linear-gradient(180deg, ${color1}, ${color2})`;
+}
+function getCategoryHoverGradient(count) {
+  const hue = (count * 40) % 360;
+  const color1 = `hsl(${hue}, 80%, 75%)`;
+  const color2 = `hsl(${hue}, 80%, 90%)`;
+  return `linear-gradient(180deg, ${color1}, ${color2})`;
+}
 
 async function loadTOC() {
   try {
@@ -162,154 +74,127 @@ async function loadTOC() {
     toc.innerHTML = "";
 
     const totalCount = document.getElementById("totalCount");
+    totalCount.textContent = `Total artikel: ${data.reduce((acc, cat)=> acc + cat[1].length,0)}`;
 
-    // --- Kelompokkan data per kategori ---
-    const grouped = {};
-    Object.keys(data).forEach(cat => {
-      grouped[cat] = data[cat].map(arr => ({
-        title: arr[0],
-        file: arr[1],
-        category: cat
-      }));
-    });
+    // Kelompokkan per kategori (format json object)
+    const grouped = data; // data sudah object { "Kategori": [[judul,file]] }
 
-    // --- Hitung total artikel ---
-    const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
-    totalCount.textContent = `Total artikel: ${totalArticles}`;
+    // Urutkan kategori berdasarkan jumlah artikel terbanyak
+    const sortedCats = Object.keys(grouped).sort((a,b)=> grouped[b].length - grouped[a].length);
 
-    // --- Urutkan kategori berdasarkan jumlah artikel terbanyak ---
-    Object.keys(grouped)
-      .sort((a, b) => grouped[b].length - grouped[a].length)
-      .forEach(cat => {
-        const catDiv = document.createElement("div");
-        catDiv.className = "category";
+    sortedCats.forEach(cat => {
+      const catDiv = document.createElement("div");
+      catDiv.className = "category";
+      catDiv.innerHTML = `<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div>
+                          <div class="toc-list"></div>`;
+      const catList = catDiv.querySelector(".toc-list");
 
-        catDiv.innerHTML = `
-          <div class="category-header">
-            ${cat} <span class="badge">${grouped[cat].length}</span>
-          </div>
-          <div class="toc-list"></div>
-        `;
+      const catHeader = catDiv.querySelector(".category-header");
+      catHeader.style.background = getCategoryPastelGradient(grouped[cat].length);
+      catHeader.addEventListener("mouseenter", ()=>{ catHeader.style.background = getCategoryHoverGradient(grouped[cat].length); });
+      catHeader.addEventListener("mouseleave", ()=>{ catHeader.style.background = getCategoryPastelGradient(grouped[cat].length); });
 
-        const catList = catDiv.querySelector(".toc-list");
+      grouped[cat].forEach((item,i)=>{
+        const el = document.createElement("div");
+        el.className="toc-item";
+        el.dataset.text = item[0].toLowerCase();
 
-        // --- Terapkan gradient dari gradientMap ---
-        catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
+        const a = document.createElement("a");
+        a.href=`artikel/${item[1]}`;
+        a.target="_blank";
+        a.textContent = `${i+1}. ${item[0]}`;
 
-        // --- Tambahkan item TOC ---
-        grouped[cat].forEach((item, i) => {
-          const el = document.createElement("div");
-          el.className = "toc-item";
-          el.dataset.text = item.title.toLowerCase();
+        const statusSpan = document.createElement("span");
+        if(visitedLinks.includes(item[1])){
+          statusSpan.className="label-visited"; 
+          statusSpan.textContent="sudah dibaca 👍"; 
+          a.classList.add("visited");
+        } else { 
+          statusSpan.className="label-new"; 
+          statusSpan.textContent="📚 belum dibaca"; 
+        }
 
-          const a = document.createElement("a");
-          a.href = `artikel/${item.file}`;
-          a.target="_blank";
-          a.textContent = `${i + 1}. ${item.title}`;
-
-          const statusSpan = document.createElement("span");
-          if (visitedLinks.includes(item.file)) {
-            statusSpan.className = "label-visited";
-            statusSpan.textContent = "sudah dibaca 👍";
+        a.addEventListener("click",()=>{
+          if(!visitedLinks.includes(item[1])){
+            visitedLinks.push(item[1]);
+            localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
+            statusSpan.className="label-visited";
+            statusSpan.textContent="sudah dibaca 👍";
             a.classList.add("visited");
-          } else {
-            statusSpan.className = "label-new";
-            statusSpan.textContent = "📚 belum dibaca";
           }
-
-          a.addEventListener("click", () => {
-            if (!visitedLinks.includes(item.file)) {
-              visitedLinks.push(item.file);
-              localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-              statusSpan.className = "label-visited";
-              statusSpan.textContent = "sudah dibaca 👍";
-              a.classList.add("visited");
-            }
-          });
-
-          const titleDiv = document.createElement("div");
-          titleDiv.className = "toc-title";
-          titleDiv.appendChild(a);
-          titleDiv.appendChild(statusSpan);
-          el.appendChild(titleDiv);
-          catList.appendChild(el);
         });
 
-        // --- Toggle kategori individu ---
-        catDiv.querySelector(".category-header").addEventListener("click", () => {
-          catList.style.display = catList.style.display === "block" ? "none" : "block";
-          updateTOCToggleText();
-        });
-
-        toc.appendChild(catDiv);
+        const titleDiv = document.createElement("div");
+        titleDiv.className="toc-title";
+        titleDiv.appendChild(a);
+        titleDiv.appendChild(statusSpan);
+        el.appendChild(titleDiv);
+        catList.appendChild(el);
       });
 
-    // --- Marquee ---
-    const m = document.getElementById("marquee-content");
-    const allArticles = Object.values(grouped).flat();
-    m.innerHTML = allArticles.map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+      catHeader.addEventListener("click", ()=>{
+        catList.style.display = catList.style.display==="block" ? "none" : "block";
+        updateTOCToggleText();
+      });
 
-    // --- Search ---
-    document.getElementById("search").addEventListener("input", function () {
+      toc.appendChild(catDiv);
+    });
+
+    // Tombol Expand/Collapse TOC Global
+    let tocCollapsed = false;
+    const tocToggleBtn = document.getElementById("tocToggle");
+    function updateTOCToggleText() {
+      const allCollapsed = Array.from(document.querySelectorAll(".toc-list")).every(list => list.style.display==="none");
+      tocCollapsed = allCollapsed;
+      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+    }
+    tocToggleBtn.addEventListener("click", ()=>{
+      tocCollapsed = !tocCollapsed;
+      document.querySelectorAll(".toc-list").forEach(list => { list.style.display = tocCollapsed ? "none" : "block"; });
+      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+    });
+    updateTOCToggleText();
+
+    // Search + highlight
+    document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
       let countVisible = 0;
-
       document.querySelectorAll(".category").forEach(category => {
         let catVisible = false;
         category.querySelectorAll(".toc-item").forEach(item => {
           const text = item.dataset.text;
           const link = item.querySelector("a");
-          if (term && text.includes(term)) {
-            item.style.display = "flex";
-            catVisible = true;
-            countVisible++;
+          if(term && text.includes(term)) {
+            item.style.display = "flex"; catVisible = true; countVisible++;
             const regex = new RegExp(`(${term})`, "gi");
             link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
           } else {
             item.style.display = term ? "none" : "flex";
             link.innerHTML = link.textContent;
-            if (!term) countVisible++;
+            if(!term) countVisible++;
           }
         });
         category.style.display = catVisible ? "block" : (term ? "none" : "block");
         const tocList = category.querySelector(".toc-list");
         tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
-
       totalCount.textContent = `Total artikel: ${countVisible}`;
       updateTOCToggleText();
     });
 
-    // --- Tombol global Buka/Tutup ---
-    let tocCollapsed = false;
-    const tocToggleBtn = document.getElementById("tocToggle");
+    // Marquee
+    const m = document.getElementById("marquee-content");
+    m.innerHTML = sortedCats.map(cat=>{
+      return grouped[cat].map(item=>{
+        return `<a href="artikel/${item[1]}" target="_blank">${item[0]}</a>`;
+      }).join(" • ");
+    }).join(" • ");
 
-    function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-        .every(list => list.style.display === "none");
-      tocCollapsed = allCollapsed;
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    }
-
-    tocToggleBtn.addEventListener("click", () => {
-      tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list => {
-        list.style.display = tocCollapsed ? "none" : "block";
-      });
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    });
-
-    // --- Inisialisasi tombol ---
-    updateTOCToggleText();
-
-  } catch (e) {
-    console.error("Gagal load artikel.json:", e);
-  }
+  } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
 
-  
+// Jalankan loadTOC
 loadTOC();
-
 </script>
 
 <script>
@@ -390,6 +275,5 @@ fetch('https://ipapi.co/json/')
     console.error(err);
 });
 </script>
-
 </body>
 </html>
