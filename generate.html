@@ -1,103 +1,130 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generator TOC JSON</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
-    h2 { margin-bottom: 10px; }
-    textarea { width: 100%; height: 200px; margin-top: 10px; }
-    input, select, button { margin: 5px 0; padding: 6px; }
-    .kategori { margin: 15px 0; padding: 10px; background: #fff; border-radius: 8px; }
-    .item { margin-left: 20px; }
-    .output { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 6px; white-space: pre; }
-    .btn-group { margin-top: 10px; }
-    button { cursor: pointer; border: none; border-radius: 4px; background: #0073e6; color: #fff; }
-    button:hover { background: #005bb5; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate artikel.json Otomatis</title>
+<style>
+body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
+h1 { text-align:center; }
+textarea { width:100%; height:400px; padding:10px; font-family: monospace; font-size:14px; }
+button { padding:10px 15px; font-size:16px; margin:5px; cursor:pointer; border:none; border-radius:4px; background:#0073e6; color:#fff; }
+button:hover { background:#005bb5; }
+.btn-group { text-align:center; margin:15px 0; }
+</style>
 </head>
 <body>
-  <h2>Generator TOC JSON</h2>
 
-  <!-- Tambah Kategori -->
-  <input type="text" id="kategoriInput" placeholder="Nama kategori (misal: Jaringan)">
-  <button onclick="addKategori()">Tambah Kategori</button>
+<h1>Generate artikel.json Otomatis</h1>
+<p style="text-align:center">JSON muncul di bawah. Download & push manual ke repo.</p>
 
-  <div id="kategoriList"></div>
+<div class="btn-group">
+  <button id="generateBtn">Generate JSON</button>
+  <button id="downloadBtn">Download JSON</button>
+  <button id="copyBtn">Copy JSON</button>
+</div>
 
-  <div class="btn-group">
-    <button onclick="generateJSON()">Hasilkan JSON</button>
-    <button onclick="downloadJSON()">Download toc.json</button>
-    <button onclick="copyJSON()">Copy JSON</button>
-  </div>
+<textarea id="jsonOutput" readonly></textarea>
 
-  <h3>Output JSON</h3>
-  <pre class="output" id="output"></pre>
+<script>
+// --- Fungsi kategori berdasarkan keyword ---
+function titleToCategory(title){
+  const t = title.toLowerCase();
+  const cats = [
+    {name: "Arch", k:["arch","manjaro","cachyos","endeavouros","artix","parabola","blackarch","garuda","antergos","arco"]},
+    {name: "Debian", k:["debian","ubuntu","mint","mx linux","elementary","puppy","kali","kubuntu","xubuntu","lubuntu","zorin","popos","deepin","tails","raspbian","devuan"]},
+    {name: "Desktop", k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce","desktop environment","fluxbox","openbox","i3","sway","awesome","dwm","enlightenment","wayland","xorg","window manager"]},
+    {name: "Kehidupan", k:["hidup","uang","dosa","alasan","bapak","ibu","anak","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily","rutinitas","bahagia","sedih","cinta","emosi","keluarga","sosial","masalah","motivasi","inspirasi","tujuan","rencana","kebiasaan","jodoh","nikah"]},
+    {name: "Kerja", k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir","bisnis","proyek","meeting","wawancara","resign","gaji","promosi","lembur","freelance","startup","cv","lamaran","manajemen","produktivitas"]},
+    {name: "Kuliner", k:["resep","makan","minum","bumbu","kuliner","masak","restoran","kafe","jajanan","sarapan","makan siang","makan malam","diet","makanan","minuman","dapur","kue","roti","gorengan"]},
+    {name: "Multimedia", k:["video","foto","audio","film","ffmpeg","imagemagick","photoshop","gimp","audacity","blender","premiere","davinci","lightroom","kdenlive","shotcut","editing","produksi","musik","podcast","vfx","efek"]},
+    {name: "NixOS", k:["nixos","nix"]},
+    {name: "OpenSUSE", k:["opensuse","suse","leap","tumbleweed","chameleon","zypper"]},
+    {name: "OS Linux", k:["grub","autoremove","cron","reinstall","dd","troubleshooting","skrip","rsync","systemd","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis","kernel","cli","shell","bash","zsh","init","pacman","yay","apt-get","dpkg","yum","dnf","zypper","aptitude","uname","ls","grep","awk","sed","chmod","chown","user","group","service","systemctl"]},
+    {name: "OS Windows", k:["windows","windows 10","windows 11","powershell","cmd","registry","boot","update","explorer","task manager","bsod","driver"]},
+    {name: "Redhat", k:["fedora","centos","redhat","rhel","scientific linux","alma","rocky","centos stream"]},
+    {name: "Religi", k:["allah","shalat","sholat","agama","puasa","nabi","islam","madinah","religi","ghibah","muslim","quran","hadits","dakwah","doa","surga","neraka","masjid","iman","ibadah","hijab","akidah"]},
+    {name: "Repository", k:["repository","dnf","apt","repo","snap","synaptic","octopi","flatpak","netselect","mirror","reflector","aur","ppa","github","gitlab","bitbucket","dockerhub","git","clone","push","pull"]},
+    {name: "Slackware", k:["slackware","slac","sbopkg","pkgtools"]},
+    {name: "Jaringan", k:["jaringan","internet","wifi","router","modem","ethernet","ip address","dns","firewall","tcp","udp","http","https","proxy","vpn","port","lan","wan","bandwidth","ping","traceroute"]},
+    {name: "Pemrograman", k:["pemrograman","program","coding","javascript","python","php","java","c++","c","html","css","database","sql","mysql","mongodb","framework","library","api","bug","compiler","debugging","syntax","variabel","algoritma","frontend","backend","fullstack","data science"]},
+    {name: "Perangkat Keras", k:["perangkat keras","hardware","cpu","gpu","ram","hardisk","ssd","motherboard","power supply","monitor","keyboard","mouse","printer","usb","driver","bios","uefi","processor","graphic card","storage","komponen"]},
+    {name: "Keuangan", k:["keuangan","investasi","saham","crypto","bitcoin","uang","bank","tabungan","kredit","pinjaman","pajak","anggaran","ekonomi","fintech","reksadana","inflasi","utang"]}
+  ];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
+}
 
-  <script>
-  const tocData = {};
+// --- Konfigurasi repo GitHub Pages publik ---
+const owner = "frijal";       // ganti sesuai username
+const repo = "frijal.github.io";  // ganti sesuai repo
+const folder = "artikel";     // folder artikel
 
-  function addKategori() {
-    const kategori = document.getElementById("kategoriInput").value.trim();
-    if (!kategori) return alert("Isi nama kategori dulu!");
+async function generateJSON() {
+  try {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+    const res = await fetch(apiUrl);
+    const files = await res.json();
+    const htmlFiles = files.filter(f => f.name.endsWith(".html"));
 
-    if (!tocData[kategori]) tocData[kategori] = [];
+    const grouped = {};
 
-    // Buat UI kategori
-    const div = document.createElement("div");
-    div.className = "kategori";
-    div.innerHTML = `
-      <h4>${kategori}</h4>
-      <div class="items" id="items-${kategori}"></div>
-      <input type="text" id="judul-${kategori}" placeholder="Judul artikel">
-      <input type="text" id="link-${kategori}" placeholder="Link artikel (contoh.html)">
-      <button onclick="addItem('${kategori}')">Tambah Item</button>
-    `;
-    document.getElementById("kategoriList").appendChild(div);
+    for (const f of htmlFiles) {
+      try {
+        const htmlText = await fetch(f.download_url).then(r=>r.text());
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText,'text/html');
+        const title = doc.querySelector("title")?.innerText || f.name;
+        const category = titleToCategory(title);
+        if (!grouped[category]) grouped[category] = [];
+        grouped[category].push([title, f.name]);
+      } catch(e) {
+        console.warn("Gagal membaca file:", f.name);
+        if (!grouped["Lainnya"]) grouped["Lainnya"] = [];
+        grouped["Lainnya"].push([f.name, f.name]);
+      }
+    }
 
-    document.getElementById("kategoriInput").value = "";
+    // Format JSON dengan gaya compact per kategori
+    function jsonPrettyByCategory(obj){
+      return '{\n' +
+        Object.keys(obj).map(cat=>
+          `  "${cat}": [${obj[cat].map(a=>`["${a[0]}","${a[1]}"]`).join(', ')}]`
+        ).join(',\n') + '\n}';
+    }
+
+    document.getElementById("jsonOutput").value = jsonPrettyByCategory(grouped);
+
+  } catch(err){
+    console.error("Gagal mengambil daftar file:", err);
+    document.getElementById("jsonOutput").value = "Error: " + err.message;
   }
+}
 
-  function addItem(kategori) {
-    const judul = document.getElementById(`judul-${kategori}`).value.trim();
-    const link = document.getElementById(`link-${kategori}`).value.trim();
-    if (!judul || !link) return alert("Judul dan link harus diisi!");
+// Tombol generate
+document.getElementById("generateBtn").addEventListener("click", generateJSON);
 
-    tocData[kategori].push([judul, link]);
+// Tombol download
+document.getElementById("downloadBtn").addEventListener("click", ()=>{
+  const blob = new Blob([document.getElementById("jsonOutput").value], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "artikel.json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
-    const itemDiv = document.createElement("div");
-    itemDiv.className = "item";
-    itemDiv.textContent = `${judul} → ${link}`;
-    document.getElementById(`items-${kategori}`).appendChild(itemDiv);
+// Tombol copy
+document.getElementById("copyBtn").addEventListener("click", ()=>{
+  const txt = document.getElementById("jsonOutput").value;
+  navigator.clipboard.writeText(txt).then(()=>{
+    alert("JSON berhasil disalin ke clipboard!");
+  }).catch(err=>{
+    alert("Gagal menyalin JSON!");
+    console.error(err);
+  });
+});
+</script>
 
-    document.getElementById(`judul-${kategori}`).value = "";
-    document.getElementById(`link-${kategori}`).value = "";
-  }
-
-  function generateJSON() {
-    document.getElementById("output").textContent = JSON.stringify(tocData, null, 2);
-  }
-
-  function downloadJSON() {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tocData, null, 2));
-    const a = document.createElement("a");
-    a.href = dataStr;
-    a.download = "toc.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-
-  function copyJSON() {
-    const jsonContent = JSON.stringify(tocData, null, 2);
-    navigator.clipboard.writeText(jsonContent).then(() => {
-      alert("JSON berhasil disalin ke clipboard!");
-    }).catch(err => {
-      console.error("Gagal menyalin JSON:", err);
-      alert("Gagal menyalin JSON!");
-    });
-  }
-  </script>
 </body>
 </html>
