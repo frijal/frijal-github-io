@@ -44,6 +44,28 @@
 
   @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
 
+ /* Badge jumlah artikel di kategori TOC */
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  border-radius: 6px;
+}
+
+.category-header .badge {
+  background: #ffc107; /* kuning emas */
+  color: #333;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+  
   /* Efek pada judul artikel TOC */
 .toc-title a {
   position: relative;
