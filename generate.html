@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generate artikel.json Compact</title>
+<title>Generate artikel.json per Kategori (Baris Terpisah)</title>
 <style>
 body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
 h1 { text-align:center; }
@@ -13,7 +13,7 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; }
 </head>
 <body>
 
-<h1>Generate artikel.json Compact</h1>
+<h1>Generate artikel.json per Kategori (Baris Terpisah)</h1>
 <p>JSON akan muncul di bawah. Download & push manual ke repo.</p>
 <textarea id="jsonOutput" readonly></textarea>
 <br>
@@ -75,7 +75,16 @@ async function generateJSON(){
       sortedResult[cat] = result[cat].sort((a,b)=>a[0].localeCompare(b[0]));
     });
 
-    document.getElementById("jsonOutput").value = JSON.stringify(sortedResult);
+    // JSON compact per artikel, kategori per baris
+    let output = "{\n";
+    Object.keys(sortedResult).forEach((cat,i)=>{
+      const articles = sortedResult[cat].map(a=>`["${a[0]}","${a[1]}"]`).join(",");
+      output += `  "${cat}":[${articles}]`;
+      output += i < Object.keys(sortedResult).length-1 ? ",\n" : "\n";
+    });
+    output += "}";
+
+    document.getElementById("jsonOutput").value = output;
   }catch(err){
     console.error(err);
     document.getElementById("jsonOutput").value = "Error: "+err.message;
