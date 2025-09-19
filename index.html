@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Isi</title>
+<title>Daftar Isi Lazy Load + JSON</title>
 <style>
 body { font-family:'Segoe UI', Arial; margin:0; padding-top:100px; background:#f2f2f2; color:#333; }
 #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
@@ -29,7 +29,7 @@ body { font-family:'Segoe UI', Arial; margin:0; padding-top:100px; background:#f
 
 <div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
 
-<h1 style="text-align:center;">Daftar Isi</h1>
+<h1 style="text-align:center;">Daftar Isi Lazy Load + JSON</h1>
 
 <div id="controls">
   <input type="text" id="search" placeholder="Cari judul...">
@@ -39,15 +39,11 @@ body { font-family:'Segoe UI', Arial; margin:0; padding-top:100px; background:#f
 <div id="toc"></div>
 
 <script>
-const GITHUB_USER="frijal"; // ganti
-const GITHUB_REPO="frijal.github.io"; // ganti
-const ARTIKEL_PATH="artikel";
 const BATCH_SIZE=20;
+let DATA=[], loadedIndex=0;
 
-let allFiles=[], DATA=[], loadedIndex=0;
-
+// Gradient kategori
 const gradientMap = {
-  const gradientMap = {
   "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
   "Debian": "linear-gradient(180deg, #A80030, #D23759)",
   "Desktop": "linear-gradient(180deg, #4A2E78, #6B4E9A)",
@@ -69,105 +65,70 @@ const gradientMap = {
   "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
   "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
 };
-};
 
-function titleToCategory(title){
-  const t=title.toLowerCase();
-  const cats=[
-    {name:"Arch", k:["manjaro", "cachy", "arch", "endeavouros", "artix", "parabola", "blackarch", "garuda"]},
-    {name:"Debian", k:["debian", "ubuntu", "mint", "mx", "elementary", "puppy", "kali", "kubuntu", "xubuntu", "lubuntu", "zorin", "popos", "deepin", "tails"]},
-    {name:"Desktop", k:["kde", "hyperland", "caja", "ukui", "pantheon", "deepin", "lxde", "budgie", "mate", "gnome", "cinnamon", "xfce", "desktop", "fluxbox", "openbox", "i3", "sway", "awesome", "dwm", "enlightenment"]},
-    {name:"Kehidupan", k:["hidup", "uang", "dosa", "alasan", "bapak", "ibu", "anak", "kehidupan", "tidur", "sahabat", "teman", "sombong", "wanita", "pria", "perempuan", "laki", "silaturahim", "daily", "rutinitas", "bahagia", "sedih", "cinta", "emosi", "keluarga", "sosial", "masalah"]},
-    {name:"Kerja", k:["kerja", "kantor", "dokumen", "strategi", "pdf", "psikotes", "karir", "bisnis", "proyek", "meeting", "wawancara", "resign", "gaji", "promosi", "lembur", "freelance", "startup"]},
-    {name:"Kuliner", k:["resep", "makan", "minum", "bumbu", "kuliner", "masak", "restoran", "kafe", "jajanan", "sarapan", "makan siang", "makan malam", "diet"]},
-    {name:"Multimedia", k:["video", "foto", "audio", "film", "ffmpeg", "imagemagick", "photoshop", "gimp", "audacity", "blender", "premiere", "davinci", "lightroom", "kdenlive", "shotcut"]},
-    {name:"NixOS", k:["nixos","nix"]},
-    {name:"OpenSUSE", k:["opensuse", "suse", "leap", "tumbleweed"]},
-    {name:"OS Linux", k:["grub", "autoremove", "cron", "reinstall", "dd", "troubleshooting", "skrip", "rsync", "system", "sudo", "backup", "plugin", "ssh", "symlinks", "mount", "samba", "linux", "bootloader", "distro", "release", "rilis", "kernel", "cli", "shell", "bash", "zsh", "systemd", "init", "pacman", "yay", "apt-get", "dpkg", "yum", "dnf", "zypper", "aptitude"]},
-    {name:"OS Windows", k:["windows", "windows10", "windows11", "powershell", "cmd", "registry", "boot", "update"]},
-    {name:"Redhat", k:["fedora", "centos", "redhat", "rhel", "scientific linux", "alma", "rocky"]},
-    {name:"Religi", k:["allah", "shalat", "sholat", "agama", "puasa", "nabi", "islam", "madinah", "religi", "ghibah", "muslim", "quran", "hadits", "dakwah", "doa", "surga", "neraka", "masjid"]},
-    {name:"Repository", k:["repository", "dnf", "apt", "repo", "snap", "synaptic", "octopi", "flatpak", "netselect", "mirror", "reflector", "aur", "ppa", "github", "gitlab", "bitbucket", "dockerhub"]},
-    {name:"Slackware", k:["slackware", "slac", "sbopkg"]},
-    {name:"Jaringan", k:["jaringan", "internet", "wifi", "router", "modem", "ethernet", "ip", "dns", "firewall", "tcp", "udp", "http", "https", "proxy", "vpn", "port"]},
-    {name:"Pemrograman", k:["pemrograman", "program", "coding", "javascript", "python", "php", "java", "c++", "c", "html", "css", "database", "sql", "mysql", "mongodb", "framework", "library", "api", "bug", "compiler", "debugging"]},
-    {name:"Perangkat Keras", k:["perangkat keras", "hardware", "cpu", "gpu", "ram", "hardisk", "ssd", "motherboard", "power supply", "monitor", "keyboard", "mouse", "printer", "usb", "driver"]},
-    {name:"Keuangan", k:["keuangan", "investasi", "saham", "crypto", "bitcoin", "uang", "bank", "tabungan", "kredit", "pinjaman", "pajak", "anggaran", "ekonomi"]}
-  ];
-  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
-}
-
-async function fetchArtikelList(){
-  const apiUrl=`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTIKEL_PATH}`;
-  const res=await fetch(apiUrl);
-  const files=await res.json();
-  return files.filter(f=>f.name.endsWith(".html")).map(f=>f.name);
-}
-
-async function loadBatch(){
-  if(loadedIndex>=allFiles.length) return;
-  const batch=allFiles.slice(loadedIndex, loadedIndex+BATCH_SIZE);
-  for(const f of batch){
-    try{
-      const txt=await (await fetch(`${ARTIKEL_PATH}/${f}`)).text();
-      const parser=new DOMParser();
-      const doc=parser.parseFromString(txt,'text/html');
-      const title=doc.querySelector('title')?.innerText||f;
-      DATA.push({title,file:f,category:titleToCategory(title)});
-    } catch(e){
-      DATA.push({title:f,file:f,category:"Lainnya"});
-    }
+// Fetch artikel.json
+async function loadData(){
+  try{
+    const res = await fetch('artikel.json');
+    DATA = await res.json();
+    DATA.sort((a,b)=>a.title.localeCompare(b.title));
+    renderBatch();
+    updateMarquee();
+  }catch(e){
+    console.error("Gagal load artikel.json", e);
   }
-  loadedIndex+=BATCH_SIZE;
-  renderTOC();
-  updateMarquee();
 }
 
-function renderTOC(){
-  const toc=document.getElementById("toc"); toc.innerHTML="";
+// Render batch
+function renderBatch(){
+  if(loadedIndex>=DATA.length) return;
+  const batch = DATA.slice(loadedIndex, loadedIndex+BATCH_SIZE);
+  const toc=document.getElementById("toc");
   const grouped={}; const visitedLinks=JSON.parse(localStorage.getItem("visitedLinks")||"[]"); const counts={}; const duplicates=new Set();
-  DATA.forEach(d=>{ const t=d.title.toLowerCase(); counts[t]=(counts[t]||0)+1; if(counts[t]>1) duplicates.add(t); if(!grouped[d.category]) grouped[d.category]=[]; grouped[d.category].push(d); });
+  batch.forEach(d=>{ const t=d.title.toLowerCase(); counts[t]=(counts[t]||0)+1; if(counts[t]>1) duplicates.add(t); if(!grouped[d.category]) grouped[d.category]=[]; grouped[d.category].push(d); });
   Object.keys(grouped).sort().forEach(cat=>{
-    const section=document.createElement("div"); section.className="category";
-    section.innerHTML=`<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div><div class="toc-list"></div>`;
+    let section=document.querySelector(`.category[data-cat="${cat}"]`);
+    if(!section){
+      section=document.createElement("div"); section.className="category"; section.dataset.cat=cat;
+      section.innerHTML=`<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div><div class="toc-list"></div>`;
+      const grad=gradientMap[cat]||gradientMap["Lainnya"];
+      section.querySelector(".category-header").style.background=grad;
+      section.querySelector(".badge").style.background=grad;
+      section.querySelector(".category-header").addEventListener("click",()=>{ const l=section.querySelector(".toc-list"); l.style.display=l.style.display==="block"?"none":"block"; });
+      toc.appendChild(section);
+    } else {
+      const badge=section.querySelector(".badge"); badge.textContent=parseInt(badge.textContent)+grouped[cat].length;
+    }
     const list=section.querySelector(".toc-list");
-    // Gradient
-    const grad=gradientMap[cat]||gradientMap["Lainnya"];
-    section.querySelector(".category-header").style.background=grad;
-    section.querySelector(".badge").style.background=grad;
-
     grouped[cat].forEach((item,i)=>{
       const clean=item.title.toLowerCase();
       const el=document.createElement("div"); el.className="toc-item"; el.dataset.text=clean;
-      const a=document.createElement("a"); a.href=`${ARTIKEL_PATH}/${item.file}`; a.target="_blank"; a.textContent=`${i+1}. ${item.title}`;
+      const a=document.createElement("a"); a.href=item.file; a.target="_blank"; a.textContent=item.title;
       if(visitedLinks.includes(item.file)) a.classList.add("visited");
-      a.addEventListener("click",()=>{ if(!visitedLinks.includes(item.file)){ visitedLinks.push(item.file); localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks)); a.classList.add("visited"); }});
+      a.addEventListener("click",()=>{ if(!visitedLinks.includes(item.file)){ visitedLinks.push(item.file); localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks)); a.classList.add("visited"); } });
       const titleDiv=document.createElement("div"); titleDiv.className="toc-title"; titleDiv.appendChild(a);
       const statusSpan=document.createElement("span"); statusSpan.className=visitedLinks.includes(item.file)?"label-visited":"label-new"; statusSpan.textContent=visitedLinks.includes(item.file)?"sudah dibaca 👍":"📚 belum di klik"; titleDiv.appendChild(statusSpan);
       if(duplicates.has(clean)){ const dup=document.createElement("span"); dup.className="label-duplicate"; dup.textContent="⚠️ Duplikat Judul"; titleDiv.appendChild(dup); }
       el.appendChild(titleDiv); list.appendChild(el);
     });
-
-    section.querySelector(".category-header").addEventListener("click",()=>{ list.style.display=list.style.display==="block"?"none":"block"; });
-    toc.appendChild(section);
   });
+  loadedIndex+=BATCH_SIZE;
 }
 
+// Update marquee
 function updateMarquee(){
   const marquee=document.getElementById("marquee-content");
-  marquee.innerHTML=DATA.map(d=>`<a href="${ARTIKEL_PATH}/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+  marquee.innerHTML=DATA.map(d=>`<a href="${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 }
 
 // Infinite scroll
-window.addEventListener("scroll",()=>{ if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){ loadBatch(); } });
+window.addEventListener("scroll",()=>{ if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){ renderBatch(); } });
 
 document.getElementById("toggleAll").addEventListener("click",()=>{ const lists=document.querySelectorAll(".toc-list"); const exp=[...lists].some(l=>l.style.display==="none"||l.style.display===""); lists.forEach(l=>l.style.display=exp?"block":"none"); });
+
 document.getElementById("search").addEventListener("input",function(){ const term=this.value.toLowerCase(); document.querySelectorAll(".toc-item").forEach(item=>{ item.style.display=item.dataset.text.includes(term)?"flex":"none"; }); });
 
-(async function init(){
-  allFiles=await fetchArtikelList();
-  await loadBatch();
-})();
+loadData();
 </script>
 </body>
 </html>
