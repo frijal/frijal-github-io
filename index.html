@@ -245,9 +245,23 @@ async function loadTOC() {
       });
 
     // --- Marquee ---
-    const m = document.getElementById("marquee-content");
-    const allArticles = Object.values(grouped).flat();
-    m.innerHTML = allArticles.map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+const m = document.getElementById("marquee-content");
+const allArticles = Object.values(grouped).flat();
+
+// fungsi shuffle (Fisher-Yates)
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+const shuffled = shuffle(allArticles);
+
+m.innerHTML = shuffled
+  .map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`)
+  .join(" • ");
 
     // --- Search ---
     document.getElementById("search").addEventListener("input", function () {
