@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate artikel.json per Kategori</title>
+<style>
+body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
+h1 { text-align:center; }
+textarea { width:100%; height:400px; padding:10px; font-family: monospace; font-size:14px; margin-top:10px; }
+button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<h1>Generate artikel.json per Kategori</h1>
+<p>JSON akan muncul di bawah. Download & push manual ke repo.</p>
+<textarea id="jsonOutput" readonly></textarea>
+<br>
+<button id="downloadBtn">Download JSON</button>
+
+<script>
+// --- Fungsi menentukan kategori berdasarkan judul ---
+function titleToCategory(title){
+  const t = title.toLowerCase();
+  const cats = [
+    {name: "Jaringan", k:["jaringan","internet","wifi","router","modem","ethernet"]},
+    {name: "Multimedia", k:["video","foto","audio","film","ffmpeg","imagemagick","photoshop","gimp"]},
+    {name: "Kuliner", k:["makan","resep","masak","restoran","minum","kue"]},
+    {name: "Kehidupan", k:["hidup","uang","cinta","teman","keluarga","bahagia","sedih"]},
+    {name: "Pemrograman", k:["javascript","python","php","java","html","css","c++","sql"]},
+    {name: "Lainnya", k:[]}
+  ];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
+}
+
+// --- Konfigurasi GitHub Pages ---
+const owner = "frijal";       // ganti dengan username
+const repo = "frijal.github.io"; // ganti nama repo
+const folder = "artikel";     // folder artikel
+
+async function generateJSON(){
+  try {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+    const files = await (await fetch(apiUrl)).json();
+    const htmlFiles = files.filter(f=>f.name.endsWith(".html"));
+
+    const result = {};
+
+    for(const f of htmlFiles){
+      try{
+        const htmlText = await fetch(f.download_url).then(r=>r.text());
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlText,'text/html');
+        const title = doc.querySelector("title")?.innerText || f.name;
+        const category = titleToCategory(title);
+
+        if(!result[category]) result[category]=[];
+        result[category].push([title,f.name]);
+
+      }catch(e){
+        console.warn("Gagal membaca file:", f.name);
+        if(!result["Lainnya"]) result["Lainnya"]=[];
+        result["Lainnya"].push([f.name,f.name]);
+      }
+    }
+
+    document.getElementById("jsonOutput").value = JSON.stringify(result,null,2);
+
+  } catch(err){
+    console.error("Gagal mengambil daftar file:", err);
+    document.getElementById("jsonOutput").value = "Error: " + err.message;
+  }
+}
+
+// --- Download JSON ---
+document.getElementById("downloadBtn").addEventListener("click",()=>{
+  const blob = new Blob([document.getElementById("jsonOutput").value], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "artikel.json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+// Jalankan otomatis
+generateJSON();
+</script>
+
+</body>
+</html>
