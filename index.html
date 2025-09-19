@@ -3,68 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Isi Interaktif</title>
+<title>Daftar Artikel</title>
 <style>
-  body { font-family: 'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
-  h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
-
-  /* Marquee */
-  #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 600s linear infinite; will-change:transform; }
-  #marquee-container:hover #marquee-content { animation-play-state:paused; }
-  #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: all 0.3s ease; }
-  #marquee-content a:hover { color: yellow; text-shadow: 0 0 5px #fff; transform: scale(1.1); }
-  @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-
-  #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
-
-  #tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
-
-  #toc { max-width:900px; margin:10px auto; }
-  #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
-
-  .category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:#333; }
-  .toc-list { display:none; padding:0 16px; }
-  .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
-  .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
-  .toc-title a { text-decoration:none; color:#333; transition:all 0.3s; font-weight:bold; position:relative; }
-  .toc-title a.visited { color: gray; }
-  .label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
-  .label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
-  .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; background: rgba(0,0,0,0.3); }
-
-  .highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
-  @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
-
-  @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
+body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0 10px; }
+h1 { text-align:center; margin-top: 20px; }
+#search { width: 100%; padding:8px; font-size:14px; margin-bottom:10px; }
+.category { margin-bottom: 10px; border-radius:5px; overflow:hidden; }
+.category-header { padding:10px; color:white; font-weight:bold; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.toc-list { display:block; padding:5px 10px; background:#fff; }
+.toc-item { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee; }
+.toc-item a { text-decoration:none; color:#333; }
+.toc-item a.visited { text-decoration: line-through; color: #999; }
+.label-new, .label-visited { font-size:12px; margin-left:5px; }
+.badge { background: rgba(0,0,0,0.2); border-radius:12px; padding:2px 8px; font-size:12px; }
+#tocToggle { padding:8px 12px; margin-bottom:10px; cursor:pointer; }
+.highlight { background: yellow; }
+#marquee { background:#222; color:white; padding:5px 0; overflow:hidden; white-space:nowrap; }
+#marquee a { color:white; margin-right:10px; text-decoration:none; }
 </style>
 </head>
 <body>
 
-<div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
-<div id="footerInfo" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;font-size:14px;text-align:center;margin:10px auto;max-width:900px;"></div>
-<input type="text" id="search" placeholder="Cari judul...">
+<h1>Daftar Artikel</h1>
+<div id="marquee"><span id="marquee-content"></span></div>
+<input type="text" id="search" placeholder="Cari artikel...">
 <button id="tocToggle">Tutup</button>
 <div id="toc"></div>
-<div id="totalCount">Total artikel: 0</div>
 
 <script>
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
 
-// Gradient pastel otomatis
-function getCategoryPastelGradient(count) {
-  const hue = (count * 40) % 360;
-  const color1 = `hsl(${hue}, 70%, 85%)`;
-  const color2 = `hsl(${hue}, 70%, 95%)`;
-  return `linear-gradient(180deg, ${color1}, ${color2})`;
-}
-function getCategoryHoverGradient(count) {
-  const hue = (count * 40) % 360;
-  const color1 = `hsl(${hue}, 80%, 75%)`;
-  const color2 = `hsl(${hue}, 80%, 90%)`;
-  return `linear-gradient(180deg, ${color1}, ${color2})`;
-}
+const gradientMap = {
+  "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
+  "Debian": "linear-gradient(180deg, #A80030, #D23759)",
+  "Desktop": "linear-gradient(180deg, #4A2E78, #6B4E9A)",
+  "Kehidupan": "linear-gradient(180deg, #F9D030, #FFEA8D)",
+  "Kerja": "linear-gradient(180deg, #2B3D4F, #576F86)",
+  "Kuliner": "linear-gradient(180deg, #D44E4E, #E58484)",
+  "Multimedia": "linear-gradient(180deg, #9C4D9A, #C972C7)",
+  "NixOS": "linear-gradient(180deg, #5277C3, #7D9FDE)",
+  "OpenSUSE": "linear-gradient(180deg, #74A82F, #9AC16B)",
+  "OS Linux": "linear-gradient(180deg, #333333, #666666)",
+  "OS Windows": "linear-gradient(180deg, #0078D7, #459DEB)",
+  "Redhat": "linear-gradient(180deg, #EE0000, #F84949)",
+  "Religi": "linear-gradient(180deg, #6A0DAD, #9D4EDD)",
+  "Repository": "linear-gradient(180deg, #8B949E, #B2BDC9)",
+  "Slackware": "linear-gradient(180deg, #4B859D, #7AB1C8)",
+  "Jaringan": "linear-gradient(180deg, #FF6600, #FF9933)",
+  "Pemrograman": "linear-gradient(180deg, #3D886D, #67AE91)",
+  "Perangkat Keras": "linear-gradient(180deg, #375A7F, #6A86A8)",
+  "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
+  "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
+};
 
 async function loadTOC() {
   try {
@@ -73,231 +63,123 @@ async function loadTOC() {
     const toc = document.getElementById("toc");
     toc.innerHTML = "";
 
-    // Hitung jumlah artikel per kategori
-    const catCounts = Object.entries(data).map(([cat, items]) => ({ cat, count: items.length }));
-    catCounts.sort((a, b) => b.count - a.count); // urut dari terbanyak
+    // Urutkan kategori berdasarkan jumlah artikel terbanyak
+    const sortedCats = Object.keys(data).sort((a,b)=>data[b].length - data[a].length);
 
-    // Total artikel
-    const totalCount = document.getElementById("totalCount");
-    const totalArtikel = Object.values(data).reduce((sum, arr) => sum + arr.length, 0);
-    totalCount.textContent = `Total artikel: ${totalArtikel}`;
-
-    // Fungsi untuk generate warna random
-    function randomColor(seed) {
-      // Seed bisa berupa index kategori agar tetap konsisten
-      const x = Math.sin(seed) * 10000;
-      const hue = (x - Math.floor(x)) * 360;
-      return `hsl(${hue}, 60%, 70%)`;
-    }
-
-    // Loop kategori berdasarkan urutan jumlah artikel
-    catCounts.forEach(({ cat, count }, idx) => {
+    sortedCats.forEach(cat => {
       const catDiv = document.createElement("div");
       catDiv.className = "category";
 
-      // header kategori + badge jumlah
-      const header = document.createElement("div");
-      header.className = "category-header";
-      header.textContent = cat;
-      const badge = document.createElement("span");
-      badge.className = "category-badge";
-      badge.textContent = count;
-      header.appendChild(badge);
+      const count = data[cat].length;
+      catDiv.innerHTML = `
+        <div class="category-header">
+          ${cat} <span class="badge">${count}</span>
+        </div>
+        <div class="toc-list"></div>
+      `;
+      const catList = catDiv.querySelector(".toc-list");
+      const header = catDiv.querySelector(".category-header");
+      header.style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
-      // beri warna random
-      header.style.backgroundColor = randomColor(idx);
-
-      catDiv.appendChild(header);
-
-      const catList = document.createElement("div");
-      catList.className = "toc-list";
-      catDiv.appendChild(catList);
-
-      // tambahkan artikel
-      data[cat].forEach((item, i) => {
+      data[cat].forEach((item,i)=>{
         const el = document.createElement("div");
         el.className = "toc-item";
         el.dataset.text = item[0].toLowerCase();
 
         const a = document.createElement("a");
         a.href = `artikel/${item[1]}`;
-        a.target = "_blank";
-        a.textContent = `${i + 1}. ${item[0]}`;
+        a.target="_blank";
+        a.textContent = `${i+1}. ${item[0]}`;
 
         const statusSpan = document.createElement("span");
-        if (visitedLinks.includes(item[1])) {
-          statusSpan.className = "label-visited";
-          statusSpan.textContent = "sudah dibaca 👍";
+        if(visitedLinks.includes(item[1])){
+          statusSpan.className="label-visited"; 
+          statusSpan.textContent="sudah dibaca 👍"; 
           a.classList.add("visited");
-        } else {
-          statusSpan.className = "label-new";
-          statusSpan.textContent = "📚 belum dibaca";
+        } else { 
+          statusSpan.className="label-new"; 
+          statusSpan.textContent="📚 belum dibaca"; 
         }
 
-        a.addEventListener("click", () => {
-          if (!visitedLinks.includes(item[1])) {
+        a.addEventListener("click",()=>{
+          if(!visitedLinks.includes(item[1])){
             visitedLinks.push(item[1]);
             localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-            statusSpan.className = "label-visited";
-            statusSpan.textContent = "sudah dibaca 👍";
+            statusSpan.className="label-visited";
+            statusSpan.textContent="sudah dibaca 👍";
             a.classList.add("visited");
           }
         });
 
         const titleDiv = document.createElement("div");
-        titleDiv.className = "toc-title";
+        titleDiv.className="toc-title";
         titleDiv.appendChild(a);
         titleDiv.appendChild(statusSpan);
         el.appendChild(titleDiv);
         catList.appendChild(el);
       });
 
-      // toggle kategori
-      header.addEventListener("click", () => {
-        catList.style.display = catList.style.display === "block" ? "none" : "block";
+      // Toggle kategori
+      header.addEventListener("click", ()=>{
+        catList.style.display = catList.style.display==="block" ? "none" : "block";
         updateTOCToggleText();
       });
 
       toc.appendChild(catDiv);
     });
 
-    // tombol global expand/collapse
+    // Marquee
+    const m = document.getElementById("marquee-content");
+    m.innerHTML = sortedCats.flatMap(cat=>data[cat].map(d=>`<a href="artikel/${d[1]}" target="_blank">${d[0]}</a>`)).join(" • ");
+
+    // Search
+    document.getElementById("search").addEventListener("input", function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll(".category").forEach(category => {
+        let catVisible = false;
+        category.querySelectorAll(".toc-item").forEach(item => {
+          const text = item.dataset.text;
+          const link = item.querySelector("a");
+          if(term && text.includes(term)) {
+            item.style.display = "flex";
+            catVisible = true;
+            const regex = new RegExp(`(${term})`,"gi");
+            link.innerHTML = link.textContent.replace(regex,'<span class="highlight">$1</span>');
+          } else {
+            item.style.display = term ? "none" : "flex";
+            link.innerHTML = link.textContent;
+          }
+        });
+        category.style.display = catVisible ? "block" : (term ? "none" : "block");
+        const tocList = category.querySelector(".toc-list");
+        tocList.style.display = catVisible ? "block" : tocList.style.display;
+      });
+    });
+
+    // Tombol Expand/Collapse Global
     let tocCollapsed = false;
     const tocToggleBtn = document.getElementById("tocToggle");
+
     function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-        .every(list => list.style.display === "none");
+      const allCollapsed = Array.from(document.querySelectorAll(".toc-list")).every(list => list.style.display === "none");
       tocCollapsed = allCollapsed;
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     }
-    tocToggleBtn.addEventListener("click", () => {
+
+    tocToggleBtn.addEventListener("click", ()=>{
       tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list => {
-        list.style.display = tocCollapsed ? "none" : "block";
-      });
+      document.querySelectorAll(".toc-list").forEach(list => list.style.display = tocCollapsed ? "none" : "block");
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     });
+
     updateTOCToggleText();
 
-    // search
-    const searchInput = document.getElementById("search");
-    if (searchInput) {
-      searchInput.addEventListener("input", function () {
-        const term = this.value.toLowerCase();
-        let countVisible = 0;
-
-        document.querySelectorAll(".category").forEach(category => {
-          let catVisible = false;
-          category.querySelectorAll(".toc-item").forEach(item => {
-            const text = item.dataset.text;
-            const link = item.querySelector("a");
-            if (term && text.includes(term)) {
-              item.style.display = "flex";
-              catVisible = true;
-              countVisible++;
-              const regex = new RegExp(`(${term})`, "gi");
-              link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
-            } else {
-              item.style.display = term ? "none" : "flex";
-              link.innerHTML = link.textContent;
-              if (!term) countVisible++;
-            }
-          });
-          category.style.display = catVisible ? "block" : (term ? "none" : "block");
-          const tocList = category.querySelector(".toc-list");
-          tocList.style.display = catVisible ? "block" : tocList.style.display;
-        });
-
-        totalCount.textContent = `Total artikel: ${countVisible}`;
-        updateTOCToggleText();
-      });
-    }
-
-  } catch (e) {
-    console.error("Gagal load artikel.json:", e);
-  }
+  } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
 
+// Jalankan TOC
 loadTOC();
 </script>
 
-<script>
-// --- Ikon SVG untuk Browser ---
-const browserIcons = {
-    "Firefox": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FF7139"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Chrome": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#4285F4"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Edge": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Safari": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#00A1F1"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><circle cx="12" cy="12" r="10"/></svg>`
-};
-
-// --- Ikon SVG untuk OS ---
-const osIcons = {
-    "Windows": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><rect width="24" height="24"/></svg>`,
-    "macOS": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><rect width="24" height="24"/></svg>`,
-    "Linux": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FCC624"><rect width="24" height="24"/></svg>`,
-    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#ccc"><rect width="24" height="24"/></svg>`
-};
-
-// --- Ikon Globe SVG untuk IP ---
-const globeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#28a745"><circle cx="12" cy="12" r="10"/></svg>`;
-
-// --- Fungsi deteksi Browser ---
-function getBrowserInfo(){
-    const ua = navigator.userAgent;
-    let name="Unknown", version="N/A";
-    if(ua.includes("Firefox")) { name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; }
-    else if(ua.includes("Chrome") && !ua.includes("Edg")) { name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; }
-    else if(ua.includes("Edg")) { name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; }
-    else if(ua.includes("Safari")) { name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; }
-    return {name, version, icon: browserIcons[name] || browserIcons["Unknown"]};
-}
-
-// --- Fungsi deteksi OS ---
-function getOSInfo(){
-    const platform = navigator.platform.toLowerCase();
-    let name="Unknown";
-    if(platform.includes("win")) name="Windows";
-    else if(platform.includes("mac")) name="macOS";
-    else if(platform.includes("linux")) name="Linux";
-    return {name, icon: osIcons[name] || osIcons["Unknown"]};
-}
-
-// --- Ambil IP dan info lokasi + bendera ---
-fetch('https://ipapi.co/json/')
-.then(res => res.json())
-.then(data => {
-    const footer = document.getElementById('footerInfo');
-    const browser = getBrowserInfo();
-    const os = getOSInfo();
-    const countryCode = data.country_code.toLowerCase();
-
-    // Gunakan FlagCDN untuk bendera
-    const flagImg = `<img src="https://flagcdn.com/48x36/${countryCode}.png" alt="${data.country_name}" width="24" height="18" style="vertical-align:middle;border:1px solid #ccc;border-radius:2px;">`;
-
-    // Tampilkan semua info dengan animasi hover
-    footer.innerHTML = `
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${browser.icon} <span> ${browser.name} ${browser.version}</span>
-        </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${os.icon} <span> ${os.name}</span>
-        </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${globeSVG} <span> ${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
-        </div>
-    `;
-
-    // Tambahkan animasi hover
-    document.querySelectorAll('.info-item').forEach(el=>{
-        el.addEventListener('mouseenter', ()=>{ el.style.transform='scale(1.05)'; el.style.color='#007BFF'; });
-        el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
-    });
-})
-.catch(err=>{
-    document.getElementById('footerInfo').textContent='Tidak dapat mengambil data IP';
-    console.error(err);
-});
-</script>
 </body>
 </html>
