@@ -43,7 +43,50 @@
   @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
 
   @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
-  
+
+  /* Efek pada judul artikel TOC */
+.toc-title a {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Efek hover: scale, shadow, gradient text */
+.toc-title a:hover {
+  transform: scale(1.05); /* sedikit membesar */
+  color: transparent;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  background-clip: text;
+  -webkit-background-clip: text; /* untuk browser Webkit */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Efek underline animasi */
+.toc-title a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: #007BFF;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.toc-title a:hover::after {
+  width: 100%;
+}
+
+/* Efek highlight saat diklik atau visited */
+.toc-title a.visited {
+  color: gray;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
 </style>
 </head>
 <body>
