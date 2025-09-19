@@ -3,46 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Isi Interaktif</title>
+<title>Daftar Isi</title>
 <style>
-body { font-family: 'Segoe UI', Arial; margin:0; padding-top:60px; background:#f2f2f2; color:#333; }
-h1 { text-align:center; margin:20px 0; font-size:2.5rem; font-weight:900; background: linear-gradient(90deg, #007BFF, #6610f2, #fd7e14); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 1px; transform: skewY(-2deg);}
+body { font-family:'Segoe UI', Arial; margin:0; padding-top:100px; background:#f2f2f2; color:#333; }
+#marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
+#marquee-content { display:inline-block; padding-left:100%; animation:marquee 200s linear infinite; will-change:transform; }
+#marquee-container:hover #marquee-content { animation-play-state:paused; }
+#marquee-content a { color:white; text-decoration:none; margin-right:30px; }
 #controls { text-align:center; margin:15px 0; }
 #search { width:80%; max-width:400px; padding:10px; font-size:16px; border-radius:6px; border:1px solid #ccc; }
-#toggleAll { margin:5px; padding:6px 12px; border:none; background:#007BFF; color:white; border-radius:4px; cursor:pointer; transition:background 0.3s; }
-#toggleAll:hover { background:#0056b3; }
+#toggleAll { margin:5px; padding:6px 12px; border:none; background:#007BFF; color:white; border-radius:4px; cursor:pointer; }
 .category { margin:10px auto; max-width:900px; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s; font-size:1.3rem;}
+.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; font-size:1.3rem; color:white; }
 .toc-list { display:none; padding:0 16px; }
 .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; position:relative; }
 .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
-.toc-title a { text-decoration:none; color:#333; transition:color 0.3s; }
-.label-new { background:#28a745; color:white; padding:2px 5px; margin-left:6px; border-radius:8px; }
-.label-visited { background:#6c757d; color:white; padding:2px 5px; margin-left:6px; border-radius:8px; }
-.label-duplicate { background:#ffc107; color:black; padding:2px 5px; margin-left:6px; border-radius:8px; }
-.badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
-#marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;}
-#marquee-content { display:inline-block; padding-left:100%; animation:marquee 400s linear infinite; will-change:transform; }
-#marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
-#marquee-content a:hover { color:yellow; text-decoration:underline; }
-@keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-.info-bar { font-size:14px; color:white; margin-top:5px; display:flex; flex-wrap:wrap; gap:15px; }
-.info-bar div { display:flex; align-items:center; gap:5px; }
-.info-bar img { width:24px; height:24px; }
-
-@media(max-width:500px){ #marquee-container { flex-direction: column; gap:5px; } }
+.toc-title a { text-decoration:none; color:#333; font-weight:bold; }
+.label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
+.label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
+.label-duplicate { background:#ffc107; color:black; padding:2px 5px; border-radius:8px; }
+.badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; font-weight:bold; }
 </style>
 </head>
 <body>
 
-<div id="marquee-container">
-  <div id="marquee-content">Memuat judul artikel...</div>
-  <div class="info-bar">
-    <div><img id="browserIcon" alt="Browser"><span id="browserText">Browser...</span></div>
-    <div><img id="osIcon" alt="OS"><span id="osText">OS...</span></div>
-    <div><img id="flagIcon" alt="Flag"><span id="ipText">IP...</span></div>
-  </div>
-</div>
+<div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
+
+<h1 style="text-align:center;">Daftar Isi</h1>
 
 <div id="controls">
   <input type="text" id="search" placeholder="Cari judul...">
@@ -52,162 +39,135 @@ h1 { text-align:center; margin:20px 0; font-size:2.5rem; font-weight:900; backgr
 <div id="toc"></div>
 
 <script>
-// Gradient per kategori
+const GITHUB_USER="frijal"; // ganti
+const GITHUB_REPO="frijal.github.io"; // ganti
+const ARTIKEL_PATH="artikel";
+const BATCH_SIZE=20;
+
+let allFiles=[], DATA=[], loadedIndex=0;
+
 const gradientMap = {
-  "Arch": "linear-gradient(180deg, #007BFF, #00d4ff)",
-  "Debian": "linear-gradient(180deg, #28a745, #85e085)",
-  "Desktop": "linear-gradient(180deg, #6f42c1, #a56bff)",
-  "Kehidupan": "linear-gradient(180deg, #fd7e14, #ffbf47)",
-  "Kerja": "linear-gradient(180deg, #17a2b8, #55d6e0)",
-  "Kuliner": "linear-gradient(180deg, #dc3545, #ff7f7f)",
-  "Multimedia": "linear-gradient(180deg, #6610f2, #a285ff)",
-  "NixOS": "linear-gradient(180deg, #20c997, #6fe5c9)",
-  "OpenSUSE": "linear-gradient(180deg, #ffc107, #fff14f)",
-  "OS Linux": "linear-gradient(180deg, #343a40, #6c757d)",
-  "OS Windows": "linear-gradient(180deg, #007BFF, #66b3ff)",
-  "Redhat": "linear-gradient(180deg, #d63384, #ff77b5)",
-  "Religi": "linear-gradient(180deg, #fd7e14, #ffa64d)",
-  "Repository": "linear-gradient(180deg, #6c757d, #a8a9ad)",
-  "Slackware": "linear-gradient(180deg, #198754, #56d685)",
-  "Lainnya": "linear-gradient(180deg, #adb5bd, #e1e2e3)"
+  const gradientMap = {
+  "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
+  "Debian": "linear-gradient(180deg, #A80030, #D23759)",
+  "Desktop": "linear-gradient(180deg, #4A2E78, #6B4E9A)",
+  "Kehidupan": "linear-gradient(180deg, #F9D030, #FFEA8D)",
+  "Kerja": "linear-gradient(180deg, #2B3D4F, #576F86)",
+  "Kuliner": "linear-gradient(180deg, #D44E4E, #E58484)",
+  "Multimedia": "linear-gradient(180deg, #9C4D9A, #C972C7)",
+  "NixOS": "linear-gradient(180deg, #5277C3, #7D9FDE)",
+  "OpenSUSE": "linear-gradient(180deg, #74A82F, #9AC16B)",
+  "OS Linux": "linear-gradient(180deg, #333333, #666666)",
+  "OS Windows": "linear-gradient(180deg, #0078D7, #459DEB)",
+  "Redhat": "linear-gradient(180deg, #EE0000, #F84949)",
+  "Religi": "linear-gradient(180deg, #6A0DAD, #9D4EDD)",
+  "Repository": "linear-gradient(180deg, #8B949E, #B2BDC9)",
+  "Slackware": "linear-gradient(180deg, #4B859D, #7AB1C8)",
+  "Jaringan": "linear-gradient(180deg, #FF6600, #FF9933)",
+  "Pemrograman": "linear-gradient(180deg, #3D886D, #67AE91)",
+  "Perangkat Keras": "linear-gradient(180deg, #375A7F, #6A86A8)",
+  "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
+  "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
+};
 };
 
-// --- Lazy load & display TOC dari JSON ---
-async function generateTOC(){
-  const DATA = await fetch('artikel.json').then(r=>r.json());
-  displayTOC(DATA);
-  updateMarquee(DATA);
+function titleToCategory(title){
+  const t=title.toLowerCase();
+  const cats=[
+    {name:"Arch", k:["manjaro", "cachy", "arch", "endeavouros", "artix", "parabola", "blackarch", "garuda"]},
+    {name:"Debian", k:["debian", "ubuntu", "mint", "mx", "elementary", "puppy", "kali", "kubuntu", "xubuntu", "lubuntu", "zorin", "popos", "deepin", "tails"]},
+    {name:"Desktop", k:["kde", "hyperland", "caja", "ukui", "pantheon", "deepin", "lxde", "budgie", "mate", "gnome", "cinnamon", "xfce", "desktop", "fluxbox", "openbox", "i3", "sway", "awesome", "dwm", "enlightenment"]},
+    {name:"Kehidupan", k:["hidup", "uang", "dosa", "alasan", "bapak", "ibu", "anak", "kehidupan", "tidur", "sahabat", "teman", "sombong", "wanita", "pria", "perempuan", "laki", "silaturahim", "daily", "rutinitas", "bahagia", "sedih", "cinta", "emosi", "keluarga", "sosial", "masalah"]},
+    {name:"Kerja", k:["kerja", "kantor", "dokumen", "strategi", "pdf", "psikotes", "karir", "bisnis", "proyek", "meeting", "wawancara", "resign", "gaji", "promosi", "lembur", "freelance", "startup"]},
+    {name:"Kuliner", k:["resep", "makan", "minum", "bumbu", "kuliner", "masak", "restoran", "kafe", "jajanan", "sarapan", "makan siang", "makan malam", "diet"]},
+    {name:"Multimedia", k:["video", "foto", "audio", "film", "ffmpeg", "imagemagick", "photoshop", "gimp", "audacity", "blender", "premiere", "davinci", "lightroom", "kdenlive", "shotcut"]},
+    {name:"NixOS", k:["nixos","nix"]},
+    {name:"OpenSUSE", k:["opensuse", "suse", "leap", "tumbleweed"]},
+    {name:"OS Linux", k:["grub", "autoremove", "cron", "reinstall", "dd", "troubleshooting", "skrip", "rsync", "system", "sudo", "backup", "plugin", "ssh", "symlinks", "mount", "samba", "linux", "bootloader", "distro", "release", "rilis", "kernel", "cli", "shell", "bash", "zsh", "systemd", "init", "pacman", "yay", "apt-get", "dpkg", "yum", "dnf", "zypper", "aptitude"]},
+    {name:"OS Windows", k:["windows", "windows10", "windows11", "powershell", "cmd", "registry", "boot", "update"]},
+    {name:"Redhat", k:["fedora", "centos", "redhat", "rhel", "scientific linux", "alma", "rocky"]},
+    {name:"Religi", k:["allah", "shalat", "sholat", "agama", "puasa", "nabi", "islam", "madinah", "religi", "ghibah", "muslim", "quran", "hadits", "dakwah", "doa", "surga", "neraka", "masjid"]},
+    {name:"Repository", k:["repository", "dnf", "apt", "repo", "snap", "synaptic", "octopi", "flatpak", "netselect", "mirror", "reflector", "aur", "ppa", "github", "gitlab", "bitbucket", "dockerhub"]},
+    {name:"Slackware", k:["slackware", "slac", "sbopkg"]},
+    {name:"Jaringan", k:["jaringan", "internet", "wifi", "router", "modem", "ethernet", "ip", "dns", "firewall", "tcp", "udp", "http", "https", "proxy", "vpn", "port"]},
+    {name:"Pemrograman", k:["pemrograman", "program", "coding", "javascript", "python", "php", "java", "c++", "c", "html", "css", "database", "sql", "mysql", "mongodb", "framework", "library", "api", "bug", "compiler", "debugging"]},
+    {name:"Perangkat Keras", k:["perangkat keras", "hardware", "cpu", "gpu", "ram", "hardisk", "ssd", "motherboard", "power supply", "monitor", "keyboard", "mouse", "printer", "usb", "driver"]},
+    {name:"Keuangan", k:["keuangan", "investasi", "saham", "crypto", "bitcoin", "uang", "bank", "tabungan", "kredit", "pinjaman", "pajak", "anggaran", "ekonomi"]}
+  ];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
 
-function displayTOC(DATA){
-  const toc=document.getElementById("toc");
-  toc.innerHTML="";
-  const grouped={};
-  const visitedLinks=JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-  const counts={};
-  const duplicates=new Set();
+async function fetchArtikelList(){
+  const apiUrl=`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${ARTIKEL_PATH}`;
+  const res=await fetch(apiUrl);
+  const files=await res.json();
+  return files.filter(f=>f.name.endsWith(".html")).map(f=>f.name);
+}
 
-  DATA.forEach(d=>{
-    const t=d.title.toLowerCase();
-    counts[t]=(counts[t]||0)+1;
-    if(counts[t]>1) duplicates.add(t);
-    if(!grouped[d.category]) grouped[d.category]=[];
-    grouped[d.category].push(d);
-  });
+async function loadBatch(){
+  if(loadedIndex>=allFiles.length) return;
+  const batch=allFiles.slice(loadedIndex, loadedIndex+BATCH_SIZE);
+  for(const f of batch){
+    try{
+      const txt=await (await fetch(`${ARTIKEL_PATH}/${f}`)).text();
+      const parser=new DOMParser();
+      const doc=parser.parseFromString(txt,'text/html');
+      const title=doc.querySelector('title')?.innerText||f;
+      DATA.push({title,file:f,category:titleToCategory(title)});
+    } catch(e){
+      DATA.push({title:f,file:f,category:"Lainnya"});
+    }
+  }
+  loadedIndex+=BATCH_SIZE;
+  renderTOC();
+  updateMarquee();
+}
 
+function renderTOC(){
+  const toc=document.getElementById("toc"); toc.innerHTML="";
+  const grouped={}; const visitedLinks=JSON.parse(localStorage.getItem("visitedLinks")||"[]"); const counts={}; const duplicates=new Set();
+  DATA.forEach(d=>{ const t=d.title.toLowerCase(); counts[t]=(counts[t]||0)+1; if(counts[t]>1) duplicates.add(t); if(!grouped[d.category]) grouped[d.category]=[]; grouped[d.category].push(d); });
   Object.keys(grouped).sort().forEach(cat=>{
-    const section=document.createElement("div");
-    section.className="category";
+    const section=document.createElement("div"); section.className="category";
     section.innerHTML=`<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div><div class="toc-list"></div>`;
     const list=section.querySelector(".toc-list");
-
-    section.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
-    section.querySelector(".badge").style.background = gradientMap[cat] || gradientMap["Lainnya"];
+    // Gradient
+    const grad=gradientMap[cat]||gradientMap["Lainnya"];
+    section.querySelector(".category-header").style.background=grad;
+    section.querySelector(".badge").style.background=grad;
 
     grouped[cat].forEach((item,i)=>{
-      const el=document.createElement("div");
-      el.className="toc-item";
-      el.dataset.text = item.title.toLowerCase();
-
-      const titleDiv = document.createElement("div");
-      titleDiv.className="toc-title";
-
-      const a = document.createElement("a");
-      a.href = "artikel/" + item.file;
-      a.target="_blank";
-      a.textContent = `${i+1}. ${item.title}`;
+      const clean=item.title.toLowerCase();
+      const el=document.createElement("div"); el.className="toc-item"; el.dataset.text=clean;
+      const a=document.createElement("a"); a.href=`${ARTIKEL_PATH}/${item.file}`; a.target="_blank"; a.textContent=`${i+1}. ${item.title}`;
       if(visitedLinks.includes(item.file)) a.classList.add("visited");
-
-      a.addEventListener("click",()=>{
-        if(!visitedLinks.includes(item.file)){
-          visitedLinks.push(item.file);
-          localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks));
-        }
-        a.classList.add("visited");
-      });
-
-      const statusSpan = document.createElement("span");
-      statusSpan.textContent = visitedLinks.includes(item.file) ? "sudah dibaca 👍" : "📚 belum di klik";
-      statusSpan.className = visitedLinks.includes(item.file) ? "label-visited" : "label-new";
-
-      titleDiv.appendChild(a);
-      titleDiv.appendChild(statusSpan);
-      if(duplicates.has(item.title.toLowerCase())){
-        const dup = document.createElement("span");
-        dup.className="label-duplicate";
-        dup.textContent="⚠️ Duplikat Judul";
-        titleDiv.appendChild(dup);
-      }
-
-      el.appendChild(titleDiv);
-      list.appendChild(el);
+      a.addEventListener("click",()=>{ if(!visitedLinks.includes(item.file)){ visitedLinks.push(item.file); localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks)); a.classList.add("visited"); }});
+      const titleDiv=document.createElement("div"); titleDiv.className="toc-title"; titleDiv.appendChild(a);
+      const statusSpan=document.createElement("span"); statusSpan.className=visitedLinks.includes(item.file)?"label-visited":"label-new"; statusSpan.textContent=visitedLinks.includes(item.file)?"sudah dibaca 👍":"📚 belum di klik"; titleDiv.appendChild(statusSpan);
+      if(duplicates.has(clean)){ const dup=document.createElement("span"); dup.className="label-duplicate"; dup.textContent="⚠️ Duplikat Judul"; titleDiv.appendChild(dup); }
+      el.appendChild(titleDiv); list.appendChild(el);
     });
 
-    section.querySelector(".category-header").addEventListener("click",()=>{ list.style.display = list.style.display==="block"?"none":"block"; });
+    section.querySelector(".category-header").addEventListener("click",()=>{ list.style.display=list.style.display==="block"?"none":"block"; });
     toc.appendChild(section);
   });
-
-  document.getElementById("search").addEventListener("input",function(){
-    const term=this.value.toLowerCase();
-    document.querySelectorAll(".toc-item").forEach(item=>{ item.style.display=item.dataset.text.includes(term)?"flex":"none"; });
-  });
 }
 
-function updateMarquee(DATA){
-  const m=document.getElementById("marquee-content");
-  const shuffled = DATA.slice().sort(()=>Math.random()-0.5);
-  m.innerHTML = shuffled.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+function updateMarquee(){
+  const marquee=document.getElementById("marquee-content");
+  marquee.innerHTML=DATA.map(d=>`<a href="${ARTIKEL_PATH}/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 }
 
-// --- Browser / OS / IP info ---
-function getBrowserOS(){
-  const ua=navigator.userAgent;
-  const platform=navigator.platform.toLowerCase();
-  let browser="Unknown", browserVer="", os="Unknown OS";
+// Infinite scroll
+window.addEventListener("scroll",()=>{ if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){ loadBatch(); } });
 
-  if(ua.indexOf("Firefox")>-1){browser="Firefox"; browserVer=ua.match(/Firefox\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){browser="Chrome"; browserVer=ua.match(/Chrome\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Edg")>-1){browser="Edge"; browserVer=ua.match(/Edg\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){browser="Safari"; browserVer=ua.match(/Version\/([0-9\.]+)/)[1];}
+document.getElementById("toggleAll").addEventListener("click",()=>{ const lists=document.querySelectorAll(".toc-list"); const exp=[...lists].some(l=>l.style.display==="none"||l.style.display===""); lists.forEach(l=>l.style.display=exp?"block":"none"); });
+document.getElementById("search").addEventListener("input",function(){ const term=this.value.toLowerCase(); document.querySelectorAll(".toc-item").forEach(item=>{ item.style.display=item.dataset.text.includes(term)?"flex":"none"; }); });
 
-  if(platform.indexOf("win")!==-1) os="Windows";
-  else if(platform.indexOf("mac")!==-1) os="macOS";
-  else if(platform.indexOf("linux")!==-1) os="Linux";
-  else if(/android/.test(ua)) os="Android";
-  else if(/iphone|ipad|ipod/.test(ua)) os="iOS";
-
-  return {browser,browserVer,os};
-}
-
-async function getIPInfo(){
-  try{
-    const res = await fetch("https://ipapi.co/json/");
-    const data = await res.json();
-    return {ip:data.ip, city:data.city, country:data.country_code};
-  } catch(e){
-    return {ip:"Unknown", city:"Unknown", country:"--"};
-  }
-}
-
-async function updateInfoBar(){
-  const b = getBrowserOS();
-  const ip = await getIPInfo();
-  document.getElementById('browserIcon').src='https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png';
-  document.getElementById('browserText').textContent = `${b.browser} ${b.browserVer}`;
-  document.getElementById('osIcon').src='https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png';
-  document.getElementById('osText').textContent = `${b.os}`;
-  document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${ip.country.toLowerCase()}.png`;
-  document.getElementById('ipText').textContent = `${ip.ip} (${ip.city})`;
-}
-
-document.getElementById("toggleAll").addEventListener("click",()=>{
-  const lists=document.querySelectorAll(".toc-list");
-  const expand=[...lists].some(l=>l.style.display==="none"||l.style.display==="");
-  lists.forEach(l=>l.style.display=expand?"block":"none");
-});
-
-updateInfoBar();
-generateTOC();
+(async function init(){
+  allFiles=await fetchArtikelList();
+  await loadBatch();
+})();
 </script>
 </body>
 </html>
