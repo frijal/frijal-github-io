@@ -434,10 +434,4 @@ fetch('https://ipapi.co/json/')
   <div id="articleCount"></div>
 </div>
 </body>
-<script>
-if (!sessionStorage.getItem('refreshed')) {
-  sessionStorage.setItem('refreshed', 'true');
-  setTimeout(()=>location.reload(), 5000); 
-}
-</script>
 </html>
