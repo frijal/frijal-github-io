@@ -5,73 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Isi Interaktif</title>
 <style>
-  body { font-family: 'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
-  h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
+body { font-family:'Segoe UI',Arial;margin:0;padding-top:70px;background:#f2f2f2;color:#333; }
+#marquee-container{width:100%;background:#007BFF;color:white;overflow:hidden;white-space:nowrap;position:fixed;top:0;left:0;z-index:9999;padding:10px 0;font-size:14px;font-weight:bold;}
+#marquee-content{display:inline-block;padding-left:100%;animation:marquee 500s linear infinite;will-change:transform;}
+#marquee-container:hover #marquee-content{animation-play-state:paused;}
+#marquee-content a{color:white;text-decoration:none;margin-right:30px;transition: color 0.3s;}
+#marquee-content a:hover{color:yellow;text-decoration:underline;}
+@keyframes marquee{0%{transform:translateX(0%);}100%{transform:translateX(-100%);}}
 
-  /* Marquee */
-  #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 200s linear infinite; will-change:transform; }
-  #marquee-container:hover #marquee-content { animation-play-state:paused; }
-  #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
-  #marquee-content a:hover { color:yellow; text-decoration:underline; }
-  @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+#infoBar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;font-size:14px;text-align:center;margin:10px auto;max-width:900px;}
+#infoBar div{display:flex;align-items:center;gap:6px;}
+#infoBar svg{width:24px;height:24px;vertical-align:middle;}
 
-  /* Info OS, Browser, IP */
-  #infoBar { display:flex; flex-wrap: wrap; justify-content:center; align-items:center; gap:20px; font-size:14px; text-align:center; margin:10px auto; max-width:900px; }
-  #infoBar div { display:flex; align-items:center; gap:6px; }
+#search{width:80%;max-width:400px;padding:10px;font-size:16px;margin:15px auto;display:block;border-radius:6px;border:1px solid #ccc;}
+#tocToggle{display:block;width:200px;margin:10px auto;padding:8px 12px;font-size:14px;font-weight:bold;border:none;border-radius:6px;cursor:pointer;background:#007BFF;color:white;}
+#toc{max-width:900px;margin:10px auto;}
+#totalCount{text-align:center;margin-top:20px;font-weight:bold;font-size:16px;padding:10px;background:#007BFF;color:white;border-radius:6px;}
 
-  #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
+.category{margin:10px 0;border-radius:8px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,0.1);background:white;}
+.category-header{cursor:pointer;padding:10px 16px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s ease;color:white;position:relative;border-radius:8px;}
+.category-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:8px;box-shadow:0 0 0 rgba(255,255,255,0);transition:box-shadow 0.3s ease,transform 0.3s ease;}
+.category-header:hover::before{box-shadow:0 4px 15px rgba(255,255,255,0.3);transform:scale(1.02);}
+.category-header:hover{transform:translateY(-2px);}
 
-  /* Expand/Collapse Button */
-  #tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
-
-  /* TOC */
-  #toc { max-width:900px; margin:10px auto; }
-  #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
-
-  .category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
-  .toc-list { display:none; padding:0 16px; }
-  .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
-  .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
-  .toc-title a { text-decoration:none; color:#333; transition:all 0.3s; font-weight:bold; position:relative; }
-  .toc-title a.visited { color: gray; }
-  .toc-title a::after { content:""; position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); width:0; height:2px; background:#fff; transition:width 0.3s ease; }
-  .toc-title a:hover::after { width:100%; }
-  .label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
-  .label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
-  .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
-
-  /* Highlight fade-in */
-  .highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
-  @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
-
-  @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
+.toc-list{display:none;padding:0 16px;}
+.toc-item{display:flex;align-items:center;margin:4px 0;padding:4px 0;border-bottom:1px solid #f0f0f0;}
+.toc-title{flex:1;display:flex;align-items:center;justify-content:flex-start;gap:8px;flex-wrap:wrap;}
+.toc-title a{text-decoration:none;color:#333;transition:all 0.3s;font-weight:bold;position:relative;}
+.toc-title a.visited{color:gray;}
+.toc-title a::after{content:"";position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);width:0;height:2px;background:#fff;transition:width 0.3s ease;}
+.toc-title a:hover::after{width:100%;}
+.label-new{background:#28a745;color:white;padding:2px 5px;border-radius:8px;}
+.label-visited{background:#6c757d;color:white;padding:2px 5px;border-radius:8px;}
+.badge{padding:2px 8px;border-radius:12px;font-size:12px;color:white;margin-left:8px;font-weight:bold;}
+.highlight{background:yellow;color:black;animation:fadeIn 0.5s ease-in;}
+@keyframes fadeIn{from{background:transparent;}to{background:yellow;}}
+@media(max-width:500px){#infoBar{flex-direction:column;gap:10px;}}
 </style>
 </head>
 <body>
 
-<!-- Marquee -->
 <div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
 
-<!-- Info Bar -->
 <div id="infoBar">
-  <div><img id="browserIcon" width="24" height="24"><span id="browserText"></span></div>
-  <div><img id="osIcon" width="24" height="24"><span id="osText"></span></div>
-  <div><img id="flagIcon" width="24" height="24"><span id="ipText"></span></div>
+  <div id="browserDiv"></div>
+  <div id="osDiv"></div>
+  <div id="flagDiv"></div>
 </div>
 
-<!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
-
-<!-- Expand/Collapse TOC -->
-<button id="tocToggle">Collapse TOC</button>
-
-<!-- TOC -->
+<button id="tocToggle">Expand TOC</button>
 <div id="toc"></div>
 <div id="totalCount">Total artikel: 0</div>
 
 <script>
+
+let visitedLinks=JSON.parse(localStorage.getItem("visitedLinks")||"[]");
+let tocCollapsed=true;
+
+async function loadTOC(){
+  try{
+    const res=await fetch("artikel.json");
+    const data=await res.json();
+    const toc=document.getElementById("toc");
+    toc.innerHTML="";
+    const totalCount=document.getElementById("totalCount");
+    totalCount.textContent=`Total artikel: ${data.length}`;
 const gradientMap = {
   "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
   "Debian": "linear-gradient(180deg, #A80030, #D23759)",
@@ -94,123 +93,93 @@ const gradientMap = {
   "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
   "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
 };
+    const grouped={};
+    data.forEach(d=>{if(!grouped[d.category])grouped[d.category]=[];grouped[d.category].push(d);});
 
-const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-let tocCollapsed = false;
-
-async function loadTOC() {
-  try {
-    const res = await fetch("artikel.json");
-    const data = await res.json();
-    const toc = document.getElementById("toc");
-    toc.innerHTML = "";
-
-    const totalCount = document.getElementById("totalCount");
-    totalCount.textContent = `Total artikel: ${data.length}`;
-
-    // Kelompokkan per kategori
-    const grouped = {};
-    data.forEach(d => {
-      if(!grouped[d.category]) grouped[d.category] = [];
-      grouped[d.category].push(d);
-    });
-
-    Object.keys(grouped).sort().forEach(cat => {
-      const catDiv = document.createElement("div");
-      catDiv.className = "category";
-      catDiv.innerHTML = `<div class="category-header">${cat}</div><div class="toc-list"></div>`;
-      const catList = catDiv.querySelector(".toc-list");
-      catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
+    Object.keys(grouped).sort().forEach(cat=>{
+      const catDiv=document.createElement("div");
+      catDiv.className="category";
+      catDiv.innerHTML=`<div class="category-header">${cat}</div><div class="toc-list"></div>`;
+      const catList=catDiv.querySelector(".toc-list");
+      catDiv.querySelector(".category-header").style.background=gradientMap[cat]||gradientMap["Lainnya"];
 
       grouped[cat].forEach((item,i)=>{
-        const el=document.createElement("div");
-        el.className="toc-item";
-        el.dataset.text = item.title.toLowerCase();
-
-        const a=document.createElement("a");
-        a.href=`artikel/${item.file}`;
-        a.target="_blank";
-        a.textContent = `${i+1}. ${item.title}`;
-
+        const el=document.createElement("div");el.className="toc-item";el.dataset.text=item.title.toLowerCase();
+        const a=document.createElement("a");a.href=`artikel/${item.file}`;a.target="_blank";a.textContent=`${i+1}. ${item.title}`;
         const statusSpan=document.createElement("span");
-        if(visitedLinks.includes(item.file)){
-          statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
-        } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
-
+        if(visitedLinks.includes(item.file)){statusSpan.className="label-visited";statusSpan.textContent="sudah dibaca 👍";a.classList.add("visited");}
+        else{statusSpan.className="label-new";statusSpan.textContent="📚 belum dibaca";}
         a.addEventListener("click",()=>{
-          if(!visitedLinks.includes(item.file)){
-            visitedLinks.push(item.file);
-            localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-            statusSpan.className="label-visited";
-            statusSpan.textContent="sudah dibaca 👍";
-            a.classList.add("visited");
-          }
+          if(!visitedLinks.includes(item.file)){visitedLinks.push(item.file);localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks));statusSpan.className="label-visited";statusSpan.textContent="sudah dibaca 👍";a.classList.add("visited");}
         });
-
-        const titleDiv=document.createElement("div");
-        titleDiv.className="toc-title";
-        titleDiv.appendChild(a);
-        titleDiv.appendChild(statusSpan);
-        el.appendChild(titleDiv);
-        catList.appendChild(el);
+        const titleDiv=document.createElement("div");titleDiv.className="toc-title";titleDiv.appendChild(a);titleDiv.appendChild(statusSpan);
+        el.appendChild(titleDiv);catList.appendChild(el);
       });
 
-      // Toggle kategori
       catDiv.querySelector(".category-header").addEventListener("click",()=>{
-        catList.style.display = catList.style.display==="block" ? "none" : "block";
+        const list=catDiv.querySelector(".toc-list");
+        list.style.display=list.style.display==="block"?"none":"block";
       });
 
       toc.appendChild(catDiv);
     });
 
     // Marquee
-    const m = document.getElementById("marquee-content");
-    m.innerHTML = data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+    const m=document.getElementById("marquee-content");
+    m.innerHTML=data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 
-    // Search + highlight + update total + auto expand kategori
-    document.getElementById("search").addEventListener("input", function() {
-      const term = this.value.toLowerCase();
-      let countVisible = 0;
-
-      document.querySelectorAll(".category").forEach(category => {
-        let catVisible = false;
-        category.querySelectorAll(".toc-item").forEach(item => {
-          const text = item.dataset.text;
-          const link = item.querySelector("a");
-          if(term && text.includes(term)) {
-            item.style.display = "flex";
-            catVisible = true;
-            countVisible++;
-            const regex = new RegExp(`(${term})`, "gi");
-            link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
-          } else {
-            item.style.display = term ? "none" : "flex";
-            link.innerHTML = link.textContent;
-            if(!term) countVisible++;
-          }
+    document.getElementById("search").addEventListener("input",function(){
+      const term=this.value.toLowerCase();
+      let countVisible=0;
+      document.querySelectorAll(".category").forEach(category=>{
+        category.querySelectorAll(".toc-item").forEach(item=>{
+          const text=item.dataset.text;const link=item.querySelector("a");
+          if(term && text.includes(term)){item.style.display="flex";countVisible++;const regex=new RegExp(`(${term})`,"gi");link.innerHTML=link.textContent.replace(regex,'<span class="highlight">$1</span>');}
+          else{item.style.display=term?"none":"flex";link.innerHTML=link.textContent;if(!term)countVisible++;}
         });
-        category.style.display = catVisible ? "block" : (term ? "none" : "block");
-        // Auto-expand jika ada hasil
-        const tocList = category.querySelector(".toc-list");
-        tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
-
-      totalCount.textContent = `Total artikel: ${countVisible}`;
+      totalCount.textContent=`Total artikel: ${countVisible}`;
     });
 
-    // Tombol Expand/Collapse TOC
     document.getElementById("tocToggle").addEventListener("click",()=>{
-      tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list=>{
-        list.style.display = tocCollapsed ? "none" : "block";
-      });
-      document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
+      tocCollapsed=!tocCollapsed;
+      document.querySelectorAll(".toc-list").forEach(list=>{list.style.display=tocCollapsed?"block":"none";});
+      document.getElementById("tocToggle").textContent=tocCollapsed?"Collapse TOC":"Expand TOC";
     });
 
-  } catch(e){ console.error("Gagal load artikel.json:", e); }
+  }catch(e){console.error("Gagal load artikel.json:",e);}
 }
-
 loadTOC();
+
+// --- Info Browser, OS, IP ---
+function getBrowserInfo(){
+  const ua=navigator.userAgent;let name="Unknown",version="N/A",icon='';
+  if(ua.includes("Firefox")){name="Firefox";version=ua.match(/Firefox\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  else if(ua.includes("Chrome") && !ua.includes("Edg")){name="Chrome";version=ua.match(/Chrome\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  else if(ua.includes("Edg")){name="Edge";version=ua.match(/Edg\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  return {name,version,icon};
+}
+function getOSInfo(){
+  const platform=navigator.platform.toLowerCase();let name="Unknown OS",icon='';
+  if(platform.includes("win")){name="Windows";icon='M0 0h24v24H0z';}
+  else if(platform.includes("mac")){name="macOS";icon='M0 0h24v24H0z';}
+  else if(platform.includes("linux")){name='Linux';icon='M0 0h24v24H0z';}
+  return {name,icon};
+}
+const browser=getBrowserInfo();
+document.getElementById('browserDiv').innerHTML=`<svg viewBox="0 0 24 24"><path d="${browser.icon}"/></svg><span>${browser.name} ${browser.version}</span>`;
+const os=getOSInfo();
+document.getElementById('osDiv').innerHTML=`<svg viewBox="0 0 24 24"><path d="${os.icon}"/></svg><span>${os.name}</span>`;
+
+// Fetch IP & inline SVG flag
+fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{
+  let svgFlag='';
+  const c=data.country_code.toLowerCase();
+  if(c==='id')svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="8" fill="#ff0000"/><rect y="8" width="24" height="8" fill="#ffffff"/></svg>';
+  else if(c==='us')svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#b22234"/><rect y="2" width="24" height="2" fill="#ffffff"/><rect y="4" width="24" height="2" fill="#ffffff"/></svg>';
+  else svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#888"/></svg>';
+  document.getElementById('flagDiv').innerHTML=`${svgFlag}<span>${data.ip} (${data.city})</span>`;
+}).catch(()=>{document.getElementById('flagDiv').textContent='IP: Tidak dapat diambil';});
 </script>
 </body>
 </html>
