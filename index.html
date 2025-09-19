@@ -87,7 +87,6 @@ const gradientMap = {
 };
 
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-let tocpsed = false;
 
 async function loadTOC() {
   try {
@@ -146,9 +145,10 @@ async function loadTOC() {
         catList.appendChild(el);
       });
 
-      // Toggle kategori
+      // Toggle kategori individu
       catDiv.querySelector(".category-header").addEventListener("click",()=>{
         catList.style.display = catList.style.display==="block" ? "none" : "block";
+        updateTOCToggleText(); // update tombol global otomatis
       });
 
       toc.appendChild(catDiv);
@@ -181,27 +181,41 @@ async function loadTOC() {
           }
         });
         category.style.display = catVisible ? "block" : (term ? "none" : "block");
-        // Auto-expand jika ada hasil
         const tocList = category.querySelector(".toc-list");
         tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
 
       totalCount.textContent = `Total artikel: ${countVisible}`;
+      updateTOCToggleText(); // update tombol global jika search collapse semua
     });
 
- // Tombol Expand/Collapse TOC
-    document.getElementById("tocToggle").addEventListener("click",()=>{
+    // --- Tombol Expand/Collapse TOC Global ---
+    let tocCollapsed = false; // status global, false = ada kategori terbuka
+    const tocToggleBtn = document.getElementById("tocToggle");
+
+    function updateTOCToggleText() {
+      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
+        .every(list => list.style.display === "none");
+      tocCollapsed = allCollapsed;
+      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+    }
+
+    tocToggleBtn.addEventListener("click", () => {
       tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list=>{
+      document.querySelectorAll(".toc-list").forEach(list => {
         list.style.display = tocCollapsed ? "none" : "block";
       });
-      document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
+      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     });
+
+    // Inisialisasi tombol sesuai kondisi awal TOC
+    updateTOCToggleText();
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
 
 loadTOC();
+
 </script>
 
 <script>
