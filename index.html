@@ -10,7 +10,7 @@
 
   /* Marquee */
   #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 500s linear infinite; will-change:transform; }
+  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 600s linear infinite; will-change:transform; }
   #marquee-container:hover #marquee-content { animation-play-state:paused; }
   #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
   #marquee-content a:hover { color:yellow; text-decoration:underline; }
@@ -55,8 +55,8 @@
 <!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
 
-<!-- Expand/Collapse TOC -->
-<button id="tocToggle">Collapse TOC</button>
+<!-- Expand/pse TOC -->
+<button id="tocToggle">pse TOC</button>
 
 <!-- TOC -->
 <div id="toc"></div>
@@ -87,7 +87,7 @@ const gradientMap = {
 };
 
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-let tocCollapsed = false;
+let tocpsed = false;
 
 async function loadTOC() {
   try {
@@ -189,13 +189,13 @@ async function loadTOC() {
       totalCount.textContent = `Total artikel: ${countVisible}`;
     });
 
-    // Tombol Expand/Collapse TOC
+    // Tombol Expand/pse TOC
     document.getElementById("tocToggle").addEventListener("click",()=>{
-      tocCollapsed = !tocCollapsed;
+      tocpsed = !tocpsed;
       document.querySelectorAll(".toc-list").forEach(list=>{
-        list.style.display = tocCollapsed ? "none" : "block";
+        list.style.display = tocpsed ? "none" : "block";
       });
-      document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
+      document.getElementById("tocToggle").textContent = tocCollapsed ? "Buka" : "Tutup";
     });
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
