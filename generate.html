@@ -24,12 +24,25 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; }
 function titleToCategory(title){
   const t = title.toLowerCase();
   const cats = [
-    {name: "Jaringan", k:["jaringan","internet","wifi","router","modem","ethernet"]},
-    {name: "Multimedia", k:["video","foto","audio","film","ffmpeg","imagemagick","photoshop","gimp"]},
-    {name: "Kuliner", k:["makan","resep","masak","restoran","minum","kue"]},
-    {name: "Kehidupan", k:["hidup","uang","cinta","teman","keluarga","bahagia","sedih"]},
-    {name: "Pemrograman", k:["javascript","python","php","java","html","css","c++","sql"]},
-    {name: "Lainnya", k:[]}
+    {name: "Arch", k:["arch", "manjaro", "cachyos", "endeavouros", "artix", "parabola", "blackarch", "garuda", "antergos", "arco"]},
+    {name: "Debian", k:["debian", "ubuntu", "mint", "mx linux", "elementary", "puppy", "kali", "kubuntu", "xubuntu", "lubuntu", "zorin", "popos", "deepin", "tails", "raspbian", "devuan"]},
+    {name: "Desktop", k:["kde", "hyperland", "caja", "ukui", "pantheon", "deepin", "lxde", "budgie", "mate", "gnome", "cinnamon", "xfce", "desktop environment", "fluxbox", "openbox", "i3", "sway", "awesome", "dwm", "enlightenment", "wayland", "xorg", "window manager"]},
+    {name: "Kehidupan", k:["hidup", "uang", "dosa", "alasan", "bapak", "ibu", "anak", "kehidupan", "tidur", "sahabat", "teman", "sombong", "wanita", "pria", "perempuan", "laki", "silaturahim", "daily", "rutinitas", "bahagia", "sedih", "cinta", "emosi", "keluarga", "sosial", "masalah", "motivasi", "inspirasi", "tujuan", "rencana", "kebiasaan", "jodoh", "nikah"]},
+    {name: "Kerja", k:["kerja", "kantor", "dokumen", "strategi", "pdf", "psikotes", "karir", "bisnis", "proyek", "meeting", "wawancara", "resign", "gaji", "promosi", "lembur", "freelance", "startup", "cv", "lamaran", "manajemen", "produktivitas"]},
+    {name: "Kuliner", k:["resep", "makan", "minum", "bumbu", "kuliner", "masak", "restoran", "kafe", "jajanan", "sarapan", "makan siang", "makan malam", "diet", "makanan", "minuman", "dapur", "kue", "roti", "gorengan"]},
+    {name: "Multimedia", k:["video", "foto", "audio", "film", "ffmpeg", "imagemagick", "photoshop", "gimp", "audacity", "blender", "premiere", "davinci", "lightroom", "kdenlive", "shotcut", "editing", "produksi", "musik", "podcast", "vfx", "efek"]},
+    {name: "NixOS", k:["nixos", "nix"]},
+    {name: "OpenSUSE", k:["opensuse", "suse", "leap", "tumbleweed", "chameleon", "zypper"]},
+    {name: "OS Linux", k:["grub", "autoremove", "cron", "reinstall", "dd", "troubleshooting", "skrip", "rsync", "systemd", "sudo", "backup", "plugin", "ssh", "symlinks", "mount", "samba", "linux", "bootloader", "distro", "release", "rilis", "kernel", "cli", "shell", "bash", "zsh", "init", "pacman", "yay", "apt-get", "dpkg", "yum", "dnf", "zypper", "aptitude", "uname", "ls", "grep", "awk", "sed", "chmod", "chown", "user", "group", "service", "systemctl"]},
+    {name: "OS Windows", k:["windows", "windows 10", "windows 11", "powershell", "cmd", "registry", "boot", "update", "explorer", "task manager", "bsod", "driver"]},
+    {name: "Redhat", k:["fedora", "centos", "redhat", "rhel", "scientific linux", "alma", "rocky", "centos stream"]},
+    {name: "Religi", k:["allah", "shalat", "sholat", "agama", "puasa", "nabi", "islam", "madinah", "religi", "ghibah", "muslim", "quran", "hadits", "dakwah", "doa", "surga", "neraka", "masjid", "iman", "ibadah", "hijab", "akidah"]},
+    {name: "Repository", k:["repository", "dnf", "apt", "repo", "snap", "synaptic", "octopi", "flatpak", "netselect", "mirror", "reflector", "aur", "ppa", "github", "gitlab", "bitbucket", "dockerhub", "git", "clone", "push", "pull"]},
+    {name: "Slackware", k:["slackware", "slac", "sbopkg", "pkgtools"]},
+    {name: "Jaringan", k:["jaringan", "internet", "wifi", "router", "modem", "ethernet", "ip address", "dns", "firewall", "tcp", "udp", "http", "https", "proxy", "vpn", "port", "lan", "wan", "modem", "bandwidth", "ping", "traceroute"]},
+    {name: "Pemrograman", k:["pemrograman", "program", "coding", "javascript", "python", "php", "java", "c++", "c", "html", "css", "database", "sql", "mysql", "mongodb", "framework", "library", "api", "bug", "compiler", "debugging", "syntax", "variabel", "algoritma", "frontend", "backend", "fullstack", "data science"]},
+    {name: "Perangkat Keras", k:["perangkat keras", "hardware", "cpu", "gpu", "ram", "hardisk", "ssd", "motherboard", "power supply", "monitor", "keyboard", "mouse", "printer", "usb", "driver", "bios", "uefi", "processor", "graphic card", "storage", "komponen"]},
+    {name: "Keuangan", k:["keuangan", "investasi", "saham", "crypto", "bitcoin", "uang", "bank", "tabungan", "kredit", "pinjaman", "pajak", "anggaran", "ekonomi", "fintech", "reksadana", "inflasi", "utang"]}
   ];
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
