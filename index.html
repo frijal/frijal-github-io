@@ -56,7 +56,7 @@
 <input type="text" id="search" placeholder="Cari judul...">
 
 <!-- Expand/pse TOC -->
-<button id="tocToggle">pse TOC</button>
+<button id="tocToggle">Collapse TOC</button>
 
 <!-- TOC -->
 <div id="toc"></div>
@@ -195,7 +195,7 @@ async function loadTOC() {
       document.querySelectorAll(".toc-list").forEach(list=>{
         list.style.display = tocpsed ? "none" : "block";
       });
-      document.getElementById("tocToggle").textContent = tocCollapsed ? "Buka" : "Tutup";
+      document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
     });
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
