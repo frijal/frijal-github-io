@@ -7,10 +7,10 @@
 <style>
   body { font-family: 'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
   h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
-  
+
   /* Marquee */
   #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 200s linear infinite; will-change:transform; }
+  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 400s linear infinite; will-change:transform; }
   #marquee-container:hover #marquee-content { animation-play-state:paused; }
   #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
   #marquee-content a:hover { color:yellow; text-decoration:underline; }
@@ -23,8 +23,11 @@
   #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
 
   /* TOC */
-  .category { margin:10px auto; max-width:900px; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
+  #toc { max-width:900px; margin:10px auto; }
+  #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
+
+  .category, .sub-category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
+  .category-header, .sub-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
   .toc-list { display:none; padding:0 16px; }
   .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
   .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
@@ -35,6 +38,10 @@
   .label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
   .label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
   .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
+
+  /* Highlight fade-in */
+  .highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
+  @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
 
   @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
 </style>
@@ -56,6 +63,7 @@
 
 <!-- TOC -->
 <div id="toc"></div>
+<div id="totalCount">Total artikel: 0</div>
 
 <script>
 const gradientMap = {
@@ -88,77 +96,115 @@ async function loadTOC() {
     const res = await fetch("artikel.json");
     const data = await res.json();
 
-    // Kelompokkan per kategori
-    const grouped = {};
-    data.forEach(d => {
-      if(!grouped[d.category]) grouped[d.category] = [];
-      grouped[d.category].push(d);
-    });
-
     const toc = document.getElementById("toc");
     toc.innerHTML = "";
 
+    // Kelompokkan per kategori dan subkategori
+    const grouped = {};
+    data.forEach(d => {
+      if(!grouped[d.category]) grouped[d.category] = {};
+      const subcat = d.subcategory || "Umum";
+      if(!grouped[d.category][subcat]) grouped[d.category][subcat] = [];
+      grouped[d.category][subcat].push(d);
+    });
+
     Object.keys(grouped).sort().forEach(cat => {
-      const section = document.createElement("div");
-      section.className="category";
-      section.innerHTML = `<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div><div class="toc-list"></div>`;
-      const list = section.querySelector(".toc-list");
+      const catDiv = document.createElement("div");
+      catDiv.className = "category";
+      catDiv.innerHTML = `<div class="category-header">${cat}</div><div class="toc-list"></div>`;
+      const catList = catDiv.querySelector(".toc-list");
+      catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
-      // Set gradient
-      const grad = gradientMap[cat] || gradientMap["Lainnya"];
-      section.querySelector(".category-header").style.background = grad;
-      section.querySelector(".badge").style.background = grad;
+      Object.keys(grouped[cat]).sort().forEach(subcat => {
+        const subDiv = document.createElement("div");
+        subDiv.className = "sub-category";
+        subDiv.innerHTML = `<div class="sub-header">${subcat}</div><div class="toc-list"></div>`;
+        const subList = subDiv.querySelector(".toc-list");
+        subDiv.querySelector(".sub-header").style.background = gradientMap[subcat] || gradientMap["Lainnya"];
 
-      grouped[cat].forEach((item,i)=>{
-        const el=document.createElement("div");
-        el.className="toc-item";
-        el.dataset.text = item.title.toLowerCase();
+        grouped[cat][subcat].forEach((item,i)=>{
+          const el=document.createElement("div");
+          el.className="toc-item";
+          el.dataset.text = item.title.toLowerCase();
 
-        const a=document.createElement("a");
-        a.href=`artikel/${item.file}`;
-        a.target="_blank";
-        a.textContent = `${i+1}. ${item.title}`;
+          const a=document.createElement("a");
+          a.href=`artikel/${item.file}`;
+          a.target="_blank";
+          a.textContent = `${i+1}. ${item.title}`;
 
-        const statusSpan=document.createElement("span");
-        if(visitedLinks.includes(item.file)){
-          statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
-        } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
+          const statusSpan=document.createElement("span");
+          if(visitedLinks.includes(item.file)){
+            statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
+          } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
 
-        a.addEventListener("click",()=>{
-          if(!visitedLinks.includes(item.file)){
-            visitedLinks.push(item.file);
-            localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-            statusSpan.className="label-visited";
-            statusSpan.textContent="sudah dibaca 👍";
-            a.classList.add("visited");
-          }
+          a.addEventListener("click",()=>{
+            if(!visitedLinks.includes(item.file)){
+              visitedLinks.push(item.file);
+              localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
+              statusSpan.className="label-visited";
+              statusSpan.textContent="sudah dibaca 👍";
+              a.classList.add("visited");
+            }
+          });
+
+          const titleDiv=document.createElement("div");
+          titleDiv.className="toc-title";
+          titleDiv.appendChild(a);
+          titleDiv.appendChild(statusSpan);
+          el.appendChild(titleDiv);
+          subList.appendChild(el);
         });
 
-        const titleDiv=document.createElement("div");
-        titleDiv.className="toc-title";
-        titleDiv.appendChild(a);
-        titleDiv.appendChild(statusSpan);
-        el.appendChild(titleDiv);
-        list.appendChild(el);
+        subDiv.querySelector(".sub-header").addEventListener("click",()=>{
+          subList.style.display = subList.style.display==="block" ? "none" : "block";
+        });
+
+        catList.appendChild(subDiv);
       });
 
-      section.querySelector(".category-header").addEventListener("click",()=>{
-        list.style.display = list.style.display==="block" ? "none" : "block";
+      catDiv.querySelector(".category-header").addEventListener("click",()=>{
+        catList.style.display = catList.style.display==="block" ? "none" : "block";
       });
 
-      toc.appendChild(section);
+      toc.appendChild(catDiv);
     });
 
     // Marquee
     const m = document.getElementById("marquee-content");
     m.innerHTML = data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 
-    // Search
-    document.getElementById("search").addEventListener("input",function(){
-      const term=this.value.toLowerCase();
-      document.querySelectorAll(".toc-item").forEach(item=>{
-        item.style.display=item.dataset.text.includes(term)?"flex":"none";
+    // Search dengan highlight + update total
+    const totalCount = document.getElementById("totalCount");
+    document.getElementById("search").addEventListener("input", function() {
+      const term = this.value.toLowerCase();
+      let countVisible = 0;
+
+      document.querySelectorAll(".category").forEach(category => {
+        let catVisible = false;
+        category.querySelectorAll(".sub-category").forEach(subcat => {
+          let subVisible = false;
+          subcat.querySelectorAll(".toc-item").forEach(item => {
+            const text = item.dataset.text;
+            const link = item.querySelector("a");
+            if(term && text.includes(term)) {
+              item.style.display = "flex";
+              subVisible = true;
+              countVisible++;
+              const regex = new RegExp(`(${term})`, "gi");
+              link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
+            } else {
+              item.style.display = term ? "none" : "flex";
+              if(!term) countVisible++;
+              link.innerHTML = link.textContent;
+            }
+          });
+          subcat.style.display = subVisible ? "block" : "none";
+          if(subVisible) catVisible = true;
+        });
+        category.style.display = catVisible ? "block" : "none";
       });
+
+      totalCount.textContent = `Total artikel: ${countVisible}`;
     });
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
@@ -177,13 +223,13 @@ function getBrowserInfo(){
 }
 function getOSInfo(){
   const platform=navigator.platform.toLowerCase();
-  const ua=navigator.userAgent.toLowerCase();
   let name="Unknown OS", icon="";
   if(platform.includes("win")){ name="Windows"; icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg"; }
   else if(platform.includes("mac")){ name="macOS"; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"; }
   else if(platform.includes("linux")){ name="Linux"; icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"; }
   return {name,icon};
 }
+
 const browser=getBrowserInfo();
 document.getElementById('browserIcon').src = browser.icon;
 document.getElementById('browserText').textContent = `${browser.name} ${browser.version}`;
@@ -197,7 +243,6 @@ fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{
   document.getElementById('ipText').textContent=`${data.ip} (${data.city})`;
   document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
 }).catch(()=>{ document.getElementById('ipText').textContent='IP: Tidak dapat diambil'; });
-
 </script>
 </body>
 </html>
