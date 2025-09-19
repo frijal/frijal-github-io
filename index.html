@@ -140,34 +140,35 @@ async function loadTOC() {
     toc.innerHTML = "";
 
     const totalCount = document.getElementById("totalCount");
-    totalCount.textContent = `Total artikel: ${data.length}`;
 
-    // Kelompokkan per kategori
+    // Format object per kategori
     const grouped = {};
-    data.forEach(d => {
-      if(!grouped[d.category]) grouped[d.category] = [];
-      grouped[d.category].push(d);
+    Object.keys(data).forEach(cat => {
+      grouped[cat] = data[cat].map(arr => ({
+        title: arr[0],
+        file: arr[1],
+        category: cat
+      }));
     });
 
-    // Hitung jumlah maksimum artikel per kategori untuk gradasi
-    const maxCount = Math.max(...Object.values(grouped).map(arr => arr.length));
+    // Hitung total artikel
+    const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
+    totalCount.textContent = `Total artikel: ${totalArticles}`;
 
     // Urutkan kategori berdasarkan jumlah artikel terbanyak
     Object.keys(grouped)
-      .sort((a,b) => grouped[b].length - grouped[a].length)
+      .sort((a, b) => grouped[b].length - grouped[a].length)
       .forEach(cat => {
         const catDiv = document.createElement("div");
         catDiv.className = "category";
 
-        // Gradasi kecerahan (0.3 - 1) berdasarkan proporsi artikel
-        const intensity = 0.3 + 0.7 * (grouped[cat].length / maxCount);
-        const baseColor = gradientMap[cat] || "linear-gradient(180deg, #007BFF, #3399FF)";
-
-        catDiv.innerHTML = `<div class="category-header" style="background: ${baseColor}; filter: brightness(${intensity});">
-                              ${cat} (${grouped[cat].length})
-                            </div>
-                            <div class="toc-list"></div>`;
-
+        const catListHTML = `<div class="toc-list"></div>`;
+        catDiv.innerHTML = `
+          <div class="category-header">
+            ${cat} <span class="badge">${grouped[cat].length}</span>
+          </div>
+          ${catListHTML}
+        `;
         const catList = catDiv.querySelector(".toc-list");
 
         grouped[cat].forEach((item,i)=>{
@@ -182,12 +183,12 @@ async function loadTOC() {
 
           const statusSpan = document.createElement("span");
           if(visitedLinks.includes(item.file)){
-            statusSpan.className = "label-visited"; 
-            statusSpan.textContent = "sudah dibaca 👍"; 
+            statusSpan.className = "label-visited";
+            statusSpan.textContent = "sudah dibaca 👍";
             a.classList.add("visited");
-          } else { 
-            statusSpan.className = "label-new"; 
-            statusSpan.textContent = "📚 belum dibaca"; 
+          } else {
+            statusSpan.className = "label-new";
+            statusSpan.textContent = "📚 belum dibaca";
           }
 
           a.addEventListener("click", ()=>{
@@ -208,7 +209,7 @@ async function loadTOC() {
           catList.appendChild(el);
         });
 
-        // Toggle kategori individu
+        // Toggle kategori
         catDiv.querySelector(".category-header").addEventListener("click", ()=>{
           catList.style.display = catList.style.display==="block" ? "none" : "block";
           updateTOCToggleText();
@@ -219,9 +220,10 @@ async function loadTOC() {
 
     // Marquee
     const m = document.getElementById("marquee-content");
-    m.innerHTML = data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+    const allArticles = Object.values(grouped).flat();
+    m.innerHTML = allArticles.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 
-    // Search + highlight + update total + auto expand kategori
+    // Search
     document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
       let countVisible = 0;
@@ -252,7 +254,7 @@ async function loadTOC() {
       updateTOCToggleText();
     });
 
-    // --- Tombol Expand/Collapse TOC Global ---
+    // Tombol global
     let tocCollapsed = false;
     const tocToggleBtn = document.getElementById("tocToggle");
 
@@ -271,12 +273,11 @@ async function loadTOC() {
       tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
     });
 
-    // Inisialisasi tombol sesuai kondisi awal TOC
+    // Inisialisasi tombol
     updateTOCToggleText();
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
-
 
   
 loadTOC();
