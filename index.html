@@ -10,7 +10,7 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 
 /* Marquee */
 #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-#marquee-content { display:inline-block; padding-left:100%; animation:marquee 200s linear infinite; will-change:transform; }
+#marquee-content { display:inline-block; padding-left:100%; animation:marquee 500s linear infinite; will-change:transform; }
 #marquee-container:hover #marquee-content { animation-play-state:paused; }
 #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
 #marquee-content a:hover { color:yellow; text-decoration:underline; }
@@ -19,7 +19,6 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 /* Info Bar */
 #infoBar { display:flex; flex-wrap: wrap; justify-content:center; align-items:center; gap:20px; font-size:14px; text-align:center; margin:10px auto; max-width:900px; }
 #infoBar div { display:flex; align-items:center; gap:6px; }
-#infoBar svg { width:24px; height:24px; vertical-align:middle; }
 
 /* Search */
 #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
@@ -32,20 +31,7 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
 
 .category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s ease; color:white; position:relative; border-radius:8px; }
-
-/* Animasi hover title */
-.category-header::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0; bottom:0;
-  border-radius:8px;
-  box-shadow:0 0 0 rgba(255,255,255,0);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-.category-header:hover::before { box-shadow: 0 4px 15px rgba(255,255,255,0.3); transform: scale(1.02); }
-.category-header:hover { transform: translateY(-2px); }
-
+.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
 .toc-list { display:none; padding:0 16px; } /* collapse default */
 .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
 .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
@@ -69,20 +55,11 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 <!-- Marquee -->
 <div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
 
-<!-- Info Bar dengan SVG -->
+<!-- Info Bar -->
 <div id="infoBar">
-  <div>
-    <svg id="browserIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#888"/></svg>
-    <span id="browserText"></span>
-  </div>
-  <div>
-    <svg id="osIcon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="#888"/></svg>
-    <span id="osText"></span>
-  </div>
-  <div>
-    <svg id="flagIcon" viewBox="0 0 24 24"><rect width="24" height="16" fill="#888"/></svg>
-    <span id="ipText"></span>
-  </div>
+  <div><img id="browserIcon" width="24" height="24" alt="Browser"><span id="browserText"></span></div>
+  <div><img id="osIcon" width="24" height="24" alt="OS"><span id="osText"></span></div>
+  <div><img id="flagIcon" width="24" height="24" alt="Negara"><span id="ipText"></span></div>
 </div>
 
 <!-- Search -->
@@ -96,7 +73,6 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 <div id="totalCount">Total artikel: 0</div>
 
 <script>
-// Gradient kategori
 const gradientMap = {
   "Arch": "linear-gradient(180deg, #1793D1, #51A4C9)",
   "Debian": "linear-gradient(180deg, #A80030, #D23759)",
@@ -129,26 +105,39 @@ async function loadTOC() {
     const data = await res.json();
     const toc = document.getElementById("toc");
     toc.innerHTML = "";
+
     const totalCount = document.getElementById("totalCount");
     totalCount.textContent = `Total artikel: ${data.length}`;
 
     // Kelompokkan per kategori
     const grouped = {};
-    data.forEach(d => { if(!grouped[d.category]) grouped[d.category]=[]; grouped[d.category].push(d); });
+    data.forEach(d => {
+      if(!grouped[d.category]) grouped[d.category] = [];
+      grouped[d.category].push(d);
+    });
 
     Object.keys(grouped).sort().forEach(cat => {
-      const catDiv=document.createElement("div");
-      catDiv.className="category";
+      const catDiv = document.createElement("div");
+      catDiv.className = "category";
       catDiv.innerHTML = `<div class="category-header">${cat}</div><div class="toc-list"></div>`;
       const catList = catDiv.querySelector(".toc-list");
       catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
       grouped[cat].forEach((item,i)=>{
-        const el=document.createElement("div"); el.className="toc-item"; el.dataset.text=item.title.toLowerCase();
-        const a=document.createElement("a"); a.href=`artikel/${item.file}`; a.target="_blank"; a.textContent=`${i+1}. ${item.title}`;
+        const el=document.createElement("div");
+        el.className="toc-item";
+        el.dataset.text = item.title.toLowerCase();
+
+        const a=document.createElement("a");
+        a.href=`artikel/${item.file}`;
+        a.target="_blank";
+        a.textContent = `${i+1}. ${item.title}`;
+
         const statusSpan=document.createElement("span");
-        if(visitedLinks.includes(item.file)){ statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited"); }
-        else{ statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
+        if(visitedLinks.includes(item.file)){
+          statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
+        } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
+
         a.addEventListener("click",()=>{
           if(!visitedLinks.includes(item.file)){
             visitedLinks.push(item.file);
@@ -158,9 +147,13 @@ async function loadTOC() {
             a.classList.add("visited");
           }
         });
+
         const titleDiv=document.createElement("div");
-        titleDiv.className="toc-title"; titleDiv.appendChild(a); titleDiv.appendChild(statusSpan);
-        el.appendChild(titleDiv); catList.appendChild(el);
+        titleDiv.className="toc-title";
+        titleDiv.appendChild(a);
+        titleDiv.appendChild(statusSpan);
+        el.appendChild(titleDiv);
+        catList.appendChild(el);
       });
 
       // Toggle kategori per header
@@ -180,20 +173,25 @@ async function loadTOC() {
     document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
       let countVisible = 0;
-      document.querySelectorAll(".category").forEach(category=>{
-        category.querySelectorAll(".toc-item").forEach(item=>{
-          const text=item.dataset.text; const link=item.querySelector("a");
-          if(term && text.includes(term)){
-            item.style.display="flex"; countVisible++;
-            const regex=new RegExp(`(${term})`,"gi");
-            link.innerHTML = link.textContent.replace(regex,'<span class="highlight">$1</span>');
-          } else{
-            item.style.display=term?"none":"flex"; link.innerHTML=link.textContent;
+
+      document.querySelectorAll(".category").forEach(category => {
+        category.querySelectorAll(".toc-item").forEach(item => {
+          const text = item.dataset.text;
+          const link = item.querySelector("a");
+          if(term && text.includes(term)) {
+            item.style.display = "flex";
+            countVisible++;
+            const regex = new RegExp(`(${term})`, "gi");
+            link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
+          } else {
+            item.style.display = term ? "none" : "flex";
+            link.innerHTML = link.textContent;
             if(!term) countVisible++;
           }
         });
       });
-      totalCount.textContent=`Total artikel: ${countVisible}`;
+
+      totalCount.textContent = `Total artikel: ${countVisible}`;
     });
 
     // Tombol Expand/Collapse TOC
@@ -210,37 +208,45 @@ async function loadTOC() {
 
 loadTOC();
 
-// --- Info Browser, OS, IP dengan SVG ---
+// --- Info Browser, OS, IP ---
 function getBrowserInfo(){
-  const ua=navigator.userAgent; let name="Unknown", icon="", version="N/A";
-  if(/Firefox\/([0-9\.]+)/.test(ua)){ name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon=`<svg viewBox="0 0 24 24" fill="#FF9400"><circle cx="12" cy="12" r="10"/></svg>`; }
-  else if(/Edg\/([0-9\.]+)/.test(ua)){ name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon=`<svg viewBox="0 0 24 24" fill="#0078D7"><circle cx="12" cy="12" r="10"/></svg>`; }
-  else if(/Chrome\/([0-9\.]+)/.test(ua)){ name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon=`<svg viewBox="0 0 24 24" fill="#4285F4"><circle cx="12" cy="12" r="10"/></svg>`; }
-  else if(/Safari\/([0-9\.]+)/.test(ua) && !/Chrome/.test(ua)){ name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon=`<svg viewBox="0 0 24 24" fill="#00A1F1"><circle cx="12" cy="12" r="10"/></svg>`; }
+  const ua = navigator.userAgent;
+  let name="Unknown", icon="", version="N/A";
+  if(/Firefox\/([0-9\.]+)/.test(ua)){ name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"; }
+  else if(/Edg\/([0-9\.]+)/.test(ua)){ name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg"; }
+  else if(/Chrome\/([0-9\.]+)/.test(ua)){ name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png"; }
+  else if(/Safari\/([0-9\.]+)/.test(ua) && !/Chrome/.test(ua)){ name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/c/ca/Safari_logo.svg"; }
   return {name,version,icon};
 }
+
 function getOSInfo(){
-  const platform=navigator.platform.toLowerCase(); let name="Unknown OS", icon="";
-  if(platform.includes("win")){ name="Windows"; icon=`<svg viewBox="0 0 24 24" fill="#0078D7"><rect x="2" y="2" width="20" height="20"/></svg>`; }
-  else if(platform.includes("mac")){ name="macOS"; icon=`<svg viewBox="0 0 24 24" fill="#000000"><rect x="2" y="2" width="20" height="20"/></svg>`; }
-  else if(platform.includes("linux")){ name="Linux"; icon=`<svg viewBox="0 0 24 24" fill="#FCC624"><circle cx="12" cy="12" r="10"/></svg>`; }
+  const platform = navigator.platform.toLowerCase();
+  let name="Unknown OS", icon="";
+  if(platform.includes("win")) icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg", name="Windows";
+  else if(platform.includes("mac")) icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg", name="macOS";
+  else if(platform.includes("linux")) icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png", name="Linux";
   return {name,icon};
 }
 
-const browser=getBrowserInfo();
-document.getElementById('browserIcon').outerHTML=browser.icon+'<span id="browserText">'+browser.name+' '+browser.version+'</span>';
-const os=getOSInfo();
-document.getElementById('osIcon').outerHTML=os.icon+'<span id="osText">'+os.name+'</span>';
+const browser = getBrowserInfo();
+document.getElementById('browserIcon').src = browser.icon;
+document.getElementById('browserText').textContent = `${browser.name} ${browser.version}`;
 
-// IP & flag
+const os = getOSInfo();
+document.getElementById('osIcon').src = os.icon;
+document.getElementById('osText').textContent = os.name;
+
+// Fetch IP & flag
 fetch('https://ipapi.co/json/')
-.then(res=>res.json())
-.then(data=>{
-  document.getElementById('ipText').textContent=`${data.ip} (${data.city})`;
-  const svgFlag = `<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#${data.country_code.toLowerCase()}"/></svg>`;
-  document.getElementById('flagIcon').outerHTML=svgFlag+'<span id="ipText">'+data.ip+' ('+data.city+')</span>';
+.then(res => res.json())
+.then(data => {
+  document.getElementById('ipText').textContent = `${data.ip} (${data.city})`;
+  document.getElementById('flagIcon').src = `https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
 })
-.catch(()=>{ document.getElementById('ipText').textContent='IP: Tidak dapat diambil'; });
+.catch(()=>{ 
+  document.getElementById('ipText').textContent='IP: Tidak dapat diambil'; 
+  document.getElementById('flagIcon').alt='Tidak ada'; 
+});
 </script>
 </body>
 </html>
