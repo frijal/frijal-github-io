@@ -312,26 +312,26 @@ loadTOC();
 
 </script>
 
-<script>
-// --- Ikon SVG untuk Browser ---
+  <script>
+// --- Ikon PNG untuk Browser ---
 const browserIcons = {
-    "Firefox": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FF7139"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Chrome": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#4285F4"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Edge": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Safari": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#00A1F1"><circle cx="12" cy="12" r="10"/></svg>`,
-    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><circle cx="12" cy="12" r="10"/></svg>`
+    "Firefox": "https://upload.wikimedia.org/wikipedia/commons/6/69/Firefox_logo_2019.png",
+    "Chrome": "https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png",
+    "Edge": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Microsoft_Edge_logo_%282019%29.png",
+    "Safari": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Safari_browser_logo.png",
+    "Unknown": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Question_mark_gray.png"
 };
 
-// --- Ikon SVG untuk OS ---
+// --- Ikon PNG untuk OS ---
 const osIcons = {
-    "Windows": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#0078D7"><rect width="24" height="24"/></svg>`,
-    "macOS": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#999"><rect width="24" height="24"/></svg>`,
-    "Linux": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#FCC624"><rect width="24" height="24"/></svg>`,
-    "Unknown": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#ccc"><rect width="24" height="24"/></svg>`
+    "Windows": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg",
+    "macOS": "https://upload.wikimedia.org/wikipedia/commons/f/fa/MacOS_logo.svg",
+    "Linux": "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png",
+    "Unknown": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Question_mark_gray.png"
 };
 
-// --- Ikon Globe SVG untuk IP ---
-const globeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#28a745"><circle cx="12" cy="12" r="10"/></svg>`;
+// --- Ikon Globe PNG untuk IP ---
+const globePNG = "https://upload.wikimedia.org/wikipedia/commons/8/83/Globe_icon.png";
 
 // --- Fungsi deteksi Browser ---
 function getBrowserInfo(){
@@ -363,23 +363,23 @@ fetch('https://ipapi.co/json/')
     const os = getOSInfo();
     const countryCode = data.country_code.toLowerCase();
 
-    // Gunakan FlagCDN untuk bendera
+    // FlagCDN
     const flagImg = `<img src="https://flagcdn.com/48x36/${countryCode}.png" alt="${data.country_name}" width="24" height="18" style="vertical-align:middle;border:1px solid #ccc;border-radius:2px;">`;
 
-    // Tampilkan semua info dengan animasi hover
+    // Tampilkan semua info
     footer.innerHTML = `
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${browser.icon} <span> ${browser.name} ${browser.version}</span>
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <img src="${browser.icon}" width="16" height="16"> <span>${browser.name} ${browser.version}</span>
         </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${os.icon} <span> ${os.name}</span>
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <img src="${os.icon}" width="16" height="16"> <span>${os.name}</span>
         </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;transition:transform 0.2s, color 0.2s;cursor:pointer;">
-            ${globeSVG} <span> ${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
+        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <img src="${globePNG}" width="16" height="16"> <span>${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
         </div>
     `;
 
-    // Tambahkan animasi hover
+    // Animasi hover
     document.querySelectorAll('.info-item').forEach(el=>{
         el.addEventListener('mouseenter', ()=>{ el.style.transform='scale(1.05)'; el.style.color='#007BFF'; });
         el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
@@ -390,6 +390,7 @@ fetch('https://ipapi.co/json/')
     console.error(err);
 });
 </script>
+
 
 </body>
 </html>
