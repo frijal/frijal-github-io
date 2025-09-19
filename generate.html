@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate artikel.json</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background:#f9f9f9; }
+h1 { color: #007BFF; }
+textarea { width: 100%; height: 300px; font-family: monospace; margin-top: 10px; }
+button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<h1>Generate artikel.json dari folder artikel</h1>
+<p>Masukkan nama file HTML (tanpa folder) di bawah:</p>
+<textarea id="fileList" placeholder="bahaya-ghibah.html
+conky-bahasa-indonesia.html
+desktop-blankon-compiz.html"></textarea>
+<br>
+<button id="generateBtn">Generate JSON</button>
+<h2>Hasil JSON:</h2>
+<textarea id="result" readonly></textarea>
+
+<script>
+// --- Tentukan kategori berdasarkan judul ---
+function titleToCategory(title){
+  const t = title.toLowerCase();
+  const cats = [
+    {name:"Arch", k:["manjaro","cachy","arch"]},
+    {name:"Debian", k:["debian","ubuntu","mint","mx","elementary","puppy","kali","kubuntu","xubuntu"]},
+    {name:"Desktop", k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce","desktop"]},
+    {name:"Kehidupan", k:["hidup","uang","dosa","alasan","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily"]},
+    {name:"Kerja", k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir"]},
+    {name:"Kuliner", k:["resep","makan","minum","bumbu","kuliner"]},
+    {name:"Multimedia", k:["video","foto","audio","film","ffmpeg","imagemagick"]},
+    {name:"NixOS", k:["nixos"]},
+    {name:"OpenSUSE", k:["opensuse"]},
+    {name:"OS Linux", k:["grub","autoremove","cron","reinstall","dd","troubleshooting","skrip","rsync","system","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis"]},
+    {name:"OS Windows", k:["windows"]},
+    {name:"Redhat", k:["fedora","centos"]},
+    {name:"Religi", k:["allah","shalat","sholat","agama","puasa","nabi","islam","madinah","religi","ghibah"]},
+    {name:"Repository", k:["repository","dnf","apt","repo","snap","synaptic","octopi","flatpak","netselect","mirror","reflector"]},
+    {name:"Slackware", k:["slackware"]}];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
+}
+
+document.getElementById("generateBtn").addEventListener("click", async () => {
+  const files = document.getElementById("fileList").value.trim().split(/\n/).map(f=>f.trim()).filter(f=>f);
+  const result = [];
+  
+  for(const f of files){
+    try{
+      const res = await fetch("artikel/"+f);
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html,"text/html");
+      const title = doc.querySelector("title")?.innerText || f;
+      const category = titleToCategory(title);
+      result.push({title, file: f, category});
+    } catch(e){
+      console.warn("Gagal fetch:", f);
+      result.push({title:f, file:f, category:"Lainnya"});
+    }
+  }
+
+  document.getElementById("result").value = JSON.stringify(result, null, 2);
+});
+</script>
+
+</body>
+</html>
