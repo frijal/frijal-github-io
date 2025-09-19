@@ -5,49 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Isi Interaktif</title>
 <style>
-body { font-family: 'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
-h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
+  body { font-family: 'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
+  h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 
-/* Marquee */
-#marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
-#marquee-content { display:inline-block; padding-left:100%; animation:marquee 500s linear infinite; will-change:transform; }
-#marquee-container:hover #marquee-content { animation-play-state:paused; }
-#marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
-#marquee-content a:hover { color:yellow; text-decoration:underline; }
-@keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+  /* Marquee */
+  #marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; }
+  #marquee-content { display:inline-block; padding-left:100%; animation:marquee 500s linear infinite; will-change:transform; }
+  #marquee-container:hover #marquee-content { animation-play-state:paused; }
+  #marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
+  #marquee-content a:hover { color:yellow; text-decoration:underline; }
+  @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
-/* Info Bar */
-#infoBar { display:flex; flex-wrap: wrap; justify-content:center; align-items:center; gap:20px; font-size:14px; text-align:center; margin:10px auto; max-width:900px; }
-#infoBar div { display:flex; align-items:center; gap:6px; }
+  /* Info OS, Browser, IP */
+  #infoBar { display:flex; flex-wrap: wrap; justify-content:center; align-items:center; gap:20px; font-size:14px; text-align:center; margin:10px auto; max-width:900px; }
+  #infoBar div { display:flex; align-items:center; gap:6px; }
 
-/* Search */
-#search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
+  #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
 
-/* Expand/Collapse Button */
-#tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
+  /* Expand/Collapse Button */
+  #tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
 
-/* TOC */
-#toc { max-width:900px; margin:10px auto; }
-#totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
+  /* TOC */
+  #toc { max-width:900px; margin:10px auto; }
+  #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
 
-.category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
-.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
-.toc-list { display:none; padding:0 16px; } /* collapse default */
-.toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
-.toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
-.toc-title a { text-decoration:none; color:#333; transition:all 0.3s; font-weight:bold; position:relative; }
-.toc-title a.visited { color: gray; }
-.toc-title a::after { content:""; position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); width:0; height:2px; background:#fff; transition:width 0.3s ease; }
-.toc-title a:hover::after { width:100%; }
-.label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
-.label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
-.badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
+  .category { margin:10px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
+  .category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:all 0.3s; color:white; }
+  .toc-list { display:none; padding:0 16px; }
+  .toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; }
+  .toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
+  .toc-title a { text-decoration:none; color:#333; transition:all 0.3s; font-weight:bold; position:relative; }
+  .toc-title a.visited { color: gray; }
+  .toc-title a::after { content:""; position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); width:0; height:2px; background:#fff; transition:width 0.3s ease; }
+  .toc-title a:hover::after { width:100%; }
+  .label-new { background:#28a745; color:white; padding:2px 5px; border-radius:8px; }
+  .label-visited { background:#6c757d; color:white; padding:2px 5px; border-radius:8px; }
+  .badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
 
-/* Highlight fade-in */
-.highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
-@keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
+  /* Highlight fade-in */
+  .highlight { background: yellow; color: black; animation:fadeIn 0.5s ease-in; }
+  @keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
 
-@media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
+  @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
 </style>
 </head>
 <body>
@@ -57,16 +56,16 @@ h1 { text-align:center; margin-bottom:20px; font-size:2rem; }
 
 <!-- Info Bar -->
 <div id="infoBar">
-  <div><img id="browserIcon" width="24" height="24" alt="Browser"><span id="browserText"></span></div>
-  <div><img id="osIcon" width="24" height="24" alt="OS"><span id="osText"></span></div>
-  <div><img id="flagIcon" width="24" height="24" alt="Negara"><span id="ipText"></span></div>
+  <div><img id="browserIcon" width="24" height="24"><span id="browserText"></span></div>
+  <div><img id="osIcon" width="24" height="24"><span id="osText"></span></div>
+  <div><img id="flagIcon" width="24" height="24"><span id="ipText"></span></div>
 </div>
 
 <!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
 
 <!-- Expand/Collapse TOC -->
-<button id="tocToggle">Expand TOC</button>
+<button id="tocToggle">Collapse TOC</button>
 
 <!-- TOC -->
 <div id="toc"></div>
@@ -81,23 +80,11 @@ const gradientMap = {
   "Kerja": "linear-gradient(180deg, #2B3D4F, #576F86)",
   "Kuliner": "linear-gradient(180deg, #D44E4E, #E58484)",
   "Multimedia": "linear-gradient(180deg, #9C4D9A, #C972C7)",
-  "NixOS": "linear-gradient(180deg, #5277C3, #7D9FDE)",
-  "OpenSUSE": "linear-gradient(180deg, #74A82F, #9AC16B)",
-  "OS Linux": "linear-gradient(180deg, #333333, #666666)",
-  "OS Windows": "linear-gradient(180deg, #0078D7, #459DEB)",
-  "Redhat": "linear-gradient(180deg, #EE0000, #F84949)",
-  "Religi": "linear-gradient(180deg, #6A0DAD, #9D4EDD)",
-  "Repository": "linear-gradient(180deg, #8B949E, #B2BDC9)",
-  "Slackware": "linear-gradient(180deg, #4B859D, #7AB1C8)",
-  "Jaringan": "linear-gradient(180deg, #FF6600, #FF9933)",
-  "Pemrograman": "linear-gradient(180deg, #3D886D, #67AE91)",
-  "Perangkat Keras": "linear-gradient(180deg, #375A7F, #6A86A8)",
-  "Keuangan": "linear-gradient(180deg, #1B5E20, #4CAF50)",
   "Lainnya": "linear-gradient(180deg, #B0BEC5, #CFD8DC)"
 };
 
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-let tocCollapsed = true;
+let tocCollapsed = false;
 
 async function loadTOC() {
   try {
@@ -156,10 +143,9 @@ async function loadTOC() {
         catList.appendChild(el);
       });
 
-      // Toggle kategori per header
+      // Toggle kategori
       catDiv.querySelector(".category-header").addEventListener("click",()=>{
-        const list = catDiv.querySelector(".toc-list");
-        list.style.display = list.style.display==="block" ? "none" : "block";
+        catList.style.display = catList.style.display==="block" ? "none" : "block";
       });
 
       toc.appendChild(catDiv);
@@ -169,17 +155,19 @@ async function loadTOC() {
     const m = document.getElementById("marquee-content");
     m.innerHTML = data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 
-    // Search + highlight (tidak auto-expand)
+    // Search + highlight + update total + auto expand kategori
     document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
       let countVisible = 0;
 
       document.querySelectorAll(".category").forEach(category => {
+        let catVisible = false;
         category.querySelectorAll(".toc-item").forEach(item => {
           const text = item.dataset.text;
           const link = item.querySelector("a");
           if(term && text.includes(term)) {
             item.style.display = "flex";
+            catVisible = true;
             countVisible++;
             const regex = new RegExp(`(${term})`, "gi");
             link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
@@ -189,6 +177,10 @@ async function loadTOC() {
             if(!term) countVisible++;
           }
         });
+        category.style.display = catVisible ? "block" : (term ? "none" : "block");
+        // Auto-expand jika ada hasil
+        const tocList = category.querySelector(".toc-list");
+        tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
 
       totalCount.textContent = `Total artikel: ${countVisible}`;
@@ -198,55 +190,15 @@ async function loadTOC() {
     document.getElementById("tocToggle").addEventListener("click",()=>{
       tocCollapsed = !tocCollapsed;
       document.querySelectorAll(".toc-list").forEach(list=>{
-        list.style.display = tocCollapsed ? "block" : "none";
+        list.style.display = tocCollapsed ? "none" : "block";
       });
-      document.getElementById("tocToggle").textContent = tocCollapsed ? "Collapse TOC" : "Expand TOC";
+      document.getElementById("tocToggle").textContent = tocCollapsed ? "Expand TOC" : "Collapse TOC";
     });
 
   } catch(e){ console.error("Gagal load artikel.json:", e); }
 }
 
 loadTOC();
-
-// --- Info Browser, OS, IP ---
-function getBrowserInfo(){
-  const ua = navigator.userAgent;
-  let name="Unknown", icon="", version="N/A";
-  if(/Firefox\/([0-9\.]+)/.test(ua)){ name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"; }
-  else if(/Edg\/([0-9\.]+)/.test(ua)){ name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg"; }
-  else if(/Chrome\/([0-9\.]+)/.test(ua)){ name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png"; }
-  else if(/Safari\/([0-9\.]+)/.test(ua) && !/Chrome/.test(ua)){ name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/c/ca/Safari_logo.svg"; }
-  return {name,version,icon};
-}
-
-function getOSInfo(){
-  const platform = navigator.platform.toLowerCase();
-  let name="Unknown OS", icon="";
-  if(platform.includes("win")) icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg", name="Windows";
-  else if(platform.includes("mac")) icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg", name="macOS";
-  else if(platform.includes("linux")) icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png", name="Linux";
-  return {name,icon};
-}
-
-const browser = getBrowserInfo();
-document.getElementById('browserIcon').src = browser.icon;
-document.getElementById('browserText').textContent = `${browser.name} ${browser.version}`;
-
-const os = getOSInfo();
-document.getElementById('osIcon').src = os.icon;
-document.getElementById('osText').textContent = os.name;
-
-// Fetch IP & flag
-fetch('https://ipapi.co/json/')
-.then(res => res.json())
-.then(data => {
-  document.getElementById('ipText').textContent = `${data.ip} (${data.city})`;
-  document.getElementById('flagIcon').src = `https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
-})
-.catch(()=>{ 
-  document.getElementById('ipText').textContent='IP: Tidak dapat diambil'; 
-  document.getElementById('flagIcon').alt='Tidak ada'; 
-});
 </script>
 </body>
 </html>
