@@ -17,8 +17,9 @@
   @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
   /* Info OS, Browser, IP */
-  #infoBar { display:flex; flex-wrap: wrap; justify-content:center; align-items:center; gap:20px; font-size:14px; text-align:center; margin:10px auto; max-width:900px; }
-  #infoBar div { display:flex; align-items:center; gap:6px; }
+ #infoBar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;font-size:14px;text-align:center;margin:10px auto;max-width:900px;}
+#infoBar div{display:flex;align-items:center;gap:6px;}
+#infoBar svg{width:24px;height:24px;vertical-align:middle;}
 
   #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
 
@@ -56,9 +57,9 @@
 
 <!-- Info Bar -->
 <div id="infoBar">
-  <div><img id="browserIcon" width="24" height="24"><span id="browserText"></span></div>
-  <div><img id="osIcon" width="24" height="24"><span id="osText"></span></div>
-  <div><img id="flagIcon" width="24" height="24"><span id="ipText"></span></div>
+  <div id="browserDiv"></div>
+  <div id="osDiv"></div>
+  <div id="flagDiv"></div>
 </div>
 
 <!-- Search -->
@@ -211,6 +212,37 @@ async function loadTOC() {
 }
 
 loadTOC();
+  
+  // --- Info Browser, OS, IP ---
+function getBrowserInfo(){
+  const ua=navigator.userAgent;let name="Unknown",version="N/A",icon='';
+  if(ua.includes("Firefox")){name="Firefox";version=ua.match(/Firefox\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  else if(ua.includes("Chrome") && !ua.includes("Edg")){name="Chrome";version=ua.match(/Chrome\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  else if(ua.includes("Edg")){name="Edge";version=ua.match(/Edg\/([0-9\.]+)/)[1];icon='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z';}
+  return {name,version,icon};
+}
+function getOSInfo(){
+  const platform=navigator.platform.toLowerCase();let name="Unknown OS",icon='';
+  if(platform.includes("win")){name="Windows";icon='M0 0h24v24H0z';}
+  else if(platform.includes("mac")){name="macOS";icon='M0 0h24v24H0z';}
+  else if(platform.includes("linux")){name='Linux';icon='M0 0h24v24H0z';}
+  return {name,icon};
+}
+const browser=getBrowserInfo();
+document.getElementById('browserDiv').innerHTML=`<svg viewBox="0 0 24 24"><path d="${browser.icon}"/></svg><span>${browser.name} ${browser.version}</span>`;
+const os=getOSInfo();
+document.getElementById('osDiv').innerHTML=`<svg viewBox="0 0 24 24"><path d="${os.icon}"/></svg><span>${os.name}</span>`;
+
+// Fetch IP & inline SVG flag
+fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{
+  let svgFlag='';
+  const c=data.country_code.toLowerCase();
+  if(c==='id')svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="8" fill="#ff0000"/><rect y="8" width="24" height="8" fill="#ffffff"/></svg>';
+  else if(c==='us')svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#b22234"/><rect y="2" width="24" height="2" fill="#ffffff"/><rect y="4" width="24" height="2" fill="#ffffff"/></svg>';
+  else svgFlag='<svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#888"/></svg>';
+  document.getElementById('flagDiv').innerHTML=`${svgFlag}<span>${data.ip} (${data.city})</span>`;
+}).catch(()=>{document.getElementById('flagDiv').textContent='IP: Tidak dapat diambil';});
+
 </script>
 </body>
 </html>
