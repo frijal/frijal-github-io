@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate JSON Artikel</title>
+</head>
+<body>
+<h1>Generate JSON Artikel dari Browser</h1>
+<button id="generateBtn">Generate JSON</button>
+
+<script>
+// --- Daftar file artikel ---
+const urls = [
+  "bahaya-ghibah.html",
+  "conky-bahasa-indonesia.html",
+  "desktop-blankon-compiz.html"
+  // dst...
+];
+
+// --- Fungsi kategori (sama seperti sebelumnya) ---
+function titleToCategory(title){
+  const t=title.toLowerCase();
+  const cats=[
+    {name:"Arch",k:["manjaro","cachy","arch"]},
+    {name:"Debian",k:["debian","ubuntu","mint","mx","elementary","puppy","kali","kubuntu","xubuntu"]},
+    {name:"Desktop",k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce"]},
+    {name:"Kehidupan",k:["hidup","uang","dosa","alasan","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily"]},
+    {name:"Kerja",k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir"]},
+    {name:"Kuliner",k:["resep","makan","minum","bumbu","kuliner"]},
+    {name:"Multimedia",k:["video","foto","audio","film","ffmpeg","imagemagick"]},
+    {name:"NixOS",k:["nixos"]},
+    {name:"OpenSUSE",k:["opensuse"]},
+    {name:"OS Linux",k:["grub","autoremove","cron","reinstall","dd","troubleshooting","skrip","rsync","system","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis"]},
+    {name:"OS Windows",k:["windows"]},
+    {name:"Redhat",k:["fedora","centos"]},
+    {name:"Religi",k:["allah","shalat","sholat","agama","puasa","nabi","islam","madinah","religi"]},
+    {name:"Repository",k:["repository","dnf","apt","repo","snap","synaptic","octopi","flatpak","netselect","mirror","reflector"]},
+    {name:"Slackware",k:["slackware"]}];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
+}
+
+// --- Fungsi generate JSON dari file HTML ---
+async function generateJSON(){
+  const DATA = [];
+  for(const u of urls){
+    try{
+      const res = await fetch(u);
+      const text = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text,'text/html');
+      const title = doc.querySelector("title")?.innerText || u;
+      const category = titleToCategory(title);
+      DATA.push({title, url: u, category});
+    } catch(e){
+      console.warn(`Gagal memuat ${u}, tetap dimasukkan.`);
+      DATA.push({title: u, url: u, category: "Lainnya"});
+    }
+  }
+
+  // --- Convert ke JSON ---
+  const jsonStr = JSON.stringify(DATA, null, 2);
+
+  // --- Download otomatis ---
+  const blob = new Blob([jsonStr], {type: "application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "artikel.json";
+  a.click();
+}
+
+document.getElementById("generateBtn").addEventListener("click", generateJSON);
+</script>
+</body>
+</html>
