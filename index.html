@@ -170,17 +170,17 @@ function titleToCategory(title){
     {name:"Arch",k:["manjaro","cachy","arch"]},
     {name:"Debian",k:["debian","ubuntu","mint","mx","elementary","puppy","kali","kubuntu","xubuntu"]},
     {name:"Desktop",k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce"]},
-    {name:"Kehidupan",k:["hidup","uang","dosa","alasan","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily"]},
+    {name:"Kehidupan",k:["hidup","uang","dosa","alasan","ghibah","gibah","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily"]},
     {name:"Kerja",k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir"]},
     {name:"Kuliner",k:["resep","makan","minum","bumbu","kuliner"]},
     {name:"Multimedia",k:["video","foto","audio","film","ffmpeg","imagemagick"]},
     {name:"NixOS",k:["nixos"]},
     {name:"OpenSUSE",k:["opensuse"]},
-    {name:"OS Linux",k:["grub","autoremove","conky","cron","reinstall","dd","troubleshooting","skrip","rsync","system","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis"]},
-    {name:"OS Windows",k:["windows"]},
+    {name:"OS Linux",k:["grub","oss","autoremove","conky","cron","reinstall","dd","troubleshooting","skrip","rsync","system","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis"]},
+    {name:"OS Windows",k:["windows","lisensi","software"]},
     {name:"Redhat",k:["fedora","centos"]},
-    {name:"Religi",k:["allah","shalat","maulid","sholat","agama","puasa","nabi","islam","madinah","religi"]},
-    {name:"Repository",k:["repository","dnf","apt","repo","snap","synaptic","octopi","flatpak","netselect","mirror","reflector"]},
+    {name:"Religi",k:["allah","shalat","maulid","sholat","agama","puasa","nabi","islam","hijab","madinah","religi"]},
+    {name:"Repository",k:["repository","dnf","apt","repo","yum","zsync","iso","snap","synaptic","octopi","flatpak","netselect","mirror","reflector"]},
     {name:"Slackware",k:["slackware"]}];
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
