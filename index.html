@@ -3,55 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Isi Interaktif Modern</title>
+<title>Daftar Isi Interaktif</title>
 <style>
-body { font-family:'Segoe UI', Arial; margin:0; padding-top:70px; background:#f2f2f2; color:#333; }
-h1 { text-align:center; margin:20px 0; font-size:2.2rem; font-weight:900; background: linear-gradient(90deg,#007BFF,#6610f2,#fd7e14); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow:1px 1px 3px rgba(0,0,0,0.2); }
-#marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:12px 0; }
-#marquee-content { display:inline-block; padding-left:100%; animation:marquee 300s linear infinite; will-change:transform; }
-#marquee-container:hover #marquee-content { animation-play-state:paused; }
-#marquee-content a { color:white; text-decoration:none; margin-right:30px; transition:color 0.3s; }
-#marquee-content a:hover { color:yellow; text-decoration:underline; }
-@keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-
-#infoBar { text-align:center; margin:10px 0; font-size:14px; color:#444; }
-
+body { font-family: 'Segoe UI', Arial; margin:0; padding-top:60px; background:#f2f2f2; color:#333; }
+h1 { text-align:center; margin:20px 0; font-size:2.5rem; font-weight:900; background: linear-gradient(90deg, #007BFF, #6610f2, #fd7e14); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); letter-spacing: 1px; transform: skewY(-2deg);}
 #controls { text-align:center; margin:15px 0; }
-#search { width:80%; max-width:400px; padding:10px; border-radius:6px; border:1px solid #ccc; font-size:16px; }
+#search { width:80%; max-width:400px; padding:10px; font-size:16px; border-radius:6px; border:1px solid #ccc; }
 #toggleAll { margin:5px; padding:6px 12px; border:none; background:#007BFF; color:white; border-radius:4px; cursor:pointer; transition:background 0.3s; }
 #toggleAll:hover { background:#0056b3; }
-
-.category { margin:12px auto; max-width:900px; border-radius:8px; overflow:hidden; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; font-size:1.2rem; color:white; transition:all 0.3s; }
-.badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; font-weight:bold; background: linear-gradient(90deg,#007BFF,#6610f2); }
-
+.category { margin:10px auto; max-width:900px; border-radius:8px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.1); background:white; }
+.category-header { cursor:pointer; padding:10px 16px; font-weight:bold; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s; font-size:1.3rem;}
 .toc-list { display:none; padding:0 16px; }
-.toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; justify-content:space-between; }
-.toc-title a { text-decoration:none; color:#333; font-weight:bold; position:relative; transition: all 0.3s ease; }
-.toc-title a::after { content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%); width:0; height:2px; background:#1793D1; transition:width 0.3s; }
-.toc-title a:hover { color:#1793D1; text-shadow:0 0 5px rgba(23,147,209,0.5); }
-.toc-title a:hover::after { width:100%; }
-.label-new { background:#28a745; color:white; padding:2px 6px; border-radius:8px; font-size:12px; margin-left:6px; }
-.label-visited { background:#6c757d; color:white; padding:2px 6px; border-radius:8px; font-size:12px; margin-left:6px; }
-.label-duplicate { background:#ffc107; color:black; padding:2px 6px; border-radius:8px; font-size:12px; margin-left:6px; }
+.toc-item { display:flex; align-items:center; margin:4px 0; padding:4px 0; border-bottom:1px solid #f0f0f0; position:relative; }
+.toc-title { flex:1; display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap: wrap; }
+.toc-title a { text-decoration:none; color:#333; transition:color 0.3s; }
+.label-new { background:#28a745; color:white; padding:2px 5px; margin-left:6px; border-radius:8px; }
+.label-visited { background:#6c757d; color:white; padding:2px 5px; margin-left:6px; border-radius:8px; }
+.label-duplicate { background:#ffc107; color:black; padding:2px 5px; margin-left:6px; border-radius:8px; }
+.badge { padding:2px 8px; border-radius:12px; font-size:12px; color:white; margin-left:8px; font-weight:bold; }
+#marquee-container { width:100%; background:#007BFF; color:white; overflow:hidden; white-space:nowrap; position:fixed; top:0; left:0; z-index:9999; padding:10px 0; font-size:14px; font-weight:bold; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;}
+#marquee-content { display:inline-block; padding-left:100%; animation:marquee 400s linear infinite; will-change:transform; }
+#marquee-content a { color:white; text-decoration:none; margin-right:30px; transition: color 0.3s; }
+#marquee-content a:hover { color:yellow; text-decoration:underline; }
+@keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+.info-bar { font-size:14px; color:white; margin-top:5px; display:flex; flex-wrap:wrap; gap:15px; }
+.info-bar div { display:flex; align-items:center; gap:5px; }
+.info-bar img { width:24px; height:24px; }
+
+@media(max-width:500px){ #marquee-container { flex-direction: column; gap:5px; } }
 </style>
 </head>
 <body>
 
-<div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
-<div id="infoBar">Browser: ... | OS: ... | IP: ...</div>
+<div id="marquee-container">
+  <div id="marquee-content">Memuat judul artikel...</div>
+  <div class="info-bar">
+    <div><img id="browserIcon" alt="Browser"><span id="browserText">Browser...</span></div>
+    <div><img id="osIcon" alt="OS"><span id="osText">OS...</span></div>
+    <div><img id="flagIcon" alt="Flag"><span id="ipText">IP...</span></div>
+  </div>
+</div>
 
 <div id="controls">
-<input type="text" id="search" placeholder="Cari judul...">
-<button id="toggleAll">Tampilkan/Sembunyikan Semua</button>
+  <input type="text" id="search" placeholder="Cari judul...">
+  <button id="toggleAll">Tampilkan/Sembunyikan Semua</button>
 </div>
 
 <div id="toc"></div>
 
 <script>
-// --- Gradient kategori ---
+// Gradient per kategori
 const gradientMap = {
-"Arch": "linear-gradient(180deg, #007BFF, #00d4ff)",
+  "Arch": "linear-gradient(180deg, #007BFF, #00d4ff)",
   "Debian": "linear-gradient(180deg, #28a745, #85e085)",
   "Desktop": "linear-gradient(180deg, #6f42c1, #a56bff)",
   "Kehidupan": "linear-gradient(180deg, #fd7e14, #ffbf47)",
@@ -69,18 +72,22 @@ const gradientMap = {
   "Lainnya": "linear-gradient(180deg, #adb5bd, #e1e2e3)"
 };
 
-// --- Load artikel.json ---
-async function loadTOC(){
-  const res = await fetch('artikel.json');
-  const data = await res.json();
-  const toc = document.getElementById('toc');
-  const grouped = {};
-  const visited = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-  const counts = {};
-  const duplicates = new Set();
+// --- Lazy load & display TOC dari JSON ---
+async function generateTOC(){
+  const DATA = await fetch('artikel.json').then(r=>r.json());
+  displayTOC(DATA);
+  updateMarquee(DATA);
+}
 
-  // Hitung duplikat
-  data.forEach(d=>{
+function displayTOC(DATA){
+  const toc=document.getElementById("toc");
+  toc.innerHTML="";
+  const grouped={};
+  const visitedLinks=JSON.parse(localStorage.getItem("visitedLinks")||"[]");
+  const counts={};
+  const duplicates=new Set();
+
+  DATA.forEach(d=>{
     const t=d.title.toLowerCase();
     counts[t]=(counts[t]||0)+1;
     if(counts[t]>1) duplicates.add(t);
@@ -88,68 +95,119 @@ async function loadTOC(){
     grouped[d.category].push(d);
   });
 
-  // Buat kategori
   Object.keys(grouped).sort().forEach(cat=>{
-    const section = document.createElement('div');
-    section.className='category';
+    const section=document.createElement("div");
+    section.className="category";
     section.innerHTML=`<div class="category-header">${cat} <span class="badge">${grouped[cat].length}</span></div><div class="toc-list"></div>`;
-    const list = section.querySelector('.toc-list');
-    section.querySelector('.category-header').style.background = gradientMap[cat]||gradientMap["Lainnya"];
-    section.querySelector('.badge').style.background = gradientMap[cat]||gradientMap["Lainnya"];
+    const list=section.querySelector(".toc-list");
+
+    section.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
+    section.querySelector(".badge").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
     grouped[cat].forEach((item,i)=>{
-      const el=document.createElement('div'); el.className='toc-item';
-      const a=document.createElement('a');
-      a.href=`artikel/${item.file}`; a.target="_blank"; a.textContent=`${i+1}. ${item.title}`;
+      const el=document.createElement("div");
+      el.className="toc-item";
+      el.dataset.text = item.title.toLowerCase();
 
-      const statusSpan=document.createElement('span');
-      if(visited.includes(item.file)){statusSpan.className='label-visited'; statusSpan.textContent='sudah dibaca 👍';}
-      else{statusSpan.className='label-new'; statusSpan.textContent='📚 belum di klik';}
+      const titleDiv = document.createElement("div");
+      titleDiv.className="toc-title";
 
-      a.addEventListener('click',()=>{
-        if(!visited.includes(item.file)){ visited.push(item.file); localStorage.setItem("visitedLinks",JSON.stringify(visited)); statusSpan.className='label-visited'; statusSpan.textContent='sudah dibaca 👍'; }
+      const a = document.createElement("a");
+      a.href = "artikel/" + item.file;
+      a.target="_blank";
+      a.textContent = `${i+1}. ${item.title}`;
+      if(visitedLinks.includes(item.file)) a.classList.add("visited");
+
+      a.addEventListener("click",()=>{
+        if(!visitedLinks.includes(item.file)){
+          visitedLinks.push(item.file);
+          localStorage.setItem("visitedLinks",JSON.stringify(visitedLinks));
+        }
+        a.classList.add("visited");
       });
 
-      const dupSpan=document.createElement('span');
-      if(duplicates.has(item.title.toLowerCase())){ dupSpan.className='label-duplicate'; dupSpan.textContent='⚠️ Duplikat Judul'; }
+      const statusSpan = document.createElement("span");
+      statusSpan.textContent = visitedLinks.includes(item.file) ? "sudah dibaca 👍" : "📚 belum di klik";
+      statusSpan.className = visitedLinks.includes(item.file) ? "label-visited" : "label-new";
 
-      const div=document.createElement('div'); div.className='toc-title';
-      div.appendChild(a); div.appendChild(statusSpan); if(duplicates.has(item.title.toLowerCase())) div.appendChild(dupSpan);
-      el.appendChild(div); list.appendChild(el);
+      titleDiv.appendChild(a);
+      titleDiv.appendChild(statusSpan);
+      if(duplicates.has(item.title.toLowerCase())){
+        const dup = document.createElement("span");
+        dup.className="label-duplicate";
+        dup.textContent="⚠️ Duplikat Judul";
+        titleDiv.appendChild(dup);
+      }
+
+      el.appendChild(titleDiv);
+      list.appendChild(el);
     });
 
-    section.querySelector('.category-header').addEventListener('click',()=>{ list.style.display=list.style.display==='block'?'none':'block'; });
+    section.querySelector(".category-header").addEventListener("click",()=>{ list.style.display = list.style.display==="block"?"none":"block"; });
     toc.appendChild(section);
   });
 
-  // Marquee
-  const marquee = document.getElementById('marquee-content');
-  const shuffled = [...data].sort(()=>Math.random()-0.5);
-  marquee.innerHTML = shuffled.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(' • ');
+  document.getElementById("search").addEventListener("input",function(){
+    const term=this.value.toLowerCase();
+    document.querySelectorAll(".toc-item").forEach(item=>{ item.style.display=item.dataset.text.includes(term)?"flex":"none"; });
+  });
 }
 
-loadTOC();
-
-// --- Search & Toggle ---
-document.getElementById('search').addEventListener('input',function(){
-  const term=this.value.toLowerCase();
-  document.querySelectorAll('.toc-item').forEach(item=>item.style.display=item.textContent.toLowerCase().includes(term)?'flex':'none');
-});
-document.getElementById('toggleAll').addEventListener('click',()=>{
-  const lists=document.querySelectorAll('.toc-list');
-  const expand=[...lists].some(l=>l.style.display==='none'||l.style.display==='');
-  lists.forEach(l=>l.style.display=expand?'block':'none');
-});
-
-// --- Info OS, Browser, IP ---
-function updateInfo(){ 
-  const info=document.getElementById('infoBar');
-  info.textContent=`Browser: ${navigator.userAgent} | OS: ${navigator.platform} | IP: Memuat...`;
-  fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{ info.textContent=`Browser: ${navigator.userAgent} | OS: ${navigator.platform} | IP: ${d.ip} (${d.city})`; })
-  .catch(()=>{ info.textContent+= ' | IP: Tidak tersedia'; });
+function updateMarquee(DATA){
+  const m=document.getElementById("marquee-content");
+  const shuffled = DATA.slice().sort(()=>Math.random()-0.5);
+  m.innerHTML = shuffled.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 }
-updateInfo();
+
+// --- Browser / OS / IP info ---
+function getBrowserOS(){
+  const ua=navigator.userAgent;
+  const platform=navigator.platform.toLowerCase();
+  let browser="Unknown", browserVer="", os="Unknown OS";
+
+  if(ua.indexOf("Firefox")>-1){browser="Firefox"; browserVer=ua.match(/Firefox\/([0-9\.]+)/)[1];}
+  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){browser="Chrome"; browserVer=ua.match(/Chrome\/([0-9\.]+)/)[1];}
+  else if(ua.indexOf("Edg")>-1){browser="Edge"; browserVer=ua.match(/Edg\/([0-9\.]+)/)[1];}
+  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){browser="Safari"; browserVer=ua.match(/Version\/([0-9\.]+)/)[1];}
+
+  if(platform.indexOf("win")!==-1) os="Windows";
+  else if(platform.indexOf("mac")!==-1) os="macOS";
+  else if(platform.indexOf("linux")!==-1) os="Linux";
+  else if(/android/.test(ua)) os="Android";
+  else if(/iphone|ipad|ipod/.test(ua)) os="iOS";
+
+  return {browser,browserVer,os};
+}
+
+async function getIPInfo(){
+  try{
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+    return {ip:data.ip, city:data.city, country:data.country_code};
+  } catch(e){
+    return {ip:"Unknown", city:"Unknown", country:"--"};
+  }
+}
+
+async function updateInfoBar(){
+  const b = getBrowserOS();
+  const ip = await getIPInfo();
+  document.getElementById('browserIcon').src='https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png';
+  document.getElementById('browserText').textContent = `${b.browser} ${b.browserVer}`;
+  document.getElementById('osIcon').src='https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png';
+  document.getElementById('osText').textContent = `${b.os}`;
+  document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${ip.country.toLowerCase()}.png`;
+  document.getElementById('ipText').textContent = `${ip.ip} (${ip.city})`;
+}
+
+document.getElementById("toggleAll").addEventListener("click",()=>{
+  const lists=document.querySelectorAll(".toc-list");
+  const expand=[...lists].some(l=>l.style.display==="none"||l.style.display==="");
+  lists.forEach(l=>l.style.display=expand?"block":"none");
+});
+
+updateInfoBar();
+generateTOC();
 </script>
-
 </body>
 </html>
