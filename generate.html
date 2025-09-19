@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generate artikel.json + Info Browser/OS/IP</title>
+<title>Generate artikel.json</title>
 <style>
 body { font-family: Arial; padding:20px; background:#f9f9f9; }
 h1 { color:#007BFF; }
@@ -13,7 +13,7 @@ button { padding:10px 20px; font-size:16px; margin-top:10px; cursor:pointer; }
 </head>
 <body>
 
-<h1>Generate artikel.json + Info Browser/OS/IP</h1>
+<h1>Generate artikel.json</h1>
 <p>Semua file di <code>/artikel/list.txt</code> akan diproses.</p>
 <button id="generateBtn">Generate JSON</button>
 <h2>Hasil JSON:</h2>
@@ -46,43 +46,9 @@ function titleToCategory(title){
   ];
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
-
-// --- Deteksi browser & OS ---
-function getBrowserOS(){
-  const ua = navigator.userAgent;
-  const platform = navigator.platform.toLowerCase();
-  let browser="Unknown", browserVer="", os="Unknown OS", osVer="";
-
-  if(ua.indexOf("Firefox")>-1){browser="Firefox"; browserVer=ua.match(/Firefox\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){browser="Chrome"; browserVer=ua.match(/Chrome\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Edg")>-1){browser="Edge"; browserVer=ua.match(/Edg\/([0-9\.]+)/)[1];}
-  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){browser="Safari"; browserVer=ua.match(/Version\/([0-9\.]+)/)[1];}
-
-  if(platform.indexOf("win")!==-1){os="Windows";}
-  else if(platform.indexOf("mac")!==-1){os="macOS";}
-  else if(platform.indexOf("linux")!==-1){os="Linux";}
-  else if(/android/.test(ua)){os="Android";}
-  else if(/iphone|ipad|ipod/.test(ua)){os="iOS";}
-
-  return {browser,browserVer,os};
-}
-
-// --- Ambil IP & kota via API ---
-async function getIPInfo(){
-  try{
-    const res = await fetch("https://ipapi.co/json/");
-    const data = await res.json();
-    return {ip:data.ip, city:data.city, country:data.country_name};
-  } catch(e){
-    return {ip:"Unknown", city:"Unknown", country:"Unknown"};
-  }
-}
-
 // --- Generate JSON utama ---
 document.getElementById("generateBtn").addEventListener("click", async ()=>{
   const result = [];
-  const browserOS = getBrowserOS();
-  const ipInfo = await getIPInfo();
 
   try{
     const listRes = await fetch("artikel/list.txt");
@@ -101,13 +67,7 @@ document.getElementById("generateBtn").addEventListener("click", async ()=>{
         result.push({
           title,
           file:f,
-          category,
-          browser: browserOS.browser,
-          browserVer: browserOS.browserVer,
-          os: browserOS.os,
-          ip: ipInfo.ip,
-          city: ipInfo.city,
-          country: ipInfo.country
+          category
         });
 
       } catch(e){
@@ -115,13 +75,7 @@ document.getElementById("generateBtn").addEventListener("click", async ()=>{
         result.push({
           title:f,
           file:f,
-          category:"Lainnya",
-          browser: browserOS.browser,
-          browserVer: browserOS.browserVer,
-          os: browserOS.os,
-          ip: ipInfo.ip,
-          city: ipInfo.city,
-          country: ipInfo.country
+          category:"Lainnya"
         });
       }
     }
@@ -132,6 +86,6 @@ document.getElementById("generateBtn").addEventListener("click", async ()=>{
   }
 });
 </script>
-
+  
 </body>
 </html>
