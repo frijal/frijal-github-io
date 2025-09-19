@@ -18,9 +18,9 @@
 
   #search { width:80%; max-width:400px; padding:10px; font-size:16px; margin:15px auto; display:block; border-radius:6px; border:1px solid #ccc; }
 
-  /* Expand/Collapse Button */
+    /* Expand/Collapse Button */
   #tocToggle { display:block; width:200px; margin:10px auto; padding:8px 12px; font-size:14px; font-weight:bold; border:none; border-radius:6px; cursor:pointer; background:#007BFF; color:white; }
-
+  
   /* TOC */
   #toc { max-width:900px; margin:10px auto; }
   #totalCount { text-align:center; margin-top:20px; font-weight:bold; font-size:16px; padding:10px; background:#007BFF; color:white; border-radius:6px; }
@@ -55,7 +55,7 @@
 <!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
 
-<!-- Expand/pse TOC -->
+<!-- Expand/Collapse TOC -->
 <button id="tocToggle">Collapse TOC</button>
 
 <!-- TOC -->
@@ -189,7 +189,7 @@ async function loadTOC() {
       totalCount.textContent = `Total artikel: ${countVisible}`;
     });
 
-    // Tombol Expand/Collapse TOC
+ // Tombol Expand/Collapse TOC
     document.getElementById("tocToggle").addEventListener("click",()=>{
       tocCollapsed = !tocCollapsed;
       document.querySelectorAll(".toc-list").forEach(list=>{
