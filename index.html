@@ -152,47 +152,63 @@ async function loadTOC() {
     Object.keys(grouped).sort().forEach(cat => {
       const catDiv = document.createElement("div");
       catDiv.className = "category";
-      catDiv.innerHTML = `<div class="category-header">${cat}</div><div class="toc-list"></div>`;
+
+      // Hitung jumlah artikel di kategori
+      const count = grouped[cat].length;
+
+      // Header kategori + badge jumlah
+      catDiv.innerHTML = `
+        <div class="category-header">
+          ${cat} <span class="badge">${count}</span>
+        </div>
+        <div class="toc-list"></div>
+      `;
+
       const catList = catDiv.querySelector(".toc-list");
       catDiv.querySelector(".category-header").style.background = gradientMap[cat] || gradientMap["Lainnya"];
 
-      grouped[cat].forEach((item,i)=>{
-        const el=document.createElement("div");
-        el.className="toc-item";
+      // Tambahkan artikel
+      grouped[cat].forEach((item, i) => {
+        const el = document.createElement("div");
+        el.className = "toc-item";
         el.dataset.text = item.title.toLowerCase();
 
-        const a=document.createElement("a");
-        a.href=`artikel/${item.file}`;
-        a.target="_blank";
+        const a = document.createElement("a");
+        a.href = `artikel/${item.file}`;
+        a.target = "_blank";
         a.textContent = `${i+1}. ${item.title}`;
 
-        const statusSpan=document.createElement("span");
+        const statusSpan = document.createElement("span");
         if(visitedLinks.includes(item.file)){
-          statusSpan.className="label-visited"; statusSpan.textContent="sudah dibaca 👍"; a.classList.add("visited");
-        } else { statusSpan.className="label-new"; statusSpan.textContent="📚 belum dibaca"; }
+          statusSpan.className = "label-visited";
+          statusSpan.textContent = "sudah dibaca 👍";
+          a.classList.add("visited");
+        } else {
+          statusSpan.className = "label-new";
+          statusSpan.textContent = "📚 belum dibaca";
+        }
 
-        a.addEventListener("click",()=>{
+        a.addEventListener("click", () => {
           if(!visitedLinks.includes(item.file)){
             visitedLinks.push(item.file);
             localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-            statusSpan.className="label-visited";
-            statusSpan.textContent="sudah dibaca 👍";
+            statusSpan.className = "label-visited";
+            statusSpan.textContent = "sudah dibaca 👍";
             a.classList.add("visited");
           }
         });
 
-        const titleDiv=document.createElement("div");
-        titleDiv.className="toc-title";
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "toc-title";
         titleDiv.appendChild(a);
         titleDiv.appendChild(statusSpan);
         el.appendChild(titleDiv);
         catList.appendChild(el);
       });
 
-      // Toggle kategori individu
-      catDiv.querySelector(".category-header").addEventListener("click",()=>{
+      // Toggle kategori
+      catDiv.querySelector(".category-header").addEventListener("click", () => {
         catList.style.display = catList.style.display==="block" ? "none" : "block";
-        updateTOCToggleText(); // update tombol global otomatis
       });
 
       toc.appendChild(catDiv);
@@ -200,9 +216,9 @@ async function loadTOC() {
 
     // Marquee
     const m = document.getElementById("marquee-content");
-    m.innerHTML = data.map(d=>`<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
+    m.innerHTML = data.map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`).join(" • ");
 
-    // Search + highlight + update total + auto expand kategori
+    // Search + highlight + update total + auto-expand kategori
     document.getElementById("search").addEventListener("input", function() {
       const term = this.value.toLowerCase();
       let countVisible = 0;
@@ -225,37 +241,25 @@ async function loadTOC() {
           }
         });
         category.style.display = catVisible ? "block" : (term ? "none" : "block");
+        // Auto-expand jika ada hasil
         const tocList = category.querySelector(".toc-list");
         tocList.style.display = catVisible ? "block" : tocList.style.display;
       });
 
       totalCount.textContent = `Total artikel: ${countVisible}`;
-      updateTOCToggleText(); // update tombol global jika search collapse semua
     });
 
-    // --- Tombol Expand/Collapse TOC Global ---
-    let tocCollapsed = false; // status global, false = ada kategori terbuka
-    const tocToggleBtn = document.getElementById("tocToggle");
-
-    function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-        .every(list => list.style.display === "none");
-      tocCollapsed = allCollapsed;
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    }
-
-    tocToggleBtn.addEventListener("click", () => {
+    // Tombol Expand/Collapse TOC
+    let tocCollapsed = false;
+    document.getElementById("tocToggle").addEventListener("click", () => {
       tocCollapsed = !tocCollapsed;
       document.querySelectorAll(".toc-list").forEach(list => {
         list.style.display = tocCollapsed ? "none" : "block";
       });
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+      document.getElementById("tocToggle").textContent = tocCollapsed ? "Buka" : "Tutup";
     });
 
-    // Inisialisasi tombol sesuai kondisi awal TOC
-    updateTOCToggleText();
-
-  } catch(e){ console.error("Gagal load artikel.json:", e); }
+  } catch(e) { console.error("Gagal load artikel.json:", e); }
 }
 
 loadTOC();
