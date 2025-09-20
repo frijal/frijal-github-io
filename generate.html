@@ -7,8 +7,8 @@
 <style>
 body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
 h1 { text-align:center; }
-textarea { width:100%; height:200px; padding:10px; font-family: monospace; font-size:13px; }
-button { padding:10px 15px; font-size:14px; margin-top:10px; cursor:pointer; margin-right:8px; }
+textarea { width:100%; height:200px; padding:10px; font-family: monospace; font-size:14px; }
+button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; margin-right:10px; }
 #log { background:#111; color:#0f0; padding:10px; height:350px; overflow-y:auto; font-family: monospace; font-size:13px; margin-top:15px; border-radius:4px; white-space: pre-wrap; }
 </style>
 </head>
@@ -55,9 +55,9 @@ function titleToCategory(title){
 }
 
 // --- Konfigurasi repo GitHub Pages publik ---
-const owner = "frijal";       
-const repo = "frijal.github.io";  
-const folder = "artikel";     
+const owner = "frijal";       // ganti sesuai username
+const repo = "frijal.github.io";  // ganti sesuai repo
+const folder = "artikel";     // folder artikel
 
 function log(msg){
   const logBox = document.getElementById("log");
@@ -68,7 +68,10 @@ function log(msg){
 async function generateJSON() {
   try {
     document.getElementById("jsonOutput").value = "";
+    document.getElementById("log").textContent = "";
     log("🔍 Mengambil daftar file dari repo...");
+    const startTime = Date.now();
+
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
     const res = await fetch(apiUrl);
     const files = await res.json();
@@ -77,7 +80,8 @@ async function generateJSON() {
 
     const grouped = {};
     const seenTitles = new Set();
-    let success=0, fail=0, skipped=0;
+    const duplicates = [];
+    let success = 0, fail = 0;
 
     for (const f of htmlFiles) {
       log(`➡️ Membaca file: ${f.name}`);
@@ -87,18 +91,19 @@ async function generateJSON() {
         const doc = parser.parseFromString(htmlText,'text/html');
         const title = doc.querySelector("title")?.innerText || f.name;
 
-        if(seenTitles.has(title)){
-          skipped++;
-          log(`   ⚠️ Duplikat judul, diskip: "${title}"`);
+        if (seenTitles.has(title)) {
+          log(`   ⚠️ Duplikat diskip: "${title}" → file: ${f.name}`);
+          duplicates.push([title, f.name]);
           continue;
         }
+        seenTitles.add(title);
 
         const category = titleToCategory(title);
         if (!grouped[category]) grouped[category] = [];
         grouped[category].push([title, f.name]);
-        seenTitles.add(title);
+
         success++;
-        log(`   ✔️ Berhasil → "${title}" | Kategori: ${category}`);
+        log(`   ✔️ Berhasil → Judul: "${title}" | Kategori: ${category}`);
       } catch(e) {
         fail++;
         log(`   ❌ Gagal membaca file: ${f.name}`);
@@ -107,7 +112,7 @@ async function generateJSON() {
       }
     }
 
-    // Format JSON multi-baris
+    // --- Format JSON multi-baris per item ---
     function jsonPrettyByCategory(obj){
       return '{\n' + 
         Object.keys(obj).map(cat =>
@@ -120,22 +125,33 @@ async function generateJSON() {
     const resultJSON = jsonPrettyByCategory(grouped);
     document.getElementById("jsonOutput").value = resultJSON;
 
+    // --- Ringkasan ---
     log("\n📊 Ringkasan per kategori:");
     Object.entries(grouped)
-      .sort((a,b) => b[1].length - a[1].length)
-      .forEach(([cat, arr])=>{
+      .sort((a, b) => b[1].length - a[1].length)
+      .forEach(([cat, arr]) => {
         log(`   - ${cat}: ${arr.length} item`);
       });
 
-    log(`\n📈 Total sukses: ${success}, gagal: ${fail}, duplikat diskip: ${skipped}`);
+    const totalTime = (Date.now() - startTime) / 1000;
+    const speed = (success+fail) / totalTime;
+
+    log(`\n📈 Total sukses: ${success}, gagal: ${fail}, duplikat diskip: ${duplicates.length}`);
+    if (duplicates.length) {
+      log("📂 Daftar duplikat:");
+      duplicates.forEach(d => log(`   • "${d[0]}" (${d[1]})`));
+    }
+    log(`⏱️ Total waktu: ${totalTime.toFixed(1)}s`);
+    log(`⚡ Kecepatan rata-rata: ${speed.toFixed(2)} file/detik`);
     log("\n✅ Proses selesai! JSON siap diunduh / dicopy.");
   } catch(err){
+    console.error("Gagal mengambil daftar file:", err);
     log("❌ Error: " + err.message);
     document.getElementById("jsonOutput").value = "Error: " + err.message;
   }
 }
 
-// Tombol download
+// Download JSON
 document.getElementById("downloadBtn").addEventListener("click", ()=>{
   const blob = new Blob([document.getElementById("jsonOutput").value], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -146,7 +162,7 @@ document.getElementById("downloadBtn").addEventListener("click", ()=>{
   URL.revokeObjectURL(url);
 });
 
-// Tombol copy
+// Copy JSON ke Clipboard
 document.getElementById("copyBtn").addEventListener("click", async ()=>{
   try {
     await navigator.clipboard.writeText(document.getElementById("jsonOutput").value);
@@ -156,18 +172,17 @@ document.getElementById("copyBtn").addEventListener("click", async ()=>{
   }
 });
 
-// Refresh
+// Refresh Scan
 document.getElementById("refreshBtn").addEventListener("click", ()=>{
-  document.getElementById("log").textContent = "";
   generateJSON();
 });
 
-// Clear log
+// Clear Log
 document.getElementById("clearLogBtn").addEventListener("click", ()=>{
   document.getElementById("log").textContent = "";
 });
 
-// Auto jalan
+// Jalankan otomatis pertama kali
 generateJSON();
 </script>
 
