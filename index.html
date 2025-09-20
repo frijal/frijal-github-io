@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Artikel</title>
+<script>
+fetch('artikel.json')
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(data => {
+    const urls = Object.values(data).flat().map(a => a[1]);
+    window.location.href = urls.length ? urls[Math.floor(Math.random() * urls.length)] : 'sitemap.html';
+  })
+  .catch(_ => window.location.href = 'sitemap.html');
+</script>
+</head>
+<body></body>
+</html>
