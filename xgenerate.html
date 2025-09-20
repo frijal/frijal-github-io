@@ -7,55 +7,44 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       padding: 20px;
     }
-    h2 {
-      color: #333;
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    h2 { text-align: center; color: #333; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea {
+      width: 100%; padding: 8px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px;
     }
     button {
-      margin-top: 15px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      background: #007BFF;
-      color: white;
+      margin-top: 15px; padding: 10px 15px;
+      border: none; border-radius: 4px;
+      cursor: pointer; color: white; background: #007BFF;
     }
-    button:hover {
-      background: #0056b3;
-    }
+    button:hover { background: #0056b3; }
     pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 4px;
-      overflow-x: auto;
-      margin-top: 20px;
+      background: #f4f4f4; padding: 10px;
+      border-radius: 4px; overflow-x: auto; margin-top: 20px;
     }
+    .file-load { margin: 15px 0; }
   </style>
 </head>
 <body>
   <h2>Generator JSON Artikel</h2>
 
-  <label>Slug (unik, tanpa spasi)</label>
-  <input type="text" id="slug" placeholder="contoh: pln-balikpapan">
+  <!-- Load JSON lama -->
+  <div class="file-load">
+    <label>Load artikel.json lama</label>
+    <input type="file" id="fileInput" accept=".json">
+  </div>
 
+  <!-- Form input -->
   <label>Judul</label>
-  <input type="text" id="title" placeholder="Judul artikel">
+  <input type="text" id="title" placeholder="Judul artikel" oninput="autoSlug()">
+
+  <label>Slug (otomatis dari judul, bisa diubah)</label>
+  <input type="text" id="slug" placeholder="contoh: pln-balikpapan">
 
   <label>Deskripsi</label>
   <textarea id="description" placeholder="Ringkasan artikel..."></textarea>
@@ -80,6 +69,34 @@
   <script>
     let data = [];
 
+    // Load file JSON lama
+    document.getElementById("fileInput").addEventListener("change", function(e){
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        try {
+          data = JSON.parse(ev.target.result);
+          document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+          alert("Berhasil memuat " + file.name);
+        } catch (err) {
+          alert("File JSON tidak valid!");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Auto slug dari judul
+    function autoSlug() {
+      const title = document.getElementById("title").value;
+      const slug = title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-");
+      document.getElementById("slug").value = slug;
+    }
+
+    // Tambah artikel baru
     function tambahArtikel() {
       const artikel = {
         slug: document.getElementById("slug").value.trim(),
@@ -91,13 +108,11 @@
         image: document.getElementById("image").value.trim()
       };
 
-      // Validasi wajib
       if (!artikel.slug || !artikel.title || !artikel.date) {
         alert("Slug, Judul, dan Tanggal wajib diisi!");
         return;
       }
 
-      // Cek duplikat slug
       if (data.some(item => item.slug === artikel.slug)) {
         alert("Slug sudah ada, gunakan yang lain!");
         return;
@@ -107,14 +122,15 @@
       document.getElementById("output").textContent = JSON.stringify(data, null, 2);
 
       // Reset form
-      document.getElementById("slug").value = "";
       document.getElementById("title").value = "";
+      document.getElementById("slug").value = "";
       document.getElementById("description").value = "";
       document.getElementById("date").value = "";
       document.getElementById("category").value = "";
       document.getElementById("image").value = "";
     }
 
+    // Download JSON
     function downloadJSON() {
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
