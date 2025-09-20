@@ -8,7 +8,7 @@
 fetch('artikel.json')
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(data => {
-    const urls = Object.values(data).flat().map(a => a[1]);
+    const urls = Object.values(data).flat().map(a => 'artikel/' + a[1]);
     window.location.href = urls.length ? urls[Math.floor(Math.random() * urls.length)] : 'sitemap.html';
   })
   .catch(_ => window.location.href = 'sitemap.html');
