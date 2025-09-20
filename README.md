@@ -9,7 +9,6 @@
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge&animation=glow)
 ![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/ChatGPT-Yes-blue?style=for-the-badge&logo=openai&logoColor=white)
 ![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Release-Continuous-orange?style=for-the-badge)
-![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge&animation=glow)
 ![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/JavaScript-Yes-yellow?style=for-the-badge&logo=javascript&logoColor=black)
 ![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/CSS3-Yes-blue?style=for-the-badge&logo=css3&logoColor=white)
 ![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/HTML5-Yes-orange?style=for-the-badge&logo=html5&logoColor=white)
