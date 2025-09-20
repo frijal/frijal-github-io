@@ -2,7 +2,11 @@
 
 # 🌟 Lisensi UNLICENSE / Public Domain
 
-![License](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&labelColor=0A66C2&animation=blink)![Free](https://img.shields.io/badge/Free-100%25-brightgreen?style=for-the-badge&animation=glow)![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)![Tech Stack](https://img.shields.io/badge/HTML5-Yes-orange?style=for-the-badge&logo=html5&logoColor=white)![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Version-Latest-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&labelColor=0A66C2&animation=blink)
+![Free](https://img.shields.io/badge/Free-100%25-brightgreen?style=for-the-badge&animation=glow)
+![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
+![Tech Stack](https://img.shields.io/badge/HTML5-Yes-orange?style=for-the-badge&logo=html5&logoColor=white)
+![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Version-Latest-blue?style=for-the-badge)
 
 ---
 
