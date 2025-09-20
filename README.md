@@ -2,7 +2,6 @@
 
 # 🌟 Lisensi UNLICENSE / Public Domain
 
-![GitHub Stats, menunjukkan metrik dari repositori GitHub, seperti jumlah bintang, fork, kontributor, atau aktivitas commit.](https://img.shields.io/github/license/frijal/frijal.github.io?style=for-the-badge&logo=github&logoColor=white)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&animation=blink)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Free-100%25-brightgreen?style=for-the-badge&animation=glow)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
