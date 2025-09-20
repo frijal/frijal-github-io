@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Artikel Berdasarkan Kategori</title>
+    <title>Galeri Artikel - Thumbnail Otomatis</title>
     
     <style>
         body {
@@ -11,21 +11,18 @@
             background-color: #f0f2f5;
             margin: 0;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
         }
-        
+
         .container {
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
         h1 {
-            color: #333;
             text-align: center;
-            margin-bottom: 30px;
+            color: #333;
+            margin-bottom: 40px;
         }
         
         .category-section {
@@ -33,107 +30,167 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
-
+        
         .category-section h2 {
-            margin-top: 0;
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #007bff;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
 
-        .article-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
         }
 
-        .article-list li {
-            margin-bottom: 10px;
-        }
-
-        .article-list a {
-            display: block;
-            padding: 10px 15px;
+        .article-card {
             background-color: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            color: #333;
-            transition: background-color 0.3s ease;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            min-height: 250px; /* Minimal tinggi kartu */
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-card .card-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .article-list a:hover {
-            background-color: #e2e6ea;
+        .article-card .card-content h3 {
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .no-thumbnail {
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            color: #6c757d;
+            font-size: 1.1em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Daftar Artikel Berdasarkan Kategori</h1>
+    <h1>Galeri Artikel</h1>
     <div id="main-container">
         </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         const mainContainer = document.getElementById('main-container');
-
-        // Menggunakan Fetch API untuk memuat file JSON
-        fetch('artikel.json')
-            .then(response => {
+        const defaultThumbnail = 'thumbnail.jpg';
+        
+        // Fungsi untuk mengambil thumbnail dari meta tag
+        async function fetchThumbnail(url) {
+            try {
+                // Gunakan fetch untuk mengambil konten HTML dari URL
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(`Gagal memuat data: ${response.statusText}`);
+                    throw new Error('Gagal memuat konten artikel.');
                 }
-                return response.json();
-            })
-            .then(data => {
-                // Iterasi setiap kunci (key) di dalam objek data
-                // Kunci di sini adalah nama kategori
-                for (const category in data) {
-                    if (data.hasOwnProperty(category)) {
-                        const articles = data[category];
+                const htmlText = await response.text();
 
-                        // Buat bagian (section) baru untuk setiap kategori
-                        const section = document.createElement('div');
-                        section.classList.add('category-section');
+                // Parsing HTML untuk mencari meta tag og:image
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const metaTag = doc.querySelector('meta[property="og:image"]');
 
-                        // Tambahkan judul kategori
-                        const heading = document.createElement('h2');
-                        heading.textContent = category;
-                        section.appendChild(heading);
-
-                        // Buat daftar (list) untuk artikel
-                        const ul = document.createElement('ul');
-                        ul.classList.add('article-list');
-
-                        // Iterasi setiap array artikel dalam kategori tersebut
-                        articles.forEach(item => {
-                            const title = item[0];
-                            const url = item[1];
-
-                            const li = document.createElement('li');
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.textContent = title;
-                            a.target = "_blank"; // Membuka di tab baru
-                            
-                            li.appendChild(a);
-                            ul.appendChild(li);
-                        });
-
-                        section.appendChild(ul);
-                        mainContainer.appendChild(section);
-                    }
+                if (metaTag && metaTag.content) {
+                    return metaTag.content;
                 }
-            })
-            .catch(error => {
-                console.error('Ada masalah saat memuat atau memproses data JSON:', error);
-                mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan coba lagi.</p>`;
-            });
+                return defaultThumbnail; // Gunakan default jika meta tag tidak ditemukan
+            } catch (error) {
+                console.warn(`Gagal mengambil thumbnail untuk ${url}: ${error}`);
+                return defaultThumbnail; // Gunakan default jika ada error
+            }
+        }
+
+        try {
+            const response = await fetch('artikel.json');
+            if (!response.ok) {
+                throw new Error('Gagal memuat file data.json');
+            }
+            const data = await response.json();
+
+            // Iterasi setiap kategori dalam data JSON
+            for (const category in data) {
+                if (data.hasOwnProperty(category)) {
+                    const articles = data[category];
+
+                    const section = document.createElement('div');
+                    section.classList.add('category-section');
+
+                    const heading = document.createElement('h2');
+                    heading.textContent = category;
+                    section.appendChild(heading);
+
+                    const grid = document.createElement('div');
+                    grid.classList.add('article-grid');
+
+                    // Menggunakan Promise.all untuk mengambil semua thumbnail secara paralel
+                    const articlePromises = articles.map(async (item) => {
+                        const title = item[0];
+                        const articleUrl = `artikel/${item[1]}`;
+                        const thumbnailUrl = await fetchThumbnail(articleUrl);
+
+                        const link = document.createElement('a');
+                        link.href = articleUrl;
+                        link.classList.add('article-card');
+                        link.target = "_blank";
+
+                        const thumbnailHtml = `<img src="${thumbnailUrl}" alt="Thumbnail untuk ${title}">`;
+
+                        link.innerHTML = `
+                            ${thumbnailHtml}
+                            <div class="card-content">
+                                <h3>${title}</h3>
+                            </div>
+                        `;
+                        return link;
+                    });
+                    
+                    const articleElements = await Promise.all(articlePromises);
+                    articleElements.forEach(element => grid.appendChild(element));
+
+                    section.appendChild(grid);
+                    mainContainer.appendChild(section);
+                }
+            }
+        } catch (error) {
+            console.error('Ada masalah saat memuat atau memproses data:', error);
+            mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan periksa konsol untuk detail kesalahan.</p>`;
+        }
     });
 </script>
 
