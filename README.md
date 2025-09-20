@@ -4,8 +4,8 @@
 
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&animation=blink)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Free-100%25-brightgreen?style=for-the-badge&animation=glow)
-![Security, menyoroti fitur keamanan yang diterapkan dalam proyek, seperti penggunaan HTTPS atau otentikasi multifaktor (MFA).](https://img.shields.io/badge/HTTPS-Enabled-blue?style=for-the-badge)
 ![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Release-Continuous-orange?style=for-the-badge)
+![Security, menyoroti fitur keamanan yang diterapkan dalam proyek, seperti penggunaan HTTPS atau otentikasi multifaktor (MFA).](https://img.shields.io/badge/HTTPS-Enabled-blue?style=for-the-badge)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge&animation=glow)
 ![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/JavaScript-Yes-yellow?style=for-the-badge&logo=javascript&logoColor=black)
