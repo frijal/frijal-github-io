@@ -7,9 +7,9 @@
 <style>
 body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
 h1 { text-align:center; }
-textarea { width:100%; height:300px; padding:10px; font-family: monospace; font-size:14px; }
-button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; margin-right:10px; }
-#log { background:#111; color:#0f0; padding:10px; height:200px; overflow-y:auto; font-family: monospace; font-size:13px; margin-top:15px; border-radius:4px; white-space: pre-wrap; }
+textarea { width:100%; height:200px; padding:10px; font-family: monospace; font-size:13px; }
+button { padding:10px 15px; font-size:14px; margin-top:10px; cursor:pointer; margin-right:8px; }
+#log { background:#111; color:#0f0; padding:10px; height:350px; overflow-y:auto; font-family: monospace; font-size:13px; margin-top:15px; border-radius:4px; white-space: pre-wrap; }
 </style>
 </head>
 <body>
@@ -30,34 +30,34 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
 // --- Fungsi kategori berdasarkan keyword ---
 function titleToCategory(title){
   const t = title.toLowerCase();
- const cats = [
-    {name: "Arch", k:["arch", "manjaro", "cachyos", "endeavouros", "artix", "parabola", "blackarch", "garuda", "antergos", "arco"]},
-    {name: "Debian", k:["debian", "ubuntu", "mint", "mx linux", "elementary", "puppy", "kali", "kubuntu", "xubuntu", "lubuntu", "zorin", "popos", "deepin", "tails", "raspbian", "devuan"]},
-    {name: "Desktop", k:["kde", "hyperland", "caja", "ukui", "pantheon", "deepin", "lxde", "budgie", "mate", "gnome", "cinnamon", "xfce", "desktop environment", "fluxbox", "openbox", "i3", "sway", "awesome", "dwm", "enlightenment", "wayland", "xorg", "window manager"]},
-    {name: "Kehidupan", k:["hidup", "uang", "dosa", "alasan", "bapak", "ibu", "anak", "kehidupan", "tidur", "sahabat", "teman", "sombong", "wanita", "pria", "perempuan", "laki", "silaturahim", "daily", "rutinitas", "bahagia", "sedih", "cinta", "emosi", "keluarga", "sosial", "masalah", "motivasi", "inspirasi", "tujuan", "rencana", "kebiasaan", "jodoh", "nikah"]},
-    {name: "Kerja", k:["kerja", "kantor", "dokumen", "strategi", "pdf", "psikotes", "karir", "bisnis", "proyek", "meeting", "wawancara", "resign", "gaji", "promosi", "lembur", "freelance", "startup", "cv", "lamaran", "manajemen", "produktivitas"]},
-    {name: "Kuliner", k:["resep", "makan", "minum", "bumbu", "kuliner", "masak", "restoran", "kafe", "jajanan", "sarapan", "makan siang", "makan malam", "diet", "makanan", "minuman", "dapur", "kue", "roti", "gorengan"]},
-    {name: "Multimedia", k:["video", "foto", "audio", "film", "ffmpeg", "imagemagick", "photoshop", "gimp", "audacity", "blender", "premiere", "davinci", "lightroom", "kdenlive", "shotcut", "editing", "produksi", "musik", "podcast", "vfx", "efek"]},
-    {name: "NixOS", k:["nixos", "nix"]},
-    {name: "OpenSUSE", k:["opensuse", "suse", "leap", "tumbleweed", "chameleon", "zypper"]},
-    {name: "OS Linux", k:["grub","oss", "lts", "open source", "autoremove", "cron", "reinstall", "dd", "troubleshooting", "skrip", "rsync", "systemd", "sudo", "backup", "plugin", "ssh", "symlinks", "mount", "samba", "linux", "bootloader", "distro", "release", "rilis", "kernel", "cli", "shell", "bash", "zsh", "init", "pacman", "yay", "apt-get", "dpkg", "yum", "dnf", "zypper", "aptitude", "uname", "ls", "grep", "awk", "sed", "chmod", "chown", "user", "group", "service", "systemctl"]},
-    {name: "OS Windows", k:["windows", "windows 10", "windows 11", "powershell", "cmd", "registry", "boot", "update", "explorer", "task manager", "bsod", "driver"]},
-    {name: "Redhat", k:["fedora", "centos", "redhat", "rhel", "scientific linux", "alma", "rocky", "centos stream"]},
-    {name: "Religi", k:["allah", "shalat", "sholat", "agama", "puasa", "nabi", "islam", "madinah", "religi", "ghibah", "muslim", "quran", "hadits", "dakwah", "doa", "surga", "neraka", "masjid", "iman", "ibadah", "hijab", "akidah"]},
-    {name: "Repository", k:["repository", "dnf", "apt", "repo", "snap", "synaptic", "octopi", "flatpak", "netselect", "mirror", "reflector", "aur", "ppa", "github", "gitlab", "bitbucket", "dockerhub", "git", "clone", "push", "pull"]},
-    {name: "Slackware", k:["slackware", "slac", "sbopkg", "pkgtools"]},
-    {name: "Jaringan", k:["jaringan", "internet", "wifi", "router", "modem", "ethernet", "ip address", "dns", "firewall", "tcp", "udp", "http", "https", "proxy", "vpn", "port", "lan", "wan", "modem", "bandwidth", "ping", "traceroute"]},
-    {name: "Pemrograman", k:["pemrograman", "program", "coding", "javascript", "python", "php", "java", "c++", "c", "html", "css", "database", "sql", "mysql", "mongodb", "framework", "library", "api", "bug", "compiler", "debugging", "syntax", "variabel", "algoritma", "frontend", "backend", "fullstack", "data science"]},
-    {name: "Perangkat Keras", k:["perangkat keras", "hardware", "cpu", "gpu", "ram", "hardisk", "ssd", "motherboard", "power supply", "monitor", "keyboard", "mouse", "printer", "usb", "driver", "bios", "uefi", "processor", "graphic card", "storage", "komponen"]},
-    {name: "Keuangan", k:["keuangan", "investasi", "saham", "crypto", "bitcoin", "uang", "bank", "tabungan", "kredit", "pinjaman", "pajak", "anggaran", "ekonomi", "fintech", "reksadana", "inflasi", "utang"]}
+  const cats = [
+    {name: "Arch", k:["arch","manjaro","cachyos","endeavouros","artix","parabola","blackarch","garuda","antergos","arco"]},
+    {name: "Debian", k:["debian","ubuntu","mint","mx linux","elementary","puppy","kali","kubuntu","xubuntu","lubuntu","zorin","popos","deepin","tails","raspbian","devuan"]},
+    {name: "Desktop", k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce","desktop environment","fluxbox","openbox","i3","sway","awesome","dwm","enlightenment","wayland","xorg","window manager"]},
+    {name: "Kehidupan", k:["hidup","uang","dosa","alasan","bapak","ibu","anak","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily","rutinitas","bahagia","sedih","cinta","emosi","keluarga","sosial","masalah","motivasi","inspirasi","tujuan","rencana","kebiasaan","jodoh","nikah"]},
+    {name: "Kerja", k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir","bisnis","proyek","meeting","wawancara","resign","gaji","promosi","lembur","freelance","startup","cv","lamaran","manajemen","produktivitas"]},
+    {name: "Kuliner", k:["resep","makan","minum","bumbu","kuliner","masak","restoran","kafe","jajanan","sarapan","makan siang","makan malam","diet","makanan","minuman","dapur","kue","roti","gorengan"]},
+    {name: "Multimedia", k:["video","foto","audio","film","ffmpeg","imagemagick","photoshop","gimp","audacity","blender","premiere","davinci","lightroom","kdenlive","shotcut","editing","produksi","musik","podcast","vfx","efek"]},
+    {name: "NixOS", k:["nixos","nix"]},
+    {name: "OpenSUSE", k:["opensuse","suse","leap","tumbleweed","chameleon","zypper"]},
+    {name: "OS Linux", k:["grub","oss","lts","open source","autoremove","cron","reinstall","dd","troubleshooting","skrip","rsync","systemd","sudo","backup","plugin","ssh","symlinks","mount","samba","linux","bootloader","distro","release","rilis","kernel","cli","shell","bash","zsh","init","pacman","yay","apt-get","dpkg","yum","dnf","zypper","aptitude","uname","ls","grep","awk","sed","chmod","chown","user","group","service","systemctl"]},
+    {name: "OS Windows", k:["windows","windows 10","windows 11","powershell","cmd","registry","boot","update","explorer","task manager","bsod","driver"]},
+    {name: "Redhat", k:["fedora","centos","redhat","rhel","scientific linux","alma","rocky","centos stream"]},
+    {name: "Religi", k:["allah","shalat","sholat","agama","puasa","nabi","islam","madinah","religi","ghibah","muslim","quran","hadits","dakwah","doa","surga","neraka","masjid","iman","ibadah","hijab","akidah"]},
+    {name: "Repository", k:["repository","dnf","apt","repo","snap","synaptic","octopi","flatpak","netselect","mirror","reflector","aur","ppa","github","gitlab","bitbucket","dockerhub","git","clone","push","pull"]},
+    {name: "Slackware", k:["slackware","slac","sbopkg","pkgtools"]},
+    {name: "Jaringan", k:["jaringan","internet","wifi","router","modem","ethernet","ip address","dns","firewall","tcp","udp","http","https","proxy","vpn","port","lan","wan","bandwidth","ping","traceroute"]},
+    {name: "Pemrograman", k:["pemrograman","program","coding","javascript","python","php","java","c++","c","html","css","database","sql","mysql","mongodb","framework","library","api","bug","compiler","debugging","syntax","variabel","algoritma","frontend","backend","fullstack","data science"]},
+    {name: "Perangkat Keras", k:["perangkat keras","hardware","cpu","gpu","ram","hardisk","ssd","motherboard","power supply","monitor","keyboard","mouse","printer","usb","driver","bios","uefi","processor","graphic card","storage","komponen"]},
+    {name: "Keuangan", k:["keuangan","investasi","saham","crypto","bitcoin","uang","bank","tabungan","kredit","pinjaman","pajak","anggaran","ekonomi","fintech","reksadana","inflasi","utang"]}
   ];
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
 
 // --- Konfigurasi repo GitHub Pages publik ---
-const owner = "frijal";       // ganti sesuai username
-const repo = "frijal.github.io";  // ganti sesuai repo
-const folder = "artikel";     // folder artikel
+const owner = "frijal";       
+const repo = "frijal.github.io";  
+const folder = "artikel";     
 
 function log(msg){
   const logBox = document.getElementById("log");
@@ -76,6 +76,8 @@ async function generateJSON() {
     log(`📂 Ditemukan ${htmlFiles.length} file HTML`);
 
     const grouped = {};
+    const seenTitles = new Set();
+    let success=0, fail=0, skipped=0;
 
     for (const f of htmlFiles) {
       log(`➡️ Membaca file: ${f.name}`);
@@ -84,20 +86,28 @@ async function generateJSON() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlText,'text/html');
         const title = doc.querySelector("title")?.innerText || f.name;
-        const category = titleToCategory(title);
 
+        if(seenTitles.has(title)){
+          skipped++;
+          log(`   ⚠️ Duplikat judul, diskip: "${title}"`);
+          continue;
+        }
+
+        const category = titleToCategory(title);
         if (!grouped[category]) grouped[category] = [];
         grouped[category].push([title, f.name]);
-
-        log(`   ✔️ Berhasil → Judul: "${title}" | Kategori: ${category}`);
+        seenTitles.add(title);
+        success++;
+        log(`   ✔️ Berhasil → "${title}" | Kategori: ${category}`);
       } catch(e) {
+        fail++;
         log(`   ❌ Gagal membaca file: ${f.name}`);
         if (!grouped["Lainnya"]) grouped["Lainnya"] = [];
         grouped["Lainnya"].push([f.name, f.name]);
       }
     }
 
-    // --- Format JSON multi-baris per item ---
+    // Format JSON multi-baris
     function jsonPrettyByCategory(obj){
       return '{\n' + 
         Object.keys(obj).map(cat =>
@@ -111,22 +121,21 @@ async function generateJSON() {
     document.getElementById("jsonOutput").value = resultJSON;
 
     log("\n📊 Ringkasan per kategori:");
-// ubah object jadi array [kategori, data]
-Object.entries(grouped)
-  .sort((a, b) => b[1].length - a[1].length) // urutkan desc
-  .forEach(([cat, arr]) => {
-    log(`   - ${cat}: ${arr.length} item`);
-  });
+    Object.entries(grouped)
+      .sort((a,b) => b[1].length - a[1].length)
+      .forEach(([cat, arr])=>{
+        log(`   - ${cat}: ${arr.length} item`);
+      });
 
+    log(`\n📈 Total sukses: ${success}, gagal: ${fail}, duplikat diskip: ${skipped}`);
     log("\n✅ Proses selesai! JSON siap diunduh / dicopy.");
   } catch(err){
-    console.error("Gagal mengambil daftar file:", err);
     log("❌ Error: " + err.message);
     document.getElementById("jsonOutput").value = "Error: " + err.message;
   }
 }
 
-// Download JSON
+// Tombol download
 document.getElementById("downloadBtn").addEventListener("click", ()=>{
   const blob = new Blob([document.getElementById("jsonOutput").value], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -137,7 +146,7 @@ document.getElementById("downloadBtn").addEventListener("click", ()=>{
   URL.revokeObjectURL(url);
 });
 
-// Copy JSON ke Clipboard
+// Tombol copy
 document.getElementById("copyBtn").addEventListener("click", async ()=>{
   try {
     await navigator.clipboard.writeText(document.getElementById("jsonOutput").value);
@@ -147,18 +156,18 @@ document.getElementById("copyBtn").addEventListener("click", async ()=>{
   }
 });
 
-// Refresh Scan
+// Refresh
 document.getElementById("refreshBtn").addEventListener("click", ()=>{
   document.getElementById("log").textContent = "";
   generateJSON();
 });
 
-// Clear Log
+// Clear log
 document.getElementById("clearLogBtn").addEventListener("click", ()=>{
   document.getElementById("log").textContent = "";
 });
 
-// Jalankan otomatis pertama kali
+// Auto jalan
 generateJSON();
 </script>
 
