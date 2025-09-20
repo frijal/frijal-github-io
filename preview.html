@@ -83,7 +83,7 @@
         const mainContainer = document.getElementById('main-container');
 
         // Menggunakan Fetch API untuk memuat file JSON
-        fetch('data.json')
+        fetch('artikel.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Gagal memuat data: ${response.statusText}`);
