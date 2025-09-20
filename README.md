@@ -14,6 +14,7 @@
 ![Cloud & Hosting, menunjukkan platform cloud atau layanan hosting yang digunakan, untuk mengelola proyek.](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?style=for-the-badge&logo=github&logoColor=white)
 ![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/ChatGPT-Yes-blue?style=for-the-badge&logo=openai&logoColor=white)
 ![GitHub Stats, menunjukkan metrik dari repositori GitHub, seperti jumlah bintang, fork, kontributor, atau aktivitas commit.](https://img.shields.io/github/last-commit/frijal/frijal.github.io?style=for-the-badge&logo=github&logoColor=white)
+![GitHub Stats, menunjukkan metrik dari repositori GitHub, seperti jumlah bintang, fork, kontributor, atau aktivitas commit. (sesuaikan USERNAME REPO)](https://img.shields.io/github/commit-activity/m/frijal/frijal.github.io?style=for-the-badge&logo=github&logoColor=white)
 
 ---
 
