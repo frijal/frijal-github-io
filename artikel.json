@@ -22,7 +22,6 @@
     ["Cara Merekam Sebagian Layar Desktop dengan FFmpeg","rekam-layar-ffmpeg.html"],
     ["Menyatukan Pecahan Film dengan Terminal (cat command)","tutorial-menyatukan-film.html"],
     ["Panduan Interaktif ImageMagick & FFmpeg","ubah-gabung.html"],
-    ["Panduan Interaktif ImageMagick & FFmpeg","ubahpotong.html"],
     ["Cara Memutar Video Terbalik di VLC Player","vlc-rotate.html"],
     ["Memberi Watermark pada Gambar dengan ImageMagick di Linux","watermark-imagemagick.html"]
   ],
@@ -75,12 +74,15 @@
     ["Panduan Mirror Linux Lintas Distro","docs-linux-mirror.html"],
     ["EULA (End User License Agreement) - Panduan Lengkap Memahami Lisensi Perangkat Lunak","eula-guide.html"],
     ["Otomatis Memilih Mirror Linux Tercepat","fedora-opensuse-auto-mirror-selection.html"],
+    ["Implementasi Open Source Software di Hulu Sungai Tengah","hst-oss.html"],
     ["Panduan Mirror Linux Tercepat — Semua Distro","linux-mirror-guide-all.html"],
     ["Mirror Selector Toolkit — Semua Distro","linux-mirrors-all.html"],
     ["Panduan Memilih Repository Linux Tercepat","linux-repo-guide.html"],
     ["Memeriksa Kondisi Baterai di Linux","memeriksa-kondisi-baterai-di-Linux-menggunakan-command-line.html"],
     ["Migrasi Windows ke Linux Itu Gampang: Panduan Langkah Demi Langkah","migrasi-windows-ke-linux.html"],
     ["Migrasi Windows ke GNU/Linux - Panduan Lengkap","migrasi-windows-linux.html"],
+    ["Open Source: Kisah Sukses Sumber Terbuka","open-source.html"],
+    ["Kampanye OSS di Sekolah: Hemat Anggaran, Tingkatkan Kreativitas","oss-di-sekolah.html"],
     ["Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB","perbaiki-grub-rescue.html"],
     ["YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas","presto-yum.html"],
     ["Membaca Teks Terbalik dengan Perintah rev di Linux","rev-linux.html"],
@@ -212,8 +214,6 @@
     ["Conky Bahasa Indonesia: pasang, konfigurasi, autostart, dan contoh lengkap","conky-bahasa-indonesia.html"],
     ["facebookcomment.html","facebookcomment.html"],
     ["Hapus OS Ilegal dengan Aman, Cepat, dan Tanpa Live USB","hapus-os-ilegal-aman.html"],
-    ["Implementasi Open Source Software di Hulu Sungai Tengah","hst-oss.html"],
-    ["Open Source: Kisah Sukses Sumber Terbuka","open-source.html"],
     ["Stop Piracy : Penjelasan Lengkap & Sumber Gambar","stop-piracy-retro.html"]
   ],
   "NixOS": 
@@ -224,9 +224,5 @@
   "OpenSUSE": 
   [
     ["opensuse-mirror.sh — Mirror Tercepat untuk openSUSE","opensuse-mirror.html"]
-  ],
-  "Keuangan": 
-  [
-    ["Kampanye OSS di Sekolah: Hemat Anggaran, Tingkatkan Kreativitas","oss-di-sekolah.html"]
   ]
 }
