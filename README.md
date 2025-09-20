@@ -85,7 +85,7 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 
 ---
 
-## 🚀 Ringkasan Visual Interaktif
+## 🚀 Ringkasan Interaktif
 
 <table style="width:100%; border-collapse: collapse; text-align: left; margin-top:10px;">
 <tr>
