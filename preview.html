@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Artikel</title>
+    <title>Daftar Artikel Berdasarkan Kategori</title>
     
     <style>
         body {
@@ -18,7 +18,7 @@
         }
         
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
         }
 
@@ -27,67 +27,63 @@
             text-align: center;
             margin-bottom: 30px;
         }
-
-        .article-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .article-card {
+        
+        .category-section {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .article-content {
             padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .article-content h2 {
+        .category-section h2 {
             margin-top: 0;
-            font-size: 1.2em;
-            color: #333;
+            font-size: 1.5em;
+            color: #007bff;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
-        
-        .article-link {
+
+        .article-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .article-list li {
+            margin-bottom: 10px;
+        }
+
+        .article-list a {
             display: block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
             border-radius: 5px;
+            text-decoration: none;
+            color: #333;
             transition: background-color 0.3s ease;
         }
-
-        .article-link:hover {
-            background-color: #0056b3;
+        
+        .article-list a:hover {
+            background-color: #e2e6ea;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Daftar Artikel</h1>
-    <div id="article-container" class="article-list">
+    <h1>Daftar Artikel Berdasarkan Kategori</h1>
+    <div id="main-container">
         </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const articleContainer = document.getElementById('article-container');
+        const mainContainer = document.getElementById('main-container');
 
         // Menggunakan Fetch API untuk memuat file JSON
-        fetch('artikel.json')
+        fetch('data.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Gagal memuat data: ${response.statusText}`);
@@ -95,30 +91,48 @@
                 return response.json();
             })
             .then(data => {
-                // Iterasi setiap array di dalam data JSON
-                data.forEach(item => {
-                    // Membuat elemen kartu untuk setiap item
-                    const card = document.createElement('div');
-                    card.classList.add('article-card');
+                // Iterasi setiap kunci (key) di dalam objek data
+                // Kunci di sini adalah nama kategori
+                for (const category in data) {
+                    if (data.hasOwnProperty(category)) {
+                        const articles = data[category];
 
-                    // Mengakses data menggunakan indeks array: item[0] untuk judul, item[1] untuk URL
-                    const title = item[0];
-                    const url = item[1];
+                        // Buat bagian (section) baru untuk setiap kategori
+                        const section = document.createElement('div');
+                        section.classList.add('category-section');
 
-                    card.innerHTML = `
-                        <div class="article-content">
-                            <h2>${title}</h2>
-                            <a href="${url}" target="_blank" class="article-link">Baca Artikel &rarr;</a>
-                        </div>
-                    `;
-                    
-                    // Menambahkan kartu ke dalam container
-                    articleContainer.appendChild(card);
-                });
+                        // Tambahkan judul kategori
+                        const heading = document.createElement('h2');
+                        heading.textContent = category;
+                        section.appendChild(heading);
+
+                        // Buat daftar (list) untuk artikel
+                        const ul = document.createElement('ul');
+                        ul.classList.add('article-list');
+
+                        // Iterasi setiap array artikel dalam kategori tersebut
+                        articles.forEach(item => {
+                            const title = item[0];
+                            const url = item[1];
+
+                            const li = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.textContent = title;
+                            a.target = "_blank"; // Membuka di tab baru
+                            
+                            li.appendChild(a);
+                            ul.appendChild(li);
+                        });
+
+                        section.appendChild(ul);
+                        mainContainer.appendChild(section);
+                    }
+                }
             })
             .catch(error => {
                 console.error('Ada masalah saat memuat atau memproses data JSON:', error);
-                articleContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan coba lagi.</p>`;
+                mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan coba lagi.</p>`;
             });
     });
 </script>
