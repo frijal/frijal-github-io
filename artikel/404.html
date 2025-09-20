@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landing Page Premium Browser & OS</title>
+<title>Redirect Page Premium Browser - OS - IP Address</title>
 <style>
 body {
   margin: 0;
@@ -219,13 +219,13 @@ fetch("https://ipapi.co/json/")
   });
 
 // Redirect countdown
-let redirectTime = 2;
+let redirectTime = 3;
 const redirectEl = document.getElementById("redirectInfo");
 const countdown = setInterval(()=>{
   redirectTime--;
   if(redirectTime<=0){
     clearInterval(countdown);
-    window.location.href = "https://bak.xo.je/sitemap.html"; // ganti tujuan
+    window.location.href = "https://frijal.github.io/sitemap.html"; // ganti tujuan
   } else {
     redirectEl.textContent = `meluncur dalam ${redirectTime} detik...`;
   }
