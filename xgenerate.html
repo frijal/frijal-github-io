@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Generator JSON Artikel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #007BFF;
+      color: white;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Generator JSON Artikel</h2>
+
+  <label>Slug (unik, tanpa spasi)</label>
+  <input type="text" id="slug" placeholder="contoh: pln-balikpapan">
+
+  <label>Judul</label>
+  <input type="text" id="title" placeholder="Judul artikel">
+
+  <label>Deskripsi</label>
+  <textarea id="description" placeholder="Ringkasan artikel..."></textarea>
+
+  <label>Tanggal</label>
+  <input type="date" id="date">
+
+  <label>Penulis</label>
+  <input type="text" id="author" value="Fakhrul Rijal">
+
+  <label>Kategori</label>
+  <input type="text" id="category" placeholder="contoh: Perjalanan">
+
+  <label>URL Gambar</label>
+  <input type="url" id="image" placeholder="https://...jpg">
+
+  <button onclick="tambahArtikel()">Tambah Artikel</button>
+  <button onclick="downloadJSON()">Download JSON</button>
+
+  <pre id="output">[]</pre>
+
+  <script>
+    let data = [];
+
+    function tambahArtikel() {
+      const artikel = {
+        slug: document.getElementById("slug").value.trim(),
+        title: document.getElementById("title").value.trim(),
+        description: document.getElementById("description").value.trim(),
+        date: document.getElementById("date").value,
+        author: document.getElementById("author").value.trim(),
+        category: document.getElementById("category").value.trim(),
+        image: document.getElementById("image").value.trim()
+      };
+
+      // Validasi wajib
+      if (!artikel.slug || !artikel.title || !artikel.date) {
+        alert("Slug, Judul, dan Tanggal wajib diisi!");
+        return;
+      }
+
+      // Cek duplikat slug
+      if (data.some(item => item.slug === artikel.slug)) {
+        alert("Slug sudah ada, gunakan yang lain!");
+        return;
+      }
+
+      data.push(artikel);
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+
+      // Reset form
+      document.getElementById("slug").value = "";
+      document.getElementById("title").value = "";
+      document.getElementById("description").value = "";
+      document.getElementById("date").value = "";
+      document.getElementById("category").value = "";
+      document.getElementById("image").value = "";
+    }
+
+    function downloadJSON() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "artikel.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
