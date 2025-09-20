@@ -111,9 +111,12 @@ async function generateJSON() {
     document.getElementById("jsonOutput").value = resultJSON;
 
     log("\n📊 Ringkasan per kategori:");
-    Object.keys(grouped).forEach(cat=>{
-      log(`   - ${cat}: ${grouped[cat].length} item`);
-    });
+// ubah object jadi array [kategori, data]
+Object.entries(grouped)
+  .sort((a, b) => b[1].length - a[1].length) // urutkan desc
+  .forEach(([cat, arr]) => {
+    log(`   - ${cat}: ${arr.length} item`);
+  });
 
     log("\n✅ Proses selesai! JSON siap diunduh / dicopy.");
   } catch(err){
