@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Artikel</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .article-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .article-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-content h2 {
+            margin-top: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+        
+        .article-link {
+            display: block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .article-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Daftar Artikel</h1>
+    <div id="article-container" class="article-list">
+        </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const articleContainer = document.getElementById('article-container');
+
+        // Menggunakan Fetch API untuk memuat file JSON
+        fetch('artikel.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Gagal memuat data: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Iterasi setiap array di dalam data JSON
+                data.forEach(item => {
+                    // Membuat elemen kartu untuk setiap item
+                    const card = document.createElement('div');
+                    card.classList.add('article-card');
+
+                    // Mengakses data menggunakan indeks array: item[0] untuk judul, item[1] untuk URL
+                    const title = item[0];
+                    const url = item[1];
+
+                    card.innerHTML = `
+                        <div class="article-content">
+                            <h2>${title}</h2>
+                            <a href="${url}" target="_blank" class="article-link">Baca Artikel &rarr;</a>
+                        </div>
+                    `;
+                    
+                    // Menambahkan kartu ke dalam container
+                    articleContainer.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Ada masalah saat memuat atau memproses data JSON:', error);
+                articleContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan coba lagi.</p>`;
+            });
+    });
+</script>
+
+</body>
+</html>
