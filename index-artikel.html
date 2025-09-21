@@ -1,180 +1,96 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Artikel - frijal.github.io</title>
-  <meta name="description" content="Daftar artikel lengkap Fakhrul Rijal: nostalgia, catatan perjalanan, teknologi, dan cerita kehidupan.">
-  <link rel="icon" href="https://frijal.github.io/favicon.ico">
-
-  <style>
-    body { font-family:"Segoe UI",sans-serif; margin:0; background:#f9f9f9; color:#333; }
-    header { background:#0A66C2; color:white; text-align:center; padding:20px; }
-    header h1 { margin:0; font-size:24px; }
-    .container { max-width:1100px; margin:auto; padding:20px; }
-
-    /* Toolbar */
-    .toolbar {
-      display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; justify-content:space-between;
-    }
-    .toolbar input, .toolbar select {
-      padding:10px; border:1px solid #ccc; border-radius:6px; font-size:14px;
-      flex:1; min-width:180px;
-    }
-
-    /* Grid & Cards */
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; }
-    .card {
-      background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      overflow:hidden; display:flex; flex-direction:column; transition:0.3s;
-    }
-    .card:hover { transform:translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-    .card img { width:100%; height:160px; object-fit:cover; }
-    .card-content { padding:15px; flex-grow:1; }
-    .card h2 { font-size:18px; margin:0 0 10px; color:#0A66C2; }
-    .card p { font-size:14px; color:#555; }
-    .card .date { font-size:12px; color:#888; margin-bottom:8px; }
-
-    /* Loader */
-    #loader { text-align:center; padding:20px; font-size:14px; color:#666; }
-
-    footer { text-align:center; padding:20px; font-size:14px; color:#666; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Sitemap GitHub Pages</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+input { padding: 6px; margin-right: 10px; width: 200px; }
+button { padding: 6px 12px; cursor: pointer; }
+#preview { margin-top: 20px; }
+.preview-item { display: flex; align-items: center; margin-bottom: 10px; }
+.preview-item img { width: 80px; height: 60px; object-fit: cover; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+textarea { width: 100%; height: 300px; margin-top: 20px; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>📚 Daftar Artikel</h1>
-    <p>Kumpulan tulisan & catatan Fakhrul Rijal</p>
-  </header>
 
-  <div class="container">
-    <!-- Toolbar -->
-    <div class="toolbar">
-      <input type="text" id="search" placeholder="🔍 Cari artikel...">
-      <select id="filter-category">
-        <option value="">📂 Semua Kategori</option>
-      </select>
-      <select id="sort-date">
-        <option value="newest">⏱️ Terbaru</option>
-        <option value="oldest">⏱️ Terlama</option>
-      </select>
-    </div>
+<h2>Generator Sitemap GitHub Pages</h2>
 
-    <!-- Grid -->
-    <div class="grid" id="article-list">Memuat daftar artikel...</div>
+<p>Masukkan username GitHub dan nama repo (folder artikel/)</p>
+<input type="text" id="username" placeholder="Username GitHub">
+<input type="text" id="repo" placeholder="Nama Repo">
+<button id="generate">Generate Sitemap</button>
 
-    <!-- Loader -->
-    <div id="loader">⬇️ Scroll ke bawah untuk memuat artikel berikutnya...</div>
-  </div>
+<div id="preview"></div>
+<textarea id="output" readonly></textarea>
 
-  <footer>© 2025 Fakhrul Rijal • frijal.github.io</footer>
+<script>
+async function getHtmlFiles(username, repo) {
+    const apiUrl = `https://api.github.com/repos/${username}/${repo}/git/trees/main?recursive=1`;
+    const response = await fetch(apiUrl);
+    if(!response.ok) throw new Error("Gagal mengambil daftar file dari GitHub.");
+    const data = await response.json();
+    return data.tree
+        .filter(f => f.path.startsWith("artikel/") && f.path.endsWith(".html"))
+        .map(f => f.path);
+}
 
-  <script>
-    let allArticles = [];
-    let filteredArticles = [];
-    let currentPage = 0;
-    const articlesPerPage = 6;
-    let loading = false;
+document.getElementById("generate").addEventListener("click", async () => {
+    const username = document.getElementById("username").value.trim();
+    const repo = document.getElementById("repo").value.trim();
+    if(!username || !repo) { alert("Masukkan username dan repo!"); return; }
 
-    async function loadArticles(){
-      try {
-        let res=await fetch("artikel.json");
-        let data=await res.json();
-        allArticles=data;
+    try {
+        const htmlFiles = await getHtmlFiles(username, repo);
+        const today = new Date().toISOString().split("T")[0];
+        const baseUrl = `https://${username}.github.io/${repo === username + ".github.io" ? "" : repo + "/"}`;
 
-        populateCategories();
-        applyFilters();
-      } catch(e){
-        document.getElementById("article-list").innerHTML="⚠️ Gagal memuat artikel.";
-      }
+        let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+        xml += '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"\n';
+        xml += '        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">\n';
+
+        const previewDiv = document.getElementById("preview");
+        previewDiv.innerHTML = ""; // kosongkan preview sebelumnya
+
+        htmlFiles.forEach(file => {
+            const fileName = file.split("/").pop().replace(".html","") + ".jpg";
+            const thumbPath = `artikel/thumb/${fileName}`;
+            const imageUrl = `${baseUrl}${thumbPath}`; // fallback di Google/Search tetap ke thumbnail.jpg
+
+            xml += `  <url>\n`;
+            xml += `    <loc>${baseUrl}${file}</loc>\n`;
+            xml += `    <lastmod>${today}</lastmod>\n`;
+            xml += `    <changefreq>monthly</changefreq>\n`;
+            xml += `    <priority>0.8</priority>\n`;
+            xml += `    <image:image>\n`;
+            xml += `      <image:loc>${imageUrl}</image:loc>\n`;
+            xml += `    </image:image>\n`;
+            xml += `  </url>\n`;
+
+            // Tambahkan preview
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "preview-item";
+            itemDiv.innerHTML = `<img src="${imageUrl}" onerror="this.src='${baseUrl}thumbnail.jpg'"><span>${baseUrl}${file}</span>`;
+            previewDiv.appendChild(itemDiv);
+        });
+
+        xml += '</urlset>';
+        document.getElementById("output").value = xml;
+
+        // Download otomatis
+        const blob = new Blob([xml], {type: "application/xml"});
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "sitemap.xml";
+        link.click();
+
+    } catch(e) {
+        alert("Terjadi error: " + e.message);
     }
+});
+</script>
 
-    function applyFilters(){
-      let search=document.getElementById("search").value.toLowerCase();
-      let filter=document.getElementById("filter-category").value;
-      let sort=document.getElementById("sort-date").value;
-
-      filteredArticles=allArticles.filter(article=>{
-        let matchesSearch =
-          article.title.toLowerCase().includes(search) ||
-          article.description.toLowerCase().includes(search);
-        let matchesCategory = !filter || article.category===filter;
-        return matchesSearch && matchesCategory;
-      });
-
-      // Sort
-      filteredArticles.sort((a,b)=>{
-        let da=new Date(a.date), db=new Date(b.date);
-        return sort==="newest" ? db-da : da-db;
-      });
-
-      // Reset state
-      currentPage=0;
-      document.getElementById("article-list").innerHTML="";
-      loadMoreArticles();
-    }
-
-    function loadMoreArticles(){
-      if(loading) return;
-      loading=true;
-
-      let start=currentPage*articlesPerPage;
-      let end=start+articlesPerPage;
-      let pageArticles=filteredArticles.slice(start,end);
-
-      let list=document.getElementById("article-list");
-
-      pageArticles.forEach(article=>{
-        let card=document.createElement("div");
-        card.className="card";
-        card.innerHTML=`
-          <a href="artikel.html?slug=${article.slug}">
-            <img src="${article.image}" alt="${article.title}">
-          </a>
-          <div class="card-content">
-            <div class="date">${article.date} • ${article.author}</div>
-            <h2><a href="artikel.html?slug=${article.slug}" style="text-decoration:none;">${article.title}</a></h2>
-            <p>${article.description}</p>
-          </div>
-        `;
-        list.appendChild(card);
-      });
-
-      currentPage++;
-      loading=false;
-
-      // Cek apakah masih ada artikel
-      if(currentPage * articlesPerPage >= filteredArticles.length){
-        document.getElementById("loader").textContent="✅ Semua artikel sudah ditampilkan.";
-      } else {
-        document.getElementById("loader").textContent="⬇️ Scroll ke bawah untuk memuat artikel berikutnya...";
-      }
-    }
-
-    function populateCategories(){
-      let categories=[...new Set(allArticles.map(a=>a.category))];
-      let select=document.getElementById("filter-category");
-      categories.forEach(cat=>{
-        let option=document.createElement("option");
-        option.value=cat; option.textContent=cat;
-        select.appendChild(option);
-      });
-    }
-
-    // Event listeners
-    document.getElementById("search").addEventListener("input", applyFilters);
-    document.getElementById("filter-category").addEventListener("change", applyFilters);
-    document.getElementById("sort-date").addEventListener("change", applyFilters);
-
-    // Infinite scroll
-    window.addEventListener("scroll",()=>{
-      if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
-        loadMoreArticles();
-      }
-    });
-
-    loadArticles();
-  </script>
 </body>
 </html>
-
