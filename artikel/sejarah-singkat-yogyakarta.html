@@ -10,7 +10,6 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Sejarah Singkat & Perkembangan Kota Yogyakarta — Ngayogyakarta Hadiningrat" />
   <meta property="og:description" content="Ringkasan sejarah Yogyakarta: Perjanjian Gianti 1755, Sultan Hamengku Buwono I, pendirian Kraton, hingga peran modern sebagai Daerah Istimewa." />
-  <meta property="og:image" content="https://example.com/og-image-yogyakarta.jpg" />
   <meta property="og:url" content="" id="meta-og-url" />
   <meta property="og:site_name" content="SejarahYogya.id" />
 
@@ -18,7 +17,6 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sejarah Singkat & Perkembangan Kota Yogyakarta — Ngayogyakarta Hadiningrat" />
   <meta name="twitter:description" content="Ringkasan sejarah Yogyakarta: Perjanjian Gianti 1755, Sultan Hamengku Buwono I, pendirian Kraton, hingga peran modern sebagai Daerah Istimewa." />
-  <meta name="twitter:image" content="https://example.com/twitter-image-yogyakarta.jpg" />
 
   <!-- Canonical (set dynamically to current URL) -->
   <link rel="canonical" href="" id="canonical-link" />
@@ -318,5 +316,6 @@
     flex-shrink: 0;
   }
 </style>
+ <script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
 </body>
 </html>
