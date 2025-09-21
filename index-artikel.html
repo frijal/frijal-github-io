@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generate JSON & Sitemap (Ultimate Hybrid)</title>
+<title>Generate JSON & Sitemap Hybrid</title>
 <style>
 body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
 h1 { text-align:center; }
@@ -17,7 +17,7 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
 </head>
 <body>
 
-<h1>Generate JSON & Sitemap (Ultimate Hybrid)</h1>
+<h1>Generate JSON & Sitemap Hybrid</h1>
 
 <div id="progressContainer">
   <div style="background:#ddd; border-radius:4px; overflow:hidden; height:20px;">
@@ -41,6 +41,11 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
 <h3>Verbose Log</h3>
 <div id="log"></div>
 
+<div style="margin-top:15px;">
+  <button id="onlineModeBtn">🌐 Scan Online (GitHub)</button>
+  <button id="offlineModeBtn">📂 Scan Offline (Local)</button>
+</div>
+
 <script>
 // ----------------- Utility -----------------
 function log(msg){
@@ -49,6 +54,15 @@ function log(msg){
   logBox.scrollTop = logBox.scrollHeight;
 }
 function sleep(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
+
+// ----------------- Escape XML -----------------
+function escapeXML(s){
+  return s.replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&apos;");
+}
 
 // ----------------- Config -----------------
 const owner = "frijal";
@@ -84,7 +98,7 @@ function titleToCategory(title){
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
 
-// ----------------- GitHub Fetch Helpers -----------------
+// ----------------- GitHub Helpers -----------------
 async function checkRateLimit(){
   try{
     const res = await fetch('https://api.github.com/rate_limit');
@@ -106,16 +120,34 @@ async function fetchFileWithRateLimit(file){
   return await fetch(file.download_url).then(r=>r.text());
 }
 
-// ----------------- Main -----------------
-let totalFiles=0, completedFiles=0, startTimeProgress=0;
-async function generateJSONandSitemap(){
+// ----------------- Generate JSON & Sitemap -----------------
+async function generate(grouped, sitemapUrls){
+  // JSON
+  function jsonPretty(obj){
+    return '{\n'+Object.keys(obj).map(cat=>`  "${cat}":[\n${obj[cat].map(a=>`    ["${a[0]}","${a[1]}"]`).join(',\n')}\n  ]`).join(',\n')+'\n}';
+  }
+  document.getElementById("jsonOutput").value = jsonPretty(grouped);
+
+  // Sitemap
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+  sitemapUrls.forEach(u=>{
+    sitemap += `  <url>\n    <loc>${escapeXML(BASE_URL+u.loc)}</loc>\n`;
+    if(u.img) sitemap += `    <image:image>\n      <image:loc>${escapeXML(u.img)}</image:loc>\n    </image:image>\n`;
+    sitemap += `  </url>\n`;
+  });
+  sitemap += `</urlset>`;
+  document.getElementById("sitemapOutput").value = sitemap;
+
+  log("\n✅ Proses selesai! JSON & Sitemap siap dicopy / di-download.");
+}
+
+// ----------------- Mode Online -----------------
+async function generateOnline(){
   document.getElementById("jsonOutput").value="";
   document.getElementById("sitemapOutput").value="";
   document.getElementById("log").textContent="";
   document.getElementById("progressBar").style.width="0%";
   document.getElementById("progressText").textContent="0 / 0 files";
-  startTimeProgress=Date.now();
-  completedFiles=0;
 
   try{
     log("🔍 Mengambil daftar file dari repo...");
@@ -123,13 +155,11 @@ async function generateJSONandSitemap(){
     const files = await res.json();
     const htmlFiles = files.filter(f=>f.type==="file" && f.name.endsWith(".html"));
     totalFiles = htmlFiles.length;
+    completedFiles = 0;
     log(`📂 Ditemukan ${totalFiles} file HTML`);
 
     const grouped = {};
-    const seenTitles = new Set();
-    const duplicates = [];
     const sitemapUrls = [];
-
     let index=0;
     async function worker(){
       while(index<htmlFiles.length){
@@ -139,63 +169,88 @@ async function generateJSONandSitemap(){
           const htmlText = await fetchFileWithRateLimit(f);
           const doc = new DOMParser().parseFromString(htmlText,'text/html');
           const title = doc.querySelector("title")?.innerText || f.name;
+          const category = titleToCategory(title);
+          if(!grouped[category]) grouped[category]=[];
+          grouped[category].push([title,f.name]);
 
-          // Duplicate check
-          if(seenTitles.has(title)){ duplicates.push([title,f.name]); } 
-          else { seenTitles.add(title); const category = titleToCategory(title); if(!grouped[category]) grouped[category]=[]; grouped[category].push([title,f.name]); }
-
-          // Fallback image
           let imgMeta = doc.querySelector('meta[property="og:image"]')?.content
                      || doc.querySelector('meta[name="twitter:image"]')?.content
                      || doc.querySelector('main section img')?.src
                      || FALLBACK_IMG;
           if(!imgMeta.startsWith('http')) imgMeta = BASE_URL + imgMeta;
-
           sitemapUrls.push({loc:f.name,img:imgMeta});
+        }catch(err){ log("❌ Error file "+f.name+": "+err.message); }
 
-        }catch(e){
-          if(!grouped["Lainnya"]) grouped["Lainnya"]=[]; grouped["Lainnya"].push([f.name,f.name]);
-        }
-
-        // Update progress
         completedFiles++;
         const percent = Math.round((completedFiles/totalFiles)*100);
-        document.getElementById("progressBar").style.width = percent + "%";
+        document.getElementById("progressBar").style.width = percent+"%";
         const elapsed = (Date.now()-startTimeProgress)/1000;
         const eta = Math.round((elapsed/completedFiles)*(totalFiles-completedFiles));
         document.getElementById("progressText").textContent = `${completedFiles} / ${totalFiles} files (${percent}%) | ETA: ${eta}s`;
       }
     }
     await Promise.all(Array(10).fill().map(()=>worker()));
+    await generate(grouped,sitemapUrls);
 
-    // JSON output
-    function jsonPretty(obj){
-      return '{\n'+Object.keys(obj).map(cat=>`  "${cat}":[\n${obj[cat].map(a=>`    ["${a[0]}","${a[1]}"]`).join(',\n')}\n  ]`).join(',\n')+'\n}';
+  }catch(err){ log("❌ Error online: "+err.message); }
+}
+
+// ----------------- Mode Offline -----------------
+async function generateOffline(){
+  const filesInput = document.createElement("input");
+  filesInput.type = "file";
+  filesInput.multiple = true;
+  filesInput.accept = ".html";
+  filesInput.webkitdirectory = true;
+  filesInput.addEventListener("change", async ()=>{
+    const files = Array.from(filesInput.files).filter(f=>f.name.endsWith(".html"));
+    totalFiles = files.length;
+    completedFiles = 0;
+    startTimeProgress = Date.now();
+    const grouped = {};
+    const sitemapUrls = [];
+    log(`📂 Ditemukan ${totalFiles} file HTML (offline)`);
+
+    for(const f of files){
+      try{
+        const text = await f.text();
+        const doc = new DOMParser().parseFromString(text,"text/html");
+        const title = doc.querySelector("title")?.innerText || f.name;
+        const category = titleToCategory(title);
+        if(!grouped[category]) grouped[category]=[];
+        grouped[category].push([title,f.name]);
+
+        let imgMeta = doc.querySelector('meta[property="og:image"]')?.content
+                   || doc.querySelector('meta[name="twitter:image"]')?.content
+                   || doc.querySelector('main section img')?.src
+                   || FALLBACK_IMG;
+        if(!imgMeta.startsWith("http")) imgMeta = BASE_URL + imgMeta;
+        sitemapUrls.push({loc:f.name,img:imgMeta});
+
+        completedFiles++;
+        const percent = Math.round((completedFiles/totalFiles)*100);
+        document.getElementById("progressBar").style.width = percent+"%";
+        const elapsed = (Date.now()-startTimeProgress)/1000;
+        const eta = Math.round((elapsed/completedFiles)*(totalFiles-completedFiles));
+        document.getElementById("progressText").textContent = `${completedFiles} / ${totalFiles} files (${percent}%) | ETA: ${eta}s`;
+
+      }catch(err){ log("❌ Error file "+f.name+": "+err.message); }
     }
-    document.getElementById("jsonOutput").value=jsonPretty(grouped);
-
-    // Sitemap output
-    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
-    sitemapUrls.forEach(u=>{
-      sitemap += `  <url>\n    <loc>${BASE_URL}${u.loc}</loc>\n`;
-      if(u.img) sitemap += `    <image:image>\n      <image:loc>${u.img}</image:loc>\n    </image:image>\n`;
-      sitemap += `  </url>\n`;
-    });
-    sitemap += `</urlset>`;
-    document.getElementById("sitemapOutput").value=sitemap;
-
-    log("\n📊 Ringkasan per kategori:");
-    Object.entries(grouped).sort((a,b)=>b[1].length-a[1].length).forEach(([cat,arr])=>log(`   - ${cat}: ${arr.length} item`));
-    log(`\n📈 Total file: ${totalFiles}, Duplikat: ${duplicates.length}`);
-    log(`⏱️ Waktu total: ${(Date.now()-startTimeProgress)/1000}s`);
-    log("\n✅ Proses selesai! JSON & Sitemap siap dicopy / di-download.");
-
-  }catch(err){
-    log("❌ Error: "+err.message);
-  }
+    await generate(grouped,sitemapUrls);
+  });
+  filesInput.click();
 }
 
 // ----------------- Tombol -----------------
+document.getElementById("onlineModeBtn").addEventListener("click",()=>{
+  startTimeProgress = Date.now();
+  generateOnline();
+});
+document.getElementById("offlineModeBtn").addEventListener("click",()=>{
+  startTimeProgress = Date.now();
+  generateOffline();
+});
+
 document.getElementById("downloadJsonBtn").addEventListener("click",()=>{
   const blob = new Blob([document.getElementById("jsonOutput").value],{type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -203,7 +258,7 @@ document.getElementById("downloadJsonBtn").addEventListener("click",()=>{
   URL.revokeObjectURL(url);
 });
 document.getElementById("copyJsonBtn").addEventListener("click",async()=>{
-  try{ await navigator.clipboard.writeText(document.getElementById("jsonOutput").value); log("📋 JSON berhasil dicopy ke clipboard!"); }
+  try{ await navigator.clipboard.writeText(document.getElementById("jsonOutput").value); log("📋 JSON berhasil dicopy!"); }
   catch(err){ log("❌ Gagal copy JSON: "+err.message); }
 });
 document.getElementById("downloadSitemapBtn").addEventListener("click",()=>{
@@ -213,12 +268,9 @@ document.getElementById("downloadSitemapBtn").addEventListener("click",()=>{
   URL.revokeObjectURL(url);
 });
 document.getElementById("copySitemapBtn").addEventListener("click",async()=>{
-  try{ await navigator.clipboard.writeText(document.getElementById("sitemapOutput").value); log("📋 Sitemap berhasil dicopy ke clipboard!"); }
+  try{ await navigator.clipboard.writeText(document.getElementById("sitemapOutput").value); log("📋 Sitemap berhasil dicopy!"); }
   catch(err){ log("❌ Gagal copy Sitemap: "+err.message); }
 });
-
-// Jalankan otomatis
-generateJSONandSitemap();
 </script>
 </body>
 </html>
