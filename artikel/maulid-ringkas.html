@@ -18,14 +18,12 @@
   <meta property="og:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
   <meta property="og:description" content="Poin-poin cepat: kontra Maulid, pro Maulid, dan kesimpulan adab. Cocok untuk slide dan diskusi.">
   <meta property="og:url" content="https://frijal.github.io/artikel/maulid-ringkas.html">
-  <meta property="og:image" content="https://frijal.github.io/assets/og-maulid-ringkas.jpg">
   <meta property="og:locale" content="id_ID">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
   <meta name="twitter:description" content="Ringkasan super singkat untuk presentasi: pro-kontra Maulid dan adab perbedaan.">
-  <meta name="twitter:image" content="https://frijal.github.io/assets/og-maulid-ringkas.jpg">
   <meta name="twitter:site" content="@frijal">
 
   <!-- CSS: Template baru (teal-magenta neon, glass, wide fullscreen) -->
@@ -480,5 +478,7 @@
         .catch(()=>{ /* silent */ });
     })();
   </script>
+  <script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
+
 </body>
 </html>
