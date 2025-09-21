@@ -51,13 +51,10 @@ document.getElementById("generate").addEventListener("click", async () => {
         xml += '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"\n';
         xml += '        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">\n';
 
-        const previewDiv = document.getElementById("preview");
-        previewDiv.innerHTML = ""; // kosongkan preview sebelumnya
-
         htmlFiles.forEach(file => {
             const fileName = file.split("/").pop().replace(".html","") + ".jpg";
             const thumbPath = `artikel/thumb/${fileName}`;
-            const imageUrl = `${baseUrl}${thumbPath}`; // fallback di Google/Search tetap ke thumbnail.jpg
+            const imageUrl = `${baseUrl}${thumbPath}`;
 
             xml += `  <url>\n`;
             xml += `    <loc>${baseUrl}${file}</loc>\n`;
@@ -68,15 +65,10 @@ document.getElementById("generate").addEventListener("click", async () => {
             xml += `      <image:loc>${imageUrl}</image:loc>\n`;
             xml += `    </image:image>\n`;
             xml += `  </url>\n`;
-
-            // Tambahkan preview
-            const itemDiv = document.createElement("div");
-            itemDiv.className = "preview-item";
-            itemDiv.innerHTML = `<img src="${imageUrl}" onerror="this.src='${baseUrl}thumbnail.jpg'"><span>${baseUrl}${file}</span>`;
-            previewDiv.appendChild(itemDiv);
         });
 
         xml += '</urlset>';
+
         document.getElementById("output").value = xml;
 
         // Download otomatis
@@ -91,6 +83,7 @@ document.getElementById("generate").addEventListener("click", async () => {
     }
 });
 </script>
+
 
 </body>
 </html>
