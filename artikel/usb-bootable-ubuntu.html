@@ -15,11 +15,9 @@
 <meta property="og:description" content="Panduan membuat USB bootable Ubuntu tanpa USB Creator menggunakan dd, lengkap dengan info browser, OS, IP publik, dan bendera negara.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://frijal.github.io/artikel/usb-bootable-ubuntu.html">
-<meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Membuat USB Bootable Ubuntu Tanpa USB Creator">
 <meta name="twitter:description" content="Panduan membuat USB bootable Ubuntu tanpa USB Creator menggunakan dd, lengkap dengan info browser, OS, IP publik, dan bendera negara.">
-<meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
 <!-- Prism.js untuk syntax highlighting -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
@@ -179,7 +177,6 @@ fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{
   document.getElementById('ip-info').innerHTML=`IP: ${data.ip} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="${data.country_name}">`;
 });
 </script>
-<script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
-
+<script>document.addEventListener("DOMContentLoaded",()=>{let s=(document.querySelector("main section img")||{}).src||"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))});</script>
 </body>
 </html>
