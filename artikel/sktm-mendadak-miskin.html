@@ -12,7 +12,6 @@
 <meta property="og:title" content="Mendadak 'Miskin' Demi Sekolah: Fenomena SKTM Palsu">
 <meta property="og:description" content="Mengapa orang tua rela berbohong demi anak mereka? Artikel ini membahas tuntas fenomena SKTM palsu dalam sistem PPDB.">
 <meta property="og:url" content="https://frijal.github.io/artikel/sktm.mendadak-miskin.html">
-<meta property="og:image" content="https://frijal.github.io/thumbnail/sktm-mendadak-miskin.jpg">
 <meta property="og:site_name" content="Frijal.github.io">
 
 <link rel="icon" href="../favicon.ico" type="image/x-icon">
@@ -201,7 +200,7 @@ fetch('https://ipapi.co/json/')
 })
 .catch(()=> document.getElementById('location-info').textContent='Tidak dapat mendeteksi lokasi.');
 </script>
-<script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
+<script>document.addEventListener("DOMContentLoaded",()=>{let s=(document.querySelector("main section img")||{}).src||"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))});</script>
 </body>
 </html>
 
