@@ -1,102 +1,6 @@
  <!DOCTYPE html>
 <html lang="id">
- <head>
-  <!-- Meta SEO -->
-  <meta name="description" content="Artikel catatan perjalanan cuti tahunan 2012. Dari Balikpapan ke Jogja, Cepu, Gresik, hingga pulang lagi ke Balikpapan.">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="Catatan Perjalanan 2012">
-  <meta property="og:description" content="Artikel catatan perjalanan cuti tahunan 2012. Dari Balikpapan ke Jogja, Cepu, Gresik, hingga pulang lagi ke Balikpapan.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Catatan Perjalanan 2012">
-  <meta name="twitter:description" content="Artikel catatan perjalanan cuti tahunan 2012. Dari Balikpapan ke Jogja, Cepu, Gresik, hingga pulang lagi ke Balikpapan.">
-  <meta name="twitter:image" content="">
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = Array.from(document.querySelectorAll("main section img"));
-
-      if(images.length > 0){
-        let bestImg = null;
-        let maxArea = 0;
-
-        images.forEach(img => {
-          const width = img.naturalWidth;
-          const height = img.naturalHeight;
-
-          // Hanya pilih landscape (horizontal) dan minimal 300px
-          if(width >= 300 && width >= height){
-            const area = width * height;
-            if(area > maxArea){
-              maxArea = area;
-              bestImg = img;
-            }
-          }
-        });
-
-        // Jika tidak ada landscape yang memenuhi, ambil gambar pertama
-        if(!bestImg) bestImg = images[0];
-
-        const imageUrl = bestImg.src;
-
-        // Update meta og:image dan twitter:image
-        const ogImage = document.querySelector('meta[property="og:image"]');
-        const twImage = document.querySelector('meta[name="twitter:image"]');
-        if(ogImage) ogImage.setAttribute("content", imageUrl);
-        if(twImage) twImage.setAttribute("content", imageUrl);
-      }
-
-      // Update og:url otomatis
-      const ogUrl = document.querySelector('meta[property="og:url"]');
-      if(ogUrl) ogUrl.setAttribute("content", window.location.href);
-    });
-  </script>
-
-  <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; background:#f0f2f5; color:#333; }
-    header { background:#007BFF; color:#fff; padding:2rem 1rem; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-    header h1 { font-size:2rem; }
-    main { max-width:75%; margin:2rem auto; padding:0 1rem; }
-
-    section {
-      margin-bottom:3rem;
-      padding:1.5rem;
-      border-radius:10px;
-      background:#fff;
-      box-shadow:0 4px 10px rgba(0,0,0,0.05);
-      opacity:0;
-      transform: translateY(50px);
-      transition: all 0.8s ease-out;
-    }
-
-    section:nth-child(odd) { background:#ffffff; }
-    section:nth-child(even) { background:#f9f9f9; }
-
-    section p { margin-bottom:1rem; text-align:justify; }
-    figure { margin:1rem 0; text-align:center; }
-    figure img {
-      max-width:100%; height:auto; border-radius:10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    figure img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-    }
-    figcaption { margin-top:0.5rem; font-size:0.9rem; color:#555; }
-
-    footer { text-align:center; padding:2rem 1rem; background:#007BFF; color:#fff; margin-top:3rem; }
-
-    @media (max-width:768px){
-      header h1 { font-size:1.5rem; }
-      section { padding:1rem; }
-    }
-  </style>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catatan Perjalanan 2012</title>
@@ -149,6 +53,7 @@
   <header>
     <h1>Catatan Perjalanan Cuti Tahunan 2012</h1>
   </header>
+
   <main>
     <!-- Masukkan semua <section> yang sudah diminimalkan di sini -->
     <style>
@@ -700,13 +605,9 @@ function handleSwipeGesture() {
     });
   </script>
   
- 
+ <script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
+
 
   
  </body>
 </html>
-
-
-
-
-
