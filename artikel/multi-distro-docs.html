@@ -15,11 +15,9 @@
 <meta property="og:description" content="Tips mengelola dokumen saat memasang banyak Distro dalam satu komputer. Gunakan partisi besar dan softlink agar dokumen tidak duplikat dan mudah diakses.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://frijal.github.io/artikel/multi-distro-docs.html">
-<meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Manajemen Dokumen di Multi-Distro">
 <meta name="twitter:description" content="Tips mengelola dokumen saat memasang banyak Distro dalam satu komputer. Gunakan partisi besar dan softlink agar dokumen tidak duplikat dan mudah diakses.">
-<meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
 <!-- Prism.js untuk syntax highlighting -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
@@ -203,6 +201,6 @@ fetch('https://ipapi.co/json/')
 document.getElementById('ip-info').innerHTML=`IP: ${data.ip} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="${data.country_name}">`;
 });
 </script>
-
+<script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
 </body>
 </html>
