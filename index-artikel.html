@@ -19,6 +19,11 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
 
 <h1>Generate JSON & Sitemap Hybrid</h1>
 
+  <div style="margin-top:15px;">
+  <button id="onlineModeBtn">🌐 Scan Online (GitHub)</button>
+  <button id="offlineModeBtn">📂 Scan Offline (Local)</button>
+</div>
+  
 <div id="progressContainer">
   <div style="background:#ddd; border-radius:4px; overflow:hidden; height:20px;">
     <div id="progressBar"></div>
@@ -41,10 +46,7 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
 <h3>Verbose Log</h3>
 <div id="log"></div>
 
-<div style="margin-top:15px;">
-  <button id="onlineModeBtn">🌐 Scan Online (GitHub)</button>
-  <button id="offlineModeBtn">📂 Scan Offline (Local)</button>
-</div>
+
 
 <script>
 // ----------------- Utility -----------------
