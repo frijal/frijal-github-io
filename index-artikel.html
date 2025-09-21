@@ -3,84 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator Sitemap XML</title>
-<style>
-body { font-family: sans-serif; margin: 2rem; background: #f5f5f5; }
-h1 { text-align: center; }
-button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
-#preview { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
-.preview-item { background: white; padding: 0.5rem; border-radius: 5px; text-align: center; width: 150px; }
-.preview-item img { width: 100%; height: 100px; object-fit: cover; border-radius: 3px; }
-#output { width: 100%; height: 300px; margin-top: 1rem; }
-</style>
+<title>Generate Sitemap XML</title>
 </head>
 <body>
-
-<h1>Generator Sitemap XML dari artikel.json bro...</h1>
-<p>Klik tombol di bawah untuk membuat sitemap.xml dari <code>artikel.json</code>.</p>
-<button id="generate">Generate Sitemap & Download</button>
-
-<div id="preview"></div>
-<textarea id="output" readonly placeholder="XML akan muncul di sini..."></textarea>
+<h1>Generate Sitemap XML</h1>
+<p>Klik tombol di bawah untuk membuat <code>sitemap.xml</code> dari <code>artikel.json</code>.</p>
+<button id="generate-btn">Generate Sitemap</button>
+<pre id="sitemap-output" style="white-space: pre-wrap; border:1px solid #ccc; padding:10px; margin-top:20px;"></pre>
 
 <script>
-async function loadArtikelJson() {
-    const response = await fetch('./artikel.json'); // JSON di root
-    if(!response.ok) throw new Error('Gagal membaca artikel.json');
-    return await response.json();
-}
-
-document.getElementById("generate").addEventListener("click", async () => {
+document.getElementById('generate-btn').addEventListener('click', async () => {
     try {
-        const data = await loadArtikelJson();
-        const today = new Date().toISOString().split("T")[0];
-        const baseUrl = window.location.origin + "/";
+        const response = await fetch('artikel.json');
+        if (!response.ok) throw new Error('Gagal memuat artikel.json');
+        const data = await response.json();
 
-        let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-        xml += '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"\n';
-        xml += '        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">\n';
+        const baseUrl = location.origin; // URL root GitHub Pages
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+        xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-        const previewDiv = document.getElementById("preview");
-        previewDiv.innerHTML = "";
-
-        for(const kategori in data){
-            data[kategori].forEach(artikel => {
-                const title = artikel[0] || "Tanpa Judul";
-                const file = artikel[1] || "#";
-                const url = file.startsWith("http") ? file : baseUrl + "artikel/" + file;
-                const imageUrl = baseUrl + "thumbnail.jpg";
-
-                xml += `  <url>\n`;
-                xml += `    <loc>${url}</loc>\n`;
-                xml += `    <lastmod>${today}</lastmod>\n`;
-                xml += `    <changefreq>monthly</changefreq>\n`;
-                xml += `    <priority>0.8</priority>\n`;
-                xml += `    <image:image>\n`;
-                xml += `      <image:loc>${imageUrl}</image:loc>\n`;
-                xml += `    </image:image>\n`;
-                xml += `  </url>\n`;
-
-                const itemDiv = document.createElement("div");
-                itemDiv.className = "preview-item";
-                itemDiv.innerHTML = `<img src="${imageUrl}" onerror="this.src='thumbnail.jpg'"><span>${url}</span>`;
-                previewDiv.appendChild(itemDiv);
-            });
+        for (const category in data) {
+            if (data.hasOwnProperty(category)) {
+                const articles = data[category];
+                for (const item of articles) {
+                    const url = `${baseUrl}/artikel/${item[1]}`;
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${url}</loc>\n`;
+                    xml += `  </url>\n`;
+                }
+            }
         }
 
-        xml += '</urlset>';
-        document.getElementById("output").value = xml;
+        xml += `</urlset>`;
+        document.getElementById('sitemap-output').textContent = xml;
 
-        const blob = new Blob([xml], {type: "application/xml"});
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "sitemap.xml";
-        link.click();
+        // Opsi: download file
+        const blob = new Blob([xml], { type: 'application/xml' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'sitemap.xml';
+        a.textContent = 'Klik di sini untuk download sitemap.xml';
+        document.body.appendChild(a);
 
-    } catch(e) {
-        alert("Terjadi error: " + e.message);
+    } catch (err) {
+        console.error(err);
+        alert('Gagal generate sitemap. Cek console untuk detail.');
     }
 });
 </script>
-
 </body>
 </html>
