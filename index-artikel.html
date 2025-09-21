@@ -3,21 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generate artikel.json & Sitemap Otomatis</title>
+<title>Generate artikel.json + sitemap.xml (Ultimate Hybrid)</title>
 <style>
 body { font-family: Arial, sans-serif; padding:20px; background:#f5f5f5; }
 h1 { text-align:center; }
 textarea { width:100%; height:150px; padding:10px; font-family: monospace; font-size:14px; margin-top:10px; }
 button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; margin-right:10px; }
-#log { background:#111; color:#0f0; padding:10px; height:300px; overflow-y:auto; font-family: monospace; font-size:13px; margin-top:15px; border-radius:4px; white-space: pre-wrap; }
+#log { background:#111; color:#0f0; padding:10px; height:350px; overflow-y:auto; font-family: monospace; font-size:13px; margin-top:15px; border-radius:4px; white-space: pre-wrap; }
 #progressContainer { margin-top:15px; }
 #progressBar { width:0%; height:20px; background:#4caf50; border-radius:4px; }
 #progressText { text-align:right; font-size:12px; margin-top:2px; }
+#tokenInput { width:100%; padding:8px; font-family: monospace; margin-bottom:10px; }
+h2 { margin-top:30px; }
 </style>
 </head>
 <body>
 
-<h1>Generate artikel.json & Sitemap Otomatis</h1>
+<h1>Generate artikel.json + sitemap.xml (Ultimate Hybrid)</h1>
+<p>Isi GitHub Personal Access Token jika ada (untuk menghindari rate limit):</p>
+<input type="text" id="tokenInput" placeholder="ghp_..." />
 
 <div id="progressContainer">
   <div style="background:#ddd; border-radius:4px; overflow:hidden; height:20px;">
@@ -26,18 +30,22 @@ button { padding:10px 15px; font-size:16px; margin-top:10px; cursor:pointer; mar
   <div id="progressText">0 / 0 files</div>
 </div>
 
+<h2>Output JSON</h2>
 <textarea id="jsonOutput" readonly></textarea>
 <br>
-<button id="downloadBtn">⬇️ Download JSON</button>
-<button id="copyBtn">📋 Copy JSON</button>
-<button id="refreshBtn">🔄 Refresh Scan</button>
-<button id="clearLogBtn">🧹 Clear Log</button>
+<button id="downloadJsonBtn">⬇️ Download JSON</button>
+<button id="copyJsonBtn">📋 Copy JSON</button>
+
+<h2>Output sitemap.xml</h2>
+<textarea id="sitemapOutput" readonly></textarea>
+<br>
+<button id="downloadSitemapBtn">⬇️ Download sitemap.xml</button>
 
 <h3>Verbose Log</h3>
 <div id="log"></div>
 
 <script>
-// --------- Utility ---------
+// ----------------- Utility -----------------
 function log(msg){
   const logBox = document.getElementById("log");
   logBox.textContent += msg + "\n";
@@ -45,125 +53,150 @@ function log(msg){
 }
 function sleep(ms){ return new Promise(resolve=>setTimeout(resolve, ms)); }
 
-// --------- Repo config ---------
+// ----------------- Repo config -----------------
 const owner = "frijal";
 const repo = "frijal.github.io";
 const folder = "artikel";
+const defaultThumbnail = "thumbnail.jpg";
 
-// --------- Kategori ---------
+// ----------------- Kategori -----------------
 function titleToCategory(title){
   const t = title.toLowerCase();
   const cats = [
-    {name: "Arch", k:["arch","manjaro","cachyos","endeavouros"]},
-    {name: "Debian", k:["debian","ubuntu","mint"]},
-    {name: "Desktop", k:["kde","gnome","xfce","desktop environment"]},
-    {name: "Religi", k:["allah","shalat","agama","puasa","nabi","islam"]}
-    // bisa ditambah kategori lain sesuai kebutuhan
+    {name:"Arch",k:["arch","manjaro","cachyos","endeavouros","artix","parabola","blackarch","garuda","antergos","arco"]},
+    {name:"Debian",k:["debian","ubuntu","mint","mx linux","elementary","puppy","kali","kubuntu","xubuntu","lubuntu","zorin","popos","deepin","tails","raspbian","devuan"]},
+    {name:"Desktop",k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce","desktop environment","fluxbox","openbox","i3","sway","awesome","dwm","enlightenment","wayland","xorg","window manager"]},
+    {name:"Kehidupan",k:["hidup","uang","dosa","alasan","bapak","ibu","anak","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily","rutinitas","bahagia","sedih","cinta","emosi","keluarga","sosial","masalah","motivasi","inspirasi","tujuan","rencana","kebiasaan","jodoh","nikah"]},
+    {name:"Kerja",k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir","bisnis","proyek","meeting","wawancara","resign","gaji","promosi","lembur","freelance","startup","cv","lamaran","manajemen","produktivitas"]},
+    {name:"Kuliner",k:["resep","makan","minum","bumbu","kuliner","masak","restoran","kafe","jajanan","sarapan","makan siang","makan malam","diet","makanan","minuman","dapur","kue","roti","gorengan"]},
+    {name:"Multimedia",k:["video","foto","audio","film","ffmpeg","imagemagick","photoshop","gimp","audacity","blender","premiere","davinci","lightroom","kdenlive","shotcut","editing","produksi","musik","podcast","vfx","efek"]},
+    {name:"Lainnya",k:[]}
   ];
   return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"Lainnya"}).name;
 }
 
-// --------- GitHub API rate limit ---------
-async function checkRateLimit(){
+// ----------------- Rate Limit Helper -----------------
+async function checkRateLimit(GITHUB_TOKEN){
   try{
-    const res = await fetch('https://api.github.com/rate_limit');
+    const res = await fetch('https://api.github.com/rate_limit',{
+      headers: GITHUB_TOKEN ? { "Authorization": `token ${GITHUB_TOKEN}` } : {}
+    });
     const data = await res.json();
-    const remaining = data.rate.remaining;
-    const resetTime = data.rate.reset*1000;
-    log(`🔹 GitHub API Remaining: ${remaining}, Reset at: ${new Date(resetTime).toLocaleTimeString()}`);
-    return {remaining, resetTime};
+    return { remaining: data.rate.remaining, resetTime: data.rate.reset*1000 };
   }catch(err){
     log("❌ Gagal cek rate limit: "+err.message);
-    return {remaining:1, resetTime:Date.now()+60000};
+    return { remaining:1, resetTime:Date.now()+60000 };
   }
 }
-
-async function fetchFileWithRateLimit(file){
+async function fetchFileWithRateLimit(file,GITHUB_TOKEN){
   while(true){
-    const {remaining, resetTime} = await checkRateLimit();
+    const { remaining, resetTime } = await checkRateLimit(GITHUB_TOKEN);
     if(remaining>5) break;
     const waitMs = resetTime - Date.now() + 1000;
     log(`⏳ Menunggu ${Math.ceil(waitMs/1000)}s karena rate limit hampir habis...`);
     await sleep(waitMs);
   }
-  return await fetch(file.download_url).then(r=>r.text());
+  return await fetch(file.download_url,{
+    headers: GITHUB_TOKEN ? { "Authorization": `token ${GITHUB_TOKEN}` } : {}
+  }).then(r=>r.text());
 }
 
-// --------- Main ---------
+// ----------------- Ambil thumbnail dari og:image -----------------
+async function fetchThumbnail(htmlText){
+  try{
+    const doc = new DOMParser().parseFromString(htmlText,'text/html');
+    const og = doc.querySelector('meta[property="og:image"]');
+    return og?.content || defaultThumbnail;
+  }catch(e){
+    return defaultThumbnail;
+  }
+}
+
+// ----------------- Main -----------------
 let totalFiles=0, completedFiles=0, startTimeProgress=0;
 
-async function generateJSONRateLimitAware(){
+async function generateJSONAndSitemap(){
   document.getElementById("jsonOutput").value="";
+  document.getElementById("sitemapOutput").value="";
   document.getElementById("log").textContent="";
   document.getElementById("progressBar").style.width="0%";
   document.getElementById("progressText").textContent="0 / 0 files";
-  startTimeProgress = Date.now();
-  completedFiles = 0;
+  startTimeProgress=Date.now();
+  completedFiles=0;
+
+  const GITHUB_TOKEN = document.getElementById("tokenInput").value.trim() || null;
 
   try{
     log("🔍 Mengambil daftar file dari repo...");
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`);
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`,{
+      headers: GITHUB_TOKEN ? { "Authorization": `token ${GITHUB_TOKEN}` } : {}
+    });
     const files = await res.json();
-
-    if(!Array.isArray(files)) throw new Error(files.message || "Response bukan array!");
-
+    if(!Array.isArray(files)) throw new Error("Response bukan array");
     const htmlFiles = files.filter(f=>f.type==="file" && f.name.endsWith(".html"));
     totalFiles = htmlFiles.length;
     log(`📂 Ditemukan ${totalFiles} file HTML`);
 
     const grouped = {};
-    const seenTitles = new Set();
-    const duplicates = [];
+    const sitemapEntries = [];
 
-    let concurrency = Math.min(10, totalFiles);
-    let index = 0;
-
+    let index=0;
     async function worker(){
       while(index<htmlFiles.length){
         const i=index++;
-        const f = htmlFiles[i];
+        const f=htmlFiles[i];
         try{
-          const htmlText = await fetchFileWithRateLimit(f);
+          const htmlText = await fetchFileWithRateLimit(f,GITHUB_TOKEN);
           const doc = new DOMParser().parseFromString(htmlText,'text/html');
           const title = doc.querySelector("title")?.innerText || f.name;
+          const category = titleToCategory(title);
 
-          // ambil og:image
-          const metaImg = doc.querySelector('meta[property="og:image"]')?.content || 'thumbnail.jpg';
+          if(!grouped[category]) grouped[category]=[];
+          grouped[category].push([title,f.name]);
 
-          if(seenTitles.has(title)){
-            duplicates.push([title,f.name]);
-          } else {
-            seenTitles.add(title);
-            const category = titleToCategory(title);
-            if(!grouped[category]) grouped[category]=[];
-            grouped[category].push({title,fname:f.name,img:metaImg});
-          }
+          // Sitemap
+          const thumbnail = await fetchThumbnail(htmlText);
+          sitemapEntries.push({
+            loc: `https://${owner}.github.io/${folder}/${f.name}`,
+            lastmod: new Date().toISOString(),
+            image: thumbnail
+          });
+
         }catch(e){
-          if(!grouped["Lainnya"]) grouped["Lainnya"]=[];
-          grouped["Lainnya"].push({title:f.name,fname:f.name,img:"thumbnail.jpg"});
+          log(`⚠️ Error file ${f.name}: ${e.message}`);
         }
 
         completedFiles++;
         const percent = Math.round((completedFiles/totalFiles)*100);
-        document.getElementById("progressBar").style.width = percent+"%";
+        document.getElementById("progressBar").style.width = percent + "%";
         const elapsed = (Date.now()-startTimeProgress)/1000;
         const eta = Math.round((elapsed/completedFiles)*(totalFiles-completedFiles));
         document.getElementById("progressText").textContent = `${completedFiles} / ${totalFiles} files (${percent}%) | ETA: ${eta}s`;
       }
     }
+    await Promise.all(Array(10).fill().map(()=>worker()));
 
-    await Promise.all(Array(concurrency).fill().map(()=>worker()));
+    // JSON
+    function jsonPretty(obj){
+      return '{\n'+Object.keys(obj).map(cat=>`  "${cat}":[\n${obj[cat].map(a=>`    ["${a[0]}","${a[1]}"]`).join(',\n')}\n  ]`).join(',\n')+'\n}';
+    }
+    document.getElementById("jsonOutput").value = jsonPretty(grouped);
 
-    // generate JSON
-    const jsonOutput = JSON.stringify(grouped,null,2);
-    document.getElementById("jsonOutput").value = jsonOutput;
+    // Sitemap XML
+    const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+      sitemapEntries.map(e=>`  <url>
+    <loc>${e.loc}</loc>
+    <lastmod>${e.lastmod}</lastmod>
+    <image:image>
+      <image:loc>${e.image}</image:loc>
+      <image:title>${e.loc}</image:title>
+    </image:image>
+  </url>`).join("\n") +
+      `\n</urlset>`;
+    document.getElementById("sitemapOutput").value = sitemapXml;
 
-    log("\n📊 Ringkasan per kategori:");
-    Object.entries(grouped).sort((a,b)=>b[1].length-a[1].length)
-      .forEach(([cat,arr])=>log(`   - ${cat}: ${arr.length} item`));
-    log(`\n📈 Total file: ${totalFiles}, Duplikat: ${duplicates.length}`);
-    log(`⏱️ Waktu total: ${(Date.now()-startTimeProgress)/1000}s`);
-    log("\n✅ Proses selesai!");
+    log("\n✅ Proses selesai! JSON & sitemap siap diunduh.");
+    document.getElementById("progressText").textContent = `Selesai: ${completedFiles} / ${totalFiles} files`;
 
   }catch(err){
     log("❌ Error: "+err.message);
@@ -171,22 +204,26 @@ async function generateJSONRateLimitAware(){
   }
 }
 
-// --------- Tombol ---------
-document.getElementById("downloadBtn").addEventListener("click",()=>{
+// ----------------- Tombol -----------------
+document.getElementById("downloadJsonBtn").addEventListener("click",()=>{
   const blob = new Blob([document.getElementById("jsonOutput").value],{type:"application/json"});
   const url = URL.createObjectURL(blob);
   const a=document.createElement("a"); a.href=url; a.download="artikel.json"; a.click();
   URL.revokeObjectURL(url);
 });
-document.getElementById("copyBtn").addEventListener("click",async()=>{
-  try{ await navigator.clipboard.writeText(document.getElementById("jsonOutput").value); log("📋 JSON berhasil dicopy!"); }
+document.getElementById("copyJsonBtn").addEventListener("click",async()=>{
+  try{ await navigator.clipboard.writeText(document.getElementById("jsonOutput").value); log("📋 JSON berhasil dicopy ke clipboard!"); }
   catch(err){ log("❌ Gagal copy JSON: "+err.message); }
 });
-document.getElementById("refreshBtn").addEventListener("click",()=>{ generateJSONRateLimitAware(); });
-document.getElementById("clearLogBtn").addEventListener("click",()=>{ document.getElementById("log").textContent=""; });
+document.getElementById("downloadSitemapBtn").addEventListener("click",()=>{
+  const blob = new Blob([document.getElementById("sitemapOutput").value],{type:"application/xml"});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="sitemap.xml"; a.click();
+  URL.revokeObjectURL(url);
+});
 
-// otomatis run
-generateJSONRateLimitAware();
+// Jalankan otomatis
+generateJSONAndSitemap();
 </script>
 </body>
 </html>
