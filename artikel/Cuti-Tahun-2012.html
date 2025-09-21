@@ -1,6 +1,64 @@
  <!DOCTYPE html>
 <html lang="id">
 <head>
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Ambil semua gambar dalam artikel
+  const images = Array.from(document.querySelectorAll("main section img"));
+
+  if(images.length > 0){
+    let bestImg = null;
+    let maxArea = 0;
+
+    images.forEach(img => {
+      const width = img.naturalWidth;
+      const height = img.naturalHeight;
+
+      // Hanya pilih landscape (horizontal) dan minimal 300px
+      if(width >= 300 && width >= height){
+        const area = width * height;
+        if(area > maxArea){
+          maxArea = area;
+          bestImg = img;
+        }
+      }
+    });
+
+    // Jika tidak ada landscape yang memenuhi, ambil gambar pertama
+    if(!bestImg) bestImg = images[0];
+
+    const imageUrl = bestImg.src;
+
+    // Update meta og:image dan twitter:image
+    let ogImage = document.querySelector('meta[property="og:image"]');
+    let twImage = document.querySelector('meta[name="twitter:image"]');
+
+    if(!ogImage){
+      ogImage = document.createElement("meta");
+      ogImage.setAttribute("property", "og:image");
+      document.head.appendChild(ogImage);
+    }
+    if(!twImage){
+      twImage = document.createElement("meta");
+      twImage.setAttribute("name", "twitter:image");
+      document.head.appendChild(twImage);
+    }
+
+    ogImage.setAttribute("content", imageUrl);
+    twImage.setAttribute("content", imageUrl);
+  }
+
+  // Update og:url otomatis
+  let ogUrl = document.querySelector('meta[property="og:url"]');
+  if(!ogUrl){
+    ogUrl = document.createElement("meta");
+    ogUrl.setAttribute("property", "og:url");
+    document.head.appendChild(ogUrl);
+  }
+  ogUrl.setAttribute("content", window.location.href);
+});
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catatan Perjalanan Cuti Tahun 2012</title>
