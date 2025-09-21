@@ -15,14 +15,12 @@
   <meta property="og:description" content="Instal Conky, pakai konfigurasi Bahasa Indonesia, tambah sensor jaringan ponsel/modem, dan atur autostart." />
   <meta property="og:url" content="https://frijal.github.io/artikel/conky-bahasa-indonesia.html" />
   <meta property="og:site_name" content="frijal.github.io" />
-  <meta property="og:image" content="https://frijal.github.io/assets/og/conky-id.jpg" />
   <meta property="og:image:alt" content="Tampilan Conky berbahasa Indonesia di desktop Linux" />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Conky Bahasa Indonesia: pasang & konfigurasi" />
   <meta name="twitter:description" content="Langkah lengkap memasang Conky, script mulai, autostart, dan contoh .conkyrc berbahasa Indonesia." />
-  <meta name="twitter:image" content="https://frijal.github.io/assets/og/conky-id.jpg" />
   <meta name="twitter:site" content="@frijal" />
 
   <!-- Favicon (SVG inline) -->
@@ -643,5 +641,7 @@ ${top name 3} ${alignr}${top mem 3} MiB
         });
     })();
   </script>
+  <script>document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("main section img");const src=i?i.src:"thumbnail.jpg";["og:image","twitter:image"].forEach((p,j)=>{let m=document.querySelector(j?`meta[name="${p}"]`:`meta[property="${p}"]`);if(!m){m=document.createElement("meta");j?m.setAttribute("name",p):m.setAttribute("property",p);document.head.appendChild(m)}m.setAttribute("content",src)});let u=document.querySelector('meta[property="og:url"]');if(!u){u=document.createElement("meta");u.setAttribute("property","og:url");document.head.appendChild(u)}u.setAttribute("content",window.location.href)});</script>
+
 </body>
 </html>
