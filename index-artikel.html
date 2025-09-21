@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator Sitemap GitHub Pages</title>
+<title>Generator Sitemap dari artikel.json</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
-input { padding: 6px; margin-right: 10px; width: 200px; }
-button { padding: 6px 12px; cursor: pointer; }
+button { padding: 6px 12px; cursor: pointer; margin-top: 10px; }
 #preview { margin-top: 20px; }
 .preview-item { display: flex; align-items: center; margin-bottom: 10px; }
 .preview-item img { width: 80px; height: 60px; object-fit: cover; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
@@ -16,62 +15,64 @@ textarea { width: 100%; height: 300px; margin-top: 20px; }
 </head>
 <body>
 
-<h2>Generator Sitemap GitHub Pages</h2>
+<h2>Generator Sitemap dari artikel.json</h2>
+<p>Pastikan ada file <strong>artikel.json</strong> di folder <code>artikel/</code>.</p>
 
-<p>Masukkan username GitHub dan nama repo (folder artikel/)</p>
-<input type="text" id="username" placeholder="Username GitHub">
-<input type="text" id="repo" placeholder="Nama Repo">
 <button id="generate">Generate Sitemap</button>
 
 <div id="preview"></div>
 <textarea id="output" readonly></textarea>
 
 <script>
-async function getHtmlFiles(username, repo) {
-    const apiUrl = `https://api.github.com/repos/${username}/${repo}/git/trees/main?recursive=1`;
-    const response = await fetch(apiUrl);
-    if(!response.ok) throw new Error("Gagal mengambil daftar file dari GitHub.");
-    const data = await response.json();
-    return data.tree
-        .filter(f => f.path.startsWith("artikel/") && f.path.endsWith(".html"))
-        .map(f => f.path);
+async function loadArtikelJson() {
+    const response = await fetch('artikel.json'); // sesuaikan path
+    if(!response.ok) throw new Error('Gagal membaca artikel.json');
+    return await response.json();
 }
 
 document.getElementById("generate").addEventListener("click", async () => {
-    const username = document.getElementById("username").value.trim();
-    const repo = document.getElementById("repo").value.trim();
-    if(!username || !repo) { alert("Masukkan username dan repo!"); return; }
-
     try {
-        const htmlFiles = await getHtmlFiles(username, repo);
+        const data = await loadArtikelJson();
         const today = new Date().toISOString().split("T")[0];
-        const baseUrl = `https://${username}.github.io/${repo === username + ".github.io" ? "" : repo + "/"}`;
+        const baseUrl = window.location.origin + "/"; // ubah jika perlu untuk GitHub Pages
 
         let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
         xml += '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"\n';
         xml += '        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">\n';
 
-        htmlFiles.forEach(file => {
-            const fileName = file.split("/").pop().replace(".html","") + ".jpg";
-            const thumbPath = `artikel/thumb/${fileName}`;
-            const imageUrl = `${baseUrl}${thumbPath}`;
+        const previewDiv = document.getElementById("preview");
+        previewDiv.innerHTML = "";
 
-            xml += `  <url>\n`;
-            xml += `    <loc>${baseUrl}${file}</loc>\n`;
-            xml += `    <lastmod>${today}</lastmod>\n`;
-            xml += `    <changefreq>monthly</changefreq>\n`;
-            xml += `    <priority>0.8</priority>\n`;
-            xml += `    <image:image>\n`;
-            xml += `      <image:loc>${imageUrl}</image:loc>\n`;
-            xml += `    </image:image>\n`;
-            xml += `  </url>\n`;
-        });
+        // Loop per kategori
+        for(const kategori in data){
+            const artikelList = data[kategori];
+            artikelList.forEach(artikel => {
+                const title = artikel[0] || "Tanpa Judul";
+                const url = artikel[1] ? (artikel[1].startsWith("http") ? artikel[1] : baseUrl + "artikel/" + artikel[1]) : "#";
+                const thumb = "thumbnail.jpg"; // fallback thumbnail
+                const imageUrl = baseUrl + thumb;
+
+                xml += `  <url>\n`;
+                xml += `    <loc>${url}</loc>\n`;
+                xml += `    <lastmod>${today}</lastmod>\n`;
+                xml += `    <changefreq>monthly</changefreq>\n`;
+                xml += `    <priority>0.8</priority>\n`;
+                xml += `    <image:image>\n`;
+                xml += `      <image:loc>${imageUrl}</image:loc>\n`;
+                xml += `    </image:image>\n`;
+                xml += `  </url>\n`;
+
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "preview-item";
+                itemDiv.innerHTML = `<img src="${imageUrl}" onerror="this.src='thumbnail.jpg'"><span>${url}</span>`;
+                previewDiv.appendChild(itemDiv);
+            });
+        }
 
         xml += '</urlset>';
-
         document.getElementById("output").value = xml;
 
-        // Download otomatis
+        // download sitemap.xml otomatis
         const blob = new Blob([xml], {type: "application/xml"});
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
@@ -83,7 +84,6 @@ document.getElementById("generate").addEventListener("click", async () => {
     }
 });
 </script>
-
 
 </body>
 </html>
