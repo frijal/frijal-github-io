@@ -1,7 +1,7 @@
 #related-posts-container {
     /* Posisi dan tampilan kotak */
     position: fixed; /* Membuat elemen menempel pada layar */
-    top: 50%; /* Posisikan di tengah vertikal */
+    top: 30%; /* Posisikan di tengah vertikal */
     right: 0; /* Posisikan di sisi kanan */
     transform: translateY(-50%); /* Menyesuaikan posisi agar benar-benar di tengah */
     font-family: inherit;
