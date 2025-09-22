@@ -98,9 +98,9 @@
     </p>
 
     <pre><code class="language-bash">perl -pi -w -e 's/Desember/Januari/g;' *.txt</code></pre>
-<p>atau bisa juga mengganti url di dalam file, dengan cara mengubah pemisahnya. Jika contoh di atas pemisah adalah / maka kita bisa menggunakan pemisah lainnya. 
- Yang penting kata atau kalimat awal harus bisa dibedakan dengan kata atau kalimat yang baru. </p>
-   <pre><code class="language-bash">perl -pi -w -e 's#//frijal.github.io/" target="_blank"#<//frijal.github.io/sitemap.html" target="_blank"#g' *.html</code></pre>
+<p>atau bisa juga mengganti url di dalam file, dengan cara mengubah pemisahnya. Jika contoh di atas pemisahnya adalah / maka kita bisa menggunakan pemisah lainnya, misalnya kita pakai pemisah #. 
+ Yang penting kata atau kalimat awal harus bisa dibedakan dengan kata atau kalimat yang baru.</p>
+   <pre><code class="language-bash">perl -pi -w -e 's#//frijal.github.io/" target="_blank"#//frijal.github.io/sitemap.html" target="_blank"#g' *.html</code></pre>
     <blockquote>
       Catatan: Berkas yang didukung hanyalah <b>plain text</b>, misalnya <code>.txt</code>, <code>.html</code>, <code>.css</code>, <code>.xml</code>, dll.
     </blockquote>
