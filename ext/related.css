@@ -10,7 +10,7 @@
     max-height: 80vh;
     padding: 15px;
     overflow-y: auto;
-    z-index: -1;
+    z-index: 1;
     
     /* Mewarisi font dan ukuran font */
     font-family: inherit;
