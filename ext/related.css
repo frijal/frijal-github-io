@@ -4,7 +4,7 @@
     top: 50%; /* Posisikan di tengah vertikal */
     right: 0; /* Posisikan di sisi kanan */
     transform: translateY(-50%); /* Menyesuaikan posisi agar benar-benar di tengah */
-
+    font-family: inherit;
     /* Ukuran dan warna */
     width: 250px;
     max-height: 80vh; /* Tinggi maksimum 80% dari viewport */
@@ -22,6 +22,7 @@
     margin-top: 0;
     border-bottom: 2px solid #333;
     padding-bottom: 5px;
+    font-family: inherit;
 }
 
 #related-posts-list {
@@ -39,6 +40,7 @@
     color: #007bff; /* Warna tautan */
     font-weight: bold;
     display: block; /* Membuat tautan memenuhi seluruh lebar list item */
+    font-family: inherit;
 }
 
 #related-posts-list a:hover {
