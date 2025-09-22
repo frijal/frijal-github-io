@@ -1,1 +1,46 @@
-dfhd
+#related-posts-container {
+    /* Posisi dan tampilan kotak */
+    position: fixed; /* Membuat elemen menempel pada layar */
+    top: 50%; /* Posisikan di tengah vertikal */
+    right: 0; /* Posisikan di sisi kanan */
+    transform: translateY(-50%); /* Menyesuaikan posisi agar benar-benar di tengah */
+
+    /* Ukuran dan warna */
+    width: 250px;
+    max-height: 80vh; /* Tinggi maksimum 80% dari viewport */
+    background-color: transparent; /* Latar belakang transparan */
+    color: #333; /* Warna teks */
+    padding: 15px;
+    border: 1px solid #ccc; /* Border opsional untuk visibilitas */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Sesuaikan bayangan */
+    overflow-y: auto; /* Tambahkan scrollbar jika konten melebihi max-height */
+    z-index: 1000; /* Pastikan elemen berada di atas konten lain */
+}
+
+#related-posts-container h3 {
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+#related-posts-list {
+    list-style-type: none; /* Hilangkan bullet point */
+    padding: 0;
+    margin: 0;
+}
+
+#related-posts-list li {
+    margin-bottom: 10px;
+}
+
+#related-posts-list a {
+    text-decoration: none; /* Hilangkan garis bawah pada tautan */
+    color: #007bff; /* Warna tautan */
+    font-weight: bold;
+    display: block; /* Membuat tautan memenuhi seluruh lebar list item */
+}
+
+#related-posts-list a:hover {
+    text-decoration: underline; /* Munculkan garis bawah saat kursor mengarah */
+}
