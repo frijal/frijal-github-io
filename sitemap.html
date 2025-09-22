@@ -45,7 +45,13 @@
 
   @media(max-width:500px){ #infoBar { flex-direction:column; gap:10px; } }
 
- /* Badge jumlah artikel di kategori TOC */
+ .flag-icon {
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+ 
+  /* Badge jumlah artikel di kategori TOC */
 .category-header {
   display: flex;
   justify-content: space-between;
@@ -393,9 +399,12 @@ fetch('https://ipapi.co/json/').then(res => res.json()).then(data => {
         el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
     });
 
-}).catch(err=>{
-    document.getElementById('footerInfo').textContent='Tidak dapat mengambil data IP';
-    console.error(err);
+}).catch(err => {
+    const footer = document.getElementById('footerInfo');
+    if (footer) {
+        footer.textContent = 'Gagal memuat info IP. Silakan coba lagi nanti.';
+    }
+    console.error('Terjadi kesalahan saat mengambil data IP:', err);
 });
 
 </script>
