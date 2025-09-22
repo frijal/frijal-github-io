@@ -392,14 +392,12 @@ fetch('https://ipapi.co/json/').then(res => res.json()).then(data => {
         el.addEventListener('mouseenter', ()=>{ el.style.transform='scale(1.05)'; el.style.color='#007BFF'; });
         el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
     });
-    
-}).catch(err => {
-    const footer = document.getElementById('footerInfo');
-    if (footer) {
-        footer.textContent = 'Gagal memuat info IP. Silakan coba lagi nanti.';
-    }
-    console.error('Terjadi kesalahan saat mengambil data IP:', err);
+
+}).catch(err=>{
+    document.getElementById('footerInfo').textContent='Tidak dapat mengambil data IP';
+    console.error(err);
 });
+
 </script>
  
 </body>
