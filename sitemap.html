@@ -367,28 +367,25 @@ function getOSInfo(){
     return {name, icon: osIcons[name] || osIcons["Unknown"]};
 }
 
-// --- Ambil IP dan info lokasi + bendera ---
+    // Ambil IP dan info lokasi + bendera
 fetch('https://ipapi.co/json/').then(res => res.json()).then(data => {
     const footer = document.getElementById('footerInfo');
     const browser = getBrowserInfo();
     const os = getOSInfo();
-    const countryCode = data.country_code.toLowerCase();
+    const countryCode = data.country_code.toUpperCase();
     
-    // FlagCDN
-    const flagImg = `<img src="https://flagcdn.com/48x36/${countryCode}.png" alt="${data.country_name}" width="24" height="18" style="vertical-align:middle;border:1px solid #ccc;border-radius:2px;">`;
+    // Konversi kode negara (mis. 'ID') menjadi emoji bendera ('🇮🇩')
+    const flagEmoji = countryCode.split('').map(char => String.fromCodePoint(char.charCodeAt(0) + 127397)).join('');
     
     // Tampilkan semua info
     footer.innerHTML = `
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-            <span style="width:16px;height:16px;display:inline-block;">${browser.icon}</span> <span>${browser.name} ${browser.version}</span>
-        </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-            <span style="width:16px;height:16px;display:inline-block;">${os.icon}</span> <span>${os.name}</span>
-        </div>
-        <div class="info-item" style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-            <span style="width:16px;height:16px;display:inline-block;">${globePNG}</span> <span>${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagImg}
+        <div class="info-item">
+            ...
+            <span>${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagEmoji}
         </div>
     `;
+    // ...
+});
 
     // Animasi hover
     document.querySelectorAll('.info-item').forEach(el=>{
