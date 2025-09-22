@@ -12,6 +12,7 @@
 ![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/CSS3-Yes-blue?style=for-the-badge&logo=css3&logoColor=white)
 ![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/Gemini-Yes-blueviolet?style=for-the-badge&logo=google&logoColor=white)
 ![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/ChatGPT-Yes-blue?style=for-the-badge&logo=openai&logoColor=white)
+![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/Copilot-Yes-purple?style=for-the-badge&logo=github&logoColor=white)
 ![Cloud & Hosting, menunjukkan platform cloud atau layanan hosting yang digunakan, untuk mengelola proyek.](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?style=for-the-badge&logo=github&logoColor=white)
 ![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Release-Continuous-orange?style=for-the-badge)
 ![GitHub Stats, menunjukkan metrik dari repositori GitHub, seperti jumlah bintang, fork, kontributor, atau aktivitas commit.](https://img.shields.io/github/last-commit/frijal/frijal.github.io?style=for-the-badge&logo=github&logoColor=white)
