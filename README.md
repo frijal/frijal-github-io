@@ -111,12 +111,3 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 </table>
 
 ---
-
-## 🎨 Tips Visual
-
-- Gunakan **emoji / ikon / badge animasi** agar README lebih hidup.  
-- Collapse untuk **teks bahasa Inggris**, biar rapi.  
-- Ringkasan visual menggunakan **warna & hover effects** untuk menarik perhatian.  
-- Halaman ini boleh dijadikan template untuk **project apapun** di GitHub.
-
----
