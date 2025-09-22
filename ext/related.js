@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(jsonUrl)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Gagal mengambil data: ' + response.statusText);
+                throw new Error('seluruh artikel sudah dibaca.' + response.statusText);
             }
             return response.json();
         })
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!currentPostCategory) {
-                relatedPostsList.innerHTML = '<li>Kategori artikel tidak dapat ditemukan.</li>';
+                relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
                 return;
             }
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(viewedPostsKey, JSON.stringify(newViewedPosts.slice(-viewedPostsCap)));
 
             if (displayPosts.length === 0) {
-                 relatedPostsList.innerHTML = '<li>Tidak ada artikel terkait yang tersedia.</li>';
+                 relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
                 return;
             }
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => {
-            console.error('Ada masalah dengan operasi fetch:', error);
-            relatedPostsList.innerHTML = '<li>Gagal memuat artikel terkait.</li>';
+            console.error('seluruh artikel sudah dibaca.', error);
+            relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
         });
 });
