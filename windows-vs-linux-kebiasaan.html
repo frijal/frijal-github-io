@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)</title><link rel="stylesheet" href="/ext/related.css">
+  <meta name="description" content="Ringan, lucu, tapi informatif: kebiasaan umum pengguna Windows dan Linux saat memasang aplikasi, menyiapkan sistem, dan menunggu proses. Disajikan seimbang, plus tips dan contoh perintah." />
+  <link rel="canonical" href="https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)" />
+  <meta property="og:description" content="Obrolan santai tentang perbedaan kebiasaan pengguna Windows dan Linux—dengan contoh nyata, tips, dan humor yang sehat." />
+  <meta property="og:url" content="https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html" />
+  <meta property="og:site_name" content="frijal.github.io" />
+  <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg" />
+  <meta property="og:image:alt" content="Ilustrasi Windows dan Linux berdampingan" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)" />
+  <meta name="twitter:description" content="Bahas perbedaan kebiasaan pengguna Windows & Linux secara santai, seimbang, dan bermanfaat." />
+  <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg" />
+  <meta name="twitter:site" content="@frijal" />
+
+  <!-- Favicon (SVG inline) -->
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%232563eb" offset="0"/><stop stop-color="%23ff4b91" offset="1"/></linearGradient></defs><rect width="128" height="128" rx="28" fill="url(%23g)"/><g transform="translate(20,20)"><rect x="8" y="12" width="80" height="20" rx="10" fill="%23fff" opacity=".92"/><rect x="8" y="48" width="62" height="20" rx="10" fill="%23fff" opacity=".92"/><rect x="8" y="84" width="44" height="20" rx="10" fill="%23fff" opacity=".92"/></g></svg>' />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+
+  <!-- Highlight.js (syntax highlighting + copy via plugin) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" integrity="sha512-z87Q0V5JwR+7D3S9qE5Z+9Y/PLdR3wI7w9X3c7q2x2n9E6eU9jLZg6tQj8oT1P5V7i5Xn6kK3z5wL2Q5iQ7qwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-zL5f3A4q9u1VJz3qk1p7i3a8b8w8H42rA1+9eq+0lK9M3xgYz1o0l3P6k1mM1Bf4Y8oL+2o1F4QvFZk0l8l4nQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('pre code').forEach(el=>hljs.highlightElement(el));});</script>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --layer: #0f1530;
+      --glass: rgba(255,255,255,.06);
+      --ink: #e9edf8;
+      --muted: #9aa3b2;
+      --p: #2563eb;
+      --s: #22d3ee;
+      --t: #ff4b91;
+      --y: #f59e0b;
+      --g: #10b981;
+      --ring: 0 0 0 6px rgba(37,99,235,.22);
+      --maxw: 1240px;
+      --radius: 20px;
+      --shadow: 0 30px 60px rgba(0,0,0,.35);
+      --border: 1px solid rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(60vw 40vh at 10% -10%, rgba(37,99,235,.25), transparent 60%),
+        radial-gradient(60vw 40vh at 110% 10%, rgba(255,75,145,.20), transparent 60%),
+        var(--bg);
+    }
+    a{color:#9bc9ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{width:min(94vw,var(--maxw)); margin:28px auto}
+
+    header.hero{
+      position:relative; overflow:hidden;
+      border-radius: var(--radius);
+      border: var(--border); box-shadow: var(--shadow);
+      padding: 28px; background: linear-gradient(180deg, rgba(18,22,50,.8), rgba(11,16,32,.96));
+    }
+    .kicker{display:inline-flex; gap:10px; align-items:center; font-weight:900; letter-spacing:.2px}
+    .kdot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--p),var(--t))}
+    h1{margin:10px 0 6px; font-size: clamp(28px,4vw,48px); line-height:1.12}
+    .sub{margin:0; color:var(--muted); font-size:clamp(14px,1.4vw,18px)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{padding:6px 10px;border-radius:999px;border:var(--border);background:#0f1838; color:#cbd5e1;font-size:12px}
+
+    main.grid{ display:grid; gap:24px; grid-template-columns: 2fr 1fr; margin-top:24px }
+    @media (max-width: 1020px){ main.grid{ grid-template-columns: 1fr } }
+
+    .card{
+      background: linear-gradient(180deg, rgba(15,21,48,.9), rgba(11,16,40,.96));
+      border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{ padding:16px 18px; border-bottom: var(--border); background: linear-gradient(90deg, rgba(37,99,235,.18), rgba(34,211,238,.12), rgba(255,75,145,.12)); font-weight:900 }
+    .card .bd{ padding:20px 22px 24px }
+    .muted{ color: var(--muted) }
+
+    /* Comparison styles */
+    .cols{ display:grid; gap:16px; grid-template-columns: 1fr 1fr }
+    @media (max-width: 820px){ .cols{ grid-template-columns: 1fr } }
+    .box{
+      padding:16px; border-radius:16px; border:var(--border);
+      background: linear-gradient(135deg, rgba(37,99,235,.10), rgba(255,75,145,.10));
+    }
+    .box h3{margin:0 0 8px}
+    .box ul{margin:0; padding-left:18px}
+    .note{ display:flex; gap:10px; align-items:flex-start; padding:12px; border-radius:12px; border:var(--border); background: #0f1830; margin-top:12px}
+
+    /* Gallery */
+    .gallery{ display:grid; gap:12px; grid-template-columns: repeat(3, 1fr) }
+    @media (max-width: 880px){ .gallery{ grid-template-columns: repeat(2, 1fr) } }
+    @media (max-width: 560px){ .gallery{ grid-template-columns: 1fr } }
+    .shot{position:relative; display:block; border-radius:14px; overflow:hidden; border: var(--border); background:#0c1028}
+    .shot img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .25s ease; filter:saturate(1.05) }
+    .shot:hover img{ transform: scale(1.035) }
+    .shot .cap{position:absolute; inset:auto 0 0 0; padding:10px 12px; font-size:12px; color:#fff; background: linear-gradient(180deg, transparent, rgba(0,0,0,.6))}
+
+    /* Lightbox */
+    .lightbox{ position:fixed; inset:0; background: rgba(6,10,20,.88); display:none; align-items:center; justify-content:center; padding:16px; z-index:9998 }
+    .lightbox.open{ display:flex }
+    .lightbox img{ max-width:96vw; max-height:92vh; border-radius:14px; border:var(--border); background:#000 }
+    .lightbox .ctrl{ position:fixed; top:14px; right:16px; display:flex; gap:8px }
+    .lightbox button{ padding:8px 12px; border-radius:10px; border:var(--border); background:#0f1830; color:#fff; cursor:pointer; font-weight:800 }
+    .lightbox button:hover{ box-shadow: var(--ring) }
+
+    /* Code */
+    pre{ background:#0d132c; border: var(--border); border-radius:12px; overflow:auto }
+
+    /* Share */
+    .share{ display:flex; flex-wrap:wrap; gap:10px }
+    .btn-share{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#0f1830; border:var(--border); font-weight:800; color:#e2e8f0; text-decoration:none }
+    .btn-share:hover{ box-shadow: var(--ring) }
+    .ico{ width:20px; height:20px; display:inline-block }
+
+    /* Env */
+    .env{ display:grid; gap:10px; grid-template-columns: 1fr 1fr }
+    @media (max-width: 700px){ .env{ grid-template-columns: 1fr } }
+    .env .row{ display:flex; align-items:center; gap:12px; padding:12px; border-radius:12px; border: var(--border); background:#0f1830 }
+    .flag{ width:32px; height:24px; border-radius:4px; object-fit:cover; border: var(--border) }
+
+    /* Footer info */
+    footer{ width:min(94vw,var(--maxw)); margin: 24px auto 60px }
+    .ipbox{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; padding:12px; border-radius:14px; border: var(--border); background: linear-gradient(90deg, rgba(16,185,129,.08), rgba(37,99,235,.10)) }
+
+    /* Floating Home Buttons (requested; completed) */
+    #btn-home-left, #btn-home-right {
+      position: fixed;
+      display: inline-flex;
+      align-items: center;
+      background-color: #0f1830;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(0,0,0,.35);
+      transition: background 0.3s ease, transform 0.2s ease;
+      z-index: 9999;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    #btn-home-left:hover, #btn-home-right:hover { background-color: #14224a; transform: scale(1.07) }
+    #btn-home-left { left: 10px; top: 30%; transform: translateY(-50%) }
+    #btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%) }
+    #btn-home-left svg, #btn-home-right svg { width:18px; height:18px; fill: currentColor; margin-right:6px }
+  </style>
+
+  <!-- JSON-LD Article -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)",
+    "description":"Perbedaan kebiasaan pengguna Windows dan Linux dalam memasang aplikasi dan menyiapkan sistem, disajikan secara seimbang.",
+    "inLanguage":"id-ID",
+    "author":{"@type":"Person","name":"Fakhrul Rijal"},
+    "publisher":{"@type":"Organization","name":"frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/assets/logo.png"}},
+    "datePublished":"2013-04-03T03:00:00Z",
+    "dateModified":"2025-09-18T21:20:00+08:00",
+    "image":"https://frijal.github.io/assets/og/windows-linux-discuss.jpg",
+    "mainEntityOfPage":"https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html"
+  }
+  </script>
+
+  <!-- JSON-LD Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/"},
+      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel"},
+      {"@type":"ListItem","position":3,"name":"Windows vs Linux: kebiasaan","item":"https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html"}
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Tombol Home Kiri -->
+  <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home">
+    <!-- Ikon Rumah SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 19.5v-9zM9.75 21v-6h4.5v6"/></svg>
+    Home
+  </a>
+  <!-- Tombol Home Kanan -->
+  <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home">
+    <!-- Ikon Rumah SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 19.5v-9zM9.75 21v-6h4.5v6"/></svg>
+    Home
+  </a>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="kicker"><span class="kdot"></span><span>Obrolan Santai • Windows & Linux</span></div>
+      <h1>Windows vs Linux: beda kebiasaan pengguna, tanpa nyinyir, tanpa menggurui</h1>
+      <p class="sub">Hasil diskusi ringan yang bikin senyum: bagaimana pengguna Windows dan Linux biasanya memasang aplikasi, menyiapkan sistem, dan menghadapi “waktu tunggu”. Kita rangkum seimbang—karena setiap orang punya alasan dan kebutuhannya sendiri.</p>
+      <div class="chips">
+        <span class="chip">Windows</span>
+        <span class="chip">Linux</span>
+        <span class="chip">Install Apps</span>
+        <span class="chip">Kebiasaan Pengguna</span>
+      </div>
+    </header>
+
+    <main class="grid">
+      <article class="card">
+        <div class="hd">Kebiasaan umum yang sering terlihat</div>
+        <div class="bd">
+          <div class="cols">
+            <div class="box">
+              <h3>Linux</h3>
+              <ul>
+                <li><b>Install cepat via terminal:</b> ketik perintah paket, tunggu sebentar, aplikasi siap dipakai.</li>
+                <li><b>Banyak bawaan:</b> setelah instal sistem, biasanya sudah ada editor dokumen, pemutar multimedia, utilitas sistem, dan lainnya.</li>
+                <li><b>Repositori terpusat:</b> satu tempat untuk mencari, memasang, memperbarui, dan menghapus aplikasi.</li>
+              </ul>
+              <div class="note">
+                <span>💡</span>
+                <div>GUI store (mis. Software Center) juga tersedia—tidak harus terminal. Pilih yang paling nyaman.</div>
+              </div>
+            </div>
+            <div class="box">
+              <h3>Windows</h3>
+              <ul>
+                <li><b>Installer mandiri:</b> unduh .exe/.msi dari situs resmi, jalankan wizard, klik Next hingga selesai.</li>
+                <li><b>Lisensi & kunci produk:</b> beberapa aplikasi butuh aktivasi; simpan akun/serial dengan aman.</li>
+                <li><b>Store & package manager:</b> kini ada Microsoft Store, winget, atau Chocolatey untuk pemasangan cepat.</li>
+              </ul>
+              <div class="note">
+                <span>🔐</span>
+                <div>Utamakan sumber resmi. Hindari software bajakan supaya aman, stabil, dan legal.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:16px">
+            <span>🤝</span>
+            <div>Intinya bukan siapa yang “lebih manja” atau “lebih sabar”. Setiap platform punya kemudahan dan tantangannya. Pilih yang paling cocok dengan pekerjaan dan kebiasaan Anda.</div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="card">
+        <div class="hd">Contoh perintah pemasangan</div>
+        <div class="bd">
+          <p><b>Linux (Debian/Ubuntu):</b></p>
+          <pre><code class="language-bash">sudo apt update
+sudo apt install paket-yang-dicari</code></pre>
+
+          <p><b>Linux (Fedora):</b></p>
+          <pre><code class="language-bash">sudo dnf install paket-yang-dicari</code></pre>
+
+          <p><b>Windows (winget):</b></p>
+          <pre><code class="language-bash">winget search nama-aplikasi
+winget install Nama.Paket.Resmi</code></pre>
+
+          <p><b>Windows (Chocolatey):</b></p>
+          <pre><code class="language-bash">choco install nama-aplikasi</code></pre>
+
+          <p class="muted">Nama paket berbeda-beda. Selalu periksa dokumentasi resmi aplikasi yang Anda butuhkan.</p>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card" style="margin-top:24px">
+      <div class="hd">Galeri ilustrasi</div>
+      <div class="bd">
+        <div class="gallery" id="gallery">
+          <a href="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" class="shot" data-lightbox="gal" data-caption="Terminal Linux: cepat dan bisa diotomasi">
+            <img loading="lazy" data-src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" alt="Terminal Linux" />
+            <span class="cap">Terminal Linux: cepat dan bisa diotomasi</span>
+          </a>
+          <a href="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=1600&auto=format&fit=crop" class="shot" data-lightbox="gal" data-caption="Wizard installer Windows: pandu langkah demi langkah">
+            <img loading="lazy" data-src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=600&auto=format&fit=crop" alt="Installer Windows" />
+            <span class="cap">Wizard installer Windows: pandu langkah demi langkah</span>
+          </a>
+          <a href="https://images.unsplash.com/photo-1548611716-3d6babd0f36a?q=80&w=1600&auto=format&fit=crop" class="shot" data-lightbox="gal" data-caption="Store & repositori: serba dari satu tempat">
+            <img loading="lazy" data-src="https://images.unsplash.com/photo-1548611716-3d6babd0f36a?q=80&w=600&auto=format&fit=crop" alt="App store" />
+            <span class="cap">Store & repositori: serba dari satu tempat</span>
+          </a>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+          <div class="ctrl">
+            <button id="lb-close" aria-label="Tutup">Tutup ✕</button>
+          </div>
+          <img id="lb-img" src="" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <div class="hd">Tips menjaga kenyamanan di kedua platform</div>
+      <div class="bd">
+        <ul>
+          <li><b>Sumber resmi:</b> unduh dari situs atau repositori tepercaya untuk menghindari malware.</li>
+          <li><b>Cadangan:</b> buat backup sebelum perubahan besar; gunakan restore point (Windows) atau snapshot (Linux/Btrfs).</li>
+          <li><b>Otomasi update:</b> aktifkan pembaruan berkala agar aman dan stabil.</li>
+          <li><b>Catat lisensi:</b> simpan lisensi/akun aplikasi berbayar dan catatan konfigurasi penting.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <div class="hd">Bagikan artikel ini</div>
+      <div class="bd">
+        <p class="muted">Link berbagi: <b>https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html</b></p>
+        <div class="share">
+          <a class="btn-share" id="share-fb" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078V12.07h3.047V9.412c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.49 0-1.953.926-1.953 1.875v2.262h3.328l-.532 3.492h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a class="btn-share" id="share-x" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M18.244 2H21l-6.51 7.44L22.5 22h-6.91l-4.33-5.66L5.19 22H2.43l6.98-7.98L1.5 2h6.91l3.92 5.18L18.24 2z"/></svg>
+            X
+          </a>
+          <a class="btn-share" id="share-twitter" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#1DA1F2" d="M23.954 4.569c-.885.389-1.83.654-2.825.774 1.014-.611 1.794-1.574 2.163-2.724-.95.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .386.045.762.127 1.124-4.094-.205-7.725-2.167-10.159-5.147-.424.722-.666 1.561-.666 2.457 0 1.696.863 3.19 2.173 4.069-.801-.025-1.555-.246-2.214-.614v.061c0 2.37 1.685 4.348 3.918 4.798-.41.111-.84.171-1.285.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.6 3.418-1.685 1.32-3.809 2.108-6.111 2.108-.398 0-.79-.023-1.17-.067 2.179 1.397 4.768 2.209 7.557 2.209 9.054 0 14.002-7.496 14.002-13.986 0-.21 0-.423-.016-.633.961-.695 1.8-1.562 2.46-2.549z"/></svg>
+            Twitter
+          </a>
+          <a class="btn-share" id="share-wa" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#25D366" d="M.057 24l1.687-6.163A11.867 11.867 0 0 1 0 11.993C0 5.373 5.373 0 11.995 0 18.617 0 24 5.373 24 11.993c0 6.62-5.383 11.993-12.005 11.993-2.051 0-3.975-.504-5.668-1.392L.057 24z"/></svg>
+            WhatsApp
+          </a>
+          <a class="btn-share" id="share-tg" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#26A5E4" d="M9.999 15.2l-.4 5.6c.6 0 .9-.3 1.3-.6l3.1-2.9 6.4 4.7c1.2.7 2.1.3 2.4-1.1l4.3-20.1c.4-1.7-.6-2.4-1.8-2l-25 9.7c-1.7.7-1.7 1.6-.3 2l6.4 2 14.8-9.3c.7-.4 1.3-.2.8.3"/></svg>
+            Telegram
+          </a>
+          <a class="btn-share" id="share-ig" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#E1306C" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.4.4.6.2 1 .4 1.5.9.5.5.7.9.9 1.5.2.5.3 1.2.4 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.4-.2.6-.4 1-.9 1.5-.5.5-.9.7-1.5.9-.5.2-1.2.3-2.4.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.4-.4-.6-.2-1-.4-1.5-.9-.5-.5-.7-.9-.9-1.5-.2-.5-.3-1.2-.4-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.4.2-.6.4-1 .9-1.5.5-.5.9-.7 1.5-.9.5-.2 1.2-.3 2.4-.4C8.4 2.2 8.8 2.2 12 2.2"/></svg>
+            Instagram
+          </a>
+          <a class="btn-share" id="share-threads" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M17.48 9.53c-.32-.96-.98-1.78-1.9-2.28-1.01-.55-2.2-.73-3.5-.56-2.89.39-4.86 2.6-4.86 5.29 0 3.08 2.45 5.33 5.83 5.33 2.2 0 3.87-.98 4.78-2.88h-2.18c-.52.93-1.54 1.46-2.71 1.46-1.86 0-3.2-1.2-3.2-2.9h7.3c.02-.2.05-.42.05-.64 0-.39-.06-.86-.21-1.82zM9.75 11.2c.22-1.33 1.33-2.27 2.68-2.27 1.38 0 2.55.93 2.74 2.27H9.75z"/></svg>
+            Threads
+          </a>
+          <a class="btn-share" id="share-tt" href="#" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 24 24"><path fill="#000" d="M12.9 2a9.9 9.9 0 0 0 3.3 2.8C17.2 9 21 9 21 9v3s-3.8 0-5.7-1.7v5.2c0 3.7-3 6.5-6.6 6.5S2 19.2 2 15.5 4.9 9 8.6 9c.5 0 1 .1 1.5.2v3c-.5-.2-1-.3-1.5-.3-2 0-3.6 1.6-3.6 3.6s1.6 3.5 3.6 3.5 3.6-1.5 3.6-3.5V2.1c.6 0 1.2-.05 1.8-.1z"/></svg>
+            TikTok
+          </a>
+          <button class="btn-share" id="share-copy" type="button">Salin Link</button>
+        </div>
+
+        <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+        <div style="margin-top:16px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+        <!-- Facebook Comments Plugin (user-provided) -->
+        <div style="margin-top:18px">
+          <!-- Facebook Comments Plugin -->
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+          </script>
+          <div class="fb-comments"
+               id="fb-comments"
+               data-href=""
+               data-width="100%"
+               data-numposts="5"></div>
+          <script>
+            const currentUrl = window.location.href;
+            document.getElementById("current-url").textContent = currentUrl;
+            // Set data-href FB Comments ke URL halaman ini
+            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+            // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+            window.fbAsyncInit = function() {
+              if (typeof FB !== 'undefined') {
+                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+              }
+            }
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <div class="hd">Lingkungan Anda saat membuka halaman ini</div>
+      <div class="bd">
+        <div class="env" id="env">
+          <div class="row"><span class="ico" id="ico-browser"></span><div><b>Browser:</b> <span id="ua-browser">-</span></div></div>
+          <div class="row"><span class="ico" id="ico-os"></span><div><b>Sistem Operasi:</b> <span id="ua-os">-</span></div></div>
+        </div>
+        <p class="muted" style="margin-top:8px">Informasi diurai dari <span class="kbd">navigator.userAgent</span>; hasil bisa bervariasi tergantung mode privasi/peramban.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="ipbox" id="ipbox">
+      <img id="flag" class="flag" alt="Bendera negara" src="" />
+      <div><b>IP publik:</b> <span id="ip">-</span></div>
+      <div><b>Kota:</b> <span id="city">-</span></div>
+      <div><b>Negara:</b> <span id="country">-</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Lazy-load images (IntersectionObserver)
+    (function(){
+      const imgs = document.querySelectorAll('img[data-src]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs)=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){
+              const el = e.target;
+              el.src = el.getAttribute('data-src');
+              el.removeAttribute('data-src');
+              obs.unobserve(el);
+            }
+          });
+        }, { rootMargin: '150px' });
+        imgs.forEach(i=>io.observe(i));
+      } else {
+        imgs.forEach(i=>{ i.src = i.getAttribute('data-src'); i.removeAttribute('data-src'); });
+      }
+    })();
+
+    // Simple Lightbox
+    (function(){
+      const gallery = document.getElementById('gallery');
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img');
+      const btnClose = document.getElementById('lb-close');
+
+      gallery.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[data-lightbox="gal"]');
+        if(!a) return;
+        e.preventDefault();
+        img.src = a.getAttribute('href');
+        img.alt = a.getAttribute('data-caption') || '';
+        lb.classList.add('open');
+      });
+      btnClose.addEventListener('click', ()=>lb.classList.remove('open'));
+      lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+    })();
+
+    // Share links
+    (function(){
+      const shareUrl = 'https://frijal.github.io/artikel/windows-vs-linux-kebiasaan.html';
+      const text = 'Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)';
+      const enc = encodeURIComponent;
+
+      const map = {
+        'share-fb': `https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrl)}`,
+        'share-x': `https://twitter.com/intent/tweet?url=${enc(shareUrl)}&text=${enc(text)}`,
+        'share-twitter': `https://twitter.com/intent/tweet?url=${enc(shareUrl)}&text=${enc(text)}`,
+        'share-wa': `https://wa.me/?text=${enc(text + ' ' + shareUrl)}`,
+        'share-tg': `https://t.me/share/url?url=${enc(shareUrl)}&text=${enc(text)}`,
+        'share-ig': shareUrl,
+        'share-threads': shareUrl,
+        'share-tt': shareUrl
+      };
+      Object.keys(map).forEach(id=>{
+        const el = document.getElementById(id);
+        if (el) el.href = map[id];
+      });
+
+      const btnCopy = document.getElementById('share-copy');
+      btnCopy?.addEventListener('click', async()=>{
+        try{
+          await navigator.clipboard.writeText(shareUrl);
+          btnCopy.textContent = 'Tersalin!';
+          setTimeout(()=>btnCopy.textContent='Salin Link', 1400);
+        }catch(e){ alert('Gagal menyalin. Salin manual: ' + shareUrl); }
+      });
+
+      if (navigator.share) {
+        const x = document.getElementById('share-x');
+        x?.addEventListener('click', async (e)=>{
+          e.preventDefault();
+          try { await navigator.share({ title: document.title, text, url: shareUrl }); } catch(_){}
+        });
+      }
+    })();
+
+    // UA parsing for Browser/OS + icons
+    (function(){
+      const ua = navigator.userAgent;
+      let browser='Browser Tidak Dikenal', ver='', os='OS Tidak Dikenal', osv='';
+
+      if (/Edg\/(\d+(\.\d+)?)/.test(ua)) { browser='Microsoft Edge'; ver=RegExp.$1; }
+      else if (/OPR\/(\d+(\.\d+)?)/.test(ua) || /Opera\/(\d+(\.\d+)?)/.test(ua)) { browser='Opera'; ver=RegExp.$1; }
+      else if (/Chrome\/(?!.*Chromium)(\d+(\.\d+)?)/.test(ua) && !/Edg\//.test(ua)) { browser='Google Chrome'; ver=RegExp.$1; }
+      else if (/Firefox\/(\d+(\.\d+)?)/.test(ua)) { browser='Mozilla Firefox'; ver=RegExp.$1; }
+      else if (/Safari\/(\d+(\.\d+)?)/.test(ua) && /Version\/(\d+(\.\d+)?)/.test(ua)) { browser='Safari'; ver=RegExp.$1; }
+      else if (/Chromium\/(\d+(\.\d+)?)/.test(ua)) { browser='Chromium'; ver=RegExp.$1; }
+
+      if (/Windows NT ([0-9.]+)/.test(ua)) {
+        os='Windows';
+        const map={'10.0':'10/11','6.3':'8.1','6.2':'8','6.1':'7'};
+        osv = map[RegExp.$1] || RegExp.$1;
+      } else if (/Android ([0-9.]+)/.test(ua)) { os='Android'; osv=RegExp.$1; }
+      else if (/iPhone OS ([0-9_]+)/.test(ua) || /iPad; CPU OS ([0-9_]+)/.test(ua)) { os='iOS'; osv=(RegExp.$1||'').replace(/_/g,'.'); }
+      else if (/Mac OS X ([0-9_]+)/.test(ua)) { os='macOS'; osv=RegExp.$1.replace(/_/g,'.'); }
+      else if (/CrOS/.test(ua)) { os='ChromeOS'; }
+      else if (/Linux/.test(ua)) { os='Linux'; }
+
+      const BICO = {
+        'Google Chrome':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#db4437"/><path d="M21.54 7H12l-3.46-6A10.01 10.01 0 0 1 21.54 7z" fill="#ffcd40"/><path d="M2.46 7 8.54 17h6.92A10 10 0 0 1 2.46 7z" fill="#0f9d58"/><circle cx="12" cy="12" r="5" fill="#4285f4"/></svg>',
+        'Mozilla Firefox':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF9500"/><path fill="#fff" d="M7 16c1.5 1.8 3.8 2.3 6 1.5 2.2-.8 3.8-2.8 4-5-.7 1.3-2 2.2-3.5 2.5-1.6.3-3.2-.2-4.3-1.3C8 12.6 7.5 11.4 7.5 10c-.9 1-1.5 2.3-1.5 3.7 0 .9.3 1.7 1 2.3z"/></svg>',
+        'Microsoft Edge':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0c59a4"/><path d="M5 16c2.5 4 9 5 13 1-2 1.5-6 1.5-8.5.5S6.5 16.5 5 16z" fill="#37c7f4"/></svg>',
+        'Safari':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0fb5ee"/><path d="M12 6l3 6-6 3 3-9z" fill="#fff"/></svg>',
+        'Opera':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff1b2d"/><ellipse cx="12" cy="12" rx="5" ry="8" fill="#fff"/></svg>',
+        'Chromium':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#5f98f7"/><circle cx="12" cy="12" r="5" fill="#2e6ae8"/></svg>'
+      }[browser] || '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>';
+
+      const OSICO = {
+        'Windows':'<svg class="ico" viewBox="0 0 24 24"><path fill="#00A4EF" d="M3 4l8-1v9H3M12 3l9-1v10h-9M3 13h8v9l-8-1M12 13h9v10l-9-1"/></svg>',
+        'macOS':'<svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M16 2c-1 0-2 .6-2.6 1.5-.6.9-1.2 2.2-.9 3.4 1.2.1 2.5-.7 3.2-1.6.7-.9 1.1-2.1 1.2-3.3z"/><path fill="#A3AAAE" d="M20.7 17.2c-.5 1.1-1.2 2.2-2.1 3.2-.7.8-1.5 1.6-2.5 1.6-1 .1-1.3-.5-2.5-.5-1.2 0-1.5.6-2.5.5-1-.1-1.8-.8-2.5-1.6-1.8-2-3.1-5-2.1-7.6.8-2.1 2.7-3.4 4.7-3.5 1 .1 1.9.6 2.6.6.7 0 1.7-.7 2.9-.6 1.1.1 2.2.5 2.9 1.4-2.6 1.6-2.2 5.4.6 6.5z"/></svg>',
+        'Linux':'<svg class="ico" viewBox="0 0 24 24"><path fill="#FCC624" d="M12 2c2.8 0 5 2.2 5 5v2c2.2.3 4 2.2 4 4.5 0 2.5-2 4.5-4.5 4.5H7.5C5 18 3 16 3 13.5 3 11.2 4.8 9.3 7 9V7c0-2.8 2.2-5 5-5z"/><circle cx="9.5" cy="7.5" r="1" fill="#000"/><circle cx="14.5" cy="7.5" r="1" fill="#000"/></svg>',
+        'Android':'<svg class="ico" viewBox="0 0 24 24"><path fill="#3DDC84" d="M7 8h10v10a2 2 0 0 1-2 2h-1v2h-2v-2H9a2 2 0 0 1-2-2V8z"/><path fill="#3DDC84" d="M7 6l-2-3m12 3l2-3" stroke="#3DDC84" stroke-width="1.5"/></svg>',
+        'iOS':'<svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M16.36 2.64a4.5 4.5 0 0 1-1.66 3.04A4.2 4.2 0 0 1 11.99 7a4.2 4.2 0 0 1 1.69-3.39A4.5 4.5 0 0 1 16.36 2.64z"/><path fill="#A3AAAE" d="M20 17.2c-.5 1.1-1.2 2.2-2.1 3.2-.7.8-1.5 1.6-2.5 1.6-1 .1-1.3-.5-2.5-.5-1.2 0-1.5.6-2.5.5-1-.1-1.8-.8-2.5-1.6C6.1 18.9 5 16.4 5.9 14c.8-2.1 2.7-3.4 4.7-3.5 1 .1 1.9.6 2.6.6.7 0 1.7-.7 2.9-.6 1.1.1 2.2.5 2.9 1.4-2.6 1.6-2.2 5.4.6 6.5z"/></svg>',
+        'ChromeOS':'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M2 12a10 10 0 0 1 18-6H12L6.5 6.5" fill="#EA4335"/></svg>'
+      }[os] || '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>';
+
+      document.getElementById('ua-browser').textContent = browser + (ver?(' ' + ver):'');
+      document.getElementById('ua-os').textContent = os + (osv?(' ' + osv):'');
+
+      document.getElementById('ico-browser').innerHTML = BICO;
+      document.getElementById('ico-os').innerHTML = OSICO;
+    })();
+
+    // IP + Flag (ipapi.co)
+    (function(){
+      const ipEl = document.getElementById('ip');
+      const cityEl = document.getElementById('city');
+      const countryEl = document.getElementById('country');
+      const flagEl = document.getElementById('flag');
+
+      fetch('https://ipapi.co/json/')
+        .then(r=>r.json())
+        .then(d=>{
+          ipEl.textContent = d.ip || '-';
+          cityEl.textContent = d.city || '-';
+          countryEl.textContent = (d.country_name || '-') + (d.country_code ? ' ('+d.country_code+')' : '');
+          if (d.country_code) {
+            const cc = String(d.country_code).toLowerCase();
+            flagEl.src = `https://flagcdn.com/48x36/${cc}.png`;
+            flagEl.alt = 'Bendera ' + (d.country_name || cc.toUpperCase());
+          } else {
+            flagEl.style.display='none';
+          }
+        })
+        .catch(_=>{
+          ipEl.textContent = 'Tidak tersedia';
+          cityEl.textContent = 'Tidak tersedia';
+          countryEl.textContent = 'Tidak tersedia';
+          flagEl.style.display='none';
+        });
+    })();
+  </script>
+<div id="related-posts-container"><h3>Artikel Terkait</h3><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>
+</html>
