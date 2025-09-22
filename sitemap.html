@@ -328,23 +328,23 @@ loadTOC();
 <script>
 // --- Ikon SVG Inline ---
 const browserIcons = {
-    "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#FF7139" d="M12.9 6.2c0-1.8-1-3.2-2.5-4.2C9.4 1.2 8.3.9 7.2 1.3c-1.1.4-2 .8-2.9 1.4-.8.6-1.6 1.3-2.2 2-.5.8-.8 1.6-.8 2.5 0 2 1.2 3.5 3 4.6 1.8 1.1 4 1.7 6.4 1.7.3-.2.6-.5.9-.9.4-.4.8-1 1-1.7.3-.8.4-1.6.4-2.5 0-.4-.1-.8-.2-1.2zm-2.4 4.5c-.3.4-.6.8-1 1.2-.4.4-.8.7-1.3.9-1-.2-2-.6-3-1.1-.9-.5-1.7-1.1-2.4-1.8-.7-.7-1.3-1.6-1.8-2.6-.4-.8-.7-1.6-.9-2.5-.2-.9-.2-1.7.1-2.5.2-.8.5-1.5 1-2.1.4-.6 1-1.1 1.6-1.5.6-.5 1.4-.8 2.2-1 .7.2 1.4.5 2.1.9.7.4 1.4.9 2.1 1.5.7.6 1.3 1.2 1.8 1.9.4.7.7 1.4.9 2.2.2.8.3 1.6.1 2.4-.2.8-.5 1.5-1 2.1-.4.6-1 1.1-1.6 1.5z"/></svg>',
-    "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#34A853" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5zm0 1.5a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#4285F4" d="M8 4a4 4 0 100 8A4 4 0 008 4z"/><path fill="#FBBC05" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#EA4335" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/></svg>',
-    "Edge": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#0078D7" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5z"/></svg>',
-    "Safari": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#000" d="M8 1a7 7 0 100 14A7 7 0 008 1zm2.3 2.1c.3.1.5.4.4.7-.1.3-.4.5-.7.4-.3-.1-.5-.4-.4-.7.1-.3.4-.5.7-.4zm-.8 2.7c-.5.3-1.1.5-1.7.5s-1.2-.2-1.7-.5c-.5-.3-.9-.7-1.1-1.2-.3-.5-.4-1.1-.3-1.7s.4-1.1.9-1.5c.5-.4 1.1-.6 1.8-.6s1.3.2 1.7.5c.5.3.9.7 1.1 1.2.3.5.4 1.1.3 1.7-.1.6-.4 1.1-.9 1.5z"/></svg>',
-    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#999" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5zm-.5 3.3a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zM8 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1z"/></svg>'
+  "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#FF7139" d="M12.9 6.2c0-1.8-1-3.2-2.5-4.2C9.4 1.2 8.3.9 7.2 1.3c-1.1.4-2 .8-2.9 1.4-.8.6-1.6 1.3-2.2 2-.5.8-.8 1.6-.8 2.5 0 2 1.2 3.5 3 4.6 1.8 1.1 4 1.7 6.4 1.7.3-.2.6-.5.9-.9.4-.4.8-1 1-1.7.3-.8.4-1.6.4-2.5 0-.4-.1-.8-.2-1.2z"/></svg>',
+  "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#EA4335"/><circle cx="8" cy="8" r="5.5" fill="#FBBC05"/><circle cx="8" cy="8" r="4" fill="#4285F4"/></svg>',
+  "Edge": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#0078D7"/></svg>',
+  "Safari": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#00ADEF"/><path fill="#fff" d="M8 4l1 4-4-1z"/></svg>',
+  "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
 };
 
 // --- Ikon SVG Inline untuk OS ---
 const osIcons = {
-    "Windows": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#00A4EF" d="M8.5 2.1L2.4 3.1 2 7.7l6.5-.8zm-6.1 5.9l-.4 4.6 6.5-.8-.1-4.7zm7.1-.9L9.1 13.9 14 13.1 14 8zm0-1L14 3.1 9.1 2.3 9.1 7z"/></svg>',
-    "macOS": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#000" d="M8.2 1.6C6.7 1.6 4 3 4 5.9c0 2 1.2 3.8 3 4.7.6.3 1.1.5 1.7.5s1.1-.2 1.7-.5c1.8-.9 3-2.7 3-4.7 0-2.9-2.7-4.3-4.2-4.3zM8 12.3c-.6 0-1.1-.2-1.7-.5-.6-.3-1.1-.8-1.5-1.3-.4-.6-.7-1.3-.9-2.1-.2-.8-.2-1.6 0-2.4.2-.8.5-1.5 1-2.1.5-.6 1-1.1 1.6-1.5.6-.4 1.4-.8 2.2-.8s1.6.2 2.2.8c.6.4 1.1.9 1.6 1.5.5.6.8 1.3 1 2.1.2.8.2 1.6 0 2.4-.2.8-.5 1.5-1 2.1-.5.6-1.1 1.1-1.7 1.3-.6.2-1.2.3-1.8.3z"/></svg>',
-    "Linux": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#FBBC05" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5zm0 1.5a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#000" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#EA4335" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#34A853" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#4285F4" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/><path fill="#FBBC05" d="M8 4a4 4 0 100 8A4 4 0 008 4z" clip-rule="evenodd"/></svg>',
-    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#999" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5zm-.5 3.3a1.5 1.5 0 11-1.5 1.5 1.5 1.5 0 011.5-1.5zM8 9a1 1 0 00-1 1v1a1 1 0 002 0v-1a1 1 0 00-1-1z"/></svg>'
+  "Windows": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#00A4EF" d="M8.5 2.1L2.4 3.1 2 7.7l6.5-.8zM2.4 8l-.4 4.6 6.5-.8-.1-4.7zM9.1 7.1v6.8L14 13.1V8zM9.1 2.3v4.7L14 7V3.1z"/></svg>',
+  "macOS": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/></svg>',
+  "Linux": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="10" cy="6" r="1" fill="#fff"/></svg>',
+  "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
 };
 
 // --- Ikon Globe SVG Inline untuk IP ---
-const globePNG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#000" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 1.5a5.5 5.5 0 110 11A5.5 5.5 0 018 2.5zm-.5 1.8c.3.1.5.4.4.7-.1.3-.4.5-.7.4-.3-.1-.5-.4-.4-.7.1-.3.4-.5.7-.4zm-.8 2.7c-.5.3-1.1.5-1.7.5s-1.2-.2-1.7-.5c-.5-.3-.9-.7-1.1-1.2-.3-.5-.4-1.1-.3-1.7s.4-1.1.9-1.5c.5-.4 1.1-.6 1.8-.6s1.3.2 1.7.5c.5.3.9.7 1.1 1.2.3.5.4 1.1.3 1.7-.1.6-.4 1.1-.9 1.5z"/></svg>';
+const globeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#4CAF50"/><path fill="#fff" d="M8 3a5 5 0 010 10 5 5 0 010-10z"/></svg>';
 
 // --- Fungsi deteksi Browser ---
 function getBrowserInfo(){
