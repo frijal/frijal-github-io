@@ -78,7 +78,7 @@ function titleToCategory(title){
   const t = title.toLowerCase();
   const cats = [
     {name: "Arch", k:["arch","manjaro","cachyos","endeavouros","artix","parabola","blackarch","garuda","antergos","arco"]},
-    {name: "Debian", k:["debian","ubuntu","mint","mx linux","elementary","puppy","kali linux","kubuntu","xubuntu","lubuntu","zorin","popos","deepin","tails","raspbian","devuan"]},
+    {name: "Debian", k:["debian","ubuntu","mint","mx linux","elementary","puppy","kubuntu","xubuntu","lubuntu","zorin","popos","deepin","tails","raspbian","devuan"]},
     {name: "Desktop", k:["kde","hyperland","caja","ukui","pantheon","deepin","lxde","budgie","mate","gnome","cinnamon","xfce","desktop environment","fluxbox","openbox","i3","sway","awesome","dwm","enlightenment","wayland","xorg","window manager"]},
     {name: "Kehidupan", k:["hidup","uang","dosa","alasan","bapak","ibu","anak","kehidupan","tidur","sahabat","teman","sombong","wanita","pria","perempuan","laki","silaturahim","daily","rutinitas","bahagia","sedih","cinta","emosi","keluarga","sosial","masalah","motivasi","inspirasi","tujuan","rencana","kebiasaan","jodoh","nikah"]},
     {name: "Kerja", k:["kerja","kantor","dokumen","strategi","pdf","psikotes","karir","bisnis","proyek","meeting","wawancara","resign","gaji","promosi","lembur","freelance","startup","cv","lamaran","manajemen","produktivitas"]},
@@ -197,7 +197,7 @@ async function generateOnline(){
   }catch(err){ log("❌ Error online: "+err.message); }
 }
 
-// ----------------- Mode Offline -----------------
+// ----------------- Mode Offline ----------------
 async function generateOffline(){
   const filesInput = document.createElement("input");
   filesInput.type = "file";
