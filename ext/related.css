@@ -1,32 +1,32 @@
 #related-posts-container {
     /* Posisi dan tampilan kotak */
-    position: fixed; /* Membuat elemen menempel pada layar */
-    top: 30%; /* Posisikan di tengah vertikal */
-    right: 0; /* Posisikan di sisi kanan */
-    transform: translateY(-50%); /* Menyesuaikan posisi agar benar-benar di tengah */
-    font-family: inherit;
+    position: fixed;
+    top: 20%;
+    right: 0;
+    transform: translateY(-50%);
+
     /* Ukuran dan warna */
-    width: 250px;
-    max-height: 80vh; /* Tinggi maksimum 80% dari viewport */
-    /* background-color: transparent; /* Latar belakang transparan */
-    color: #333; /* Warna teks */
+    width: 200px;
+    max-height: 80vh;
     padding: 15px;
-   /* border: 1px solid #ccc; /* Border opsional untuk visibilitas */
-  /*  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Sesuaikan bayangan */
-    overflow-y: auto; /* Tambahkan scrollbar jika konten melebihi max-height */
-    z-index: 1000; /* Pastikan elemen berada di atas konten lain */
+    overflow-y: auto;
+    z-index: 1000;
+    
+    /* Mewarisi font dan ukuran font */
+    font-family: inherit;
+    font-size: inherit;
 }
 
 #related-posts-container h3 {
     text-align: center;
     margin-top: 0;
-    border-bottom: 2px solid #333;
     padding-bottom: 5px;
     font-family: inherit;
+    font-size: 16px; /* Anda bisa menyesuaikan ini jika ingin judulnya berbeda */
 }
 
 #related-posts-list {
-    list-style-type: none; /* Hilangkan bullet point */
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
@@ -36,13 +36,13 @@
 }
 
 #related-posts-list a {
-    text-decoration: none; /* Hilangkan garis bawah pada tautan */
-    color: #007bff; /* Warna tautan */
+    text-decoration: none;
+    color: #007bff;
     font-weight: bold;
-    display: block; /* Membuat tautan memenuhi seluruh lebar list item */
+    display: block;
     font-family: inherit;
 }
 
 #related-posts-list a:hover {
-    text-decoration: underline; /* Munculkan garis bawah saat kursor mengarah */
+    text-decoration: underline;
 }
