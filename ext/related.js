@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsonUrl = '/artikel.json';
     const relatedPostsList = document.getElementById('related-posts-list');
     
-    // Mendapatkan nama file (slug) dari URL saat ini secara otomatis
+    // Mendapatkan nama file (slug) dari URL saat ini
     const fullPathname = window.location.pathname;
     const currentUrlSlug = fullPathname.split('/').pop();
+
+    // Dapatkan riwayat URL yang sudah dilihat dari localStorage
+    const viewedPosts = JSON.parse(localStorage.getItem('viewedPosts')) || [];
 
     fetch(jsonUrl)
         .then(response => {
@@ -16,36 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             let currentPostCategory = null;
 
-            // Loop melalui setiap kategori di data JSON
+            // Cari kategori artikel saat ini
             for (const category in data) {
                 if (data.hasOwnProperty(category)) {
-                    // Cari artikel yang URL-nya cocok dengan halaman saat ini
                     const foundPost = data[category].find(post => post[1] === currentUrlSlug);
                     if (foundPost) {
                         currentPostCategory = category;
-                        break; // Keluar dari loop setelah kategori ditemukan
+                        break; 
                     }
                 }
             }
 
-            // Jika kategori tidak ditemukan, tampilkan pesan dan keluar
             if (!currentPostCategory) {
                 relatedPostsList.innerHTML = '<li>Kategori artikel tidak dapat ditemukan.</li>';
                 return;
             }
 
-            // Dapatkan semua artikel dari kategori yang ditemukan
             const allPostsInCategory = data[currentPostCategory];
-
-            // Saring artikel yang bukan artikel saat ini
-            const filteredPosts = allPostsInCategory.filter(post => post[1] !== currentUrlSlug);
+            
+            // Saring artikel yang bukan artikel saat ini DAN belum pernah dilihat
+            const filteredPosts = allPostsInCategory.filter(post => 
+                post[1] !== currentUrlSlug && !viewedPosts.includes(post[1])
+            );
 
             if (filteredPosts.length === 0) {
-                relatedPostsList.innerHTML = '<li>Tidak ada artikel terkait di kategori ini.</li>';
+                relatedPostsList.innerHTML = '<li>Tidak ada artikel terkait baru.</li>';
                 return;
             }
 
-            // Fungsi untuk mengacak array
             const shuffleArray = array => {
                 for (let i = array.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
@@ -53,11 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Acak daftar artikel yang sudah disaring
             shuffleArray(filteredPosts);
 
-            // Ambil 5 artikel pertama dari daftar yang sudah diacak
-            const displayPosts = filteredPosts.slice(0, 5);
+            const displayPosts = filteredPosts.slice(0, 4);
+            
+            // Perbarui riwayat dengan artikel yang akan ditampilkan
+            const newViewedPosts = [...viewedPosts, ...displayPosts.map(post => post[1])];
+            
+            // Simpan riwayat yang diperbarui ke localStorage
+            localStorage.setItem('viewedPosts', JSON.stringify(newViewedPosts));
 
             // Tampilkan artikel di HTML
             displayPosts.forEach(post => {
