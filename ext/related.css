@@ -8,11 +8,11 @@
     /* Ukuran dan warna */
     width: 250px;
     max-height: 80vh; /* Tinggi maksimum 80% dari viewport */
-    background-color: transparent; /* Latar belakang transparan */
+    /* background-color: transparent; /* Latar belakang transparan */
     color: #333; /* Warna teks */
     padding: 15px;
-    border: 1px solid #ccc; /* Border opsional untuk visibilitas */
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Sesuaikan bayangan */
+   /* border: 1px solid #ccc; /* Border opsional untuk visibilitas */
+  /*  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Sesuaikan bayangan */
     overflow-y: auto; /* Tambahkan scrollbar jika konten melebihi max-height */
     z-index: 1000; /* Pastikan elemen berada di atas konten lain */
 }
