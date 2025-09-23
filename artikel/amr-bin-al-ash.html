@@ -288,7 +288,7 @@ blockquote::before {
 /* Wrapper */
 .floating-nav-wrapper {
   position: fixed;
-  left: 12px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10000;
@@ -588,7 +588,14 @@ blockquote::before {
 
         <div class="chip">💬 Bagikan pemikiran dan pelajaran Anda di kolom komentar!</div>
 
-            <div class="env" id="env-info">
+        <div class="related-wrap">
+          <h3 style="margin:6px 0;">Artikel terkait</h3>
+          <div id="related-posts-container">
+            <ul id="related-posts-list"></ul>
+          </div>
+        </div>
+
+        <div class="env" id="env-info">
           <!-- Info perangkat, OS & lokasi IP akan muncul di sini -->
         </div>
 
@@ -672,7 +679,7 @@ blockquote::before {
 <div class="floating-nav-wrapper">
   <!-- Tombol toggle -->
   <button id="nav-toggle" class="nav-toggle">☰</button>
-<div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+
   <!-- Daftar tombol section -->
   <nav class="floating-nav-mini" id="floating-nav">
     <button data-target="kelahiran-dan-masa-kecil" title="Kelahiran">📜</button>
