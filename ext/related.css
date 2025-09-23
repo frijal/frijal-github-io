@@ -4,11 +4,11 @@
     top: 50%;
     right: 0;
     transform: translateY(-50%) translateX(100%); /* Geser tombol ke luar layar */
-    z-index: 2;
+    z-index: 2000;
     padding: 10px 15px;
     cursor: pointer;
     border: 1px solid #ccc;
-    background-color: #f0f0f0;
+    background-color: #ff0000;
     transition: transform 0.3s ease-in-out; /* Transisi untuk animasi */
 }
 
@@ -28,7 +28,7 @@
     padding: 15px;
     overflow-y: auto;
     z-index: 1;
-    background-color: white; /* Tambahkan warna latar belakang agar terlihat */
+    background-color: rgb(255, 0, 0); /* Tambahkan warna latar belakang agar terlihat */
     border: 1px solid #ccc; /* Tambahkan border agar lebih jelas */
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: transform 0.3s ease-in-out; /* Tambahkan transisi */
