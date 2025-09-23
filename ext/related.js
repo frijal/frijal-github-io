@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Skrip untuk mengatur URL Facebook Comments
+    document.querySelector('.fb-comments').setAttribute('data-href', location.href);
+
+    // Skrip untuk mengatur meta tags (Open Graph, Twitter)
+    let s = (document.querySelector("main section img") || {}).src || "thumbnail.jpg";
+    ["og:image", "twitter:image"].forEach((p, j) => document.head.appendChild(document.querySelector((j ? "meta[name=" : "meta[property=") + `"${p}"]`) || Object.assign(document.createElement("meta"), { [j ? "name" : "property"]: p, content: s })));
+    document.head.appendChild(document.querySelector('meta[property="og:url"]') || Object.assign(document.createElement("meta"), { property: "og:url", content: location.href }));
+
+    // Skrip utama untuk menampilkan artikel terkait
     const jsonUrl = '/artikel.json';
     const relatedPostsList = document.getElementById('related-posts-list');
     const numToDisplay = 4;
@@ -28,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const foundPost = data[category].find(post => post[1] === currentUrlSlug);
                     if (foundPost) {
                         currentPostCategory = category;
-                        break; 
+                        break;
                     }
                 }
             }
@@ -39,12 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const allPostsInCategory = data[currentPostCategory];
-            
             // Filter posts that haven't been viewed yet and are not the current post
-            const unseenPosts = allPostsInCategory.filter(post => 
+            const unseenPosts = allPostsInCategory.filter(post =>
                 post[1] !== currentUrlSlug && !viewedPosts.includes(post[1])
             );
-
             let displayPosts;
             const shuffleArray = array => {
                 for (let i = array.length - 1; i > 0; i--) {
@@ -52,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     [array[i], array[j]] = [array[j], array[i]];
                 }
             };
-            
             if (unseenPosts.length >= numToDisplay) {
                 // Tahap 1: Cukup postingan baru, acak dan ambil
                 shuffleArray(unseenPosts);
@@ -66,12 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Perbarui riwayat dengan URL yang baru dilihat
             const newViewedPosts = [...viewedPosts, ...displayPosts.map(post => post[1])];
-            
             // Jaga agar riwayat tidak terlalu besar dengan memotongnya
             localStorage.setItem(viewedPostsKey, JSON.stringify(newViewedPosts.slice(-viewedPostsCap)));
-
             if (displayPosts.length === 0) {
-                 relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
+                relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
                 return;
             }
 
@@ -81,12 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const urlSlug = post[1];
                 const baseUrl = 'https://frijal.github.io/artikel/';
 
+
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
                 link.href = baseUrl + urlSlug;
                 link.textContent = title;
-                
+
                 listItem.appendChild(link);
+
                 relatedPostsList.appendChild(listItem);
             });
         })
