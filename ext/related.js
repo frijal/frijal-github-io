@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Skrip untuk mengatur URL Facebook Comments
-    document.querySelector('.fb-comments').setAttribute('data-href', location.href);
-
     // Skrip untuk mengatur meta tags (Open Graph, Twitter)
     let s = (document.querySelector("main section img") || {}).src || "thumbnail.jpg";
     ["og:image", "twitter:image"].forEach((p, j) => document.head.appendChild(document.querySelector((j ? "meta[name=" : "meta[property=") + `"${p}"]`) || Object.assign(document.createElement("meta"), { [j ? "name" : "property"]: p, content: s })));
