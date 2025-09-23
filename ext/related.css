@@ -1,22 +1,49 @@
-#related-posts-container {
-    /* Posisi dan tampilan kotak */
+/* Styling untuk tombol */
+#toggle-related-posts-btn {
     position: fixed;
     top: 50%;
     right: 0;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(100%); /* Geser tombol ke luar layar */
+    z-index: 2;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    transition: transform 0.3s ease-in-out; /* Transisi untuk animasi */
+}
 
-    /* Ukuran dan warna */
+/* CSS untuk menggeser tombol masuk ke layar saat kontainer terbuka */
+#toggle-related-posts-btn.open {
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Posisi dan tampilan kotak */
+#related-posts-container {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%) translateX(100%); /* Geser kontainer ke luar layar */
     width: 200px;
     max-height: 80vh;
     padding: 15px;
     overflow-y: auto;
     z-index: 1;
+    background-color: white; /* Tambahkan warna latar belakang agar terlihat */
+    border: 1px solid #ccc; /* Tambahkan border agar lebih jelas */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out; /* Tambahkan transisi */
     
     /* Mewarisi font dan ukuran font */
     font-family: inherit;
     font-size: inherit;
 }
 
+/* CSS untuk menggeser kontainer masuk ke layar */
+#related-posts-container.open {
+    transform: translateY(-50%) translateX(0);
+}
+
+/* CSS asli dari Anda */
 #related-posts-container h3 {
     text-align: center;
     margin-top: 0;

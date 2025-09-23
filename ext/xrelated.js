@@ -1,30 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Skrip untuk mengatur URL Facebook Comments
-   // document.querySelector('.fb-comments').setAttribute('data-href', location.href);
-
     // Skrip untuk mengatur meta tags (Open Graph, Twitter)
     let s = (document.querySelector("main section img") || {}).src || "thumbnail.jpg";
     ["og:image", "twitter:image"].forEach((p, j) => document.head.appendChild(document.querySelector((j ? "meta[name=" : "meta[property=") + `"${p}"]`) || Object.assign(document.createElement("meta"), { [j ? "name" : "property"]: p, content: s })));
     document.head.appendChild(document.querySelector('meta[property="og:url"]') || Object.assign(document.createElement("meta"), { property: "og:url", content: location.href }));
-    
-    // Skrip untuk fungsionalitas tombol buka/tutup container
-    const toggleBtn = document.getElementById('toggle-related-posts-btn');
-    const container = document.getElementById('related-posts-container');
-
-    // Event listener untuk tombol
-    toggleBtn.addEventListener('click', () => {
-        // Toggle class 'open' pada kontainer dan tombol
-        container.classList.toggle('open');
-        toggleBtn.classList.toggle('open');
-
-        // Mengubah teks tombol berdasarkan status
-        if (container.classList.contains('open')) {
-            toggleBtn.textContent = 'Tutup';
-        } else {
-            toggleBtn.textContent = 'Buka Artikel Terkait';
-        }
-    });
 
     // Skrip utama untuk menampilkan artikel terkait
     const jsonUrl = '/artikel.json';
