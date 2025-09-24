@@ -1,47 +1,59 @@
+/* related.css */
 #related-posts-container {
-    /* Posisi dan tampilan kotak */
+    /* selalu di atas (floating) */
     position: fixed;
-    top: 50%;
+    top: 0;
+    left: 0;
     right: 0;
-    transform: translateY(-50%);
 
-    /* Ukuran dan warna */
-    width: 200px;
-    max-height: 80vh;
-    padding: 15px;
-    overflow-y: auto;
-    z-index: 1;
-    
-    /* Mewarisi font dan ukuran font */
+    /* layout default: 2 kolom 2 baris */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+
+    /* tampilan */
+    width: 100%;
+    padding: 10px;
+    background: rgba(255,255,255,0.5); /* putih transparan 50% */
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 9999;
     font-family: inherit;
     font-size: inherit;
-}
-
-#related-posts-container h3 {
-    text-align: center;
-    margin-top: 0;
-    padding-bottom: 5px;
-    font-family: inherit;
-    font-size: 12px; /* Anda bisa menyesuaikan ini jika ingin judulnya berbeda */
+    gap: 8px;
 }
 
 #related-posts-list {
-    list-style-type: none;
+    display: contents; /* biar <li> langsung ikut grid */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 #related-posts-list li {
-    margin-bottom: 5px;
+    text-align: center;
 }
 
 #related-posts-list a {
     text-decoration: none;
     color: #007bff;
     display: block;
-    font-family: inherit;
+    padding: 4px 6px;
 }
 
 #related-posts-list a:hover {
     text-decoration: underline;
+}
+
+/* supaya konten tidak ketutupan header */
+body {
+    margin-top: 80px;
+}
+
+/* Responsive: layar kecil → 1 kolom 4 baris */
+@media (max-width: 600px) {
+  #related-posts-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+  }
 }
