@@ -355,13 +355,13 @@
     document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLB(); if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
   </script>
 
-  <!-- Facebook SDK dan auto data-href (ditempatkan di atas <div id="related-posts-container"><h3>Artikel Terkait</h3><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body> sesuai permintaan) -->
+  <!-- Facebook SDK dan auto data-href (ditempatkan di atas <div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body> sesuai permintaan) -->
   <div id="fb-root"></div>
   <div class="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
 
-  <!-- Auto og:image/twitter:image fallback dan og:url (ditempatkan di atas <div id="related-posts-container"><h3>Artikel Terkait</h3><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>) -->
+  <!-- Auto og:image/twitter:image fallback dan og:url (ditempatkan di atas <div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>) -->
   <script>
     document.addEventListener("DOMContentLoaded",()=>{
       let s=(document.querySelector("main section img")||{}).src||"thumbnail.jpg";
@@ -369,5 +369,5 @@
       document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))
     });
   </script>
-<div id="related-posts-container"><h3>Artikel Terkait</h3><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>
+<div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>
 </html>
