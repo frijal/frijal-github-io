@@ -1,0 +1,56 @@
+name: Remove Custom Text
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Teks/Tag yang ingin dihapus (contoh: <h3>Artikel Terkait</h3>)'
+        required: true
+        default: '<h3>Artikel Terkait</h3>'
+      folder:
+        description: 'Folder target tempat file .html berada'
+        required: true
+        default: 'artikel'
+
+permissions:
+  contents: write   # supaya bisa push ke main
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Remove target text
+        run: |
+          TARGET="${{ github.event.inputs.target }}"
+          FOLDER="${{ github.event.inputs.folder }}"
+
+          echo "✂️ Menghapus teks: $TARGET"
+          echo "📂 Dari folder: $FOLDER"
+
+          if [ -d "$FOLDER" ]; then
+            find "$FOLDER" -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
+              sed -i "s|$TARGET||g" "$file"
+              echo "   ↳ Edit $file"
+            done
+          else
+            echo "⚠️ Folder $FOLDER tidak ditemukan!"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet; then
+            echo "✅ Tidak ada perubahan untuk di-commit."
+          else
+            git add ${{ github.event.inputs.folder }}
+            git commit -m "Remove text ${{ github.event.inputs.target }} from ${{ github.event.inputs.folder }}/*.html"
+            git push origin main
+            echo "🚀 Perubahan berhasil dipush ke main."
+          fi
