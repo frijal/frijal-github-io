@@ -1,129 +1,47 @@
-/* Container related posts */
 #related-posts-container {
+    /* Posisi dan tampilan kotak */
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
     right: 0;
+    transform: translateY(-50%);
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-
-    width: 100%;
-    padding: 10px;
-    background: rgba(255,255,255,0.5); /* putih transparan */
-    backdrop-filter: blur(10px);        /* ✨ glass effect */
-    -webkit-backdrop-filter: blur(10px);/* Safari support */
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    z-index: 9999;
+    /* Ukuran dan warna */
+    width: 200px;
+    max-height: 80vh;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 1;
+    
+    /* Mewarisi font dan ukuran font */
     font-family: inherit;
     font-size: inherit;
-    gap: 8px;
-
-    transition: transform 0.3s ease;
 }
 
-/* state disembunyikan */
-#related-posts-container.hidden {
-    transform: translateY(-100%);
+#related-posts-container h3 {
+    text-align: center;
+    margin-top: 0;
+    padding-bottom: 5px;
+    font-family: inherit;
+    font-size: 12px; /* Anda bisa menyesuaikan ini jika ingin judulnya berbeda */
 }
 
-/* daftar artikel */
 #related-posts-list {
-    display: contents;
-    list-style: none;
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 #related-posts-list li {
-    text-align: center;
+    margin-bottom: 5px;
 }
 
 #related-posts-list a {
     text-decoration: none;
     color: #007bff;
     display: block;
-    padding: 4px 6px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    font-family: inherit;
 }
 
 #related-posts-list a:hover {
     text-decoration: underline;
-    background: rgba(0,123,255,0.1);
-}
-
-/* tombol toggle */
-#toggle-btn {
-    position: fixed;
-    top: 5px;
-    right: 10px;
-    z-index: 10000;
-    background: rgba(0,123,255,0.8);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    transition: opacity 0.3s ease, background 0.3s;
-}
-
-#toggle-btn:hover {
-    background: rgba(0,123,255,1);
-}
-
-/* agar konten tidak ketutupan bar */
-body {
-    margin-top: 80px;
-}
-
-/* Responsive: layar kecil → 1 kolom 4 baris */
-@media (max-width: 600px) {
-  #related-posts-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto);
-  }
-}
-
-/* 🌙 Dark mode support */
-@media (prefers-color-scheme: dark) {
-  #related-posts-container {
-    background: rgba(20,20,20,0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
-  }
-
-  #related-posts-list a {
-    color: #4da6ff;
-  }
-
-  #related-posts-list a:hover {
-    background: rgba(77,166,255,0.1);
-  }
-
-  #toggle-btn {
-    background: rgba(77,166,255,0.8);
-  }
-
-  #toggle-btn:hover {
-    background: rgba(77,166,255,1);
-  }
-}
-/* saat hover */
-#toggle-btn:hover {
-    background: rgba(0,123,255,1);
-}
-
-/* class hidden untuk auto-hide */
-#toggle-btn.hidden {
-    opacity: 0;
-    pointer-events: none;
 }
