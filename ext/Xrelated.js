@@ -98,16 +98,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('seluruh artikel sudah dibaca.', error);
             relatedPostsList.innerHTML = '<li>seluruh artikel sudah dibaca.</li>';
         });
-
-// toggle related posts
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.getElementById("toggle-btn");
-  const relatedBox = document.getElementById("related-posts-container");
-
-  if (toggleBtn && relatedBox) {
-    toggleBtn.addEventListener("click", () => {
-      relatedBox.classList.toggle("hidden");
-      toggleBtn.textContent = relatedBox.classList.contains("hidden") ? "▼" : "▲";
-    });
-  }
 });

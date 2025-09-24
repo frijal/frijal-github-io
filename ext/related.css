@@ -1,59 +1,76 @@
-/* related.css */
 #related-posts-container {
-    /* selalu di atas (floating) */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
 
-    /* layout default: 2 kolom 2 baris */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
 
-    /* tampilan */
-    width: 100%;
-    padding: 10px;
-    background: rgba(255,255,255,0.5); /* putih transparan 50% */
-    border-bottom: 1px solid #ddd;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    z-index: 9999;
-    font-family: inherit;
-    font-size: inherit;
-    gap: 8px;
-}
+        width: 100%;
+        padding: 10px;
+        background: rgba(255,255,255,0.5);
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        z-index: 9999;
+        font-family: inherit;
+        font-size: inherit;
+        gap: 8px;
 
-#related-posts-list {
-    display: contents; /* biar <li> langsung ikut grid */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        transition: transform 0.3s ease;
+    }
 
-#related-posts-list li {
-    text-align: center;
-}
+    /* disembunyikan */
+    #related-posts-container.hidden {
+        transform: translateY(-100%);
+    }
 
-#related-posts-list a {
-    text-decoration: none;
-    color: #007bff;
-    display: block;
-    padding: 4px 6px;
-}
+    #related-posts-list {
+        display: contents;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-#related-posts-list a:hover {
-    text-decoration: underline;
-}
+    #related-posts-list li {
+        text-align: center;
+    }
 
-/* supaya konten tidak ketutupan header */
-body {
-    margin-top: 80px;
-}
+    #related-posts-list a {
+        text-decoration: none;
+        color: #007bff;
+        display: block;
+        padding: 4px 6px;
+    }
 
-/* Responsive: layar kecil → 1 kolom 4 baris */
-@media (max-width: 600px) {
-  #related-posts-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto);
-  }
-}
+    #related-posts-list a:hover {
+        text-decoration: underline;
+    }
+
+    /* tombol toggle */
+    #toggle-btn {
+        position: fixed;
+        top: 5px;
+        right: 10px;
+        z-index: 10000;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    body {
+        margin-top: 80px;
+    }
+
+    @media (max-width: 600px) {
+      #related-posts-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+      }
+    }
