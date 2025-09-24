@@ -1,7 +1,12 @@
-name: Remove Artikel Terkait
+name: Remove Custom Tag or Text
 
 on:
-  workflow_dispatch:   # hanya manual dari tab Actions
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Teks/Tag yang ingin dihapus (contoh: <h3>Artikel Terkait</h3>)'
+        required: true
+        default: '<h3>Artikel Terkait</h3>'
 
 jobs:
   clean:
@@ -17,13 +22,14 @@ jobs:
           echo "📂 List isi folder artikel/"
           ls -lah artikel || echo "⚠️ Folder artikel tidak ditemukan"
 
-      - name: Remove <h3>Artikel Terkait</h3> from artikel/*.html
+      - name: Remove target text from artikel/*.html
         run: |
-          echo "🔎 Menghapus baris <h3>Artikel Terkait</h3>..."
+          TARGET="${{ github.event.inputs.target }}"
+          echo "✂️ Menghapus: $TARGET"
           if [ -d "artikel" ]; then
             find artikel -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
-              echo "✂️  Edit $file"
-              sed -i '/<h3>Artikel Terkait<\/h3>/d' "$file"
+              echo "   ↳ Edit $file"
+              sed -i "s|$TARGET||g" "$file"
             done
           else
             echo "⚠️ Folder artikel tidak ada!"
@@ -38,7 +44,7 @@ jobs:
             echo "✅ Tidak ada perubahan untuk di-commit."
           else
             git add artikel
-            git commit -m "Remove <h3>Artikel Terkait</h3> from artikel/*.html"
+            git commit -m "Remove text [$TARGET] from artikel/*.html"
             git push
             echo "🚀 Perubahan berhasil dipush."
           fi
