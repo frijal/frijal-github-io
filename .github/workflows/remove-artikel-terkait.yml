@@ -1,7 +1,7 @@
 name: Remove Artikel Terkait
 
 on:
-  workflow_dispatch:   # hanya bisa dijalankan manual dari Actions
+  workflow_dispatch:   # hanya manual dari tab Actions
 
 jobs:
   clean:
@@ -9,17 +9,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Remove <h3>Artikel Terkait</h3> from all HTML files in artikel/
+      - name: Debug list files
         run: |
-          find artikel -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
-            sed -i '/<h3>Artikel Terkait<\/h3>/d' "$file"
-          done
+          echo "📂 List isi folder artikel/"
+          ls -lah artikel || echo "⚠️ Folder artikel tidak ditemukan"
 
-      - name: Commit and push changes
+      - name: Remove <h3>Artikel Terkait</h3> from artikel/*.html
+        run: |
+          echo "🔎 Menghapus baris <h3>Artikel Terkait</h3>..."
+          if [ -d "artikel" ]; then
+            find artikel -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
+              echo "✂️  Edit $file"
+              sed -i '/<h3>Artikel Terkait<\/h3>/d' "$file"
+            done
+          else
+            echo "⚠️ Folder artikel tidak ada!"
+          fi
+
+      - name: Commit and push changes if any
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add artikel
-          git commit -m "Remove <h3>Artikel Terkait</h3> from artikel/*.html" || echo "No changes"
-          git push
+
+          if git diff --quiet; then
+            echo "✅ Tidak ada perubahan untuk di-commit."
+          else
+            git add artikel
+            git commit -m "Remove <h3>Artikel Terkait</h3> from artikel/*.html"
+            git push
+            echo "🚀 Perubahan berhasil dipush."
+          fi
