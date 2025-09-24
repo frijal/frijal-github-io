@@ -110,4 +110,39 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleBtn.textContent = relatedBox.classList.contains("hidden") ? "▼" : "▲";
     });
   }
+
+  // related-autohide.js
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggle-btn");
+  const relatedBox = document.getElementById("related-posts-container");
+
+  if (!toggleBtn || !relatedBox) return;
+
+  // fungsi toggle buka/tutup bar
+  toggleBtn.addEventListener("click", () => {
+    relatedBox.classList.toggle("hidden");
+    toggleBtn.textContent = relatedBox.classList.contains("hidden") ? "▼" : "▲";
+  });
+
+  // Auto-hide tombol
+  let hideTimeout;
+
+  function resetHideTimer() {
+    // tampilkan tombol
+    toggleBtn.classList.remove("hidden");
+
+    // reset timer
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      toggleBtn.classList.add("hidden");
+    }, 3000); // sembunyi setelah 3 detik idle
+  }
+
+  // trigger saat ada aktivitas user
+  ["mousemove", "scroll", "keydown", "touchstart"].forEach(evt => {
+    document.addEventListener(evt, resetHideTimer, { passive: true });
+  });
+
+  // mulai timer pertama
+  resetHideTimer();
 });
