@@ -1,0 +1,25 @@
+name: Remove Artikel Terkait
+
+on:
+  workflow_dispatch:   # hanya bisa dijalankan manual dari Actions
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Remove <h3>Artikel Terkait</h3> from all HTML files in artikel/
+        run: |
+          find artikel -type f -name "*.html" -print0 | while IFS= read -r -d '' file; do
+            sed -i '/<h3>Artikel Terkait<\/h3>/d' "$file"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add artikel
+          git commit -m "Remove <h3>Artikel Terkait</h3> from artikel/*.html" || echo "No changes"
+          git push
