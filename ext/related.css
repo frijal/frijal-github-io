@@ -1,0 +1,79 @@
+#related-posts-container {
+    /* Posisi dan tampilan kotak */
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+
+    /* Ukuran dan warna */
+    width: 200px;
+    max-height: 80vh;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 1;
+    
+    /* Mewarisi font dan ukuran font */
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#related-posts-container h3 {
+    text-align: center;
+    margin-top: 0;
+    padding-bottom: 5px;
+    font-family: inherit;
+    font-size: 12px; /* Anda bisa menyesuaikan ini jika ingin judulnya berbeda */
+}
+
+#related-posts-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#related-posts-list li {
+    margin-bottom: 5px;
+}
+
+#related-posts-list a {
+    text-decoration: none;
+    color: #007bff;
+    display: block;
+    font-family: inherit;
+}
+
+#related-posts-list a:hover {
+    text-decoration: underline;
+}
+
+/* Tambahan CSS untuk tombol dan logika hide/unhide */
+#related-posts-toggle {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 2; /* Pastikan tombol di atas container */
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px 0 0 5px;
+    display: block; /* Agar tombol selalu terlihat */
+}
+
+/* CSS untuk kondisi container tersembunyi */
+#related-posts-container.hidden {
+    right: -200px; /* Geser container keluar dari layar */
+    visibility: hidden; /* Sembunyikan sepenuhnya dari interaksi */
+    opacity: 0; /* Tambahkan efek transisi */
+    transition: right 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* CSS untuk kondisi container terlihat */
+#related-posts-container:not(.hidden) {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: right 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
