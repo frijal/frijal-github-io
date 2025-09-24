@@ -1,4 +1,4 @@
-name: Remove Custom Text and Create PR
+name: Remove Custom Text and Create PR (PAT Ready)
 
 on:
   workflow_dispatch:
@@ -12,12 +12,18 @@ on:
         required: true
         default: 'artikel'
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   clean:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACTIONS_PAT }}
 
       - name: Remove target text from folder
         run: |
@@ -38,7 +44,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACTIONS_PAT }}
           commit-message: "Remove text from ${{ github.event.inputs.folder }}/*.html"
           branch: remove-text
           branch-suffix: timestamp
