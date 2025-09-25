@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # pakai GITHUB_TOKEN bawaan
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -30,6 +32,7 @@ jobs:
 
       - name: Generate artikel.json & sitemap.xml
         run: |
+          mkdir -p ext
           cat > ext/generate.js <<'EOF'
           const fs = require("fs");
           const { JSDOM } = require("jsdom");
@@ -102,7 +105,7 @@ jobs:
           console.log("✅ artikel.json & sitemap.xml generated");
           EOF
 
-          node generate.js
+          node ext/generate.js
 
       - name: Commit and push results
         run: |
@@ -110,26 +113,19 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add artikel.json sitemap.xml
           git diff --cached --quiet || git commit -m "Auto-generate artikel.json & sitemap.xml"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          git push
 
-
-      - name: Ping Google & Bing with retry
+      - name: Ping Google & Bing
         run: |
-          echo "🔔 Pinging search engines..."
           for TRY in 1 2; do
             STATUS_GOOGLE=$(curl -o /dev/null -s -w "%{http_code}" "https://www.google.com/ping?sitemap=https://frijal.github.io/sitemap.xml")
             STATUS_BING=$(curl -o /dev/null -s -w "%{http_code}" "https://www.bing.com/ping?sitemap=https://frijal.github.io/sitemap.xml")
-            echo "Attempt $TRY - Google status: $STATUS_GOOGLE | Bing status: $STATUS_BING"
-
+            echo "Attempt $TRY - Google: $STATUS_GOOGLE | Bing: $STATUS_BING"
             if [ "$STATUS_GOOGLE" = "200" ] && [ "$STATUS_BING" = "200" ]; then
-              echo "✅ Ping sukses ke Google & Bing"
+              echo "✅ Ping sukses"
               break
             fi
-
-            if [ "$TRY" -eq 1 ]; then
-              echo "⚠️ Ping gagal, coba ulang dalam 30 detik..."
-              sleep 30
-            fi
+            sleep 30
           done
 
       - name: Telegram notification
