@@ -1,0 +1,46 @@
+name: Tambah Konten & Pindahkan HTML
+
+on:
+  workflow_dispatch:   # hanya jalan manual
+
+permissions:
+  contents: write
+
+jobs:
+  modify-and-move-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Tambahkan snippet ke HTML di artikelx/
+        run: |
+          for file in artikelx/*.html; do
+            # Tambahkan meta tag jika belum ada
+            if ! grep -q '<link rel="stylesheet" href="/ext/related.css">' "$file"; then
+              sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
+            fi
+
+            # Tambahkan div jika belum ada
+            if ! grep -q '<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"; then
+              sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
+            fi
+          done
+
+      - name: Pindahkan file HTML ke folder artikel/
+        run: |
+          mkdir -p artikel
+          mv artikelx/*.html artikel/ || true
+
+      - name: Commit & Push perubahan
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          if git diff --quiet; then
+            echo "Tidak ada perubahan baru, skip commit."
+          else
+            git add artikelx || true
+            git add artikel || true
+            git commit -m "Auto update: tambah snippet & pindahkan HTML"
+            git push
+          fi
