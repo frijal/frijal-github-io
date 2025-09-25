@@ -1,0 +1,34 @@
+name: Tambah Konten HTML di artikelx
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:  # bisa dijalankan manual
+
+permissions:
+  contents: write
+
+jobs:
+  modify-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Tambahkan snippet ke HTML di artikelx/
+        run: |
+          for file in artikelx/*.html; do
+            # Tambahkan snippet di akhir </title>
+            sed -i '/<\/title>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
+
+            # Tambahkan snippet sebelum </body>
+            sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
+          done
+
+      - name: Commit & Push perubahan
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add artikelx/*.html
+          git commit -m "Auto update: tambah snippet HTML"
+          git push
