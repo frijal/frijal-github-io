@@ -6,7 +6,7 @@ on:
       target:
         description: 'Teks/Tag yang ingin dihapus (contoh: <h3>Artikel Terkait</h3>)'
         required: true
-        default: 'ketik apa yang mau dihapus?'
+        default: '<h3>Artikel Terkait</h3>'
       folder:
         description: 'Folder target tempat file .html berada'
         required: true
