@@ -79,10 +79,10 @@ jobs:
             });
           });
 
-            // Save artikel.json
+          # Save artikel.json
           fs.writeFileSync("artikel.json", JSON.stringify(grouped, null, 2));
 
-          // Build sitemap.xml
+          # Build sitemap.xml
           let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
           sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
           sitemapUrls.forEach(u=>{
@@ -106,7 +106,7 @@ jobs:
 
           node ext/generate.js
           
-          // --- Perbandingan dengan artikel.json lama ---
+          # --- Perbandingan dengan artikel.json lama ---
           let oldData = {};
           if (fs.existsSync("artikel.json")) {
             try {
@@ -117,7 +117,7 @@ jobs:
           const newData = grouped;
           const changes = {added:[], removed:[], updated:[]};
 
-          // cari yang baru ditambahkan
+          # cari yang baru ditambahkan
           for (const [cat, arts] of Object.entries(newData)) {
             arts.forEach(([title,file])=>{
               const existed = Object.values(oldData).flat().some(([t,f])=>t===title && f===file);
@@ -125,7 +125,7 @@ jobs:
             });
           }
 
-          // cari yang dihapus
+          # cari yang dihapus
           for (const [cat, arts] of Object.entries(oldData)) {
             arts.forEach(([title,file])=>{
               const stillExists = Object.values(newData).flat().some(([t,f])=>t===title && f===file);
@@ -133,7 +133,7 @@ jobs:
             });
           }
 
-          // log perubahan
+          # log perubahan
           console.log("📊 Perubahan artikel:");
           if (changes.added.length) console.log("➕ Ditambahkan:", changes.added.join(", "));
           if (changes.removed.length) console.log("➖ Dihapus:", changes.removed.join(", "));
