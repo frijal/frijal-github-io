@@ -130,7 +130,7 @@ jobs:
               break
             fi
             echo "⚠️ Ping gagal, mencoba lagi dalam 30 detik..."
-            sleep 30
+            sleep 300
           done
 
           if [ "$STATUS_GOOGLE" != "200" ] || [ "$STATUS_BING" != "200" ]; then
