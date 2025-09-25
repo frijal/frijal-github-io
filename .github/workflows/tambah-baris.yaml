@@ -34,5 +34,7 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add artikelx/*.html
+           git add artikelx || true
+            git add artikel || true
           git commit -m "Auto update: tambah snippet HTML"
           git push
