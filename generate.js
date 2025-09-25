@@ -1,1 +1,106 @@
+const fs = require("fs");
+const { JSDOM } = require("jsdom");
+
+const BASE_URL = "https://frijal.github.io/artikel/";
+const FALLBACK_IMG = "thumbnail.jpg";
+
+function titleToCategory(title){
+  const t = title.toLowerCase();
+  const cats = [
+    {name: "📽️ Multimedia & Editing", k:["ffmpeg","video","film","audio","mp3","ogg","rekam","convert","split","cut","durasi","imagemagick","resize","format","potong","watermark","foto","gambar","pdf","gabung","kompres","scan","ghostscript","pdftk","vlc","multimedia","codec"]},
+    {name: "🐧 Linux & Open Source", k:["linux","libreoffice","openoffice","perl","ubuntu","distro","lts","live usb","conky","fedora","debian","arch","slackware","nixos","opensuse","blankon","mirror","repo","apt","yum","rsync","grub","chroot","dpkg","open source","oss","foss","komunitas","kpli","gnome","kde","compiz","desktop","ubuntu party"]},
+    {name: "📚 Islam & Kehidupan", k:["islam","shalat","akidah","aqidah","qunut","istigfar","istighfar","mukjizat","masjid","madinah","imam","risalah","nabi","quran","hadis","hijriyah","muslim","doa","hukum","halal","haram","syariat","fiqh","hijab","ramadhan","maulid","piagam madinah","mushaf utsman","tabut","iman","sabar","ghibah","fitnah","sombong","salam","janji"]},
+    {name: "🏞️ Budaya, Kuliner & Lifestyle", k:["kuliner","obat","sakit","pecel","minuman","jagung","kerupuk","angkringan","kurma","kopi","camilan","wisata","jogja","bali","bekapai","hotel","bandara","respiro","tidur","kesehatan","psikotes","wanita","bahagia"]},
+    {name: "📰 Catatan & Sosial", k:["catatan","pt","kopdar","sejarah","indonesia","peradaban","sahabat","kota","rencana","kreativitas","ibu","perjalanan","bisnis","perusahaan","ekspedisi","aturan","harian","cuti","nostalgia","renungan","golput","duit","pekerjaan","kerja halal","perencanaan","produktifitas","sahabat","fenomena","sktm","ppdb"]},
+    {name: "💻 Windows & Teknologi Umum", k:["windows","learning","cpu","samba","jaringan","software","terminal","github","shutdown","hdd","ssd","refresh","optimasi","bootloader","virtualbox","keyring","laptop","osborne1","baterai","mic","wifi","amd","cooling","phishing","eula","lisensi","piracy"]}
+  ];
+  return (cats.find(c=>c.k.some(k=>t.includes(k)))||{name:"🗂️ Lainnya"}).name;
+}
+
+// --- Baca semua file artikel ---
+const files = fs.readdirSync("artikel").filter(f=>f.endsWith(".html"));
+const grouped = {};
+const sitemapUrls = [];
+
+files.forEach(f=>{
+  const html = fs.readFileSync(`artikel/${f}`,"utf-8");
+  const dom = new JSDOM(html);
+  const doc = dom.window.document;
+
+  const title = doc.querySelector("title")?.textContent || f;
+  const category = titleToCategory(title);
+  if(!grouped[category]) grouped[category] = [];
+  grouped[category].push([title,f]);
+
+  let img = doc.querySelector('meta[property="og:image"]')?.content
+         || doc.querySelector('meta[name="twitter:image"]')?.content
+         || doc.querySelector("main section img")?.src
+         || FALLBACK_IMG;
+  if(!img.startsWith("http")) img = BASE_URL + img;
+
+  sitemapUrls.push({
+    loc: BASE_URL + f,
+    lastmod: new Date().toISOString().split("T")[0],
+    priority: 0.6,
+    changefreq: "monthly",
+    img
+  });
+});
+
+// --- Simpan artikel.json ---
+fs.writeFileSync("artikel.json", JSON.stringify(grouped, null, 2));
+
+// --- Build sitemap.xml ---
+let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+sitemapUrls.forEach(u=>{
+  sitemap += `  <url>\n`;
+  sitemap += `    <loc>${u.loc}</loc>\n`;
+  sitemap += `    <lastmod>${u.lastmod}</lastmod>\n`;
+  sitemap += `    <priority>${u.priority}</priority>\n`;
+  sitemap += `    <changefreq>${u.changefreq}</changefreq>\n`;
+  if(u.img){
+    sitemap += `    <image:image>\n`;
+    sitemap += `      <image:loc>${u.img}</image:loc>\n`;
+    sitemap += `    </image:image>\n`;
+  }
+  sitemap += `  </url>\n`;
+});
+sitemap += `</urlset>\n`;
+fs.writeFileSync("sitemap.xml", sitemap);
+
+console.log("✅ artikel.json & sitemap.xml generated");
+
+// --- Perbandingan dengan artikel.json lama ---
+let oldData = {};
+if (fs.existsSync("artikel.json")) {
+  try {
+    oldData = JSON.parse(fs.readFileSync("artikel.json","utf-8"));
+  } catch {}
+}
+
+const newData = grouped;
+const changes = {added:[], removed:[], updated:[]};
+
+// cari yang baru ditambahkan
+for (const [cat, arts] of Object.entries(newData)) {
+  arts.forEach(([title,file])=>{
+    const existed = Object.values(oldData).flat().some(([t,f])=>t===title && f===file);
+    if (!existed) changes.added.push(`${title} (${file})`);
+  });
+}
+
+// cari yang dihapus
+for (const [cat, arts] of Object.entries(oldData)) {
+  arts.forEach(([title,file])=>{
+    const stillExists = Object.values(newData).flat().some(([t,f])=>t===title && f===file);
+    if (!stillExists) changes.removed.push(`${title} (${file})`);
+  });
+}
+
+// log perubahan
+console.log("📊 Perubahan artikel:");
+if (changes.added.length) console.log("➕ Ditambahkan:", changes.added.join(", "));
+if (changes.removed.length) console.log("➖ Dihapus:", changes.removed.join(", "));
+if (!changes.added.length && !changes.removed.length) console.log("ℹ️ Tidak ada perubahan pada artikel.");
 
