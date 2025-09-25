@@ -17,12 +17,12 @@ jobs:
         run: |
           for file in artikelx/*.html; do
             # Tambahkan meta tag jika belum ada
-            if ! grep -q '<link rel="stylesheet" href="/ext/related.css">' "$file"; then
+       #     if ! grep -q '<link rel="stylesheet" href="/ext/related.css">' "$file"; then
               sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
             fi
 
             # Tambahkan div jika belum ada
-            if ! grep -q '<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"; then
+       #     if ! grep -q '<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"; then
               sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
             fi
           done
