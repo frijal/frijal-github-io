@@ -104,7 +104,7 @@ jobs:
           console.log("✅ artikel.json & sitemap.xml generated");
           EOF
 
-          node generate.js
+          node ext/generate.js
           
           // --- Perbandingan dengan artikel.json lama ---
           let oldData = {};
