@@ -74,7 +74,7 @@ jobs:
               loc: BASE_URL + f,
               lastmod: new Date().toISOString().split("T")[0],
               priority: 0.6,
-              changefreq: "monthly"
+              changefreq: "monthly",
               img
             });
           });
