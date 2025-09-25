@@ -29,8 +29,7 @@ jobs:
           npm install jsdom
 
       - name: Generate artikel.json & sitemap.xml
-        run: |
-          node <<'EOF'
+        run: node - <<'EOF'
           const fs = require("fs");
           const { JSDOM } = require("jsdom");
 
