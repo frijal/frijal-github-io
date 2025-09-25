@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-       paths:
+    paths:
       - 'artikel/**'     # hanya jalan kalau ada perubahan di folder artikel/
   schedule:
     - cron: "0 0 * * *"   # jalan otomatis tiap tengah malam UTC
