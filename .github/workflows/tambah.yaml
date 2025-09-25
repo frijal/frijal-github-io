@@ -19,11 +19,11 @@ jobs:
           for file in artikelx/*.html; do
             # Sisipkan ke dalam <head>
             sed -i '/<\/head>/i \
-<link rel="stylesheet" href="/ext/related.css">' "$file"
+'<link rel="stylesheet" href="/ext/related.css">' "$file"
 
             # Sisipkan sebelum </body>
             sed -i '/<\/body>/i \
-<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
+'<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
           done
 
       - name: Commit changes
