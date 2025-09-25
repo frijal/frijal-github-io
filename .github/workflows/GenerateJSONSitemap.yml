@@ -104,7 +104,7 @@ jobs:
           console.log("✅ artikel.json & sitemap.xml generated");
           EOF
 
-// --- Perbandingan dengan artikel.json lama ---
+          // --- Perbandingan dengan artikel.json lama ---
           let oldData = {};
           if (fs.existsSync("artikel.json")) {
             try {
