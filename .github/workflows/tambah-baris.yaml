@@ -27,6 +27,7 @@ jobs:
 
  - name: Pindahkan file HTML ke folder artikel/
         run: |
+         for file in artikelx/*.html; do
           mv artikelx/*.html artikel/ || true
 
       - name: Commit & Push perubahan
@@ -35,6 +36,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add artikelx/*.html
            git add artikelx || true
+            git add artikel/*.html
             git add artikel || true
           git commit -m "Auto update: tambah snippet HTML"
           git push
