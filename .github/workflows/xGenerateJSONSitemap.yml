@@ -115,16 +115,30 @@ jobs:
           git diff --cached --quiet || git commit -m "Auto-generate artikel.json & sitemap.xml"
           git push -f origin auto-generated
 
-      - name: Create Pull Request
-        id: create_pr
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.ACTIONS_PAT }}
-          commit-message: "Auto-generate artikel.json & sitemap.xml"
-          branch: auto-generated
-          base: main
-          title: "Update artikel.json & sitemap.xml"
-          body: "PR otomatis dari workflow untuk update artikel.json & sitemap.xml"
+      - name: Auto Create Pull Request
+        on:
+          push:
+          branches:
+          - main
+
+        jobs:
+          create_pull_request:
+            runs-on: ubuntu-latest
+
+            steps:
+              - name: Checkout repository
+                uses: actions/checkout@v4
+
+              - name: Create Pull Request
+                uses: peter-evans/create-pull-request@v5
+                with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  commit-message: "Auto-generate artikel.json & sitemap.xml"
+                  branch: auto-generated
+                  base: main
+                  title: "Update artikel.json & sitemap.xml"
+                  body: "PR otomatis dari workflow untuk update artikel.json & sitemap.xml"
+
 
       - name: Attempt Auto-Merge
         id: auto_merge
