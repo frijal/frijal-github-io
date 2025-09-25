@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate artikel.json & sitemap.xml
         run: |
-          cat > /etc/generate.js <<'EOF'
+          cat > ext/generate.js <<'EOF'
           const fs = require("fs");
           const { JSDOM } = require("jsdom");
 
