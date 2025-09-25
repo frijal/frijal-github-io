@@ -29,7 +29,8 @@ jobs:
           npm install jsdom
 
       - name: Generate artikel.json & sitemap.xml
-        run: node - <<'EOF'
+        run: |
+          cat > generate.js <<'EOF'
           const fs = require("fs");
           const { JSDOM } = require("jsdom");
 
@@ -103,6 +104,8 @@ jobs:
           console.log("✅ artikel.json & sitemap.xml generated");
           EOF
 
+          node generate.js
+          
           // --- Perbandingan dengan artikel.json lama ---
           let oldData = {};
           if (fs.existsSync("artikel.json")) {
