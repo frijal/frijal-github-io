@@ -104,6 +104,9 @@ jobs:
 
           node ext/generate.js
 
+      - name: Move sitemap.xml to root
+        run: cp ext/sitemap.xml ./sitemap.xml
+
   ping:
     runs-on: ubuntu-latest
     needs: generate
