@@ -1,4 +1,4 @@
-name: Generate JSON & Sitemap with Auto-PR, Auto-Merge & Fallback
+name: Generate JSON & Sitemap with PR + Auto-Merge + Cleanup + Ping
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
       - main
     paths:
       - 'artikel/**'
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
@@ -28,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: |
           npm init -y
-          npm install jsdom
-
+          npm install jsdom node-fetch@2
+      
       - name: Generate artikel.json & sitemap.xml
         run: |
           cat > ext/generate.js <<'EOF'
@@ -106,7 +104,7 @@ jobs:
 
           node ext/generate.js
 
-      - name: Commit and push to auto-generated branch
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -115,62 +113,58 @@ jobs:
           git diff --cached --quiet || git commit -m "Auto-generate artikel.json & sitemap.xml"
           git push -f origin auto-generated
 
-      - name: Auto Create Pull Request
-        on:
-          push:
-          branches:
-          - main
-
-        jobs:
-          create_pull_request:
-            runs-on: ubuntu-latest
-
-            steps:
-              - name: Checkout repository
-                uses: actions/checkout@v4
-
-              - name: Create Pull Request
-                uses: peter-evans/create-pull-request@v5
-                with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  commit-message: "Auto-generate artikel.json & sitemap.xml"
-                  branch: auto-generated
-                  base: main
-                  title: "Update artikel.json & sitemap.xml"
-                  body: "PR otomatis dari workflow untuk update artikel.json & sitemap.xml"
-
-
-      - name: Attempt Auto-Merge
-        id: auto_merge
-        uses: devops-infra/action-pull-request-merge@v0.4.5
-        continue-on-error: true  # penting supaya workflow tidak gagal
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
         with:
-          github_token: ${{ secrets.ACTIONS_PAT }}
-          pull_request_number: ${{ steps.create_pr.outputs.pull-request-number }}
-          merge_method: squash
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Auto-generate artikel.json & sitemap.xml"
+          branch: auto-generated
+          base: main
+          title: "Update artikel.json & sitemap.xml"
+          body: "PR otomatis dari workflow untuk update artikel.json & sitemap.xml"
 
-      - name: Notify Telegram if merge failed
-        if: steps.auto_merge.outcome == 'failure'
+      - name: Attempt Auto-Merge via GitHub API
+        id: merge_pr
+        if: steps.create_pr.outputs.pull-request-number != ''
         run: |
-          MSG="⚠️ Auto-merge PR #${{ steps.create_pr.outputs.pull-request-number }} gagal. Merge manual diperlukan!"
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="$MSG"
+          PR_NUM=${{ steps.create_pr.outputs.pull-request-number }}
+          REPO=${GITHUB_REPOSITORY}
+          RESPONSE=$(curl -s -X PUT -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/$REPO/pulls/$PR_NUM/merge \
+            -d '{"merge_method":"squash"}')
+          if echo "$RESPONSE" | grep -q '"merged":true'; then
+            echo "✅ PR #$PR_NUM merged successfully"
+            echo "MERGED=true" >> $GITHUB_ENV
+          else
+            echo "⚠️ PR #$PR_NUM could not be auto-merged, manual merge required"
+            curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+              -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+              -d text="⚠️ Auto-merge PR #$PR_NUM gagal. Merge manual diperlukan!"
+          fi
 
-      - name: Ping Google & Bing
+      - name: Cleanup auto-generated branch
+        if: env.MERGED == 'true'
         run: |
+          git push origin --delete auto-generated
+          echo "✅ Branch auto-generated deleted"
+
+      - name: Ping sitemap.xml to Google & Bing
+        run: |
+          SITEMAP_URL="https://frijal.github.io/ext/sitemap.xml"
           for TRY in 1 2; do
-            STATUS_GOOGLE=$(curl -o /dev/null -s -w "%{http_code}" "https://www.google.com/ping?sitemap=https://frijal.github.io/ext/sitemap.xml")
-            STATUS_BING=$(curl -o /dev/null -s -w "%{http_code}" "https://www.bing.com/ping?sitemap=https://frijal.github.io/ext/sitemap.xml")
+            STATUS_GOOGLE=$(curl -o /dev/null -s -w "%{http_code}" "https://www.google.com/ping?sitemap=$SITEMAP_URL")
+            STATUS_BING=$(curl -o /dev/null -s -w "%{http_code}" "https://www.bing.com/ping?sitemap=$SITEMAP_URL")
             echo "Attempt $TRY - Google: $STATUS_GOOGLE | Bing: $STATUS_BING"
             if [ "$STATUS_GOOGLE" = "200" ] && [ "$STATUS_BING" = "200" ]; then
-              echo "✅ Ping sukses"
+              echo "✅ Sitemap ping sukses"
               break
             fi
             sleep 30
           done
 
-      - name: Telegram notification on ping failure
+      - name: Notify Telegram if ping fails
         if: failure()
         run: |
           MSG="❌ Sitemap ping gagal di repo $GITHUB_REPOSITORY (workflow: $GITHUB_WORKFLOW)"
