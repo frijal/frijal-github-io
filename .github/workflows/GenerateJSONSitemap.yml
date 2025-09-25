@@ -77,7 +77,7 @@ jobs:
             });
           });
 
-          // Save artikel.json
+            // Save artikel.json
           fs.writeFileSync("artikel.json", JSON.stringify(grouped, null, 2));
 
           // Build sitemap.xml
@@ -101,6 +101,39 @@ jobs:
 
           console.log("✅ artikel.json & sitemap.xml generated");
           EOF
+
+// --- Perbandingan dengan artikel.json lama ---
+          let oldData = {};
+          if (fs.existsSync("artikel.json")) {
+            try {
+              oldData = JSON.parse(fs.readFileSync("artikel.json","utf-8"));
+            } catch {}
+          }
+
+          const newData = grouped;
+          const changes = {added:[], removed:[], updated:[]};
+
+          // cari yang baru ditambahkan
+          for (const [cat, arts] of Object.entries(newData)) {
+            arts.forEach(([title,file])=>{
+              const existed = Object.values(oldData).flat().some(([t,f])=>t===title && f===file);
+              if (!existed) changes.added.push(`${title} (${file})`);
+            });
+          }
+
+          // cari yang dihapus
+          for (const [cat, arts] of Object.entries(oldData)) {
+            arts.forEach(([title,file])=>{
+              const stillExists = Object.values(newData).flat().some(([t,f])=>t===title && f===file);
+              if (!stillExists) changes.removed.push(`${title} (${file})`);
+            });
+          }
+
+          // log perubahan
+          console.log("📊 Perubahan artikel:");
+          if (changes.added.length) console.log("➕ Ditambahkan:", changes.added.join(", "));
+          if (changes.removed.length) console.log("➖ Dihapus:", changes.removed.join(", "));
+          if (!changes.added.length && !changes.removed.length) console.log("ℹ️ Tidak ada perubahan pada artikel.");
 
       - name: Commit and push results
         run: |
