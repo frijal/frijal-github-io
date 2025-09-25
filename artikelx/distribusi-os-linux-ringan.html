@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ext/related.css">
 <title>Linux Ringan: Penjelasan Distro</title>
 <style>
 :root {
@@ -235,6 +236,7 @@ fetch('https://ipapi.co/json/')
   })
   .catch(()=>{document.getElementById('ipText').textContent='IP: Tidak dapat diambil';});
 </script>
+<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
 </body>
 </html>
 
