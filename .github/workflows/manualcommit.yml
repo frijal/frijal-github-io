@@ -114,25 +114,4 @@ jobs:
           name: generated-files
           path: ext/
 
-  ping:
-    runs-on: ubuntu-latest
-    needs: generate
-    steps:
-      - name: Ping sitemap.xml to Google & Bing
-        run: |
-          SITEMAP_URL="https://frijal.github.io/sitemap.xml"
-          for TRY in 1 2; do
-            STATUS_GOOGLE=$(curl -o /dev/null -s -w "%{http_code}" "https://www.google.com/ping?sitemap=$SITEMAP_URL")
-            STATUS_BING=$(curl -o /dev/null -s -w "%{http_code}" "https://www.bing.com/ping?sitemap=$SITEMAP_URL")
-            echo "Attempt $TRY - Google: $STATUS_GOOGLE | Bing: $STATUS_BING"
-            if [ "$STATUS_GOOGLE" = "200" ] && [ "$STATUS_BING" = "200" ]; then
-              echo "✅ Sitemap ping sukses"
-              break
-            fi
-            echo "⚠️ Ping gagal, mencoba lagi dalam 30 detik..."
-            sleep 300
-          done
-
-          if [ "$STATUS_GOOGLE" != "200" ] || [ "$STATUS_BING" != "200" ]; then
-            echo "❌ Ping sitemap tetap gagal setelah 2 percobaan"
-            exit 1
+  
