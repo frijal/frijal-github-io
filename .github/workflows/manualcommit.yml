@@ -1,4 +1,4 @@
-name: Generate & Ping Sitemap (Manual Commit)
+name: Generate & Ping Sitemap (Manual Commit + Artifact)
 
 on:
   push:
@@ -27,7 +27,11 @@ jobs:
         run: |
           npm init -y
           npm install jsdom
-      
+
+      - name: Prepare ext folder
+        run: |
+          mkdir -p ext
+
       - name: Generate artikel.json & sitemap.xml
         run: |
           cat > ext/generate.js <<'EOF'
@@ -104,7 +108,31 @@ jobs:
 
           node ext/generate.js
 
-      - name: Move sitemap.xml to root
-        run: cp ext/sitemap.xml ./sitemap.xml
+      - name: Upload ext folder as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-files
+          path: ext/
 
- 
+  ping:
+    runs-on: ubuntu-latest
+    needs: generate
+    steps:
+      - name: Ping sitemap.xml to Google & Bing
+        run: |
+          SITEMAP_URL="https://frijal.github.io/sitemap.xml"
+          for TRY in 1 2; do
+            STATUS_GOOGLE=$(curl -o /dev/null -s -w "%{http_code}" "https://www.google.com/ping?sitemap=$SITEMAP_URL")
+            STATUS_BING=$(curl -o /dev/null -s -w "%{http_code}" "https://www.bing.com/ping?sitemap=$SITEMAP_URL")
+            echo "Attempt $TRY - Google: $STATUS_GOOGLE | Bing: $STATUS_BING"
+            if [ "$STATUS_GOOGLE" = "200" ] && [ "$STATUS_BING" = "200" ]; then
+              echo "✅ Sitemap ping sukses"
+              break
+            fi
+            echo "⚠️ Ping gagal, mencoba lagi dalam 30 detik..."
+            sleep 30
+          done
+
+          if [ "$STATUS_GOOGLE" != "200" ] || [ "$STATUS_BING" != "200" ]; then
+            echo "❌ Ping sitemap tetap gagal setelah 2 percobaan"
+            exit 1
