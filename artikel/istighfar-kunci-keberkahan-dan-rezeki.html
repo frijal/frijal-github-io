@@ -71,6 +71,7 @@
 
     @media (max-width:640px){ .wrap{margin:16px 12px;padding:16px} .gallery img{height:140px} }
   </style>
+<link rel="stylesheet" href="/ext/related.css">
 </head>
 <body>
   <a class="float-btn sitemap" href="https://frijal.github.io/sitemap.html" aria-label="Sitemap">📑 Sitemap</a>
@@ -151,5 +152,6 @@
     function shareTW(){ window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href),'_blank','width=600,height=400') }
     function shareWA(){ window.open('https://wa.me/?text='+encodeURIComponent(location.href),'_blank') }
   </script>
+<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
 </body>
 </html>
