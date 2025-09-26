@@ -20,16 +20,30 @@ jobs:
         run: |
           for file in artikelx/*.html; do
             # Tambahkan sebelum head
-              sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
+            sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
 
             # Tambahkan sebelum body
-              sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
+            sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
           done
 
       - name: Pindahkan file HTML ke folder artikel/
         run: |
           mkdir -p artikel
           mv artikelx/*.html artikel/ || true
+
+      - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
+        run: |
+          for file in artikel/*.html; do
+            # Skip kalau sudah ada prettier-ignore
+            if grep -q "<!-- prettier-ignore -->" "$file"; then
+              echo "ℹ️ Sudah ada prettier-ignore di $file"
+              continue
+            fi
+
+            # Gunakan perl untuk replace <title>…</title> dengan versi ada komentar + line break
+            perl -0777 -i -pe 's|<title>(.*?)</title>|\n<!-- prettier-ignore -->\n<title>\1</title>\n|is' "$file"
+            echo "✅ Ditambahkan prettier-ignore di $file"
+          done
 
       - name: Commit & Push perubahan
         run: |
@@ -40,6 +54,6 @@ jobs:
           else
             git add artikelx || true
             git add artikel || true
-            git commit -m "Auto update: tambah snippet & pindahkan HTML"
+            git commit -m "Auto update: tambah snippet, pindahkan HTML, sisipkan prettier-ignore"
             git push
           fi
