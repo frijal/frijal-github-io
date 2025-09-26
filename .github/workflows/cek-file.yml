@@ -1,11 +1,11 @@
-      - name: Debug list files
-          run: |
-           echo "🔎 Cari file sesuai input..."
-           IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
-           IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
-           for dir in "${DIRS[@]}"; do
-           for ext in "${EXTS[@]}"; do
-           echo "Folder: $dir, Ekstensi: .$ext"
-           find "$dir"/ -name "*.${ext}" || echo "⚠️ Tidak ada file .$ext di $dir"
-           done
-      done     
+- name: Debug list files
+  run: |
+    echo "🔎 Cari file sesuai input..."
+    IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
+    IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
+    for dir in "${DIRS[@]}"; do
+      for ext in "${EXTS[@]}"; do
+        echo "Folder: $dir, Ekstensi: .$ext"
+        find "$dir"/ -name "*.${ext}" || echo "⚠️ Tidak ada file .$ext di $dir"
+      done
+    done
