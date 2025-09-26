@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { titleToCategory } = require("titleToCategory"); // 🔑 integrasi
+const { titleToCategory } = require("./titleToCategory"); // 🔑 integrasi
 
 const artikelDir = path.join(__dirname, "artikel");
 const jsonOut = path.join(__dirname, "artikel.json");
