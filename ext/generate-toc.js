@@ -1,11 +1,9 @@
 const fs = require('fs');
-const path = require('path');
 const { parse } = require('node-html-parser');
 
 function generateTOC(filePath) {
   const html = fs.readFileSync(filePath, 'utf8');
   const root = parse(html);
-
   const body = root.querySelector('body');
   if (!body) return;
 
@@ -17,7 +15,6 @@ function generateTOC(filePath) {
     const text = h.text.trim();
     const id = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
     h.setAttribute('id', id);
-
     const indent = h.tagName === 'H3' ? ' style="margin-left:1rem;"' : '';
     tocHtml += `<li${indent}><a href="#${id}">${text}</a></li>`;
   });
@@ -31,10 +28,7 @@ function generateTOC(filePath) {
   }
 
   fs.writeFileSync(filePath, root.toString());
-  console.log(`✅ TOC generated in: ${filePath}`);
+  console.log(`✅ TOC generated: ${filePath}`);
 }
 
-// Scan semua HTML di folder
-fs.readdirSync('.')
-  .filter(file => file.endsWith('.html'))
-  .forEach(file => generateTOC(path.join('.', file)));
+module.exports = generateTOC;
