@@ -24,16 +24,10 @@ jobs:
 
       - name: Enhance HTML files
         run: |
-          find . -name "*.html" | while read file; do
-            echo "Enhancing $file"
-            # Format and beautify
-            prettier --write "$file"
-            # Minify while preserving readability
-            html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true --input-dir $(dirname "$file") --output-dir $(dirname "$file") --file-ext html
-          done
-          
-      - name: Generate TOC
-        run: node ext/generate-toc.js
+          find artikel/ -name "*.html" | while read file; do
+          echo "Memproses $file"
+          node ext/generate-toc.js "$file"
+          done        
 
       - name: Commit changes
         run: |
