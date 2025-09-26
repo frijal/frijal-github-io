@@ -1,4 +1,4 @@
-name: Optimize Files (HTML, JS, CSS)
+name: Optimize Files (HTML, JS, CSS) - Full Version
 
 on:
   workflow_dispatch:
@@ -44,16 +44,21 @@ jobs:
         run: |
           npm install -g prettier html-minifier terser clean-css-cli
 
-      - name: Prepare output folder
-        if: ${{ github.event.inputs.saveMode != 'overwrite' }}
-        run: mkdir -p ${{ github.event.inputs.outputDir }}
-
-      - name: Minify Files
+      - name: Prepare output folders
         run: |
+          mkdir -p mini
+          if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
+            mkdir -p ${{ github.event.inputs.outputDir }}
+          fi
+
+      - name: Minify Files (skip errors + count)
+        run: |
+          successCount=0
+          failCount=0
+          failList=""
           IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
           IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
           for dir in "${DIRS[@]}"; do
-            echo "🔎 Processing folder: $dir"
             if [ -d "$dir" ]; then
               for ext in "${EXTS[@]}"; do
                 find "$dir"/ -name "*.${ext}" | while read file; do
@@ -63,47 +68,61 @@ jobs:
 
                   case "$ext" in
                     html)
-                      html-minifier \
-                        --collapse-whitespace \
-                        --remove-comments \
-                        --minify-css true \
-                        --minify-js true \
-                        "$file" -o "$file"
+                      if html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true "$file" -o "$file"; then
+                        successCount=$((successCount+1))
+                      else
+                        echo "⚠️ Skip HTML: $file"
+                        failCount=$((failCount+1))
+                        failList="$failList\n$file"
+                      fi
                       ;;
                     js)
-                      terser "$file" -c -m -o "$file"
+                      if terser "$file" -c -m -o "$file"; then
+                        successCount=$((successCount+1))
+                      else
+                        echo "⚠️ Skip JS: $file"
+                        failCount=$((failCount+1))
+                        failList="$failList\n$file"
+                      fi
                       ;;
                     css)
-                      cleancss -o "$file" "$file"
+                      if cleancss -o "$file" "$file"; then
+                        successCount=$((successCount+1))
+                      else
+                        echo "⚠️ Skip CSS: $file"
+                        failCount=$((failCount+1))
+                        failList="$failList\n$file"
+                      fi
                       ;;
                   esac
 
                   if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
-                    cp "$file" "$outpath"
+                    cp "$file" "$outpath" || echo "⚠️ Gagal copy $file"
                   fi
                 done
               done
-            else
-              echo "⚠️ Folder $dir tidak ditemukan"
             fi
           done
+          echo "SUCCESS_COUNT=$successCount" >> $GITHUB_ENV
+          echo "FAIL_COUNT=$failCount" >> $GITHUB_ENV
+          echo "FAIL_LIST=$failList" >> $GITHUB_ENV
 
       - name: Wait before Prettier
         if: ${{ github.event.inputs.runPrettier == 'true' }}
         run: sleep ${{ github.event.inputs.delay }}
 
-      - name: Prettier Format
+      - name: Prettier Format (skip errors)
         if: ${{ github.event.inputs.runPrettier == 'true' }}
         run: |
           IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
           if [ "${{ github.event.inputs.saveMode }}" != "output" ]; then
             for ext in "${EXTS[@]}"; do
-              prettier --write "${{ github.event.inputs.targetDirs }}/**/*.${ext}"
+              prettier --write "${{ github.event.inputs.targetDirs }}/**/*.${ext}" || echo "⚠️ Skip Prettier targetDirs for .$ext"
             done
           fi
           if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
             for ext in "${EXTS[@]}"; do
-              prettier --write "${{ github.event.inputs.outputDir }}/**/*.${ext}"
+              prettier --write "${{ github.event.inputs.outputDir }}/**/*.${ext}" || echo "⚠️ Skip Prettier outputDir for .$ext"
             done
           fi
 
@@ -117,6 +136,62 @@ jobs:
           if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
             git add ${{ github.event.inputs.outputDir }} || true
           fi
-          git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) with saveMode=${{ github.event.inputs.saveMode }}" || echo "No changes to commit"
+          git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) with saveMode=${{ github.event.inputs.saveMode }} (skip errors)" || echo "No changes to commit"
           git push
         continue-on-error: true
+
+      - name: Log Summary
+        run: |
+          echo "✅ File berhasil diproses: $SUCCESS_COUNT"
+          echo "⚠️ File dilewati (error): $FAIL_COUNT"
+          if [ "$FAIL_COUNT" -gt 0 ]; then
+            echo -e "📋 Daftar file gagal:$FAIL_LIST"
+          fi
+
+      - name: Save Summary to File (mini/)
+        run: |
+          timestamp=$(date +"%d-%m-%y-%H-%M")
+          summaryFile="${timestamp}-optimize-summary.txt"
+          {
+            echo "📊 Optimization Summary"
+            echo "Tanggal & Jam: $(date)"
+            echo "✅ File berhasil diproses: $SUCCESS_COUNT"
+            echo "⚠️ File dilewati (error): $FAIL_COUNT"
+            if [ "$FAIL_COUNT" -gt 0 ]; then
+              echo -e "📋 Daftar file gagal:$FAIL_LIST"
+            fi
+          } > "$summaryFile"
+          mkdir -p mini
+          mv "$summaryFile" mini/
+          echo "SUMMARY_FILE=mini/$summaryFile" >> $GITHUB_ENV
+
+      - name: Commit summary file
+        run: |
+          git config --global user.name "Auto Optimizer"
+          git config --global user.email "actions@github.com"
+          git add mini/*.txt || true
+          git commit -m "📝 Add optimization summary file in mini/" || echo "No summary changes to commit"
+          git push
+        continue-on-error: true
+
+      - name: Upload summary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimize-summary
+          path: mini/*-optimize-summary.txt
+
+      - name: Add summary to GitHub Actions Job
+        run: |
+          {
+            echo "## 📊 Optimization Summary"
+            echo ""
+            echo "**Tanggal & Jam:** $(date)"
+            echo ""
+            echo "✅ File berhasil diproses: $SUCCESS_COUNT"
+            echo "⚠️ File dilewati (error): $FAIL_COUNT"
+            if [ "$FAIL_COUNT" -gt 0 ]; then
+              echo ""
+              echo "### 📋 Daftar file gagal"
+              echo -e "$FAIL_LIST"
+            fi
+          } >> $GITHUB_STEP_SUMMARY
