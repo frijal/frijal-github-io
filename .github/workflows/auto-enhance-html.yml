@@ -1,0 +1,42 @@
+name: Auto Enhance HTML
+
+on:
+  push:
+    paths:
+      - '**/*.html'
+  workflow_dispatch:
+
+jobs:
+  enhance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install HTML enhancement tools
+        run: |
+          npm install -g prettier js-beautify html-minifier
+
+      - name: Enhance HTML files
+        run: |
+          find . -name "*.html" | while read file; do
+            echo "Enhancing $file"
+            # Format and beautify
+            prettier --write "$file"
+            # Minify while preserving readability
+            html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true --input-dir $(dirname "$file") --output-dir $(dirname "$file") --file-ext html
+          done
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Auto Enhancer"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "✨ Auto-enhanced HTML files"
+          git push
+        continue-on-error: true
