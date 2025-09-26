@@ -1,0 +1,159 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Skrip Otomatis: Setup & Cleanup chroot</title><link rel="stylesheet" href="/ext/related.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .info { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+    h2 { color: #333; }
+    p { margin: 5px 0; }
+  </style>
+</head>
+<body>    
+    <!-- Skrip Otomatis -->
+    <section>
+      <h2>Skrip Otomatis: Setup & Cleanup chroot</h2>
+      <p>Untuk memudahkan, berikut contoh skrip shell sederhana agar tidak perlu mengetik semua perintah mount/umount secara manual.</p>
+      
+      <h3>1. Setup (buat file <code>enter-chroot.sh</code>)</h3>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+# enter-chroot.sh
+# Gunakan: sudo ./enter-chroot.sh /srv/chroot/debian
+
+CHROOT_DIR="$1"
+
+if [ -z "$CHROOT_DIR" ]; then
+  echo "Usage: $0 /path/to/chroot"
+  exit 1
+fi
+
+# Mount filesystem penting
+mount --bind /dev "$CHROOT_DIR/dev"
+mount --bind /dev/pts "$CHROOT_DIR/dev/pts"
+mount -t proc /proc "$CHROOT_DIR/proc"
+mount -t sysfs /sys "$CHROOT_DIR/sys"
+
+# Copy resolv.conf untuk DNS
+cp /etc/resolv.conf "$CHROOT_DIR/etc/"
+
+# Masuk ke chroot
+chroot "$CHROOT_DIR" /bin/bash</code></pre>
+
+      <h3>2. Cleanup (buat file <code>exit-chroot.sh</code>)</h3>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+# exit-chroot.sh
+# Gunakan: sudo ./exit-chroot.sh /srv/chroot/debian
+
+CHROOT_DIR="$1"
+
+if [ -z "$CHROOT_DIR" ]; then
+  echo "Usage: $0 /path/to/chroot"
+  exit 1
+fi
+
+umount "$CHROOT_DIR/dev/pts"
+umount "$CHROOT_DIR/dev"
+umount "$CHROOT_DIR/proc"
+umount "$CHROOT_DIR/sys"</code></pre>
+
+      <p>Pastikan memberi izin eksekusi:</p>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">chmod +x enter-chroot.sh exit-chroot.sh</code></pre>
+
+      <p>Sekarang kamu cukup menjalankan:</p>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">sudo ./enter-chroot.sh /srv/chroot/debian
+# ...kerja di dalam chroot...
+exit
+sudo ./exit-chroot.sh /srv/chroot/debian</code></pre>
+      <p>Dengan cara ini, mount/umount jadi lebih aman dan konsisten.</p>
+    </section>
+
+<!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+          <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+        <!-- Facebook Comments Plugin (user-provided) -->
+        <div style="margin-top:18px">
+          <!-- Facebook Comments Plugin -->
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+          </script>
+          <div class="fb-comments"
+               id="fb-comments"
+               data-href=""
+               data-width="100%"
+               data-numposts="5"></div>
+          <script>
+            // Ambil URL unik halaman saat ini
+            const currentUrl = window.location.href;
+            document.getElementById("current-url").textContent = currentUrl;
+            // Set data-href FB Comments ke URL halaman ini
+            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+            // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+            window.fbAsyncInit = function() {
+              if (typeof FB !== 'undefined') {
+                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+              }
+            }
+          </script>
+<!-- Tombol Home Kiri -->
+<a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<!-- Tombol Home Kanan -->
+<a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<style>
+  /* Style umum tombol */
+  #btn-home-left, #btn-home-right {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 9999;
+  }
+
+  #btn-home-left:hover, #btn-home-right:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* Tombol kiri */
+  #btn-home-left {
+    left: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+
+  /* Tombol kanan */
+  #btn-home-right {
+    right: 10px;
+    bottom: 20%;
+    transform: translateY(50%);
+  }
+
+  #btn-home-left svg, #btn-home-right svg {
+    flex-shrink: 0;
+  }
+</style>
+<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>
+</html
