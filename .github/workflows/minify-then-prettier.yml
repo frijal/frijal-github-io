@@ -147,6 +147,10 @@ jobs:
             done
           fi
 
+      - name: Run JSON & XML Generator
+        run: node ext/generator.js
+
+
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
