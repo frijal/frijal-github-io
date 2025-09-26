@@ -27,3 +27,9 @@ if (args.length > 0) {
     .filter(file => file.endsWith('.html'))
     .forEach(file => enhanceFile(path.join('artikel', file)));
 }
+try {
+  // existing code
+} catch (err) {
+  console.error("❌ Enhancement failed:", err);
+  process.exit(1);
+}
