@@ -14,7 +14,7 @@ on:
       targetDirs:
         description: "Daftar folder target (pisahkan dengan koma, contoh: artikel,docs,pages)"
         required: true
-        default: "artikel"
+        default: "artikel/"
       extensions:
         description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js,css)"
         required: true
@@ -22,7 +22,7 @@ on:
       outputDir:
         description: "Folder output hasil optimisasi"
         required: true
-        default: "optimized"
+        default: "mini/"
       saveMode:
         description: "Mode penyimpanan: overwrite, output, atau both"
         required: true
