@@ -22,7 +22,7 @@ jobs:
 
       - name: Run JSON & XML Generator
         run: |
-          echo "🔎 Menjalankan generator.js..."
+          echo "🔎 Menjalankan ext/generator.js..."
           node ext/generator.js
 
       - name: Prettify outputs
