@@ -117,5 +117,12 @@ const rss = `<?xml version="1.0" encoding="UTF-8" ?>
   </channel>
 </rss>`;
 
+// sort descending
+itemsArr.sort((a, b) => b.dateObj - a.dateObj);
+
+// batasi sesuai RSS_LIMIT (default 30)
+const limit = parseInt(process.env.RSS_LIMIT || "30", 10);
+itemsArr = itemsArr.slice(0, limit);
+
 fs.writeFileSync(rssPath, rss, "utf8");
 console.log("✅ rss.xml berhasil dibuat, disortir berdasarkan <meta name='date'>, dibatasi 50 item");
