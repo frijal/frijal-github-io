@@ -7,19 +7,33 @@ const artikelDir = path.join(__dirname, "../artikel");
 const jsonOut = path.join(__dirname, "../artikel.json");
 const xmlOut = path.join(__dirname, "../sitemap.xml");
 
-// Ambil judul dari <title>
+// Fungsi ambil judul dari <title>
 function extractTitle(content) {
   const match = content.match(/<title>([\s\S]*?)<\/title>/i);
-  return match ? match[1].trim() : "Periksa title Judul";
+  return match ? match[1].trim() : "Tanpa Judul";
 }
 
-// Cari gambar: og:image > img pertama > fallback thumbnail.jpg
-function extractImage(content) {
+// Fungsi fix <title> agar selalu satu baris
+function fixTitleOneLine(content) {
+  return content.replace(/<title>([\s\S]*?)<\/title>/gi, (m, p1) => {
+    return `<title>${p1.trim()}</title>`;
+  });
+}
+
+// Fungsi cari gambar: og:image > img pertama > fallback thumbnail.jpg
+function extractImage(content, file) {
   const og = content.match(/property=["']og:image["'] content=["'](.*?)["']/i);
   if (og && og[1]) return og[1].trim();
 
   const img = content.match(/<img[^>]+src=["'](.*?)["']/i);
-  if (img && img[1]) return img[1].trim();
+  if (img && img[1]) {
+    let src = img[1].trim();
+    // kalau path relatif, ubah jadi absolut
+    if (!/^https?:\/\//i.test(src)) {
+      src = `https://frijal.github.io/artikel/${src}`;
+    }
+    return src;
+  }
 
   return "https://frijal.github.io/artikel/thumbnail.jpg"; // fallback
 }
@@ -32,14 +46,22 @@ let xmlUrls = [];
 
 files.forEach(file => {
   const fullPath = path.join(artikelDir, file);
-  const content = fs.readFileSync(fullPath, "utf8");
+  let content = fs.readFileSync(fullPath, "utf8");
 
-  const title = extractTitle(content);
+  // Perbaiki <title> jadi satu baris
+  const fixedContent = fixTitleOneLine(content);
+  if (fixedContent !== content) {
+    fs.writeFileSync(fullPath, fixedContent, "utf8");
+    console.log(`🔧 Fixed <title> di ${file}`);
+  }
+
+  // Ambil judul & kategori
+  const title = extractTitle(fixedContent);
   const category = titleToCategory(title);
-  const image = extractImage(content);
+  const image = extractImage(fixedContent, file);
 
   if (!grouped[category]) grouped[category] = [];
-  grouped[category].push([title,file]);
+  grouped[category].push([title, file]);
 
   // Sitemap entry
   const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
@@ -66,4 +88,4 @@ ${xmlUrls.join("\n")}
 </urlset>`;
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
 
-console.log("✅ artikel.json & sitemap.xml berhasil dibuat (gambar dinamis + fallback thumbnail)");
+console.log("✅ artikel.json & sitemap.xml berhasil dibuat (title fix + gambar dinamis + fallback thumbnail)");
