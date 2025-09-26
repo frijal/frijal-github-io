@@ -159,6 +159,7 @@ jobs:
             git add ${{ github.event.inputs.outputDir }} || true
           fi
           git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) with saveMode=${{ github.event.inputs.saveMode }} (skip errors)" || echo "No changes to commit"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push
           env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
