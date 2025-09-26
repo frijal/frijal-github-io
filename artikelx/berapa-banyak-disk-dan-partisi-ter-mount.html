@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Charset & viewport -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <!-- Title & basic SEO -->
+  <title>💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</title>
+  <meta name="description" content="Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount. Termasuk penjelasan tmpfs/devtmpfs, contoh output, galeri gambar, dan tips.">
+
+  <!-- Canonical & favicon -->
+  <link rel="canonical" href="https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html">
+  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/assets/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="https://frijal.github.io/assets/favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux">
+  <meta property="og:description" content="Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html">
+  <meta property="og:image" content="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png">
+  <meta property="og:site_name" content="Frijal Artikel">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux">
+  <meta name="twitter:description" content="Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount.">
+  <meta name="twitter:image" content="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png">
+
+  <!-- JSON-LD Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux",
+    "description": "Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount.",
+    "inLanguage": "id-ID",
+    "author": { "@type": "Person", "name": "Fakhrul" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Frijal",
+      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/assets/logo.png" }
+    },
+    "image": [
+      "https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png",
+      "https://frijal.github.io/assets/gallery/df-h.jpg",
+      "https://frijal.github.io/assets/gallery/mount-output.jpg"
+    ],
+    "mainEntityOfPage": { "@type": "WebPage", "url": "https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html" },
+    "datePublished": "2025-09-26",
+    "dateModified": "2025-09-26"
+  }
+  </script>
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#2A7F62">
+
+  <!-- Styles: wide fullscreen, single column, mobile-first -->
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --panel:#0b1224;
+      --muted:#9aa5b1;
+      --text:#eaeef3;
+      --brand:#2A7F62; /* green-blue */
+      --brand2:#8ED1C0;
+      --accent:#f59e0b; /* amber */
+      --red:#ef4444;
+      --shadow: 0 30px 80px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(46,197,168,.12), transparent 60%),
+        radial-gradient(900px 500px at 80% 110%, rgba(245,158,11,.08), transparent 60%),
+        linear-gradient(180deg, #0b132b 0%, #0f172a 100%);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Nimbus Sans", sans-serif;
+      line-height:1.7;
+    }
+    header{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:48px 20px 12px;
+    }
+    .title{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+    }
+    .title .emoji{font-size:34px; filter: drop-shadow(0 4px 12px rgba(0,0,0,.3));}
+    h1{
+      margin:0;
+      font-size:clamp(28px,4.2vw,42px);
+      letter-spacing:.2px;
+      background:linear-gradient(90deg,var(--text),#e4f7f1 60%, var(--brand2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .meta{
+      display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+      color:var(--muted); font-size:14px; margin-top:10px;
+    }
+    .meta .dot{width:6px; height:6px; border-radius:50%; background:var(--brand2); opacity:.7}
+    .info-strip{
+      max-width:var(--max);
+      margin:20px auto 0;
+      padding:14px 20px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(42,127,98,.18), rgba(42,127,98,.06));
+      border:1px solid rgba(142,209,192,.25);
+      display:flex; gap:18px; align-items:center; flex-wrap:wrap;
+    }
+    .chip{
+      display:flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+      font-size:14px; color:#dce3ea;
+    }
+    .chip svg{width:18px; height:18px; opacity:.9}
+    main{
+      max-width:var(--max);
+      margin:24px auto 80px;
+      padding:0 20px;
+    }
+    article{
+      backdrop-filter: blur(6px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+      background:
+        radial-gradient(1000px 600px at -20% 0%, rgba(142,209,192,.10), transparent 60%),
+        linear-gradient(180deg, rgba(12,18,33,.72), rgba(10,16,28,.82));
+    }
+    .content{
+      padding:28px;
+    }
+    .lead{
+      font-size:18px; color:#e6f1ee; margin:0 0 14px 0;
+    }
+    h2{
+      font-size:clamp(22px,3.6vw,28px);
+      margin:28px 0 8px;
+      color:#eaf4f0;
+    }
+    p{margin:10px 0}
+    .code{
+      background:#0a1020; border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:14px; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      color:#cde5ff;
+    }
+    .gallery{
+      display:grid; grid-template-columns:1fr; gap:16px; padding:20px; background:rgba(255,255,255,.03); border-top:1px solid rgba(255,255,255,.06);
+    }
+    .gallery figure{
+      margin:0; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.08);
+      background:#0a0f1c;
+    }
+    .gallery img{width:100%; height:auto; display:block;}
+    .gallery figcaption{
+      padding:10px 12px; font-size:14px; color:#cfe5da; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+    }
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; background:rgba(8,12,20,.85);
+      display:none; align-items:center; justify-content:center; z-index:9999;
+    }
+    .lightbox.open{display:flex;}
+    .lightbox img{max-width:92vw; max-height:82vh; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.55)}
+    .lb-controls{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding:0 28px;
+    }
+    .lb-btn{
+      width:44px; height:44px; border-radius:999px; background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.18); display:grid; place-items:center; cursor:pointer;
+      transition:transform .12s ease;
+    }
+    .lb-btn:hover{transform:scale(1.06)}
+    .lb-close{
+      position:absolute; top:16px; right:16px;
+      width:42px; height:42px; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+      display:grid; place-items:center; cursor:pointer;
+    }
+    /* Share bar */
+    .share{
+      display:flex; gap:10px; flex-wrap:wrap; padding:18px 28px; border-top:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.03);
+    }
+    .share a{
+      text-decoration:none; color:#eaf4f0; font-size:14px;
+      padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      display:flex; align-items:center; gap:8px;
+    }
+    /* Floating buttons */
+    .floater{
+      position:fixed; z-index:10000; display:flex; align-items:center; gap:10px; text-decoration:none; color:#eaf4f0;
+      padding:10px 12px; border-radius:999px; background:linear-gradient(180deg, rgba(42,127,98,.25), rgba(42,127,98,.15));
+      border:1px solid rgba(142,209,192,.35); box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    .btn-sitemap{left:14px; top:30%}
+    .btn-home{right:14px; bottom:20%}
+    .floater svg{width:18px; height:18px}
+    /* FB comments */
+    .comments{
+      padding:24px 28px; border-top:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+    }
+    /* TOC */
+    .toc{
+      margin:10px 0 20px; padding:12px; border-radius:12px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      color:#dbe7e3; font-size:15px;
+    }
+    .toc a{color:#c0f0e0; text-decoration:none}
+    .toc a:hover{text-decoration:underline}
+    /* Responsive tweaks */
+    @media (min-width:700px){
+      .gallery{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (min-width:1024px){
+      .gallery{grid-template-columns: repeat(3, 1fr)}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <span class="emoji">💽</span>
+      <h1>Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</h1>
+    </div>
+    <div class="meta">
+      <span>Ditulis dengan cinta—bahasa santai, inti tetap tajam</span>
+      <span class="dot"></span>
+      <span>Panduan praktis untuk pemula & pengguna berpengalaman</span>
+    </div>
+  </header>
+
+  <!-- Browser/OS/Location info strip -->
+  <div class="info-strip" id="info-strip">
+    <div class="chip" id="chip-browser">
+      <!-- Browser icon -->
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#8ED1C0" stroke-width="1.5"/><path d="M12 6v6l4 4" stroke="#8ED1C0" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Browser: mendeteksi…</span>
+    </div>
+    <div class="chip" id="chip-os">
+      <!-- OS icon -->
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#8ED1C0" stroke-width="1.5"/><path d="M9 20h6" stroke="#8ED1C0" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>OS: mendeteksi…</span>
+    </div>
+    <div class="chip" id="chip-location">
+      <!-- Location icon -->
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-4.5 7-10a7 7 0 10-14 0c0 5.5 7 10 7 10z" stroke="#8ED1C0" stroke-width="1.5"/><circle cx="12" cy="11" r="3" stroke="#8ED1C0" stroke-width="1.5"/></svg>
+      <span>Lokasi: Surabaya, 🇮🇩 Indonesia</span>
+    </div>
+  </div>
+
+  <main>
+    <article>
+      <div class="content">
+        <p class="lead">Kadang kita cuma perlu jawaban cepat: berapa sih disk dan partisi yang lagi aktif di sistem Linux-ku? Tenang—cukup dua jurus: <b>df</b> dan <b>mount</b>. Di bawah ini, kita bahas dengan bahasa santai, contoh nyata, plus galeri visual biar makin kebayang.</p>
+
+        <div class="toc">
+          <b>Daftar isi:</b>
+          <ul>
+            <li><a href="#pendahuluan">Pendahuluan</a></li>
+            <li><a href="#df">Menggunakan perintah df</a></li>
+            <li><a href="#kolom-df">Memahami kolom output df</a></li>
+            <li><a href="#fs-khusus">Filesystem khusus: tmpfs, devtmpfs, credentials</a></li>
+            <li><a href="#mount">Menggunakan perintah mount</a></li>
+            <li><a href="#perbandingan">Perbandingan df vs mount</a></li>
+            <li><a href="#galeri">Galeri foto</a></li>
+            <li><a href="#komentar">Komentar</a></li>
+          </ul>
+        </div>
+
+        <h2 id="pendahuluan">Pendahuluan</h2>
+        <p>Di Linux, informasi storage itu kaya—dan itu bagus! Untuk tahu berapa disk serta partisi yang “terpasang” (mounted), gunakan <code>df</code> buat lihat kapasitas & penggunaan, sementara <code>mount</code> menampilkan daftar filesystem aktif beserta opsinya.</p>
+
+        <h2 id="df">Menggunakan perintah df</h2>
+        <p><code>df</code> (disk free) menunjukkan seberapa penuh filesystem yang ter-mount. Ini resep cepat:</p>
+        <div class="code"><pre>df -h
+df -k
+df -h /dev/sdb4</pre></div>
+        <p>Contoh output ringkas (human-readable):</p>
+        <div class="code"><pre>Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdb4        45G   17G   29G  37% /
+/dev/sdb3       2.9G  543M  2.4G  19% /boot
+/dev/sdb5        35G   24G   12G  68% /var
+/dev/sdb7       385G   91G  294G  24% /home
+/dev/sda1       300M  6.8M  294M   3% /sda
+/dev/nvme0n1p1  1.8T  762G  979G  44% /nvme</pre></div>
+        <p>Dari sini kelihatan ada <b>3 disk</b> utama: <code>sda</code>, <code>sdb</code>, dan <code>nvme0n1</code>, masing-masing dengan beberapa partisi yang ter-mount. Rapi dan informatif.</p>
+
+        <h2 id="kolom-df">Memahami kolom output df</h2>
+        <ul>
+          <li><b>Filesystem:</b> nama perangkat/partisi atau filesystem virtual.</li>
+          <li><b>Size / Used / Avail:</b> total, terpakai, dan sisa ruang.</li>
+          <li><b>Use%:</b> persentase penggunaan—cepat buat lihat mana yang hampir penuh.</li>
+          <li><b>Mounted on:</b> lokasi mount point di sistem file.</li>
+        </ul>
+
+        <h2 id="fs-khusus">Filesystem khusus: tmpfs, devtmpfs, credentials</h2>
+        <p>Jangan kaget kalau ada entri yang bukan partisi fisik:</p>
+        <ul>
+          <li><b>tmpfs:</b> penyimpanan sementara di RAM (cepat, tapi volatil).</li>
+          <li><b>devtmpfs:</b> untuk device nodes di <code>/dev</code>.</li>
+          <li><b>/run/credentials/:</b> systemd menyimpan data sensitif di RAM (password/kunci) agar lebih aman.</li>
+        </ul>
+        <p>Ini normal dan bikin sistemmu efisien.</p>
+
+        <h2 id="mount">Menggunakan perintah mount</h2>
+        <p>Kalau mau lihat “apa saja yang terpasang” beserta jenis filesystem & opsi mount, gunakan:</p>
+        <div class="code"><pre>mount</pre></div>
+        <p>Contoh potongan output:</p>
+        <div class="code"><pre>/dev/sda1 on / type ext4 (rw,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+/dev/sdb1 on /backup type ext4 (rw,relatime)</pre></div>
+        <p>Di sini kamu bisa lihat jenisnya (<code>ext4</code>, <code>tmpfs</code>, dst.) dan opsi seperti <code>rw</code> (read-write), <code>relatime</code>, dsb.</p>
+
+        <h2 id="perbandingan">Perbandingan df vs mount</h2>
+        <ul>
+          <li><b>df -h:</b> fokus kapasitas—berapa besar, terpakai, tersisa, dan mount point-nya.</li>
+          <li><b>mount:</b> fokus list filesystem aktif—jenis & opsi mount-nya.</li>
+        </ul>
+        <p>Keduanya komplementer. Pakai <code>df</code> untuk “berapa banyak”, dan <code>mount</code> untuk “apa saja & bagaimana”.</p>
+      </div>
+
+      <!-- Gallery: lazy-load + lightbox -->
+      <section class="gallery" id="galeri">
+        <figure>
+          <img loading="lazy" src="https://flaviocopes.com/images/linux-command-du/Screen_Shot_2020-09-04_at_08.22.25.png" alt="Contoh output perintah df/du di terminal" data-full="https://flaviocopes.com/images/linux-command-du/Screen_Shot_2020-09-04_at_08.22.25.png">
+          <figcaption>Gambar 1: Contoh output terminal untuk melihat storage</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://linuxconfig.org/wp-content/uploads/2013/03/01-du-command-in-linux-with-examples.png" alt="df -h human readable" data-full="https://linuxconfig.org/wp-content/uploads/2013/03/01-du-command-in-linux-with-examples.png">
+          <figcaption>Gambar 2: Format human-readable — enak dilihat, gampang dipahami</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://linuxhandbook.com/content/images/2020/06/du-command-linux-featured.png" alt="Ringkasan direktori dengan df/du" data-full="https://linuxhandbook.com/content/images/2020/06/du-command-linux-featured.png">
+          <figcaption>Gambar 3: Ringkas direktori—lihat apa yang paling makan ruang</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png" alt="Ilustrasi hard link vs soft link" data-full="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png">
+          <figcaption>Gambar 4: Bonus konsep—hard/soft link bisa mempengaruhi hitungan ukuran</figcaption>
+        </figure>
+      </section>
+
+      <!-- Share bar -->
+      <div class="share">
+        <a id="share-twitter" href="#" target="_blank" rel="noopener">
+          <!-- Twitter icon -->
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.4-1.2 1.7-2.1-.8.5-1.7.9-2.6 1.1A3.9 3.9 0 0012 8.6c0 .3 0 .6.1.9-3.3-.2-6.2-1.8-8.1-4.3-.4.7-.6 1.5-.6 2.3 0 1.6.9 3 2.2 3.8-.6 0-1.2-.2-1.8-.4v.1c0 2.2 1.6 4 3.7 4.4-.4.1-.9.2-1.4.2-.3 0-.7 0-1-.1.7 2 2.6 3.4 4.9 3.4A7.9 7.9 0 014 18.8 11 11 0 0010 20c6.6 0 10.3-5.6 10.3-10.4v-.5c.7-.5 1.3-1.1 1.7-1.8z" stroke="#cfeee3"/></svg>
+          <span>Bagikan ke Twitter</span>
+        </a>
+        <a id="share-fb" href="#" target="_blank" rel="noopener">
+          <!-- FB icon -->
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 9h3l-1 4h-2v8h-4v-8H8V9h2V7a4 4 0 014-4h3v4h-3a1 1 0 00-1 1v1z" stroke="#cfeee3"/></svg>
+          <span>Bagikan ke Facebook</span>
+        </a>
+        <a id="share-whatsapp" href="#" target="_blank" rel="noopener">
+          <!-- WhatsApp icon -->
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21a8.9 8.9 0 01-4.6-1.3L5 20l.4-2.3A9 9 0 1112 21z" stroke="#cfeee3"/><path d="M8.5 8.9c.3-1 1.4-1 1.7-.7l.5.6c.2.2.2.6 0 .8l-.4.5c-.2.3 0 .7.3 1 1 .9 2.2 1.5 2.8 1.4l.6-.6c.2-.2.6-.2.8 0l.7.4c.3.2.4 1.2-.5 1.6-1.1.5-3.1-.3-4.7-1.7-1.6-1.5-2.2-3.3-1.8-4.3z" stroke="#cfeee3"/></svg>
+          <span>Bagikan ke WhatsApp</span>
+        </a>
+        <a id="share-linkedin" href="#" target="_blank" rel="noopener">
+          <!-- LinkedIn icon -->
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="4" height="12" rx="1" stroke="#cfeee3"/><circle cx="5" cy="4.5" r="2" stroke="#cfeee3"/><rect x="10" y="8" width="11" height="12" rx="1" stroke="#cfeee3"/><path d="M11 10h4c2 0 3 .8 3 2.7V20" stroke="#cfeee3"/></svg>
+          <span>Bagikan ke LinkedIn</span>
+        </a>
+      </div>
+
+      <!-- Facebook comments -->
+      <section class="comments" id="komentar">
+        <h2>Komentar</h2>
+        <div id="fb-root"></div>
+        <div class="fb-comments" data-href="https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html" data-width="100%" data-numposts="6" data-order-by="social"></div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-controls">
+      <button class="lb-btn" id="lb-prev" aria-label="Sebelumnya">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="#eaf4f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="lb-btn" id="lb-next" aria-label="Berikutnya">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#eaf4f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <button class="lb-close" id="lb-close" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M6 18L18 6" stroke="#eaf4f0" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <img id="lb-img" src="" alt="Preview">
+  </div>
+
+  <!-- Floating buttons -->
+  <a class="floater btn-sitemap" href="https://frijal.github.io/sitemap.html" title="Sitemap">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14v6H5V5zM5 13h7v6H5v-6zM14 13h5v6h-5v-6z" stroke="#eaf4f0" stroke-width="1.5"/></svg>
+    <span>Sitemap</span>
+  </a>
+  <a class="floater btn-home" href="https://frijal.github.io/artikel.html" title="Beranda Artikel">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M3 11l9-8 9 8v10a2 2 0 01-2 2h-4a2 2 0 01-2-2v-5H9v5a2 2 0 01-2 2H5a2 2 0 01-2-2V11z" stroke="#eaf4f0" stroke-width="1.5"/></svg>
+    <span>Home</span>
+  </a>
+
+  <!-- Scripts -->
+  <script>
+    // Detect browser & OS (simple heuristic)
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let browser = 'Tidak diketahui';
+      if(ua.includes('edg')) browser = 'Microsoft Edge';
+      else if(ua.includes('chrome')) browser = 'Google Chrome';
+      else if(ua.includes('safari') && !ua.includes('chrome')) browser = 'Safari';
+      else if(ua.includes('firefox')) browser = 'Mozilla Firefox';
+      else if(ua.includes('opera') || ua.includes('opr')) browser = 'Opera';
+
+      let os = 'Tidak diketahui';
+      if(ua.includes('windows')) os = 'Windows';
+      else if(ua.includes('mac os') || ua.includes('macintosh')) os = 'macOS';
+      else if(ua.includes('android')) os = 'Android';
+      else if(ua.includes('iphone') || ua.includes('ipad')) os = 'iOS';
+      else if(ua.includes('linux')) os = 'Linux';
+
+      document.querySelector('#chip-browser span').textContent = 'Browser: ' + browser;
+      document.querySelector('#chip-os span').textContent = 'OS: ' + os;
+
+      // Location: fallback to Surabaya, Indonesia (🇮🇩), try Geolocation if permitted
+      if('geolocation' in navigator){
+        navigator.geolocation.getCurrentPosition(function(pos){
+          // We won't reverse geocode (no API), but we can show coordinates if available.
+          const lat = pos.coords.latitude.toFixed(3);
+          const lon = pos.coords.longitude.toFixed(3);
+          document.querySelector('#chip-location span').textContent = `Lokasi: Koordinat ${lat}, ${lon} (🌏)`;
+        }, function(){
+          // keep default Surabaya
+        }, {timeout: 3000});
+      }
+    })();
+
+    // Lightbox gallery
+    (function(){
+      const figs = Array.from(document.querySelectorAll('.gallery figure'));
+      const imgs = Array.from(document.querySelectorAll('.gallery img'));
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lb-img');
+      const prev = document.getElementById('lb-prev');
+      const next = document.getElementById('lb-next');
+      const close = document.getElementById('lb-close');
+      let index = 0;
+
+      function open(i){
+        index = i;
+        lbImg.src = imgs[index].dataset.full || imgs[index].src;
+        lb.classList.add('open');
+      }
+      function nav(d){
+        index = (index + d + imgs.length) % imgs.length;
+        lbImg.src = imgs[index].dataset.full || imgs[index].src;
+      }
+      function exit(){
+        lb.classList.remove('open');
+        lbImg.src = '';
+      }
+
+      imgs.forEach((img,i)=>{
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', ()=> open(i));
+      });
+      prev.addEventListener('click', ()=> nav(-1));
+      next.addEventListener('click', ()=> nav(1));
+      close.addEventListener('click', exit);
+      lb.addEventListener('click', (e)=> { if(e.target === lb) exit(); });
+      document.addEventListener('keydown', (e)=>{
+        if(!lb.classList.contains('open')) return;
+        if(e.key === 'Escape') exit();
+        if(e.key === 'ArrowLeft') nav(-1);
+        if(e.key === 'ArrowRight') nav(1);
+      });
+    })();
+
+    // Share links
+    (function(){
+      const url = encodeURIComponent(document.querySelector('link[rel="canonical"]')?.href || location.href);
+      const title = encodeURIComponent(document.title);
+      document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+      document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      document.getElementById('share-whatsapp').href = `https://wa.me/?text=${title}%20${url}`;
+      document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    })();
+
+    // Load Facebook SDK (works when served over HTTPS and proper domain)
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</body>
+</html>
