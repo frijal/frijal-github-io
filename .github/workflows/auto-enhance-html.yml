@@ -25,6 +25,14 @@ jobs:
       - name: Enhance HTML (metadata + TOC)
         run: node ext/index.js
 
+      - name: Debug Node.js
+        run: |
+          node -v
+          npm -v
+          which prettier || echo "Prettier not found"
+          which html-minifier || echo "html-minifier not found"
+          ls -R artikel || echo "No artikel folder"
+
       - name: Format & Minify
         run: |
           find artikel/ -name "*.html" | while read file; do
@@ -47,3 +55,6 @@ jobs:
           git commit -m "✨ Auto-enhanced HTML files"
           git push
         continue-on-error: true
+
+      
+
