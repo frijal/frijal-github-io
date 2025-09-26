@@ -3,7 +3,7 @@ name: Auto Enhance HTML
 on:
   push:
     paths:
-      - '**/*.html'
+      - 'artikel/**/*.html'
   workflow_dispatch:
 
 jobs:
@@ -18,22 +18,38 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install HTML enhancement tools
+      - name: Install dependencies
         run: |
-          npm install -g prettier js-beautify html-minifier
+          npm install -g prettier html-minifier node-html-parser
 
-      - name: Enhance HTML files
+      - name: Inject metadata
+        run: node ext/inject-metadata.js
+
+      - name: Generate TOC
         run: |
           find artikel/ -name "*.html" | while read file; do
-          echo "Memproses $file"
-          node ext/generate-toc.js "$file"
-          done        
+            node ext/generate-toc.js "$file"
+          done
+
+      - name: Format & Minify
+        run: |
+          find artikel/ -name "*.html" | while read file; do
+            prettier --write "$file"
+            html-minifier \
+              --collapse-whitespace \
+              --remove-comments \
+              --minify-css true \
+              --minify-js true \
+              --input-dir $(dirname "$file") \
+              --output-dir $(dirname "$file") \
+              --file-ext html
+          done
 
       - name: Commit changes
         run: |
           git config --global user.name "Auto Enhancer"
           git config --global user.email "actions@github.com"
-          git add .
+          git add artikel/*.html
           git commit -m "✨ Auto-enhanced HTML files"
           git push
         continue-on-error: true
