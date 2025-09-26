@@ -22,20 +22,30 @@ function fixTitleOneLine(content) {
 
 // Fungsi cari gambar: og:image > img pertama > fallback thumbnail.jpg
 function extractImage(content, file) {
-  const og = content.match(/property=["']og:image["'] content=["'](.*?)["']/i);
-  if (og && og[1]) return og[1].trim();
+  let src = null;
 
-  const img = content.match(/<img[^>]+src=["'](.*?)["']/i);
-  if (img && img[1]) {
-    let src = img[1].trim();
-    // kalau path relatif, ubah jadi absolut
-    if (!/^https?:\/\//i.test(src)) {
-      src = `https://frijal.github.io/artikel/${src}`;
+  // cari meta og:image
+  const og = content.match(/property=["']og:image["'] content=["'](.*?)["']/i);
+  if (og && og[1]) src = og[1].trim();
+
+  // kalau og:image tidak ada, cari <img>
+  if (!src) {
+    const img = content.match(/<img[^>]+src=["'](.*?)["']/i);
+    if (img && img[1]) {
+      src = img[1].trim();
+      // kalau path relatif, ubah jadi absolut
+      if (!/^https?:\/\//i.test(src)) {
+        src = `https://frijal.github.io/artikel/${src}`;
+      }
     }
-    return src;
   }
 
-  return "https://frijal.github.io/artikel/thumbnail.jpg"; // fallback
+  // fallback jika kosong atau tidak ada ekstensi valid
+  if (!src || !/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(src.split("?")[0])) {
+    return "https://frijal.github.io/artikel/thumbnail.jpg";
+  }
+
+  return src;
 }
 
 // Ambil semua file HTML
@@ -76,7 +86,7 @@ files.forEach(file => {
   </image:image>
 </url>`
   );
-}); // ← ini yang hilang sebelumnya, sekarang sudah ditutup
+});
 
 // Simpan artikel.json (grouping per kategori)
 fs.writeFileSync(jsonOut, JSON.stringify(grouped, null, 2), "utf8");
@@ -89,4 +99,4 @@ ${xmlUrls.join("\n")}
 </urlset>`;
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
 
-console.log("✅ artikel.json & sitemap.xml berhasil dibuat (title fix + gambar dinamis + fallback thumbnail)");
+console.log("✅ artikel.json & sitemap.xml berhasil dibuat (title fix + gambar dinamis + fallback ekstensi)");
