@@ -61,11 +61,11 @@ files.forEach(file => {
   const image = extractImage(fixedContent, file);
 
   if (!grouped[category]) grouped[category] = [];
-  grouped[category].push([title,file]);
+  grouped[category].push([title, file]);
 
   // Sitemap entry
-const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-xmlUrls.push(
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  xmlUrls.push(
 `<url>
   <loc>https://frijal.github.io/artikel/${file}</loc>
   <lastmod>${today}</lastmod>
@@ -75,7 +75,8 @@ xmlUrls.push(
     <image:loc>${image}</image:loc>
   </image:image>
 </url>`
-);
+  );
+}); // ← ini yang hilang sebelumnya, sekarang sudah ditutup
 
 // Simpan artikel.json (grouping per kategori)
 fs.writeFileSync(jsonOut, JSON.stringify(grouped, null, 2), "utf8");
