@@ -6,7 +6,7 @@ on:
       delay:
         description: "Delay (detik) sebelum menjalankan Prettier"
         required: true
-        default: "300"
+        default: "100"
       runPrettier:
         description: "Jalankan Prettier setelah minify?"
         required: true
@@ -18,15 +18,15 @@ on:
       extensions:
         description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js,css)"
         required: true
-        default: "html,js,css"
+        default: "html,css"
       outputDir:
         description: "Folder output hasil optimisasi"
         required: true
-        default: "mini"
+        default: "artikel"
       saveMode:
         description: "Mode penyimpanan: overwrite, output, atau both"
         required: true
-        default: "both"
+        default: "overwrite"
 
 jobs:
   optimize:
