@@ -25,7 +25,7 @@ files.forEach(file => {
   const category = titleToCategory(title);
 
   if (!grouped[category]) grouped[category] = [];
-  grouped[category].push([title, file]); // format [judul, file]
+  grouped[category].push([title,file]); // format [judul, file]
 });
 
 // Simpan ke artikel.json
