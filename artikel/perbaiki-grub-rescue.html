@@ -1,12 +1,183 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB</title><link rel="stylesheet" href="/ext/related.css"><meta name="description" content="Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB. Tutorial ini membahas langkah detail agar Linux bisa booting normal kembali."><link rel="canonical" href="https://frijal.github.io/artikel/perbaiki-grub-rescue.html"><link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d2/Anthon_Open_Source_Community_LOGO.svg" type="image/svg+xml"><meta property="og:title" content="Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB"><meta property="og:description" content="Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB. Tutorial detail dengan contoh kode dan langkah teruji."><meta property="og:type" content="article"><meta property="og:url" content="https://frijal.github.io/artikel/perbaiki-grub-rescue.html"><meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB"><meta name="twitter:description" content="Tutorial lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB dengan langkah detail."><meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg"><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"><style>body{font-family:"Segoe UI",sans-serif;margin:0;padding:0;line-height:1.7;background:#f9fafc;color:#333}header{background:linear-gradient(120deg,#06f,#0c9);color:#fff;text-align:center;padding:40px 20px}header h1{margin:0;font-size:2rem}.container{max-width:960px;margin:auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.1)}img{max-width:100%;border-radius:8px;margin:20px auto;display:block}pre{position:relative}.copy-btn{position:absolute;top:6px;right:8px;background:#0c9;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:12px}.share-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.share-buttons a{padding:10px 14px;border-radius:6px;color:#fff;font-size:14px;text-decoration:none;transition:.2s}.share-buttons a:hover{opacity:.8}.facebook{background:#1877f2}.twitter{background:#1da1f2}.whatsapp{background:#25d366}.telegram{background:#08c}.instagram{background:#e1306c}.threads{background:#000}.tiktok{background:#000}footer{margin-top:40px;padding:20px;background:#f0f2f5;font-size:14px;border-top:2px solid #ddd}.system-info{margin-top:20px;font-size:14px}</style><script type="application/ld+json">{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB",
-    "description": "Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB dengan langkah teruji.",
-    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg",
-    "author": { "@type": "Person", "name": "Admin Linux" },
-    "publisher": { "@type": "Organization", "name": "LinuxID" }
-  }</script></head><body><header><h1>Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB</h1></header><div class="container"><p>Banyak pengguna Linux sering mencoba berbagai distro dan memasangnya di <i>harddisk</i> atau perangkat virtual. Namun, saat konfigurasi partisi salah, sering muncul error <b>GRUB Rescue</b>. Jangan panik, berikut langkah detail untuk memperbaikinya tanpa bantuan LiveCD/USB.</p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg" alt="Error GRUB Rescue"><h2>Langkah Memperbaiki GRUB Rescue</h2><p>Ikuti langkah-langkah ini secara berurutan:</p><pre><code class="language-bash">set prefix=(hdX,Z)/boot/grub
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB</title>
+    <link rel="stylesheet" href="/ext/related.css" />
+    <meta
+      name="description"
+      content="Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB. Tutorial ini membahas langkah detail agar Linux bisa booting normal kembali."
+    />
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/perbaiki-grub-rescue.html"
+    />
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/d/d2/Anthon_Open_Source_Community_LOGO.svg"
+      type="image/svg+xml"
+    />
+    <meta
+      property="og:title"
+      content="Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB"
+    />
+    <meta
+      property="og:description"
+      content="Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB. Tutorial detail dengan contoh kode dan langkah teruji."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/perbaiki-grub-rescue.html"
+    />
+    <meta
+      property="og:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB"
+    />
+    <meta
+      name="twitter:description"
+      content="Tutorial lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB dengan langkah detail."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.7;
+        background: #f9fafc;
+        color: #333;
+      }
+      header {
+        background: linear-gradient(120deg, #06f, #0c9);
+        color: #fff;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin: 20px auto;
+        display: block;
+      }
+      pre {
+        position: relative;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        background: #0c9;
+        color: #fff;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .share-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 20px 0;
+      }
+      .share-buttons a {
+        padding: 10px 14px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 14px;
+        text-decoration: none;
+        transition: 0.2s;
+      }
+      .share-buttons a:hover {
+        opacity: 0.8;
+      }
+      .facebook {
+        background: #1877f2;
+      }
+      .twitter {
+        background: #1da1f2;
+      }
+      .whatsapp {
+        background: #25d366;
+      }
+      .telegram {
+        background: #08c;
+      }
+      .instagram {
+        background: #e1306c;
+      }
+      .threads {
+        background: #000;
+      }
+      .tiktok {
+        background: #000;
+      }
+      footer {
+        margin-top: 40px;
+        padding: 20px;
+        background: #f0f2f5;
+        font-size: 14px;
+        border-top: 2px solid #ddd;
+      }
+      .system-info {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB",
+        "description": "Panduan lengkap memperbaiki GRUB Rescue tanpa LiveCD/USB dengan langkah teruji.",
+        "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg",
+        "author": { "@type": "Person", "name": "Admin Linux" },
+        "publisher": { "@type": "Organization", "name": "LinuxID" }
+      }
+    </script>
+  </head>
+  <body>
+    <header><h1>Cara Memperbaiki GRUB Rescue Tanpa LiveCD/USB</h1></header>
+    <div class="container">
+      <p>
+        Banyak pengguna Linux sering mencoba berbagai distro dan memasangnya di
+        <i>harddisk</i> atau perangkat virtual. Namun, saat konfigurasi partisi
+        salah, sering muncul error <b>GRUB Rescue</b>. Jangan panik, berikut
+        langkah detail untuk memperbaikinya tanpa bantuan LiveCD/USB.
+      </p>
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkDL4vht__Sph6vdoIQAkW_R8nyo7jxNm34uZncj4Y_ZqcZDPuZmnLpcATemu6ZBtp6utOQ66ySSvKOf2dGu3_l2lX1CxHCvPnFawcZcw8p1lbWmWVkx80M-mI4kq-h5SqkFueS82AeeRZ/s800/grub-rescue.jpg"
+        alt="Error GRUB Rescue"
+      />
+      <h2>Langkah Memperbaiki GRUB Rescue</h2>
+      <p>Ikuti langkah-langkah ini secara berurutan:</p>
+      <pre><code class="language-bash">set prefix=(hdX,Z)/boot/grub
 insmod (hdX,Z)/boot/grub/linux.mod
 insmod part_msdos
 insmod ext2
@@ -14,4 +185,179 @@ insmod gzio
 set root=(hdX,Z)
 linux /boot/vmlinuz-[versi-kernel] root=/dev/sdXY ro
 initrd /boot/initrd.img-[versi-image]
-boot</code><button class="copy-btn">Copy</button></pre><p>Keterangan:</p><ul><li><b>(hdX,Z)</b> adalah lokasi partisi boot. Misalnya <code>/dev/sda1</code> = <code>(hd0,msdos1)</code>.</li><li><b>/dev/sdXY</b>: X = nama disk (a, b, c), Y = nomor partisi (1, 2, 3).</li><li>Gunakan tombol <kbd>TAB</kbd> untuk melihat daftar kernel dan initrd yang tersedia.</li></ul><div class="share-buttons"><a href="#" class="facebook">Facebook</a> <a href="#" class="twitter">Twitter / X</a> <a href="#" class="whatsapp">WhatsApp</a> <a href="#" class="telegram">Telegram</a> <a href="#" class="instagram">Instagram</a> <a href="#" class="threads">Threads</a> <a href="#" class="tiktok">TikTok</a></div><div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div><div style="margin-top:18px"><div id="fb-root"></div><script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script><div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div></div></div><footer><div class="system-info" id="system-info">Mendeteksi sistem...</div></footer><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M280.4 148.3L96 300.1V464h128V336h128v128h128V300.1L295.6 148.3a12 12 0 0 0-15.2 0z"/></svg>Home </a><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M280.4 148.3L96 300.1V464h128V336h128v128h128V300.1L295.6 148.3a12 12 0 0 0-15.2 0z"/></svg>Home</a><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script><script>document.querySelectorAll(".copy-btn").forEach(n=>{n.addEventListener("click",()=>{var e=n.previousElementSibling.innerText;navigator.clipboard.writeText(e),n.textContent="Copied!",setTimeout(()=>n.textContent="Copy",2e3)})});let currentUrl=window.location.href;function getBrowserInfo(){var e=navigator.userAgent;return e.includes("Firefox")?{name:"Firefox",icon:"🔥"}:e.includes("Chrome")?{name:"Chrome",icon:"🌐"}:e.includes("Safari")?{name:"Safari",icon:"🧭"}:e.includes("Edg")?{name:"Edge",icon:"🌀"}:{name:"Browser",icon:"💻"}}function getOSInfo(){var e=navigator.platform.toLowerCase();return e.includes("win")?{name:"Windows",icon:"🪟"}:e.includes("linux")?{name:"Linux",icon:"🐧"}:e.includes("mac")?{name:"MacOS",icon:"🍎"}:{name:"OS",icon:"💻"}}document.getElementById("current-url").textContent=currentUrl,document.getElementById("fb-comments").setAttribute("data-href",currentUrl),(async()=>{var e=getBrowserInfo(),n=getOSInfo(),t=await fetch("https://ipapi.co/json/").then(e=>e.json()).catch(()=>null),o=t?t.ip:"Tidak diketahui",r=t?t.country_name:"Unknown",t=t?`<img src="https://flagcdn.com/24x18/${t.country_code.toLowerCase()}.png">`:"";document.getElementById("system-info").innerHTML=`${e.icon} Browser: ${e.name} &nbsp; | &nbsp; ${n.icon} OS: ${n.name} <br> 🌍 IP: ${o} ${t} `+r})()</script><style>#btn-home-left,#btn-home-right{position:fixed;display:flex;align-items:center;background:#06f;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:700;box-shadow:0 4px 8px rgba(0,0,0,.2);transition:background .3s,transform .2s;z-index:9999}#btn-home-left:hover,#btn-home-right:hover{background:#0c9;transform:scale(1.05)}#btn-home-left{left:10px;top:30%;transform:translateY(-50%)}#btn-home-right{right:10px;bottom:20%;transform:translateY(50%)}</style><button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body></html>
+boot</code><button class="copy-btn">Copy</button></pre>
+      <p>Keterangan:</p>
+      <ul>
+        <li>
+          <b>(hdX,Z)</b> adalah lokasi partisi boot. Misalnya
+          <code>/dev/sda1</code> = <code>(hd0,msdos1)</code>.
+        </li>
+        <li>
+          <b>/dev/sdXY</b>: X = nama disk (a, b, c), Y = nomor partisi (1, 2,
+          3).
+        </li>
+        <li>
+          Gunakan tombol <kbd>TAB</kbd> untuk melihat daftar kernel dan initrd
+          yang tersedia.
+        </li>
+      </ul>
+      <div class="share-buttons">
+        <a href="#" class="facebook">Facebook</a>
+        <a href="#" class="twitter">Twitter / X</a>
+        <a href="#" class="whatsapp">WhatsApp</a>
+        <a href="#" class="telegram">Telegram</a>
+        <a href="#" class="instagram">Instagram</a>
+        <a href="#" class="threads">Threads</a>
+        <a href="#" class="tiktok">TikTok</a>
+      </div>
+      <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
+        <span id="current-url" class="small-muted"></span>
+      </div>
+      <div style="margin-top: 18px">
+        <div id="fb-root"></div>
+        <script
+          async
+          defer="defer"
+          crossorigin="anonymous"
+          src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+        ></script>
+        <div
+          class="fb-comments"
+          id="fb-comments"
+          data-href=""
+          data-width="100%"
+          data-numposts="5"
+        ></div>
+      </div>
+    </div>
+    <footer>
+      <div class="system-info" id="system-info">Mendeteksi sistem...</div>
+    </footer>
+    <a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-left"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="18"
+        height="18"
+        fill="currentColor"
+        style="margin-right: 6px"
+      >
+        <path
+          d="M280.4 148.3L96 300.1V464h128V336h128v128h128V300.1L295.6 148.3a12 12 0 0 0-15.2 0z"
+        /></svg
+      >Home </a
+    ><a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-right"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="18"
+        height="18"
+        fill="currentColor"
+        style="margin-right: 6px"
+      >
+        <path
+          d="M280.4 148.3L96 300.1V464h128V336h128v128h128V300.1L295.6 148.3a12 12 0 0 0-15.2 0z"
+        /></svg
+      >Home</a
+    >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script>
+      document.querySelectorAll(".copy-btn").forEach((n) => {
+        n.addEventListener("click", () => {
+          var e = n.previousElementSibling.innerText;
+          (navigator.clipboard.writeText(e),
+            (n.textContent = "Copied!"),
+            setTimeout(() => (n.textContent = "Copy"), 2e3));
+        });
+      });
+      let currentUrl = window.location.href;
+      function getBrowserInfo() {
+        var e = navigator.userAgent;
+        return e.includes("Firefox")
+          ? { name: "Firefox", icon: "🔥" }
+          : e.includes("Chrome")
+            ? { name: "Chrome", icon: "🌐" }
+            : e.includes("Safari")
+              ? { name: "Safari", icon: "🧭" }
+              : e.includes("Edg")
+                ? { name: "Edge", icon: "🌀" }
+                : { name: "Browser", icon: "💻" };
+      }
+      function getOSInfo() {
+        var e = navigator.platform.toLowerCase();
+        return e.includes("win")
+          ? { name: "Windows", icon: "🪟" }
+          : e.includes("linux")
+            ? { name: "Linux", icon: "🐧" }
+            : e.includes("mac")
+              ? { name: "MacOS", icon: "🍎" }
+              : { name: "OS", icon: "💻" };
+      }
+      ((document.getElementById("current-url").textContent = currentUrl),
+        document
+          .getElementById("fb-comments")
+          .setAttribute("data-href", currentUrl),
+        (async () => {
+          var e = getBrowserInfo(),
+            n = getOSInfo(),
+            t = (r = await fetch("https://ipapi.co/json/")
+              .then((e) => e.json())
+              .catch(() => null))
+              ? r.ip
+              : "Tidak diketahui",
+            o = r ? r.country_name : "Unknown",
+            r = r
+              ? `<img src="https://flagcdn.com/24x18/${r.country_code.toLowerCase()}.png">`
+              : "";
+          document.getElementById("system-info").innerHTML =
+            `${e.icon} Browser: ${e.name} &nbsp; | &nbsp; ${n.icon} OS: ${n.name} <br> 🌍 IP: ${t} ${r} ` +
+            o;
+        })());
+    </script>
+    <style>
+      #btn-home-left,
+      #btn-home-right {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        background: #06f;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition:
+          background 0.3s,
+          transform 0.2s;
+        z-index: 9999;
+      }
+      #btn-home-left:hover,
+      #btn-home-right:hover {
+        background: #0c9;
+        transform: scale(1.05);
+      }
+      #btn-home-left {
+        left: 10px;
+        top: 30%;
+        transform: translateY(-50%);
+      }
+      #btn-home-right {
+        right: 10px;
+        bottom: 20%;
+        transform: translateY(50%);
+      }</style
+    ><button id="related-posts-toggle">❌</button>
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <script src="/ext/related.js"></script>
+  </body>
+</html>

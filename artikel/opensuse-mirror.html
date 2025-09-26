@@ -1,4 +1,139 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>opensuse-mirror.sh — Mirror Tercepat untuk openSUSE</title><link rel="stylesheet" href="/ext/related.css"><link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"><style>body{font-family:"Segoe UI",sans-serif;background:#fdfdfd;color:#222;line-height:1.6;margin:0;padding:0;transition:background .3s,color .3s}header{background:#1976d2;color:#fff;padding:18px;text-align:center}header h1{margin:0;font-size:1.3rem}main{max-width:900px;margin:20px auto;padding:20px}h2{color:#1976d2}.note{background:#e3f2fd;padding:10px;border-left:4px solid #1976d2;border-radius:6px;margin-bottom:16px}pre{position:relative;background:#2d2d2d;color:#f8f8f2;border-radius:8px;overflow-x:auto;margin:16px 0}pre code{display:block;padding:16px}.copy-btn{position:absolute;top:8px;right:8px;background:#1976d2;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:.8rem}.download-btn{display:inline-block;background:#2196f3;color:#fff;text-decoration:none;padding:8px 14px;border-radius:6px;font-size:.9rem;margin-top:10px}.download-btn:hover{background:#1976d2}footer{text-align:center;padding:10px;margin-top:20px;font-size:.9rem;color:#666}.dark-mode{background:#121212;color:#eaeaea}.dark-mode header{background:#0d47a1}.dark-mode h2{color:#90caf9}.dark-toggle{position:fixed;top:12px;right:12px;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;background:#1976d2;color:#fff;font-size:.9rem}</style></head><body><button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button><header><h1>⚡ Skrip opensuse-mirror.sh</h1><p>Gunakan mirror list resmi openSUSE agar lebih cepat</p></header><main><h2>Penjelasan</h2><p>openSUSE menggunakan <code>zypper</code> sebagai package manager. Kita bisa memanfaatkan <strong>mirrorlist.opensuse.org</strong> untuk mendapatkan mirror tercepat otomatis. Skrip ini akan membackup repo lama, menggantinya dengan mirror list, lalu merefresh database repo.</p><div class="note">⚠️ Jalankan dengan <code>sudo</code> agar bisa mengubah file repo di <code>/etc/zypp/repos.d</code>.</div><h2>Kode Skrip</h2><pre>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>opensuse-mirror.sh — Mirror Tercepat untuk openSUSE</title>
+    <link rel="stylesheet" href="/ext/related.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #fdfdfd;
+        color: #222;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        transition:
+          background 0.3s,
+          color 0.3s;
+      }
+      header {
+        background: #1976d2;
+        color: #fff;
+        padding: 18px;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+      main {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      h2 {
+        color: #1976d2;
+      }
+      .note {
+        background: #e3f2fd;
+        padding: 10px;
+        border-left: 4px solid #1976d2;
+        border-radius: 6px;
+        margin-bottom: 16px;
+      }
+      pre {
+        position: relative;
+        background: #2d2d2d;
+        color: #f8f8f2;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+      }
+      pre code {
+        display: block;
+        padding: 16px;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.8rem;
+      }
+      .download-btn {
+        display: inline-block;
+        background: #2196f3;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+      .download-btn:hover {
+        background: #1976d2;
+      }
+      footer {
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      .dark-mode {
+        background: #121212;
+        color: #eaeaea;
+      }
+      .dark-mode header {
+        background: #0d47a1;
+      }
+      .dark-mode h2 {
+        color: #90caf9;
+      }
+      .dark-toggle {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #1976d2;
+        color: #fff;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <header>
+      <h1>⚡ Skrip opensuse-mirror.sh</h1>
+      <p>Gunakan mirror list resmi openSUSE agar lebih cepat</p>
+    </header>
+    <main>
+      <h2>Penjelasan</h2>
+      <p>
+        openSUSE menggunakan <code>zypper</code> sebagai package manager. Kita
+        bisa memanfaatkan <strong>mirrorlist.opensuse.org</strong> untuk
+        mendapatkan mirror tercepat otomatis. Skrip ini akan membackup repo
+        lama, menggantinya dengan mirror list, lalu merefresh database repo.
+      </p>
+      <div class="note">
+        ⚠️ Jalankan dengan <code>sudo</code> agar bisa mengubah file repo di
+        <code>/etc/zypp/repos.d</code>.
+      </div>
+      <h2>Kode Skrip</h2>
+      <pre>
       <button class="copy-btn" onclick="copyCode(this)">Copy</button>
 <code class="language-bash">#!/bin/bash
 # opensuse-mirror.sh (gunakan mirror list openSUSE otomatis)
@@ -26,4 +161,147 @@ echo "[INFO] Refresh repo..."
 sudo zypper ref
 
 echo "[DONE] Repo openSUSE sekarang menggunakan mirror tercepat!"</code>
-    </pre><a href="data:text/plain;charset=utf-8,#!/bin/bash%0A#%20opensuse-mirror.sh%20(gunakan%20mirror%20list%20openSUSE%20otomatis)%0A%0Aset%20-e%0A%0Aecho%20%22[INFO]%20Backup%20repo%20lama...%22%0Asudo%20mkdir%20-p%20/etc/zypp/repos.d/backup%0Asudo%20cp%20/etc/zypp/repos.d/*.repo%20/etc/zypp/repos.d/backup/%202%3E/dev/null%20%7C%7C%20true%0A%0Aecho%20%22[INFO]%20Mengatur%20repo%20menggunakan%20mirrorlist...%22%0AOS_VERSION=$(grep%20VERSION_ID%20/etc/os-release%20%7C%20cut%20-d%20'%22'%20-f2)%0Asudo%20zypper%20rr%20-a%0A%0A#%20Tambahkan%20repo%20utama%20(OSS%20dan%20Non-OSS)%20dengan%20mirrorlist%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/oss%22%20%5C%0A%20%20%22openSUSE-OSS%22%0A%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/non-oss%22%20%5C%0A%20%20%22openSUSE-Non-OSS%22%0A%0Aecho%20%22[INFO]%20Refresh%20repo...%22%0Asudo%20zypper%20ref%0A%0Aecho%20%22[DONE]%20Repo%20openSUSE%20sekarang%20menggunakan%20mirror%20tercepat!%22" download="opensuse-mirror.sh" class="download-btn">⬇️ Download opensuse-mirror.sh</a><div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div><div style="margin-top:18px"><div id="fb-root"></div><script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script><div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div><script>let currentUrl=window.location.href;document.getElementById("current-url").textContent=currentUrl,document.getElementById("fb-comments").setAttribute("data-href",currentUrl),window.fbAsyncInit=function(){if("undefined"!=typeof FB)try{FB.XFBML.parse()}catch(t){}}</script></div></main><footer>&copy; 2025 • opensuse-mirror.sh — gunakan dengan hati-hati, selalu backup repo sebelum mengubah.</footer><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script><script>function copyCode(t){var e=t.nextElementSibling.innerText;navigator.clipboard.writeText(e).then(()=>{t.textContent="Copied!",setTimeout(()=>{t.textContent="Copy"},1500)})}function toggleDarkMode(){document.body.classList.toggle("dark-mode"),document.querySelector(".dark-toggle").textContent=document.body.classList.contains("dark-mode")?"☀️ Light Mode":"🌙 Dark Mode"}</script><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/></svg> Home </a><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/></svg> Home</a><style>#btn-home-left,#btn-home-right{position:fixed;display:flex;align-items:center;background-color:#007bff;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-family:Arial,sans-serif;font-size:14px;font-weight:700;box-shadow:0 4px 8px rgba(0,0,0,.2);transition:background .3s ease,transform .2s ease;z-index:9999}#btn-home-left:hover,#btn-home-right:hover{background-color:#0056b3;transform:scale(1.05)}#btn-home-left{left:10px;top:30%;transform:translateY(-50%)}#btn-home-right{right:10px;bottom:20%;transform:translateY(50%)}#btn-home-left svg,#btn-home-right svg{flex-shrink:0}</style><button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body></html>
+    </pre>
+      <a
+        href="data:text/plain;charset=utf-8,#!/bin/bash%0A#%20opensuse-mirror.sh%20(gunakan%20mirror%20list%20openSUSE%20otomatis)%0A%0Aset%20-e%0A%0Aecho%20%22[INFO]%20Backup%20repo%20lama...%22%0Asudo%20mkdir%20-p%20/etc/zypp/repos.d/backup%0Asudo%20cp%20/etc/zypp/repos.d/*.repo%20/etc/zypp/repos.d/backup/%202%3E/dev/null%20%7C%7C%20true%0A%0Aecho%20%22[INFO]%20Mengatur%20repo%20menggunakan%20mirrorlist...%22%0AOS_VERSION=$(grep%20VERSION_ID%20/etc/os-release%20%7C%20cut%20-d%20'%22'%20-f2)%0Asudo%20zypper%20rr%20-a%0A%0A#%20Tambahkan%20repo%20utama%20(OSS%20dan%20Non-OSS)%20dengan%20mirrorlist%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/oss%22%20%5C%0A%20%20%22openSUSE-OSS%22%0A%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/non-oss%22%20%5C%0A%20%20%22openSUSE-Non-OSS%22%0A%0Aecho%20%22[INFO]%20Refresh%20repo...%22%0Asudo%20zypper%20ref%0A%0Aecho%20%22[DONE]%20Repo%20openSUSE%20sekarang%20menggunakan%20mirror%20tercepat!%22"
+        download="opensuse-mirror.sh"
+        class="download-btn"
+        >⬇️ Download opensuse-mirror.sh</a
+      >
+      <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
+        <span id="current-url" class="small-muted"></span>
+      </div>
+      <div style="margin-top: 18px">
+        <div id="fb-root"></div>
+        <script
+          async
+          defer="defer"
+          crossorigin="anonymous"
+          src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+        ></script>
+        <div
+          class="fb-comments"
+          id="fb-comments"
+          data-href=""
+          data-width="100%"
+          data-numposts="5"
+        ></div>
+        <script>
+          let currentUrl = window.location.href;
+          ((document.getElementById("current-url").textContent = currentUrl),
+            document
+              .getElementById("fb-comments")
+              .setAttribute("data-href", currentUrl),
+            (window.fbAsyncInit = function () {
+              if ("undefined" != typeof FB)
+                try {
+                  FB.XFBML.parse();
+                } catch (t) {}
+            }));
+        </script>
+      </div>
+    </main>
+    <footer>
+      &copy; 2025 • opensuse-mirror.sh — gunakan dengan hati-hati, selalu backup
+      repo sebelum mengubah.
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script>
+      function copyCode(t) {
+        var e = t.nextElementSibling.innerText;
+        navigator.clipboard.writeText(e).then(() => {
+          ((t.textContent = "Copied!"),
+            setTimeout(() => {
+              t.textContent = "Copy";
+            }, 1500));
+        });
+      }
+      function toggleDarkMode() {
+        (document.body.classList.toggle("dark-mode"),
+          (document.querySelector(".dark-toggle").textContent =
+            document.body.classList.contains("dark-mode")
+              ? "☀️ Light Mode"
+              : "🌙 Dark Mode"));
+      }
+    </script>
+    <a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-left"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="18"
+        height="18"
+        fill="currentColor"
+        style="margin-right: 6px"
+      >
+        <path
+          d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
+        />
+      </svg>
+      Home </a
+    ><a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-right"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+        width="18"
+        height="18"
+        fill="currentColor"
+        style="margin-right: 6px"
+      >
+        <path
+          d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
+        />
+      </svg>
+      Home</a
+    ><style>
+      #btn-home-left,
+      #btn-home-right {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition:
+          background 0.3s ease,
+          transform 0.2s ease;
+        z-index: 9999;
+      }
+      #btn-home-left:hover,
+      #btn-home-right:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      #btn-home-left {
+        left: 10px;
+        top: 30%;
+        transform: translateY(-50%);
+      }
+      #btn-home-right {
+        right: 10px;
+        bottom: 20%;
+        transform: translateY(50%);
+      }
+      #btn-home-left svg,
+      #btn-home-right svg {
+        flex-shrink: 0;
+      }</style
+    ><button id="related-posts-toggle">❌</button>
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <script src="/ext/related.js"></script>
+  </body>
+</html>

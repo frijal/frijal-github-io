@@ -1,4 +1,61 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Resize Semua Foto dengan ImageMagick (Shell Script)</title><link rel="stylesheet" href="/ext/related.css"><link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet"><style>body{font-family:"Segoe UI",sans-serif;line-height:1.6;margin:20px;background-color:#fdfdfd;color:#333}h1,h2{color:#06c}pre{position:relative;padding:1em;border-radius:8px;background:#2d2d2d;color:#f8f8f2;overflow-x:auto}.copy-btn,.download-btn{position:absolute;top:8px;right:8px;background:#06c;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:.8em}.download-btn{right:70px;background:#28a745}</style></head><body><h1>Shell Script: Resize Semua Foto dengan ImageMagick</h1><p>Script ini akan mengambil semua file gambar di folder asal, lalu mengubah ukurannya (misalnya 800px lebar) dan menyimpan hasilnya ke folder tujuan. File asli tetap aman di folder asal.</p><h2>Skrip Lengkap (<code>resize-images.sh</code>)</h2><pre>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resize Semua Foto dengan ImageMagick (Shell Script)</title>
+    <link rel="stylesheet" href="/ext/related.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #fdfdfd;
+        color: #333;
+      }
+      h1,
+      h2 {
+        color: #06c;
+      }
+      pre {
+        position: relative;
+        padding: 1em;
+        border-radius: 8px;
+        background: #2d2d2d;
+        color: #f8f8f2;
+        overflow-x: auto;
+      }
+      .copy-btn,
+      .download-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #06c;
+        color: #fff;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8em;
+      }
+      .download-btn {
+        right: 70px;
+        background: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shell Script: Resize Semua Foto dengan ImageMagick</h1>
+    <p>
+      Script ini akan mengambil semua file gambar di folder asal, lalu mengubah
+      ukurannya (misalnya 800px lebar) dan menyimpan hasilnya ke folder tujuan.
+      File asli tetap aman di folder asal.
+    </p>
+    <h2>Skrip Lengkap (<code>resize-images.sh</code>)</h2>
+    <pre>
     <button class="download-btn" onclick="downloadScript()">Download</button>
     <button class="copy-btn" onclick="copyCode()">Copy</button>
 <code class="language-bash">#!/bin/bash
@@ -25,4 +82,148 @@ for img in "$SOURCE_DIR"/*.{jpg,jpeg,png}; do
 done
 
 echo "Semua gambar sudah diresize dan disimpan di $DEST_DIR"</code>
-  </pre><h2>Cara Menggunakan</h2><ol><li>Simpan skrip di atas sebagai <code>resize-images.sh</code>.</li><li>Beri izin eksekusi:<pre><code class="language-bash">chmod +x resize-images.sh</code></pre></li><li>Jalankan:<pre><code class="language-bash">./resize-images.sh /home/user/foto /home/user/foto_kecil 800</code></pre></li></ol><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script><script>function copyCode(){var e=document.querySelector("code.language-bash").innerText;navigator.clipboard.writeText(e).then(()=>{alert("Kode berhasil dicopy!")})}function downloadScript(){var e=document.querySelector("code.language-bash").innerText,e=new Blob([e],{type:"text/x-sh"}),e=URL.createObjectURL(e),t=document.createElement("a");t.href=e,t.download="resize-images.sh",t.click(),URL.revokeObjectURL(e)}</script><div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div><div style="margin-top:18px"><div id="fb-root"></div><script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script><div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div><script>let currentUrl=window.location.href;document.getElementById("current-url").textContent=currentUrl,document.getElementById("fb-comments").setAttribute("data-href",currentUrl),window.fbAsyncInit=function(){if("undefined"!=typeof FB)try{FB.XFBML.parse()}catch(t){}}</script><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/></svg> Home </a><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/></svg> Home</a><style>#btn-home-left,#btn-home-right{position:fixed;display:flex;align-items:center;background-color:#007bff;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-family:Arial,sans-serif;font-size:14px;font-weight:700;box-shadow:0 4px 8px rgba(0,0,0,.2);transition:background .3s ease,transform .2s ease;z-index:9999}#btn-home-left:hover,#btn-home-right:hover{background-color:#0056b3;transform:scale(1.05)}#btn-home-left{left:10px;top:30%;transform:translateY(-50%)}#btn-home-right{right:10px;bottom:20%;transform:translateY(50%)}#btn-home-left svg,#btn-home-right svg{flex-shrink:0}</style><button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></div></body></html>
+  </pre>
+    <h2>Cara Menggunakan</h2>
+    <ol>
+      <li>Simpan skrip di atas sebagai <code>resize-images.sh</code>.</li>
+      <li>
+        Beri izin eksekusi:
+        <pre><code class="language-bash">chmod +x resize-images.sh</code></pre>
+      </li>
+      <li>
+        Jalankan:
+        <pre><code class="language-bash">./resize-images.sh /home/user/foto /home/user/foto_kecil 800</code></pre>
+      </li>
+    </ol>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script>
+      function copyCode() {
+        var e = document.querySelector("code.language-bash").innerText;
+        navigator.clipboard.writeText(e).then(() => {
+          alert("Kode berhasil dicopy!");
+        });
+      }
+      function downloadScript() {
+        var e = document.querySelector("code.language-bash").innerText,
+          e = new Blob([e], { type: "text/x-sh" }),
+          e = URL.createObjectURL(e),
+          t = document.createElement("a");
+        ((t.href = e),
+          (t.download = "resize-images.sh"),
+          t.click(),
+          URL.revokeObjectURL(e));
+      }
+    </script>
+    <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
+      <span id="current-url" class="small-muted"></span>
+    </div>
+    <div style="margin-top: 18px">
+      <div id="fb-root"></div>
+      <script
+        async
+        defer="defer"
+        crossorigin="anonymous"
+        src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+      ></script>
+      <div
+        class="fb-comments"
+        id="fb-comments"
+        data-href=""
+        data-width="100%"
+        data-numposts="5"
+      ></div>
+      <script>
+        let currentUrl = window.location.href;
+        ((document.getElementById("current-url").textContent = currentUrl),
+          document
+            .getElementById("fb-comments")
+            .setAttribute("data-href", currentUrl),
+          (window.fbAsyncInit = function () {
+            if ("undefined" != typeof FB)
+              try {
+                FB.XFBML.parse();
+              } catch (t) {}
+          }));
+      </script>
+      <a
+        href="https://frijal.github.io/sitemap.html"
+        target="_blank"
+        id="btn-home-left"
+        title="Kembali ke Home"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+          width="18"
+          height="18"
+          fill="currentColor"
+          style="margin-right: 6px"
+        >
+          <path
+            d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
+          />
+        </svg>
+        Home </a
+      ><a
+        href="https://frijal.github.io/sitemap.html"
+        target="_blank"
+        id="btn-home-right"
+        title="Kembali ke Home"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+          width="18"
+          height="18"
+          fill="currentColor"
+          style="margin-right: 6px"
+        >
+          <path
+            d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
+          />
+        </svg>
+        Home</a
+      ><style>
+        #btn-home-left,
+        #btn-home-right {
+          position: fixed;
+          display: flex;
+          align-items: center;
+          background-color: #007bff;
+          color: #fff;
+          padding: 12px 18px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          transition:
+            background 0.3s ease,
+            transform 0.2s ease;
+          z-index: 9999;
+        }
+        #btn-home-left:hover,
+        #btn-home-right:hover {
+          background-color: #0056b3;
+          transform: scale(1.05);
+        }
+        #btn-home-left {
+          left: 10px;
+          top: 30%;
+          transform: translateY(-50%);
+        }
+        #btn-home-right {
+          right: 10px;
+          bottom: 20%;
+          transform: translateY(50%);
+        }
+        #btn-home-left svg,
+        #btn-home-right svg {
+          flex-shrink: 0;
+        }</style
+      ><button id="related-posts-toggle">❌</button>
+      <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+      <script src="/ext/related.js"></script>
+    </div>
+  </body>
+</html>
