@@ -3,17 +3,14 @@ name: Generate artikel.json & sitemap.xml
 on:
   push:
     paths:
-      - 'artikel/**'   # 🔑 jalan kalau ada commit ke folder artikel/
-  pull_request:
-    paths:
-      - 'artikel/**'   # 🔑 jalan juga kalau ada PR yang mengubah folder artikel/
-  workflow_dispatch:     # tetap bisa dijalankan manual
+      - 'artikel/**'
+  workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # penting agar bisa push hasil
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -24,32 +21,15 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run JSON & XML Generator
-        run: |
-          echo "🔎 Menjalankan ext/generator.js..."
-          node ext/generator.js
-
-      - name: Prettify outputs
-        run: |
-          npx prettier --write artikel.json sitemap.xml || true
+      - name: Run generator.js
+        run: node ext/generator.js
 
       - name: Commit and Push results
-        if: github.event_name == 'push'   # 🔑 hanya commit kalau event push, bukan PR
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add artikel.json sitemap.xml
           git commit -m "🔄 Update artikel.json & sitemap.xml (auto)" || echo "No changes to commit"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload artifacts (for PR preview)
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-json-xml
-          path: |
-            artikel.json
-            sitemap.xml
