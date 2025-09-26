@@ -61,7 +61,7 @@ files.forEach(file => {
   const image = extractImage(fixedContent, file);
 
   if (!grouped[category]) grouped[category] = [];
-  grouped[category].push([title, file]);
+  grouped[category].push([title,file]);
 
   // Sitemap entry
   const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
