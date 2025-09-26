@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'artikel/**'
+  delete:
+    paths:
+      - 'artikel/**'
   workflow_dispatch:
 
 jobs:
@@ -24,7 +27,8 @@ jobs:
       - name: Run generator.js
         run: node ext/generator.js
 
-      - name: Commit and Push results
+      - name: Commit and Push results (only on main)
+        if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
