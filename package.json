@@ -1,0 +1,25 @@
+{
+  "name": "frijal.github.io",
+  "version": "1.0.0",
+  "description": "[](https://frijal.github.io/index.html)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frijal/frijal.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frijal/frijal.github.io/issues"
+  },
+  "homepage": "https://github.com/frijal/frijal.github.io#readme",
+  "devDependencies": {
+    "html-minifier": "^4.0.0",
+    "node-html-parser": "^7.0.1",
+    "prettier": "^3.6.2"
+  }
+}
