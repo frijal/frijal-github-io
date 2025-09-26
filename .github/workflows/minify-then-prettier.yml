@@ -1,4 +1,4 @@
-name: Optimize Files (HTML & JS)
+name: Optimize Files (HTML, JS, CSS)
 
 on:
   workflow_dispatch:
@@ -16,9 +16,17 @@ on:
         required: true
         default: "artikel"
       extensions:
-        description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js)"
+        description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js,css)"
         required: true
-        default: "html,js"
+        default: "html,js,css"
+      outputDir:
+        description: "Folder output hasil optimisasi"
+        required: true
+        default: "optimized"
+      saveMode:
+        description: "Mode penyimpanan: overwrite, output, atau both"
+        required: true
+        default: "both"
 
 jobs:
   optimize:
@@ -34,7 +42,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g prettier html-minifier terser
+          npm install -g prettier html-minifier terser clean-css-cli
+
+      - name: Prepare output folder
+        if: ${{ github.event.inputs.saveMode != 'overwrite' }}
+        run: mkdir -p ${{ github.event.inputs.outputDir }}
 
       - name: Minify Files
         run: |
@@ -44,26 +56,32 @@ jobs:
             echo "🔎 Processing folder: $dir"
             if [ -d "$dir" ]; then
               for ext in "${EXTS[@]}"; do
-                case "$ext" in
-                  html)
-                    find "$dir"/ -name "*.html" | while read file; do
+                find "$dir"/ -name "*.${ext}" | while read file; do
+                  relpath="${file#$dir/}"
+                  outpath="${{ github.event.inputs.outputDir }}/$relpath"
+                  mkdir -p "$(dirname "$outpath")"
+
+                  case "$ext" in
+                    html)
                       html-minifier \
                         --collapse-whitespace \
                         --remove-comments \
                         --minify-css true \
                         --minify-js true \
                         "$file" -o "$file"
-                    done
-                    ;;
-                  js)
-                    find "$dir"/ -name "*.js" | while read file; do
+                      ;;
+                    js)
                       terser "$file" -c -m -o "$file"
-                    done
-                    ;;
-                  *)
-                    echo "⚠️ Ekstensi $ext belum didukung"
-                    ;;
-                esac
+                      ;;
+                    css)
+                      cleancss -o "$file" "$file"
+                      ;;
+                  esac
+
+                  if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
+                    cp "$file" "$outpath"
+                  fi
+                done
               done
             else
               echo "⚠️ Folder $dir tidak ditemukan"
@@ -77,26 +95,28 @@ jobs:
       - name: Prettier Format
         if: ${{ github.event.inputs.runPrettier == 'true' }}
         run: |
-          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
           IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
-          for dir in "${DIRS[@]}"; do
-            if [ -d "$dir" ]; then
-              for ext in "${EXTS[@]}"; do
-                prettier --write "$dir/**/*.${ext}"
-              done
-            fi
-          done
+          if [ "${{ github.event.inputs.saveMode }}" != "output" ]; then
+            for ext in "${EXTS[@]}"; do
+              prettier --write "${{ github.event.inputs.targetDirs }}/**/*.${ext}"
+            done
+          fi
+          if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
+            for ext in "${EXTS[@]}"; do
+              prettier --write "${{ github.event.inputs.outputDir }}/**/*.${ext}"
+            done
+          fi
 
       - name: Commit changes
         run: |
           git config --global user.name "Auto Optimizer"
           git config --global user.email "actions@github.com"
-          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
-          for dir in "${DIRS[@]}"; do
-            if [ -d "$dir" ]; then
-              git add "$dir"/*.{html,js} || true
-            fi
-          done
-          git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) in ${{ github.event.inputs.targetDirs }}" || echo "No changes to commit"
+          if [ "${{ github.event.inputs.saveMode }}" != "output" ]; then
+            git add ${{ github.event.inputs.targetDirs }} || true
+          fi
+          if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
+            git add ${{ github.event.inputs.outputDir }} || true
+          fi
+          git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) with saveMode=${{ github.event.inputs.saveMode }}" || echo "No changes to commit"
           git push
         continue-on-error: true
