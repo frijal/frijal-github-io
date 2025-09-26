@@ -22,14 +22,8 @@ jobs:
         run: |
           npm install -g prettier html-minifier node-html-parser
 
-      - name: Inject metadata
-        run: node ext/inject-metadata.js
-
-      - name: Generate TOC
-        run: |
-          find artikel/ -name "*.html" | while read file; do
-            node ext/generate-toc.js "$file"
-          done
+      - name: Enhance HTML (metadata + TOC)
+        run: node ext/index.js
 
       - name: Format & Minify
         run: |
