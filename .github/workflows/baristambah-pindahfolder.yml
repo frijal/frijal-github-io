@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "artikelx/*.html"   # hanya trigger kalau ada file baru/diubah di artikelx/
+      - "artikelx/*.html"
 
 permissions:
   contents: write
@@ -19,10 +19,7 @@ jobs:
       - name: Tambahkan snippet ke HTML di artikelx/
         run: |
           for file in artikelx/*.html; do
-            # Tambahkan sebelum head
             sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
-
-            # Tambahkan sebelum body
             sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
           done
 
@@ -34,15 +31,38 @@ jobs:
       - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
         run: |
           for file in artikel/*.html; do
-            # Skip kalau sudah ada prettier-ignore
             if grep -q "<!-- prettier-ignore -->" "$file"; then
               echo "ℹ️ Sudah ada prettier-ignore di $file"
               continue
             fi
-
-            # Gunakan perl untuk replace <title>…</title> dengan versi ada komentar + line break
             perl -0777 -i -pe 's|<title>(.*?)</title>|\n<!-- prettier-ignore -->\n<title>\1</title>\n|is' "$file"
             echo "✅ Ditambahkan prettier-ignore di $file"
+          done
+
+      - name: Sisipkan <meta name="date"> & Google Verification
+        run: |
+          for file in artikel/*.html; do
+            # --- Meta Date ---
+            if grep -qi '<meta[^>]*date' "$file"; then
+              echo "ℹ️ Sudah ada meta date di $file"
+            else
+              DATE=$(git log --follow --format=%aI -- "$file" | tail -1)
+              if [ -z "$DATE" ]; then
+                DATE=$(date -u +"%Y-%m-%d")
+              else
+                DATE=$(date -d "$DATE" +"%Y-%m-%d")
+              fi
+              sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
+              echo "✅ Ditambahkan meta date $DATE di $file"
+            fi
+
+            # --- Google Site Verification ---
+            if grep -qi '<meta[^>]*google-site-verification' "$file"; then
+              echo "ℹ️ Sudah ada google-site-verification di $file"
+            else
+              sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
+              echo "✅ Ditambahkan google-site-verification di $file"
+            fi
           done
 
       - name: Commit & Push perubahan
@@ -54,6 +74,6 @@ jobs:
           else
             git add artikelx || true
             git add artikel || true
-            git commit -m "Auto update: tambah snippet, pindahkan HTML, sisipkan prettier-ignore"
+            git commit -m "Auto update: tambah snippet, pindahkan HTML, sisipkan prettier-ignore, meta date & google verification"
             git push
           fi
