@@ -1,4 +1,4 @@
-name: Minify then Prettier
+name: Optimize Files (HTML & JS)
 
 on:
   workflow_dispatch:
@@ -11,6 +11,14 @@ on:
         description: "Jalankan Prettier setelah minify?"
         required: true
         default: "true"
+      targetDirs:
+        description: "Daftar folder target (pisahkan dengan koma, contoh: artikel,docs,pages)"
+        required: true
+        default: "artikel"
+      extensions:
+        description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js)"
+        required: true
+        default: "html,js"
 
 jobs:
   optimize:
@@ -26,17 +34,40 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g prettier html-minifier
+          npm install -g prettier html-minifier terser
 
-      - name: Minify HTML
+      - name: Minify Files
         run: |
-          find artikel/ -name "*.html" | while read file; do
-            html-minifier \
-              --collapse-whitespace \
-              --remove-comments \
-              --minify-css true \
-              --minify-js true \
-              "$file" -o "$file"
+          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
+          IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
+          for dir in "${DIRS[@]}"; do
+            echo "🔎 Processing folder: $dir"
+            if [ -d "$dir" ]; then
+              for ext in "${EXTS[@]}"; do
+                case "$ext" in
+                  html)
+                    find "$dir"/ -name "*.html" | while read file; do
+                      html-minifier \
+                        --collapse-whitespace \
+                        --remove-comments \
+                        --minify-css true \
+                        --minify-js true \
+                        "$file" -o "$file"
+                    done
+                    ;;
+                  js)
+                    find "$dir"/ -name "*.js" | while read file; do
+                      terser "$file" -c -m -o "$file"
+                    done
+                    ;;
+                  *)
+                    echo "⚠️ Ekstensi $ext belum didukung"
+                    ;;
+                esac
+              done
+            else
+              echo "⚠️ Folder $dir tidak ditemukan"
+            fi
           done
 
       - name: Wait before Prettier
@@ -45,13 +76,27 @@ jobs:
 
       - name: Prettier Format
         if: ${{ github.event.inputs.runPrettier == 'true' }}
-        run: prettier --write "artikel/**/*.html"
+        run: |
+          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
+          IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
+          for dir in "${DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              for ext in "${EXTS[@]}"; do
+                prettier --write "$dir/**/*.${ext}"
+              done
+            fi
+          done
 
       - name: Commit changes
         run: |
           git config --global user.name "Auto Optimizer"
           git config --global user.email "actions@github.com"
-          git add artikel/*.html
-          git commit -m "♻️ Minified${{ github.event.inputs.runPrettier == 'true' && ' + Prettified' || '' }} HTML"
+          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
+          for dir in "${DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              git add "$dir"/*.{html,js} || true
+            fi
+          done
+          git commit -m "♻️ Optimized (${{ github.event.inputs.extensions }}) in ${{ github.event.inputs.targetDirs }}" || echo "No changes to commit"
           git push
         continue-on-error: true
