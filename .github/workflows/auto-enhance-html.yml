@@ -31,6 +31,9 @@ jobs:
             # Minify while preserving readability
             html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true --input-dir $(dirname "$file") --output-dir $(dirname "$file") --file-ext html
           done
+          
+      - name: Generate TOC
+        run: node ext/generate-toc.js
 
       - name: Commit changes
         run: |
