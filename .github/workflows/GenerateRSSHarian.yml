@@ -1,0 +1,41 @@
+name: Generate RSS Harian
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # jalan tiap hari jam 05:00 UTC (≈ 12:00 WIB)
+  workflow_dispatch:       # bisa juga dijalankan manual
+
+permissions:
+  contents: write
+
+jobs:
+  build-rss:
+    runs-on: ubuntu-latest
+    env:
+      RSS_LIMIT: 30   # fix limit 30 artikel terbaru
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate artikel.json & sitemap.xml
+        run: node ext/generator.js
+
+      - name: Generate rss.xml
+        run: node ext/rss.js
+
+      - name: Commit & Push perubahan
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          if git diff --quiet; then
+            echo "Tidak ada perubahan baru, skip commit."
+          else
+            git add artikel.json sitemap.xml rss.xml || true
+            git commit -m "Auto update RSS harian (limit 30)"
+            git push
+          fi
