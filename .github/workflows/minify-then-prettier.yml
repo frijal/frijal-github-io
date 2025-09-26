@@ -1,0 +1,57 @@
+name: Minify then Prettier
+
+on:
+  workflow_dispatch:
+    inputs:
+      delay:
+        description: "Delay (detik) sebelum menjalankan Prettier"
+        required: true
+        default: "300"
+      runPrettier:
+        description: "Jalankan Prettier setelah minify?"
+        required: true
+        default: "true"
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install -g prettier html-minifier
+
+      - name: Minify HTML
+        run: |
+          find artikel/ -name "*.html" | while read file; do
+            html-minifier \
+              --collapse-whitespace \
+              --remove-comments \
+              --minify-css true \
+              --minify-js true \
+              "$file" -o "$file"
+          done
+
+      - name: Wait before Prettier
+        if: ${{ github.event.inputs.runPrettier == 'true' }}
+        run: sleep ${{ github.event.inputs.delay }}
+
+      - name: Prettier Format
+        if: ${{ github.event.inputs.runPrettier == 'true' }}
+        run: prettier --write "artikel/**/*.html"
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Auto Optimizer"
+          git config --global user.email "actions@github.com"
+          git add artikel/*.html
+          git commit -m "♻️ Minified${{ github.event.inputs.runPrettier == 'true' && ' + Prettified' || '' }} HTML"
+          git push
+        continue-on-error: true
