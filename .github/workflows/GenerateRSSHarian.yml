@@ -40,7 +40,7 @@ jobs:
           if git diff --quiet; then
             echo "Tidak ada perubahan baru, skip commit."
           else
-            git add artikel.json sitemap.xml rss.xml || true
+            git add artikel.json sitemap.xml rss.xml feed atom rss || true
             git commit -m "Auto update RSS harian (limit 30)"
             git push
           fi
