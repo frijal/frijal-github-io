@@ -107,11 +107,13 @@ let items = itemsArr
   .join("\n");
 
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title><![CDATA[Frijal Artikel]]></title>
     <link><![CDATA[https://frijal.github.io/]]></link>
     <description><![CDATA[Feed artikel terbaru]]></description>
+    <language>id-ID</language>
+    <atom:link href="https://frijal.github.io/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>
