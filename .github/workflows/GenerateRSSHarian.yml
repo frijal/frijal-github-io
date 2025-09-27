@@ -33,6 +33,12 @@ jobs:
       - name: Generate rss.xml
         run: node ext/rss.js
 
+      - name: Copy rss.xml to alias feeds
+        run: |
+          cp rss.xml rss
+          cp rss.xml atom
+          cp rss.xml feed
+
       - name: Commit & Push perubahan
         run: |
           git config --global user.name "github-actions"
