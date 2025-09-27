@@ -6,6 +6,7 @@ const sitemapPath = path.join(__dirname, "../sitemap.xml");
 const rssPath = path.join(__dirname, "../rss.xml");
 const artikelJsonPath = path.join(__dirname, "../artikel.json");
 
+// --- Helpers ---
 function extractDescription(filePath) {
   if (!fs.existsSync(filePath)) return "";
   const html = fs.readFileSync(filePath, "utf8");
@@ -45,7 +46,20 @@ function sanitizeTitle(fileName) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// baca artikel.json → buat map file → kategori
+// --- Cleaners ---
+function cleanCategory(raw) {
+  if (!raw) return "Umum";
+  // Buang emoji + spasi di depan
+  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
+}
+
+function cleanTitle(raw) {
+  if (!raw) return "";
+  // Buang emoji + spasi di depan
+  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
+}
+
+// --- Build kategori map dari artikel.json ---
 let kategoriMap = {};
 if (fs.existsSync(artikelJsonPath)) {
   try {
@@ -60,12 +74,12 @@ if (fs.existsSync(artikelJsonPath)) {
   }
 }
 
-// baca sitemap
+// --- Baca sitemap ---
 const sitemapContent = fs.readFileSync(sitemapPath, "utf8");
 const doc = new DOMParser().parseFromString(sitemapContent, "text/xml");
 const urls = doc.getElementsByTagName("url");
 
-// kumpulkan item
+// --- Kumpulkan item ---
 let itemsArr = [];
 for (let i = 0; i < urls.length; i++) {
   const loc = urls[i].getElementsByTagName("loc")[0]?.textContent;
@@ -74,15 +88,9 @@ for (let i = 0; i < urls.length; i++) {
     const localPath = path.join(__dirname, "../artikel", fileName);
 
     const desc = extractDescription(localPath);
-    const title = sanitizeTitle(fileName);
-    
-    let category = kategoriMap[fileName] || "Umum";
-    
-// Hilangkan 2 karakter pertama (misalnya emoji + spasi) hanya untuk output RSS
-if (category.length > 3) {
-  category = category.substring(3);
-}
-    // Ambil tanggal dari <meta name="date">
+    const title = cleanTitle(sanitizeTitle(fileName));
+    const category = cleanCategory(kategoriMap[fileName] || "Umum");
+
     const dateObj = extractDate(localPath) || new Date();
     const pubDate = dateObj.toUTCString();
 
@@ -90,14 +98,12 @@ if (category.length > 3) {
   }
 }
 
-// sort descending (artikel terbaru duluan)
+// --- Sort & limit ---
 itemsArr.sort((a, b) => b.dateObj - a.dateObj);
-
-// batasi sesuai RSS_LIMIT (default 30)
 const limit = parseInt(process.env.RSS_LIMIT || "30", 10);
 itemsArr = itemsArr.slice(0, limit);
 
-// generate RSS items
+// --- Generate RSS items ---
 let items = itemsArr
   .map(
     it => `    <item>
@@ -111,7 +117,7 @@ let items = itemsArr
   )
   .join("\n");
 
-// template RSS
+// --- Template RSS ---
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -125,6 +131,6 @@ ${items}
   </channel>
 </rss>`;
 
-// tulis file rss.xml
+// --- Tulis file ---
 fs.writeFileSync(rssPath, rss, "utf8");
 console.log(`✅ rss.xml berhasil dibuat (${itemsArr.length} item), disortir berdasarkan <meta name='date'>`);
