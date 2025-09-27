@@ -1,37 +1,29 @@
 name: RSS Feed Atom
 
 on:
-  schedule:
-    - cron: "0 5 * * *"   # jalan tiap hari jam 05:00 UTC (≈ 12:00 WIB)
-  workflow_dispatch:       # bisa juga dijalankan manual
-
-permissions:
-  contents: write
+  push:
+    paths:
+      - 'artikel.json'
+      - 'sitemap.xml'
+  workflow_dispatch:
 
 jobs:
-  build-rss:
+  rss:
     runs-on: ubuntu-latest
-    env:
-      RSS_LIMIT: 30   # fix limit 30 artikel terbaru
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'   # aktifkan cache npm biar lebih cepat
 
-      - name: Install dependencies
-        run: npm ci   # pastikan ada package-lock.json, kalau belum bisa pakai npm install
-
-      - name: Generate artikel.json & sitemap.xml
-        run: node ext/generator.js
-
-      - name: Generate rss.xml
+      - name: Run rss.js
         run: node ext/rss.js
+        env:
+          RSS_LIMIT: 30
 
       - name: Copy rss.xml to alias feeds
         run: |
@@ -39,14 +31,22 @@ jobs:
           cp rss.xml atom
           cp rss.xml feed
 
-      - name: Commit & Push perubahan
+      - name: Commit and Push results (only on main)
+        if: github.ref == 'refs/heads/main'
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          if git diff --quiet; then
-            echo "Tidak ada perubahan baru, skip commit."
-          else
-            git add artikel.json sitemap.xml rss.xml feed atom rss || true
-            git commit -m "Auto update RSS harian (limit 30)"
-            git push
-          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add rss.xml rss atom feed || true
+          git commit -m "🔄 Update RSS feed (auto)" || echo "No changes to commit"
+
+          git fetch origin main
+          git rebase origin/main || {
+            echo "⚠️ Konflik saat rebase, auto-resolve dengan hasil generator (ours)"
+            git rebase --abort
+            git merge -X ours origin/main
+          }
+
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
