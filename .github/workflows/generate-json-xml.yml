@@ -16,11 +16,9 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -30,22 +28,19 @@ jobs:
       - name: Validate sitemap.xml
         run: node ext/validate-sitemap.js
 
-      - name: Check diff
-        id: diffcheck
-        run: |
-          git add artikel.json sitemap.xml
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
       - name: Commit and Push results (only on main)
-        if: steps.diffcheck.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "🔄 Update artikel.json & sitemap.xml (auto)"
-          git push
+          git add artikel.json sitemap.xml
+          git commit -m "🔄 Update artikel.json & sitemap.xml (auto)" || echo "No changes to commit"
+          git fetch origin main
+          git rebase origin/main || {
+            echo "⚠️ Konflik saat rebase, auto-resolve dengan hasil generator (ours)"
+            git rebase --abort
+            git merge -X ours origin/main
+          }
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
