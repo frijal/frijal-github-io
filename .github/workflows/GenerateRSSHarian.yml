@@ -21,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run rss.js
         run: node ext/rss.js
@@ -43,15 +43,15 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+          # pastikan working tree bersih
+          git reset --hard
+          git clean -fd
+
           git add rss.xml rss atom feed || true
           git commit -m "🔄 Update RSS feed (auto)" || echo "No changes to commit"
 
           git fetch origin main
-          git rebase origin/main || {
-            echo "⚠️ Konflik saat rebase, auto-resolve dengan hasil generator (ours)"
-            git rebase --abort
-            git merge -X ours origin/main
-          }
+          git merge -X ours origin/main
 
           git push origin HEAD:main
         env:
