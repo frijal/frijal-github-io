@@ -96,16 +96,17 @@ itemsArr = itemsArr.slice(0, limit);
 let items = itemsArr
   .map(
     it => `    <item>
-      <title>${it.title}</title>
-      <link>${it.loc}</link>
-      <guid>${it.loc}</guid>
+      <title><![CDATA[${it.title}]]></title>
+      <link><![CDATA[${it.loc}]]></link>
+      <guid><![CDATA[${it.loc}]]></guid>
       <pubDate>${it.pubDate}</pubDate>
       <description><![CDATA[${it.desc}]]></description>
-      <category>${it.category}</category>
+      <category><![CDATA[${it.category}]]></category>
     </item>`
   )
   .join("\n");
 
+// template RSS
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -119,5 +120,6 @@ ${items}
   </channel>
 </rss>`;
 
+// tulis file rss.xml
 fs.writeFileSync(rssPath, rss, "utf8");
 console.log(`✅ rss.xml berhasil dibuat (${itemsArr.length} item), disortir berdasarkan <meta name='date'>`);
