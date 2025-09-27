@@ -11,13 +11,11 @@ function extractDescription(filePath) {
   if (!fs.existsSync(filePath)) return "";
   const html = fs.readFileSync(filePath, "utf8");
 
-  // 1. Meta description
   const metaMatch = html.match(
     /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i
   );
   if (metaMatch) return metaMatch[1];
 
-  // 2. Fallback: <p> pertama
   const pMatch = html.match(/<p[^>]*>(.*?)<\/p>/i);
   if (pMatch) {
     const text = pMatch[1].replace(/<[^>]+>/g, "");
@@ -46,16 +44,13 @@ function sanitizeTitle(fileName) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// --- Cleaners ---
 function cleanCategory(raw) {
   if (!raw) return "Umum";
-  // Buang emoji + spasi di depan
   return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
 }
 
 function cleanTitle(raw) {
   if (!raw) return "";
-  // Buang emoji + spasi di depan
   return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
 }
 
@@ -131,6 +126,13 @@ ${items}
   </channel>
 </rss>`;
 
-// --- Tulis file ---
+// --- Tulis file utama ---
 fs.writeFileSync(rssPath, rss, "utf8");
-console.log(`✅ rss.xml berhasil dibuat (${itemsArr.length} item), disortir berdasarkan <meta name='date'>`);
+
+// --- Tulis duplikat identik ---
+["../rss", "../atom", "../feed"].forEach(name => {
+  const outPath = path.join(__dirname, name);
+  fs.writeFileSync(outPath, rss, "utf8");
+});
+
+console.log(`✅ rss.xml + alias (/rss, /atom, /feed) berhasil dibuat (${itemsArr.length} item)`);
