@@ -114,7 +114,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8" ?>
     <link>https://frijal.github.io/</link>
     <description>Feed artikel terbaru</description>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    ${items}
+${items}
   </channel>
 </rss>`;
 
