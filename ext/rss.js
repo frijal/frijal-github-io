@@ -127,11 +127,11 @@ ${items}
 </rss>`;
 
 // --- Tulis file utama ---
-fs.writeFileSync(rssPath, rss, "utf8");
+fs.writeFileSync(path.join(__dirname, "../rss.xml"), rss, "utf8");
 
-// --- Tulis duplikat identik ---
-["../rss", "../atom", "../feed"].forEach(name => {
-  const outPath = path.join(__dirname, name);
+// --- Tulis duplikat identik di root repo ---
+["rss", "atom", "feed"].forEach(name => {
+  const outPath = path.join(__dirname, "..", name);
   fs.writeFileSync(outPath, rss, "utf8");
 });
 
