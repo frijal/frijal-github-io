@@ -7,6 +7,18 @@ const artikelDir = path.join(__dirname, "../artikel");
 const jsonOut = path.join(__dirname, "../artikel.json");
 const xmlOut = path.join(__dirname, "../sitemap.xml");
 
+// Fungsi format tanggal ISO 8601 penuh dengan offset lokal
+function formatISO8601(date = new Date()) {
+  const tzOffset = -date.getTimezoneOffset(); // dalam menit
+  const diff = tzOffset >= 0 ? "+" : "-";
+  const pad = n => String(Math.floor(Math.abs(n))).padStart(2, "0");
+
+  const hours = pad(tzOffset / 60);
+  const minutes = pad(tzOffset % 60);
+
+  return date.toISOString().replace("Z", `${diff}${hours}:${minutes}`);
+}
+
 // Fungsi ambil judul dari <title>
 function extractTitle(content) {
   const match = content.match(/<title>([\s\S]*?)<\/title>/i);
@@ -73,8 +85,8 @@ files.forEach(file => {
   if (!grouped[category]) grouped[category] = [];
   grouped[category].push([title, file]);
 
-  // Sitemap entry
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  // Sitemap entry dengan tanggal ISO 8601 penuh
+  const today = formatISO8601(new Date());
   xmlUrls.push(
 `<url>
   <loc>https://frijal.github.io/artikel/${file}</loc>
@@ -99,4 +111,4 @@ ${xmlUrls.join("\n")}
 </urlset>`;
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
 
-console.log("✅ artikel.json & sitemap.xml berhasil dibuat (title fix + gambar dinamis + fallback ekstensi)");
+console.log("✅ artikel.json & sitemap.xml berhasil dibuat (title fix + gambar dinamis + fallback ekstensi + tanggal ISO 8601 penuh)");
