@@ -1,7 +1,493 @@
-<!doctype html><html lang="id" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<!-- prettier-ignore -->
-<title>YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas</title>
-<link rel="stylesheet" href="/ext/related.css"><link rel="canonical" href="https://frijal.github.io/artikel/presto-yum.html"><meta name="description" content="Buat update di distro YUM jadi lebih hemat bandwidth dengan YUM Presto (delta RPM). Panduan mudah: apa itu Presto, cara pasang, tips, dan contoh perintah. Disertai ilustrasi, komentar Facebook, dan tombol berbagi."><meta property="og:type" content="article"><meta property="og:title" content="YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas"><meta property="og:description" content="Panduan mudah memahami YUM Presto (delta RPM) untuk menghemat kuota saat update. Lengkap dengan langkah dan tips."><meta property="og:url" content="https://frijal.github.io/artikel/presto-yum.html"><meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"><meta property="og:locale" content="id_ID"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas"><meta name="twitter:description" content="Panduan mudah memahami YUM Presto (delta RPM) untuk menghemat kuota saat update."><meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"><link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%2300a3ff"/><stop offset="1" stop-color="%236222ee"/></linearGradient></defs><rect width="64" height="64" rx="12" fill="url(%23g)"/><text x="50%" y="54%" text-anchor="middle" font-family="Segoe UI,Arial" font-size="30" fill="white" font-weight="700">BK</text></svg>'><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"><link rel="preload" as="style" href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"><script defer="defer" src="https://unpkg.com/prismjs@1.29.0/prism.min.js"></script><script defer="defer" src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script><script defer="defer" src="https://unpkg.com/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script><style>:root{--bg:#f7f9fc;--bg-soft:#ffffff;--bg-soft-2:#f0f3fb;--card:#ffffff;--text:#1b2559;--muted:#5b6b90;--accent:#1aa2ff;--accent-2:#7c4dff;--accent-3:#ffb020;--ok:#16a34a;--warn:#ff9800;--danger:#e53935;--shadow:0 12px 30px rgba(10, 20, 70, 0.08);--radius:16px;--maxw:1200px;--border:1px solid rgba(10, 20, 70, 0.08)}*{box-sizing:border-box}body,html{height:100%}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,Helvetica,sans-serif;background:radial-gradient(1200px 600px at 10% -20%,rgba(26,162,255,.12),transparent 60%),radial-gradient(800px 500px at 100% 0,rgba(124,77,255,.1),transparent 60%),linear-gradient(180deg,#f7f9fc 0,#f7f9fc 100%);color:var(--text);overflow-x:hidden}a{color:var(--accent);text-decoration:none}a:hover{color:#008cff}header.hero{min-height:56vh;display:grid;place-items:center;text-align:center;padding:32px 18px 16px;background:radial-gradient(900px 500px at 50% -10%,rgba(255,176,32,.12),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0))}.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:6px 0 10px;letter-spacing:.2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 24px rgba(124,77,255,.2);font-weight:800}.hero p.sub{color:var(--muted);max-width:860px;margin:10px auto 0;font-size:clamp(14px,1.8vw,18px)}.wrap{max-width:var(--maxw);margin:0 auto;padding:20px}main{margin-top:-60px}.card{background:var(--card);border:var(--border);box-shadow:var(--shadow);border-radius:var(--radius);padding:20px}.grid{display:grid;grid-template-columns:1.12fr .88fr;gap:22px}@media (max-width:1024px){.grid{grid-template-columns:1fr}}article h2{margin:20px 0 10px;font-size:clamp(20px,2.3vw,26px)}article p{text-align:justify;color:var(--text);line-height:1.75}article .note{background:#e8fff2;border:1px dashed #a5f3c6;color:#0a6847;padding:12px 14px;border-radius:12px;margin:12px 0 2px}.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.figure{grid-column:span 6;background:var(--bg-soft);border:var(--border);border-radius:14px;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 6px 16px rgba(10,20,70,.06)}.figure:hover{transform:translateY(-3px);box-shadow:0 12px 22px rgba(10,20,70,.12)}.figure img{width:100%;height:280px;object-fit:cover;display:block;background:linear-gradient(90deg,#e9eefc,#f3f6ff);cursor:zoom-in}.figure figcaption{font-size:13px;color:var(--muted);padding:10px 12px;background:linear-gradient(180deg,#fff,#fbfdff)}@media (max-width:900px){.figure{grid-column:span 12}.figure img{height:220px}}.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9998;padding:20px}.lightbox.open{display:flex}.lightbox img{max-width:92vw;max-height:86vh;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4)}.lightbox button{position:absolute;top:14px;right:14px;background:#fff;border:1px solid rgba(10,20,70,.12);color:#1b2559;padding:8px 10px;border-radius:10px;cursor:pointer;box-shadow:0 6px 16px rgba(10,20,70,.12)}.lightbox .caption{position:absolute;bottom:16px;left:16px;right:16px;color:#fff;font-size:13px;text-align:center}.share{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:10px}.share a{display:inline-flex;align-items:center;gap:8px;border:var(--border);padding:8px 12px;border-radius:999px;color:#fff;font-weight:600;font-size:14px;transition:transform .15s ease,filter .2s ease;will-change:transform}.share a:hover{transform:translateY(-2px);filter:brightness(1.05)}.share svg{width:18px;height:18px}.fb{background:#1877f2}.tw{background:#1d9bf0}.x{background:#000}.wa{background:#25d366}.tg{background:#229ed9}.ig{background:radial-gradient(circle at 30% 107%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%)}.threads{background:#000}.tt{background:#010101}aside .box{background:var(--bg-soft);border:var(--border);border-radius:14px;padding:14px 16px;margin-bottom:16px;box-shadow:0 6px 16px rgba(10,20,70,.06)}.kv{display:flex;align-items:center;gap:8px;margin:6px 0;color:var(--muted)}.kv img.icon,.kv svg.icon{width:18px;height:18px}.small-muted{color:var(--muted);font-size:12px}.codecard{position:relative;margin-top:20px;border-radius:14px;overflow:hidden;border:var(--border);background:#fbfdff}.copy-btn{position:absolute;top:8px;right:8px;z-index:10;background:linear-gradient(180deg,#fff,#f0f3fb);color:#1b2559;border:var(--border);border-radius:10px;padding:6px 10px;font-size:12px;cursor:pointer}footer{margin:30px 0 40px;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;color:var(--muted)}.env{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}.badge{display:inline-flex;gap:8px;align-items:center;border:var(--border);padding:8px 10px;border-radius:999px;background:#fff;box-shadow:0 6px 16px rgba(10,20,70,.06)}.ipbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap}#btn-home-left,#btn-home-right{position:fixed;display:inline-flex;align-items:center;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:10px 14px;border-radius:999px;text-decoration:none;font-family:Inter,system-ui,Segoe UI,Arial,Helvetica,sans-serif;font-size:14px;font-weight:800;box-shadow:0 10px 24px rgba(10,20,70,.18);transition:background .3s ease,transform .2s ease;z-index:9999}#btn-home-left:hover,#btn-home-right:hover{background:linear-gradient(90deg,#9e81ff,#00b4ff);transform:scale(1.05)}#btn-home-left{left:10px;top:30%;transform:translateY(-50%)}#btn-home-right{right:10px;bottom:20%;transform:translateY(50%)}#btn-home-left svg,#btn-home-right svg{width:18px;height:18px;fill:currentColor;margin-right:6px}</style><script type="application/ld+json">{
+<!doctype html>
+<html lang="id" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <!-- prettier-ignore -->
+    <title>YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas</title>
+    <link rel="stylesheet" href="/ext/related.css" />
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/presto-yum.html"
+    />
+    <meta
+      name="description"
+      content="Buat update di distro YUM jadi lebih hemat bandwidth dengan YUM Presto (delta RPM). Panduan mudah: apa itu Presto, cara pasang, tips, dan contoh perintah. Disertai ilustrasi, komentar Facebook, dan tombol berbagi."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas"
+    />
+    <meta
+      property="og:description"
+      content="Panduan mudah memahami YUM Presto (delta RPM) untuk menghemat kuota saat update. Lengkap dengan langkah dan tips."
+    />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/presto-yum.html"
+    />
+    <meta
+      property="og:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas"
+    />
+    <meta
+      name="twitter:description"
+      content="Panduan mudah memahami YUM Presto (delta RPM) untuk menghemat kuota saat update."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%2300a3ff"/><stop offset="1" stop-color="%236222ee"/></linearGradient></defs><rect width="64" height="64" rx="12" fill="url(%23g)"/><text x="50%" y="54%" text-anchor="middle" font-family="Segoe UI,Arial" font-size="30" fill="white" font-weight="700">BK</text></svg>'
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css"
+    />
+    <script
+      defer="defer"
+      src="https://unpkg.com/prismjs@1.29.0/prism.min.js"
+    ></script>
+    <script
+      defer="defer"
+      src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"
+    ></script>
+    <script
+      defer="defer"
+      src="https://unpkg.com/prismjs@1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"
+    ></script>
+    <style>
+      :root {
+        --bg: #f7f9fc;
+        --bg-soft: #ffffff;
+        --bg-soft-2: #f0f3fb;
+        --card: #ffffff;
+        --text: #1b2559;
+        --muted: #5b6b90;
+        --accent: #1aa2ff;
+        --accent-2: #7c4dff;
+        --accent-3: #ffb020;
+        --ok: #16a34a;
+        --warn: #ff9800;
+        --danger: #e53935;
+        --shadow: 0 12px 30px rgba(10, 20, 70, 0.08);
+        --radius: 16px;
+        --maxw: 1200px;
+        --border: 1px solid rgba(10, 20, 70, 0.08);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body,
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          system-ui,
+          Segoe UI,
+          Arial,
+          Helvetica,
+          sans-serif;
+        background:
+          radial-gradient(
+            1200px 600px at 10% -20%,
+            rgba(26, 162, 255, 0.12),
+            transparent 60%
+          ),
+          radial-gradient(
+            800px 500px at 100% 0,
+            rgba(124, 77, 255, 0.1),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #f7f9fc 0, #f7f9fc 100%);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        color: #008cff;
+      }
+      header.hero {
+        min-height: 56vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 32px 18px 16px;
+        background:
+          radial-gradient(
+            900px 500px at 50% -10%,
+            rgba(255, 176, 32, 0.12),
+            transparent 60%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.85),
+            rgba(255, 255, 255, 0)
+          );
+      }
+      .hero h1 {
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.15;
+        margin: 6px 0 10px;
+        letter-spacing: 0.2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 2px 24px rgba(124, 77, 255, 0.2);
+        font-weight: 800;
+      }
+      .hero p.sub {
+        color: var(--muted);
+        max-width: 860px;
+        margin: 10px auto 0;
+        font-size: clamp(14px, 1.8vw, 18px);
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 20px;
+      }
+      main {
+        margin-top: -60px;
+      }
+      .card {
+        background: var(--card);
+        border: var(--border);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        padding: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 22px;
+      }
+      @media (max-width: 1024px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      article h2 {
+        margin: 20px 0 10px;
+        font-size: clamp(20px, 2.3vw, 26px);
+      }
+      article p {
+        text-align: justify;
+        color: var(--text);
+        line-height: 1.75;
+      }
+      article .note {
+        background: #e8fff2;
+        border: 1px dashed #a5f3c6;
+        color: #0a6847;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 12px 0 2px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 12px;
+      }
+      .figure {
+        grid-column: span 6;
+        background: var(--bg-soft);
+        border: var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        box-shadow: 0 6px 16px rgba(10, 20, 70, 0.06);
+      }
+      .figure:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 22px rgba(10, 20, 70, 0.12);
+      }
+      .figure img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        display: block;
+        background: linear-gradient(90deg, #e9eefc, #f3f6ff);
+        cursor: zoom-in;
+      }
+      .figure figcaption {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 10px 12px;
+        background: linear-gradient(180deg, #fff, #fbfdff);
+      }
+      @media (max-width: 900px) {
+        .figure {
+          grid-column: span 12;
+        }
+        .figure img {
+          height: 220px;
+        }
+      }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9998;
+        padding: 20px;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox img {
+        max-width: 92vw;
+        max-height: 86vh;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+      .lightbox button {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: #fff;
+        border: 1px solid rgba(10, 20, 70, 0.12);
+        color: #1b2559;
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(10, 20, 70, 0.12);
+      }
+      .lightbox .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        color: #fff;
+        font-size: 13px;
+        text-align: center;
+      }
+      .share {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .share a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: var(--border);
+        padding: 8px 12px;
+        border-radius: 999px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        transition:
+          transform 0.15s ease,
+          filter 0.2s ease;
+        will-change: transform;
+      }
+      .share a:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.05);
+      }
+      .share svg {
+        width: 18px;
+        height: 18px;
+      }
+      .fb {
+        background: #1877f2;
+      }
+      .tw {
+        background: #1d9bf0;
+      }
+      .x {
+        background: #000;
+      }
+      .wa {
+        background: #25d366;
+      }
+      .tg {
+        background: #229ed9;
+      }
+      .ig {
+        background: radial-gradient(
+          circle at 30% 107%,
+          #fdf497 0,
+          #fdf497 5%,
+          #fd5949 45%,
+          #d6249f 60%,
+          #285aeb 90%
+        );
+      }
+      .threads {
+        background: #000;
+      }
+      .tt {
+        background: #010101;
+      }
+      aside .box {
+        background: var(--bg-soft);
+        border: var(--border);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 6px 16px rgba(10, 20, 70, 0.06);
+      }
+      .kv {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0;
+        color: var(--muted);
+      }
+      .kv img.icon,
+      .kv svg.icon {
+        width: 18px;
+        height: 18px;
+      }
+      .small-muted {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .codecard {
+        position: relative;
+        margin-top: 20px;
+        border-radius: 14px;
+        overflow: hidden;
+        border: var(--border);
+        background: #fbfdff;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 10;
+        background: linear-gradient(180deg, #fff, #f0f3fb);
+        color: #1b2559;
+        border: var(--border);
+        border-radius: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      footer {
+        margin: 30px 0 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+      }
+      .env {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      .badge {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: var(--border);
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: #fff;
+        box-shadow: 0 6px 16px rgba(10, 20, 70, 0.06);
+      }
+      .ipbox {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      #btn-home-left,
+      #btn-home-right {
+        position: fixed;
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(90deg, var(--accent-2), var(--accent));
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-family:
+          Inter,
+          system-ui,
+          Segoe UI,
+          Arial,
+          Helvetica,
+          sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        box-shadow: 0 10px 24px rgba(10, 20, 70, 0.18);
+        transition:
+          background 0.3s ease,
+          transform 0.2s ease;
+        z-index: 9999;
+      }
+      #btn-home-left:hover,
+      #btn-home-right:hover {
+        background: linear-gradient(90deg, #9e81ff, #00b4ff);
+        transform: scale(1.05);
+      }
+      #btn-home-left {
+        left: 10px;
+        top: 30%;
+        transform: translateY(-50%);
+      }
+      #btn-home-right {
+        right: 10px;
+        bottom: 20%;
+        transform: translateY(50%);
+      }
+      #btn-home-left svg,
+      #btn-home-right svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+        margin-right: 6px;
+      }
+    </style>
+    <script type="application/ld+json">
+      {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": "YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas",
@@ -23,36 +509,206 @@
           "@id": "https://frijal.github.io/artikel/presto-yum.html"
         },
         "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"
-      }</script><script type="application/ld+json">{
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://frijal.github.io/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Artikel",
-            "item": "https://frijal.github.io/artikel"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "YUM Presto",
-            "item": "https://frijal.github.io/artikel/presto-yum.html"
-          }
-        ]
-<link rel="stylesheet" href="/ext/related.css">
-<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
-      }</script></head><body><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"/></svg> Home </a><a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"/></svg> Home</a><main><header class="hero"><div class="wrap"><h1 id="top">YUM Presto: Hemat Bandwidth Saat Update</h1><p class="sub">Panduan singkat &amp; mudah untuk pengguna distro Linux berbasis YUM yang ingin update lebih cepat dengan menghemat kuota internet.</p><div class="share" id="hero-share"></div></div></header><div class="grid wrap"><article class="card"><div class="note"><strong>Inti sumber (diringkas):</strong> Banyak orang mengira Linux butuh usaha besar. Nyatanya, ada cara sederhana untuk mempermudah, salah satunya memakai <em>YUM Presto</em> agar update lebih cepat/hemat bandwidth. Contoh: paket 57 MB bisa jadi ~8,5 MB setelah kompresi/delta — cocok untuk koneksi terbatas.</div><h2>Apa itu YUM Presto?</h2><p><strong>YUM Presto</strong> adalah plugin untuk manajer paket <em>YUM</em> yang memanfaatkan <em>Delta RPM</em>. Alih‑alih mengunduh paket lengkap setiap update, sistem hanya mengunduh <em>perubahan</em> (delta) dari versi lama ke versi baru. Efeknya, ukuran unduhan bisa jauh lebih kecil—hemat waktu dan kuota.</p><ul><li><strong>Hemat bandwidth</strong>: Unduhan sering kali menyusut drastis.</li><li><strong>Lebih cepat</strong>: Waktu update berkurang, terutama pada koneksi lambat.</li><li><strong>Terintegrasi</strong>: Bekerja lewat YUM (tampilan & alur tetap familiar).</li></ul><p class="small-muted">Catatan: Pada distro modern berbasis <em>DNF</em>, fitur <em>delta RPM</em> umumnya sudah tersedia/terintegrasi. Namun bila Anda masih memakai YUM, plugin <em>yum-presto</em> adalah solusi klasik yang ringan.</p><h2>Cara Pasang & Aktifkan</h2><p>Buka terminal, lalu jalankan perintah berikut untuk memasang plugin:</p><div class="codecard"><button class="copy-btn" data-target="#snippet-yum">Salin</button><pre class="language-bash"><code id="snippet-yum" class="language-bash"># Pasang YUM Presto (untuk distro yang masih menggunakan YUM)
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://frijal.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Artikel",
+                  "item": "https://frijal.github.io/artikel"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "YUM Presto",
+                  "item": "https://frijal.github.io/artikel/presto-yum.html"
+                }
+              ]
+      <link rel="stylesheet" href="/ext/related.css">
+      <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+            }
+    </script>
+  </head>
+  <body>
+    <a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-left"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"
+        />
+      </svg>
+      Home </a
+    ><a
+      href="https://frijal.github.io/sitemap.html"
+      target="_blank"
+      id="btn-home-right"
+      title="Kembali ke Home"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"
+        />
+      </svg>
+      Home</a
+    >
+    <main>
+      <header class="hero">
+        <div class="wrap">
+          <h1 id="top">YUM Presto: Hemat Bandwidth Saat Update</h1>
+          <p class="sub">
+            Panduan singkat &amp; mudah untuk pengguna distro Linux berbasis YUM
+            yang ingin update lebih cepat dengan menghemat kuota internet.
+          </p>
+          <div class="share" id="hero-share"></div>
+        </div>
+      </header>
+      <div class="grid wrap">
+        <article class="card">
+          <div class="note">
+            <strong>Inti sumber (diringkas):</strong> Banyak orang mengira Linux
+            butuh usaha besar. Nyatanya, ada cara sederhana untuk mempermudah,
+            salah satunya memakai <em>YUM Presto</em> agar update lebih
+            cepat/hemat bandwidth. Contoh: paket 57 MB bisa jadi ~8,5 MB setelah
+            kompresi/delta — cocok untuk koneksi terbatas.
+          </div>
+          <h2>Apa itu YUM Presto?</h2>
+          <p>
+            <strong>YUM Presto</strong> adalah plugin untuk manajer paket
+            <em>YUM</em> yang memanfaatkan <em>Delta RPM</em>. Alih‑alih
+            mengunduh paket lengkap setiap update, sistem hanya mengunduh
+            <em>perubahan</em> (delta) dari versi lama ke versi baru. Efeknya,
+            ukuran unduhan bisa jauh lebih kecil—hemat waktu dan kuota.
+          </p>
+          <ul>
+            <li>
+              <strong>Hemat bandwidth</strong>: Unduhan sering kali menyusut
+              drastis.
+            </li>
+            <li>
+              <strong>Lebih cepat</strong>: Waktu update berkurang, terutama
+              pada koneksi lambat.
+            </li>
+            <li>
+              <strong>Terintegrasi</strong>: Bekerja lewat YUM (tampilan & alur
+              tetap familiar).
+            </li>
+          </ul>
+          <p class="small-muted">
+            Catatan: Pada distro modern berbasis <em>DNF</em>, fitur
+            <em>delta RPM</em> umumnya sudah tersedia/terintegrasi. Namun bila
+            Anda masih memakai YUM, plugin <em>yum-presto</em> adalah solusi
+            klasik yang ringan.
+          </p>
+          <h2>Cara Pasang & Aktifkan</h2>
+          <p>
+            Buka terminal, lalu jalankan perintah berikut untuk memasang plugin:
+          </p>
+          <div class="codecard">
+            <button class="copy-btn" data-target="#snippet-yum">Salin</button>
+            <pre
+              class="language-bash"
+            ><code id="snippet-yum" class="language-bash"># Pasang YUM Presto (untuk distro yang masih menggunakan YUM)
 sudo yum install yum-presto
 
 # Lanjutkan update seperti biasa
-sudo yum update -y</code></pre></div><p>Setelah terpasang, YUM akan otomatis mencoba menggunakan <em>delta RPM</em> bila tersedia di repositori. Jika delta tidak tersedia, YUM akan mengunduh RPM penuh seperti biasa (jadi tetap aman).</p><h2>Tips Praktis</h2><ul><li><strong>Pastikan repo mendukung delta</strong>: Tidak semua mirror menyediakan delta RPM. Jika hasilnya tidak “mengecil”, coba ganti mirror.</li><li><strong>Performa CPU vs hemat kuota</strong>: Rekonstruksi paket dari delta butuh CPU untuk “menyusun ulang”. Di mesin lama, proses mungkin sedikit lebih lama—tapi unduhannya tetap hemat.</li><li><strong>Tambahkan plugin terkait</strong>: Misal <code>yum-plugin-fastestmirror</code> agar otomatis memilih mirror tercepat.</li></ul><h2>Galeri Ilustrasi (Klik untuk memperbesar)</h2><div class="gallery"><figure class="figure"><img class="lightboxable" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s800/Untitled.jpg" alt="Tangkapan layar ilustrasi YUM Presto bekerja (sumber Blogger)" loading="lazy" decoding="async" fetchpriority="low" data-caption="Ilustrasi cara kerja YUM Presto dengan Delta RPM."><figcaption>Ilustrasi cara kerja YUM Presto</figcaption></figure><figure class="figure"><img class="lightboxable" src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1200&auto=format&fit=crop" alt="Desktop Linux modern yang ramah pengguna" loading="lazy" decoding="async" fetchpriority="low" data-caption="Desktop Linux yang modern."><figcaption>Desktop Linux yang modern dan ramah pengguna.</figcaption></figure><figure class="figure"><img class="lightboxable" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9k1O_CcjJoJiJvVLjvGbWXFc3hyphenhyphenTJ9WVdqn6x2m2Q3gTpdSpWdcSkXe71erX-rG_CJfikVJMLjnAf4R56_A_4_o0UA3FvleB0vUyXjwgN9sTh53oAIwu7YymKxBZjNip6w3_58c80-1MT9RVDxIHYWErwAmMWVU7eJdo4jzFVOb81H1YL5NRbM21mSQQ/s1600/498-wallpaper.png" alt="Sistem operasi Linux" loading="lazy" decoding="async" fetchpriority="low" data-caption="Contoh antarmuka desktop Linux."><figcaption>Sistem operasi Linux</figcaption></figure></div><h2>Contoh Output & Tambahan Perintah</h2><p class="small-muted">Contoh berikut memperlihatkan pola umum. Output asli bisa berbeda tergantung distro & repositori.</p><div class="codecard"><button class="copy-btn" data-target="#snippet-extra">Salin</button><pre class="language-bash"><code id="snippet-extra" class="language-bash"># Memeriksa info plugin (opsional)
+sudo yum update -y</code></pre>
+          </div>
+          <p>
+            Setelah terpasang, YUM akan otomatis mencoba menggunakan
+            <em>delta RPM</em> bila tersedia di repositori. Jika delta tidak
+            tersedia, YUM akan mengunduh RPM penuh seperti biasa (jadi tetap
+            aman).
+          </p>
+          <h2>Tips Praktis</h2>
+          <ul>
+            <li>
+              <strong>Pastikan repo mendukung delta</strong>: Tidak semua mirror
+              menyediakan delta RPM. Jika hasilnya tidak “mengecil”, coba ganti
+              mirror.
+            </li>
+            <li>
+              <strong>Performa CPU vs hemat kuota</strong>: Rekonstruksi paket
+              dari delta butuh CPU untuk “menyusun ulang”. Di mesin lama, proses
+              mungkin sedikit lebih lama—tapi unduhannya tetap hemat.
+            </li>
+            <li>
+              <strong>Tambahkan plugin terkait</strong>: Misal
+              <code>yum-plugin-fastestmirror</code> agar otomatis memilih mirror
+              tercepat.
+            </li>
+          </ul>
+          <h2>Galeri Ilustrasi (Klik untuk memperbesar)</h2>
+          <div class="gallery">
+            <figure class="figure">
+              <img
+                class="lightboxable"
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s800/Untitled.jpg"
+                alt="Tangkapan layar ilustrasi YUM Presto bekerja (sumber Blogger)"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                data-caption="Ilustrasi cara kerja YUM Presto dengan Delta RPM."
+              />
+              <figcaption>Ilustrasi cara kerja YUM Presto</figcaption>
+            </figure>
+            <figure class="figure">
+              <img
+                class="lightboxable"
+                src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1200&auto=format&fit=crop"
+                alt="Desktop Linux modern yang ramah pengguna"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                data-caption="Desktop Linux yang modern."
+              />
+              <figcaption>
+                Desktop Linux yang modern dan ramah pengguna.
+              </figcaption>
+            </figure>
+            <figure class="figure">
+              <img
+                class="lightboxable"
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9k1O_CcjJoJiJvVLjvGbWXFc3hyphenhyphenTJ9WVdqn6x2m2Q3gTpdSpWdcSkXe71erX-rG_CJfikVJMLjnAf4R56_A_4_o0UA3FvleB0vUyXjwgN9sTh53oAIwu7YymKxBZjNip6w3_58c80-1MT9RVDxIHYWErwAmMWVU7eJdo4jzFVOb81H1YL5NRbM21mSQQ/s1600/498-wallpaper.png"
+                alt="Sistem operasi Linux"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                data-caption="Contoh antarmuka desktop Linux."
+              />
+              <figcaption>Sistem operasi Linux</figcaption>
+            </figure>
+          </div>
+          <h2>Contoh Output & Tambahan Perintah</h2>
+          <p class="small-muted">
+            Contoh berikut memperlihatkan pola umum. Output asli bisa berbeda
+            tergantung distro & repositori.
+          </p>
+          <div class="codecard">
+            <button class="copy-btn" data-target="#snippet-extra">Salin</button>
+            <pre
+              class="language-bash"
+            ><code id="snippet-extra" class="language-bash"># Memeriksa info plugin (opsional)
 yum info yum-presto
 
 # Mengaktifkan mirror tercepat (opsional)
@@ -63,6 +719,422 @@ sudo yum update
 
 # DNF (sistem modern) — referensi alternatif:
 # sudo dnf update
-# (Pada beberapa distro, delta RPM sudah terintegrasi)</code></pre></div><h2>Bagikan Artikel</h2><div class="share" id="share-bar"><a class="fb" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56v1.87h2.76l-.44 2.91h-2.32V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg> Facebook </a><a class="tw" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M22 5.8c-.7.3-1.5.5-2.2.6.8-.5 1.4-1.2 1.7-2.1-.7.5-1.6.8-2.5 1-1.4-1.5-3.7-1.6-5.2-.1-1.1 1-1.5 2.6-1.1 4-3-.1-5.7-1.6-7.5-4-.9 1.6-.4 3.7 1.1 4.8-.6 0-1.1-.2-1.6-.4 0 1.8 1.3 3.4 3.1 3.7-.6.2-1.2.2-1.8.1.5 1.6 2 2.8 3.7 2.8-1.4 1.1-3.2 1.7-5 1.7H2c1.8 1.1 3.9 1.7 6 1.7 7.2 0 11.3-6 11.3-11.3v-.5c.8-.5 1.5-1.2 2-2z"/></svg> Twitter </a><a class="x" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M18.244 2H21l-7.41 8.47L22 22h-6.845l-5.35-6.44L3.5 22H1l7.94-9.08L2 2h6.845l4.98 5.99L18.244 2zM8.18 3.64H5.2l10.67 12.75h2.98L8.18 3.64z"/></svg> X </a><a class="wa" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M20.5 3.5A11.9 11.9 0 0 0 12.1 0 11.9 11.9 0 0 0 0 12.1 11.8 11.8 0 0 0 2.1 18L0 24l6.2-2a12 12 0 0 0 5.9 1.5h.1A11.9 11.9 0 0 0 24 12.1c0-3.2-1.3-6.1-3.5-8.6z"/></svg> WhatsApp </a><a class="tg" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M9 15.7 8.9 20.4c.3 0 .5-.1.6-.2l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1L24 3.5c.3-1.6-.6-2.3-1.6-1.9L1.8 9.3c-1.6.6-1.6 1.5-.3 1.9l5.5 1.7L19.8 6.4c.9-.5 1.7-.3 1 0"/></svg> Telegram </a><a class="ig" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.8A4.2 4.2 0 1 0 16.2 12 4.2 4.2 0 0 0 12 7.8zM18.8 5.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1zM12 9.4A2.6 2.6 0 1 1 9.4 12 2.6 2.6 0 0 1 12 9.4z"/></svg> Instagram </a><a class="threads" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke Threads"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.6 12.8c-.2 3.3-2.2 5.2-5.5 5.2-3.4 0-5.9-2.5-5.9-6s2.5-6 5.9-6c2.6 0 4.5 1.3 5.3 3.4l-1.8.7c-.5-1.2-1.7-2-3.4-2-2.3 0-3.9 1.7-3.9 3.9 0 2.3 1.6 4 3.9 4 1.8 0 3-.8 3.3-2.2H11v-1.9h5.4c.1.4.1.8.2 1.1z"/></svg> Threads </a><a class="tt" href="#" target="_blank" rel="noopener" aria-label="Bagikan ke TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M21 8.5a7.4 7.4 0 0 1-5.2-2.2v8.2a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.3a3.2 3.2 0 1 0 2.3 3.1V2h2.4a5 5 0 0 0 4.2 4.2V8.5z"/></svg> TikTok</a></div><h2>Komentar Pembaca</h2><div style="margin-top:16px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div><div style="margin-top:18px"><div id="fb-root"></div><script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0" nonce="4s7E9E8G"></script><div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div><script>let currentUrl=window.location.href;document.getElementById("current-url").textContent=currentUrl,document.getElementById("fb-comments").setAttribute("data-href",currentUrl),window.fbAsyncInit=function(){if("undefined"!=typeof FB)try{FB.XFBML.parse()}catch(t){}}</script></div><div class="codecard"><button class="copy-btn" data-target="#snippet-source">Salin</button><pre class="language-bash"><code id="snippet-source" class="language-bash"># Perintah singkat dari sumber
+# (Pada beberapa distro, delta RPM sudah terintegrasi)</code></pre>
+          </div>
+          <h2>Bagikan Artikel</h2>
+          <div class="share" id="share-bar">
+            <a
+              class="fb"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke Facebook"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56v1.87h2.76l-.44 2.91h-2.32V22c4.78-.76 8.44-4.92 8.44-9.94z"
+                />
+              </svg>
+              Facebook </a
+            ><a
+              class="tw"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke Twitter"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M22 5.8c-.7.3-1.5.5-2.2.6.8-.5 1.4-1.2 1.7-2.1-.7.5-1.6.8-2.5 1-1.4-1.5-3.7-1.6-5.2-.1-1.1 1-1.5 2.6-1.1 4-3-.1-5.7-1.6-7.5-4-.9 1.6-.4 3.7 1.1 4.8-.6 0-1.1-.2-1.6-.4 0 1.8 1.3 3.4 3.1 3.7-.6.2-1.2.2-1.8.1.5 1.6 2 2.8 3.7 2.8-1.4 1.1-3.2 1.7-5 1.7H2c1.8 1.1 3.9 1.7 6 1.7 7.2 0 11.3-6 11.3-11.3v-.5c.8-.5 1.5-1.2 2-2z"
+                />
+              </svg>
+              Twitter </a
+            ><a
+              class="x"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke X (Twitter)"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M18.244 2H21l-7.41 8.47L22 22h-6.845l-5.35-6.44L3.5 22H1l7.94-9.08L2 2h6.845l4.98 5.99L18.244 2zM8.18 3.64H5.2l10.67 12.75h2.98L8.18 3.64z"
+                />
+              </svg>
+              X </a
+            ><a
+              class="wa"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke WhatsApp"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M20.5 3.5A11.9 11.9 0 0 0 12.1 0 11.9 11.9 0 0 0 0 12.1 11.8 11.8 0 0 0 2.1 18L0 24l6.2-2a12 12 0 0 0 5.9 1.5h.1A11.9 11.9 0 0 0 24 12.1c0-3.2-1.3-6.1-3.5-8.6z"
+                />
+              </svg>
+              WhatsApp </a
+            ><a
+              class="tg"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke Telegram"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M9 15.7 8.9 20.4c.3 0 .5-.1.6-.2l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1L24 3.5c.3-1.6-.6-2.3-1.6-1.9L1.8 9.3c-1.6.6-1.6 1.5-.3 1.9l5.5 1.7L19.8 6.4c.9-.5 1.7-.3 1 0"
+                />
+              </svg>
+              Telegram </a
+            ><a
+              class="ig"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke Instagram"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.8A4.2 4.2 0 1 0 16.2 12 4.2 4.2 0 0 0 12 7.8zM18.8 5.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1zM12 9.4A2.6 2.6 0 1 1 9.4 12 2.6 2.6 0 0 1 12 9.4z"
+                />
+              </svg>
+              Instagram </a
+            ><a
+              class="threads"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke Threads"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.6 12.8c-.2 3.3-2.2 5.2-5.5 5.2-3.4 0-5.9-2.5-5.9-6s2.5-6 5.9-6c2.6 0 4.5 1.3 5.3 3.4l-1.8.7c-.5-1.2-1.7-2-3.4-2-2.3 0-3.9 1.7-3.9 3.9 0 2.3 1.6 4 3.9 4 1.8 0 3-.8 3.3-2.2H11v-1.9h5.4c.1.4.1.8.2 1.1z"
+                />
+              </svg>
+              Threads </a
+            ><a
+              class="tt"
+              href="#"
+              target="_blank"
+              rel="noopener"
+              aria-label="Bagikan ke TikTok"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#fff"
+                  d="M21 8.5a7.4 7.4 0 0 1-5.2-2.2v8.2a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.3a3.2 3.2 0 1 0 2.3 3.1V2h2.4a5 5 0 0 0 4.2 4.2V8.5z"
+                />
+              </svg>
+              TikTok</a
+            >
+          </div>
+          <h2>Komentar Pembaca</h2>
+          <div style="margin-top: 16px; color: var(--muted); font-size: 10px">
+            <span id="current-url" class="small-muted"></span>
+          </div>
+          <div style="margin-top: 18px">
+            <div id="fb-root"></div>
+            <script
+              async
+              defer="defer"
+              crossorigin="anonymous"
+              src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+              nonce="4s7E9E8G"
+            ></script>
+            <div
+              class="fb-comments"
+              id="fb-comments"
+              data-href=""
+              data-width="100%"
+              data-numposts="5"
+            ></div>
+            <script>
+              let currentUrl = window.location.href;
+              ((document.getElementById("current-url").textContent =
+                currentUrl),
+                document
+                  .getElementById("fb-comments")
+                  .setAttribute("data-href", currentUrl),
+                (window.fbAsyncInit = function () {
+                  if ("undefined" != typeof FB)
+                    try {
+                      FB.XFBML.parse();
+                    } catch (t) {}
+                }));
+            </script>
+          </div>
+          <div class="codecard">
+            <button class="copy-btn" data-target="#snippet-source">
+              Salin
+            </button>
+            <pre
+              class="language-bash"
+            ><code id="snippet-source" class="language-bash"># Perintah singkat dari sumber
 <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
-sudo yum install yum-presto</code></pre></div></article><aside><div class="box"><h3 style="margin:6px 0 8px">Tentang Artikel</h3><div class="kv"><strong>Penulis:</strong> <span>Pelan Kiri</span></div><div class="kv"><strong>Tanggal:</strong> <span>18 September 2025</span></div><div class="kv"><strong>Slug:</strong> <span class="small-muted">/artikel/presto-yum.html</span></div><div class="kv"><strong>Estimasi baca:</strong> <span>~4 menit</span></div></div><div class="box"><h3 style="margin:6px 0 8px">Info Perangkat</h3><div class="kv"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-6l2 3H9l2-3H5a2 2 0 0 1-2-2z"/></svg> <span id="ua-str" class="small-muted">Mendeteksi...</span></div><div class="kv"><span id="browser-icon"></span> <span id="browser-ver" class="small-muted"></span></div><div class="kv"><span id="os-icon"></span> <span id="os-ver" class="small-muted"></span></div></div><div class="box"><h3 style="margin:6px 0 8px">Checklist Hemat Kuota</h3><ul style="margin:0;padding-left:16px;color:var(--muted)"><li>Pilih mirror lokal/terdekat.</li><li>Aktifkan <em>fastestmirror</em> (opsional).</li><li>Jalankan update di luar jam sibuk.</li><li>Gunakan koneksi stabil untuk menghindari retry.</li></ul></div></aside></div></main><footer class="wrap"><div class="env"><div class="badge"><span id="browser-badge-icon"></span> <span id="browser-badge">Browser: -</span></div><div class="badge"><span id="os-badge-icon"></span> <span id="os-badge">OS: -</span></div></div><div class="ipbox"><img id="flag-icon" alt="Bendera" width="26" height="18" style="border-radius:3px;border:var(--border)"> <span id="ip-info">Mendeteksi IP &amp; lokasi...</span></div><div class="small-muted">© 2025 BAK — Halaman interaktif wide fullscreen, responsive, tema terang.</div></footer><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Viewer gambar"><button type="button" id="lightbox-close" aria-label="Tutup">✕ Tutup</button> <img id="lightbox-img" alt=""><div class="caption" id="lightbox-cap"></div></div><script>(()=>{var e=document.querySelector('link[rel="canonical"]')?.href||location.href,t=document.title||"",n=encodeURIComponent,t={".fb":"https://www.facebook.com/sharer/sharer.php?u="+n(e),".tw":`https://twitter.com/intent/tweet?url=${n(e)}&text=`+n(t),".x":`https://twitter.com/intent/tweet?url=${n(e)}&text=`+n(t),".wa":"https://wa.me/?text="+n(t+" "+e),".tg":`https://t.me/share/url?url=${n(e)}&text=`+n(t),".ig":"https://www.instagram.com/?url="+n(e),".threads":`https://www.threads.net/intent/post?text=${n(t)}%20`+n(e),".tt":"https://www.tiktok.com/share?url="+n(e)};Object.entries(t).forEach(([e,t])=>{(e=document.querySelector("#share-bar "+e))&&(e.href=t)})})(),(()=>{let e=document.querySelectorAll(".lightboxable"),t=document.getElementById("lightbox"),n=document.getElementById("lightbox-img"),o=document.getElementById("lightbox-cap"),c=document.getElementById("lightbox-close");e.forEach(e=>{e.loading=e.loading||"lazy",e.decoding=e.decoding||"async",e.addEventListener("click",()=>{n.src=e.src.replace(/w=\d+/,"w=1600"),n.alt=e.alt||"",o.textContent=e.dataset.caption||e.alt||"",t.classList.add("open")})}),c.addEventListener("click",()=>t.classList.remove("open")),t.addEventListener("click",e=>{e.target===t&&t.classList.remove("open")}),document.addEventListener("keydown",e=>{"Escape"===e.key&&t.classList.remove("open")})})(),document.querySelectorAll(".copy-btn").forEach(n=>{n.addEventListener("click",()=>{var e,t=document.querySelector(n.dataset.target);t&&((e=document.createElement("textarea")).value=t.textContent,document.body.appendChild(e),e.select(),document.execCommand("copy"),document.body.removeChild(e),n.textContent="Tersalin ✓",setTimeout(()=>n.textContent="Salin",1500))})}),(()=>{var e=navigator.userAgent||"";function t(e){return`<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${e}"/></svg>`}(d=document.getElementById("ua-str"))&&(d.textContent=e.slice(0,190)+(190<e.length?"…":""));var n="M16.4 2c-.86.5-1.6 1.3-2.1 2.3-.47.93-.77 2.07-.63 3.2 1.2.09 2.45-.62 3.27-1.55.78-.9 1.33-2.15 1.15-3.32-.98-.05-2.05.5-3.69-.63zM12 6c-1.64 0-3.06.95-3.87.95-.84 0-2-.93-3.3-.9C3.12 6.1 1.5 7.1.62 8.6c-1.77 3.06-.46 7.6 1.25 10.1.83 1.2 1.8 2.52 3.1 2.48 1.2-.05 1.7-.8 3.2-.8 1.47 0 1.95.8 3.3.77 1.37-.02 2.24-1.2 3.08-2.4.97-1.43 1.37-2.82 1.38-2.89-.03-.01-2.65-1.02-2.68-4.02 0-2.52 2.05-3.72 2.15-3.77-1.18-1.73-3-2-3.38-2.02z";let o="Unknown",c="",r="Unknown",a="";/Edg\//.test(e)?(o="Microsoft Edge",c=(e.match(/Edg\/([\d.]+)/)||[])[1]||""):/Chrome\//.test(e)&&!/OPR\//.test(e)?(o="Google Chrome",c=(e.match(/Chrome\/([\d.]+)/)||[])[1]||""):/Firefox\//.test(e)?(o="Mozilla Firefox",c=(e.match(/Firefox\/([\d.]+)/)||[])[1]||""):/Safari\//.test(e)&&!/Chrome\//.test(e)&&(o="Apple Safari",c=(e.match(/Version\/([\d.]+)/)||[])[1]||""),/Windows NT/.test(e)?(r="Windows",a=(e.match(/Windows NT ([\d.]+)/)||[])[1]||""):/Android/.test(e)?(r="Android",a=(e.match(/Android ([\d.]+)/)||[])[1]||""):/Mac OS X/.test(e)?(r="macOS",a=((e.match(/Mac OS X ([\d_]+)/)||[])[1]||"").replace(/_/g,".")):/Linux/.test(e)?(r="Linux",a=""):/iPhone|iPad|iPod/.test(e)&&(r="iOS",a=(e.match(/OS ([\d_]+)/)||[])[1]?.replace(/_/g,".")||"");var d=document.getElementById("browser-icon"),e=document.getElementById("os-icon"),i=o.includes("Chrome")?"M12 2a10 10 0 1 1-8.66 5l7.66 0a4 4 0 1 1 0 8 4 4 0 0 1-3.46-2H2.54A10 10 0 0 1 12 2z":o.includes("Edge")?"M12 2c5.52 0 10 4.48 10 10 0 6.4-7.5 10.64-13.63 7.76 5.33.3 7.71-4.1 7.44-6.22-.2-1.66-1.47-2.72-2.79-2.72-1.63 0-2.9 1.44-2.78 3.27.1 1.37.98 2.12 1.86 2.38-3.23.1-5.58-2.58-5.58-5.5C6.52 6.5 8.9 4 12 4c3.18 0 5.48 2.53 5.48 4.9 0 .46-.09.9-.25 1.32C16.69 7.93 14.86 6 12 6c-3.14 0-5.39 2.6-5.39 5.55C6.61 14.83 9.08 18 13.81 18 18.98 18 22 14.2 22 11.09 22 6.48 17.52 2 12 2z":o.includes("Firefox")?"M12 2c4.43 0 8 3.57 8 8 0 5.5-5.07 8.94-10.2 8C7.6 17.47 6 14.9 6 13c0-2.4 1.56-4.6 4.07-5.22-.73 1.58.67 3.68 2.84 3.68 1.7 0 3.09-1.43 3.09-3.2 0-.96-.46-1.8-1.16-2.35.8-.17 1.25-.27 2.16-.27-.67-1.92-2.28-3.64-3.91-4.4C13.24 2.08 12.62 2 12 2z":o.includes("Safari")?"M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.24 5.76-3.5 7.48-7.48 3.5 3.5-7.48 7.48-3.5z":"",n="Windows"===r?"M3 5l8-1v8H3V5zm9-1 9-1v9h-9V4zM3 13h8v8l-8-1v-7zm9 0h9v9l-9-1v-8z":"macOS"===r?n:"Android"===r?"M7 19a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zm12 0a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zM6 7h12v9H6V7zm9.5-3.5 1.5-1.5 1 1-1.5 1.5-1-1zM7 2l1.5 1.5-1 1L6 3l1-1z":"Linux"===r?"M12 2c1.76 0 3.36.67 4.58 1.77C16.1 5.5 15.1 7.7 13.5 9c-1.5 1.3-2.36 1.2-3.9 0C8 7.7 7 5.5 6.42 3.77A7.97 7.97 0 0 1 12 2zm-4.5 12.5c-.62 1.55.22 3.5 1.77 4.12s3.5-.22 4.12-1.77c.63-1.55-.22-3.5-1.77-4.12-1.55-.63-3.5.22-4.12 1.77z":"iOS"===r?n:"",i=(d&&i&&(d.innerHTML=t(i)),e&&n&&(e.innerHTML=t(n)),document.getElementById("browser-ver")),n=document.getElementById("os-ver"),i=(i&&(i.textContent=(o+" "+c).trim()),n&&(n.textContent=(r+" "+a).trim()),document.getElementById("browser-badge")),n=document.getElementById("os-badge"),i=(i&&(i.textContent=(`Browser: ${o} `+c).trim()),n&&(n.textContent=(`OS: ${r} `+a).trim()),document.getElementById("browser-badge-icon")),n=document.getElementById("os-badge-icon");i&&d&&(i.innerHTML=d.innerHTML),n&&e&&(n.innerHTML=e.innerHTML)})(),(()=>{let c=document.getElementById("ip-info"),r=document.getElementById("flag-icon");fetch("https://ipapi.co/json/").then(e=>e.json()).then(e=>{var t=e.ip||"-",n=e.city||"-",o=e.country_name||"-",e=(e.country_code||"").toLowerCase();c&&(c.textContent=`IP Anda: ${t} · Kota: ${n} · Negara: `+o),e&&r&&(r.src=`https://flagcdn.com/${e}.svg`,r.alt="Bendera "+o)}).catch(()=>{c&&(c.textContent="Gagal memuat IP & lokasi.")})})()</script><button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body></html>
+sudo yum install yum-presto</code></pre>
+          </div>
+        </article>
+        <aside>
+          <div class="box">
+            <h3 style="margin: 6px 0 8px">Tentang Artikel</h3>
+            <div class="kv">
+              <strong>Penulis:</strong> <span>Pelan Kiri</span>
+            </div>
+            <div class="kv">
+              <strong>Tanggal:</strong> <span>18 September 2025</span>
+            </div>
+            <div class="kv">
+              <strong>Slug:</strong>
+              <span class="small-muted">/artikel/presto-yum.html</span>
+            </div>
+            <div class="kv">
+              <strong>Estimasi baca:</strong> <span>~4 menit</span>
+            </div>
+          </div>
+          <div class="box">
+            <h3 style="margin: 6px 0 8px">Info Perangkat</h3>
+            <div class="kv">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-6l2 3H9l2-3H5a2 2 0 0 1-2-2z"
+                />
+              </svg>
+              <span id="ua-str" class="small-muted">Mendeteksi...</span>
+            </div>
+            <div class="kv">
+              <span id="browser-icon"></span>
+              <span id="browser-ver" class="small-muted"></span>
+            </div>
+            <div class="kv">
+              <span id="os-icon"></span>
+              <span id="os-ver" class="small-muted"></span>
+            </div>
+          </div>
+          <div class="box">
+            <h3 style="margin: 6px 0 8px">Checklist Hemat Kuota</h3>
+            <ul style="margin: 0; padding-left: 16px; color: var(--muted)">
+              <li>Pilih mirror lokal/terdekat.</li>
+              <li>Aktifkan <em>fastestmirror</em> (opsional).</li>
+              <li>Jalankan update di luar jam sibuk.</li>
+              <li>Gunakan koneksi stabil untuk menghindari retry.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <footer class="wrap">
+      <div class="env">
+        <div class="badge">
+          <span id="browser-badge-icon"></span>
+          <span id="browser-badge">Browser: -</span>
+        </div>
+        <div class="badge">
+          <span id="os-badge-icon"></span> <span id="os-badge">OS: -</span>
+        </div>
+      </div>
+      <div class="ipbox">
+        <img
+          id="flag-icon"
+          alt="Bendera"
+          width="26"
+          height="18"
+          style="border-radius: 3px; border: var(--border)"
+        />
+        <span id="ip-info">Mendeteksi IP &amp; lokasi...</span>
+      </div>
+      <div class="small-muted">
+        © 2025 BAK — Halaman interaktif wide fullscreen, responsive, tema
+        terang.
+      </div>
+    </footer>
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Viewer gambar"
+    >
+      <button type="button" id="lightbox-close" aria-label="Tutup">
+        ✕ Tutup
+      </button>
+      <img id="lightbox-img" alt="" />
+      <div class="caption" id="lightbox-cap"></div>
+    </div>
+    <script>
+      ((() => {
+        var e =
+            document.querySelector('link[rel="canonical"]')?.href ||
+            location.href,
+          t = document.title || "",
+          n = encodeURIComponent,
+          t = {
+            ".fb": "https://www.facebook.com/sharer/sharer.php?u=" + n(e),
+            ".tw": `https://twitter.com/intent/tweet?url=${n(e)}&text=` + n(t),
+            ".x": `https://twitter.com/intent/tweet?url=${n(e)}&text=` + n(t),
+            ".wa": "https://wa.me/?text=" + n(t + " " + e),
+            ".tg": `https://t.me/share/url?url=${n(e)}&text=` + n(t),
+            ".ig": "https://www.instagram.com/?url=" + n(e),
+            ".threads":
+              `https://www.threads.net/intent/post?text=${n(t)}%20` + n(e),
+            ".tt": "https://www.tiktok.com/share?url=" + n(e),
+          };
+        Object.entries(t).forEach(([e, t]) => {
+          (e = document.querySelector("#share-bar " + e)) && (e.href = t);
+        });
+      })(),
+        (() => {
+          let e = document.querySelectorAll(".lightboxable"),
+            t = document.getElementById("lightbox"),
+            n = document.getElementById("lightbox-img"),
+            o = document.getElementById("lightbox-cap"),
+            c = document.getElementById("lightbox-close");
+          (e.forEach((e) => {
+            ((e.loading = e.loading || "lazy"),
+              (e.decoding = e.decoding || "async"),
+              e.addEventListener("click", () => {
+                ((n.src = e.src.replace(/w=\d+/, "w=1600")),
+                  (n.alt = e.alt || ""),
+                  (o.textContent = e.dataset.caption || e.alt || ""),
+                  t.classList.add("open"));
+              }));
+          }),
+            c.addEventListener("click", () => t.classList.remove("open")),
+            t.addEventListener("click", (e) => {
+              e.target === t && t.classList.remove("open");
+            }),
+            document.addEventListener("keydown", (e) => {
+              "Escape" === e.key && t.classList.remove("open");
+            }));
+        })(),
+        document.querySelectorAll(".copy-btn").forEach((n) => {
+          n.addEventListener("click", () => {
+            var e,
+              t = document.querySelector(n.dataset.target);
+            t &&
+              (((e = document.createElement("textarea")).value = t.textContent),
+              document.body.appendChild(e),
+              e.select(),
+              document.execCommand("copy"),
+              document.body.removeChild(e),
+              (n.textContent = "Tersalin ✓"),
+              setTimeout(() => (n.textContent = "Salin"), 1500));
+          });
+        }),
+        (() => {
+          var e = navigator.userAgent || "";
+          function t(e) {
+            return `<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${e}"/></svg>`;
+          }
+          (d = document.getElementById("ua-str")) &&
+            (d.textContent = e.slice(0, 190) + (190 < e.length ? "…" : ""));
+          var n =
+            "M16.4 2c-.86.5-1.6 1.3-2.1 2.3-.47.93-.77 2.07-.63 3.2 1.2.09 2.45-.62 3.27-1.55.78-.9 1.33-2.15 1.15-3.32-.98-.05-2.05.5-3.69-.63zM12 6c-1.64 0-3.06.95-3.87.95-.84 0-2-.93-3.3-.9C3.12 6.1 1.5 7.1.62 8.6c-1.77 3.06-.46 7.6 1.25 10.1.83 1.2 1.8 2.52 3.1 2.48 1.2-.05 1.7-.8 3.2-.8 1.47 0 1.95.8 3.3.77 1.37-.02 2.24-1.2 3.08-2.4.97-1.43 1.37-2.82 1.38-2.89-.03-.01-2.65-1.02-2.68-4.02 0-2.52 2.05-3.72 2.15-3.77-1.18-1.73-3-2-3.38-2.02z";
+          let o = "Unknown",
+            c = "",
+            r = "Unknown",
+            a = "";
+          (/Edg\//.test(e)
+            ? ((o = "Microsoft Edge"),
+              (c = (e.match(/Edg\/([\d.]+)/) || [])[1] || ""))
+            : /Chrome\//.test(e) && !/OPR\//.test(e)
+              ? ((o = "Google Chrome"),
+                (c = (e.match(/Chrome\/([\d.]+)/) || [])[1] || ""))
+              : /Firefox\//.test(e)
+                ? ((o = "Mozilla Firefox"),
+                  (c = (e.match(/Firefox\/([\d.]+)/) || [])[1] || ""))
+                : /Safari\//.test(e) &&
+                  !/Chrome\//.test(e) &&
+                  ((o = "Apple Safari"),
+                  (c = (e.match(/Version\/([\d.]+)/) || [])[1] || "")),
+            /Windows NT/.test(e)
+              ? ((r = "Windows"),
+                (a = (e.match(/Windows NT ([\d.]+)/) || [])[1] || ""))
+              : /Android/.test(e)
+                ? ((r = "Android"),
+                  (a = (e.match(/Android ([\d.]+)/) || [])[1] || ""))
+                : /Mac OS X/.test(e)
+                  ? ((r = "macOS"),
+                    (a = (
+                      (e.match(/Mac OS X ([\d_]+)/) || [])[1] || ""
+                    ).replace(/_/g, ".")))
+                  : /Linux/.test(e)
+                    ? ((r = "Linux"), (a = ""))
+                    : /iPhone|iPad|iPod/.test(e) &&
+                      ((r = "iOS"),
+                      (a =
+                        (e.match(/OS ([\d_]+)/) || [])[1]?.replace(/_/g, ".") ||
+                        "")));
+          var d = document.getElementById("browser-icon"),
+            e = document.getElementById("os-icon"),
+            i = o.includes("Chrome")
+              ? "M12 2a10 10 0 1 1-8.66 5l7.66 0a4 4 0 1 1 0 8 4 4 0 0 1-3.46-2H2.54A10 10 0 0 1 12 2z"
+              : o.includes("Edge")
+                ? "M12 2c5.52 0 10 4.48 10 10 0 6.4-7.5 10.64-13.63 7.76 5.33.3 7.71-4.1 7.44-6.22-.2-1.66-1.47-2.72-2.79-2.72-1.63 0-2.9 1.44-2.78 3.27.1 1.37.98 2.12 1.86 2.38-3.23.1-5.58-2.58-5.58-5.5C6.52 6.5 8.9 4 12 4c3.18 0 5.48 2.53 5.48 4.9 0 .46-.09.9-.25 1.32C16.69 7.93 14.86 6 12 6c-3.14 0-5.39 2.6-5.39 5.55C6.61 14.83 9.08 18 13.81 18 18.98 18 22 14.2 22 11.09 22 6.48 17.52 2 12 2z"
+                : o.includes("Firefox")
+                  ? "M12 2c4.43 0 8 3.57 8 8 0 5.5-5.07 8.94-10.2 8C7.6 17.47 6 14.9 6 13c0-2.4 1.56-4.6 4.07-5.22-.73 1.58.67 3.68 2.84 3.68 1.7 0 3.09-1.43 3.09-3.2 0-.96-.46-1.8-1.16-2.35.8-.17 1.25-.27 2.16-.27-.67-1.92-2.28-3.64-3.91-4.4C13.24 2.08 12.62 2 12 2z"
+                  : o.includes("Safari")
+                    ? "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.24 5.76-3.5 7.48-7.48 3.5 3.5-7.48 7.48-3.5z"
+                    : "",
+            n =
+              "Windows" === r
+                ? "M3 5l8-1v8H3V5zm9-1 9-1v9h-9V4zM3 13h8v8l-8-1v-7zm9 0h9v9l-9-1v-8z"
+                : "macOS" === r
+                  ? n
+                  : "Android" === r
+                    ? "M7 19a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zm12 0a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zM6 7h12v9H6V7zm9.5-3.5 1.5-1.5 1 1-1.5 1.5-1-1zM7 2l1.5 1.5-1 1L6 3l1-1z"
+                    : "Linux" === r
+                      ? "M12 2c1.76 0 3.36.67 4.58 1.77C16.1 5.5 15.1 7.7 13.5 9c-1.5 1.3-2.36 1.2-3.9 0C8 7.7 7 5.5 6.42 3.77A7.97 7.97 0 0 1 12 2zm-4.5 12.5c-.62 1.55.22 3.5 1.77 4.12s3.5-.22 4.12-1.77c.63-1.55-.22-3.5-1.77-4.12-1.55-.63-3.5.22-4.12 1.77z"
+                      : "iOS" === r
+                        ? n
+                        : "",
+            i =
+              (d && i && (d.innerHTML = t(i)),
+              e && n && (e.innerHTML = t(n)),
+              document.getElementById("browser-ver")),
+            n = document.getElementById("os-ver"),
+            i =
+              (i && (i.textContent = (o + " " + c).trim()),
+              n && (n.textContent = (r + " " + a).trim()),
+              document.getElementById("browser-badge")),
+            n = document.getElementById("os-badge"),
+            i =
+              (i && (i.textContent = (`Browser: ${o} ` + c).trim()),
+              n && (n.textContent = (`OS: ${r} ` + a).trim()),
+              document.getElementById("browser-badge-icon")),
+            n = document.getElementById("os-badge-icon");
+          (i && d && (i.innerHTML = d.innerHTML),
+            n && e && (n.innerHTML = e.innerHTML));
+        })(),
+        (() => {
+          let c = document.getElementById("ip-info"),
+            r = document.getElementById("flag-icon");
+          fetch("https://ipapi.co/json/")
+            .then((e) => e.json())
+            .then((e) => {
+              var t = e.ip || "-",
+                n = e.city || "-",
+                o = e.country_name || "-",
+                e = (e.country_code || "").toLowerCase();
+              (c &&
+                (c.textContent = `IP Anda: ${t} · Kota: ${n} · Negara: ` + o),
+                e &&
+                  r &&
+                  ((r.src = `https://flagcdn.com/${e}.svg`),
+                  (r.alt = "Bendera " + o)));
+            })
+            .catch(() => {
+              c && (c.textContent = "Gagal memuat IP & lokasi.");
+            });
+        })());
+    </script>
+    <button id="related-posts-toggle">❌</button>
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <script src="/ext/related.js"></script>
+  </body>
+</html>

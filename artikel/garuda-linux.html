@@ -1,7 +1,171 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Garuda Linux merilis ISO snapshot terbaru September 2025 dengan perbaikan Mesa dan peningkatan kompatibilitas perangkat keras."><meta name="keywords" content="Garuda Linux, ISO September 2025, Mesa, Plasma Wayland, Linux Arch, Dr460nized, garuda-update"><meta name="author" content="Fakhrul">
-<!-- prettier-ignore -->
-<title>Garuda Linux Rilis ISO Baru: September 2025</title>
-<link rel="stylesheet" href="/ext/related.css">
-<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
-<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
-<style>body{font-family:sans-serif;line-height:1.6;margin:0 auto;max-width:800px;padding:2rem;background:#fdfdfd;color:#333}h1,h2,h3{color:#2c3e50}img{max-width:100%;height:auto;border-radius:8px;margin:1rem 0}pre{background:#f4f4f4;padding:1rem;border-radius:6px;overflow-x:auto}ul{padding-left:1.2rem}.section{margin-bottom:2rem}</style><link rel="stylesheet" href="/ext/related.css"></head><body><header class="section"><h1>🦅 Garuda Linux Rilis ISO Baru: September 2025</h1><p><em>Snapshot terbaru dengan perbaikan Mesa, peningkatan kompatibilitas perangkat keras, dan pembaruan visual.</em></p><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2025/09/garuda-september-2025-update.jpg" alt="Garuda Linux September 2025"></header><nav class="section"><h2>📌 Daftar Isi</h2><ul><li><a href="#ringkasan">Ringkasan</a></li><li><a href="#perubahan">Perubahan Utama</a></li><li><a href="#dr460nized">Edisi Dr460nized</a></li><li><a href="#ragam">Ragam Edisi ISO</a></li><li><a href="#update">Cara Update</a></li><li><a href="#sumber">Sumber</a></li></ul></nav><section id="ringkasan" class="section"><h2>✨ Ringkasan</h2><p>Garuda Linux, distro berbasis Arch yang dikenal dengan tampilan visual memukau dan performa tinggi, merilis ISO snapshot terbaru untuk bulan September 2025. Ini bukan rilis mayor, melainkan pembaruan kumulatif yang mencakup semua paket terbaru, perbaikan bug, dan peningkatan kompatibilitas perangkat keras.</p></section><section id="perubahan" class="section"><h2>🔧 Perubahan Utama</h2><ul><li><strong>Mesa 25.2.2</strong> – Memperbaiki bug logout acak pada sesi Plasma Wayland.</li><li><strong>garuda-hardware-tool</strong> – Kini mendeteksi GPU dengan string PCI ID yang lebih panjang.</li><li><strong>Dinonaktifkannya <code>udevadm trigger</code></strong> – Mencegah crash sistem saat pembaruan file systemd/udev berlangsung.</li></ul></section><section id="dr460nized" class="section"><h2>🖥️ Edisi Dr460nized</h2><img src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2025/09/garuda-september-2025-desktop.jpg" alt="Garuda Linux Dr460nized Edition"><ul><li>Plasma 6.4.4 yang telah dikustomisasi</li><li>Shell Fish 4.0 sebagai shell default</li><li>Kernel Linux 6.16 versi terbaru</li></ul></section><section id="ragam" class="section"><h2>🧩 Ragam Edisi ISO</h2><p>Garuda menyediakan ISO untuk berbagai edisi desktop:</p><ul><li>Cinnamon</li><li>Dr460nized (termasuk varian Gaming)</li><li>GNOME</li><li>KDE Lite</li><li>Hyprland</li><li>i3</li><li>Mokka</li><li>Sway</li><li>XFCE</li></ul></section><section id="update" class="section"><h2>🛠️ Cara Update</h2><p>Kamu tidak perlu instal ulang! Cukup jalankan perintah berikut di terminal:</p><pre><code>garuda-update</code></pre></section><section id="sumber" class="section"><h2>🔗 Sumber</h2><ul><li><a href="https://linuxiac.com/garuda-linux-releases-new-iso-with-mesa-fixes/" target="_blank">Linuxiac: Garuda Linux Releases New ISO</a></li><li><a href="https://forum.garudalinux.org/t/iso-release-250907/45868" target="_blank">Forum Garuda Linux</a></li></ul></section><button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Garuda Linux merilis ISO snapshot terbaru September 2025 dengan perbaikan Mesa dan peningkatan kompatibilitas perangkat keras."
+    />
+    <meta
+      name="keywords"
+      content="Garuda Linux, ISO September 2025, Mesa, Plasma Wayland, Linux Arch, Dr460nized, garuda-update"
+    />
+    <meta name="author" content="Fakhrul" />
+    <!-- prettier-ignore -->
+    <title>Garuda Linux Rilis ISO Baru: September 2025</title>
+    <link rel="stylesheet" href="/ext/related.css" />
+    <button id="related-posts-toggle">❌</button>
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <script src="/ext/related.js"></script>
+    <meta
+      name="google-site-verification"
+      content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA"
+    />
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 2rem;
+        background: #fdfdfd;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1rem 0;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      .section {
+        margin-bottom: 2rem;
+      }
+    </style>
+    <link rel="stylesheet" href="/ext/related.css" />
+  </head>
+  <body>
+    <header class="section">
+      <h1>🦅 Garuda Linux Rilis ISO Baru: September 2025</h1>
+      <p>
+        <em
+          >Snapshot terbaru dengan perbaikan Mesa, peningkatan kompatibilitas
+          perangkat keras, dan pembaruan visual.</em
+        >
+      </p>
+      <img
+        src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2025/09/garuda-september-2025-update.jpg"
+        alt="Garuda Linux September 2025"
+      />
+    </header>
+    <nav class="section">
+      <h2>📌 Daftar Isi</h2>
+      <ul>
+        <li><a href="#ringkasan">Ringkasan</a></li>
+        <li><a href="#perubahan">Perubahan Utama</a></li>
+        <li><a href="#dr460nized">Edisi Dr460nized</a></li>
+        <li><a href="#ragam">Ragam Edisi ISO</a></li>
+        <li><a href="#update">Cara Update</a></li>
+        <li><a href="#sumber">Sumber</a></li>
+      </ul>
+    </nav>
+    <section id="ringkasan" class="section">
+      <h2>✨ Ringkasan</h2>
+      <p>
+        Garuda Linux, distro berbasis Arch yang dikenal dengan tampilan visual
+        memukau dan performa tinggi, merilis ISO snapshot terbaru untuk bulan
+        September 2025. Ini bukan rilis mayor, melainkan pembaruan kumulatif
+        yang mencakup semua paket terbaru, perbaikan bug, dan peningkatan
+        kompatibilitas perangkat keras.
+      </p>
+    </section>
+    <section id="perubahan" class="section">
+      <h2>🔧 Perubahan Utama</h2>
+      <ul>
+        <li>
+          <strong>Mesa 25.2.2</strong> – Memperbaiki bug logout acak pada sesi
+          Plasma Wayland.
+        </li>
+        <li>
+          <strong>garuda-hardware-tool</strong> – Kini mendeteksi GPU dengan
+          string PCI ID yang lebih panjang.
+        </li>
+        <li>
+          <strong>Dinonaktifkannya <code>udevadm trigger</code></strong> –
+          Mencegah crash sistem saat pembaruan file systemd/udev berlangsung.
+        </li>
+      </ul>
+    </section>
+    <section id="dr460nized" class="section">
+      <h2>🖥️ Edisi Dr460nized</h2>
+      <img
+        src="https://cdn.shortpixel.ai/spai/q_lossy+ret_img+to_auto/linuxiac.com/wp-content/uploads/2025/09/garuda-september-2025-desktop.jpg"
+        alt="Garuda Linux Dr460nized Edition"
+      />
+      <ul>
+        <li>Plasma 6.4.4 yang telah dikustomisasi</li>
+        <li>Shell Fish 4.0 sebagai shell default</li>
+        <li>Kernel Linux 6.16 versi terbaru</li>
+      </ul>
+    </section>
+    <section id="ragam" class="section">
+      <h2>🧩 Ragam Edisi ISO</h2>
+      <p>Garuda menyediakan ISO untuk berbagai edisi desktop:</p>
+      <ul>
+        <li>Cinnamon</li>
+        <li>Dr460nized (termasuk varian Gaming)</li>
+        <li>GNOME</li>
+        <li>KDE Lite</li>
+        <li>Hyprland</li>
+        <li>i3</li>
+        <li>Mokka</li>
+        <li>Sway</li>
+        <li>XFCE</li>
+      </ul>
+    </section>
+    <section id="update" class="section">
+      <h2>🛠️ Cara Update</h2>
+      <p>
+        Kamu tidak perlu instal ulang! Cukup jalankan perintah berikut di
+        terminal:
+      </p>
+      <pre><code>garuda-update</code></pre>
+    </section>
+    <section id="sumber" class="section">
+      <h2>🔗 Sumber</h2>
+      <ul>
+        <li>
+          <a
+            href="https://linuxiac.com/garuda-linux-releases-new-iso-with-mesa-fixes/"
+            target="_blank"
+            >Linuxiac: Garuda Linux Releases New ISO</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://forum.garudalinux.org/t/iso-release-250907/45868"
+            target="_blank"
+            >Forum Garuda Linux</a
+          >
+        </li>
+      </ul>
+    </section>
+    <button id="related-posts-toggle">❌</button>
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <script src="/ext/related.js"></script>
+  </body>
+</html>
