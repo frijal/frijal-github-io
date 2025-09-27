@@ -2,8 +2,8 @@
 
 [![Tambah Konten & Pindahkan](https://github.com/frijal/frijal.github.io/actions/workflows/baristambah-pindahfolder.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/baristambah-pindahfolder.yml)
 [![rapikan (HTML, JS, CSS)](https://github.com/frijal/frijal.github.io/actions/workflows/minify-then-prettier.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/minify-then-prettier.yml)
-[![RSS Harian](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml)
 [![artikel.json & sitemap.xml](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
+[![RSS Harian](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml)
 
 # 🌟 Lisensi UNLICENSE / Public Domain
 
