@@ -95,8 +95,7 @@ itemsArr = itemsArr.slice(0, limit);
 // generate RSS items
 let items = itemsArr
   .map(
-    it => `
-    <item>
+    it => `    <item>
       <title>${it.title}</title>
       <link>${it.loc}</link>
       <guid>${it.loc}</guid>
