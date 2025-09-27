@@ -3,14 +3,11 @@ name: bikin artikel.json & sitemap.xml
 on:
   push:
     paths:
-      - 'artikel/**'
-  delete:
-    paths:
-      - 'artikel/**'
+      - 'artikel/*.html'
   workflow_dispatch:
 
 jobs:
-  generate:
+  generator:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -23,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run generator.js
         run: node ext/generator.js
@@ -36,14 +33,17 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add artikel.json sitemap.xml
+
+          # pastikan working tree bersih
+          git reset --hard
+          git clean -fd
+
+          git add artikel.json sitemap.xml || true
           git commit -m "🔄 Update artikel.json & sitemap.xml (auto)" || echo "No changes to commit"
+
           git fetch origin main
-          git rebase origin/main || {
-            echo "⚠️ Konflik saat rebase, auto-resolve dengan hasil generator (ours)"
-            git rebase --abort
-            git merge -X ours origin/main
-          }
+          git merge -X ours origin/main
+
           git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
