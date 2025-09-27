@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Mengubah Format Gambar Massal (PNG ke JPG) dengan mogrify ImageMagick</title>
+    <link rel="canonical" href="https://frijal.github.io/artikel/mengubah-format-gambar.html">
+    <meta name="description" content="Panduan lengkap mengubah format gambar secara massal menggunakan perintah mogrify di ImageMagick (Linux). Praktis, cepat, dan efisien.">
+    <meta name="robots" content="index, follow">
+    <meta name="date" content="2025-09-27">
+    <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+    
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/0/0a/ImageMagick-logo.png">
+    
+    <meta property="og:title" content="Mengubah Format Gambar Massal dengan ImageMagick">
+    <meta property="og:description" content="Pelajari cara mudah mengubah format gambar secara massal dengan ImageMagick.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/mengubah-format-gambar.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4plrIZN7XWwHE-H8sc81qshP12EzBLwgat2ZWKHBoBr3DnYGwBeUjAlBkFfK_H1ImgnfI0STp4cgiFTsEKoDg3ye8NGElqV6GJJIKltBrx1iJm5xXTOug8bp1-QzUlRXI9kMEvkjJXH2q/s1600/Logo_Imagemagick.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mengubah Format Gambar Massal dengan ImageMagick">
+    <meta name="twitter:description" content="Cara mudah mengubah format gambar secara massal dengan ImageMagick.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4plrIZN7XWwHE-H8sc81qshP12EzBLwgat2ZWKHBoBr3DnYGwBeUjAlBkFfK_H1ImgnfI0STp4cgiFTsEKoDg3ye8NGElqV6GJJIKltBrx1iJm5xXTOug8bp1-QzUlRXI9kMEvkjJXH2q/s1600/Logo_Imagemagick.png">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        :root{--primary:#0284c7;--secondary:#0369a1;--accent:#10b981;--bg-light:#f0f9ff;--bg-dark:#e0f2fe;--text-color:#222;--code-bg:#0f172a;--code-text:#f8f8f2}
+        body{font-family:"Segoe UI",sans-serif;margin:0;padding:0;line-height:1.7;background:linear-gradient(120deg,var(--bg-light),var(--bg-dark));color:var(--text-color);display:flex;flex-direction:column;min-height:100vh}
+        header{background:var(--primary);color:#fff;padding:20px;text-align:center}
+        main{flex-grow:1;max-width:900px;width:100%;margin:20px auto;padding:20px;background:#fff;border-radius:12px;box-shadow:0 6px 15px rgba(0,0,0,.1);box-sizing:border-box}
+        h1,h2{color:var(--secondary)}
+        pre{border-radius:8px;padding:15px;background:var(--code-bg);color:var(--code-text);overflow-x:auto}
+        .code-container{position:relative;margin-bottom:20px}
+        .copy-btn{position:absolute;top:10px;right:10px;background:var(--accent);border:none;color:#fff;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:12px;transition:.2s}
+        .copy-btn:hover{background:#059669}
+        footer{margin-top:auto;padding:20px 0;text-align:center;font-size:14px;color:#555;background:#f5f5f5}
+        .info-box{margin-top:20px;padding:15px;border:1px solid #ccc;border-radius:8px;background:#f9fafb}
+        .share-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+        .share-buttons a{text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px;background:var(--bg-dark);color:var(--secondary);transition:.2s;display:inline-flex;align-items:center}
+        .share-buttons a:hover{background:#bae6fd}
+        #btn-home-left,#btn-home-right{position:fixed;display:flex;align-items:center;background-color:var(--primary);color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 4px 8px rgba(0,0,0,.2);transition:background .3s ease,transform .2s ease;z-index:9999}
+        #btn-home-left:hover,#btn-home-right:hover{background-color:var(--secondary);transform:scale(1.05)}
+        #btn-home-left{left:10px;top:30%;transform:translateY(-50%)}
+        #btn-home-right{right:10px;bottom:20%;transform:translateY(50%)}
+        .article-image{float:right;margin:0 0 15px 15px;max-width:150px;height:auto;border-radius:6px;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+    </style>
+</head>
+<body>
+    
+    <a href="https://frijal.github.io/" target="_blank" id="btn-home-left" title="Kembali ke Beranda" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M541 229.16l-61-53.74V56a8 8 0 0 0-8-8h-40a8 8 0 0 0-8 8v72L314.39 43a35.44 35.44 0 0 0-46.78 0L35 229.16a12 12 0 0 0-1.16 16.9l21.4 23.6a12 12 0 0 0 16.9 1.15L96 227.69V456a23.94 23.94 0 0 0 24 24h112a23.94 23.94 0 0 0 24-24V344h64v112a23.94 23.94 0 0 0 24 24h112a23.94 23.94 0 0 0 24-24V227.7l24.9 42.12a12 12 0 0 0 16.9-1.15l21.4-23.6a12 12 0 0 0-1.2-16.91z"/></svg> Beranda
+    </a>
+    <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Peta Situs" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="18" height="18" fill="currentColor" style="margin-right:6px"><path d="M64 48c0-13.3 10.7-24 24-24h8c13.3 0 24 10.7 24 24V96H448V48c0-13.3 10.7-24 24-24h8c13.3 0 24 10.7 24 24v48h48c13.3 0 24 10.7 24 24v8c0 13.3-10.7 24-24 24H520V464c0 13.3-10.7 24-24 24H144c-13.3 0-24-10.7-24-24V176H64c-13.3 0-24-10.7-24-24v-8c0-13.3 10.7-24 24-24h48V96H64zm176 160h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16s7.2-16 16-16zm-16 80c0-8.8 7.2-16 16-16h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16zm16 112h192c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg> Sitemap
+    </a>
+    
+    <header>
+        <h1>Mengubah Format Gambar Massal dengan ImageMagick</h1>
+    </header>
+    
+    <main>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4plrIZN7XWwHE-H8sc81qshP12EzBLwgat2ZWKHBoBr3DnYGwBeUjAlBkFfK_H1ImgnfI0STp4cgiFTsEKoDg3ye8NGElqV6GJJIKltBrx1iJm5xXTOug8bp1-QzUlRXI9kMEvkjJXH2q/s320/Logo_Imagemagick.png" alt="Logo ImageMagick" class="article-image">
+        
+        <p>Jika Anda memiliki ratusan gambar yang harus diunggah ke website, ukurannya sering kali terlalu besar. Mengkonversi gambar satu per satu sangat membuang waktu. Dengan **ImageMagick**, kita bisa mengubah format gambar secara massal agar lebih ringan menggunakan perintah **`mogrify`**.</p>
+        
+        <h2>Perbedaan `mogrify` dan `convert`</h2>
+        <p>Penting untuk dipahami bahwa dalam ImageMagick terdapat dua perintah utama untuk konversi:</p>
+        <ul>
+            <li>**`convert`**: Digunakan untuk mengkonversi gambar, **membuat file output baru** dan membiarkan file asli tetap utuh.</li>
+            <li>**`mogrify`**: Digunakan untuk mengkonversi gambar, namun **akan menimpa (overwrite) file asli** dengan format baru. Sangat efisien untuk operasi massal, tetapi gunakan dengan hati-hati.</li>
+        </ul>
+        
+        <h2>Contoh Perintah Massal (PNG ke JPG)</h2>
+        <p>Perintah ini akan mengubah **semua file PNG** di direktori aktif menjadi format **JPG** dan menimpa file aslinya. Jika Anda ingin mengubah format lain, cukup ganti `*.png` dan `jpg`.</p>
+        
+        <div class="code-container">
+            <pre><code class="language-bash">mogrify -format jpg *.png</code></pre>
+            <button class="copy-btn" onclick="copyCode(this)">Salin Perintah</button>
+        </div>
+        
+        <h2>Penjelasan Sintaks</h2>
+        <ul>
+            <li><code>mogrify</code>: Perintah utama dari ImageMagick yang memodifikasi file **di tempat** (menimpa file asli).</li>
+            <li><code>-format jpg</code>: Opsi ini menentukan format tujuan konversi, yaitu Joint Photographic Group (JPG).</li>
+            <li><code>*.png</code>: Merupakan *wildcard* yang menargetkan semua file yang berakhiran `.png` di direktori saat ini.</li>
+        </ul>
+
+        <h2>Bagikan Artikel Ini</h2>
+        <div class="share-buttons">
+            <a href="#" onclick='shareTo("facebook")'>Facebook</a> 
+            <a href="#" onclick='shareTo("twitter")'>Twitter</a> 
+            <a href="#" onclick='shareTo("whatsapp")'>WhatsApp</a> 
+            <a href="#" onclick='shareTo("telegram")'>Telegram</a>
+        </div>
+        
+        <div style="margin-top:18px;color:#777;font-size:10px">
+            <span id="current-url" class="small-muted"></span>
+        </div>
+        
+        <div style="margin-top:18px">
+            <div id="fb-root"></div>
+            <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+        </div>
+        
+        <div class="info-box" id="info-box">Memuat Browser & OS...</div>
+        <div class="info-box" id="ip-box">Memuat IP & negara...</div>
+    </main>
+    
+    <footer>
+        <p>© 2025 Panduan Linux - Semua Hak Dilindungi</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="/ext/related.js"></script>
+    
+    <script>
+        // Copy Code Function (Diperbaiki: menerima elemen tombol)
+        function copyCode(e) {
+            const code = e.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                e.textContent = "Berhasil Disalin!";
+                setTimeout(() => { e.textContent = "Salin Perintah"; }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin:', err);
+                e.textContent = "Gagal Salin!";
+            });
+        }
+        
+        // Share to Social Media Function (Ditambahkan untuk tombol berbagi)
+        function shareTo(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = "";
+
+            switch (platform) {
+                case "facebook": shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+                case "twitter": shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`; break;
+                case "whatsapp": shareUrl = `https://wa.me/?text=${title} - ${url}`; break;
+                case "telegram": shareUrl = `https://t.me/share/url?url=${url}&text=${title}`; break;
+                default: return;
+            }
+            window.open(shareUrl, "_blank", "width=600,height=400");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Setup current URL for display and FB comments
+            let currentUrl = window.location.href;
+            document.getElementById("current-url").textContent = currentUrl;
+            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+
+            // FB SDK Parse
+            window.fbAsyncInit = function() {
+                if(typeof FB !== 'undefined') try { FB.XFBML.parse(); } catch (t) {}
+            };
+
+            // User Agent Detection
+            let ua = navigator.userAgent;
+            let browser = "Browser tidak dikenal", os = "OS tidak dikenal";
+            
+            if (/Firefox/.test(ua)) browser = "Mozilla Firefox";
+            else if (/Chrome/.test(ua)) browser = "Google Chrome";
+            else if (/Safari/.test(ua)) browser = "Safari";
+            else if (/Edg/.test(ua)) browser = "Microsoft Edge";
+            
+            if (/Linux/.test(ua)) os = "Linux";
+            else if (/Windows/.test(ua)) os = "Windows";
+            else if (/Mac/.test(ua)) os = "macOS";
+            else if (/Android/.test(ua)) os = "Android";
+            else if (/iPhone|iPad|iPod/.test(ua)) os = "iOS";
+
+            document.getElementById("info-box").innerHTML = `<b>Peramban:</b> ${browser}<br><b>Sistem Operasi:</b> ${os}`;
+
+            // IP and Country Fetch (Ditingkatkan untuk menampilkan bendera)
+            fetch("https://ipapi.co/json/").then(n => n.json()).then(n => {
+                const countryCode = n.country_code.toLowerCase();
+                const flagUrl = `https://flagcdn.com/24x18/${countryCode}.png`;
+                document.getElementById("ip-box").innerHTML = `<b>IP Anda:</b> ${n.ip}<br><b>Negara:</b> <img src="${flagUrl}" alt="Bendera ${n.country_name}" style="vertical-align: middle; margin-right: 5px;"> ${n.country_name}`;
+            }).catch(() => {
+                 document.getElementById("ip-box").innerHTML = "Gagal memuat info IP/Negara.";
+            });
+
+            // Initialize PrismJS
+            Prism.highlightAll();
+        });
+        
+        // Facebook SDK loader (Ditingkatkan: dihapus dari inline script, dipindahkan ke sini)
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.async = true;
+          js.crossorigin = 'anonymous';
+          js.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <div id="related-posts-container"><ul id="related-posts-list"></ul></div>
+    <button id="related-posts-toggle">❌</button>
+</body>
+</html>
