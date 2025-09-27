@@ -127,12 +127,6 @@ ${items}
 </rss>`;
 
 // --- Tulis file utama ---
-fs.writeFileSync(path.join(__dirname, "../rss.xml"), rss, "utf8");
+fs.writeFileSync(rssPath, rss, "utf8");
 
-// --- Tulis duplikat identik di root repo ---
-["rss", "atom", "feed"].forEach(name => {
-  const outPath = path.join(__dirname, "..", name);
-  fs.writeFileSync(outPath, rss, "utf8");
-});
-
-console.log(`✅ rss.xml + alias (/rss, /atom, /feed) berhasil dibuat (${itemsArr.length} item)`);
+console.log(`✅ rss.xml berhasil dibuat (${itemsArr.length} item)`);
