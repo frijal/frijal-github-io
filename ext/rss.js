@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { DOMParser } = require("xmldom");
+const { DOMParser } = require("@xmldom/xmldom");
 
 const sitemapPath = path.join(__dirname, "../sitemap.xml");
 const rssPath = path.join(__dirname, "../rss.xml");
