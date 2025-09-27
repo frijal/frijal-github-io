@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RSS_LIMIT: 30   # fix limit 30 artikel terbaru
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,6 +22,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'   # aktifkan cache npm biar lebih cepat
+
+      - name: Install dependencies
+        run: npm ci   # pastikan ada package-lock.json, kalau belum bisa pakai npm install
 
       - name: Generate artikel.json & sitemap.xml
         run: node ext/generator.js
