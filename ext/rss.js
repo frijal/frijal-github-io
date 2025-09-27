@@ -77,6 +77,11 @@ for (let i = 0; i < urls.length; i++) {
     const title = sanitizeTitle(fileName);
     const category = kategoriMap[fileName] || "Umum";
 
+    
+// Hilangkan 2 karakter pertama (misalnya emoji + spasi) hanya untuk output RSS
+if (category.length > 2) {
+  category = category.substring(2);
+}
     // Ambil tanggal dari <meta name="date">
     const dateObj = extractDate(localPath) || new Date();
     const pubDate = dateObj.toUTCString();
