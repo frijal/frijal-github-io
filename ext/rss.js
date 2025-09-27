@@ -75,8 +75,8 @@ for (let i = 0; i < urls.length; i++) {
 
     const desc = extractDescription(localPath);
     const title = sanitizeTitle(fileName);
-    const category = kategoriMap[fileName] || "Umum";
-
+    
+    let category = kategoriMap[fileName] || "Umum";
     
 // Hilangkan 2 karakter pertama (misalnya emoji + spasi) hanya untuk output RSS
 if (category.length > 2) {
