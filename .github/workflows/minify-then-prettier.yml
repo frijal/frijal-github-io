@@ -1,4 +1,4 @@
-name: rapikan Files (HTML, JS, CSS)
+name: Rapikan Artikel
 
 on:
   workflow_dispatch:
@@ -7,29 +7,22 @@ on:
         description: "Pilih mode: minify, prettier, atau all"
         required: true
         default: "all"
-      delay:
-        description: "Delay (detik) sebelum menjalankan Prettier"
-        required: true
-        default: "100"
+        type: choice
+        options:
+          - minify
+          - prettier
+          - all
       targetDirs:
-        description: "Daftar folder target (pisahkan dengan koma, contoh: artikel,docs,pages)"
+        description: "Daftar folder target (pisahkan dengan koma)"
         required: true
         default: "artikel"
       extensions:
-        description: "Ekstensi file yang diproses (pisahkan dengan koma, contoh: html,js,css)"
+        description: "Ekstensi file yang diproses (pisahkan dengan koma)"
         required: true
-        default: "html,css"
-      outputDir:
-        description: "Folder output hasil optimisasi"
-        required: true
-        default: "artikel"
-      saveMode:
-        description: "Mode penyimpanan: overwrite, output, atau both"
-        required: true
-        default: "overwrite"
+        default: "html,js,css"
 
 jobs:
-  optimize:
+  format:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -38,88 +31,30 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
         run: |
           npm install -g prettier html-minifier terser clean-css-cli
 
-      - name: Prepare output folders
-        run: |
-          mkdir -p mini
-          if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
-            mkdir -p ${{ github.event.inputs.outputDir }}
-          fi
-
-      - name: Debug list files
-        run: |        
-          echo "🔎 Cari file sesuai input..."
-          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
-          IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
-          for dir in "${DIRS[@]}"; do
-            if [ -d "$dir" ]; then
-              for ext in "${EXTS[@]}"; do
-                echo "📂 Folder: $dir | Ekstensi: .$ext"
-                files=$(find "$dir" -type f -name "*.${ext}")
-                if [ -z "$files" ]; then
-                  echo "⚠️ Tidak ada file .$ext di $dir"
-                else
-                  echo "$files"
-                fi
-              done
-            else
-              echo "⚠️ Folder $dir tidak ditemukan"
-            fi
-          done
-
-      - name: Minify Files (skip errors + count)
+      - name: Run Minify
         if: ${{ github.event.inputs.mode == 'minify' || github.event.inputs.mode == 'all' }}
-        run: |
-          successCount=0
-          failCount=0
-          failList=""
-          IFS=',' read -ra DIRS <<< "${{ github.event.inputs.targetDirs }}"
-          IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
-          for dir in "${DIRS[@]}"; do
-            if [ -d "$dir" ]; then
-              for ext in "${EXTS[@]}"; do
-                find "$dir"/ -name "*.${ext}" | while read file; do
-                  relpath="${file#$dir/}"
-                  outpath="${{ github.event.inputs.outputDir }}/$relpath"
-                  mkdir -p "$(dirname "$outpath")"
+        run: node ext/minify.js
+        env:
+          TARGET_DIRS: ${{ github.event.inputs.targetDirs }}
+          EXTENSIONS: ${{ github.event.inputs.extensions }}
 
-                  case "$ext" in
-                    html) html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true "$file" -o "$file" || echo "⚠️ Skip HTML: $file" ;;
-                    js) terser "$file" -c -m -o "$file" || echo "⚠️ Skip JS: $file" ;;
-                    css) cleancss -o "$file" "$file" || echo "⚠️ Skip CSS: $file" ;;
-                  esac
-
-                  if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
-                    cp "$file" "$outpath" || echo "⚠️ Gagal copy $file"
-                  fi
-                done
-              done
-            fi
-          done
-
-      - name: Wait before Prettier
+      - name: Run Prettier
         if: ${{ github.event.inputs.mode == 'prettier' || github.event.inputs.mode == 'all' }}
-        run: sleep ${{ github.event.inputs.delay }}
+        run: node ext/prettier.js
+        env:
+          TARGET_DIRS: ${{ github.event.inputs.targetDirs }}
+          EXTENSIONS: ${{ github.event.inputs.extensions }}
 
-      - name: Prettier Format (skip errors)
-        if: ${{ github.event.inputs.mode == 'prettier' || github.event.inputs.mode == 'all' }}
+      - name: Commit changes
         run: |
-          IFS=',' read -ra EXTS <<< "${{ github.event.inputs.extensions }}"
-          if [ "${{ github.event.inputs.saveMode }}" != "output" ]; then
-            for ext in "${EXTS[@]}"; do
-              prettier --write "${{ github.event.inputs.targetDirs }}/**/*.${ext}" || echo "⚠️ Skip Prettier targetDirs for .$ext"
-            done
-          fi
-          if [ "${{ github.event.inputs.saveMode }}" != "overwrite" ]; then
-            for ext in "${EXTS[@]}"; do
-              prettier --write "${{ github.event.inputs.outputDir }}/**/*.${ext}" || echo "⚠️ Skip Prettier outputDir for .$ext"
-            done
-          fi
-
-      - name: Run JSON & XML Generator
-        run: node ext/generator.js
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "♻️ Format files (mode=${{ github.event.inputs.mode }})" || echo "No changes to commit"
+          git push
