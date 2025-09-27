@@ -1,0 +1,322 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- prettier-ignore -->
+<title>FFmpeg: Split Video Otomatis</title>
+<link rel="stylesheet" href="/ext/related.css">
+<style>
+:root {
+  --bg-light: #f0f8ff;
+  --text-light: #111;
+  --bg-dark: #111;
+  --text-dark: #f0f8ff;
+  --accent: #ff6347;
+  --secondary: #00bfff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.5s, color 0.5s;
+}
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--accent);
+}
+h2 {
+  margin-top: 30px;
+  font-size: 1.8rem;
+  color: var(--secondary);
+}
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+pre {
+  background: linear-gradient(120deg, #f0f8ff, #ffe4e1);
+  padding: 15px;
+  border-radius: 12px;
+  overflow-x: auto;
+  position: relative;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  opacity: 0.8;
+}
+#toggleDark {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.info-box {
+  margin-top: 50px;
+  padding: 20px;
+  background: linear-gradient(120deg, #ffe4e1, #f0f8ff);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.1rem;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+@media(max-width:600px){
+  h1 {font-size:2rem;}
+  h2 {font-size:1.5rem;}
+  p {font-size:1rem;}
+  pre {font-size:1rem;}
+  .info-item img {width:24px;height:24px;}
+}
+</style>
+<link rel="stylesheet" href="/ext/related.css">
+<meta name="date" content="2025-09-27">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+</head>
+<body>
+<button id="toggleDark">Toggle Dark Mode</button>
+<div class="container">
+  <h1>FFmpeg: Split Video Otomatis</h1>
+
+  <p>Gunakan perintah FFmpeg berikut untuk membagi video menjadi beberapa bagian otomatis berdasarkan durasi tertentu:</p>
+
+  <pre><code id="ffmpegCode">#!/bin/bash
+INPUT="input.mp4"
+DURATION=20   # durasi tiap split dalam detik
+LEN=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$INPUT")
+COUNT=0
+START=0
+
+while (( $(echo "$START < $LEN" | bc -l) )); do
+  OUTPUT="part_$COUNT.mp4"
+  ffmpeg -i "$INPUT" -ss $START -t $DURATION -c copy "$OUTPUT"
+  START=$(echo "$START + $DURATION" | bc)
+  COUNT=$((COUNT+1))
+done</code>
+  <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
+
+  <h2>Penjelasan Script</h2>
+  <p><strong>INPUT="input.mp4"</strong>: Nama file video yang akan dibagi.</p>
+  <p><strong>DURATION=20</strong>: Durasi setiap bagian video dalam detik.</p>
+  <p><strong>ffprobe</strong>: Digunakan untuk mengambil durasi total video.</p>
+  <p><strong>Loop while</strong>: Membagi video mulai dari detik 0 hingga akhir, secara otomatis membuat file output bernama part_0.mp4, part_1.mp4, dst.</p>
+  <p><strong>-ss</strong>: Menentukan titik mulai potong setiap bagian.</p>
+  <p><strong>-t</strong>: Durasi potongan.</p>
+  <p><strong>-c copy</strong>: Menyalin stream tanpa re-encoding untuk mempercepat proses.</p>
+
+<!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+          <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+        </article>
+
+        <!-- Facebook Comments Plugin (user-provided) -->
+        <div style="margin-top:18px">
+          <!-- Facebook Comments Plugin -->
+          <div id="fb-root"></div>
+          <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+          </script>
+          <div class="fb-comments"
+               id="fb-comments"
+               data-href=""
+               data-width="100%"
+               data-numposts="5"></div>
+          <script>
+            // Ambil URL unik halaman saat ini
+            const currentUrl = window.location.href;
+            document.getElementById("current-url").textContent = currentUrl;
+            // Set data-href FB Comments ke URL halaman ini
+            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+            // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+            window.fbAsyncInit = function() {
+              if (typeof FB !== 'undefined') {
+                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+              }
+            }
+          </script>
+
+  <div class="info-box" id="infoBox">
+    <div class="info-item">
+      <img src="" id="browserIcon" alt="Browser Icon">
+      <span id="browserText">Browser: ...</span>
+    </div>
+    <div class="info-item">
+      <img src="" id="osIcon" alt="OS Icon">
+      <span id="osText">OS: ...</span>
+    </div>
+    <div class="info-item">
+      <img src="" id="flagIcon" alt="Country Flag">
+      <span id="ipText">IP: ...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Dark mode auto + toggle
+const body = document.body;
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if(prefersDark) body.classList.add('dark');
+
+document.getElementById('toggleDark').addEventListener('click', ()=>{
+  body.classList.toggle('dark');
+});
+
+// Copy syntax
+function copyCode(){
+  const code = document.getElementById('ffmpegCode').textContent;
+  navigator.clipboard.writeText(code);
+  alert("Syntax copied!");
+}
+
+// Browser detection
+function getBrowserInfo() {
+  const ua = navigator.userAgent;
+  let name="Unknown", icon="", version="N/A";
+
+  if(ua.indexOf("Brave") > -1){name="Brave"; icon="https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg";}
+  else if(ua.indexOf("Firefox")>-1){name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg";}
+  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png";}
+  else if(ua.indexOf("Chromium")>-1){name="Chromium"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg";}
+  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg";}
+  else if(ua.indexOf("Edg")>-1){name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg";}
+  else if(ua.indexOf("OPR")>-1){name="Opera"; version=ua.match(/OPR\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg";}
+  return {name, version, icon};
+}
+
+// OS detection
+function getOSInfo(){
+  const platform=navigator.platform.toLowerCase();
+  const ua=navigator.userAgent.toLowerCase();
+  let name="Unknown OS", version="", icon="";
+  if(platform.indexOf("win")!==-1){name="Windows"; const m=ua.match(/windows nt ([0-9\.]+)/); version=m?m[1]:""; icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg";}
+  else if(platform.indexOf("mac")!==-1){name="macOS"; const m=ua.match(/mac os x ([0-9_]+)/); version=m?m[1].replace(/_/g,"."):""; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
+  else if(platform.indexOf("linux")!==-1){name="Linux"; icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png";}
+  else if(/android/.test(ua)){name="Android"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg";}
+  else if(/iphone|ipad|ipod/.test(ua)){name="iOS"; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
+  return {name, version, icon};
+}
+
+// Display info
+const browser = getBrowserInfo();
+document.getElementById('browserIcon').src = browser.icon;
+document.getElementById('browserText').textContent = `Browser: ${browser.name} ${browser.version}`;
+
+const os = getOSInfo();
+document.getElementById('osIcon').src = os.icon;
+document.getElementById('osText').textContent = `OS: ${os.name} ${os.version}`;
+
+// Fetch IP & flag
+fetch('https://ipapi.co/json/')
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById('ipText').textContent=`IP: ${data.ip} (${data.country_name})`;
+    document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
+  })
+  .catch(()=>{document.getElementById('ipText').textContent='IP: Tidak dapat diambil';});
+</script>
+<!-- Tombol Home Kiri -->
+<a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<!-- Tombol Home Kanan -->
+<a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home">
+  <!-- Ikon Rumah SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
+    <path d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"/>
+  </svg>
+  Home
+</a>
+
+<style>
+  /* Style umum tombol */
+  #btn-home-left, #btn-home-right {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 9999;
+  }
+
+  #btn-home-left:hover, #btn-home-right:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* Tombol kiri */
+  #btn-home-left {
+    left: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+  }
+
+  /* Tombol kanan */
+  #btn-home-right {
+    right: 10px;
+    bottom: 20%;
+    transform: translateY(50%);
+  }
+
+  #btn-home-left svg, #btn-home-right svg {
+    flex-shrink: 0;
+  }
+</style>
+<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
+<button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script></body>
+</html>

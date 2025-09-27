@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- SEO & Metadata -->
+    <meta charset="UTF-8">
+    
+<!-- prettier-ignore -->
+<title>⌨️ Memahami dan Menggunakan Perintah alias di Linux</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="Penjelasan santai, interaktif, dan berwarna tentang cara kerja dan trik perintah alias di Linux. Lengkap dengan contoh, galeri, info sistem, share, dan komentar!">
+    <meta name="keywords" content="Linux, alias, terminal, bashrc, perintah, tips, tutorial, interaktif, Indonesia">
+    <link rel="canonical" href="https://frijal.github.io/artikel/artikel-alias-linux.html">
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="⌨️ Memahami dan Menggunakan Perintah alias di Linux">
+    <meta property="og:description" content="Penjelasan santai, interaktif, dan berwarna tentang cara kerja dan trik perintah alias di Linux. Lengkap dengan contoh, galeri, info sistem, share, dan komentar!">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/artikel-alias-linux.html">
+    <meta property="og:site_name" content="frijal.github.io">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/a/AVvXsEhzp2w3mqQerHktFzXiLLBqsXjLgpP0g5rlyo8voQpezAWNuHYyN2rOfhLvns0iUBiOrq1ScXNkU-0iInJwNGF31bV5I_M5svzLDRqwBapkmzqxasLumMU-NsiNlO5A9gSAZDqlakVor3aMw67JSpDG-aFllcEpXS_PoezpISCDUz00YYvobTA8sANJec4">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="⌨️ Memahami dan Menggunakan Perintah alias di Linux">
+    <meta name="twitter:description" content="Penjelasan santai, interaktif, dan berwarna tentang cara kerja dan trik perintah alias di Linux. Lengkap dengan contoh, galeri, info sistem, share, dan komentar!">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/a/AVvXsEhzp2w3mqQerHktFzXiLLBqsXjLgpP0g5rlyo8voQpezAWNuHYyN2rOfhLvns0iUBiOrq1ScXNkU-0iInJwNGF31bV5I_M5svzLDRqwBapkmzqxasLumMU-NsiNlO5A9gSAZDqlakVor3aMw67JSpDG-aFllcEpXS_PoezpISCDUz00YYvobTA8sANJec4">
+    <meta name="twitter:site" content="@frijal">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "⌨️ Memahami dan Menggunakan Perintah alias di Linux",
+      "description": "Penjelasan santai, interaktif, dan berwarna tentang cara kerja dan trik perintah alias di Linux. Lengkap dengan contoh, galeri, info sistem, share, dan komentar!",
+      "datePublished": "2025-09-26",
+      "author": { "@type": "Person", "name": "frijal" },
+      "image": [
+        "https://blogger.googleusercontent.com/img/a/AVvXsEhzp2w3mqQerHktFzXiLLBqsXjLgpP0g5rlyo8voQpezAWNuHYyN2rOfhLvns0iUBiOrq1ScXNkU-0iInJwNGF31bV5I_M5svzLDRqwBapkmzqxasLumMU-NsiNlO5A9gSAZDqlakVor3aMw67JSpDG-aFllcEpXS_PoezpISCDUz00YYvobTA8sANJec4"
+      ],
+      "mainEntityOfPage": "https://frijal.github.io/artikel/artikel-alias-linux.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "frijal.github.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://frijal.github.io/favicon.ico"
+        }
+      }
+    }
+    </script>
+    <!-- CSS3 Responsive Wide, Colorful Theme -->
+    <style>
+        :root {
+            --main-bg: #232946;
+            --main-text: #f7f7fa;
+            --accent: #00a97f;
+            --accent2: #f6c177;
+            --card-bg: #2a2d4a;
+            --card-shadow: 0 2px 18px #23294655, 0 1px 7px #00a97f1a;
+            --radius: 1.25em;
+            --gallery-height: 340px;
+            --gallery-thumb: 62px;
+        }
+        html, body {
+            margin: 0; padding: 0;
+            background: var(--main-bg);
+            color: var(--main-text);
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            min-height: 100%;
+        }
+        body { min-height: 100vh; }
+        header {
+            width: 100vw;
+            background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
+            box-shadow: var(--card-shadow);
+            padding: 0 0 1.2em 0;
+        }
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 2.2em 1.2em 4em 1.2em;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 4em;
+        }
+        h1, h2, h3 {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        h1 {
+            color: var(--accent);
+            font-size: 2.12em;
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+        }
+        h2 {
+            color: var(--accent2);
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 2.1em;
+            margin-bottom: 0.6em;
+        }
+        h3 {
+            color: var(--accent);
+            font-size: 1.09em;
+            font-weight: 600;
+            margin: 1.7em 0 0.4em 0;
+        }
+        ul, ol { margin-left: 1.2em; }
+        code, pre {
+            background: #181b31;
+            color: #00c897;
+            padding: 2px 10px;
+            border-radius: 7px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            font-size: 1em;
+        }
+        .gallery {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2em 0;
+        }
+        .gallery-main {
+            width: 100%;
+            max-width: 602px;
+            height: var(--gallery-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #181b31;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #181b31;
+            border-radius: var(--radius);
+        }
+        .gallery-thumbs {
+            margin-top: 0.5em;
+            display: flex;
+            gap: 0.5em;
+            justify-content: center;
+        }
+        .gallery-thumbs img {
+            width: var(--gallery-thumb);
+            height: var(--gallery-thumb);
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.7;
+            border: 2px solid transparent;
+            background: #232946;
+            transition: border 0.2s, opacity 0.2s;
+        }
+        .gallery-thumbs img.active {
+            border: 2px solid var(--accent);
+            opacity: 1;
+        }
+        .gallery-nav-btn {
+            position: absolute;
+            top: 50%;
+            background: rgba(246,193,119,0.88);
+            border: none;
+            color: #232946;
+            font-size: 2em;
+            border-radius: 50%;
+            width: 44px; height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 4px #0003;
+            transition: background 0.2s;
+            z-index: 5;
+        }
+        .gallery-prev { left: 12px; transform: translateY(-50%); }
+        .gallery-next { right: 12px; transform: translateY(-50%); }
+        .gallery-caption {
+            margin-top: 0.6em;
+            color: #f6c177;
+            font-size: 1em;
+            text-align: center;
+            font-style: italic;
+        }
+        .share-bar {
+            display: flex;
+            gap: 0.7em;
+            margin: 2em 0 0.7em 0;
+            justify-content: flex-end;
+        }
+        .share-bar a {
+            background: var(--accent2);
+            color: #232946;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.25em;
+            box-shadow: 0 1px 6px #0002;
+            transition: background 0.18s;
+        }
+        .share-bar a:hover { background: var(--accent); color:#fff; }
+        .info-bar {
+            display: flex;
+            gap: 1.5em;
+            flex-wrap: wrap;
+            align-items: center;
+            background: #181b31;
+            border-radius: 8px;
+            box-shadow: 0 1px 7px #0001;
+            padding: 0.6em 1.1em;
+            margin-bottom: 1.5em;
+            font-size: 0.97em;
+        }
+        .info-bar span {
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+            font-weight: 500;
+        }
+        .flag {
+            font-size: 1.1em;
+            margin-right: 0.1em;
+        }
+        .btn-sitemap, .btn-home {
+            position: fixed;
+            z-index: 9999;
+            background: var(--accent2);
+            color: #232946;
+            box-shadow: 0 1px 10px #0003;
+            border: none;
+            padding: 0.75em 1.1em;
+            border-radius: 2em;
+            font-size: 1.09em;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            opacity: 0.93;
+            gap: 0.5em;
+        }
+        .btn-sitemap { left: 0.8em; top: 30%; }
+        .btn-home { right: 1em; bottom: 20%; }
+        .btn-sitemap:hover, .btn-home:hover { background: var(--accent); color:#fff;}
+        #fb-comments { margin: 2em 0 0 0; }
+        @media (max-width: 700px) {
+            .container { padding: 1em 0.1em; border-radius: 0; }
+            .gallery-main { max-width: 100vw; height: 180px; }
+            .gallery-thumbs img { width: 34px; height: 34px; }
+        }
+    </style>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="/ext/related.css">
+<link rel="stylesheet" href="/ext/related.css">
+<meta name="date" content="2025-09-27">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+</head>
+<body>
+    <header>
+        <div class="container" style="background:none;box-shadow:none;border-radius:0;max-width:100vw;padding:2em 0 0.8em 0">
+            <h1>⌨️ Memahami dan Menggunakan Perintah <span style="color:#00c897;">alias</span> di Linux</h1>
+        </div>
+    </header>
+    <a href="https://frijal.github.io/sitemap.html" class="btn-sitemap" title="Ke Sitemap"><i class="fa fa-sitemap"></i> Sitemap</a>
+    <a href="https://frijal.github.io/artikel.html" class="btn-home" title="Kembali ke Artikel"><i class="fa fa-home"></i> Home</a>
+    <div class="container">
+        <div class="info-bar" id="user-info">
+            <span><i class="fa fa-globe"></i> Deteksi Lokasi...</span>
+            <span><i class="fa fa-laptop-code"></i> Browser: <span id="browser-info">-</span></span>
+            <span><i class="fa fa-desktop"></i> OS: <span id="os-info">-</span></span>
+        </div>
+        <div class="share-bar">
+            <a href="#" id="share-wa" title="Bagikan ke WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" id="share-tw" title="Bagikan ke Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" id="share-fb" title="Bagikan ke Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" id="share-tg" title="Bagikan ke Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+        <p style="font-size:1.08em">📌 Sumber asli: <a href="https://www.linux.org/threads/understanding-and-using-the-alias-command.49170/" target="_blank" rel="noopener">Linux.org</a></p>
+
+        <h2>🔎 Apa itu Alias?</h2>
+        <p>
+            Alias adalah cara bikin <b>shortcut</b> perintah di terminal Linux. Jadi, perintah panjang bisa disingkat jadi satu kata aja—hemat waktu, nggak pegel ngetik!
+        </p>
+        <p>Contoh alias basic:</p>
+        <code>alias ls="ls -a"</code>
+        <p>Sekarang setiap ketik <span style="color:#00c897;">ls</span>, otomatis akan menampilkan file tersembunyi juga.</p>
+
+        <div class="gallery" id="gallery">
+            <div class="gallery-main">
+                <button class="gallery-prev gallery-nav-btn" aria-label="Sebelumnya">&lt;</button>
+                <img id="gallery-img" src="" alt="" loading="lazy">
+                <button class="gallery-next gallery-nav-btn" aria-label="Selanjutnya">&gt;</button>
+            </div>
+            <div class="gallery-thumbs" id="gallery-thumbs"></div>
+            <div class="gallery-caption" id="gallery-caption"></div>
+        </div>
+
+        <h2>📋 Melihat Alias yang Ada</h2>
+        <p>
+            Mau tahu semua alias aktif di terminal? Cukup ketik:
+        </p>
+        <code>alias</code>
+        <p>Atau lebih lengkap:</p>
+        <code>alias -p</code>
+
+        <h2>🔒 Membuat Alias Permanen</h2>
+        <p>
+            Alias di terminal itu sementara. Biar permanen, tambahin ke file <code>~/.bashrc</code> atau <code>~/.bash_aliases</code>:
+        </p>
+        <code>alias up='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt dist-upgrade -y'</code>
+
+        <h2>⚠️ Hal yang Perlu Diperhatikan</h2>
+        <ul>
+            <li>Alias itu <b>case-sensitive</b> (huruf besar kecil beda).</li>
+            <li>Jangan sampai menimpa perintah penting Linux tanpa sadar.</li>
+            <li>Pakai <code>type &lt;nama&gt;</code> buat cek apakah nama alias sudah dipakai sistem.</li>
+        </ul>
+
+        <h2>❌ Menghapus Alias</h2>
+        <p>Untuk hapus alias sementara:</p>
+        <code>unalias ls</code>
+        <p>Hapus semua alias sekaligus:</p>
+        <code>unalias -a</code>
+        <p>Kalau aliasnya di <code>.bashrc</code>, hapus barisnya lalu restart terminal.</p>
+
+        <h2>🛠️ Alias Lanjutan</h2>
+        <ul>
+            <li>Alias bisa buat shortcut script atau perintah panjang.</li>
+            <li>Bisa juga untuk mempercepat workflow harian.</li>
+        </ul>
+        <p>Contoh alias unik:</p>
+        <code>alias cd..="cd .."</code><br>
+        <code>alias edit=nano</code>
+
+        <h2>🚪 Escaping Alias</h2>
+        <p>
+            Kadang alias suka ganggu, misal <code>grep</code> sudah di-alias otomatis nambah parameter. Biar jalanin perintah asli, pakai <b>backslash</b>:
+        </p>
+        <code>\grep bash</code>
+
+        <h2>🎯 Kesimpulan</h2>
+        <ul>
+            <li>Alias itu fitur kecil yang sangat membantu.</li>
+            <li>Bisa bikin kerja lebih cepat &amp; efisien.</li>
+            <li>Bisa dibuat permanen, dihapus, atau diabaikan kapan aja.</li>
+        </ul>
+        <p>
+            Kalau kamu sering ngoprek terminal, alias bakal jadi sahabat terbaikmu. Selamat berkreasi dengan alias!
+        </p>
+
+        <div id="fb-comments">
+            <div class="fb-comments"
