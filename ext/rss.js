@@ -109,9 +109,9 @@ let items = itemsArr
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
   <channel>
-    <title>Frijal Artikel</title>
-    <link>https://frijal.github.io/</link>
-    <description>Feed artikel terbaru</description>
+    <title><![CDATA[Frijal Artikel]]></title>
+    <link><![CDATA[https://frijal.github.io/]]></link>
+    <description><![CDATA[Feed artikel terbaru]]></description>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>
