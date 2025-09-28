@@ -207,8 +207,7 @@
 
             <button id="related-posts-toggle">❌</button>
             <div id="related-posts-container">
-                <ul id="related-posts-list"></ul>
-            </div>
+                <ul id="related-posts-list"></ul></div>
             
         </article>
     </main>
@@ -260,12 +259,7 @@
                 
                 const geoText = `${data.city || 'Kota tak dikenal'}, ${data.country_name || 'Negara tak dikenal'}`;
                 document.getElementById("geo").textContent = geoText;
-                
-                // Flag logic (dapat ditambahkan jika Anda ingin menampilkan emoji bendera)
-                // const flag = data.country_code ? String.fromCodePoint(...[...data.country_code].map(t => 127397 + t.charCodeAt())) : "🏳️";
-                // document.getElementById("flag").textContent = flag; 
-
-            } catch (error) {
+              } catch (error) {
                 console.error("Error fetching IP info:", error);
                 document.getElementById("geo").textContent = "Lokasi tidak tersedia";
             }
