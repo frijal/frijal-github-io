@@ -2,9 +2,10 @@ name: bikin artikel.json & sitemap.xml
 
 on:
   push:
+    branches: ["main"]
     paths:
       - 'artikel/*.html'
-#  workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   generator:
