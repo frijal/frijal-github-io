@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04</title>
+  <meta name="description" content="Kegiatan Komunitas Pengguna Linux Indonesia (KPLI) Balikpapan dalam rilis party Ubuntu 16.04 bersama pelajar SMK di Kota Balikpapan.">
+  <link rel="canonical" href="https://bak.xo.je/artikel/kpli-balikpapan.html">
+  <link rel="icon" href="https://www.linux.org/favicon.ico">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04">
+  <meta property="og:description" content="KPLI Balikpapan mengadakan rilis party Ubuntu 16.04 di DiLo Telkom bersama pelajar SMK.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://bak.xo.je/artikel/kpli-balikpapan.html">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04">
+  <meta name="twitter:description" content="KPLI Balikpapan mengadakan rilis party Ubuntu 16.04 bersama pelajar SMK.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg">
+
+  <!-- CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.7;
+    }
+    header {
+      text-align: center;
+      background: #2c3e50;
+      color: #fff;
+      padding: 40px 20px;
+    }
+    header h1 { margin: 0; font-size: 2.4rem; }
+    .container { max-width: 1100px; margin: auto; padding: 20px; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .gallery img {
+      width: 100%; height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+    pre { background: #2d2d2d; color: #eee; border-radius: 6px; padding: 12px; }
+    button.copy-btn {
+      background: #3498db; border: none; color: #fff;
+      padding: 6px 12px; border-radius: 4px;
+      cursor: pointer; margin-top: 6px;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      background: #2c3e50;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    /* Tombol Home */
+    #btn-home-left, #btn-home-right {
+      position: fixed;
+      display: flex; align-items: center;
+      background: #3498db; color: #fff;
+      padding: 12px 18px; border-radius: 8px;
+      text-decoration: none; font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 9999;
+    }
+    #btn-home-left:hover, #btn-home-right:hover { background: #2980b9; transform: scale(1.05); }
+    #btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
+    #btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
+    #btn-home-left svg, #btn-home-right svg { flex-shrink: 0; margin-right: 6px; }
+    .share-buttons a { margin: 0 6px; text-decoration: none; font-size: 1.2rem; }
+    .sysinfo { margin-top: 20px; font-size: 0.9rem; text-align: center; }
+    .flag { width: 20px; height: 14px; vertical-align: middle; margin-left: 4px; }
+  </style>
+
+  <!-- Prism.js -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Kegiatan KPLI Balikpapan</h1>
+    <p>Rilis Party Ubuntu 16.04 Bersama Pelajar SMK</p>
+  </header>
+
+  <div class="container">
+    <p>
+      Kegiatan <b>Komunitas Pengguna Linux Indonesia (KPLI) Balikpapan</b> kali ini diadakan di ruang <b>DiLo Telkom</b>. 
+      Acara berlangsung sederhana namun penuh semangat, berupa <i>rilis party</i> Ubuntu 16.04 yang ditujukan kepada pelajar SMK di Kota Balikpapan. 
+      Selain memperkenalkan Linux, kegiatan ini juga bertujuan menumbuhkan minat generasi muda terhadap <i>open source</i> dan dunia teknologi informasi.
+    </p>
+
+    <div class="gallery">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg" alt="KPLI Balikpapan 1">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjv5YJDlr-FufKxkB78fgGEHR97KA0meqjl_WQX8LheWK7cJe6LnnYDnFIrp7Wsx5PLcmOxEkrRlyZ76WraykaNmaKTodMjiBQg5wmRb4xSxS0nWA_f2SCQApuaJHq2mdulmGOAbrCzq2v1/s1600/IMG_20160612_141350.jpg" alt="KPLI Balikpapan 2">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkIpcuw2zXtW0ERKD1__3H1t1Z0F408KA9w6Tg0C8r_UkKUOjaV1qUALR1ylS3UdDj-31ffOwuKaXfmmJV3eM1Be7oXu1lHdL3oVBJh-NgT1M-gs4EnUQGVl6F5UDvntKTPpDV_QPXjFVt/s1600/IMG_20160612_140834.jpg" alt="KPLI Balikpapan 3">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRBPUlwylYEHinpxRsralfBBBdI_BteDGF7Vuuz1t00L2Wf2vbh-RgPlLHKkeWSE55Lv5q4Obo2TfizwTtYsDZrgII7VSwrF3m-DaY0IyoREgoLnxbK4z00S1mbqZ7_iQEhSsidO-I1ONs/s1600/IMG_20160612_141534.jpg" alt="KPLI Balikpapan 4">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnVl0U-BQ96yYdsMokns6fe1cpK0A25ZUMEvxJjLFtw7qkZcG6ovrzO-mhDhTskbuEhAgSBRrHzyKjR0OyO0mT7GtTB18uumfAjt5l-Sxt_iVUWy3ouo14lm8jdh2PpNzEDjT_5GnXEHsj/s1600/IMG_20160612_140849.jpg" alt="KPLI Balikpapan 5">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzIyRvI28cfb77oxGNw1J7HPvpeqoBEittAmf35w2WS3v7t8KgofiejMSExwWPEPUa26XGckACZ0r8FbZbRTrS5Hp9S0MdmPWTsk9GoxgUJdSr7bL2BFi8cIhX569TbO7Pilu_cXs0AMZG/s1600/IMG_20160612_170645.jpg" alt="KPLI Balikpapan 6">
+    </div>
+
+    <h2>Sejarah dan Keberadaan KPLI</h2>
+    <p>
+      KPLI didirikan di Jakarta pada <b>31 Oktober 1998</b> dengan nama awal KPLI-Jakarta. 
+      Sejak awal, KPLI hadir sebagai wadah bagi pengguna Linux di Indonesia, dengan tujuan memasyarakatkan perangkat lunak <b>gratis dan terbuka</b>. 
+      Saat ini, banyak daerah memiliki KPLI lokal atau dikenal sebagai <i>Linux User Group (LUG)</i>.
+    </p>
+
+    <h2>KPLI di Balikpapan</h2>
+    <p>
+      KPLI Balikpapan rutin mengadakan kegiatan seperti <i>kopdar</i>, seminar, hingga acara rilis sistem operasi. 
+      Dengan adanya kegiatan ini, diharapkan semakin banyak pelajar dan masyarakat yang memahami Linux dan perangkat lunak <i>open source</i>.
+    </p>
+
+    <h3>Contoh Perintah Linux</h3>
+    <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y</code></pre>
+    <button class="copy-btn" onclick="copyCommand()">Copy</button>
+
+    <div class="share-buttons">
+      <p>Bagikan ke:</p>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://bak.xo.je/artikel/kpli-balikpapan.html" target="_blank">Facebook</a> |
+      <a href="https://twitter.com/intent/tweet?url=https://bak.xo.je/artikel/kpli-balikpapan.html" target="_blank">Twitter/X</a> |
+      <a href="https://wa.me/?text=https://bak.xo.je/artikel/kpli-balikpapan.html" target="_blank">WhatsApp</a> |
+      <a href="https://t.me/share/url?url=https://bak.xo.je/artikel/kpli-balikpapan.html" target="_blank">Telegram</a>
+    </div>
+
+    <!-- Facebook Comments -->
+    <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url"></span></div>
+    <div style="margin-top:18px">
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+      <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+    </div>
+  </div>
+
+  <!-- Tombol Home -->
+  <a href="https://bak.xo.je/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor"><path d="M541 229.16l-61-53.6V56a24 24..."/></svg>
+    Home
+  </a>
+  <a href="https://bak.xo.je/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor"><path d="M541 229.16l-61-53.6V56a24 24..."/></svg>
+    Home
+  </a>
+
+  <footer>
+    <div class="sysinfo" id="sysinfo"></div>
+    <p>&copy; 2025 KPLI Balikpapan. Dibuat untuk edukasi Linux & Open Source.</p>
+  </footer>
+
+  <script>
+    function copyCommand() {
+      const text = "sudo apt update && sudo apt upgrade -y";
+      navigator.clipboard.writeText(text).then(() => alert("Perintah disalin ke clipboard!"));
+    }
+
+    // FB Comments current URL
+    const currentUrl = window.location.href;
+    document.getElementById("current-url").textContent = currentUrl;
+    document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+
+    // Deteksi browser, OS, IP
+    function detectInfo() {
+      let ua = navigator.userAgent;
+      let browser = "Unknown Browser", os = "Unknown OS";
+      if (/firefox/i.test(ua)) browser = "Firefox";
+      else if (/chrome|chromium/i.test(ua)) browser = "Chrome";
+      else if (/safari/i.test(ua)) browser = "Safari";
+      else if (/edg/i.test(ua)) browser = "Edge";
+
+      if (/windows/i.test(ua)) os = "Windows";
+      else if (/linux/i.test(ua)) os = "Linux";
+      else if (/mac/i.test(ua)) os = "MacOS";
+      else if (/android/i.test(ua)) os = "Android";
+      else if (/iphone|ios/i.test(ua)) os = "iOS";
+
+      fetch("https://ipapi.co/json/")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("sysinfo").innerHTML = 
+            `Browser: ${browser} | OS: ${os} <br> IP: ${data.ip} | Negara: ${data.country_name} <img class="flag" src="https://flagcdn.com/20x15/${data.country_code.toLowerCase()}.png">`;
+        });
+    }
+    detectInfo();
+  </script>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04",
+    "author":{"@type":"Person","name":"KPLI Balikpapan"},
+    "publisher":{"@type":"Organization","name":"KPLI Indonesia"},
+    "datePublished":"2016-06-12",
+    "image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg"
+  }
+  </script>
+</body>
+</html>
