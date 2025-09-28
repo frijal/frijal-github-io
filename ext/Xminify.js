@@ -12,7 +12,7 @@ function run(cmd) {
 
 targetDirs.forEach(dir => {
   if (!fs.existsSync(dir)) {
-    console.log(`⚠️ Folder ${dir} tidak di temukan`);
+    console.log(`⚠️ Folder ${dir} tidak ditemukan`);
     return;
   }
 
