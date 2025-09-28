@@ -41,41 +41,50 @@ const gradients = [
 
 function generateGradientMap(categories) {
   const map = {};
-  const rotation = Date.now() % gradients.length; // offset rotasi
-  categories.forEach(cat => {
-    const idx = (hashString(cat) + rotation) % gradients.length;
-    map[cat] = gradients[idx];
+  (categories || []).forEach(cat => {
+    map[cat] = gradients[hashString(cat) % gradients.length];
   });
   return map;
 }
 
-function applyGradients(categories) {
-  const gradientMap = generateGradientMap(categories);
-  document.querySelectorAll(".category-header").forEach(el => {
-    const name = el.textContent.trim();
-    if (gradientMap[name]) {
-      if (!document.body.classList.contains("dark-mode")) {
-        el.style.background = gradientMap[name];
-        el.style.backgroundSize = "200% 200%";   // untuk animasi
-        el.style.animation = "gradientMove 10s ease infinite"; 
-      } else {
-        el.style.background = "#222"; // fallback gelap
-        el.style.animation = "none";
-      }
-    }
-  });
+function isDarkModeActive() {
+  const saved = localStorage.getItem('darkMode');
+  if (saved === 'true') return true;
+  if (saved === 'false') return false;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
-// CSS animasi (inject sekali saja)
-const style = document.createElement("style");
-style.textContent = `
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+function applyGradients(categories) {
+  const gradientMap = generateGradientMap(categories || []);
+  const headers = document.querySelectorAll('.category-header');
+  headers.forEach(el => {
+    const name = getHeaderName(el);
+    // try exact match first
+    let key = Object.keys(gradientMap).find(k => k.trim() === name);
+    // try fuzzy: key contains name or name contains key
+    if (!key) {
+      key = Object.keys(gradientMap).find(k => k.includes(name) || name.includes(k));
+    }
+    const gradient = key ? gradientMap[key] : null;
+
+    // respect manual dark-mode and prefered dark
+    if (isDarkModeActive()) {
+      // keep dark fallback (avoid bright gradients in dark mode)
+      el.style.background = el.dataset._origBg || "#222";
+    } else {
+      if (gradient) {
+        el.style.background = gradient;
+      } else {
+        // fallback: generate random inline gradient (keadaan langka)
+        const a = '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+        const b = '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+        el.style.background = `linear-gradient(90deg, ${a}, ${b})`;
+      }
+    }
+    // mark applied so observer can skip or check later
+    el.dataset._grad_applied = "1";
+  });
 }
-`;
-document.head.appendChild(style);
 
 // Init dark-mode and bind switch (but do not BLOCK applying gradients if switch missing)
 function initDarkMode(categories) {
