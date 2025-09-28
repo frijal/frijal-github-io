@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Isi Interaktif - Pelan Kiri FRijal</title>
+<meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
+<link rel="stylesheet" href="ext/sitemap.css">
+</head>
+<body>
+
+<!-- Marquee -->
+<div id="marquee-container">
+  <div id="marquee-content">Memuat judul artikel...</div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer">
+  <div id="footerInfo"></div>
+</footer>
+
+<!-- Search -->
+<input type="text" id="search" placeholder="Cari judul...">
+
+<!-- Expand/Collapse TOC -->
+<button id="tocToggle">Collapse TOC</button>
+
+<!-- TOC -->
+<div id="toc"></div>
+<div id="totalCount">Total artikel: 0</div>
+
+<!-- Toggle Dark Mode -->
+<div id="darkToggle">
+  🌞 <input type="checkbox" id="darkSwitch"> 🌙
+</div>
+
+<!-- Script modular -->
+<script type="module">
+  import { loadTOC } from './ext/toc.js';
+  import { initDarkMode } from './ext/darkmode.js';
+  import './ext/gradient-random.js';  // gradient random eksternal
+  import './ext/iposbrowser.js';      // info browser & IP
+
+  // Jalankan modul utama setelah DOM siap
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadTOC();
+    initDarkMode();
+  });
+</script>
+
+</body>
+</html>
