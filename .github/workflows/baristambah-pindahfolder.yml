@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  modify-and-move-html:
+  modify-html-then-move:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -19,54 +19,53 @@ jobs:
 
       - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
         run: |
-          for file in artikel/*.html; do
+          for file in artikelx/*.html; do
             if grep -q "<!-- prettier-ignore -->" "$file"; then
               echo "ℹ️ Sudah ada prettier-ignore di $file"
               continue
             fi
-            perl -0777 -i -pe 's|<title>(.*?)</title>|\n<!-- prettier-ignore -->\n<title>\1</title>\n|is' "$file"
+            perl -0777 -i -pe 's|<title>(.*?)</title>|<!-- prettier-ignore -->\n<title>\1</title>|is' "$file"
             echo "✅ Ditambahkan prettier-ignore di $file"
           done
 
       - name: Sisipkan <meta name="date"> & Google Verification
         run: |
-          for file in artikel/*.html; do
-            # --- Meta Date ---
-            if grep -qi '<meta[^>]*date' "$file"; then
+          for file in artikelx/*.html; do
+            # Meta Date
+            if grep -qi '<meta[^>]*name="date"' "$file"; then
               echo "ℹ️ Sudah ada meta date di $file"
             else
               DATE=$(git log --follow --format=%aI -- "$file" | tail -1)
-              if [ -z "$DATE" ]; then
-                DATE=$(date -u +"%Y-%m-%d")
-              else
-                DATE=$(date -d "$DATE" +"%Y-%m-%d")
-              fi
+              [ -z "$DATE" ] && DATE=$(date -u +"%Y-%m-%d") || DATE=$(date -d "$DATE" +"%Y-%m-%d")
               sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
               echo "✅ Ditambahkan meta date $DATE di $file"
             fi
 
-            # --- Google Site Verification ---
-            if grep -qi '<meta[^>]*google-site-verification' "$file"; then
+            # Google Site Verification
+            if grep -qi 'google-site-verification' "$file"; then
               echo "ℹ️ Sudah ada google-site-verification di $file"
             else
               sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
               echo "✅ Ditambahkan google-site-verification di $file"
             fi
 
+            # related.css
             if grep -qi '/ext/related.css' "$file"; then
               echo "ℹ️ Sudah ada ext/related.css di $file"
             else
-              sed -i "/<\/head>/i <link rel="stylesheet" href="/ext/related.css">" "$file"
+              sed -i '/<\/head>/i <link rel="stylesheet" href=\"/ext/related.css\">' "$file"
               echo "✅ Ditambahkan ext/related.css di $file"
             fi
-            
+
+            # Toggle button
             if grep -qi '>❌</button>' "$file"; then
-              echo "ℹ️ Sudah ada toggle">❌</button> di $file"
+              echo "ℹ️ Sudah ada toggle ❌ di $file"
             else
               sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button>' "$file"
-              echo "✅ Ditambahkan toggle">❌</button> di $file"
+              echo "✅ Ditambahkan toggle ❌ di $file"
             fi
-            
+
+            # Related posts container
             if grep -qi 'related-posts-container' "$file"; then
               echo "ℹ️ Sudah ada related-posts-container di $file"
             else
@@ -74,16 +73,25 @@ jobs:
               echo "✅ Ditambahkan related-posts-container di $file"
             fi
 
+            # Related posts list
             if grep -qi 'related-posts-list' "$file"; then
               echo "ℹ️ Sudah ada related-posts-list di $file"
             else
               sed -i '/<\/body>/i <ul id="related-posts-list"></ul></div>' "$file"
               echo "✅ Ditambahkan related-posts-list di $file"
             fi
-          done
 
+            if grep -qi '/ext/related.js' "$file"; then
+              echo "ℹ️ Sudah ada skrip related di $file"
+            else
+              sed -i '/<\/body>/i <script src="/ext/related.js"></script>' "$file"
+              echo "✅ Ditambahkan skrip related di $file"
+            fi
+          done
+    
       - name: Pindahkan file HTML ke folder artikel/
         run: |
+          mkdir -p artikel
           mv -f artikelx/*.html artikel/ || true
 
       - name: Commit & Push perubahan
@@ -95,6 +103,6 @@ jobs:
           else
             git add artikelx || true
             git add artikel || true
-            git commit -m "related post button, pindahkan HTML, sisipkan prettier-ignore, meta date & google verification"
+            git commit -m "Modifikasi HTML di artikelx/, lalu pindahkan ke artikel/"
             git push
           fi
