@@ -83,7 +83,7 @@ jobs:
 
       - name: Pindahkan file HTML ke folder artikel/
         run: |
-          mv artikelx/*.html artikel/ || true
+          mv -f artikelx/*.html artikel/ || true
 
       - name: Commit & Push perubahan
         run: |
