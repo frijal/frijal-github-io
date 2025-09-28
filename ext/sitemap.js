@@ -37,13 +37,18 @@ function applyGradients(categories) {
   document.querySelectorAll(".category-header").forEach(el => {
     const name = el.textContent.trim();
     if (gradientMap[name]) {
-      el.style.background = gradientMap[name];
+      // hanya pasang gradient kalau bukan dark mode
+      if (!document.body.classList.contains("dark-mode")) {
+        el.style.background = gradientMap[name];
+      } else {
+        el.style.background = "#222"; // fallback gelap
+      }
     }
   });
 }
 
 // ---------------- DARK MODE TOGGLE ----------------
-function initDarkMode() {
+function initDarkMode(categories) {
   const darkSwitch = document.getElementById("darkSwitch");
   if (!darkSwitch) return;
 
@@ -53,6 +58,9 @@ function initDarkMode() {
     darkSwitch.checked = true;
   }
 
+  // Terapkan gradient sesuai mode saat awal load
+  applyGradients(categories);
+
   darkSwitch.addEventListener("change", () => {
     if (darkSwitch.checked) {
       document.body.classList.add("dark-mode");
@@ -61,10 +69,6 @@ function initDarkMode() {
       document.body.classList.remove("dark-mode");
       localStorage.setItem("darkMode", "false");
     }
+    applyGradients(categories);
   });
 }
-
-// Inisialisasi otomatis setelah DOM siap
-document.addEventListener("DOMContentLoaded", () => {
-  initDarkMode();
-});
