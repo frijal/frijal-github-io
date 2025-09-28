@@ -43,3 +43,50 @@ jobs:
           git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show Published Links & Summary
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "✅ File berhasil dipublish ke GitHub Pages:"
+          echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
+          echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
+          echo ""
+          echo "📄 Artikel yang berubah di commit ini:"
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^artikel/.*\.html$' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "⚠️ Tidak ada artikel .html yang berubah."
+          else
+            for f in $CHANGED; do
+              base=$(basename "$f")
+              echo "🔗 https://frijal.github.io/artikel/$base"
+            done
+          fi
+          echo ""
+          echo "📊 Jumlah total artikel saat ini:"
+          COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
+          echo "➡️  $COUNT artikel di folder artikel/"
+          echo ""
+          echo "📂 Jumlah kategori unik & distribusi:"
+          if [ -f artikel.json ]; then
+            CATEGORIES=$(jq 'keys | length' artikel.json)
+            echo "➡️  $CATEGORIES kategori unik"
+            echo ""
+            echo "📌 Daftar kategori & jumlah artikelnya:"
+            jq -r 'to_entries[] | "• \(.key): \(.value | length) artikel"' artikel.json
+            echo ""
+            echo "🆕 Artikel terbaru:"
+            jq -r '
+              to_entries
+              | map({kategori: .key, artikel: .value})
+              | map(.artikel | map({judul: .[0], file: .[1], kategori: input_filename}) )
+              ' artikel.json > /dev/null
+            # ambil artikel terakhir dari semua kategori
+            jq -r '
+              to_entries
+              | map({kategori: .key, artikel: .value})
+              | map(.artikel[] as $a | {kategori: .key, judul: $a[0], file: $a[1]})
+              | .[-1] | "• \(.judul) [Kategori: \(.kategori)]"
+            ' artikel.json
+          else
+            echo "⚠️ artikel.json tidak ditemukan"
+          fi
