@@ -77,3 +77,32 @@
     opacity: 1;
     transition: right 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
+
+.marquee-container {
+  border-top: 1px solid #ccc;
+  padding: 8px 0;
+  background: linear-gradient(90deg, #f0f4f8, #e0f2fe);
+  overflow: hidden;
+  position: relative;
+  height: 32px;
+}
+
+.marquee-inner {
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  font-weight: 500;
+}
+
+.marquee-inner a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #2563eb;
+  transition: color 0.2s;
+}
+
+.marquee-inner a:hover {
+  color: #0ea5e9;
+}
+
