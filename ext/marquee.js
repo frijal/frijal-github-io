@@ -23,7 +23,7 @@ export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed =
 
   async function fetchArticles() {
     try {
-      const res = await fetch('./artikel.json');
+      const res = await fetch('/artikel.json');
       const data = await res.json();
 
       const currentFile = location.pathname.split('/').pop();
