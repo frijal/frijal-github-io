@@ -16,12 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Tambahkan snippet ke HTML di artikelx/
-        run: |
-          for file in artikelx/*.html; do
-            sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
-          done
-
       - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
         run: |
           for file in artikel/*.html; do
