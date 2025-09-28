@@ -1,4 +1,4 @@
-name: Mass Replace with Inputs (Case-Sensitive)
+name: Mass Replace with Folder Option
 
 on:
   workflow_dispatch:
@@ -11,6 +11,10 @@ on:
         description: "Teks pengganti"
         required: true
         default: "mandi pagi sendirian"
+      folder:
+        description: "Folder target (misal: content, src, docs). Kosong = root repo"
+        required: false
+        default: "."
       globs:
         description: "Polanya file (misal: **/*.txt,**/*.html)"
         required: false
@@ -23,13 +27,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Jalankan penggantian string (case-sensitive)
+      - name: Jalankan penggantian string di folder terpilih
         run: |
+          TARGET="${{ github.event.inputs.folder }}"
           IFS=',' read -ra GLOBS <<< "${{ github.event.inputs.globs }}"
           for g in "${GLOBS[@]}"; do
-            echo "Proses pola: $g"
-            find . -type f -name "${g##*/}" -print | while read -r file; do
-              # case-sensitive: hanya g (tanpa I)
+            echo "Proses pola: $g di folder $TARGET"
+            find "$TARGET" -type f -name "${g##*/}" -print | while read -r file; do
               sed -i "s/${{ github.event.inputs.search }}/${{ github.event.inputs.replace }}/g" "$file"
             done
           done
@@ -39,5 +43,5 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git add -A
-          git commit -m "chore: replace '${{ github.event.inputs.search }}' -> '${{ github.event.inputs.replace }}'" || echo "Tidak ada perubahan"
+          git commit -m "chore: replace '${{ github.event.inputs.search }}' -> '${{ github.event.inputs.replace }}' di folder ${{ github.event.inputs.folder }}" || echo "Tidak ada perubahan"
           git push
