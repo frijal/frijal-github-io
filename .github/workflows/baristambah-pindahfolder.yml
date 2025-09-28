@@ -23,11 +23,6 @@ jobs:
             sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
           done
 
-      - name: Pindahkan file HTML ke folder artikel/
-        run: |
-          mkdir -p artikel
-          mv artikelx/*.html artikel/ || true
-
       - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
         run: |
           for file in artikel/*.html; do
@@ -64,6 +59,11 @@ jobs:
               echo "✅ Ditambahkan google-site-verification di $file"
             fi
           done
+
+      - name: Pindahkan file HTML ke folder artikel/
+        run: |
+          mkdir -p artikel
+          mv artikelx/*.html artikel/ || true
 
       - name: Commit & Push perubahan
         run: |
