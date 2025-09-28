@@ -80,3 +80,80 @@ export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed =
   // Refresh otomatis
   setInterval(updateMarquee, refreshInterval); // default: 60 detik
 }
+
+///////////////////////
+
+export function initMarqueeDynamic(marqueeId, speed = 1, refreshInterval = 60000) {
+  const marquee = document.getElementById(marqueeId);
+  if (!marquee) return;
+
+  let scroll = 0;
+  let contentWidth = 0;
+  let rafId;
+  let currentSpeed = speed;
+
+  // Ambil kategori dari URL saat ini (misal: /kategori/tech/)
+  const pathParts = window.location.pathname.split('/');
+  const currentCategory = pathParts[1] || ''; // ambil folder pertama sebagai kategori
+
+  async function loadMarquee() {
+    try {
+      const res = await fetch('/artikel/artikel.json');
+      const data = await res.json();
+
+      // Filter artikel berdasarkan kategori di filename
+      const filtered = data.filter(item => item.filename.includes(currentCategory));
+
+      if (filtered.length === 0) {
+        console.warn('Tidak ada artikel sesuai kategori:', currentCategory);
+        return;
+      }
+
+      // Ambil artikel random dari filtered
+      const shuffled = filtered.sort(() => 0.5 - Math.random());
+
+      marquee.innerHTML = '';
+
+      const container = document.createElement('div');
+      container.className = 'marquee-content';
+
+      shuffled.forEach(item => {
+        let filePath = item.filename;
+        if (!filePath.startsWith('artikel/')) filePath = 'artikel/' + filePath;
+
+        const a = document.createElement('a');
+        a.href = '/' + filePath;
+        a.textContent = item.title;
+        a.target = '_blank';
+        container.appendChild(a);
+      });
+
+      // Duplikasi konten untuk loop mulus
+      const containerClone = container.cloneNode(true);
+      marquee.appendChild(container);
+      marquee.appendChild(containerClone);
+
+      contentWidth = container.scrollWidth;
+      scroll = 0;
+
+    } catch (err) {
+      console.error('Error loading marquee JSON:', err);
+    }
+  }
+
+  function animate() {
+    scroll += currentSpeed;
+    if (scroll >= contentWidth) scroll = 0;
+    marquee.scrollLeft = scroll;
+    rafId = requestAnimationFrame(animate);
+  }
+
+  loadMarquee();
+  animate();
+  setInterval(loadMarquee, refreshInterval);
+
+  return {
+    stop: () => cancelAnimationFrame(rafId),
+    setSpeed: (s) => { currentSpeed = s; }
+  };
+}
