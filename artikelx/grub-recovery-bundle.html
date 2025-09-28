@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Bundle Perbaikan GRUB Bootloader (Debian & Turunannya)</title>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #fcfcfc;
+      color: #222;
+    }
+    h1 {
+      color: #8b0000;
+      text-align: center;
+    }
+    h2 {
+      color: #005f73;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+    }
+    pre {
+      position: relative;
+      padding: 1em;
+      border-radius: 8px;
+      background: #2d2d2d;
+      color: #f8f8f2;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    .copy-btn, .download-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #005f73;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+    .download-btn {
+      right: 80px;
+      background: #006400;
+    }
+    ol li, ul li {
+      margin-bottom: 10px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📌 Bundle Perbaikan GRUB Bootloader</h1>
+  <p>
+    Halaman ini berisi tiga metode untuk memperbaiki GRUB di Debian/Ubuntu dan turunannya:  
+    <strong>otomatis, manual, dan troubleshooting</strong>.  
+    Pilih cara yang sesuai dengan kondisi sistem kamu.
+  </p>
+
+  <!-- Bagian 1: Otomatis -->
+  <section id="otomatis">
+    <h2>1. Perbaikan Otomatis dengan Skrip</h2>
+    <p>
+      Cara cepat untuk memperbaiki GRUB adalah menggunakan skrip otomatis.  
+      Cocok untuk pemula, tapi tetap hati-hati: pastikan disk target benar!
+    </p>
+    <pre>
+      <button class="download-btn" onclick="downloadScript()">Download</button>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">#!/bin/bash
+# fix-grub.sh
+# Skrip otomatis untuk memperbaiki GRUB di Debian/Ubuntu
+# ⚠ PERINGATAN: Gunakan dengan hati-hati, pastikan disk target benar
+
+DISK="$1"
+if [ -z "$DISK" ]; then
+  echo "Usage: $0 /dev/sdX"
+  echo "Contoh: $0 /dev/sda"
+  exit 1
+fi
+
+echo "=== PERINGATAN ==="
+echo "Skrip ini akan mencoba memperbaiki GRUB pada disk: $DISK"
+read -p "Lanjutkan? (y/n) " ans
+if [[ "$ans" != "y" ]]; then
+  echo "Dibatalkan."
+  exit 0
+fi
+
+# Mount partisi root (anggap partisi root ada di /dev/sdX1)
+mount /dev/${DISK##*/}1 /mnt || { echo "Gagal mount root partition!"; exit 1; }
+
+# Mount pseudo-filesystems
+mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+
+# Chroot & reinstall GRUB
+chroot /mnt grub-install "$DISK"
+chroot /mnt update-grub
+
+# Cleanup
+umount /mnt/dev
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt
+
+echo "✔ GRUB berhasil diperbaiki di $DISK"
+echo "Silakan reboot sistem."</code>
+    </pre>
+    <p><strong>Cara pakai:</strong></p>
+    <ol>
+      <li>Simpan sebagai <code>fix-grub.sh</code>.</li>
+      <li>Beri izin: <code>chmod +x fix-grub.sh</code>.</li>
+      <li>Jalankan dari Live USB: <code>sudo ./fix-grub.sh /dev/sda</code>.</li>
+    </ol>
+  </section>
+
+  <!-- Bagian 2: Manual -->
+  <section id="manual">
+    <h2>2. Perbaikan Manual Step by Step</h2>
+    <p>
+      Jika lebih nyaman mengetik perintah sendiri, gunakan cara manual.  
+      Cocok untuk belajar atau kondisi khusus yang tidak cocok dengan skrip.
+    </p>
+    <ol>
+      <li><strong>Boot ke Live USB</strong>.</li>
+      <li><strong>Cari partisi root:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo fdisk -l</code>
+        </pre>
+      </li>
+      <li><strong>Mount partisi root:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo mount /dev/sda1 /mnt</code>
+        </pre>
+      </li>
+      <li><strong>Mount pseudo-filesystems:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">for i in /dev /proc /sys; do sudo mount --bind $i /mnt$i; done</code>
+        </pre>
+      </li>
+      <li><strong>Masuk ke chroot:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo chroot /mnt</code>
+        </pre>
+      </li>
+      <li><strong>Reinstall GRUB:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">grub-install /dev/sda
+update-grub</code>
+        </pre>
+      </li>
+      <li><strong>Keluar & unmount:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">exit
+for i in /dev /proc /sys; do sudo umount /mnt$i; done
+sudo umount /mnt</code>
+        </pre>
+      </li>
+      <li><strong>Reboot sistem:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo reboot</code>
+        </pre>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Bagian 3: Troubleshooting -->
+  <section id="troubleshooting">
+    <h2>3. Troubleshooting Jika Masih Gagal</h2>
+    <ul>
+      <li><strong>Mount partisi EFI (untuk UEFI):</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo mount /dev/sda1 /mnt/boot/efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian
+update-grub</code>
+        </pre>
+      </li>
+      <li><strong>Cek UUID partisi:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">blkid
+cat /etc/fstab</code>
+        </pre>
+      </li>
+      <li><strong>Gunakan Boot-Repair:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo add-apt-repository ppa:yannubuntu/boot-repair
+sudo apt update
+sudo apt install boot-repair
+boot-repair</code>
+        </pre>
+      </li>
+      <li><strong>Periksa mode boot (UEFI vs Legacy).</strong></li>
+      <li><strong>Periksa filesystem:</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">fsck -f /dev/sda1</code>
+        </pre>
+      </li>
+      <li><strong>Reinstall kernel (jika perlu):</strong>
+        <pre>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">apt update
+apt install --reinstall linux-image-amd64</code>
+        </pre>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Script Prism + Copy -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Kode berhasil dicopy!");
+      });
+    }
+    function downloadScript() {
+      const code = document.querySelector("#otomatis code.language-bash").innerText;
+      const blob = new Blob([code], { type: "text/x-sh" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "fix-grub.sh";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
