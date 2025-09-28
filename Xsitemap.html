@@ -191,19 +191,12 @@ async function loadTOC() {
 }
 
 loadTOC();
+  
 </script>
 
-  <script>
-  const categories = [
-    "📽️ Multimedia & Editing",
-    "🐧 Linux & Open Source",
-    "📚 Islam & Kehidupan",
-    "🏞️ Budaya, Kuliner & Lifestyle",
-    "📰 Catatan & Sosial",
-    "💻 Windows & Teknologi Umum",
-    "🗂️ Lainnya"
-  ];
-  applyGradients(categories);
+ <script src="ext/sitemap.js"></script>
+  const categories = Object.keys(grouped);
+initDarkMode(categories);
 </script>
   <!-- Toggle Dark Mode -->
 <div id="darkToggle">
