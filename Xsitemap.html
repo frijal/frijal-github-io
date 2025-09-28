@@ -194,15 +194,28 @@ loadTOC();
   
 </script>
 
- <script src="ext/sitemap.js"></script>
-  const categories = Object.keys(grouped);
-initDarkMode(categories);
-</script>
-  <!-- Toggle Dark Mode -->
+<!-- Toggle Dark Mode -->
 <div id="darkToggle">
   🌞 <input type="checkbox" id="darkSwitch"> 🌙
 </div>
 
-  <script src="ext/iposbrowser.js"></script>
+<!-- Gradient random & Dark mode -->
+<script src="ext/sitemap.js"></script>
+<script>
+  // Jalankan initDarkMode setelah TOC selesai dimuat
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocEl = document.getElementById("toc");
+    if (tocEl) {
+      const categories = Array.from(
+        tocEl.querySelectorAll(".category-header")
+      ).map(el => el.textContent.trim());
+      initDarkMode(categories);
+    }
+  });
+</script>
+
+<!-- Info Client (Browser, OS, IP) -->
+<script src="ext/iposbrowser.js"></script>
+ 
 </body>
 </html>
