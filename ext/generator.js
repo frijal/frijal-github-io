@@ -117,10 +117,13 @@ files.forEach(file => {
   );
 });
 
-// Simpan artikel.json (rapi dengan newline, koma rapat)
 let jsonString = JSON.stringify(grouped, null, 2);
-// hapus spasi setelah koma di dalam array
-jsonString = jsonString.replace(/",\s+"/g, '","');
+// Hilangkan spasi setelah [ dan sebelum ]
+jsonString = jsonString
+  .replace(/\[\s+/g, "[")    // [ "Judul" → ["Judul"
+  .replace(/\s+\]/g, "]")    // "file" ] → "file"]
+  .replace(/,\s+/g, ",");    // "A", "B" → "A","B"
+
 fs.writeFileSync(jsonOut, jsonString, "utf8");
 
 // Simpan sitemap.xml
