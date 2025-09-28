@@ -184,7 +184,7 @@
             <li><strong>pemandangan.jpg:</strong> Nama file gambar yang ingin Anda potong.</li>
             <li>
                 <strong>-crop 100%x50%:</strong> Opsi untuk memotong.
-                `100%` berarti <b>lebar penuh**, dan `50%` berarti
+                `100%` berarti <b>lebar penuh</b>, dan `50%` berarti
                 <b>setengah tinggi**. ImageMagick akan otomatis membuat dua file.
             </li>
             <li>
@@ -224,14 +224,13 @@
             dari kiri ke kanan? Kita akan membaginya menjadi
             50% bagian kiri dan 50% bagian kanan.
         </p>
-        <p class="image-caption">Gambar Asli: gedung.jpg</p>
+        <p class="image-caption">Gambar Asli: pemandangan.jpg</p>
          <div class="image-placeholder">
-             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNbvbpS1z6xOAxFh2AGopParJoSDH2ey4e28C8gsynCbDO9Uq4WbGF31m-iCr-ugNPIQ5lpapr_Y5n1r1r_4BJh83Oj0_rcp-f_OtSEwDBOhdUDvV-EWCfUlSkAsLNfEXANm7dqluL4D_Vj8e7p2G3JI6frVuGb7XwQXhZZ8uyJAmD9H83vb6rbjgBE-0/s1600/pemandangan.jpg" alt="Gambar gedung sebelum dipotong" />
+             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNbvbpS1z6xOAxFh2AGopParJoSDH2ey4e28C8gsynCbDO9Uq4WbGF31m-iCr-ugNPIQ5lpapr_Y5n1r1r_4BJh83Oj0_rcp-f_OtSEwDBOhdUDvV-EWCfUlSkAsLNfEXANm7dqluL4D_Vj8e7p2G3JI6frVuGb7XwQXhZZ8uyJAmD9H83vb6rbjgBE-0/s1600/pemandangan.jpg" alt="Gambar pemandangan sebelum dipotong" />
         </div>
         <p>Gunakan perintah berikut:</p>
         <code
-            >convert gedung.jpg -crop 50%x100% +repage hasil_vertikal_%d.jpg</code
-        >
+            >convert pemandangan.jpg -crop 50%x100% +repage hasil_vertikal_%d.jpg</code>
         
         <h4>Penjelasan Perintah:</h4>
         <p>Strukturnya sama, yang berbeda hanya pada opsi <code>-crop</code>:</p>
@@ -239,7 +238,7 @@
             <li>
                 <strong>-crop 50%x100%:</strong> Kita memotong dengan <b>lebar
                 `50%` (setengah lebar)</b> dan <b>tinggi `100%` (tinggi
-                penuh)**.
+                penuh)</b>.
             </li>
         </ul>
         
