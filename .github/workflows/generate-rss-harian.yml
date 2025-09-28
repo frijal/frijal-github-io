@@ -2,10 +2,11 @@ name: RSS Feed Atom
 
 on:
   push:
+    branches: ["main"]
     paths:
       - 'artikel.json'
       - 'sitemap.xml'
-#  workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   rss:
