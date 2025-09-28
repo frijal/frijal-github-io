@@ -103,6 +103,6 @@ jobs:
           else
             git add artikelx || true
             git add artikel || true
-            git commit -m "Modifikasi HTML di artikelx/, lalu pindahkan ke artikel/"
+            git commit -m "modif di artikelx/ lalu pindahin ke artikel/"
             git push
           fi
