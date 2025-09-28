@@ -28,12 +28,9 @@ jobs:
 
       - name: Debug cek file output
         run: |
-         ls -lah
-         cat artikel.json || echo "artikel.json tidak ada"
-         cat sitemap.xml || echo "sitemap.xml tidak ada"
-
-#      - name: Validate sitemap.xml
-   #     run: node ext/validate-sitemap.js
+          ls -lah
+          cat artikel.json || echo "artikel.json tidak ada"
+          cat sitemap.xml || echo "sitemap.xml tidak ada"
 
       - name: Commit and Push results (only on main)
         if: github.ref == 'refs/heads/main'
@@ -41,16 +38,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # pastikan working tree bersih
-          git reset --hard
-          git clean -fd
-
-          git add artikel.json sitemap.xml || true
+          git add artikel.json sitemap.xml
           git commit -m "🔄 Update artikel.json & sitemap.xml (auto)" || echo "No changes to commit"
-
-          git fetch origin main
-          git merge -X ours origin/main
-
           git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
