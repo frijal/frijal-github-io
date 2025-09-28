@@ -117,19 +117,34 @@ files.forEach(file => {
   );
 });
 
-let jsonString = JSON.stringify(grouped, null, 0);
+function formatArrayBlocks(obj) {
+  // stringify dulu dengan indentasi 2 spasi
+  let jsonString = JSON.stringify(obj, null, 2);
 
-// Hilangkan spasi setelah [ dan sebelum ]
-jsonString = jsonString
-  .replace(/\[\s+/g, "[")    // [ "Judul" → ["Judul"
-  .replace(/\s+\]/g, "]")    // "file" ] → "file"]
-  .replace(/,\s+/g, ",");    // "A", "B" → "A","B"
+  // Regex cari array of arrays → [ [..], [..], ... ]
+  jsonString = jsonString.replace(/\[(\s*\[.*?\])\s*\]/gs, (match, inner, offset, str) => {
+    // Hitung indentasi level berdasarkan posisi dalam string
+    const before = str.slice(0, offset);
+    const lastLine = before.split("\n").pop() || "";
+    const indent = lastLine.match(/^\s*/)[0]; // ambil jumlah spasi di baris itu
+    const itemIndent = indent + "  ";         // isi array +2 spasi
 
-// Tambahkan newline untuk setiap array block
-jsonString = jsonString.replace(/\],\[/g, "],\n[");
+    // Pecah sub-array
+    const items = inner
+      .split("],")
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map(s => (s.endsWith("]") ? s : s + "]"));
 
+    return "[\n" + itemIndent + items.join(",\n" + itemIndent) + "\n" + indent + "]";
+  });
+
+  return jsonString;
+}
+
+// Pemakaian
+let jsonString = formatArrayBlocks(grouped);
 fs.writeFileSync(jsonOut, jsonString, "utf8");
-
 
 // Simpan sitemap.xml
 const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
