@@ -174,7 +174,16 @@ const gradientMap = {
   "💻 Windows & Teknologi Umum": "linear-gradient(90deg, #2F4F4F, #708090)", // SlateGray → DarkSlateGray
   "🗂️ Lainnya": "linear-gradient(90deg, #696969, #A9A9A9)"                 // DarkGray → DimGray
 };
+/////////
+  function getGradient(category) {
+  if (!category) return "linear-gradient(90deg, #ccc, #eee)"; // fallback default
 
+  // Normalisasi string (NFC) + trim spasi
+  const normalized = category.normalize("NFC").trim();
+
+  return gradientMap[normalized] || "linear-gradient(90deg, #ccc, #eee)";
+}
+/////////
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
 
 async function loadTOC() {
