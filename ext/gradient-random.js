@@ -1,13 +1,70 @@
-function randColor(){return'#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0')}
-function adjustBrightness(hex,amt){let col=parseInt(hex.slice(1),16),r=(col>>16)+amt,g=(col>>8&255)+amt,b=(col&255)+amt;
-r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
-return'#'+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)}
-function randGradient(){let a=randColor(),b=adjustBrightness(a,Math.random()>.5?80:-80);
-return 'linear-gradient(90deg, '+a+', '+b+')'}
-function generateGradientMap(cats){const map={};cats.forEach(cat=>map[cat]=randGradient());return map}
-function applyGradients(){document.querySelectorAll('.category-header').forEach(el=>{
- if(el.dataset._grad_applied)return; el.style.background=randGradient(); el.dataset._grad_applied=1})}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyGradients)}else{applyGradients()}
-const observer=new MutationObserver(()=>{applyGradients()});
-observer.observe(document.documentElement||document.body,{childList:true,subtree:true});
-window.generateGradientMap=generateGradientMap;
+// Fungsi hash sederhana dari string → angka
+function hashString(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h << 5) - h + str.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+// Pilihan kombinasi gradient
+const gradients = [
+  "linear-gradient(90deg, #FF4500, #FF7F50)",
+  "linear-gradient(90deg, #FFA500, #FFD700)",
+  "linear-gradient(90deg, #2E8B57, #3CB371)",
+  "linear-gradient(90deg, #8A2BE2, #9370DB)",
+  "linear-gradient(90deg, #1E90FF, #4682B4)",
+  "linear-gradient(90deg, #2F4F4F, #708090)",
+  "linear-gradient(90deg, #696969, #A9A9A9)",
+  "linear-gradient(90deg, #ff7e5f, #feb47b)",
+  "linear-gradient(90deg, #00c6ff, #0072ff)"
+];
+
+// Buat map kategori → gradient random stabil (berdasarkan hash)
+function generateGradientMap(categories) {
+  const map = {};
+  categories.forEach(cat => {
+    const idx = hashString(cat) % gradients.length;
+    map[cat] = gradients[idx];
+  });
+  return map;
+}
+
+// Terapkan gradient ke elemen dengan class .category-header
+function applyGradients(categories) {
+  const gradientMap = generateGradientMap(categories);
+  document.querySelectorAll(".category-header").forEach(el => {
+    const name = el.textContent.trim();
+    if (gradientMap[name]) {
+      el.style.background = gradientMap[name];
+    }
+  });
+}
+
+// ---------------- DARK MODE TOGGLE ----------------
+function initDarkMode() {
+  const darkSwitch = document.getElementById("darkSwitch");
+  if (!darkSwitch) return;
+
+  const savedMode = localStorage.getItem("darkMode");
+  if (savedMode === "true") {
+    document.body.classList.add("dark-mode");
+    darkSwitch.checked = true;
+  }
+
+  darkSwitch.addEventListener("change", () => {
+    if (darkSwitch.checked) {
+      document.body.classList.add("dark-mode");
+      localStorage.setItem("darkMode", "true");
+    } else {
+      document.body.classList.remove("dark-mode");
+      localStorage.setItem("darkMode", "false");
+    }
+  });
+}
+
+// Inisialisasi otomatis setelah DOM siap
+document.addEventListener("DOMContentLoaded", () => {
+  initDarkMode();
+});
