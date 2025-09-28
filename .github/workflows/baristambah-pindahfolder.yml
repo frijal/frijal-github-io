@@ -94,6 +94,6 @@ jobs:
           else
             git add artikelx || true
             git add artikel || true
-            git commit -m "Auto update: tambah snippet, pindahkan HTML, sisipkan prettier-ignore, meta date & google verification"
+            git commit -m "related post button, pindahkan HTML, sisipkan prettier-ignore, meta date & google verification"
             git push
           fi
