@@ -3,8 +3,7 @@
 [![Tambah Konten & Pindahkan](https://github.com/frijal/frijal.github.io/actions/workflows/baristambah-pindahfolder.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/baristambah-pindahfolder.yml)
 [![rapikan (HTML, JS, CSS)](https://github.com/frijal/frijal.github.io/actions/workflows/minify-then-prettier.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/minify-then-prettier.yml)
 [![artikel.json & sitemap.xml](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
-[![RSS Harian](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/GenerateRSSHarian.yml)
-
+[![RSS Feed Atom](https://github.com/frijal/frijal.github.io/actions/workflows/generate-rss-harian.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-rss-harian.yml)
 # 🌟 Lisensi UNLICENSE / Public Domain
 
 ![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&animation=blink)
