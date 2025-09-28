@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "artikelx/*.html"
+  workflow_dispatch:
 
 permissions:
   contents: write
