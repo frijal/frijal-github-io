@@ -52,31 +52,37 @@ jobs:
               echo "✅ Ditambahkan google-site-verification di $file"
             fi
 
-            if grep -qi '<link rel="stylesheet" href="/ext/related.css">' "$file"; then
+            if grep -qi '/ext/related.css' "$file"; then
               echo "ℹ️ Sudah ada ext/related.css di $file"
             else
               sed -i "/<\/head>/i <link rel="stylesheet" href="/ext/related.css">" "$file"
               echo "✅ Ditambahkan ext/related.css di $file"
             fi
             
-            if grep -qi '<button id="related-posts-toggle">❌</button>' "$file"; then
+            if grep -qi '>❌</button>' "$file"; then
               echo "ℹ️ Sudah ada toggle">❌</button> di $file"
             else
               sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button>' "$file"
               echo "✅ Ditambahkan toggle">❌</button> di $file"
             fi
             
-            if grep -qi '<div id="related-posts-container"><ul id="related-posts-list"></ul></div>' "$file"; then
+            if grep -qi 'related-posts-container' "$file"; then
               echo "ℹ️ Sudah ada related-posts-container di $file"
             else
-              sed -i '/<\/body>/i <div id="related-posts-container"><ul id="related-posts-list"></ul></div>' "$file"
+              sed -i '/<\/body>/i <div id="related-posts-container">' "$file"
               echo "✅ Ditambahkan related-posts-container di $file"
+            fi
+
+            if grep -qi 'related-posts-list' "$file"; then
+              echo "ℹ️ Sudah ada related-posts-list di $file"
+            else
+              sed -i '/<\/body>/i <ul id="related-posts-list"></ul></div>' "$file"
+              echo "✅ Ditambahkan related-posts-list di $file"
             fi
           done
 
       - name: Pindahkan file HTML ke folder artikel/
         run: |
-          mkdir -p artikel
           mv artikelx/*.html artikel/ || true
 
       - name: Commit & Push perubahan
