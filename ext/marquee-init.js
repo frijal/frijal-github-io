@@ -1,4 +1,4 @@
-import { initMarqueeDynamic } from './marquee.js';
+import { initMarqueeDynamic } from 'ext/marquee.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initMarqueeDynamic('marquee-bottom', 1, 60000); 
