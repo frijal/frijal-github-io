@@ -26,6 +26,12 @@ jobs:
       - name: Run generator.js
         run: node ext/generator.js
 
+      - name: Debug cek file output
+        run: |
+         ls -lah
+         cat artikel.json || echo "artikel.json tidak ada"
+         cat sitemap.xml || echo "sitemap.xml tidak ada"
+
 #      - name: Validate sitemap.xml
    #     run: node ext/validate-sitemap.js
 
