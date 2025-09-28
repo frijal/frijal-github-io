@@ -5,7 +5,7 @@ on:
     paths:
       - 'artikel.json'
       - 'sitemap.xml'
-  workflow_dispatch:
+#  workflow_dispatch:
 
 jobs:
   rss:
