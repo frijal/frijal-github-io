@@ -1,0 +1,86 @@
+name: Cek Kode JS di ext/ (Lint Report Timestamp)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'ext/**/*.js'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ext/**/*.js'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # 🔎 Step pertama: cek jumlah lint-report di mini/
+      - name: Cek jumlah lint-report lama
+        run: |
+          mkdir -p mini
+          COUNT=$(ls mini/*-lint-report.txt 2>/dev/null | wc -l)
+          echo "📊 Jumlah lint-report yang ada di folder mini/: $COUNT"
+
+          # Opsional: hapus laporan lama, hanya simpan 5 terbaru
+          if [ "$COUNT" -gt 5 ]; then
+            echo "🧹 Terlalu banyak lint-report, menghapus yang lama..."
+            ls -t mini/*-lint-report.txt | tail -n +6 | xargs rm -f
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ✅ Cek sintaks dasar
+      - name: Cek sintaks JS
+        run: |
+          for file in ext/**/*.js; do
+            echo "🔎 Checking syntax: $file"
+            node --check "$file"
+          done
+
+      # ✅ Linting dengan output ke file mini/ + timestamp
+      - name: Lint dengan ESLint (simpan laporan timestamp)
+        id: lint
+        run: |
+          mkdir -p mini
+          TS=$(date +"%y-%m-%d-%H-%M")
+          FILE="mini/${TS}-lint-report.txt"
+          echo "📄 Lint report akan disimpan di $FILE"
+          npx eslint ext/ -f stylish > "$FILE" || true
+          echo "REPORT_FILE=$FILE" >> $GITHUB_ENV
+
+      # ✅ Commit lint report ke repo (hanya di main)
+      - name: Commit lint report
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add mini/*.txt
+          git commit -m "📝 Add lint report (auto)" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ✅ Jalankan Unit Test
+      - name: Jalankan Unit Test
+        run: npm test
+
+      # ✅ Summary lint report terbaru (nama file + isi ringkas)
+      - name: Summary Lint Report
+        run: |
+          echo "✅ Lint report terbaru berhasil dibuat:"
+          echo "➡️  $REPORT_FILE"
+          echo ""
+          echo "📄 Isi ringkas lint report (10 baris pertama):"
+          head -n 10 "$REPORT_FILE"
