@@ -31,9 +31,9 @@ jobs:
 
       - name: Copy rss.xml to alias feeds
         run: |
-          cp rss.xml rss
-          cp rss.xml atom
-          cp rss.xml feed
+          cp -f rss.xml rss
+          cp -f rss.xml atom
+          cp -f rss.xml feed
 
       - name: Validate rss.xml
         run: node ext/validate-rss.js
