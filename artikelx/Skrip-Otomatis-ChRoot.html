@@ -1,0 +1,57 @@
+    <!-- Skrip Otomatis -->
+    <section>
+      <h2>Skrip Otomatis: Setup & Cleanup chroot</h2>
+      <p>Untuk memudahkan, berikut contoh skrip shell sederhana agar tidak perlu mengetik semua perintah mount/umount secara manual.</p>
+      
+      <h3>1. Setup (buat file <code>enter-chroot.sh</code>)</h3>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+# enter-chroot.sh
+# Gunakan: sudo ./enter-chroot.sh /srv/chroot/debian
+
+CHROOT_DIR="$1"
+
+if [ -z "$CHROOT_DIR" ]; then
+  echo "Usage: $0 /path/to/chroot"
+  exit 1
+fi
+
+# Mount filesystem penting
+mount --bind /dev "$CHROOT_DIR/dev"
+mount --bind /dev/pts "$CHROOT_DIR/dev/pts"
+mount -t proc /proc "$CHROOT_DIR/proc"
+mount -t sysfs /sys "$CHROOT_DIR/sys"
+
+# Copy resolv.conf untuk DNS
+cp /etc/resolv.conf "$CHROOT_DIR/etc/"
+
+# Masuk ke chroot
+chroot "$CHROOT_DIR" /bin/bash</code></pre>
+
+      <h3>2. Cleanup (buat file <code>exit-chroot.sh</code>)</h3>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+# exit-chroot.sh
+# Gunakan: sudo ./exit-chroot.sh /srv/chroot/debian
+
+CHROOT_DIR="$1"
+
+if [ -z "$CHROOT_DIR" ]; then
+  echo "Usage: $0 /path/to/chroot"
+  exit 1
+fi
+
+umount "$CHROOT_DIR/dev/pts"
+umount "$CHROOT_DIR/dev"
+umount "$CHROOT_DIR/proc"
+umount "$CHROOT_DIR/sys"</code></pre>
+
+      <p>Pastikan memberi izin eksekusi:</p>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">chmod +x enter-chroot.sh exit-chroot.sh</code></pre>
+
+      <p>Sekarang kamu cukup menjalankan:</p>
+      <pre><button class="copy-btn">Copy</button><code class="language-bash">sudo ./enter-chroot.sh /srv/chroot/debian
+# ...kerja di dalam chroot...
+exit
+sudo ./exit-chroot.sh /srv/chroot/debian</code></pre>
+      <p>Dengan cara ini, mount/umount jadi lebih aman dan konsisten.</p>
+    </section>
+
