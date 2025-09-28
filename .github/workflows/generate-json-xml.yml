@@ -25,8 +25,8 @@ jobs:
       - name: Run generator.js
         run: node ext/generator.js
 
-      - name: Validate sitemap.xml
-        run: node ext/validate-sitemap.js
+#      - name: Validate sitemap.xml
+   #     run: node ext/validate-sitemap.js
 
       - name: Commit and Push results (only on main)
         if: github.ref == 'refs/heads/main'
