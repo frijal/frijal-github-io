@@ -19,7 +19,6 @@ jobs:
       - name: Tambahkan snippet ke HTML di artikelx/
         run: |
           for file in artikelx/*.html; do
-            sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/related.css">' "$file"
             sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>' "$file"
           done
 
@@ -57,6 +56,27 @@ jobs:
             else
               sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
               echo "✅ Ditambahkan google-site-verification di $file"
+            fi
+
+            if grep -qi '<link rel="stylesheet" href="/ext/related.css">' "$file"; then
+              echo "ℹ️ Sudah ada ext/related.css di $file"
+            else
+              sed -i "/<\/head>/i <link rel="stylesheet" href="/ext/related.css">" "$file"
+              echo "✅ Ditambahkan ext/related.css di $file"
+            fi
+            
+            if grep -qi '<button id="related-posts-toggle">❌</button>' "$file"; then
+              echo "ℹ️ Sudah ada toggle">❌</button> di $file"
+            else
+              sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button>' "$file"
+              echo "✅ Ditambahkan toggle">❌</button> di $file"
+            fi
+            
+            if grep -qi '<div id="related-posts-container"><ul id="related-posts-list"></ul></div>' "$file"; then
+              echo "ℹ️ Sudah ada related-posts-container di $file"
+            else
+              sed -i '/<\/body>/i <div id="related-posts-container"><ul id="related-posts-list"></ul></div>' "$file"
+              echo "✅ Ditambahkan related-posts-container di $file"
             fi
           done
 
