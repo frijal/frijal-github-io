@@ -117,14 +117,19 @@ files.forEach(file => {
   );
 });
 
-let jsonString = JSON.stringify(grouped, null, 2);
+let jsonString = JSON.stringify(grouped, null, 0);
+
 // Hilangkan spasi setelah [ dan sebelum ]
 jsonString = jsonString
   .replace(/\[\s+/g, "[")    // [ "Judul" → ["Judul"
   .replace(/\s+\]/g, "]")    // "file" ] → "file"]
   .replace(/,\s+/g, ",");    // "A", "B" → "A","B"
 
+// Tambahkan newline untuk setiap array block
+jsonString = jsonString.replace(/\],\[/g, "],\n[");
+
 fs.writeFileSync(jsonOut, jsonString, "utf8");
+
 
 // Simpan sitemap.xml
 const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
