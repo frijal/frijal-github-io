@@ -90,7 +90,6 @@ jobs:
              echo "changes_made=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # --- LANGKAH MAINTENANCE: CLEANUP FILE YATIM ---
       - name: 🧹 Hapus JPG Tanpa Pasangan HTML (Maintenance)
         id: cleanup
         run: |
@@ -98,7 +97,6 @@ jobs:
           echo "Memulai scan file JPG tanpa file HTML pasangan..."
           
           find artikel/ -name "*.jpg" -print0 | while IFS= read -r -d $'\0' JPG_FILE; do
-              
               HTML_FILE="${JPG_FILE/.jpg/.html}"
               
               if [ ! -f "$HTML_FILE" ]; then
@@ -108,9 +106,14 @@ jobs:
               fi
           done
           
+          # !!! PERBAIKAN: Set output berdasarkan status CLEANUP_NEEDED !!!
           if [ "$CLEANUP_NEEDED" = true ]; then
               echo "changes_made=true" >> "$GITHUB_OUTPUT"
               echo "Cleanup selesai. File telah dihapus."
+          else
+              # Penting: Set changes_made=false jika tidak ada yang dihapus, untuk kejelasan
+              echo "changes_made=false" >> "$GITHUB_OUTPUT"
+              echo "Tidak ada file JPG yang dihapus."
           fi
 
       # --- LANGKAH AKHIR: COMMIT PERUBAHAN ---
