@@ -1,65 +1,65 @@
-# .github/workflows/screenshot-semua-html.yml
+# .github/workflows/screenshot-artikel-hanya.yml
 
-name: Screenshot Semua File HTML
+name: Screenshot File HTML dalam Folder Artikel
 
 on:
-  # Memungkinkan workflow untuk dijalankan secara manual dari tab Actions
+  # Memungkinkan workflow untuk dijalankan secara manual
   workflow_dispatch:
     inputs:
       html_glob:
-        description: 'Pola file HTML untuk di-screenshot'
+        description: 'Pola file HTML (misalnya: artikel/**/*.html)'
         required: true
-        default: '**/*.html' # Default akan mencari semua file .html di semua folder
+        default: 'artikel/**/*.html' # Default hanya mencari di dalam folder 'artikel'
 
 jobs:
   screenshot_proses:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Kode Repositori
-        # Diperlukan untuk mengakses file .html dan melakukan commit/push
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Instal HTTP Server Sederhana
-        # Kita perlu menjalankan server lokal agar 'webpage-screenshot' dapat mengakses file .html
+        # Server diperlukan untuk mengakses file .html di runner
         run: |
           npm install -g http-server
           # Jalankan server di background pada port 8080
           nohup http-server . -p 8080 &
 
-      - name: Temukan dan Proses Semua File HTML
+      - name: Temukan dan Proses File HTML di folder 'artikel/'
+        id: process_files
         run: |
-          # Dapatkan pola file dari input (defaultnya adalah **/*.html)
           HTML_GLOB="${{ github.event.inputs.html_glob }}"
+          CHANGES_MADE=false
           
-          # Buat folder target jika belum ada
+          # Pastikan folder 'artikel' ada untuk menyimpan .jpg
           mkdir -p artikel
           
-          # Cari semua file yang cocok dengan pola
-          find . -name "*.html" | while read -r HTML_FILE; do
-              # Abaikan file di folder .github dan node_modules
-              if [[ "$HTML_FILE" == *".github"* ]] || [[ "$HTML_FILE" == *"node_modules"* ]]; then
-                  continue
-              fi
+          # Cari semua file yang cocok di folder artikel/
+          # Perintah find ini akan mencari di dalam folder 'artikel'
+          find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
               # 1. Tentukan Nama File Akhir
-              # Hapus "./" di awal dan hapus ekstensi .html
-              BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^./||' -e 's|.html$||')
+              # Hapus 'artikel/' dan '.html' untuk sanitasi nama file
+              BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
               # Ganti karakter yang tidak aman dengan underscore
               FILE_NAME=$(echo "$BASE_NAME" | sed 's|[^a-zA-Z0-9_-]|_|g')
+              
+              # Tentukan path lengkap file JPG di folder artikel/
               FINAL_PATH="artikel/${FILE_NAME}.jpg"
               
               echo "--- Memproses $HTML_FILE -> $FINAL_PATH ---"
               
-              # 2. Periksa Keberadaan File Screenshot
+              # 2. Periksa Keberadaan File Screenshot (.jpg)
               if [ -f "$FINAL_PATH" ]; then
-                  echo "Screenshot sudah ada. Dilewati."
+                  echo "Screenshot JPG sudah ada: $FINAL_PATH. Dilewati."
               else
                   # 3. Ambil Screenshot menggunakan URL lokal
+                  # URL harus mencakup path lengkap (misalnya: http://localhost:8080/artikel/file.html)
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Eksekusi action screenshot menggunakan Docker karena itu cara termudah untuk menjalankannya dalam loop shell
+                  # Gunakan Docker untuk menjalankan alat screenshot dalam loop shell
                   docker run --rm -v "${PWD}:/workspace" --network host kitta/webpage-screenshot:latest \
                     --url "$LOCAL_URL" \
                     --output "temp_screenshot.png" \
@@ -67,23 +67,23 @@ jobs:
                     --type "jpeg" \
                     --quality 90 \
                     --wait-for-selector "body" 
-
+                  
                   # 4. Pindahkan dan Ganti Nama File
+                  # Pindahkan temp_screenshot.jpg yang baru dibuat ke lokasi akhir
                   mv temp_screenshot.jpg "$FINAL_PATH"
                   echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
                   
-                  # Tandai bahwa ada perubahan yang perlu di-commit
+                  # Tandai bahwa ada perubahan
                   CHANGES_MADE=true
               fi
           done
           
-          # Simpan status perubahan
+          # Simpan status perubahan untuk langkah commit
           if [ "$CHANGES_MADE" = true ]; then
              echo "changes_made=true" >> $GITHUB_OUTPUT
           else
              echo "changes_made=false" >> $GITHUB_OUTPUT
           fi
-        id: process_files
 
       - name: Commit dan Push Screenshot Baru
         # Hanya berjalan jika ada file baru yang dibuat
@@ -92,6 +92,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           
+          # Commit folder artikel/ yang sekarang berisi file .jpg baru
           git add artikel/
-          git commit -m "feat: Menambahkan screenshot viewport untuk file HTML baru"
+          git commit -m "feat: Menambahkan screenshot viewport untuk file HTML di artikel/"
           git push
