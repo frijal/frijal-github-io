@@ -54,17 +54,15 @@ jobs:
               else
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # !!! PERBAIKAN: Instalasi NPM sementara di dalam container !!!
-                  # 1. Tentukan direktori instalasi sementara di /tmp
-                  # 2. Instal Playwright ke direktori tersebut tanpa menyimpan
-                  # 3. Jalankan Node dengan modul dari direktori instalasi tersebut
                   INSTALL_DIR="/tmp/playwright-install"
                   
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     bash -c "\
-                      mkdir -p $INSTALL_DIR && \
+                      # Instalasi sementara tanpa menyimpan ke package.json
                       npm install playwright --no-save --prefix $INSTALL_DIR && \
-                      node --require $INSTALL_DIR/lib/node_modules/playwright/index.js /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'\
+                      
+                      # !!! PERBAIKAN UTAMA: Menggunakan path node_modules yang benar !!!
+                      node --require $INSTALL_DIR/node_modules/playwright /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'\
                     "
                   
                   if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
