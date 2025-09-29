@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <!-- prettier-ignore -->
-<title>Biskuit LINUX itu nyata — camilan yang bikin senyum</title>
+<title>Biskuit LINUX itu nyata — Camilan yang bikin Senyum</title>
   <meta name="description" content="Ada biskuit bermerek LINUX. Serius. Lihat foto-fotonya, senyum, lalu kirim ke grup open source favoritmu.">
   <meta name="keywords" content="Biskuit LINUX, camilan Linux, humor open source, koleksi Linux, brand unik, foto lucu Linux">
 
@@ -414,7 +414,7 @@
   <!-- Auto-set OG image + twitter image + og:url (sesuai permintaan) -->
   <script>
     document.addEventListener("DOMContentLoaded",()=>{
-      let s=(document.querySelector("main section img")||{}).src||"thumbnail.jpg";
+      let s=(document.querySelector("main section img")||{}).src||"";
       ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));
       document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))
     });

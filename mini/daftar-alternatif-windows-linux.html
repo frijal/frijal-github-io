@@ -2,23 +2,27 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- prettier-ignore -->
-<title>Daftar Aplikasi Windows dan Penggantinya di Linux</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Daftar Aplikasi Windows dan Penggantinya di Linux 🐧</title>
 
-    <meta name="description" content="Temukan daftar lengkap aplikasi Windows populer beserta alternatif gratis dan open-source terbaik di Linux. Dilengkapi tautan unduhan dan situs web resmi.">
-    <meta name="keywords" content="linux, windows, alternatif aplikasi, open source, gratis, software, pengganti, GIMP, LibreOffice, Blender">
-    <link rel="canonical" href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html"> <meta property="og:title" content="Daftar Aplikasi Windows dan Penggantinya di Linux">
-    <meta property="og:description" content="Temukan daftar lengkap aplikasi Windows populer beserta alternatif gratis dan open-source terbaik di Linux.">
+    <link rel="canonical" href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
+    
+    <meta name="description" content="Temukan daftar lengkap aplikasi Windows populer (Photoshop, MS Office, Notepad, dll.) beserta alternatif gratis dan open-source terbaik di Linux. Dilengkapi tautan unduhan dan situs web resmi.">
+    <meta name="keywords" content="linux, windows, alternatif aplikasi, open source, gratis, software, pengganti, GIMP, LibreOffice, Blender, migrasi linux">
+    <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html"> <meta property="og:image" content="http://frijal.github.io/logo.png"> <meta property="og:site_name" content="frijal.github.io">
+    <meta property="og:title" content="Daftar Aplikasi Windows dan Penggantinya di Linux 🐧">
+    <meta property="og:description" content="Temukan daftar lengkap aplikasi Windows populer beserta alternatif gratis dan open-source terbaik di Linux.">
+    <meta property="og:url" content="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html"> 
+    <meta property="og:site_name" content="frijal.github.io">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Daftar Aplikasi Windows dan Penggantinya di Linux">
+    <meta name="twitter:title" content="Daftar Aplikasi Windows dan Penggantinya di Linux 🐧">
     <meta name="twitter:description" content="Temukan daftar lengkap aplikasi Windows populer beserta alternatif gratis dan open-source terbaik di Linux.">
-    <meta name="twitter:image" content="http://frijal.github.io/thumbnail.jpg"> <script type="application/ld+json">
+    
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -28,20 +32,20 @@
       },
       "headline": "Daftar Aplikasi Windows dan Penggantinya di Linux",
       "description": "Sebuah daftar komprehensif aplikasi Windows dan padanannya di ekosistem Linux untuk membantu transisi pengguna.",
-      "image": "http://frijal.github.io/thumbnail.jpg",  
       "author": {
         "@type": "Person",
         "name": "Fakhrul Rijal" 
-      },  
+      }, 
       "publisher": {
         "@type": "Organization",
-        "name": "Pelan Kiri",
+        "name": "frijal.github.io",
         "logo": {
           "@type": "ImageObject",
           "url": "https://frijal.github.io/logo.png" 
         }
       },
-      "datePublished": "2025-09-16"
+      "datePublished": "2025-09-16T00:00:00+07:00",
+      "dateModified": "2025-09-29T22:19:00+08:00"
     }
     </script>
     <script type="application/ld+json">
@@ -63,10 +67,8 @@
     </script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
-    <style>
+    <link rel="stylesheet" href="/ext/related.css"> <style>
+        /* ... (CSS AS PROVIDED, WITH MINOR HOME BUTTON CLEANUP) ... */
         :root {
             --bg-color: #121212;
             --text-color: #e0e0e0;
@@ -200,10 +202,15 @@
             margin-top: 0;
         }
 
+        .social-sharing {
+            display: flex; /* Ensure flex for wrapping */
+            flex-wrap: wrap; 
+            gap: 10px; /* Added gap for better spacing */
+        }
         .social-sharing a {
             display: inline-flex;
             align-items: center;
-            margin: 5px;
+            /* margin: 5px; REMOVED to use gap */
             padding: 10px 15px;
             border-radius: 5px;
             color: white;
@@ -211,7 +218,7 @@
             transition: transform 0.2s ease;
         }
         .social-sharing a:hover {
-            transform: scale(1.1);
+            transform: scale(1.05); /* Adjusted from 1.1 for smoothness */
         }
         .social-fb { background-color: #1877F2; }
         .social-tw { background-color: #1DA1F2; }
@@ -222,28 +229,7 @@
         .social-th { background-color: #000000; }
         .social-tt { background-color: #010101; }
 
-        /* Code Block with Copy Button */
-        .code-container {
-            position: relative;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .copy-btn:hover {
-            background-color: #666;
-        }
-        pre[class*="language-"] {
-            padding-top: 40px;
-        }
+        /* Code Block with Copy Button - REMOVED since not used in main content */
 
         /* User Info Section */
         #user-info-footer {
@@ -263,9 +249,8 @@
             width: 24px;
             height: 24px;
         }
-
-        /* Home Button Styles (from user) */
-        #btn-home-left, #btn-home-right {
+        /* Home Button Styles (CLEANUP: Using classes instead of two IDs for similar elements) */
+        .btn-home-float {
             position: fixed;
             display: flex;
             align-items: center;
@@ -281,117 +266,103 @@
             transition: background 0.3s ease, transform 0.2s ease;
             z-index: 9999;
         }
-        #btn-home-left:hover, #btn-home-right:hover {
+        .btn-home-float:hover {
             background-color: var(--button-hover);
             transform: scale(1.05);
         }
-        #btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
-        #btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
-        #btn-home-left svg, #btn-home-right svg { flex-shrink: 0; }
+        #btn-home-left-float { left: 10px; top: 30%; transform: translateY(-50%); }
+        #btn-home-right-float { right: 10px; bottom: 20%; transform: translateY(50%); }
+        .btn-home-float svg { flex-shrink: 0; }
     </style>
-<meta name="date" content="2025-09-28">
-<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
-<link rel="stylesheet" href="/ext/related.css">
 </head>
 <body>
 
-    <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left" title="Kembali ke Home">
+    <a href="https://frijal.github.io/sitemap.html" target="_blank" class="btn-home-float" id="btn-home-left-float" title="Peta Situs" aria-label="Akses Peta Situs">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
             <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H120c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
         </svg>
-        Home
+        Peta Situs
     </a>
 
-    <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right" title="Kembali ke Home">
+    <a href="https://frijal.github.io/sitemap.html" target="_blank" class="btn-home-float" id="btn-home-right-float" title="Peta Situs" aria-label="Akses Peta Situs">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="18" height="18" fill="currentColor" style="margin-right:6px;">
             <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H120c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
         </svg>
-        Home
+        Peta Situs
     </a>
 
     <div class="container">
         <header>
-            <h1>Daftar Aplikasi Windows dan Penggantinya di Linux</h1>
+            <h1>Daftar Aplikasi Windows dan Penggantinya di Linux 🐧</h1>
         </header>
 
         <main>
-            <div class="table-wrapper">
+            <p>Beralih ke Linux? Anda tidak perlu khawatir kehilangan fungsionalitas aplikasi favorit Anda. Ekosistem <strong>Open Source</strong> menawarkan banyak alternatif kuat, gratis, dan kaya fitur. Berikut adalah daftar komprehensif untuk membantu transisi Anda.</p>
+            
+            <div class="table-wrapper" role="region" aria-label="Tabel Aplikasi Alternatif Linux">
                 <table>
                     <thead>
                         <tr>
                             <th>Aplikasi Windows</th>
                             <th>Alternatif di Linux</th>
-                            <th>Situs Web</th>
+                            <th>Situs Web Resmi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        </tbody>
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: var(--secondary-color);" id="loading-message">Memuat daftar aplikasi...</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
             <div class="section">
                 <h2>Bagikan Halaman Ini</h2>
-                <div class="social-sharing">
-                    <a href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html" class="social-fb" target="_blank" rel="noopener noreferrer">
+                <div class="social-sharing" role="group" aria-label="Tombol Berbagi Sosial">
+                    <a href="#" class="social-fb" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Facebook">
                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>&nbsp;Facebook
                     </a>
-                    <a href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html" class="social-tw" target="_blank" rel="noopener noreferrer">
+                    <a href="#" class="social-tw" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Twitter (Teks Saja)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg>&nbsp;Twitter
                     </a>
-                    <a href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html" class="social-x" target="_blank" rel="noopener noreferrer">
+                    <a href="#" class="social-x" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke X (Teks Saja)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/></svg>&nbsp;X
                     </a>
-                    <a href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html" class="social-wa" target="_blank" rel="noopener noreferrer">
+                    <a href="#" class="social-wa" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke WhatsApp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>&nbsp;WhatsApp
                     </a>
-                    <a href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html" class="social-tg" target="_blank" rel="noopener noreferrer">
+                    <a href="#" class="social-tg" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Telegram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/></svg>&nbsp;Telegram
                     </a>
                 </div>
             </div>
             
-                        <div class="section">
-                <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
-          <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
-        <!-- Facebook Comments Plugin (user-provided) -->
-        <div style="margin-top:18px">
-          <!-- Facebook Comments Plugin -->
-          <div id="fb-root"></div>
-          <script async defer crossorigin="anonymous"
-            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
-          </script>
-          <div class="fb-comments"
-               id="fb-comments"
-               data-href=""
-               data-width="100%"
-               data-numposts="5"></div>
-          <script>
-            const currentUrl = window.location.href;
-            document.getElementById("current-url").textContent = currentUrl;
-            // Set data-href FB Comments ke URL halaman ini
-            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-            // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
-            window.fbAsyncInit = function() {
-              if (typeof FB !== 'undefined') {
-                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
-              }
-            }
-          </script>
+            <div class="section">
+                <h2>Diskusi dan Komentar</h2>
+                <div style="margin-top:18px;color:var(--text-color);font-size:0.8rem">URL Halaman: <span id="current-url" style="color:var(--link-color);">Memuat...</span></div>
+                <div style="margin-top:10px">
+                    <div id="fb-root"></div>
+                    <div class="fb-comments"
+                        id="fb-comments"
+                        data-href="https://frijal.github.io/artikel/daftar-alternatif-windows-linux.html"
+                        data-width="100%"
+                        data-numposts="5"></div>
+                </div>
             </div>
 
         </main>
 
         <footer class="section">
-            <div id="user-info-footer">
-                <div class="info-item" id="ip-info">
+            <div id="user-info-footer" aria-live="polite">
+                <div class="info-item" id="ip-info" role="status">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                     <span>IP Anda: <span id="ip-address">Memuat...</span> <span id="country-flag"></span></span>
                 </div>
-                 <div class="info-item" id="os-info">
+                <div class="info-item" id="os-info" role="status">
                     <span id="os-icon"></span>
                     <span>OS: <span id="os-name">Memuat...</span></span>
                 </div>
-                <div class="info-item" id="browser-info">
+                <div class="info-item" id="browser-info" role="status">
                     <span id="browser-icon"></span>
                     <span>Browser: <span id="browser-name">Memuat...</span></span>
                 </div>
@@ -656,7 +627,13 @@ ZoneAlarm | Guarddog | http://www.simonzone.com/software/guarddog
 Zscreen | Shutter | http://shutter-project.org
 `;
             const tableBody = document.querySelector('table tbody');
+            const loadingMessage = document.getElementById('loading-message');
             const rows = rawData.trim().split('\n');
+
+            // Hapus pesan "Memuat" sebelum menambahkan data
+            if (loadingMessage) {
+                tableBody.innerHTML = '';
+            }
 
             rows.forEach(row => {
                 const columns = row.split('|').map(s => s.trim());
@@ -668,65 +645,66 @@ Zscreen | Shutter | http://shutter-project.org
                     tr.innerHTML = `
                         <td data-label="Aplikasi Windows">${columns[0]}</td>
                         <td data-label="Alternatif di Linux">${columns[1]}</td>
-                        <td data-label="Situs Web"><a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a></td>
+                        <td data-label="Situs Web Resmi"><a href="${url}" target="_blank" rel="noopener noreferrer">${url.replace(/^(http|https):\/\//, '').replace(/\/$/, '')}</a></td>
                     `;
                     tableBody.appendChild(tr);
                 }
             });
-
-            // Copy Button Functionality
-            const copyButton = document.querySelector('.copy-btn');
-            const codeBlock = document.querySelector('code');
-            copyButton.addEventListener('click', () => {
-                navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-                    copyButton.textContent = 'Copied!';
-                    setTimeout(() => {
-                        copyButton.textContent = 'Copy';
-                    }, 2000);
-                });
-            });
             
-            // Social Sharing Links
+            // --- Sharing & Facebook Comment Initialization ---
             const pageUrl = window.location.href;
             const encodedUrl = encodeURIComponent(pageUrl);
             const pageTitle = encodeURIComponent(document.title);
-            
+
+            // Update Social Sharing Links
             document.querySelector('.social-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+            // Twitter and X share using the same intent URL
             document.querySelector('.social-tw').href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`;
             document.querySelector('.social-x').href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`;
             document.querySelector('.social-wa').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${encodedUrl}`;
             document.querySelector('.social-tg').href = `https://t.me/share/url?url=${encodedUrl}&text=${pageTitle}`;
             
-            // Facebook Comments Plugin
+            // Update FB Comments URL
             const currentUrlElem = document.getElementById("current-url");
             if (currentUrlElem) currentUrlElem.textContent = pageUrl;
             
             const fbCommentsElem = document.getElementById("fb-comments");
             if (fbCommentsElem) fbCommentsElem.setAttribute("data-href", pageUrl);
-
-            // This is a common pattern to re-parse FB plugins if the SDK loads after the DOM is manipulated.
-            if (window.FB) {
-                try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
-            }
             
-            // User Info Detection
+            // --- User Info Detection ---
+            const osIcons = {
+                Windows: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px"><path fill="#00adef" d="M12.3,35.7l-10-1.6V22.6h10V35.7z M12.3,12.3l-10,1.6V20.6h10V12.3z M35.7,35.7V22.6h10v11.5L35.7,35.7z M35.7,12.3v11.5h10V13.9L35.7,12.3z"/></svg>`,
+                macOS: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.13a8.48 8.48 0 0 0-2.5 0c-1.42 1.1-2.2 2.8-2.12 4.67.12 2.44 1.7 4.3 3.32 4.3.43 0 .88-.1 1.3-.3 1.1-.53 1.62-1.74 1.5-2.97-.1-1.28-.78-2.5-1.5-3.32zm3.83 2.62c-1.1-1.3-2.8-2-4.43-2-1 0-2 .3-2.8.8.8 1.1 1.22 2.4 1.1 3.7-.1 1.8-1.12 3.5-2.7 4.1-1.2.5-2.5.5-3.7 0-2.8-.9-4.72-3.5-4.72-6.5 0-3.3 2.3-6.2 5.3-6.9 1-.22 2.1-.3 3.1-.3 1.5 0 2.9.4 4.2 1.2 1.3.8 2.3 2 2.9 3.4-.4.2-.8.5-1.2.9z"/></svg>`,
+                Linux: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.4,18C6.9,17.8 6.5,17.4 6.2,16.9C5.9,16.4 5.8,15.8 5.8,15.1C5.8,14.5 5.9,14 6.1,13.5C6.3,13 6.6,12.5 7.1,12.2C7.5,11.8 8.1,11.7 8.7,11.7C9.4,11.7 9.9,11.8 10.4,12.2C10.9,12.5 11.2,13 11.4,13.5C11.6,14 11.7,14.5 11.7,15.1C11.7,15.8 11.6,16.4 11.3,16.9C11,17.4 10.6,17.8 10.1,18C9.6,18.2 9.1,18.3 8.5,18.3C7.9,18.3 7.4,18.2 7.4,18M16.6,18C16.1,17.8 15.7,17.4 15.4,16.9C15.1,16.4 15,15.8 15,15.1C15,14.5 15.1,14 15.3,13.5C15.5,13 15.8,12.5 16.3,12.2C16.7,11.8 17.3,11.7 17.9,11.7C18.6,11.7 19.1,11.8 19.6,12.2C20.1,12.5 20.4,13 20.6,13.5C20.8,14 20.9,14.5 20.9,15.1C20.9,15.8 20.8,16.4 20.5,16.9C20.2,17.4 19.8,17.8 19.3,18C18.8,18.2 18.3,18.3 17.7,18.3C17.1,18.3 16.6,18.2 16.6,18M12.9,9.3C13.8,9.5 14.5,9.8 15,10.3C15.5,10.8 15.8,11.4 15.8,12.1C15.8,12.6 15.6,13 15.3,13.3C15.1,13.7 14.7,13.9 14.3,14.1L15.3,16.3H14.1L13,14C12.8,14 12.6,14.1 12.3,14.1H11.2V16.3H10V11.9H12.3C12.8,11.9 13.2,12 13.5,12.2C13.8,12.4 14,12.7 14,13C14,13.4 13.8,13.6 13.5,13.8C13.2,13.9 12.8,14 12.3,14H11.2V9.3H12.9M12,6.9C11.8,7.2 11.5,7.4 11.2,7.5C10.9,7.6 10.6,7.7 10.3,7.7C9.9,7.7 9.6,7.6 9.3,7.5C9.1,7.4 8.8,7.2 8.6,6.9L7.9,7.8C8.3,8.2 8.8,8.5 9.4,8.7C10,8.8 10.5,8.9 11.1,8.9C11.6,8.9 12.2,8.8 12.7,8.6C13.3,8.4 13.7,8.1 14.1,7.7L13.3,6.8C13.1,7.1 12.9,7.2 12.6,7.4C12.4,7.5 12.2,7.6 12,7.6V6.9Z"/></svg>`,
+                Android: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.2,10.29L14.12,9.21L12,11.33L9.88,9.21L8.8,10.29L10.92,12.41L8.8,14.54L9.88,15.62L12,13.5L14.12,15.62L15.2,14.54L13.08,12.41L15.2,10.29M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,19H7V5H17V19Z" /></svg>`,
+                iOS: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.13a8.48 8.48 0 0 0-2.5 0c-1.42 1.1-2.2 2.8-2.12 4.67.12 2.44 1.7 4.3 3.32 4.3.43 0 .88-.1 1.3-.3 1.1-.53 1.62-1.74 1.5-2.97-.1-1.28-.78-2.5-1.5-3.32zm3.83 2.62c-1.1-1.3-2.8-2-4.43-2-1 0-2 .3-2.8.8.8 1.1 1.22 2.4 1.1 3.7-.1 1.8-1.12 3.5-2.7 4.1-1.2.5-2.5.5-3.7 0-2.8-.9-4.72-3.5-4.72-6.5 0-3.3 2.3-6.2 5.3-6.9 1-.22 2.1-.3 3.1-.3 1.5 0 2.9.4 4.2 1.2 1.3.8 2.3 2 2.9 3.4-.4.2-.8.5-1.2.9z"/></svg>`,
+                Unknown: ``
+            };
+            const browserIcons = {
+                Firefox: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2Z"/></svg>`,
+                Edge: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10.4,4.2C13.1,4.2 15.3,5.1 17.1,6.4L14.3,9.3C13.5,8.8 12.6,8.5 11.5,8.5C9.5,8.5 7.8,10 7.8,12C7.8,12.1 7.8,12.3 7.8,12.4L4.9,9.5C5.9,6.5 7.9,4.2 10.4,4.2M18.1,12C18.1,11.9 18.1,11.7 18.1,11.6L14.7,8.2C14.7,9 14.5,9.8 14.2,10.6L10.3,14.4C11.1,14.7 12,14.8 13,14.8C15,14.8 16.7,13.5 17.2,11.7C17.2,11.6 17.3,11.5 17.3,11.4C17.7,11.5 18,11.8 18.1,12M5.9,13.2C5.5,12.6 5.3,11.8 5.3,11C5.3,8.7 6.9,6.8 9,6.5L12.4,9.9C12.2,10.2 12.2,10.6 12.2,11C12.2,11.4 12.3,11.8 12.4,12.1L8.3,16.2C7.1,15.5 6.3,14.5 5.9,13.2Z"/></svg>`,
+                Chrome: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2C6.47,2 2,6.5 2,12C2,17.5 6.47,22 12,22C17.53,22 22,17.5 22,12C22,6.5 17.53,2 12,2M0,12C0,5.37 5.37,0 12,0C18.63,0 24,5.37 24,12C24,18.63 18.63,24 12,24C5.37,24 0,18.63 0,12M17.3,8.3C16.3,6.7 14.3,5.8 12.3,5.8C8.8,5.8 6.1,8.5 6.1,12C6.1,15.5 8.8,18.2 12.3,18.2C14.3,18.2 16.3,17.3 17.3,15.7L15.3,14.7C14.7,15.7 13.5,16.2 12.3,16.2C9.8,16.2 8.1,14.2 8.1,12C8.1,9.8 9.8,7.8 12.3,7.8C13.5,7.8 14.7,8.3 15.3,9.3L17.3,8.3M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/></svg>`,
+                Safari: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M15.5,6.5L14,14L6.5,15.5L8,8L15.5,6.5M12,10.9A1.1,1.1 0 0,0 10.9,12A1.1,1.1 0 0,0 12,13.1A1.1,1.1 0 0,0 13.1,12A1.1,1.1 0 0,0 12,10.9Z"/></svg>`,
+                Unknown: ``
+            };
+            
             const getOS = () => {
                 const ua = navigator.userAgent;
-                if (ua.includes("Win")) return { name: "Windows", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px"><path fill="#00adef" d="M12.3,35.7l-10-1.6V22.6h10V35.7z M12.3,12.3l-10,1.6V20.6h10V12.3z M35.7,35.7V22.6h10v11.5L35.7,35.7z M35.7,12.3v11.5h10V13.9L35.7,12.3z"/></svg>` };
-                if (ua.includes("Mac")) return { name: "macOS", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.13a8.48 8.48 0 0 0-2.5 0c-1.42 1.1-2.2 2.8-2.12 4.67.12 2.44 1.7 4.3 3.32 4.3.43 0 .88-.1 1.3-.3 1.1-.53 1.62-1.74 1.5-2.97-.1-1.28-.78-2.5-1.5-3.32zm3.83 2.62c-1.1-1.3-2.8-2-4.43-2-1 0-2 .3-2.8.8.8 1.1 1.22 2.4 1.1 3.7-.1 1.8-1.12 3.5-2.7 4.1-1.2.5-2.5.5-3.7 0-2.8-.9-4.72-3.5-4.72-6.5 0-3.3 2.3-6.2 5.3-6.9 1-.22 2.1-.3 3.1-.3 1.5 0 2.9.4 4.2 1.2 1.3.8 2.3 2 2.9 3.4-.4.2-.8.5-1.2.9z"/></svg>` };
-                if (ua.includes("Linux")) return { name: "Linux", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.4,18C6.9,17.8 6.5,17.4 6.2,16.9C5.9,16.4 5.8,15.8 5.8,15.1C5.8,14.5 5.9,14 6.1,13.5C6.3,13 6.6,12.5 7.1,12.2C7.5,11.8 8.1,11.7 8.7,11.7C9.4,11.7 9.9,11.8 10.4,12.2C10.9,12.5 11.2,13 11.4,13.5C11.6,14 11.7,14.5 11.7,15.1C11.7,15.8 11.6,16.4 11.3,16.9C11,17.4 10.6,17.8 10.1,18C9.6,18.2 9.1,18.3 8.5,18.3C7.9,18.3 7.4,18.2 7.4,18M16.6,18C16.1,17.8 15.7,17.4 15.4,16.9C15.1,16.4 15,15.8 15,15.1C15,14.5 15.1,14 15.3,13.5C15.5,13 15.8,12.5 16.3,12.2C16.7,11.8 17.3,11.7 17.9,11.7C18.6,11.7 19.1,11.8 19.6,12.2C20.1,12.5 20.4,13 20.6,13.5C20.8,14 20.9,14.5 20.9,15.1C20.9,15.8 20.8,16.4 20.5,16.9C20.2,17.4 19.8,17.8 19.3,18C18.8,18.2 18.3,18.3 17.7,18.3C17.1,18.3 16.6,18.2 16.6,18M12.9,9.3C13.8,9.5 14.5,9.8 15,10.3C15.5,10.8 15.8,11.4 15.8,12.1C15.8,12.6 15.6,13 15.3,13.3C15.1,13.7 14.7,13.9 14.3,14.1L15.3,16.3H14.1L13,14C12.8,14 12.6,14.1 12.3,14.1H11.2V16.3H10V11.9H12.3C12.8,11.9 13.2,12 13.5,12.2C13.8,12.4 14,12.7 14,13C14,13.4 13.8,13.6 13.5,13.8C13.2,13.9 12.8,14 12.3,14H11.2V9.3H12.9M12,6.9C11.8,7.2 11.5,7.4 11.2,7.5C10.9,7.6 10.6,7.7 10.3,7.7C9.9,7.7 9.6,7.6 9.3,7.5C9.1,7.4 8.8,7.2 8.6,6.9L7.9,7.8C8.3,8.2 8.8,8.5 9.4,8.7C10,8.8 10.5,8.9 11.1,8.9C11.6,8.9 12.2,8.8 12.7,8.6C13.3,8.4 13.7,8.1 14.1,7.7L13.3,6.8C13.1,7.1 12.9,7.2 12.6,7.4C12.4,7.5 12.2,7.6 12,7.6V6.9Z"/></svg>` };
-                if (ua.includes("Android")) return { name: "Android", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.2,10.29L14.12,9.21L12,11.33L9.88,9.21L8.8,10.29L10.92,12.41L8.8,14.54L9.88,15.62L12,13.5L14.12,15.62L15.2,14.54L13.08,12.41L15.2,10.29M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,19H7V5H17V19Z" /></svg>` };
-                if (ua.includes("iPhone") || ua.includes("iPad")) return { name: "iOS", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.13a8.48 8.48 0 0 0-2.5 0c-1.42 1.1-2.2 2.8-2.12 4.67.12 2.44 1.7 4.3 3.32 4.3.43 0 .88-.1 1.3-.3 1.1-.53 1.62-1.74 1.5-2.97-.1-1.28-.78-2.5-1.5-3.32zm3.83 2.62c-1.1-1.3-2.8-2-4.43-2-1 0-2 .3-2.8.8.8 1.1 1.22 2.4 1.1 3.7-.1 1.8-1.12 3.5-2.7 4.1-1.2.5-2.5.5-3.7 0-2.8-.9-4.72-3.5-4.72-6.5 0-3.3 2.3-6.2 5.3-6.9 1-.22 2.1-.3 3.1-.3 1.5 0 2.9.4 4.2 1.2 1.3.8 2.3 2 2.9 3.4-.4.2-.8.5-1.2.9z"/></svg>` };
-                return { name: "Unknown", icon: "" };
+                if (ua.includes("Win")) return { name: "Windows", icon: osIcons.Windows };
+                if (ua.includes("Mac")) return { name: "macOS", icon: osIcons.macOS };
+                if (ua.includes("Linux")) return { name: "Linux", icon: osIcons.Linux };
+                if (ua.includes("Android")) return { name: "Android", icon: osIcons.Android };
+                if (ua.includes("iPhone") || ua.includes("iPad")) return { name: "iOS", icon: osIcons.iOS };
+                return { name: "Unknown", icon: osIcons.Unknown };
             };
 
             const getBrowser = () => {
                 const ua = navigator.userAgent;
-                if (ua.includes("Firefox")) return { name: "Firefox", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2Z"/></svg>` };
-                if (ua.includes("Edg")) return { name: "Edge", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10.4,4.2C13.1,4.2 15.3,5.1 17.1,6.4L14.3,9.3C13.5,8.8 12.6,8.5 11.5,8.5C9.5,8.5 7.8,10 7.8,12C7.8,12.1 7.8,12.3 7.8,12.4L4.9,9.5C5.9,6.5 7.9,4.2 10.4,4.2M18.1,12C18.1,11.9 18.1,11.7 18.1,11.6L14.7,8.2C14.7,9 14.5,9.8 14.2,10.6L10.3,14.4C11.1,14.7 12,14.8 13,14.8C15,14.8 16.7,13.5 17.2,11.7C17.2,11.6 17.3,11.5 17.3,11.4C17.7,11.5 18,11.8 18.1,12M5.9,13.2C5.5,12.6 5.3,11.8 5.3,11C5.3,8.7 6.9,6.8 9,6.5L12.4,9.9C12.2,10.2 12.2,10.6 12.2,11C12.2,11.4 12.3,11.8 12.4,12.1L8.3,16.2C7.1,15.5 6.3,14.5 5.9,13.2Z"/></svg>` };
-                if (ua.includes("Chrome")) return { name: "Chrome", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2C6.47,2 2,6.5 2,12C2,17.5 6.47,22 12,22C17.53,22 22,17.5 22,12C22,6.5 17.53,2 12,2M0,12C0,5.37 5.37,0 12,0C18.63,0 24,5.37 24,12C24,18.63 18.63,24 12,24C5.37,24 0,18.63 0,12M17.3,8.3C16.3,6.7 14.3,5.8 12.3,5.8C8.8,5.8 6.1,8.5 6.1,12C6.1,15.5 8.8,18.2 12.3,18.2C14.3,18.2 16.3,17.3 17.3,15.7L15.3,14.7C14.7,15.7 13.5,16.2 12.3,16.2C9.8,16.2 8.1,14.2 8.1,12C8.1,9.8 9.8,7.8 12.3,7.8C13.5,7.8 14.7,8.3 15.3,9.3L17.3,8.3M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/></svg>` };
-                if (ua.includes("Safari")) return { name: "Safari", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M15.5,6.5L14,14L6.5,15.5L8,8L15.5,6.5M12,10.9A1.1,1.1 0 0,0 10.9,12A1.1,1.1 0 0,0 12,13.1A1.1,1.1 0 0,0 13.1,12A1.1,1.1 0 0,0 12,10.9Z"/></svg>` };
-                return { name: "Unknown", icon: "" };
+                if (ua.includes("Edg")) return { name: "Edge", icon: browserIcons.Edge }; // Cek Edge sebelum Chrome
+                if (ua.includes("Chrome")) return { name: "Chrome", icon: browserIcons.Chrome }; 
+                if (ua.includes("Firefox")) return { name: "Firefox", icon: browserIcons.Firefox };
+                if (ua.includes("Safari")) return { name: "Safari", icon: browserIcons.Safari };
+                return { name: "Unknown", icon: browserIcons.Unknown };
             };
             
             const os = getOS();
@@ -741,18 +719,24 @@ Zscreen | Shutter | http://shutter-project.org
             fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('ip-address').textContent = data.ip;
-                    document.getElementById('country-flag').innerHTML = `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="${data.country_name}">`;
+                    document.getElementById('ip-address').textContent = data.ip + ` (${data.city}, ${data.country_code})`;
+                    document.getElementById('country-flag').innerHTML = `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}" width="16" height="12">`;
                 })
                 .catch(error => {
                     document.getElementById('ip-address').textContent = 'Tidak dapat memuat';
-                    console.error('Error fetching IP:', error);
+                    // console.error('Error fetching IP:', error); // Dihapus untuk output bersih
                 });
+
         });
     </script>
-<button id="related-posts-toggle">❌</button>
-<div id="related-posts-container">
-<ul id="related-posts-list"></ul></div>
-<script src="/ext/related.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <button id="related-posts-toggle" aria-label="Tutup/Buka Daftar Artikel Terkait">❌</button>
+    <div id="related-posts-container" aria-expanded="false">
+        <ul id="related-posts-list"></ul>
+    </div>
+    <script src="/ext/related.js"></script>
 </body>
 </html>
