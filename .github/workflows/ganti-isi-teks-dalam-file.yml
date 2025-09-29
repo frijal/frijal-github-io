@@ -34,7 +34,7 @@ jobs:
           for g in "${GLOBS[@]}"; do
             echo "Proses pola: $g di folder $TARGET"
             find "$TARGET" -type f -name "${g##*/}" -print | while read -r file; do
-              sed -i "s/${{ github.event.inputs.search }}/${{ github.event.inputs.replace }}/g" "$file"
+            perl -pi -w -e 's#${{ github.event.inputs.search }}#${{ github.event.inputs.replace }}#g' "$file"
             done
           done
 
@@ -45,3 +45,5 @@ jobs:
           git add -A
           git commit -m "chore: replace '${{ github.event.inputs.search }}' -> '${{ github.event.inputs.replace }}' di folder ${{ github.event.inputs.folder }}" || echo "Tidak ada perubahan"
           git push
+
+    #       sed -i "s/${{ github.event.inputs.search }}/${{ github.event.inputs.replace }}/g" "$file"
