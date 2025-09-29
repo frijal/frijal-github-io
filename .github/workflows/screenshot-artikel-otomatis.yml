@@ -58,11 +58,11 @@ jobs:
                   
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     bash -c "\
-                      # Instalasi sementara tanpa menyimpan ke package.json
+                      mkdir -p $INSTALL_DIR && \
                       npm install playwright --no-save --prefix $INSTALL_DIR && \
-                      
-                      # !!! PERBAIKAN UTAMA: Menggunakan path node_modules yang benar !!!
-                      node --require $INSTALL_DIR/node_modules/playwright /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'\
+                      \
+                      # !!! Eksekusi Node.js - Path sekarang ada di skrip JS itu sendiri !!!
+                      node /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'\
                     "
                   
                   if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
