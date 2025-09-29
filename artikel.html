@@ -146,92 +146,74 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const mainContainer = document.getElementById('main-container');
-        const defaultThumbnail = 'thumbnail.jpg';
-        
-        // Fungsi untuk mengambil thumbnail dari meta tag
-        async function fetchThumbnail(url) {
-            try {
-                // Gunakan fetch untuk mengambil konten HTML dari URL
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Gagal memuat konten artikel.');
-                }
-                const htmlText = await response.text();
+document.addEventListener('DOMContentLoaded', async () => {
+    const mainContainer = document.getElementById('main-container');
+    const defaultThumbnail = 'thumbnail.jpg';
 
-                // Parsing HTML untuk mencari meta tag og:image
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const metaTag = doc.querySelector('meta[property="og:image"]');
+    try {
+        const response = await fetch('artikel.json');
+        if (!response.ok) {
+            throw new Error('Gagal memuat artikel.json');
+        }
+        const data = await response.json();
 
-                if (metaTag && metaTag.content) {
-                    return metaTag.content;
-                }
-                return defaultThumbnail; // Gunakan default jika meta tag tidak ditemukan
-            } catch (error) {
-                console.warn(`Gagal mengambil thumbnail untuk ${url}: ${error}`);
-                return defaultThumbnail; // Gunakan default jika ada error
+        // Iterasi kategori
+        for (const category in data) {
+            if (data.hasOwnProperty(category)) {
+                const articles = data[category];
+
+                const section = document.createElement('div');
+                section.classList.add('category-section');
+
+                const heading = document.createElement('h2');
+                heading.textContent = category;
+                section.appendChild(heading);
+
+                const grid = document.createElement('div');
+                grid.classList.add('article-grid');
+
+                articles.forEach((item) => {
+                    const title = item[0];
+                    const fileName = item[1];
+                    const jsonImage = item[2] || "";
+
+                    const articleUrl = `artikel/${fileName}`;
+
+                    // langsung pakai arr[2], fallback defaultThumbnail
+                    let thumbnailUrl = jsonImage;
+                    if (!thumbnailUrl || !/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(thumbnailUrl)) {
+                        thumbnailUrl = defaultThumbnail;
+                    }
+                    // kalau path relatif → lengkapi
+                    if (!/^https?:\/\//i.test(thumbnailUrl)) {
+                        thumbnailUrl = `artikel/${thumbnailUrl}`;
+                    }
+
+                    const link = document.createElement('a');
+                    link.href = articleUrl;
+                    link.classList.add('article-card');
+                    link.target = "_blank";
+
+                    link.innerHTML = `
+                        <img src="${thumbnailUrl}" alt="${title}">
+                        <div class="card-content">
+                            <h3>${title}</h3>
+                        </div>
+                    `;
+                    grid.appendChild(link);
+                });
+
+                section.appendChild(grid);
+                mainContainer.appendChild(section);
             }
         }
-
-        try {
-            const response = await fetch('artikel.json');
-            if (!response.ok) {
-                throw new Error('Gagal memuat file data.json');
-            }
-            const data = await response.json();
-
-            // Iterasi setiap kategori dalam data JSON
-            for (const category in data) {
-                if (data.hasOwnProperty(category)) {
-                    const articles = data[category];
-
-                    const section = document.createElement('div');
-                    section.classList.add('category-section');
-
-                    const heading = document.createElement('h2');
-                    heading.textContent = category;
-                    section.appendChild(heading);
-
-                    const grid = document.createElement('div');
-                    grid.classList.add('article-grid');
-
-                    // Menggunakan Promise.all untuk mengambil semua thumbnail secara paralel
-                    const articlePromises = articles.map(async (item) => {
-                        const title = item[0];
-                        const articleUrl = `artikel/${item[1]}`;
-                        const thumbnailUrl = await fetchThumbnail(articleUrl);
-
-                        const link = document.createElement('a');
-                        link.href = articleUrl;
-                        link.classList.add('article-card');
-                        link.target = "_blank";
-
-                        const thumbnailHtml = `<img src="${thumbnailUrl}" alt="${title}">`;
-
-                        link.innerHTML = `
-                            ${thumbnailHtml}
-                            <div class="card-content">
-                                <h3>${title}</h3>
-                            </div>
-                        `;
-                        return link;
-                    });
-                    
-                    const articleElements = await Promise.all(articlePromises);
-                    articleElements.forEach(element => grid.appendChild(element));
-
-                    section.appendChild(grid);
-                    mainContainer.appendChild(section);
-                }
-            }
-        } catch (error) {
-            console.error('Ada masalah saat memuat atau memproses data:', error);
-            mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. Silakan periksa konsol untuk detail kesalahan.</p>`;
-        }
-    });
+    } catch (error) {
+        console.error('Ada masalah saat memuat artikel.json:', error);
+        mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel.</p>`;
+    }
+});
 </script>
+    
 <script>
         // --- Ikon SVG Inline ---
         const browserIcons = {
