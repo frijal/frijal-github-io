@@ -1,0 +1,89 @@
+# .github/workflows/screenshot-viewport-check.yml
+
+name: Screenshot Viewport dengan Pengecekan Duplikasi
+
+on:
+  # Memungkinkan workflow untuk dijalankan secara manual dari tab Actions
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'URL Halaman Web'
+        required: true
+        default: 'https://github.com/github'
+
+jobs:
+  screenshot_proses:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Kode Repositori
+        # Diperlukan untuk memeriksa keberadaan file dan melakukan commit/push
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tentukan Nama File Akhir
+        id: prepare_name
+        run: |
+          # 1. Ambil URL dan sanitasi untuk nama file
+          URL_INPUT="${{ github.event.inputs.target_url }}"
+          # Menghapus protokol dan mengganti karakter yang tidak aman dengan underscore
+          FILE_NAME=$(echo "$URL_INPUT" | sed -e 's|^[^/]*//||' -e 's|[^a-zA-Z0-9_-]|_|g')
+          FINAL_PATH="artikel/${FILE_NAME}.jpg"
+          
+          # Simpan path akhir ke output untuk digunakan di langkah selanjutnya
+          echo "final_path=$FINAL_PATH" >> $GITHUB_OUTPUT
+          echo "Screenshot ditargetkan ke: $FINAL_PATH"
+
+      - name: Periksa Keberadaan File Screenshot
+        id: check_file
+        run: |
+          TARGET_PATH="${{ steps.prepare_name.outputs.final_path }}"
+          if [ -f "$TARGET_PATH" ]; then
+            echo "::notice file=$TARGET_PATH::Screenshot sudah ada. Job akan dilewati."
+            echo "file_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Screenshot belum ada. Melanjutkan proses pengambilan gambar."
+            echo "file_exists=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Ambil Screenshot Tampilan Layar Utama (Viewport)
+        uses: kitta-web/webpage-screenshot@v3
+        # Langkah ini hanya berjalan jika file belum ada
+        if: ${{ steps.check_file.outputs.file_exists == 'false' }}
+        id: screenshot
+        with:
+          url: ${{ github.event.inputs.target_url }}
+          output: 'temp_screenshot.png'
+          # !!! PERUBAHAN DI SINI: Menggunakan 'page' untuk hanya menangkap viewport
+          mode: 'page' 
+          type: 'jpeg' 
+          quality: 90 
+
+      - name: Pindahkan dan Ganti Nama File
+        # Langkah ini hanya berjalan jika screenshot berhasil diambil
+        if: ${{ success() && steps.check_file.outputs.file_exists == 'false' }}
+        run: |
+          FINAL_PATH="${{ steps.prepare_name.outputs.final_path }}"
+          
+          # Buat folder 'artikel' jika belum ada
+          mkdir -p artikel
+          
+          # Pindahkan dan ganti nama file
+          mv temp_screenshot.jpg "$FINAL_PATH"
+          echo "Screenshot baru berhasil dibuat dan disimpan di: $FINAL_PATH"
+
+      - name: Commit dan Push Screenshot Baru
+        # Langkah ini hanya berjalan jika screenshot baru dibuat
+        if: ${{ success() && steps.check_file.outputs.file_exists == 'false' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          
+          # Menambahkan folder artikel ke staging area
+          git add artikel/
+          
+          # Commit hanya jika ada perubahan
+          git commit -m "feat: Menambahkan screenshot viewport: ${{ steps.prepare_name.outputs.final_path }}" || echo "Tidak ada perubahan untuk di-commit"
+          
+          # Push ke branch
+          git push
