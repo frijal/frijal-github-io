@@ -23,8 +23,7 @@ jobs:
       - run: npm install http-server
 
       - name: 💾 Instal Playwright (Modul Lokal)
-        # Playwright diinstal di folder node_modules runner utama.
-        # Docker akan mengakses folder ini melalui mount volume.
+        # Menginstal modul Playwright terbaru di runner utama
         run: npm install playwright
 
       - name: ▶️ Jalankan HTTP Server di Background
@@ -38,9 +37,8 @@ jobs:
           CHANGES_MADE=false
           mkdir -p artikel
           
-          # Menggunakan versi Docker Image yang kompatibel dengan modul Playwright terbaru
-          # Catatan: Kita menggunakan tag 'latest' untuk memastikan kompatibilitas browser/modul
-          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:latest" 
+          # !!! PERBAIKAN: Menggunakan tag versi SPESIFIK yang kompatibel dengan modul NPM yang terinstal !!!
+          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy" 
           
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
@@ -55,8 +53,7 @@ jobs:
               else
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Eksekusi Node.js: Docker akan menemukan node_modules
-                  # karena kita mount seluruh direktori kerja (PWD)
+                  # Eksekusi Node.js dengan modul yang diinstal di runner utama.
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     node /workspace/ext/screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
                   
