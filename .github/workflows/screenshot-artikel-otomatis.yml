@@ -27,40 +27,7 @@ jobs:
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           echo "Server dijalankan di port 8080."
           
-      - name: 📝 Buat Skrip Screenshot Playwright di folder ext/
-        run: |
-          mkdir -p ext
-          # Menggunakan trik heredoc minimalis untuk menghindari error indentasi
-          cat > ext/screenshot.js <<'EOF'
-const playwright = require('playwright');
-async function takeScreenshot(url, outputPath) {
-  const browser = await playwright.chromium.launch();
-  const page = await browser.newPage();
-  await page.setViewportSize({ width: 1280, height: 800 }); 
-  
-  try {
-    const response = await page.goto(url, { waitUntil: 'load' });
-    
-    if (response && response.status() !== 200) {
-       console.error(`[ERROR] Gagal memuat ${url}. Status: ${response.status()}`);
-       await browser.close();
-       return 1;
-    }
-
-    await page.screenshot({ path: outputPath, type: 'jpeg', quality: 90 });
-    console.log(`[SUCCESS] Screenshot disimpan sebagai ${outputPath}`);
-
-  } catch (error) {
-    console.error(`[FATAL] Gagal mengambil screenshot untuk ${url}: ${error.message}`);
-    return 1;
-  } finally {
-    await browser.close();
-  }
-  return 0;
-}
-
-takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
-EOF
+      # --- Langkah pembuatan skrip DIBERSIHKAN ---
 
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
@@ -68,6 +35,12 @@ EOF
           CHANGES_MADE=false
           mkdir -p artikel
           PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.47.0-jammy" 
+          
+          # Cek apakah file skrip ext/screenshot.js ada di repositori
+          if [ ! -f "ext/screenshot.js" ]; then
+            echo "::error::File 'ext/screenshot.js' tidak ditemukan. Harap tambahkan skrip secara manual."
+            exit 1
+          fi
           
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
@@ -78,14 +51,13 @@ EOF
               
               echo "--- Memproses $HTML_FILE -> $FINAL_PATH ---"
               
-              # 2. Periksa Duplikasi
               if [ -f "$FINAL_PATH" ]; then
                   echo "Screenshot JPG sudah ada: $FINAL_PATH. Dilewati."
               else
                   # 3. Eksekusi Screenshot Docker
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Memanggil skrip melalui path mount /workspace/ext/
+                  # Memanggil skrip yang sudah ada di repositori
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     node /workspace/ext/screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
                   
@@ -95,7 +67,7 @@ EOF
                       echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
                       CHANGES_MADE=true
                   else
-                      echo "[FAILED] Gagal membuat screenshot untuk $HTML_FILE."
+                      echo "[FAILED] Gagal membuat screenshot untuk $HTML_FILE. Cek log Docker."
                       rm -f "temp_screenshot.jpg"
                   fi
               fi
