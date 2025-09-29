@@ -8,10 +8,11 @@ on:
         required: true
         default: 'artikel/**/*.html'
   
-  # 2. Pemicu Otomatis (saat ada commit ke file HTML)
+  # 2. Pemicu Otomatis (saat ada commit ke file artikel.json atau sitemap.xml)
   push:
     paths:
-      - 'artikel/**/*.html' 
+      - 'artikel.json'
+      - 'sitemap.xml'
 
 jobs:
   screenshot_proses:
