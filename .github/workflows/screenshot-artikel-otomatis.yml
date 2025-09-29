@@ -34,11 +34,9 @@ jobs:
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           echo "Server dijalankan di port 8080."
           
-      # --- LANKAH UTAMA: PROSES SCREENSHOT ---
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
         run: |
-          # Dijalankan secara sinkron (satu per satu)
           CHANGES_MADE=false
           mkdir -p artikel
           
@@ -49,6 +47,8 @@ jobs:
             exit 1
           fi
           
+          # ... (Loop find dan docker run tetap sama) ...
+
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
               BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
@@ -56,7 +56,7 @@ jobs:
               FINAL_PATH="artikel/${FILE_NAME}.jpg"
               TEMP_OUTPUT_INSIDE_DOCKER="temp_screenshot.jpg" 
               
-              echo "--- Memproses $HTML_FILE -> $FINAL_PATH ---"
+              # ... (Logika pemeriksaan duplikasi dan pengambilan screenshot Docker) ...
               
               if [ -f "$FINAL_PATH" ]; then
                   echo "Screenshot JPG sudah ada: $FINAL_PATH. Dilewati."
@@ -64,10 +64,12 @@ jobs:
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   INSTALL_DIR="/tmp/playwright-install"
                   
-                  # Eksekusi Docker dengan Node_Modules dari runner utama (via /workspace)
+                  echo "Mengambil screenshot..."
+                  
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     bash -c "\
-                      export NODE_PATH=/workspace/node_modules && \
+                      npm install playwright --no-save --prefix $INSTALL_DIR > /dev/null && \
+                      export NODE_PATH=$INSTALL_DIR/node_modules && \
                       node /workspace/ext/screenshot.js '$LOCAL_URL' '/workspace/$TEMP_OUTPUT_INSIDE_DOCKER'\
                     "
                   
@@ -76,7 +78,8 @@ jobs:
                   if [ $DOCKER_EXIT_CODE -eq 0 ] && [ -f "$TEMP_OUTPUT_INSIDE_DOCKER" ]; then
                       mv "$TEMP_OUTPUT_INSIDE_DOCKER" "$FINAL_PATH"
                       echo "[SUCCESS] Screenshot baru berhasil disimpan: $FINAL_PATH"
-                      CHANGES_MADE=true
+                      # Tandai status di sini
+                      CHANGES_MADE=true 
                   else
                       echo "::warning::[FAILED] Gagal memproses $HTML_FILE. Docker Exit Code: $DOCKER_EXIT_CODE. File output hilang."
                       rm -f "$TEMP_OUTPUT_INSIDE_DOCKER"
@@ -84,6 +87,7 @@ jobs:
               fi
           done
           
+          # EKSPOR STATUS AKHIR DI LUAR LOOP
           if [ "$CHANGES_MADE" = true ]; then
              echo "changes_made=true" >> "$GITHUB_OUTPUT"
           else
@@ -97,6 +101,7 @@ jobs:
           echo "Memulai scan file JPG tanpa file HTML pasangan..."
           
           find artikel/ -name "*.jpg" -print0 | while IFS= read -r -d $'\0' JPG_FILE; do
+              
               HTML_FILE="${JPG_FILE/.jpg/.html}"
               
               if [ ! -f "$HTML_FILE" ]; then
@@ -106,12 +111,11 @@ jobs:
               fi
           done
           
-          # !!! PERBAIKAN: Set output berdasarkan status CLEANUP_NEEDED !!!
+          # EKSPOR STATUS AKHIR DI LUAR LOOP
           if [ "$CLEANUP_NEEDED" = true ]; then
               echo "changes_made=true" >> "$GITHUB_OUTPUT"
               echo "Cleanup selesai. File telah dihapus."
           else
-              # Penting: Set changes_made=false jika tidak ada yang dihapus, untuk kejelasan
               echo "changes_made=false" >> "$GITHUB_OUTPUT"
               echo "Tidak ada file JPG yang dihapus."
           fi
