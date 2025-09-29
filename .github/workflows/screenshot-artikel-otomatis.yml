@@ -29,7 +29,6 @@ jobs:
           
       # --- Langkah pembuatan skrip DIBERSIHKAN ---
 
-
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
         run: |
@@ -55,13 +54,18 @@ jobs:
               else
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # !!! PERBAIKAN: Gunakan bash -c untuk menjalankan instalasi dan eksekusi dalam satu container !!!
-                  docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
-                    bash -c "npm install playwright && \
-                             node /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'"
+                  # !!! PERBAIKAN: Instalasi NPM sementara di dalam container !!!
+                  # 1. Tentukan direktori instalasi sementara di /tmp
+                  # 2. Instal Playwright ke direktori tersebut tanpa menyimpan
+                  # 3. Jalankan Node dengan modul dari direktori instalasi tersebut
+                  INSTALL_DIR="/tmp/playwright-install"
                   
-                  # Catatan: Perintah di atas menggunakan npm install playwright setiap loop.
-                  # Jika Anda memiliki banyak file HTML, Anda dapat menginstal playwright secara terpisah di luar loop untuk efisiensi.
+                  docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
+                    bash -c "\
+                      mkdir -p $INSTALL_DIR && \
+                      npm install playwright --no-save --prefix $INSTALL_DIR && \
+                      node --require $INSTALL_DIR/lib/node_modules/playwright/index.js /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'\
+                    "
                   
                   if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
                       mv temp_screenshot.jpg "$FINAL_PATH"
