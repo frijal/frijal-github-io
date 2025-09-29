@@ -1,15 +1,15 @@
-name: Cari Kata dan Simpan ke mini/
+name: Pencarian Kata Format Terbalik
 
 on:
   workflow_dispatch:
     inputs:
       keyword:
-        description: 'Kata yang ingin dicari'
+        description: 'Kata yang ingin dicari dalam file .html'
         required: true
-        default: 'contoh'
+        default: 'metadata'
 
 jobs:
-  cari-kata:
+  cari-format-terbalik:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,18 +18,16 @@ jobs:
       - name: Buat folder mini jika belum ada
         run: mkdir -p mini
 
-      - name: Cari kata dan simpan ke mini/hasil.txt
+      - name: Cari kata dan simpan format terbalik ke mini/hasil.txt
         run: |
-          echo "Mencari kata: ${{ github.event.inputs.keyword }}"
-          grep -rni "${{ github.event.inputs.keyword }}" . > mini/hasil.txt || echo "Tidak ditemukan." > mini/hasil.txt
+          echo "Mencari kata '${{ github.event.inputs.keyword }}' di semua file .html..."
+          > mini/hasil.txt
+          find . -type f -name "*.html" | while read file; do
+            if grep -qi "${{ github.event.inputs.keyword }}" "$file"; then
+              nama=$(basename "$file")
+              echo "${{ github.event.inputs.keyword }}, $nama" >> mini/hasil.txt
+            fi
+          done
 
-      - name: Tampilkan ringkasan hasil
-        run: |
-          echo "Isi mini/hasil.txt:"
-          head -n 10 mini/hasil.txt || echo "(File kosong)"
-
-      - name: Upload hasil sebagai artifact (opsional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: hasil-pencarian
-          path: mini/hasil.txt
+      - name: Tampilkan isi hasil.txt
+        run: cat mini/hasil.txt || echo "(Tidak ada hasil)"
