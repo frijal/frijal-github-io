@@ -1,0 +1,35 @@
+name: Cari Kata dan Simpan ke mini/
+
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: 'Kata yang ingin dicari'
+        required: true
+        default: 'contoh'
+
+jobs:
+  cari-kata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Buat folder mini jika belum ada
+        run: mkdir -p mini
+
+      - name: Cari kata dan simpan ke mini/hasil.txt
+        run: |
+          echo "Mencari kata: ${{ github.event.inputs.keyword }}"
+          grep -rni "${{ github.event.inputs.keyword }}" . > mini/hasil.txt || echo "Tidak ditemukan." > mini/hasil.txt
+
+      - name: Tampilkan ringkasan hasil
+        run: |
+          echo "Isi mini/hasil.txt:"
+          head -n 10 mini/hasil.txt || echo "(File kosong)"
+
+      - name: Upload hasil sebagai artifact (opsional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-pencarian
+          path: mini/hasil.txt
