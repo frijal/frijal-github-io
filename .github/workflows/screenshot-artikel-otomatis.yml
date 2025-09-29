@@ -90,11 +90,21 @@ jobs:
           fi
 
       - name: ⬆️ Commit dan Push Screenshot Baru
-        if: ${{ steps.process_files.outputs.changes_made == 'true' }}
+        # Gunakan 'always()' atau 'success()' saja, dan biarkan Git yang memutuskan.
+        # Kita akan menghapus kondisi if: agar pesan commit muncul
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           
-          git add artikel/
-          git commit -m "feat: Menambahkan screenshot viewport baru di artikel/"
-          git push
+          # Menambahkan semua file .jpg yang mungkin baru
+          git add artikel/*.jpg
+          
+          # Commit dengan || true agar tidak gagal jika tidak ada perubahan
+          git commit -m "feat: Otomatis menambahkan screenshot baru dari workflow" || true
+          
+          # Push hanya jika ada sesuatu yang di-commit
+          if git log -1 --pretty=%B | grep -q "feat: Otomatis menambahkan screenshot baru dari workflow"; then
+              git push
+          else
+              echo "Tidak ada file screenshot baru yang di-commit. Proses selesai."
+          fi
