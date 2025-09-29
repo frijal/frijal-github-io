@@ -29,6 +29,7 @@ jobs:
           
       # --- Langkah pembuatan skrip DIBERSIHKAN ---
 
+
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
         run: |
@@ -36,7 +37,6 @@ jobs:
           mkdir -p artikel
           PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.47.0-jammy" 
           
-          # Cek apakah file skrip ext/screenshot.js ada di repositori
           if [ ! -f "ext/screenshot.js" ]; then
             echo "::error::File 'ext/screenshot.js' tidak ditemukan. Harap tambahkan skrip secara manual."
             exit 1
@@ -44,7 +44,6 @@ jobs:
           
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
-              # 1. Sanitasi Nama File dan Tentukan Path Akhir .jpg
               BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
               FILE_NAME=$(echo "$BASE_NAME" | sed 's|[^a-zA-Z0-9_-]|_|g')
               FINAL_PATH="artikel/${FILE_NAME}.jpg"
@@ -54,14 +53,16 @@ jobs:
               if [ -f "$FINAL_PATH" ]; then
                   echo "Screenshot JPG sudah ada: $FINAL_PATH. Dilewati."
               else
-                  # 3. Eksekusi Screenshot Docker
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Memanggil skrip yang sudah ada di repositori
+                  # !!! PERBAIKAN: Gunakan bash -c untuk menjalankan instalasi dan eksekusi dalam satu container !!!
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
-                    node /workspace/ext/screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
+                    bash -c "npm install playwright && \
+                             node /workspace/ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'"
                   
-                  # 4. Pindahkan dan Ganti Nama
+                  # Catatan: Perintah di atas menggunakan npm install playwright setiap loop.
+                  # Jika Anda memiliki banyak file HTML, Anda dapat menginstal playwright secara terpisah di luar loop untuk efisiensi.
+                  
                   if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
                       mv temp_screenshot.jpg "$FINAL_PATH"
                       echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
