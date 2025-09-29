@@ -1,15 +1,10 @@
-name: Cari Kata di artikel/*.html
+name: Cari Tag og:image di artikel/*.html
 
 on:
   workflow_dispatch:
-    inputs:
-      keyword:
-        description: 'Kata yang ingin dicari dalam artikel/*.html'
-        required: true
-        default: 'metadata'
 
 jobs:
-  cari-kata-artikel:
+  cari-og-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,15 +13,15 @@ jobs:
       - name: Buat folder mini jika belum ada
         run: mkdir -p mini
 
-      - name: Cari kata di artikel/*.html dan simpan ke mini/hasil.txt
+      - name: Cari tag og:image dan simpan hasilnya
         run: |
-          echo "Mencari kata '${{ github.event.inputs.keyword }}' di artikel/*.html..."
+          echo "Mencari <meta property=\"og:image\" content= di artikel/*.html..."
           > mini/hasil.txt
           find artikel/ -type f -name "*.html" | while read file; do
-            if grep -qi "${{ github.event.inputs.keyword }}" "$file"; then
+            grep -F '<meta property="og:image" content=' "$file" | while read line; do
               nama=$(basename "$file")
-              echo "${{ github.event.inputs.keyword }}, $nama" >> mini/hasil.txt
-            fi
+              echo "$line [$nama]" >> mini/hasil.txt
+            done
           done
 
       - name: Tampilkan isi hasil.txt
