@@ -32,17 +32,17 @@ jobs:
         run: |
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           echo "Server dijalankan di port 8080."
-
+          
       - name: 📝 Buat Skrip Screenshot Playwright di folder ext/
         run: |
           # Pastikan folder 'ext' ada
           mkdir -p ext
           
-          # Tulis script ke ext/screenshot.js
-          # Konten di bawah ini DIHILANGKAN SEMUA INDENTASINYA
+          # Konten di sini HARUS DIMULAI TANPA INDENTASI.
+          # Catatan: Baris EOF juga tidak boleh memiliki indentasi.
           cat > ext/screenshot.js <<'EOF'
 const playwright = require('playwright');
-
+          
 async function takeScreenshot(url, outputPath) {
   const browser = await playwright.chromium.launch();
   const page = await browser.newPage();
@@ -70,7 +70,7 @@ async function takeScreenshot(url, outputPath) {
 }
 
 takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
-EOF
+EOF # <--- Baris ini dan baris 'const playwright' HARUS tanpa spasi di depannya.
 
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
