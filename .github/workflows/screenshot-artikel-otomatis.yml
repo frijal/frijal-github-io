@@ -37,14 +37,21 @@ jobs:
           CHANGES_MADE=false
           mkdir -p artikel
           
-          # !!! PERBAIKAN: Menggunakan tag versi SPESIFIK yang kompatibel dengan modul NPM yang terinstal !!!
+          # Menggunakan tag spesifik yang diminta oleh log Anda (asumsi v1.55.1)
           PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy" 
+          
+          # Catatan: Pastikan file ext/screenshot.js sudah ada di repositori
+          if [ ! -f "ext/screenshot.js" ]; then
+            echo "::error::File 'ext/screenshot.js' tidak ditemukan. Harap tambahkan skrip secara manual."
+            exit 1
+          fi
           
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
               BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
               FILE_NAME=$(echo "$BASE_NAME" | sed 's|[^a-zA-Z0-9_-]|_|g')
               FINAL_PATH="artikel/${FILE_NAME}.jpg"
+              TEMP_OUTPUT="temp_screenshot.jpg"
               
               echo "--- Memproses $HTML_FILE -> $FINAL_PATH ---"
               
@@ -52,18 +59,32 @@ jobs:
                   echo "Screenshot JPG sudah ada: $FINAL_PATH. Dilewati."
               else
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
+                  INSTALL_DIR="/tmp/playwright-install"
                   
-                  # Eksekusi Node.js dengan modul yang diinstal di runner utama.
-                  docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
-                    node /workspace/ext/screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
+                  echo "Mengambil screenshot..."
                   
-                  if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
-                      mv temp_screenshot.jpg "$FINAL_PATH"
-                      echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
+                  # 1. Jalankan Docker untuk Mengambil Screenshot
+                  docker run --rm \
+                    -v "${PWD}:/workspace" \
+                    --network host "$PLAYWRIGHT_IMAGE" \
+                    bash -c "\
+                      npm install playwright --no-save --prefix $INSTALL_DIR > /dev/null && \
+                      export NODE_PATH=$INSTALL_DIR/node_modules && \
+                      node /workspace/ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'\
+                    "
+                  
+                  DOCKER_EXIT_CODE=$?
+                  
+                  # 2. Periksa Hasil Setelah Docker Selesai
+                  if [ $DOCKER_EXIT_CODE -eq 0 ] && [ -f "$TEMP_OUTPUT" ]; then
+                      # Proses berhasil: Pindahkan dan ganti nama
+                      mv "$TEMP_OUTPUT" "$FINAL_PATH"
+                      echo "Screenshot baru berhasil disimpan: $FINAL_PATH"
                       CHANGES_MADE=true
                   else
-                      echo "[FAILED] Gagal membuat screenshot untuk $HTML_FILE. Cek log Docker."
-                      rm -f "temp_screenshot.jpg"
+                      # Proses gagal: Hapus file sementara (jika ada) dan catat kegagalan
+                      echo "::warning::Gagal memproses $HTML_FILE. Docker Exit Code: $DOCKER_EXIT_CODE. File output tidak ditemukan."
+                      rm -f "$TEMP_OUTPUT"
                   fi
               fi
           done
