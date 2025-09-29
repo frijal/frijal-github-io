@@ -40,17 +40,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          # pastikan working tree bersih
-          git reset --hard
-          git clean -fd
-
+          
           git add rss.xml rss atom feed || true
-          git commit -m "🔄 Update RSS feed (auto)" || echo "No changes to commit"
-
-          git fetch origin main
-          git merge -X ours origin/main
-
-          git push origin HEAD:main
+          git commit -m "🔄 Update RSS feed (auto)" || echo "aman, belum ada perubahan"
+          
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
