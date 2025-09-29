@@ -14,6 +14,9 @@ on:
       - 'artikel.json'
       - 'sitemap.xml'
 
+  schedule:
+    - cron: '0 21 30 * *'    
+
 jobs:
   screenshot_proses:
     runs-on: ubuntu-latest
