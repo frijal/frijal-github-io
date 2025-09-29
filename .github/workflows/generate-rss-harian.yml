@@ -8,6 +8,9 @@ on:
       - 'sitemap.xml'
   workflow_dispatch:
 
+  schedule:
+    - cron: '0 21 15 * *'
+
 jobs:
   rss:
     runs-on: ubuntu-latest
