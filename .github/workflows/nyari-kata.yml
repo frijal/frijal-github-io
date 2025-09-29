@@ -1,15 +1,15 @@
-name: Pencarian Kata Format Terbalik
+name: Cari Kata di artikel/*.html
 
 on:
   workflow_dispatch:
     inputs:
       keyword:
-        description: 'Kata yang ingin dicari dalam file .html'
+        description: 'Kata yang ingin dicari dalam artikel/*.html'
         required: true
         default: 'metadata'
 
 jobs:
-  cari-format-terbalik:
+  cari-kata-artikel:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,11 +18,11 @@ jobs:
       - name: Buat folder mini jika belum ada
         run: mkdir -p mini
 
-      - name: Cari kata dan simpan format terbalik ke mini/hasil.txt
+      - name: Cari kata di artikel/*.html dan simpan ke mini/hasil.txt
         run: |
-          echo "Mencari kata '${{ github.event.inputs.keyword }}' di semua file .html..."
+          echo "Mencari kata '${{ github.event.inputs.keyword }}' di artikel/*.html..."
           > mini/hasil.txt
-          find . -type f -name "*.html" | while read file; do
+          find artikel/ -type f -name "*.html" | while read file; do
             if grep -qi "${{ github.event.inputs.keyword }}" "$file"; then
               nama=$(basename "$file")
               echo "${{ github.event.inputs.keyword }}, $nama" >> mini/hasil.txt
