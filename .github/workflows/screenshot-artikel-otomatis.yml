@@ -22,43 +22,9 @@ jobs:
           node-version: '20'
       - run: npm install http-server
 
-      - name: 📝 Buat Skrip Screenshot Playwright (Langkah Asli)
-        # Kami mengembalikan skrip karena sudah terbukti valid tanpa error sintaks
-        run: |
-          mkdir -p ext
-          cat > ext/screenshot.js <<'EOF'
-const playwright = require('playwright');
-async function takeScreenshot(url, outputPath) {
-  const browser = await playwright.chromium.launch();
-  const page = await browser.newPage();
-  await page.setViewportSize({ width: 1280, height: 800 }); 
-  
-  try {
-    const response = await page.goto(url, { waitUntil: 'load' });
-    
-    if (response && response.status() !== 200) {
-       console.error(`[ERROR] Gagal memuat ${url}. Status: ${response.status()}`);
-       await browser.close();
-       return 1;
-    }
-
-    await page.screenshot({ path: outputPath, type: 'jpeg', quality: 90 });
-    console.log(`[SUCCESS] Screenshot disimpan sebagai ${outputPath}`);
-
-  } catch (error) {
-    console.error(`[FATAL] Gagal mengambil screenshot untuk ${url}: ${error.message}`);
-    return 1;
-  } finally {
-    await browser.close();
-  }
-  return 0;
-}
-
-takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
-EOF
-
-      - name: 💾 Instal Playwright di Runner Utama
-        # Instal Playwright di runner, bukan di dalam container, untuk menghindari isu NPM cache
+      - name: 💾 Instal Playwright (Modul Lokal)
+        # Playwright diinstal di folder node_modules runner utama.
+        # Docker akan mengakses folder ini melalui mount volume.
         run: npm install playwright
 
       - name: ▶️ Jalankan HTTP Server di Background
@@ -72,9 +38,9 @@ EOF
           CHANGES_MADE=false
           mkdir -p artikel
           
-          # !!! PERBAIKAN UTAMA: Ganti versi Docker Image ke yang kompatibel !!!
-          # Menggunakan versi yang lebih baru (v1.55.1) sesuai permintaan log
-          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy" 
+          # Menggunakan versi Docker Image yang kompatibel dengan modul Playwright terbaru
+          # Catatan: Kita menggunakan tag 'latest' untuk memastikan kompatibilitas browser/modul
+          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:latest" 
           
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
@@ -89,8 +55,8 @@ EOF
               else
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Eksekusi Node.js dengan modul Playwright yang sudah diinstal di runner utama.
-                  # Kita mengandalkan mount volume untuk menemukan node_modules
+                  # Eksekusi Node.js: Docker akan menemukan node_modules
+                  # karena kita mount seluruh direktori kerja (PWD)
                   docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
                     node /workspace/ext/screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
                   
