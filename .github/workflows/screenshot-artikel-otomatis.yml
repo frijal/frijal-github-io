@@ -97,21 +97,24 @@ jobs:
       - name: 🧹 Hapus JPG Tanpa Pasangan HTML (Maintenance)
         id: cleanup
         run: |
-          CLEANUP_NEEDED=false
+          # Dideklarasikan di shell utama
+          CLEANUP_NEEDED=false 
           echo "Memulai scan file JPG tanpa file HTML pasangan..."
           
-          find artikel/ -name "*.jpg" -print0 | while IFS= read -r -d $'\0' JPG_FILE; do
+          # Menggunakan Process Substitution (< <(...)) untuk menghindari sub-shell
+          while IFS= read -r -d $'\0' JPG_FILE; do
               
               HTML_FILE="${JPG_FILE/.jpg/.html}"
               
               if [ ! -f "$HTML_FILE" ]; then
                   echo "Menghapus: $JPG_FILE (HTML tidak ditemukan: $HTML_FILE)"
                   rm "$JPG_FILE"
-                  CLEANUP_NEEDED=true
+                  # Variabel kini diubah di shell utama
+                  CLEANUP_NEEDED=true 
               fi
-          done
+          done < <(find artikel/ -name "*.jpg" -print0)
           
-          # EKSPOR STATUS AKHIR DI LUAR LOOP
+          # Pengecekan status akhir di luar loop
           if [ "$CLEANUP_NEEDED" = true ]; then
               echo "changes_made=true" >> "$GITHUB_OUTPUT"
               echo "Cleanup selesai. File telah dihapus."
@@ -119,7 +122,7 @@ jobs:
               echo "changes_made=false" >> "$GITHUB_OUTPUT"
               echo "Tidak ada file JPG yang dihapus."
           fi
-
+      
       # --- LANGKAH AKHIR: COMMIT PERUBAHAN ---
       - name: ⬆️ Commit dan Push Screenshot Baru/Dihapus
         # Commit akan berjalan jika:
