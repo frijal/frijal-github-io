@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>zzzzzzzzzzzzzzzzzzzzz</title>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #fdfdfd;
+      color: #222;
+    }
+    h1, h2 {
+      color: #005f73;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 4px;
+      margin-top: 30px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    pre {
+      position: relative;
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1em;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #005f73;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+    ul {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📦 Tutorial APT (Advanced Package Tool)</h1>
+  <p>
+    APT adalah <strong>package manager</strong> bawaan sistem operasi Debian dan turunannya
+    (seperti Ubuntu, Linux Mint, dll).  
+    Dengan APT, kita bisa dengan mudah <em>mencari, menginstal, menghapus, dan mengelola aplikasi</em> langsung dari terminal.
+  </p>
+
+  <h2>1. Fungsi Utama APT</h2>
+  <ul>
+    <li>Menginstal aplikasi dari repository resmi Debian.</li>
+    <li>Menghapus aplikasi yang tidak diperlukan.</li>
+    <li>Melakukan update dan upgrade sistem.</li>
+    <li>Mencari aplikasi berdasarkan nama atau deskripsi.</li>
+    <li>Mengelola dependensi secara otomatis (APT akan memasang paket tambahan yang dibutuhkan oleh aplikasi).</li>
+  </ul>
+
+  <h2>2. Cara Dasar Menggunakan APT</h2>
+  <p>Semua perintah APT dijalankan di terminal dengan awalan <code>sudo</code>.</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt update       # Memperbarui daftar paket
+sudo apt upgrade      # Memperbarui semua aplikasi yang terpasang
+sudo apt full-upgrade # Upgrade penuh termasuk dependensi</code>
+  </pre>
+
+  <h2>3. Mencari Nama Aplikasi dengan APT</h2>
+  <p>Gunakan perintah berikut untuk mencari aplikasi yang tersedia:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">apt search nama-aplikasi</code>
+  </pre>
+  <p>Contoh mencari aplikasi <code>htop</code>:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">apt search htop</code>
+  </pre>
+
+  <h2>4. Memasang Aplikasi dengan APT</h2>
+  <p>Gunakan perintah berikut untuk memasang aplikasi:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt install nama-aplikasi</code>
+  </pre>
+  <p>Contoh memasang <code>htop</code>:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt install htop</code>
+  </pre>
+
+  <h2>5. Menghapus Aplikasi dengan APT</h2>
+  <p>Jika aplikasi tidak diperlukan, bisa dihapus dengan:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt remove nama-aplikasi</code>
+  </pre>
+  <p>Untuk menghapus sekaligus file konfigurasinya:</p>
+  <pre>
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt purge nama-aplikasi</code>
+  </pre>
+
+  <h2>6. Kegunaan Lain dari APT</h2>
+  <ul>
+    <li><strong>Membersihkan cache paket:</strong>
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo apt autoremove   # Menghapus paket yang tidak dipakai
+sudo apt clean        # Membersihkan cache APT
+sudo apt autoclean    # Hapus paket lama dari cache</code>
+      </pre>
+    </li>
+    <li><strong>Melihat detail paket:</strong>
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">apt show nama-aplikasi</code>
+      </pre>
+    </li>
+    <li><strong>Melihat aplikasi terinstal:</strong>
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">apt list --installed</code>
+      </pre>
+    </li>
+  </ul>
+
+  <h2>Kesimpulan</h2>
+  <p>
+    APT memudahkan kita dalam mengelola aplikasi di Debian dan turunannya.
+    Dengan APT, kita tidak perlu repot mengunduh file aplikasi manual satu per satu, 
+    karena semua paket disediakan di repository resmi dan bisa dipasang langsung dari terminal.
+  </p>
+
+  <!-- PrismJS untuk highlight -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Kode berhasil dicopy!");
+      });
+    }
+  </script>
+</body>
+</html>
+
