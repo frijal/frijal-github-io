@@ -1,83 +1,38 @@
-// inject-meta.js
-// Jalankan: node inject-meta.js
-// - Tambah <meta property="og:image"> kalau belum ada
-// - JSON-LD: isi/rapikan "image"
-//   * kosong → fallback
-//   * []/[""] → [fallback]
-//   * relatif → ubah ke absolut
-// - Output JSON-LD rapi dengan sorted keys
-
 import fs from "fs";
 import path from "path";
 
-const folder = "./artikelX";
-const baseUrl = "https://frijal.github.io/artikel/";
+const folder = "artikelx";
 
-function toAbsolute(url, fallback) {
-  if (!url || url.trim() === "") return fallback;
-  if (/^https?:\/\//i.test(url)) return url; // sudah absolut
-  return baseUrl + url.replace(/^\.?\//, ""); // buang ./ kalau ada
-}
+for (const f of fs.readdirSync(folder)) {
+  if (!f.endsWith(".html")) continue;
+  const file = path.join(folder, f);
+  let html = fs.readFileSync(file, "utf8");
+  const base = path.basename(f, ".html");
+  const img = `https://frijal.github.io/artikel/${base}.jpg`;
 
-// Rekursif sort object keys
-function sortKeys(obj) {
-  if (Array.isArray(obj)) return obj.map(sortKeys);
-  if (obj && typeof obj === "object") {
-    return Object.keys(obj)
-      .sort()
-      .reduce((acc, key) => {
-        acc[key] = sortKeys(obj[key]);
-        return acc;
-      }, {});
-  }
-  return obj;
-}
-
-function injectMeta(filePath) {
-  let html = fs.readFileSync(filePath, "utf8");
-  const fileName = path.basename(filePath, ".html");
-  const fallbackImg = `${baseUrl}${fileName}.jpg`;
-
-  // og:image → hanya tambahkan kalau belum ada
-  if (!/<meta[^>]+property=["']og:image["']/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta property="og:image" content="${fallbackImg}">\n</head>`
-    );
-  }
-
-  // JSON-LD → isi/rapikan "image"
   html = html.replace(
-    /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/i,
-    (m, open, json, close) => {
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/i,
+    (m, j) => {
       try {
-        const data = JSON.parse(json);
-        let img = data.image;
-
-        if (!img || (typeof img === "string" && img.trim() === "")) {
-          data.image = fallbackImg;
-        } else if (Array.isArray(img)) {
-          if (img.length === 0 || img.every((el) => typeof el === "string" && el.trim() === "")) {
-            data.image = [fallbackImg];
-          } else {
-            data.image = img.map((el) => toAbsolute(el, fallbackImg));
-          }
-        } else if (typeof img === "string") {
-          data.image = toAbsolute(img, fallbackImg);
-        }
-
-        const sorted = sortKeys(data);
-        return `${open}${JSON.stringify(sorted, null, 2)}${close}`;
+        const d = JSON.parse(j);
+        const fix = (o) => {
+          if (!o || typeof o !== "object") return;
+          if (!o.image || (Array.isArray(o.image) && !o.image.length) || o.image === "")
+            o.image = img;
+          Object.values(o).forEach(fix);
+        };
+        Array.isArray(d) ? d.forEach(fix) : fix(d);
+        return `<script type="application/ld+json">${JSON.stringify(d)}</script>`;
       } catch {
-        return m; // skip kalau gagal parse
+        return m;
       }
     }
   );
 
-  fs.writeFileSync(filePath, html, "utf8");
-  console.log(`✔ Updated: ${fileName}.html`);
-}
+  if (!/<meta[^>]+property=["']og:image["']/i.test(html)) {
+    html = html.replace("</head>", `<meta property="og:image" content="${img}">\n</head>`);
+  }
 
-fs.readdirSync(folder)
-  .filter((f) => f.endsWith(".html"))
-  .forEach((f) => injectMeta(path.join(folder, f)));
+  fs.writeFileSync(file, html);
+  console.log("✔", f);
+}
