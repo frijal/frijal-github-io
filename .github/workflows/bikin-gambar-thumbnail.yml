@@ -1,62 +1,99 @@
-# .github/workflows/screenshot-artikel-hanya.yml
+# .github/workflows/screenshot-artikel-otomatis.yml
 
-name: Screenshot File HTML dalam Folder Artikel
+name: 📸 Ambil Screenshot File HTML Artikel
 
 on:
-  # Memungkinkan workflow untuk dijalankan secara manual
+  # Memungkinkan workflow untuk dijalankan secara manual dari tab Actions
   workflow_dispatch:
     inputs:
       html_glob:
-        description: 'Pola file HTML (misalnya: artikel/**/*.html)'
+        description: 'Pola file HTML untuk di-screenshot'
         required: true
         default: 'artikel/**/*.html' # Default hanya mencari di dalam folder 'artikel'
 
 jobs:
   screenshot_proses:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout Kode Repositori
+      - name: ⬇️ Checkout Kode Repositori
+        # Diperlukan untuk mengakses file .html, memeriksa duplikasi, dan melakukan commit/push
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Siapkan Lingkungan Node.js
-        # Node.js diperlukan untuk menjalankan http-server
+      - name: ⚙️ Siapkan Lingkungan Node.js (untuk HTTP Server)
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Instal HTTP Server Secara Lokal (Memperbaiki EACCES)
-        # Instalasi tanpa '-g' untuk menghindari isu permission
+      - name: 💾 Instal HTTP Server Lokal
+        # Instalasi lokal mengatasi error EACCES (permission denied)
         run: npm install http-server
-        
-      - name: Jalankan HTTP Server Sederhana
-        # Menggunakan path lokal './node_modules/.bin/' untuk menjalankan server
-        run: |
-          # Jalankan server di background pada port 8080
-          # --silent agar output tidak terlalu banyak
-          # & untuk menjalankan di background
-          nohup ./node_modules/.bin/http-server . -p 8080 --silent &
 
-      - name: Temukan dan Proses File HTML di folder 'artikel/'
+      - name: ▶️ Jalankan HTTP Server di Background
+        run: |
+          # Server diperlukan agar Playwright bisa mengakses file HTML via URL (http://localhost:8080/...)
+          nohup ./node_modules/.bin/http-server . -p 8080 --silent &
+          echo "Server dijalankan di port 8080."
+          
+      - name: 📝 Buat Skrip Screenshot Playwright
+        # Kita membuat skrip Node.js (screenshot.js) yang akan dijalankan di dalam container Docker Playwright
+        run: |
+          cat > screenshot.js <<EOF
+          const playwright = require('playwright');
+          
+          async function takeScreenshot(url, outputPath) {
+            // Menggunakan browser Chromium
+            const browser = await playwright.chromium.launch();
+            const page = await browser.newPage();
+            // Atur ukuran viewport yang konsisten
+            await page.setViewportSize({ width: 1280, height: 800 }); 
+            
+            try {
+              // Tunggu hingga halaman dimuat ('load')
+              const response = await page.goto(url, { waitUntil: 'load' });
+              
+              if (response && response.status() !== 200) {
+                 console.error(\`[ERROR] Gagal memuat \${url}. Status: \${response.status()}\`);
+                 await browser.close();
+                 return 1; # Kembalikan kode error 
+              }
+
+              // Ambil screenshot hanya dari viewport ('page')
+              await page.screenshot({ path: outputPath, type: 'jpeg', quality: 90 });
+              console.log(\`[SUCCESS] Screenshot disimpan sebagai \${outputPath}\`);
+
+            } catch (error) {
+              console.error(\`[FATAL] Gagal mengambil screenshot untuk \${url}: \${error.message}\`);
+              return 1;
+            } finally {
+              await browser.close();
+            }
+            return 0;
+          }
+
+          // Panggil fungsi utama dengan argumen dari Docker
+          takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
+          EOF
+
+      - name: 🔍 Temukan, Periksa, dan Proses File HTML
         id: process_files
         run: |
           HTML_GLOB="${{ github.event.inputs.html_glob }}"
           CHANGES_MADE=false
           
-          # Pastikan folder 'artikel' ada untuk menyimpan .jpg
           mkdir -p artikel
           
-          # Cari semua file yang cocok di folder artikel/
+          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.47.0-jammy" 
+          
+          # Iterasi hanya melalui file HTML di folder 'artikel/'
           find artikel/ -name "*.html" | while read -r HTML_FILE; do
               
-              # 1. Tentukan Nama File Akhir
-              # Hapus 'artikel/' dan '.html' untuk sanitasi nama file
+              # 1. Sanitasi Nama File dan Tentukan Path Akhir .jpg
+              # Hapus 'artikel/' dan '.html'
               BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
-              # Ganti karakter yang tidak aman dengan underscore
               FILE_NAME=$(echo "$BASE_NAME" | sed 's|[^a-zA-Z0-9_-]|_|g')
-              
-              # Tentukan path lengkap file JPG di folder artikel/
               FINAL_PATH="artikel/${FILE_NAME}.jpg"
               
               echo "--- Memproses $HTML_FILE -> $FINAL_PATH ---"
@@ -68,31 +105,33 @@ jobs:
                   # 3. Ambil Screenshot menggunakan URL lokal
                   LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
                   
-                  # Gunakan Docker untuk menjalankan alat screenshot dalam loop shell
-                  docker run --rm -v "${PWD}:/workspace" --network host kitta/webpage-screenshot:latest \
-                    --url "$LOCAL_URL" \
-                    --output "temp_screenshot.png" \
-                    --mode "page" \
-                    --type "jpeg" \
-                    --quality 90 \
-                    --wait-for-selector "body" 
+                  # Jalankan skrip screenshot.js di dalam container Playwright
+                  docker run --rm -v "${PWD}:/workspace" --network host "$PLAYWRIGHT_IMAGE" \
+                    node screenshot.js "$LOCAL_URL" "temp_screenshot.jpg"
                   
-                  # 4. Pindahkan dan Ganti Nama File
-                  mv temp_screenshot.jpg "$FINAL_PATH"
-                  echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
-                  
-                  CHANGES_MADE=true
+                  # Cek apakah Docker berhasil (kode keluar 0) DAN file output dibuat
+                  if [ $? -eq 0 ] && [ -f "temp_screenshot.jpg" ]; then
+                      # 4. Pindahkan dan Ganti Nama File
+                      mv temp_screenshot.jpg "$FINAL_PATH"
+                      echo "Screenshot baru berhasil dibuat: $FINAL_PATH"
+                      CHANGES_MADE=true
+                  else
+                      echo "[FAILED] Gagal membuat screenshot untuk $HTML_FILE."
+                      # Pastikan file sementara dihapus jika ada, untuk clean-up
+                      rm -f "temp_screenshot.jpg"
+                  fi
               fi
           done
           
-          # Simpan status perubahan untuk langkah commit
+          # Simpan status perubahan
           if [ "$CHANGES_MADE" = true ]; then
              echo "changes_made=true" >> $GITHUB_OUTPUT
           else
              echo "changes_made=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit dan Push Screenshot Baru
+      - name: ⬆️ Commit dan Push Screenshot Baru
+        # Hanya berjalan jika ada file baru yang dibuat
         if: ${{ steps.process_files.outputs.changes_made == 'true' }}
         run: |
           git config --local user.email "action@github.com"
