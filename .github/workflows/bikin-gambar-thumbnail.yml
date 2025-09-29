@@ -32,7 +32,7 @@ jobs:
         run: |
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           echo "Server dijalankan di port 8080."
-          
+
       - name: 📝 Buat Skrip Screenshot Playwright di folder ext/
         run: |
           # Pastikan folder 'ext' ada
@@ -42,7 +42,7 @@ jobs:
           # Konten di bawah ini DIHILANGKAN SEMUA INDENTASINYA
           cat > ext/screenshot.js <<'EOF'
 const playwright = require('playwright');
-          
+
 async function takeScreenshot(url, outputPath) {
   const browser = await playwright.chromium.launch();
   const page = await browser.newPage();
