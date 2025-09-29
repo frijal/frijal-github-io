@@ -39,7 +39,8 @@ jobs:
           mkdir -p ext
           
           # Tulis script ke ext/screenshot.js
-          cat > ext/screenshot.js <<EOF
+          # !!! PERBAIKAN: Menggunakan <<'EOF' untuk mencegah substitusi shell di dalam backtick (`) !!!
+          cat > ext/screenshot.js <<'EOF'
           const playwright = require('playwright');
           
           async function takeScreenshot(url, outputPath) {
@@ -51,16 +52,17 @@ jobs:
               const response = await page.goto(url, { waitUntil: 'load' });
               
               if (response && response.status() !== 200) {
-                 console.error(\`[ERROR] Gagal memuat \${url}. Status: \${response.status()}\`);
+                 // Tanda kutip terbalik (`) sekarang aman
+                 console.error(`[ERROR] Gagal memuat ${url}. Status: ${response.status()}`);
                  await browser.close();
                  return 1;
               }
 
               await page.screenshot({ path: outputPath, type: 'jpeg', quality: 90 });
-              console.log(\`[SUCCESS] Screenshot disimpan sebagai \${outputPath}\`);
+              console.log(`[SUCCESS] Screenshot disimpan sebagai ${outputPath}`);
 
             } catch (error) {
-              console.error(\`[FATAL] Gagal mengambil screenshot untuk \${url}: \${error.message}\`);
+              console.error(`[FATAL] Gagal mengambil screenshot untuk ${url}: ${error.message}`);
               return 1;
             } finally {
               await browser.close();
@@ -69,8 +71,7 @@ jobs:
           }
 
           takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
-          EOF
-          
+          EOF         
 ---
 
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
