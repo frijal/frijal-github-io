@@ -32,41 +32,35 @@ function fixTitleOneLine(content) {
   });
 }
 
-// Fungsi cari gambar: og:image > img pertama > fallback .jpg dari URL file
-function extractImage(content, file) { // 'file' adalah URL file HTML yang sedang diproses
+function extractImage(content, file) {
   let src = null;
 
-  // 1. Cari meta og:image
+  // 1. Cari og:image
   const og =
     content.match(/<meta[^>]+property=["']og:image["'][^>]+content=["'](.*?)["']/i) ||
     content.match(/<meta[^>]+content=["'](.*?)["'][^>]+property=["']og:image["']/i);
   if (og && og[1]) src = og[1].trim();
 
-  // 2. Kalau og:image tidak ada, cari <img>
+  // 2. Kalau og:image tidak ada → cari <img>
   if (!src) {
     const img = content.match(/<img[^>]+src=["'](.*?)["']/i);
     if (img && img[1]) {
       src = img[1].trim();
-      // kalau path relatif, ubah jadi absolut
       if (!/^https?:\/\//i.test(src)) {
-        // Asumsi base URL Anda
-        src = `https://frijal.github.io/artikel/${src}`;
+        src = `https://frijal.github.io/artikel/${src.replace(/^\/+/, "")}`;
       }
     }
   }
 
-  // 3. Fallback jika kosong atau tidak ada ekstensi valid
-  if (!src || !/\.(jpg|jpeg|png|gif|webp|svg)$/i.test(src.split("?")[0])) {
-    // --- PERUBAHAN UTAMA DI SINI ---
-    // Ambil path file (cth: https://frijal.github.io/artikel/nama-file.html)
-    // Ganti ekstensi .html menjadi .jpg
-    
-    // Periksa apakah 'file' adalah string dan memiliki ekstensi yang dapat diganti
-    if (typeof file === 'string' && file.endsWith('.html')) {
-        return file.replace(/\.html$/, '.jpg');
-    }
-    
-    // Fallback ke default statis jika URL file HTML tidak valid atau tidak memiliki .html
+  // 3. Kalau masih kosong → coba fallback ke gambar dengan nama sama
+  if (!src) {
+    const baseName = file.replace(/\.html?$/i, ""); // hapus .html
+    src = `https://frijal.github.io/artikel/${baseName}.jpg`;
+  }
+
+  // 4. Validasi ekstensi (jpg, jpeg, png, gif, webp, avif, svg)
+  const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
+  if (!src || !validExt.test(src.split("?")[0])) {
     return "https://frijal.github.io/thumbnail.jpg";
   }
 
