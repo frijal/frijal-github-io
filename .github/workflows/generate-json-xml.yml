@@ -7,7 +7,6 @@ on:
       - 'artikel/*.html'
   workflow_dispatch:
 
-  # Menjalankan setiap hari pada pukul 21:00 UTC = 05:00 UTC+8 (WITA)
   schedule:
     - cron: '0 21 * * *'
 
