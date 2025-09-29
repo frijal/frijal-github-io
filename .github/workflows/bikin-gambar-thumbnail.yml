@@ -71,7 +71,7 @@ jobs:
           }
 
           takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
-          EOF         
+          EOF
 ---
 
       - name: 🔍 Temukan, Periksa, dan Proses File HTML
