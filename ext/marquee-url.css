@@ -11,48 +11,46 @@
 }
 
 /* Container marquee */
-#marquee-bottom {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+#marquee-bottom{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
 }
 
 /* Konten marquee */
-#marquee-inner {
-  display: inline-block;
-  white-space: nowrap;
-  transform: translateX(0);
+#marquee-inner{
+  display:inline-block;
+  white-space:nowrap;
+  transform:translateX(0);
 }
 
 /* Slider vertikal */
-#speedRange {
-  position: fixed;
-  right: 15px;
-  top: 50%;
-  transform: rotate(-90deg) translateY(-50%);
-  transform-origin: center;
-  width: 120px;
-  height: 6px;
-  background: #555;
-  -webkit-appearance: none;
-  appearance: none;
-  z-index: 999;
+#speedRange{
+  position:fixed;
+  right:15px;
+  top:50%;
+  transform:rotate(-90deg) translateY(-50%);
+  transform-origin:center;
+  width:120px;
+  height:6px;
+  background:#555;
+  -webkit-appearance:none;
+  appearance:none;
+  z-index:999;
 }
 
-/* Thumb slider Chrome/Safari */
-#speedRange::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  cursor: pointer;
+/* Thumb slider */
+#speedRange::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  cursor:pointer;
 }
-
-/* Thumb slider Firefox */
-#speedRange::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  cursor: pointer;
+#speedRange::-moz-range-thumb{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  cursor:pointer;
 }
