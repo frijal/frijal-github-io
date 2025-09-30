@@ -66,3 +66,33 @@ async function initCategoryMarquee(targetCategoryId, categoryName, jsonPath) {
         marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
     }
 }
+
+/**
+ * Inisialisasi kontrol slider untuk mengubah kecepatan Marquee.
+ * @param {string} sliderId ID dari input range (e.g., 'speedSlider')
+ * @param {string} contentClass Class dari elemen konten Marquee (e.g., 'marquee-content')
+ */
+function initMarqueeSpeedControl(sliderId, contentClass) {
+    const slider = document.getElementById(sliderId);
+    const content = document.querySelector(`.${contentClass}`); // Mengambil elemen Marquee Content
+
+    if (!slider || !content) {
+        console.warn("Slider atau konten Marquee tidak ditemukan.");
+        return;
+    }
+
+    // Fungsi untuk menerapkan kecepatan
+    const applySpeed = (value) => {
+        // Logika: Nilai slider yang lebih tinggi (misalnya 150) = animasi lebih lambat (nilai detik lebih besar)
+        const duration = value; // Durasi dalam detik
+        content.style.animationDuration = `${duration}s`;
+    };
+
+    // 1. Set kecepatan awal
+    applySpeed(slider.value);
+
+    // 2. Tambahkan event listener untuk perubahan slider
+    slider.addEventListener('input', (e) => {
+        applySpeed(e.target.value);
+    });
+}
