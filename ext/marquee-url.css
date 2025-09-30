@@ -24,20 +24,20 @@
   color:inherit;
 }
 
-/* Slider vertikal */
-#speedRange{
-  position:fixed;
-  right:15px; /* jarak dari kanan */
-  top:50%;
-  transform:rotate(-90deg) translateY(-50%);
-  transform-origin:center;
-  width:120px;
-  height:6px;
-  background:#555;
-  -webkit-appearance:none;
-  appearance:none;
-  z-index:1000;
+#speedRange {
+  position: fixed;
+  right: 0;           /* dekatkan ke kanan layar */
+  top: 50%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: center;
+  width: 120px;       /* panjang slider */
+  height: 6px;        /* tebal slider */
+  background: #555;
+  -webkit-appearance: none;
+  appearance: none;
+  z-index: 1000;
 }
+
 
 /* Thumb slider */
 #speedRange::-webkit-slider-thumb{
