@@ -1,0 +1,51 @@
+name: Hitung File dan Buat Laporan
+
+on:
+  # Tentukan pemicu (trigger) untuk workflow ini
+  push:
+    branches:
+      - main # Ganti dengan nama branch utama Anda
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Memungkinkan eksekusi manual dari tab Actions
+
+jobs:
+  count_and_report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Siapkan Folder Laporan
+        run: |
+          mkdir -p mini/
+
+      - name: Hitung dan Buat Laporan File
+        id: file_counting
+        run: |
+          # 1. Hitung jumlah file per ekstensi, urutkan, dan simpan ke file sementara
+          echo "Menghitung file di direktori saat ini..."
+          REPORT_CONTENT=$(find . -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
+          
+          # 2. Hitung total semua file
+          TOTAL_FILES=$(find . -type f | wc -l)
+          
+          # 3. Format laporan dengan summary di baris pertama
+          REPORT_FILE="mini/laporan_jumlah_file.txt"
+          
+          echo "SUMMARY: Total File = ${TOTAL_FILES}" > ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
+          echo "${REPORT_CONTENT}" >> ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
+          echo "Laporan telah dibuat di ${REPORT_FILE}"
+          
+          # Tampilkan isi laporan di log
+          cat ${REPORT_FILE}
+
+      - name: Upload Artifact (Laporan)
+        uses: actions/upload-artifact@v4
+        with:
+          name: laporan-jumlah-file
+          path: mini/laporan_jumlah_file.txt
+          retention-days: 7
