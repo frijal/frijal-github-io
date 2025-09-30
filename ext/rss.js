@@ -2,144 +2,140 @@ const fs = require("fs");
 const path = require("path");
 const { DOMParser } = require("@xmldom/xmldom");
 
-const sitemapPath = path.join(__dirname, "../sitemap.xml");
-const rssPath = path.join(__dirname, "../rss.xml");
+// Tentukan path input dan output
 const artikelJsonPath = path.join(__dirname, "../artikel.json");
+const rssOutPath = path.join(__dirname, "../rss.xml");
+const sitemapPath = path.join(__dirname, "../sitemap.xml");
+
+// Urutan data dalam array artikel.json:
+const IDX_TITLE = 0;
+const IDX_FILE = 1;
+const IDX_IMAGE = 2;
+const IDX_LASTMOD = 3;
+const IDX_DESCRIPTION = 4; // Deskripsi berada di indeks 4
 
 // --- Helpers ---
-function extractDescription(filePath) {
-  if (!fs.existsSync(filePath)) return "";
-  const html = fs.readFileSync(filePath, "utf8");
 
-  const metaMatch = html.match(
-    /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i
-  );
-  if (metaMatch) return metaMatch[1];
-
-  const pMatch = html.match(/<p[^>]*>(.*?)<\/p>/i);
-  if (pMatch) {
-    const text = pMatch[1].replace(/<[^>]+>/g, "");
-    return text.substring(0, 150) + (text.length > 150 ? "…" : "");
-  }
-
-  return "";
+/**
+ * Mengambil data lastmod dari sitemap.xml berdasarkan nama file.
+ * Kami menggunakan lastmod dari sitemap karena nilainya adalah ISO 8601 (lebih bersih).
+ * @param {string} fileName - Nama file (mis: 'artikel.html').
+ * @param {object} sitemapData - Objek URL dari sitemap.
+ * @returns {string} Tanggal dalam format string atau null.
+ */
+function getSitemapData(fileName, sitemapData) {
+    const url = sitemapData[fileName];
+    if (url) {
+        return {
+            lastmod: url.lastmod || new Date().toUTCString(),
+            image: url.imageLoc || '',
+        };
+    }
+    return null;
 }
 
 /**
- * Mendapatkan URL gambar dari meta tag og:image atau twitter:image.
- * @param {string} filePath - Path ke file HTML.
- * @returns {string} URL gambar atau string kosong jika tidak ditemukan.
+ * Mengambil data kategori dari judul (Jika diperlukan, untuk kasus non-JSON).
+ * Di sini kita menggunakan data JSON, jadi ini mungkin tidak diperlukan,
+ * tapi disertakan untuk jaga-jaga.
  */
-function extractImage(filePath) {
-    if (!fs.existsSync(filePath)) return "";
-    const html = fs.readFileSync(filePath, "utf8");
+function sanitizeTitle(raw) {
+    if (!raw) return "";
+    return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
+}
 
-    // Cari <meta property="og:image" content="...">
-    const ogImageMatch = html.match(
-        /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i
-    );
-    if (ogImageMatch) return ogImageMatch[1];
+/**
+ * Memuat dan mengurai sitemap.xml menjadi objek yang mudah dicari.
+ * @returns {object} Objek dengan key: nama file, value: {lastmod, imageLoc}
+ */
+function loadSitemapMap() {
+    if (!fs.existsSync(sitemapPath)) return {};
     
-    // Fallback: Cari <meta name="twitter:image" content="...">
-    const twitterImageMatch = html.match(
-        /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i
-    );
-    if (twitterImageMatch) return twitterImageMatch[1];
+    const sitemapContent = fs.readFileSync(sitemapPath, "utf8");
+    const doc = new DOMParser().parseFromString(sitemapContent, "text/xml");
+    const urls = doc.getElementsByTagName("url");
+    const map = {};
 
-    return "";
+    for (let i = 0; i < urls.length; i++) {
+        const locElement = urls[i].getElementsByTagName("loc")[0];
+        const lastmodElement = urls[i].getElementsByTagName("lastmod")[0];
+        const imageLocElement = urls[i].getElementsByTagName("image:loc")[0];
+
+        if (locElement) {
+            const loc = locElement.textContent;
+            const fileName = path.basename(loc);
+            
+            map[fileName] = {
+                lastmod: lastmodElement ? lastmodElement.textContent : null,
+                imageLoc: imageLocElement ? imageLocElement.textContent : null,
+            };
+        }
+    }
+    return map;
 }
 
-function extractDate(filePath) {
-  if (!fs.existsSync(filePath)) return null;
-  const html = fs.readFileSync(filePath, "utf8");
-  const dateMatch = html.match(
-    /<meta[^>]+name=["']date["'][^>]+content=["']([^"']+)["']/i
-  );
-  if (dateMatch) {
-    return new Date(dateMatch[1]);
-  }
-  return null;
+// --- Logika Utama ---
+if (!fs.existsSync(artikelJsonPath)) {
+    console.error("❌ ERROR: File artikel.json tidak ditemukan. Jalankan generator.js terlebih dahulu.");
+    process.exit(1);
 }
 
-function sanitizeTitle(fileName) {
-  return fileName
-    .replace(/\.html$/i, "")
-    .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, c => c.toUpperCase());
+// 1. Muat Data
+const artikelData = JSON.parse(fs.readFileSync(artikelJsonPath, "utf8"));
+const sitemapMap = loadSitemapMap();
+
+let allItems = [];
+
+// 2. Iterasi melalui data artikel.json
+for (const [category, articles] of Object.entries(artikelData)) {
+    articles.forEach(arr => {
+        const fileName = arr[IDX_FILE];
+        const sitemapInfo = getSitemapData(fileName, sitemapMap);
+
+        // Pastikan kami memiliki data esensial
+        if (sitemapInfo) {
+            allItems.push({
+                title: arr[IDX_TITLE],
+                file: fileName,
+                loc: `https://frijal.github.io/artikel/${fileName}`,
+                pubDate: new Date(sitemapInfo.lastmod).toUTCString(), // Konversi ISO ke RFC 822/UTC String
+                desc: arr[IDX_DESCRIPTION] || sanitizeTitle(arr[IDX_TITLE]), // Fallback ke judul jika deskripsi kosong
+                category: category,
+                imageLoc: arr[IDX_IMAGE], // Ambil gambar dari JSON
+                dateObj: new Date(sitemapInfo.lastmod),
+            });
+        }
+    });
 }
 
-function cleanCategory(raw) {
-  if (!raw) return "Umum";
-  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
-}
-
-function cleanTitle(raw) {
-  if (!raw) return "";
-  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
-}
-
-// --- Build kategori map dari artikel.json ---
-let kategoriMap = {};
-if (fs.existsSync(artikelJsonPath)) {
-  try {
-    const artikelData = JSON.parse(fs.readFileSync(artikelJsonPath, "utf8"));
-    for (const [kategori, daftarArtikel] of Object.entries(artikelData)) {
-      daftarArtikel.forEach(([judul, file]) => {
-        kategoriMap[file] = kategori;
-      });
-    }
-  } catch (e) {
-    console.error("⚠️ Gagal parse artikel.json:", e);
-  }
-}
-
-// --- Baca sitemap ---
-const sitemapContent = fs.readFileSync(sitemapPath, "utf8");
-const doc = new DOMParser().parseFromString(sitemapContent, "text/xml");
-const urls = doc.getElementsByTagName("url");
-
-// --- Kumpulkan item ---
-let itemsArr = [];
-for (let i = 0; i < urls.length; i++) {
-  const loc = urls[i].getElementsByTagName("loc")[0]?.textContent;
-  if (loc) {
-    const fileName = path.basename(loc);
-    const localPath = path.join(__dirname, "../artikel", fileName);
-
-    const desc = extractDescription(localPath);
-    const imageLoc = extractImage(localPath); // ⭐ BARU: Ambil URL Gambar
-    const title = cleanTitle(sanitizeTitle(fileName));
-    const category = cleanCategory(kategoriMap[fileName] || "Umum");
-
-    const dateObj = extractDate(localPath) || new Date();
-    const pubDate = dateObj.toUTCString();
-
-    // ⭐ BARU: Tambahkan imageLoc ke objek item
-    itemsArr.push({ title, loc, pubDate, desc, category, dateObj, imageLoc });
-  }
-}
-
-// --- Sort & limit ---
-itemsArr.sort((a, b) => b.dateObj - a.dateObj);
+// 3. Sortir dan Batasi
+allItems.sort((a, b) => b.dateObj - a.dateObj);
 const limit = parseInt(process.env.RSS_LIMIT || "30", 10);
-itemsArr = itemsArr.slice(0, limit);
+const itemsArr = allItems.slice(0, limit);
 
-// --- Generate RSS items ---
+// 4. Generate RSS items
 let items = itemsArr
-  .map(
-    it => `    <item>
+    .map(
+        it => {
+            // Gunakan imageLoc dari artikel.json
+            const enclosure = it.imageLoc ? 
+                `    <enclosure url="${it.imageLoc}" length="0" type="image/jpeg" />` : 
+                '';
+            
+            return `    <item>
       <title><![CDATA[${it.title}]]></title>
       <link><![CDATA[${it.loc}]]></link>
       <guid><![CDATA[${it.loc}]]></guid>
       <pubDate>${it.pubDate}</pubDate>
       <description><![CDATA[${it.desc}]]></description>
       <category><![CDATA[${it.category}]]></category>
-${it.imageLoc ? `      <enclosure url="${it.imageLoc}" length="0" type="image/jpeg" />` : ''}
-    </item>`
-  )
-  .join("\n");
+${enclosure}
+    </item>`;
+        }
+    )
+    .join("\n");
 
-// --- Template RSS ---
+// 5. Template RSS
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -153,7 +149,7 @@ ${items}
   </channel>
 </rss>`;
 
-// --- Tulis file utama ---
-fs.writeFileSync(rssPath, rss, "utf8");
+// 6. Tulis file utama
+fs.writeFileSync(rssOutPath, rss, "utf8");
 
-console.log(`✅ rss.xml berhasil dibuat (${itemsArr.length} item)`);
+console.log(`✅ rss.xml berhasil dibuat dari artikel.json (${itemsArr.length} item)`);
