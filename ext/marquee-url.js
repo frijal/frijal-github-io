@@ -1,1 +1,68 @@
-(function(root,factory){if(typeof define==="function"&&define.amd){define([],factory)}else if(typeof exports==="object"){module.exports=factory()}else{root.MarqueeDynamic=factory()}})(this,function(){async function initMarqueeDynamic(m="marquee-bottom",s=.2,r=6e4){const e=document.getElementById(m),t=document.getElementById("marquee-inner");if(!e||!t)return;let n=0,a=0,c,d=s;function f(l){if(!l)return"#";if(/^https?:\/\//i.test(l))return l;if(l.startsWith("/"))return l;if(l.startsWith("artikel/"))return"/"+l;return"/artikel/"+l}async function i(){try{const m=await fetch("/artikel.json"),s=await m.json(),e=location.pathname.split("/").pop();let t=null;for(const n in s)if(s[n].some(m=>m[1]===e)){t=n;break}return t?s[t].map(m=>({title:m[0],file:m[1]})).sort(()=>Math.random()-.5):[]}catch(m){return console.error("Load JSON gagal:",m),t.textContent="Gagal memuat artikel.",[]}}function o(m){const s=m.map(m=>`<a href="${f(m.file)}" target="_blank">${m.title}</a>`).join(" • ");t.innerHTML=s+" • "+s,a=t.scrollWidth/2,n=0,t.style.transform=`translateX(${n}px)`}async function l(){const m=await i();m.length>0&&o(m)}function u(){n-=d,n<=-a&&(n=0),t.style.transform=`translateX(${n}px)`,c=requestAnimationFrame(u)}e.addEventListener("mouseenter",()=>cancelAnimationFrame(c)),e.addEventListener("mouseleave",()=>c=requestAnimationFrame(u));document.getElementById("speedRange")?.addEventListener("input",m=>d=parseFloat(m.target.value));await l(),c=requestAnimationFrame(u),setInterval(l,r)}return{initMarqueeDynamic}});document.addEventListener("DOMContentLoaded",function(){if(window.MarqueeDynamic){MarqueeDynamic.initMarqueeDynamic("marquee-bottom",.15,45e3)}});
+/**
+ * Inisialisasi Marquee Dinamis dengan Artikel dari Kategori yang Sama.
+ * Fungsi ini mengambil data dari JSON yang terletak di root ('/artikel.json'), 
+ * memfilter, mengacak, dan menampilkannya dalam elemen Marquee.
+ * * @param {string} targetCategoryId ID elemen div Marquee (e.g., 'related-marquee-container')
+ * @param {string} categoryName Nama kategori yang ingin diambil (e.g., 'Religi dan Islam')
+ * @param {string} jsonPath Jalur relatif/absolut file artikel.json (HARUS: '/artikel.json' atau 'artikel.json')
+ */
+async function initCategoryMarquee(targetCategoryId, categoryName, jsonPath) {
+    const marqueeContainer = document.getElementById(targetCategoryId);
+    
+    // 1. Validasi Wadah Marquee
+    if (!marqueeContainer) {
+        console.error(`Marquee Error: Elemen dengan ID: ${targetCategoryId} tidak ditemukan.`);
+        return;
+    }
+    
+    // Tampilkan pesan loading sementara
+    marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait dari kategori "${categoryName}"...</p>`;
+
+    try {
+        // 2. Ambil Data JSON menggunakan path yang disediakan (diasumsikan root: /artikel.json)
+        const response = await fetch(jsonPath);
+        if (!response.ok) {
+            throw new Error(`Gagal memuat ${jsonPath} (Status: ${response.status})`);
+        }
+        const data = await response.json();
+        
+        let allArticles = [];
+
+        // 3. Filter Artikel berdasarkan Kategori
+        if (data[categoryName] && Array.isArray(data[categoryName])) {
+            // Mengubah format array JSON: [title, file, image, _, desc] menjadi objek URL/Title
+            allArticles = data[categoryName].map(item => ({
+                title: item[0],
+                // URL artikel dibuat relatif terhadap root situs (e.g., /artikel/file.html)
+                // Diasumsikan artikel selalu ada di subfolder 'artikel/'
+                url: `/artikel/${item[1]}` 
+            }));
+        }
+
+        if (allArticles.length === 0) {
+            marqueeContainer.innerHTML = ''; // Sembunyikan Marquee jika tidak ada artikel
+            return;
+        }
+
+        // 4. Acak Urutan Artikel
+        allArticles.sort(() => 0.5 - Math.random()); 
+        
+        // 5. Bangun Konten HTML
+        let contentHTML = '';
+        const separator = ' • ';
+
+        allArticles.forEach(post => {
+            contentHTML += `<a href="${post.url}" target="_blank" rel="noopener" title="${post.title}">${post.title}</a>${separator}`;
+        });
+
+        // 6. Ulangi Konten untuk Efek Gulir Berkelanjutan
+        const repeatedContent = contentHTML.repeat(5); // Ulangi 5 kali
+        
+        // 7. Suntikkan Konten
+        marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
+
+    } catch (error) {
+        console.error(`Marquee Error: Gagal memuat/memproses artikel kategori "${categoryName}":`, error);
+        marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
+    }
+}
