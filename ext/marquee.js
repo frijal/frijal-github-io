@@ -14,7 +14,7 @@ export function initMarquee(grouped) {
     .map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`)
     .join(" • ");
 }
-export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed = 0.3, refreshInterval = 60000) {
+export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed = 0.03, refreshInterval = 60000) {
   const container = document.getElementById(containerId);
   const inner = document.getElementById('marquee-inner');
   let left = 0;
