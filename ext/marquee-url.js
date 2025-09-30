@@ -3,7 +3,7 @@
 
 var MarqueeDynamic = {};
 
-MarqueeDynamic.initMarqueeDynamic = function(containerId, defaultSpeed=0.2, refreshInterval=60000){
+MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2, refreshInterval=60000){
   const container = document.getElementById(containerId);
   const inner = document.getElementById("marquee-inner");
   const speedRange = document.getElementById("speedRange");
@@ -13,7 +13,7 @@ MarqueeDynamic.initMarqueeDynamic = function(containerId, defaultSpeed=0.2, refr
 
   async function loadArticles(){
     try{
-      const res = await fetch('/artikel.json'); // fetch dari root
+      const res = await fetch('/artikel.json');
       const data = await res.json();
       const currentFile = location.pathname.split('/').pop();
       let category = null;
@@ -43,10 +43,8 @@ MarqueeDynamic.initMarqueeDynamic = function(containerId, defaultSpeed=0.2, refr
     requestAnimationFrame(step);
   }
 
-  document.addEventListener("DOMContentLoaded", async function(){
-    await loadArticles();
-    step();
-  });
+  await loadArticles();
+  step();
 
   if(speedRange) speedRange.addEventListener("input", function(e){
     speed = parseFloat(e.target.value);
