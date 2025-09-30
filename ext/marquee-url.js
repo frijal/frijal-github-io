@@ -1,1 +1,98 @@
-!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.MarqueeDynamic=e():t.MarqueeDynamic=e()}(this,(function(){return(()=>{var t={d:(e,n)=>{for(var o in n)t.o(n,o)&&!t.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:n[o]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e)},e={};function n(t,e,n){const o=document.getElementById(t);if(!o)return;let r=0,i=0,a=0;async function c(){try{const t=await fetch("/artikel/artikel.json"),c=await t.json(),l=window.location.pathname.split("/"),s=l[1]||"",u=c.filter((t=>t.filename.includes(s)));if(0===u.length)return void console.warn("Tidak ada artikel sesuai kategori:",s);const f=u.sort((()=>.5-Math.random()));o.innerHTML="";const d=document.createElement("div");d.className="marquee-content",f.forEach((t=>{let e=t.filename;e.startsWith("artikel/")||(e="artikel/"+e);const n=document.createElement("a");n.href="/"+e,n.textContent=t.title,n.target="_blank";const r=document.createElement("span");r.className="tooltip-text",r.textContent=t[4]||"",n.appendChild(r),n.classList.add("tooltip"),d.appendChild(n)}));const m=d.cloneNode(!0);o.appendChild(d),o.appendChild(m),i=d.scrollWidth,r=0}catch(t){console.error("Error loading marquee JSON:",t)}}function l(){(r+=a)>=i&&(r=0),o.scrollLeft=r,requestAnimationFrame(l)}c(),a=n||.15,l(),setInterval(c,e||6e4)}return t.d(e,{initMarqueeDynamic:()=>n}),e})()}));
+(function (global, factory) {
+  if (typeof exports === "object" && typeof module !== "undefined") {
+    factory(exports);
+  } else if (typeof define === "function" && define.amd) {
+    define(["exports"], factory);
+  } else {
+    global = global || self;
+    factory(global.MarqueeDynamic = {});
+  }
+})(this, function (exports) {
+  "use strict";
+
+  async function initMarqueeDynamic(containerId, speed = 0.2, refreshInterval = 60000) {
+    const container = document.getElementById(containerId);
+    const inner = document.getElementById("marquee-inner");
+    const slider = document.getElementById("speedRange");
+    if (!container || !inner) return;
+
+    let left = 0;
+    let totalWidth = 0;
+    let currentSpeed = speed;
+    let animationId;
+
+    async function fetchArticles() {
+      try {
+        const res = await fetch("/artikel.json");
+        const data = await res.json();
+
+        const currentFile = location.pathname.split("/").pop();
+        let category = null;
+
+        for (const cat in data) {
+          if (data[cat].some(arr => arr[1] === currentFile)) {
+            category = cat;
+            break;
+          }
+        }
+        if (!category) return [];
+
+        return data[category].map(arr => ({
+          title: arr[0],
+          file: arr[1],
+          img: arr[2],
+          date: arr[3],
+          desc: arr[4],
+        })).sort(() => Math.random() - 0.5);
+
+      } catch (e) {
+        console.error("Gagal load artikel.json:", e);
+        inner.textContent = "Gagal memuat artikel.";
+        return [];
+      }
+    }
+
+    function buildMarquee(articles) {
+      const content = articles
+        .map(a => `
+          <span class="tooltip">
+            <a href="artikel/${a.file}">${a.title}</a>
+            <span class="tooltip-text">${a.desc}</span>
+          </span>
+        `)
+        .join(" • ");
+      inner.innerHTML = content + " • " + content;
+      totalWidth = inner.scrollWidth / 2;
+      left = 0;
+      inner.style.transform = `translateX(${left}px)`;
+    }
+
+    async function updateMarquee() {
+      const articles = await fetchArticles();
+      if (articles.length > 0) buildMarquee(articles);
+    }
+
+    function step() {
+      left -= currentSpeed;
+      if (left <= -totalWidth) left = 0;
+      inner.style.transform = `translateX(${left}px)`;
+      animationId = requestAnimationFrame(step);
+    }
+
+    container.addEventListener("mouseenter", () => cancelAnimationFrame(animationId));
+    container.addEventListener("mouseleave", () => animationId = requestAnimationFrame(step));
+
+    if (slider) {
+      slider.addEventListener("input", e => {
+        currentSpeed = parseFloat(e.target.value);
+      });
+    }
+
+    await updateMarquee();
+    animationId = requestAnimationFrame(step);
+    setInterval(updateMarquee, refreshInterval);
+  }
+
+  exports.initMarqueeDynamic = initMarqueeDynamic;
+  Object.defineProperty(exports, "__esModule", { value: true });
+});
