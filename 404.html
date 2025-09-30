@@ -5,230 +5,240 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redirect Page Premium Browser - OS - IP Address</title>
 <style>
+/* CSS Disesuaikan */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0a0a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
 }
 .info-box {
-  padding: 50px 70px;
-  border-radius: 20px;
-  background-color: rgba(20,20,20,0.85);
-  max-width: 90%;
-  min-width: 320px;
-  box-shadow: 0 0 60px rgba(0,191,255,0.6), 0 0 20px rgba(255,0,255,0.4);
-  transition: transform 0.3s ease;
+    padding: 50px 70px;
+    border-radius: 20px;
+    background-color: rgba(20,20,20,0.85);
+    max-width: 90%;
+    min-width: 320px;
+    box-shadow: 0 0 60px rgba(0,191,255,0.6), 0 0 20px rgba(255,0,255,0.4);
+    transition: transform 0.3s ease;
 }
 .info-box:hover{
-  transform: scale(1.02);
+    transform: scale(1.02);
 }
 h1 {
-  margin-bottom: 40px;
-  font-size: 3rem;
-  text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+    margin-bottom: 40px;
+    font-size: 3rem;
+    text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
 }
 .info-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  margin: 25px 0;
-  transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 25px 0;
+    transition: transform 0.3s ease;
 }
-.info-item img {
-  width: 50px;
-  height: 50px;
-  margin: 0 20px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 5px #0ff);
-  transition: transform 0.3s ease, filter 0.3s ease;
-  border-radius: 8px;
+/* Gaya untuk SVG Container */
+.info-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 20px;
+    display: flex; /* Untuk menengahkan SVG */
+    align-items: center;
+    justify-content: center;
+    /* Filter dan Transisi Diterapkan pada Container SVG */
+    filter: drop-shadow(0 0 5px #0ff);
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
-.info-item img:hover{
-  transform: scale(1.3);
-  filter: drop-shadow(0 0 20px #0ff) drop-shadow(0 0 40px #0ff);
+/* Gaya SVG di dalam container */
+.info-icon svg {
+    width: 100%;
+    height: 100%;
+    /* Atur agar SVG mengisi container */
+}
+.info-icon:hover{
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 20px #0ff) drop-shadow(0 0 40px #0ff);
 }
 #redirectInfo{
-  margin-top: 35px;
-  font-size: 1.5rem;
-  color: #00bfff;
-  text-shadow: 0 0 10px #0ff;
+    margin-top: 35px;
+    font-size: 1.5rem;
+    color: #00bfff;
+    text-shadow: 0 0 10px #0ff;
 }
 
 @media (max-width:800px){
-  h1{font-size:2rem;}
-  .info-item{font-size:1.3rem;}
-  .info-item img{width:40px;height:40px; margin: 0 12px;}
+    h1{font-size:2rem;}
+    .info-item{font-size:1.3rem;}
+    .info-icon{width:40px;height:40px; margin: 0 12px;}
 }
 @media (max-width:400px){
-  h1{font-size:1.5rem;}
-  .info-item{font-size:1rem;}
-  .info-item img{width:28px;height:28px; margin:0 8px;}
+    h1{font-size:1.5rem;}
+    .info-item{font-size:1rem;}
+    .info-icon{width:28px;height:28px; margin:0 8px;}
 }
 </style>
 </head>
 <body>
 
 <div class="info-box">
-  <h1>Informasi Browser, OS & IP</h1>
-  <div class="info-item" id="browserInfo">
-    <img src="" alt="Left Icon" id="browserLeftIcon">
-    <span id="browserText">Browser: ...</span>
-    <img src="" alt="Right Icon" id="browserRightIcon">
-  </div>
-  <div class="info-item" id="versionInfo">
-    <img src="" alt="Left Icon" id="versionLeftIcon">
-    <span id="versionText">Versi: ...</span>
-    <img src="" alt="Right Icon" id="versionRightIcon">
-  </div>
-  <div class="info-item" id="osInfo">
-    <img src="" alt="Left Icon" id="osLeftIcon">
-    <span id="osText">OS: ...</span>
-    <img src="" alt="Right Icon" id="osRightIcon">
-  </div>
-  <div class="info-item" id="ipInfo">
-    <img src="" alt="Left Icon" id="flagLeftIcon">
-    <span id="ipText">IP: ...</span>
-    <img src="" alt="Right Icon" id="flagRightIcon">
-  </div>
-  <p id="redirectInfo">redirect sebentar lagi...</p>
+    <h1>Informasi Browser, OS & IP</h1>
+    <div class="info-item" id="browserInfo">
+        <span class="info-icon" id="browserLeftIcon"></span> <span id="browserText">Browser: ...</span>
+        <span class="info-icon" id="browserRightIcon"></span> </div>
+    <div class="info-item" id="versionInfo">
+        <span class="info-icon" id="versionLeftIcon"></span> <span id="versionText">Versi: ...</span>
+        <span class="info-icon" id="versionRightIcon"></span> </div>
+    <div class="info-item" id="osInfo">
+        <span class="info-icon" id="osLeftIcon"></span> <span id="osText">OS: ...</span>
+        <span class="info-icon" id="osRightIcon"></span> </div>
+    <div class="info-item" id="ipInfo">
+        <span class="info-icon" id="flagLeftIcon"></span> <span id="ipText">IP: ...</span>
+        <span class="info-icon" id="flagRightIcon"></span> </div>
+    <p id="redirectInfo">redirect sebentar lagi...</p>
 </div>
 
 <script>
-// Browser detection with extended list
+// Ikon SVG Lokal
+const svgIcons = {
+    // Browser SVG (Diperluas dengan path dasar)
+    'Brave': '<svg viewBox="0 0 100 100" fill="#ff4d00"><circle cx="50" cy="50" r="45"/><path fill="#fff" d="M30 35h40l-5 30H35z"/></svg>',
+    'Firefox': '<svg viewBox="0 0 100 100" fill="#ff4500"><circle cx="50" cy="50" r="45"/><path fill="#ffd700" d="M30 40c-5 10-5 30 0 40l20-10V40z"/></svg>',
+    'Chrome': '<svg viewBox="0 0 100 100" fill="#4285F4"><circle cx="50" cy="50" r="48"/><path fill="#fff" d="M50 20a30 30 0 000 60 30 30 0 000-60z"/><circle cx="50" cy="50" r="15" fill="#34A853"/><path fill="#FBBC05" d="M50 20L80 50 50 80z"/></svg>',
+    'Safari': '<svg viewBox="0 0 100 100" fill="#00ADEF"><circle cx="50" cy="50" r="48"/><path fill="#fff" d="M50 15L85 50 50 85 15 50z"/></svg>',
+    'Edge': '<svg viewBox="0 0 100 100" fill="#0078D7"><circle cx="50" cy="50" r="48"/><path fill="#fff" d="M25 50h50L60 65 40 35z"/></svg>',
+    'Opera': '<svg viewBox="0 0 100 100" fill="#CC0F16"><circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="30" fill="#fff"/></svg>',
+    'UnknownBrowser': '<svg viewBox="0 0 100 100" fill="#6a6a6a"><circle cx="50" cy="50" r="48"/><text x="50" y="65" font-size="60" fill="#fff" text-anchor="middle">?</text></svg>',
+
+    // OS SVG
+    'Windows': '<svg viewBox="0 0 100 100" fill="#00BFFF"><path fill="#fff" d="M20 20h30v30H20zM55 20h25v30H55zM20 55h30v25H20zM55 55h25v25H55z"/></svg>',
+    'macOS': '<svg viewBox="0 0 100 100" fill="#fff"><path d="M50 10C35 10 20 20 20 40c0 10 10 20 10 20s-10 10-10 20c0 10 10 10 20 10h20c10 0 20-10 20-20 0-10-10-10-10-20s10-10 10-20c0-20-15-30-30-30z"/></svg>',
+    'Linux': '<svg viewBox="0 0 100 100" fill="#ff7f00"><circle cx="50" cy="65" r="30"/><circle cx="40" cy="40" r="10" fill="#fff"/><circle cx="60" cy="40" r="10" fill="#fff"/><path fill="#000" d="M48 55l-5 10 14 0z"/></svg>',
+    'Android': '<svg viewBox="0 0 100 100" fill="#3DDC84"><rect x="30" y="35" width="40" height="50" rx="5" ry="5"/><path d="M40 35l-5-10h30l-5 10z"/><circle cx="40" cy="40" r="3" fill="#fff"/><circle cx="60" cy="40" r="3" fill="#fff"/></svg>',
+    'iOS': '<svg viewBox="0 0 100 100" fill="#fff"><path d="M50 10C35 10 20 20 20 40c0 10 10 20 10 20s-10 10-10 20c0 10 10 10 20 10h20c10 0 20-10 20-20 0-10-10-10-10-20s10-10 10-20c0-20-15-30-30-30z"/></svg>',
+    'UnknownOS': '<svg viewBox="0 0 100 100" fill="#6a6a6a"><circle cx="50" cy="50" r="48"/><text x="50" y="65" font-size="60" fill="#fff" text-anchor="middle">?</text></svg>',
+    
+    // Icon IP/Global
+    'Globe': '<svg viewBox="0 0 100 100" fill="#00bfff"><circle cx="50" cy="50" r="48"/><path fill="none" stroke="#fff" stroke-width="5" d="M50 2a48 48 0 000 96 48 48 0 000-96zM2 50h96M50 2c15 30 15 70 0 96"/></svg>'
+};
+
+// Map browser name to the key in svgIcons
+function getBrowserIconKey(name) {
+    if (name.includes("Firefox")) return 'Firefox';
+    if (name.includes("Chrome")) return 'Chrome';
+    if (name.includes("Brave")) return 'Brave';
+    if (name.includes("Safari")) return 'Safari';
+    if (name.includes("Edge")) return 'Edge';
+    if (name.includes("Opera")) return 'Opera';
+    return 'UnknownBrowser';
+}
+
+// Map OS name to the key in svgIcons
+function getOSIconKey(name) {
+    if (name.includes("Windows")) return 'Windows';
+    if (name.includes("macOS")) return 'macOS';
+    if (name.includes("Linux")) return 'Linux';
+    if (name.includes("Android")) return 'Android';
+    if (name.includes("iOS")) return 'iOS';
+    return 'UnknownOS';
+}
+
+// Browser detection (disajikan lebih ringkas)
 function getBrowserInfo() {
-  const ua = navigator.userAgent;
-  let name = "Unknown";
-  let version = "Unknown";
-  let icon = "";
+    const ua = navigator.userAgent;
+    let name = "Unknown Browser";
+    let version = "N/A";
 
-  if(ua.indexOf("Brave") > -1){
-    name="Brave"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg";
-  } else if(ua.indexOf("Firefox")>-1){
-    name="Firefox"; version = ua.match(/Firefox\/([0-9\.]+)/)[1];
-    icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg";
-  } else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){
-    name="Chrome"; version = ua.match(/Chrome\/([0-9\.]+)/)[1];
-    icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png";
-  } else if(ua.indexOf("Chromium")>-1){
-    name="Chromium"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg";
-  } else if(ua.indexOf("IceCat")>-1){
-    name="GNU IceCat"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/GNU_IceCat_icon.png";
-  } else if(ua.indexOf("Iceweasel")>-1){
-    name="Iceweasel"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/2/21/Iceweasel_Icon.svg";
-  } else if(ua.indexOf("MSIE")>-1 || ua.indexOf("Trident")>-1){
-    name="Internet Explorer"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/4/44/Internet_Explorer_10_icon.svg";
-  } else if(ua.indexOf("Konqueror")>-1){
-    name="Konqueror"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/3/3b/Konqueror_logo.svg";
-  } else if(ua.indexOf("Netscape")>-1){
-    name="Netscape"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/6/69/Netscape_logo.svg";
-  } else if(ua.indexOf("TorBrowser")>-1){
-    name="Tor Browser"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/e/e4/Tor-logo-2011.png";
-  } else if(ua.indexOf("Vivaldi")>-1){
-    name="Vivaldi"; version = "N/A";
-    icon="https://upload.wikimedia.org/wikipedia/commons/0/0b/Vivaldi_Logo.png";
-  } else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){
-    name="Safari"; version = ua.match(/Version\/([0-9\.]+)/)[1];
-    icon="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg";
-  } else if(ua.indexOf("Edg")>-1){
-    name="Edge"; version = ua.match(/Edg\/([0-9\.]+)/)[1];
-    icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg";
-  } else if(ua.indexOf("OPR")>-1){
-    name="Opera"; version = ua.match(/OPR\/([0-9\.]+)/)[1];
-    icon="https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg";
-  }
-  return {name, version, icon};
+    if(ua.indexOf("Brave") > -1) name="Brave"; 
+    else if(ua.indexOf("Firefox")>-1) { name="Firefox"; version = ua.match(/Firefox\/([0-9\.]+)/)?.[1] || "N/A"; } 
+    else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1) { name="Chrome"; version = ua.match(/Chrome\/([0-9\.]+)/)?.[1] || "N/A"; }
+    else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1) { name="Safari"; version = ua.match(/Version\/([0-9\.]+)/)?.[1] || "N/A"; }
+    else if(ua.indexOf("Edg")>-1) { name="Edge"; version = ua.match(/Edg\/([0-9\.]+)/)?.[1] || "N/A"; }
+    else if(ua.indexOf("OPR")>-1) { name="Opera"; version = ua.match(/OPR\/([0-9\.]+)/)?.[1] || "N/A"; }
+    
+    return {name, version, iconKey: getBrowserIconKey(name)};
 }
 
-// OS detection
+// OS detection (disajikan lebih ringkas)
 function getOSInfo(){
-  const platform = navigator.platform.toLowerCase();
-  const ua = navigator.userAgent.toLowerCase();
-  let name = "Unknown OS";
-  let version = "";
-  let icon = "";
+    const platform = navigator.platform.toLowerCase();
+    const ua = navigator.userAgent.toLowerCase();
+    let name = "Unknown OS";
+    let version = "N/A";
 
-  if(platform.indexOf("win")!==-1){
-    name="Windows";
-    const m = ua.match(/windows nt ([0-9\.]+)/);
-    version = m?m[1]:"";
-    icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg";
-  } else if(platform.indexOf("mac")!==-1){
-    name="macOS";
-    const m = ua.match(/mac os x ([0-9_]+)/);
-    version = m?m[1].replace(/_/g,"."):"";
-    icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";
-  } else if(platform.indexOf("linux")!==-1){
-    name="Linux";
-    icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png";
-  } else if(/android/.test(ua)){
-    name="Android";
-    icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg";
-  } else if(/iphone|ipad|ipod/.test(ua)){
-    name="iOS";
-    icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";
-  }
-
-  return {name, version, icon};
+    if(platform.indexOf("win")!==-1){
+        name="Windows";
+        version = ua.match(/windows nt ([0-9\.]+)/)?.[1] || "N/A";
+    } else if(platform.indexOf("mac")!==-1){
+        name="macOS";
+        version = ua.match(/mac os x ([0-9_]+)/)?.[1]?.replace(/_/g,".") || "N/A";
+    } else if(/android/.test(ua)){
+        name="Android";
+    } else if(/iphone|ipad|ipod/.test(ua)){
+        name="iOS";
+    } else if(platform.indexOf("linux")!==-1){
+        name="Linux";
+    }
+    
+    return {name, version, iconKey: getOSIconKey(name)};
 }
 
-// Display Browser & OS
+// Fungsi untuk menyuntikkan SVG
+function setSvgIcon(id, iconKey) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.innerHTML = svgIcons[iconKey] || svgIcons['UnknownBrowser']; // Fallback umum
+    }
+}
+
+// 1. Display Browser & Version
 const browser = getBrowserInfo();
-document.getElementById("browserLeftIcon").src = browser.icon;
-document.getElementById("browserRightIcon").src = browser.icon;
+setSvgIcon("browserLeftIcon", browser.iconKey);
+setSvgIcon("browserRightIcon", browser.iconKey);
 document.getElementById("browserText").textContent = `Browser: ${browser.name}`;
 
-document.getElementById("versionLeftIcon").src = browser.icon;
-document.getElementById("versionRightIcon").src = browser.icon;
+setSvgIcon("versionLeftIcon", browser.iconKey);
+setSvgIcon("versionRightIcon", browser.iconKey);
 document.getElementById("versionText").textContent = `Versi: ${browser.version}`;
 
+// 2. Display OS
 const os = getOSInfo();
-document.getElementById("osLeftIcon").src = os.icon;
-document.getElementById("osRightIcon").src = os.icon;
+setSvgIcon("osLeftIcon", os.iconKey);
+setSvgIcon("osRightIcon", os.iconKey);
 document.getElementById("osText").textContent = `OS: ${os.name} ${os.version}`;
 
-// Fetch IP & country flag
+// 3. Fetch IP & Globe Icon
+setSvgIcon("flagLeftIcon", 'Globe');
+setSvgIcon("flagRightIcon", 'Globe');
+
 fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(data => {
-    const ip = data.ip;
-    const countryCode = data.country_code.toLowerCase();
-    const flagUrl = `https://flagcdn.com/64x48/${countryCode}.png`; 
-    document.getElementById("flagLeftIcon").src = flagUrl;
-    document.getElementById("flagRightIcon").src = flagUrl;
-    document.getElementById("ipText").textContent = `IP: ${ip} (${data.country_name})`;
-  })
-  .catch(err => {
-    document.getElementById("ipText").textContent = "IP: Tidak dapat diambil";
-  });
+    .then(res => res.json())
+    .then(data => {
+        const ip = data.ip;
+        // Tidak lagi menggunakan bendera eksternal, hanya menampilkan teks
+        document.getElementById("ipText").textContent = `IP: ${ip} (${data.country_name})`;
+    })
+    .catch(err => {
+        document.getElementById("ipText").textContent = "IP: Tidak dapat diambil";
+    });
 
 // Redirect countdown
 let redirectTime = 3;
 const redirectEl = document.getElementById("redirectInfo");
 const countdown = setInterval(()=>{
-  redirectTime--;
-  if(redirectTime<=0){
-    clearInterval(countdown);
-    window.location.href = "https://frijal.github.io/sitemap.html"; // ganti tujuan
-  } else {
-    redirectEl.textContent = `meluncur dalam ${redirectTime} detik...`;
-  }
+    redirectTime--;
+    if(redirectTime<=0){
+        clearInterval(countdown);
+        window.location.href = "https://frijal.github.io/sitemap.html"; // ganti tujuan
+    } else {
+        redirectEl.textContent = `meluncur dalam ${redirectTime} detik...`;
+    }
 },1000);
 </script>
 
