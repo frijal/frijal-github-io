@@ -14,7 +14,7 @@ export function initMarquee(grouped) {
     .map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`)
     .join(" • ");
 }
-export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed = 1, refreshInterval = 60000) {
+export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed = 0.5, refreshInterval = 60000) {
   const container = document.getElementById(containerId);
   const inner = document.getElementById('marquee-inner');
   let left = 0;
@@ -83,7 +83,7 @@ export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed =
 
 ///////////////////////
 
-export function initMarqueeDynamic(marqueeId, speed = 1, refreshInterval = 60000) {
+export function initMarqueeDynamic(marqueeId, speed = 0.5, refreshInterval = 60000) {
   const marquee = document.getElementById(marqueeId);
   if (!marquee) return;
 
