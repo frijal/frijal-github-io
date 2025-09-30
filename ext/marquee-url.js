@@ -20,7 +20,7 @@
 
     async function updateMarquee(){
       try{
-        const res=await fetch("/artikel/artikel.json");
+        const res=await fetch("/artikel.json");
         const data=await res.json();
         const currentFile=location.pathname.split("/").pop();
 
