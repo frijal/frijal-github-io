@@ -15,8 +15,8 @@ jobs:
         # Menggunakan token GITHUB_TOKEN bawaan, fetch-depth: 0 diperlukan untuk commit
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
-          
+          fetch-depth: 0
+
       - name: Siapkan Folder Laporan
         run: |
           mkdir -p mini/
@@ -26,38 +26,74 @@ jobs:
         run: |
           TARGET_DIR="${{ github.event.inputs.target_folder }}"
           # Mengganti karakter non-alfanumerik/path dengan underscore untuk nama file
-          SANITIZED_DIR_NAME=$(echo "${TARGET_DIR}" | sed 's/[^a-zA-Z0-9]/_/g') 
+          SANITIZED_DIR_NAME=$(echo "${TARGET_DIR}" | sed 's/[^a-zA-Z0-9]/_/g')
           REPORT_FILE="mini/laporan_jumlah_file_${SANITIZED_DIR_NAME}.txt"
-          
+
           echo "Memulai scanning di folder: ${TARGET_DIR}"
-          
+
           if [ ! -d "${TARGET_DIR}" ]; then
             echo "::error::Error: Folder '${TARGET_DIR}' tidak ditemukan."
             exit 1
           fi
-          
-          # 1. Hitung jumlah file per ekstensi (diurutkan dari terbanyak)
-          REPORT_CONTENT=$(find "${TARGET_DIR}" -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
-          
-          # 2. Hitung total semua file di folder target
+
+          # 1. Hitung total semua file di folder target
           TOTAL_FILES=$(find "${TARGET_DIR}" -type f | wc -l)
-          
-          # 3. Format laporan dengan summary di baris pertama
-          echo "SUMMARY: Total File dalam folder '${TARGET_DIR}' = ${TOTAL_FILES}" > ${REPORT_FILE}
+
+          # 2. Konten Ringkasan: Hitung jumlah file per ekstensi (diurutkan dari terbanyak)
+          REPORT_SUMMARY_CONTENT=$(find "${TARGET_DIR}" -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
+
+          # 3. Konten Detail: Daftar file dikelompokkan berdasarkan ekstensi dengan pemisah baris kosong
+          REPORT_DETAIL_CONTENT=$(find "${TARGET_DIR}" -type f -print | awk -F'.' '{
+              # Jika ada ekstensi, gunakan ekstensi terakhir. Jika tidak, gunakan "no_ext"
+              ext = (NF > 1) ? $NF : "no_ext";
+              # Cetak ekstensi dan path untuk sorting
+              print ext " " $0;
+          }' | sort -k1,1 | awk '
+              BEGIN { current_ext = ""; }
+              {
+                  # Ambil ekstensi (kata pertama)
+                  ext = $1;
+                  # Path adalah sisa baris setelah ekstensi dan spasi
+                  # Menggunakan substr untuk menangani spasi dalam nama file
+                  path = substr($0, length(ext) + 2);
+
+                  if (ext != current_ext) {
+                      if (current_ext != "") {
+                          print ""; # Garis kosong pemisah kelompok
+                      }
+                      current_ext = ext;
+                      
+                      # Tampilkan header grup. Ubah 'no_ext' menjadi Teks
+                      display_ext = (ext == "no_ext") ? "TIDAK ADA EKSTENSI" : "." toupper(ext);
+                      print "## " display_ext " ##";
+                  }
+                  print "- " path;
+              }
+          ')
+
+          # 4. Format laporan akhir
+          echo "LAPORAN JUMLAH FILE FOLDER '${TARGET_DIR}'" > ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
-          echo "${REPORT_CONTENT}" >> ${REPORT_FILE}
-          echo "==================================" >> ${REPORT_FILE}
+          echo "SUMMARY: Total File Ditemukan = ${TOTAL_FILES}" >> ${REPORT_FILE}
+          echo "" >> ${REPORT_FILE}
           
+          echo "### RINGKASAN JUMLAH PER EKSTENSI ###" >> ${REPORT_FILE}
+          echo "JUMLAH | EKSTENSI" >> ${REPORT_FILE}
+          echo "${REPORT_SUMMARY_CONTENT}" >> ${REPORT_FILE}
+          
+          echo "" >> ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
+          echo "### DAFTAR DETAIL FILE BERDASARKAN EKSTENSI ###" >> ${REPORT_FILE}
+          echo "${REPORT_DETAIL_CONTENT}" >> ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
+
           echo "Laporan telah dibuat di ${REPORT_FILE}"
           cat ${REPORT_FILE}
 
       - name: Commit File Laporan ke Repositori
         # Action ini akan melakukan git commit & push otomatis
-        uses: stefanzweifel/git-auto-commit-action@v5 
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Laporan: Update jumlah file di folder ${{ github.event.inputs.target_folder }}"
           branch: ${{ github.ref_name }} # Commit ke branch yang sedang berjalan
           file_pattern: mini/*.txt # Hanya commit file laporan yang baru dibuat
-          
-      # CATATAN: Langkah penghapusan Artifact tidak diperlukan karena kita telah MENGHAPUS 
-      # langkah 'upload-artifact' yang lama. Dengan demikian, Artifact tidak pernah dibuat.
