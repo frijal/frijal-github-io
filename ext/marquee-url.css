@@ -1,10 +1,20 @@
+/* Dark/Light mode otomatis */
+@media(prefers-color-scheme:dark){
+  body{background:#111;color:#fff}
+  #speedRange::-webkit-slider-thumb{background:#fff}
+  #speedRange::-moz-range-thumb{background:#fff}
+}
+@media(prefers-color-scheme:light){
+  body{background:#fff;color:#111}
+  #speedRange::-webkit-slider-thumb{background:#000}
+  #speedRange::-moz-range-thumb{background:#000}
+}
+
 /* Container marquee */
 #marquee-bottom {
   position: relative;
   width: 100%;
-  overflow: hidden; /* harus hidden supaya marquee terlihat */
-  background: #111;
-  color: #fff;
+  overflow: hidden; /* wajib agar marquee terlihat */
   white-space: nowrap;
 }
 
@@ -24,7 +34,7 @@
   transform-origin: center;
   width: 120px;  /* panjang slider */
   height: 6px;   /* tebal slider */
-  background: #555; /* agar track terlihat */
+  background: #555;
   -webkit-appearance: none;
   appearance: none;
   z-index: 999;
@@ -35,7 +45,6 @@
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
-  background: #fff;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -44,7 +53,6 @@
 #speedRange::-moz-range-thumb {
   width: 12px;
   height: 12px;
-  background: #fff;
   border-radius: 50%;
   cursor: pointer;
 }
