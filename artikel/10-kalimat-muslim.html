@@ -247,13 +247,24 @@
             fjs.parentNode.insertBefore(js, fjs);
         })(document, 'script', 'facebook-jssdk');
     </script>
+
     
-<div id="marquee-bottom"><div id="marquee-inner"></div></div><input id="speedRange" type="range" min="0.01" max="2" step="0.01" value="0.2"><script src="/ext/marquee-url.js"></script><script>MarqueeDynamic.initMarqueeDynamic("marquee-bottom",0.2,60000);</script>
+    <script src="/ext/marquee-url.js"></script><section id="related-marquee-section"><div id="related-marquee-container"></div></section>
 
-</body>
-</html>
+<div id="marquee-speed-control"><input type="range" id="speedSlider" min="20" max="150" value="100"></div>
 
+<script>
+document.addEventListener('DOMContentLoaded',() => {
+    // Deteksi nama file dari URL:
+    const pathname = window.location.pathname;
+    const FILENAME_AKTIF = pathname.substring(pathname.lastIndexOf('/') + 1);
+    const SUMBER_JSON = "/artikel.json";
+    
+    initCategoryMarquee('related-marquee-container', FILENAME_AKTIF, SUMBER_JSON);
+    initMarqueeSpeedControl('speedSlider','marquee-content');
+});
+</script>
 
-
+    
 </body>
 </html>
