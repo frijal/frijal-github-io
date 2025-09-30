@@ -1,50 +1,42 @@
-/* Container marquee */
-#marquee-bottom {
-  position: relative;
-  width: 100%;
-  overflow: hidden; /* harus hidden supaya marquee terlihat */
-  background: #111;
-  color: #fff;
-  white-space: nowrap;
-}
+(function(global, factory) {
+  if (typeof exports === "object" && typeof module === "object")
+    module.exports = factory();
+  else if (typeof define === "function" && define.amd)
+    define(["exports"], factory);
+  else
+    global.MarqueeDynamic = factory();
+})(this, function(exports) {
+  "use strict";
 
-/* Konten marquee */
-#marquee-inner {
-  display: inline-block;
-  white-space: nowrap;
-  transform: translateX(0);
-}
+  exports.initMarqueeDynamic = function(containerId, defaultSpeed = 0.2, refreshInterval = 60000) {
+    const container = document.getElementById(containerId);
+    const inner = document.getElementById("marquee-inner");
+    const speedRange = document.getElementById("speedRange");
 
-/* Slider vertikal */
-#speedRange {
-  position: fixed;
-  right: 15px;
-  top: 50%;
-  transform: rotate(-90deg) translateY(-50%);
-  transform-origin: center;
-  width: 120px;  /* panjang slider */
-  height: 6px;   /* tebal slider */
-  background: #555; /* agar track terlihat */
-  -webkit-appearance: none;
-  appearance: none;
-  z-index: 999;
-}
+    if (!container || !inner) return;
 
-/* Thumb slider Chrome/Safari */
-#speedRange::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
-  background: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-}
+    let left = 0;
+    let speed = defaultSpeed;
 
-/* Thumb slider Firefox */
-#speedRange::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  background: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-}
+    function step() {
+      left -= speed;
+      if (left <= -inner.scrollWidth / 2) left = 0;
+      inner.style.transform = "translateX(" + left + "px)";
+      requestAnimationFrame(step);
+    }
+
+    // Jalankan step setelah DOM siap
+    document.addEventListener("DOMContentLoaded", step);
+
+    // Slider input untuk mengubah kecepatan
+    if (speedRange) {
+      speedRange.addEventListener("input", function(e) {
+        speed = parseFloat(e.target.value);
+      });
+    }
+  };
+
+  Object.defineProperty(exports, "__esModule", { value: true });
+
+  return exports;
+});
