@@ -13,7 +13,7 @@ exports.initMarqueeDynamic=function(containerId,defaultSpeed=0.2,refreshInterval
 
   async function loadArticles(){
     try{
-      const res=await fetch('/artikel.json');
+      const res=await fetch('/artikel.json'); // pastikan artikel.json ada di root
       const data=await res.json();
       const currentFile=location.pathname.split('/').pop();
       let category=null;
