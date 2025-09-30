@@ -15,7 +15,7 @@ on:
       - 'sitemap.xml'
 
   schedule:
-    - cron: '0 21 30 * *'    
+    - cron: '0 20 40 * *'    
 
 jobs:
   screenshot_proses:
