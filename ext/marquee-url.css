@@ -12,5 +12,5 @@
 @media(prefers-color-scheme:dark){
   #marquee-bottom{background:var(--marquee-bg-dark,#111);color:var(--marquee-color-dark,#f9f9f9)}
 }
-/* Slider Kontrol Kecepatan - Fixed di kanan */
-#speedRange{position:fixed;top:50%;right:20px;transform:translateY(-50%);z-index:9999;writing-mode:bt-lr;-webkit-appearance:slider-vertical;height:200px}
+/* Slider Kontrol Kecepatan - Fixed di kanan lebih dekat */
+#speedRange{position:fixed;top:50%;right:5px;transform:translateY(-50%);z-index:9999;writing-mode:bt-lr;-webkit-appearance:slider-vertical;height:200px}
