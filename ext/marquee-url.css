@@ -65,3 +65,39 @@
         transform: translateX(-100%); 
     }
 }
+
+
+/* =======================================
+   GAYA UNTUK SLIDER KECEPATAN MARQUEE
+   ======================================= */
+
+#marquee-speed-control {
+    position: fixed; /* Membuatnya sticky terhadap viewport */
+    right: 15px; /* Jarak 15px dari pinggir kanan layar */
+    top: 50%; /* Posisikan di tengah vertikal */
+    transform: translateY(-50%);
+    z-index: 1001; /* Pastikan di atas Marquee dan konten */
+    padding: 10px 5px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+#marquee-speed-control label {
+    display: block;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+#speedSlider {
+    /* Membuat slider menjadi vertikal */
+    writing-mode: bt-lr; /* Dari bawah ke atas */
+    -webkit-appearance: none; /* Untuk Chrome/Safari */
+    margin: 10px 0;
+    width: 150px; /* Lebar slider yang akan menjadi tinggi */
+    height: 10px; /* Tinggi slider yang akan menjadi lebar */
+    transform: rotate(270deg); /* Putar 270 derajat */
+    cursor: pointer;
+}
