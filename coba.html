@@ -10,7 +10,9 @@
     <meta name="keywords" content="Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal">
     <meta name="author" content="Fakhrul">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://frijal.github.io/artikel.html"> <meta property="og:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
+    <meta name="theme-color" content="#f0f2f5"> <link rel="canonical" href="https://frijal.github.io/coba.html"> 
+    
+    <meta property="og:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
     <meta property="og:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir. Temukan topik yang relevan dengan minat Anda.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://frijal.github.io/artikel.html">
@@ -23,7 +25,7 @@
     <meta name="twitter:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir.">
     <meta name="twitter:site" content="@frijal">
     <meta name="twitter:creator" content="@frijal">
-    <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
+    <meta name="twitter:image" content="https://frijal.github.io/logo.png">
 
     <script type="application/ld+json">
     {
@@ -31,25 +33,39 @@
       "@type": "CollectionPage",
       "name": "Jelajahi Artikel: Windows, Linux, Religi, & Karir",
       "description": "Kumpulan artikel terbaru tentang Linux, Windows, Islam, dan tips karir.",
-      "url": "https://frijal.github.io/artikel.html",
+      "url": "https://frijal.github.io/coba.html",
       "publisher": {
         "@type": "Organization",
         "name": "Frijal",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://frijal.github.io/logo.png"
+          "url": "URL_LOGO_ORGANISASI_ANDA_DI_SINI"
         }
       }
     }
     </script>
     
     <style>
-        /* Gaya CSS Anda yang tidak diubah */
+        /* =======================================
+           GAYA DEFAULT (LIGHT MODE)
+           ======================================= */
+        :root {
+            --bg-page: #f0f2f5;
+            --bg-section: #fff;
+            --bg-card: #f8f9fa;
+            --text-primary: #333;
+            --text-secondary: #007bff;
+            --text-muted: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: var(--bg-page);
             margin: 0;
             padding: 20px;
+            color: var(--text-primary);
         }
         .container {
             max-width: 1200px;
@@ -58,20 +74,20 @@
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 40px;
         }
         .category-section {
-            background-color: #fff;
+            background-color: var(--bg-section);
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             padding: 20px;
             margin-bottom: 30px;
         }
         .category-section h2 {
             font-size: 1.8em;
-            color: #007bff;
-            border-bottom: 2px solid #e9ecef;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
@@ -81,7 +97,7 @@
             gap: 25px;
         }
         .article-card {
-            background-color: #f8f9fa;
+            background-color: var(--bg-card);
             border-radius: 8px;
             overflow: hidden;
             text-align: center;
@@ -115,30 +131,27 @@
             line-height: 1.4;
         }
         .no-thumbnail {
-            background-color: #e9ecef;
+            background-color: var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
             height: 150px;
-            color: #6c757d;
+            color: var(--text-muted);
             font-size: 1.1em;
             text-align: center;
         }
-        /* Gaya dasar untuk footer */
         .page-footer {
             padding: 20px;
             text-align: center;
             font-family: sans-serif;
             font-size: 14px;
         }
-        /* Gaya untuk wadah info dinamis */
         #footerInfo {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
         }
-        /* Gaya untuk setiap item info */
         .info-item {
             display: flex;
             align-items: center;
@@ -147,18 +160,64 @@
             transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
             color: #555;
         }
-        /* Gaya saat hover */
         .info-item:hover {
             transform: scale(1.05);
             color: #007BFF;
         }
-        /* Tambahan gaya untuk ikon SVG */
         .info-item svg {
             width: 16px;
             height: 16px;
             vertical-align: middle;
         }
+
+
+        /* =======================================
+           DARK MODE OVERRIDES
+           Menggunakan prefers-color-scheme
+           ======================================= */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-page: #121212;
+                --bg-section: #1e1e1e;
+                --bg-card: #2c2c2c;
+                --text-primary: #f0f0f0;
+                --text-secondary: #5dade2; /* Biru yang lebih terang untuk dark mode */
+                --text-muted: #aaa;
+                --border-color: #383838;
+                --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            }
+            body {
+                color: var(--text-primary);
+            }
+            h1 {
+                color: var(--text-primary);
+            }
+            .category-section h2 {
+                color: var(--text-secondary);
+                border-bottom: 2px solid var(--border-color);
+            }
+            .article-card:hover {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            }
+            .info-item {
+                color: var(--text-muted);
+            }
+            .info-item:hover {
+                color: var(--text-secondary); /* Warna hover menyesuaikan dark mode */
+            }
+            /* Ganti warna ikon SVG jika perlu, misal: */
+            .info-item svg path, .info-item svg circle, .info-item svg rect {
+                 /* Ini akan mempengaruhi semua ikon, perlu penyesuaian jika ikon memiliki warna spesifik */
+            }
+            /* Menyesuaikan meta theme color untuk dark mode */
+            meta[name="theme-color"] {
+                content: #121212;
+            }
+        }
     </style>
+    <meta name="theme-color" content="#f0f2f5" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
 </head>
 <body>
     <div class="container">
@@ -188,7 +247,7 @@
         };
         const globeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#4CAF50"/><path fill="#fff" d="M8 3a5 5 0 010 10 5 5 0 010-10z"/></svg>';
 
-        // --- Logika Utama Pemuatan Artikel (Lazy Load Diterapkan) ---
+        // --- Logika Utama Pemuatan Artikel (Tidak diubah) ---
         document.addEventListener('DOMContentLoaded', async () => {
             const mainContainer = document.getElementById('main-container');
             const defaultThumbnail = 'thumbnail.jpg';
@@ -200,14 +259,12 @@
                 }
                 const data = await response.json();
 
-                // Iterasi kategori
                 for (const category in data) {
                     if (data.hasOwnProperty(category)) {
                         const articles = data[category];
                         const section = document.createElement('div');
                         section.classList.add('category-section');
                         
-                        // H2 harusnya menggunakan ID yang unik agar bisa jadi target tautan cepat
                         const categoryId = category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
                         const heading = document.createElement('h2');
                         heading.id = categoryId;
@@ -236,10 +293,9 @@
                             link.classList.add('article-card');
                             link.target = "_blank";
                             
-                            // Membuat img dan menerapkan lazy loading
                             const image = document.createElement('img');
                             image.src = thumbnailUrl;
-                            image.alt = `Thumbnail untuk artikel: ${title}`; // Alt text lebih deskriptif untuk SEO
+                            image.alt = `Thumbnail untuk artikel: ${title}`;
                             image.loading = 'lazy'; 
 
                             const content = document.createElement('div');
@@ -330,8 +386,8 @@
             }
 
             document.querySelectorAll('.info-item').forEach(el => {
-                el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.05)'; el.style.color = '#007BFF'; });
-                el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; el.style.color = '#555'; });
+                el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.05)'; el.style.color = 'var(--text-secondary)'; });
+                el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; el.style.color = 'var(--text-muted)'; }); // Gunakan variabel CSS
             });
         }
     </script>
