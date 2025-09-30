@@ -1,14 +1,12 @@
-name: Hitung File dan Buat Laporan
+name: Hitung File di Folder Kustom
 
 on:
-  # Tentukan pemicu (trigger) untuk workflow ini
-  push:
-    branches:
-      - main # Ganti dengan nama branch utama Anda
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch: # Memungkinkan eksekusi manual dari tab Actions
+  workflow_dispatch:
+    inputs:
+      target_folder:
+        description: 'Lokasi folder yang akan di-scan (contoh: src atau .)'
+        required: true
+        default: '.' # Nilai default adalah direktori root repositori
 
 jobs:
   count_and_report:
@@ -24,17 +22,27 @@ jobs:
       - name: Hitung dan Buat Laporan File
         id: file_counting
         run: |
-          # 1. Hitung jumlah file per ekstensi, urutkan, dan simpan ke file sementara
-          echo "Menghitung file di direktori saat ini..."
-          REPORT_CONTENT=$(find . -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
+          # Ambil input folder dari pemicu workflow
+          TARGET_DIR="${{ github.event.inputs.target_folder }}"
+          REPORT_FILE="mini/laporan_jumlah_file_${TARGET_DIR//\//_}.txt" # Nama file yang dinamis
           
-          # 2. Hitung total semua file
-          TOTAL_FILES=$(find . -type f | wc -l)
+          echo "Memulai scanning di folder: ${TARGET_DIR}"
+          
+          # Cek apakah folder yang ditargetkan ada
+          if [ ! -d "${TARGET_DIR}" ]; then
+            echo "Error: Folder '${TARGET_DIR}' tidak ditemukan."
+            exit 1
+          fi
+          
+          # 1. Hitung jumlah file per ekstensi, urutkan, dan simpan ke file sementara
+          # Menggunakan sed untuk menghapus path folder target, dan mencari ekstensi
+          REPORT_CONTENT=$(find "${TARGET_DIR}" -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
+          
+          # 2. Hitung total semua file di folder target
+          TOTAL_FILES=$(find "${TARGET_DIR}" -type f | wc -l)
           
           # 3. Format laporan dengan summary di baris pertama
-          REPORT_FILE="mini/laporan_jumlah_file.txt"
-          
-          echo "SUMMARY: Total File = ${TOTAL_FILES}" > ${REPORT_FILE}
+          echo "SUMMARY: Total File dalam folder '${TARGET_DIR}' = ${TOTAL_FILES}" > ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
           echo "${REPORT_CONTENT}" >> ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
@@ -46,6 +54,6 @@ jobs:
       - name: Upload Artifact (Laporan)
         uses: actions/upload-artifact@v4
         with:
-          name: laporan-jumlah-file
-          path: mini/laporan_jumlah_file.txt
+          name: laporan-jumlah-file-${{ github.event.inputs.target_folder }}
+          path: mini/
           retention-days: 7
