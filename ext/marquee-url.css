@@ -1,21 +1,16 @@
-#marquee-bottom{overflow:hidden;white-space:nowrap;width:100%;box-sizing:border-box}
+/* Marquee Container */
+#marquee-bottom{position:relative;overflow:hidden;white-space:nowrap;width:100%;height:40px;background:var(--marquee-bg,#111);color:var(--marquee-color,#fff);display:flex;align-items:center}
+/* Marquee Inner */
 #marquee-inner{display:inline-block;white-space:nowrap;will-change:transform}
-
-/* ==== Slider CSS (vertical, auto dark/light) ==== */
-#speedRange{position:fixed;right:10px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:center;width:200px;height:30px;z-index:1000;appearance:none;background:transparent;cursor:pointer}
-#speedRange::-webkit-slider-runnable-track{height:6px;border-radius:4px}
-#speedRange::-moz-range-track{height:6px;border-radius:4px}
-#speedRange::-webkit-slider-thumb{appearance:none;width:16px;height:16px;border-radius:50%;margin-top:-5px;cursor:grab}
-#speedRange::-moz-range-thumb{width:16px;height:16px;border-radius:50%;cursor:grab}
+/* Marquee Links */
+#marquee-inner a{color:inherit;text-decoration:none;margin:0 1rem;transition:color .3s}
+#marquee-inner a:hover{color:var(--marquee-hover,#0af)}
+/* Dark/Light mode auto */
 @media(prefers-color-scheme:light){
-  #speedRange::-webkit-slider-runnable-track{background:#ddd}
-  #speedRange::-moz-range-track{background:#ddd}
-  #speedRange::-webkit-slider-thumb{background:#444}
-  #speedRange::-moz-range-thumb{background:#444}
+  #marquee-bottom{background:var(--marquee-bg-light,#f9f9f9);color:var(--marquee-color-light,#111)}
 }
 @media(prefers-color-scheme:dark){
-  #speedRange::-webkit-slider-runnable-track{background:#555}
-  #speedRange::-moz-range-track{background:#555}
-  #speedRange::-webkit-slider-thumb{background:#fff}
-  #speedRange::-moz-range-thumb{background:#fff}
+  #marquee-bottom{background:var(--marquee-bg-dark,#111);color:var(--marquee-color-dark,#f9f9f9)}
 }
+/* Slider Kontrol Kecepatan - Fixed di kanan */
+#speedRange{position:fixed;top:50%;right:20px;transform:translateY(-50%);z-index:9999;writing-mode:bt-lr;-webkit-appearance:slider-vertical;height:200px}
