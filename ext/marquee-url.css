@@ -1,9 +1,15 @@
-/* Container marquee */
+/* Marquee container fixed di bawah */
 #marquee-bottom{
-  position:relative;
+  position:fixed;       /* tetap di viewport */
+  bottom:0;             /* menempel bawah layar */
+  left:0;
   width:100%;
   overflow:hidden;
   white-space:nowrap;
+  background:#222;      /* opsional, bisa diubah sesuai tema */
+  padding:5px 0;        /* sedikit spasi atas-bawah */
+  box-sizing:border-box;
+  z-index:999;          /* selalu di atas konten lain */
 }
 
 /* Konten marquee */
@@ -25,7 +31,7 @@
   background:#555;
   -webkit-appearance:none;
   appearance:none;
-  z-index:999;
+  z-index:1000; /* lebih tinggi dari marquee */
 }
 
 /* Thumb slider */
