@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '0 21 35 * *'
+    - cron: '35 21 * * *'
 
 jobs:
   rss:
