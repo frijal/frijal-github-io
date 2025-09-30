@@ -1,97 +1,91 @@
+// ISI DARI /ext/marquee-url.js (Pastikan ini sudah benar)
+
+// ... (Kode initCategoryMarquee - Fungsi deteksi kategori dari filename di JSON)
+// ... (Kode initMarqueeSpeedControl - Fungsi kontrol slider kecepatan)
+
 /**
- * Inisialisasi Marquee Dinamis dengan Artikel dari Kategori yang Sama.
- * Fungsi ini mengambil data dari JSON yang terletak di root ('/artikel.json'), 
- * memfilter, mengacak, dan menampilkannya dalam elemen Marquee.
- * * @param {string} targetCategoryId ID elemen div Marquee (e.g., 'related-marquee-container')
- * @param {string} categoryName Nama kategori yang ingin diambil (e.g., 'Religi dan Islam')
- * @param {string} jsonPath Jalur relatif/absolut file artikel.json (HARUS: '/artikel.json' atau 'artikel.json')
+ * Inisialisasi Marquee Dinamis dengan mendeteksi kategori berdasarkan nama file artikel.
+ * @param {string} targetCategoryId ID elemen div Marquee
+ * @param {string} currentFilename Nama file artikel yang sedang dibuka (e.g., '1011nabi-yaakub-yusuf.html')
+ * @param {string} jsonPath Jalur file artikel.json (e.g., '/artikel.json')
  */
-async function initCategoryMarquee(targetCategoryId, categoryName, jsonPath) {
+async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) {
     const marqueeContainer = document.getElementById(targetCategoryId);
+    // ... (Logika fetch, iterasi, deteksi targetCategory, filter, shuffle, dan inject HTML)
+    // *Gunakan kode dari langkah terakhir untuk fungsi ini*
     
-    // 1. Validasi Wadah Marquee
+    // START KODE initCategoryMarquee (Hanya untuk referensi logika):
     if (!marqueeContainer) {
         console.error(`Marquee Error: Elemen dengan ID: ${targetCategoryId} tidak ditemukan.`);
         return;
     }
-    
-    // Tampilkan pesan loading sementara
-    marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait dari kategori "${categoryName}"...</p>`;
-
+    marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait...</p>`;
     try {
-        // 2. Ambil Data JSON menggunakan path yang disediakan (diasumsikan root: /artikel.json)
         const response = await fetch(jsonPath);
-        if (!response.ok) {
-            throw new Error(`Gagal memuat ${jsonPath} (Status: ${response.status})`);
-        }
+        if (!response.ok) throw new Error(`Gagal memuat ${jsonPath}`);
         const data = await response.json();
-        
+        let targetCategory = null;
         let allArticles = [];
 
-        // 3. Filter Artikel berdasarkan Kategori
-        if (data[categoryName] && Array.isArray(data[categoryName])) {
-            // Mengubah format array JSON: [title, file, image, _, desc] menjadi objek URL/Title
-            allArticles = data[categoryName].map(item => ({
-                title: item[0],
-                // URL artikel dibuat relatif terhadap root situs (e.g., /artikel/file.html)
-                // Diasumsikan artikel selalu ada di subfolder 'artikel/'
-                url: `/artikel/${item[1]}` 
-            }));
+        for (const categoryName in data) {
+            if (data.hasOwnProperty(categoryName)) {
+                const articleMatch = data[categoryName].find(item => item[1] === currentFilename);
+                if (articleMatch) {
+                    targetCategory = categoryName;
+                    allArticles = data[categoryName]; 
+                    break;
+                }
+            }
         }
-
-        if (allArticles.length === 0) {
-            marqueeContainer.innerHTML = ''; // Sembunyikan Marquee jika tidak ada artikel
+        
+        if (!targetCategory || allArticles.length === 0) {
+            marqueeContainer.innerHTML = '';
+            console.warn(`Marquee: Kategori untuk file ${currentFilename} tidak ditemukan di JSON.`);
             return;
         }
 
-        // 4. Acak Urutan Artikel
-        allArticles.sort(() => 0.5 - Math.random()); 
+        const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
+        if (filteredArticles.length === 0) { marqueeContainer.innerHTML = ''; return; }
+
+        filteredArticles.sort(() => 0.5 - Math.random()); 
         
-        // 5. Bangun Konten HTML
         let contentHTML = '';
         const separator = ' • ';
 
-        allArticles.forEach(post => {
-            contentHTML += `<a href="${post.url}" target="_blank" rel="noopener" title="${post.title}">${post.title}</a>${separator}`;
+        filteredArticles.forEach(post => {
+            const title = post[0];
+            const url = `/artikel/${post[1]}`;
+            contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${title}">${title}</a>${separator}`;
         });
 
-        // 6. Ulangi Konten untuk Efek Gulir Berkelanjutan
-        const repeatedContent = contentHTML.repeat(5); // Ulangi 5 kali
-        
-        // 7. Suntikkan Konten
+        const repeatedContent = contentHTML.repeat(5); 
         marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
 
     } catch (error) {
-        console.error(`Marquee Error: Gagal memuat/memproses artikel kategori "${categoryName}":`, error);
+        console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
         marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
     }
+    // END KODE initCategoryMarquee
 }
 
 /**
  * Inisialisasi kontrol slider untuk mengubah kecepatan Marquee.
- * @param {string} sliderId ID dari input range (e.g., 'speedSlider')
- * @param {string} contentClass Class dari elemen konten Marquee (e.g., 'marquee-content')
  */
 function initMarqueeSpeedControl(sliderId, contentClass) {
     const slider = document.getElementById(sliderId);
-    const content = document.querySelector(`.${contentClass}`); // Mengambil elemen Marquee Content
+    const content = document.querySelector(`.${contentClass}`);
 
     if (!slider || !content) {
-        console.warn("Slider atau konten Marquee tidak ditemukan.");
         return;
     }
 
-    // Fungsi untuk menerapkan kecepatan
     const applySpeed = (value) => {
-        // Logika: Nilai slider yang lebih tinggi (misalnya 150) = animasi lebih lambat (nilai detik lebih besar)
-        const duration = value; // Durasi dalam detik
+        const duration = value;
         content.style.animationDuration = `${duration}s`;
     };
 
-    // 1. Set kecepatan awal
     applySpeed(slider.value);
 
-    // 2. Tambahkan event listener untuk perubahan slider
     slider.addEventListener('input', (e) => {
         applySpeed(e.target.value);
     });
