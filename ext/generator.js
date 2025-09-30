@@ -25,6 +25,18 @@ function extractTitle(content) {
   return match ? match[1].trim() : "Tanpa Judul";
 }
 
+// ⭐ FUNGSI BARU: Ambil deskripsi dari meta tag
+function extractDescription(content) {
+  // Mencari <meta name="description" content="...">
+  const match = content.match(
+    /<meta\s+name=["']description["'][^>]+content=["']([^"']+)["']/i
+  );
+  if (match && match[1]) {
+    return match[1].trim();
+  }
+  return "";
+}
+
 // Fungsi fix <title> agar selalu satu baris
 function fixTitleOneLine(content) {
   return content.replace(/<title>([\s\S]*?)<\/title>/gi, (m, p1) => {
@@ -95,18 +107,20 @@ files.forEach(file => {
     console.log(`🔧 Fixed <title> di ${file}`);
   }
 
-  // Ambil judul, kategori, gambar
+  // Ambil data-data
   const title = extractTitle(fixedContent);
   const category = titleToCategory(title);
   const image = extractImage(fixedContent, file);
+  const description = extractDescription(fixedContent); // ⭐ PANGGIL FUNGSI BARU
 
   // Ambil lastmod dari mtime file
   const stats = fs.statSync(fullPath);
   const lastmod = formatISO8601(stats.mtime);
 
   if (!grouped[category]) grouped[category] = [];
-  // Format array sesuai permintaan: [title,file,image,lastmod]
-  grouped[category].push([title, file, image, lastmod]);
+  
+  // Format array diperbarui: [title, file, image, lastmod, description]
+  grouped[category].push([title, file, image, lastmod, description]); // ⭐ DESKRIPSI DITAMBAHKAN
 
   // Sitemap entry dengan tanggal file
   xmlUrls.push(
