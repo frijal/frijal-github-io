@@ -26,9 +26,12 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
       }
       if(!category) return;
 
-      const articles = data[category].map(arr=>({title:arr[0], file:arr[1]})).sort(()=>0.5-Math.random());
-      const content = articles.map(a=>`<a href="artikel/${a.file}">${a.title}</a>`).join(' • ');
-      inner.innerHTML = content + ' • ' + content;
+      const articles = data[category].map(arr=>{
+        const file = arr[1].startsWith('artikel/') ? arr[1] : 'artikel/' + arr[1];
+        return {title: arr[0], file};
+      }).sort(()=>0.5-Math.random());
+
+      inner.innerHTML = articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ') + ' • ' + articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ');
 
     }catch(e){
       console.error('Gagal load artikel.json:', e);
