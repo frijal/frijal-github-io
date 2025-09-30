@@ -17,9 +17,9 @@
   transform:translateX(0);
 }
 
-/* Judul marquee, beri jarak antar link */
+/* Jarak antar judul */
 #marquee-inner a{
-  margin-right:30px; /* jarak antar judul */
+  margin-right:30px;
   text-decoration:none;
   color:inherit;
 }
@@ -27,7 +27,7 @@
 /* Slider vertikal */
 #speedRange{
   position:fixed;
-  right:15px;
+  right:15px; /* jarak dari kanan */
   top:50%;
   transform:rotate(-90deg) translateY(-50%);
   transform-origin:center;
