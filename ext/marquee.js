@@ -1,159 +1,101 @@
-export function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-export function initMarquee(grouped) {
-  const m = document.getElementById("marquee-content");
-  const allArticles = Object.values(grouped).flat();
-  const shuffled = shuffle(allArticles);
-  m.innerHTML = shuffled
-    .map(d => `<a href="artikel/${d.file}" target="_blank">${d.title}</a>`)
-    .join(" • ");
-}
-export async function initMarqueeDynamic(containerId = 'marquee-bottom', speed = 0.03, refreshInterval = 60000) {
-  const container = document.getElementById(containerId);
-  const inner = document.getElementById('marquee-inner');
-  let left = 0;
-  let totalWidth = 0;
-  let animationId;
-
-  async function fetchArticles() {
-    try {
-      const res = await fetch('/artikel.json');
-      const data = await res.json();
-
-      const currentFile = location.pathname.split('/').pop();
-
-      // Temukan kategori halaman
-      let category = null;
-      for (const cat in data) {
-        if (data[cat].some(arr => arr[1] === currentFile)) {
-          category = cat;
-          break;
-        }
-      }
-      if (!category) return [];
-
-      let articles = data[category].map(arr => ({ title: arr[0], file: arr[1] }));
-      // Shuffle
-      return articles.sort(() => Math.random() - 0.5);
-
-    } catch (e) {
-      console.error('Gagal load artikel.json:', e);
-      inner.textContent = 'Gagal memuat artikel.';
-      return [];
-    }
-  }
-
-  function buildMarquee(articles) {
-    const content = articles.map(a => `<a href="artikel/${a.file}" target="_blank">${a.title}</a>`).join(' • ');
-    inner.innerHTML = content + ' • ' + content; // double untuk seamless
-    totalWidth = inner.scrollWidth / 2;
-    left = 0;
-    inner.style.transform = `translateX(${left}px)`;
-  }
-
-  async function updateMarquee() {
-    const articles = await fetchArticles();
-    if (articles.length > 0) buildMarquee(articles);
-  }
-
-  function step() {
-    left -= speed;
-    if (left <= -totalWidth) left = 0;
-    inner.style.transform = `translateX(${left}px)`;
-    animationId = requestAnimationFrame(step);
-  }
-
-  // Hover pause
-  container.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
-  container.addEventListener('mouseleave', () => animationId = requestAnimationFrame(step));
-
-  // Inisialisasi
-  await updateMarquee();
-  animationId = requestAnimationFrame(step);
-
-  // Refresh otomatis
-  setInterval(updateMarquee, refreshInterval); // default: 60 detik
-}
-
-///////////////////////
-
-export function initMarqueeDynamic(marqueeId, speed = 0.5, refreshInterval = 60000) {
-  const marquee = document.getElementById(marqueeId);
-  if (!marquee) return;
-
-  let scroll = 0;
-  let contentWidth = 0;
-  let rafId;
-  let currentSpeed = speed;
-
-  // Ambil kategori dari URL saat ini (misal: /kategori/tech/)
-  const pathParts = window.location.pathname.split('/');
-  const currentCategory = pathParts[1] || ''; // ambil folder pertama sebagai kategori
-
-  async function loadMarquee() {
-    try {
-      const res = await fetch('/artikel/artikel.json');
-      const data = await res.json();
-
-      // Filter artikel berdasarkan kategori di filename
-      const filtered = data.filter(item => item.filename.includes(currentCategory));
-
-      if (filtered.length === 0) {
-        console.warn('Tidak ada artikel sesuai kategori:', currentCategory);
+/**
+ * Inisialisasi Marquee Dinamis dengan mendeteksi kategori berdasarkan nama file artikel.
+ * @param {string} targetCategoryId ID elemen div Marquee (e.g., 'related-marquee-container')
+ * @param {string} currentFilename Nama file artikel yang sedang dibuka (e.g., '1011nabi-yaakub-yusuf.html')
+ * @param {string} jsonPath Jalur file artikel.json (e.g., '/artikel.json')
+ */
+async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) {
+    const marqueeContainer = document.getElementById(targetCategoryId);
+    
+    if (!marqueeContainer) {
+        console.error(`Marquee Error: Elemen dengan ID: ${targetCategoryId} tidak ditemukan.`);
         return;
-      }
-
-      // Ambil artikel random dari filtered
-      const shuffled = filtered.sort(() => 0.5 - Math.random());
-
-      marquee.innerHTML = '';
-
-      const container = document.createElement('div');
-      container.className = 'marquee-content';
-
-      shuffled.forEach(item => {
-        let filePath = item.filename;
-        if (!filePath.startsWith('artikel/')) filePath = 'artikel/' + filePath;
-
-        const a = document.createElement('a');
-        a.href = '/' + filePath;
-        a.textContent = item.title;
-        a.target = '_blank';
-        container.appendChild(a);
-      });
-
-      // Duplikasi konten untuk loop mulus
-      const containerClone = container.cloneNode(true);
-      marquee.appendChild(container);
-      marquee.appendChild(containerClone);
-
-      contentWidth = container.scrollWidth;
-      scroll = 0;
-
-    } catch (err) {
-      console.error('Error loading marquee JSON:', err);
     }
-  }
+    
+    marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait...</p>`;
 
-  function animate() {
-    scroll += currentSpeed;
-    if (scroll >= contentWidth) scroll = 0;
-    marquee.scrollLeft = scroll;
-    rafId = requestAnimationFrame(animate);
-  }
+    try {
+        const response = await fetch(jsonPath);
+        if (!response.ok) {
+            throw new Error(`Gagal memuat ${jsonPath} (Status: ${response.status})`);
+        }
+        const data = await response.json();
+        
+        let targetCategory = null;
+        let allArticles = [];
 
-  loadMarquee();
-  animate();
-  setInterval(loadMarquee, refreshInterval);
+        // 1. Lakukan Iterasi untuk Mencari Kategori Berdasarkan Filename
+        for (const categoryName in data) {
+            if (data.hasOwnProperty(categoryName)) {
+                // Mencari di array artikel (indeks 1 adalah nama file)
+                const articleMatch = data[categoryName].find(item => item[1] === currentFilename);
+                
+                if (articleMatch) {
+                    targetCategory = categoryName;
+                    // Ambil semua artikel dari kategori yang cocok
+                    allArticles = data[categoryName]; 
+                    break; // Kategori ditemukan, hentikan perulangan
+                }
+            }
+        }
+        
+        if (!targetCategory || allArticles.length === 0) {
+            marqueeContainer.innerHTML = '';
+            console.warn(`Marquee: Kategori untuk file ${currentFilename} tidak ditemukan di JSON.`);
+            return;
+        }
 
-  return {
-    stop: () => cancelAnimationFrame(rafId),
-    setSpeed: (s) => { currentSpeed = s; }
-  };
+        // 2. Filter artikel saat ini dari daftar related posts (opsional)
+        const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
+
+        if (filteredArticles.length === 0) {
+             marqueeContainer.innerHTML = '';
+             return;
+        }
+
+        // 3. Acak Urutan Artikel
+        filteredArticles.sort(() => 0.5 - Math.random()); 
+        
+        // 4. Bangun Konten HTML Marquee
+        let contentHTML = '';
+        const separator = ' • ';
+
+        filteredArticles.forEach(post => {
+            const title = post[0];
+            const url = `/artikel/${post[1]}`;
+            contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${title}">${title}</a>${separator}`;
+        });
+
+        const repeatedContent = contentHTML.repeat(5); 
+        
+        marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
+
+    } catch (error) {
+        console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
+        marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
+    }
+}
+
+/**
+ * Inisialisasi kontrol slider untuk mengubah kecepatan Marquee (tetap sama).
+ */
+function initMarqueeSpeedControl(sliderId, contentClass) {
+    const slider = document.getElementById(sliderId);
+    const content = document.querySelector(`.${contentClass}`);
+
+    if (!slider || !content) {
+        // Ini normal jika slider tidak selalu ada di halaman
+        return;
+    }
+
+    const applySpeed = (value) => {
+        const duration = value; 
+        content.style.animationDuration = `${duration}s`;
+    };
+
+    applySpeed(slider.value);
+
+    slider.addEventListener('input', (e) => {
+        applySpeed(e.target.value);
+    });
 }
