@@ -8,65 +8,89 @@ const artikelJsonPath = path.join(__dirname, "../artikel.json");
 
 // --- Helpers ---
 function extractDescription(filePath) {
-  if (!fs.existsSync(filePath)) return "";
-  const html = fs.readFileSync(filePath, "utf8");
+  if (!fs.existsSync(filePath)) return "";
+  const html = fs.readFileSync(filePath, "utf8");
 
-  const metaMatch = html.match(
-    /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i
-  );
-  if (metaMatch) return metaMatch[1];
+  const metaMatch = html.match(
+    /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i
+  );
+  if (metaMatch) return metaMatch[1];
 
-  const pMatch = html.match(/<p[^>]*>(.*?)<\/p>/i);
-  if (pMatch) {
-    const text = pMatch[1].replace(/<[^>]+>/g, "");
-    return text.substring(0, 150) + (text.length > 150 ? "…" : "");
-  }
+  const pMatch = html.match(/<p[^>]*>(.*?)<\/p>/i);
+  if (pMatch) {
+    const text = pMatch[1].replace(/<[^>]+>/g, "");
+    return text.substring(0, 150) + (text.length > 150 ? "…" : "");
+  }
 
-  return "";
+  return "";
+}
+
+/**
+ * Mendapatkan URL gambar dari meta tag og:image atau twitter:image.
+ * @param {string} filePath - Path ke file HTML.
+ * @returns {string} URL gambar atau string kosong jika tidak ditemukan.
+ */
+function extractImage(filePath) {
+    if (!fs.existsSync(filePath)) return "";
+    const html = fs.readFileSync(filePath, "utf8");
+
+    // Cari <meta property="og:image" content="...">
+    const ogImageMatch = html.match(
+        /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i
+    );
+    if (ogImageMatch) return ogImageMatch[1];
+    
+    // Fallback: Cari <meta name="twitter:image" content="...">
+    const twitterImageMatch = html.match(
+        /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i
+    );
+    if (twitterImageMatch) return twitterImageMatch[1];
+
+    return "";
 }
 
 function extractDate(filePath) {
-  if (!fs.existsSync(filePath)) return null;
-  const html = fs.readFileSync(filePath, "utf8");
-  const dateMatch = html.match(
-    /<meta[^>]+name=["']date["'][^>]+content=["']([^"']+)["']/i
-  );
-  if (dateMatch) {
-    return new Date(dateMatch[1]);
-  }
-  return null;
+  if (!fs.existsSync(filePath)) return null;
+  const html = fs.readFileSync(filePath, "utf8");
+  const dateMatch = html.match(
+    /<meta[^>]+name=["']date["'][^>]+content=["']([^"']+)["']/i
+  );
+  if (dateMatch) {
+    return new Date(dateMatch[1]);
+  }
+  return null;
 }
 
 function sanitizeTitle(fileName) {
-  return fileName
-    .replace(/\.html$/i, "")
-    .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, c => c.toUpperCase());
+  return fileName
+    .replace(/\.html$/i, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
 }
 
 function cleanCategory(raw) {
-  if (!raw) return "Umum";
-  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
+  if (!raw) return "Umum";
+  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
 }
 
 function cleanTitle(raw) {
-  if (!raw) return "";
-  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
+  if (!raw) return "";
+  return raw.replace(/^\p{Emoji_Presentation}\s*/u, "").trimStart();
 }
 
 // --- Build kategori map dari artikel.json ---
 let kategoriMap = {};
 if (fs.existsSync(artikelJsonPath)) {
-  try {
-    const artikelData = JSON.parse(fs.readFileSync(artikelJsonPath, "utf8"));
-    for (const [kategori, daftarArtikel] of Object.entries(artikelData)) {
-      daftarArtikel.forEach(([judul, file]) => {
-        kategoriMap[file] = kategori;
-      });
-    }
-  } catch (e) {
-    console.error("⚠️ Gagal parse artikel.json:", e);
-  }
+  try {
+    const artikelData = JSON.parse(fs.readFileSync(artikelJsonPath, "utf8"));
+    for (const [kategori, daftarArtikel] of Object.entries(artikelData)) {
+      daftarArtikel.forEach(([judul, file]) => {
+        kategoriMap[file] = kategori;
+      });
+    }
+  } catch (e) {
+    console.error("⚠️ Gagal parse artikel.json:", e);
+  }
 }
 
 // --- Baca sitemap ---
@@ -77,20 +101,22 @@ const urls = doc.getElementsByTagName("url");
 // --- Kumpulkan item ---
 let itemsArr = [];
 for (let i = 0; i < urls.length; i++) {
-  const loc = urls[i].getElementsByTagName("loc")[0]?.textContent;
-  if (loc) {
-    const fileName = path.basename(loc);
-    const localPath = path.join(__dirname, "../artikel", fileName);
+  const loc = urls[i].getElementsByTagName("loc")[0]?.textContent;
+  if (loc) {
+    const fileName = path.basename(loc);
+    const localPath = path.join(__dirname, "../artikel", fileName);
 
-    const desc = extractDescription(localPath);
-    const title = cleanTitle(sanitizeTitle(fileName));
-    const category = cleanCategory(kategoriMap[fileName] || "Umum");
+    const desc = extractDescription(localPath);
+    const imageLoc = extractImage(localPath); // ⭐ BARU: Ambil URL Gambar
+    const title = cleanTitle(sanitizeTitle(fileName));
+    const category = cleanCategory(kategoriMap[fileName] || "Umum");
 
-    const dateObj = extractDate(localPath) || new Date();
-    const pubDate = dateObj.toUTCString();
+    const dateObj = extractDate(localPath) || new Date();
+    const pubDate = dateObj.toUTCString();
 
-    itemsArr.push({ title, loc, pubDate, desc, category, dateObj });
-  }
+    // ⭐ BARU: Tambahkan imageLoc ke objek item
+    itemsArr.push({ title, loc, pubDate, desc, category, dateObj, imageLoc });
+  }
 }
 
 // --- Sort & limit ---
@@ -100,30 +126,31 @@ itemsArr = itemsArr.slice(0, limit);
 
 // --- Generate RSS items ---
 let items = itemsArr
-  .map(
-    it => `    <item>
-      <title><![CDATA[${it.title}]]></title>
-      <link><![CDATA[${it.loc}]]></link>
-      <guid><![CDATA[${it.loc}]]></guid>
-      <pubDate>${it.pubDate}</pubDate>
-      <description><![CDATA[${it.desc}]]></description>
-      <category><![CDATA[${it.category}]]></category>
-    </item>`
-  )
-  .join("\n");
+  .map(
+    it => `    <item>
+      <title><![CDATA[${it.title}]]></title>
+      <link><![CDATA[${it.loc}]]></link>
+      <guid><![CDATA[${it.loc}]]></guid>
+      <pubDate>${it.pubDate}</pubDate>
+      <description><![CDATA[${it.desc}]]></description>
+      <category><![CDATA[${it.category}]]></category>
+${it.imageLoc ? `      <enclosure url="${it.imageLoc}" length="0" type="image/jpeg" />` : ''}
+    </item>`
+  )
+  .join("\n");
 
 // --- Template RSS ---
 const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title><![CDATA[Frijal Artikel]]></title>
-    <link><![CDATA[https://frijal.github.io/]]></link>
-    <description><![CDATA[Feed artikel terbaru]]></description>
-    <language>id-ID</language>
-    <atom:link href="https://frijal.github.io/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+  <channel>
+    <title><![CDATA[Frijal Artikel]]></title>
+    <link><![CDATA[https://frijal.github.io/]]></link>
+    <description><![CDATA[Feed artikel terbaru]]></description>
+    <language>id-ID</language>
+    <atom:link href="https://frijal.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
-  </channel>
+  </channel>
 </rss>`;
 
 // --- Tulis file utama ---
