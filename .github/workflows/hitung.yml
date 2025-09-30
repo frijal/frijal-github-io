@@ -70,8 +70,8 @@ jobs:
                       display_ext = (ext == "no_ext") ? "TIDAK ADA EKSTENSI" : "." toupper(ext);
                       print "## " display_ext " ##";
                   }
-                  # TAMBAHAN: Tambahkan prefix URL di depan path file
-                  print "- " prefix path;
+                  # PERUBAHAN: Menghapus " - " di depan prefix URL
+                  print prefix path;
               }
           ')
 
