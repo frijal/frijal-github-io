@@ -2,7 +2,7 @@
 #marquee-bottom {
   position: relative;
   width: 100%;
-  overflow: visible; /* agar tooltip tidak terpotong */
+  overflow: hidden;
   background: #111;
   color: #fff;
   white-space: nowrap;
@@ -15,53 +15,22 @@
   transform: translateX(0);
 }
 
-/* Tooltip wrapper */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-/* Tooltip text box */
-.tooltip .tooltip-text {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s;
-  position: absolute;
-  bottom: 125%; /* muncul di atas link */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  text-align: center;
-  padding: 5px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  z-index: 99;
-  font-size: 12px;
-}
-
-/* Tampilkan tooltip saat hover */
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Slider vertikal untuk kecepatan */
+/* Slider vertikal */
 #speedRange {
   position: fixed;
-  right: 15px; /* jarak dari kanan layar */
+  right: 15px;
   top: 50%;
   transform: rotate(-90deg) translateY(-50%);
   transform-origin: center;
-  width: 120px; /* panjang slider */
-  height: 6px; /* tebal slider */
+  width: 120px;
+  height: 6px;
   background: transparent;
   -webkit-appearance: none;
   appearance: none;
   z-index: 999;
 }
 
-/* Thumb slider untuk Chrome/Safari */
+/* Slider thumb Chrome/Safari */
 #speedRange::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
@@ -71,7 +40,7 @@
   cursor: pointer;
 }
 
-/* Thumb slider untuk Firefox */
+/* Slider thumb Firefox */
 #speedRange::-moz-range-thumb {
   width: 12px;
   height: 12px;
