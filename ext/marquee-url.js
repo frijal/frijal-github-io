@@ -28,12 +28,10 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
       if(!category) return;
 
       const articles = data[category].map(arr=>{
-        // jika arr[1] sudah diawali "artikel/", jangan tambahkan lagi
         const file = arr[1].startsWith('artikel/') ? arr[1] : 'artikel/' + arr[1];
         return {title: arr[0], file};
       }).sort(()=>0.5-Math.random());
 
-      // buat loop mulus
       const content = articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ');
       inner.innerHTML = content + ' • ' + content;
 
@@ -53,7 +51,6 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
   await loadArticles();
   step();
 
-  // slider kontrol kecepatan
   if(speedRange) speedRange.addEventListener("input", function(e){
     speed = parseFloat(e.target.value);
   });
