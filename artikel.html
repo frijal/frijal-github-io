@@ -287,14 +287,15 @@
         // --- Fungsi untuk membuat tombol navigasi cepat ---
         function createQuickNav(categories) {
             const quickNav = document.getElementById('quick-nav');
-            quickNav.innerHTML = ''; // Bersihkan kontainer
+            quickNav.innerHTML = ''; 
 
             // Buat tombol 'Atas'
             const upButton = document.createElement('button');
             upButton.className = 'nav-button';
             upButton.textContent = '↑ Atas';
             upButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Perpindahan INSTAN ke atas
+                window.scrollTo({ top: 0, behavior: 'instant' }); 
             });
             quickNav.appendChild(upButton);
 
@@ -306,12 +307,15 @@
                 button.className = 'nav-button';
                 button.textContent = categoryName;
 
-                // Tambahkan smooth scrolling pada klik
+                // Perpindahan INSTAN ke blok kategori
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetElement = document.getElementById(categoryId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        targetElement.scrollIntoView({ 
+                            behavior: 'instant', 
+                            block: 'start' 
+                        });
                     }
                 });
                 quickNav.appendChild(button);
@@ -319,7 +323,7 @@
         }
 
 
-        // --- Logika Utama Pemuatan Artikel (Diperbarui untuk memanggil createQuickNav) ---
+        // --- Logika Utama Pemuatan Artikel ---
         document.addEventListener('DOMContentLoaded', async () => {
             const mainContainer = document.getElementById('main-container');
             const defaultThumbnail = 'thumbnail.jpg';
@@ -335,7 +339,7 @@
                 // 1. ITERASI & MEMBANGUN KONTEN
                 for (const category in data) {
                     if (data.hasOwnProperty(category)) {
-                        categories.push(category); // Simpan nama kategori
+                        categories.push(category); 
                         
                         const articles = data[category];
                         const section = document.createElement('div');
@@ -399,7 +403,7 @@
             updateFooterInfo();
         });
 
-        // --- FUNGSI DETEKSI LINGKUNGAN (Tidak diubah) ---
+        // --- FUNGSI DETEKSI LINGKUNGAN & IP (Tidak diubah) ---
         function getBrowserInfo() {
             const ua = navigator.userAgent;
             let name = "Unknown", version = "N/A";
