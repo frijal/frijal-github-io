@@ -3,53 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeri Artikel Otomatis</title>
-    <meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
+    
+    <title>Jelajahi Artikel: Windows, Linux (Ubuntu, Arch, Fedora), Religi, & Karir | Frijal</title>
+    
+    <meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux (Ubuntu, Debian, Arch, RedHat, Fedora), inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan dan karir.">
+    <meta name="keywords" content="Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal">
+    <meta name="author" content="Fakhrul">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#f0f2f5"> <link rel="canonical" href="https://frijal.github.io/"> 
+    
+    <meta property="og:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
+    <meta property="og:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir. Temukan topik yang relevan dengan minat Anda.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://frijal.github.io/">
+    <meta property="og:site_name" content="Frijal">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg"> 
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
+    <meta name="twitter:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir.">
+    <meta name="twitter:site" content="@frijal">
+    <meta name="twitter:creator" content="@frijal">
+    <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Jelajahi Artikel: Windows, Linux, Religi, & Karir",
+      "description": "Kumpulan artikel terbaru tentang Linux, Windows, Islam, dan tips karir.",
+      "url": "https://frijal.github.io/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Frijal",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://frijal.github.io/logo.png"
+        }
+      }
+    }
+    </script>
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
+        /* =======================================
+           GAYA DEFAULT (LIGHT MODE)
+           ======================================= */
+        :root {
+            --bg-page: #f0f2f5;
+            --bg-section: #fff;
+            --bg-card: #f8f9fa;
+            --text-primary: #333;
+            --text-secondary: #007bff;
+            --text-muted: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-primary);
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-
         h1 {
             text-align: center;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 40px;
         }
-        
         .category-section {
-            background-color: #fff;
+            background-color: var(--bg-section);
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             padding: 20px;
             margin-bottom: 30px;
         }
-        
         .category-section h2 {
             font-size: 1.8em;
-            color: #007bff;
-            border-bottom: 2px solid #e9ecef;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
-
         .article-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
         }
-
         .article-card {
-            background-color: #f8f9fa;
+            background-color: var(--bg-card);
             border-radius: 8px;
             overflow: hidden;
             text-align: center;
@@ -58,21 +106,18 @@
             color: inherit;
             display: flex;
             flex-direction: column;
-            min-height: 250px; /* Minimal tinggi kartu */
+            min-height: 250px;
         }
-
         .article-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-
         .article-card img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             display: block;
         }
-
         .article-card .card-content {
             padding: 15px;
             flex-grow: 1;
@@ -80,40 +125,33 @@
             flex-direction: column;
             justify-content: center;
         }
-        
         .article-card .card-content h3 {
             font-size: 1.1em;
             margin: 0;
             line-height: 1.4;
         }
-
         .no-thumbnail {
-            background-color: #e9ecef;
+            background-color: var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
             height: 150px;
-            color: #6c757d;
+            color: var(--text-muted);
             font-size: 1.1em;
             text-align: center;
         }
-        /* Gaya dasar untuk footer */
         .page-footer {
             padding: 20px;
             text-align: center;
             font-family: sans-serif;
             font-size: 14px;
         }
-
-        /* Gaya untuk wadah info dinamis */
         #footerInfo {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
         }
-
-        /* Gaya untuk setiap item info */
         .info-item {
             display: flex;
             align-items: center;
@@ -122,151 +160,193 @@
             transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
             color: #555;
         }
-
-        /* Gaya saat hover */
         .info-item:hover {
             transform: scale(1.05);
             color: #007BFF;
         }
-        
-        /* Tambahan gaya untuk ikon SVG */
         .info-item svg {
             width: 16px;
             height: 16px;
             vertical-align: middle;
         }
-    </style>
-</head>
-<body>
-<div><footer class="page-footer"><div id="footerInfo"></div></footer></div>
-<div class="container">
-    <div id="main-container">
-        </div>
-    <footer class="page-footer"><div id="footerInfo"></div></footer>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    const mainContainer = document.getElementById('main-container');
-    const defaultThumbnail = 'thumbnail.jpg';
 
-    try {
-        const response = await fetch('artikel.json');
-        if (!response.ok) {
-            throw new Error('Gagal memuat artikel.json');
-        }
-        const data = await response.json();
-
-        // Iterasi kategori
-        for (const category in data) {
-            if (data.hasOwnProperty(category)) {
-                const articles = data[category];
-
-                const section = document.createElement('div');
-                section.classList.add('category-section');
-
-                const heading = document.createElement('h2');
-                heading.textContent = category;
-                section.appendChild(heading);
-
-                const grid = document.createElement('div');
-                grid.classList.add('article-grid');
-
-                articles.forEach((item) => {
-                    const title = item[0];
-                    const fileName = item[1];
-                    const jsonImage = item[2] || "";
-
-                    const articleUrl = `artikel/${fileName}`;
-
-                    // langsung pakai arr[2], fallback defaultThumbnail
-                    let thumbnailUrl = jsonImage;
-                    if (!thumbnailUrl || !/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(thumbnailUrl)) {
-                        thumbnailUrl = defaultThumbnail;
-                    }
-                    // kalau path relatif → lengkapi
-                    if (!/^https?:\/\//i.test(thumbnailUrl)) {
-                        thumbnailUrl = `artikel/${thumbnailUrl}`;
-                    }
-
-                    const link = document.createElement('a');
-                    link.href = articleUrl;
-                    link.classList.add('article-card');
-                    link.target = "_blank";
-
-                    link.innerHTML = `
-                        <img src="${thumbnailUrl}" alt="${title}">
-                        <div class="card-content">
-                            <h3>${title}</h3>
-                        </div>
-                    `;
-                    grid.appendChild(link);
-                });
-
-                section.appendChild(grid);
-                mainContainer.appendChild(section);
+        /* =======================================
+           DARK MODE OVERRIDES
+           Menggunakan prefers-color-scheme
+           ======================================= */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-page: #121212;
+                --bg-section: #1e1e1e;
+                --bg-card: #2c2c2c;
+                --text-primary: #f0f0f0;
+                --text-secondary: #5dade2; /* Biru yang lebih terang untuk dark mode */
+                --text-muted: #aaa;
+                --border-color: #383838;
+                --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            }
+            body {
+                color: var(--text-primary);
+            }
+            h1 {
+                color: var(--text-primary);
+            }
+            .category-section h2 {
+                color: var(--text-secondary);
+                border-bottom: 2px solid var(--border-color);
+            }
+            .article-card:hover {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            }
+            .info-item {
+                color: var(--text-muted);
+            }
+            .info-item:hover {
+                color: var(--text-secondary); /* Warna hover menyesuaikan dark mode */
+            }
+            /* Ganti warna ikon SVG jika perlu, misal: */
+            .info-item svg path, .info-item svg circle, .info-item svg rect {
+                 /* Ini akan mempengaruhi semua ikon, perlu penyesuaian jika ikon memiliki warna spesifik */
+            }
+            /* Menyesuaikan meta theme color untuk dark mode */
+            meta[name="theme-color"] {
+                content: #121212;
             }
         }
-    } catch (error) {
-        console.error('Ada masalah saat memuat artikel.json:', error);
-        mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel.</p>`;
-    }
-});
-</script>
+    </style>
+    <meta name="theme-color" content="#f0f2f5" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Galeri Artikel</h1>
+        <div id="main-container">
+            </div>
+    </div>
     
-<script>
-        // --- Ikon SVG Inline ---
+    <footer class="page-footer">
+        <div id="footerInfo"></div>
+    </footer>
+
+    <script>
+        // --- Ikon SVG Inline (Tidak diubah) ---
         const browserIcons = {
-          "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#FF7139" d="M12.9 6.2c0-1.8-1-3.2-2.5-4.2C9.4 1.2 8.3.9 7.2 1.3c-1.1.4-2 .8-2.9 1.4-.8.6-1.6 1.3-2.2 2-.5.8-.8 1.6-.8 2.5 0 2 1.2 3.5 3 4.6 1.8 1.1 4 1.7 6.4 1.7.3-.2.6-.5.9-.9.4-.4.8-1 1-1.7.3-.8.4-1.6.4-2.5 0-.4-.1-.8-.2-1.2z"/></svg>',
-          "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#EA4335"/><circle cx="8" cy="8" r="5.5" fill="#FBBC05"/><circle cx="8" cy="8" r="4" fill="#4285F4"/></svg>',
-          "Edge": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#0078D7"/></svg>',
-          "Safari": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#00ADEF"/><path fill="#fff" d="M8 4l1 4-4-1z"/></svg>',
-          "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
+            "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#FF7139" d="M12.9 6.2c0-1.8-1-3.2-2.5-4.2C9.4 1.2 8.3.9 7.2 1.3c-1.1.4-2 .8-2.9 1.4-.8.6-1.6 1.3-2.2 2-.5.8-.8 1.6-.8 2.5 0 2 1.2 3.5 3 4.6 1.8 1.1 4 1.7 6.4 1.7.3-.2.6-.5.9-.9.4-.4.8-1 1-1.7.3-.8.4-1.6.4-2.5 0-.4-.1-.8-.2-1.2z"/></svg>',
+            "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#EA4335"/><circle cx="8" cy="8" r="5.5" fill="#FBBC05"/><circle cx="8" cy="8" r="4" fill="#4285F4"/></svg>',
+            "Edge": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#0078D7"/></svg>',
+            "Safari": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#00ADEF"/><path fill="#fff" d="M8 4l1 4-4-1z"/></svg>',
+            "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
         };
-
-        // --- Ikon SVG Inline untuk OS ---
         const osIcons = {
-          "Windows": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#00A4EF" d="M8.5 2.1L2.4 3.1 2 7.7l6.5-.8zM2.4 8l-.4 4.6 6.5-.8-.1-4.7zM9.1 7.1v6.8L14 13.1V8zM9.1 2.3v4.7L14 7V3.1z"/></svg>',
-          "macOS": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/></svg>',
-          "Linux": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="10" cy="6" r="1" fill="#fff"/></svg>',
-          "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
+            "Windows": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#00A4EF" d="M8.5 2.1L2.4 3.1 2 7.7l6.5-.8zM2.4 8l-.4 4.6 6.5-.8-.1-4.7zM9.1 7.1v6.8L14 13.1V8zM9.1 2.3v4.7L14 7V3.1z"/></svg>',
+            "macOS": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/></svg>',
+            "Linux": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="10" cy="6" r="1" fill="#fff"/></svg>',
+            "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
         };
-
-        // --- Ikon Globe SVG Inline untuk IP ---
         const globeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#4CAF50"/><path fill="#fff" d="M8 3a5 5 0 010 10 5 5 0 010-10z"/></svg>';
 
-        // --- Fungsi deteksi Browser ---
-        function getBrowserInfo(){
+        // --- Logika Utama Pemuatan Artikel (Tidak diubah) ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            const mainContainer = document.getElementById('main-container');
+            const defaultThumbnail = 'thumbnail.jpg';
+
+            try {
+                const response = await fetch('artikel.json');
+                if (!response.ok) {
+                    throw new Error('Gagal memuat artikel.json');
+                }
+                const data = await response.json();
+
+                for (const category in data) {
+                    if (data.hasOwnProperty(category)) {
+                        const articles = data[category];
+                        const section = document.createElement('div');
+                        section.classList.add('category-section');
+                        
+                        const categoryId = category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                        const heading = document.createElement('h2');
+                        heading.id = categoryId;
+                        heading.textContent = category;
+                        section.appendChild(heading);
+                        
+                        const grid = document.createElement('div');
+                        grid.classList.add('article-grid');
+                        
+                        articles.forEach((item) => {
+                            const title = item[0];
+                            const fileName = item[1];
+                            const jsonImage = item[2] || "";
+                            const articleUrl = `artikel/${fileName}`;
+
+                            let thumbnailUrl = jsonImage;
+                            if (!thumbnailUrl || !/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(thumbnailUrl)) {
+                                thumbnailUrl = defaultThumbnail;
+                            }
+                            if (!/^https?:\/\//i.test(thumbnailUrl)) {
+                                thumbnailUrl = `artikel/${thumbnailUrl}`;
+                            }
+
+                            const link = document.createElement('a');
+                            link.href = articleUrl;
+                            link.classList.add('article-card');
+                            link.target = "_blank";
+                            
+                            const image = document.createElement('img');
+                            image.src = thumbnailUrl;
+                            image.alt = `Thumbnail untuk artikel: ${title}`;
+                            image.loading = 'lazy'; 
+
+                            const content = document.createElement('div');
+                            content.classList.add('card-content');
+                            content.innerHTML = `<h3>${title}</h3>`;
+
+                            link.appendChild(image);
+                            link.appendChild(content);
+                            grid.appendChild(link);
+                        });
+
+                        section.appendChild(grid);
+                        mainContainer.appendChild(section);
+                    }
+                }
+            } catch (error) {
+                console.error('Ada masalah saat memuat artikel.json:', error);
+                mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel.</p>`;
+            }
+            
+            updateFooterInfo();
+        });
+
+        // --- FUNGSI DETEKSI LINGKUNGAN (Tidak diubah) ---
+        function getBrowserInfo() {
             const ua = navigator.userAgent;
-            let name="Unknown", version="N/A";
-            if(ua.includes("Firefox")) { name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; }
-            else if(ua.includes("Chrome") && !ua.includes("Edg")) { name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; }
-            else if(ua.includes("Edg")) { name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; }
-            else if(ua.includes("Safari")) { name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; }
-            return {name, version, icon: browserIcons[name] || browserIcons["Unknown"]};
+            let name = "Unknown", version = "N/A";
+            if (ua.includes("Firefox")) { name = "Firefox"; version = ua.match(/Firefox\/([0-9\.]+)/)?.[1] || "N/A"; }
+            else if (ua.includes("Chrome") && !ua.includes("Edg")) { name = "Chrome"; version = ua.match(/Chrome\/([0-9\.]+)/)?.[1] || "N/A"; }
+            else if (ua.includes("Edg")) { name = "Edge"; version = ua.match(/Edg\/([0-9\.]+)/)?.[1] || "N/A"; }
+            else if (ua.includes("Safari") && !ua.includes("Chrome")) { name = "Safari"; version = ua.match(/Version\/([0-9\.]+)/)?.[1] || "N/A"; }
+            return { name, version, icon: browserIcons[name] || browserIcons["Unknown"] };
         }
 
-        // --- Fungsi deteksi OS ---
-        function getOSInfo(){
+        function getOSInfo() {
             const platform = navigator.platform.toLowerCase();
-            let name="Unknown";
-            if(platform.includes("win")) name="Windows";
-            else if(platform.includes("mac")) name="macOS";
-            else if(platform.includes("linux")) name="Linux";
-            return {name, icon: osIcons[name] || osIcons["Unknown"]};
+            const ua = navigator.userAgent;
+            let name = "Unknown";
+            if (platform.includes("win")) name = "Windows";
+            else if (platform.includes("mac")) name = "macOS";
+            else if (platform.includes("linux") && !ua.includes("Android")) name = "Linux";
+            else if (ua.includes("Android")) name = "Android";
+            else if (ua.includes("iPhone") || ua.includes("iPad")) name = "iOS";
+            return { name, icon: osIcons[name] || osIcons["Unknown"] };
         }
 
-        // --- Ambil IP dan info lokasi + bendera ---
-        fetch('https://ipapi.co/json/').then(res => res.json()).then(data => {
+        async function updateFooterInfo() {
             const footer = document.getElementById('footerInfo');
             const browser = getBrowserInfo();
             const os = getOSInfo();
-            const countryCode = data.country_code.toUpperCase();
-            
-            // Konversi kode negara (mis. 'ID') menjadi emoji bendera ('🇮🇩')
-            const flagEmoji = countryCode.split('').map(char => String.fromCodePoint(char.charCodeAt(0) + 127397)).join('');
-            
-            // Tampilkan semua info
+
             if (footer) {
                 footer.innerHTML = `
                     <div class="info-item">
@@ -275,23 +355,41 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="info-item">
                         <span style="width:16px;height:16px;display:inline-block;">${os.icon}</span> <span>${os.name}</span>
                     </div>
-                    <div class="info-item">
-                        <span style="width:16px;height:16px;display:inline-block;">${globeIcon}</span> <span>${data.ip} (${data.city}, ${data.region}, ${data.country_name})</span> ${flagEmoji}
+                    <div class="info-item" id="ip-info-item">
+                        <span style="width:16px;height:16px;display:inline-block;">${globeIcon}</span> <span>Memuat Lokasi...</span>
                     </div>
                 `;
             }
-            // Animasi hover
-            document.querySelectorAll('.info-item').forEach(el=>{
-                el.addEventListener('mouseenter', ()=>{ el.style.transform='scale(1.05)'; el.style.color='#007BFF'; });
-                el.addEventListener('mouseleave', ()=>{ el.style.transform='scale(1)'; el.style.color='inherit'; });
-            });
-        }).catch(err => {
-            const footer = document.getElementById('footerInfo');
-            if (footer) {
-                footer.textContent = 'Gagal memuat info IP. Silakan coba lagi nanti.';
+
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (!res.ok) throw new Error('IP API failed');
+                const data = await res.json();
+                
+                const countryCode = data.country_code.toUpperCase();
+                const flagEmoji = countryCode.split('').map(char => String.fromCodePoint(char.charCodeAt(0) + 127397)).join('');
+
+                const ipInfoEl = document.getElementById('ip-info-item');
+                if (ipInfoEl) {
+                    ipInfoEl.innerHTML = `
+                        <span style="width:16px;height:16px;display:inline-block;">${globeIcon}</span>
+                        <span>${data.ip} (${data.city || data.region || 'Lokasi'}, ${data.country_name})</span> ${flagEmoji}
+                    `;
+                }
+
+            } catch (err) {
+                console.error('Terjadi kesalahan saat mengambil data IP:', err);
+                const ipInfoEl = document.getElementById('ip-info-item');
+                if (ipInfoEl) {
+                    ipInfoEl.innerHTML = `<span style="width:16px;height:16px;display:inline-block;">${globeIcon}</span> <span>Gagal memuat IP.</span>`;
+                }
             }
-            console.error('Terjadi kesalahan saat mengambil data IP:', err);
-        });
+
+            document.querySelectorAll('.info-item').forEach(el => {
+                el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.05)'; el.style.color = 'var(--text-secondary)'; });
+                el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; el.style.color = 'var(--text-muted)'; }); // Gunakan variabel CSS
+            });
+        }
     </script>
 </body>
 </html>
