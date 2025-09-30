@@ -14,7 +14,7 @@
 #marquee-bottom {
   position: relative;
   width: 100%;
-  overflow: hidden; /* wajib agar marquee terlihat */
+  overflow: hidden;
   white-space: nowrap;
 }
 
@@ -32,8 +32,8 @@
   top: 50%;
   transform: rotate(-90deg) translateY(-50%);
   transform-origin: center;
-  width: 120px;  /* panjang slider */
-  height: 6px;   /* tebal slider */
+  width: 120px;
+  height: 6px;
   background: #555;
   -webkit-appearance: none;
   appearance: none;
