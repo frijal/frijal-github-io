@@ -252,18 +252,8 @@
     <script src="/ext/related.js"></script>
 <button id="related-posts-toggle">❌</button><div id="related-posts-container"><ul id="related-posts-list"></ul></div><script src="/ext/related.js"></script>
 
-<div id="marquee-bottom">
-  <div id="marquee-inner"></div>
-</div>
+<div id="marquee-bottom"><div id="marquee-inner"></div></div><input id="speedRange" type="range" min="0.01" max="2" step="0.01" value="0.2"><script src="/ext/marquee-url.js"></script><script>MarqueeDynamic.initMarqueeDynamic("marquee-bottom",0.2,60000);</script>
 
-<input id="speedRange" type="range" min="0.01" max="2" step="0.01" value="0.2">
-
-<script src="/ext/marquee-url.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  MarqueeDynamic.initMarqueeDynamic("marquee-bottom", 0.2, 60000);
-});
-</script>
 
 </body>
 </html>
