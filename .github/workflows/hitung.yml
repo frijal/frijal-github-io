@@ -25,6 +25,9 @@ jobs:
         id: file_counting
         run: |
           TARGET_DIR="${{ github.event.inputs.target_folder }}"
+          # Definisikan prefix URL untuk laporan
+          URL_PREFIX="https://frijal.github.io/"
+          
           # Mengganti karakter non-alfanumerik/path dengan underscore untuk nama file
           SANITIZED_DIR_NAME=$(echo "${TARGET_DIR}" | sed 's/[^a-zA-Z0-9]/_/g')
           REPORT_FILE="mini/laporan_jumlah_file_${SANITIZED_DIR_NAME}.txt"
@@ -48,7 +51,7 @@ jobs:
               ext = (NF > 1) ? $NF : "no_ext";
               # Cetak ekstensi dan path untuk sorting
               print ext " " $0;
-          }' | sort -k1,1 | awk '
+          }' | sort -k1,1 | awk -v prefix="${URL_PREFIX}" '
               BEGIN { current_ext = ""; }
               {
                   # Ambil ekstensi (kata pertama)
@@ -67,7 +70,8 @@ jobs:
                       display_ext = (ext == "no_ext") ? "TIDAK ADA EKSTENSI" : "." toupper(ext);
                       print "## " display_ext " ##";
                   }
-                  print "- " path;
+                  # TAMBAHAN: Tambahkan prefix URL di depan path file
+                  print "- " prefix path;
               }
           ')
 
@@ -83,7 +87,7 @@ jobs:
           
           echo "" >> ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
-          echo "### DAFTAR DETAIL FILE BERDASARKAN EKSTENSI ###" >> ${REPORT_FILE}
+          echo "### DAFTAR DETAIL FILE BERDASARKAN EKSTENSI (URL Relatif ke ${URL_PREFIX}) ###" >> ${REPORT_FILE}
           echo "${REPORT_DETAIL_CONTENT}" >> ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
 
