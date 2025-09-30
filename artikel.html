@@ -10,7 +10,7 @@
     <meta name="keywords" content="Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal">
     <meta name="author" content="Fakhrul">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#f0f2f5"> <link rel="canonical" href="https://frijal.github.io/artikel.html"> 
+    <link rel="canonical" href="https://frijal.github.io/artikel.html"> 
     
     <meta property="og:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
     <meta property="og:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir. Temukan topik yang relevan dengan minat Anda.">
@@ -19,7 +19,6 @@
     <meta property="og:site_name" content="Frijal">
     <meta property="og:locale" content="id_ID">
     <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg"> 
-    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
     <meta name="twitter:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir.">
@@ -58,6 +57,8 @@
             --text-muted: #6c757d;
             --border-color: #e9ecef;
             --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --nav-bg: #fff; /* Warna latar navigasi cepat */
+            --nav-border: #ddd;
         }
 
         body {
@@ -169,11 +170,43 @@
             height: 16px;
             vertical-align: middle;
         }
+        
+        /* Gaya Navigasi Cepat (Quick Nav) */
+        #quick-nav {
+            position: fixed;
+            right: 15px;
+            bottom: 20%; /* Posisikan 20% dari bawah */
+            transform: translateY(50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .nav-button {
+            background-color: var(--nav-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--nav-border);
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s, transform 0.2s;
+            max-width: 100px; /* Batasi lebar tombol */
+            overflow: hidden; /* Sembunyikan jika teks terlalu panjang */
+            white-space: nowrap;
+            text-overflow: ellipsis; /* Tampilkan ellipsis */
+        }
+        .nav-button:hover {
+            background-color: var(--border-color);
+            transform: scale(1.05);
+        }
 
 
         /* =======================================
            DARK MODE OVERRIDES
-           Menggunakan prefers-color-scheme
            ======================================= */
         @media (prefers-color-scheme: dark) {
             :root {
@@ -181,15 +214,14 @@
                 --bg-section: #1e1e1e;
                 --bg-card: #2c2c2c;
                 --text-primary: #f0f0f0;
-                --text-secondary: #5dade2; /* Biru yang lebih terang untuk dark mode */
+                --text-secondary: #5dade2; 
                 --text-muted: #aaa;
                 --border-color: #383838;
                 --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+                --nav-bg: #2c2c2c; /* Latar belakang nav gelap */
+                --nav-border: #444; /* Border nav gelap */
             }
             body {
-                color: var(--text-primary);
-            }
-            h1 {
                 color: var(--text-primary);
             }
             .category-section h2 {
@@ -203,13 +235,15 @@
                 color: var(--text-muted);
             }
             .info-item:hover {
-                color: var(--text-secondary); /* Warna hover menyesuaikan dark mode */
+                color: var(--text-secondary); 
             }
-            /* Ganti warna ikon SVG jika perlu, misal: */
-            .info-item svg path, .info-item svg circle, .info-item svg rect {
-                 /* Ini akan mempengaruhi semua ikon, perlu penyesuaian jika ikon memiliki warna spesifik */
+            .nav-button {
+                color: var(--text-primary);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
             }
-            /* Menyesuaikan meta theme color untuk dark mode */
+            .nav-button:hover {
+                background-color: #383838;
+            }
             meta[name="theme-color"] {
                 content: #121212;
             }
@@ -230,6 +264,9 @@
         <div id="footerInfo"></div>
     </footer>
 
+    <div id="quick-nav">
+        </div>
+
     <script>
         // --- Ikon SVG Inline (Tidak diubah) ---
         const browserIcons = {
@@ -247,10 +284,46 @@
         };
         const globeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#4CAF50"/><path fill="#fff" d="M8 3a5 5 0 010 10 5 5 0 010-10z"/></svg>';
 
-        // --- Logika Utama Pemuatan Artikel (Tidak diubah) ---
+        // --- Fungsi untuk membuat tombol navigasi cepat ---
+        function createQuickNav(categories) {
+            const quickNav = document.getElementById('quick-nav');
+            quickNav.innerHTML = ''; // Bersihkan kontainer
+
+            // Buat tombol 'Atas'
+            const upButton = document.createElement('button');
+            upButton.className = 'nav-button';
+            upButton.textContent = '↑ Atas';
+            upButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            quickNav.appendChild(upButton);
+
+            // Buat tombol untuk setiap kategori
+            categories.forEach(categoryName => {
+                const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                const button = document.createElement('a');
+                button.href = `#${categoryId}`;
+                button.className = 'nav-button';
+                button.textContent = categoryName;
+
+                // Tambahkan smooth scrolling pada klik
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetElement = document.getElementById(categoryId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+                quickNav.appendChild(button);
+            });
+        }
+
+
+        // --- Logika Utama Pemuatan Artikel (Diperbarui untuk memanggil createQuickNav) ---
         document.addEventListener('DOMContentLoaded', async () => {
             const mainContainer = document.getElementById('main-container');
             const defaultThumbnail = 'thumbnail.jpg';
+            const categories = [];
 
             try {
                 const response = await fetch('artikel.json');
@@ -259,8 +332,11 @@
                 }
                 const data = await response.json();
 
+                // 1. ITERASI & MEMBANGUN KONTEN
                 for (const category in data) {
                     if (data.hasOwnProperty(category)) {
+                        categories.push(category); // Simpan nama kategori
+                        
                         const articles = data[category];
                         const section = document.createElement('div');
                         section.classList.add('category-section');
@@ -311,6 +387,10 @@
                         mainContainer.appendChild(section);
                     }
                 }
+                
+                // 2. MEMBANGUN NAVIGASI CEPAT
+                createQuickNav(categories);
+
             } catch (error) {
                 console.error('Ada masalah saat memuat artikel.json:', error);
                 mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel.</p>`;
@@ -387,7 +467,7 @@
 
             document.querySelectorAll('.info-item').forEach(el => {
                 el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.05)'; el.style.color = 'var(--text-secondary)'; });
-                el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; el.style.color = 'var(--text-muted)'; }); // Gunakan variabel CSS
+                el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)'; el.style.color = 'var(--text-muted)'; });
             });
         }
     </script>
