@@ -10,6 +10,7 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
   if(!container || !inner) return;
 
   let left = 0, speed = defaultSpeed;
+  let animFrameId;
 
   async function loadArticles(){
     try{
@@ -27,11 +28,14 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
       if(!category) return;
 
       const articles = data[category].map(arr=>{
+        // jika arr[1] sudah diawali "artikel/", jangan tambahkan lagi
         const file = arr[1].startsWith('artikel/') ? arr[1] : 'artikel/' + arr[1];
         return {title: arr[0], file};
       }).sort(()=>0.5-Math.random());
 
-      inner.innerHTML = articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ') + ' • ' + articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ');
+      // buat loop mulus
+      const content = articles.map(a=>`<a href="${a.file}">${a.title}</a>`).join(' • ');
+      inner.innerHTML = content + ' • ' + content;
 
     }catch(e){
       console.error('Gagal load artikel.json:', e);
@@ -43,15 +47,20 @@ MarqueeDynamic.initMarqueeDynamic = async function(containerId, defaultSpeed=0.2
     left -= speed;
     if(left <= -inner.scrollWidth/2) left = 0;
     inner.style.transform = "translateX("+left+"px)";
-    requestAnimationFrame(step);
+    animFrameId = requestAnimationFrame(step);
   }
 
   await loadArticles();
   step();
 
+  // slider kontrol kecepatan
   if(speedRange) speedRange.addEventListener("input", function(e){
     speed = parseFloat(e.target.value);
   });
+
+  // hover pause/resume
+  container.addEventListener('mouseenter', ()=> cancelAnimationFrame(animFrameId));
+  container.addEventListener('mouseleave', ()=> step());
 
   setInterval(loadArticles, refreshInterval);
 };
