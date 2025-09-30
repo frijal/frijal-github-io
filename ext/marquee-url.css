@@ -1,15 +1,3 @@
-/* Dark/Light mode otomatis */
-@media(prefers-color-scheme:dark){
-  body{background:#111;color:#fff}
-  #speedRange::-webkit-slider-thumb{background:#fff}
-  #speedRange::-moz-range-thumb{background:#fff}
-}
-@media(prefers-color-scheme:light){
-  body{background:#fff;color:#111}
-  #speedRange::-webkit-slider-thumb{background:#000}
-  #speedRange::-moz-range-thumb{background:#000}
-}
-
 /* Container marquee */
 #marquee-bottom{
   position:relative;
