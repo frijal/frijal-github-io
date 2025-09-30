@@ -1,4 +1,4 @@
-/* Marquee container fixed di bawah */
+/* Marquee container fixed di bawah, transparan */
 #marquee-bottom{
   position:fixed;       /* tetap di viewport */
   bottom:0;             /* menempel bawah layar */
@@ -6,8 +6,6 @@
   width:100%;
   overflow:hidden;
   white-space:nowrap;
-  background:#222;      /* opsional, bisa diubah sesuai tema */
-  padding:5px 0;        /* sedikit spasi atas-bawah */
   box-sizing:border-box;
   z-index:999;          /* selalu di atas konten lain */
 }
