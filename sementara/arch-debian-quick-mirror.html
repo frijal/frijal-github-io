@@ -164,7 +164,7 @@ elif [ "$MODE" = "arch" ]; then
 else
   echo "Usage: $0 debian|arch"
 fi</code>
-<div></div><div></div><div></div><script src="/ext/related.js"></script>
+<div></div><div></div><div></div><div></div>
     </pre>
       <a
         href="data:text/plain;charset=utf-8,#!/bin/bash%0A#%20quick-mirror.sh%20(pilih%20salah%20satu%20mode:%20debian|arch)%0AMODE=%22$1%22%0A%0Aif%20[%20%22$MODE%22%20=%20%22debian%22%20];%20then%0A%20%20sudo%20apt%20update%0A%20%20sudo%20apt%20install%20-y%20netselect-apt%0A%20%20sudo%20netselect-apt%20stable%0A%20%20sudo%20cp%20/etc/apt/sources.list%20/etc/apt/sources.list.bak%0A%20%20sudo%20mv%20sources.list%20/etc/apt/sources.list%0A%20%20sudo%20apt%20update%0A%0Aelif%20[%20%22$MODE%22%20=%20%22arch%22%20];%20then%0A%20%20sudo%20pacman%20-S%20--noconfirm%20reflector%0A%20%20sudo%20reflector%20--country%20%22Indonesia%22%20--latest%2010%20--sort%20rate%20--save%20/etc/pacman.d/mirrorlist%0A%20%20sudo%20pacman%20-Syyu%0A%0Aelse%0A%20%20echo%20%22Usage:%20$0%20debian|arch%22%0Afi"
@@ -306,6 +306,6 @@ fi</code>
       }</style
     ><div></div>
     <div></div><div></div>
-    <script src="/ext/related.js"></script>
+    <div></div>
   </body>
 </html>

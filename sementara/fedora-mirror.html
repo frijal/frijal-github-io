@@ -164,7 +164,7 @@ echo "[INFO] Membersihkan cache DNF..."
 sudo dnf clean all
 
 echo "[DONE] Fastestmirror berhasil diaktifkan untuk Fedora!"</code>
-<div></div><div></div><div></div><script src="/ext/related.js"></script>
+<div></div><div></div><div></div><div></div>
     </pre>
       <a
         href="data:text/plain;charset=utf-8,#!/bin/bash%0A#%20fedora-mirror.sh%20(aktifkan%20mirror%20tercepat%20Fedora%20dengan%20DNF)%0A%0Aset%20-e%0A%0Aecho%20%22[INFO]%20Install%20plugin%20DNF...%22%0Asudo%20dnf%20install%20-y%20dnf-plugins-core%0A%0Aecho%20%22[INFO]%20Backup%20konfigurasi%20lama...%22%0Asudo%20cp%20/etc/dnf/dnf.conf%20/etc/dnf/dnf.conf.bak.$(date%20+%25F_%25T)%0A%0Aecho%20%22[INFO]%20Mengaktifkan%20fastestmirror%20di%20/etc/dnf/dnf.conf...%22%0Aif%20!%20grep%20-q%20%22fastestmirror=True%22%20/etc/dnf/dnf.conf;%20then%0A%20%20echo%20%22fastestmirror=True%22%20|%20sudo%20tee%20-a%20/etc/dnf/dnf.conf%0Afi%0A%0Aecho%20%22[INFO]%20Membersihkan%20cache%20DNF...%22%0Asudo%20dnf%20clean%20all%0A%0Aecho%20%22[DONE]%20Fastestmirror%20berhasil%20diaktifkan%20untuk%20Fedora!%22"
@@ -306,6 +306,6 @@ echo "[DONE] Fastestmirror berhasil diaktifkan untuk Fedora!"</code>
       }</style
     ><div></div>
     <div></div><div></div>
-    <script src="/ext/related.js"></script>
+    <div></div>
   </body>
 </html>
