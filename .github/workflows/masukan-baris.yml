@@ -1,0 +1,39 @@
+# Nama workflow yang akan muncul di tab "Actions" GitHub
+name: Inject Content After Body
+
+# Pemicu: Workflow ini HANYA dapat dijalankan secara manual dari tab Actions
+on:
+  workflow_dispatch:
+
+# Pekerjaan yang akan dilakukan
+jobs:
+  inject-and-commit:
+    runs-on: ubuntu-latest
+    env:
+      SENTENCE_TO_INJECT: 'masukkan kalimat setelah <body>'
+
+    steps:
+      # Langkah 1: Mengunduh kode dari repositori Anda
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Langkah 2: Proses pencarian dan penyisipan kalimat
+      - name: Inject sentence into HTML files
+        run: |
+          find . -type f -name "*.html" -exec sed -i 's|<body.*>|&\n${{ env.SENTENCE_TO_INJECT }}|' {} +
+
+      # Langkah 3: Commit dan push perubahan kembali ke repositori
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          if ! git diff --quiet; then
+            git add .
+            git commit -m "CI: Auto-inject content after body tag [skip ci]"
+            git push
+          else
+            echo "Tidak ada perubahan yang perlu di-commit."
+          fi
