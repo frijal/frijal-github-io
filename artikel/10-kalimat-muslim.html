@@ -248,23 +248,7 @@
         })(document, 'script', 'facebook-jssdk');
     </script>    
 
-    <section id="related-marquee-section"><div id="related-marquee-container"></div></section>
-
-    <script src="/ext/marquee-url.js"></script> 
-
-<script>
-    // 1. Dapatkan Nama File Saat Ini
-    // Ini adalah cara sederhana untuk mendapatkan 'nama-file.html' dari URL
-    const currentURL = window.location.pathname;
-    const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
-
-    // 2. Inisialisasi Marquee Dinamis
-    initCategoryMarquee(
-        'related-marquee-container', // ID target div
-        currentFilename,             // e.g., '1011nabi-yaakub-yusuf.html'
-        '/artikel.json'              // Path ke data JSON Anda
-    );
-</script>
+    <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script> 
 
 </body>
 </html>
