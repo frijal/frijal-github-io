@@ -50,17 +50,23 @@
     100% { transform: translateX(-100%); }
 }
 
-/* --- (2) GAYA UNTUK KOLOM PENCARIAN MELAYANG --- */
+/* --- (2) GAYA UNTUK KOLOM PENCARIAN MELAYANG (DIPERBAIKI) --- */
 .search-floating-container {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1001;
     width: 250px;
+    transition: width 0.4s ease-in-out; 
+}
+
+.search-floating-container:focus-within {
+    width: 300px;
 }
 
 #floatingSearchInput {
     width: 100%;
+    height: 44px;
     padding: 10px 40px 10px 40px; 
     font-size: 14px;
     border: 1px solid #ccc;
@@ -71,14 +77,13 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
     background-position: 15px center;
     background-repeat: no-repeat;
-    text-align: right; /* BARU: Mulai teks dari kanan */
-    transition: width 0.4s ease-in-out, text-align 0.4s ease-in-out; /* MODIFIKASI: Tambahkan transisi untuk text-align */
+    text-align: right;
+    transition: text-align 0.4s ease-in-out;
 }
 
 #floatingSearchInput:focus {
-    width: 300px;
     border-color: #007bff;
-    text-align: left; /* BARU: Ubah perataan teks ke kiri saat diketik */
+    text-align: left;
 }
 
 .floating-results-container {
