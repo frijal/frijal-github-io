@@ -1,5 +1,5 @@
 /* =======================================
-    GAYA UNTUK MARQUEE (Sticky Bawah, Transparan)
+    GAYA UNTUK MARQUEE (Sticky Bawah, Konstan)
     ======================================= */
 
 /* Kontainer luar yang menempatkan Marquee */
@@ -28,53 +28,39 @@
 /* Elemen yang dianimasikan */
 #related-marquee-container .marquee-content {
     display: inline-block;
-    padding-left: 100%;
-    /* Kecepatan Konstan Anda: 3000s (50 menit) */
-    animation: marquee-scroll 3500s linear infinite;
+    /* Dihapus: padding-left: 100%; agar teks langsung memenuhi layar */
+    /* Kecepatan Konstan: 3000s (50 menit) */
+    animation: marquee-scroll 3000s linear infinite;
 }
 
-/* --- LOGIKA HOVER UNTUK MENJEDA MARQUEE --- */
-/* Menjeda animasi saat mouse hover di atas kontainer marquee */
+/* --- LOGIKA HOVER MARQUEE & JUDUL --- */
+
+/* 1. Menjeda animasi saat mouse hover di atas kontainer marquee */
 #related-marquee-container:hover .marquee-content {
     animation-play-state: paused;
 }
-/* ------------------------------------------- */
 
-/* Gaya Link/Judul */
+/* 2. Gaya Link/Judul */
 #related-marquee-container a {
     color: var(--text-light);
     text-decoration: none;
     margin-right: 30px;
-    transition: color 0.3s;
-    font-weight: 400;
+    /* Transisi halus untuk perubahan hover */
+    transition: color 0.3s, font-weight 0.2s; 
+    font-weight: 400; 
     font-size: 0.85em;
 }
 
+/* 3. Efek Pembeda saat hover pada judul */
 #related-marquee-container a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent, #ffcc00); /* Ubah ke warna aksen */
+    font-weight: 700; /* Jadikan tebal (Bold) */
+    text-decoration: underline; /* Garis bawah opsional */
 }
-
-/* Gaya Link/Judul */
-#related-marquee-container a {
-    color: var(--text-light); /* Warna default (misalnya, putih/terang) */
-    text-decoration: none;
-    margin-right: 30px;
-    transition: color 0.3s, font-weight 0.2s; /* Tambahkan transisi agar perubahan halus */
-    font-weight: 400; /* Ketebalan font default */
-    font-size: 0.85em;
-}
-
-#related-marquee-container a:hover {
-    /* EFEK PEMBEDA SAAT HOVER */
-    color: var(--color-accent, #ffcc00); /* Ubah ke warna aksen (misalnya, kuning cerah/merah) */
-    font-weight: 700; /* Jadikan lebih tebal (Bold) */
-    text-decoration: underline; /* Opsional: Tambahkan garis bawah */
-}
+/* ------------------------------------------- */
 
 /* Kunci Animasi CSS (Penting) */
 @keyframes marquee-scroll {
-    0% { transform: translateX(0); }
+    0% { transform: translateX(0); } 
     100% { transform: translateX(-100%); }
 }
-
-/* Catatan: Seluruh GAYA UNTUK SLIDER KECEPATAN MARQUEE TELAH DIHAPUS. */
