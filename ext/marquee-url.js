@@ -101,7 +101,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
             const description = post[4] || title; // arr[4] untuk Tooltip
             
             // Tambahkan atribut data-article-id untuk pelacakan klik
-            contentHTML += `<a href="${url}" data-article-id="${articleId}" rel="noopener" title="${description}">${title}</a>${separator}`;
+            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${description}">${title}</a>${separator}`;
         });
 
         // Diperbaiki: Ulangi konten 30 kali agar selalu mengisi lebar layar penuh dari awal
