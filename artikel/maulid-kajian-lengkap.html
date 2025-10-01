@@ -294,5 +294,6 @@
         document.addEventListener("DOMContentLoaded",()=>{let e=document.querySelector("main section img"),n=e?e.src:"",t=(["og:image","twitter:image"].forEach((e,t)=>{let r=document.querySelector(t?`meta[name="${e}"]`:`meta[property="${e}"]`);r||(r=document.createElement("meta"),t?r.setAttribute("name",e):r.setAttribute("property",e),document.head.appendChild(r)),r.setAttribute("content",n)}),document.querySelector('meta[property="og:url"]'));t||((t=document.createElement("meta")).setAttribute("property","og:url"),document.head.appendChild(t)),t.setAttribute("content",window.location.href)});
     </script>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
 </body>
 </html>
