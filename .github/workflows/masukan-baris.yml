@@ -1,4 +1,3 @@
-# Nama workflow
 name: masukkan baris sebelum atau sesudah
 
 # Pemicu: Hanya berjalan manual
@@ -6,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       position:
-        description: 'Sisipkan kalimat "sebelum" atau "sesudah" target?'
+        description: 'Sisipkan "sebelum" atau "sesudah" target?'
         required: true
         type: choice
         default: 'sesudah'
@@ -14,15 +13,20 @@ on:
         - sesudah
         - sebelum
       target_string:
-        description: 'Masukkan teks target (contoh: <body class="dark">, </body>, dll.)'
+        description: 'Masukkan teks target (contoh: <body>, </body>)'
         required: true
         default: '<body>'
+      # BARU: Kolom input untuk kalimat yang akan disisipkan
+      sentence:
+        description: 'Masukkan kalimat/HTML yang akan disisipkan'
+        required: true
+        type: string
+        default: '<div style="background-color: #e1f5fe; text-align: center; padding: 5px; font-size: 0.9em;">Ini adalah contoh kalimat.</div>'
 
 jobs:
   inject-and-commit:
     runs-on: ubuntu-latest
-    env:
-      SENTENCE_TO_INJECT: '<div id="auto-injected-banner" style="background-color: #e1f5fe; text-align: center; padding: 5px; font-size: 0.9em;">Ini kalimat yang disisipkan secara dinamis.</div>'
+    # DIHAPUS: Blok 'env' tidak lagi diperlukan karena kalimat diinput langsung
 
     steps:
       - name: Checkout repository
@@ -32,24 +36,21 @@ jobs:
 
       - name: Inject sentence into HTML files
         run: |
-          # Mengambil nilai dari kedua input
+          # MODIFIKASI: Mengambil nilai dari ketiga input
           POSITION="${{ github.event.inputs.position }}"
           TARGET="${{ github.event.inputs.target_string }}"
-          SENTENCE="${{ env.SENTENCE_TO_INJECT }}"
+          SENTENCE="${{ github.event.inputs.sentence }}"
 
-          # Langkah PENTING: Meng-escape karakter khusus pada input TARGET
-          # agar tidak merusak perintah 'sed'.
+          # Langkah untuk meng-escape karakter khusus pada input TARGET
           ESCAPED_TARGET=$(printf '%s\n' "$TARGET" | sed -e 's/[]\/$*.^[]/\\&/g');
 
           echo "Posisi: $POSITION"
           echo "Target: $TARGET"
           
-          # Menjalankan perintah 'sed' berdasarkan pilihan 'sebelum' atau 'sesudah'
+          # Menjalankan perintah 'sed' berdasarkan pilihan
           if [[ "$POSITION" == "sesudah" ]]; then
-            # Mengganti target dengan dirinya sendiri (&), baris baru, lalu kalimat
             find . -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|&\n$SENTENCE|" {} +
           elif [[ "$POSITION" == "sebelum" ]]; then
-            # Mengganti target dengan kalimat, baris baru, lalu dirinya sendiri (&)
             find . -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|$SENTENCE\n&|" {} +
           fi
 
