@@ -30,7 +30,7 @@
     display: inline-block;
     /* Dihapus: padding-left: 100%; agar teks langsung memenuhi layar */
     /* Kecepatan Konstan: 3000s (50 menit) */
-    animation: marquee-scroll 3000s linear infinite;
+    animation: marquee-scroll 4000s linear infinite;
 }
 
 /* --- LOGIKA HOVER MARQUEE & JUDUL --- */
