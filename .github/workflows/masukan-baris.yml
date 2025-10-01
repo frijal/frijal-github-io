@@ -1,30 +1,58 @@
-# Nama workflow yang akan muncul di tab "Actions" GitHub
-name: masukkan baris After Body
+# Nama workflow
+name: masukkan baris sebelum atau sesudah
 
-# Pemicu: Workflow ini HANYA dapat dijalankan secara manual dari tab Actions
+# Pemicu: Hanya berjalan manual
 on:
   workflow_dispatch:
+    inputs:
+      position:
+        description: 'Sisipkan kalimat "sebelum" atau "sesudah" target?'
+        required: true
+        type: choice
+        default: 'sesudah'
+        options:
+        - sesudah
+        - sebelum
+      target_string:
+        description: 'Masukkan teks target (contoh: <body class="dark">, </body>, dll.)'
+        required: true
+        default: '<body>'
 
-# Pekerjaan yang akan dilakukan
 jobs:
   inject-and-commit:
     runs-on: ubuntu-latest
     env:
-      SENTENCE_TO_INJECT: 'masukkan kalimat setelah <body>'
+      SENTENCE_TO_INJECT: '<div id="auto-injected-banner" style="background-color: #e1f5fe; text-align: center; padding: 5px; font-size: 0.9em;">Ini kalimat yang disisipkan secara dinamis.</div>'
 
     steps:
-      # Langkah 1: Mengunduh kode dari repositori Anda
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Langkah 2: Proses pencarian dan penyisipan kalimat
       - name: Inject sentence into HTML files
         run: |
-          find . -type f -name "*.html" -exec sed -i 's|<body.*>|&\n${{ env.SENTENCE_TO_INJECT }}|' {} +
+          # Mengambil nilai dari kedua input
+          POSITION="${{ github.event.inputs.position }}"
+          TARGET="${{ github.event.inputs.target_string }}"
+          SENTENCE="${{ env.SENTENCE_TO_INJECT }}"
 
-      # Langkah 3: Commit dan push perubahan kembali ke repositori
+          # Langkah PENTING: Meng-escape karakter khusus pada input TARGET
+          # agar tidak merusak perintah 'sed'.
+          ESCAPED_TARGET=$(printf '%s\n' "$TARGET" | sed -e 's/[]\/$*.^[]/\\&/g');
+
+          echo "Posisi: $POSITION"
+          echo "Target: $TARGET"
+          
+          # Menjalankan perintah 'sed' berdasarkan pilihan 'sebelum' atau 'sesudah'
+          if [[ "$POSITION" == "sesudah" ]]; then
+            # Mengganti target dengan dirinya sendiri (&), baris baru, lalu kalimat
+            find . -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|&\n$SENTENCE|" {} +
+          elif [[ "$POSITION" == "sebelum" ]]; then
+            # Mengganti target dengan kalimat, baris baru, lalu dirinya sendiri (&)
+            find . -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|$SENTENCE\n&|" {} +
+          fi
+
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -32,7 +60,7 @@ jobs:
           
           if ! git diff --quiet; then
             git add .
-            git commit -m "CI: Auto-inject content after body tag [skip ci]"
+            git commit -m "CI: Auto-inject content dynamically [skip ci]"
             git push
           else
             echo "Tidak ada perubahan yang perlu di-commit."
