@@ -54,6 +54,23 @@
     color: var(--color-accent);
 }
 
+/* Gaya Link/Judul */
+#related-marquee-container a {
+    color: var(--text-light); /* Warna default (misalnya, putih/terang) */
+    text-decoration: none;
+    margin-right: 30px;
+    transition: color 0.3s, font-weight 0.2s; /* Tambahkan transisi agar perubahan halus */
+    font-weight: 400; /* Ketebalan font default */
+    font-size: 0.85em;
+}
+
+#related-marquee-container a:hover {
+    /* EFEK PEMBEDA SAAT HOVER */
+    color: var(--color-accent, #ffcc00); /* Ubah ke warna aksen (misalnya, kuning cerah/merah) */
+    font-weight: 700; /* Jadikan lebih tebal (Bold) */
+    text-decoration: underline; /* Opsional: Tambahkan garis bawah */
+}
+
 /* Kunci Animasi CSS (Penting) */
 @keyframes marquee-scroll {
     0% { transform: translateX(0); }
