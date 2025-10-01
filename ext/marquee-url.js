@@ -41,8 +41,6 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         console.error(`Marquee Error: Elemen dengan ID: ${targetCategoryId} tidak ditemukan.`);
         return;
     }
-    // Tampilan loading awal
-    marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait...</p>`;
     
     try {
         const response = await fetch(jsonPath);
@@ -72,8 +70,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         // Filter artikel yang sedang dibuka
         const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
 
-        // --- LOGIKA FILTER LOCAL STORAGE (BARU) ---
-        // Ambil ID artikel yang sudah dibaca dari Local Storage
+        // --- LOGIKA FILTER LOCAL STORAGE ---
         const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
         
         // Filter: Hanya sisakan artikel yang ID-nya BELUM ada di Local Storage
@@ -83,6 +80,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         });
         
         if (unreadArticles.length === 0) {
+            // Tampilan jika semua sudah dibaca
             marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
             return; 
         }
@@ -104,18 +102,19 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
             contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${description}">${title}</a>${separator}`;
         });
 
-        // Diperbaiki: Ulangi konten 30 kali agar selalu mengisi lebar layar penuh dari awal
+        // Ulangi konten 30 kali agar langsung mengisi lebar penuh
         const repeatedContent = contentHTML.repeat(30);
         
-        // Suntikkan konten ke kontainer
+        // Suntikkan konten ke kontainer dan mulai animasi
         marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
         
-        // Daftarkan event listener pelacakan klik setelah konten marquee disuntikkan
+        // Daftarkan event listener pelacakan klik
         registerReadTracker(); 
 
     } catch (error) {
         console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
-        marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
+        // Tampilan error DIHAPUS, GANTI DENGAN KOSONG
+        marqueeContainer.innerHTML = ''; 
     }
 }
 
