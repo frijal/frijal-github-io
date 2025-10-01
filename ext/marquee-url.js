@@ -1,4 +1,18 @@
 /**
+ * Mendeteksi apakah perangkat yang digunakan adalah Mobile (layar kecil/layar sentuh).
+ * @returns {boolean} True jika mobile, False jika desktop.
+ */
+function isMobileDevice() {
+    // Kriteria deteksi: Maksimal lebar layar 768px ATAU adanya kemampuan layar sentuh
+    return (
+        window.innerWidth <= 768 || 
+        ('ontouchstart' in window) || 
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0)
+    );
+}
+
+/**
  * Fungsi untuk menyimpan ID artikel yang diklik ke Local Storage.
  */
 function registerReadTracker() {
@@ -7,19 +21,14 @@ function registerReadTracker() {
     
     // Mendaftarkan event listener pada kontainer marquee
     marqueeContainer.addEventListener('click', function(event) {
-        // Cek apakah yang diklik adalah link (<a>)
         const clickedLink = event.target.closest('a');
         if (clickedLink) {
             const articleId = clickedLink.getAttribute('data-article-id');
             if (articleId) {
-                // 1. Ambil data saat ini dari Local Storage
                 const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
                 
-                // 2. Tambahkan ID baru jika belum ada
                 if (!readArticles.includes(articleId)) {
                     readArticles.push(articleId);
-                    
-                    // 3. Simpan kembali data yang sudah diperbarui ke Local Storage
                     localStorage.setItem('read_marquee_articles', JSON.stringify(readArticles));
                 }
             }
@@ -31,8 +40,8 @@ function registerReadTracker() {
 /**
  * Inisialisasi Marquee Dinamis dengan memfilter hanya artikel yang belum dibaca.
  * @param {string} targetCategoryId ID elemen div Marquee
- * @param {string} currentFilename Nama file artikel yang sedang dibuka (e.g., '1011nabi-yaakub-yusuf.html')
- * @param {string} jsonPath Jalur file artikel.json (e.g., '/artikel.json')
+ * @param {string} currentFilename Nama file artikel yang sedang dibuka
+ * @param {string} jsonPath Jalur file artikel.json
  */
 async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) {
     const marqueeContainer = document.getElementById(targetCategoryId);
@@ -67,45 +76,53 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
             return;
         }
 
-        // Filter artikel yang sedang dibuka
         const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
 
         // --- LOGIKA FILTER LOCAL STORAGE ---
         const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
         
-        // Filter: Hanya sisakan artikel yang ID-nya BELUM ada di Local Storage
         const unreadArticles = filteredArticles.filter(item => {
-            const articleId = item[1]; // Nama file unik (ID Artikel)
+            const articleId = item[1]; 
             return !readArticles.includes(articleId);
         });
         
         if (unreadArticles.length === 0) {
-            // Tampilan jika semua sudah dibaca
             marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
             return; 
         }
         
-        // Gunakan unreadArticles untuk proses selanjutnya
         unreadArticles.sort(() => 0.5 - Math.random());
         
         let contentHTML = '';
         const separator = ' • ';
+        
+        // Cek status mobile sekali
+        const isMobile = isMobileDevice(); 
 
         // Membuat string HTML dari artikel
         unreadArticles.forEach(post => {
             const title = post[0];
             const articleId = post[1]; 
             const url = `/artikel/${articleId}`;
-            const description = post[4] || title; // arr[4] untuk Tooltip
+            
+            // Logika Tooltip Bersyarat
+            let tooltipText;
+            if (isMobile) {
+                // Mobile: Gunakan hanya Judul (arr[0])
+                tooltipText = title;
+            } else {
+                // Desktop: Gunakan Deskripsi (arr[4]) jika ada, atau fallback ke Judul
+                tooltipText = post[4] || title; 
+            }
             
             // Tambahkan atribut data-article-id untuk pelacakan klik
-            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${description}">${title}</a>${separator}`;
+            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
         });
 
-        // Ulangi konten 30 kali agar langsung mengisi lebar penuh
+        // Ulangi konten 30 kali
         const repeatedContent = contentHTML.repeat(30);
         
-        // Suntikkan konten ke kontainer dan mulai animasi
+        // Suntikkan konten
         marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
         
         // Daftarkan event listener pelacakan klik
@@ -113,7 +130,6 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
 
     } catch (error) {
         console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
-        // Tampilan error DIHAPUS, GANTI DENGAN KOSONG
         marqueeContainer.innerHTML = ''; 
     }
 }
@@ -123,15 +139,13 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
  * Dipicu secara otomatis saat DOMContentLoaded.
  */
 function initializeMarquee() {
-    // 1. Dapatkan Nama File Saat Ini
     const currentURL = window.location.pathname;
     const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 
-    // 2. Inisialisasi Marquee Dinamis
     initCategoryMarquee(
-        'related-marquee-container', // ID target div
-        currentFilename,             // Nama file artikel yang sedang dibuka
-        '/artikel.json'              // Path ke data JSON Anda
+        'related-marquee-container', 
+        currentFilename,             
+        '/artikel.json'              
     );
 }
 
