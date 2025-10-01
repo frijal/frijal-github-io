@@ -1,5 +1,4 @@
 name: masukkan baris sebelum atau sesudah
-# Pemicu: Hanya berjalan manual
 on:
   workflow_dispatch:
     inputs:
@@ -20,12 +19,17 @@ on:
         required: true
         type: string
         default: '<div style="background-color: #e1f5fe; text-align: center; padding: 5px; font-size: 0.9em;">Ini adalah contoh kalimat.</div>'
-      # BARU: Kolom input untuk menentukan folder kerja
       target_directory:
         description: 'Folder target (contoh: ., artikel/, mini/)'
         required: true
         type: string
         default: '.'
+      # BARU: Kolom input untuk menentukan ekstensi file
+      file_extension:
+        description: 'Ekstensi file target (contoh: html, txt, js, css)'
+        required: true
+        type: string
+        default: 'html'
 
 jobs:
   inject-and-commit:
@@ -37,26 +41,28 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Inject sentence into HTML files
+      - name: Inject sentence into files
         run: |
           # Mengambil nilai dari semua input
           POSITION="${{ github.event.inputs.position }}"
           TARGET="${{ github.event.inputs.target_string }}"
           SENTENCE="${{ github.event.inputs.sentence }}"
           DIRECTORY="${{ github.event.inputs.target_directory }}"
+          EXTENSION="${{ github.event.inputs.file_extension }}"
 
           # Langkah untuk meng-escape karakter khusus pada input TARGET
           ESCAPED_TARGET=$(printf '%s\n' "$TARGET" | sed -e 's/[]\/$*.^[]/\\&/g');
 
+          echo "Tipe File: *.$EXTENSION"
           echo "Folder Target: $DIRECTORY"
           echo "Posisi: $POSITION"
           echo "Target: $TARGET"
           
-          # MODIFIKASI: Perintah 'find' sekarang dimulai dari folder yang ditentukan
+          # MODIFIKASI: Perintah 'find' sekarang menggunakan ekstensi file yang dinamis
           if [[ "$POSITION" == "sesudah" ]]; then
-            find "$DIRECTORY" -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|&\n$SENTENCE|" {} +
+            find "$DIRECTORY" -type f -name "*.$EXTENSION" -exec sed -i "s|$ESCAPED_TARGET|&\n$SENTENCE|" {} +
           elif [[ "$POSITION" == "sebelum" ]]; then
-            find "$DIRECTORY" -type f -name "*.html" -exec sed -i "s|$ESCAPED_TARGET|$SENTENCE\n&|" {} +
+            find "$DIRECTORY" -type f -name "*.$EXTENSION" -exec sed -i "s|$ESCAPED_TARGET|$SENTENCE\n&|" {} +
           fi
 
       - name: Commit and push changes
@@ -66,7 +72,7 @@ jobs:
           
           if ! git diff --quiet; then
             git add .
-            git commit -m "CI: Auto-inject content in specific directory [skip ci]"
+            git commit -m "CI: Auto-inject content into *.$EXTENSION files [skip ci]"
             git push
           else
             echo "Tidak ada perubahan yang perlu di-commit."
