@@ -22,15 +22,15 @@
     white-space: nowrap;
     padding: 8px 0;
     
-    /* Adaptif Tema: Gunakan variabel untuk batas agar tetap terlihat di Dark/Light Mode */
-    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)); 
+    /* Adaptif Tema: Menggunakan warna teks sebagai batas agar kontras di Light/Dark Mode. */
+    border-top: 1px solid var(--text-color, #f0f0f0); 
     background-color: transparent; 
 }
 
 /* Elemen yang dianimasikan */
 #related-marquee-container .marquee-content {
     display: inline-block;
-    /* Kecepatan Konstan: 3000s (50 menit) */
+    /* Kecepatan Konstan: 3000s */
     animation: marquee-scroll 15000s linear infinite;
 }
 
@@ -41,24 +41,26 @@
     animation-play-state: paused;
 }
 
-/* 2. Gaya Link/Judul */
+/* 2. Gaya Link/Judul (Adaptif Tema) */
 #related-marquee-container a {
-    /* Adaptif Tema: Gunakan variabel teks utama situs Anda */
-    color: var(--text-color, #f0f0f0); 
+    /* PENTING: Menggunakan inherit agar warna teks mengikuti tema halaman yang aktif */
+    color: inherit; 
     text-decoration: none;
     margin-right: 30px;
     /* Transisi halus untuk perubahan hover */
-    transition: color 0.3s, font-weight 0.2s; 
+    transition: color 0.3s, font-weight 0.2s, text-shadow 0.3s; /* Ditambah text-shadow */
     font-weight: 400; 
     font-size: 0.85em;
 }
 
-/* 3. Efek Pembeda saat hover pada judul */
+/* 3. Efek Pembeda saat hover pada judul (EFEK BERSINAR) */
 #related-marquee-container a:hover {
-    /* Adaptif Tema: Gunakan variabel aksen */
     color: var(--color-accent, #ffcc00); 
     font-weight: 700; 
-    text-decoration: underline; 
+    text-decoration: none; /* Menghapus garis bawah */
+
+    /* EFEK BERSINAR (Glow) */
+    text-shadow: 0 0 5px var(--color-accent, #ffcc00);
 }
 /* ------------------------------------------- */
 
@@ -67,5 +69,3 @@
     0% { transform: translateX(0); } 
     100% { transform: translateX(-100%); }
 }
-
-/* Catatan: Media Query Mobile telah dihapus dari sini. */
