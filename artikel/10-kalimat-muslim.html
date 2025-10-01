@@ -254,10 +254,6 @@
     </div>
 </section>
 
-<div id="marquee-speed-control">
-    <input type="range" min="300" max="6000" value="3000" id="speedSlider" />
-</div>
-
     <script src="/ext/marquee-url.js"></script> 
 
 <script>
@@ -271,12 +267,6 @@
         'related-marquee-container', // ID target div
         currentFilename,             // e.g., '1011nabi-yaakub-yusuf.html'
         '/artikel.json'              // Path ke data JSON Anda
-    );
-
-    // 3. Inisialisasi Kontrol Kecepatan
-    initMarqueeSpeedControl(
-        'speedSlider',             // ID elemen input range
-        'marquee-content'          // Class dari elemen yang dianimasikan
     );
 </script>
 
