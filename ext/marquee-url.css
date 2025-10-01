@@ -1,13 +1,6 @@
-/* =======================================
-    GAYA UNTUK MARQUEE (Sticky Bawah, Adaptif Tema)
-    ======================================= */
-
-/* Kontainer luar yang menempatkan Marquee */
 #related-marquee-section {
     margin: 0;
     padding: 0;
-    background: transparent;
-    box-shadow: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -22,9 +15,8 @@
     white-space: nowrap;
     padding: 8px 0;
     
-    /* Adaptif Tema: Menggunakan warna teks sebagai batas agar kontras di Light/Dark Mode. */
+    /* Batas adaptif tema dipertahankan */
     border-top: 1px solid var(--text-color, #f0f0f0); 
-    background-color: transparent; 
 }
 
 /* Elemen yang dianimasikan */
@@ -41,14 +33,14 @@
     animation-play-state: paused;
 }
 
-/* 2. Gaya Link/Judul (Adaptif Tema) */
+/* 2. Gaya Link/Judul */
 #related-marquee-container a {
-    /* PENTING: Menggunakan inherit agar warna teks mengikuti tema halaman yang aktif */
+    /* Menggunakan inherit agar warna teks mengikuti tema halaman yang aktif */
     color: inherit; 
     text-decoration: none;
     margin-right: 30px;
-    /* Transisi halus untuk perubahan hover */
-    transition: color 0.3s, font-weight 0.2s, text-shadow 0.3s; /* Ditambah text-shadow */
+    /* Transisi halus */
+    transition: color 0.3s, font-weight 0.2s, text-shadow 0.3s; 
     font-weight: 400; 
     font-size: 0.85em;
 }
@@ -57,7 +49,7 @@
 #related-marquee-container a:hover {
     color: var(--color-accent, #ffcc00); 
     font-weight: 700; 
-    text-decoration: none; /* Menghapus garis bawah */
+    text-decoration: none; 
 
     /* EFEK BERSINAR (Glow) */
     text-shadow: 0 0 5px var(--color-accent, #ffcc00);
