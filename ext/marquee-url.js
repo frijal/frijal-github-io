@@ -1,5 +1,35 @@
 /**
- * Inisialisasi Marquee Dinamis dengan mendeteksi kategori berdasarkan nama file artikel.
+ * Fungsi untuk menyimpan ID artikel yang diklik ke Local Storage.
+ */
+function registerReadTracker() {
+    const marqueeContainer = document.getElementById('related-marquee-container');
+    if (!marqueeContainer) return;
+    
+    // Mendaftarkan event listener pada kontainer marquee
+    marqueeContainer.addEventListener('click', function(event) {
+        // Cek apakah yang diklik adalah link (<a>)
+        const clickedLink = event.target.closest('a');
+        if (clickedLink) {
+            const articleId = clickedLink.getAttribute('data-article-id');
+            if (articleId) {
+                // 1. Ambil data saat ini dari Local Storage
+                const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
+                
+                // 2. Tambahkan ID baru jika belum ada
+                if (!readArticles.includes(articleId)) {
+                    readArticles.push(articleId);
+                    
+                    // 3. Simpan kembali data yang sudah diperbarui ke Local Storage
+                    localStorage.setItem('read_marquee_articles', JSON.stringify(readArticles));
+                }
+            }
+        }
+    });
+}
+
+
+/**
+ * Inisialisasi Marquee Dinamis dengan memfilter hanya artikel yang belum dibaca.
  * @param {string} targetCategoryId ID elemen div Marquee
  * @param {string} currentFilename Nama file artikel yang sedang dibuka (e.g., '1011nabi-yaakub-yusuf.html')
  * @param {string} jsonPath Jalur file artikel.json (e.g., '/artikel.json')
@@ -39,26 +69,39 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
             return;
         }
 
-        // Filter artikel yang sedang dibuka dan acak urutan
+        // Filter artikel yang sedang dibuka
         const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
-        if (filteredArticles.length === 0) { 
-            marqueeContainer.innerHTML = ''; 
+
+        // --- LOGIKA FILTER LOCAL STORAGE (BARU) ---
+        // Ambil ID artikel yang sudah dibaca dari Local Storage
+        const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
+        
+        // Filter: Hanya sisakan artikel yang ID-nya BELUM ada di Local Storage
+        const unreadArticles = filteredArticles.filter(item => {
+            const articleId = item[1]; // Nama file unik (ID Artikel)
+            return !readArticles.includes(articleId);
+        });
+        
+        if (unreadArticles.length === 0) {
+            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
             return; 
         }
-
-        filteredArticles.sort(() => 0.5 - Math.random());
+        
+        // Gunakan unreadArticles untuk proses selanjutnya
+        unreadArticles.sort(() => 0.5 - Math.random());
         
         let contentHTML = '';
         const separator = ' • ';
 
         // Membuat string HTML dari artikel
-        filteredArticles.forEach(post => {
+        unreadArticles.forEach(post => {
             const title = post[0];
-            const url = `/artikel/${post[1]}`;
-            // BARU: Mengambil arr[4] untuk dijadikan Tooltip (title attribute)
-            const description = post[4] || title; // Gunakan arr[4], jika kosong fallback ke Judul (arr[0])
+            const articleId = post[1]; 
+            const url = `/artikel/${articleId}`;
+            const description = post[4] || title; // arr[4] untuk Tooltip
             
-            contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${description}">${title}</a>${separator}`;
+            // Tambahkan atribut data-article-id untuk pelacakan klik
+            contentHTML += `<a href="${url}" data-article-id="${articleId}" target="_blank" rel="noopener" title="${description}">${title}</a>${separator}`;
         });
 
         // Diperbaiki: Ulangi konten 30 kali agar selalu mengisi lebar layar penuh dari awal
@@ -66,6 +109,9 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         
         // Suntikkan konten ke kontainer
         marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
+        
+        // Daftarkan event listener pelacakan klik setelah konten marquee disuntikkan
+        registerReadTracker(); 
 
     } catch (error) {
         console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
@@ -75,6 +121,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
 
 /**
  * Fungsi utama untuk mendapatkan nama file saat ini dan memicu inisialisasi Marquee.
+ * Dipicu secara otomatis saat DOMContentLoaded.
  */
 function initializeMarquee() {
     // 1. Dapatkan Nama File Saat Ini
@@ -91,5 +138,3 @@ function initializeMarquee() {
 
 // Pemicu: Jalankan fungsi inisialisasi setelah seluruh konten HTML (DOM) selesai dimuat.
 document.addEventListener('DOMContentLoaded', initializeMarquee);
-
-// Catatan: Fungsi initMarqueeSpeedControl telah dihapus dari file ini.
