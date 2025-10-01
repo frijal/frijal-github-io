@@ -57,42 +57,18 @@ jobs:
               echo "✅ Ditambahkan google-site-verification di $file"
             fi
 
-            # related.css
-            if grep -qi '/ext/related.css' "$file"; then
-              echo "ℹ️ Sudah ada ext/related.css di $file"
+            # marquee related-url.css
+            if grep -qi '/ext/marquee-url.css' "$file"; then
+              echo "ℹ️ Sudah ada ext/marquee-url.css di $file"
             else
-              sed -i '/<\/head>/i <link rel="stylesheet" href=\"/ext/related.css\">' "$file"
-              echo "✅ Ditambahkan ext/related.css di $file"
+              sed -i '/<\/head>/i <link rel="stylesheet" href=\"/ext/marquee-url.css\">' "$file"
+              echo "✅ Ditambahkan ext/marquee-url.css di $file"
             fi
 
-            # Toggle button
-            if grep -qi '>❌</button>' "$file"; then
-              echo "ℹ️ Sudah ada toggle ❌ di $file"
-            else
-              sed -i '/<\/body>/i <button id="related-posts-toggle">❌</button>' "$file"
-              echo "✅ Ditambahkan toggle ❌ di $file"
-            fi
-
-            # Related posts container
-            if grep -qi 'related-posts-container' "$file"; then
-              echo "ℹ️ Sudah ada related-posts-container di $file"
-            else
-              sed -i '/<\/body>/i <div id="related-posts-container">' "$file"
-              echo "✅ Ditambahkan related-posts-container di $file"
-            fi
-
-            # Related posts list
-            if grep -qi 'related-posts-list' "$file"; then
-              echo "ℹ️ Sudah ada related-posts-list di $file"
-            else
-              sed -i '/<\/body>/i <ul id="related-posts-list"></ul></div>' "$file"
-              echo "✅ Ditambahkan related-posts-list di $file"
-            fi
-
-            if grep -qi '/ext/related.js' "$file"; then
+            if grep -qi 'related-marquee-section' "$file"; then
               echo "ℹ️ Sudah ada skrip related di $file"
             else
-              sed -i '/<\/body>/i <script src="/ext/related.js"></script>' "$file"
+              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>' "$file"
               echo "✅ Ditambahkan skrip related di $file"
             fi
           done
