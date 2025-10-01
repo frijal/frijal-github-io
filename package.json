@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node ext/rss.js"
-    "gen:gitignore": "node ext/generate-gitignore.js"
   },
   "repository": {
     "type": "git",
