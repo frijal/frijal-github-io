@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- prettier-ignore -->
+<title>Apa Artinya 'Main Branch Isn't Protected' di GitHub?</title>
+    <div></div>
+    <meta name="description" content="Penjelasan santai tentang arti 'main branch isn't protected' di GitHub. Pahami siapa saja yang bisa push ke repo, peran branch protection, dan keamanan repository publik.">
+    <meta name="keywords" content="GitHub, main branch, branch protection, repository, repo, push, pull request, kolaborator, keamanan repo">
+    <meta name="author" content="Frijal">
+    <link rel="canonical" href="https://frijal.github.io/artikel/main-branch-protection.html">
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Apa Artinya 'Main Branch Isn't Protected' di GitHub?">
+    <meta property="og:description" content="Penjelasan santai tentang arti 'main branch isn't protected' di GitHub. Pahami siapa saja yang bisa push ke repo, peran branch protection, dan keamanan repository publik.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/main-branch-protection.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apa Artinya 'Main Branch Isn't Protected' di GitHub?">
+    <meta name="twitter:description" content="Penjelasan santai tentang arti 'main branch isn't protected' di GitHub. Pahami siapa saja yang bisa push ke repo, peran branch protection, dan keamanan repository publik.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
+
+    <style>
+        :root {
+            --primary-color: #6a0572;
+            --secondary-color: #ab6cc9;
+            --accent-color: #ff9900;
+            --background-color: #f0f0f5;
+            --text-color: #333;
+            --heading-color: #4a0450;
+            --card-bg: #fff;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.7;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px 0;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            padding: 40px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 30px;
+            animation: slideInLeft 0.7s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        ul li::before {
+            content: '👉';
+            position: absolute;
+            left: -20px;
+            color: var(--accent-color);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.5s;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-content img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100vh;
+            display: block;
+        }
+
+        .lightbox-close, .lightbox-nav {
+            position: absolute;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close {
+            top: 20px;
+            right: 30px;
+        }
+
+        .lightbox-nav.prev {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav.next {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-nav:hover, .lightbox-close:hover {
+            color: var(--accent-color);
+        }
+
+        .social-share {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .social-share a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            font-size: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .social-share a:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-color);
+        }
+        
+        .fb-comments {
+            margin-top: 50px;
+        }
+
+        .floating-button {
+            position: fixed;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            line-height: 60px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 999;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+
+        #sitemap-btn {
+            left: 20px;
+            top: 30%;
+        }
+
+        #home-btn {
+            right: 20px;
+            bottom: 20%;
+        }
+
+        .info-box {
+            margin-top: 40px;
+            padding: 20px;
+            border-left: 5px solid var(--accent-color);
+            background-color: #f9f9e0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .floating-button {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 20px;
+            }
+            #sitemap-btn {
+                left: 10px;
+            }
+            #home-btn {
+                right: 10px;
+            }
+        }
+    </style>
+<meta name="date" content="2025-09-28">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+  <meta property="og:image:alt" content="Apa Artinya 'Main Branch Isn't Protected' di GitHub?">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/main-branch-protection.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Apa Artinya 'Main Branch Isn't Protected' di GitHub? 🤔</h1>
+        <p>Sering banget kan, pas buka repository di GitHub, tiba-tiba muncul peringatan kayak gini: <strong>"Your main branch isn't protected, Protect this branch from force pushing or deletion, or require status checks before merging."</strong> Nah, kalau lihat tulisan itu, banyak yang langsung mikir, "Waduh, berarti semua orang bisa seenaknya ubah dan hapus file di repo saya dong?" </p>
+     <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg" style="display: block; padding: 1em 0px; text-align: center;"><img alt="" border="0" data-original-height="720" data-original-width="1280" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg" /></a></div>
+        <p>Tenang, itu pertanyaan yang bagus dan penting banget buat dipahami. Jawabannya: <strong>tidak</strong>.</p>
+        <p>Meskipun branch utama kamu <strong>tidak dilindungi (unprotected)</strong>, bukan berarti semua orang bisa seenaknya ubah atau hapus file di repo kamu. Mari kita bahas lebih lanjut biar kamu makin paham.</p>
+
+        ---
+
+        <h2>🔑 Siapa Saja yang Bisa Push ke Repo Kamu?</h2>
+        <p>Ada aturan ketat di GitHub tentang siapa yang bisa langsung mengubah kode di repo kamu. Ini dia daftarnya:</p>
+        <ul>
+            <li><strong>Kamu (pemilik repo)</strong>: Jelas, kamu selalu punya hak penuh untuk push.</li>
+            <li><strong>Kolaborator</strong>: Orang-orang yang sudah kamu undang secara khusus sebagai kolaborator juga bisa push ke repo.</li>
+            <li><strong>GitHub Actions</strong>: Bot atau skrip otomatis hanya bisa push kalau kamu memberikan izin (`contents: write`) menggunakan `GITHUB_TOKEN` atau Personal Access Token (PAT) yang kamu buat sendiri.</li>
+        </ul>
+        <p>Poin paling pentingnya adalah: <strong>Orang luar (publik, user lain di GitHub) tidak bisa langsung push ke repo kamu</strong>. Mereka cuma bisa melakukan dua hal ini:</p>
+        <ul>
+            <li><strong>Fork</strong> repo kamu, alias bikin salinan repo-nya di akun mereka sendiri.</li>
+            <li><strong>Buat Pull Request (PR)</strong>, yaitu mengusulkan perubahan. Tapi, kamu tetap punya kendali penuh untuk memutuskan apakah usulan itu akan diterima (di-merge) atau tidak.</li>
+        </ul>
+        
+
+        ---
+
+        <h2>🔒 Apa Maksud 'Main Branch Isn’t Protected'?</h2>
+        <p>Jadi, arti sebenarnya dari peringatan itu lebih ke soal <strong>aturan internal</strong>.  Peringatan itu cuma memberitahu kamu bahwa:</p>
+        <ul>
+            <li><strong>Kamu</strong> (atau bot yang kamu izinkan) bisa push langsung ke branch <code>main</code> tanpa hambatan. </li>
+            <li>Tidak ada aturan tambahan yang wajib dipenuhi, misalnya harus ada review dari kolaborator lain atau harus lulus tes otomatis dulu sebelum kode bisa di-merge.</li>
+        </ul>
+        <p>Jadi, peringatan itu <strong>sama sekali tidak berarti publik bisa bebas push atau hapus kode</strong>.  Ini lebih seperti "jalan bebas hambatan" untuk pemilik repo sendiri.</p>
+
+        ---
+
+        <h2>📌 Ringkasnya</h2>
+        <ul>
+            <li><strong>Repo publik</strong>: Orang lain bisa <strong>melihat</strong> dan <strong>meng-fork</strong>, tapi <strong>tidak bisa push langsung</strong>. </li>
+            <li><strong>Repo privat</strong>: Hanya kamu dan kolaborator yang kamu undang yang bisa mengakses. </li>
+            <li><strong>Branch protection</strong>: Ini fitur opsional yang tujuannya untuk menambah aturan internal, terutama kalau kamu bekerja dalam tim dengan banyak kolaborator. </li>
+        </ul>
+                <p>Intinya, kalau repo ini hanya kamu yang pegang, membiarkan branch `main` tidak terlindungi itu <strong>tidak masalah sama sekali</strong>. Aman kok! 😉</p> 
+
+        <div class="info-box">
+            <h4>Info Tambahan</h4>
+            <p><strong>Browser</strong>: <span id="browser-info"></span></p>
+            <p><strong>OS</strong>: <span id="os-info"></span></p>
+            <p><strong>Lokasi IP</strong>: <span id="ip-info"></span></p>
+        </div>
+
+        <div class="social-share">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/main-branch-protection.html" target="_blank" aria-label="Bagikan ke Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/main-branch-protection.html&text=Penjelasan santai tentang arti 'main branch isn't protected' di GitHub!" target="_blank" aria-label="Bagikan ke Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://t.me/share/url?url=https://frijal.github.io/artikel/main-branch-protection.html&text=Penjelasan santai tentang arti 'main branch isn't protected' di GitHub!" target="_blank" aria-label="Bagikan ke Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://wa.me/?text=Penjelasan santai tentang arti 'main branch isn't protected' di GitHub! https://frijal.github.io/artikel/main-branch-protection.html" target="_blank" aria-label="Bagikan ke WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+        <div class="fb-comments">
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/main-branch-protection.html" data-width="100%" data-numposts="5"></div>
+        </div>
+
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="">
+        </div>
+        <a class="lightbox-nav prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="lightbox-nav next" onclick="changeImage(1)">&#10095;</a>
+    </div>
+
+    <a href="https://frijal.github.io/sitemap.html" id="sitemap-btn" class="floating-button" aria-label="Sitemap">🗺️</a>
+    <a href="https://frijal.github.io/artikel.html" id="home-btn" class="floating-button" aria-label="Home">🏠</a>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID_HERE&autoLogAppEvents=1" nonce="Lgq459kS"></script>
+
+    <script>
+        // Gallery and Lightbox
+        const images = [
+            "https://frijal.github.io/assets/images/github-fork.jpg",
+            "https://frijal.github.io/assets/images/github-pull-request.jpg"
+        ];
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            document.getElementById('lightbox-image').src = images[currentIndex];
+            document.getElementById('lightbox').style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = "none";
+        }
+
+        function changeImage(direction) {
+            currentIndex = (currentIndex + direction + images.length) % images.length;
+            document.getElementById('lightbox-image').src = images[currentIndex];
+        }
+
+        // Lazy-load images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll("img[loading='lazy']");
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        });
+
+        // Info Box
+        async function getIPInfo() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                const location = `${data.city}, ${data.region}, ${data.country_name} ${data.country_code}`;
+                const flag = getFlagEmoji(data.country_code);
+                document.getElementById('ip-info').innerHTML = `${data.city} ${flag}`;
+            } catch (error) {
+                console.error("Gagal mendapatkan info IP:", error);
+                document.getElementById('ip-info').textContent = "Tidak dapat memuat lokasi.";
+            }
+        }
+
+        function getFlagEmoji(countryCode) {
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        }
+
+        function getBrowserAndOS() {
+            const userAgent = navigator.userAgent;
+            let browser = "Unknown";
+            let os = "Unknown";
+
+            // OS
+            if (userAgent.includes("Win")) os = "Windows";
+            if (userAgent.includes("Mac")) os = "macOS";
+            if (userAgent.includes("Linux")) os = "Linux";
+            if (userAgent.includes("Android")) os = "Android";
+            if (userAgent.includes("like Mac")) os = "iOS";
+
+            // Browser
+            if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) browser = "Chrome";
+            if (userAgent.includes("Firefox")) browser = "Firefox";
+            if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) browser = "Safari";
+            if (userAgent.includes("Edg")) browser = "Edge";
+            if (userAgent.includes("OPR") || userAgent.includes("Opera")) browser = "Opera";
+
+            document.getElementById('browser-info').textContent = browser;
+            document.getElementById('os-info').textContent = os;
+        }
+
+        getBrowserAndOS();
+        getIPInfo();
+    </script>
+    <div></div><div></div><div></div>
+<div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <!-- prettier-ignore -->
+<title>Ubuntu vs Windows: pengalaman instal pertama - jujur tapi santai</title>
+  <meta name="description" content="Perbandingan santai Ubuntu vs Windows saat instal pertama: software bawaan, dukungan perangkat keras, plus catatan adil. Dilengkapi tabel responsif, galeri, dan tombol berbagi.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/ubuntu-vs-windows-2010.html">
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#ff7a59">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Frijal Articles">
+  <meta property="og:title" content="Ubuntu vs Windows: pengalaman instal pertama - jujur tapi santai">
+  <meta property="og:description" content="Perbandingan santai Ubuntu vs Windows saat instal pertama: software bawaan, dukungan perangkat keras, plus catatan adil.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/ubuntu-vs-windows-2010.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7egYn0YQoK2agjqS8-6eh8zKTBIB5hTjvmK4VBqksJ93T5yi5PQOsJ6kn2WBme1xmyLqzNNfbWdESOFfUDZsONO1jfS3J-ck7Lwr5BhMGEfWbag2T5m1e0JKVAnkxEM0-OaNyJPkqTqZZ/s16000/ususbuntu.jpg">
+  <meta property="article:published_time" content="2010-03-03T12:00:00+07:00">
+  <meta property="article:modified_time" content="2025-09-21T00:15:00+08:00">
+  <meta property="article:author" content="Fakhrul">
+  <meta property="article:section" content="Opini & Perbandingan">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ubuntu vs Windows: pengalaman instal pertama - jujur tapi santai">
+  <meta name="twitter:description" content="Perbandingan santai Ubuntu vs Windows saat instal pertama: software bawaan, dukungan perangkat keras, plus catatan adil.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7egYn0YQoK2agjqS8-6eh8zKTBIB5hTjvmK4VBqksJ93T5yi5PQOsJ6kn2WBme1xmyLqzNNfbWdESOFfUDZsONO1jfS3J-ck7Lwr5BhMGEfWbag2T5m1e0JKVAnkxEM0-OaNyJPkqTqZZ/s16000/ususbuntu.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/ubuntu-vs-windows-2010.html","image":"https://frijal.github.io/artikel/ubuntu-vs-windows-2010.jpg"},"headline":"Ubuntu vs Windows: pengalaman instal pertama - jujur tapi santai","description":"Perbandingan santai Ubuntu vs Windows saat instal pertama: software bawaan, dukungan perangkat keras, plus catatan adil.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7egYn0YQoK2agjqS8-6eh8zKTBIB5hTjvmK4VBqksJ93T5yi5PQOsJ6kn2WBme1xmyLqzNNfbWdESOFfUDZsONO1jfS3J-ck7Lwr5BhMGEfWbag2T5m1e0JKVAnkxEM0-OaNyJPkqTqZZ/s16000/ususbuntu.jpg"],"author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.github.io/artikel/ubuntu-vs-windows-2010.jpg"},"publisher":{"@type":"Organization","name":"Frijal","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/ubuntu-vs-windows-2010.jpg"},"image":"https://frijal.github.io/artikel/ubuntu-vs-windows-2010.jpg"},"datePublished":"2010-03-03T12:00:00+07:00","dateModified":"2025-09-21T00:15:00+08:00","articleSection":"Opini & Perbandingan","inLanguage":"id-ID"}</script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1221;
+      --bg-soft:#141734;
+      --card:#1a1f46;
+      --text:#f6f7fb;
+      --muted:#c9cbe3;
+      --brand:#ff7a59;
+      --brand-2:#4dd4ff;
+      --accent:#ffe85a;
+      --ok:#3ad29f;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:16px;
+      --gap:18px;
+      --win:#7bc8ff;
+      --ubu:#ff926e;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Plus Jakarta Sans",system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      background: radial-gradient(1200px 1200px at 10% 10%, #1b1f49 0%, #101433 40%, #0f1221 100%) fixed;
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{color:#ffa68f}
+    .wide-wrap{width:min(1200px, 94vw); margin:0 auto}
+    header.hero{
+      min-height:72vh; position:relative; display:grid; align-items:center;
+      padding:6rem 0 3rem; overflow:hidden; isolation:isolate;
+    }
+    .bubbles span{
+      position:absolute; border-radius:50%;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      opacity:.12; filter:blur(1px); animation:float 18s infinite ease-in-out;
+      box-shadow:0 6px 30px rgba(255,122,89,.15);
+    }
+    .bubbles span:nth-child(1){width:260px;height:260px;left:6%;top:12%;animation-duration:22s}
+    .bubbles span:nth-child(2){width:180px;height:180px;left:70%;top:18%;animation-duration:17s}
+    .bubbles span:nth-child(3){width:320px;height:320px;left:78%;bottom:-80px;animation-duration:26s}
+    .bubbles span:nth-child(4){width:140px;height:140px;left:-60px;bottom:10%;animation-duration:19s}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0)} 50%{transform:translateY(-20px) translateX(10px)}}
+    .hero-content{z-index:2; display:grid; gap:1rem}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:.35rem .7rem; border-radius:999px; background:rgba(255,232,90,.14);
+      font-weight:600; letter-spacing:.3px;
+    }
+    h1{margin:.3rem 0 0; font-size:clamp(1.9rem, 2.6rem + 1vw, 3.4rem); line-height:1.15; font-weight:800; text-wrap:balance}
+    .sub{color:var(--muted); font-size:clamp(1rem, .9rem + .4vw, 1.15rem); max-width:70ch}
+    .meta-row{display:flex; gap:1rem; flex-wrap:wrap; color:var(--muted); font-size:.95rem; align-items:center}
+    .meta-chip{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.45rem .7rem; border:1px dashed #2c3166; border-radius:10px;
+      background:linear-gradient(180deg,#14183b 0,#0f1331 100%);
+    }
+    .share-row{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.8rem}
+    .btn{
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.7rem .9rem; border-radius:12px; border:0; cursor:pointer;
+      background:linear-gradient(180deg,#2a2f66,#1c2153); color:#fff;
+      box-shadow:var(--shadow); transition:.2s transform, .2s filter;
+    }
+    .btn:hover{transform:translateY(-2px); filter:brightness(1.08)}
+    .btn svg{width:18px;height:18px}
+    main{position:relative; z-index:3; margin-top:-2rem; border-top-left-radius:24px; border-top-right-radius:24px; background:linear-gradient(180deg, #0f1221 0%, #0f1221ee 50%, #0f1221 100%)}
+    .grid{display:grid; gap:var(--gap); grid-template-columns: 1.2fr .8fr}
+    article{background:linear-gradient(180deg,#171c46,#13173a); border-radius:var(--radius); padding:clamp(16px, 2vw, 28px); box-shadow:var(--shadow)}
+    aside{display:grid; gap:var(--gap); height:max-content}
+    .card{background:linear-gradient(180deg,#161a3f,#12163a); border-radius:var(--radius); padding:clamp(14px,1.6vw,22px); box-shadow:var(--shadow)}
+    .lead{font-size:1.05rem; color:#e9ebff; text-wrap:pretty}
+    .callout{margin:1rem 0; padding:1rem; border-radius:12px; background:linear-gradient(180deg,#15204a,#141b3e); border:1px solid #2b3270}
+    .tag{display:inline-flex; gap:.4rem; align-items:center; padding:.3rem .6rem; border-radius:999px; font-size:.9rem}
+    .tag.win{background:rgba(123,200,255,.15); border:1px solid rgba(123,200,255,.35)}
+    .tag.ubu{background:rgba(255,146,110,.15); border:1px solid rgba(255,146,110,.35)}
+
+    /* Responsive tables */
+    .table-wrap{overflow:auto; border-radius:12px; border:1px solid #20265a}
+    table{width:100%; border-collapse:separate; border-spacing:0; min-width:680px}
+    thead th{position:sticky; top:0; background:#0f1331; color:#fff}
+    th,td{padding:.8rem .9rem; text-align:left}
+    tbody tr:nth-child(even){background:#0f1438}
+    tbody tr:nth-child(odd){background:#121740}
+    td,th{border-bottom:1px solid #1f2760}
+    .score{font-weight:800; color:#ffe85a; text-align:center}
+    .badge{display:inline-block; padding:.2rem .5rem; border-radius:8px; font-weight:700; font-size:.86rem}
+    .badge.ok{background:#163c2e; color:#7dffcb; border:1px solid #245b47}
+    .badge.na{background:#3a1622; color:#ff9ab0; border:1px solid #5a2436}
+    .sum{font-weight:800; color:#ffe85a}
+
+    /* Gallery */
+    .gallery{display:grid; gap:10px; grid-template-columns: repeat(12, 1fr); margin-top:.6rem}
+    .gallery figure{margin:0; position:relative; overflow:hidden; border-radius:12px; background:#0b0e24; border:1px solid #20265a; grid-column: span 12}
+    .gallery img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease, filter .35s ease; filter:saturate(1.05) contrast(1.02)}
+    .gallery figure:hover img{transform:scale(1.03)}
+    .caption{position:absolute; left:8px; bottom:8px; right:8px; background:linear-gradient(180deg, rgba(10,12,28,.0), rgba(10,12,28,.6)); color:#fff; padding:6px 10px; border-radius:8px; font-size:.9rem}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; background:rgba(5,7,20,.9); display:none; align-items:center; justify-content:center; z-index:1000}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92vw; max-height:86vh; border-radius:14px; box-shadow:0 30px 100px rgba(0,0,0,.6)}
+    .lightbox .close, .lightbox .prev, .lightbox .next{
+      position:absolute; background:rgba(255,255,255,.1); backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.2); color:#fff; padding:.6rem .8rem; border-radius:10px;
+      cursor:pointer; display:flex; align-items:center; gap:.4rem;
+    }
+    .lightbox .close{top:18px; right:18px}
+    .lightbox .prev{left:18px; top:50%; transform:translateY(-50%)}
+    .lightbox .next{right:18px; top:50%; transform:translateY(-50%)}
+
+    /* Info strip */
+    .info-strip{display:flex; gap:10px; flex-wrap:wrap; align-items:center; color:var(--muted); font-size:.94rem; margin:.6rem 0 0}
+    .chip{display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .6rem; border-radius:12px; border:1px solid #2a2f66; background:#12163a}
+    .flag{font-size:1.1rem}
+
+    /* Facebook comments */
+    .fb-card .fb-comments{width:100%}
+
+    /* Nav Home buttons */
+    .nav-home{position:fixed; z-index:1100}
+    .nav-home.left{left:10px; top:30%}
+    .nav-home.right{right:10px; bottom:30%}
+    .nav-home a{
+      display:flex; align-items:center; gap:.6rem;
+      background:linear-gradient(180deg,#ff8f6f,#ff7a59); color:#0b0e24; font-weight:800;
+      padding:.7rem .9rem; border-radius:999px; box-shadow:0 12px 30px rgba(255,122,89,.35)
+    }
+    .nav-home svg{width:18px;height:18px}
+    footer{padding:2rem 0 4rem; color:var(--muted); text-align:center}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+    }
+    @media (max-width:680px){
+      header.hero{padding:4rem 0 2rem; min-height:64vh}
+      .meta-row{gap:.6rem}
+      .btn{padding:.6rem .8rem}
+      .nav-home.left{top:auto; bottom:30%; left:10px}
+      .nav-home.right{bottom:10%}
+      table{min-width:620px}
+    }
+  </style>
+<meta name="date" content="2025-09-28">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<div></div>
+  <meta property="og:image:alt" content="Ubuntu vs Windows: pengalaman instal pertama - jujur tapi santai">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/ubuntu-vs-windows-2010.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+  <!-- Home buttons -->
+  <div class="nav-home left" aria-label="Tombol menuju sitemap kiri">
+    <a href="https://frijal.github.io/sitemap.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z"/></svg>
+      <span>Home</span>
+    </a>
+  </div>
+  <div class="nav-home right" aria-label="Tombol menuju sitemap kanan">
+    <a href="https://frijal.github.io/sitemap.html" target="_blank" rel="noopener">
+      <span>Lihat Sitemap</span>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4l1.41 1.41L8.83 10H20v2H8.83l4.58 4.59L12 18l-8-8 8-8z"/></svg>
+    </a>
+  </div>
+
+  <header class="hero">
+    <div class="bubbles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="wide-wrap hero-content">
+      <span class="eyebrow">Tema Ceria • Fullscreen</span>
+      <h1>Ubuntu vs Windows (instal pertama): jujur, santai, dan apa adanya</h1>
+      <p class="sub">Ini rangkuman pengalaman instal pertama kali di era 2010-an: apa saja yang langsung tersedia, apa yang perlu tambah, dan bagaimana perangkat keras dikenali. Niatnya bukan menjelekkan salah satu—cuma berbagi biar teman-teman punya ekspektasi yang pas.</p>
+      <div class="meta-row">
+        <div class="meta-chip">Ditulis: 3 Maret 2010</div>
+        <div class="meta-chip">Didedikasikan: Komunitas Ubuntu Jogja & JogjaIT (Mega Bazar 3–7 Maret 2010)</div>
+        <div class="meta-chip">Model: Debat Terbuka - Kamis, 4 Maret 2010, 14.00–15.30 WIB</div>
+      </div>
+
+      <div class="share-row" role="group" aria-label="Bagikan artikel">
+        <button class="btn" id="btn-copy" title="Salin tautan">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.9 12a5 5 0 015-5h3v2h-3a3 3 0 000 6h3v2h-3a5 5 0 01-5-5zm7-3h3a5 5 0 010 10h-3v-2h3a3 3 0 100-6h-3V9zm-1 3h6v2H9v-2z"/></svg>
+          <span>Salin</span>
+        </button>
+        <a class="btn" id="share-wa" target="_blank" rel="noopener" aria-label="Bagikan ke WhatsApp">
+          <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M19.11 17.7c-.28-.14-1.66-.81-1.92-.9-.26-.1-.45-.14-.64.14-.19.28-.74.9-.9 1.08-.17.18-.33.2-.62.07-.28-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.68-1.56-1.96-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.47-.64-.47h-.55c-.19 0-.5.07-.76.35-.26.28-1 1-1 2.44s1.02 2.83 1.16 3.02c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.66-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z"/><path d="M16 3a13 13 0 00-11.2 19.5L3 29l6.7-1.76A13 13 0 1016 3zm7.76 20.76A11 11 0 115.01 5 11 11 0 0123.76 23.76z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a class="btn" id="share-x" target="_blank" rel="noopener" aria-label="Bagikan ke X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21l-6.72 7.69L22 22h-6.828l-5.34-6.51L3.6 22H1l7.2-8.24L2 2h6.914l4.86 5.93L18.244 2zM7.42 3.83H4.28l12.36 16.38h3.27L7.42 3.83z"/></svg>
+          <span>Bagikan</span>
+        </a>
+        <a class="btn" id="share-fb" target="_blank" rel="noopener" aria-label="Bagikan ke Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.24 10.44 22v-7.02H7.9v-2.91h2.54v-2.22c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.1 22 12.07z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a class="btn" id="share-ln" target="_blank" rel="noopener" aria-label="Bagikan ke LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6a2 2 0 11.001-4.001A2 2 0 016 6zM4 8h4v12H4V8zm6 0h3.8v1.64h.05c.53-1 1.84-2.06 3.78-2.06C21.1 7.58 22 9.57 22 12.7V20h-4v-6.3c0-1.5-.03-3.44-2.1-3.44-2.1 0-2.4 1.63-2.4 3.32V20h-4V8z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="info-strip" id="env-info" aria-live="polite">
+        <div class="chip"><strong>Browser:</strong> <span id="browser">—</span></div>
+        <div class="chip"><strong>OS:</strong> <span id="os">—</span></div>
+        <div class="chip"><span class="flag" id="flag">🏳️</span> <span id="geo">Mendeteksi lokasi…</span></div>
+        <div class="chip"><strong>IP:</strong> <span id="ip">—</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wide-wrap grid" role="main">
+      <article>
+        <p class="lead">Dulu waktu pertama kali instal, saya bikin checklist sederhana: kalau habis instal, apa saja yang sudah “langsung bisa jalan”, dan apa yang masih perlu tambah. Berikut saya rapikan dengan tampilan yang lebih enak dibaca—versi santai, tetap jujur.</p>
+
+        <div class="callout">
+          <strong>Disclaimer singkat:</strong> perbandingan ini merujuk pengalaman sekitar 2010. Ekosistem terus berubah. Jadi anggap ini sebagai snapshot sejarah—berguna untuk konteks debat “Ubuntu vs Windows 7” saat Mega Bazar 2010.
+        </div>
+
+        <h2>Software bawaan setelah instal</h2>
+        <div class="table-wrap" role="region" aria-label="Tabel perbandingan software bawaan" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th>Dukungan perangkat lunak</th>
+                <th style="text-align:center">Ubuntu <span class="tag ubu">bawaan</span></th>
+                <th class="score">Nilai</th>
+                <th style="text-align:center">Windows <span class="tag win">bawaan</span></th>
+                <th class="score">Nilai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Ukuran media instal</td><td style="text-align:center">± 700 MB</td><td class="score">1</td><td style="text-align:center">± 700 MB</td><td class="score">1</td></tr>
+              <tr><td>Kalkulator</td><td style="text-align:center"><span class="badge ok">Ada</span></td><td class="score">1</td><td style="text-align:center"><span class="badge ok">Ada</span></td><td class="score">1</td></tr>
+              <tr><td>Penampil gambar</td><td style="text-align:center">Image Viewer</td><td class="score">1</td><td style="text-align:center">Windows Picture & Fax Viewer</td><td class="score">1</td></tr>
+              <tr><td>Pemutar audio</td><td style="text-align:center">Rhythmbox</td><td class="score">1</td><td style="text-align:center">Media Player</td><td class="score">1</td></tr>
+              <tr><td>Pemutar video</td><td style="text-align:center">MPlayer</td><td class="score">1</td><td style="text-align:center">Media Player</td><td class="score">1</td></tr>
+              <tr><td>Pengolah kata</td><td style="text-align:center">OpenOffice Writer</td><td class="score">1</td><td style="text-align:center">WordPad</td><td class="score">1</td></tr>
+              <tr><td>Pengolah angka</td><td style="text-align:center">OpenOffice Calc</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Basis data</td><td style="text-align:center">OpenOffice Base</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Presentasi</td><td style="text-align:center">OpenOffice Impress</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Penampil PDF</td><td style="text-align:center">Document Viewer</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Efek desktop</td><td style="text-align:center">Compiz</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Permainan ringan</td><td style="text-align:center">Ada</td><td class="score">1</td><td style="text-align:center">Ada</td><td class="score">1</td></tr>
+              <tr><td>Screen saver</td><td style="text-align:center">Ada</td><td class="score">1</td><td style="text-align:center">Ada</td><td class="score">1</td></tr>
+              <tr><td>Manajer berkas</td><td style="text-align:center">Nautilus</td><td class="score">1</td><td style="text-align:center">Windows Explorer</td><td class="score">1</td></tr>
+              <tr><td>Peramban web</td><td style="text-align:center">Mozilla Firefox</td><td class="score">1</td><td style="text-align:center">Internet Explorer</td><td class="score">1</td></tr>
+              <tr><td>Pesan instan</td><td style="text-align:center">Pidgin</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr><td>Klien torrent</td><td style="text-align:center">Transmission</td><td class="score">1</td><td style="text-align:center"><span class="badge na">Tidak ada</span></td><td class="score">0</td></tr>
+              <tr>
+                <td class="sum">Total</td>
+                <td colspan="2" class="sum" style="text-align:center">17</td>
+                <td colspan="2" class="sum" style="text-align:center">10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Dukungan perangkat keras setelah instal</h2>
+        <div class="table-wrap" role="region" aria-label="Tabel perbandingan hardware" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th>Perangkat</th>
+                <th style="text-align:center">Ubuntu</th>
+                <th class="score">Nilai</th>
+                <th style="text-align:center">Windows</th>
+                <th class="score">Nilai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Kartu jaringan kabel</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr><td>Kartu jaringan Wi‑Fi</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr><td>Bluetooth</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr><td>Pencetak (printer)</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr><td>Pemindai (scanner)</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr><td>Kartu grafis</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td></tr>
+              <tr><td>Kartu suara</td><td style="text-align:center"><span class="badge ok">Langsung aktif</span></td><td class="score">1</td><td style="text-align:center">Butuh driver tambahan</td><td class="score">0</td></tr>
+              <tr>
+                <td class="sum">Total</td>
+                <td colspan="2" class="sum" style="text-align:center">7</td>
+                <td colspan="2" class="sum" style="text-align:center">1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Catatan adil:</strong> di Windows, banyak fitur jadi “butuh driver” karena pabrikan memang mendistribusikan driver terpisah. Begitu driver diinstal, pengalaman biasanya mulus. Di Ubuntu, banyak perangkat langsung dikenali karena kernel menyertakan banyak driver terbuka.
+        </div>
+
+        <h2>Galeri</h2>
+        <p>Suasana waktu nyusun materi untuk debat “Ubuntu vs Windows 7”.</p>
+        <section class="gallery" id="gallery" aria-label="Galeri Foto">
+          <figure>
+            <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7egYn0YQoK2agjqS8-6eh8zKTBIB5hTjvmK4VBqksJ93T5yi5PQOsJ6kn2WBme1xmyLqzNNfbWdESOFfUDZsONO1jfS3J-ck7Lwr5BhMGEfWbag2T5m1e0JKVAnkxEM0-OaNyJPkqTqZZ/s16000/ususbuntu.jpg" data-index="0">
+              <img loading="lazy" width="1600" height="900" alt="Poster lucu: usus buntu vs Ubuntu" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7egYn0YQoK2agjqS8-6eh8zKTBIB5hTjvmK4VBqksJ93T5yi5PQOsJ6kn2WBme1xmyLqzNNfbWdESOFfUDZsONO1jfS3J-ck7Lwr5BhMGEfWbag2T5m1e0JKVAnkxEM0-OaNyJPkqTqZZ/s16000/ususbuntu.jpg">
+              <figcaption class="caption">Sedikit humor biar debat tetap fun 😄</figcaption>
+            </a>
+          </figure>
+        </section>
+
+        <h2>Detail acara</h2>
+        <ul>
+          <li><strong>Waktu:</strong> Kamis, 4 Maret 2010 - 14.00–15.30 WIB</li>
+          <li><strong>Tema:</strong> Operating System</li>
+          <li><strong>Judul:</strong> Ubuntu versus Windows 7</li>
+          <li><strong>Pelaku:</strong> Komunitas Ubuntu-Jogja & pelaku bisnis berbasis Windows</li>
+          <li><strong>Model:</strong> Debat terbuka</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Akhir kata:</strong> mana pun pilihanmu, yang penting legal, nyaman untuk kerja, dan mendukung ekosistem yang kamu cintai. Sisa diskusi—kita santai saja tapi tajam.
+        </div>
+      </article>
+
+      <aside>
+        <div class="card">
+          <h3>Bagikan artikel</h3>
+          <p>Kalau ini bermanfaat, titip share ya—biar bahan debatnya makin kaya.</p>
+          <div class="share-row">
+            <a class="btn" id="share-wa-2" target="_blank" rel="noopener">
+              <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M19.11 17.7c-.28-.14-1.66-.81-1.92-.9-.26-.1-.45-.14-.64.14-.19.28-.74.9-.9 1.08-.17.18-.33.2-.62.07-.28-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.68-1.56-1.96-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.47-.64-.47h-.55c-.19 0-.5.07-.76.35-.26.28-1 1-1 2.44s1.02 2.83 1.16 3.02c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.66-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z"/><path d="M16 3a13 13 0 00-11.2 19.5L3 29l6.7-1.76A13 13 0 1016 3zm7.76 20.76A11 11 0 115.01 5 11 11 0 0123.76 23.76z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <a class="btn" id="share-x-2" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21l-6.72 7.69L22 22h-6.828l-5.34-6.51L3.6 22H1l7.2-8.24L2 2h6.914l4.86 5.93L18.244 2zM7.42 3.83H4.28l12.36 16.38h3.27L7.42 3.83z"/></svg>
+              <span>Bagikan</span>
+            </a>
+            <a class="btn" id="share-fb-2" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.24 10.44 22v-7.02H7.9v-2.91h2.54v-2.22c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.44 2.91h-2.34V22C18.34 21.24 22 17.1 22 12.07z"/></svg>
+              <span>Facebook</span>
+            </a>
+            <a class="btn" id="share-ln-2" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 6a2 2 0 11.001-4.001A2 2 0 016 6zM4 8h4v12H4V8zm6 0h3.8v1.64h.05c.53-1 1.84-2.06 3.78-2.06C21.1 7.58 22 9.57 22 12.7V20h-4v-6.3c0-1.5-.03-3.44-2.1-3.44-2.1 0-2.4 1.63-2.4 3.32V20h-4V8z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card fb-card">
+          <h3>Komentar</h3>
+          <div id="fb-root"></div>
+          <div class="fb-comments" data-href="https://frijal.github.io/artikel/ubuntu-vs-windows-2010.html" data-width="100%" data-numposts="8" data-order-by="social"></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="wide-wrap">
+      <footer>
+        <p>© 2010–2025 • Disusun di Balikpapan, Kalimantan Timur. Santai, objektif, dan tetap legal.</p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan gambar penuh">
+    <button class="close" id="lb-close" aria-label="Tutup">Tutup ✕</button>
+    <button class="prev" id="lb-prev" aria-label="Sebelumnya">‹</button>
+    <img id="lb-img" alt="">
+    <button class="next" id="lb-next" aria-label="Berikutnya">›</button>
+  </div>
+
+  <!-- Facebook SDK (ganti appId bila perlu) -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1234567890"
+    nonce="frijal"></script>
+
+  <script>
+    // Detect browser & OS
+    (function detectEnv(){
+      const ua = navigator.userAgent, plat = navigator.platform;
+      const elBrowser = document.getElementById('browser');
+      const elOS = document.getElementById('os');
+      function getBrowser(){
+        if(/Edg\//.test(ua)) return "Microsoft Edge";
+        if(/OPR\//.test(ua) || /Opera/.test(ua)) return "Opera";
+        if(/Chrome\//.test(ua) && !/Edg\//.test(ua)) return "Google Chrome";
+        if(/Safari\//.test(ua) && /Version\//.test(ua) && !/Chrome/.test(ua)) return "Safari";
+        if(/Firefox\//.test(ua)) return "Mozilla Firefox";
+        if(/MSIE|Trident/.test(ua)) return "Internet Explorer";
+        return "Browser tidak dikenal";
+      }
+      function getOS(){
+        if(/Win/.test(plat)) return "Windows";
+        if(/Mac/.test(plat)) return "macOS";
+        if(/Linux/.test(plat)) return "Linux";
+        if(/Android/.test(ua)) return "Android";
+        if(/iPhone|iPad|iPod/.test(ua)) return "iOS";
+        return "OS tidak dikenal";
+      }
+      elBrowser.textContent = getBrowser();
+      elOS.textContent = getOS();
+    })();
+
+    // IP Geolocation (public API)
+    (function geolocate(){
+      const geo = document.getElementById('geo');
+      const ipEl = document.getElementById('ip');
+      const flagEl = document.getElementById('flag');
+      fetch('https://ipapi.co/json/')
+        .then(r=>r.ok?r.json():Promise.reject())
+        .then(d=>{
+          ipEl.textContent = d.ip || '—';
+          const city = d.city || 'Kota tidak diketahui';
+          const country = d.country_name || '';
+          const cc = d.country_code || '';
+          geo.textContent = city + (country?`, ${country}`:'');
+          flagEl.textContent = cc ? ccToEmoji(cc) : '🏳️';
+        })
+        .catch(()=>{
+          fetch('https://ipinfo.io/json?token=')
+            .then(r=>r.json())
+            .then(d=>{
+              ipEl.textContent = d.ip || '—';
+              const loc = (d.city||'') + (d.country?`, ${d.country}`:'');
+              geo.textContent = loc || 'Lokasi tidak diketahui';
+              flagEl.textContent = d.country ? ccToEmoji(d.country) : '🏳️';
+            })
+            .catch(()=>{
+              geo.textContent = 'Lokasi tidak diketahui';
+              ipEl.textContent = '—';
+              flagEl.textContent = '🏳️';
+            });
+        });
+
+      function ccToEmoji(cc){
+        return cc.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt()));
+      }
+    })();
+
+    // Share links
+    (function share(){
+      const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
+      const title = encodeURIComponent(document.title);
+      const text = encodeURIComponent('Baca perbandingan instal pertama Ubuntu vs Windows:');
+      const shareTargets = [
+        ['share-wa','https://wa.me/?text='+text+'%20'+url],
+        ['share-wa-2','https://wa.me/?text='+text+'%20'+url],
+        ['share-x','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+        ['share-x-2','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+        ['share-fb','https://www.facebook.com/sharer/sharer.php?u='+url],
+        ['share-fb-2','https://www.facebook.com/sharer/sharer.php?u='+url],
+        ['share-ln','https://www.linkedin.com/sharing/share-offsite/?url='+url],
+        ['share-ln-2','https://www.linkedin.com/sharing/share-offsite/?url='+url]
+      ];
+      shareTargets.forEach(([id,link])=>{
+        const a=document.getElementById(id);
+        if(a) a.href=link;
+      });
+      const btnCopy = document.getElementById('btn-copy');
+      if(btnCopy){
+        btnCopy.addEventListener('click', async ()=>{
+          try{
+            await navigator.clipboard.writeText(decodeURIComponent(url));
+            btnCopy.classList.add('ok');
+            btnCopy.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg><span>Tautan disalin</span>';
+          }catch(e){
+            alert('Gagal menyalin tautan.');
+          }
+        });
+      }
+    })();
+
+    // Lightbox
+    (function lightbox(){
+      const gallery = [...document.querySelectorAll('#gallery a')];
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img');
+      const close = document.getElementById('lb-close');
+      const prev = document.getElementById('lb-prev');
+      const next = document.getElementById('lb-next');
+      let idx = 0;
+
+      function open(i){
+        idx = i;
+        const href = gallery[idx].getAttribute('href');
+        const alt = gallery[idx].querySelector('img')?.getAttribute('alt') || '';
+        img.src = href; img.alt = alt;
+        lb.classList.add('open');
+      }
+      function move(delta){
+        idx = (idx + delta + gallery.length) % gallery.length;
+        open(idx);
+      }
+      function closeLB(){
+        lb.classList.remove('open'); img.src=''; img.alt='';
+      }
+
+      gallery.forEach((a,i)=>{
+        a.addEventListener('click', e=>{ e.preventDefault(); open(i); });
+      });
+      close.addEventListener('click', closeLB);
+      prev.addEventListener('click', ()=>move(-1));
+      next.addEventListener('click', ()=>move(1));
+      lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+      document.addEventListener('keydown', e=>{
+        if(!lb.classList.contains('open')) return;
+        if(e.key==='Escape') closeLB();
+        if(e.key==='ArrowLeft') move(-1);
+        if(e.key==='ArrowRight') move(1);
+      });
+    })();
+  </script>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+</body>
+</html>

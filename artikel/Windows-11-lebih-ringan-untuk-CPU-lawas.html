@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- prettier-ignore -->
+<title>Optimasi Windows 11 untuk CPU Lawas</title>
+<style>
+:root {
+  --bg-light: #f5f5f5;
+  --text-light: #111;
+  --bg-dark: #111;
+  --text-dark: #f5f5f5;
+  --accent: #1e90ff;
+  --secondary: #ff6347;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.5s, color 0.5s;
+}
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--accent);
+}
+h2 {
+  margin-top: 30px;
+  font-size: 1.8rem;
+  color: var(--secondary);
+}
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+pre {
+  background: linear-gradient(120deg, #f5f5f5, #e0f7fa);
+  padding: 15px;
+  border-radius: 12px;
+  overflow-x: auto;
+  position: relative;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  opacity: 0.8;
+}
+#toggleDark {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.info-box {
+  margin-top: 50px;
+  padding: 20px;
+  background: linear-gradient(120deg, #e0f7fa, #f5f5f5);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.1rem;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+@media(max-width:600px){
+  h1 {font-size:2rem;}
+  h2 {font-size:1.5rem;}
+  p {font-size:1rem;}
+  pre {font-size:1rem;}
+  .info-item img {width:24px;height:24px;}
+}
+</style>
+<meta name="date" content="2025-09-28">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<div></div>
+  <meta property="og:image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
+  <meta property="og:image:alt" content="Optimasi Windows 11 untuk CPU Lawas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+<button id="toggleDark">Toggle Dark Mode</button>
+<div class="container">
+  <h1>Membuat Windows 11 Lebih Ringan untuk CPU Lawas</h1>
+
+  <p>Windows 11 bisa terasa berat pada komputer dengan CPU lawas. Berikut beberapa langkah optimasi agar performa meningkat.</p>
+
+  <h2>Langkah-langkah Optimasi</h2>
+  <ul>
+    <li>Matikan efek visual & animasi yang tidak perlu.</li>
+    <li>Nonaktifkan startup program yang tidak penting.</li>
+    <li>Gunakan tema ringan (misal tema Windows klasik).</li>
+    <li>Nonaktifkan layanan background yang tidak diperlukan.</li>
+    <li>Gunakan Storage Sense untuk mengelola cache & temporary files.</li>
+    <li>Update driver secara berkala.</li>
+    <li>Gunakan antivirus ringan atau built-in Windows Defender.</li>
+  </ul>
+
+  <h2>Contoh Perintah / Script PowerShell Ringan</h2>
+  <pre><code id="win11Code">
+# Matikan animasi dan efek transparan
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value 90,12,03,80,10,00,00,00
+
+# Nonaktifkan startup program tertentu
+Get-CimInstance Win32_StartupCommand | Where-Object { $_.Command -like "*nama_program*" } | Remove-CimInstance
+
+# Matikan layanan yang tidak perlu
+Stop-Service "Diagsvc" -Force
+Set-Service "Diagsvc" -StartupType Disabled
+</code>
+  <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
+
+  <div class="info-box" id="infoBox">
+    <div class="info-item">
+      <img src="" id="browserIcon" alt="Browser Icon">
+      <span id="browserText">Browser: ...</span>
+    </div>
+    <div class="info-item">
+      <img src="" id="osIcon" alt="OS Icon">
+      <span id="osText">OS: ...</span>
+    </div>
+    <div class="info-item">
+      <img src="" id="flagIcon" alt="Country Flag">
+      <span id="ipText">IP: ...</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Dark mode auto + toggle
+const body = document.body;
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if(prefersDark) body.classList.add('dark');
+
+document.getElementById('toggleDark').addEventListener('click', ()=>{
+  body.classList.toggle('dark');
+});
+
+// Copy syntax
+function copyCode(){
+  const code = document.getElementById('win11Code').textContent;
+  navigator.clipboard.writeText(code);
+  alert("Syntax copied!");
+}
+
+// Browser detection
+function getBrowserInfo() {
+  const ua = navigator.userAgent;
+  let name="Unknown", icon="", version="N/A";
+
+  if(ua.indexOf("Brave") > -1){name="Brave"; icon="https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg";}
+  else if(ua.indexOf("Firefox")>-1){name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg";}
+  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png";}
+  else if(ua.indexOf("Chromium")>-1){name="Chromium"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg";}
+  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg";}
+  else if(ua.indexOf("Edg")>-1){name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg";}
+  else if(ua.indexOf("OPR")>-1){name="Opera"; version=ua.match(/OPR\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg";}
+  return {name, version, icon};
+}
+
+// OS detection
+function getOSInfo(){
+  const platform=navigator.platform.toLowerCase();
+  const ua=navigator.userAgent.toLowerCase();
+  let name="Unknown OS", version="", icon="";
+  if(platform.indexOf("win")!==-1){name="Windows"; const m=ua.match(/windows nt ([0-9\.]+)/); version=m?m[1]:""; icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg";}
+  else if(platform.indexOf("mac")!==-1){name="macOS"; const m=ua.match(/mac os x ([0-9_]+)/); version=m?m[1].replace(/_/g,"."):""; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
+  else if(platform.indexOf("linux")!==-1){name="Linux"; icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png";}
+  else if(/android/.test(ua)){name="Android"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg";}
+  else if(/iphone|ipad|ipod/.test(ua)){name="iOS"; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
+  return {name, version, icon};
+}
+
+// Display info
+const browser = getBrowserInfo();
+document.getElementById('browserIcon').src = browser.icon;
+document.getElementById('browserText').textContent = `Browser: ${browser.name} ${browser.version}`;
+
+const os = getOSInfo();
+document.getElementById('osIcon').src = os.icon;
+document.getElementById('osText').textContent = `OS: ${os.name} ${os.version}`;
+
+// Fetch IP & flag
+fetch('https://ipapi.co/json/')
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById('ipText').textContent=`IP: ${data.ip} (${data.country_name})`;
+    document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
+  })
+  .catch(()=>{document.getElementById('ipText').textContent='IP: Tidak dapat diambil';});
+</script>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+</body>
+</html>
+

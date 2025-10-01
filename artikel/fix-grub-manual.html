@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- prettier-ignore -->
+<title>Perbaikan Manual GRUB Bootloader (Debian & Turunannya)</title>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background: #fafafa;
+      color: #222;
+    }
+    h1, h2 {
+      color: #8b0000;
+    }
+    pre {
+      position: relative;
+      padding: 1em;
+      border-radius: 8px;
+      background: #2d2d2d;
+      color: #f8f8f2;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #8b0000;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+    ol li {
+      margin-bottom: 10px;
+    }
+  </style>
+<meta name="date" content="2025-09-28">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<div></div>
+  <meta property="og:image" content="https://frijal.github.io/artikel/fix-grub-manual.jpg">
+  <meta property="og:image:alt" content="Perbaikan Manual GRUB Bootloader (Debian & Turunannya)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/fix-grub-manual.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/fix-grub-manual.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+  <h1>Perbaikan Manual GRUB Bootloader di Debian/Ubuntu</h1>
+  <p>
+    Jika GRUB rusak atau hilang, kamu bisa memperbaikinya secara manual menggunakan <em>Live USB</em>.  
+    Cara ini lebih aman karena semua langkah diketik sendiri, jadi kamu tahu persis apa yang terjadi di sistem.
+  </p>
+
+  <h2>Langkah-Langkah</h2>
+  <ol>
+    <li><strong>Boot ke Live USB Debian/Ubuntu</strong> (gunakan opsi “Try Ubuntu/Debian without install”).</li>
+
+    <li><strong>Cari partisi root Linux</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo fdisk -l</code>
+      </pre>
+      Dari output, cari partisi Linux, misalnya <code>/dev/sda1</code>.
+    </li>
+
+    <li><strong>Mount partisi root</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo mount /dev/sda1 /mnt</code>
+      </pre>
+      Jika ada partisi <code>/boot</code> terpisah, mount juga:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo mount /dev/sda2 /mnt/boot</code>
+      </pre>
+    </li>
+
+    <li><strong>Mount pseudo-filesystems</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">for i in /dev /proc /sys; do sudo mount --bind $i /mnt$i; done</code>
+      </pre>
+    </li>
+
+    <li><strong>Masuk ke chroot</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo chroot /mnt</code>
+      </pre>
+    </li>
+
+    <li><strong>Reinstall GRUB</strong> ke disk (bukan partisi):
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">grub-install /dev/sda
+update-grub</code>
+      </pre>
+    </li>
+
+    <li><strong>Keluar dari chroot dan unmount</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">exit
+for i in /dev /proc /sys; do sudo umount /mnt$i; done
+sudo umount /mnt</code>
+      </pre>
+    </li>
+
+    <li><strong>Reboot sistem</strong>:
+      <pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+<code class="language-bash">sudo reboot</code>
+      </pre>
+      Jika berhasil, GRUB akan muncul kembali.
+    </li>
+  </ol>
+
+  <p><strong>Catatan:</strong> Jika sistem menggunakan UEFI, pastikan juga partisi EFI (biasanya <code>/dev/sda1</code> dengan tipe FAT32) ikut di-mount ke <code>/mnt/boot/efi</code> sebelum menjalankan <code>grub-install</code>.</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Kode berhasil dicopy!");
+      });
+    }
+  </script>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+</body>
+</html>

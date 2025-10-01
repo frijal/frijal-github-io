@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- prettier-ignore -->
+<title>Panduan Mudah Berbagi Folder dengan Samba Server Configuration</title>
+  <meta name="description" content="Cara mudah mengatur dan berbagi folder dengan Samba Server Configuration di Linux. Tutorial lengkap, interaktif, dengan perintah yang bisa langsung disalin.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/samba-server-config.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Panduan Mudah Berbagi Folder dengan Samba Server Configuration">
+  <meta property="og:description" content="Cara mudah mengatur dan berbagi folder dengan Samba Server Configuration di Linux. Tutorial lengkap, interaktif, dengan perintah yang bisa langsung disalin.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.github.io/artikel/samba-server-config.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDudjQ85eRiMWKJJdhvtNyhBc0JLaspVNG-mK98M_1jLIGnUhNzIqSuqeUWSxr7Z4uL4QBIXT0nOMQAvbZsZtCoqwcFKOSpfxFjhe3-3AqNCvIKVBBgEpgGgwq-PeM3YY7MMrFcemIi0uB/s1600/sambaserverconfiguratio.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panduan Mudah Berbagi Folder dengan Samba Server Configuration">
+  <meta name="twitter:description" content="Cara mudah mengatur dan berbagi folder dengan Samba Server Configuration di Linux.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDudjQ85eRiMWKJJdhvtNyhBc0JLaspVNG-mK98M_1jLIGnUhNzIqSuqeUWSxr7Z4uL4QBIXT0nOMQAvbZsZtCoqwcFKOSpfxFjhe3-3AqNCvIKVBBgEpgGgwq-PeM3YY7MMrFcemIi0uB/s1600/sambaserverconfiguratio.png">
+
+  <link rel="icon" href="https://www.samba.org/samba.png" type="image/png">
+
+  <!-- Prism.js untuk highlight -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #f9f9f9, #dff1ff);
+      color: #222;
+      line-height: 1.7;
+    }
+    header {
+      background: #0077cc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0; }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    pre {
+      position: relative;
+      background: #2d2d2d;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ffcc00;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .share-buttons a {
+      display: inline-block;
+      margin: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: white;
+      transition: 0.3s;
+    }
+    .share-buttons a.fb { background: #1877f2; }
+    .share-buttons a.tw { background: #1da1f2; }
+    .share-buttons a.wa { background: #25d366; }
+    .share-buttons a.tg { background: #0088cc; }
+    .share-buttons a.ig { background: #e4405f; }
+    .share-buttons a.th { background: #000; }
+    .share-buttons a.tt { background: #010101; }
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+    }
+    /* Tombol Home */
+    #btn-home-left, #btn-home-right {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      background: #0077cc;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 9999;
+    }
+    #btn-home-left:hover, #btn-home-right:hover { background: #005fa3; transform: scale(1.05); }
+    #btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
+    #btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
+  </style>
+<meta name="date" content="2025-09-28">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<div></div>
+  <meta property="og:image:alt" content="Panduan Mudah Berbagi Folder dengan Samba Server Configuration">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/samba-server-config.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+  <header>
+    <h1>Panduan Mudah Berbagi Folder dengan Samba Server Configuration</h1>
+    <p>Solusi cepat & praktis untuk berbagi folder di jaringan menggunakan Linux</p>
+  </header>
+  <main>
+    <h2>📂 Mengapa Samba?</h2>
+    <p>Samba adalah solusi populer di Linux untuk berbagi folder/berkas dalam jaringan lokal. Dengan <b>Samba Server Configuration</b>, kita bisa mengatur folder tanpa harus mengedit file konfigurasi secara manual.</p>
+
+    <h2>🖥️ Instalasi Samba Server Configuration</h2>
+    <p>Gunakan perintah berikut untuk menginstal:</p>
+    <pre><code class="language-bash">sudo apt install system-config-samba</code><button class="copy-btn">Copy</button></pre>
+
+    <h2>⚙️ Cara Menggunakan</h2>
+    <p>Setelah instalasi, buka aplikasi melalui menu:</p>
+    <pre><code class="language-bash">Menu → System → Administration → Samba</code><button class="copy-btn">Copy</button></pre>
+
+    <div style="text-align:center">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDudjQ85eRiMWKJJdhvtNyhBc0JLaspVNG-mK98M_1jLIGnUhNzIqSuqeUWSxr7Z4uL4QBIXT0nOMQAvbZsZtCoqwcFKOSpfxFjhe3-3AqNCvIKVBBgEpgGgwq-PeM3YY7MMrFcemIi0uB/s1600/sambaserverconfiguratio.png" alt="Samba Server Configuration Screenshot">
+    </div>
+
+    <h2>✅ Kelebihan Samba Server Configuration</h2>
+    <ul>
+      <li>GUI memudahkan pengaturan folder</li>
+      <li>Tidak perlu edit <code>smb.conf</code> manual</li>
+      <li>Integrasi dengan sistem menu Linux</li>
+    </ul>
+
+    <h2>🔗 Bagikan Artikel Ini</h2>
+    <div class="share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/samba-server-config.html" target="_blank" class="fb">Facebook</a>
+      <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/samba-server-config.html" target="_blank" class="tw">Twitter</a>
+      <a href="https://wa.me/?text=https://frijal.github.io/artikel/samba-server-config.html" target="_blank" class="wa">WhatsApp</a>
+      <a href="https://t.me/share/url?url=https://frijal.github.io/artikel/samba-server-config.html" target="_blank" class="tg">Telegram</a>
+      <a href="#" target="_blank" class="ig">Instagram</a>
+      <a href="#" target="_blank" class="th">Threads</a>
+      <a href="#" target="_blank" class="tt">TikTok</a>
+    </div>
+
+    <!-- FB Comments -->
+    <div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url"></span></div>
+    <div style="margin-top:18px">
+      <div id="fb-root"></div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+      <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+    </div>
+
+    <h2>ℹ️ Info Sistem</h2>
+    <p id="browser-info"></p>
+    <p id="os-info"></p>
+    <p id="ip-info">Mendeteksi IP...</p>
+    <div id="flag"></div>
+  </main>
+
+  <!-- Tombol Home -->
+  <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-left">🏠 Home</a>
+  <a href="https://frijal.github.io/sitemap.html" target="_blank" id="btn-home-right">🏠 Home</a>
+
+  <footer>
+    <p>© 2025 Panduan Samba Server Configuration</p>
+  </footer>
+
+  <script>
+    // Copy button
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const code = btn.previousElementSibling.innerText;
+        navigator.clipboard.writeText(code);
+        btn.innerText = "Copied!";
+        setTimeout(()=>btn.innerText="Copy", 2000);
+      });
+    });
+
+    // FB Comments URL
+    const currentUrl = window.location.href;
+    document.getElementById("current-url").textContent = currentUrl;
+    document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+
+    // Browser & OS info + icons
+    const ua = navigator.userAgent;
+    let browser = "Unknown", os = "Unknown";
+    if(ua.includes("Firefox")) browser="Mozilla Firefox 🦊";
+    else if(ua.includes("Chrome")) browser="Google Chrome 🌐";
+    else if(ua.includes("Safari")) browser="Safari 🍏";
+    else if(ua.includes("Edg")) browser="Microsoft Edge 🪟";
+    if(ua.includes("Win")) os="Windows 💻";
+    else if(ua.includes("Linux")) os="Linux 🐧";
+    else if(ua.includes("Mac")) os="MacOS 🍎";
+    document.getElementById("browser-info").textContent = "Browser: "+browser;
+    document.getElementById("os-info").textContent = "OS: "+os;
+
+    // IP & Country flag
+    fetch("https://ipapi.co/json/").then(r=>r.json()).then(data=>{
+      document.getElementById("ip-info").textContent = "IP Anda: "+data.ip+" ("+data.country_name+")";
+      document.getElementById("flag").innerHTML = `<img src="https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png">`;
+    });
+  </script>
+
+  <!-- JSON-LD Article + Breadcrumb + FAQ -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Panduan Mudah Berbagi Folder dengan Samba Server Configuration","author":{"@type":"Person","name":"Admin Linux","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},"publisher":{"@type":"Organization","name":"Linux Guides","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},"datePublished":"2025-09-15","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDudjQ85eRiMWKJJdhvtNyhBc0JLaspVNG-mK98M_1jLIGnUhNzIqSuqeUWSxr7Z4uL4QBIXT0nOMQAvbZsZtCoqwcFKOSpfxFjhe3-3AqNCvIKVBBgEpgGgwq-PeM3YY7MMrFcemIi0uB/s1600/sambaserverconfiguratio.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io/","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},{"@type":"ListItem","position":2,"name":"Linux","item":"https://frijal.github.io/sitemap.html","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},{"@type":"ListItem","position":3,"name":"Samba Server Config","item":"https://frijal.github.io/artikel/samba-server-config.html","image":"https://frijal.github.io/artikel/samba-server-config.jpg"}],"image":"https://frijal.github.io/artikel/samba-server-config.jpg"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa itu Samba?","acceptedAnswer":{"@type":"Answer","text":"Samba adalah perangkat lunak open-source untuk berbagi file dan printer antar sistem Linux, Windows, dan MacOS.","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},"image":"https://frijal.github.io/artikel/samba-server-config.jpg"},{"@type":"Question","name":"Apakah Samba Server Configuration tersedia di semua distro Linux?","acceptedAnswer":{"@type":"Answer","text":"Umumnya tersedia di distro berbasis Debian/Ubuntu. Distro lain dapat menggunakan paket serupa atau konfigurasi manual.","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},"image":"https://frijal.github.io/artikel/samba-server-config.jpg"},{"@type":"Question","name":"Apakah Samba lebih aman daripada berbagi folder biasa?","acceptedAnswer":{"@type":"Answer","text":"Samba mendukung autentikasi pengguna, kontrol akses, dan enkripsi, sehingga lebih aman dibandingkan berbagi folder tanpa proteksi.","image":"https://frijal.github.io/artikel/samba-server-config.jpg"},"image":"https://frijal.github.io/artikel/samba-server-config.jpg"}],"image":"https://frijal.github.io/artikel/samba-server-config.jpg"}</script>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+</body>
+</html>
+
