@@ -18,7 +18,7 @@ const IDX_DESCRIPTION = 4; // Deskripsi berada di indeks 4
 
 /**
  * Mengambil data lastmod dari sitemap.xml berdasarkan nama file.
- * Kami menggunakan lastmod dari sitemap karena nilainya adalah ISO 8601 (lebih bersih).
+ * Kami menggunakan lastmod dari  sitemap karena nilainya adalah ISO 8601 (lebih bersih).
  * @param {string} fileName - Nama file (mis: 'artikel.html').
  * @param {object} sitemapData - Objek URL dari sitemap.
  * @returns {string} Tanggal dalam format string atau null.
