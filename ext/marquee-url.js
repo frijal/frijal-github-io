@@ -1,7 +1,4 @@
-// ISI DARI /ext/marquee-url.js (Pastikan ini sudah benar)
-
-// ... (Kode initCategoryMarquee - Fungsi deteksi kategori dari filename di JSON)
-// ... (Kode initMarqueeSpeedControl - Fungsi kontrol slider kecepatan)
+// ISI DARI /ext/marquee-url.js
 
 /**
  * Inisialisasi Marquee Dinamis dengan mendeteksi kategori berdasarkan nama file artikel.
@@ -11,15 +8,13 @@
  */
 async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) {
     const marqueeContainer = document.getElementById(targetCategoryId);
-    // ... (Logika fetch, iterasi, deteksi targetCategory, filter, shuffle, dan inject HTML)
-    // *Gunakan kode dari langkah terakhir untuk fungsi ini*
     
-    // START KODE initCategoryMarquee (Hanya untuk referensi logika):
     if (!marqueeContainer) {
         console.error(`Marquee Error: Elemen dengan ID: ${targetCategoryId} tidak ditemukan.`);
         return;
     }
     marqueeContainer.innerHTML = `<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait...</p>`;
+    
     try {
         const response = await fetch(jsonPath);
         if (!response.ok) throw new Error(`Gagal memuat ${jsonPath}`);
@@ -32,7 +27,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
                 const articleMatch = data[categoryName].find(item => item[1] === currentFilename);
                 if (articleMatch) {
                     targetCategory = categoryName;
-                    allArticles = data[categoryName]; 
+                    allArticles = data[categoryName];
                     break;
                 }
             }
@@ -45,9 +40,12 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         }
 
         const filteredArticles = allArticles.filter(item => item[1] !== currentFilename);
-        if (filteredArticles.length === 0) { marqueeContainer.innerHTML = ''; return; }
+        if (filteredArticles.length === 0) { 
+            marqueeContainer.innerHTML = ''; 
+            return; 
+        }
 
-        filteredArticles.sort(() => 0.5 - Math.random()); 
+        filteredArticles.sort(() => 0.5 - Math.random());
         
         let contentHTML = '';
         const separator = ' • ';
@@ -58,35 +56,15 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
             contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${title}">${title}</a>${separator}`;
         });
 
-        const repeatedContent = contentHTML.repeat(5); 
+        // Diperbaiki: Ulangi konten 30 kali agar selalu mengisi lebar layar
+        const repeatedContent = contentHTML.repeat(30);
+        
         marqueeContainer.innerHTML = `<div class="marquee-content">${repeatedContent}</div>`;
 
     } catch (error) {
         console.error(`Marquee Error: Terjadi kesalahan saat memproses data:`, error);
         marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: red;">Gagal memuat artikel terkait.</p>';
     }
-    // END KODE initCategoryMarquee
 }
 
-/**
- * Inisialisasi kontrol slider untuk mengubah kecepatan Marquee.
- */
-function initMarqueeSpeedControl(sliderId, contentClass) {
-    const slider = document.getElementById(sliderId);
-    const content = document.querySelector(`.${contentClass}`);
-
-    if (!slider || !content) {
-        return;
-    }
-
-    const applySpeed = (value) => {
-        const duration = value;
-        content.style.animationDuration = `${duration}s`;
-    };
-
-    applySpeed(slider.value);
-
-    slider.addEventListener('input', (e) => {
-        applySpeed(e.target.value);
-    });
-}
+// Fungsi initMarqueeSpeedControl TELAH DIHAPUS.
