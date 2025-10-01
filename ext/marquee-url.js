@@ -154,6 +154,15 @@ async function initializeApp() {
         const currentURL = window.location.pathname;
         const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 
+        // --- MODIFIKASI DIMASUKKAN DI SINI ---
+        // Perbaikan untuk memastikan simbol '×' dirender sebagai HTML
+        const clearButton = document.getElementById('floatingSearchClear');
+        if (clearButton) {
+            clearButton.innerHTML = '&times;';
+        }
+        // ------------------------------------
+
+        // Jalankan semua fitur
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
 
