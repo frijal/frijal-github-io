@@ -1,5 +1,5 @@
 /* =======================================
-    GAYA UNTUK MARQUEE (Sticky Bawah, Konstan)
+    GAYA UNTUK MARQUEE (Sticky Bawah, Adaptif Tema)
     ======================================= */
 
 /* Kontainer luar yang menempatkan Marquee */
@@ -21,14 +21,15 @@
     overflow: hidden;
     white-space: nowrap;
     padding: 8px 0;
-    background-color: transparent;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Adaptif Tema: Gunakan variabel untuk batas agar tetap terlihat di Dark/Light Mode */
+    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1)); 
+    background-color: transparent; 
 }
 
 /* Elemen yang dianimasikan */
 #related-marquee-container .marquee-content {
     display: inline-block;
-    /* Dihapus: padding-left: 100%; agar teks langsung memenuhi layar */
     /* Kecepatan Konstan: 3000s (50 menit) */
     animation: marquee-scroll 15000s linear infinite;
 }
@@ -42,7 +43,8 @@
 
 /* 2. Gaya Link/Judul */
 #related-marquee-container a {
-    color: var(--text-light);
+    /* Adaptif Tema: Gunakan variabel teks utama situs Anda */
+    color: var(--text-color, #f0f0f0); 
     text-decoration: none;
     margin-right: 30px;
     /* Transisi halus untuk perubahan hover */
@@ -53,9 +55,10 @@
 
 /* 3. Efek Pembeda saat hover pada judul */
 #related-marquee-container a:hover {
-    color: var(--color-accent, #ffcc00); /* Ubah ke warna aksen */
-    font-weight: 700; /* Jadikan tebal (Bold) */
-    text-decoration: underline; /* Garis bawah opsional */
+    /* Adaptif Tema: Gunakan variabel aksen */
+    color: var(--color-accent, #ffcc00); 
+    font-weight: 700; 
+    text-decoration: underline; 
 }
 /* ------------------------------------------- */
 
@@ -64,3 +67,5 @@
     0% { transform: translateX(0); } 
     100% { transform: translateX(-100%); }
 }
+
+/* Catatan: Media Query Mobile telah dihapus dari sini. */
