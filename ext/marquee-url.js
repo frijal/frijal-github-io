@@ -1,7 +1,6 @@
 /**
  * Inisialisasi Marquee Dinamis dengan mendeteksi kategori berdasarkan nama file artikel.
- * Fungsi ini mengambil data, mencari kategori yang cocok, dan menyuntikkan konten marquee.
- * * @param {string} targetCategoryId ID elemen div Marquee
+ * @param {string} targetCategoryId ID elemen div Marquee
  * @param {string} currentFilename Nama file artikel yang sedang dibuka (e.g., '1011nabi-yaakub-yusuf.html')
  * @param {string} jsonPath Jalur file artikel.json (e.g., '/artikel.json')
  */
@@ -56,7 +55,10 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         filteredArticles.forEach(post => {
             const title = post[0];
             const url = `/artikel/${post[1]}`;
-            contentHTML += `<a href="${url}" rel="noopener" title="${title}">${title}</a>${separator}`;
+            // BARU: Mengambil arr[4] untuk dijadikan Tooltip (title attribute)
+            const description = post[4] || title; // Gunakan arr[4], jika kosong fallback ke Judul (arr[0])
+            
+            contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${description}">${title}</a>${separator}`;
         });
 
         // Diperbaiki: Ulangi konten 30 kali agar selalu mengisi lebar layar penuh dari awal
@@ -76,17 +78,18 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
  */
 function initializeMarquee() {
     // 1. Dapatkan Nama File Saat Ini
-    // Ini adalah cara sederhana untuk mendapatkan 'nama-file.html' dari URL
     const currentURL = window.location.pathname;
     const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 
     // 2. Inisialisasi Marquee Dinamis
     initCategoryMarquee(
-        'related-marquee-container', // ID target div (Pastikan ini sesuai dengan HTML Anda)
+        'related-marquee-container', // ID target div
         currentFilename,             // Nama file artikel yang sedang dibuka
-        '/artikel.json'              // Path ke data JSON Anda (Pastikan ini benar)
+        '/artikel.json'              // Path ke data JSON Anda
     );
 }
 
 // Pemicu: Jalankan fungsi inisialisasi setelah seluruh konten HTML (DOM) selesai dimuat.
 document.addEventListener('DOMContentLoaded', initializeMarquee);
+
+// Catatan: Fungsi initMarqueeSpeedControl telah dihapus dari file ini.
