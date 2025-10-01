@@ -248,21 +248,40 @@
         })(document, 'script', 'facebook-jssdk');
     </script>    
 
-<script src="/ext/marquee-url.js"></script><section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+////////////////////
+    <section id="related-marquee-section">
+    <div id="related-marquee-container">
+        <p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Memuat artikel terkait...</p>
+    </div>
+</section>
 
-<div id="marquee-speed-control"><input type="range" id="speedSlider" min="900" max="2000" value="1200"></div>
+<div id="marquee-speed-control">
+    <label for="speedSlider">Kecepatan Marquee</label>
+    <input type="range" min="300" max="6000" value="3000" id="speedSlider" />
+</div>
 
+////////////////////
+    <script src="/ext/marquee-url.js"></script> 
+////////////////////
 <script>
-document.addEventListener('DOMContentLoaded',() => {
-    // Deteksi nama file dari URL:
-    const pathname = window.location.pathname;
-    const FILENAME_AKTIF = pathname.substring(pathname.lastIndexOf('/') + 1);
-    const SUMBER_JSON = "/artikel.json";
-    
-    initCategoryMarquee('related-marquee-container', FILENAME_AKTIF, SUMBER_JSON);
-    initMarqueeSpeedControl('speedSlider','marquee-content');
-});
+    // 1. Dapatkan Nama File Saat Ini
+    // Ini adalah cara sederhana untuk mendapatkan 'nama-file.html' dari URL
+    const currentURL = window.location.pathname;
+    const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+
+    // 2. Inisialisasi Marquee Dinamis
+    initCategoryMarquee(
+        'related-marquee-container', // ID target div
+        currentFilename,             // e.g., '1011nabi-yaakub-yusuf.html'
+        '/artikel.json'              // Path ke data JSON Anda
+    );
+
+    // 3. Inisialisasi Kontrol Kecepatan
+    initMarqueeSpeedControl(
+        'speedSlider',             // ID elemen input range
+        'marquee-content'          // Class dari elemen yang dianimasikan
+    );
 </script>
-    
+////////////////////
 </body>
-     </html>
+</html>
