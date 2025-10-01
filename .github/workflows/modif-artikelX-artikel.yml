@@ -71,6 +71,13 @@ jobs:
               sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>' "$file"
               echo "✅ Ditambahkan skrip related di $file"
             fi
+
+            if grep -qi 'search-floating-container' "$file"; then
+              echo "ℹ️ Sudah ada kolom pencarian di $file"
+            else
+              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
+              echo "✅ Ditambahkan kolom pencarian di $file"
+            fi
           done
     
       - name: Pindahkan file HTML ke folder artikel/
