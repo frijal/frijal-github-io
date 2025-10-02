@@ -132,7 +132,7 @@
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
@@ -140,38 +140,32 @@
             const loadingState = document.getElementById('loading-state');
             const errorState = document.getElementById('error-state');
 
-            // URL Feed Anda
             const FEED_URL = 'https://frijal.github.io/rss.xml';
-            
-            // Menggunakan proxy untuk menghindari masalah CORS di browser.
-            // Layanan ini gratis dan tidak memerlukan pendaftaran.
-            const CORS_PROXY = 'https://corsproxy.io/?'; 
-            
-            // URL yang akan di-fetch, digabungkan dengan proxy
+            const CORS_PROXY = 'https://api.allorigins.win/raw?url='; // Menggunakan proxy alternatif yang lebih stabil
             const PROXY_URL = CORS_PROXY + encodeURIComponent(FEED_URL);
 
             try {
-                // Inisialisasi parser. 'RSSParser' tersedia secara global karena kita memuatnya dari CDN.
                 const parser = new RSSParser();
-                
-                // Ambil dan parse feed melalui proxy
                 const feed = await parser.parseURL(PROXY_URL);
 
-                // Sembunyikan pesan loading setelah data berhasil didapat
                 loadingState.style.display = 'none';
 
-                // Loop melalui setiap item/artikel dan buat kartu HTML-nya
+                // Jika tidak ada artikel, tampilkan pesan
+                if (!feed.items || feed.items.length === 0) {
+                    errorState.style.display = 'block';
+                    errorState.textContent = 'Tidak ada artikel yang ditemukan di dalam feed.';
+                    return;
+                }
+
                 feed.items.forEach(item => {
                     const articleCard = document.createElement('div');
                     articleCard.className = 'article-card';
                     
-                    // Format tanggal agar lebih mudah dibaca (misal: "2 Oktober 2025")
                     const pubDate = new Date(item.pubDate);
                     const formattedDate = pubDate.toLocaleDateString('id-ID', {
                         year: 'numeric', month: 'long', day: 'numeric'
                     });
 
-                    // Membuat struktur HTML untuk kartu artikel
                     articleCard.innerHTML = `
                         <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
                         <p class="snippet">${item.contentSnippet || 'Tidak ada ringkasan.'}</p>
@@ -181,16 +175,18 @@
                         </div>
                     `;
                     
-                    // Tambahkan kartu yang sudah jadi ke dalam container
                     articlesContainer.appendChild(articleCard);
                 });
 
             } catch (error) {
                 console.error('Gagal mengambil atau mem-parsing RSS feed:', error);
-                // Sembunyikan pesan loading dan tampilkan pesan error
-                loading-state.style.display = 'none';
+                
+                // === DI SINI LETAK PERBAIKANNYA ===
+                // Variabel yang benar adalah 'loadingState', bukan 'loading-state'
+                loadingState.style.display = 'none';
+                
                 errorState.style.display = 'block';
-                errorState.textContent = `Maaf, terjadi kesalahan saat mengambil artikel. Kemungkinan masalah CORS atau feed tidak valid. Coba lagi nanti. (Error: ${error.message})`;
+                errorState.textContent = `Maaf, terjadi kesalahan saat mengambil artikel. Silakan cek tab Console di Developer Tools untuk detailnya. (Error: ${error.message})`;
             }
         });
     </script>
