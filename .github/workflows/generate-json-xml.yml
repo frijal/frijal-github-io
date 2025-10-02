@@ -1,98 +1,86 @@
-name: Generate All Site Artifacts
+# Nama workflow di-update untuk mencerminkan semua tugasnya
+name: Build and Generate Site Files
 
 on:
-  # Pemicu utama: saat ada file .html baru/berubah di folder artikel
   push:
     branches: ["main"]
+    # === Pemicu kembali ke struktur 'artikel/' ===
     paths:
       - 'artikel/*.html'
-  # Pemicu manual untuk testing atau menjalankan ulang
   workflow_dispatch:
-  # Pemicu terjadwal untuk memastikan semuanya tetap sinkron
   schedule:
-    - cron: '0 22 * * *' # Menjalankan setiap hari jam 10 malam WITA
+    - cron: '0 21 * * *'
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: 1. Checkout repository code
+      - name: "1. Checkout Repository"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 2. Setup Node.js environment
+      - name: "2. Setup Node.js"
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 3. Install project dependencies
+      - name: "3. Install Dependencies"
         run: npm ci
 
-      - name: 4. Generate 'artikel.json' and 'sitemap.xml'
+      - name: "4. Generate artikel.json & sitemap.xml"
         run: node ext/generator.js
 
-      - name: 5. Generate RSS Feed and Aliases
-        run: |
-          node ext/rss.js
-          echo "Membuat alias untuk RSS feed..."
-          cp -f rss.xml rss
-          cp -f rss.xml atom
-          cp -f rss.xml feed
-
-      - name: 6. Generate 'artikel-terbaru.html' page
+      - name: "5. Generate 'artikel-terbaru.html' page"
         run: node ext/build-page.js
 
-      # === BAGIAN YANG DIPERBAIKI ADA DI BAWAH INI ===
-      - name: 7. Generate Article Cover Images
+      - name: "6. Generate RSS Feed"
+        run: node ext/rss.js
+        env:
+          RSS_LIMIT: 30
+
+      - name: "7. Generate Article Cover Images"
         run: |
           echo "Mempersiapkan server untuk screenshot..."
-          # Install http-server secara eksplisit untuk memastikan ketersediaan
           npm install http-server
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
-          sleep 5 # Beri waktu server untuk启动
+          sleep 2
           
-          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy"
-
-          if [ ! -f "ext/screenshot.js" ]; then
-            echo "::error::File 'ext/screenshot.js' tidak ditemukan."
-            exit 1
-          fi
-
           echo "Mulai memproses file HTML untuk screenshot..."
-          find artikel/ -name "*.html" | while read -r HTML_FILE; do
-            BASE_NAME=$(echo "$HTML_FILE" | sed -e 's|^artikel/||' -e 's|.html$||')
-            FILE_NAME=$(echo "$BASE_NAME" | sed 's|[^a-zA-Z0-9_-]|_|g')
-            FINAL_PATH="artikel/${FILE_NAME}.jpg"
+          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy"
+          
+          # === Loop sekarang mencari file di folder 'artikel/' ===
+          find artikel -name "*.html" | while read -r HTML_FILE; do
+            BASE_NAME=$(basename "$HTML_FILE" .html)
+            FINAL_PATH="artikel/${BASE_NAME}.jpg"
             TEMP_OUTPUT="temp_screenshot.jpg"
-
+            
             if [ -f "$FINAL_PATH" ]; then
               echo "✅ Screenshot sudah ada: $FINAL_PATH. Dilewati."
             else
               echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
-              LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
+              LOCAL_URL="http://localhost:8080/$HTML_FILE"
               
-              # === PERBAIKAN UTAMA: Install 'playwright' secara eksplisit di dalam kontainer ===
               docker run --rm --network host -v "${PWD}:/workspace" -w /workspace "$PLAYWRIGHT_IMAGE" \
-                bash -c "npm install playwright && node ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'"
+                bash -c "npm install playwright && node ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'"
               
               if [ -f "$TEMP_OUTPUT" ]; then
                 mv "$TEMP_OUTPUT" "$FINAL_PATH"
                 echo "✅ Screenshot baru berhasil disimpan: $FINAL_PATH"
               else
-                echo "::warning::Gagal memproses $HTML_FILE."
+                echo "❌ Gagal membuat screenshot untuk $HTML_FILE."
               fi
             fi
           done
 
-      - name: 8. Commit and Push all generated files
+      - name: "8. Commit and Push All Generated Files"
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
+          
           if [[ -z $(git status -s) ]]; then
             echo "✅ Tidak ada perubahan file, tidak perlu commit."
             exit 0
@@ -100,7 +88,7 @@ jobs:
           
           echo "✅ Perubahan ditemukan. Melakukan commit..."
           git add .
-          git commit -m "🤖 [Auto] Update generated site files"
+          git commit -m "build: 🚀 Update file-file yang di-generate (auto)"
           
           echo "🔃 Melakukan sinkronisasi dengan remote repository..."
           git pull --rebase origin main
@@ -109,17 +97,45 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: 9. Show Summary
+
+      - name: "9. Show Published Links & Summary"
         if: always()
         run: |
-          echo "✅ Proses selesai. File yang di-generate:"
-          echo "🔗 https://frijal.github.io/artikel.json"
-          echo "🔗 https://frijal.github.io/sitemap.xml"
-          echo "🔗 https://frijal.github.io/artikel/artikel-terbaru.html"
-          echo "🔗 https://frijal.github.io/rss.xml"
+          echo "✅ File yang di-generate (seharusnya):"
+          echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
+          echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
+          echo "🔗 rss.xml     : https://frijal.github.io/rss.xml"
+          echo "🔗 artikel-terbaru.html: https://frijal.github.io/artikel/artikel-terbaru.html"
           echo ""
+          
           echo "📊 Jumlah total artikel saat ini:"
+          # === Cara menghitung file kembali ke 'artikel/' ===
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
           echo "➡️  $COUNT artikel di folder artikel/"
+          echo ""
+```
+### Apa yang Telah Kita Lakukan?
+
+1.  **Memperbarui `ext/generator.js` (Sudah selesai):** Anda sekarang memiliki skrip yang bekerja dengan folder `artikel/`.
+2.  **Memperbarui Workflow `.yml` (Baru saja kita lakukan):** File automasi di GitHub sekarang juga sudah sinkron dan akan mencari file di folder `artikel/`.
+
+### Langkah Terakhir: Publikasikan Semuanya
+
+Sekarang, Anda hanya perlu menjalankan alur kerja final ini di komputer lokal Anda untuk memastikan semuanya sinkron sebelum diunggah.
+
+1.  **Jalankan Build Lokal Sekali Lagi:**
+    Di terminal Anda, jalankan kembali skrip build untuk memastikan semua file (`artikel.json`, `sitemap.xml`, `artikel-terbaru.html`) dibuat berdasarkan `generator.js` yang terbaru.
+    ```bash
+    node ext/build-page.js
+    ```
+    *(Menjalankan `build-page.js` saja sudah cukup, karena ia akan membaca `rss.xml` yang kemungkinan sudah ada. Jika ingin lebih yakin, jalankan semua skrip `node ext/...`)*
+
+2.  **Commit dan Push Semua Perubahan:**
+    Ini adalah langkah terakhir untuk menyimpan semua pembaruan skrip dan file hasil build ke GitHub.
+    ```bash
+    git add .
+    git commit -m "refactor: Sederhanakan struktur folder kembali ke 'artikel'"
+    git push
+    
+
 
