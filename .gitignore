@@ -1,18 +1,35 @@
-# Folder dependensi Node.js (INI YANG PALING PENTING DAN WAJIB)
-# Tanda / di akhir berarti ini adalah folder.
-/node_modules/
+# ┌─────────────────────────────┐
+# │  DEPENDENCIES & BUILD       │
+# └─────────────────────────────┘
+node_modules/
 
-# File log yang mungkin dibuat oleh npm atau yarn
-npm-debug.log*
-yarn-error.log
-yarn.lock
-
-# File sistem operasi yang tidak perlu
-# macOS
+# ┌─────────────────────────────┐
+# │  SYSTEM & IDE ARTIFACTS     │
+# └─────────────────────────────┘
 .DS_Store
-# Windows
 Thumbs.db
-
-# Opsional: File konfigurasi editor kode
-# Jika Anda menggunakan Visual Studio Code
 .vscode/
+.idea/
+
+# ┌─────────────────────────────┐
+# │  ENV & CONFIG FILES         │
+# └─────────────────────────────┘
+.env
+*.log
+*.local.json
+*.config.js
+
+# ┌─────────────────────────────┐
+# │  SVG ORNAMENTATION          │
+# └─────────────────────────────┘
+ornament-*.svg
+pattern-*.svg
+grid-*.svg
+
+# ┌─────────────────────────────┐
+# │  INTERACTIVE HTML PAGES     │
+# └─────────────────────────────┘
+*.bak.html
+*.draft.html
+*.preview.html
+*.snapshot.html
