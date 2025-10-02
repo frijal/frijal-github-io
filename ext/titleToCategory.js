@@ -5,7 +5,7 @@ const categories = [
   { name: "📚 Islam & Kehidupan", keywords: ["islam","shalat","akidah","aqidah","qunut","istigfar","istighfar","mukjizat","masjid","madinah","imam","risalah","nabi","quran","hadis","hijriyah","muslim","doa","hukum","halal","haram","syariat","fiqh","hijab","ramadhan","maulid","piagam madinah","mushaf utsman","tabut","iman","sabar","ghibah","fitnah","sombong","salam","janji"] },
   { name: "🏞️ Budaya, Kuliner & Lifestyle", keywords: ["kuliner","obat","sakit","pecel","minuman","jagung","kerupuk","angkringan","kurma","kopi","camilan","wisata","jogja","bali","bekapai","hotel","bandara","respiro","tidur","kesehatan","psikotes","wanita","bahagia"] },
   { name: "📰 Catatan & Sosial", keywords: ["catatan","pt","kopdar","sejarah","indonesia","peradaban","sahabat","kota","rencana","kreativitas","ibu","perjalanan","bisnis","perusahaan","ekspedisi","aturan","harian","cuti","nostalgia","renungan","golput","duit","pekerjaan","kerja halal","perencanaan","produktifitas","fenomena","sktm","ppdb"] },
-  { name: "💻 Windows & Teknologi Umum", keywords: ["windows","learning","cpu","samba","jaringan","software","terminal","github","shutdown","hdd","ssd","refresh","optimasi","bootloader","virtualbox","keyring","laptop","osborne1","baterai","mic","wifi","amd","cooling","phishing","eula","lisensi","piracy"] }
+  { name: "💻 Windows & Teknologi Umum", keywords: ["windows","git","learning","cpu","samba","jaringan","software","terminal","github","shutdown","hdd","ssd","refresh","optimasi","bootloader","virtualbox","keyring","laptop","osborne1","baterai","mic","wifi","amd","cooling","phishing","eula","lisensi","piracy"] }
 ];
 
 function titleToCategory(title) {
