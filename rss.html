@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel Terbaru - Frijal's Blog (Dinamis)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --primary-color: #4d90fe;
+            --card-bg: #2c2c2c;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(77, 144, 254, 0.5);
+        }
+
+        /* Styling untuk Status Loading dan Error */
+        #loading-state, #error-state {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        #error-state {
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            border-radius: 8px;
+            display: none; /* Sembunyi secara default */
+        }
+        
+        /* Styling untuk Kartu Artikel */
+        #articles-container {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .article-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .article-card h3 a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .article-card h3 a:hover {
+            color: var(--primary-color);
+        }
+
+        .article-card .snippet {
+            color: #ccc;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .article-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .article-card .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Artikel Terbaru</h1>
+            <p>Daftar ini diambil secara dinamis dari file <a href="https://frijal.github.io/rss.xml" target="_blank" rel="noopener noreferrer">rss.xml</a> menggunakan rss-parser.</p>
+        </header>
+
+        <main>
+            <div id="loading-state">Memuat artikel terbaru... 🔄</div>
+            
+            <div id="error-state"></div>
+
+            <div id="articles-container"></div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const articlesContainer = document.getElementById('articles-container');
+            const loadingState = document.getElementById('loading-state');
+            const errorState = document.getElementById('error-state');
+
+            // URL Feed Anda
+            const FEED_URL = 'https://frijal.github.io/rss.xml';
+            
+            // Menggunakan proxy untuk menghindari masalah CORS di browser.
+            // Layanan ini gratis dan tidak memerlukan pendaftaran.
+            const CORS_PROXY = 'https://corsproxy.io/?'; 
+            
+            // URL yang akan di-fetch, digabungkan dengan proxy
+            const PROXY_URL = CORS_PROXY + encodeURIComponent(FEED_URL);
+
+            try {
+                // Inisialisasi parser. 'RSSParser' tersedia secara global karena kita memuatnya dari CDN.
+                const parser = new RSSParser();
+                
+                // Ambil dan parse feed melalui proxy
+                const feed = await parser.parseURL(PROXY_URL);
+
+                // Sembunyikan pesan loading setelah data berhasil didapat
+                loadingState.style.display = 'none';
+
+                // Loop melalui setiap item/artikel dan buat kartu HTML-nya
+                feed.items.forEach(item => {
+                    const articleCard = document.createElement('div');
+                    articleCard.className = 'article-card';
+                    
+                    // Format tanggal agar lebih mudah dibaca (misal: "2 Oktober 2025")
+                    const pubDate = new Date(item.pubDate);
+                    const formattedDate = pubDate.toLocaleDateString('id-ID', {
+                        year: 'numeric', month: 'long', day: 'numeric'
+                    });
+
+                    // Membuat struktur HTML untuk kartu artikel
+                    articleCard.innerHTML = `
+                        <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+                        <p class="snippet">${item.contentSnippet || 'Tidak ada ringkasan.'}</p>
+                        <div class="meta">
+                            <span class="date">${formattedDate}</span>
+                            <a href="${item.link}" class="read-more" target="_blank" rel="noopener noreferrer">Baca Selengkapnya &rarr;</a>
+                        </div>
+                    `;
+                    
+                    // Tambahkan kartu yang sudah jadi ke dalam container
+                    articlesContainer.appendChild(articleCard);
+                });
+
+            } catch (error) {
+                console.error('Gagal mengambil atau mem-parsing RSS feed:', error);
+                // Sembunyikan pesan loading dan tampilkan pesan error
+                loading-state.style.display = 'none';
+                errorState.style.display = 'block';
+                errorState.textContent = `Maaf, terjadi kesalahan saat mengambil artikel. Kemungkinan masalah CORS atau feed tidak valid. Coba lagi nanti. (Error: ${error.message})`;
+            }
+        });
+    </script>
+</body>
+</html>
