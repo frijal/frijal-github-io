@@ -132,7 +132,7 @@
         </main>
     </div>
 
-   <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
@@ -141,8 +141,10 @@
             const errorState = document.getElementById('error-state');
 
             const FEED_URL = 'https://frijal.github.io/rss.xml';
-            const CORS_PROXY = 'https://api.allorigins.win/raw?url='; // Menggunakan proxy alternatif yang lebih stabil
-            const PROXY_URL = CORS_PROXY + encodeURIComponent(FEED_URL);
+            
+            // === DI SINI LETAK PERUBAHANNYA ===
+            const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
+            const PROXY_URL = CORS_PROXY + FEED_URL;
 
             try {
                 const parser = new RSSParser();
@@ -150,7 +152,6 @@
 
                 loadingState.style.display = 'none';
 
-                // Jika tidak ada artikel, tampilkan pesan
                 if (!feed.items || feed.items.length === 0) {
                     errorState.style.display = 'block';
                     errorState.textContent = 'Tidak ada artikel yang ditemukan di dalam feed.';
@@ -162,7 +163,7 @@
                     articleCard.className = 'article-card';
                     
                     const pubDate = new Date(item.pubDate);
-                    const formattedDate = pubDate.toLocaleDateString('id-ID', {
+                    const formattedDate = pubDate.toLocaleDateDateString('id-ID', {
                         year: 'numeric', month: 'long', day: 'numeric'
                     });
 
@@ -180,15 +181,14 @@
 
             } catch (error) {
                 console.error('Gagal mengambil atau mem-parsing RSS feed:', error);
-                
-                // === DI SINI LETAK PERBAIKANNYA ===
-                // Variabel yang benar adalah 'loadingState', bukan 'loading-state'
                 loadingState.style.display = 'none';
-                
                 errorState.style.display = 'block';
                 errorState.textContent = `Maaf, terjadi kesalahan saat mengambil artikel. Silakan cek tab Console di Developer Tools untuk detailnya. (Error: ${error.message})`;
             }
         });
     </script>
+
+
+    
 </body>
 </html>
