@@ -63,7 +63,7 @@ async function initCategoryMarquee(targetCategoryId, currentFilename, jsonPath) 
         filteredArticles.forEach(post => {
             const title = post[0];
             const url = `/artikel/${post[1]}`;
-            contentHTML += `<a href="${url}" target="_blank" rel="noopener" title="${title}">${title}</a>${separator}`;
+            contentHTML += `<a href="${url}" rel="noreferrer" title="${title}">${title}</a>${separator}`;
         });
 
         const repeatedContent = contentHTML.repeat(5); 
