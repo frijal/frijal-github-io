@@ -40,7 +40,7 @@ export async function loadTOC() {
 
           const a = document.createElement("a");
           a.href = `artikel/${item.file}`;
-          a.target = "_blank";
+          a.target = "";
           a.textContent = `${i + 1}. ${item.title}`;
 
           const statusSpan = document.createElement("span");

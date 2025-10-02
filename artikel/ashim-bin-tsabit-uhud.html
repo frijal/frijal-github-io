@@ -189,7 +189,7 @@
                 "tg"===e&&(o=`https://t.me/share/url?url=${encodeURIComponent(n)}&text=`+encodeURIComponent(t)),
                 "cp"===e?navigator.clipboard?.writeText(n).then(()=>{
                     l.innerHTML="✔️ Tersalin",setTimeout(()=>location.reload(),1e3)
-                }):window.open(o,"_blank","noopener,width=680,height=520")
+                }):window.open(o,"","noopener,width=680,height=520")
             })
         });
 

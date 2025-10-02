@@ -120,7 +120,7 @@
     <div class="container">
         <header>
             <h1>Artikel Terbaru</h1>
-            <p>Daftar ini diambil secara dinamis dari file <a href="https://frijal.github.io/rss.xml" target="_blank" rel="noopener noreferrer">rss.xml</a> menggunakan rss-parser.</p>
+            <p>Daftar ini diambil secara dinamis dari file <a href="https://frijal.github.io/rss.xml" target="" rel="noopener noreferrer">rss.xml</a> menggunakan rss-parser.</p>
         </header>
 
         <main>
@@ -168,11 +168,11 @@
                     });
 
                     articleCard.innerHTML = `
-                        <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+                        <h3><a href="${item.link}" target="" rel="noopener noreferrer">${item.title}</a></h3>
                         <p class="snippet">${item.contentSnippet || 'Tidak ada ringkasan.'}</p>
                         <div class="meta">
                             <span class="date">${formattedDate}</span>
-                            <a href="${item.link}" class="read-more" target="_blank" rel="noopener noreferrer">Baca Selengkapnya &rarr;</a>
+                            <a href="${item.link}" class="read-more" target="" rel="noopener noreferrer">Baca Selengkapnya &rarr;</a>
                         </div>
                     `;
                     

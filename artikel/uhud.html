@@ -475,7 +475,7 @@
         case 'tg': shareUrl = `https://t.me/share/url?url=${url}&text=${title}`; break;
         case 'ln': shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`; break;
       }
-      window.open(shareUrl, "_blank", "noopener");
+      window.open(shareUrl, "", "noopener");
     }
 
     // Browser, OS, IP, Location
