@@ -18,6 +18,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Kita perlu fetch-depth: 0 agar bisa membandingkan dengan commit sebelumnya (HEAD~1)
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -32,18 +35,36 @@ jobs:
       - name: Debug cek file output
         run: |
           ls -lah
-          cat artikel.json || echo "artikel.json tidak ada"
-          cat sitemap.xml || echo "sitemap.xml tidak ada"
+          echo "--- Isi artikel.json (5 baris pertama) ---"
+          head -n 5 artikel.json || echo "artikel.json tidak ada"
+          echo "--- Isi sitemap.xml (5 baris pertama) ---"
+          head -n 5 sitemap.xml || echo "sitemap.xml tidak ada"
 
-      - name: Commit and Push results (only on main)
+      # === BAGIAN YANG DIPERBAIKI ADA DI BAWAH INI ===
+      - name: Commit and Push results
         if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add artikel.json sitemap.xml
-          git commit -m "🔄 Update artikel.json & sitemap.xml (auto)" || echo "No changes to commit"
-          git push origin HEAD:main
+          # Cek dulu apakah ada perubahan pada file yang kita lacak
+          if ! git diff --quiet artikel.json sitemap.xml; then
+            echo "✅ Perubahan ditemukan pada file output. Melakukan commit..."
+            git add artikel.json sitemap.xml
+            git commit -m "🔄 Update artikel.json & sitemap.xml (auto)"
+
+            # === INI PERBAIKAN UTAMANYA ===
+            # Tarik perubahan terbaru dari server dengan strategi rebase
+            # untuk menghindari error 'non-fast-forward'.
+            echo "🔃 Melakukan sinkronisasi dengan remote repository..."
+            git pull --rebase origin main
+
+            # Dorong perubahan ke server
+            echo "🚀 Mendorong perubahan ke server..."
+            git push origin main
+          else
+            echo "✅ Tidak ada perubahan pada artikel.json & sitemap.xml. Tidak perlu commit."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -55,12 +76,13 @@ jobs:
           echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
           echo ""
           echo "📄 Artikel yang berubah di commit ini:"
-          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^artikel/.*\.html$' || true)
-          if [ -z "$CHANGED" ]; then
-            echo "⚠️ Tidak ada artikel .html yang berubah."
+          # Mengambil daftar file .html yang berubah dari commit terakhir
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep 'artikel/.*\.html$' || true)
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "⚠️ Tidak ada file artikel .html yang berubah pada commit terakhir."
           else
-            for f in $CHANGED; do
-              base=$(basename "$f")
+            for file in $CHANGED_FILES; do
+              base=$(basename "$file")
               echo "🔗 https://frijal.github.io/artikel/$base"
             done
           fi
@@ -68,28 +90,61 @@ jobs:
           echo "📊 Jumlah total artikel saat ini:"
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
           echo "➡️  $COUNT artikel di folder artikel/"
+          
+      - name: Show Published Links & Summary
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Menampilkan link file yang baru di-publish
+          echo "✅ File berhasil dipublish ke GitHub Pages:"
+          echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
+          echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
           echo ""
-          echo "📂 Jumlah kategori unik & distribusi:"
+
+          # Menampilkan daftar file artikel .html yang berubah pada commit terakhir
+          echo "📄 Artikel yang berubah di commit ini:"
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep 'artikel/.*\.html$' || true)
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "⚠️ Tidak ada file artikel .html yang berubah pada commit terakhir."
+          else
+            for file in $CHANGED_FILES; do
+              base=$(basename "$file")
+              echo "🔗 https://frijal.github.io/artikel/$base"
+            done
+          fi
+          echo ""
+
+          # Menghitung statistik dari file-file yang ada
+          echo "📊 Jumlah total artikel saat ini:"
+          COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
+          echo "➡️  $COUNT artikel di folder artikel/"
+          echo ""
+
+          # Analisis mendalam menggunakan 'jq' jika artikel.json ada
+          echo "📂 Analisis dari artikel.json:"
           if [ -f artikel.json ]; then
+            # Menghitung jumlah kategori unik
             CATEGORIES=$(jq 'keys | length' artikel.json)
-            echo "➡️  $CATEGORIES kategori unik"
+            echo "➡️  $CATEGORIES kategori unik."
             echo ""
+
+            # Menampilkan daftar kategori dan jumlah artikel per kategori
             echo "📌 Daftar kategori & jumlah artikelnya:"
             jq -r 'to_entries[] | "• \(.key): \(.value | length) artikel"' artikel.json
             echo ""
-            echo "🆕 Artikel terbaru:"
+
+            # Menampilkan artikel yang dianggap terbaru (artikel terakhir dalam daftar file JSON)
+            echo "🆕 Artikel terbaru yang terdeteksi:"
             jq -r '
-              to_entries
-              | map({kategori: .key, artikel: .value})
-              | map(.artikel | map({judul: .[0], file: .[1], kategori: input_filename}) )
-              ' artikel.json > /dev/null
-            # ambil artikel terakhir dari semua kategori
-            jq -r '
-              to_entries
-              | map({kategori: .key, artikel: .value})
-              | map(.artikel[] as $a | {kategori: .key, judul: $a[0], file: $a[1]})
-              | .[-1] | "• \(.judul) [Kategori: \(.kategori)]"
+              # 1. Ubah objek jadi array: [ {key: "kategori", value: [artikel...]}, ... ]
+              to_entries |
+              # 2. Gabungkan semua artikel dari semua kategori menjadi satu array besar
+              map(.value[]) |
+              # 3. Ambil artikel terakhir dari array gabungan tersebut
+              .[-1] |
+              # 4. Format outputnya
+              "• \(.[0])"
             ' artikel.json
+
           else
-            echo "⚠️ artikel.json tidak ditemukan"
+            echo "⚠️ artikel.json tidak ditemukan untuk dianalisis."
           fi
