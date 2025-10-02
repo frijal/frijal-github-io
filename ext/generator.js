@@ -2,54 +2,34 @@ const fs = require("fs");
 const path = require("path");
 const { titleToCategory } = require("./titleToCategory");
 
-// folder artikel ada di root
-const artikelDir = path.join(__dirname, "../artikel");
+// --- KEMBALI KE STRUKTUR LAMA: Lokasi folder input adalah 'artikel' ---
+const artikelDir = path.join(__dirname, "../artikel"); 
 const jsonOut = path.join(__dirname, "../artikel.json");
 const xmlOut = path.join(__dirname, "../sitemap.xml");
 
-// Fungsi format tanggal ISO 8601
-function formatISO8601(date) {
-    // ... (fungsi ini tetap sama)
-    const d = new Date(date);
-    const tzOffset = -d.getTimezoneOffset();
+// --- FUNGSI REKURSIF DIHAPUS KARENA TIDAK DIPERLUKAN LAGI ---
+
+// ... (Semua fungsi pembantu seperti formatISO8601, extractTitle, dll. tetap sama) ...
+function formatISO8601(date = new Date()) {
+    const tzOffset = -date.getTimezoneOffset();
     const diff = tzOffset >= 0 ? "+" : "-";
     const pad = n => String(Math.floor(Math.abs(n))).padStart(2, "0");
     const hours = pad(tzOffset / 60);
     const minutes = pad(tzOffset % 60);
-    return d.toISOString().replace("Z", `${diff}${hours}:${minutes}`);
+    return date.toISOString().replace("Z", `${diff}${hours}:${minutes}`);
 }
-
-// Fungsi ambil judul dari <title>
 function extractTitle(content) {
     const match = content.match(/<title>([\s\S]*?)<\/title>/i);
     return match ? match[1].trim() : "Tanpa Judul";
 }
-
-// Fungsi ambil deskripsi dari meta tag
 function extractDescription(content) {
-    // ... (fungsi ini tetap sama)
     const match = content.match(/<meta\s+name=["']description["'][^>]+content=["']([^"']+)["']/i);
     return match ? match[1].trim() : "";
 }
-
-// ⭐ FUNGSI BARU: Ambil tanggal publikasi dari meta tag
-function extractPubDate(content) {
-    const match = content.match(
-        /<meta\s+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i
-    );
-    return match ? match[1].trim() : null; // Kembalikan null jika tidak ditemukan
-}
-
-
-// Fungsi fix <title> agar selalu satu baris
 function fixTitleOneLine(content) {
-    // ... (fungsi ini tetap sama)
     return content.replace(/<title>([\s\S]*?)<\/title>/gi, (m, p1) => `<title>${p1.trim()}</title>`);
 }
-
-// Fungsi extractImage tetap sama
 function extractImage(content, file) {
-    // ... (seluruh isi fungsi ini tetap sama)
     let src = null;
     const og = content.match(/<meta[^>]+property=["']og:image["'][^>]+content=["'](.*?)["']/i) || content.match(/<meta[^>]+content=["'](.*?)["'][^>]+property=["']og:image["']/i);
     if (og && og[1]) src = og[1].trim();
@@ -58,12 +38,14 @@ function extractImage(content, file) {
         if (img && img[1]) {
             src = img[1].trim();
             if (!/^https?:\/\//i.test(src)) {
+                // Path gambar sekarang relatif terhadap folder 'artikel'
                 src = `https://frijal.github.io/artikel/${src.replace(/^\/+/, "")}`;
             }
         }
     }
     if (!src) {
         const baseName = file.replace(/\.html?$/i, "");
+        // Fallback ke folder 'artikel'
         src = `https://frijal.github.io/artikel/${baseName}.jpg`;
     }
     const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
@@ -73,22 +55,26 @@ function extractImage(content, file) {
     return src;
 }
 
-
-// ... (bagian 'if (!fs.existsSync(artikelDir))' tetap sama) ...
+// ... (Blok 'if (!fs.existsSync(artikelDir))' diupdate) ...
 if (!fs.existsSync(artikelDir)) {
     console.warn("⚠️ Folder artikel/ tidak ditemukan. Membuat output kosong.");
     fs.writeFileSync(jsonOut, JSON.stringify({}, null, 2), "utf8");
-    const emptyXml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`;
+    const emptyXml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`;
     fs.writeFileSync(xmlOut, emptyXml, "utf8");
     process.exit(0);
 }
 
 
+// --- KEMBALI KE CARA LAMA: Langsung baca file di folder 'artikel' ---
+console.log(`🔎 Mencari file .html di dalam folder '${artikelDir}'...`);
 const files = fs.readdirSync(artikelDir).filter(f => f.endsWith(".html"));
+console.log(`✅ Ditemukan ${files.length} file artikel.`);
+
 let grouped = {};
 let xmlUrls = [];
 
 files.forEach(file => {
+    // 'file' sekarang adalah nama file langsung, misal: 'nama-file.html'
     const fullPath = path.join(artikelDir, file);
     let content = fs.readFileSync(fullPath, "utf8");
     const fixedContent = fixTitleOneLine(content);
@@ -102,25 +88,16 @@ files.forEach(file => {
     const image = extractImage(fixedContent, file);
     const description = extractDescription(fixedContent);
 
-    // === PERUBAHAN LOGIKA PENGAMBILAN TANGGAL DI SINI ===
-    // Coba ambil tanggal dari meta tag 'article:published_time' dulu
-    let pubDate = extractPubDate(fixedContent);
-
-    // Jika meta tag tidak ada, baru gunakan tanggal modifikasi file sebagai cadangan
-    if (!pubDate) {
-        const stats = fs.statSync(fullPath);
-        pubDate = stats.mtime;
-        console.log(`- Fallback ke mtime untuk file: ${file}`);
-    }
-
-    // Format tanggal yang sudah didapat
-    const lastmod = formatISO8601(pubDate);
+    const stats = fs.statSync(fullPath);
+    const lastmod = formatISO8601(stats.mtime);
 
     if (!grouped[category]) grouped[category] = [];
+    
+    // Path file sekarang hanya nama filenya saja
     grouped[category].push([title, file, image, lastmod, description]);
 
     xmlUrls.push(
-        `<url>
+`<url>
   <loc>https://frijal.github.io/artikel/${file}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>0.6</priority>
@@ -132,7 +109,7 @@ files.forEach(file => {
     );
 });
 
-// ... (sisa skrip, yaitu fungsi formatArrayBlocks dan penulisan file, tetap sama) ...
+// ... (Fungsi formatArrayBlocks dan penulisan file tetap sama) ...
 function formatArrayBlocks(obj) {
     let jsonString = JSON.stringify(obj, null, 2);
     jsonString = jsonString.replace(/\[(\s*\[.*?\])\s*\]/gs, (match, inner, offset, str) => {
@@ -149,4 +126,7 @@ let jsonString = formatArrayBlocks(grouped);
 fs.writeFileSync(jsonOut, jsonString, "utf8");
 const xmlContent = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrls.join("\n")}</urlset>`;
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
-console.log("✅ artikel.json & sitemap.xml dibuat dengan tanggal dari meta tag.");
+
+console.log("✅ artikel.json & sitemap.xml dibuat (struktur folder 'artikel' flat).");
+
+
