@@ -1,0 +1,18 @@
+# Folder dependensi Node.js (INI YANG PALING PENTING DAN WAJIB)
+# Tanda / di akhir berarti ini adalah folder.
+/node_modules/
+
+# File log yang mungkin dibuat oleh npm atau yarn
+npm-debug.log*
+yarn-error.log
+yarn.lock
+
+# File sistem operasi yang tidak perlu
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+# Opsional: File konfigurasi editor kode
+# Jika Anda menggunakan Visual Studio Code
+.vscode/
