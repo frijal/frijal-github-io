@@ -46,15 +46,15 @@ jobs:
       - name: 6. Generate 'artikel-terbaru.html' page
         run: node ext/build-page.js
 
+      # === BAGIAN YANG DIPERBAIKI ADA DI BAWAH INI ===
       - name: 7. Generate Article Cover Images
         id: process_files
         run: |
           echo "Mempersiapkan server untuk screenshot..."
-          npm install http-server
+          # Kita tidak perlu `npm install http-server` lagi di sini karena sudah ada dari `npm ci`
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           sleep 5 # Beri waktu server untuk启动
           
-          CHANGES_MADE=false
           PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy"
 
           if [ ! -f "ext/screenshot.js" ]; then
@@ -75,19 +75,18 @@ jobs:
               echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
               LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
               
+              # === PERBAIKAN UTAMA: Install dependensi DI DALAM kontainer ===
               docker run --rm --network host -v "${PWD}:/workspace" "$PLAYWRIGHT_IMAGE" \
-                node /workspace/ext/screenshot.js "$LOCAL_URL" "/workspace/$TEMP_OUTPUT"
+                bash -c "cd /workspace && npm ci && node ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'"
               
               if [ -f "$TEMP_OUTPUT" ]; then
                 mv "$TEMP_OUTPUT" "$FINAL_PATH"
                 echo "✅ Screenshot baru berhasil disimpan: $FINAL_PATH"
-                CHANGES_MADE=true
               else
                 echo "::warning::Gagal memproses $HTML_FILE."
               fi
             fi
           done
-          echo "changes_made=$CHANGES_MADE" >> "$GITHUB_OUTPUT"
 
       - name: 8. Commit and Push all generated files
         run: |
@@ -112,13 +111,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: 9. Show Summary
-        if: always() # Selalu jalankan step ini, bahkan jika step sebelumnya gagal
+        if: always()
         run: |
           echo "✅ Proses selesai. File yang di-generate:"
           echo "🔗 https://frijal.github.io/artikel.json"
           echo "🔗 https://frijal.github.io/sitemap.xml"
-          echo "🔗 https://frijal.github.io/rss.xml"
           echo "🔗 https://frijal.github.io/artikel/artikel-terbaru.html"
+          echo "🔗 https://frijal.github.io/rss.xml"
           echo ""
           echo "📊 Jumlah total artikel saat ini:"
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
