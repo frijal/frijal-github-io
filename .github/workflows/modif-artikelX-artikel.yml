@@ -47,7 +47,7 @@ jobs:
           #   [ -z "$DATE" ] && DATE=$(date -u +"%Y-%m-%d") || DATE=$(date -d "$DATE" +"%Y-%m-%d")
           #   sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
           #   echo "✅ Ditambahkan meta date $DATE di $file"
-            fi
+          #  fi
 
             # Google Site Verification
             if grep -qi 'google-site-verification' "$file"; then
