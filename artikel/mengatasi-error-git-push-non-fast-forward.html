@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Git Fetch vs Pull: Cara Aman Update Repo Lokal Tanpa Kehilangan Perubahan</title>
-    <meta name="description" content="Panduan lengkap dan detail untuk memperbarui repository Git lokal Anda dengan aman menggunakan git fetch dan git stash, menghindari konflik dan perubahan tak terduga dari git pull.">
-    <meta name="keywords" content="git, git fetch, git pull, git stash, git merge, tutorial git, version control, frijal, pemula">
+    <!-- prettier-ignore -->
+<title>Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!</title>
+    <meta name="description" content="Panduan lengkap dan mudah dipahami untuk mengatasi error 'rejected non-fast-forward' dan 'divergent branches' di Git. Pelajari solusinya dengan perintah git pull.">
+    <meta name="keywords" content="git, git push, non-fast-forward, divergent branches, git pull, git merge, git rebase, tutorial git, frijal">
     <meta name="author" content="Frijal">
-    <link rel="canonical" href="https://frijal.github.io/artikel/git-fetch-vs-pull.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📥</text></svg>">
+    <link rel="canonical" href="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔀</text></svg>">
 
-    <meta property="og:title" content="Git Fetch vs Pull: Cara Aman Update Repo Lokal Tanpa Kehilangan Perubahan">
-    <meta property="og:description" content="Jangan biarkan 'git pull' merusak pekerjaanmu! Pelajari alur kerja profesional dengan 'git fetch' dan 'git stash' untuk kontrol penuh.">
+    <meta property="og:title" content="Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!">
+    <meta property="og:description" content="Jangan panik saat git push ditolak! Pelajari apa itu 'divergent branches' dan cara mengatasinya dengan aman menggunakan git pull.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/git-fetch-vs-pull.html">
+    <meta property="og:url" content="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html">
     <meta property="og:image" content=""> <meta property="og:site_name" content="Frijal's Blog">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@nama_twitter_anda"> <meta name="twitter:creator" content="@nama_twitter_anda">
-    <meta name="twitter:title" content="Git Fetch vs Pull: Cara Aman Update Repo Lokal Tanpa Kehilangan Perubahan">
-    <meta name="twitter:description" content="Jangan biarkan 'git pull' merusak pekerjaanmu! Pelajari alur kerja profesional dengan 'git fetch' dan 'git stash' untuk kontrol penuh.">
+    <meta name="twitter:title" content="Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!">
+    <meta name="twitter:description" content="Jangan panik saat git push ditolak! Pelajari apa itu 'divergent branches' dan cara mengatasinya dengan aman menggunakan git pull.">
     <meta name="twitter:image" content=""> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
@@ -34,7 +35,7 @@
         header .meta-info{text-align:center;font-size:0.9rem;color:#aaa;margin-bottom:40px}
         article h2{font-size:2rem;color:var(--primary-color);border-bottom:2px solid var(--border-color);padding-bottom:10px;margin-top:50px;margin-bottom:25px}
         article h3{font-size:1.5rem;color:#eee;margin-top:30px;margin-bottom:15px}
-        article p, article ul, article ol {margin-bottom:20px}
+        article p, article ul {margin-bottom:20px}
         article li {margin-left: 20px;}
         blockquote{border-left:4px solid var(--primary-color);padding-left:20px;margin:25px 0;font-style:italic;color:#ccc}
         pre{background-color:var(--code-bg);border:1px solid var(--border-color);border-radius:8px;padding:20px;overflow-x:auto;position:relative;margin:20px 0}
@@ -62,6 +63,10 @@
         #sitemap-btn {bottom: calc(30% + 60px);}
         #rss-btn{left:15px;bottom:15px}}
     </style>
+  <meta property="og:image:alt" content="Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.jpg">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -72,61 +77,51 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID&autoLogAppEvents=1" nonce="aBcDeFgH"></script> <main class="container">
         <header>
-            <h1>Git Fetch vs Pull: Cara Aman Update Repo Tanpa Kehilangan Perubahan</h1>
+            <h1>Error 'Non-Fast-Forward' Saat git push? Ini Solusinya!</h1>
             <div class="meta-info">
                 <span>Ditulis oleh Frijal</span> | <span>Diperbarui: 2 Oktober 2025</span>
             </div>
         </header>
 
         <article>
-            <p>Setiap developer yang menggunakan Git pasti akrab dengan `git pull`. Perintah ini terasa seperti tombol ajaib untuk menyinkronkan semua pekerjaan terbaru dari server. Tapi di balik kemudahannya, `git pull` bisa menjadi pedang bermata dua, terutama saat kita sedang asyik mengerjakan sesuatu di komputer lokal.</p>
-            <p>Pernahkah kamu `git pull` dan tiba-tiba Git marah-marah karena file lokalmu akan ditimpa? Atau lebih buruk, prosesnya malah menciptakan *merge conflict* yang tidak kamu duga? Jika ya, artikel ini untukmu. Kita akan membahas cara yang lebih aman dan profesional untuk memperbarui repo lokal: menggunakan `git fetch`.</p>
+            <p>Kamu sudah selesai dengan pekerjaanmu, melakukan `git add` dan `git commit` dengan pesan yang rapi. Tinggal satu langkah lagi: `git push`. Tapi bukannya pesan sukses, kamu malah disambut dengan rentetan kalimat merah yang mengintimidasi:</p>
+            <pre><code class="language-bash">! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to '...'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.</code></pre>
+            <p>Tenang, jangan panik. Error ini bukan berarti pekerjaanmu hilang. Justru, ini adalah cara Git melindungimu dari kehilangan pekerjaan orang lain (atau pekerjaanmu sendiri dari komputer lain). Mari kita pahami apa artinya dan bagaimana cara menyelesaikannya dengan aman.</p>
 
-            <h2>Masalah Umum: `git pull` yang Terburu-buru</h2>
-            <p>Untuk memahami mengapa `git pull` kadang berbahaya, kita perlu tahu apa yang sebenarnya ia lakukan. `git pull` adalah sebuah perintah pintasan (shortcut) yang menggabungkan dua perintah lain:</p>
-            <pre><code class="language-bash"># git pull sebenarnya adalah...
-git fetch  # 1. Mengunduh perubahan dari server
-git merge  # 2. Langsung mencoba menggabungkannya
-</code></pre>
-            <blockquote>Analogi `git pull`: Ini seperti menekan tombol "Sinkronkan Sekarang" di Dropbox. Aplikasi akan langsung mengunduh file baru dari server dan mencoba menggabungkannya dengan file lokal. Cepat, tapi otomatis dan kadang hasilnya tidak terduga.</blockquote>
-            <p>Masalahnya muncul saat kamu punya perubahan lokal yang belum di-commit. `git pull` bisa gagal total, atau memaksamu masuk ke dalam proses penggabungan yang belum siap kamu hadapi.</p>
+            <h2>Kenapa Ini Terjadi? (Analogi Dokumen Bersama)</h2>
+            <p>Bayangkan kamu dan rekan kerjamu mengedit dokumen yang sama.</p>
+            <ol>
+                <li>Kamu mengunduh dokumen versi terbaru pagi ini (`git pull`).</li>
+                <li>Kamu bekerja dan menambahkan beberapa paragraf baru (`git commit`).</li>
+                <li>Di saat yang sama, rekan kerjamu juga menambahkan paragraf di bagian lain dan menyimpannya ke server. Sekarang, server memiliki versi yang lebih baru yang tidak kamu ketahui.</li>
+                <li>Kamu mencoba mengunggah hasil kerjamu (`git push`).</li>
+            </ol>
+            <blockquote>"Server akan menolak file-mu dan berkata, 'Tunggu! Versi yang kamu edit sudah usang. Ada perubahan baru di sini. Unduh dulu perubahan itu, gabungkan dengan pekerjaanmu, baru unggah lagi versi finalnya.' "</blockquote>
+            <p>Itulah arti dari "your current branch is behind its remote counterpart". Riwayat di server (GitHub) sudah lebih maju daripada riwayat di komputermu.</p>
+
+            <h2>Solusi Lengkap (Langkah demi Langkah)</h2>
+            <p>Seperti yang disarankan oleh Git, solusinya adalah menggabungkan perubahan dari server ke komputermu terlebih dahulu sebelum mengirim perubahanmu.</p>
+
+            <h3>Langkah 1: Tarik dan Gabungkan Perubahan (`git pull`)</h3>
+            <p>Jalankan perintah ini di terminal. Perintah ini akan mengunduh "commit" baru dari GitHub dan mencoba menggabungkannya dengan commit yang sudah kamu buat secara lokal.</p>
+            <pre><button class="copy-btn">Copy</button><code class="language-bash">git pull</code></pre>
+            <p>Saat menjalankan `git pull`, Git akan secara otomatis menggunakan strategi penggabungan (biasanya "merge"). Jika perubahanmu dan perubahan di server ada di file yang berbeda, proses ini seringkali berjalan mulus. Git akan membuat "merge commit" untuk menyatukan kedua riwayat tersebut.</p>
             
-            <h2>Solusi Cerdas: `git fetch`, Sang Notifikasi Update</h2>
-            <p>Di sinilah `git fetch` bersinar. Berbeda dengan `git pull`, `git fetch` hanya melakukan langkah pertama: mengunduh semua data baru dari server. Ia **tidak akan pernah** menyentuh atau mengubah file di folder kerjamu.</p>
-            <blockquote>Analogi `git fetch`: Ini seperti menerima notifikasi di ponselmu, "Ada update baru tersedia. Lihat detailnya?". Kamu bisa melihat dulu apa saja yang baru, lalu memutuskan sendiri kapan waktu yang tepat untuk menginstal update tersebut. Penuh kontrol, tanpa kejutan.</blockquote>
-            <p>Setelah `fetch`, Git di komputermu sudah tahu semua riwayat baru dari server, tapi menyimpannya di "ruang karantina" (seperti `origin/main`), terpisah dari branch kerjamu (`main`).</p>
+            <blockquote><strong>Catatan:</strong> Jika `git pull` pertama kali memberimu error `fatal: Need to specify how to reconcile divergent branches`, jalankan perintah `git config --global pull.rebase false` sekali saja untuk mengatur "merge" sebagai strategi default, lalu jalankan `git pull` lagi.</blockquote>
 
-            <h2>Alur Kerja Paling Aman (Langkah demi Langkah)</h2>
-            <p>Mari kita simulasikan skenario paling umum: kamu sedang mengerjakan file `A`, tapi belum siap di-commit. Tiba-tiba, kamu perlu mengambil update terbaru dari GitHub untuk mengerjakan file `B`.</p>
+            <h3>Langkah 2: Dorong Perubahan Final (`git push`)</h3>
+            <p>Setelah `git pull` berhasil dan semua perubahan telah digabungkan di komputermu, riwayat lokalmu sekarang sudah sinkron dan lebih maju dari server. Sekarang, kamu bisa dengan aman mengirimkan versi gabungan ini.</p>
+            <pre><button class="copy-btn">Copy</button><code class="language-bash">git push</code></pre>
+            <p>Kali ini, `push` akan diterima karena prosesnya menjadi "fast-forward" (hanya menambahkan riwayat baru di atas riwayat yang sudah sinkron).</p>
 
-            <h3>Langkah 1: Amankan Pekerjaanmu dengan `git stash` (Si Laci Ajaib)</h3>
-            <p>Karena file `A` masih "setengah jadi", kita tidak mau perubahannya tercampur. Kita akan menyimpannya sementara di "laci ajaib" Git.</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash"># Simpan semua perubahan yang belum di-commit ke laci sementara
-git stash</code></pre>
-            <p>Setelah perintah ini, folder kerjamu akan kembali bersih, seolah-olah kamu belum mengubah apa-apa. Pekerjaanmu aman tersimpan.</p>
-
-            <h3>Langkah 2: Unduh Riwayat Baru dengan `git fetch`</h3>
-            <p>Sekarang, unduh semua pembaruan dari server dengan aman.</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash"># Unduh semua info baru dari remote 'origin'
-git fetch origin</code></pre>
-            
-            <h3>Langkah 3: Gabungkan Perubahan dengan `git merge`</h3>
-            <p>Setelah "meja kerja" bersih dan info update sudah di tangan, saatnya menggabungkan perubahan itu ke branch lokalmu.</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash"># Pastikan kamu di branch yang benar (misalnya, main)
-git checkout main
-
-# Gabungkan perubahan dari 'origin/main' ke 'main' lokalmu
-git merge origin/main</code></pre>
-
-            <h3>Langkah 4: Kembalikan Simpananmu dengan `git stash pop`</h3>
-            <p>Branch lokalmu kini sudah ter-update. Saatnya membuka kembali "laci ajaib" dan melanjutkan pekerjaanmu di file `A`.</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash"># Ambil kembali perubahan terakhir dari stash dan terapkan
-git stash pop</code></pre>
-            <p>Pekerjaan "setengah jadi" milikmu sekarang diterapkan di atas kode yang sudah diperbarui dari server.</p>
-            
             <h2>Kesimpulan</h2>
-            <p>Meskipun `git pull` terasa lebih praktis, membiasakan diri dengan alur kerja `fetch` + `merge` akan memberimu kontrol lebih besar dan menghindarkanmu dari banyak masalah di masa depan. Terutama saat kamu punya perubahan lokal yang belum disimpan, `git stash` adalah teman terbaikmu.</p>
-            <p>Jadi, kapan harus menggunakan `git pull`? Gunakan saat kamu yakin 100% bahwa folder kerjamu bersih dan tidak ada perubahan yang belum di-commit. Untuk semua situasi lain, alur kerja `fetch` adalah pilihan yang lebih aman dan profesional.</p>
+            <p>Error `non-fast-forward` bukanlah musuh, melainkan teman yang mencegah kita kehilangan data. Biasakan untuk menjalankan `git pull` sebelum memulai pekerjaan baru atau sebelum melakukan `git push`, terutama jika kamu bekerja dari beberapa komputer atau dalam sebuah tim.</p>
+            <p>Alur kerja yang aman adalah selalu: **Tarik, Kerjakan, Simpan, Tarik lagi, lalu Dorong.** (`Pull, Work, Commit, Pull, Push`).</p>
+
         </article>
         
         <section class="interaction-section">
@@ -138,7 +133,7 @@ git stash pop</code></pre>
                 <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke LinkedIn">🔗</a>
             </div>
 
-            <div class="fb-comments" data-href="https://frijal.github.io/artikel/git-fetch-vs-pull.html" data-width="100%" data-numposts="5"></div>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html" data-width="100%" data-numposts="5"></div>
         </section>
     </main>
 
@@ -183,5 +178,7 @@ git stash pop</code></pre>
         fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{const flag=`https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;document.getElementById('ip-info').innerHTML=`IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`}).catch(()=>{document.getElementById('ip-info').textContent='IP: Tidak terdeteksi'});
     });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>

@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!</title>
-    <meta name="description" content="Panduan lengkap dan mudah dipahami untuk mengatasi error 'rejected non-fast-forward' dan 'divergent branches' di Git. Pelajari solusinya dengan perintah git pull.">
-    <meta name="keywords" content="git, git push, non-fast-forward, divergent branches, git pull, git merge, git rebase, tutorial git, frijal">
+    <!-- prettier-ignore -->
+<title>Mengatasi Error 'Private Email' di GitHub: Panduan Konfigurasi Noreply</title>
+    <meta name="description" content="Stuck karena error 'GH007: Your push would publish a private email address'? Tenang, ini solusinya. Panduan lengkap cara konfigurasi Git dengan email noreply dari GitHub.">
+    <meta name="keywords" content="github, git, GH007, private email, noreply, git config, git push rejected, tutorial git, frijal">
     <meta name="author" content="Frijal">
-    <link rel="canonical" href="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔀</text></svg>">
+    <link rel="canonical" href="https://frijal.github.io/artikel/konfigurasi-git-email-noreply.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
 
-    <meta property="og:title" content="Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!">
-    <meta property="og:description" content="Jangan panik saat git push ditolak! Pelajari apa itu 'divergent branches' dan cara mengatasinya dengan aman menggunakan git pull.">
+    <meta property="og:title" content="Mengatasi Error 'Private Email' di GitHub: Panduan Konfigurasi Noreply">
+    <meta property="og:description" content="Panduan langkah demi langkah untuk memperbaiki error 'push declined due to email privacy restrictions' dengan mengatur email noreply di Git.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html">
-    <meta property="og:image" content=""> <meta property="og:site_name" content="Frijal's Blog">
+    <meta property="og:url" content="https://frijal.github.io/artikel/konfigurasi-git-email-noreply.html">
+    <meta property="og:image" content="https://frijal.github.io/assets/images/cover-git-noreply.jpg"> <meta property="og:site_name" content="Frijal's Blog">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@nama_twitter_anda"> <meta name="twitter:creator" content="@nama_twitter_anda">
-    <meta name="twitter:title" content="Error 'Non-Fast-Forward' Saat git push? Ini Penjelasan dan Solusinya!">
-    <meta name="twitter:description" content="Jangan panik saat git push ditolak! Pelajari apa itu 'divergent branches' dan cara mengatasinya dengan aman menggunakan git pull.">
-    <meta name="twitter:image" content=""> <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="twitter:title" content="Mengatasi Error 'Private Email' di GitHub: Panduan Konfigurasi Noreply">
+    <meta name="twitter:description" content="Jangan biarkan error privasi email menghentikanmu! Ikuti panduan ini untuk mengatasinya dengan cepat dan aman.">
+    <meta name="twitter:image" content="https://frijal.github.io/assets/images/cover-git-noreply.jpg"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
 
     <style>
@@ -62,6 +63,10 @@
         #sitemap-btn {bottom: calc(30% + 60px);}
         #rss-btn{left:15px;bottom:15px}}
     </style>
+  <meta property="og:image:alt" content="Mengatasi Error 'Private Email' di GitHub: Panduan Konfigurasi Noreply">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/konfigurasi-git-email-noreply.jpg">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -72,50 +77,56 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID&autoLogAppEvents=1" nonce="aBcDeFgH"></script> <main class="container">
         <header>
-            <h1>Error 'Non-Fast-Forward' Saat git push? Ini Solusinya!</h1>
+            <h1>Mengatasi Error 'Private Email' di GitHub</h1>
             <div class="meta-info">
                 <span>Ditulis oleh Frijal</span> | <span>Diperbarui: 2 Oktober 2025</span>
             </div>
         </header>
 
         <article>
-            <p>Kamu sudah selesai dengan pekerjaanmu, melakukan `git add` dan `git commit` dengan pesan yang rapi. Tinggal satu langkah lagi: `git push`. Tapi bukannya pesan sukses, kamu malah disambut dengan rentetan kalimat merah yang mengintimidasi:</p>
-            <pre><code class="language-bash">! [rejected]        main -> main (non-fast-forward)
-error: failed to push some refs to '...'
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: 'git pull ...') before pushing again.</code></pre>
-            <p>Tenang, jangan panik. Error ini bukan berarti pekerjaanmu hilang. Justru, ini adalah cara Git melindungimu dari kehilangan pekerjaan orang lain (atau pekerjaanmu sendiri dari komputer lain). Mari kita pahami apa artinya dan bagaimana cara menyelesaikannya dengan aman.</p>
+            <p>Pernahkah kamu merasa sudah di puncak dunia setelah seharian *ngoding*, lalu dengan penuh percaya diri mengetik `git push`, dan... jreng! Bukannya pesan sukses, malah muncul barisan error merah yang bikin hati menciut. Salah satunya yang cukup sering muncul adalah ini:</p>
+            <pre><code class="language-bash">remote: error: GH007: Your push would publish a private email address.
+! [remote rejected] main -> main (push declined due to email privacy restrictions)</code></pre>
+            <p>Tenang, jangan panik! Ini bukan berarti kode kamu rusak. Justru sebaliknya, ini adalah fitur keamanan GitHub yang sedang bekerja untuk melindungimu. Mari kita bedah masalah ini dan selesaikan dengan cara yang profesional.</p>
 
-            <h2>Kenapa Ini Terjadi? (Analogi Dokumen Bersama)</h2>
-            <p>Bayangkan kamu dan rekan kerjamu mengedit dokumen yang sama.</p>
+            <h2>Tanya: "Sebenarnya, Kenapa Error Ini Muncul?"</h2>
+            <p>Jawaban singkatnya: **konfigurasi Git di komputermu tidak sinkron dengan pengaturan privasi di akun GitHub-mu.**</p>
+            <blockquote>
+                "Saat kamu melakukan `commit`, Git 'menstempel' commit tersebut dengan nama dan alamat email-mu. Di sisi lain, GitHub punya fitur untuk menyembunyikan alamat email pribadimu agar tidak terekspos di riwayat commit publik. Error ini muncul saat GitHub melihat stempel email pribadimu dan menolaknya demi menjaga privasimu."
+            </blockquote>
+            <p>Ini adalah konflik antara email yang tercatat di `git config` lokal dengan kebijakan privasi di `github.com/settings/emails`.</p>
+
+            <h2>Jawab: "Solusinya? Pakai Email 'Noreply' dari GitHub!"</h2>
+            <p>Ini adalah cara yang paling direkomendasikan karena menjaga email pribadimu tetap aman selamanya. Kita akan mengatur Git di komputer untuk menggunakan alamat email anonim yang disediakan khusus oleh GitHub.</p>
+
+            <h3>Langkah A: Temukan Harta Karun (Email Noreply Anda)</h3>
             <ol>
-                <li>Kamu mengunduh dokumen versi terbaru pagi ini (`git pull`).</li>
-                <li>Kamu bekerja dan menambahkan beberapa paragraf baru (`git commit`).</li>
-                <li>Di saat yang sama, rekan kerjamu juga menambahkan paragraf di bagian lain dan menyimpannya ke server. Sekarang, server memiliki versi yang lebih baru yang tidak kamu ketahui.</li>
-                <li>Kamu mencoba mengunggah hasil kerjamu (`git push`).</li>
+                <li>Buka pengaturan email di akun GitHub Anda: <a href="https://github.com/settings/emails" target="_blank" rel="noopener noreferrer">https://github.com/settings/emails</a>.</li>
+                <li>Pastikan opsi "Keep my email addresses private" dan "Block command line pushes that expose my email" <b>tetap dicentang</b>.</li>
+                <li>Salin alamat email `noreply` yang disediakan di sana. Formatnya akan terlihat seperti ini: `12345678+username@users.noreply.github.com`.</li>
             </ol>
-            <blockquote>"Server akan menolak file-mu dan berkata, 'Tunggu! Versi yang kamu edit sudah usang. Ada perubahan baru di sini. Unduh dulu perubahan itu, gabungkan dengan pekerjaanmu, baru unggah lagi versi finalnya.' "</blockquote>
-            <p>Itulah arti dari "your current branch is behind its remote counterpart". Riwayat di server (GitHub) sudah lebih maju daripada riwayat di komputermu.</p>
-
-            <h2>Solusi Lengkap (Langkah demi Langkah)</h2>
-            <p>Seperti yang disarankan oleh Git, solusinya adalah menggabungkan perubahan dari server ke komputermu terlebih dahulu sebelum mengirim perubahanmu.</p>
-
-            <h3>Langkah 1: Tarik dan Gabungkan Perubahan (`git pull`)</h3>
-            <p>Jalankan perintah ini di terminal. Perintah ini akan mengunduh "commit" baru dari GitHub dan mencoba menggabungkannya dengan commit yang sudah kamu buat secara lokal.</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">git pull</code></pre>
-            <p>Saat menjalankan `git pull`, Git akan secara otomatis menggunakan strategi penggabungan (biasanya "merge"). Jika perubahanmu dan perubahan di server ada di file yang berbeda, proses ini seringkali berjalan mulus. Git akan membuat "merge commit" untuk menyatukan kedua riwayat tersebut.</p>
             
-            <blockquote><strong>Catatan:</strong> Jika `git pull` pertama kali memberimu error `fatal: Need to specify how to reconcile divergent branches`, jalankan perintah `git config --global pull.rebase false` sekali saja untuk mengatur "merge" sebagai strategi default, lalu jalankan `git pull` lagi.</blockquote>
+            <h3>Langkah B: Atur Konfigurasi Git di Komputer Lokal</h3>
+            <p>Buka terminalmu, lalu jalankan perintah ini. Jangan lupa ganti dengan alamat email `noreply` yang sudah kamu salin.</p>
+            <pre><button class="copy-btn">Copy</button><code class="language-bash">git config --global user.email "12345678+username@users.noreply.github.com"</code></pre>
+            <p>Perintah ini akan mengatur semua commit-mu di *masa depan* untuk menggunakan email anonim ini.</p>
 
-            <h3>Langkah 2: Dorong Perubahan Final (`git push`)</h3>
-            <p>Setelah `git pull` berhasil dan semua perubahan telah digabungkan di komputermu, riwayat lokalmu sekarang sudah sinkron dan lebih maju dari server. Sekarang, kamu bisa dengan aman mengirimkan versi gabungan ini.</p>
+            <h3>Langkah C: Perbaiki 'Kesalahan Masa Lalu' (Amandemen Commit)</h3>
+            <p>Commit terakhir yang kamu buat masih menggunakan stempel email yang lama. Kita perlu memperbaikinya dengan satu perintah sakti:</p>
+            <pre><button class="copy-btn">Copy</button><code class="language-bash">git commit --amend --no-edit --reset-author</code></pre>
+            <ul>
+                <li><strong>--amend:</strong> Memperbaiki commit terakhir.</li>
+                <li><strong>--no-edit:</strong> Tidak perlu mengubah pesan commit yang sudah ada.</li>
+                <li><strong>--reset-author:</strong> Memperbarui stempel nama dan email di commit tersebut dengan konfigurasi baru dari Langkah B.</li>
+            </ul>
+
+            <h3>Langkah D: Push Ulang dan Rasakan Kemenangan!</h3>
+            <p>Sekarang, saatnya mencoba lagi. Jalankan perintah push seperti biasa.</p>
             <pre><button class="copy-btn">Copy</button><code class="language-bash">git push</code></pre>
-            <p>Kali ini, `push` akan diterima karena prosesnya menjadi "fast-forward" (hanya menambahkan riwayat baru di atas riwayat yang sudah sinkron).</p>
-
-            <h2>Kesimpulan</h2>
-            <p>Error `non-fast-forward` bukanlah musuh, melainkan teman yang mencegah kita kehilangan data. Biasakan untuk menjalankan `git pull` sebelum memulai pekerjaan baru atau sebelum melakukan `git push`, terutama jika kamu bekerja dari beberapa komputer atau dalam sebuah tim.</p>
-            <p>Alur kerja yang aman adalah selalu: **Tarik, Kerjakan, Simpan, Tarik lagi, lalu Dorong.** (`Pull, Work, Commit, Pull, Push`).</p>
+            <p>Dan... berhasil! Push Anda akan diterima karena commit-nya sekarang menggunakan email `noreply` yang aman.</p>
+            
+            <h2>Kesimpulan: Kenapa Ini Penting?</h2>
+            <p>Menggunakan email `noreply` adalah praktik terbaik bagi developer. Ini tidak hanya menyelesaikan satu error spesifik, tapi juga secara proaktif melindungi privasi Anda di semua proyek open source yang mungkin Anda kontribusikan di masa depan. Sekarang, Anda bisa `push` dengan tenang tanpa khawatir email pribadi Anda tersebar di jagat maya.</p>
 
         </article>
         
@@ -128,7 +139,7 @@ hint: 'git pull ...') before pushing again.</code></pre>
                 <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke LinkedIn">🔗</a>
             </div>
 
-            <div class="fb-comments" data-href="https://frijal.github.io/artikel/mengatasi-error-git-push-non-fast-forward.html" data-width="100%" data-numposts="5"></div>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/konfigurasi-git-email-noreply.html" data-width="100%" data-numposts="5"></div>
         </section>
     </main>
 
@@ -173,5 +184,7 @@ hint: 'git pull ...') before pushing again.</code></pre>
         fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{const flag=`https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;document.getElementById('ip-info').innerHTML=`IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`}).catch(()=>{document.getElementById('ip-info').textContent='IP: Tidak terdeteksi'});
     });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
