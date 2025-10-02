@@ -450,7 +450,7 @@
 
             let buttonsHtml = '';
             for (const key in platforms) {
-                buttonsHtml += `<a href="${platforms[key].url}" target="_blank" rel="noopener noreferrer" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}">${platforms[key].icon}</a>`;
+                buttonsHtml += `<a href="${platforms[key].url}" rel="noreferrer" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}">${platforms[key].icon}</a>`;
             }
             shareContainer.innerHTML = buttonsHtml;
         }
