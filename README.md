@@ -1,7 +1,6 @@
 [](https://frijal.github.io/index.html)
 
 [![📸 Cover Image Artikel](https://github.com/frijal/frijal.github.io/actions/workflows/screenshot-artikel-otomatis.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/screenshot-artikel-otomatis.yml)
-[![modif artikelX > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
 [![artikel.json & sitemap.xml](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
 [![RSS Feed Atom](https://github.com/frijal/frijal.github.io/actions/workflows/generate-rss-harian.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-rss-harian.yml)
 # 🌟 Lisensi UNLICENSE / Public Domain
