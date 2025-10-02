@@ -29,14 +29,11 @@ jobs:
 
       - name: 3. Install project dependencies
         run: npm ci
-
-      - name: 4. Generate 'artikel-terbaru.html' page
-        run: node ext/build-page.js
-      
-      - name: 5. Generate 'artikel.json' and 'sitemap.xml'
+           
+      - name: 4. Generate 'artikel.json' and 'sitemap.xml'
         run: node ext/generator.js
 
-      - name: 6. Debug generated files
+      - name: 5. Debug generated files
         run: |
           ls -lah artikel/
           echo "--- Isi artikel.json (5 baris pertama) ---"
@@ -44,7 +41,7 @@ jobs:
           echo "--- Isi sitemap.xml (5 baris pertama) ---"
           head -n 5 sitemap.xml || echo "sitemap.xml tidak ada"
 
-      - name: 7. Commit and Push all generated files
+      - name: 6. Commit and Push all generated files
         if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
@@ -72,7 +69,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # --- INI ADALAH BLOK SUMMARY YANG SUDAH DIBERSIHKAN DARI DUPLIKASI ---
-      - name: 8. Show Published Links & Summary
+      - name: 7. Show Published Links & Summary
         if: github.ref == 'refs/heads/main'
         run: |
           # Menampilkan link file yang baru di-publish
