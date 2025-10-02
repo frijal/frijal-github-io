@@ -50,7 +50,7 @@ jobs:
       - name: 7. Generate Article Cover Images
         run: |
           echo "Mempersiapkan server untuk screenshot..."
-          # PERBAIKAN 1: Install http-server secara eksplisit di sini
+          # Install http-server secara eksplisit untuk memastikan ketersediaan
           npm install http-server
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           sleep 5 # Beri waktu server untuk启动
@@ -75,10 +75,10 @@ jobs:
               echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
               LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
               
-              # PERBAIKAN 2: Jalankan skrip node secara langsung tanpa 'npm ci'
-              # Gambar Docker Playwright sudah berisi semua yang dibutuhkan.
+              # === PERBAIKAN UTAMA: Gunakan 'npm install' DI DALAM kontainer ===
+              # Ini akan menginstal 'devDependencies' seperti 'playwright'
               docker run --rm --network host -v "${PWD}:/workspace" "$PLAYWRIGHT_IMAGE" \
-                node /workspace/ext/screenshot.js "$LOCAL_URL" "/workspace/$TEMP_OUTPUT"
+                bash -c "cd /workspace && npm install && node ext/screenshot.js '$LOCAL_URL' '/workspace/$TEMP_OUTPUT'"
               
               if [ -f "$TEMP_OUTPUT" ]; then
                 mv "$TEMP_OUTPUT" "$FINAL_PATH"
