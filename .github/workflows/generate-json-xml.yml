@@ -34,13 +34,13 @@ jobs:
       - name: "4. Generate artikel.json & sitemap.xml"
         run: node ext/generator.js
 
-      - name: "5. Generate 'artikel-terbaru.html' page"
-        run: node ext/build-page.js
-
-      - name: "6. Generate RSS Feed"
+      - name: "5. Generate RSS Feed"
         run: node ext/rss.js
         env:
           RSS_LIMIT: 30
+
+      - name: "6. Generate 'artikel-terbaru.html' page"
+        run: node ext/build-page.js
 
       - name: "7. Generate Article Cover Images"
         run: |
@@ -112,30 +112,6 @@ jobs:
           # === Cara menghitung file kembali ke 'artikel/' ===
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
           echo "➡️  $COUNT artikel di folder artikel/"
-          echo ""
-```
-### Apa yang Telah Kita Lakukan?
 
-1.  **Memperbarui `ext/generator.js` (Sudah selesai):** Anda sekarang memiliki skrip yang bekerja dengan folder `artikel/`.
-2.  **Memperbarui Workflow `.yml` (Baru saja kita lakukan):** File automasi di GitHub sekarang juga sudah sinkron dan akan mencari file di folder `artikel/`.
-
-### Langkah Terakhir: Publikasikan Semuanya
-
-Sekarang, Anda hanya perlu menjalankan alur kerja final ini di komputer lokal Anda untuk memastikan semuanya sinkron sebelum diunggah.
-
-1.  **Jalankan Build Lokal Sekali Lagi:**
-    Di terminal Anda, jalankan kembali skrip build untuk memastikan semua file (`artikel.json`, `sitemap.xml`, `artikel-terbaru.html`) dibuat berdasarkan `generator.js` yang terbaru.
-    ```bash
-    node ext/build-page.js
-    ```
-    *(Menjalankan `build-page.js` saja sudah cukup, karena ia akan membaca `rss.xml` yang kemungkinan sudah ada. Jika ingin lebih yakin, jalankan semua skrip `node ext/...`)*
-
-2.  **Commit dan Push Semua Perubahan:**
-    Ini adalah langkah terakhir untuk menyimpan semua pembaruan skrip dan file hasil build ke GitHub.
-    ```bash
-    git add .
-    git commit -m "refactor: Sederhanakan struktur folder kembali ke 'artikel'"
-    git push
-    
 
 
