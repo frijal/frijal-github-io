@@ -48,10 +48,10 @@ jobs:
 
       # === BAGIAN YANG DIPERBAIKI ADA DI BAWAH INI ===
       - name: 7. Generate Article Cover Images
-        id: process_files
         run: |
           echo "Mempersiapkan server untuk screenshot..."
-          # Kita tidak perlu `npm install http-server` lagi di sini karena sudah ada dari `npm ci`
+          # PERBAIKAN 1: Install http-server secara eksplisit di sini
+          npm install http-server
           nohup ./node_modules/.bin/http-server . -p 8080 --silent &
           sleep 5 # Beri waktu server untuk启动
           
@@ -75,9 +75,10 @@ jobs:
               echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
               LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
               
-              # === PERBAIKAN UTAMA: Install dependensi DI DALAM kontainer ===
+              # PERBAIKAN 2: Jalankan skrip node secara langsung tanpa 'npm ci'
+              # Gambar Docker Playwright sudah berisi semua yang dibutuhkan.
               docker run --rm --network host -v "${PWD}:/workspace" "$PLAYWRIGHT_IMAGE" \
-                bash -c "cd /workspace && npm ci && node ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'"
+                node /workspace/ext/screenshot.js "$LOCAL_URL" "/workspace/$TEMP_OUTPUT"
               
               if [ -f "$TEMP_OUTPUT" ]; then
                 mv "$TEMP_OUTPUT" "$FINAL_PATH"
@@ -116,8 +117,8 @@ jobs:
           echo "✅ Proses selesai. File yang di-generate:"
           echo "🔗 https://frijal.github.io/artikel.json"
           echo "🔗 https://frijal.github.io/sitemap.xml"
-          echo "🔗 https://frijal.github.io/rss.xml"
           echo "🔗 https://frijal.github.io/artikel/artikel-terbaru.html"
+          echo "🔗 https://frijal.github.io/rss.xml"
           echo ""
           echo "📊 Jumlah total artikel saat ini:"
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
