@@ -43,31 +43,32 @@ jobs:
           echo "--- Isi sitemap.xml (5 baris pertama) ---"
           head -n 5 sitemap.xml || echo "sitemap.xml tidak ada"
 
-      # === BAGIAN YANG DIPERBAIKI ADA DI BAWAH INI ===
       - name: Commit and Push results
         if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Cek dulu apakah ada perubahan pada file yang kita lacak
-          if ! git diff --quiet artikel.json sitemap.xml; then
-            echo "✅ Perubahan ditemukan pada file output. Melakukan commit..."
-            git add artikel.json sitemap.xml
-            git commit -m "🔄 Update artikel.json & sitemap.xml (auto)"
-
-            # === INI PERBAIKAN UTAMANYA ===
-            # Tarik perubahan terbaru dari server dengan strategi rebase
-            # untuk menghindari error 'non-fast-forward'.
-            echo "🔃 Melakukan sinkronisasi dengan remote repository..."
-            git pull --rebase origin main
-
-            # Dorong perubahan ke server
-            echo "🚀 Mendorong perubahan ke server..."
-            git push origin main
-          else
-            echo "✅ Tidak ada perubahan pada artikel.json & sitemap.xml. Tidak perlu commit."
+          # === PERBAIKAN 1: Cek semua perubahan, bukan hanya file spesifik ===
+          # Jika output 'git status -s' kosong, berarti tidak ada perubahan sama sekali.
+          if [[ -z $(git status -s) ]]; then
+            echo "✅ Tidak ada perubahan file, tidak perlu commit."
+            exit 0
           fi
+          
+          echo "✅ Perubahan ditemukan. Melakukan commit..."
+          
+          # === PERBAIKAN 2: Tambahkan SEMUA file yang berubah ===
+          # Menggunakan '.' akan menambahkan semua file baru dan yang termodifikasi.
+          git add .
+          
+          git commit -m "🔄 Update file-file yang di-generate (auto)"
+          
+          echo "🔃 Melakukan sinkronisasi dengan remote repository..."
+          git pull --rebase origin main
+          
+          echo "🚀 Mendorong perubahan ke server..."
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
