@@ -10,7 +10,7 @@ const xmlOut = path.join(__dirname, "../sitemap.xml");
 // Fungsi format tanggal ISO 8601
 function formatISO8601(date) {
     const d = new Date(date);
-    if (isNaN(d)) { // Penanganan jika tanggal tidak valid
+    if (isNaN(d)) {
         console.warn(`⚠️ Tanggal tidak valid terdeteksi, menggunakan tanggal saat ini sebagai fallback.`);
         return new Date().toISOString();
     }
@@ -22,12 +22,12 @@ function formatISO8601(date) {
     return d.toISOString().replace("Z", `${diff}${hours}:${minutes}`);
 }
 
-// ⭐ FUNGSI BARU: Ambil tanggal publikasi dari meta tag
+// Fungsi ambil tanggal publikasi dari meta tag
 function extractPubDate(content) {
     const match = content.match(
         /<meta\s+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i
     );
-    return match ? match[1].trim() : null; // Kembalikan null jika tidak ditemukan
+    return match ? match[1].trim() : null;
 }
 
 
@@ -84,26 +84,47 @@ let xmlUrls = [];
 files.forEach(file => {
     const fullPath = path.join(artikelDir, file);
     let content = fs.readFileSync(fullPath, "utf8");
-    const fixedContent = fixTitleOneLine(content);
-    if (fixedContent !== content) {
-        fs.writeFileSync(fullPath, fixedContent, "utf8");
+    let needsSave = false;
+
+    // Perbaiki <title> jadi satu baris
+    const fixedTitleContent = fixTitleOneLine(content);
+    if (fixedTitleContent !== content) {
+        content = fixedTitleContent;
+        needsSave = true;
         console.log(`🔧 Fixed <title> di ${file}`);
     }
 
-    const title = extractTitle(fixedContent);
+    // Ambil data-data
+    const title = extractTitle(content);
     const category = titleToCategory(title);
-    const image = extractImage(fixedContent, file);
-    const description = extractDescription(fixedContent);
+    const image = extractImage(content, file);
+    const description = extractDescription(content);
 
-    // === PERUBAHAN LOGIKA PENGAMBILAN TANGGAL DI SINI ===
-    // Prioritas 1: Ambil tanggal dari meta tag 'article:published_time'
-    let pubDate = extractPubDate(fixedContent);
-
-    // Prioritas 2 (Fallback): Jika meta tag tidak ada, gunakan tanggal modifikasi file
+    // === LOGIKA BARU: Ambil ATAU TULIS tanggal ===
+    let pubDate = extractPubDate(content);
+    
+    // Jika meta tag tidak ada...
     if (!pubDate) {
         const stats = fs.statSync(fullPath);
-        pubDate = stats.mtime;
-        console.warn(`- ⚠️ Peringatan: Meta tag tanggal tidak ditemukan di '${file}'. Menggunakan tanggal modifikasi file sebagai fallback.`);
+        const mtimeDate = stats.mtime; // Gunakan tanggal modifikasi file
+        pubDate = mtimeDate; // Set pubDate untuk proses saat ini
+        
+        // Buat tag meta baru
+        const newMetaTag = `    <meta property="article:published_time" content="${formatISO8601(mtimeDate)}">`;
+
+        // Suntikkan tag meta baru sebelum </head>
+        if (content.includes("</head>")) {
+            content = content.replace("</head>", `${newMetaTag}\n</head>`);
+            needsSave = true;
+            console.log(`➕ Menambahkan meta tag tanggal ke '${file}'`);
+        } else {
+            console.warn(`- ⚠️ Peringatan: Tag </head> tidak ditemukan di '${file}'. Tidak bisa menambahkan tanggal.`);
+        }
+    }
+    
+    // Jika ada perubahan (title atau tanggal), simpan file
+    if (needsSave) {
+        fs.writeFileSync(fullPath, content, "utf8");
     }
 
     // Format tanggal yang sudah didapat
@@ -143,4 +164,6 @@ fs.writeFileSync(jsonOut, jsonString, "utf8");
 const xmlContent = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlUrls.join("\n")}</urlset>`;
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
 
-console.log("✅ artikel.json & sitemap.xml dibuat (prioritas tanggal dari meta tag).");
+console.log("✅ artikel.json & sitemap.xml dibuat (bisa menulis tanggal otomatis).");
+
+
