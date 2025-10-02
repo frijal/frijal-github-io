@@ -116,8 +116,8 @@ jobs:
           echo "✅ Proses selesai. File yang di-generate:"
           echo "🔗 https://frijal.github.io/artikel.json"
           echo "🔗 https://frijal.github.io/sitemap.xml"
-          echo "🔗 https://frijal.github.io/artikel/artikel-terbaru.html"
           echo "🔗 https://frijal.github.io/rss.xml"
+          echo "🔗 https://frijal.github.io/artikel/artikel-terbaru.html"
           echo ""
           echo "📊 Jumlah total artikel saat ini:"
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
