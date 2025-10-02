@@ -17,6 +17,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: bikin halaman terbaru
+        run: node ext/build-page.js
+      
       - name: Siapkan Folder Laporan
         run: |
           mkdir -p mini/
