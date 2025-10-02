@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: bikin halaman terbaru
+        run: node ext/build-page.js
+      
       - name: Run generator.js
         run: node ext/generator.js
 
