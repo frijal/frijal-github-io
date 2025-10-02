@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Pasang 20 Aplikasi Windows Sekaligus dengan Winget</title>
+  <!-- prettier-ignore -->
+<title>Pasang 20 Aplikasi Windows Sekaligus dengan Winget</title>
   <meta name="description" content="Winget bikin setup Windows jadi cepat, aman, dan otomatis. Panduan santai + skrip PowerShell untuk memasang 20 aplikasi sekaligus, lengkap dengan tips, ekspor/impor daftar, dan best practice.">
   <link rel="canonical" href="https://frijal.github.io/artikel/winget-instal-20-aplikasi.html">
   <link rel="icon" href="https://frijal.github.io/assets/favicon.ico">
@@ -54,6 +55,12 @@
 .code-block code .var { color: #4ec9b0; }         /* variabel hijau toska */
 
   </style>
+  <meta property="og:image" content="https://frijal.github.io/artikel/winget-instal-20-aplikasi.jpg">
+  <meta property="og:image:alt" content="Pasang 20 Aplikasi Windows Sekaligus dengan Winget">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/winget-instal-20-aplikasi.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/winget-instal-20-aplikasi.jpg">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <main>
@@ -198,6 +205,8 @@
     updateLocBadge(null,'ID');
     fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{updateLocBadge(d.city,d.country_code)}).catch(()=>{});
   </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
 
