@@ -1,5 +1,6 @@
 [](https://frijal.github.io/index.html)
 
+[![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
 [![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
 
 # 🌟 Lisensi UNLICENSE / Public Domain
