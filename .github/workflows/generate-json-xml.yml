@@ -75,10 +75,9 @@ jobs:
               echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
               LOCAL_URL="http://localhost:8080/$(echo "$HTML_FILE" | sed 's|^./||')"
               
-              # === PERBAIKAN UTAMA: Gunakan 'npm install' DI DALAM kontainer ===
-              # Ini akan menginstal 'devDependencies' seperti 'playwright'
-              docker run --rm --network host -v "${PWD}:/workspace" "$PLAYWRIGHT_IMAGE" \
-                bash -c "cd /workspace && npm install && node ext/screenshot.js '$LOCAL_URL' '/workspace/$TEMP_OUTPUT'"
+              # === PERBAIKAN UTAMA: Install 'playwright' secara eksplisit di dalam kontainer ===
+              docker run --rm --network host -v "${PWD}:/workspace" -w /workspace "$PLAYWRIGHT_IMAGE" \
+                bash -c "npm install playwright && node ext/screenshot.js '$LOCAL_URL' 'temp_screenshot.jpg'"
               
               if [ -f "$TEMP_OUTPUT" ]; then
                 mv "$TEMP_OUTPUT" "$FINAL_PATH"
