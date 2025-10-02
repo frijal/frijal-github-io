@@ -35,11 +35,11 @@ async function buildPage() {
 <div class="article-card">
     ${imageHtml} 
     <div class="card-content">
-        <h3><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h3>
+        <h3><a href="${item.link}" rel="noreferrer">${item.title}</a></h3>
         <p class="snippet">${item.contentSnippet || 'Tidak ada ringkasan.'}</p>
         <div class="meta">
             <span class="date">${formattedDate}</span>
-            <a href="${item.link}" class="read-more" target="_blank" rel="noopener noreferrer">Baca Selengkapnya &rarr;</a>
+            <a href="${item.link}" class="read-more" rel="noreferrer">Baca Selengkapnya &rarr;</a>
         </div>
     </div>
 </div>`;
