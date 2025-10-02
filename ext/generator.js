@@ -144,19 +144,3 @@ const xmlContent = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns:xsi="htt
 fs.writeFileSync(xmlOut, xmlContent, "utf8");
 
 console.log("✅ artikel.json & sitemap.xml dibuat (prioritas tanggal dari meta tag).");
-```
-
-### Langkah Selanjutnya Untuk Anda
-
-1.  **Perbarui `ext/generator.js`:** Ganti isi file `ext/generator.js` Anda dengan kode lengkap di atas.
-2.  **Tambahkan Meta Tag ke Artikel Anda:** Ini adalah langkah manual yang paling penting. Buka setiap file `.html` di dalam folder `artikel/` Anda. Di dalam bagian `<head>`, tambahkan baris ini, dan **sesuaikan tanggalnya** dengan tanggal publikasi yang benar.
-
-    ```html
-    <meta property="article:published_time" content="YYYY-MM-DDTHH:MM:SS+08:00">
-    ```
-    Contoh:
-    ```html
-    <meta property="article:published_time" content="2024-05-20T09:00:00+08:00">
-    
-
-
