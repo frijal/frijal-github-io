@@ -40,13 +40,13 @@ jobs:
         run: |
           for file in artikelx/*.html; do
             # Meta Date
-            if grep -qi '<meta[^>]*name="date"' "$file"; then
-              echo "ℹ️ Sudah ada meta date di $file"
-            else
-              DATE=$(git log --follow --format=%aI -- "$file" | tail -1)
-              [ -z "$DATE" ] && DATE=$(date -u +"%Y-%m-%d") || DATE=$(date -d "$DATE" +"%Y-%m-%d")
-              sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
-              echo "✅ Ditambahkan meta date $DATE di $file"
+            # if grep -qi '<meta[^>]*name="date"' "$file"; then
+            #  echo "ℹ️ Sudah ada meta date di $file"
+           # else
+          #   DATE=$(git log --follow --format=%aI -- "$file" | tail -1)
+          #   [ -z "$DATE" ] && DATE=$(date -u +"%Y-%m-%d") || DATE=$(date -d "$DATE" +"%Y-%m-%d")
+          #   sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
+          #   echo "✅ Ditambahkan meta date $DATE di $file"
             fi
 
             # Google Site Verification
