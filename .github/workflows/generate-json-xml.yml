@@ -6,7 +6,6 @@ on:
     paths:
       - 'artikel/*.html'
   workflow_dispatch:
-
   schedule:
     - cron: '0 21 * * *'
 
@@ -17,40 +16,41 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 1. Checkout repository code
+        uses: actions/checkout@v4
         with:
           # Kita perlu fetch-depth: 0 agar bisa membandingkan dengan commit sebelumnya (HEAD~1)
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: 2. Setup Node.js environment
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: 3. Install project dependencies
         run: npm ci
 
-      - name: bikin halaman terbaru
+      - name: 4. Generate 'artikel-terbaru.html' page
         run: node ext/build-page.js
       
-      - name: Run generator.js
+      - name: 5. Generate 'artikel.json' and 'sitemap.xml'
         run: node ext/generator.js
 
-      - name: Debug cek file output
+      - name: 6. Debug generated files
         run: |
-          ls -lah
+          ls -lah artikel/
           echo "--- Isi artikel.json (5 baris pertama) ---"
           head -n 5 artikel.json || echo "artikel.json tidak ada"
           echo "--- Isi sitemap.xml (5 baris pertama) ---"
           head -n 5 sitemap.xml || echo "sitemap.xml tidak ada"
 
-      - name: Commit and Push results
+      - name: 7. Commit and Push all generated files
         if: github.ref == 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # === PERBAIKAN 1: Cek semua perubahan, bukan hanya file spesifik ===
-          # Jika output 'git status -s' kosong, berarti tidak ada perubahan sama sekali.
+          # Cek apakah ada perubahan file di dalam repository
           if [[ -z $(git status -s) ]]; then
             echo "✅ Tidak ada perubahan file, tidak perlu commit."
             exit 0
@@ -58,8 +58,7 @@ jobs:
           
           echo "✅ Perubahan ditemukan. Melakukan commit..."
           
-          # === PERBAIKAN 2: Tambahkan SEMUA file yang berubah ===
-          # Menggunakan '.' akan menambahkan semua file baru dan yang termodifikasi.
+          # Tambahkan SEMUA file yang berubah (termasuk artikel-terbaru.html)
           git add .
           
           git commit -m "🔄 Update file-file yang di-generate (auto)"
@@ -72,36 +71,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Show Published Links & Summary
-        if: github.ref == 'refs/heads/main'
-        run: |
-          echo "✅ File berhasil dipublish ke GitHub Pages:"
-          echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
-          echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
-          echo ""
-          echo "📄 Artikel yang berubah di commit ini:"
-          # Mengambil daftar file .html yang berubah dari commit terakhir
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep 'artikel/.*\.html$' || true)
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "⚠️ Tidak ada file artikel .html yang berubah pada commit terakhir."
-          else
-            for file in $CHANGED_FILES; do
-              base=$(basename "$file")
-              echo "🔗 https://frijal.github.io/artikel/$base"
-            done
-          fi
-          echo ""
-          echo "📊 Jumlah total artikel saat ini:"
-          COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
-          echo "➡️  $COUNT artikel di folder artikel/"
-          
-      - name: Show Published Links & Summary
+      # --- INI ADALAH BLOK SUMMARY YANG SUDAH DIBERSIHKAN DARI DUPLIKASI ---
+      - name: 8. Show Published Links & Summary
         if: github.ref == 'refs/heads/main'
         run: |
           # Menampilkan link file yang baru di-publish
           echo "✅ File berhasil dipublish ke GitHub Pages:"
           echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
           echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
+          echo "🔗 artikel-terbaru.html: https://frijal.github.io/artikel/artikel-terbaru.html"
           echo ""
 
           # Menampilkan daftar file artikel .html yang berubah pada commit terakhir
@@ -139,13 +117,9 @@ jobs:
             # Menampilkan artikel yang dianggap terbaru (artikel terakhir dalam daftar file JSON)
             echo "🆕 Artikel terbaru yang terdeteksi:"
             jq -r '
-              # 1. Ubah objek jadi array: [ {key: "kategori", value: [artikel...]}, ... ]
               to_entries |
-              # 2. Gabungkan semua artikel dari semua kategori menjadi satu array besar
               map(.value[]) |
-              # 3. Ambil artikel terakhir dari array gabungan tersebut
               .[-1] |
-              # 4. Format outputnya
               "• \(.[0])"
             ' artikel.json
 
