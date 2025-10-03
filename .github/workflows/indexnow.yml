@@ -1,0 +1,30 @@
+name: IndexNow Daily Submit
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 11:00 WITA = 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Find artikel/*.html
+        id: find_html
+        run: |
+          urls=$(for f in artikel/*.html; do echo "https://frijal.github.io/$f"; done | jq -R . | jq -s .)
+          echo "urls=$urls" >> $GITHUB_OUTPUT
+
+      - name: Submit to IndexNow
+        run: |
+          curl -X POST "https://bing.com/indexnow" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"host\": \"frijal.github.io\",
+            \"key\": \"f8399d60e90d46a6945577b73ff3f778\",
+            \"keyLocation\": \"https://frijal.github.io/f8399d60e90d46a6945577b73ff3f778.txt\",
+            \"urlList\": ${{ steps.find_html.outputs.urls }}
+          }"
