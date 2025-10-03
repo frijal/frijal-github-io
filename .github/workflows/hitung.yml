@@ -6,7 +6,9 @@ on:
       target_folder:
         description: 'Lokasi folder yang akan di-scan (contoh: src atau .)'
         required: true
-        default: '.'
+        default: 'artikel/'
+  schedule:
+   - cron: '0 13 * * *'
 
 jobs:
   count_and_report:
