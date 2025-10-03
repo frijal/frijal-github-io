@@ -11,12 +11,6 @@
 ![HTML5](https://img.shields.io/badge/HTML5-Yes-orange?logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Yes-yellow?logo=javascript&logoColor=black)
 ![CSS3](https://img.shields.io/badge/CSS3-Yes-blue?logo=css3&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
-![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
-![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
-![artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-![Generator](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-
 ![Node.js](https://img.shields.io/badge/Node.js-Yes-339933?logo=node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-Yes-CB3837?logo=npm&logoColor=white)
 ![pipx](https://img.shields.io/badge/pipx-Yes-3776AB?logo=python&logoColor=white)
@@ -25,6 +19,12 @@
 ![YAML](https://img.shields.io/badge/YAML-Yes-6f9eaf?logo=yaml&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-Yes-000000?logo=json&logoColor=white)
 ![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)
+
+![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
+![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
+![artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
+![Generator](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
 
 ![Heroku](https://img.shields.io/badge/Heroku-Yes-430098?logo=heroku&logoColor=white)
 ![Aria2](https://img.shields.io/badge/Aria2-Yes-green?logo=aria2&logoColor=white)
