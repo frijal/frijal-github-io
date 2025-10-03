@@ -17,8 +17,10 @@ jobs:
         with:
           fetch-depth: 0
            
-      - name: Siapkan Folder Laporan
-        run: mkdir -p mini/
+      - name: Siapkan Folder Laporan & Badge
+        run: |
+          mkdir -p mini/
+          mkdir -p ext/
 
       - name: Hitung dan Buat Laporan File
         id: file_counting
@@ -100,7 +102,6 @@ jobs:
 
       - name: Buat Badge JSON (HTML, JPG, Gabungan)
         run: |
-          mkdir -p mini/
           HTML=${{ steps.file_counting.outputs.total_html }}
           JPG=${{ steps.file_counting.outputs.total_jpg }}
 
@@ -119,7 +120,7 @@ jobs:
             \"label\": \"html files\",
             \"message\": \"${HTML}\",
             \"color\": \"blue\"
-          }" > mini/html_count_badge.json
+          }" > ext/html_count_badge.json
 
           # Badge JPG
           echo "{
@@ -127,7 +128,7 @@ jobs:
             \"label\": \"jpg files\",
             \"message\": \"${JPG}\",
             \"color\": \"green\"
-          }" > mini/jpg_count_badge.json
+          }" > ext/jpg_count_badge.json
 
           # Badge Gabungan
           echo "{
@@ -135,7 +136,7 @@ jobs:
             \"label\": \"html/jpg\",
             \"message\": \"${HTML} / ${JPG}\",
             \"color\": \"${COLOR}\"
-          }" > mini/html_jpg_badge.json
+          }" > ext/html_jpg_badge.json
 
       - name: Rotasi Laporan TXT (simpan 7 terakhir)
         run: |
@@ -154,4 +155,4 @@ jobs:
         with:
           commit_message: "Laporan & Badge Dinamis: Update jumlah file di folder ${{ github.event.inputs.target_folder }}"
           branch: ${{ github.ref_name }}
-          file_pattern: mini/*
+          file_pattern: mini/* ext/*
