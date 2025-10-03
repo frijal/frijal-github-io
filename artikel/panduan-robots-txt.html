@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO & Metadata Utama -->
-    <title>Panduan Lengkap robots.txt untuk SEO: Dari Pemula hingga Mahir</title>
+    <!-- prettier-ignore -->
+<title>Panduan Lengkap robots.txt untuk SEO: Dari Pemula hingga Mahir</title>
     <meta name="description" content="Bingung cara membuat file robots.txt yang benar agar blog dikenali Google? Pelajari contoh, sintaks, dan kesalahan umum dalam panduan santai dan lengkap ini.">
     <meta name="keywords" content="robots.txt, seo, googlebot, sitemap, panduan seo, tutorial blog, frijal, pemula">
     <meta name="author" content="Frijal">
@@ -168,6 +169,10 @@
             #sitemap-btn {bottom: calc(25% + 56px);} /* 44px + 12px */
         }
     </style>
+  <meta property="og:image:alt" content="Panduan Lengkap robots.txt untuk SEO: Dari Pemula hingga Mahir">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/panduan-robots-txt.jpg">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -282,6 +287,8 @@ Disallow: /</code></pre>
         fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{const flag=`https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;document.getElementById('ip-info').innerHTML=`<img src="${flag}" alt="${data.country_name}" width="20"> ${data.city||'Lokasi tidak diketahui'}, ${data.country_name}`}).catch(()=>{document.getElementById('ip-info').textContent='Lokasi tidak terdeteksi'});
     });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
 

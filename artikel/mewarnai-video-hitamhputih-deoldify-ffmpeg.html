@@ -4,10 +4,11 @@
   <!-- Basic SEO -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows</title>
-  <meta name="description" content="Panduan santai cara mengubah semua PNG menjadi JPG sekaligus dalam satu folder dengan ImageMagick—di Linux, macOS, dan Windows. Termasuk opsi kualitas, output folder, dan penanganan transparansi.">
+  <!-- prettier-ignore -->
+<title>Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg | frijal.github.io</title>
+  <meta name="description" content="Panduan santai mewarnai video hitam putih jadi berwarna dengan AI (DeOldify) dan ffmpeg. Lengkap: alur kerja, skrip praktis, tips akurasi, dan penggabungan audio.">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://frijal.github.io/artikel/imagemagick-konversi-png-ke-jpg-massal.html">
+  <link rel="canonical" href="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.html">
 
   <!-- Favicon -->
   <link rel="icon" href="https://frijal.github.io/assets/favicon.ico" sizes="any">
@@ -17,10 +18,10 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
-  <meta property="og:description" content="Ubah semua PNG jadi JPG sekaligus dengan ImageMagick. Perintah untuk Linux, macOS, dan Windows, plus tips kualitas dan transparansi.">
-  <meta property="og:url" content="https://frijal.github.io/artikel/imagemagick-konversi-png-ke-jpg-massal.html">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg">
+  <meta property="og:title" content="Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg">
+  <meta property="og:description" content="Alur kerja dan skrip untuk mewarnai video hitam putih jadi berwarna menggunakan AI (DeOldify) dan ffmpeg.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.html">
+  <meta property="og:image" content="https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg">
   <meta property="og:site_name" content="frijal.github.io">
   <meta property="article:author" content="Fakhrul">
   <meta property="article:section" content="Artikel">
@@ -29,32 +30,12 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
-  <meta name="twitter:description" content="Perintah singkat untuk konversi massal, plus opsi kualitas dan transparansi.">
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg">
+  <meta name="twitter:title" content="Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg">
+  <meta name="twitter:description" content="Workflow praktis, skrip siap pakai, dan tips hasil terbaik.">
+  <meta name="twitter:image" content="https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg">
 
   <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://frijal.github.io/artikel/imagemagick-konversi-png-ke-jpg-massal.html"
-    },
-    "headline": "Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows",
-    "description": "Panduan santai cara mengubah semua PNG menjadi JPG sekaligus dalam satu folder dengan ImageMagick—di Linux, macOS, dan Windows. Termasuk opsi kualitas, output folder, dan penanganan transparansi.",
-    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg",
-    "author": { "@type": "Person", "name": "Fakhrul" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "frijal.github.io",
-      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/logo.png" }
-    },
-    "datePublished": "2025-10-03T00:00:00+08:00",
-    "dateModified": "2025-10-03T00:00:00+08:00"
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.html","image":"https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg"},"headline":"Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg","description":"Panduan santai mewarnai video hitam putih jadi berwarna dengan AI (DeOldify) dan ffmpeg. Lengkap: alur kerja, skrip praktis, tips akurasi, dan penggabungan audio.","image":"https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg"},"publisher":{"@type":"Organization","name":"frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/logo.png","image":"https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg"},"image":"https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg"},"datePublished":"2025-10-03T00:00:00+08:00","dateModified":"2025-10-03T00:00:00+08:00"}</script>
 
   <!-- Prism.js CSS (syntax highlight untuk kode) -->
   <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css" rel="stylesheet" />
@@ -149,6 +130,10 @@
       .lb-btn { width: 40px; height: 40px; }
     }
   </style>
+  <meta property="og:image:alt" content="Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg | frijal.github.io">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg">
+<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <div class="wrap">
@@ -177,8 +162,8 @@
     <main role="main">
       <div class="col">
         <article itemscope itemtype="https://schema.org/Article">
-          <h1 itemprop="headline">Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows</h1>
-          <p class="lead" itemprop="description">ImageMagick itu seperti “pisau Swiss” untuk gambar. Buat urusan convert massal, dia simpel, cepat, dan konsisten di berbagai sistem. Di bawah ini perintah siap pakai untuk ubah semua PNG jadi JPG sekaligus, plus tips kualitas, output folder, dan penanganan transparansi.</p>
+          <h1 itemprop="headline">Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg</h1>
+          <p class="lead" itemprop="description">Secara teknis, video hitam putih bisa diwarnai ulang (colorization). AI memprediksi warna alami dari objek: langit, daun, kulit, dan lainnya. Kita pecah video jadi frame, warnai setiap frame, lalu gabungkan kembali dan sinkronkan audionya. Di sini kamu dapat alur kerja sederhana + skrip praktis.</p>
           <div class="byline">
             Ditulis oleh <span itemprop="author">Fakhrul</span> · <time itemprop="datePublished" datetime="2025-10-03">03 Okt 2025</time>
           </div>
@@ -205,69 +190,143 @@
 
           <!-- Konten artikel -->
           <div class="content" itemprop="articleBody">
-            <h2>Prinsip umum: mogrify untuk massal</h2>
-            <p><strong>ImageMagick</strong> menyediakan perintah <code>mogrify</code> untuk memproses banyak file sekaligus. Versi baru memanggilnya lewat <code>magick</code>, jadi pola umumnya: <code>magick mogrify</code>. Perintahnya konsisten di Linux, macOS, dan Windows—bedanya cuma shell/terminal yang dipakai.</p>
-
-            <h2>Linux (bash/zsh)</h2>
-            <p>Masuk ke folder berisi file <code>.png</code>, lalu jalankan perintah berikut untuk mengubah semua PNG menjadi JPG di folder yang sama:</p>
-            <pre><code class="language-bash"># Konversi semua PNG menjadi JPG di folder ini
-magick mogrify -format jpg *.png</code></pre>
-            <p>Kalau mau hasilnya ke folder lain agar rapi, buat folder output lalu gunakan opsi <code>-path</code>:</p>
-            <pre><code class="language-bash">mkdir ../jpg-output
-magick mogrify -path ../jpg-output -format jpg *.png</code></pre>
-
-            <h2>macOS (Terminal)</h2>
-            <p>Perintahnya identik dengan Linux (macOS berbasis Unix). Contohnya:</p>
-            <pre><code class="language-bash">cd /path/ke/folder/gambar
-magick mogrify -format jpg *.png
-# Simpan ke Desktop sebagai folder output
-magick mogrify -path ~/Desktop/jpg-output -format jpg *.png</code></pre>
-
-            <h2>Windows (Command Prompt atau PowerShell)</h2>
-            <p>Di Windows, panggil <code>magick</code> juga. Buka Command Prompt atau PowerShell, lalu:</p>
-            <pre><code class="language-powershell">cd "C:\Users\NamaAnda\Pictures\png-folder"
-magick mogrify -format jpg *.png
-# Output ke folder lain:
-magick mogrify -path "C:\Users\NamaAnda\Pictures\jpg-output" -format jpg *.png</code></pre>
-
-            <h2>Opsi penting: kualitas, kompresi, dan transparansi</h2>
+            <h2>Bagaimana proses pewarnaan video hitam putih bekerja</h2>
             <ul>
-              <li><strong>Kualitas JPEG</strong> (0–100, default 92–95 tergantung build). 85 biasanya aman untuk web:
-                <pre><code class="language-bash">magick mogrify -quality 85 -format jpg *.png</code></pre>
-              </li>
-              <li><strong>Hasil ke folder lain</strong> agar tidak campur dengan PNG asli:
-                <pre><code class="language-bash">magick mogrify -path ./output-jpg -format jpg *.png</code></pre>
-              </li>
-              <li><strong>Transparansi (alpha)</strong>: PNG bisa transparan, sedangkan JPG tidak. Supaya latar jadi putih dan tidak hitam:
-                <pre><code class="language-bash">magick mogrify -background white -alpha remove -alpha off -format jpg *.png</code></pre>
-              </li>
+              <li><strong>AI colorization:</strong> Model dilatih dengan jutaan foto/video berwarna untuk memprediksi warna alami. Misalnya langit → biru, daun → hijau, kulit manusia → tone natural.</li>
+              <li><strong>Frame-by-frame:</strong> Video dipecah jadi frame gambar, tiap frame diwarnai, lalu digabung lagi.</li>
+              <li><strong>Manual + semi-otomatis:</strong> Editor bisa kasih petunjuk warna (mask/region), sisanya diisi otomatis.</li>
             </ul>
 
-            <h2>Catatan kompatibilitas</h2>
-            <p>Jika kamu menggunakan versi lama ImageMagick, kadang perintahnya masih <code>convert</code>/<code>mogrify</code> langsung tanpa awalan <code>magick</code>. Untuk massal, tetap pakai <code>mogrify</code>:
-            <pre><code class="language-bash"># Versi lama (tidak direkomendasikan, tapi masih ada)
-mogrify -format jpg *.png</code></pre>
-            </p>
+            <h2>Alat yang bisa dipakai</h2>
+            <ul>
+              <li><strong>DeOldify (open source):</strong> Populer untuk foto & video lama, berbasis Python/deep learning.</li>
+              <li><strong>DaVinci Resolve:</strong> Profesional; kombinasi dengan plugin/AI untuk colorization.</li>
+              <li><strong>Adobe After Effects/Premiere Pro:</strong> dengan plugin pihak ketiga untuk pewarnaan dan koreksi.</li>
+              <li><strong>Topaz Video AI:</strong> peningkatan kualitas; beberapa kasus bisa bantu colorization.</li>
+              <li><strong>Online tools:</strong> cepat untuk video pendek, tapi terbatas resolusi/durasi.</li>
+            </ul>
 
-            <blockquote>Intinya: untuk konversi massal, gunakan <strong>magick mogrify -format jpg *.png</strong>. Tambahkan <code>-quality</code> bila perlu, dan pakai <code>-background white -alpha remove</code> untuk menangani PNG transparan agar latarnya putih.</blockquote>
+            <h2>Catatan hasil</h2>
+            <ul>
+              <li><strong>Akurasi:</strong> tidak selalu 100% (warna baju/objek tertentu bisa salah tebak).</li>
+              <li><strong>Kombinasi:</strong> hasil terbaik pakai AI + koreksi manual (grading).</li>
+              <li><strong>Kualitas sumber:</strong> semakin bagus kualitas asli, semakin enak diwarnai.</li>
+            </ul>
+
+            <h2>Workflow praktis dengan ffmpeg + DeOldify</h2>
+            <p>Berikut alur sederhana yang bisa kamu jalankan di Linux/macOS/Windows (dengan Python dan ffmpeg terpasang). Kita ekstrak frame, warnai dengan DeOldify, lalu gabungkan kembali dan re-attach audio.</p>
+
+            <h3>1) Siapkan lingkungan</h3>
+            <pre><code class="language-bash"># Pastikan ffmpeg terpasang
+# macOS (Homebrew)
+brew install ffmpeg
+# Ubuntu/Debian
+sudo apt-get update && sudo apt-get install -y ffmpeg
+# Windows: install ffmpeg dari situs resmi, lalu tambahkan ke PATH
+
+# Buat environment Python (opsional, dianjurkan)
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependensi DeOldify (versi minimal)
+pip install torch torchvision
+pip install fastai==1.0.60
+pip install deoldify==0.6.0  # jika tersedia; alternatif: pakai repo source</code></pre>
+
+            <h3>2) Ekstrak frame dari video</h3>
+            <pre><code class="language-bash"># Struktur folder
+mkdir -p work/frames work/colorized
+
+# Ekstrak frame (simpan sebagai PNG untuk kualitas)
+# Ganti input.mp4 dengan video hitam putih kamu
+ffmpeg -i input.mp4 -qscale:v 1 work/frames/frame_%05d.png
+
+# Ekstrak audio (jika ada)
+ffmpeg -i input.mp4 -vn -acodec copy work/audio.aac</code></pre>
+
+            <h3>3) Warnai frame dengan DeOldify (Python)</h3>
+            <p>Kita gunakan DeOldify “artistic” untuk warna yang menarik; bisa ganti ke “stable” untuk warna lebih natural. Contoh skrip Python di bawah ini membaca semua frame dan menyimpan versi berwarna ke folder <code>work/colorized</code>.</p>
+            <pre><code class="language-python"># colorize_frames.py
+import os
+from pathlib import Path
+from PIL import Image
+import torch
+
+# DeOldify imports (pastikan deoldify tersedia)
+from deoldify import device
+from deoldify.device import DeviceId
+from deoldify.visualize import get_artistic_image_colorizer, get_stable_image_colorizer
+
+# Pakai GPU jika tersedia, kalau tidak otomatis CPU
+device.set(DeviceId.GPU if torch.cuda.is_available() else DeviceId.CPU)
+
+# Pilih model: artistic atau stable
+colorizer = get_artistic_image_colorizer()  # alternatif: get_stable_image_colorizer()
+
+frames_dir = Path("work/frames")
+out_dir = Path("work/colorized")
+out_dir.mkdir(parents=True, exist_ok=True)
+
+# Parameter render: bisa di-tuning
+render_factor = 35  # naikkan untuk detail, turunkan untuk speed/warna lembut
+
+frames = sorted(frames_dir.glob("frame_*.png"))
+print(f"Memproses {len(frames)} frame...")
+
+for i, frame_path in enumerate(frames, 1):
+    try:
+        result = colorizer.get_transformed_image(
+            str(frame_path),
+            render_factor=render_factor,
+            post_process=True
+        )
+        # Simpan
+        out_path = out_dir / frame_path.name
+        result.save(str(out_path))
+        if i % 50 == 0:
+            print(f"  >> {i}/{len(frames)} frame diwarnai...")
+    except Exception as e:
+        print(f"  !! Gagal memproses {frame_path.name}: {e}")
+
+print("Selesai mewarnai semua frame.")</code></pre>
+
+            <h3>4) Gabungkan kembali frame menjadi video berwarna</h3>
+            <pre><code class="language-bash"># Gabungkan frame berwarna jadi video (sesuaikan framerate)
+# Untuk framerate yang sama dengan input, bisa baca dari ffmpeg -i input.mp4
+ffmpeg -framerate 25 -i work/colorized/frame_%05d.png -c:v libx264 -pix_fmt yuv420p work/colorized_noaudio.mp4
+
+# Tempelkan audio asli (jika diekstrak)
+ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 192k -shortest output_colorized.mp4</code></pre>
+
+            <h2>Tips hasil lebih bagus</h2>
+            <ul>
+              <li><strong>Render factor:</strong> coba nilai 28–40. Terlalu tinggi bisa over-saturation atau artefak, terlalu rendah kurang detail.</li>
+              <li><strong>Stabil vs artistik:</strong> “stable” untuk warna natural, “artistic” untuk warna lebih hidup/dramatis.</li>
+              <li><strong>Preprocessing:</strong> naikkan resolusi dengan upscaler (mis. <em>waifu2x</em> untuk animasi, <em>Topaz</em> untuk video) sebelum colorization.</li>
+              <li><strong>Grading akhir:</strong> pakai editor (Resolve/Premiere) untuk koreksi warna global dan konsistensi antar scene.</li>
+              <li><strong>Berkas besar:</strong> proses per segmen (split video per bab) untuk menghindari kehabisan RAM/VRAM.</li>
+            </ul>
+
+            <blockquote>Intinya: ekstrak frame → colorize dengan DeOldify → gabungkan dengan ffmpeg → re-attach audio → lakukan color grading akhir. Simpel, modular, dan bisa diulang untuk proyek lain.</blockquote>
 
             <figure>
-              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg" alt="Ilustrasi konversi massal PNG ke JPG dengan ImageMagick" loading="lazy">
+              <img src="https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg" alt="Ilustrasi proses colorization video dengan DeOldify" loading="lazy">
+              <figcaption>Gunakan gambar preview 1200×630 agar share ke media sosial optimal.</figcaption>
             </figure>
 
             <!-- Galeri foto lazy-load -->
             <div class="gallery" id="gallery">
-              <div class="item" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg" data-caption="Linux: mogrify di bash, cepat dan stabil.">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/w320-h206/imlinux.jpg" alt="Terminal Linux konversi massal" loading="lazy">
-                <div class="cap">Linux terminal</div>
+              <div class="item" data-full="https://frijal.github.io/assets/gallery/deoldify-bw-large.jpg" data-caption="Frame asli: hitam putih.">
+                <img src="https://frijal.github.io/assets/gallery/deoldify-bw-thumb.jpg" alt="Frame hitam putih" loading="lazy">
+                <div class="cap">Sebelum</div>
               </div>
-              <div class="item" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTXlf_ZmwuHxllPEE3YiHDYiRAtFrS-CW-8k6INMecff6fYZzfGqtvnlwsjui4GVNnna2B5sctLZZT8GULGL1oUet0t-MLJm5zRK21Ifem5lI_ls7cIKoZX7NAV_Gy8ZExhcOAFkGU4Bn4HgN69N0egxcaAeIRYiQzEPnoBgk1qZVSN73RnM4Q756Xlx4/s1600/immac.jpg" data-caption="macOS: perintah identik, tinggal jalankan di Terminal.">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTXlf_ZmwuHxllPEE3YiHDYiRAtFrS-CW-8k6INMecff6fYZzfGqtvnlwsjui4GVNnna2B5sctLZZT8GULGL1oUet0t-MLJm5zRK21Ifem5lI_ls7cIKoZX7NAV_Gy8ZExhcOAFkGU4Bn4HgN69N0egxcaAeIRYiQzEPnoBgk1qZVSN73RnM4Q756Xlx4/w320-h181/immac.jpg" loading="lazy">
-                <div class="cap">macOS terminal</div>
+              <div class="item" data-full="https://frijal.github.io/assets/gallery/deoldify-color-large.jpg" data-caption="Frame setelah diwarnai: berwarna.">
+                <img src="https://frijal.github.io/assets/gallery/deoldify-color-thumb.jpg" alt="Frame berwarna" loading="lazy">
+                <div class="cap">Sesudah</div>
               </div>
-              <div class="item" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDtTBDkqv4UzFgLYrd-gTaNpnImseKC11Lm2utGbwCD-SGfS-g7GCLcADnwJ9nHtXXArWQMRs_jj5vGmExVOOW9p19YXGg3QOkqvb3cC_j5XOec8PtbATQIaOu_k5rYBedKIwi6GIjkJ8M_Ja-L-Y7NircJS5O6de8N9xVj8IJuqrYrPnZN1P3p48Cxj4/s1600/imwin.jpg" data-caption="Windows: jalankan di CMD atau PowerShell, hasilnya sama.">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDtTBDkqv4UzFgLYrd-gTaNpnImseKC11Lm2utGbwCD-SGfS-g7GCLcADnwJ9nHtXXArWQMRs_jj5vGmExVOOW9p19YXGg3QOkqvb3cC_j5XOec8PtbATQIaOu_k5rYBedKIwi6GIjkJ8M_Ja-L-Y7NircJS5O6de8N9xVj8IJuqrYrPnZN1P3p48Cxj4/w320-h168/imwin.jpg" alt="PowerShell konversi massal" loading="lazy">
-                <div class="cap">Windows PowerShell</div>
+              <div class="item" data-full="https://frijal.github.io/assets/gallery/deoldify-workflow-large.jpg" data-caption="Workflow modular: ffmpeg, Python, gabung audio.">
+                <img src="https://frijal.github.io/assets/gallery/deoldify-workflow-thumb.jpg" alt="Workflow colorization" loading="lazy">
+                <div class="cap">Workflow</div>
               </div>
             </div>
           </div>
@@ -285,13 +344,13 @@ mogrify -format jpg *.png</code></pre>
 
           <!-- Komentar Facebook -->
           <div id="fb-root"></div>
-          <div class="fb-comments" data-href="https://frijal.github.io/artikel/imagemagick-konversi-png-ke-jpg-massal.html" data-width="100%" data-numposts="5" data-colorscheme="dark"></div>
+          <div class="fb-comments" data-href="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.html" data-width="100%" data-numposts="5" data-colorscheme="dark"></div>
         </article>
       </div>
     </main>
 
     <footer class="site" role="contentinfo">
-      <small>© 2025 frijal.github.io · Artikel disajikan dengan gaya santai, tetap akurat dan ramah pengguna.</small>
+      <small>© 2025 frijal.github.io · Artikel disajikan santai, akurat, dan modular agar mudah diikuti.</small>
     </footer>
   </div>
 
@@ -306,7 +365,7 @@ mogrify -format jpg *.png</code></pre>
   <!-- Prism.js JS -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powershell.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
 
   <!-- JS: share, lightbox, deteksi lingkungan, lokasi/flags -->
   <script>
@@ -431,6 +490,7 @@ mogrify -format jpg *.png</code></pre>
     }
   })();
   </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
-
