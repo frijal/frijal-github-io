@@ -6,6 +6,7 @@
 [![HTTPS Enabled](https://img.shields.io/badge/HTTPS-Enabled-blue?logo=letsencrypt&logoColor=white)](#readme)
 [![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?logo=creative-commons&logoColor=white)](#readme)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?logo=github&logoColor=white)](#readme)
+[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
 [![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 
 [![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)](#readme)
@@ -20,7 +21,6 @@
 [![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)](#readme)
 [![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)](#readme)
 [![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)](#readme)
-[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
 
 [![Heroku](https://img.shields.io/badge/Heroku-Yes-430098?logo=heroku&logoColor=white)](#readme)
 [![Aria2](https://img.shields.io/badge/Aria2-Yes-green?logo=aria2&logoColor=white)](#readme)
