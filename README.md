@@ -1,47 +1,45 @@
 [](https://frijal.github.io/index.html)
 
 # 🌟 Lisensi UNLICENSE / Public Domain
-## 📛 License & Legal
 ![License: Unlicense](https://img.shields.io/badge/License-Unlicense-blue?logo=open-source-initiative&logoColor=white)
 ![Free 100%](https://img.shields.io/badge/Free-100%25-brightgreen?logo=opensourceinitiative&logoColor=white)
 ![HTTPS Enabled](https://img.shields.io/badge/HTTPS-Enabled-blue?logo=letsencrypt&logoColor=white)
 ![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?logo=creative-commons&logoColor=white)
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?logo=github&logoColor=white)
+[![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 
-## 🛠 Tech Stack
 ![HTML5](https://img.shields.io/badge/HTML5-Yes-orange?logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Yes-yellow?logo=javascript&logoColor=black)
 ![CSS3](https://img.shields.io/badge/CSS3-Yes-blue?logo=css3&logoColor=white)
-
-## 🤖 AI & LLM
 ![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
 
-## ☁️ Hosting & Status
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?logo=github&logoColor=white)
-![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange?logo=github&logoColor=white)
-![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Yes-339933?logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/npm-Yes-CB3837?logo=npm&logoColor=white)
+![pipx](https://img.shields.io/badge/pipx-Yes-3776AB?logo=python&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-Yes-000000?logo=markdown&logoColor=white)
+![pnpm](https://img.shields.io/badge/pnpm-Yes-F69220?logo=pnpm&logoColor=white)
+![YAML](https://img.shields.io/badge/YAML-Yes-6f9eaf?logo=yaml&logoColor=white)
+![JSON](https://img.shields.io/badge/JSON-Yes-000000?logo=json&logoColor=white)
+![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)
 
-## 📊 Dinamis (Hasil Hitung File)
-![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)
-![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)
-![HTML/JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_jpg_badge.json&logo=file&logoColor=white)
-
-## ⚙️ Workflow (Resmi GitHub, Statis)
-![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-
-## 🔧 Ekosistem & Tools
 ![Heroku](https://img.shields.io/badge/Heroku-Yes-430098?logo=heroku&logoColor=white)
 ![Aria2](https://img.shields.io/badge/Aria2-Yes-green?logo=aria2&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Yes-2088FF?logo=githubactions&logoColor=white)
 ![GitHub Bot](https://img.shields.io/badge/GitHub%20Bot-Active-blue?logo=github&logoColor=white)
 ![Action User](https://img.shields.io/badge/Action%20User-Yes-orange?logo=github&logoColor=white)
-[![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 ![Codespaces](https://img.shields.io/badge/Codespaces-Ready-2f363d?logo=github&logoColor=white)
-![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
 ![GitHub Cron](https://img.shields.io/badge/GitHub%20Cron-Scheduled-2f363d?logo=github&logoColor=white)
+
+![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?logo=github&logoColor=white)
+![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange?logo=github&logoColor=white)
+![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)
+![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)
+![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)
+![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
+![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
 
 ---
 
