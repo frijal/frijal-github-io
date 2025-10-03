@@ -1,7 +1,8 @@
 [](https://frijal.github.io/index.html)
 
+# 🌟 Lisensi UNLICENSE
 <details>
-<summary> ## 🌟 Lisensi UNLICENSE / Public Domain</summary>
+<summary>Public Domain</summary>
 
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-blue?logo=open-source-initiative&logoColor=white)](#readme)
 [![Free 100%](https://img.shields.io/badge/Free-100%25-brightgreen?logo=opensourceinitiative&logoColor=white)](#readme)
