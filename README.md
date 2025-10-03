@@ -6,20 +6,27 @@
 [![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
 
 # 🌟 Lisensi UNLICENSE / Public Domain
-![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/License-Unlicense-blue?style=for-the-badge&logo=github&logoColor=white&animation=blink)
-![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Free-100%25-brightgreen?style=for-the-badge&animation=glow)
-![Security, menyoroti fitur keamanan yang diterapkan dalam proyek, seperti penggunaan HTTPS atau otentikasi multifaktor (MFA).](https://img.shields.io/badge/HTTPS-Enabled-blue?style=for-the-badge)
-![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Public%20Domain-Yes-orange?style=for-the-badge&animation=glow)
-![License & Legal, adalah status lisensi, legalitas, dan ketersediaan proyek, seperti gratis, open source, atau public domain.](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge&animation=glow)
-![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/HTML5-Yes-orange?style=for-the-badge&logo=html5&logoColor=white)
-![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/JavaScript-Yes-yellow?style=for-the-badge&logo=javascript&logoColor=black)
-![Tech Stack, menampilkan teknologi utama (bahasa pemrograman, framework, dan pustaka) yang digunakan dalam proyek.](https://img.shields.io/badge/CSS3-Yes-blue?style=for-the-badge&logo=css3&logoColor=white)
-![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/Gemini-Yes-blueviolet?style=for-the-badge&logo=google&logoColor=white)
-![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/ChatGPT-Yes-blue?style=for-the-badge&logo=openai&logoColor=white)
-![Artificial Intelligence & Large Language Model menunjukkan bahwa proyek tersebut menggunakan kecerdasan buatan.](https://img.shields.io/badge/Copilot-Yes-purple?style=for-the-badge&logo=github&logoColor=white)
-![Cloud & Hosting, menunjukkan platform cloud atau layanan hosting yang digunakan, untuk mengelola proyek.](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?style=for-the-badge&logo=github&logoColor=white)
-![Status & Maintenance, memberikan informasi tentang kondisi proyek saat ini, seperti apakah proyek aktif, stabil, atau sering mendapatkan pembaruan.](https://img.shields.io/badge/Release-Continuous-orange?style=for-the-badge)
-![GitHub Stats, menunjukkan metrik dari repositori GitHub, seperti jumlah bintang, fork, kontributor, atau aktivitas commit.](https://img.shields.io/github/last-commit/frijal/frijal.github.io?style=for-the-badge&logo=github&logoColor=white)
+![License: Unlicense](https://img.shields.io/badge/License-Unlicense-blue)
+![Free 100%](https://img.shields.io/badge/Free-100%25-brightgreen)
+![HTTPS Enabled](https://img.shields.io/badge/HTTPS-Enabled-blue)
+![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange)
+![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue)
+
+![HTML5](https://img.shields.io/badge/HTML5-Yes-orange)
+![JavaScript](https://img.shields.io/badge/JavaScript-Yes-yellow)
+![CSS3](https://img.shields.io/badge/CSS3-Yes-blue)
+
+![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet)
+![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue)
+![Copilot](https://img.shields.io/badge/Copilot-Yes-purple)
+
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue)
+![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange)
+![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io)
+
+![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
+![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
+![HTML/JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_jpg_badge.json)
 
 ---
 
