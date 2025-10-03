@@ -1,8 +1,7 @@
 [](https://frijal.github.io/index.html)
 
-
-![html](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
-![jpg](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
+![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
+![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
 [![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
 [![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
 
