@@ -42,8 +42,6 @@
 [![JSON](https://img.shields.io/badge/JSON-Yes-000000?logo=json&logoColor=white)](#readme)
 [![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)](#readme)
 
-[![GitHub](https://img.shields.io/badge/GitHub-frijal-181717?logo=github&logoColor=white)](https://github.com/frijal)
-[![Gist](https://img.shields.io/badge/Gist-frijal-181717?logo=github&logoColor=white)](https://gist.github.com/frijal)
 [![Twitter/X](https://img.shields.io/badge/Twitter-frijal-000000?logo=x&logoColor=white)](https://twitter.com/frijal)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-frijal-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/frijal)
 [![Facebook](https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white)](https://facebook.com/frijal)
