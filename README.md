@@ -14,6 +14,8 @@
 ![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
+![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
+![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
 
 ![Node.js](https://img.shields.io/badge/Node.js-Yes-339933?logo=node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-Yes-CB3837?logo=npm&logoColor=white)
@@ -38,8 +40,6 @@
 ![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)
 ![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)
 ![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)
-![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
 
 ---
 
