@@ -14,8 +14,8 @@
 ![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
-![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
-![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
+![artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
+![Generator](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)
 
 ![Node.js](https://img.shields.io/badge/Node.js-Yes-339933?logo=node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-Yes-CB3837?logo=npm&logoColor=white)
