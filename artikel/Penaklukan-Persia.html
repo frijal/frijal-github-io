@@ -180,7 +180,7 @@
     </main>
     
     <footer>
-        <p>© Frijal • Dibangun dengan cinta, warna, dan ketelitian.</p>
+        <p>&#127279; Frijal • Dibangun dengan cinta, warna, dan ketelitian.</p>
     </footer>
     
     <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
@@ -199,7 +199,7 @@
     </script>
     
     <script>
-        let map=L.map("map").setView([32,45],5),battles=(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"&copy; OpenStreetMap contributors"}).addTo(map),[{name:"Pertempuran Dzat as-Salasil (633 M)",coords:[31.9,47.1],desc:"Kemenangan awal Khalid bin al-Walid di Irak."},{name:"Pertempuran Qadisiyyah (636 M)",coords:[32,44.9],desc:"Sa’d bin Abi Waqqash mengalahkan Rustum."},{name:"Jatuhnya Mada’in (637 M)",coords:[33.1,44.6],desc:"Ibu kota Persia jatuh ke tangan Muslim."},{name:"Pertempuran Nahawand (642 M)",coords:[34.2,48.4],desc:"Dikenal sebagai Fath al-Futuh (Kemenangan Besar)."}]);battles.forEach(a=>{L.marker(a.coords).addTo(map).bindPopup(`<strong>${a.name}</strong><br>`+a.desc)})
+        let map=L.map("map").setView([32,45],5),battles=(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"&#127279; OpenStreetMap contributors"}).addTo(map),[{name:"Pertempuran Dzat as-Salasil (633 M)",coords:[31.9,47.1],desc:"Kemenangan awal Khalid bin al-Walid di Irak."},{name:"Pertempuran Qadisiyyah (636 M)",coords:[32,44.9],desc:"Sa’d bin Abi Waqqash mengalahkan Rustum."},{name:"Jatuhnya Mada’in (637 M)",coords:[33.1,44.6],desc:"Ibu kota Persia jatuh ke tangan Muslim."},{name:"Pertempuran Nahawand (642 M)",coords:[34.2,48.4],desc:"Dikenal sebagai Fath al-Futuh (Kemenangan Besar)."}]);battles.forEach(a=>{L.marker(a.coords).addTo(map).bindPopup(`<strong>${a.name}</strong><br>`+a.desc)})
     </script>
     <script>
         let routeCoords=battles.map(o=>o.coords),routeLine=L.polyline(routeCoords,{color:"#6dd3ff",weight:4,opacity:.7,dashArray:"10, 10"}).addTo(map),progress=0;function animateRoute(){var o;(progress+=1)>50*routeCoords.length||(o=Math.floor(progress/50),1<(o=routeCoords.slice(0,o+1)).length&&routeLine.setLatLngs(o),requestAnimationFrame(animateRoute))}animateRoute()
