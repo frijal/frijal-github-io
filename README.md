@@ -42,13 +42,6 @@
 [![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)](#readme)
 
 [![GitHub Repo](https://img.shields.io/badge/Repo-frijal.github.io-181717?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io)
-[![Issues](https://img.shields.io/github/issues/frijal/frijal.github.io?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/frijal/frijal.github.io?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io/pulls)
-[![Stars](https://img.shields.io/github/stars/frijal/frijal.github.io?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io/stargazers)
-[![Forks](https://img.shields.io/github/forks/frijal/frijal.github.io?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io/network/members)
-[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
-
-[![GitHub Repo](https://img.shields.io/badge/Repo-frijal.github.io-181717?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io)
 [![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
 
 [![GitHub](https://img.shields.io/badge/GitHub-frijal-181717?logo=github&logoColor=white)](https://github.com/frijal)
