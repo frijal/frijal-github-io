@@ -1,10 +1,5 @@
 [](https://frijal.github.io/index.html)
 
-![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
-![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
-[![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
-[![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
-
 # 🌟 Lisensi UNLICENSE / Public Domain
 ![License: Unlicense](https://img.shields.io/badge/License-Unlicense-blue)
 ![Free 100%](https://img.shields.io/badge/Free-100%25-brightgreen)
@@ -26,7 +21,8 @@
 
 ![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
 ![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
-![HTML/JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_jpg_badge.json)
+[![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
+[![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
 
 ---
 
