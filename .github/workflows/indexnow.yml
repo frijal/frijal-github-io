@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Generate IndexNow JSON
+      - name: Generate IndexNow JSON + Log
         run: |
           python ext/generate_indexnow.py
 
