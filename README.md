@@ -57,11 +57,10 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-frijal-181717?logo=github&logoColor=white)](https://github.com/frijal)
 [![Gist](https://img.shields.io/badge/Gist-frijal-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
-[![Website](https://img.shields.io/badge/Website-frijal.github.io-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
-[![Twitter/X](https://img.shields.io/badge/Twitter-frijal-1DA1F2?logo=x&logoColor=white)](https://twitter.com/frijal)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-frijal-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/frijal)
-[![Facebook](https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white)](https://facebook.com/frijal)
-[![Email](https://img.shields.io/badge/Email-frijal%40example.com-D14836?logo=gmail&logoColor=white)](mailto:frijal@example.com)
+[![W](https://img.shields.io/badge/Website-frijal.github.io-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
+[![T](https://img.shields.io/badge/Threads-frijal-1DA1F2?logo=x&logoColor=white)](https://threads.net/frijal)
+[![L](https://img.shields.io/badge/LinkedIn-frijal-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/frijal)
+[![F](https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white)](https://facebook.com/frijal)
 
 ---
 
