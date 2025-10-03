@@ -25,8 +25,11 @@ jobs:
         run: |
           TARGET_DIR="${{ github.event.inputs.target_folder }}"
           URL_PREFIX="https://frijal.github.io/"
+
+          # Ambil bulan dan tanggal
+          DATE_PREFIX=$(date +'%m-%d')
           SANITIZED_DIR_NAME=$(echo "${TARGET_DIR}" | sed 's/[^a-zA-Z0-9]/_/g')
-          REPORT_FILE="mini/laporan_jumlah_file_${SANITIZED_DIR_NAME}.txt"
+          REPORT_FILE="mini/${DATE_PREFIX}-laporan-jumlah-file_${SANITIZED_DIR_NAME}.txt"
 
           echo "Memulai scanning di folder: ${TARGET_DIR}"
 
@@ -39,21 +42,69 @@ jobs:
           TOTAL_FILES=$(find "${TARGET_DIR}" -type f | wc -l)
           TOTAL_HTML=$(find "${TARGET_DIR}" -type f -name "*.html" | wc -l)
           TOTAL_JPG=$(find "${TARGET_DIR}" -type f -name "*.jpg" | wc -l)
+          TOTAL_PNG=$(find "${TARGET_DIR}" -type f -name "*.png" | wc -l)
 
-          # Tulis laporan ringkas
+          # Tentukan status perbandingan dengan emoji
+          if [ "$TOTAL_HTML" -gt "$TOTAL_JPG" ]; then
+            STATUS="✅ HTML lebih banyak"
+          elif [ "$TOTAL_HTML" -lt "$TOTAL_JPG" ]; then
+            STATUS="❌ JPG lebih banyak"
+          else
+            STATUS="🔵 Jumlah HTML dan JPG seimbang"
+          fi
+
+          # Ringkasan per ekstensi
+          REPORT_SUMMARY_CONTENT=$(find "${TARGET_DIR}" -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
+
+          # Detail daftar file
+          REPORT_DETAIL_CONTENT=$(find "${TARGET_DIR}" -type f -print | awk -F'.' '{
+              ext = (NF > 1) ? $NF : "no_ext";
+              print ext " " $0;
+          }' | sort -k1,1 | awk -v prefix="${URL_PREFIX}" '
+              BEGIN { current_ext = ""; }
+              {
+                  ext = $1;
+                  path = substr($0, length(ext) + 2);
+                  if (ext != current_ext) {
+                      if (current_ext != "") { print ""; }
+                      current_ext = ext;
+                      display_ext = (ext == "no_ext") ? "TIDAK ADA EKSTENSI" : "." toupper(ext);
+                      print "## " display_ext " ##";
+                  }
+                  print prefix path;
+              }
+          ')
+
+          # Tulis laporan
           echo "LAPORAN JUMLAH FILE FOLDER '${TARGET_DIR}'" > ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
           echo "SUMMARY: Total File Ditemukan = ${TOTAL_FILES}" >> ${REPORT_FILE}
-          echo "HTML = ${TOTAL_HTML}, JPG = ${TOTAL_JPG}" >> ${REPORT_FILE}
+          echo "HTML = ${TOTAL_HTML}, JPG = ${TOTAL_JPG}, PNG = ${TOTAL_PNG}" >> ${REPORT_FILE}
+          echo "STATUS PERBANDINGAN: ${STATUS}" >> ${REPORT_FILE}
+          echo "" >> ${REPORT_FILE}
+          echo "### RINGKASAN JUMLAH PER EKSTENSI ###" >> ${REPORT_FILE}
+          echo "JUMLAH | EKSTENSI" >> ${REPORT_FILE}
+          echo "${REPORT_SUMMARY_CONTENT}" >> ${REPORT_FILE}
+          echo "" >> ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
+          echo "### DAFTAR DETAIL FILE BERDASARKAN EKSTENSI (URL Relatif ke ${URL_PREFIX}) ###" >> ${REPORT_FILE}
+          echo "${REPORT_DETAIL_CONTENT}" >> ${REPORT_FILE}
+          echo "==================================" >> ${REPORT_FILE}
 
+          echo "Laporan telah dibuat di ${REPORT_FILE}"
+          cat ${REPORT_FILE}
+
+          # Simpan output untuk step berikutnya
           echo "total_html=${TOTAL_HTML}" >> $GITHUB_OUTPUT
           echo "total_jpg=${TOTAL_JPG}" >> $GITHUB_OUTPUT
 
-      - name: Buat Badge JSON Gabungan (HTML/JPG) dengan Warna Dinamis
+      - name: Buat Badge JSON (HTML, JPG, Gabungan)
         run: |
+          mkdir -p mini/
           HTML=${{ steps.file_counting.outputs.total_html }}
           JPG=${{ steps.file_counting.outputs.total_jpg }}
 
+          # Tentukan warna dinamis
           if [ "$HTML" -gt "$JPG" ]; then
             COLOR="green"
           elif [ "$HTML" -lt "$JPG" ]; then
@@ -62,7 +113,23 @@ jobs:
             COLOR="blue"
           fi
 
-          mkdir -p mini/
+          # Badge HTML
+          echo "{
+            \"schemaVersion\": 1,
+            \"label\": \"html files\",
+            \"message\": \"${HTML}\",
+            \"color\": \"blue\"
+          }" > mini/html_count_badge.json
+
+          # Badge JPG
+          echo "{
+            \"schemaVersion\": 1,
+            \"label\": \"jpg files\",
+            \"message\": \"${JPG}\",
+            \"color\": \"green\"
+          }" > mini/jpg_count_badge.json
+
+          # Badge Gabungan
           echo "{
             \"schemaVersion\": 1,
             \"label\": \"html/jpg\",
@@ -70,7 +137,17 @@ jobs:
             \"color\": \"${COLOR}\"
           }" > mini/html_jpg_badge.json
 
-          cat mini/html_jpg_badge.json
+      - name: Rotasi Laporan TXT (simpan 7 terakhir)
+        run: |
+          FILES=$(ls -1t mini/*-laporan-jumlah-file_*.txt 2>/dev/null || true)
+          COUNT=$(echo "$FILES" | wc -l)
+
+          if [ "$COUNT" -gt 7 ]; then
+            echo "Total laporan: $COUNT, menyimpan 7 terbaru, menghapus sisanya..."
+            echo "$FILES" | tail -n +8 | xargs rm -f
+          else
+            echo "Total laporan: $COUNT, tidak ada yang dihapus."
+          fi
 
       - name: Commit File Laporan & Badge ke Repositori
         uses: stefanzweifel/git-auto-commit-action@v5
