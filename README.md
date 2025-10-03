@@ -8,6 +8,13 @@
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?logo=github&logoColor=white)
 [![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 
+![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?logo=github&logoColor=white)
+![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange?logo=github&logoColor=white)
+![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)
+![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)
+![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)
+
 ![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)
@@ -22,12 +29,6 @@
 ![Action User](https://img.shields.io/badge/Action%20User-Yes-orange?logo=github&logoColor=white)
 ![Codespaces](https://img.shields.io/badge/Codespaces-Ready-2f363d?logo=github&logoColor=white)
 
-![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?logo=github&logoColor=white)
-![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange?logo=github&logoColor=white)
-![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)
-![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)
-![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)
 
 ![HTML5](https://img.shields.io/badge/HTML5-Yes-orange?logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Yes-yellow?logo=javascript&logoColor=black)
