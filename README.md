@@ -34,7 +34,6 @@
 [![Gist](https://img.shields.io/badge/Gist-Available-black)](https://gist.github.com/frijal)
 ![Codespaces](https://img.shields.io/badge/Codespaces-Ready-2f363d)
 
-
 ---
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
