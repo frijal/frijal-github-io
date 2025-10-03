@@ -21,8 +21,19 @@
 
 ![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json)
 ![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json)
+![HTML/JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_jpg_badge.json)
+
 [![modif artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
 [![Generate All Site Artifacts](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
+
+![Heroku](https://img.shields.io/badge/Heroku-Yes-430098)
+![Aria2](https://img.shields.io/badge/Aria2-Yes-green)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Yes-2088FF)
+![GitHub Bot](https://img.shields.io/badge/GitHub%20Bot-Active-blue)
+![Action User](https://img.shields.io/badge/Action%20User-Yes-orange)
+[![Gist](https://img.shields.io/badge/Gist-Available-black)](https://gist.github.com/frijal)
+![Codespaces](https://img.shields.io/badge/Codespaces-Ready-2f363d)
+
 
 ---
 
