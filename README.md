@@ -1,6 +1,6 @@
 [](https://frijal.github.io/index.html)
 
-# 🌟 Lisensi UNLICENSE
+## 🌟 Lisensi UNLICENSE
 <details>
 <summary>Public Domain</summary>
 
@@ -10,7 +10,6 @@
 [![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?logo=creative-commons&logoColor=white)](#readme)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?logo=github&logoColor=white)](#readme)
 [![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
-[![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 
 [![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)](#readme)
 [![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)](#readme)
@@ -51,6 +50,7 @@
 [![Threads](https://img.shields.io/badge/Threads-frijal-000000?logo=threads&logoColor=white)](https://www.threads.net/@frijal)
 [![TikTok](https://img.shields.io/badge/TikTok-@gibah.dilarang-000000?logo=tiktok&logoColor=white)](https://www.tiktok.com/@gibah.dilarang)
 [![Instagram](https://img.shields.io/badge/Instagram-frijal-E4405F?logo=instagram&logoColor=white)](https://instagram.com/frijal)
+[![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
 </details>
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)
