@@ -16,6 +16,7 @@
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple)
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue)
+![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
 ![Release Continuous](https://img.shields.io/badge/Release-Continuous-orange)
 ![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io)
 
