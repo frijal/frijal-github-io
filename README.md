@@ -14,6 +14,7 @@
 ![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet)
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue)
 ![Copilot](https://img.shields.io/badge/Copilot-Yes-purple)
+![GitHub Cron](https://img.shields.io/badge/GitHub%20Cron-Scheduled-2f363d?logo=github&logoColor=white)
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue)
 ![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)
