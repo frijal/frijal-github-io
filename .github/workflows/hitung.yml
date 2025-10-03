@@ -119,7 +119,7 @@ jobs:
           # Badge HTML
           echo "{
             \"schemaVersion\": 1,
-            \"label\": \"html files\",
+            \"label\": \"artikel\",
             \"message\": \"${HTML}\",
             \"color\": \"blue\"
           }" > ext/html_count_badge.json
@@ -127,7 +127,7 @@ jobs:
           # Badge JPG
           echo "{
             \"schemaVersion\": 1,
-            \"label\": \"jpg files\",
+            \"label\": \"cover\",
             \"message\": \"${JPG}\",
             \"color\": \"green\"
           }" > ext/jpg_count_badge.json
