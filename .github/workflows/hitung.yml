@@ -1,4 +1,5 @@
-name: Hitung File, Commit Laporan
+name: Hitung File, Commit Laporan + Badge Dinamis
+
 on:
   workflow_dispatch:
     inputs:
@@ -12,23 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        # Menggunakan token GITHUB_TOKEN bawaan, fetch-depth: 0 diperlukan untuk commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
            
       - name: Siapkan Folder Laporan
-        run: |
-          mkdir -p mini/
+        run: mkdir -p mini/
 
       - name: Hitung dan Buat Laporan File
         id: file_counting
         run: |
           TARGET_DIR="${{ github.event.inputs.target_folder }}"
-          # Definisikan prefix URL untuk laporan
           URL_PREFIX="https://frijal.github.io/"
-          
-          # Mengganti karakter non-alfanumerik/path dengan underscore untuk nama file
           SANITIZED_DIR_NAME=$(echo "${TARGET_DIR}" | sed 's/[^a-zA-Z0-9]/_/g')
           REPORT_FILE="mini/laporan_jumlah_file_${SANITIZED_DIR_NAME}.txt"
 
@@ -39,65 +35,46 @@ jobs:
             exit 1
           fi
 
-          # 1. Hitung total semua file di folder target
+          # Hitung total file
           TOTAL_FILES=$(find "${TARGET_DIR}" -type f | wc -l)
+          TOTAL_HTML=$(find "${TARGET_DIR}" -type f -name "*.html" | wc -l)
+          TOTAL_JPG=$(find "${TARGET_DIR}" -type f -name "*.jpg" | wc -l)
 
-          # 2. Konten Ringkasan: Hitung jumlah file per ekstensi (diurutkan dari terbanyak)
-          REPORT_SUMMARY_CONTENT=$(find "${TARGET_DIR}" -type f -print | sed 's/.*\.//' | sort | uniq -c | sort -r)
-
-          # 3. Konten Detail: Daftar file dikelompokkan berdasarkan ekstensi dengan pemisah baris kosong
-          REPORT_DETAIL_CONTENT=$(find "${TARGET_DIR}" -type f -print | awk -F'.' '{
-              # Jika ada ekstensi, gunakan ekstensi terakhir. Jika tidak, gunakan "no_ext"
-              ext = (NF > 1) ? $NF : "no_ext";
-              # Cetak ekstensi dan path untuk sorting
-              print ext " " $0;
-          }' | sort -k1,1 | awk -v prefix="${URL_PREFIX}" '
-              BEGIN { current_ext = ""; }
-              {
-                  # Ambil ekstensi (kata pertama)
-                  ext = $1;
-                  # Path adalah sisa baris setelah ekstensi dan spasi
-                  # Menggunakan substr untuk menangani spasi dalam nama file
-                  path = substr($0, length(ext) + 2);
-
-                  if (ext != current_ext) {
-                      if (current_ext != "") {
-                          print ""; # Garis kosong pemisah kelompok
-                      }
-                      current_ext = ext;
-                      
-                      # Tampilkan header grup. Ubah 'no_ext' menjadi Teks
-                      display_ext = (ext == "no_ext") ? "TIDAK ADA EKSTENSI" : "." toupper(ext);
-                      print "## " display_ext " ##";
-                  }
-                  # PERUBAHAN: Menghapus " - " di depan prefix URL
-                  print prefix path;
-              }
-          ')
-
-          # 4. Format laporan akhir
+          # Tulis laporan ringkas
           echo "LAPORAN JUMLAH FILE FOLDER '${TARGET_DIR}'" > ${REPORT_FILE}
           echo "==================================" >> ${REPORT_FILE}
           echo "SUMMARY: Total File Ditemukan = ${TOTAL_FILES}" >> ${REPORT_FILE}
-          echo "" >> ${REPORT_FILE}
-          
-          echo "### RINGKASAN JUMLAH PER EKSTENSI ###" >> ${REPORT_FILE}
-          echo "JUMLAH | EKSTENSI" >> ${REPORT_FILE}
-          echo "${REPORT_SUMMARY_CONTENT}" >> ${REPORT_FILE}
-          
-          echo "" >> ${REPORT_FILE}
-          echo "==================================" >> ${REPORT_FILE}
-          echo "### DAFTAR DETAIL FILE BERDASARKAN EKSTENSI (URL Relatif ke ${URL_PREFIX}) ###" >> ${REPORT_FILE}
-          echo "${REPORT_DETAIL_CONTENT}" >> ${REPORT_FILE}
-          echo "==================================" >> ${REPORT_FILE}
+          echo "HTML = ${TOTAL_HTML}, JPG = ${TOTAL_JPG}" >> ${REPORT_FILE}
 
-          echo "Laporan telah dibuat di ${REPORT_FILE}"
-          cat ${REPORT_FILE}
+          echo "total_html=${TOTAL_HTML}" >> $GITHUB_OUTPUT
+          echo "total_jpg=${TOTAL_JPG}" >> $GITHUB_OUTPUT
 
-      - name: Commit File Laporan ke Repositori
-        # Action ini akan melakukan git commit & push otomatis
+      - name: Buat Badge JSON Gabungan (HTML/JPG) dengan Warna Dinamis
+        run: |
+          HTML=${{ steps.file_counting.outputs.total_html }}
+          JPG=${{ steps.file_counting.outputs.total_jpg }}
+
+          if [ "$HTML" -gt "$JPG" ]; then
+            COLOR="green"
+          elif [ "$HTML" -lt "$JPG" ]; then
+            COLOR="red"
+          else
+            COLOR="blue"
+          fi
+
+          mkdir -p mini/
+          echo "{
+            \"schemaVersion\": 1,
+            \"label\": \"html/jpg\",
+            \"message\": \"${HTML} / ${JPG}\",
+            \"color\": \"${COLOR}\"
+          }" > mini/html_jpg_badge.json
+
+          cat mini/html_jpg_badge.json
+
+      - name: Commit File Laporan & Badge ke Repositori
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Laporan: Update jumlah file di folder ${{ github.event.inputs.target_folder }}"
-          branch: ${{ github.ref_name }} # Commit ke branch yang sedang berjalan
-          file_pattern: mini/*.txt # Hanya commit file laporan yang baru dibuat
+          commit_message: "Laporan & Badge Dinamis: Update jumlah file di folder ${{ github.event.inputs.target_folder }}"
+          branch: ${{ github.ref_name }}
+          file_pattern: mini/*
