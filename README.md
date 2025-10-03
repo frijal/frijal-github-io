@@ -6,14 +6,14 @@
 [![HTTPS Enabled](https://img.shields.io/badge/HTTPS-Enabled-blue?logo=letsencrypt&logoColor=white)](#readme)
 [![Public Domain](https://img.shields.io/badge/Public%20Domain-Yes-orange?logo=creative-commons&logoColor=white)](#readme)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?logo=github&logoColor=white)](#readme)
-[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
-[![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
+<a href="https://frijal.github.io" target="_blank"><img src="https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white"></a>
+<a href="https://gist.github.com/frijal" target="_blank"><img src="https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white"></a>
 
 [![Gemini](https://img.shields.io/badge/Gemini-Yes-blueviolet?logo=google&logoColor=white)](#readme)
 [![ChatGPT](https://img.shields.io/badge/ChatGPT-Yes-blue?logo=openai&logoColor=white)](#readme)
 [![Copilot](https://img.shields.io/badge/Copilot-Yes-purple?logo=github&logoColor=white)](#readme)
-[![artikelx > artikel](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)](https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml)
-[![Generator](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white)](https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml)
+<a href="https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml" target="_blank"><img src="https://github.com/frijal/frijal.github.io/actions/workflows/modif-artikelX-artikel.yml/badge.svg?branch=main&logo=githubactions&logoColor=white"></a>
+<a href="https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml" target="_blank"><img src="https://github.com/frijal/frijal.github.io/actions/workflows/generate-json-xml.yml/badge.svg?branch=main&logo=githubactions&logoColor=white"></a>
 
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-Available-34A853?logo=googledrive&logoColor=white)](#readme)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Yes-blue?logo=github&logoColor=white)](#readme)
@@ -42,11 +42,12 @@
 [![JSON](https://img.shields.io/badge/JSON-Yes-000000?logo=json&logoColor=white)](#readme)
 [![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)](#readme)
 
-[![Twitter/X](https://img.shields.io/badge/Twitter-frijal-000000?logo=x&logoColor=white)](https://twitter.com/frijal)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-frijal-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/frijal)
-[![Facebook](https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white)](https://facebook.com/frijal)
-[![Threads](https://img.shields.io/badge/Threads-frijal-000000?logo=threads&logoColor=white)](https://www.threads.net/@frijal)
-[![TikTok](https://img.shields.io/badge/TikTok-@gibah.dilarang-000000?logo=tiktok&logoColor=white)](https://www.tiktok.com/@gibah.dilarang)
+<a href="https://twitter.com/frijal" target="_blank"><img src="https://img.shields.io/badge/Twitter-frijal-000000?logo=x&logoColor=white"></a>
+<a href="https://www.linkedin.com/in/frijal" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-frijal-0A66C2?logo=linkedin&logoColor=white"></a>
+<a href="https://facebook.com/frijal" target="_blank"><img src="https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white"></a>
+<a href="https://www.threads.net/@frijal" target="_blank"><img src="https://img.shields.io/badge/Threads-frijal-000000?logo=threads&logoColor=white"></a>
+<a href="https://www.tiktok.com/@gibah.dilarang" target="_blank"><img src="https://img.shields.io/badge/TikTok-@gibah.dilarang-000000?logo=tiktok&logoColor=white"></a>
+<a href="https://instagram.com/frijal" target="_blank"><img src="https://img.shields.io/badge/Instagram-frijal-E4405F?logo=instagram&logoColor=white"></a>
 
 ---
 
