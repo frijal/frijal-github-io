@@ -58,9 +58,6 @@
 [![Facebook](https://img.shields.io/badge/Facebook-frijal-1877F2?logo=facebook&logoColor=white)](https://facebook.com/frijal)
 [![Threads](https://img.shields.io/badge/Threads-frijal-000000?logo=threads&logoColor=white)](https://www.threads.net/@frijal)
 [![TikTok](https://img.shields.io/badge/TikTok-@gibah.dilarang-000000?logo=tiktok&logoColor=white)](https://www.tiktok.com/@gibah.dilarang)
-[![Website](https://img.shields.io/badge/Website-frijal.github.io-4285F4?logo=google-chrome&logoColor=white)](https://frijal.github.io)
-
-
 
 ---
 
