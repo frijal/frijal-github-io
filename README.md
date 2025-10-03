@@ -20,6 +20,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/frijal/frijal.github.io?logo=github&logoColor=white)](#readme)
 [![HTML Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/html_count_badge.json&logo=html5&logoColor=white)](#readme)
 [![JPG Count](https://img.shields.io/endpoint?url=https://frijal.github.io/ext/jpg_count_badge.json&logo=file&logoColor=white)](#readme)
+[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
 
 [![Heroku](https://img.shields.io/badge/Heroku-Yes-430098?logo=heroku&logoColor=white)](#readme)
 [![Aria2](https://img.shields.io/badge/Aria2-Yes-green?logo=aria2&logoColor=white)](#readme)
@@ -40,9 +41,6 @@
 [![YAML](https://img.shields.io/badge/YAML-Yes-6f9eaf?logo=yaml&logoColor=white)](#readme)
 [![JSON](https://img.shields.io/badge/JSON-Yes-000000?logo=json&logoColor=white)](#readme)
 [![XML](https://img.shields.io/badge/XML-Yes-orange?logo=w3c&logoColor=white)](#readme)
-
-[![GitHub Repo](https://img.shields.io/badge/Repo-frijal.github.io-181717?logo=github&logoColor=white)](https://github.com/frijal/frijal.github.io)
-[![Website](https://img.shields.io/badge/Website-Live-2ea44f?logo=google-chrome&logoColor=white)](https://frijal.github.io)
 
 [![GitHub](https://img.shields.io/badge/GitHub-frijal-181717?logo=github&logoColor=white)](https://github.com/frijal)
 [![Gist](https://img.shields.io/badge/Gist-frijal-181717?logo=github&logoColor=white)](https://gist.github.com/frijal)
