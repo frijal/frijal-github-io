@@ -222,23 +222,24 @@ function initNavIcons(allArticlesData, currentFilename) {
     const prevBottom = document.getElementById('prev-bottom');
 
     function updateUI() {
-        const nextIndex = (currentIndexInCategory - 1 + total) % total; // Newer posts have lower index
-        const prevIndex = (currentIndexInCategory + 1) % total; // Older posts have higher index
+  const nextIndex = (currentIndex + 1) % total;
+  const prevIndex = (currentIndex - 1 + total) % total;
 
-        const nextArticle = articlesInCurrentCategory[nextIndex];
-        const prevArticle = articlesInCurrentCategory[prevIndex];
+  // update href
+  nextBtn.href = list[nextIndex][1];
+  prevBtn.href = list[prevIndex][1];
 
-        nextBtn.href = `/artikel/${nextArticle[1]}`;
-        prevBtn.href = `/artikel/${prevArticle[1]}`;
+  // update angka dua baris
+  nextTop.textContent = currentIndex+1;
+  nextBottom.textContent = total;
+  prevTop.textContent = currentIndex+1;
+  prevBottom.textContent = total;
 
-        nextTop.textContent = nextIndex + 1;
-        nextBottom.textContent = `/ ${total}`;
-        prevTop.textContent = prevIndex + 1;
-        prevBottom.textContent = `/ ${total}`;
+  // update tooltip (judul dulu, lalu kategori)
+  nextBtn.title = `${list[nextIndex][0]} - ${currentCategory}`;
+  prevBtn.title = `${list[prevIndex][0]} - ${currentCategory}`;
+}
 
-        nextBtn.title = `${currentCategoryName} - ${nextArticle[0]}`;
-        prevBtn.title = `${currentCategoryName} - ${prevArticle[0]}`;
-    }
 
     updateUI();
 }
