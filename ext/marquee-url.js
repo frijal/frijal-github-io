@@ -156,6 +156,18 @@ function initNavIcons(allArticlesData, currentFilename) {
           <text id="next-bottom" x="24" y="46" text-anchor="middle" font-size="8" fill="#fff" opacity="0.8"></text>
         </svg>
       </a>
+      <!-- Ikon RSS (RESTORED) -->
+      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g1)"/>
+          <circle cx="14" cy="34" r="4" fill="#fff"/>
+          <path d="M12 22a16 16 0 0 1 14 14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </a>
       <!-- Ikon Home -->
       <a href="https://frijal.github.io/home.html" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -226,10 +238,7 @@ function initNavIcons(allArticlesData, currentFilename) {
     const prevTop = document.getElementById('prev-top');
     const prevBottom = document.getElementById('prev-bottom');
 
-    // ** KODE BARU DIMASUKKAN DI SINI **
     function updateUI() {
-        // This logic seems reversed from standard Next/Prev, but matches the user's intent
-        // where Next goes to a higher index (older post) and Prev to a lower index (newer post)
         const nextIndex = (currentIndexInCategory + 1) % total;
         const prevIndex = (currentIndexInCategory - 1 + total) % total;
 
