@@ -1,2 +1,8 @@
-    <a href="https://frijal.github.io/sitemap.html" id="btn-sitemap" class="btn-fixed" title="Ke Sitemap"><i class="fa fa-sitemap"></i> Sitemap</a>
-    <a href="https://frijal.github.io/artikel.html" id="btn-home" class="btn-fixed" title="Kembali ke Artikel"><i class="fa fa-home"></i> Home</a>
+k.btn-sitemap {
+        left: 14px;
+        top: 30%;
+      }
+      .btn-home {
+        right: 14px;
+        bottom: 20%;
+      }
