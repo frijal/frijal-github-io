@@ -1,0 +1,364 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Charset & Viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Title & Description -->
+  <!-- prettier-ignore -->
+<title>MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”</title>
+  <meta name="description" content="MX Linux 25 “Infinity” memasuki beta publik, kini berbasis Debian 13 “Trixie”. Sorotan: Wayland di KDE, MX Tools ke Qt6, opsi systemd & sysVinit, mx-updater, dan dukungan Secure Boot." />
+
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
+  <meta name="theme-color" content="#0f1520" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Frijal" />
+  <meta property="og:url" content="https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html" />
+  <meta property="og:title" content="MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”" />
+  <meta property="og:description" content="Sorotan rilis beta MX 25: Wayland, Qt6, mx-updater dengan Nala, dukungan Secure Boot, dan opsi systemd/sysVinit." />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s1920/mx25b.jpg" />
+  <meta property="article:section" content="Teknologi" />
+  <meta property="article:published_time" content="2025-09-28T17:09:00+08:00" />
+  <meta property="article:modified_time" content="2025-09-28T17:09:00+08:00" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”" />
+  <meta name="twitter:description" content="Rangkuman fitur MX 25 beta: Wayland, Qt6, mx-updater + Nala, Secure Boot, dan pilihan systemd/sysVinit." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s1920/mx25b.jpg" />
+  <meta name="twitter:site" content="@frijal" />
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”","description":"MX Linux 25 beta berbasis Debian 13 Trixie. Wayland default di KDE Plasma, MX Tools ke Qt6, mx-updater + Nala, Secure Boot, dan opsi systemd/sysVinit.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s1920/mx25b.jpg"],"author":{"@type":"Person","name":"Frijal","image":"https://frijal.github.io/artikel/mx-linux-25-infinity-beta.jpg"},"publisher":{"@type":"Organization","name":"Frijal","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/mx-linux-25-infinity-beta.jpg"},"image":"https://frijal.github.io/artikel/mx-linux-25-infinity-beta.jpg"},"datePublished":"2025-09-28T17:09:00+08:00","dateModified":"2025-09-28T17:09:00+08:00","inLanguage":"id-ID","mainEntityOfPage":"https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html"}</script>
+
+  <!-- Styles: single-column, aurora tech theme, wide fullscreen -->
+  <style>
+    :root{
+      --bg:#0f1520;
+      --layer1:#0f1520;
+      --layer2:#111c2e;
+      --layer3:#14233f;
+      --panel:#162945cc;
+      --card:#182d4e;
+      --ink:#e8f0ff;
+      --muted:#b8c8e6;
+      --accent:#7cc4ff;  /* cyan-blue */
+      --accent2:#8be8b0; /* mint */
+      --border:#203a63;
+      --maxw:940px;
+      --shadow:0 16px 50px rgba(0,0,0,.45);
+      --glass: blur(8px) saturate(1.15);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 15% -10%, #182d4e, transparent 60%),
+        radial-gradient(1200px 800px at 85% 0%, #111c2e, transparent 60%),
+        linear-gradient(180deg, var(--layer1), var(--layer2) 35%, var(--layer3));
+      line-height:1.8;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Hero */
+    header.hero{
+      position:relative;min-height:46vh;display:grid;place-items:center;overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(22,41,69,.18), rgba(22,41,69,.86)),
+        url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s1920/mx25b.jpg') center/cover no-repeat;
+      border-bottom:1px solid var(--border);
+    }
+    .title{
+      width:min(95%, 980px);
+      text-align:center;padding:2rem 1rem;
+      backdrop-filter: var(--glass);
+      background: linear-gradient(180deg, rgba(24,45,78,.45), rgba(24,45,78,.7));
+      border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);
+    }
+    .title h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.8rem);text-shadow:0 2px 22px rgba(0,0,0,.5)}
+    .kicker{margin:.5rem auto 0;color:var(--muted);max-width:64ch;font-size:1.03rem}
+
+    /* Chips */
+    .chips{
+      display:grid;grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap:.8rem;padding:1rem;background:rgba(22,41,69,.55);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+      backdrop-filter: var(--glass);
+    }
+    .chip{
+      display:flex;align-items:center;gap:.6rem;padding:.7rem .9rem;
+      background:#182d4e;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+      font-size:.98rem;
+    }
+    .chip .i{font-size:1.2rem}
+
+    /* Article */
+    .article{
+      width:min(100%, var(--maxw));margin:2rem auto;padding:1.3rem 1.3rem 1.8rem;
+      background:linear-gradient(180deg, #162945, #182d4e);
+      border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);
+    }
+    .article h2,.article h3{margin-top:1.25rem;margin-bottom:.6rem;font-size:clamp(1.25rem,2.4vw,1.6rem)}
+    .article p,.article li{color:#eaf2ff}
+    .article blockquote{
+      margin:1rem 0;padding:.8rem 1rem;border-left:4px solid var(--accent2);
+      background:#152a48;border-radius:12px;color:#dce9ff
+    }
+    .article hr{border:none;height:1px;background:linear-gradient(90deg, transparent, #203a63, transparent);margin:1rem 0}
+    .article code{background:#1b345c;color:#e9ecf8;padding:.1rem .25rem;border-radius:6px}
+
+    /* Gallery */
+    .gallery{width:min(100%, var(--maxw));margin:2rem auto;display:grid;grid-template-columns:1fr;gap:.95rem}
+    .thumb{position:relative;overflow:hidden;cursor:zoom-in;border:1px solid var(--border);border-radius:18px;background:#182d4e}
+    .thumb img{
+      display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;
+      filter:saturate(1.04) contrast(1.03);
+      transition:transform .5s ease, opacity .3s ease;
+    }
+    .thumb:hover img{transform:scale(1.02)}
+    .caption{
+      position:absolute;left:0;right:0;bottom:0;padding:.65rem .9rem;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.25) 40%, rgba(0,0,0,.55));
+      color:#f0f6ff;font-size:.95rem;text-shadow:0 1px 2px rgba(0,0,0,.35)
+    }
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;display:none;background:rgba(13,17,26,.78);backdrop-filter: blur(3px);z-index:9999}
+    .lightbox.open{display:grid;place-items:center}
+    .lightbox img{max-width:min(92vw,1400px);max-height:82vh;border-radius:16px;box-shadow:0 28px 98px rgba(0,0,0,.52)}
+    .lb-controls{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none}
+    .lb-btn{
+      pointer-events:auto;position:fixed;top:50%;transform:translateY(-50%);
+      background:linear-gradient(180deg, #23406e, #182d4e);border:1px solid var(--border);color:#eaf2ff;
+      padding:.6rem .95rem;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)
+    }
+    .lb-prev{left:2vw}
+    .lb-next{right:2vw}
+    .lb-close{top:2vh;right:2vw;transform:none;border-radius:10px}
+
+    /* Share bar */
+    .share{width:min(100%, var(--maxw));margin:1rem auto 2rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:.5rem;padding:.58rem .9rem;border-radius:12px;
+      border:1px solid var(--border);background:#182d4e;color:#eaf2ff;cursor:pointer;box-shadow:var(--shadow)
+    }
+    .btn .sicon{font-size:1.15rem}
+
+    /* Floating buttons */
+    .float-left{position:fixed;left:1rem;top:30%;z-index:999}
+    .float-right{position:fixed;right:1rem;bottom:20%;z-index:999}
+    .float-btn{
+      display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.05rem;
+      background:linear-gradient(180deg, #7cc4ff, #4ea4ef);color:#0e1420;border:none;border-radius:14px;box-shadow:var(--shadow);cursor:pointer
+    }
+    .float-btn:hover{filter:brightness(1.05)}
+
+    /* Comments */
+    .comments{width:min(100%, var(--maxw));margin:2rem auto;padding:1rem;background:#182d4e;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+
+    /* Footer */
+    footer{text-align:center;padding:2rem 1rem 3rem;color:var(--muted)}
+
+    @media (max-width:640px){
+      .lb-prev,.lb-next{display:none}
+      header.hero{min-height:40vh}
+    }
+  </style>
+<meta name="date" content="2025-09-28">
+
+  <meta property="og:image:alt" content="MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/mx-linux-25-infinity-beta.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-28T11:00:00+08:00"></head>
+<body>
+  <!-- Facebook SDK -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0"></script>
+
+  <!-- Floating quick actions -->
+  <div class="float-left">
+    <button class="float-btn" onclick="location.href='https://frijal.github.io/sitemap.html'">
+      <span>🧭</span><span>Sitemap</span>
+    </button>
+  </div>
+  <div class="float-right">
+    <button class="float-btn" onclick="location.href='https://frijal.github.io/home.html'">
+      <span>🏠</span><span>Home</span>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" role="banner">
+    <div class="title">
+      <h1>MX Linux 25 "Infinity" Memasuki Pengujian Beta Publik: Beralih ke Debian 13 "Trixie"</h1>
+      <p class="kicker">Beta publik pertama MX 25: basis Debian 13, Wayland default di KDE, MX Tools ke Qt6, mx-updater, dan dukungan Secure Boot.</p>
+    </div>
+  </header>
+
+  <!-- Info chips -->
+  <section class="chips" aria-label="Info perangkat dan lokasi">
+    <div class="chip"><span class="i">🧩</span><span id="browser">Browser: mendeteksi...</span></div>
+    <div class="chip"><span class="i">💻</span><span id="os">OS: mendeteksi...</span></div>
+    <div class="chip"><span class="i">📍</span><span id="loc">Lokasi: Surabaya, Jawa Timur 🇮🇩</span></div>
+    <div class="chip"><span class="i">ℹ️</span><span>Tata letak: 1 kolom, wide fullscreen, responsif</span></div>
+  </section>
+
+  <!-- Article -->
+  <article class="article" role="article">
+    <p>Kabar gembira untuk para penggemar Linux yang mencari stabilitas, kecepatan, dan kemudahan penggunaan! <b>MX Linux 25, yang diberi nama kode "Infinity,"</b> baru saja meluncurkan versi beta publik pertamanya. Pembaruan besar ini membawa MX Linux ke basis <b>Debian 13 "Trixie"</b> terbaru, membawa serta berbagai perubahan besar di bawah kap mesin dan di permukaan antarmuka.</p>
+    <p>Ini bukan sekadar pembaruan rutin. Versi 25 ini membawa beberapa perubahan filosofis dan teknis yang penting, memastikan MX Linux tetap relevan dan powerful di masa depan.</p>
+
+    <hr />
+
+    <h2>Poin utama pembaruan yang harus Anda ketahui</h2>
+
+    <h3>1. Fondasi baru: Debian 13 "Trixie"</h3>
+    <p>MX Linux dikenal stabil karena dibangun di atas <b>Debian Stable</b>. Dengan beralih ke Debian 13 (yang masih dalam fase pengembangan), MX memastikan paket <i>software</i> dan <i>library</i> paling baru dan modern.</p>
+    <ul>
+      <li><b>Dampak bagi pengguna:</b> Kompatibilitas <i>hardware</i> meningkat dan kinerja lebih baik, khususnya pada perangkat terbaru.</li>
+    </ul>
+
+    <h3>2. Tiga pilihan desktop kekinian</h3>
+    <p>Versi 25 memperbarui trio lingkungan desktop:</p>
+    <ul>
+      <li><b>Xfce 4.20:</b> Ringan, cepat, dan makin fungsional.</li>
+      <li><b>KDE Plasma 6.3.6:</b> Pembaruan besar—<b>Wayland</b> kini jadi default untuk grafis lebih halus, keamanan, dan pengalaman <i>multi-monitor</i> yang lebih baik.</li>
+      <li><b>Fluxbox 1.3.7:</b> Paling minimalis dan hemat sumber daya—cocok untuk mesin tua atau pengguna yang mengejar efisiensi maksimal.</li>
+    </ul>
+
+    <h3>3. Perubahan filosofis: dukungan penuh systemd</h3>
+    <p>MX lama populer dengan <b>sysVinit</b> untuk sistem <i>init</i>. Di MX-25, pengembang kini menawarkan <i>image</i> dengan <b>systemd</b> sepenuhnya.</p>
+    <ul>
+      <li><b>Tetap fleksibel:</b> Edisi Xfce dan Fluxbox <b>sysVinit</b> tetap tersedia bagi pengguna yang anti-<i>systemd</i>. MX menjaga pilihan untuk basis penggunanya.</li>
+    </ul>
+
+    <h3>4. Peningkatan tool dan installer</h3>
+    <p><b>MX Tools</b> adalah nilai jual MX—utilitas <i>point-and-click</i> yang memudahkan pengelolaan tanpa Terminal.</p>
+    <ul>
+      <li><b>MX Tools ke Qt6:</b> Migrasi ke <b>Qt 6</b> menghadirkan tampilan modern dan performa lebih mulus, terutama di edisi KDE Plasma.</li>
+      <li><b><code>mx-updater</code> baru:</b> Menggantikan <i>apt-notifier</i>; menawarkan opsi <b>Nala</b> sebagai <i>backend</i> update yang lebih cepat dan informatif ketimbang <i>apt</i> standar.</li>
+      <li><b>Dukungan Secure Boot:</b> Installer kini mendukung <b>UEFI Secure Boot</b> 64-bit—krusial untuk perangkat modern.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Kesimpulan: Untuk siapa beta ini?</h2>
+    <p><b>MX Linux 25 "Infinity"</b> menunjukkan kesiapan merangkul teknologi masa depan (Wayland, Qt6, kernel baru) sambil tetap menghormati akar (opsi sysVinit, Xfce ringan).</p>
+    <p><b>Peringatan penting:</b> Ini adalah rilis <b>beta</b>—disarankan <b>TIDAK</b> digunakan pada komputer utama. Tujuan beta adalah pengujian komunitas, pencarian <i>bug</i>, dan <i>feedback</i> sebelum rilis final.</p>
+    <blockquote>Jika Anda ingin mencoba pengalaman Linux yang stabil, <i>powerful</i>, dan mudah dikelola dengan teknologi terbaru dari Debian 13, saatnya mengunduh MX Linux 25 Beta—uji, beri masukan, bantu bentuk rilis finalnya.</blockquote>
+  </article>
+
+  <!-- Gallery -->
+  <section class="gallery" aria-label="Galeri MX Linux 25 Infinity beta">
+    <div class="thumb" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s1920/mx25b.jpg">
+      <img loading="lazy" alt="MX Linux 25 Infinity beta berbasis Debian 13 Trixie" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzrUkQu7AOuTrn0ezaJT0hIaPeZMeuNvGE4XoRFUtLdog_JY-T3BqzO01e8HuMElRFNt5a3TF5eshO-wTqhHCvwlGXPDXl_afDR-H3yrey2rkP6hPfFmX0lQ_RhjAho5-SbKC3ytWhHTwoWaAqLim-NnPCqb-LVggSj8hZ-6efXnq95LkTUSAEcVb1NBM/s16000/mx25b.jpg">
+      <div class="caption">MX 25 Infinity: Wayland, Qt6, systemd opsional, dan alat yang kian ramah pengguna.</div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+    <img id="lb-img" alt="Gambar galeri ukuran penuh" />
+    <div class="lb-controls">
+      <button class="lb-btn lb-prev" aria-label="Sebelumnya">◀</button>
+      <button class="lb-btn lb-next" aria-label="Berikutnya">▶</button>
+      <button class="lb-btn lb-close" aria-label="Tutup">✕</button>
+    </div>
+  </div>
+
+  <!-- Share -->
+  <div class="share" aria-label="Bagikan artikel">
+    <button class="btn" id="copyLink"><span class="sicon">🔗</span><span>Salin tautan</span></button>
+    <a class="btn" id="waShare" href="#" rel="noreferrer"><span class="sicon">🟢</span><span>WhatsApp</span></a>
+    <a class="btn" id="fbShare" href="#" rel="noreferrer"><span class="sicon">🔵</span><span>Facebook</span></a>
+    <a class="btn" id="xShare" href="#" rel="noreferrer"><span class="sicon">⚫</span><span>X (Twitter)</span></a>
+    <a class="btn" id="tgShare" href="#" rel="noreferrer"><span class="sicon">🔷</span><span>Telegram</span></a>
+  </div>
+
+  <!-- Facebook Comments -->
+  <section class="comments" aria-label="Komentar Facebook">
+    <h2 style="margin-top:0">Kolom komentar</h2>
+    <div class="fb-comments" data-href="https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html" data-width="100%" data-numposts="5" data-order-by="reverse_time"></div>
+  </section>
+
+  <footer>
+    &#127279; 2025 Frijal • Teknologi: MX Linux 25 “Infinity” • Beta yang menjembatani tradisi dan masa depan.
+  </footer>
+
+  <!-- Scripts: detect Browser/OS, lightbox, share links -->
+  <script>
+    // Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
+
+    // Lightbox gallery
+    (function(){
+      const thumbs=[...document.querySelectorAll('.gallery .thumb')];
+      const lb=document.getElementById('lightbox');
+      const img=document.getElementById('lb-img');
+      const prev=document.querySelector('.lb-prev');
+      const next=document.querySelector('.lb-next');
+      const close=document.querySelector('.lb-close');
+      let i=0;
+      function open(n){ i=n; img.src=thumbs[i].dataset.full; lb.classList.add('open'); }
+      function step(d){ i=(i+d+thumbs.length)%thumbs.length; img.src=thumbs[i].dataset.full; }
+      function hide(){ lb.classList.remove('open'); }
+      thumbs.forEach((t,idx)=> t.addEventListener('click',()=>open(idx)));
+      prev.addEventListener('click',()=>step(-1));
+      next.addEventListener('click',()=>step(1));
+      close.addEventListener('click',hide);
+      lb.addEventListener('click',e=>{ if(e.target===lb) hide(); });
+      document.addEventListener('keydown',e=>{
+        if(!lb.classList.contains('open')) return;
+        if(e.key==='Escape') hide();
+        if(e.key==='ArrowLeft') step(-1);
+        if(e.key==='ArrowRight') step(1);
+      });
+    })();
+
+    // Share links
+    (function(){
+      const url = encodeURIComponent('https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html');
+      const title = encodeURIComponent('MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”');
+      document.getElementById('copyLink').addEventListener('click', async ()=>{
+        try{ await navigator.clipboard.writeText(decodeURIComponent(url)); alert('Tautan disalin!'); }
+        catch{ prompt('Salin tautan secara manual:', decodeURIComponent(url)); }
+      });
+      document.getElementById('waShare').href = `https://wa.me/?text=${title}%20${url}`;
+      document.getElementById('fbShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      document.getElementById('xShare').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+      document.getElementById('tgShare').href = `https://t.me/share/url?url=${url}&text=${title}`;
+    })();
+  </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+```

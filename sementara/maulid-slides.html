@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr" prefix="og: http://ogp.me/ns#">
+<head>
+  <!-- Meta dasar -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <!-- prettier-ignore -->
+<title>Sejarah & Pro-Kontra Maulid Nabi</title>
+  <meta name="description" content="Slide presentasi interaktif: latar belakang, timeline, pro-kontra ulama, dan hikmah Maulid Nabi. Dilengkapi galeri, lightbox, komentar Facebook, dan info perangkat.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/maulid-slides.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png">
+  <meta name="theme-color" content="#dc5a00">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Slide Web: Sejarah & Pro-Kontra Maulid Nabi">
+  <meta property="og:description" content="Presentasi web interaktif tentang Maulid Nabi: sejarah, perbedaan ulama, dan sikap bijak.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/maulid-slides.html">
+  <meta property="og:image" content="">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Slide Web: Sejarah & Pro-Kontra Maulid Nabi">
+  <meta name="twitter:description" content="Slide siap pakai untuk mengajar/diskusi: ringkas, visual, dan interaktif.">
+  <meta name="twitter:image" content="">
+  <meta name="twitter:site" content="@frijal">
+
+  <!-- CSS: Template baru (sunset neon, slide fullscreen scroll-snap) -->
+  <style>
+    :root{
+      --bg:#0a0611;
+      --grad1:#ff7a18;
+      --grad2:#af002d;
+      --panel: rgba(255,255,255,.06);
+      --ink:#fffaf5;
+      --muted:#f4ddd2;
+      --border: rgba(255,255,255,.16);
+      --brand:#ff7a18;
+      --brand2:#ff3d68;
+      --ok:#22c55e; --bad:#ef4444; --note:#f59e0b;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --maxw: 1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      background:
+        radial-gradient(1200px 560px at -10% 0%, rgba(255,122,24,.22), transparent 60%),
+        radial-gradient(1200px 560px at 110% -10%, rgba(175,0,45,.22), transparent 60%),
+        linear-gradient(180deg, #0a0611 0%, #140b20 100%);
+      font:16px/1.7 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      overflow-x:hidden;
+    }
+
+    /* Slide container */
+    .slides{
+      scroll-snap-type: y mandatory;
+      height: 100dvh;
+      overflow-y: auto;
+    }
+    section.slide{
+      scroll-snap-align: start;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      position: relative;
+    }
+    .content{
+      width: 100%;
+      max-width: var(--maxw);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 980px){
+      .content{ grid-template-columns: 1fr }
+    }
+    .card{
+      background: var(--panel);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .head{
+      padding:14px 18px;
+      background: linear-gradient(90deg, rgba(255,122,24,.16), rgba(175,0,45,.16));
+      border-bottom:1px solid var(--border);
+    }
+    .head h2{ margin:0; font-size:20px; letter-spacing:-.2px }
+    .body{ padding:18px }
+    .title{
+      margin:0 0 10px; text-align:center;
+      font-size: clamp(28px, 5.5vw, 62px); font-weight:900; letter-spacing:-.02em;
+      background: linear-gradient(90deg,#fff,#ffd2b0 45%,#ff9fb3 90%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 12px 38px rgba(255,122,24,.28);
+    }
+    .subtitle{ text-align:center; color:var(--muted); max-width: 900px; margin: 0 auto 10px }
+    .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:10px 0 0 }
+    .chip{ padding:6px 12px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,.06) }
+
+    .bullets{ margin:0; padding-left: 18px }
+    .bullets li{ margin: 8px 0 }
+    .call{
+      padding:12px 14px; border-radius:12px; border:1px dashed var(--border);
+      background: linear-gradient(90deg, rgba(255,122,24,.12), rgba(175,0,45,.12));
+    }
+    .tag{ display:inline-block; padding:2px 8px; border-radius:8px; border:1px solid var(--border); font-size:12px; background: rgba(255,255,255,.06) }
+    .tag.ok{ background: rgba(34,197,94,.16) } .tag.bad{ background: rgba(239,68,68,.16) } .tag.note{ background: rgba(245,158,11,.16) }
+
+    /* Slide navigation hints */
+    .nav-hint{
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      color: var(--muted); font-size: 12px; opacity: .9;
+    }
+
+    /* Gallery & Lightbox */
+    .gallery{ display:grid; gap:12px; grid-template-columns: repeat(3,1fr) }
+    @media (max-width:780px){ .gallery{ grid-template-columns: repeat(2,1fr) } }
+    @media (max-width:520px){ .gallery{ grid-template-columns: 1fr } }
+    .gallery figure{ margin:0; border-radius:14px; overflow:hidden; border:1px solid var(--border); aspect-ratio: 16/10; background:#0e0a18; position:relative }
+    .gallery img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s ease }
+    .gallery figure:hover img{ transform: scale(1.04) }
+    .gallery figcaption{
+      position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-size:13px; color:#fff9f4;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+    }
+    .lightbox{
+      position:fixed; inset:0; display:none; place-items:center; padding:24px; z-index:9998;
+      background: rgba(10,6,17,.75); backdrop-filter: blur(6px);
+    }
+    .lightbox.open{ display:grid }
+    .lightbox figure{ margin:0; max-width:96vw; max-height:88vh; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#000; box-shadow: var(--shadow) }
+    .lightbox img{ display:block; max-width:100%; max-height:88vh; object-fit:contain }
+    .lightbox .close{ position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
+      font-weight:800; background:linear-gradient(90deg, var(--brand), var(--brand2)); color:#1b0c10 }
+
+    /* Share bar */
+    .share{ display:flex; gap:10px; flex-wrap:wrap }
+    .share a{ display:inline-flex; gap:8px; align-items:center; text-decoration:none; color:#fff; font-weight:800; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.16); transition: transform .15s ease }
+    .share a:hover{ transform: translateY(-2px) }
+    .fb{ background:#1877F2 } .tw{ background:#1DA1F2 } .x{ background:#0F1419 }
+    .wa{ background:#25D366 } .tg{ background:#229ED9 } .ig{ background:#E1306C }
+    .th{ background:#000 } .tt{ background:#010101 }
+
+    /* Code highlight + copy */
+    pre code{ display:block; border-radius:14px }
+    .codewrap{ position:relative }
+    .copy-btn{
+      position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); color:#140b0f; font-weight:800; box-shadow: var(--shadow)
+    }
+
+    /* Footer info */
+    footer{
+      position: relative;
+      padding: 18px 22px 80px;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .sys{
+      display:grid; gap:16px; grid-template-columns: 1.2fr .8fr; max-width:var(--maxw); margin: 0 auto;
+    }
+    @media (max-width:780px){ .sys{ grid-template-columns: 1fr } }
+    .chip{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; border:1px solid var(--border); background: rgba(255,255,255,.05); margin-right:8px }
+    .flag{ display:inline-flex; gap:10px; align-items:center; padding:8px 12px; border-radius:12px; border:1px solid var(--border); background: rgba(255,255,255,.05) }
+    .flag img{ width:28px; height:20px; object-fit:cover; border-radius:4px }
+
+    /* Tombol Home (perbaikan snippet agar berfungsi) */
+    #btn-home-left, #btn-home-right{
+      position: fixed; display: inline-flex; align-items: center; gap:6px;
+      background-color: #ff7a18; color: #1a0f0f; padding:10px 14px; border-radius:999px;
+      text-decoration:none; font-family:inherit; font-size:14px; font-weight:900;
+      box-shadow: 0 12px 26px rgba(255,122,24,.35);
+      transition: background .3s ease, transform .2s ease; z-index: 9999;
+    }
+    #btn-home-left:hover, #btn-home-right:hover{ background-color:#ff9a4a; transform: scale(1.05) }
+    #btn-home-left{ left:10px; top:30%; transform: translateY(-50%) }
+    #btn-home-right{ right:10px; bottom:20%; transform: translateY(50%) }
+    #btn-home-left svg, #btn-home-right svg{ width:18px; height:18px; fill: currentColor }
+  </style>
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark-dimmed.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+    });
+  </script>
+<meta name="date" content="2025-09-28">
+
+  <meta property="og:image:alt" content="Sejarah & Pro-Kontra Maulid Nabi">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/maulid-slides.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-18T11:00:00+08:00"></head>
+<body>
+
+  <!-- Tombol Home Kiri (versi snippet diperbaiki) -->
+  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-left" title="Kembali ke Home">
+    <!-- Ikon Rumah SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="margin-right:6px;">
+      <path d="M575.8 255.5c0 12.7-10.3 23-23 23H512V472c0 22.1-17.9 40-40 40H360c-13.3 0-24-10.7-24-24V368H240v120c0 13.3-10.7 24-24 24H104c-22.1 0-40-17.9-40-40V278.5H23c-12.7 0-23-10.3-23-23 0-6.8 3-13.2 8.1-17.5L266.4 8.6c8.7-7.2 21.4-7.2 30.1 0l258.3 229.4c5.1 4.3 8 10.7 8 17.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Tombol Home Kanan (versi snippet diperbaiki) -->
+  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-right" title="Kembali ke Home">
+    <!-- Ikon Rumah SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="margin-right:6px;">
+      <path d="M575.8 255.5c0 12.7-10.3 23-23 23H512V472c0 22.1-17.9 40-40 40H360c-13.3 0-24-10.7-24-24V368H240v120c0 13.3-10.7 24-24 24H104c-22.1 0-40-17.9-40-40V278.5H23c-12.7 0-23-10.3-23-23 0-6.8 3-13.2 8.1-17.5L266.4 8.6c8.7-7.2 21.4-7.2 30.1 0l258.3 229.4c5.1 4.3 8 10.7 8 17.5z"/>
+    </svg>
+    Home
+  </a>
+
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: Judul -->
+    <section class="slide">
+      <div>
+        <h1 class="title">Maulid Nabi: Sejarah, Pro-Kontra, dan Hikmah</h1>
+        <p class="subtitle">Outline slide presentasi siap pakai untuk mengajar atau diskusi. Nama: Fakhrul • Topik: Kajian ringkas Maulid Nabi</p>
+        <div class="chips">
+          <span class="chip">Sejarah</span>
+          <span class="chip">Ikhtilaf Ulama</span>
+          <span class="chip">Sikap Bijak</span>
+        </div>
+      </div>
+      <div class="nav-hint">Scroll ke bawah untuk slide berikutnya ⬇️</div>
+    </section>
+
+    <!-- Slide 2: Latar belakang -->
+    <section class="slide">
+      <div class="content">
+        <article class="card">
+          <div class="head"><h2>Slide 2 — Latar belakang</h2></div>
+          <div class="body">
+            <ul class="bullets">
+              <li><strong>Maulid Nabi:</strong> perayaan kelahiran Rasulullah ﷺ.</li>
+              <li><strong>Fakta awal:</strong> tidak dilakukan pada masa Nabi, sahabat, dan tabi’in.</li>
+              <li><strong>Realitas:</strong> menjadi tradisi luas di dunia Islam.</li>
+              <li><strong>Dampak:</strong> memunculkan perbedaan pendapat ulama.</li>
+            </ul>
+            <p class="call" style="margin-top:10px"><strong>Catatan:</strong> Perbedaan lahir dari cara memandang bentuk ibadah vs. wasilah dakwah.</p>
+          </div>
+        </article>
+              </div>
+      <div class="nav-hint">Slide 2/6</div>
+    </section>
+
+    <!-- Slide 3: Sejarah singkat -->
+    <section class="slide">
+      <div class="content">
+        <article class="card">
+          <div class="head"><h2>Slide 3 — Sejarah singkat</h2></div>
+          <div class="body">
+            <ul class="bullets">
+              <li><strong>Abad ke-4 H:</strong> awal perayaan pada masa Dinasti Fathimiyah (Mesir).</li>
+              <li><strong>Abad ke-6–7 H:</strong> masuk Ahlus Sunnah (Syam & Irak), bentuk sederhana (sirah, dzikir, doa).</li>
+              <li><strong>Abad ke-8–9 H:</strong> sebagian ulama membolehkan dengan syarat isi kebaikan (shalawat, sedekah, sirah).</li>
+              <li><strong>Abad ke-12 H:</strong> gelombang tajdid menolak Maulid sebagai bid’ah.</li>
+              <li><strong>Masa modern:</strong> dirayakan luas (Indonesia, Mesir, Turki, Maroko); tidak dirayakan resmi di sebagian negara (mis. Saudi).</li>
+            </ul>
+            <p class="call" style="margin-top:10px"><strong>Benang merah:</strong> Dari fenomena politik-istana, lalu budaya-keagamaan, hingga menjadi perdebatan fiqh yang berkelanjutan.</p>
+          </div>
+        </article>
+        <aside class="card">
+          <div class="head"><h2>Kutipan siap salin</h2></div>
+          <div class="body">
+            <div class="codewrap">
+<pre><code class="language-markdown">- 4 H: Fathimiyah (Mesir), awal Maulid.
+- 6–7 H: Masuk Ahlus Sunnah (Syam & Irak).
+- 8–9 H: Ulama membolehkan dengan syarat.
+- 12 H: Gelombang tajdid menolak.
+- Modern: Praktik beragam lintas negara.</code></pre>
+              <button class="copy-btn">Copy</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="nav-hint">Slide 3/6</div>
+    </section>
+
+    <!-- Slide 4: Pandangan ulama -->
+    <section class="slide">
+      <div class="content">
+        <article class="card">
+          <div class="head"><h2>Slide 4 — Pandangan ulama</h2></div>
+          <div class="body">
+            <h3 style="margin:0 0 6px">❌ Ulama yang melarang <span class="tag bad">Bid’ah</span></h3>
+            <ul class="bullets">
+              <li><strong>Dalil:</strong> larangan perkara baru dalam agama.</li>
+              <li><strong>Fakta teladan:</strong> tidak pernah dirayakan Nabi ﷺ & sahabat.</li>
+              <li><strong>Kekhawatiran:</strong> tasyabbuh dan ghuluw.</li>
+            </ul>
+            <hr style="border:0;border-top:1px dashed var(--border);margin:12px 0">
+            <h3 style="margin:0 0 6px">✅ Ulama yang membolehkan <span class="tag ok">Wasilah</span></h3>
+            <ul class="bullets">
+              <li><strong>Dalil umum:</strong> shalawat, syukur, ta’lim sirah.</li>
+              <li><strong>Kaidah:</strong> mashlahat; bukan ibadah khusus yang ditetapkan nash.</li>
+              <li><strong>Syarat:</strong> isi kebaikan, bebas kemungkaran.</li>
+            </ul>
+          </div>
+        </article>
+        <aside class="card">
+          <div class="head"><h2>Ringkas siap salin</h2></div>
+          <div class="body">
+            <div class="codewrap">
+<pre><code class="language-markdown">❌ Larang: bid’ah, tanpa teladan salaf, tasyabbuh.
+✅ Boleh: wasilah kebaikan (sirah, shalawat, sedekah), dengan syarat.
+🤝 Dua pendekatan: bentuk ibadah vs media dakwah.</code></pre>
+              <button class="copy-btn">Copy</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="nav-hint">Slide 4/6</div>
+    </section>
+
+    <!-- Slide 5: Pro-Kontra (ringkas) -->
+    <section class="slide">
+      <div class="content">
+        <article class="card">
+          <div class="head"><h2>Slide 5 — Pro & Kontra (ringkas)</h2></div>
+          <div class="body">
+            <ul class="bullets">
+              <li><strong>❌ Kontra:</strong> Bid’ah, tasyabbuh, tanpa contoh Nabi ﷺ.</li>
+              <li><strong>✅ Pro:</strong> Media dakwah, cinta Nabi, pengajaran sirah.</li>
+              <li><strong>🤝 Kesimpulan:</strong> Dua pendekatan sama-sama bersumber dari kecintaan kepada Rasulullah ﷺ.</li>
+            </ul>
+            <p class="call" style="margin-top:10px"><strong>Tip presentasi:</strong> Tampilkan contoh praktik baik (ta’lim sirah, santunan, shalawat ma’tsur) sebagai “standar isi”.</p>
+          </div>
+        </article>
+        <aside class="card">
+          <div class="head"><h2>Bagikan slide</h2></div>
+          <div class="body">
+            <div id="share" class="share">
+              <a class="fb" href="#" rel="noreferrer" aria-label="Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 12.06C22 6.48 17.52 2 11.94 2S2 6.48 2 12.06C2 17.08 5.66 21.2 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.91h-2.33V22C18.34 21.2 22 17.08 22 12.06Z"/></svg>
+                Facebook
+              </a>
+              <a class="tw" href="#" rel="noreferrer" aria-label="Twitter">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 5.92c-.75.33-1.56.55-2.41.65a4.14 4.14 0 0 0 1.82-2.28 8.3 8.3 0 0 1-2.62 1 4.14 4.14 0 0 0-7.06 3.77 11.74 11.74 0 0 1-8.52-4.32 4.14 4.14 0 0 0 1.28 5.52c-.63-.02-1.23-.2-1.75-.49v.05a4.14 4.14 0 0 0 3.32 4.06c-.3.08-.62.12-.95.12-.23 0-.46-.02-.68-.06a4.14 4.14 0 0 0 3.86 2.87A8.31 8.31 0 0 1 2 19.54a11.74 11.74 0 0 0 6.35 1.86c7.62 0 11.79-6.31 11.79-11.79l-.01-.54A8.39 8.39 0 0 0 22 5.92Z"/></svg>
+                Twitter
+              </a>
+              <a class="x" href="#" rel="noreferrer" aria-label="X">
+                <svg width="18" height="18" viewBox="0 0 1200 1227" aria-hidden="true"><path fill="currentColor" d="M714.163 519.284 1160.89 0h-105.03L667.137 444.311 373.977 0H0l468.492 682.534L0 1226.37h105.03l416.23-464.93 307.763 464.93H1200L714.163 519.284Zm-147.36 163.42-48.275-69.366L143.02 79.833h163.41l310.12 446.605 48.27 69.366 394.22 566.948h-163.41L566.803 682.704Z"/></svg>
+                X
+              </a>
+              <a class="wa" href="#" rel="noreferrer" aria-label="WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.23c-.27-.14-1.58-.78-1.83-.86-.25-.09-.43-.14-.61.14-.18.27-.7.86-.86 1.04-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.2-1.37-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46-.16 0-.34-.02-.52-.02-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.66 1.12 2.85.14.18 1.93 2.94 4.67 4.13.65.28 1.16.45 1.56.58.65.21 1.24.18 1.7.11.52-.08 1.58-.65 1.81-1.27.23-.63.23-1.18.16-1.29-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M26.06 5.96A12.92 12.92 0 0 0 16.06 2C8.29 2 2 8.29 2 16.06c0 2.47.67 4.87 1.93 6.98L2 30l7.18-1.88a14.08 14.08 0 0 0 6.88 1.76h.01c7.77 0 14.06-6.29 14.06-14.06 0-3.76-1.47-7.3-4.07-9.86zm-10 22.09h-.01a11.72 11.72 0 0 1-5.98-1.64l-.43-.26-4.26 1.12 1.14-4.15-.28-.43A11.73 11.73 0 0 1 4.34 16.06c0-6.45 5.25-11.72 11.71-11.72 3.14 0 6.09 1.23 8.31 3.45a11.68 11.68 0 0 1 3.45 8.28c0 6.45-5.25 11.71-11.71 11.71z"/></svg>
+                WhatsApp
+              </a>
+              <a class="tg" href="#" rel="noreferrer" aria-label="Telegram">
+                <svg width="18" height="18" viewBox="0 0 240 240" aria-hidden="true"><path fill="currentColor" d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 120-53.73 120-120S186.27 0 120 0Zm54.38 80.38-19.47 92.02c-1.47 6.64-5.36 8.28-10.86 5.16l-30-22.14-14.49 13.96c-1.6 1.6-2.93 2.93-6 2.93l2.15-30.7 55.89-50.53c2.43-2.15-.53-3.34-3.78-1.2l-69.06 43.49-29.76-9.29c-6.46-2.03-6.58-6.46 1.35-9.52l116.14-44.8c5.36-1.97 10.06 1.2 8.31 9.41Z"/></svg>
+                Telegram
+              </a>
+              <a class="ig" href="https://www.instagram.com" rel="noreferrer" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10.8 2c1.1 0 2.2 1.1 2.2 2.2V18c0 1.1-1.1 2.2-2.2 2.2H6.2C5.1 20.2 4 19.1 4 18V6.2C4 5.1 5.1 4 6.2 4H17.8zM12 7a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7zm6-1.2a1.2 1.2 0 1 0 .001 2.401A1.2 1.2 0 0 0 18 5.8z"/></svg>
+                Instagram
+              </a>
+              <a class="th" href="https://www.threads.net" rel="noreferrer" aria-label="Threads">
+                <svg width="18" height="18" viewBox="0 0 192 192" aria-hidden="true"><path fill="currentColor" d="M96 24c-39.76 0-72 32.24-72 72s32.24 72 72 72 72-32.24 72-72-32.24-72-72-72zm38.44 80.51c-.55 6.41-2.88 12.05-6.94 16.83-7.26 8.68-17.96 13.12-31.76 13.12-5.86 0-11.07-.92-15.53-2.76-4.45-1.85-8.11-4.33-10.86-7.36l9.28-8.53c3.63 3.94 9.55 6.18 17.3 6.18 8.83 0 15.24-2.44 19.06-7.25 2.37-3 3.59-6.72 3.59-11.37 0-4.32-1.06-7.88-3.15-10.57-3.09-4.02-8.9-6.29-16.37-6.53l-8.9-.29v-10.8l8.02.3c5.68-.15 10.02-1.43 12.93-3.83 2.93-2.41 4.42-5.83 4.42-10.47 0-4.52-1.23-8.1-3.62-10.97-3.16-3.74-7.9-5.68-14.08-5.87-7.02-.22-12.57 1.42-16.45 4.85l-9.01-8.19c6.33-5.33 14.98-8.06 25.73-8.06 13.32 0 23.75 3.64 30.98 10.82 6.54 6.42 10.1 15.3 10.6 26.42l6.34 1.82-2.21 9.6-6.39-1.86z"/></svg>
+                Threads
+              </a>
+              <a class="tt" href="https://www.tiktok.com" rel="noreferrer" aria-label="TikTok">
+                <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M31.6 5.5c1.9 2.5 4.6 4.4 7.7 5V18c-3.4-.04-6.7-1.1-9.5-3.1l-.02 11.42c0 6.58-5.33 11.9-11.9 11.9-3.2 0-6.11-1.28-8.23-3.36a11.9 11.9 0 0 1 8.23-20.44c.65 0 1.29.06 1.9.18v6.5c-.61-.2-1.26-.31-1.94-.31a5.4 5.4 0 0 0 0 10.8 5.4 5.4 0 0 0 5.4-5.4l.06-27.29h7.22Z"/></svg>
+                TikTok
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="nav-hint">Slide 5/6</div>
+    </section>
+
+    <!-- Slide 6: Hikmah & Sikap -->
+    <section class="slide">
+      <div class="content">
+        <article class="card" style="grid-column:1/-1">
+          <div class="head"><h2>Slide 6 — Hikmah & sikap bijak</h2></div>
+          <div class="body">
+            <ul class="bullets">
+              <li><strong>Menghargai ikhtilaf:</strong> pahami alasan ilmiah kedua pihak.</li>
+              <li><strong>Fokus substansi:</strong> dzikir, shalawat, sirah Nabi, sedekah.</li>
+              <li><strong>Jaga ukhuwah:</strong> hindari saling menyalahkan; nasihati dengan hikmah.</li>
+              <li><strong>Kurasi praktik:</strong> bila dilakukan, isi harus sahih dan beradab; hindari kemungkaran.</li>
+            </ul>
+            <p class="call" style="margin-top:10px"><strong>Pesan penutup:</strong> Jadikan cinta kepada Rasulullah ﷺ sebagai energi memperbaiki ilmu, akhlak, dan layanan kepada sesama.</p>
+          </div>
+        </article>
+      </div>
+      <div class="nav-hint">Slide 6/6 • Selesai</div>
+    </section>
+
+    <!-- Komentar Facebook -->
+    <section class="slide">
+      <div class="content">
+        <article class="card" style="grid-column:1/-1">
+          <div class="head"><h2>Komentar</h2></div>
+          <div class="body">
+            <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+            <div style="margin-top:16px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+            <!-- Facebook Comments Plugin (user-provided) -->
+            <div style="margin-top:18px">
+              <!-- Facebook Comments Plugin -->
+              <div id="fb-root"></div>
+              <script async defer crossorigin="anonymous"
+                src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+              </script>
+              <div class="fb-comments"
+                   id="fb-comments"
+                   data-href=""
+                   data-width="100%"
+                   data-numposts="5"></div>
+              <script>
+                const currentUrl = window.location.href;
+                document.getElementById("current-url").textContent = currentUrl;
+                // Set data-href FB Comments ke URL halaman ini
+                document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+                // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+                window.fbAsyncInit = function() {
+                  if (typeof FB !== 'undefined') {
+                    try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+                  }
+                }
+              </script>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="nav-hint">Diskusikan dengan adab dan data</div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="sys">
+      <div class="card">
+        <div class="head"><h2>Info sistem & perangkat</h2></div>
+        <div class="body">
+          <span id="ua-browser" class="chip"><strong>Browser:</strong> —</span>
+          <span id="ua-os" class="chip"><strong>OS:</strong> —</span>
+          <div id="ua-icons" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:10px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="head"><h2>Lokasi & jaringan</h2></div>
+        <div class="body">
+          <p id="ip-info"><strong>IP Publik:</strong> —</p>
+          <p id="city-info"><strong>Kota:</strong> —</p>
+          <div class="flag"><img id="flag" alt="Bendera negara" src=""><span id="country-name">—</span></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox modal -->
+  <div class="lightbox" id="lightbox">
+    <figure>
+      <button class="close" id="lb-close" aria-label="Tutup">Tutup ✕</button>
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap" style="color:#e5e7eb; padding:10px 12px"></figcaption>
+    </figure>
+  </div>
+
+  <!-- JSON-LD: Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Slide Web: Sejarah & Pro-Kontra Maulid Nabi","description":"Slide presentasi interaktif: latar belakang, timeline, pro-kontra ulama, dan hikmah Maulid Nabi.","inLanguage":"id-ID","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.github.io/artikel/maulid-slides.jpg"},"publisher":{"@type":"Organization","name":"Frijal Media","logo":{"@type":"ImageObject","url":"https://frijal.github.io/assets/favicon.png","image":"https://frijal.github.io/artikel/maulid-slides.jpg"},"image":"https://frijal.github.io/artikel/maulid-slides.jpg"},"image":"https://frijal.github.io/assets/og-maulid-slides.jpg","dateModified":"2025-09-18","datePublished":"2025-09-18","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/maulid-slides.html","image":"https://frijal.github.io/artikel/maulid-slides.jpg"}}</script>
+
+  <!-- JSON-LD: Breadcrumb -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io/","image":"https://frijal.github.io/artikel/maulid-slides.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/","image":"https://frijal.github.io/artikel/maulid-slides.jpg"},{"@type":"ListItem","position":3,"name":"Slide Maulid Nabi","item":"https://frijal.github.io/artikel/maulid-slides.html","image":"https://frijal.github.io/artikel/maulid-slides.jpg"}],"image":"https://frijal.github.io/artikel/maulid-slides.jpg"}</script>
+
+  <!-- Skrip: Lightbox, Share, UA parsing, IP & Flag, Copy -->
+  <script>
+    // Lightbox
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img');
+      const cap = document.getElementById('lb-cap');
+      const closeBtn = document.getElementById('lb-close');
+      document.querySelectorAll('a.lb').forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          img.src = a.getAttribute('href');
+          cap.textContent = a.getAttribute('data-caption') || '';
+          lb.classList.add('open');
+          document.body.style.overflow='hidden';
+        });
+      });
+      function closeLB(){ lb.classList.remove('open'); img.src=''; cap.textContent=''; document.body.style.overflow=''; }
+      closeBtn.addEventListener('click', closeLB);
+      lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+      document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
+    })();
+
+    // Share links (gunakan canonical)
+    (function(){
+      const url = encodeURIComponent('https://frijal.github.io/artikel/maulid-slides.html');
+      const title = encodeURIComponent('Slide Web: Maulid Nabi');
+      const s = document.getElementById('share') || document;
+      const map = {
+        '.fb': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+        '.tw': `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+        '.x' : `https://x.com/intent/post?url=${url}&text=${title}`,
+        '.wa': `https://wa.me/?text=${title}%20${url}`,
+        '.tg': `https://t.me/share/url?url=${url}&text=${title}`,
+        '.ig': `https://www.instagram.com/`,
+        '.th': `https://www.threads.net/`,
+        '.tt': `https://www.tiktok.com/`
+      };
+      Object.entries(map).forEach(([sel,href])=>{
+        const a = s.querySelector ? s.querySelector(sel) : null;
+        if (a) a.href = href;
+      });
+    })();
+
+    // Copy buttons
+    document.addEventListener('click', (e)=>{
+      if (e.target.matches('.copy-btn')) {
+        const pre = e.target.closest('.codewrap').querySelector('pre');
+        const text = pre ? pre.innerText : '';
+        if (navigator.clipboard && text) {
+          navigator.clipboard.writeText(text).then(()=>{
+            const old = e.target.textContent;
+            e.target.textContent = 'Copied!';
+            setTimeout(()=> e.target.textContent = old, 1200);
+          });
+        }
+      }
+    });
+
+    // UA parsing (ringkas + ikon)
+    (function(){
+      const ua = navigator.userAgent;
+      const bEl = document.getElementById('ua-browser');
+      const oEl = document.getElementById('ua-os');
+      const icons = document.getElementById('ua-icons');
+
+      function badge(path,label){
+        const span = document.createElement('span');
+        span.className = 'chip';
+        span.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="${path}"></path></svg><span>${label}</span>`;
+        return span;
+      }
+
+      let browser='Tidak diketahui', bIcon='M3 3h18v18H3z';
+      if (/Edg\//.test(ua)){ browser='Microsoft Edge'; bIcon='M12 2a10 10 0 1 0 0 20c5.5 0 8-3.5 8-7.5-2 1.5-5 2-7 2a4.5 4.5 0 1 1 0-9c2 0 5 .5 7 2C20 5.5 17.5 2 12 2z'; }
+      else if (/Chrome\//.test(ua)){ browser='Google Chrome'; bIcon='M12 2a10 10 0 0 1 8.66 5H12L7.67 7A10 10 0 0 1 12 2zm0 20A10 10 0 0 1 3.34 17H12l4.33.01A10 10 0 0 1 12 22zm10-10a10 10 0 0 1-1.34 5H12l-2.17-3.76L12 7h8.66c.22.95.34 1.96.34 3z'; }
+      else if (/Firefox\//.test(ua)){ browser='Mozilla Firefox'; bIcon='M12 2c5.5 0 10 4.5 10 10 0 4.42-2.86 8.17-6.82 9.5.46-1.53.72-3.38.18-5.02-1.67-5.19-6.78-4.34-8.86-9.27C5.37 7.48 5 8.7 5 10c0 3.87 3.13 7 7 7 1.66 0 3.19-.58 4.39-1.55C15.38 19.9 13.78 22 12 22 6.5 22 2 17.5 2 12S6.5 2 12 2z'; }
+      else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)){ browser='Safari'; bIcon='M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0 2l6 10-10 6L6 8l6-4z'; }
+      else if (/OPR\//.test(ua) || /Opera/.test(ua)){ browser='Opera'; bIcon='M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 3c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z'; }
+
+      let os='Tidak diketahui', oIcon='M3 3h18v18H3z';
+      if (/Windows NT/.test(ua)){ os='Windows'; oIcon='M3 4l8-1v9H3V4zm9-1l9-2v12h-9V3zM3 13h8v9l-8-1v-8zm9 0h9v10l-9-2V13z'; }
+      else if (/Android/.test(ua)){ os='Android'; oIcon='M6 8h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8zm10.5-3.5L18 3l1.5 1.5-.7.7L16.5 3.7zm-9 0L8 3 6.5 4.5l.7.7L7.5 3.7zM12 5a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4zM5 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1zm14 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1z'; }
+      else if (/iPhone|iPad|iPod|Mac OS X|Macintosh/.test(ua)){ os='Apple iOS/macOS'; oIcon='M16.365 1.43c0 1.14-.48 2.24-1.25 3.1-.77.86-2.04 1.52-3.1 1.52-.15 0-.3-.01-.45-.03.02-1.1.49-2.25 1.27-3.1.78-.86 2.08-1.52 3.1-1.52.14 0 .29.01.43.03zM20.5 17.3c-.46 1.07-.69 1.55-1.29 2.5-.84 1.3-2.03 2.92-3.5 2.94-1.47.03-1.94-.93-3.15-.93-1.21 0-1.58.9-3.28.92-1.7.02-2.12-.74-3.59-2.14-1.95-1.34-3.47-3.94-3.47-6.83 0-3.23 1.7-5.22 3.38-6.37 1.61-1.05 2.73-.8 3.58-.8 1.45 0 2.02.73 3.74.75.41.01 1.43-.14 2.36-.52 1.02-.39 1.95-1.02 2.8-1.9.95-.89 1.94-2.32 2.17-3.42.14-.85.33-1.49.71-2 .35.79.51 1.49.65 2.06.14.61.44 1.57.94 2.7.57 1.27 1.38 2.24 2.4 3.47.78 1.03 1.43 2.37 1.43 3.91 0 1.26-.35 2.45-.88 3.64z'; }
+      else if (/Linux/.test(ua)){ os='Linux'; oIcon='M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1 4h2v4h-2V6zm0 6h2v6h-2v-6z'; }
+
+      const bVer = (ua.match(/(Edg|Chrome|Firefox|Version)\/([\d.]+)/)||[])[2]||'';
+      let oVer = (ua.match(/Windows NT ([\d.]+)/) || ua.match(/Android ([\d.]+)/) || ua.match(/OS ([\d_]+)/) || [])[1] || '';
+      oVer = oVer ? oVer.replace(/_/g,'.') : oVer;
+
+      bEl.innerHTML = `<strong>Browser:</strong> ${browser} ${bVer? 'v'+bVer : ''}`;
+      oEl.innerHTML = `<strong>OS:</strong> ${os} ${oVer? 'v'+oVer : ''}`;
+      document.getElementById('ua-icons').appendChild(badge(bIcon, browser));
+      document.getElementById('ua-icons').appendChild(badge(oIcon, os));
+    })();
+
+    // IP & Flag (ipwho.is)
+    (function(){
+      const ipEl = document.getElementById('ip-info');
+      const cityEl = document.getElementById('city-info');
+      const flagImg = document.getElementById('flag');
+      const countryName = document.getElementById('country-name');
+
+      fetch('https://ipwho.is/')
+        .then(r=>r.json())
+        .then(data=>{
+          ipEl.innerHTML = `<strong>IP Publik:</strong> ${data.ip || '—'}`;
+          cityEl.innerHTML = `<strong>Kota:</strong> ${data.city || '—'}`;
+          countryName.textContent = data.country || '—';
+          const code = (data.country_code || '').toLowerCase();
+          flagImg.src = code ? `https://flagcdn.com/w40/${code}.png` : '';
+          flagImg.alt = data.country ? `Bendera ${data.country}` : 'Bendera negara';
+        })
+        .catch(()=>{ /* silent */ });
+    })();
+  </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>

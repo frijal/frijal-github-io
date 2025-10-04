@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- prettier-ignore -->
+<title>Apa Bedanya target=_blank dengan target=' '?</title>
+  
+  <!-- Metadata SEO -->
+  <link rel="canonical" href="https://frijal.github.io/artikel/target-blank-vs-empty.html">
+  <meta name="description" content="Penjelasan lengkap tentang perbedaan target='_blank' dan target='' dalam link HTML. Plus demo interaktif, galeri, ikon share, komentar, dan deteksi browser/OS.">
+  <meta name="keywords" content="html, target, _blank, rel, noreferrer, noopener, tutorial">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Apa Bedanya target='_blank' dengan target=''?">
+  <meta property="og:description" content="Belajar perbedaan target='_blank' dan target='' di HTML. Artikel dengan demo interaktif, galeri, share sosmed, komentar, dan deteksi browser.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/target-blank-vs-empty.html">
+  <meta property="og:type" content="article">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apa Bedanya target='_blank' dengan target=''?">
+  <meta name="twitter:description" content="Penjelasan lengkap target HTML.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+
+  <!-- CSS -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      background: #fafafa;
+      color: #222;
+    }
+    header {
+      background: #0078d7;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      margin-top: 30px;
+    }
+    .demo-links a {
+      display: block;
+      margin: 10px 0;
+      padding: 12px;
+      background: #eef;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0078d7;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .demo-links a:hover { background: #dde; }
+
+    /* Galeri */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .lightbox .prev, .lightbox .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      user-select: none;
+    }
+    .lightbox .prev { left: 20px; }
+    .lightbox .next { right: 20px; }
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Tombol Sitemap & Home */
+    .btn-sitemap {
+      position: fixed;
+      top: 30%;
+      left: 10px;
+      background: #0078d7;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .btn-home {
+      position: fixed;
+      bottom: 20%;
+      right: 10px;
+      background: #0078d7;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      padding: 20px;
+      background: #f1f1f1;
+    }
+
+    /* Share buttons */
+    .share {
+      margin: 20px 0;
+    }
+    .share a {
+      margin: 5px;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      color: white;
+    }
+    .share .fb { background: #3b5998; }
+    .share .tw { background: #1da1f2; }
+    .share .wa { background: #25d366; }
+  </style>
+  <meta property="og:image" content="https://frijal.github.io/artikel/target-blank-vs-empty.jpg">
+  <meta property="og:image:alt" content="Apa Bedanya target=_blank dengan target=' '?">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/target-blank-vs-empty.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/target-blank-vs-empty.jpg">
+
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-10-02T11:00:00+08:00"></head>
+<body>
+  <header>
+    <h1>Apa Bedanya target="_blank" dengan target=""?</h1>
+    <p>Belajar HTML dengan santai + demo interaktif</p>
+  </header>
+
+  <main>
+    <h2>📖 Penjelasan</h2>
+    <p>
+      Dalam HTML, atribut <code>target</code> pada tag <code>&lt;a&gt;</code> dipakai untuk mengatur 
+      bagaimana link dibuka. Biasanya ada dua yang sering membingungkan:
+    </p>
+    <ul>
+      <li><b>target="_blank"</b>: selalu buka link di tab/jendela baru.</li>
+      <li><b>target=""</b> (kosong): sama saja dengan tidak menulis target, link dibuka di tab sekarang.</li>
+    </ul>
+    <p>
+      Jadi kalau kamu menulis <code>target=""</code>, itu sebenarnya tidak ada efek khusus. Browser menganggapnya sama dengan default.
+    </p>
+
+    <h2>⚡ Demo Interaktif</h2>
+    <p>Coba klik link di bawah, lalu perhatikan apakah terbuka di tab baru atau tetap di tab sekarang:</p>
+    <div class="demo-links">
+      <a href="https://frijal.github.io/sitemap.html" target="_blank">🔗 target="_blank" → buka tab baru</a>
+      <a href="https://frijal.github.io/sitemap.html" target="">🔗 target="" → sama saja dengan default (tab ini)</a>
+      <a href="https://frijal.github.io/sitemap.html">🔗 tanpa target → default (tab ini)</a>
+    </div>
+
+        <div class="share">
+      <p>📢 Bagikan artikel ini:</p>
+      <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/target-blank-vs-empty.html" target="_blank">Facebook</a>
+      <a class="tw" href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/target-blank-vs-empty.html" target="_blank">Twitter</a>
+      <a class="wa" href="https://wa.me/?text=https://frijal.github.io/artikel/target-blank-vs-empty.html" target="_blank">WhatsApp</a>
+    </div>
+
+    <h2>💬 Komentar</h2>
+    <div id="fb-root"></div>
+    <div class="fb-comments" data-href="https://frijal.github.io/artikel/target-blank-vs-empty.html" data-width="100%" data-numposts="5"></div>
+
+    <h2>🖥️ Deteksi Browser, OS, & Lokasi</h2>
+    <p id="deteksi">Mendeteksi...</p>
+  </main>
+
+  <footer>
+    &#127279; 2025 Frijal Blog • Artikel edukasi HTML
+  </footer>
+
+  <!-- Tombol Sitemap & Home -->
+  <a href="https://frijal.github.io/sitemap.html" class="btn-sitemap">📑 Sitemap</a>
+  <a href="https://frijal.github.io" class="btn-home">🏠 Home</a>
+
+  <!-- Lightbox Script -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+    <img id="lightbox-img" src="" alt="">
+    <span class="next" onclick="changeSlide(1)">&#10095;</span>
+  </div>
+
+  <script>
+    // Lightbox
+    const images = document.querySelectorAll('.gallery img');
+    let currentIndex = 0;
+    function openLightbox(i) {
+      currentIndex = i;
+      document.getElementById('lightbox-img').src = images[i].src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+    function changeSlide(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex].src;
+    }
+
+    // Deteksi Browser, OS, GeoIP
+    const ua = navigator.userAgent;
+    let browser = "Unknown Browser";
+    if (ua.indexOf("Firefox") > -1) browser = "Firefox";
+    else if (ua.indexOf("Chrome") > -1) browser = "Chrome";
+    else if (ua.indexOf("Safari") > -1) browser = "Safari";
+
+    let os = "Unknown OS";
+    if (ua.indexOf("Win") > -1) os = "Windows";
+    else if (ua.indexOf("Linux") > -1) os = "Linux";
+    else if (ua.indexOf("Mac") > -1) os = "MacOS";
+
+    fetch("https://ipapi.co/json/")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("deteksi").innerText = 
+          `Browser: ${browser}, OS: ${os}, Lokasi: ${data.city}, ${data.country_name} (${data.country_code})`;
+      })
+      .catch(() => {
+        document.getElementById("deteksi").innerText = `Browser: ${browser}, OS: ${os}, Lokasi: tidak terdeteksi`;
+      });
+  </script>
+
+  <!-- Facebook SDK -->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v17.0"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+
