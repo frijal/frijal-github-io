@@ -182,7 +182,7 @@
         fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{const flag=`https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;document.getElementById('ip-info').innerHTML=`IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`}).catch(()=>{document.getElementById('ip-info').textContent='IP: Tidak terdeteksi'});
     });
     </script>
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
