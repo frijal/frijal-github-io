@@ -1,4 +1,4 @@
- <a
+<a
       href="https://frijal.github.io/sitemap.html"
       target=""
       id="btn-home-left"
@@ -36,43 +36,3 @@
       </svg>
       Home</a
     >
-    <style>
-      #btn-home-left,
-      #btn-home-right {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        background-color: #007bff;
-        color: #fff;
-        padding: 12px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition:
-          background 0.3s ease,
-          transform 0.2s ease;
-        z-index: 9999;
-      }
-      #btn-home-left:hover,
-      #btn-home-right:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
-      }
-      #btn-home-left {
-        left: 10px;
-        top: 30%;
-        transform: translateY(-50%);
-      }
-      #btn-home-right {
-        right: 10px;
-        bottom: 20%;
-        transform: translateY(50%);
-      }
-      #btn-home-left svg,
-      #btn-home-right svg {
-        flex-shrink: 0;
-      }
-    </style>
