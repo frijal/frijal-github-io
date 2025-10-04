@@ -186,3 +186,16 @@
   }
 }
 
+/* --- (3) GAYA UNTUK TEKS KATEGORI AKTIF DI KIRI BAWAH --- */
+#kategori-aktif {
+  position: fixed;
+  left: 0;
+  bottom: 5%;
+  margin-left: 10px;   /* opsional, biar tidak terlalu mepet */
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: inherit;
+  color: inherit;      /* ikut warna teks default halaman */
+  z-index: 9999;       /* pastikan di atas elemen lain */
+}

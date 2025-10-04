@@ -260,6 +260,26 @@ function initNavIcons(allArticlesData, currentFilename) {
     });
 }
 
+function initActiveCategoryText(allArticlesData, currentFilename) {
+    const kategoriDiv = document.getElementById('kategori-aktif');
+    if (!kategoriDiv) return;
+
+    let kategoriAktif = null;
+
+    for (const [kategori, articles] of Object.entries(allArticlesData)) {
+        const idx = articles.findIndex(a => a[1] === currentFilename);
+        if (idx !== -1) {
+            kategoriAktif = kategori;
+            break;
+        }
+    }
+
+    if (kategoriAktif) {
+        kategoriDiv.textContent = kategoriAktif;
+    }
+}
+
+
 // -------------------------------------------------------------------
 // FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
 // -------------------------------------------------------------------
@@ -277,10 +297,11 @@ async function initializeApp() {
             clearButton.innerHTML = '&times;';
         }
 
-        // Initialize all features with the fetched data
-        initCategoryMarquee(allArticlesData, currentFilename);
-        initFloatingSearch(allArticlesData);
-        initNavIcons(allArticlesData, currentFilename);
+	// Initialize all features with the fetched data
+	initCategoryMarquee(allArticlesData, currentFilename);
+	initFloatingSearch(allArticlesData);
+	initNavIcons(allArticlesData, currentFilename);
+	initActiveCategoryText(allArticlesData, currentFilename);
 
     } catch (error) {
         console.error("Gagal menginisialisasi aplikasi:", error);
