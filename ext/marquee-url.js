@@ -1,9 +1,10 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v3: MARQUEE, PENCARIAN & IKON NAVIGASI
+ * SKRIP GABUNGAN v4: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
- * - Fetch data hanya satu kali.
- * - Logika navigasi looping dengan indikator angka.
+ * - Fetch data hanya satu kali untuk semua fitur.
+ * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
+ * - Indikator angka dua baris & tooltip judul artikel.
  */
 
 // -------------------------------------------------------------------
@@ -138,8 +139,7 @@ function initFloatingSearch(allArticlesData) {
     });
 }
 
-function initNavIcons(allArticlesData) {
-    // -- KODE IKON KANAN BAWAH DITAMBAHKAN DI SINI --
+function initNavIcons(allArticlesData, currentFilename) {
     const iconContainer = document.createElement("div");
     iconContainer.className = "ikon-kanan-bawah";
     iconContainer.innerHTML = `
@@ -152,23 +152,10 @@ function initNavIcons(allArticlesData) {
           <rect width="48" height="48" rx="12" fill="url(#gNext)"/>
           <path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
-          <text id="text-next" x="24" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
+          <text id="next-top" x="24" y="38" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
+          <text id="next-bottom" x="24" y="46" text-anchor="middle" font-size="8" fill="#fff" opacity="0.8"></text>
         </svg>
       </a>
-
-      <!-- Ikon RSS -->
-      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#g1)"/>
-          <circle cx="14" cy="34" r="4" fill="#fff"/>
-          <path d="M12 22a16 16 0 0 1 14 14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </svg>
-      </a>
-
       <!-- Ikon Home -->
       <a href="https://frijal.github.io/home.html" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -179,7 +166,6 @@ function initNavIcons(allArticlesData) {
           <path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/>
         </svg>
       </a>
-
       <!-- Ikon Sitemap -->
       <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -194,7 +180,6 @@ function initNavIcons(allArticlesData) {
           <rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/>
         </svg>
       </a>
-
       <!-- Panah Kiri (Prev) -->
       <a id="prev-article" href="#" title="Artikel Sebelumnya">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -204,49 +189,59 @@ function initNavIcons(allArticlesData) {
           <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
           <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
-          <text id="text-prev" x="24" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
+          <text id="prev-top" x="24" y="38" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
+          <text id="prev-bottom" x="24" y="46" text-anchor="middle" font-size="8" fill="#fff" opacity="0.8"></text>
         </svg>
       </a>
     `;
     document.body.appendChild(iconContainer);
 
-    const allArticlesFlat = [];
-    for (const category in allArticlesData) {
-        allArticlesData[category].forEach(article => {
-            allArticlesFlat.push({
-                url: article[1]
-            });
-        });
+    // --- Logika Navigasi Berbasis Kategori ---
+    let currentCategoryName = null;
+    let articlesInCurrentCategory = [];
+    let currentIndexInCategory = -1;
+
+    for (const [category, articles] of Object.entries(allArticlesData)) {
+        const idx = articles.findIndex(a => a[1] === currentFilename);
+        if (idx !== -1) {
+            currentCategoryName = category;
+            articlesInCurrentCategory = articles;
+            currentIndexInCategory = idx;
+            break;
+        }
     }
 
-    if (allArticlesFlat.length === 0) return;
+    if (!articlesInCurrentCategory.length) return;
 
+    const total = articlesInCurrentCategory.length;
     const nextBtn = document.getElementById('next-article');
     const prevBtn = document.getElementById('prev-article');
-    const textNext = document.getElementById('text-next');
-    const textPrev = document.getElementById('text-prev');
-    const total = allArticlesFlat.length;
+    const nextTop = document.getElementById('next-top');
+    const nextBottom = document.getElementById('next-bottom');
+    const prevTop = document.getElementById('prev-top');
+    const prevBottom = document.getElementById('prev-bottom');
 
-    const currentUrl = window.location.pathname.split('/').pop();
-    let currentIndex = allArticlesFlat.findIndex(a => a.url === currentUrl);
-    if (currentIndex === -1) currentIndex = 0; // Default to first if not found
+    function updateUI() {
+        const nextIndex = (currentIndexInCategory - 1 + total) % total; // Newer posts have lower index
+        const prevIndex = (currentIndexInCategory + 1) % total; // Older posts have higher index
 
-    function updateLinks() {
-        // Looping logic
-        const nextIndex = (currentIndex - 1 + total) % total; // Newer posts are at a lower index
-        const prevIndex = (currentIndex + 1) % total; // Older posts are at a higher index
+        const nextArticle = articlesInCurrentCategory[nextIndex];
+        const prevArticle = articlesInCurrentCategory[prevIndex];
 
-        nextBtn.href = `/artikel/${allArticlesFlat[nextIndex].url}`;
-        prevBtn.href = `/artikel/${allArticlesFlat[prevIndex].url}`;
-        
-        // update angka di dalam ikon (index + 1 because index is 0-based)
-        textNext.textContent = (nextIndex + 1) + '/' + total;
-        textPrev.textContent = (prevIndex + 1) + '/' + total;
+        nextBtn.href = `/artikel/${nextArticle[1]}`;
+        prevBtn.href = `/artikel/${prevArticle[1]}`;
+
+        nextTop.textContent = nextIndex + 1;
+        nextBottom.textContent = `/ ${total}`;
+        prevTop.textContent = prevIndex + 1;
+        prevBottom.textContent = `/ ${total}`;
+
+        nextBtn.title = `${currentCategoryName} - ${nextArticle[0]}`;
+        prevBtn.title = `${currentCategoryName} - ${prevArticle[0]}`;
     }
 
-    updateLinks();
+    updateUI();
 }
-
 
 // -------------------------------------------------------------------
 // FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
@@ -268,7 +263,7 @@ async function initializeApp() {
         // Initialize all features with the fetched data
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
-        initNavIcons(allArticlesData);
+        initNavIcons(allArticlesData, currentFilename);
 
     } catch (error) {
         console.error("Gagal menginisialisasi aplikasi:", error);
