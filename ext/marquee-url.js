@@ -173,6 +173,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const iconContainer = document.createElement("div");
     iconContainer.className = "ikon-kanan-bawah";
     iconContainer.innerHTML = `
+      <!-- Panah Kanan (Next) - Gradient Oranye, letakkan paling atas -->
+      <a id="next-article" href="#" title="Artikel Berikutnya">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="gNext" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#gNext)"/>
+          <path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- Ikon RSS -->
       <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
@@ -184,6 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
           <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
         </svg>
       </a>
+
+      <!-- Ikon Home -->
       <a href="https://frijal.github.io/home.html" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
@@ -193,6 +208,8 @@ document.addEventListener('DOMContentLoaded', function() {
           <path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/>
         </svg>
       </a>
+
+      <!-- Ikon Sitemap -->
       <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
@@ -206,6 +223,52 @@ document.addEventListener('DOMContentLoaded', function() {
           <rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/>
         </svg>
       </a>
+
+      <!-- Panah Kiri (Prev) - Gradient Biru, letakkan paling bawah -->
+      <a id="prev-article" href="#" title="Artikel Sebelumnya">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
+          <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     `;
     document.body.appendChild(iconContainer);
+
+    // Ambil data artikel.json untuk navigasi Prev/Next
+    fetch('/artikel.json')
+      .then(res => res.json())
+      .then(data => {
+        const currentUrl = window.location.pathname.split('/').pop();
+        let currentIndex = -1;
+
+        // Flatten data and find current index
+        const allArticles = [];
+        for (const category in data) {
+            data[category].forEach(article => {
+                allArticles.push({
+                    url: article[1]
+                });
+            });
+        }
+        
+        currentIndex = allArticles.findIndex(article => article.url === currentUrl);
+
+        if (currentIndex !== -1) {
+            const nextArticle = allArticles[currentIndex - 1]; // Newer posts are at the start of the array
+            const prevArticle = allArticles[currentIndex + 1]; // Older posts are at the end
+
+            if (nextArticle) {
+                document.getElementById('next-article').href = `/artikel/${nextArticle.url}`;
+            }
+            if (prevArticle) {
+                document.getElementById('prev-article').href = `/artikel/${prevArticle.url}`;
+            }
+        }
+      })
+      .catch(err => console.error('Gagal memuat artikel.json untuk navigasi:', err));
 });
+
