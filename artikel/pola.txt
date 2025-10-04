@@ -1,4 +1,4 @@
-<a
+ <a
       href="https://frijal.github.io/sitemap.html"
       target=""
       id="btn-home-left"
@@ -15,8 +15,9 @@
           d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
         />
       </svg>
-      Home </a
-    ><a
+      Home
+    </a>
+    <a
       href="https://frijal.github.io/sitemap.html"
       target=""
       id="btn-home-right"
@@ -34,7 +35,8 @@
         />
       </svg>
       Home</a
-    ><style>
+    >
+    <style>
       #btn-home-left,
       #btn-home-right {
         position: fixed;
@@ -72,5 +74,5 @@
       #btn-home-left svg,
       #btn-home-right svg {
         flex-shrink: 0;
-      }</style
-    ><div></div>
+      }
+    </style>
