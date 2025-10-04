@@ -1,12 +1,15 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v2: MARQUEE, PENCARIAN & IKON KANAN BAWAH
+ * SKRIP GABUNGAN v3: MARQUEE, PENCARIAN & IKON NAVIGASI
  * ===================================================================
+ * - Fetch data hanya satu kali.
+ * - Logika navigasi looping dengan indikator angka.
  */
 
 // -------------------------------------------------------------------
 // FUNGSI-FUNGSI BANTUAN (HELPER FUNCTIONS)
 // -------------------------------------------------------------------
+
 function isMobileDevice() {
     return (window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 }
@@ -54,6 +57,7 @@ function searchArticles(query, jsonData) {
 // -------------------------------------------------------------------
 // FUNGSI INTI (CORE FUNCTIONS)
 // -------------------------------------------------------------------
+
 function initCategoryMarquee(allData, currentFilename) {
     const marqueeContainer = document.getElementById('related-marquee-container');
     if (!marqueeContainer) return;
@@ -128,52 +132,18 @@ function initFloatingSearch(allArticlesData) {
     });
     document.addEventListener('click', (event) => {
         const searchContainer = document.querySelector('.search-floating-container');
-        if (!searchContainer.contains(event.target)) {
+        if (searchContainer && !searchContainer.contains(event.target)) {
             resultsContainer.style.display = 'none';
         }
     });
 }
 
-// -------------------------------------------------------------------
-// FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
-// -------------------------------------------------------------------
-async function initializeApp() {
-    try {
-        const response = await fetch('/artikel.json');
-        if (!response.ok) throw new Error(`Gagal memuat artikel.json`);
-        const allArticlesData = await response.json();
-
-        const currentURL = window.location.pathname;
-        const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
-
-        const clearButton = document.getElementById('floatingSearchClear');
-        if (clearButton) {
-            clearButton.innerHTML = '&times;';
-        }
-
-        initCategoryMarquee(allArticlesData, currentFilename);
-        initFloatingSearch(allArticlesData);
-
-    } catch (error) {
-        console.error("Gagal menginisialisasi aplikasi:", error);
-        const searchInput = document.getElementById('floatingSearchInput');
-        if (searchInput) {
-            searchInput.placeholder = "Gagal memuat data";
-            searchInput.disabled = true;
-        }
-    }
-}
-
-// Menjalankan semua fungsi saat dokumen siap
-document.addEventListener('DOMContentLoaded', function() {
-    // Menjalankan aplikasi utama (pencarian dan marquee)
-    initializeApp();
-
+function initNavIcons(allArticlesData) {
     // -- KODE IKON KANAN BAWAH DITAMBAHKAN DI SINI --
     const iconContainer = document.createElement("div");
     iconContainer.className = "ikon-kanan-bawah";
     iconContainer.innerHTML = `
-      <!-- Panah Kanan (Next) - Gradient Oranye, letakkan paling atas -->
+      <!-- Panah Kanan (Next) -->
       <a id="next-article" href="#" title="Artikel Berikutnya">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="gNext" x1="0" y1="0" x2="0" y2="1">
@@ -182,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <rect width="48" height="48" rx="12" fill="url(#gNext)"/>
           <path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
+          <text id="text-next" x="24" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
         </svg>
       </a>
 
@@ -224,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </svg>
       </a>
 
-      <!-- Panah Kiri (Prev) - Gradient Biru, letakkan paling bawah -->
+      <!-- Panah Kiri (Prev) -->
       <a id="prev-article" href="#" title="Artikel Sebelumnya">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1">
@@ -233,42 +204,83 @@ document.addEventListener('DOMContentLoaded', function() {
           <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
           <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
+          <text id="text-prev" x="24" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
         </svg>
       </a>
     `;
     document.body.appendChild(iconContainer);
 
-    // Ambil data artikel.json untuk navigasi Prev/Next
-    fetch('/artikel.json')
-      .then(res => res.json())
-      .then(data => {
-        const currentUrl = window.location.pathname.split('/').pop();
-        let currentIndex = -1;
-
-        // Flatten data and find current index
-        const allArticles = [];
-        for (const category in data) {
-            data[category].forEach(article => {
-                allArticles.push({
-                    url: article[1]
-                });
+    const allArticlesFlat = [];
+    for (const category in allArticlesData) {
+        allArticlesData[category].forEach(article => {
+            allArticlesFlat.push({
+                url: article[1]
             });
-        }
+        });
+    }
+
+    if (allArticlesFlat.length === 0) return;
+
+    const nextBtn = document.getElementById('next-article');
+    const prevBtn = document.getElementById('prev-article');
+    const textNext = document.getElementById('text-next');
+    const textPrev = document.getElementById('text-prev');
+    const total = allArticlesFlat.length;
+
+    const currentUrl = window.location.pathname.split('/').pop();
+    let currentIndex = allArticlesFlat.findIndex(a => a.url === currentUrl);
+    if (currentIndex === -1) currentIndex = 0; // Default to first if not found
+
+    function updateLinks() {
+        // Looping logic
+        const nextIndex = (currentIndex - 1 + total) % total; // Newer posts are at a lower index
+        const prevIndex = (currentIndex + 1) % total; // Older posts are at a higher index
+
+        nextBtn.href = `/artikel/${allArticlesFlat[nextIndex].url}`;
+        prevBtn.href = `/artikel/${allArticlesFlat[prevIndex].url}`;
         
-        currentIndex = allArticles.findIndex(article => article.url === currentUrl);
+        // update angka di dalam ikon (index + 1 because index is 0-based)
+        textNext.textContent = (nextIndex + 1) + '/' + total;
+        textPrev.textContent = (prevIndex + 1) + '/' + total;
+    }
 
-        if (currentIndex !== -1) {
-            const nextArticle = allArticles[currentIndex - 1]; // Newer posts are at the start of the array
-            const prevArticle = allArticles[currentIndex + 1]; // Older posts are at the end
+    updateLinks();
+}
 
-            if (nextArticle) {
-                document.getElementById('next-article').href = `/artikel/${nextArticle.url}`;
-            }
-            if (prevArticle) {
-                document.getElementById('prev-article').href = `/artikel/${prevArticle.url}`;
-            }
+
+// -------------------------------------------------------------------
+// FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
+// -------------------------------------------------------------------
+async function initializeApp() {
+    try {
+        const response = await fetch('/artikel.json');
+        if (!response.ok) throw new Error(`Gagal memuat artikel.json`);
+        const allArticlesData = await response.json();
+
+        const currentURL = window.location.pathname;
+        const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+
+        const clearButton = document.getElementById('floatingSearchClear');
+        if (clearButton) {
+            clearButton.innerHTML = '&times;';
         }
-      })
-      .catch(err => console.error('Gagal memuat artikel.json untuk navigasi:', err));
-});
+
+        // Initialize all features with the fetched data
+        initCategoryMarquee(allArticlesData, currentFilename);
+        initFloatingSearch(allArticlesData);
+        initNavIcons(allArticlesData);
+
+    } catch (error) {
+        console.error("Gagal menginisialisasi aplikasi:", error);
+        const searchInput = document.getElementById('floatingSearchInput');
+        if (searchInput) {
+            searchInput.placeholder = "Gagal memuat data";
+            searchInput.disabled = true;
+        }
+    }
+}
+
+// Menjalankan semua fungsi saat dokumen siap
+document.addEventListener('DOMContentLoaded', initializeApp);
+
 
