@@ -131,7 +131,7 @@
     </div>
 
     <!-- DEBIAN -->
-    <section id="debian" class="panel active" role="tabpanel">
+    <div id="kategori-aktif"></div><section id="debian" class="panel active" role="tabpanel">
       <h2>Debian / Ubuntu — netselect-apt</h2>
       <p>Gunakan <code>netselect-apt</code> untuk menemukan mirror APT tercepat secara otomatis. Script ini akan backup <code>/etc/apt/sources.list</code> lalu menggantinya.</p>
       <div class="note">Jalankan dengan <code>sudo</code>. Pilih release sesuai (mis. <code>bookworm</code>, <code>bullseye</code>, <code>jammy</code>).</div>
@@ -178,7 +178,7 @@ echo "[DONE] Mirror APT telah diperbarui. "</code></pre>
     </section>
 
     <!-- ARCH -->
-    <section id="arch" class="panel" role="tabpanel" aria-hidden="true">
+    <div id="kategori-aktif"></div><section id="arch" class="panel" role="tabpanel" aria-hidden="true">
       <h2>Arch / Manjaro — reflector / pacman-mirrors</h2>
       <p>Arch pakai <code>reflector</code> untuk memilih mirror cepat; Manjaro punya <code>pacman-mirrors</code>.</p>
       <div class="note">Jalankan perintah dengan <code>sudo</code>. Pilih negara sesuai lokasi untuk hasil terbaik.</div>
@@ -220,7 +220,7 @@ echo "[DONE] Mirrorlist Arch telah diperbarui."</code></pre>
     </section>
 
     <!-- FEDORA -->
-    <section id="fedora" class="panel" role="tabpanel" aria-hidden="true">
+    <div id="kategori-aktif"></div><section id="fedora" class="panel" role="tabpanel" aria-hidden="true">
       <h2>Fedora — dnf & fastestmirror</h2>
       <p>Fedora menggunakan MirrorManager. Aktifkan plugin & refresh cache untuk memastikan Anda menggunakan mirror tercepat.</p>
       <div class="note">Skrip mengaktifkan fastestmirror dan membersihkan cache.</div>
@@ -264,7 +264,7 @@ echo "[DONE] fastestmirror aktif. Jalankan 'sudo dnf upgrade --refresh' untuk me
     </section>
 
     <!-- OPENSUSE -->
-    <section id="opensuse" class="panel" role="tabpanel" aria-hidden="true">
+    <div id="kategori-aktif"></div><section id="opensuse" class="panel" role="tabpanel" aria-hidden="true">
       <h2>openSUSE — zypper + mirrorlist.opensuse.org</h2>
       <p>openSUSE menyediakan mirrorlist service; script ini mengganti repo agar menggunakan mirrorlist otomatis lalu refresh.</p>
       <div class="note">Skrip menghapus repo lama (backup) dan menambahkan OSS & Non-OSS via mirrorlist.</div>
@@ -309,7 +309,7 @@ echo "[DONE] openSUSE kini menggunakan mirrorlist.opensuse.org"</code></pre>
     </section>
 
     <!-- SLACKWARE -->
-    <section id="slackware" class="panel" role="tabpanel" aria-hidden="true">
+    <div id="kategori-aktif"></div><section id="slackware" class="panel" role="tabpanel" aria-hidden="true">
       <h2>Slackware — slackpkg mirrors</h2>
       <p>Slackware memakai <code>/etc/slackpkg/mirrors</code>. Skrip ini backup lalu meminta user memasukkan URL mirror pilihan.</p>
       <div class="note">Saran: pilih mirror resmi Slackware (mirrors.slackware.com) atau mirror lokal terpercaya.</div>
@@ -361,7 +361,7 @@ echo "[DONE] Mirror slackpkg diset ke $MIRROR_URL"</code></pre>
     </section>
 
     <!-- NIXOS -->
-    <section id="nixos" class="panel" role="tabpanel" aria-hidden="true">
+    <div id="kategori-aktif"></div><section id="nixos" class="panel" role="tabpanel" aria-hidden="true">
       <h2>NixOS — /etc/nix/nix.conf substituters</h2>
       <p>Nix mengandalkan substituters (cache) untuk mempercepat pengunduhan store. Skrip ini backup <code>/etc/nix/nix.conf</code> dan menambahkan substituter serta trusted key contoh.</p>
       <div class="note">Pastikan public key substituter benar — contoh key disertakan sebagai placeholder, ganti sesuai mirror Anda.</div>
@@ -537,7 +537,7 @@ echo "[DONE] substituter ditambahkan. Pastikan trusted key valid untuk mirror ya
     });
   });
 </script>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
 </body>
 </html>
