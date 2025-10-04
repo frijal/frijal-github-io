@@ -204,10 +204,10 @@ def fix_html_file(file_path):
 
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-        if "</body>times;</span>" in content:
+        if "times;</span>" in content:
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-            content = content.replace("</body>times;</span>", "&times;</span>")
+            content = content.replace("times;</span>", "&times;</span>")
             log_messages.append("  - Memperbaiki &lt;span&gt; penutup pencarian yang rusak.")
             has_changes = True
         
