@@ -6,7 +6,7 @@ const Parser = require('rss-parser');
 const projectRoot = path.resolve(__dirname, '..'); 
 const rssPath = path.join(projectRoot, 'rss.xml');
 const templatePath = path.join(projectRoot, 'ext', 'template.html');
-const outputPath = path.join(projectRoot, 'artikel', 'artikel-terbaru.html');
+const outputPath = path.join(projectRoot, 'rss.html');
 
 
 async function buildPage() {
@@ -28,7 +28,7 @@ async function buildPage() {
 
         let imageHtml = '';
         if (item.enclosure && item.enclosure.url) {
-            imageHtml = `<img src="${item.enclosure.url}" alt="Gambar Sampul untuk ${item.title}" class="card-image" loading="lazy">`;
+            imageHtml = `<img src="${item.enclosure.url}" alt="cover ${item.title}" class="card-image" loading="lazy">`;
         }
 
         articlesHtml += `
