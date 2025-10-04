@@ -182,7 +182,7 @@
                 </div>
                 
                 <div></div>
-                    <ul id="related-posts-list"></ul>
+                    
                 </div>
             </article>
             
@@ -207,9 +207,8 @@
     <script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
     <script>(()=>{let a=document.getElementById("env-text"),n=document.getElementById("ip-text");{let t=navigator.userAgent,e="OS tidak diketahui",i=(/Windows NT/.test(t)?e="Windows":/Mac OS X/.test(t)?e="macOS":/Android/.test(t)?e="Android":/iPhone|iPad|iPod/.test(t)?e="iOS":/Linux/.test(t)&&(e="Linux"),"Browser tidak diketahui");/Edg\//.test(t)?i="Microsoft Edge":/Chrome\//.test(t)?i="Chrome":/Safari\//.test(t)&&!/Chrome\//.test(t)?i="Safari":/Firefox\//.test(t)&&(i="Firefox"),a.textContent=i+" di "+e}(async()=>{try{var t=await fetch("https://ipapi.co/json/");if(!t.ok)throw new Error("fail");var e=await t.json(),i=e.city||"Kota tidak diketahui",a=e.country_name||"Negara",o=(e.country_code||"").toLowerCase(),r=o?`https://flagcdn.com/24x18/${o}.png`:"";n.innerHTML=(r?`<img src="${r}" alt="${a}" style="vertical-align:middle;margin-right:6px;border:1px solid #223;"/>`:"")+i+", "+a}catch(t){n.textContent="Lokasi IP tidak tersedia"}})()})()</script>
     <script>(()=>{let t=Array.from(document.querySelectorAll("#gallery img")),n=document.getElementById("lightbox"),c=document.getElementById("lightbox-img"),i=document.getElementById("lightbox-caption"),e=document.getElementById("prev"),l=document.getElementById("next"),a=document.getElementById("close"),o=0;function d(e){o=e,e=t[o],c.src=e.src,c.alt=e.alt||"",i.textContent=e.dataset.caption||"",n.classList.add("active")}function r(){n.classList.remove("active")}function s(){d((o-1+t.length)%t.length)}function m(){d((o+1)%t.length)}t.forEach((e,t)=>e.addEventListener("click",()=>d(t)),e.addEventListener("click",s),l.addEventListener("click",m),a.addEventListener("click",r),n.addEventListener("click",e=>{e.target===n&&r()}),document.addEventListener("keydown",e=>{n.classList.contains("active")&&("ArrowLeft"===e.key&&s(),"ArrowRight"===e.key&&m(),"Escape"===e.key)&&r()});let g=document.getElementById("copy-link");g.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href),g.textContent="✅ Tersalin!",setTimeout(()=>g.textContent="🔗 Salin Link",1500)}catch(e){alert("Gagal menyalin link")}})})()</script>
-    <div></div>
-    <div></div>
-        <ul id="related-posts-list"></ul>
+    
+        
     </div>
     <div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
