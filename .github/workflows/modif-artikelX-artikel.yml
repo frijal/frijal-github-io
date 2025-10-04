@@ -50,12 +50,12 @@ jobs:
           #  fi
 
             # Google Site Verification
-            if grep -qi 'google-site-verification' "$file"; then
-              echo "ℹ️ Sudah ada google-site-verification di $file"
-            else
-              sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
-              echo "✅ Ditambahkan google-site-verification di $file"
-            fi
+            # if grep -qi 'google-site-verification' "$file"; then
+              # echo "ℹ️ Sudah ada google-site-verification di $file"
+            # else
+              # sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
+              # echo "✅ Ditambahkan google-site-verification di $file"
+            # fi
 
             # marquee related-url.css
             if grep -qi '/ext/marquee-url.css' "$file"; then
