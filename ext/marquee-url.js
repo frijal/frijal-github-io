@@ -1,10 +1,10 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v4: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
+ * SKRIP GABUNGAN v5: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
  * - Fetch data hanya satu kali untuk semua fitur.
  * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
- * - Indikator angka dua baris & tooltip judul artikel.
+ * - Indikator angka dua baris & tooltip judul artikel yang lebih deskriptif.
  */
 
 // -------------------------------------------------------------------
@@ -211,7 +211,12 @@ function initNavIcons(allArticlesData, currentFilename) {
         }
     }
 
-    if (!articlesInCurrentCategory.length) return;
+    if (!articlesInCurrentCategory.length) {
+        // Hide nav buttons if no category is found
+        document.getElementById('next-article').style.display = 'none';
+        document.getElementById('prev-article').style.display = 'none';
+        return;
+    }
 
     const total = articlesInCurrentCategory.length;
     const nextBtn = document.getElementById('next-article');
@@ -222,24 +227,24 @@ function initNavIcons(allArticlesData, currentFilename) {
     const prevBottom = document.getElementById('prev-bottom');
 
     function updateUI() {
-  const nextIndex = (currentIndex + 1) % total;
-  const prevIndex = (currentIndex - 1 + total) % total;
+        // Looping logic within the category
+        const nextIndex = (currentIndexInCategory - 1 + total) % total; // Newer posts have lower index
+        const prevIndex = (currentIndexInCategory + 1) % total; // Older posts have higher index
 
-  // update href
-  nextBtn.href = list[nextIndex][1];
-  prevBtn.href = list[prevIndex][1];
+        const nextArticle = articlesInCurrentCategory[nextIndex];
+        const prevArticle = articlesInCurrentCategory[prevIndex];
 
-  // update angka dua baris
-  nextTop.textContent = currentIndex+1;
-  nextBottom.textContent = total;
-  prevTop.textContent = currentIndex+1;
-  prevBottom.textContent = total;
+        nextBtn.href = `/artikel/${nextArticle[1]}`;
+        prevBtn.href = `/artikel/${prevArticle[1]}`;
 
-  // update tooltip (judul dulu, lalu kategori)
-  nextBtn.title = `${list[nextIndex][0]} - ${currentCategory}`;
-  prevBtn.title = `${list[prevIndex][0]} - ${currentCategory}`;
-}
+        nextTop.textContent = nextIndex + 1;
+        nextBottom.textContent = `/ ${total}`;
+        prevTop.textContent = prevIndex + 1;
+        prevBottom.textContent = `/ ${total}`;
 
+        nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
+        prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
+    }
 
     updateUI();
 }
