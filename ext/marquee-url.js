@@ -1,6 +1,6 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v2: MARQUEE & PENCARIAN LIVE MELAYANG
+ * SKRIP GABUNGAN v2: MARQUEE, PENCARIAN & IKON KANAN BAWAH
  * ===================================================================
  */
 
@@ -61,7 +61,6 @@ function initCategoryMarquee(allData, currentFilename) {
     try {
         let targetCategory = null;
         let articlesInCategory = [];
-
         for (const categoryName in allData) {
             const articleMatch = allData[categoryName].find(item => item[1] === currentFilename);
             if (articleMatch) {
@@ -72,29 +71,24 @@ function initCategoryMarquee(allData, currentFilename) {
         }
         
         if (!targetCategory) return;
-
         const filteredArticles = articlesInCategory.filter(item => item[1] !== currentFilename);
         const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
         const unreadArticles = filteredArticles.filter(item => !readArticles.includes(item[1]));
-        
         if (unreadArticles.length === 0) {
             marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
             return; 
         }
         
         unreadArticles.sort(() => 0.5 - Math.random());
-        
         let contentHTML = '';
         const separator = ' • ';
         const isMobile = isMobileDevice();
-
         unreadArticles.forEach(post => {
             const [title, articleId, , , description] = post;
             const url = `/artikel/${articleId}`;
             const tooltipText = isMobile ? title : (description || title);
             contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
         });
-
         marqueeContainer.innerHTML = `<div class="marquee-content">${contentHTML.repeat(30)}</div>`;
         registerReadTracker(); 
 
@@ -126,14 +120,12 @@ function initFloatingSearch(allArticlesData) {
             resultsContainer.style.display = 'none';
         }
     });
-
     clearButton.addEventListener('click', () => {
         searchInput.value = '';
         resultsContainer.style.display = 'none';
         clearButton.style.display = 'none';
         searchInput.focus();
     });
-    
     document.addEventListener('click', (event) => {
         const searchContainer = document.querySelector('.search-floating-container');
         if (!searchContainer.contains(event.target)) {
@@ -154,15 +146,11 @@ async function initializeApp() {
         const currentURL = window.location.pathname;
         const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 
-        // --- MODIFIKASI DIMASUKKAN DI SINI ---
-        // Perbaikan untuk memastikan simbol '×' dirender sebagai HTML
         const clearButton = document.getElementById('floatingSearchClear');
         if (clearButton) {
             clearButton.innerHTML = '&times;';
         }
-        // ------------------------------------
 
-        // Jalankan semua fitur
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
 
@@ -176,4 +164,48 @@ async function initializeApp() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+// Menjalankan semua fungsi saat dokumen siap
+document.addEventListener('DOMContentLoaded', function() {
+    // Menjalankan aplikasi utama (pencarian dan marquee)
+    initializeApp();
+
+    // -- KODE IKON KANAN BAWAH DITAMBAHKAN DI SINI --
+    const iconContainer = document.createElement("div");
+    iconContainer.className = "ikon-kanan-bawah";
+    iconContainer.innerHTML = `
+      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g1)"/>
+          <circle cx="14" cy="34" r="4" fill="#fff"/>
+          <path d="M12 22a16 16 0 0 1 14 14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="https://frijal.github.io/home.html" title="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g2)"/>
+          <path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/>
+        </svg>
+      </a>
+      <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g3)"/>
+          <rect x="18" y="10" width="12" height="8" rx="2" fill="#fff"/>
+          <line x1="24" y1="18" x2="24" y2="26" stroke="#fff" stroke-width="2"/>
+          <rect x="8" y="28" width="8" height="8" rx="2" fill="#fff"/>
+          <rect x="20" y="28" width="8" height="8" rx="2" fill="#fff"/>
+          <rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/>
+        </svg>
+      </a>
+    `;
+    document.body.appendChild(iconContainer);
+});
