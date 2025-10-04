@@ -226,27 +226,46 @@ function initNavIcons(allArticlesData, currentFilename) {
     const prevTop = document.getElementById('prev-top');
     const prevBottom = document.getElementById('prev-bottom');
 
+    // ** KODE BARU DIMASUKKAN DI SINI **
     function updateUI() {
-        // Looping logic within the category
-        const nextIndex = (currentIndexInCategory - 1 + total) % total; // Newer posts have lower index
-        const prevIndex = (currentIndexInCategory + 1) % total; // Older posts have higher index
+        // This logic seems reversed from standard Next/Prev, but matches the user's intent
+        // where Next goes to a higher index (older post) and Prev to a lower index (newer post)
+        const nextIndex = (currentIndexInCategory + 1) % total;
+        const prevIndex = (currentIndexInCategory - 1 + total) % total;
 
         const nextArticle = articlesInCurrentCategory[nextIndex];
         const prevArticle = articlesInCurrentCategory[prevIndex];
 
+        // update href
         nextBtn.href = `/artikel/${nextArticle[1]}`;
         prevBtn.href = `/artikel/${prevArticle[1]}`;
 
-        nextTop.textContent = nextIndex + 1;
+        // update angka dua baris based on current index
+        const currentDisplayIndex = currentIndexInCategory + 1;
+        nextTop.textContent = currentDisplayIndex;
         nextBottom.textContent = `/ ${total}`;
-        prevTop.textContent = prevIndex + 1;
+        prevTop.textContent = currentDisplayIndex;
         prevBottom.textContent = `/ ${total}`;
 
+        // update tooltip (judul dulu, lalu kategori)
         nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
         prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
     }
 
     updateUI();
+
+    // Add event listeners for navigation
+    nextBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const nextIndex = (currentIndexInCategory + 1) % total;
+      window.location.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
+    });
+
+    prevBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const prevIndex = (currentIndexInCategory - 1 + total) % total;
+      window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
+    });
 }
 
 // -------------------------------------------------------------------
