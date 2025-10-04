@@ -68,7 +68,7 @@ jobs:
             if grep -qi 'related-marquee-section' "$file"; then
               echo "ℹ️ Sudah ada skrip related di $file"
             else
-              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>' "$file"
+              sed -i '/<\/body>/i <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>' "$file"
               echo "✅ Ditambahkan skrip related di $file"
             fi
             if grep -qi 'search-floating-container' "$file"; then
