@@ -1,14 +1,2 @@
-  <!-- Tombol Home Kiri -->
-  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-left" title="Kembali ke Home">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;">
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-    </svg>
-    Home
-  </a>
-  <!-- Tombol Home Kanan -->
-  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-right" title="Kembali ke Home">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;">
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-    </svg>
-    Home
-  </a>
+<button class="nav-btn" id="home-left" onclick="window.location.href='https://frijal.github.io/sitemap.html'">🏠 Home</button>
+<button class="nav-btn" id="home-right" onclick="window.location.href='https://frijal.github.io/sitemap.html'">🏠 Home</button>
