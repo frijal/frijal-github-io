@@ -1,10 +1,11 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v5: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
+ * SKRIP GABUNGAN v8: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
  * - Fetch data hanya satu kali untuk semua fitur.
  * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
- * - Indikator angka dua baris & tooltip judul artikel yang lebih deskriptif.
+ * - Tooltip judul artikel yang lebih deskriptif.
+ * - Ikon RSS dikembalikan.
  */
 
 // -------------------------------------------------------------------
@@ -152,8 +153,6 @@ function initNavIcons(allArticlesData, currentFilename) {
           <rect width="48" height="48" rx="12" fill="url(#gNext)"/>
           <path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
-          <text id="next-top" x="24" y="38" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
-          <text id="next-bottom" x="24" y="46" text-anchor="middle" font-size="8" fill="#fff" opacity="0.8"></text>
         </svg>
       </a>
       <!-- Ikon RSS (RESTORED) -->
@@ -201,8 +200,6 @@ function initNavIcons(allArticlesData, currentFilename) {
           <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
           <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
                 stroke-linecap="round" stroke-linejoin="round"/>
-          <text id="prev-top" x="24" y="38" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold"></text>
-          <text id="prev-bottom" x="24" y="46" text-anchor="middle" font-size="8" fill="#fff" opacity="0.8"></text>
         </svg>
       </a>
     `;
@@ -224,7 +221,6 @@ function initNavIcons(allArticlesData, currentFilename) {
     }
 
     if (!articlesInCurrentCategory.length) {
-        // Hide nav buttons if no category is found
         document.getElementById('next-article').style.display = 'none';
         document.getElementById('prev-article').style.display = 'none';
         return;
@@ -233,10 +229,6 @@ function initNavIcons(allArticlesData, currentFilename) {
     const total = articlesInCurrentCategory.length;
     const nextBtn = document.getElementById('next-article');
     const prevBtn = document.getElementById('prev-article');
-    const nextTop = document.getElementById('next-top');
-    const nextBottom = document.getElementById('next-bottom');
-    const prevTop = document.getElementById('prev-top');
-    const prevBottom = document.getElementById('prev-bottom');
 
     function updateUI() {
         const nextIndex = (currentIndexInCategory + 1) % total;
@@ -245,35 +237,26 @@ function initNavIcons(allArticlesData, currentFilename) {
         const nextArticle = articlesInCurrentCategory[nextIndex];
         const prevArticle = articlesInCurrentCategory[prevIndex];
 
-        // update href
         nextBtn.href = `/artikel/${nextArticle[1]}`;
         prevBtn.href = `/artikel/${prevArticle[1]}`;
 
-        // update angka dua baris based on current index
-        const currentDisplayIndex = currentIndexInCategory + 1;
-        nextTop.textContent = currentDisplayIndex;
-        nextBottom.textContent = `/ ${total}`;
-        prevTop.textContent = currentDisplayIndex;
-        prevBottom.textContent = `/ ${total}`;
-
-        // update tooltip (judul dulu, lalu kategori)
+        // Update tooltip with format: Judul Artikel - Kategori
         nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
         prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
     }
 
     updateUI();
 
-    // Add event listeners for navigation
     nextBtn.addEventListener('click', e => {
-      e.preventDefault();
-      const nextIndex = (currentIndexInCategory + 1) % total;
-      window.location.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
+        e.preventDefault();
+        const nextIndex = (currentIndexInCategory + 1) % total;
+        window.location.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
     });
 
     prevBtn.addEventListener('click', e => {
-      e.preventDefault();
-      const prevIndex = (currentIndexInCategory - 1 + total) % total;
-      window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
+        e.preventDefault();
+        const prevIndex = (currentIndexInCategory - 1 + total) % total;
+        window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
     });
 }
 
