@@ -14,14 +14,12 @@
     <meta property="og:description" content="Tutorial lengkap langkah demi langkah untuk membuat skrip Python dengan BeautifulSoup guna memperbaiki error HTML umum secara otomatis.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://frijal.github.io/artikel/panduan-skrip-fix-html.html">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d1469c9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80">
     <meta property="og:image:alt" content="Kode Python di layar monitor">
     <meta property="og:site_name" content="frijal.github.io">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Panduan Lengkap: Membuat Skrip Otomatis untuk Memperbaiki HTML">
     <meta name="twitter:description" content="Tutorial lengkap langkah demi langkah untuk membuat skrip Python dengan BeautifulSoup guna memperbaiki error HTML umum secara otomatis.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1555066931-4365d1469c9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80">
     <meta name="twitter:image:alt" content="Kode Python di layar monitor">
     <meta name="twitter:site" content="@frijal">
 
@@ -201,10 +199,10 @@ def fix_html_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
         if "times;</span>" in content:
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
             content = content.replace("times;</span>", "&times;</span>")
             log_messages.append("  - Memperbaiki &lt;span&gt; penutup pencarian yang rusak.")
@@ -491,7 +489,7 @@ Log untuk file: contoh.html
         return icons[name] || '';
     }
     </script>
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
