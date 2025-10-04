@@ -1,4 +1,4 @@
-name: modif artikelx > artikel
+name: Proses ArtikelX lalu Pindahkan ke Artikel
 
 on:
   push:
@@ -11,7 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  modify-html-then-move:
+  # Hanya ada satu pekerjaan yang berjalan secara berurutan
+  process_and_move_articles:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,56 +23,54 @@ jobs:
         with:
           node-version: 20
 
-      - name: Jalankan inject-meta.js
-        run: node ext/inject-meta.js   # ⬅️ sekarang dipanggil dari ext/
+      # ===================================================================
+      # SEMUA PROSES MODIFIKASI DILAKUKAN DI FOLDER artikelx/ DI BAWAH INI
+      # ===================================================================
 
-      - name: Sisipkan <!-- prettier-ignore --> sebelum <title>
+      - name: 1. Jalankan Perl find-and-replace
         run: |
           for file in artikelx/*.html; do
-            if grep -q "<!-- prettier-ignore -->" "$file"; then
+            echo "Memproses find-and-replace pada $file"
+            perl -pi -w -e 's#https://frijal.github.io/assets/apple-touch-icon.png#https://frijal.github.io/icon.png#g' "$file"
+            perl -pi -w -e 's#YOUR_APP_ID#1471267430691023#g' "$file"
+            perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID#1471267430691023#g' "$file"
+            perl -pi -w -e 's#https://frijal.github.io/assets/favicon.svg#https://frijal.github.io/favicon.svg#g' "$file"
+            perl -pi -w -e 's#https://frijal.github.io/assets/logo.png#https://frijal.github.io/logo.png#g' "$file"
+            perl -pi -w -e 's#nama_twitter_anda#frijal#g' "$file"
+            perl -pi -w -e 's/&copy;/🄯/g' "$file"
+            perl -pi -w -e 's/©/🄯/g' "$file"
+            perl -pi -w -e 's#https://frijal.github.io/apple-touch-icon.png#https://frijal.github.io/icon.png#g' "$file"
+          done
+
+      - name: 2. Jalankan inject-meta.js
+        run: node ext/inject-meta.js
+
+      - name: 3. Sisipkan sebelum <title>
+        run: |
+          for file in artikelx/*.html; do
+            if grep -q "" "$file"; then
               echo "ℹ️ Sudah ada prettier-ignore di $file"
               continue
             fi
-            perl -0777 -i -pe 's|<title>(.*?)</title>|<!-- prettier-ignore -->\n<title>\1</title>|is' "$file"
+            perl -0777 -i -pe 's|<title>(.*?)</title>|\n<title>\1</title>|is' "$file"
             echo "✅ Ditambahkan prettier-ignore di $file"
           done
 
-      - name: Sisipkan <meta name="date"> & Google Verification
+      - name: 4. Sisipkan CSS dan Skrip Tambahan
         run: |
           for file in artikelx/*.html; do
-            # Meta Date
-            # if grep -qi '<meta[^>]*name="date"' "$file"; then
-            #  echo "ℹ️ Sudah ada meta date di $file"
-           # else
-          #   DATE=$(git log --follow --format=%aI -- "$file" | tail -1)
-          #   [ -z "$DATE" ] && DATE=$(date -u +"%Y-%m-%d") || DATE=$(date -d "$DATE" +"%Y-%m-%d")
-          #   sed -i "/<\/head>/i <meta name=\"date\" content=\"$DATE\">" "$file"
-          #   echo "✅ Ditambahkan meta date $DATE di $file"
-          #  fi
-
-            # Google Site Verification
-            # if grep -qi 'google-site-verification' "$file"; then
-              # echo "ℹ️ Sudah ada google-site-verification di $file"
-            # else
-              # sed -i "/<\/head>/i <meta name=\"google-site-verification\" content=\"9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA\" />" "$file"
-              # echo "✅ Ditambahkan google-site-verification di $file"
-            # fi
-
-            # marquee related-url.css
             if grep -qi '/ext/marquee-url.css' "$file"; then
               echo "ℹ️ Sudah ada ext/marquee-url.css di $file"
             else
               sed -i '/<\/head>/i <link rel="stylesheet" href=\"/ext/marquee-url.css\">' "$file"
               echo "✅ Ditambahkan ext/marquee-url.css di $file"
             fi
-
             if grep -qi 'related-marquee-section' "$file"; then
               echo "ℹ️ Sudah ada skrip related di $file"
             else
               sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>' "$file"
               echo "✅ Ditambahkan skrip related di $file"
             fi
-
             if grep -qi 'search-floating-container' "$file"; then
               echo "ℹ️ Sudah ada kolom pencarian di $file"
             else
@@ -80,20 +79,23 @@ jobs:
             fi
           done
     
-      - name: Pindahkan file HTML ke folder artikel/
+      # ===================================================================
+      # SETELAH SEMUA MODIFIKASI SELESAI, PINDAHKAN FILE
+      # ===================================================================
+      
+      - name: 5. Pindahkan file HTML yang sudah bersih ke folder artikel/
         run: |
           mkdir -p artikel
           mv -f artikelx/*.html artikel/ || true
 
-      - name: Commit & Push perubahan
+      - name: 6. Commit & Push semua perubahan
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           if git diff --quiet; then
             echo "Tidak ada perubahan baru, skip commit."
           else
-            git add artikelx || true
-            git add artikel || true
-            git commit -m "modif di artikelx/ lalu pindahin ke artikel/"
+            git add artikelx artikel
+            git commit -m "Workflow: Proses & pindahkan artikel dari artikelx/"
             git push
           fi
