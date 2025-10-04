@@ -1,2 +1,13 @@
-    <a href="https://frijal.github.io/home.html" id="home-btn" class="nav-button" title="Home" target="">🏠</a>
-    <a href="https://frijal.github.io/sitemap.html" id="sitemap-btn" class="nav-button" title="Sitemap" target="">🗺️</a>
+<a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-left" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+    Home
+  </a>
+
+  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-right" title="Kembali ke Home">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+    Home
+  </a>
