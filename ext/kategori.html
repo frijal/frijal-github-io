@@ -8,6 +8,8 @@
     body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
     h1 { text-align: center; }
 
+    .stats { text-align: center; margin: 10px 0; font-weight: bold; }
+
     .search-container { text-align: center; margin: 20px 0; }
     .search-container input {
       padding: 10px;
@@ -18,11 +20,26 @@
       border-radius: 5px;
     }
 
-    .category { margin-bottom: 30px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    /* dua kolom */
+    #dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .category {
+      background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex; flex-direction: column;
+    }
     .category h2 {
       margin: 0; padding: 10px;
       background: #007bff; color: #fff;
       border-radius: 8px 8px 0 0; font-size: 18px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .category h2 span.count {
+      font-size: 14px; font-weight: normal; background: rgba(255,255,255,0.2);
+      padding: 2px 8px; border-radius: 12px;
     }
 
     .articles {
@@ -34,7 +51,7 @@
 
     .card {
       background: #fafafa; border: 1px solid #ddd; border-radius: 6px;
-      width: 220px; overflow: hidden;
+      width: 200px; overflow: hidden;
       display: flex; flex-direction: column;
       cursor: grab;
     }
@@ -42,15 +59,23 @@
     .card .title { padding: 10px; font-size: 14px; font-weight: bold; flex-grow: 1; }
 
     .download-btn {
-      display: block; margin: 20px auto; padding: 10px 20px;
+      display: block; margin: 30px auto; padding: 10px 20px;
       background: #28a745; color: #fff; border: none; border-radius: 5px;
       cursor: pointer; font-size: 16px;
     }
     .download-btn:hover { background: #218838; }
+
+    /* responsif: 1 kolom di mobile */
+    @media (max-width: 768px) {
+      #dashboard { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <h1>Dashboard Artikel JSON</h1>
+
+  <!-- Total Artikel -->
+  <div id="totalStats" class="stats">Total Artikel: 0</div>
 
   <!-- Search Bar -->
   <div class="search-container">
@@ -62,13 +87,12 @@
 
   <script>
     let artikelData = {};
-    const defaultThumbnail = "../thumbnail.jpg"; // fallback default
+    const defaultThumbnail = "../thumbnail.jpg";
     let draggedItem = null;
     let draggedFromCat = null;
     let draggedIdx = null;
     let searchQuery = "";
 
-    // === Load JSON ===
     async function loadData() {
       try {
         const res = await fetch("../artikel.json");
@@ -79,11 +103,12 @@
       }
     }
 
-    // === Render Dashboard ===
     function renderDashboard() {
       const container = document.getElementById("dashboard");
       container.innerHTML = "";
+      const totalStats = document.getElementById("totalStats");
 
+      let totalCount = 0;
       const categories = Object.keys(artikelData);
 
       categories.forEach(cat => {
@@ -91,7 +116,14 @@
         section.className = "category";
 
         const h2 = document.createElement("h2");
-        h2.textContent = cat;
+        const titleSpan = document.createElement("span");
+        titleSpan.textContent = cat;
+
+        const countSpan = document.createElement("span");
+        countSpan.className = "count";
+
+        h2.appendChild(titleSpan);
+        h2.appendChild(countSpan);
         section.appendChild(h2);
 
         const articlesDiv = document.createElement("div");
@@ -114,14 +146,14 @@
           }
         });
 
-        // urutkan berdasarkan arr[3] DESC
+        // sort by arr[3] desc
         let sortedArticles = [...artikelData[cat]].sort((a, b) => {
           if (a[3] > b[3]) return -1;
           if (a[3] < b[3]) return 1;
           return 0;
         });
 
-        // filter pencarian
+        // filter by search
         if (searchQuery.trim() !== "") {
           sortedArticles = sortedArticles.filter(item => {
             const title = item[0].toLowerCase();
@@ -129,6 +161,10 @@
             return title.includes(searchQuery) || file.includes(searchQuery);
           });
         }
+
+        // update jumlah artikel kategori
+        countSpan.textContent = `(${sortedArticles.length})`;
+        totalCount += sortedArticles.length;
 
         // render kartu
         sortedArticles.forEach((item, idx) => {
@@ -176,9 +212,11 @@
         section.appendChild(articlesDiv);
         container.appendChild(section);
       });
+
+      // update total
+      totalStats.textContent = `Total Artikel: ${totalCount}`;
     }
 
-    // === Pindahkan artikel antar kategori ===
     function moveArticle(fromCat, idx, toCat) {
       const article = artikelData[fromCat][idx];
       artikelData[fromCat].splice(idx, 1);
@@ -186,7 +224,6 @@
       renderDashboard();
     }
 
-    // === Download JSON ===
     function downloadJSON() {
       const blob = new Blob([JSON.stringify(artikelData, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -199,7 +236,6 @@
       URL.revokeObjectURL(url);
     }
 
-    // === Pencarian ===
     document.getElementById("searchInput").addEventListener("input", e => {
       searchQuery = e.target.value.toLowerCase();
       renderDashboard();
