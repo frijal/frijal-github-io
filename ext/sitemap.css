@@ -4,25 +4,41 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding-top: 70px; /* Ruang untuk Marquee Fixed */
+    /* MODIFIKASI: 180px memberi ruang yang cukup di bawah Marquee dan Search Box fixed, 
+       mengatasi masalah judul yang tertutup. */
+    padding-top: 180px; 
     background: #f2f2f2;
     color: #333;
     box-sizing: border-box;
     min-height: 100vh;
 }
 
-/* Container utama untuk membatasi lebar konten (TOC & Tombol) */
-.container {
-    max-width: 900px; /* Lebar maksimum untuk konten utama */
-    width: 100%;
-    margin: 20px auto; /* Memusatkan container */
-    padding: 0 15px; /* Padding samping untuk layar kecil */
-    box-sizing: border-box;
-}
-
 /* Animasi Transisi (untuk Dark Mode) */
 body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ================================================= */
+/* ===== JUDUL UTAMA (Pemusatan setelah container dihapus) ===== */
+/* ================================================= */
+
+h1.main-title {
+    text-align: center;
+    /* Pemusatan horizontal dan batas lebar 900px, menggantikan peran .container */
+    margin: 20px auto 20px auto; 
+    max-width: 900px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    
+    /* Styling Judul */
+    font-size: 2.5rem; 
+    font-weight: 900;
+    background: linear-gradient(90deg, #007BFF, #6610f2, #fd7e14);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: 1px;
+    transform: skewY(-2deg);
 }
 
 /* ================================================= */
@@ -70,7 +86,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 /* ===== SEARCH BOX (FIXED) & FOOTER INFO ===== */
 /* ================================================= */
 
-/* Kontainer utama (Fixed) */
+/* Kontainer utama (FIXED - Di luar Container Utama) */
 .search-fixed {
     position: fixed;
     top: 70px; 
@@ -89,7 +105,6 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 /* Wrapper Input Search */
 .search-wrapper {
     position: relative;
-    /* Ubah margin-bottom: 8px; menjadi 0 jika info IP diletakkan di bawah wrapper */
     margin-bottom: 0; 
 }
 
@@ -120,6 +135,23 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 #clearSearch:hover { color: #000; }
 
+/* Info Klien/IP/Browser */
+.ip-browser-info-line {
+    margin: 5px 0 10px 0; 
+    font-size: 0.75rem; 
+    color: #888; 
+    text-align: left; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    align-items: center;
+    line-height: 1.3;
+}
+.ip-browser-info-line .separator {
+    color: #ddd;
+    margin: 0; 
+}
+
 /* Footer Info */
 .search-footer {
     font-size: 0.85rem;
@@ -128,19 +160,30 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     background: #e9ecef;
     padding: 6px 10px;
     border-radius: 4px;
-    /* Tambahkan margin-top untuk memisahkan dari info IP di atasnya */
     margin-top: 10px; 
 }
 
 /* ================================================= */
-/* ===== TOC & TOMBOL (di dalam .container) ===== */
+/* ===== TOC & KONTROL (Pemusatan setelah container dihapus) ===== */
 /* ================================================= */
 
-/* Global Expand/Collapse */
+/* Pemusatan untuk elemen utama (menggantikan peran .container) */
+#totalCount, #tocToggle, #toc {
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.info { text-align:center; margin-bottom:15px; font-size:14px; color: #666; }
+
+
+/* Global Expand/Collapse Button */
 #tocToggle {
     display: block;
     width: 200px;
-    margin: 10px auto; /* Memusatkan di dalam container */
+    margin: 10px auto; 
     padding: 8px 12px;
     font-size: 14px;
     font-weight: bold;
@@ -150,11 +193,6 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     background: #007BFF;
     color: white;
     transition: all 0.3s ease;
-}
-
-/* TOC Wrapper */
-#toc { 
-    margin: 10px 0; 
 }
 
 /* Total Artikel */
@@ -170,8 +208,10 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     transition: all 0.3s ease;
 }
 
+/* Kategori */
 .category {
-    margin: 10px 0;
+    margin: 10px auto;
+    max-width: 900px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -183,13 +223,18 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
+    padding: 12px 16px;
     font-weight: bold;
     cursor: pointer;
     color: white;
     border-radius: 6px;
     transition: background 0.3s;
+    font-size: 1.3rem;
+    background: linear-gradient(90deg, #007BFF, #6610f2); 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
+.category-header:hover { filter: brightness(1.1); }
+
 .category-header .badge {
     background: #ffc107;
     color: #333;
@@ -198,48 +243,80 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     font-size: 12px;
     font-weight: bold;
 }
-.toc-list { display: none; padding: 0 16px 10px; }
-.toc-item { display: flex; align-items: center; margin: 4px 0; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+.toc-list { display: none; padding: 0 16px 10px; list-style: none; }
+.toc-item { display: flex; align-items: center; margin: 4px 0; padding: 8px 0; border-bottom: 1px solid #f0f0f0; position: relative; }
 .toc-list .toc-item:last-child { border-bottom: none; }
 
 .toc-title { flex: 1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.toc-title a { 
+
+/* Link Styles */
+.toc-title a {
     position: relative;
     text-decoration: none; 
     color: #333; 
     font-weight: bold; 
     transition: all 0.3s ease; 
+    outline: none;
 }
-.toc-title a.visited { color: gray; opacity: 0.8; }
-.toc-title a:hover { 
-    color: transparent; 
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); 
-    background-clip: text; 
-    -webkit-background-clip: text; 
+.toc-title a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #1793D1;
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
-.toc-title a::after { 
-    content: ''; 
-    position: absolute; 
-    left: 0; 
-    bottom: -2px; 
-    width: 0%; 
-    height: 2px; 
-    background: #007BFF; 
-    transition: width 0.3s ease; 
-    border-radius: 2px; 
+.toc-title a:hover {
+    color: #1793D1;
+    text-shadow: 0 0 5px rgba(23, 147, 209, 0.5);
+    transform: translateY(-1px);
 }
-.toc-title a:hover::after { width: 100%; }
+.toc-title a:hover::after {
+    width: 100%;
+}
+.toc-title a:focus {
+    color: #1793D1;
+    background-color: rgba(23, 147, 209, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(23, 147, 209, 0.5);
+}
+.toc-title a:active {
+    transform: scale(0.97);
+    text-shadow: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
 
-/* ===== LABEL STATUS & HIGHLIGHTS (Tidak berubah) ===== */
-.label-new, .label-visited {
+.toc-title a.visited { color: gray; opacity: 0.8; font-weight: normal; }
+
+
+/* ===== LABEL STATUS & HIGHLIGHTS ===== */
+.label-new, .label-visited, .label-duplicate {
     color: white;
     padding: 2px 5px;
-    border-radius: 8px;
+    margin-left: 6px;
+    border-radius: 4px;
     font-size: 12px;
     white-space: nowrap;
+    font-weight: bold;
 }
-.label-new { background: #28a745; }
-.label-visited { background: #6c757d; }
+.label-new { background: #28a745; } 
+.label-visited { background: #6c757d; } 
+.label-duplicate { background: #ffc107; color: black; } 
+
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+  margin-left: 8px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #007BFF, #6610f2);
+}
 
 .highlight { 
     background: yellow; 
@@ -251,7 +328,9 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     to { background: yellow; } 
 }
 
+/* ================================================= */
 /* ===== DARK MODE ===== */
+/* ================================================= */
 body.dark-mode {
     background: #121212;
     color: #eee;
@@ -269,7 +348,6 @@ body.dark-mode .search-footer {
     background: #2c2c2c;
     color: #ccc;
     border: 1px solid #444;
-    /* Sesuaikan warna border di Dark Mode */
 }
 body.dark-mode .category { 
     background: #1c1c1c; 
@@ -284,39 +362,19 @@ body.dark-mode #totalCount, body.dark-mode #tocToggle {
 body.dark-mode #clearSearch:hover {
     color: #fff;
 }
-
-/* ===== GRADIENT KATEGORI (biarkan) ===== */
-.category-header[data-gradient] {
-    background: var(--category-gradient);
+body.dark-mode .ip-browser-info-line {
+    color: #aaa;
+}
+body.dark-mode .ip-browser-info-line .separator {
+    color: #555;
 }
 
-/* ===== MOBILE & RESPONSIVE ===== */
-@media(max-width: 768px){
-    /* Marquee */
-    #marquee-container { font-size: 12px; padding: 8px 0; }
-    
-    /* Search Box Fixed */
-    .search-fixed { 
-        top: 60px; 
-        max-width: 90%; 
-    }
-    #search { font-size: 14px; padding: 8px 26px 8px 8px; }
-    
-    /* TOC */
-    .container { 
-        padding: 0 10px; /* Kurangi padding samping container */
-    }
-    #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
-    .toc-title { font-size: 14px; }
-    
-    /* Info IP/Browser */
-    .ip-browser-info-line {
-        font-size: 0.7rem;
-        padding: 0 5px; /* Kurangi padding di mobile */
-    }
-}
 
-/* Tambahan untuk Dark Mode Toggle (id="darkToggle") */
+/* ================================================= */
+/* ===== DARK MODE TOGGLE & RESPONSIVE ===== */
+/* ================================================= */
+
+/* Dark Mode Toggle */
 #darkToggle {
     position: fixed;
     bottom: 5%;
@@ -337,43 +395,31 @@ body.dark-mode #darkToggle {
     vertical-align: middle;
 }
 
-/* ================================================= */
-/* ===== PERBAIKAN: IP/BROWSER INFO LINE (Di luar search-wrapper) ===== */
-/* ================================================= */
-
-/* Kontainer untuk informasi IP dan Browser (Asumsi diletakkan setelah .search-wrapper di dalam .search-fixed) */
-.ip-browser-info-line {
-    /* Atur agar ada ruang di atasnya (misalnya 5px) dan di bawahnya (misalnya 10px) */
-    margin: 5px 0 10px 0; 
+/* Responsive/Mobile Adjustments */
+@media(max-width: 768px){
+    /* Body padding disesuaikan untuk mobile header height */
+    body { padding-top: 150px; } 
     
-    /* Gaya untuk teks */
-    font-size: 0.75rem; /* Lebih kecil agar ringkas */
-    color: #888; /* Abu-abu terang */
-    text-align: left; 
+    /* Marquee */
+    #marquee-container { font-size: 12px; padding: 8px 0; }
     
-    /* Pastikan semua dalam satu baris, namun memungkinkan wrap */
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px; /* Jarak antar elemen */
-    align-items: center;
-    line-height: 1.3;
-}
-
-.ip-browser-info-line .separator {
-    color: #ddd;
-    margin: 0; /* Hapus margin horizontal yang berlebihan */
-}
-
-.ip-browser-info-line .location-info {
-    /* Memastikan info lokasi/ip rata */
-    display: flex;
-    align-items: center;
-}
-
-/* Dark Mode untuk baris info IP */
-body.dark-mode .ip-browser-info-line {
-    color: #aaa;
-}
-body.dark-mode .ip-browser-info-line .separator {
-    color: #555;
+    /* Search Box Fixed */
+    .search-fixed { 
+        top: 60px; 
+        max-width: 90%; 
+    }
+    #search { font-size: 14px; padding: 8px 26px 8px 8px; }
+    
+    /* Content & Controls */
+    #totalCount, #tocToggle, #toc, h1.main-title, .category { 
+        padding: 0 10px; /* Kurangi padding samping */
+    }
+    #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
+    .toc-title { font-size: 14px; }
+    
+    /* Info IP/Browser */
+    .ip-browser-info-line {
+        font-size: 0.7rem;
+        padding: 0 5px; 
+    }
 }
