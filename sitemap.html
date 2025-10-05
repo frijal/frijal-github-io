@@ -24,6 +24,7 @@
   
 <script>
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
+let grouped = {}; // <- deklarasi global agar bisa dipakai marquee
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
@@ -44,7 +45,7 @@ async function loadTOC() {
     const totalCount = document.getElementById("totalCount");
 
     // --- Kelompokkan data per kategori + urutkan ---
-    const grouped = {};
+    grouped = {}; // isi ulang global
     Object.keys(data).forEach(cat => {
       grouped[cat] = data[cat].map(arr => ({
         title: arr[0],
@@ -123,15 +124,8 @@ async function loadTOC() {
 
         toc.appendChild(catDiv);
       });
-  } catch (e) {
-    console.error("Gagal load artikel.json", e);
-  }
-}
 
-// Panggil saat halaman load
-loadTOC();
-
-    // --- Marquee ---
+    // --- Marquee setelah grouped terisi ---
     const m = document.getElementById("marquee-content");
     const allArticles = Object.values(grouped).flat();
 
@@ -148,67 +142,65 @@ loadTOC();
       .map(d => `<a href="artikel/${d.file}" target="">${d.title}</a>`)
       .join(" • ");
 
-    // --- Search ---
-    document.getElementById("search").addEventListener("input", function () {
-      const term = this.value.toLowerCase();
-      let countVisible = 0;
-
-      document.querySelectorAll(".category").forEach(category => {
-        let catVisible = false;
-        category.querySelectorAll(".toc-item").forEach(item => {
-          const text = item.dataset.text;
-          const link = item.querySelector("a");
-          if (term && text.includes(term)) {
-            item.style.display = "flex";
-            catVisible = true;
-            countVisible++;
-            const regex = new RegExp(`(${term})`, "gi");
-            link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
-          } else {
-            item.style.display = term ? "none" : "flex";
-            link.innerHTML = link.textContent;
-            if (!term) countVisible++;
-          }
-        });
-        category.style.display = catVisible ? "block" : (term ? "none" : "block");
-        const tocList = category.querySelector(".toc-list");
-        tocList.style.display = catVisible ? "block" : tocList.style.display;
-      });
-
-      totalCount.textContent = `Total artikel: ${countVisible}`;
-      updateTOCToggleText();
-    });
-
-    // --- Tombol global Buka/Tutup ---
-    let tocCollapsed = false;
-    const tocToggleBtn = document.getElementById("tocToggle");
-
-    function updateTOCToggleText() {
-      const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-        .every(list => list.style.display === "none");
-      tocCollapsed = allCollapsed;
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    }
-
-    tocToggleBtn.addEventListener("click", () => {
-      tocCollapsed = !tocCollapsed;
-      document.querySelectorAll(".toc-list").forEach(list => {
-        list.style.display = tocCollapsed ? "none" : "block";
-      });
-      tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-    });
-
-    // --- Inisialisasi tombol ---
-    updateTOCToggleText();
-
   } catch (e) {
-    console.error("Gagal load artikel.json:", e);
+    console.error("Gagal load artikel.json", e);
   }
 }
 
+// --- Search ---
+document.getElementById("search").addEventListener("input", function () {
+  const term = this.value.toLowerCase();
+  let countVisible = 0;
+
+  document.querySelectorAll(".category").forEach(category => {
+    let catVisible = false;
+    category.querySelectorAll(".toc-item").forEach(item => {
+      const text = item.dataset.text;
+      const link = item.querySelector("a");
+      if (term && text.includes(term)) {
+        item.style.display = "flex";
+        catVisible = true;
+        countVisible++;
+        const regex = new RegExp(`(${term})`, "gi");
+        link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
+      } else {
+        item.style.display = term ? "none" : "flex";
+        link.innerHTML = link.textContent;
+        if (!term) countVisible++;
+      }
+    });
+    category.style.display = catVisible ? "block" : (term ? "none" : "block");
+    const tocList = category.querySelector(".toc-list");
+    tocList.style.display = catVisible ? "block" : tocList.style.display;
+  });
+
+  document.getElementById("totalCount").textContent = `Total artikel: ${countVisible}`;
+  updateTOCToggleText();
+});
+
+// --- Tombol global Buka/Tutup ---
+let tocCollapsed = false;
+const tocToggleBtn = document.getElementById("tocToggle");
+
+function updateTOCToggleText() {
+  const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
+    .every(list => list.style.display === "none");
+  tocCollapsed = allCollapsed;
+  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+}
+
+tocToggleBtn.addEventListener("click", () => {
+  tocCollapsed = !tocCollapsed;
+  document.querySelectorAll(".toc-list").forEach(list => {
+    list.style.display = tocCollapsed ? "none" : "block";
+  });
+  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+});
+
+// --- Inisialisasi saat load ---
 loadTOC();
-  
 </script>
+
 
 <!-- Toggle Dark Mode -->
 <div id="darkToggle">
