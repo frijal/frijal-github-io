@@ -1,91 +1,263 @@
+<style>
 /* ================================================= */
-/* ===== SEARCH BOX (FIXED) & FOOTER INFO (LIGHT MODE) ===== */
+/* ============= GLOBAL & BASE STYLES ============= */
 /* ================================================= */
-
-/* Kontainer utama untuk Search Box dan Footer Info */
-.search-fixed {
-  position: fixed;
-  top: 70px; /* Jarak dari atas, tepat di bawah marquee/header */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: 100%;
-  max-width: 420px; /* Gunakan max-width yang paling besar/spesifik */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding-top: 60px; /* Jarak untuk Marquee Fixed */
   background: #f2f2f2;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  padding: 10px; /* Padding di sekitar wrapper */
-}
-
-/* Wrapper untuk Input Search (digunakan jika ada elemen lain di dalam .search-fixed) */
-.search-wrapper {
-  position: relative;
-  margin-bottom: 8px; /* Jarak antara search box dan footer info */
-}
-
-/* Input Search */
-#search {
-  width: 100%;
-  padding: 10px 28px 10px 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #fff; /* Pastikan background cerah di light mode */
   color: #333;
 }
 
-/* Tombol Clear */
-#clearSearch {
-  position: absolute;
-  top: 50%;
-  right: 6px; /* Gunakan 6px atau 12px, saya pilih 6px yang awal */
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  color: #888;
-}
-
-#clearSearch:hover {
-  color: #000;
-}
-
-/* Footer Info (diletakkan di dalam .search-fixed) */
-.search-footer {
-  font-size: 0.85rem;
+h1 {
   text-align: center;
-  color: #555;
-  background: #e9ecef;
-  padding: 6px 10px;
+  margin: 20px 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  /* Gradasi dan Efek Teks */
+  background: linear-gradient(90deg, #007BFF, #6610f2, #fd7e14);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  transform: skewY(-2deg);
+}
+
+/* ================================================= */
+/* ============= MARQUEE (FIXED HEADER) ============= */
+/* ================================================= */
+#marquee-container {
+  width: 100%;
+  background: #007BFF;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 40s linear infinite; /* Kecepatan marquee diatur menjadi 40 detik agar lebih realistis */
+  will-change: transform;
+}
+
+#marquee-container:hover #marquee-content {
+  animation-play-state: paused;
+}
+
+#marquee-content a {
+  color: white;
+  text-decoration: none;
+  margin-right: 30px;
+  transition: color 0.3s;
+}
+
+#marquee-content a:hover {
+  color: yellow;
+  text-decoration: underline;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ================================================= */
+/* ============= CONTROLS & INFO ============= */
+/* ================================================= */
+#controls {
+  text-align: center;
+  margin: 15px 0;
+}
+
+#search {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#toggleAll {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  background: #007BFF;
+  color: white;
   border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
+#toggleAll:hover {
+  background: #0056b3;
+}
+
+.info {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #666;
+}
 
 /* ================================================= */
-/* ===== DARK MODE untuk Search Box + Footer Info ===== */
+/* ============= CATEGORY & TOC LISTS ============= */
+/* ================================================= */
+.category {
+  margin: 10px auto;
+  max-width: 900px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.category-header {
+  cursor: pointer;
+  padding: 12px 16px; /* Padding sedikit dilebarkan */
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+  font-size: 1.3rem;
+  /* Gradasi Latar Belakang */
+  background: linear-gradient(90deg, #007BFF, #6610f2); 
+  color: white; /* Ganti text-fill-color menjadi color biasa untuk header */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.category-header:hover {
+  filter: brightness(1.1);
+}
+
+.toc-list {
+  display: none;
+  padding: 0 16px;
+  list-style: none; /* Hilangkan bullet point default */
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+  padding: 8px 0; /* Padding diperbesar */
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.toc-item:last-child {
+  border-bottom: none; /* Hapus border di item terakhir */
+}
+
+.toc-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ================================================= */
+/* ============= LINK & LABEL STYLES ============= */
 /* ================================================= */
 
-body.dark-mode .search-fixed {
-  background: #1e1e1e;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+/* TOC Link Style - Enhanced */
+.toc-title a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  outline: none;
+  position: relative;
 }
 
-body.dark-mode #search {
-  background-color: #2a2a2a;
-  color: #eee;
-  border: 1px solid #555;
+.toc-title a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #1793D1;
+  transition: width 0.3s ease;
 }
 
-body.dark-mode #clearSearch {
-  color: #aaa;
-}
-body.dark-mode #clearSearch:hover {
-  color: #fff;
+.toc-title a:hover {
+  color: #1793D1;
+  text-shadow: 0 0 5px rgba(23, 147, 209, 0.5);
+  transform: translateY(-1px);
 }
 
-body.dark-mode .search-footer {
-  background: #2c2c2c;
-  color: #ccc;
-  border: 1px solid #444; /* Tambahkan border yang lebih gelap untuk kontras */
+.toc-title a:hover::after {
+  width: 100%;
 }
+
+.toc-title a:focus {
+  color: #1793D1;
+  background-color: rgba(23, 147, 209, 0.1);
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgba(23, 147, 209, 0.5);
+}
+
+.toc-title a:active {
+  transform: scale(0.97);
+  text-shadow: none;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Visited Link */
+.toc-title a.visited {
+  color: gray;
+  font-weight: normal;
+}
+
+/* Badges/Labels */
+.badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+  margin-left: 8px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #007BFF, #6610f2);
+}
+
+.label-new {
+  background: #28a745; /* Hijau Solid */
+  color: white;
+  padding: 2px 5px;
+  margin-left: 6px;
+  border-radius: 4px; /* Disesuaikan dengan 4px di atas */
+  font-size: 12px;
+}
+
+.label-visited {
+  background: #6c757d; /* Abu-abu Solid */
+  color: white;
+  padding: 2px 5px;
+  margin-left: 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.label-duplicate {
+  background: #ffc107; /* Kuning Solid */
+  color: black;
+  padding: 2px 5px;
+  margin-left: 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+</style>
