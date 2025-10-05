@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Uji Cepat Manifest</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#0f172a; color:#e5e7eb; padding:20px; }
+    h1 { color:#3b82f6; }
+    pre { background:#1e293b; padding:10px; border-radius:8px; overflow-x:auto; }
+    .ok { color:#22c55e; }
+    .fail { color:#ef4444; }
+    img { width:48px; height:48px; margin:4px; background:#fff; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Uji Cepat site.webmanifest</h1>
+  <div id="status">Memuat manifest...</div>
+  <pre id="json"></pre>
+  <div id="icons"></div>
+
+  <script>
+    const manifestUrl = "https://frijal.github.io/site.webmanifest";
+    fetch(manifestUrl)
+      .then(r => {
+        if (!r.ok) throw new Error("Gagal memuat manifest");
+        document.getElementById("status").innerHTML = "✅ Manifest berhasil dimuat";
+        return r.json();
+      })
+      .then(data => {
+        document.getElementById("json").textContent = JSON.stringify(data, null, 2);
+        if (data.icons) {
+          const iconsDiv = document.getElementById("icons");
+          iconsDiv.innerHTML = "<h2>Ikon:</h2>";
+          data.icons.forEach(icon => {
+            const img = document.createElement("img");
+            img.src = icon.src;
+            img.alt = icon.sizes;
+            img.title = icon.sizes;
+            iconsDiv.appendChild(img);
+          });
+        }
+      })
+      .catch(err => {
+        document.getElementById("status").innerHTML = "❌ " + err.message;
+      });
+  </script>
+</body>
+</html>
+
