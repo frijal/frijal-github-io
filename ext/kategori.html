@@ -40,7 +40,7 @@
 
   <script>
     let artikelData = {};
-    const defaultThumbnail = "thumbnail.jpg"; // fallback
+    const defaultThumbnail = "../thumbnail.jpg"; // fallback
     let draggedItem = null;
     let draggedFromCat = null;
     let draggedIdx = null;
@@ -49,7 +49,7 @@
     // === Load JSON ===
     async function loadData() {
       try {
-        const res = await fetch("artikel.json");
+        const res = await fetch("../artikel.json");
         artikelData = await res.json();
         renderDashboard();
       } catch (e) {
@@ -130,7 +130,7 @@
           });
 
           const image = document.createElement("img");
-          image.src = img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img) ? `artikel/${img}` : defaultThumbnail;
+          image.src = img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img) ? `../artikel/${img}` : defaultThumbnail;
           image.alt = title;
           card.appendChild(image);
 
@@ -179,3 +179,4 @@
   </script>
 </body>
 </html>
+
