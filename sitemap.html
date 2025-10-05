@@ -10,7 +10,7 @@
 <body>
 <!-- Marquee -->
 <div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
-<a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." style="position: fixed; bottom: 5%; right: 10px; z-index: 999;"><img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" /></a>
+
 <div><footer class="page-footer"><div id="footerInfo"></div></footer></div>
 <!-- Search -->
 <input type="text" id="search" placeholder="Cari judul...">
@@ -20,7 +20,7 @@
 
 <!-- TOC -->
 <div id="toc"></div>
-<div id="totalCount">Total artikel: 0</div>
+<div id="totalCount">Total artikel: 0 <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." style="position: fixed; right: 10px; z-index: 999;"><img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" /></a></div>
   
 <script>
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
