@@ -12,7 +12,7 @@
     }
     h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     #categories {
       display: flex;
@@ -76,37 +76,61 @@
     #downloadBtn:hover {
       background: #1976d2;
     }
-    /* === Context Menu (klik kanan) === */
-#contextMenu {
-  font-family: sans-serif;
-  font-size: 14px;
-  min-width: 180px;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  overflow: hidden;
-}
-
-#contextMenu div {
-  padding: 8px 12px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-#contextMenu div:hover {
-  background: #f0f0f0;
-}
-
+    /* Context Menu */
+    #contextMenu {
+      font-family: sans-serif;
+      font-size: 14px;
+      min-width: 180px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
+      position: absolute;
+      display: none;
+      z-index: 1000;
+    }
+    #contextMenu div {
+      padding: 8px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #contextMenu div:hover {
+      background: #f0f0f0;
+    }
+    /* Search bar */
+    #searchContainer {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    #searchContainer input {
+      padding: 6px 10px;
+      width: 300px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #searchContainer button {
+      margin-left: 5px;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    mark {
+      background: yellow;
+    }
   </style>
 </head>
 <body>
   <h1>📂 Dashboard Artikel</h1>
+
+  <div id="searchContainer"></div>
+
   <div id="categories"></div>
   <button id="downloadBtn">💾 Download artikel.json</button>
 
   <!-- Panggil JS -->
-  <script type="module" src="/ext/dashboard.js">
+  <script type="module" src="/ext/dashboard.js"></script>
 </body>
 </html>
 
