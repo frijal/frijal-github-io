@@ -19,11 +19,6 @@ jobs:
         with:
           fetch-depth: 0
            
-      - name: Siapkan Folder Laporan & Badge
-        run: |
-          mkdir -p mini/
-          mkdir -p ext/
-
       - name: Hitung dan Buat Laporan File
         id: file_counting
         run: |

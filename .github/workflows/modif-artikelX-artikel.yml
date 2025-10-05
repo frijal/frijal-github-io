@@ -85,7 +85,6 @@ jobs:
       
       - name: 5. Pindahkan file HTML yang sudah bersih ke folder artikel/
         run: |
-          mkdir -p artikel
           mv -f artikelx/*.html artikel/ || true
 
       - name: 6. Commit & Push semua perubahan
