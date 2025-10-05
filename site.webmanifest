@@ -1,58 +1,55 @@
 {
   "name": "Frijal Artikel",
   "short_name": "Frijal",
-  "lang": "id",
-  "description": "Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#ffffff",
-  "theme_color": "#1e90ff",
-  "id": "/artikel",
+  "theme_color": "#0f172a",
   "icons": [
+    {
+      "src": "ext/icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "ext/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
     {
       "src": "ext/icons/icon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "ext/icons/icon-128x128.png",
       "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "ext/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "ext/icons/icon-256x256.png",
       "sizes": "256x256",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "ext/icons/icon-384x384.png",
       "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "ext/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "ext/icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
+      "src": "ext/icons/icon-1024x1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
     }
   ]
 }
-
