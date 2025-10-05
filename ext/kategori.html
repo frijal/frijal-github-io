@@ -18,9 +18,9 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 .search-container button:hover { background:#b02a37; }
 
 .header-right { display:flex; align-items:center; gap:10px; }
-#moveSelectedBtn, #downloadJSONBtn { padding:8px 12px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:14px; position:relative; }
-#moveSelectedBtn:hover, #downloadJSONBtn:hover { background:#0056b3; }
-#moveSelectedBtn[hidden], #downloadJSONBtn[hidden] { display:none; }
+#downloadJSONBtn { padding:8px 12px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:14px; position:relative; }
+#downloadJSONBtn:hover { background:#0056b3; }
+#downloadJSONBtn[hidden] { display:none; }
 
 [data-tooltip]:hover::after {
   content: attr(data-tooltip);
@@ -45,7 +45,7 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 
 .selection-rectangle { position:absolute; border:2px dashed #007bff; background:rgba(0,123,255,0.1); pointer-events:none; z-index:10000; }
 #dragTooltip { position:absolute; pointer-events:none; background:rgba(0,123,255,0.8); color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; z-index:10001; display:none; }
-button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; margin-right:5px; }
+button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -60,7 +60,6 @@ button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; margin-rig
     <button id="resetSearch">X</button>
   </div>
   <div class="header-right">
-    <button id="moveSelectedBtn" hidden data-tooltip="Pindahkan artikel yang dipilih ke kategori lain">Pindahkan Artikel Terpilih</button>
     <button id="downloadJSONBtn" hidden data-tooltip="Download semua data artikel JSON">Download JSON</button>
   </div>
 </div>
@@ -90,12 +89,11 @@ function renderDashboard(){
   categories.forEach(cat=>{
     const section=document.createElement("div"); section.className="category";
     const h2=document.createElement("h2"); 
-    const titleSpan=document.createElement("span"); titleSpan.textContent=cat;
-    const countSpan=document.createElement("span"); countSpan.className="count";
 
     // CUT & PASTE buttons
     const cutBtn=document.createElement("button");
     cutBtn.textContent="✂️"; cutBtn.title="Cut semua artikel kategori ini"; cutBtn.className="cutPasteBtn";
+
     const pasteBtn=document.createElement("button");
     pasteBtn.textContent="📋"; pasteBtn.title="Paste artikel yang dicut"; pasteBtn.className="cutPasteBtn";
 
@@ -111,7 +109,18 @@ function renderDashboard(){
       renderDashboard();
     });
 
-    h2.appendChild(cutBtn); h2.appendChild(pasteBtn); h2.appendChild(countSpan);
+    // Nama kategori setelah Cut & Paste
+    const titleSpan=document.createElement("span"); titleSpan.textContent=cat; titleSpan.style.fontWeight="bold"; titleSpan.style.marginLeft="5px";
+
+    // Count span
+    const countSpan=document.createElement("span"); countSpan.className="count";
+
+    // Susun h2
+    h2.appendChild(cutBtn);
+    h2.appendChild(pasteBtn);
+    h2.appendChild(titleSpan);
+    h2.appendChild(countSpan);
+
     section.appendChild(h2);
 
     const articlesDiv=document.createElement("div"); articlesDiv.className="articles"; articlesDiv.dataset.cat=cat;
@@ -145,7 +154,7 @@ function renderDashboard(){
   });
 
   totalStats.textContent=`Total Artikel: ${totalCount}`;
-  addSelectionEvents(); addDragEvents(); addMarqueeSelection(); updateMoveBtn(); updateDownloadBtn();
+  addSelectionEvents(); addDragEvents(); addMarqueeSelection(); updateDownloadBtn();
 }
 
 // MOVE, DOWNLOAD, SELECTION
@@ -155,23 +164,9 @@ function downloadJSON(){ const blob=new Blob([JSON.stringify(artikelData,null,2)
 document.getElementById("searchInput").addEventListener("input", e=>{ searchQuery=e.target.value.toLowerCase(); renderDashboard(); });
 document.getElementById("resetSearch").addEventListener("click", ()=>{ document.getElementById("searchInput").value=""; searchQuery=""; renderDashboard(); });
 
-document.getElementById("moveSelectedBtn").addEventListener("click", ()=>{
-  if(selectedCards.length===0){ alert("Pilih artikel terlebih dahulu!"); return; }
-  if(!confirm(`Pindahkan ${selectedCards.length} artikel ke kategori lain?`)) return;
-  const targetCat=prompt("Masukkan nama kategori tujuan:");
-  if(!targetCat || !artikelData[targetCat]){ alert("Kategori tidak valid atau belum ada."); return; }
-  selectedCards.forEach(card=>{
-    const title=card.querySelector(".title").textContent;
-    const fromCat=card.closest(".articles").dataset.cat;
-    const idx=artikelData[fromCat].findIndex(a=>a[0]===title);
-    if(idx>-1) moveArticle(fromCat, idx, targetCat);
-  });
-  clearSelection(); dataChanged=true; updateDownloadBtn();
-});
-
 document.getElementById("downloadJSONBtn").addEventListener("click", downloadJSON);
 
-function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; updateMoveBtn(); }
+function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
 function addSelectionEvents(){
   document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("click", e=>{
@@ -179,12 +174,10 @@ function addSelectionEvents(){
         if(card.classList.contains("selected")){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); }
         else { card.classList.add("selected"); selectedCards.push(card); }
       } else { clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
-      updateMoveBtn();
     });
   });
 }
 
-function updateMoveBtn(){ document.getElementById("moveSelectedBtn").hidden = selectedCards.length===0; }
 function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden = !dataChanged; }
 
 // DRAG EVENTS
@@ -202,7 +195,6 @@ function addDragEvents(){
     container.addEventListener("dragleave", ()=>{ container.classList.remove("drag-over"); });
     container.addEventListener("drop", e=>{ e.preventDefault(); container.classList.remove("drag-over"); });
   });
-
   document.addEventListener("mousemove", e=>{ if(dragTooltip.style.display==="block"){ dragTooltip.style.left=e.pageX+15+"px"; dragTooltip.style.top=e.pageY+15+"px"; } });
 }
 
@@ -230,7 +222,7 @@ function addMarqueeSelection(){
         if(selectedCards.includes(card) && !e.ctrlKey && !e.metaKey){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); }
       }
     });
-    updateMoveBtn();
+  updateDownloadBtn();
   });
   document.addEventListener("mouseup", e=>{ if(isDragging){ isDragging=false; if(marquee){ marquee.remove(); marquee=null; } } });
 }
