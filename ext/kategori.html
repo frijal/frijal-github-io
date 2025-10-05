@@ -75,7 +75,7 @@ let searchQuery="", selectedCards=[], dataChanged=false, clipboard=[], historySt
 // Load data
 async function loadData() {
   try {
-    const res = await fetch("../artikel.json"); 
+    const res = await fetch("artikel/artikel.json"); 
     if(!res.ok) throw new Error(res.statusText);
     artikelData = await res.json();
     renderDashboard();
