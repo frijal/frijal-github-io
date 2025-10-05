@@ -189,7 +189,7 @@
     const IDX_TITLE = 0;
     const IDX_FILENAME = 1;
     const IDX_IMAGE = 2;
-    const IDX_DATE = 3; // Indeks Tanggal (YYYY-MM-DDTHH:MM:SS...)
+    const IDX_DATE = 3;
     const IDX_DESCRIPTION = 4;
     const DEFAULT_THUMBNAIL = '/thumbnail.jpg';
 
@@ -217,15 +217,12 @@
 
     /**
      * Memformat string tanggal ISO menjadi format yang lebih mudah dibaca (DD MMMM YYYY).
-     * @param {string} dateString - String tanggal (e.g., "2025-09-30T11:09:00.000+00:00")
-     * @returns {string} Tanggal yang diformat.
      */
     function formatDate(dateString) {
         try {
             const date = new Date(dateString);
             if (isNaN(date.getTime())) return 'Tanggal tidak diketahui';
             
-            // Format tanggal Indonesia
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('id-ID', options);
         } catch (e) {
@@ -235,8 +232,6 @@
 
     /**
      * Membuat dan mengembalikan elemen card artikel dengan tanggal.
-     * @param {Array} item - Data artikel.
-     * @returns {HTMLElement} Elemen tautan 'article-card'.
      */
     function createArticleCard(item) {
         const title = item[IDX_TITLE];
@@ -267,8 +262,6 @@
         const content = document.createElement('div');
         content.classList.add('card-content');
         
-        // Memasukkan tanggal dan judul ke dalam card-content
-        // Menggunakan styling inline agar tidak perlu mengubah CSS di <style>
         content.innerHTML = `
             <h3>${title}</h3>
             <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">${dateString}</p>
@@ -284,9 +277,8 @@
         const quickNav = document.getElementById('quick-nav');
         quickNav.innerHTML = '';
         
-        // Definisikan semua tombol yang akan dibuat
         const allNavItems = [
-            // Tombol "Terbaru" harus muncul paling atas di nav
+            // Tambahkan tombol "Terbaru" di awal
             { name: "Artikel Terbaru", icon: "🔥", cls: "latest", url: '#terbaru' },
             { name: "Daftar Isi", icon: "📑", cls: "sitemap", url: 'https://frijal.github.io/sitemap.html' },
         ];
@@ -317,10 +309,17 @@
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = item.url.substring(1);
-                    const targetElement = document.getElementById(targetId) || document.getElementById('top');
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+
+                    // --- PERBAIKAN LOGIKA SCROLL KE ATAS ---
+                    if (targetId === 'top') {
+                        // Jika target adalah #top, gunakan window.scrollTo(0,0) untuk memastikan kembali ke atas
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        // Jika target adalah kategori, cari elemen dan scroll ke sana
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                        }
                     }
                 });
             }
@@ -328,10 +327,10 @@
         });
     }
 
-    // --- Logika Utama Pemuatan Artikel (Diubah Total untuk Sorting) ---
+    // --- Logika Utama Pemuatan Artikel (Sorting dipertahankan) ---
     document.addEventListener('DOMContentLoaded', async () => {
         const mainContainer = document.getElementById('main-container');
-        let allCategories = []; // Menyimpan nama kategori asli
+        let allCategories = [];
         
         try {
             const response = await fetch('artikel.json');
@@ -346,11 +345,10 @@
                     allCategories.push(category);
                     data[category].forEach(item => {
                         const dateValue = item[IDX_DATE];
-                        // Hanya proses artikel yang memiliki tanggal valid
                         if (dateValue) {
                             allArticles.push({
                                 item: item, 
-                                date: new Date(dateValue) // Konversi ke Date object untuk sorting
+                                date: new Date(dateValue)
                             });
                         }
                     });
@@ -358,7 +356,6 @@
             }
             
             // 2. Urutkan semua artikel secara global (Terbaru ke Terlama)
-            // Menggunakan getTime() untuk perbandingan numerik yang efisien
             allArticles.sort((a, b) => b.date.getTime() - a.date.getTime());
 
             // --- Bagian 3: Tampilkan Artikel Terbaru (Global) ---
@@ -374,7 +371,6 @@
                 const latestGrid = document.createElement('div');
                 latestGrid.classList.add('article-grid');
                 
-                // Tampilkan 12 artikel terbaru global
                 const maxLatest = 12; 
                 allArticles.slice(0, maxLatest).forEach(articleObj => {
                     latestGrid.appendChild(createArticleCard(articleObj.item));
@@ -390,7 +386,8 @@
 
                 // Urutkan artikel di dalam KATEGORI (Terbaru ke Terlama)
                 articles.sort((a, b) => {
-                    const dateA = new Date(a[IDX_DATE] || 0).getTime();
+                    // Gunakan 0 jika tanggal tidak ada, sehingga artikel tanpa tanggal akan berada di akhir
+                    const dateA = new Date(a[IDX_DATE] || 0).getTime(); 
                     const dateB = new Date(b[IDX_DATE] || 0).getTime();
                     return dateB - dateA;
                 });
@@ -416,8 +413,7 @@
                 mainContainer.appendChild(section);
             });
 
-            // 5. Bangun navigasi cepat dengan menyertakan tombol 'Terbaru'
-            // Kita menggunakan array allCategories untuk mengisi nav item kategori (selain Terbaru)
+            // 5. Bangun navigasi cepat
             createQuickNav(allCategories);
             
         } catch (error) {
