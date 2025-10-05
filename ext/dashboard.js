@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const res = await fetch("/artikel/artikel.json");
   const data = await res.json();
 
-  // Ambil semua kategori (7 total)
   const categories = Object.keys(data);
 
-  // Bagi kategori jadi 3 kolom
+  // Bagi ke 3 kolom
   const columnCount = 3;
   const columns = Array.from({ length: columnCount }, () => {
     const col = document.createElement("div");
@@ -19,9 +18,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     return col;
   });
 
-  // Render kategori + item ke kolom
+  // Render kategori
   categories.forEach((cat, index) => {
-    const col = columns[index % columnCount]; // bagi rata ke 3 kolom
+    const col = columns[index % columnCount];
 
     const catDiv = document.createElement("div");
     catDiv.className = "category";
@@ -35,21 +34,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     list.className = "item-list";
     list.dataset.category = cat;
 
-    data[cat].forEach(item => {
+    data[cat].forEach(arr => {
+      const [title, file, image, lastmod, description] = arr;
+
       const itemDiv = document.createElement("div");
       itemDiv.className = "item";
       itemDiv.draggable = true;
-      itemDiv.dataset.url = item.url;
+
+      // simpan data asli
+      itemDiv.dataset.file = file;
+      itemDiv.dataset.image = image;
+      itemDiv.dataset.lastmod = lastmod;
+      itemDiv.dataset.description = description;
 
       const img = document.createElement("img");
-      img.src = item.image;
-      img.alt = item.title;
+      img.src = image;
+      img.alt = title;
 
-      const title = document.createElement("span");
-      title.textContent = item.title;
+      const span = document.createElement("span");
+      span.textContent = title;
 
       itemDiv.appendChild(img);
-      itemDiv.appendChild(title);
+      itemDiv.appendChild(span);
 
       addDragEvents(itemDiv);
       list.appendChild(itemDiv);
@@ -61,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     addDropEvents(list);
   });
 
-  // Drag & Drop helpers
+  // Drag & Drop
   let draggedItem = null;
 
   function addDragEvents(el) {
@@ -97,11 +103,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       const catName = catDiv.dataset.category;
       const items = [];
       catDiv.querySelectorAll(".item").forEach(itemDiv => {
-        items.push({
-          title: itemDiv.querySelector("span").textContent,
-          image: itemDiv.querySelector("img").src,
-          url: itemDiv.dataset.url
-        });
+        items.push([
+          itemDiv.querySelector("span").textContent,
+          itemDiv.dataset.file,
+          itemDiv.dataset.image,
+          itemDiv.dataset.lastmod,
+          itemDiv.dataset.description
+        ]);
       });
       newData[catName] = items;
     });
