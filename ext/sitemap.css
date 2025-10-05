@@ -11,22 +11,13 @@ body {
     min-height: 100vh;
 }
 
-/* Container utama untuk membatasi lebar konten (TOC & Tombol) */
-.container {
-    max-width: 900px; /* Menggunakan 900px sebagai lebar standar konten */
-    width: 100%;
-    margin: 20px auto; /* Memusatkan container */
-    padding: 0 15px; /* Padding samping untuk layar kecil */
-    box-sizing: border-box;
-}
-
 /* Animasi Transisi (untuk Dark Mode) */
 body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ================================================= */
-/* ===== MARQUEE (Sudah Bagus) ===== */
+/* ===== MARQUEE (Tidak berubah) ===== */
 /* ================================================= */
 #marquee-container {
     width: 100%;
@@ -67,19 +58,19 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 
 /* ================================================= */
-/* ===== SEARCH BOX (FIXED) & FOOTER INFO ===== */
+/* ===== SEARCH BOX (FIXED) & FOOTER INFO (Tidak berubah) ===== */
 /* ================================================= */
 
 /* Kontainer utama (Fixed) */
 .search-fixed {
     position: fixed;
-    top: 70px; /* Tepat di bawah marquee */
+    top: 70px; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    width: 95%; /* Menggunakan 95% agar ada margin di mobile */
+    width: 95%; 
     max-width: 420px;
-    background: #f2f2f2; /* Background di light mode */
+    background: #f2f2f2; 
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     padding: 10px;
@@ -89,7 +80,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 /* Wrapper Input Search */
 .search-wrapper {
     position: relative;
-    margin-bottom: 8px; /* Jarak antara search box dan footer info */
+    margin-bottom: 8px; 
 }
 
 /* Input Search */
@@ -114,7 +105,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     border: none;
     font-size: 16px;
     cursor: pointer;
-    display: none; /* Disembunyikan secara default */
+    display: none; 
     color: #888;
 }
 #clearSearch:hover { color: #000; }
@@ -130,14 +121,15 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 
 /* ================================================= */
-/* ===== TOC & TOMBOL (di dalam .container) ===== */
+/* ===== TOC & TOMBOL (Disesuaikan tanpa .container) ===== */
 /* ================================================= */
 
 /* Global Expand/Collapse */
 #tocToggle {
     display: block;
     width: 200px;
-    margin: 10px auto;
+    /* Gunakan margin auto dan padding 0 15px untuk memusatkan */
+    margin: 10px auto; 
     padding: 8px 12px;
     font-size: 14px;
     font-weight: bold;
@@ -152,16 +144,25 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 /* TOC Wrapper */
 #toc { 
     max-width: 900px; 
-    margin: 10px auto; /* Memusatkan di dalam .container */
+    width: 100%;
+    /* Gunakan margin auto dan padding samping untuk membatasi lebar */
+    margin: 10px auto;
+    padding: 0 15px; 
+    box-sizing: border-box;
 }
 
 /* Total Artikel */
 #totalCount {
+    max-width: 900px; 
+    width: 100%;
+    /* Gunakan margin auto dan padding samping untuk membatasi lebar */
+    margin: 20px auto; 
+    padding: 10px 15px; 
+    box-sizing: border-box;
+
     text-align: center;
-    margin-top: 20px;
     font-weight: bold;
     font-size: 16px;
-    padding: 10px;
     background: #007BFF;
     color: white;
     border-radius: 6px;
@@ -228,7 +229,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 .toc-title a:hover::after { width: 100%; }
 
-/* ===== LABEL STATUS & HIGHLIGHTS ===== */
+/* ===== LABEL STATUS & HIGHLIGHTS (Tidak berubah) ===== */
 .label-new, .label-visited {
     color: white;
     padding: 2px 5px;
@@ -249,7 +250,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     to { background: yellow; } 
 }
 
-/* ===== DARK MODE ===== */
+/* ===== DARK MODE (Tidak berubah) ===== */
 body.dark-mode {
     background: #121212;
     color: #eee;
@@ -287,22 +288,26 @@ body.dark-mode #clearSearch:hover {
     background: var(--category-gradient);
 }
 
-/* ===== MOBILE & RESPONSIVE ===== */
+/* ===== MOBILE & RESPONSIVE (Disesuaikan) ===== */
+@media(max-width: 930px){
+    /* Padding pada konten utama saat layar kecil */
+    #toc, #totalCount {
+        padding: 0 10px; /* Kurangi padding samping */
+        max-width: 100%; /* Lebar penuh */
+    }
+}
 @media(max-width: 768px){
     /* Marquee */
     #marquee-container { font-size: 12px; padding: 8px 0; }
     
     /* Search Box Fixed */
     .search-fixed { 
-        top: 60px; /* Sedikit lebih tinggi untuk layar kecil */
-        max-width: 90%; /* Mengambil lebar lebih besar */
+        top: 60px; 
+        max-width: 90%; 
     }
     #search { font-size: 14px; padding: 8px 26px 8px 8px; }
     
     /* TOC */
-    .container { 
-        padding: 0 10px; 
-    }
     #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
     .toc-title { font-size: 14px; }
 }
