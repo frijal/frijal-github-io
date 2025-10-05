@@ -11,13 +11,22 @@ body {
     min-height: 100vh;
 }
 
+/* Container utama untuk membatasi lebar konten (TOC & Tombol) */
+.container {
+    max-width: 900px; /* Lebar maksimum untuk konten utama */
+    width: 100%;
+    margin: 20px auto; /* Memusatkan container */
+    padding: 0 15px; /* Padding samping untuk layar kecil */
+    box-sizing: border-box;
+}
+
 /* Animasi Transisi (untuk Dark Mode) */
 body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ================================================= */
-/* ===== MARQUEE (Tidak berubah) ===== */
+/* ===== MARQUEE (Header Fixed) ===== */
 /* ================================================= */
 #marquee-container {
     width: 100%;
@@ -58,7 +67,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 
 /* ================================================= */
-/* ===== SEARCH BOX (FIXED) & FOOTER INFO (Tidak berubah) ===== */
+/* ===== SEARCH BOX (FIXED) & FOOTER INFO ===== */
 /* ================================================= */
 
 /* Kontainer utama (Fixed) */
@@ -80,7 +89,8 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 /* Wrapper Input Search */
 .search-wrapper {
     position: relative;
-    margin-bottom: 8px; 
+    /* Ubah margin-bottom: 8px; menjadi 0 jika info IP diletakkan di bawah wrapper */
+    margin-bottom: 0; 
 }
 
 /* Input Search */
@@ -118,18 +128,19 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     background: #e9ecef;
     padding: 6px 10px;
     border-radius: 4px;
+    /* Tambahkan margin-top untuk memisahkan dari info IP di atasnya */
+    margin-top: 10px; 
 }
 
 /* ================================================= */
-/* ===== TOC & TOMBOL (Disesuaikan tanpa .container) ===== */
+/* ===== TOC & TOMBOL (di dalam .container) ===== */
 /* ================================================= */
 
 /* Global Expand/Collapse */
 #tocToggle {
     display: block;
     width: 200px;
-    /* Gunakan margin auto dan padding 0 15px untuk memusatkan */
-    margin: 10px auto; 
+    margin: 10px auto; /* Memusatkan di dalam container */
     padding: 8px 12px;
     font-size: 14px;
     font-weight: bold;
@@ -143,26 +154,16 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 
 /* TOC Wrapper */
 #toc { 
-    max-width: 900px; 
-    width: 100%;
-    /* Gunakan margin auto dan padding samping untuk membatasi lebar */
-    margin: 10px auto;
-    padding: 0 15px; 
-    box-sizing: border-box;
+    margin: 10px 0; 
 }
 
 /* Total Artikel */
 #totalCount {
-    max-width: 900px; 
-    width: 100%;
-    /* Gunakan margin auto dan padding samping untuk membatasi lebar */
-    margin: 20px auto; 
-    padding: 10px 15px; 
-    box-sizing: border-box;
-
     text-align: center;
+    margin-top: 20px;
     font-weight: bold;
     font-size: 16px;
+    padding: 10px;
     background: #007BFF;
     color: white;
     border-radius: 6px;
@@ -250,7 +251,7 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
     to { background: yellow; } 
 }
 
-/* ===== DARK MODE (Tidak berubah) ===== */
+/* ===== DARK MODE ===== */
 body.dark-mode {
     background: #121212;
     color: #eee;
@@ -268,6 +269,7 @@ body.dark-mode .search-footer {
     background: #2c2c2c;
     color: #ccc;
     border: 1px solid #444;
+    /* Sesuaikan warna border di Dark Mode */
 }
 body.dark-mode .category { 
     background: #1c1c1c; 
@@ -288,14 +290,7 @@ body.dark-mode #clearSearch:hover {
     background: var(--category-gradient);
 }
 
-/* ===== MOBILE & RESPONSIVE (Disesuaikan) ===== */
-@media(max-width: 930px){
-    /* Padding pada konten utama saat layar kecil */
-    #toc, #totalCount {
-        padding: 0 10px; /* Kurangi padding samping */
-        max-width: 100%; /* Lebar penuh */
-    }
-}
+/* ===== MOBILE & RESPONSIVE ===== */
 @media(max-width: 768px){
     /* Marquee */
     #marquee-container { font-size: 12px; padding: 8px 0; }
@@ -308,6 +303,77 @@ body.dark-mode #clearSearch:hover {
     #search { font-size: 14px; padding: 8px 26px 8px 8px; }
     
     /* TOC */
+    .container { 
+        padding: 0 10px; /* Kurangi padding samping container */
+    }
     #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
     .toc-title { font-size: 14px; }
+    
+    /* Info IP/Browser */
+    .ip-browser-info-line {
+        font-size: 0.7rem;
+        padding: 0 5px; /* Kurangi padding di mobile */
+    }
+}
+
+/* Tambahan untuk Dark Mode Toggle (id="darkToggle") */
+#darkToggle {
+    position: fixed;
+    bottom: 5%;
+    left: 10px;
+    z-index: 999;
+    font-size: 1.5rem;
+    padding: 5px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+body.dark-mode #darkToggle {
+    background: rgba(0, 0, 0, 0.8);
+    color: #eee;
+}
+#darkSwitch {
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+/* ================================================= */
+/* ===== PERBAIKAN: IP/BROWSER INFO LINE (Di luar search-wrapper) ===== */
+/* ================================================= */
+
+/* Kontainer untuk informasi IP dan Browser (Asumsi diletakkan setelah .search-wrapper di dalam .search-fixed) */
+.ip-browser-info-line {
+    /* Atur agar ada ruang di atasnya (misalnya 5px) dan di bawahnya (misalnya 10px) */
+    margin: 5px 0 10px 0; 
+    
+    /* Gaya untuk teks */
+    font-size: 0.75rem; /* Lebih kecil agar ringkas */
+    color: #888; /* Abu-abu terang */
+    text-align: left; 
+    
+    /* Pastikan semua dalam satu baris, namun memungkinkan wrap */
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; /* Jarak antar elemen */
+    align-items: center;
+    line-height: 1.3;
+}
+
+.ip-browser-info-line .separator {
+    color: #ddd;
+    margin: 0; /* Hapus margin horizontal yang berlebihan */
+}
+
+.ip-browser-info-line .location-info {
+    /* Memastikan info lokasi/ip rata */
+    display: flex;
+    align-items: center;
+}
+
+/* Dark Mode untuk baris info IP */
+body.dark-mode .ip-browser-info-line {
+    color: #aaa;
+}
+body.dark-mode .ip-browser-info-line .separator {
+    color: #555;
 }
