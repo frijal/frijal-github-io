@@ -158,11 +158,14 @@
 
         // Pilih ikon sesuai kategori
         let icon = "📂";
-        if (categoryId.includes("windows")) icon = "🪟";
-        else if (categoryId.includes("linux")) icon = "🐧";
-        else if (categoryId.includes("religi") || categoryId.includes("islam")) icon = "☪️";
-        else if (categoryId.includes("karir")) icon = "💼";
-
+        if (categoryId.includes("Linux & Open Source")) icon = "🐧";
+        else if (categoryId.includes("Islam & Kehidupan")) icon = "📚";
+	else if (categoryId.includes("Lainnya")) icon = "🗂️";
+	else if (categoryId.includes("Multimedia & Editing")) icon = "📽️";
+	else if (categoryId.includes("Catatan & Sosial")) icon = "📰";
+	else if (categoryId.includes("Budaya, Kuliner & Lifestyle")) icon = "🏞️";
+	else if (categoryId.includes("Windows & Teknologi Umum")) icon = "💻";
+	
         button.innerHTML = `<span class="nav-icon">${icon}</span>`;
 
         button.addEventListener('click', (e) => {
