@@ -146,18 +146,6 @@ function getIconAndClass(categoryName) {
   const quickNav = document.getElementById('quick-nav');
   quickNav.innerHTML = '';
 
-  // Tombol Atas
-  const upButton = document.createElement('a');
-  upButton.href = "#top";
-  upButton.className = 'nav-button up';
-  upButton.title = "Atas";
-  upButton.innerHTML = `<span class="nav-icon">⬆️</span>`;
-  upButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo(0,0);
-  });
-  quickNav.appendChild(upButton);
-
   // Tombol kategori (ikon + tooltip nama)
   categories.forEach(categoryName => {
     const categoryId = categoryName
@@ -199,7 +187,17 @@ function getIconAndClass(categoryName) {
   rssButton.innerHTML = `<span class="nav-icon">📰</span>`;
   quickNav.appendChild(rssButton);
 }
-
+  // Tombol Atas
+  const upButton = document.createElement('a');
+  upButton.href = "#top";
+  upButton.className = 'nav-button up';
+  upButton.title = "Atas";
+  upButton.innerHTML = `<span class="nav-icon">⬆️</span>`;
+  upButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo(0,0);
+  });
+  quickNav.appendChild(upButton);
 
     // --- Logika Utama Pemuatan Artikel ---
     document.addEventListener('DOMContentLoaded', async () => {
