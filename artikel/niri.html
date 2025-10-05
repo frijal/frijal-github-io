@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Niri – Window Manager Wayland Dinamis & Stabil | frijal.github.io</title>
+  <title>Niri – Window Manager Wayland Dinamis & Stabil</title>
   <meta name="description" content="Niri adalah window manager Wayland modern dengan tiling dinamis, workspace vertikal, dan efek animasi yang halus — ringan, cepat, dan stabil.">
   <meta name="author" content="frijal.github.io">
   <meta name="theme-color" content="#0a0a0a">
@@ -134,7 +134,7 @@
       header { padding: 0.8rem 1rem; }
     }
   </style>
-  <meta property="og:image:alt" content="Niri – Window Manager Wayland Dinamis & Stabil | frijal.github.io">
+  <meta property="og:image:alt" content="Niri – Window Manager Wayland Dinamis & Stabil">
   <meta itemprop="image" content="https://frijal.github.io/artikel/niri.jpg">
 <link rel="stylesheet" href="/ext/marquee-url.css">
     <meta property="article:published_time" content="2025-10-04T21:14:23.768+00:00">
@@ -220,9 +220,9 @@
       <h2>🧭 Siap Coba Niri?</h2>
       <p>
         Beri kesempatan pada Niri untuk jadi jendela baru dalam cara kamu bekerja di desktop Linux.  
-        Ikuti panduan di halaman <a href="https://niri.desktop.love/getting-started" target="_blank">Getting Started</a> dan pastikan kamu sudah menyiapkan Waybar dan Fuzzel!
+        Ikuti panduan di halaman <a href="https://yalter.github.io/niri/" target="_blank">Getting Started</a> dan pastikan kamu sudah menyiapkan Waybar dan Fuzzel!
       </p>
-      <a href="https://niri.desktop.love/" class="cta-download" target="_blank">⬇️ Download Niri Sekarang</a>
+      <a href="https://yalter.github.io/niri/" class="cta-download" target="_blank">⬇️ Download Niri Sekarang</a>
 
       <div class="share-buttons">
         <a href="https://twitter.com/intent/tweet?text=Niri%20Window%20Manager%20Wayland%20dinamis%20dan%20stabil!&url=https://frijal.github.io/artikel/niri.html" target="_blank">Twitter</a>
@@ -308,29 +308,6 @@
       });
     }, { threshold: 0.1 });
     sections.forEach(sec => observer.observe(sec));
-
-    // 🔝 Tombol kembali ke atas
-    const backToTop = document.createElement("button");
-    backToTop.textContent = "⬆️";
-    backToTop.id = "backToTop";
-    backToTop.style.position = "fixed";
-    backToTop.style.bottom = "20px";
-    backToTop.style.right = "20px";
-    backToTop.style.padding = "10px 15px";
-    backToTop.style.background = "#0084ff";
-    backToTop.style.color = "#fff";
-    backToTop.style.border = "none";
-    backToTop.style.borderRadius = "50%";
-    backToTop.style.cursor = "pointer";
-    backToTop.style.display = "none";
-    document.body.appendChild(backToTop);
-
-    window.addEventListener("scroll", () => {
-      backToTop.style.display = window.scrollY > 400 ? "block" : "none";
-    });
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
 
     // 💬 Facebook Comments SDK
     (function(d, s, id) {
