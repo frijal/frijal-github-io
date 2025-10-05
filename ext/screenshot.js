@@ -1,8 +1,8 @@
 // ext/screenshot.js
-const playwright = require('playwright');
+import { chromium } from 'playwright';
 
 async function takeScreenshot(url, outputPath) {
-  const browser = await playwright.chromium.launch();
+  const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.setViewportSize({ width: 1280, height: 800 }); 
   
@@ -27,4 +27,9 @@ async function takeScreenshot(url, outputPath) {
   return 0;
 }
 
-takeScreenshot(process.argv[2], process.argv[3]).then(process.exit);
+// Ambil argumen dari command line
+const url = process.argv[2];
+const outputPath = process.argv[3];
+
+takeScreenshot(url, outputPath).then((exitCode) => process.exit(exitCode));
+
