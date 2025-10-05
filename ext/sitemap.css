@@ -174,3 +174,29 @@ body.dark-mode #tocToggle { background: #444 !important; color: #eee !important;
   #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
 }
 
+/* Container utama minimal 1200px */
+.container {
+  max-width: 1200px;  /* ubah dari 900px */
+  width: 100%;
+  background: #fff;
+  padding: 20px;
+  margin: 20px auto; /* auto untuk center */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+/* TOC wrapper */
+#toc {
+  max-width: 1200px; /* sama seperti container */
+  margin: 10px auto;
+}
+
+/* Responsive: tetap muat di layar kecil */
+@media (max-width: 1200px) {
+  .container, #toc {
+    max-width: 100%;
+    margin: 10px;
+  }
+}
+
