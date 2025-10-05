@@ -33,13 +33,16 @@
   <!-- Marquee -->
   <div id="marquee-container"><div id="marquee-content"></div></div>
   
-  <div id="footerInfo" style="font-family:sans-serif; font-size:14px;"></div>
+  <!-- Search Box + Footer Info (fixed group) -->
+  <div class="search-fixed">
+    <div class="search-wrapper">
+      <input type="text" id="search" placeholder="ketik apapun...">
+      <button id="clearSearch">✕</button>
+    </div>
+    <div id="footerInfo" class="search-footer">Total entri: 380</div>
+  </div>
   
   <div class="container">
-  
-    <!-- Search Box -->
-    <div class="search-wrapper"><input type="text" id="search" placeholder="ketik apapun..."><button id="clearSearch">✕</button></div>
-
     <!-- Global Expand/Collapse -->
     <button id="tocToggle">Tutup</button>
 
@@ -51,19 +54,20 @@
   </div>
 
   <!-- Dark Mode Toggle -->
- <!-- <div id="darkToggle"> -->
-   <!-- <label for="darkSwitch">🌙</label> -->
-   <!--  <input type="checkbox" id="darkSwitch"> -->
- <!--  </div> -->
- 
-<div id="darkToggle">
-  🌞 <input type="checkbox" id="darkSwitch"> 🌙
-</div>
+  <div id="darkToggle">
+    🌞 <input type="checkbox" id="darkSwitch"> 🌙
+  </div>
   
   <!-- External JS -->
   <script src="ext/sitemap.js"></script>
-<script src="ext/iposbrowser.js"></script>
-<a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." style="position: fixed; bottom: 5%; right: 10px; z-index: 999;"><img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" /></a>
+  <script src="ext/iposbrowser.js"></script>
+
+  <!-- RSS Badge -->
+  <a href="https://frijal.github.io/rss.html" 
+     title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." 
+     style="position: fixed; bottom: 5%; right: 10px; z-index: 999;">
+    <img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" />
+  </a>
 </body>
 </html>
 
