@@ -1,242 +1,72 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Isi Interaktif - Pelan Kiri FRijal</title>
-<meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
-<link rel="stylesheet" href="ext/sitemap.css">
-<meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" /></head>
-<body>
-<!-- Marquee -->
-<div id="marquee-container"><div id="marquee-content">Memuat judul artikel...</div></div>
-
-<div><footer class="page-footer"><div id="footerInfo"></div></footer></div>
-<!-- Search -->
-<div class="search-wrapper"><input type="text" id="search" placeholder="Cari judul...">  <button id="clearSearch">✕</button></div>
-
-<!-- Expand/Collapse TOC -->
-<button id="tocToggle">Collapse TOC</button>
-
-<!-- TOC -->
-<div id="toc"></div>
-<div id="totalCount">Total artikel: 0</div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Isi Interaktif - Pelan Kiri</title>
   
-<script>
-const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
-let grouped = {}; // <- deklarasi global agar bisa dipakai marquee
+  <!-- SEO Meta -->
+  <meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
+  <link rel="canonical" href="https://frijal.github.io/sitemap.html">
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  if (isNaN(d)) return "";
-  const dd = String(d.getDate()).padStart(2, "0");
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const yy = String(d.getFullYear()).slice(-2);
-  return `${dd}.${mm}.${yy}`;
-}
+  <!-- Open Graph -->
+  <meta property="og:title" content="Daftar Isi Interaktif - Pelan Kiri">
+  <meta property="og:description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://frijal.github.io/sitemap.html">
+  <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
 
-async function loadTOC() {
-  try {
-    const res = await fetch("artikel.json");
-    const data = await res.json();
-    const toc = document.getElementById("toc");
-    toc.innerHTML = "";
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daftar Isi Interaktif - Pelan Kiri">
+  <meta name="twitter:description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux, Ubuntu, Debian, Arch, RedHat, Fedora, inspirasi kehidupan dan perjalanan, komunitas, hingga artikel seputar religi dan Islam untuk Muslim, serta tips seputar pekerjaan.">
+  <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
-    const totalCount = document.getElementById("totalCount");
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
 
-    // --- Kelompokkan data per kategori + urutkan ---
-    grouped = {}; // isi ulang global
-    Object.keys(data).forEach(cat => {
-      grouped[cat] = data[cat].map(arr => ({
-        title: arr[0],
-        file: arr[1],
-        image: arr[2],
-        lastmod: arr[3],
-        description: arr[4],
-        category: cat
-      }))
-      .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
-    });
+  <!-- External CSS -->
+  <link rel="stylesheet" href="ext/sitemap.css">
+</head>
+<body>
 
-    // --- Hitung total artikel ---
-    const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
-    totalCount.textContent = `Total artikel: ${totalArticles}`;
+  <!-- Marquee -->
+  <div id="marquee-container"><div id="marquee-content"></div></div>
+  
+<div><footer class="page-footer"><div id="footerInfo"></div></footer></div>
 
-    // --- Urutkan kategori berdasarkan jumlah artikel terbanyak ---
-    Object.keys(grouped)
-      .sort((a, b) => grouped[b].length - grouped[a].length)
-      .forEach(cat => {
-        const catDiv = document.createElement("div");
-        catDiv.className = "category";
+  <div class="container">
 
-        catDiv.innerHTML = `
-          <div class="category-header">
-            ${cat} <span class="badge">${grouped[cat].length}</span>
-          </div>
-          <div class="toc-list"></div>
-        `;
+    <!-- Search Box -->
+    <div class="search-wrapper"><input type="text" id="search" placeholder="ketik apapun..."><button id="clearSearch">✕</button></div>
 
-        const catList = catDiv.querySelector(".toc-list");
+    <!-- Global Expand/Collapse -->
+    <button id="tocToggle">Tutup</button>
 
-        // --- Tambahkan item TOC ---
-        grouped[cat].forEach((item, i) => {
-          const el = document.createElement("div");
-          el.className = "toc-item";
-          el.dataset.text = item.title.toLowerCase();
+    <!-- TOC -->
+    <div id="toc"></div>
 
-          const a = document.createElement("a");
-          a.href = `artikel/${item.file}`;
-          a.textContent = `${i + 1}. [${formatDate(item.lastmod)}] ${item.title}`;
+    <!-- Total Artikel -->
+    <div id="totalCount"></div>
+  </div>
 
-          const statusSpan = document.createElement("span");
-          if (visitedLinks.includes(item.file)) {
-            statusSpan.className = "label-visited";
-            statusSpan.textContent = "sudah dibaca 👍";
-            a.classList.add("visited");
-          } else {
-            statusSpan.className = "label-new";
-            statusSpan.textContent = "📚 belum dibaca";
-          }
+  <!-- Dark Mode Toggle -->
+  <div id="darkToggle">
+    <label for="darkSwitch">🌙</label>
+    <input type="checkbox" id="darkSwitch">
+  </div>
 
-          a.addEventListener("click", () => {
-            if (!visitedLinks.includes(item.file)) {
-              visitedLinks.push(item.file);
-              localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-              statusSpan.className = "label-visited";
-              statusSpan.textContent = "sudah dibaca 👍";
-              a.classList.add("visited");
-            }
-          });
+  <!-- Footer -->
+  <footer class="page-footer"><div id="footerInfo">
+      <div class="info-item">© 2025 frijal.github.io</div>
+      <div class="info-item">Sitemap</div>
+    </div>
+  </footer>
 
-          const titleDiv = document.createElement("div");
-          titleDiv.className = "toc-title";
-          titleDiv.appendChild(a);
-          titleDiv.appendChild(statusSpan);
-          el.appendChild(titleDiv);
-          catList.appendChild(el);
-        });
-
-        // --- Toggle kategori individu ---
-        catDiv.querySelector(".category-header").addEventListener("click", () => {
-          catList.style.display = catList.style.display === "block" ? "none" : "block";
-          updateTOCToggleText();
-        });
-
-        toc.appendChild(catDiv);
-      });
-
-    // --- Marquee setelah grouped terisi ---
-    const m = document.getElementById("marquee-content");
-    const allArticles = Object.values(grouped).flat();
-
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-
-    const shuffled = shuffle(allArticles);
-    m.innerHTML = shuffled
-      .map(d => `<a href="artikel/${d.file}" target="">${d.title}</a>`)
-      .join(" • ");
-
-  } catch (e) {
-    console.error("Gagal load artikel.json", e);
-  }
-}
-
-// --- Search ---
-document.getElementById("search").addEventListener("input", function () {
-  const term = this.value.toLowerCase();
-  let countVisible = 0;
-
-  document.querySelectorAll(".category").forEach(category => {
-    let catVisible = false;
-    category.querySelectorAll(".toc-item").forEach(item => {
-      const text = item.dataset.text;
-      const link = item.querySelector("a");
-      if (term && text.includes(term)) {
-        item.style.display = "flex";
-        catVisible = true;
-        countVisible++;
-        const regex = new RegExp(`(${term})`, "gi");
-        link.innerHTML = link.textContent.replace(regex, '<span class="highlight">$1</span>');
-      } else {
-        item.style.display = term ? "none" : "flex";
-        link.innerHTML = link.textContent;
-        if (!term) countVisible++;
-      }
-    });
-    category.style.display = catVisible ? "block" : (term ? "none" : "block");
-    const tocList = category.querySelector(".toc-list");
-    tocList.style.display = catVisible ? "block" : tocList.style.display;
-  });
-
-  document.getElementById("totalCount").textContent = `Total artikel: ${countVisible}`;
-  updateTOCToggleText();
-});
-const searchInput = document.getElementById("search");
-const clearBtn = document.getElementById("clearSearch");
-
-// Tampilkan/hide tombol X sesuai input
-searchInput.addEventListener("input", function () {
-  clearBtn.style.display = this.value ? "block" : "none";
-});
-
-// Klik tombol X → clear input + trigger pencarian ulang
-clearBtn.addEventListener("click", function () {
-  searchInput.value = "";
-  searchInput.dispatchEvent(new Event("input")); // trigger ulang pencarian
-  clearBtn.style.display = "none";
-});
-
-// --- Tombol global Buka/Tutup ---
-let tocCollapsed = false;
-const tocToggleBtn = document.getElementById("tocToggle");
-
-function updateTOCToggleText() {
-  const allCollapsed = Array.from(document.querySelectorAll(".toc-list"))
-    .every(list => list.style.display === "none");
-  tocCollapsed = allCollapsed;
-  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-}
-
-tocToggleBtn.addEventListener("click", () => {
-  tocCollapsed = !tocCollapsed;
-  document.querySelectorAll(".toc-list").forEach(list => {
-    list.style.display = tocCollapsed ? "none" : "block";
-  });
-  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
-});
-
-// --- Inisialisasi saat load ---
-loadTOC();
-</script>
-
-
-<!-- Toggle Dark Mode -->
-<div id="darkToggle">
-  🌞 <input type="checkbox" id="darkSwitch"> 🌙
-</div>
-
-<!-- Gradient random & Dark mode -->
-<script src="ext/sitemap.js"></script>
-<script>
-  // Jalankan initDarkMode setelah TOC selesai dimuat
-  document.addEventListener("DOMContentLoaded", () => {
-    const tocEl = document.getElementById("toc");
-    if (tocEl) {
-      const categories = Array.from(
-        tocEl.querySelectorAll(".category-header")
-      ).map(el => el.textContent.trim());
-      initDarkMode(categories);
-    }
-  });
-</script>
-<!-- Info Client (Browser, OS, IP) -->
+  <!-- External JS -->
+  <script src="ext/sitemap.js"></script>
 <script src="ext/iposbrowser.js"></script>
 <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." style="position: fixed; bottom: 5%; right: 10px; z-index: 999;"><img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" /></a>
 </body>
 </html>
+

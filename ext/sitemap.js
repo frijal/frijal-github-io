@@ -1,3 +1,204 @@
+const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
+let grouped = {}; // global
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  if (isNaN(d)) return "";
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${dd}.${mm}.${yy}`;
+}
+
+async function loadTOC() {
+  try {
+    const res = await fetch("artikel.json");
+    const data = await res.json();
+    const toc = document.getElementById("toc");
+    toc.innerHTML = "";
+
+    const totalCount = document.getElementById("totalCount");
+
+    // --- Kelompokkan data per kategori + urutkan terbaru ---
+    grouped = {};
+    Object.keys(data).forEach(cat => {
+      grouped[cat] = data[cat]
+        .map(arr => ({
+          title: arr[0],
+          file: arr[1],
+          image: arr[2],
+          lastmod: arr[3],
+          description: arr[4],
+          category: cat
+        }))
+        .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
+    });
+
+    // --- Hitung total artikel ---
+    const totalArticles = Object.values(grouped).reduce(
+      (sum, arr) => sum + arr.length,
+      0
+    );
+    totalCount.textContent = `Total artikel: ${totalArticles}`;
+
+    // --- Render kategori (urut berdasarkan jumlah artikel terbanyak) ---
+    Object.keys(grouped)
+      .sort((a, b) => grouped[b].length - grouped[a].length)
+      .forEach(cat => {
+        const catDiv = document.createElement("div");
+        catDiv.className = "category";
+
+        catDiv.innerHTML = `
+          <div class="category-header">
+            ${cat} <span class="badge">${grouped[cat].length}</span>
+          </div>
+          <div class="toc-list"></div>
+        `;
+
+        const catList = catDiv.querySelector(".toc-list");
+
+        // --- Tambahkan item TOC ---
+        grouped[cat].forEach((item, i) => {
+          const el = document.createElement("div");
+          el.className = "toc-item";
+          el.dataset.text = item.title.toLowerCase();
+
+          const a = document.createElement("a");
+          a.href = `artikel/${item.file}`;
+          a.textContent = `${i + 1}. [${formatDate(item.lastmod)}] ${item.title}`;
+
+          const statusSpan = document.createElement("span");
+          if (visitedLinks.includes(item.file)) {
+            statusSpan.className = "label-visited";
+            statusSpan.textContent = "sudah dibaca 👍";
+            a.classList.add("visited");
+          } else {
+            statusSpan.className = "label-new";
+            statusSpan.textContent = "📚 belum dibaca";
+          }
+
+          a.addEventListener("click", () => {
+            if (!visitedLinks.includes(item.file)) {
+              visitedLinks.push(item.file);
+              localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
+              statusSpan.className = "label-visited";
+              statusSpan.textContent = "sudah dibaca 👍";
+              a.classList.add("visited");
+            }
+          });
+
+          const titleDiv = document.createElement("div");
+          titleDiv.className = "toc-title";
+          titleDiv.appendChild(a);
+          titleDiv.appendChild(statusSpan);
+
+          el.appendChild(titleDiv);
+          catList.appendChild(el);
+        });
+
+        // --- Toggle kategori individu ---
+        catDiv
+          .querySelector(".category-header")
+          .addEventListener("click", () => {
+            catList.style.display =
+              catList.style.display === "block" ? "none" : "block";
+            updateTOCToggleText();
+          });
+
+        toc.appendChild(catDiv);
+      });
+
+    // --- Isi marquee dengan artikel random ---
+    const m = document.getElementById("marquee-content");
+    const allArticles = Object.values(grouped).flat();
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    const shuffled = shuffle(allArticles);
+    m.innerHTML = shuffled
+      .map(d => `<a href="artikel/${d.file}" target="">${d.title}</a>`)
+      .join(" • ");
+  } catch (e) {
+    console.error("Gagal load artikel.json", e);
+  }
+}
+
+// --- Search + tombol clear ---
+const searchInput = document.getElementById("search");
+const clearBtn = document.getElementById("clearSearch");
+
+searchInput.addEventListener("input", function () {
+  const term = this.value.toLowerCase();
+  clearBtn.style.display = this.value ? "block" : "none";
+
+  let countVisible = 0;
+  document.querySelectorAll(".category").forEach(category => {
+    let catVisible = false;
+    category.querySelectorAll(".toc-item").forEach(item => {
+      const text = item.dataset.text;
+      const link = item.querySelector("a");
+      if (term && text.includes(term)) {
+        item.style.display = "flex";
+        catVisible = true;
+        countVisible++;
+        const regex = new RegExp(`(${term})`, "gi");
+        link.innerHTML = link.textContent.replace(
+          regex,
+          '<span class="highlight">$1</span>'
+        );
+      } else {
+        item.style.display = term ? "none" : "flex";
+        link.innerHTML = link.textContent;
+        if (!term) countVisible++;
+      }
+    });
+    category.style.display = catVisible ? "block" : term ? "none" : "block";
+    const tocList = category.querySelector(".toc-list");
+    tocList.style.display = catVisible ? "block" : tocList.style.display;
+  });
+
+  document.getElementById(
+    "totalCount"
+  ).textContent = `Total artikel: ${countVisible}`;
+  updateTOCToggleText();
+});
+
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  searchInput.dispatchEvent(new Event("input"));
+  clearBtn.style.display = "none";
+});
+
+// --- Tombol global Buka/Tutup ---
+let tocCollapsed = false;
+const tocToggleBtn = document.getElementById("tocToggle");
+
+function updateTOCToggleText() {
+  const allCollapsed = Array.from(document.querySelectorAll(".toc-list")).every(
+    list => list.style.display === "none"
+  );
+  tocCollapsed = allCollapsed;
+  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+}
+
+tocToggleBtn.addEventListener("click", () => {
+  tocCollapsed = !tocCollapsed;
+  document.querySelectorAll(".toc-list").forEach(list => {
+    list.style.display = tocCollapsed ? "none" : "block";
+  });
+  tocToggleBtn.textContent = tocCollapsed ? "Buka" : "Tutup";
+});
+
+// --- Inisialisasi ---
+loadTOC();
+
+
 // ===== Perbaikan gradient + dark-mode =====
 
 // get clean category name from .category-header element (ignore .badge text)
@@ -142,3 +343,16 @@ function initDarkMode(categories) {
 window.generateGradientMap = generateGradientMap;
 window.applyGradients = applyGradients;
 window.initDarkMode = initDarkMode;
+
+// di sitemap.js
+document.addEventListener("DOMContentLoaded", () => {
+  loadTOC().then(() => {
+    const tocEl = document.getElementById("toc");
+    if (tocEl) {
+      const categories = Array.from(tocEl.querySelectorAll(".category-header"))
+        .map(el => el.textContent.trim());
+      initDarkMode(categories);
+    }
+  });
+});
+
