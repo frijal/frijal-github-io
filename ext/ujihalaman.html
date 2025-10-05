@@ -14,7 +14,6 @@
     .article-report { border:1px solid #334155; border-radius:8px; padding:12px; margin:8px 0; background:#1e293b; }
     .category { margin-top:20px; }
     button { margin:4px; padding:6px 12px; border-radius:6px; border:none; cursor:pointer; }
-    small { color:#94a3b8; }
   </style>
 </head>
 <body>
@@ -115,14 +114,14 @@
 
               if (filtered.length > 0) {
                 let report = `<div class="article-report">
-                  <h4>📄 ${title} <small>(${file})</small></h4>
+                  <h4>📄 ${title} - ${file}</h4>
                   <ul>${filtered.join("")}</ul>
                 </div>`;
                 container.innerHTML += report;
               }
             })
             .catch(() => {
-              container.innerHTML += `<div class="article-report"><h4>📄 ${judul} <small>(${file})</small></h4><p class="fail">❌ Tidak bisa dimuat</p></div>`;
+              container.innerHTML += `<div class="article-report"><h4>📄 ${judul} - ${file}</h4><p class="fail">❌ Tidak bisa dimuat</p></div>`;
             });
         });
       }
