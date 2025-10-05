@@ -40,6 +40,63 @@
     }
     </script>
     <style>
+     #quick-nav {
+  position: fixed;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background-color: var(--nav-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--nav-border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9em;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.2s, transform 0.2s;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-button:hover {
+  background-color: var(--border-color);
+  transform: scale(1.05);
+}
+
+.nav-icon {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.nav-text {
+  display: inline;
+}
+
+/* Mobile: hanya ikon */
+@media (max-width: 600px) {
+  .nav-text {
+    display: none;
+  }
+  .nav-button {
+    max-width: 48px;
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
         /* === GAYA DEFAULT (LIGHT MODE) === */
         :root {
             --bg-page: #f0f2f5;
