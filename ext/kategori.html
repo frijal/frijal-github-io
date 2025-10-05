@@ -1,123 +1,141 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Artikel JSON</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; color: #333; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Artikel JSON</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; color: #333; }
 
-    /* Header sticky */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #fff;
-      padding: 15px 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 22px;
-      color: #007bff;
-    }
-    .stats {
-      margin: 5px 0;
-      font-weight: bold;
-      font-size: 16px;
-    }
+  /* Header sticky */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    padding: 15px 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .header h1 { margin:0; font-size:22px; color:#007bff; }
+  .stats { margin:5px 0; font-weight:bold; font-size:16px; }
 
-    .search-container {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-    }
-    .search-container input {
-      padding: 8px 12px;
-      width: 70%;
-      max-width: 350px;
-      font-size: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .search-container button {
-      padding: 8px 12px;
-      font-size: 15px;
-      border: none;
-      border-radius: 5px;
-      background: #dc3545;
-      color: #fff;
-      cursor: pointer;
-    }
-    .search-container button:hover {
-      background: #b02a37;
-    }
+  .search-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+  }
+  .search-container input {
+    padding: 8px 12px;
+    width: 70%;
+    max-width: 350px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .search-container button {
+    padding: 8px 12px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #dc3545;
+    color: #fff;
+    cursor: pointer;
+  }
+  .search-container button:hover { background: #b02a37; }
 
-    /* dua kolom kategori */
-    #dashboard {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 20px;
-    }
+  /* Tombol pindahkan artikel terpilih */
+  #moveSelectedBtn {
+    padding: 8px 15px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+  }
+  #moveSelectedBtn:hover { background: #0056b3; }
 
-    .category {
-      background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: flex; flex-direction: column;
-    }
-    .category h2 {
-      margin: 0; padding: 10px;
-      background: #007bff; color: #fff;
-      border-radius: 8px 8px 0 0; font-size: 18px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .category h2 span.count {
-      font-size: 14px; font-weight: normal; background: rgba(255,255,255,0.2);
-      padding: 2px 8px; border-radius: 12px;
-    }
+  /* dua kolom kategori */
+  #dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+  .category {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column;
+  }
+  .category h2 {
+    margin: 0;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .category h2 span.count {
+    font-size: 14px;
+    font-weight: normal;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
 
-    .articles {
-      display: flex; flex-wrap: wrap; gap: 15px; padding: 15px;
-      min-height: 50px; border: 2px dashed transparent;
-      transition: 0.2s;
-    }
-    .articles.drag-over { border-color: #007bff; background: #eaf4ff; }
+  .articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    min-height: 50px;
+    border: 2px dashed transparent;
+    transition: 0.2s;
+  }
+  .articles.drag-over { border-color:#007bff; background:#eaf4ff; }
 
-    .card {
-      background: #fafafa; border: 1px solid #ddd; border-radius: 6px;
-      width: 200px; overflow: hidden;
-      display: flex; flex-direction: column;
-      cursor: grab;
-    }
-    .card img { width: 100%; height: 120px; object-fit: cover; background: #eee; }
-    .card .title { padding: 10px; font-size: 14px; font-weight: bold; flex-grow: 1; }
+  .card {
+    background:#fafafa; border:1px solid #ddd; border-radius:6px;
+    width:200px; overflow:hidden;
+    display:flex; flex-direction:column;
+    cursor:grab;
+    user-select:none;
+  }
+  .card.selected { border:2px solid #007bff; background:#eaf4ff; }
 
-    .card mark {
-      background: yellow;
-      padding: 0 2px;
-      border-radius: 2px;
-    }
+  .card img { width:100%; height:120px; object-fit:cover; background:#eee; }
+  .card .title { padding:10px; font-size:14px; font-weight:bold; flex-grow:1; }
+  .card mark { background:yellow; padding:0 2px; border-radius:2px; }
 
-    .download-btn {
-      display: block; margin: 20px auto 40px; padding: 10px 20px;
-      background: #28a745; color: #fff; border: none; border-radius: 5px;
-      cursor: pointer; font-size: 16px;
-    }
-    .download-btn:hover { background: #218838; }
+  .download-btn {
+    display: block;
+    margin: 20px auto 40px;
+    padding: 10px 20px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .download-btn:hover { background:#218838; }
 
-    /* responsif: 1 kolom di mobile */
-    @media (max-width: 768px) {
-      #dashboard { grid-template-columns: 1fr; }
-      .search-container { flex-direction: column; gap: 10px; }
-      .search-container input { width: 100%; max-width: none; }
-      .search-container button { width: 100%; }
-    }
-  </style>
+  @media (max-width:768px) {
+    #dashboard { grid-template-columns: 1fr; }
+    .search-container { flex-direction: column; gap:10px; }
+    .search-container input { width:100%; max-width:none; }
+    .search-container button { width:100%; }
+  }
+</style>
 </head>
 <body>
-  <!-- Header Sticky -->
   <div class="header">
     <h1>Dashboard Artikel JSON</h1>
     <div id="totalStats" class="stats">Total Artikel: 0</div>
@@ -127,181 +145,178 @@
     </div>
   </div>
 
+  <button id="moveSelectedBtn">Pindahkan Artikel Terpilih</button>
+
   <div id="dashboard"></div>
   <button class="download-btn" onclick="downloadJSON()">Download JSON</button>
 
-  <script>
-    let artikelData = {};
-    const defaultThumbnail = "../thumbnail.jpg";
-    let draggedItem = null;
-    let draggedFromCat = null;
-    let draggedIdx = null;
-    let searchQuery = "";
+<script>
+let artikelData = {};
+const defaultThumbnail = "../thumbnail.jpg";
+let draggedItem = null, draggedFromCat = null, draggedIdx = null;
+let searchQuery = "";
+let selectedCards = [];
 
-    async function loadData() {
-      try {
-        const res = await fetch("../artikel.json");
-        artikelData = await res.json();
-        renderDashboard();
-      } catch (e) {
-        alert("Gagal memuat artikel.json: " + e);
-      }
-    }
+async function loadData() {
+  try {
+    const res = await fetch("../artikel.json");
+    artikelData = await res.json();
+    renderDashboard();
+  } catch(e) { alert("Gagal memuat artikel.json: " + e); }
+}
 
-    // fungsi highlight
-    function highlightText(text, query) {
-      if (!query) return text;
-      const regex = new RegExp(`(${query})`, "gi");
-      return text.replace(regex, "<mark>$1</mark>");
-    }
+function highlightText(text, query) {
+  if(!query) return text;
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.replace(regex, "<mark>$1</mark>");
+}
 
-    function renderDashboard() {
-      const container = document.getElementById("dashboard");
-      container.innerHTML = "";
-      const totalStats = document.getElementById("totalStats");
+function renderDashboard() {
+  const container = document.getElementById("dashboard");
+  container.innerHTML = "";
+  const totalStats = document.getElementById("totalStats");
+  let totalCount = 0;
+  const categories = Object.keys(artikelData);
 
-      let totalCount = 0;
-      const categories = Object.keys(artikelData);
+  categories.forEach(cat => {
+    const section = document.createElement("div");
+    section.className = "category";
 
-      categories.forEach(cat => {
-        const section = document.createElement("div");
-        section.className = "category";
+    const h2 = document.createElement("h2");
+    const titleSpan = document.createElement("span"); titleSpan.textContent = cat;
+    const countSpan = document.createElement("span"); countSpan.className="count";
+    h2.appendChild(titleSpan); h2.appendChild(countSpan);
+    section.appendChild(h2);
 
-        const h2 = document.createElement("h2");
-        const titleSpan = document.createElement("span");
-        titleSpan.textContent = cat;
+    const articlesDiv = document.createElement("div");
+    articlesDiv.className = "articles"; articlesDiv.dataset.cat=cat;
 
-        const countSpan = document.createElement("span");
-        countSpan.className = "count";
-
-        h2.appendChild(titleSpan);
-        h2.appendChild(countSpan);
-        section.appendChild(h2);
-
-        const articlesDiv = document.createElement("div");
-        articlesDiv.className = "articles";
-        articlesDiv.dataset.cat = cat;
-
-        // drag area
-        articlesDiv.addEventListener("dragover", e => {
-          e.preventDefault();
-          articlesDiv.classList.add("drag-over");
-        });
-        articlesDiv.addEventListener("dragleave", () => {
-          articlesDiv.classList.remove("drag-over");
-        });
-        articlesDiv.addEventListener("drop", e => {
-          e.preventDefault();
-          articlesDiv.classList.remove("drag-over");
-          if (draggedItem && draggedFromCat !== cat) {
-            moveArticle(draggedFromCat, draggedIdx, cat);
-          }
-        });
-
-        // sort by arr[3] desc
-        let sortedArticles = [...artikelData[cat]].sort((a, b) => {
-          if (a[3] > b[3]) return -1;
-          if (a[3] < b[3]) return 1;
-          return 0;
-        });
-
-        // filter by search
-        if (searchQuery.trim() !== "") {
-          sortedArticles = sortedArticles.filter(item => {
-            const title = item[0].toLowerCase();
-            const file = (item[1] || "").toLowerCase();
-            return title.includes(searchQuery) || file.includes(searchQuery);
-          });
-        }
-
-        // update jumlah artikel kategori
-        countSpan.textContent = `(${sortedArticles.length})`;
-        totalCount += sortedArticles.length;
-
-        // render kartu
-        sortedArticles.forEach((item, idx) => {
-          const [title, fileName, img] = item;
-
-          const card = document.createElement("div");
-          card.className = "card";
-          card.draggable = true;
-
-          card.addEventListener("dragstart", () => {
-            draggedItem = item;
-            draggedFromCat = cat;
-            draggedIdx = artikelData[cat].indexOf(item);
-            card.style.opacity = "0.5";
-          });
-
-          card.addEventListener("dragend", () => {
-            draggedItem = null;
-            draggedFromCat = null;
-            draggedIdx = null;
-            card.style.opacity = "1";
-          });
-
-          const image = document.createElement("img");
-          if (img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img)) {
-            if (/^https?:\/\//i.test(img)) {
-              image.src = img;
-            } else {
-              image.src = `../${img}`;
-            }
-          } else {
-            image.src = defaultThumbnail;
-          }
-          image.alt = title;
-          card.appendChild(image);
-
-          const titleDiv = document.createElement("div");
-          titleDiv.className = "title";
-          // apply highlight
-          titleDiv.innerHTML = highlightText(title, searchQuery);
-          card.appendChild(titleDiv);
-
-          articlesDiv.appendChild(card);
-        });
-
-        section.appendChild(articlesDiv);
-        container.appendChild(section);
+    articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); });
+    articlesDiv.addEventListener("dragleave", ()=>{ articlesDiv.classList.remove("drag-over"); });
+    articlesDiv.addEventListener("drop", e=>{
+      e.preventDefault(); articlesDiv.classList.remove("drag-over");
+      const targetCat = articlesDiv.dataset.cat;
+      selectedCards.forEach(card=>{
+        const fromCat = card.closest(".articles").dataset.cat;
+        const title = card.querySelector(".title").textContent;
+        const idx = artikelData[fromCat].findIndex(a=>a[0]===title);
+        if(idx>-1 && fromCat!==targetCat) moveArticle(fromCat, idx, targetCat);
       });
-
-      // update total artikel
-      totalStats.textContent = `Total Artikel: ${totalCount}`;
-    }
-
-    function moveArticle(fromCat, idx, toCat) {
-      const article = artikelData[fromCat][idx];
-      artikelData[fromCat].splice(idx, 1);
-      artikelData[toCat].push(article);
-      renderDashboard();
-    }
-
-    function downloadJSON() {
-      const blob = new Blob([JSON.stringify(artikelData, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "artikel.json";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    document.getElementById("searchInput").addEventListener("input", e => {
-      searchQuery = e.target.value.toLowerCase();
-      renderDashboard();
+      clearSelection();
     });
 
-    document.getElementById("resetSearch").addEventListener("click", () => {
-      document.getElementById("searchInput").value = "";
-      searchQuery = "";
-      renderDashboard();
+    let sortedArticles = [...artikelData[cat]].sort((a,b)=>b[3]-a[3]);
+    if(searchQuery.trim()!==""){
+      sortedArticles = sortedArticles.filter(item=>{
+        const title = item[0].toLowerCase();
+        const file = (item[1]||"").toLowerCase();
+        return title.includes(searchQuery)||file.includes(searchQuery);
+      });
+    }
+
+    countSpan.textContent=`(${sortedArticles.length})`; totalCount+=sortedArticles.length;
+
+    sortedArticles.forEach(item=>{
+      const [title,fileName,img] = item;
+      const card=document.createElement("div"); card.className="card"; card.draggable=true;
+
+      const image=document.createElement("img");
+      if(img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img)){
+        image.src=/^https?:\/\//i.test(img)?img:`../${img}`;
+      } else { image.src=defaultThumbnail; }
+      image.alt=title; card.appendChild(image);
+
+      const titleDiv=document.createElement("div"); titleDiv.className="title";
+      titleDiv.innerHTML=highlightText(title, searchQuery); card.appendChild(titleDiv);
+
+      articlesDiv.appendChild(card);
     });
 
-    loadData();
-  </script>
+    section.appendChild(articlesDiv);
+    container.appendChild(section);
+  });
+
+  totalStats.textContent=`Total Artikel: ${totalCount}`;
+  addSelectionEvents();
+  addDragEvents();
+}
+
+function moveArticle(fromCat, idx, toCat){
+  const article=artikelData[fromCat][idx];
+  artikelData[fromCat].splice(idx,1);
+  artikelData[toCat].push(article);
+  renderDashboard();
+}
+
+function downloadJSON(){
+  const blob=new Blob([JSON.stringify(artikelData,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="artikel.json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+document.getElementById("searchInput").addEventListener("input", e=>{ searchQuery=e.target.value.toLowerCase(); renderDashboard(); });
+document.getElementById("resetSearch").addEventListener("click", ()=>{ document.getElementById("searchInput").value=""; searchQuery=""; renderDashboard(); });
+
+function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
+
+function addSelectionEvents(){
+  document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click",(e)=>{
+      if(e.ctrlKey||e.metaKey){
+        if(card.classList.contains("selected")){
+          card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card);
+        } else { card.classList.add("selected"); selectedCards.push(card); }
+      } else {
+        clearSelection(); card.classList.add("selected"); selectedCards.push(card);
+      }
+    });
+  });
+}
+
+function addDragEvents(){
+  document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("dragstart",(e)=>{
+      if(!selectedCards.includes(card)){
+        clearSelection(); card.classList.add("selected"); selectedCards.push(card);
+      }
+      e.dataTransfer.setData("text/plain","drag-selected"); e.dataTransfer.effectAllowed="move";
+      card.style.opacity="0.5";
+    });
+    card.addEventListener("dragend",()=>{ document.querySelectorAll(".card").forEach(c=>c.style.opacity="1"); });
+  });
+  document.querySelectorAll(".articles").forEach(container=>{
+    container.addEventListener("dragover", e=>{ e.preventDefault(); container.classList.add("drag-over"); });
+    container.addEventListener("dragleave", ()=>{ container.classList.remove("drag-over"); });
+    container.addEventListener("drop", e=>{
+      e.preventDefault(); container.classList.remove("drag-over");
+      const targetCat = container.dataset.cat;
+      selectedCards.forEach(card=>{
+        const fromCat = card.closest(".articles").dataset.cat;
+        const title = card.querySelector(".title").textContent;
+        const idx = artikelData[fromCat].findIndex(a=>a[0]===title);
+        if(idx>-1 && fromCat!==targetCat) moveArticle(fromCat, idx, targetCat);
+      });
+      clearSelection();
+    });
+  });
+}
+
+document.getElementById("moveSelectedBtn").addEventListener("click", ()=>{
+  if(selectedCards.length===0){ alert("Pilih artikel terlebih dahulu!"); return; }
+  const targetCat=prompt("Masukkan nama kategori tujuan:");
+  if(!targetCat || !artikelData[targetCat]){ alert("Kategori tidak valid atau belum ada."); return; }
+  selectedCards.forEach(card=>{
+    const title = card.querySelector(".title").textContent;
+    const fromCat = card.closest(".articles").dataset.cat;
+    const idx = artikelData[fromCat].findIndex(a=>a[0]===title);
+    if(idx>-1) moveArticle(fromCat, idx, targetCat);
+  });
+  clearSelection();
+});
+
+loadData();
+</script>
 </body>
 </html>
 
