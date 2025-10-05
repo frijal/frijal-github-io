@@ -12,6 +12,8 @@
     .fail { color:#ef4444; }
     img { width:48px; height:48px; margin:4px; background:#fff; border-radius:6px; }
     section { margin-bottom:30px; }
+    button { margin:4px; padding:6px 12px; border-radius:6px; border:none; cursor:pointer; }
+    #exportPreview { margin-top:10px; }
   </style>
 </head>
 <body>
@@ -48,8 +50,15 @@
     <div id="clientInfo"></div>
   </section>
 
+  <section>
+    <h2>6. Ekspor Hasil Uji</h2>
+    <button id="exportJson">💾 Ekspor ke JSON</button>
+    <button id="exportMd">📝 Ekspor ke Markdown</button>
+    <pre id="exportPreview"></pre>
+  </section>
+
   <script>
-    const manifestUrl = "https://frijal.github.io/site.webmanifest";
+    const manifestUrl = "../site.webmanifest"; // manifest ada di root
 
     // --- Uji Manifest + PWA ---
     fetch(manifestUrl)
@@ -62,7 +71,7 @@
           iconsDiv.innerHTML = "<h3>Ikon:</h3>";
           data.icons.forEach(icon => {
             const img = document.createElement("img");
-            img.src = icon.src;
+            img.src = "../" + icon.src; // pastikan path relatif benar
             img.alt = icon.sizes;
             img.title = icon.sizes;
             iconsDiv.appendChild(img);
@@ -134,7 +143,7 @@
       document.getElementById("statusSchema").innerHTML = "⚠ Tidak ada structured data (Schema.org)";
     }
 
-        // --- Deteksi Browser/OS/IP ---
+    // --- Deteksi Browser/OS/IP ---
     function getBrowserInfo() {
       const ua = navigator.userAgent;
       if (ua.includes("Firefox")) return {name:"Firefox", icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};
@@ -175,6 +184,46 @@
       .catch(() => {
         document.getElementById('ipInfo').textContent = 'IP: Tidak dapat diambil';
       });
+
+    // --- Ekspor Hasil Uji ---
+    function collectResults() {
+      return {
+        manifestStatus: document.getElementById("statusManifest").innerText,
+        pwaStatus: document.getElementById("statusPWA").innerText,
+        metaStatus: document.getElementById("statusMeta").innerText,
+        schemaStatus: document.getElementById("statusSchema").innerText,
+        clientInfo: document.getElementById("clientInfo").innerText
+      };
+    }
+
+    function downloadFile(filename, content) {
+      const blob = new Blob([content], {type: "text/plain"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("exportJson").addEventListener("click", () => {
+      const results = collectResults();
+      const json = JSON.stringify(results, null, 2);
+      document.getElementById("exportPreview").textContent = json;
+      downloadFile("hasil-uji.json", json);
+    });
+
+    document.getElementById("exportMd").addEventListener("click", () => {
+      const results = collectResults();
+      const md = `# Hasil Uji\n
+- Manifest: ${results.manifestStatus}
+- PWA: ${results.pwaStatus}
+- Meta Tag SEO: ${results.metaStatus}
+- Structured Data: ${results.schemaStatus}
+- Client Info: ${results.clientInfo}`;
+      document.getElementById("exportPreview").textContent = md;
+      downloadFile("hasil-uji.md", md);
+    });
   </script>
 </body>
 </html>
