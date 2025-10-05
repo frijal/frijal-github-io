@@ -1,0 +1,30 @@
+name: Auto Backup Artikel JSON (Overwrite)
+
+on:
+  push:
+    branches:
+      - main # Ganti dengan branch utama Anda jika berbeda
+    paths:
+      - 'artikel.json' # Hanya jalankan workflow jika artikel.json berubah
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v4
+
+      - name: Copy and Overwrite artikel.json in backup folder
+        run: cp artikel.json artikel/artikel.json # Menyalin dan menimpa file di dalam folder artikel/
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Commit and Push Backup
+        run: |
+          git add artikel/artikel.json
+          git commit -m "Auto overwrite backup of artikel.json" # Pesan commit yang lebih sederhana
+          git push
