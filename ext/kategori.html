@@ -76,6 +76,18 @@ function loadData(){
   fetch("../artikel.json").then(res=>res.json()).then(json=>{ artikelData=json; renderDashboard(); }).catch(e=>alert("Gagal memuat artikel.json: "+e)); 
 }
 
+async function loadData() {
+  try {
+    const res = await fetch("../artikel.json"); // sesuaikan path
+    if (!res.ok) throw new Error(res.statusText);
+    artikelData = await res.json();
+    renderDashboard();
+  } catch (e) {
+    alert("Gagal memuat artikel.json: " + e);
+    console.error(e);
+  }
+}
+
 function saveHistory(){
   historyStack.push(JSON.stringify(artikelData));
   if(historyStack.length>20) historyStack.shift();
