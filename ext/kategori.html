@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Artikel JSON - Interaktif</title>
+<title>Dashboard Artikel JSON - Final</title>
 <style>
 body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; }
 
@@ -22,7 +22,6 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 #moveSelectedBtn:hover, #downloadJSONBtn:hover { background:#0056b3; }
 #moveSelectedBtn[hidden], #downloadJSONBtn[hidden] { display:none; }
 
-/* Tooltip */
 [data-tooltip]:hover::after {
   content: attr(data-tooltip);
   position: absolute; bottom:120%; left:50%; transform:translateX(-50%);
@@ -31,7 +30,7 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 
 #dashboard { display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:20px; }
 .category { background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); display:flex; flex-direction:column; position:relative;}
-.category h2 { margin:0; padding:10px; background:#007bff; color:#fff; border-radius:8px 8px 0 0; font-size:18px; display:flex; justify-content:space-between; align-items:center;}
+.category h2 { margin:0; padding:10px; background:#007bff; color:#fff; border-radius:8px 8px 0 0; font-size:18px; display:flex; justify-content:flex-start; align-items:center; gap:5px;}
 .category h2 span.count { font-size:14px; font-weight:normal; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:12px; }
 
 .articles { display:flex; flex-wrap:wrap; gap:15px; padding:15px; min-height:50px; border:2px dashed transparent; transition:0.2s; position:relative; }
@@ -46,6 +45,7 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 
 .selection-rectangle { position:absolute; border:2px dashed #007bff; background:rgba(0,123,255,0.1); pointer-events:none; z-index:10000; }
 #dragTooltip { position:absolute; pointer-events:none; background:rgba(0,123,255,0.8); color:#fff; padding:4px 8px; border-radius:4px; font-size:12px; z-index:10001; display:none; }
+button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; margin-right:5px; }
 </style>
 </head>
 <body>
@@ -70,7 +70,7 @@ body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; 
 
 <script>
 let artikelData={}, defaultThumbnail="../thumbnail.jpg";
-let searchQuery="", selectedCards=[], dataChanged=false;
+let searchQuery="", selectedCards=[], dataChanged=false, clipboard=[];
 let marquee=null, dragTooltip=document.getElementById("dragTooltip");
 
 // LOAD DATA
@@ -92,7 +92,27 @@ function renderDashboard(){
     const h2=document.createElement("h2"); 
     const titleSpan=document.createElement("span"); titleSpan.textContent=cat;
     const countSpan=document.createElement("span"); countSpan.className="count";
-    h2.appendChild(titleSpan); h2.appendChild(countSpan); section.appendChild(h2);
+
+    // CUT & PASTE buttons
+    const cutBtn=document.createElement("button");
+    cutBtn.textContent="✂️"; cutBtn.title="Cut semua artikel kategori ini"; cutBtn.className="cutPasteBtn";
+    const pasteBtn=document.createElement("button");
+    pasteBtn.textContent="📋"; pasteBtn.title="Paste artikel yang dicut"; pasteBtn.className="cutPasteBtn";
+
+    cutBtn.addEventListener("click", ()=>{
+      clipboard=[...artikelData[cat]];
+      alert(`Sudah menyalin ${clipboard.length} artikel dari kategori "${cat}"`);
+    });
+    pasteBtn.addEventListener("click", ()=>{
+      if(!clipboard || clipboard.length===0){ alert("Tidak ada artikel yang dicut!"); return; }
+      artikelData[cat].push(...clipboard);
+      alert(`Telah mem-paste ${clipboard.length} artikel ke kategori "${cat}"`);
+      clipboard=[]; dataChanged=true; updateDownloadBtn();
+      renderDashboard();
+    });
+
+    h2.appendChild(cutBtn); h2.appendChild(pasteBtn); h2.appendChild(countSpan);
+    section.appendChild(h2);
 
     const articlesDiv=document.createElement("div"); articlesDiv.className="articles"; articlesDiv.dataset.cat=cat;
     articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); dragTooltip.style.display="block"; dragTooltip.textContent=`Menyeret ${selectedCards.length} artikel terpilih...`; });
@@ -106,8 +126,7 @@ function renderDashboard(){
         const idx=artikelData[fromCat].findIndex(a=>a[0]===title);
         if(idx>-1 && fromCat!==targetCat){ moveArticle(fromCat, idx, targetCat); dataChanged=true; }
       });
-      clearSelection();
-      updateDownloadBtn();
+      clearSelection(); updateDownloadBtn();
     });
 
     let sortedArticles=[...artikelData[cat]].sort((a,b)=>b[3]-a[3]);
@@ -165,7 +184,6 @@ function addSelectionEvents(){
   });
 }
 
-// UPDATE BUTTONS
 function updateMoveBtn(){ document.getElementById("moveSelectedBtn").hidden = selectedCards.length===0; }
 function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden = !dataChanged; }
 
