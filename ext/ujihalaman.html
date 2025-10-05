@@ -12,6 +12,7 @@
     .fail { color:#ef4444; }
     section { margin-bottom:30px; }
     .article-report { border:1px solid #334155; border-radius:8px; padding:12px; margin:8px 0; background:#1e293b; }
+    .category { margin-top:20px; }
   </style>
 </head>
 <body>
@@ -31,7 +32,7 @@
   </section>
 
   <script>
-    const manifestUrl = "/site.webmanifest"; // manifest di root
+    const manifestUrl = "/site.webmanifest";
 
     // --- Uji Manifest + PWA ---
     fetch(manifestUrl)
@@ -44,7 +45,7 @@
           iconsDiv.innerHTML = "<h3>Ikon:</h3>";
           data.icons.forEach(icon => {
             const img = document.createElement("img");
-            img.src = "/" + icon.src; // ikon di ext/icons/
+            img.src = "/" + icon.src;
             img.alt = icon.sizes;
             img.title = icon.sizes;
             iconsDiv.appendChild(img);
@@ -68,36 +69,43 @@
 
     fetch("/artikel.json")
       .then(r => r.json())
-      .then(list => {
+      .then(data => {
         container.innerHTML = "";
-        list.forEach(item => {
-          const url = "/artikel/" + item.file;
-          fetch(url)
-            .then(r => r.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const doc = parser.parseFromString(html, "text/html");
-              const title = doc.querySelector("title")?.innerText || item.title || item.file;
+        for (const kategori in data) {
+          const group = data[kategori];
+          container.innerHTML += `<h3 class="category">📚 ${kategori}</h3>`;
+          group.forEach(item => {
+            const judul = item[0];
+            const file = item[1];
+            const url = "/artikel/" + file;
 
-              let report = `<div class="article-report"><h3>📄 ${title}</h3><ul>`;
-              report += checkMeta(doc,'meta[name="description"]',"Description");
-              report += checkMeta(doc,'link[rel="canonical"]',"Canonical");
-              report += checkMeta(doc,'meta[property="og:title"]',"OG Title");
-              report += checkMeta(doc,'meta[property="og:description"]',"OG Description");
-              report += checkMeta(doc,'meta[property="og:image"]',"OG Image");
-              report += checkMeta(doc,'meta[name="twitter:card"]',"Twitter Card");
-              report += checkMeta(doc,'meta[name="twitter:title"]',"Twitter Title");
-              report += checkMeta(doc,'meta[name="twitter:description"]',"Twitter Description");
-              report += checkMeta(doc,'meta[name="twitter:image"]',"Twitter Image");
-              report += checkMeta(doc,'script[type="application/ld+json"]',"Structured Data");
-              report += "</ul></div>";
+            fetch(url)
+              .then(r => r.text())
+              .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const title = doc.querySelector("title")?.innerText || judul || file;
 
-              container.innerHTML += report;
-            })
-            .catch(() => {
-              container.innerHTML += `<div class="article-report"><h3>📄 ${item.file}</h3><p class="fail">❌ Tidak bisa dimuat</p></div>`;
-            });
-        });
+                let report = `<div class="article-report"><h4>📄 ${title}</h4><ul>`;
+                report += checkMeta(doc,'meta[name="description"]',"Description");
+                report += checkMeta(doc,'link[rel="canonical"]',"Canonical");
+                report += checkMeta(doc,'meta[property="og:title"]',"OG Title");
+                report += checkMeta(doc,'meta[property="og:description"]',"OG Description");
+                report += checkMeta(doc,'meta[property="og:image"]',"OG Image");
+                report += checkMeta(doc,'meta[name="twitter:card"]',"Twitter Card");
+                report += checkMeta(doc,'meta[name="twitter:title"]',"Twitter Title");
+                report += checkMeta(doc,'meta[name="twitter:description"]',"Twitter Description");
+                report += checkMeta(doc,'meta[name="twitter:image"]',"Twitter Image");
+                report += checkMeta(doc,'script[type="application/ld+json"]',"Structured Data");
+                report += "</ul></div>";
+
+                container.innerHTML += report;
+              })
+              .catch(() => {
+                container.innerHTML += `<div class="article-report"><h4>📄 ${judul}</h4><p class="fail">❌ Tidak bisa dimuat</p></div>`;
+              });
+          });
+        }
       })
       .catch(() => {
         container.innerHTML = "❌ Gagal memuat artikel.json";
