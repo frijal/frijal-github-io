@@ -5,26 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Artikel JSON</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
-    h1 { text-align: center; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; color: #333; }
 
-    .stats { text-align: center; margin: 10px 0; font-weight: bold; }
-
-    .search-container { text-align: center; margin: 20px 0; }
-    .search-container input {
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
+    /* Header sticky */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      padding: 15px 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+      color: #007bff;
+    }
+    .stats {
+      margin: 5px 0;
+      font-weight: bold;
       font-size: 16px;
+    }
+
+    .search-container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+    .search-container input {
+      padding: 8px 12px;
+      width: 70%;
+      max-width: 350px;
+      font-size: 15px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+    .search-container button {
+      padding: 8px 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #dc3545;
+      color: #fff;
+      cursor: pointer;
+    }
+    .search-container button:hover {
+      background: #b02a37;
+    }
 
-    /* dua kolom */
+    /* dua kolom kategori */
     #dashboard {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
+      padding: 20px;
     }
 
     .category {
@@ -58,8 +94,14 @@
     .card img { width: 100%; height: 120px; object-fit: cover; background: #eee; }
     .card .title { padding: 10px; font-size: 14px; font-weight: bold; flex-grow: 1; }
 
+    .card mark {
+      background: yellow;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
     .download-btn {
-      display: block; margin: 30px auto; padding: 10px 20px;
+      display: block; margin: 20px auto 40px; padding: 10px 20px;
       background: #28a745; color: #fff; border: none; border-radius: 5px;
       cursor: pointer; font-size: 16px;
     }
@@ -68,18 +110,21 @@
     /* responsif: 1 kolom di mobile */
     @media (max-width: 768px) {
       #dashboard { grid-template-columns: 1fr; }
+      .search-container { flex-direction: column; gap: 10px; }
+      .search-container input { width: 100%; max-width: none; }
+      .search-container button { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <h1>Dashboard Artikel JSON</h1>
-
-  <!-- Total Artikel -->
-  <div id="totalStats" class="stats">Total Artikel: 0</div>
-
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Cari artikel...">
+  <!-- Header Sticky -->
+  <div class="header">
+    <h1>Dashboard Artikel JSON</h1>
+    <div id="totalStats" class="stats">Total Artikel: 0</div>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari artikel...">
+      <button id="resetSearch">X</button>
+    </div>
   </div>
 
   <div id="dashboard"></div>
@@ -101,6 +146,13 @@
       } catch (e) {
         alert("Gagal memuat artikel.json: " + e);
       }
+    }
+
+    // fungsi highlight
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query})`, "gi");
+      return text.replace(regex, "<mark>$1</mark>");
     }
 
     function renderDashboard() {
@@ -203,7 +255,8 @@
 
           const titleDiv = document.createElement("div");
           titleDiv.className = "title";
-          titleDiv.textContent = title;
+          // apply highlight
+          titleDiv.innerHTML = highlightText(title, searchQuery);
           card.appendChild(titleDiv);
 
           articlesDiv.appendChild(card);
@@ -213,7 +266,7 @@
         container.appendChild(section);
       });
 
-      // update total
+      // update total artikel
       totalStats.textContent = `Total Artikel: ${totalCount}`;
     }
 
@@ -238,6 +291,12 @@
 
     document.getElementById("searchInput").addEventListener("input", e => {
       searchQuery = e.target.value.toLowerCase();
+      renderDashboard();
+    });
+
+    document.getElementById("resetSearch").addEventListener("click", () => {
+      document.getElementById("searchInput").value = "";
+      searchQuery = "";
       renderDashboard();
     });
 
