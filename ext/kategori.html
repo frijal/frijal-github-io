@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Artikel JSON - Final</title>
+<title>Dashboard Artikel JSON - Cut & Paste Terpilih + Undo</title>
 <style>
 body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; }
 
@@ -57,6 +57,7 @@ button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; }
   </div>
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Cari artikel...">
+    <button id="undoBtn" data-tooltip="Undo perubahan terakhir">⎌</button>
     <button id="resetSearch">X</button>
   </div>
   <div class="header-right">
@@ -69,16 +70,17 @@ button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; }
 
 <script>
 let artikelData={}, defaultThumbnail="../thumbnail.jpg";
-let searchQuery="", selectedCards=[], dataChanged=false, clipboard=[];
-let marquee=null, dragTooltip=document.getElementById("dragTooltip");
+let searchQuery="", selectedCards=[], dataChanged=false, clipboard=[], historyStack=[];
 
-// LOAD DATA
-async function loadData(){
-  try{ const res=await fetch("../artikel.json"); artikelData=await res.json(); renderDashboard(); }
-  catch(e){ alert("Gagal memuat artikel.json: "+e); }
+function loadData(){
+  fetch("../artikel.json").then(res=>res.json()).then(json=>{ artikelData=json; renderDashboard(); }).catch(e=>alert("Gagal memuat artikel.json: "+e)); 
 }
 
-// RENDER
+function saveHistory(){
+  historyStack.push(JSON.stringify(artikelData));
+  if(historyStack.length>20) historyStack.shift();
+}
+
 function highlightText(text,query){ if(!query)return text; return text.replace(new RegExp(`(${query})`,"gi"),"<mark>$1</mark>"); }
 
 function renderDashboard(){
@@ -90,52 +92,37 @@ function renderDashboard(){
     const section=document.createElement("div"); section.className="category";
     const h2=document.createElement("h2"); 
 
-    // CUT & PASTE buttons
-    const cutBtn=document.createElement("button");
-    cutBtn.textContent="✂️"; cutBtn.title="Cut semua artikel kategori ini"; cutBtn.className="cutPasteBtn";
+    const articlesDiv=document.createElement("div"); articlesDiv.className="articles"; articlesDiv.dataset.cat=cat;
 
-    const pasteBtn=document.createElement("button");
-    pasteBtn.textContent="📋"; pasteBtn.title="Paste artikel yang dicut"; pasteBtn.className="cutPasteBtn";
+    // CUT & PASTE buttons per kategori
+    const cutBtn=document.createElement("button"); cutBtn.textContent="✂️"; cutBtn.title="Cut artikel terpilih"; cutBtn.className="cutPasteBtn";
+    const pasteBtn=document.createElement("button"); pasteBtn.textContent="📋"; pasteBtn.title="Paste artikel yang dicut"; pasteBtn.className="cutPasteBtn";
 
-    cutBtn.addEventListener("click", ()=>{
-      clipboard=[...artikelData[cat]];
-      alert(`Sudah menyalin ${clipboard.length} artikel dari kategori "${cat}"`);
-    });
-    pasteBtn.addEventListener("click", ()=>{
-      if(!clipboard || clipboard.length===0){ alert("Tidak ada artikel yang dicut!"); return; }
-      artikelData[cat].push(...clipboard);
-      alert(`Telah mem-paste ${clipboard.length} artikel ke kategori "${cat}"`);
-      clipboard=[]; dataChanged=true; updateDownloadBtn();
-      renderDashboard();
-    });
-
-    // Nama kategori setelah Cut & Paste
     const titleSpan=document.createElement("span"); titleSpan.textContent=cat; titleSpan.style.fontWeight="bold"; titleSpan.style.marginLeft="5px";
-
-    // Count span
     const countSpan=document.createElement("span"); countSpan.className="count";
 
-    // Susun h2
     h2.appendChild(cutBtn);
     h2.appendChild(pasteBtn);
     h2.appendChild(titleSpan);
     h2.appendChild(countSpan);
-
     section.appendChild(h2);
 
-    const articlesDiv=document.createElement("div"); articlesDiv.className="articles"; articlesDiv.dataset.cat=cat;
-    articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); dragTooltip.style.display="block"; dragTooltip.textContent=`Menyeret ${selectedCards.length} artikel terpilih...`; });
-    articlesDiv.addEventListener("dragleave", ()=>{ articlesDiv.classList.remove("drag-over"); dragTooltip.style.display="none"; });
+    // DRAG & DROP AREA EVENTS
+    articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); });
+    articlesDiv.addEventListener("dragleave", ()=>{ articlesDiv.classList.remove("drag-over"); });
     articlesDiv.addEventListener("drop", e=>{
-      e.preventDefault(); articlesDiv.classList.remove("drag-over"); dragTooltip.style.display="none";
+      e.preventDefault(); articlesDiv.classList.remove("drag-over");
       const targetCat=articlesDiv.dataset.cat;
-      selectedCards.forEach(card=>{
-        const fromCat=card.closest(".articles").dataset.cat;
-        const title=card.querySelector(".title").textContent;
-        const idx=artikelData[fromCat].findIndex(a=>a[0]===title);
-        if(idx>-1 && fromCat!==targetCat){ moveArticle(fromCat, idx, targetCat); dataChanged=true; }
-      });
-      clearSelection(); updateDownloadBtn();
+      if(selectedCards.length>0 && confirm(`Pindahkan ${selectedCards.length} artikel terpilih ke kategori "${targetCat}"?`)){
+        saveHistory();
+        selectedCards.forEach(card=>{
+          const fromCat=card.closest(".articles").dataset.cat;
+          const title=card.querySelector(".title").textContent;
+          const idx=artikelData[fromCat].findIndex(a=>a[0]===title);
+          if(idx>-1 && fromCat!==targetCat){ moveArticle(fromCat,idx,targetCat); dataChanged=true; }
+        });
+        clearSelection(); updateDownloadBtn();
+      }
     });
 
     let sortedArticles=[...artikelData[cat]].sort((a,b)=>b[3]-a[3]);
@@ -151,57 +138,74 @@ function renderDashboard(){
 
     section.appendChild(articlesDiv);
     container.appendChild(section);
+
+    // CUT & PASTE LOGIC
+    cutBtn.addEventListener("click", ()=>{
+      const cardsInCat = Array.from(articlesDiv.children).filter(c => c.classList.contains("selected"));
+      if(cardsInCat.length===0){ alert("Tidak ada artikel terpilih untuk di-cut!"); return; }
+      saveHistory();
+      clipboard = cardsInCat.map(card=>{
+        const title = card.querySelector(".title").textContent;
+        const fromCat = card.closest(".articles").dataset.cat;
+        const idx = artikelData[fromCat].findIndex(a=>a[0]===title);
+        return {fromCat, article: artikelData[fromCat][idx], idx};
+      });
+      alert(`Sudah menyalin ${clipboard.length} artikel terpilih dari kategori "${cat}"`);
+    });
+
+    pasteBtn.addEventListener("click", ()=>{
+      if(!clipboard || clipboard.length===0){ alert("Tidak ada artikel yang dicut!"); return; }
+      saveHistory();
+      clipboard.forEach(item=>{
+        artikelData[item.fromCat].splice(item.idx,1);
+        artikelData[cat].push(item.article);
+      });
+      clipboard=[]; dataChanged=true; updateDownloadBtn();
+      renderDashboard();
+    });
   });
 
   totalStats.textContent=`Total Artikel: ${totalCount}`;
   addSelectionEvents(); addDragEvents(); addMarqueeSelection(); updateDownloadBtn();
 }
 
-// MOVE, DOWNLOAD, SELECTION
 function moveArticle(fromCat,idx,toCat){ const article=artikelData[fromCat][idx]; artikelData[fromCat].splice(idx,1); artikelData[toCat].push(article); renderDashboard(); }
 function downloadJSON(){ const blob=new Blob([JSON.stringify(artikelData,null,2)],{type:"application/json"}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="artikel.json"; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); dataChanged=false; updateDownloadBtn(); }
 
 document.getElementById("searchInput").addEventListener("input", e=>{ searchQuery=e.target.value.toLowerCase(); renderDashboard(); });
 document.getElementById("resetSearch").addEventListener("click", ()=>{ document.getElementById("searchInput").value=""; searchQuery=""; renderDashboard(); });
-
 document.getElementById("downloadJSONBtn").addEventListener("click", downloadJSON);
 
-function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
-function addSelectionEvents(){
-  document.querySelectorAll(".card").forEach(card=>{
-    card.addEventListener("click", e=>{
-      if(e.ctrlKey||e.metaKey){
-        if(card.classList.contains("selected")){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); }
-        else { card.classList.add("selected"); selectedCards.push(card); }
-      } else { clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
-    });
-  });
-}
+document.getElementById("undoBtn").addEventListener("click", ()=>{
+  if(historyStack.length===0){ alert("Tidak ada perubahan untuk di-undo"); return; }
+  artikelData = JSON.parse(historyStack.pop());
+  dataChanged=true; updateDownloadBtn();
+  renderDashboard();
+});
 
-function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden = !dataChanged; }
+function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
+function addSelectionEvents(){ document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("click", e=>{
+    if(e.ctrlKey||e.metaKey){ if(card.classList.contains("selected")){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); } else { card.classList.add("selected"); selectedCards.push(card); } }
+    else { clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
+  });
+}}
+function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden=!dataChanged; }
 
 // DRAG EVENTS
-function addDragEvents(){
+function addDragEvents(){ 
   document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("dragstart", e=>{
       if(!selectedCards.includes(card)){ clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
       e.dataTransfer.setData("text/plain","drag-selected"); e.dataTransfer.effectAllowed="move"; card.style.opacity="0.5";
-      dragTooltip.style.display="block"; dragTooltip.textContent=`Menyeret ${selectedCards.length} artikel terpilih...`;
     });
-    card.addEventListener("dragend", ()=>{ document.querySelectorAll(".card").forEach(c=>c.style.opacity="1"); dragTooltip.style.display="none"; });
+    card.addEventListener("dragend", ()=>{ document.querySelectorAll(".card").forEach(c=>c.style.opacity="1"); });
   });
-  document.querySelectorAll(".articles").forEach(container=>{
-    container.addEventListener("dragover", e=>{ e.preventDefault(); container.classList.add("drag-over"); });
-    container.addEventListener("dragleave", ()=>{ container.classList.remove("drag-over"); });
-    container.addEventListener("drop", e=>{ e.preventDefault(); container.classList.remove("drag-over"); });
-  });
-  document.addEventListener("mousemove", e=>{ if(dragTooltip.style.display==="block"){ dragTooltip.style.left=e.pageX+15+"px"; dragTooltip.style.top=e.pageY+15+"px"; } });
 }
 
 // MARQUEE SELECTION
 function addMarqueeSelection(){
-  const dashboard=document.getElementById("dashboard");
-  let isDragging=false, startX=0, startY=0;
+  const dashboard=document.getElementById("dashboard"); let isDragging=false, startX=0, startY=0; let marquee=null;
   dashboard.addEventListener("mousedown", e=>{
     if(e.target.classList.contains("card")||e.target.closest(".card")) return;
     isDragging=true; startX=e.pageX; startY=e.pageY;
@@ -213,16 +217,12 @@ function addMarqueeSelection(){
     const x=Math.min(e.pageX,startX), y=Math.min(e.pageY,startY);
     const w=Math.abs(e.pageX-startX), h=Math.abs(e.pageY-startY);
     marquee.style.left=x+"px"; marquee.style.top=y+"px"; marquee.style.width=w+"px"; marquee.style.height=h+"px";
-
     document.querySelectorAll(".card").forEach(card=>{
       const rect=card.getBoundingClientRect(); const marRect=marquee.getBoundingClientRect();
       if(rect.left<marRect.right && rect.right>marRect.left && rect.top<marRect.bottom && rect.bottom>marRect.top){
-        if(!selectedCards.includes(card)) { card.classList.add("selected"); selectedCards.push(card); }
-      } else {
-        if(selectedCards.includes(card) && !e.ctrlKey && !e.metaKey){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); }
-      }
+        if(!selectedCards.includes(card)){ card.classList.add("selected"); selectedCards.push(card); }
+      } else { if(selectedCards.includes(card) && !e.ctrlKey && !e.metaKey){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); } }
     });
-  updateDownloadBtn();
   });
   document.addEventListener("mouseup", e=>{ if(isDragging){ isDragging=false; if(marquee){ marquee.remove(); marquee=null; } } });
 }
