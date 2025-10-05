@@ -66,6 +66,9 @@
     .nav-button.karir:hover .nav-icon { transform: scale(1.3); }
     .nav-button.sitemap:hover .nav-icon { transform: translateX(4px); }
     .nav-button.rss:hover .nav-icon { animation: pulse 0.6s ease; }
+    .nav-button.multimedia:hover .nav-icon { transform: translateX(3px); }
+    .nav-button.catatan:hover .nav-icon { animation: pulse 0.6s ease; }
+    .nav-button.budaya:hover .nav-icon { transform: translateY(-2px) scale(1.1); }
     @keyframes pulse {
       0%,100% { transform: scale(1); }
       50% { transform: scale(1.2); }
@@ -127,8 +130,22 @@
   <div id="quick-nav"></div>
 
   <script>
-    // --- Fungsi Quick Nav ---
-function createQuickNav(categories) {
+  const CATEGORY_ICON_MAP = [
+  { key: "Linux & Open Source", icon: "🐧", cls: "linux" },
+  { key: "Islam & Kehidupan", icon: "📚", cls: "religi" },
+  { key: "Lainnya", icon: "🗂️", cls: "lainnya" },
+  { key: "Multimedia & Editing", icon: "📽️", cls: "multimedia" },
+  { key: "Catatan & Sosial", icon: "📰", cls: "catatan" },
+  { key: "Budaya, Kuliner & Lifestyle", icon: "🏞️", cls: "budaya" },
+  { key: "Windows & Teknologi Umum", icon: "💻", cls: "windows" }
+];
+
+function getIconAndClass(categoryName) {
+  const found = CATEGORY_ICON_MAP.find(m => categoryName.includes(m.key));
+  return found ? found : { icon: "📂", cls: "default" };
+}
+  
+   function createQuickNav(categories) {
   const quickNav = document.getElementById('quick-nav');
   quickNav.innerHTML = '';
 
@@ -144,28 +161,19 @@ function createQuickNav(categories) {
   });
   quickNav.appendChild(upButton);
 
-  // Tombol kategori
+  // Tombol kategori (ikon + tooltip nama)
   categories.forEach(categoryName => {
     const categoryId = categoryName
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9-]/g, '');
 
+    const { icon, cls } = getIconAndClass(categoryName);
+
     const button = document.createElement('a');
     button.href = `#${categoryId}`;
-    button.className = `nav-button ${categoryId}`;
+    button.className = `nav-button ${cls}`;
     button.title = categoryName;
-
-    // Tentukan ikon sesuai kategori asli
-    let icon = "📂"; // default
-    if (categoryName.includes("Linux & Open Source")) icon = "🐧";
-    else if (categoryName.includes("Islam & Kehidupan")) icon = "📚";
-    else if (categoryName.includes("Lainnya")) icon = "🗂️";
-    else if (categoryName.includes("Multimedia & Editing")) icon = "📽️";
-    else if (categoryName.includes("Catatan & Sosial")) icon = "📰";
-    else if (categoryName.includes("Budaya, Kuliner & Lifestyle")) icon = "🏞️";
-    else if (categoryName.includes("Windows & Teknologi Umum")) icon = "💻";
-
     button.innerHTML = `<span class="nav-icon">${icon}</span>`;
 
     button.addEventListener('click', (e) => {
@@ -194,6 +202,7 @@ function createQuickNav(categories) {
   rssButton.innerHTML = `<span class="nav-icon">📰</span>`;
   quickNav.appendChild(rssButton);
 }
+
 
     // --- Logika Utama Pemuatan Artikel ---
     document.addEventListener('DOMContentLoaded', async () => {
