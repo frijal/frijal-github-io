@@ -1,4 +1,4 @@
-// titleToCategory.js (versi ESM)
+// titleToCategory.js (versi smart)
 const categories = [
   { name: "📽️ Multimedia & Editing", priority: 3, keywords: ["ffmpeg","video","film","audio","mp3","ogg","rekam","convert","ai","split","cut","durasi","imagemagick","resize","format","potong","watermark","foto","gambar","pdf","gabung","kompres","scan","ghostscript","pdftk","vlc","multimedia","codec"] },
   { name: "🐧 Linux & Open Source", priority: 5, keywords: ["linux","libreoffice","openoffice","perl","ubuntu","distro","lts","live usb","conky","fedora","debian","arch","slackware","nixos","opensuse","blankon","mirror","repo","apt","yum","rsync","grub","chroot","dpkg","open source","oss","foss","komunitas","kpli","gnome","kde","compiz","desktop","ubuntu party"] },
@@ -8,7 +8,7 @@ const categories = [
   { name: "💻 Windows & Teknologi Umum", priority: 3, keywords: ["windows","git","learning","cpu","samba","jaringan","software","terminal","github","shutdown","hdd","ssd","refresh","optimasi","bootloader","virtualbox","keyring","laptop","osborne1","baterai","mic","wifi","amd","cooling","phishing","eula","lisensi","piracy"] }
 ];
 
-export function titleToCategory(title) {
+function titleToCategory(title) {
   const t = title.toLowerCase();
   let bestMatch = { name: "🗂️ Lainnya", score: 0, priority: 0 };
 
@@ -31,4 +31,6 @@ export function titleToCategory(title) {
 
   return bestMatch.name;
 }
+
+module.exports = { titleToCategory };
 
