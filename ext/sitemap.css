@@ -1,20 +1,24 @@
-/* ===== DASAR ===== */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+/* ===== RESET STYLES ===== */
+* {
   margin: 0;
-  padding-top: 70px;
-  background: #f2f2f2;
-  color: #333;
-  display: flex;
-  justify-content: center;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== MARQUEE ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
+  padding-top: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== HEADER MARQUEE ===== */
 #marquee-container {
   width: 100%;
-  background: #007BFF;
-  color: white;
+  background-color: #007BFF;
+  color: #fff;
   overflow: hidden;
   white-space: nowrap;
   position: fixed;
@@ -22,177 +26,283 @@ body {
   left: 0;
   z-index: 9999;
   padding: 10px 0;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
 }
+
 #marquee-content {
   display: inline-block;
   padding-left: 100%;
   animation: marquee 600s linear infinite;
-  will-change: transform;
 }
+
 #marquee-container:hover #marquee-content {
   animation-play-state: paused;
 }
+
 #marquee-content a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   margin-right: 30px;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
+
 #marquee-content a:hover {
   color: yellow;
   text-decoration: underline;
 }
+
 @keyframes marquee {
-  0% { transform: translateX(0%); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
-/* ===== SEARCH ===== */
+/* ===== SEARCH BOX ===== */
 .search-wrapper {
   position: relative;
   width: 100%;
   max-width: 400px;
   margin: 15px auto;
 }
+
 #search {
   width: 100%;
   padding: 10px 28px 10px 10px;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  background: white;
+  background-color: #fff;
   color: #333;
-  box-sizing: border-box;
 }
+
 #clearSearch {
   position: absolute;
-  right: 6px;
   top: 50%;
+  right: 6px;
   transform: translateY(-50%);
   background: transparent;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
-  display: none;
   color: #888;
 }
-#clearSearch:hover { color: #000; }
 
-/* ===== TOGGLE TOC ===== */
+#clearSearch:hover {
+  color: #000;
+}
+
+/* ===== TOGGLE TABLE OF CONTENT ===== */
 #tocToggle {
   display: block;
   width: 200px;
   margin: 10px auto;
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
+  background: #007BFF;
+  color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  background: #007BFF;
-  color: white;
 }
 
-/* ===== TOC ===== */
-#toc { max-width: 900px; margin: 10px auto; }
+/* ===== TABLE OF CONTENT (TOC) ===== */
+#toc {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
 #totalCount {
   text-align: center;
-  margin-top: 20px;
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 16px;
   padding: 10px;
-  background: #007BFF;
-  color: white;
+  background-color: #007BFF;
+  color: #fff;
   border-radius: 6px;
 }
+
 .category {
   margin: 10px 0;
+  background-color: #fff;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .category-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 10px 16px;
   font-weight: bold;
+  background-color: #007BFF;
+  color: #fff;
   cursor: pointer;
-  color: white;
   border-radius: 6px;
-  transition: background 0.3s;
 }
+
 .category-header .badge {
-  background: #ffc107;
+  background-color: #ffc107;
   color: #333;
   padding: 2px 8px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
 }
-.toc-list { display: none; padding: 0 16px; }
-.toc-item { display: flex; align-items: center; margin: 4px 0; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
-.toc-title { flex: 1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.toc-title a { text-decoration: none; color: #333; font-weight: bold; transition: all 0.3s ease; }
-.toc-title a.visited { color: gray; opacity: 0.8; }
-.toc-title a:hover { transform: scale(1.05); color: transparent; background: linear-gradient(90deg, #ff7e5f, #feb47b); background-clip: text; -webkit-background-clip: text; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
-.toc-title a::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0%; height: 2px; background: #007BFF; transition: width 0.3s ease; border-radius: 2px; }
-.toc-title a:hover::after { width: 100%; }
+
+.toc-list {
+  display: none;
+  padding: 0 16px;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.toc-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toc-title a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.toc-title a.visited {
+  color: gray;
+  opacity: 0.8;
+}
+
+.toc-title a:hover {
+  transform: scale(1.05);
+  color: transparent;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.toc-title a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: #007BFF;
+  transition: width 0.3s ease;
+}
+
+.toc-title a:hover::after {
+  width: 100%;
+}
 
 /* ===== LABEL STATUS ===== */
-.label-new { background: #28a745; color: white; padding: 2px 5px; border-radius: 8px; }
-.label-visited { background: #6c757d; color: white; padding: 2px 5px; border-radius: 8px; }
+.label-new {
+  background-color: #28a745;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 8px;
+}
+
+.label-visited {
+  background-color: #6c757d;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 8px;
+}
 
 /* ===== HIGHLIGHT SEARCH ===== */
-.highlight { background: yellow; color: black; animation: fadeIn 0.5s ease-in; }
-@keyframes fadeIn { from { background: transparent; } to { background: yellow; } }
+.highlight {
+  background: yellow;
+  color: black;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { background: transparent; }
+  to { background: yellow; }
+}
 
 /* ===== DARK MODE ===== */
 body.dark-mode {
-  background: #121212 !important;
-  color: #eee !important;
+  background-color: #121212;
+  color: #eee;
 }
-body.dark-mode #search { background: #1e1e1e !important; color: #eee !important; border: 1px solid #555 !important; }
-body.dark-mode .category { background: #1c1c1c !important; box-shadow: 0 2px 5px rgba(255,255,255,0.1) !important; }
-body.dark-mode .toc-title a { color: #ddd !important; }
-body.dark-mode .toc-item { border-bottom: 1px solid #333 !important; }
-body.dark-mode #totalCount { background: #444 !important; color: #eee !important; }
-body.dark-mode #tocToggle { background: #444 !important; color: #eee !important; }
 
-/* ===== GRADIENT KATEGORI (akan di-set via JS) ===== */
+body.dark-mode #search {
+  background-color: #1e1e1e;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+body.dark-mode .category {
+  background-color: #1c1c1c;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .toc-title a {
+  color: #ddd;
+}
+
+body.dark-mode .toc-item {
+  border-bottom: 1px solid #333;
+}
+
+body.dark-mode #totalCount {
+  background-color: #444;
+  color: #eee;
+}
+
+body.dark-mode #tocToggle {
+  background-color: #444;
+  color: #eee;
+}
+
+/* ===== CATEGORY GRADIENT ===== */
 .category-header[data-gradient] {
   background: var(--category-gradient);
 }
 
-/* ===== MOBILE ===== */
-@media(max-width:500px){
+/* ===== MOBILE STYLES ===== */
+@media (max-width: 500px) {
   #toc { margin: 10px; }
-  #search { font-size: 14px; padding: 8px 26px 8px 8px; }
-  #tocToggle { width: 100%; font-size: 13px; padding: 6px 10px; }
+  #search {
+    font-size: 0.875rem;
+    padding: 8px 26px 8px 8px;
+  }
+  #tocToggle {
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 6px 10px;
+  }
 }
 
-/* Container utama minimal 1200px */
+/* CONTAINER STYLES */
 .container {
-  max-width: 1200px;  /* ubah dari 900px */
+  max-width: 1200px;
   width: 100%;
-  background: #fff;
+  background-color: #fff;
   padding: 20px;
-  margin: 20px auto; /* auto untuk center */
+  margin: 20px auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* TOC wrapper */
 #toc {
-  max-width: 1200px; /* sama seperti container */
+  max-width: 1200px;
   margin: 10px auto;
 }
 
-/* Responsive: tetap muat di layar kecil */
+/* RESPONSIVE FOR SMALLER SCREENS */
 @media (max-width: 1200px) {
   .container, #toc {
     max-width: 100%;
