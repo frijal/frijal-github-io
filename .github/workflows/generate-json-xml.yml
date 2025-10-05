@@ -113,5 +113,10 @@ jobs:
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
           echo "➡️  $COUNT artikel di folder artikel/"
 
-
+      - name: "10. Copy artikel.json to artikel/ folder"
+        if: always()
+        run: |
+          echo "📄 Menyalin artikel.json ke folder artikel/..."
+          cp -f artikel.json artikel/ || echo "❌ Gagal menyalin artikel.json"
+          echo "✅ Selesai menyalin artikel.json"
 
