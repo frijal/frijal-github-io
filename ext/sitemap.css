@@ -32,7 +32,6 @@
   border: 1px solid #ccc;
   background-color: #fff; /* Pastikan background cerah di light mode */
   color: #333;
-  /* Hapus padding-bottom tambahan yang membuat konflik dengan .search-footer */
 }
 
 /* Tombol Clear */
@@ -60,7 +59,6 @@
   background: #e9ecef;
   padding: 6px 10px;
   border-radius: 4px;
-  /* Hapus position: absolute; karena sudah di dalam container fixed */
 }
 
 
