@@ -35,47 +35,43 @@
     
     <div class="search-fixed">
         <div class="search-wrapper">
-            <input type="text" id="search" placeholder="ketik apapun...">
-            <button id="clearSearch">✕</button>
+            <input type="text" id="search" placeholder="ketik apapun..." autocomplete="off">
+            <button id="clearSearch" style="display: none;">✕</button>
         </div>
         
-        <div class="ip-browser-info-line">
-            <span class="browser-os-info">
-                <span class="browser">Firefox 143.0</span>
-                <span class="separator">|</span>
-                <span class="os">Linux</span>
-            </span>
-            <span class="location-info">
-                <span class="ip-address">2402:8780:1025:9c1a:f8d7:2cbd:741c:d6f3</span>
-                <span class="location">(Surabaya, East Java, Indonesia)</span>
-                <span class="flag">🇮🇩</span>
-            </span>
+        <div id="footerInfo" class="ip-browser-info-line">
+            Memuat info klien...
         </div>
         
-        <div id="footerInfo" class="search-footer">
-            <small>Informasi Tambahan di Sini</small>
+        <div class="search-footer">
+            <small>Daftar Isi Artikel Otomatis</small> 
         </div>
     </div>
     
-    <div class="container">
-        <button id="tocToggle">Tutup</button>
+    <h1 class="main-title">INDEKS ARTIKEL LENGKAP</h1>
+        
+    <div id="totalCount">Loading total artikel...</div>
+    
+    <button id="tocToggle">Tutup</button>
 
-        <div id="toc"></div>
-
-        <div id="totalCount">Total artikel: 0</div>
+    <div id="toc">
+        <p style="text-align: center; margin-top: 30px;">Memuat Daftar Isi...</p>
     </div>
-
+    
     <div id="darkToggle">
-        🌞 <input type="checkbox" id="darkSwitch"> 🌙
+        🌞 
+        <input type="checkbox" id="darkSwitch" style="vertical-align: middle;"> 
+        🌙
     </div>
     
-    <script src="ext/sitemap.js"></script>
-    <script src="ext/iposbrowser.js"></script>
-
     <a href="https://frijal.github.io/rss.html" 
         title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca." 
         style="position: fixed; bottom: 5%; right: 10px; z-index: 999;">
         <img src="https://img.shields.io/badge/RSS-Feed-orange?logo=rss&style=plastic" alt="RSS Feed" />
     </a>
+    
+    <script src="ext/iposbrowser.js"></script>
+    <script src="ext/sitemap.js"></script>
+
 </body>
 </html>
