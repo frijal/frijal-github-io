@@ -1,90 +1,75 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 
 const folder = "artikelx";
 
-for (const f of fs.readdirSync(folder)) {
-  if (!f.endsWith(".html")) continue;
-  const file = path.join(folder, f);
-  let html = fs.readFileSync(file, "utf8");
+// Fungsi rekursif untuk memperbaiki JSON-LD
+const fixImage = (obj, img) => {
+  if (!obj || typeof obj !== "object") return;
+  if (!obj.image || obj.image === "" || (Array.isArray(obj.image) && obj.image.length === 0)) {
+    obj.image = img;
+  }
+  Object.values(obj).forEach((v) => fixImage(v, img));
+};
 
-  const base = path.basename(f, ".html");
-  const img = `https://frijal.github.io/artikel/${base}.jpg`;
+const processFiles = async () => {
+  try {
+    const files = await fs.readdir(folder);
 
-  // Ambil <title> → fallback untuk og:image:alt
-  const titleMatch = html.match(/<title>(.*?)<\/title>/i);
-  const altText = titleMatch ? titleMatch[1].trim() : base;
+    for (const f of files) {
+      if (!f.endsWith(".html")) continue;
 
-  // === 1. Perbaiki JSON-LD ===
-  html = html.replace(
-    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi,
-    (m, j) => {
-      try {
-        const d = JSON.parse(j);
+      const filePath = path.join(folder, f);
+      let html = await fs.readFile(filePath, "utf8");
 
-        // Rekursif cek & isi image jika kosong
-        const fix = (o) => {
-          if (!o || typeof o !== "object") return;
-          if (
-            !o.image ||
-            o.image === "" ||
-            (Array.isArray(o.image) && o.image.length === 0)
-          ) {
-            o.image = img;
+      const baseName = path.basename(f, ".html");
+      const img = `https://frijal.github.io/artikel/${baseName}.jpg`;
+
+      // Ambil <title> sebagai fallback alt
+      const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+      const altText = titleMatch ? titleMatch[1].trim() : baseName;
+
+      // 1️⃣ Perbaiki JSON-LD
+      html = html.replace(
+        /<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi,
+        (match, jsonText) => {
+          try {
+            const data = JSON.parse(jsonText);
+            Array.isArray(data) ? data.forEach((o) => fixImage(o, img)) : fixImage(data, img);
+            return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+          } catch {
+            return match; // biarkan jika parsing gagal
           }
-          Object.values(o).forEach(fix);
-        };
+        }
+      );
 
-        Array.isArray(d) ? d.forEach(fix) : fix(d);
+      // 2️⃣ Siapkan meta tags baru jika belum ada
+      const metaTags = [];
 
-        return `<script type="application/ld+json">${JSON.stringify(d)}</script>`;
-      } catch {
-        return m; // kalau parsing gagal → biarkan apa adanya
+      if (!/<meta[^>]+property=["']og:image/i.test(html))
+        metaTags.push(`<meta property="og:image" content="${img}">`);
+      if (!/<meta[^>]+property=["']og:image:alt/i.test(html))
+        metaTags.push(`<meta property="og:image:alt" content="${altText}">`);
+      if (!/<meta[^>]+name=["']twitter:card/i.test(html))
+        metaTags.push(`<meta name="twitter:card" content="summary_large_image">`);
+      if (!/<meta[^>]+name=["']twitter:image/i.test(html))
+        metaTags.push(`<meta name="twitter:image" content="${img}">`);
+      if (!/<meta[^>]+itemprop=["']image["']/i.test(html))
+        metaTags.push(`<meta itemprop="image" content="${img}">`);
+
+      if (metaTags.length) {
+        html = html.replace(/<\/head>/i, `${metaTags.join("\n  ")}\n</head>`);
       }
+
+      await fs.writeFile(filePath, html, "utf8");
+      console.log("✔ Diproses:", f);
     }
-  );
 
-  // === 2. Open Graph og:image ===
-  if (!/<meta[^>]+property=["']og:image/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta property="og:image" content="${img}">\n</head>`
-    );
+    console.log("✅ Semua file selesai diproses!");
+  } catch (err) {
+    console.error("❌ Terjadi error:", err);
   }
+};
 
-  // === 3. Open Graph og:image:alt ===
-  if (!/<meta[^>]+property=["']og:image:alt/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta property="og:image:alt" content="${altText}">\n</head>`
-    );
-  }
+processFiles();
 
-  // === 4. Twitter Card ===
-  if (!/<meta[^>]+name=["']twitter:card/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta name="twitter:card" content="summary_large_image">\n</head>`
-    );
-  }
-
-  // === 5. Twitter Image ===
-  if (!/<meta[^>]+name=["']twitter:image/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta name="twitter:image" content="${img}">\n</head>`
-    );
-  }
-
-  // === 6. Schema.org Microdata itemprop="image" ===
-  if (!/<meta[^>]+itemprop=["']image["']/i.test(html)) {
-    html = html.replace(
-      /<\/head>/i,
-      `  <meta itemprop="image" content="${img}">\n</head>`
-    );
-  }
-
-  // Tulis balik hasil modifikasi
-  fs.writeFileSync(file, html);
-  console.log("✔ Diproses:", f);
-}
