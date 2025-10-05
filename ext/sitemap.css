@@ -341,3 +341,29 @@ body.dark-mode #tocToggle {
   background: #444 !important;
   color: #eee !important;
 }
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#search {
+  padding-right: 28px; /* kasih space untuk tombol X */
+}
+
+#clearSearch {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: none; /* default hidden */
+  color: #888;
+}
+#clearSearch:hover {
+  color: #000;
+}
+

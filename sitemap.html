@@ -13,7 +13,7 @@
 
 <div><footer class="page-footer"><div id="footerInfo"></div></footer></div>
 <!-- Search -->
-<input type="text" id="search" placeholder="Cari judul...">
+<div class="search-wrapper"><input type="text" id="search" placeholder="Cari judul...">  <button id="clearSearch">✕</button></div>
 
 <!-- Expand/Collapse TOC -->
 <button id="tocToggle">Collapse TOC</button>
@@ -176,6 +176,20 @@ document.getElementById("search").addEventListener("input", function () {
 
   document.getElementById("totalCount").textContent = `Total artikel: ${countVisible}`;
   updateTOCToggleText();
+});
+const searchInput = document.getElementById("search");
+const clearBtn = document.getElementById("clearSearch");
+
+// Tampilkan/hide tombol X sesuai input
+searchInput.addEventListener("input", function () {
+  clearBtn.style.display = this.value ? "block" : "none";
+});
+
+// Klik tombol X → clear input + trigger pencarian ulang
+clearBtn.addEventListener("click", function () {
+  searchInput.value = "";
+  searchInput.dispatchEvent(new Event("input")); // trigger ulang pencarian
+  clearBtn.style.display = "none";
 });
 
 // --- Tombol global Buka/Tutup ---
