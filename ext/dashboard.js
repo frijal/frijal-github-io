@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const downloadBtn = document.getElementById("downloadBtn");
 
   // Load artikel.json dari folder artikel/
-  const res = await fetch("artikel/artikel.json");
+  const res = await fetch("/artikel/artikel.json");
   const data = await res.json();
 
   // Ambil semua kategori (7 total)
