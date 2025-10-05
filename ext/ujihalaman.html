@@ -31,7 +31,7 @@
   </section>
 
   <script>
-    const manifestUrl = "../site.webmanifest";
+    const manifestUrl = "/site.webmanifest"; // manifest di root
 
     // --- Uji Manifest + PWA ---
     fetch(manifestUrl)
@@ -44,7 +44,7 @@
           iconsDiv.innerHTML = "<h3>Ikon:</h3>";
           data.icons.forEach(icon => {
             const img = document.createElement("img");
-            img.src = "../" + icon.src;
+            img.src = "/" + icon.src; // ikon di ext/icons/
             img.alt = icon.sizes;
             img.title = icon.sizes;
             iconsDiv.appendChild(img);
@@ -66,12 +66,12 @@
         : `<li class="fail">✖ ${label} tidak ada</li>`;
     }
 
-    fetch("../artikel.json")
+    fetch("/artikel.json")
       .then(r => r.json())
       .then(list => {
         container.innerHTML = "";
         list.forEach(item => {
-          const url = "../artikel/" + item.file; // pastikan artikel.json punya key "file"
+          const url = "/artikel/" + item.file;
           fetch(url)
             .then(r => r.text())
             .then(html => {
