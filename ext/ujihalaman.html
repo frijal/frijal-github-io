@@ -13,6 +13,8 @@
     section { margin-bottom:30px; }
     .article-report { border:1px solid #334155; border-radius:8px; padding:12px; margin:8px 0; background:#1e293b; }
     .category { margin-top:20px; }
+    button { margin:4px; padding:6px 12px; border-radius:6px; border:none; cursor:pointer; }
+    small { color:#94a3b8; }
   </style>
 </head>
 <body>
@@ -28,11 +30,17 @@
 
   <section>
     <h2>2. Uji Semua Artikel dari <code>artikel.json</code></h2>
+    <div>
+      <button onclick="setFilter('all')">📋 Tampilkan semua</button>
+      <button onclick="setFilter('fail')">🔴 Tampilkan hanya fail</button>
+      <button onclick="setFilter('pass')">🟢 Tampilkan hanya pass</button>
+    </div>
     <div id="articlesReport">Memuat daftar artikel...</div>
   </section>
 
   <script>
     const manifestUrl = "/site.webmanifest";
+    let currentFilter = "all"; // default
 
     // --- Uji Manifest + PWA ---
     fetch(manifestUrl)
@@ -62,54 +70,74 @@
     const container = document.getElementById("articlesReport");
 
     function checkMeta(doc, selector, label) {
-      return doc.querySelector(selector)
-        ? `<li class="ok">✔ ${label} ada</li>`
-        : `<li class="fail">✖ ${label} tidak ada</li>`;
+      if (doc.querySelector(selector)) {
+        return `<li class="ok">✔ ${label} ada</li>`;
+      } else {
+        return `<li class="fail">✖ ${label} tidak ada</li>`;
+      }
     }
 
-    fetch("/artikel.json")
-      .then(r => r.json())
-      .then(data => {
-        container.innerHTML = "";
-        for (const kategori in data) {
-          const group = data[kategori];
-          container.innerHTML += `<h3 class="category">📚 ${kategori}</h3>`;
-          group.forEach(item => {
-            const judul = item[0];
-            const file = item[1];
-            const url = "/artikel/" + file;
+    function renderArticles(data) {
+      container.innerHTML = "";
+      for (const kategori in data) {
+        const group = data[kategori];
+        container.innerHTML += `<h3 class="category">📚 ${kategori}</h3>`;
+        group.forEach(item => {
+          const judul = item[0];
+          const file = item[1];
+          const url = "/artikel/" + file;
 
-            fetch(url)
-              .then(r => r.text())
-              .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-                const title = doc.querySelector("title")?.innerText || judul || file;
+          fetch(url)
+            .then(r => r.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const title = doc.querySelector("title")?.innerText || judul || file;
 
-                let report = `<div class="article-report"><h4>📄 ${title}</h4><ul>`;
-                report += checkMeta(doc,'meta[name="description"]',"Description");
-                report += checkMeta(doc,'link[rel="canonical"]',"Canonical");
-                report += checkMeta(doc,'meta[property="og:title"]',"OG Title");
-                report += checkMeta(doc,'meta[property="og:description"]',"OG Description");
-                report += checkMeta(doc,'meta[property="og:image"]',"OG Image");
-                report += checkMeta(doc,'meta[name="twitter:card"]',"Twitter Card");
-                report += checkMeta(doc,'meta[name="twitter:title"]',"Twitter Title");
-                report += checkMeta(doc,'meta[name="twitter:description"]',"Twitter Description");
-                report += checkMeta(doc,'meta[name="twitter:image"]',"Twitter Image");
-                report += checkMeta(doc,'script[type="application/ld+json"]',"Structured Data");
-                report += "</ul></div>";
+              let checks = [];
+              checks.push(checkMeta(doc,'meta[name="description"]',"Description"));
+              checks.push(checkMeta(doc,'link[rel="canonical"]',"Canonical"));
+              checks.push(checkMeta(doc,'meta[property="og:title"]',"OG Title"));
+              checks.push(checkMeta(doc,'meta[property="og:description"]',"OG Description"));
+              checks.push(checkMeta(doc,'meta[property="og:image"]',"OG Image"));
+              checks.push(checkMeta(doc,'meta[name="twitter:card"]',"Twitter Card"));
+              checks.push(checkMeta(doc,'meta[name="twitter:title"]',"Twitter Title"));
+              checks.push(checkMeta(doc,'meta[name="twitter:description"]',"Twitter Description"));
+              checks.push(checkMeta(doc,'meta[name="twitter:image"]',"Twitter Image"));
+              checks.push(checkMeta(doc,'script[type="application/ld+json"]',"Structured Data"));
 
-                container.innerHTML += report;
-              })
-              .catch(() => {
-                container.innerHTML += `<div class="article-report"><h4>📄 ${judul}</h4><p class="fail">❌ Tidak bisa dimuat</p></div>`;
+              // filter sesuai pilihan
+              let filtered = checks.filter(c => {
+                if (currentFilter === "all") return true;
+                if (currentFilter === "fail") return c.includes("fail");
+                if (currentFilter === "pass") return c.includes("ok");
               });
-          });
-        }
-      })
-      .catch(() => {
-        container.innerHTML = "❌ Gagal memuat artikel.json";
-      });
+
+              if (filtered.length > 0) {
+                let report = `<div class="article-report">
+                  <h4>📄 ${title} <small>(${file})</small></h4>
+                  <ul>${filtered.join("")}</ul>
+                </div>`;
+                container.innerHTML += report;
+              }
+            })
+            .catch(() => {
+              container.innerHTML += `<div class="article-report"><h4>📄 ${judul} <small>(${file})</small></h4><p class="fail">❌ Tidak bisa dimuat</p></div>`;
+            });
+        });
+      }
+    }
+
+    function setFilter(mode) {
+      currentFilter = mode;
+      fetch("/artikel.json")
+        .then(r => r.json())
+        .then(data => renderArticles(data))
+        .catch(() => { container.innerHTML = "❌ Gagal memuat artikel.json"; });
+    }
+
+    // initial load
+    setFilter("all");
   </script>
 </body>
 </html>
