@@ -116,6 +116,46 @@
       }
       .nav-button:hover { background-color: #383838; }
     }
+    /* Bungkus tombol agar bisa punya tooltip */
+.nav-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Tooltip custom */
+.nav-button::after {
+  content: attr(data-tooltip);   /* ambil teks dari atribut data-tooltip */
+  position: absolute;
+  left: -9999px;                 /* sembunyikan default */
+  opacity: 0;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 0.8em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: translateY(-50%);
+  top: 50%;
+  pointer-events: none;
+  transition: opacity 0.2s, left 0.2s;
+}
+
+/* Saat hover, tampilkan tooltip di kiri ikon */
+.nav-button:hover::after {
+  left: -8px;                    /* jarak dari ikon */
+  transform: translate(-100%, -50%);
+  opacity: 1;
+  z-index: 200;
+}
+
   </style>
 </head>
 <body>
@@ -168,10 +208,11 @@ function getIconAndClass(categoryName) {
     const { icon, cls } = getIconAndClass(categoryName);
 
     const button = document.createElement('a');
-    button.href = `#${categoryId}`;
-    button.className = `nav-button ${cls}`;
-    button.title = categoryName;
-    button.innerHTML = `<span class="nav-icon">${icon}</span>`;
+	button.href = `#${categoryId}`;
+	button.className = `nav-button ${cls}`;
+	button.setAttribute('data-tooltip', categoryName); // tooltip custom
+	button.innerHTML = `<span class="nav-icon">${icon}</span>`;
+
 
     button.addEventListener('click', (e) => {
       e.preventDefault();
