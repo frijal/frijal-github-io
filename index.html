@@ -128,72 +128,72 @@
 
   <script>
     // --- Fungsi Quick Nav ---
-    function createQuickNav(categories) {
-      const quickNav = document.getElementById('quick-nav');
-      quickNav.innerHTML = '';
+function createQuickNav(categories) {
+  const quickNav = document.getElementById('quick-nav');
+  quickNav.innerHTML = '';
 
-      // Tombol Atas
-      const upButton = document.createElement('a');
-      upButton.href = "#top";
-      upButton.className = 'nav-button up';
-      upButton.title = "Atas";
-      upButton.innerHTML = `<span class="nav-icon">⬆️</span>`;
-      upButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo(0,0);
-      });
-      quickNav.appendChild(upButton);
+  // Tombol Atas
+  const upButton = document.createElement('a');
+  upButton.href = "#top";
+  upButton.className = 'nav-button up';
+  upButton.title = "Atas";
+  upButton.innerHTML = `<span class="nav-icon">⬆️</span>`;
+  upButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo(0,0);
+  });
+  quickNav.appendChild(upButton);
 
-      // Tombol kategori
-      categories.forEach(categoryName => {
-        const categoryId = categoryName
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .replace(/[^a-z0-9-]/g, '');
+  // Tombol kategori
+  categories.forEach(categoryName => {
+    const categoryId = categoryName
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
 
-        const button = document.createElement('a');
-        button.href = `#${categoryId}`;
-        button.className = `nav-button ${categoryId}`;
-        button.title = categoryName;
+    const button = document.createElement('a');
+    button.href = `#${categoryId}`;
+    button.className = `nav-button ${categoryId}`;
+    button.title = categoryName;
 
-        // Pilih ikon sesuai kategori
-        let icon = "📂";
-        if (categoryId.includes("Linux & Open Source")) icon = "🐧";
-        else if (categoryId.includes("Islam & Kehidupan")) icon = "📚";
-	else if (categoryId.includes("Lainnya")) icon = "🗂️";
-	else if (categoryId.includes("Multimedia & Editing")) icon = "📽️";
-	else if (categoryId.includes("Catatan & Sosial")) icon = "📰";
-	else if (categoryId.includes("Budaya, Kuliner & Lifestyle")) icon = "🏞️";
-	else if (categoryId.includes("Windows & Teknologi Umum")) icon = "💻";
-	
-        button.innerHTML = `<span class="nav-icon">${icon}</span>`;
+    // Tentukan ikon sesuai kategori asli
+    let icon = "📂"; // default
+    if (categoryName.includes("Linux & Open Source")) icon = "🐧";
+    else if (categoryName.includes("Islam & Kehidupan")) icon = "📚";
+    else if (categoryName.includes("Lainnya")) icon = "🗂️";
+    else if (categoryName.includes("Multimedia & Editing")) icon = "📽️";
+    else if (categoryName.includes("Catatan & Sosial")) icon = "📰";
+    else if (categoryName.includes("Budaya, Kuliner & Lifestyle")) icon = "🏞️";
+    else if (categoryName.includes("Windows & Teknologi Umum")) icon = "💻";
 
-        button.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetElement = document.getElementById(categoryId);
-          if (targetElement) {
-            targetElement.scrollIntoView({ block: 'start' });
-          }
-        });
-        quickNav.appendChild(button);
-      });
+    button.innerHTML = `<span class="nav-icon">${icon}</span>`;
 
-      // Tombol Daftar Isi
-      const sitemapButton = document.createElement('a');
-      sitemapButton.href = 'https://frijal.github.io/sitemap.html';
-      sitemapButton.className = 'nav-button sitemap';
-      sitemapButton.title = "Daftar Isi";
-      sitemapButton.innerHTML = `<span class="nav-icon">📑</span>`;
-      quickNav.appendChild(sitemapButton);
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetElement = document.getElementById(categoryId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ block: 'start' });
+      }
+    });
+    quickNav.appendChild(button);
+  });
 
-      // Tombol RSS
-      const rssButton = document.createElement('a');
-      rssButton.href = 'https://frijal.github.io/rss';
-      rssButton.className = 'nav-button rss';
-      rssButton.title = "RSS";
-      rssButton.innerHTML = `<span class="nav-icon">📰</span>`;
-      quickNav.appendChild(rssButton);
-    }
+  // Tombol Daftar Isi
+  const sitemapButton = document.createElement('a');
+  sitemapButton.href = 'https://frijal.github.io/sitemap.html';
+  sitemapButton.className = 'nav-button sitemap';
+  sitemapButton.title = "Daftar Isi";
+  sitemapButton.innerHTML = `<span class="nav-icon">📑</span>`;
+  quickNav.appendChild(sitemapButton);
+
+  // Tombol RSS
+  const rssButton = document.createElement('a');
+  rssButton.href = 'https://frijal.github.io/rss';
+  rssButton.className = 'nav-button rss';
+  rssButton.title = "RSS";
+  rssButton.innerHTML = `<span class="nav-icon">📰</span>`;
+  quickNav.appendChild(rssButton);
+}
 
     // --- Logika Utama Pemuatan Artikel ---
     document.addEventListener('DOMContentLoaded', async () => {
