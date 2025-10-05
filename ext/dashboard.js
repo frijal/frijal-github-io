@@ -3,13 +3,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("categories");
   const downloadBtn = document.getElementById("downloadBtn");
 
-  // Load artikel.json dari folder artikel/
-  const res = await fetch("/artikel/artikel.json");
+  // Load artikel.json
+  const res = await fetch("artikel/artikel.json");
   const data = await res.json();
-
   const categories = Object.keys(data);
 
-  // Bagi ke 3 kolom
+  // Buat 3 kolom
   const columnCount = 3;
   const columns = Array.from({ length: columnCount }, () => {
     const col = document.createElement("div");
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return col;
   });
 
-  // Render kategori
+  // Render kategori ke dalam kolom
   categories.forEach((cat, index) => {
     const col = columns[index % columnCount];
 
@@ -41,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       itemDiv.className = "item";
       itemDiv.draggable = true;
 
-      // simpan data asli
+      // simpan data
       itemDiv.dataset.file = file;
       itemDiv.dataset.image = image;
       itemDiv.dataset.lastmod = lastmod;
@@ -58,12 +57,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       itemDiv.appendChild(span);
 
       addDragEvents(itemDiv);
+      addContextMenu(itemDiv); // klik kanan
       list.appendChild(itemDiv);
     });
 
     catDiv.appendChild(list);
     col.appendChild(catDiv);
-
     addDropEvents(list);
   });
 
@@ -76,7 +75,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       e.dataTransfer.effectAllowed = "move";
       setTimeout(() => (el.style.display = "none"), 0);
     });
-
     el.addEventListener("dragend", () => {
       draggedItem.style.display = "flex";
       draggedItem = null;
@@ -88,17 +86,66 @@ document.addEventListener("DOMContentLoaded", async () => {
       e.preventDefault();
       e.dataTransfer.dropEffect = "move";
     });
-
     list.addEventListener("drop", e => {
       e.preventDefault();
       if (draggedItem) list.appendChild(draggedItem);
     });
   }
 
-  // Download JSON hasil edit
+  // === Context Menu ===
+  let contextMenu = null;
+  function buildContextMenu(categories) {
+    contextMenu = document.createElement("div");
+    contextMenu.id = "contextMenu";
+    contextMenu.style.position = "absolute";
+    contextMenu.style.display = "none";
+    contextMenu.style.background = "#fff";
+    contextMenu.style.border = "1px solid #ccc";
+    contextMenu.style.padding = "4px";
+    contextMenu.style.borderRadius = "6px";
+    contextMenu.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+    contextMenu.style.zIndex = 1000;
+
+    categories.forEach(cat => {
+      const opt = document.createElement("div");
+      opt.textContent = cat;
+      opt.style.padding = "4px 8px";
+      opt.style.cursor = "pointer";
+      opt.addEventListener("mouseenter", () => opt.style.background = "#eee");
+      opt.addEventListener("mouseleave", () => opt.style.background = "");
+      opt.addEventListener("click", () => {
+        if (contextMenu.currentItem) {
+          const targetList = document.querySelector(
+            `.item-list[data-category="${cat}"]`
+          );
+          if (targetList) targetList.appendChild(contextMenu.currentItem);
+        }
+        contextMenu.style.display = "none";
+      });
+      contextMenu.appendChild(opt);
+    });
+
+    document.body.appendChild(contextMenu);
+    document.addEventListener("click", () => {
+      contextMenu.style.display = "none";
+    });
+  }
+
+  function addContextMenu(el) {
+    el.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      contextMenu.currentItem = el;
+      contextMenu.style.left = e.pageX + "px";
+      contextMenu.style.top = e.pageY + "px";
+      contextMenu.style.display = "block";
+    });
+  }
+
+  buildContextMenu(categories);
+
+  // Download JSON
   downloadBtn.addEventListener("click", () => {
     const newData = {};
-
     document.querySelectorAll(".category").forEach(catDiv => {
       const catName = catDiv.dataset.category;
       const items = [];
