@@ -7,7 +7,7 @@
 <style>
 body { font-family: Arial,sans-serif; margin:0; background:#f9f9f9; color:#333; }
 
-.header { position:sticky; top:0; z-index:1000; background:#fff; padding:15px 10px; display:flex; align-items:center; justify-content:space-between; }
+.header { position:sticky; top:0; z-index:1000; background:#fff; padding:15px 10px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
 .header-left { display:flex; align-items:center; gap:15px; }
 .header h1 { margin:0; font-size:22px; color:#007bff; }
 .stats { font-weight:bold; font-size:16px; }
@@ -72,29 +72,43 @@ button.cutPasteBtn { font-size:12px; padding:2px 5px; cursor:pointer; }
 let artikelData={}, defaultThumbnail="../thumbnail.jpg";
 let searchQuery="", selectedCards=[], dataChanged=false, clipboard=[], historyStack=[];
 
-function loadData(){
-  fetch("../artikel.json").then(res=>res.json()).then(json=>{ artikelData=json; renderDashboard(); }).catch(e=>alert("Gagal memuat artikel.json: "+e)); 
-}
-
+// Load data
 async function loadData() {
   try {
-    const res = await fetch("../artikel.json"); // sesuaikan path
-    if (!res.ok) throw new Error(res.statusText);
+    const res = await fetch("../artikel.json"); 
+    if(!res.ok) throw new Error(res.statusText);
     artikelData = await res.json();
     renderDashboard();
-  } catch (e) {
+  } catch(e) {
     alert("Gagal memuat artikel.json: " + e);
     console.error(e);
   }
 }
 
-function saveHistory(){
-  historyStack.push(JSON.stringify(artikelData));
+// History & Undo
+function saveHistory() {
+  historyStack.push(JSON.stringify({data: artikelData, clipboard}));
   if(historyStack.length>20) historyStack.shift();
 }
+function undoHistory() {
+  if(historyStack.length===0){ alert("Tidak ada perubahan untuk di-undo"); return; }
+  const snapshot = JSON.parse(historyStack.pop());
+  artikelData = snapshot.data;
+  clipboard = snapshot.clipboard || [];
+  dataChanged = true;
+  updateDownloadBtn();
+  renderDashboard();
+}
 
-function highlightText(text,query){ if(!query)return text; return text.replace(new RegExp(`(${query})`,"gi"),"<mark>$1</mark>"); }
+// Utility
+function highlightText(text,query){ 
+  if(!query) return text; 
+  return text.replace(new RegExp(`(${query})`,"gi"),"<mark>$1</mark>"); 
+}
+function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
+function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden = !dataChanged; }
 
+// Render
 function renderDashboard(){
   const container=document.getElementById("dashboard"); container.innerHTML="";
   const totalStats=document.getElementById("totalStats"); let totalCount=0;
@@ -103,27 +117,23 @@ function renderDashboard(){
   categories.forEach(cat=>{
     const section=document.createElement("div"); section.className="category";
     const h2=document.createElement("h2"); 
-
     const articlesDiv=document.createElement("div"); articlesDiv.className="articles"; articlesDiv.dataset.cat=cat;
 
-    // CUT & PASTE buttons per kategori
+    // CUT & PASTE buttons
     const cutBtn=document.createElement("button"); cutBtn.textContent="✂️"; cutBtn.title="Cut artikel terpilih"; cutBtn.className="cutPasteBtn";
     const pasteBtn=document.createElement("button"); pasteBtn.textContent="📋"; pasteBtn.title="Paste artikel yang dicut"; pasteBtn.className="cutPasteBtn";
 
     const titleSpan=document.createElement("span"); titleSpan.textContent=cat; titleSpan.style.fontWeight="bold"; titleSpan.style.marginLeft="5px";
     const countSpan=document.createElement("span"); countSpan.className="count";
 
-    h2.appendChild(cutBtn);
-    h2.appendChild(pasteBtn);
-    h2.appendChild(titleSpan);
-    h2.appendChild(countSpan);
+    h2.appendChild(cutBtn); h2.appendChild(pasteBtn); h2.appendChild(titleSpan); h2.appendChild(countSpan);
     section.appendChild(h2);
 
-    // DRAG & DROP AREA EVENTS
-    articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); });
-    articlesDiv.addEventListener("dragleave", ()=>{ articlesDiv.classList.remove("drag-over"); });
+    // DRAG & DROP EVENTS
+    articlesDiv.addEventListener("dragover", e=>{ e.preventDefault(); articlesDiv.classList.add("drag-over"); updateDragTooltip(e); });
+    articlesDiv.addEventListener("dragleave", ()=>{ articlesDiv.classList.remove("drag-over"); hideDragTooltip(); });
     articlesDiv.addEventListener("drop", e=>{
-      e.preventDefault(); articlesDiv.classList.remove("drag-over");
+      e.preventDefault(); articlesDiv.classList.remove("drag-over"); hideDragTooltip();
       const targetCat=articlesDiv.dataset.cat;
       if(selectedCards.length>0 && confirm(`Pindahkan ${selectedCards.length} artikel terpilih ke kategori "${targetCat}"?`)){
         saveHistory();
@@ -137,13 +147,25 @@ function renderDashboard(){
       }
     });
 
+    // Sort & filter
     let sortedArticles=[...artikelData[cat]].sort((a,b)=>b[3]-a[3]);
-    if(searchQuery.trim()!==""){ sortedArticles=sortedArticles.filter(item=>{ const title=item[0].toLowerCase(); const file=(item[1]||"").toLowerCase(); return title.includes(searchQuery)||file.includes(searchQuery); }); }
+    if(searchQuery.trim()!==""){
+      sortedArticles=sortedArticles.filter(item=>{
+        const title=item[0].toLowerCase();
+        const file=(item[1]||"").toLowerCase();
+        return title.includes(searchQuery) || file.includes(searchQuery);
+      });
+    }
     countSpan.textContent=`(${sortedArticles.length})`; totalCount+=sortedArticles.length;
 
+    // Cards
     sortedArticles.forEach(item=>{
-      const [title,fileName,img]=item; const card=document.createElement("div"); card.className="card"; card.draggable=true;
-      const image=document.createElement("img"); if(img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img)){ image.src=/^https?:\/\//i.test(img)?img:`../${img}`; } else image.src=defaultThumbnail; image.alt=title; card.appendChild(image);
+      const [title,fileName,img]=item; 
+      const card=document.createElement("div"); card.className="card"; card.draggable=true;
+      const image=document.createElement("img"); 
+      if(img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img)){ image.src=/^https?:\/\//i.test(img)?img:`../${img}`; } 
+      else image.src=defaultThumbnail; 
+      image.alt=title; card.appendChild(image);
       const titleDiv=document.createElement("div"); titleDiv.className="title"; titleDiv.innerHTML=highlightText(title,searchQuery); card.appendChild(titleDiv);
       articlesDiv.appendChild(card);
     });
@@ -169,53 +191,67 @@ function renderDashboard(){
       if(!clipboard || clipboard.length===0){ alert("Tidak ada artikel yang dicut!"); return; }
       saveHistory();
       clipboard.forEach(item=>{
-        artikelData[item.fromCat].splice(item.idx,1);
-        artikelData[cat].push(item.article);
+        if(item.fromCat !== cat){ 
+          artikelData[item.fromCat].splice(item.idx,1);
+          artikelData[cat].push(item.article);
+        }
       });
       clipboard=[]; dataChanged=true; updateDownloadBtn();
       renderDashboard();
     });
+
   });
 
   totalStats.textContent=`Total Artikel: ${totalCount}`;
   addSelectionEvents(); addDragEvents(); addMarqueeSelection(); updateDownloadBtn();
 }
 
-function moveArticle(fromCat,idx,toCat){ const article=artikelData[fromCat][idx]; artikelData[fromCat].splice(idx,1); artikelData[toCat].push(article); renderDashboard(); }
-function downloadJSON(){ const blob=new Blob([JSON.stringify(artikelData,null,2)],{type:"application/json"}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="artikel.json"; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); dataChanged=false; updateDownloadBtn(); }
+// Move article function
+function moveArticle(fromCat,idx,toCat){ 
+  const article=artikelData[fromCat][idx]; artikelData[fromCat].splice(idx,1); artikelData[toCat].push(article); 
+  renderDashboard(); 
+}
 
-document.getElementById("searchInput").addEventListener("input", e=>{ searchQuery=e.target.value.toLowerCase(); renderDashboard(); });
-document.getElementById("resetSearch").addEventListener("click", ()=>{ document.getElementById("searchInput").value=""; searchQuery=""; renderDashboard(); });
-document.getElementById("downloadJSONBtn").addEventListener("click", downloadJSON);
+// Download JSON
+function downloadJSON(){ 
+  const blob=new Blob([JSON.stringify(artikelData,null,2)],{type:"application/json"}); 
+  const url=URL.createObjectURL(blob); 
+  const a=document.createElement("a"); a.href=url; a.download="artikel.json"; document.body.appendChild(a); a.click(); document.body.removeChild(a); 
+  URL.revokeObjectURL(url); dataChanged=false; updateDownloadBtn(); 
+}
 
-document.getElementById("undoBtn").addEventListener("click", ()=>{
-  if(historyStack.length===0){ alert("Tidak ada perubahan untuk di-undo"); return; }
-  artikelData = JSON.parse(historyStack.pop());
-  dataChanged=true; updateDownloadBtn();
-  renderDashboard();
-});
+// Drag tooltip
+function updateDragTooltip(e){
+  const tooltip=document.getElementById("dragTooltip");
+  tooltip.style.display="block"; tooltip.textContent = selectedCards.length+" artikel";
+  tooltip.style.left = e.pageX+10+"px"; tooltip.style.top = e.pageY+10+"px";
+}
+function hideDragTooltip(){ document.getElementById("dragTooltip").style.display="none"; }
 
-function clearSelection(){ selectedCards.forEach(c=>c.classList.remove("selected")); selectedCards=[]; }
-function addSelectionEvents(){ document.querySelectorAll(".card").forEach(card=>{
-  card.addEventListener("click", e=>{
-    if(e.ctrlKey||e.metaKey){ if(card.classList.contains("selected")){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); } else { card.classList.add("selected"); selectedCards.push(card); } }
-    else { clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
+// Selection events
+function addSelectionEvents(){ 
+  document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click", e=>{
+      if(e.ctrlKey||e.metaKey){ 
+        if(card.classList.contains("selected")){ card.classList.remove("selected"); selectedCards=selectedCards.filter(c=>c!==card); } 
+        else { card.classList.add("selected"); selectedCards.push(card); } 
+      } else { clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
+    });
   });
-}}
-function updateDownloadBtn(){ document.getElementById("downloadJSONBtn").hidden=!dataChanged; }
+}
 
-// DRAG EVENTS
+// Drag events
 function addDragEvents(){ 
   document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("dragstart", e=>{
       if(!selectedCards.includes(card)){ clearSelection(); card.classList.add("selected"); selectedCards.push(card); }
       e.dataTransfer.setData("text/plain","drag-selected"); e.dataTransfer.effectAllowed="move"; card.style.opacity="0.5";
     });
-    card.addEventListener("dragend", ()=>{ document.querySelectorAll(".card").forEach(c=>c.style.opacity="1"); });
+    card.addEventListener("dragend", ()=>{ document.querySelectorAll(".card").forEach(c=>c.style.opacity="1"); hideDragTooltip(); });
   });
 }
 
-// MARQUEE SELECTION
+// Marquee selection
 function addMarqueeSelection(){
   const dashboard=document.getElementById("dashboard"); let isDragging=false, startX=0, startY=0; let marquee=null;
   dashboard.addEventListener("mousedown", e=>{
@@ -239,6 +275,13 @@ function addMarqueeSelection(){
   document.addEventListener("mouseup", e=>{ if(isDragging){ isDragging=false; if(marquee){ marquee.remove(); marquee=null; } } });
 }
 
+// Event listeners
+document.getElementById("searchInput").addEventListener("input", e=>{ searchQuery=e.target.value.toLowerCase(); renderDashboard(); });
+document.getElementById("resetSearch").addEventListener("click", ()=>{ document.getElementById("searchInput").value=""; searchQuery=""; renderDashboard(); });
+document.getElementById("downloadJSONBtn").addEventListener("click", downloadJSON);
+document.getElementById("undoBtn").addEventListener("click", undoHistory);
+
+// Load
 loadData();
 </script>
 </body>
