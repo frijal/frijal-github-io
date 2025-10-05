@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Artikel JSON (Drag & Drop + Sort arr[3] Desc + Search)</title>
+  <title>Dashboard Artikel JSON</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
     h1 { text-align: center; }
+
     .search-container { text-align: center; margin: 20px 0; }
     .search-container input {
       padding: 10px;
@@ -16,14 +17,35 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
     .category { margin-bottom: 30px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .category h2 { margin: 0; padding: 10px; background: #007bff; color: #fff; border-radius: 8px 8px 0 0; font-size: 18px; }
-    .articles { display: flex; flex-wrap: wrap; gap: 15px; padding: 15px; min-height: 50px; border: 2px dashed transparent; transition: 0.2s; }
+    .category h2 {
+      margin: 0; padding: 10px;
+      background: #007bff; color: #fff;
+      border-radius: 8px 8px 0 0; font-size: 18px;
+    }
+
+    .articles {
+      display: flex; flex-wrap: wrap; gap: 15px; padding: 15px;
+      min-height: 50px; border: 2px dashed transparent;
+      transition: 0.2s;
+    }
     .articles.drag-over { border-color: #007bff; background: #eaf4ff; }
-    .card { background: #fafafa; border: 1px solid #ddd; border-radius: 6px; width: 220px; overflow: hidden; display: flex; flex-direction: column; cursor: grab; }
+
+    .card {
+      background: #fafafa; border: 1px solid #ddd; border-radius: 6px;
+      width: 220px; overflow: hidden;
+      display: flex; flex-direction: column;
+      cursor: grab;
+    }
     .card img { width: 100%; height: 120px; object-fit: cover; background: #eee; }
     .card .title { padding: 10px; font-size: 14px; font-weight: bold; flex-grow: 1; }
-    .download-btn { display: block; margin: 20px auto; padding: 10px 20px; background: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+
+    .download-btn {
+      display: block; margin: 20px auto; padding: 10px 20px;
+      background: #28a745; color: #fff; border: none; border-radius: 5px;
+      cursor: pointer; font-size: 16px;
+    }
     .download-btn:hover { background: #218838; }
   </style>
 </head>
@@ -40,7 +62,7 @@
 
   <script>
     let artikelData = {};
-    const defaultThumbnail = "../thumbnail.jpg"; // fallback
+    const defaultThumbnail = "../thumbnail.jpg"; // fallback default
     let draggedItem = null;
     let draggedFromCat = null;
     let draggedIdx = null;
@@ -76,7 +98,7 @@
         articlesDiv.className = "articles";
         articlesDiv.dataset.cat = cat;
 
-        // drag over & drop area
+        // drag area
         articlesDiv.addEventListener("dragover", e => {
           e.preventDefault();
           articlesDiv.classList.add("drag-over");
@@ -92,14 +114,14 @@
           }
         });
 
-        // urutkan artikel berdasarkan arr[3] DESC
+        // urutkan berdasarkan arr[3] DESC
         let sortedArticles = [...artikelData[cat]].sort((a, b) => {
           if (a[3] > b[3]) return -1;
           if (a[3] < b[3]) return 1;
           return 0;
         });
 
-        // filter sesuai search
+        // filter pencarian
         if (searchQuery.trim() !== "") {
           sortedArticles = sortedArticles.filter(item => {
             const title = item[0].toLowerCase();
@@ -108,6 +130,7 @@
           });
         }
 
+        // render kartu
         sortedArticles.forEach((item, idx) => {
           const [title, fileName, img] = item;
 
@@ -130,7 +153,15 @@
           });
 
           const image = document.createElement("img");
-          image.src = img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img) ? `../artikel/${img}` : defaultThumbnail;
+          if (img && /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(img)) {
+            if (/^https?:\/\//i.test(img)) {
+              image.src = img;
+            } else {
+              image.src = `../${img}`;
+            }
+          } else {
+            image.src = defaultThumbnail;
+          }
           image.alt = title;
           card.appendChild(image);
 
@@ -152,7 +183,6 @@
       const article = artikelData[fromCat][idx];
       artikelData[fromCat].splice(idx, 1);
       artikelData[toCat].push(article);
-
       renderDashboard();
     }
 
@@ -169,7 +199,7 @@
       URL.revokeObjectURL(url);
     }
 
-    // === Search event ===
+    // === Pencarian ===
     document.getElementById("searchInput").addEventListener("input", e => {
       searchQuery = e.target.value.toLowerCase();
       renderDashboard();
