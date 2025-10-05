@@ -44,6 +44,7 @@ jobs:
             perl -pi -w -e 's/&copy;/🄯/g' "$file"
             perl -pi -w -e 's/©/🄯/g' "$file"
             perl -pi -w -e 's#https://frijal.github.io/apple-touch-icon.png#https://frijal.github.io/ext/icons/apple-touch-icon.png#g' "$file"
+            perl -pi -w -e 's#yourtwitterhandle#frijal#g' "$file"                       
           done
 
       - name: 2. Jalankan inject-meta.js
