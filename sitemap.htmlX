@@ -25,15 +25,6 @@
 <script>
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks")||"[]");
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  if (isNaN(d)) return "";
-  const dd = String(d.getDate()).padStart(2, "0");
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const yy = String(d.getFullYear()).slice(-2);
-  return `${dd}.${mm}.${yy}`;
-}
-
 async function loadTOC() {
   try {
     const res = await fetch("artikel.json");
@@ -43,18 +34,14 @@ async function loadTOC() {
 
     const totalCount = document.getElementById("totalCount");
 
-    // --- Kelompokkan data per kategori + urutkan ---
+    // --- Kelompokkan data per kategori ---
     const grouped = {};
     Object.keys(data).forEach(cat => {
       grouped[cat] = data[cat].map(arr => ({
         title: arr[0],
         file: arr[1],
-        image: arr[2],
-        lastmod: arr[3],
-        description: arr[4],
         category: cat
-      }))
-      .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
+      }));
     });
 
     // --- Hitung total artikel ---
@@ -85,7 +72,8 @@ async function loadTOC() {
 
           const a = document.createElement("a");
           a.href = `artikel/${item.file}`;
-          a.textContent = `${i + 1}. [${formatDate(item.lastmod)}] ${item.title}`;
+          a.target="";
+          a.textContent = `${i + 1}. ${item.title}`;
 
           const statusSpan = document.createElement("span");
           if (visitedLinks.includes(item.file)) {
@@ -123,13 +111,6 @@ async function loadTOC() {
 
         toc.appendChild(catDiv);
       });
-  } catch (e) {
-    console.error("Gagal load artikel.json", e);
-  }
-}
-
-// Panggil saat halaman load
-loadTOC();
 
     // --- Marquee ---
     const m = document.getElementById("marquee-content");
