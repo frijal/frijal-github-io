@@ -10,59 +10,32 @@
     pre { background:#1e293b; padding:10px; border-radius:8px; overflow-x:auto; }
     .ok { color:#22c55e; }
     .fail { color:#ef4444; }
-    img { width:48px; height:48px; margin:4px; background:#fff; border-radius:6px; }
     section { margin-bottom:30px; }
-    button { margin:4px; padding:6px 12px; border-radius:6px; border:none; cursor:pointer; }
-    #exportPreview { margin-top:10px; }
+    .article-report { border:1px solid #334155; border-radius:8px; padding:12px; margin:8px 0; background:#1e293b; }
   </style>
 </head>
 <body>
   <h1>🔍 Uji Lengkap Manifest • PWA • SEO • Structured Data</h1>
 
   <section>
-    <h2>1. Uji Manifest</h2>
+    <h2>1. Uji Manifest & PWA</h2>
     <div id="statusManifest">Memuat manifest...</div>
     <pre id="jsonManifest"></pre>
     <div id="iconsManifest"></div>
+    <div id="statusPWA"></div>
   </section>
 
   <section>
-    <h2>2. Uji PWA</h2>
-    <div id="statusPWA">Memuat manifest...</div>
-    <ul id="checklistPWA"></ul>
-    <div id="extraPWA"></div>
-  </section>
-
-  <section>
-    <h2>3. Uji Meta Tag SEO</h2>
-    <div id="statusMeta">Memuat meta tag...</div>
-    <ul id="checklistMeta"></ul>
-  </section>
-
-  <section>
-    <h2>4. Uji Structured Data</h2>
-    <div id="statusSchema">Memuat structured data...</div>
-    <pre id="jsonSchema"></pre>
-  </section>
-
-  <section>
-    <h2>5. Deteksi Browser, OS, dan Lokasi</h2>
-    <div id="clientInfo"></div>
-  </section>
-
-  <section>
-    <h2>6. Ekspor Hasil Uji</h2>
-    <button id="exportJson">💾 Ekspor ke JSON</button>
-    <button id="exportMd">📝 Ekspor ke Markdown</button>
-    <pre id="exportPreview"></pre>
+    <h2>2. Uji Semua Artikel dari <code>artikel.json</code></h2>
+    <div id="articlesReport">Memuat daftar artikel...</div>
   </section>
 
   <script>
-    const manifestUrl = "../site.webmanifest"; // manifest ada di root
+    const manifestUrl = "../site.webmanifest";
 
     // --- Uji Manifest + PWA ---
     fetch(manifestUrl)
-      .then(r => { if (!r.ok) throw new Error("Gagal memuat manifest"); return r.json(); })
+      .then(r => r.json())
       .then(data => {
         document.getElementById("statusManifest").innerHTML = "✅ Manifest berhasil dimuat";
         document.getElementById("jsonManifest").textContent = JSON.stringify(data, null, 2);
@@ -71,159 +44,64 @@
           iconsDiv.innerHTML = "<h3>Ikon:</h3>";
           data.icons.forEach(icon => {
             const img = document.createElement("img");
-            img.src = "../" + icon.src; // pastikan path relatif benar
+            img.src = "../" + icon.src;
             img.alt = icon.sizes;
             img.title = icon.sizes;
             iconsDiv.appendChild(img);
           });
         }
-        // Checklist PWA
-        const checklist = [];
-        function check(prop) {
-          if (data[prop]) checklist.push(`<li class="ok">✔ ${prop} ada</li>`);
-          else checklist.push(`<li class="fail">✖ ${prop} tidak ada</li>`);
-        }
-        ["name","short_name","start_url","display","theme_color","background_color","icons"].forEach(check);
-        document.getElementById("checklistPWA").innerHTML = checklist.join("");
-        // Extra PWA checks
-        let extra = "";
-        if (location.protocol === "https:") extra += "<p class='ok'>✔ HTTPS aktif</p>";
-        else extra += "<p class='fail'>✖ Tidak via HTTPS</p>";
-        if ('serviceWorker' in navigator) extra += "<p>ℹ Service Worker API tersedia, cek DevTools → Application → Service Workers</p>";
-        else extra += "<p class='fail'>✖ Service Worker tidak tersedia</p>";
-        if (data.display === "standalone") extra += "<p class='ok'>✔ display=standalone</p>";
-        if (data.icons && data.icons.some(i => i.sizes.includes("192x192"))) extra += "<p class='ok'>✔ Ikon ≥192x192 ada</p>";
-        document.getElementById("extraPWA").innerHTML = extra;
-        document.getElementById("statusPWA").innerHTML = (data.name && data.icons && data.start_url)
-          ? "🚀 Aplikasi ini berpotensi installable sebagai PWA"
-          : "⚠ Masih ada properti yang kurang untuk PWA";
+        document.getElementById("statusPWA").innerHTML = 
+          (data.name && data.icons && data.start_url)
+          ? "🚀 PWA installable (name, icons, start_url lengkap)"
+          : "⚠ Masih ada properti PWA yang kurang";
       })
       .catch(err => { document.getElementById("statusManifest").innerHTML = "❌ " + err.message; });
 
-    // --- Uji Meta Tag SEO ---
-    const required = [
-      { selector: 'meta[name="description"]', label: "Description" },
-      { selector: 'link[rel="canonical"]', label: "Canonical" },
-      { selector: 'meta[property="og:title"]', label: "OG Title" },
-      { selector: 'meta[property="og:description"]', label: "OG Description" },
-      { selector: 'meta[property="og:image"]', label: "OG Image" },
-      { selector: 'meta[property="og:type"]', label: "OG Type" },
-      { selector: 'meta[property="og:url"]', label: "OG URL" },
-      { selector: 'meta[property="og:site_name"]', label: "OG Site Name" },
-      { selector: 'meta[name="twitter:card"]', label: "Twitter Card" },
-      { selector: 'meta[name="twitter:title"]', label: "Twitter Title" },
-      { selector: 'meta[name="twitter:description"]', label: "Twitter Description" },
-      { selector: 'meta[name="twitter:image"]', label: "Twitter Image" },
-      { selector: 'meta[itemprop="name"]', label: "Schema Name" },
-      { selector: 'meta[itemprop="image"]', label: "Schema Image" },
-      { selector: 'meta[name="viewport"]', label: "Viewport" }
-    ];
-    const checklistMeta = document.getElementById("checklistMeta");
-    let okCount = 0;
-    required.forEach(item => {
-      const el = document.querySelector(item.selector);
-      if (el) { okCount++; checklistMeta.innerHTML += `<li class="ok">✔ ${item.label} ada</li>`; }
-      else checklistMeta.innerHTML += `<li class="fail">✖ ${item.label} tidak ada</li>`;
-    });
-    document.getElementById("statusMeta").innerHTML = okCount === required.length
-      ? "✅ Semua meta tag penting sudah ada"
-      : "⚠ Beberapa meta tag masih kurang";
+    // --- Uji Semua Artikel dari artikel.json ---
+    const container = document.getElementById("articlesReport");
 
-    // --- Uji Structured Data ---
-    const schemaEl = document.querySelector('script[type="application/ld+json"]');
-    if (schemaEl) {
-      document.getElementById("statusSchema").innerHTML = "✅ Structured data ditemukan";
-      try {
-        const json = JSON.parse(schemaEl.textContent);
-        document.getElementById("jsonSchema").textContent = JSON.stringify(json, null, 2);
-      } catch(e) {
-        document.getElementById("jsonSchema").textContent = "❌ JSON tidak valid";
-      }
-    } else {
-      document.getElementById("statusSchema").innerHTML = "⚠ Tidak ada structured data (Schema.org)";
+    function checkMeta(doc, selector, label) {
+      return doc.querySelector(selector)
+        ? `<li class="ok">✔ ${label} ada</li>`
+        : `<li class="fail">✖ ${label} tidak ada</li>`;
     }
 
-    // --- Deteksi Browser/OS/IP ---
-    function getBrowserInfo() {
-      const ua = navigator.userAgent;
-      if (ua.includes("Firefox")) return {name:"Firefox", icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};
-      if (ua.includes("Edg")) return {name:"Edge", icon:"https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg"};
-      if (ua.includes("Chrome")) return {name:"Chrome", icon:"https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png"};
-      if (ua.includes("Safari")) return {name:"Safari", icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};
-      return {name:"Unknown", icon:""};
-    }
-
-    function getOSInfo(){
-      const ua=navigator.userAgent.toLowerCase();
-      if(/windows/.test(ua)) return {name:"Windows", icon:"https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg"};
-      if(/mac/.test(ua)) return {name:"macOS", icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};
-      if(/linux/.test(ua)) return {name:"Linux", icon:"https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"};
-      if(/android/.test(ua)) return {name:"Android", icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};
-      if(/iphone|ipad|ipod/.test(ua)) return {name:"iOS", icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};
-      return {name:"Unknown", icon:""};
-    }
-
-    const b = getBrowserInfo();
-    const os = getOSInfo();
-    document.getElementById("clientInfo").innerHTML = `
-      <p><img src="${b.icon}" width="24"> Browser: ${b.name}</p>
-      <p><img src="${os.icon}" width="24"> OS: ${os.name}</p>
-      <p id="ipInfo">IP: ...</p>
-    `;
-
-    // Ambil IP publik via ipify, lalu detail lokasi via ipapi.co
-    fetch('https://api.ipify.org?format=json&ipv4=true')
+    fetch("../artikel.json")
       .then(r => r.json())
-      .then(({ ip }) => fetch(`https://ipapi.co/${ip}/json/`))
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('ipInfo').innerHTML = 
-          `IP: ${data.ip} (${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'}) 
-           <img src="https://flagcdn.com/24x18/${String(data.country_code).toLowerCase()}.png">`;
+      .then(list => {
+        container.innerHTML = "";
+        list.forEach(item => {
+          const url = "../artikel/" + item.file; // pastikan artikel.json punya key "file"
+          fetch(url)
+            .then(r => r.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const title = doc.querySelector("title")?.innerText || item.title || item.file;
+
+              let report = `<div class="article-report"><h3>📄 ${title}</h3><ul>`;
+              report += checkMeta(doc,'meta[name="description"]',"Description");
+              report += checkMeta(doc,'link[rel="canonical"]',"Canonical");
+              report += checkMeta(doc,'meta[property="og:title"]',"OG Title");
+              report += checkMeta(doc,'meta[property="og:description"]',"OG Description");
+              report += checkMeta(doc,'meta[property="og:image"]',"OG Image");
+              report += checkMeta(doc,'meta[name="twitter:card"]',"Twitter Card");
+              report += checkMeta(doc,'meta[name="twitter:title"]',"Twitter Title");
+              report += checkMeta(doc,'meta[name="twitter:description"]',"Twitter Description");
+              report += checkMeta(doc,'meta[name="twitter:image"]',"Twitter Image");
+              report += checkMeta(doc,'script[type="application/ld+json"]',"Structured Data");
+              report += "</ul></div>";
+
+              container.innerHTML += report;
+            })
+            .catch(() => {
+              container.innerHTML += `<div class="article-report"><h3>📄 ${item.file}</h3><p class="fail">❌ Tidak bisa dimuat</p></div>`;
+            });
+        });
       })
       .catch(() => {
-        document.getElementById('ipInfo').textContent = 'IP: Tidak dapat diambil';
+        container.innerHTML = "❌ Gagal memuat artikel.json";
       });
-
-    // --- Ekspor Hasil Uji ---
-    function collectResults() {
-      return {
-        manifestStatus: document.getElementById("statusManifest").innerText,
-        pwaStatus: document.getElementById("statusPWA").innerText,
-        metaStatus: document.getElementById("statusMeta").innerText,
-        schemaStatus: document.getElementById("statusSchema").innerText,
-        clientInfo: document.getElementById("clientInfo").innerText
-      };
-    }
-
-    function downloadFile(filename, content) {
-      const blob = new Blob([content], {type: "text/plain"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    document.getElementById("exportJson").addEventListener("click", () => {
-      const results = collectResults();
-      const json = JSON.stringify(results, null, 2);
-      document.getElementById("exportPreview").textContent = json;
-      downloadFile("hasil-uji.json", json);
-    });
-
-    document.getElementById("exportMd").addEventListener("click", () => {
-      const results = collectResults();
-      const md = `# Hasil Uji\n
-- Manifest: ${results.manifestStatus}
-- PWA: ${results.pwaStatus}
-- Meta Tag SEO: ${results.metaStatus}
-- Structured Data: ${results.schemaStatus}
-- Client Info: ${results.clientInfo}`;
-      document.getElementById("exportPreview").textContent = md;
-      downloadFile("hasil-uji.md", md);
-    });
   </script>
 </body>
 </html>
