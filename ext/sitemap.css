@@ -1,7 +1,76 @@
+/* ================================================= */
+/* ===== SEARCH BOX (FIXED) & FOOTER INFO (LIGHT MODE) ===== */
+/* ================================================= */
+
+/* Kontainer utama untuk Search Box dan Footer Info */
+.search-fixed {
+  position: fixed;
+  top: 70px; /* Jarak dari atas, tepat di bawah marquee/header */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 100%;
+  max-width: 420px; /* Gunakan max-width yang paling besar/spesifik */
+  background: #f2f2f2;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px; /* Padding di sekitar wrapper */
+}
+
+/* Wrapper untuk Input Search (digunakan jika ada elemen lain di dalam .search-fixed) */
+.search-wrapper {
+  position: relative;
+  margin-bottom: 8px; /* Jarak antara search box dan footer info */
+}
+
+/* Input Search */
+#search {
+  width: 100%;
+  padding: 10px 28px 10px 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff; /* Pastikan background cerah di light mode */
+  color: #333;
+  /* Hapus padding-bottom tambahan yang membuat konflik dengan .search-footer */
+}
+
+/* Tombol Clear */
+#clearSearch {
+  position: absolute;
+  top: 50%;
+  right: 6px; /* Gunakan 6px atau 12px, saya pilih 6px yang awal */
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #888;
+}
+
+#clearSearch:hover {
+  color: #000;
+}
+
+/* Footer Info (diletakkan di dalam .search-fixed) */
+.search-footer {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #555;
+  background: #e9ecef;
+  padding: 6px 10px;
+  border-radius: 4px;
+  /* Hapus position: absolute; karena sudah di dalam container fixed */
+}
+
+
+/* ================================================= */
 /* ===== DARK MODE untuk Search Box + Footer Info ===== */
+/* ================================================= */
+
 body.dark-mode .search-fixed {
   background: #1e1e1e;
-  box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
 }
 
 body.dark-mode #search {
@@ -20,55 +89,5 @@ body.dark-mode #clearSearch:hover {
 body.dark-mode .search-footer {
   background: #2c2c2c;
   color: #ccc;
-  border: 1px solid #444;
+  border: 1px solid #444; /* Tambahkan border yang lebih gelap untuk kontras */
 }
-/* Group search + footer fixed */
-.search-fixed {
-  position: fixed;
-  top: 70px;              /* tepat di bawah marquee */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: 100%;
-  max-width: 420px;
-  background: #f2f2f2;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  padding: 10px;
-}
-
-/* Search box */
-.search-wrapper {
-  position: relative;
-  margin-bottom: 8px;
-}
-#search {
-  width: 100%;
-  padding: 10px 28px 10px 10px;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-#clearSearch {
-  position: absolute;
-  top: 50%;
-  right: 6px;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  color: #888;
-}
-#clearSearch:hover { color: #000; }
-
-/* Footer info sticky di bawah search box */
-.search-footer {
-  font-size: 0.85rem;
-  text-align: center;
-  color: #555;
-  background: #e9ecef;
-  padding: 6px 10px;
-  border-radius: 4px;
-}
-
