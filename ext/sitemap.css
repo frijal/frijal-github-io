@@ -4,9 +4,8 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    /* MODIFIKASI: 180px memberi ruang yang cukup di bawah Marquee dan Search Box fixed, 
-       mengatasi masalah judul yang tertutup. */
-    padding-top: 180px; 
+    /* KEMBALI NORMAL: Hanya memberi ruang untuk Marquee Fixed */
+    padding-top: 60px; 
     background: #f2f2f2;
     color: #333;
     box-sizing: border-box;
@@ -19,12 +18,12 @@ body, .category, .toc-title a, #search, #totalCount, #tocToggle {
 }
 
 /* ================================================= */
-/* ===== JUDUL UTAMA (Pemusatan setelah container dihapus) ===== */
+/* ===== JUDUL UTAMA (Pemusatan) ===== */
 /* ================================================= */
 
 h1.main-title {
     text-align: center;
-    /* Pemusatan horizontal dan batas lebar 900px, menggantikan peran .container */
+    /* Margin normal, karena search box sudah di atasnya */
     margin: 20px auto 20px auto; 
     max-width: 900px;
     padding: 0 15px;
@@ -83,18 +82,19 @@ h1.main-title {
 }
 
 /* ================================================= */
-/* ===== SEARCH BOX (FIXED) & FOOTER INFO ===== */
+/* ===== SEARCH BOX (NORMAL FLOW) & FOOTER INFO ===== */
 /* ================================================= */
 
-/* Kontainer utama (FIXED - Di luar Container Utama) */
+/* Kontainer utama (NON-FIXED) */
 .search-fixed {
-    position: fixed;
-    top: 70px; 
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+    /* MENGGANTIKAN FIXED: Gunakan margin auto untuk pemusatan dan normal flow */
+    margin: 20px auto 20px auto; 
+    
     width: 95%; 
     max-width: 420px;
+    
+    /* Z-index tidak terlalu penting di normal flow, tapi dipertahankan untuk keamanan */
+    z-index: 1000;
     background: #f2f2f2; 
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -164,10 +164,10 @@ h1.main-title {
 }
 
 /* ================================================= */
-/* ===== TOC & KONTROL (Pemusatan setelah container dihapus) ===== */
+/* ===== TOC & KONTROL (Pemusatan) ===== */
 /* ================================================= */
 
-/* Pemusatan untuk elemen utama (menggantikan peran .container) */
+/* Pemusatan untuk elemen utama */
 #totalCount, #tocToggle, #toc {
     max-width: 900px;
     width: 100%;
@@ -405,7 +405,8 @@ body.dark-mode #darkToggle {
     
     /* Search Box Fixed */
     .search-fixed { 
-        top: 60px; 
+        top: auto; /* Dihapus dari fixed */
+        margin: 20px auto 20px auto; /* Pemusatan baru */
         max-width: 90%; 
     }
     #search { font-size: 14px; padding: 8px 26px 8px 8px; }
