@@ -45,7 +45,7 @@ function renderClientInfo() {
   const browser = getBrowserInfo();
   const os = getOSInfo();
 
-  fetch("https://ipapi.co/json/")
+  fetch("https://api.ipify.org?format=json&ipv4")  
     .then(res => res.json())
     .then(data => {
       const countryCode = data.country_code.toUpperCase();
