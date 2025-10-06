@@ -168,7 +168,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         </svg>
       </a>
       <!-- Ikon Home -->
-      <a href="https://frijal.github.io/home.html" title="Home">
+      <a href="https://frijal.github.io" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
