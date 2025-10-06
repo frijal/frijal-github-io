@@ -40,54 +40,37 @@ function formatISO8601(date) {
     return d.toISOString().replace("Z", `${diff}${hours}:${minutes}`);
 }
 
-/** Ekstrak `article:published_time` dari konten HTML. */
+// ... (Sisa fungsi bantuan lainnya tetap sama) ...
 function extractPubDate(content) {
     const match = content.match(/<meta\s+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i);
     return match ? match[1].trim() : null;
 }
-
-/** Ekstrak <title> dari konten HTML. */
 function extractTitle(content) {
     const match = content.match(/<title>([\s\S]*?)<\/title>/i);
     return match ? match[1].trim() : "Tanpa Judul";
 }
-
-/** Ekstrak `description` dari konten HTML. */
 function extractDescription(content) {
     const match = content.match(/<meta\s+name=["']description["'][^>]+content=["']([^"']+)["']/i);
     return match ? match[1].trim() : "";
 }
-
-/** Pastikan <title> hanya satu baris. */
 function fixTitleOneLine(content) {
     return content.replace(/<title>([\s\S]*?)<\/title>/gi, (m, p1) => `<title>${p1.trim()}</title>`);
 }
-
-/** Ekstrak gambar dengan beberapa metode fallback. */
 function extractImage(content, file) {
     let src = null;
     const ogMatch = content.match(/<meta[^>]+property=["']og:image["'][^>]+content=["'](.*?)["']/i);
     if (ogMatch && ogMatch[1]) src = ogMatch[1].trim();
-
     if (!src) {
         const imgMatch = content.match(/<img[^>]+src=["'](.*?)["']/i);
         if (imgMatch && imgMatch[1]) {
             src = imgMatch[1].trim();
         }
     }
-    
-    if (!src) {
-        return CONFIG.defaultThumbnail;
-    }
-
+    if (!src) return CONFIG.defaultThumbnail;
     const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
-    if (!validExt.test(src.split("?")[0])) {
-        return CONFIG.defaultThumbnail;
-    }
+    if (!validExt.test(src.split("?")[0])) return CONFIG.defaultThumbnail;
     return src;
 }
-
-/** Merapikan format JSON agar setiap array berada di baris baru. */
 function formatJsonOutput(obj) {
     return JSON.stringify(obj, null, 2)
         .replace(/\[\s*\[/g, '[\n      [')
@@ -108,22 +91,49 @@ const generate = async () => {
         return;
     }
 
+    // --- LANGKAH BARU 1: Baca daftar file yang SEBENARNYA ADA di folder ---
+    const filesOnDisk = (await fs.readdir(CONFIG.artikelDir)).filter(f => f.endsWith(".html"));
+    const existingFilesOnDisk = new Set(filesOnDisk);
+
     let grouped = {};
+    let masterDataChanged = false;
+
     try {
         const masterContent = await fs.readFile(CONFIG.masterJson, "utf8");
         grouped = JSON.parse(masterContent);
         console.log("📂 Master JSON berhasil dimuat.");
     } catch {
-        console.warn("⚠️ Master JSON (artikel/artikel.json) tidak ditemukan atau rusak, memulai dari awal.");
+        console.warn("⚠️ Master JSON (artikel/artikel.json) tidak ditemukan, memulai dari awal.");
         grouped = {};
     }
 
-    const files = (await fs.readdir(CONFIG.artikelDir)).filter(f => f.endsWith(".html"));
+    // --- LANGKAH BARU 2: Bersihkan master data dari file yang sudah dihapus ---
+    const cleanedGrouped = {};
+    let deletedCount = 0;
+    for (const category in grouped) {
+        const survivingArticles = grouped[category].filter(item => {
+            const fileExists = existingFilesOnDisk.has(item[1]);
+            if (!fileExists) {
+                console.log(`🗑️ File terhapus terdeteksi, menghapus dari data: ${item[1]}`);
+                deletedCount++;
+            }
+            return fileExists;
+        });
+
+        if (survivingArticles.length > 0) {
+            cleanedGrouped[category] = survivingArticles;
+        }
+    }
+    if (deletedCount > 0) {
+        masterDataChanged = true;
+    }
+    grouped = cleanedGrouped; // Gunakan data yang sudah bersih
+
     const xmlUrls = [];
     const existingFiles = new Set(Object.values(grouped).flat().map(item => item[1]));
     let newArticlesCount = 0;
 
-    for (const file of files) {
+    for (const file of filesOnDisk) { // Loop dari file yang ada di disk
         try {
             if (existingFiles.has(file)) {
                 continue;
@@ -172,8 +182,8 @@ const generate = async () => {
             console.error(`❌ Gagal memproses file ${file}:`, error.message);
         }
     }
-    
-    if (newArticlesCount > 0) {
+
+    if (newArticlesCount > 0 || deletedCount > 0) {
         for (const category in grouped) {
             grouped[category].sort((a, b) => new Date(b[3]) - new Date(a[3]));
         }
@@ -206,10 +216,10 @@ const generate = async () => {
 
         await fs.writeFile(CONFIG.xmlOut, xmlContent, "utf8");
 
-        console.log(`\n✅ ${newArticlesCount} artikel baru diproses.`);
+        console.log(`\n✅ Ringkasan: ${newArticlesCount} artikel baru ditambahkan, ${deletedCount} artikel lama dihapus.`);
         console.log("✅ artikel.json & sitemap.xml berhasil diperbarui di root.");
     } else {
-        console.log("\n✅ Tidak ada artikel baru. File tidak diubah.");
+        console.log("\n✅ Tidak ada perubahan. File tidak diubah.");
     }
 };
 
