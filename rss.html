@@ -1,159 +1,232 @@
-
-<div class="article-card">
-    <img src="https://frijal.github.io/assets/images/cara-autostart/cover-dark.png" alt="cover Cara Autostart Skrip di Ubuntu" class="card-image" loading="lazy"> 
-    <div class="card-content">
-        <h3><a href="https://frijal.github.io/artikel/cara-autostart-skrip-di-ubuntu.html" rel="noreferrer">Cara Autostart Skrip di Ubuntu</a></h3>
-        <p class="snippet">Panduan lengkap dan santai: cara menjalankan skrip otomatis saat login di Ubuntu. Gunakan .desktop di ~/.config/autostart, contoh lengkap, tips delay, environment, dan troubleshooting.</p>
-        <div class="meta">
-            <span class="date">5 Oktober 2025</span>
-            <a href="https://frijal.github.io/artikel/cara-autostart-skrip-di-ubuntu.html" class="read-more" rel="noreferrer">Baca Selengkapnya &rarr;</a>
-        </div>
-    </div>
-</div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS Feed Reader</title>
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://frijal.github.io/rss.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- Title & Description -->
-  <title>30 Judul Artikel Terbaru Hari Ini</title>
-  <meta name="description" content="Temukan 30 judul artikel terbaru hari ini dari berbagai topik menarik. Update harian, ringkas, dan informatif." />
+    <style>
+        /* Variabel Warna untuk Mode Gelap */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #b3b3b3;
+            --accent-color: #03dac6;
+            --border-color: #2c2c2c;
+        }
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/ext/icons/apple-icon-180x180.png" />
+        /* Reset & Gaya Dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <!-- Open Graph Metadata -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="30 Judul Artikel Terbaru Hari Ini" />
-  <meta property="og:description" content="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer." />
-  <meta property="og:url" content="https://frijal.github.io/rss.html" />
-  <meta property="og:image" content="https://frijal.github.io/thumbnail.png" />
-  <meta property="og:site_name" content="Frijal" />
-  <meta property="og:locale" content="id_ID" />
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.7;
+        }
 
-  <!-- Twitter Card Metadata -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="30 Judul Artikel Terbaru Hari Ini" />
-  <meta name="twitter:description" content="Lihat daftar 30 judul artikel terbaru hari ini. Ringkas, informatif, dan selalu update." />
-  <meta name="twitter:image" content="https://frijal.github.io/thumbnail.png" />
-  <meta name="twitter:site" content="@frijal" />
-  <meta name="twitter:creator" content="@frijal" />
+        /* Kontainer Utama */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
 
-  <!-- SEO Enhancements -->
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="Frijal" />
-  <meta name="keywords" content="artikel terbaru, judul artikel hari ini, berita terkini, update harian, RSS, Frijal" />
-  <meta name="theme-color" content="#1a1a1a" />
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+        }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+        /* Kontainer untuk Item Feed */
+        #feed-container {
+            display: grid;
+            gap: 1.5rem;
+        }
 
-  <!-- Google Verification -->
-  <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+        /* Gaya Kartu untuk Setiap Item Feed */
+        .feed-item {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/ext/marquee-url.css">
-  <style>
-    :root {
-      --bg-color: #1a1a1a;
-      --text-color: #e0e0e0;
-      --primary-color: #4d90fe;
-      --card-bg: #2c2c2c;
-      --border-color: #444;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.7;
-      margin: 0;
-    }
-    .container {max-width: 900px; margin: 0 auto; padding: 40px 20px;}
-    header {text-align: center; margin-bottom: 40px;}
-    header h1 {font-size: 2.5rem; color: #fff;}
-    #articles-container {display: grid; gap: 25px;}
-    .article-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-start;
-      padding: 0;
-    }
-    .article-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-    .card-image {
-      width: 30%;
-      min-width: 120px;
-      max-width: 200px;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      display: block;
-      flex-shrink: 0;
-      border-radius: 12px 0 0 12px;
-    }
-    .card-content {padding: 20px; flex-grow: 1;}
-    .article-card h3 {margin-top: 0; font-size: 1.3rem;}
-    .article-card h3 a {
-      text-decoration: none;
-      color: #fff;
-      transition: color 0.3s;
-    }
-    .article-card h3 a:hover {color: var(--primary-color);}
-    .article-card .snippet {color: #ccc; margin-top: 10px; font-size: 0.95rem;}
-    .article-card .meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-    .article-card .read-more {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: bold;
-    }
-    @media (max-width: 768px) {
-      .article-card {flex-direction: column; align-items: stretch;}
-      .card-image {width: 100%; max-width: none; border-radius: 12px 12px 0 0;}
-      .card-content {padding: 15px;}
-      .article-card h3 {font-size: 1.2rem;}
-    }
-  </style>
+        .feed-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(3, 218, 198, 0.1);
+        }
+
+        .feed-item h2 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feed-item h2 a {
+            color: var(--primary-text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .feed-item h2 a:hover {
+            color: var(--accent-color);
+        }
+        
+        .feed-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feed-meta i {
+            color: var(--accent-color);
+        }
+
+        .feed-item p {
+            color: var(--secondary-text-color);
+        }
+        
+        /* Animasi Loading */
+        #loading {
+            border: 5px solid var(--border-color);
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 4rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Pesan Error */
+        .error-message {
+            background-color: #4e1a1a;
+            color: #ffc4c4;
+            border: 1px solid #a83c3c;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* Desain Responsif */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .feed-item h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Artikel Terbaru</h1>
-      <p>30 artikel terbaru hari ini.</p>
-    </header>
-    <main>
-      <div id="articles-container"></div>
 
-      <section id="related-marquee-section">
-        <div id="related-marquee-container"></div>
-      </section>
+    <div class="container">
+        <h1>RSS Feed Reader</h1>
+        
+        <div id="loading"></div>
+        
+        <div id="feed-container"></div>
+    </div>
 
-      <div class="search-floating-container">
-        <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off" aria-label="Pencarian artikel">
-        <span id="floatingSearchClear" class="clear-button">&times;</span>
-        <div id="floatingSearchResults" class="floating-results-container"></div>
-      </div>
-    </main>
-  </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // URL ke file rss.xml Anda. 
+            // Sesuaikan jika lokasinya berbeda, contoh: 'https://frijal.github.io/rss.xml'
+            const RSS_URL = 'rss.xml';
 
-  <!-- Scripts -->
-  <script src="/ext/marquee-url.js"></script>
+            const feedContainer = document.getElementById('feed-container');
+            const loadingIndicator = document.getElementById('loading');
+
+            const fetchAndDisplayFeed = async () => {
+                try {
+                    const response = await fetch(RSS_URL);
+                    if (!response.ok) {
+                        throw new Error(`Gagal mengambil data: Status ${response.status}`);
+                    }
+                    const xmlText = await response.text();
+                    
+                    // Parse teks XML menjadi dokumen XML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(xmlText, "application/xml");
+                    
+                    const items = doc.querySelectorAll('item');
+                    
+                    if (items.length === 0) {
+                       feedContainer.innerHTML = '<p class="error-message">Tidak ada item ditemukan di dalam feed.</p>';
+                       return; // Keluar dari fungsi
+                    }
+                    
+                    let feedHTML = '';
+
+                    items.forEach(item => {
+                        // Ambil data dari setiap tag di dalam <item>
+                        const title = item.querySelector('title')?.textContent || 'Tanpa Judul';
+                        const link = item.querySelector('link')?.textContent || '#';
+                        const description = item.querySelector('description')?.textContent || 'Tidak ada deskripsi.';
+                        const pubDateStr = item.querySelector('pubDate')?.textContent;
+                        
+                        let formattedDate = '';
+                        if (pubDateStr) {
+                            const pubDate = new Date(pubDateStr);
+                            // Format tanggal menjadi format lokal Indonesia (misal: 6 Oktober 2025)
+                            formattedDate = new Intl.DateTimeFormat('id-ID', {
+                                dateStyle: 'long'
+                            }).format(pubDate);
+                        }
+                        
+                        // Buat kartu HTML untuk setiap item
+                        feedHTML += `
+                            <div class="feed-item">
+                                <h2><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h2>
+                                <div class="feed-meta">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>${formattedDate}</span>
+                                </div>
+                                <p>${description}</p>
+                            </div>
+                        `;
+                    });
+
+                    feedContainer.innerHTML = feedHTML;
+
+                } catch (error) {
+                    console.error('Terjadi kesalahan saat memuat RSS feed:', error);
+                    feedContainer.innerHTML = `
+                        <div class="error-message">
+                            <strong>Oops! Terjadi Kesalahan</strong>
+                            <p>Tidak dapat memuat feed dari ${RSS_URL}. Silakan periksa kembali URL atau coba lagi nanti.</p>
+                        </div>
+                    `;
+                } finally {
+                    // Sembunyikan indikator loading setelah selesai (baik berhasil maupun gagal)
+                    loadingIndicator.style.display = 'none';
+                }
+            };
+
+            fetchAndDisplayFeed();
+        });
+    </script>
 </body>
 </html>
