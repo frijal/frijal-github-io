@@ -105,6 +105,9 @@
         .error-message { background-color: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); padding: 1rem; border-radius: 8px; text-align: center; }
         @media (max-width: 768px) { h1 { font-size: 2rem; } .feed-item-content h2 { font-size: 1.25rem; } }
     </style>
+<meta property="og:image:alt" content="RSS Feed - Artikel Terbaru">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/rss.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -258,5 +261,7 @@
             fetchAndDisplayFeed();
         });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
