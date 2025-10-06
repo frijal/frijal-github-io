@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitemap - Daftar Isi Artikel</title>
+    <title>Sitemap - Daftar Isi Lengkap</title>
     <meta name="description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori atau gunakan pencarian untuk menemukan topik spesifik dengan mudah.">
     <link rel="canonical" href="https://frijal.github.io/sitemap.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
@@ -22,26 +22,26 @@
 
     <style>
         :root {
-            --bg-color: #0b1522;
-            --surface-color: rgba(30, 41, 59, 0.5);
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
             --text-primary: #e0e0e0;
-            --text-secondary: #94a3b8;
-            --accent-color: #38bdf8;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --read-color: #475569;
-            --highlight-bg: rgba(56, 189, 248, 0.1);
+            --text-secondary: #b3b3b3;
+            --accent-color: #bb86fc; /* Purple Accent */
+            --border-color: #2c2c2c;
+            --hover-color: #333333;
+            --read-color: #6c757d; 
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f1f5f9;
+                --bg-color: #f8f9fa;
                 --surface-color: #ffffff;
-                --text-primary: #1e293b;
-                --text-secondary: #475569;
-                --accent-color: #0284c7;
-                --border-color: #e2e8f0;
-                --read-color: #cbd5e1;
-                --highlight-bg: rgba(2, 132, 199, 0.1);
+                --text-primary: #212529;
+                --text-secondary: #6c757d;
+                --accent-color: #6f42c1;
+                --border-color: #dee2e6;
+                --hover-color: #f1f3f5;
+                --read-color: #adb5bd;
             }
         }
 
@@ -52,90 +52,97 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.7;
-            background-image: url('https://frijal.github.io/assets/bg-texture.png');
-            background-attachment: fixed;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
-        
-        .header { text-align: center; margin-bottom: 3rem; animation: fadeInDown 0.8s ease-out; }
-        h1 { color: var(--accent-color); font-size: 2.8rem; margin-bottom: 0.5rem;}
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .header { text-align: center; margin-bottom: 2.5rem; animation: fadeInDown 0.8s ease-out; }
+        h1 { color: var(--accent-color); font-size: 2.5rem; }
         #stats { color: var(--text-secondary); font-style: italic; }
 
-        #filter-wrapper { position: relative; margin-bottom: 3rem; animation: fadeInUp 0.8s ease-out; }
         #filterInput {
             width: 100%;
-            padding: 15px 50px 15px 25px;
+            padding: 12px 20px;
+            margin-bottom: 2rem;
             font-size: 1rem;
-            border-radius: 30px;
+            border-radius: 25px;
             border: 1px solid var(--border-color);
             background-color: var(--surface-color);
             color: var(--text-primary);
             outline: none;
-            backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
         #filterInput:focus { border-color: var(--accent-color); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-color) 20%, transparent); }
-        .search-icon { position: absolute; top: 50%; right: 20px; transform: translateY(-50%); color: var(--text-secondary); }
 
-        .category-group { margin-bottom: 3rem; animation: popIn 0.6s ease-out backwards; }
+        #sitemap-container { display: flex; flex-direction: column; gap: 0.8rem; }
+        .category-item { animation: popIn 0.5s ease-out backwards; transition: opacity 0.3s; }
+        
         .category-header {
-            position: sticky;
-            top: 0;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 1rem 1.5rem;
-            background-color: color-mix(in srgb, var(--bg-color) 70%, transparent);
-            backdrop-filter: blur(10px);
-            z-index: 10;
-            border-bottom: 2px solid var(--accent-color);
-            margin-bottom: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, border-radius 0.3s;
         }
-        .category-header h2 { font-size: 1.5rem; color: var(--text-primary); }
+        .category-header:hover { background-color: var(--hover-color); }
+        .category-header.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        .category-header .title { font-size: 1.1rem; font-weight: 600; }
+        .category-header .count { font-size: 0.9rem; color: var(--text-secondary); }
+        .category-header .toggle-icon { transition: transform 0.3s ease; }
+        .category-header.active .toggle-icon { transform: rotate(90deg); }
 
-        .timeline { list-style: none; padding: 0; }
-        .timeline li {
-            position: relative;
-            padding: 8px 0 8px 30px;
-            transition: opacity 0.4s ease;
+        .article-list {
+            max-height: 0;
+            overflow: hidden;
+            background-color: color-mix(in srgb, var(--surface-color) 50%, transparent);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
         }
-        .timeline li::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            border: 2px solid var(--bg-color);
-            transition: background-color 0.3s;
-        }
-        .timeline li.read::before {
-            background-color: var(--read-color);
-        }
-        .timeline li:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            bottom: -50%;
-            width: 2px;
-            background-color: var(--border-color);
-        }
-
-        .timeline a {
+        .article-list.open { max-height: 2000px; padding: 0.5rem 0; }
+        
+        .article-list a {
+            display: flex;
+            align-items: center;
+            padding: 12px 1.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s, background-color 0.3s;
+            gap: 1rem;
         }
-        .timeline a:hover { color: var(--accent-color); }
-        .timeline li.read a { color: var(--read-color); font-style: italic; }
+        .article-list a:hover { color: var(--accent-color); background-color: var(--hover-color); }
         
-        #loading { text-align: center; padding: 2rem; font-size: 1.2rem; }
+        .article-date {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            width: 90px;
+        }
+        .article-title {
+            flex-grow: 1;
+        }
+        .read-indicator {
+            width: 24px;
+            flex-shrink: 0;
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--read-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .article-list a.is-read .read-indicator {
+            opacity: 1;
+        }
+
+        #loading { text-align: center; padding: 2rem; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
@@ -147,10 +154,7 @@
             <p id="stats"></p>
         </div>
         
-        <div id="filter-wrapper">
-            <input type="text" id="filterInput" placeholder="Cari judul artikel...">
-            <i class="fas fa-search search-icon"></i>
-        </div>
+        <input type="text" id="filterInput" placeholder="Ketik untuk filter artikel...">
         
         <div id="sitemap-container">
             <div id="loading">Memuat...</div>
@@ -187,36 +191,42 @@
                         
                         totalArticles += articles.length;
                         
-                        const categoryGroup = document.createElement('div');
-                        categoryGroup.className = 'category-group';
-                        categoryGroup.style.animationDelay = `${index * 100}ms`;
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.className = 'category-item';
+                        categoryDiv.style.animationDelay = `${index * 50}ms`;
 
-                        const header = document.createElement('div');
+                        const header = document.createElement('button');
                         header.className = 'category-header';
-                        header.innerHTML = `<h2>${category}</h2>`;
+                        header.innerHTML = `
+                            <span class="title">${category}</span>
+                            <span class="count">${articles.length} artikel <i class="fas fa-chevron-right toggle-icon"></i></span>
+                        `;
                         
-                        const articleList = document.createElement('ul');
-                        articleList.className = 'timeline';
+                        const articleList = document.createElement('div');
+                        articleList.className = 'article-list';
                         
                         articles.forEach(article => {
-                            const [title, url] = article;
-                            const listItem = document.createElement('li');
+                            const [title, url, , pubDate] = article;
                             const link = document.createElement('a');
                             link.href = `artikel/${url}`;
-                            link.textContent = title;
                             
                             const isRead = readArticles.includes(url);
-                            if(isRead) {
-                                listItem.classList.add('read');
-                            }
-                            
-                            listItem.appendChild(link);
-                            articleList.appendChild(listItem);
+                            if(isRead) link.classList.add('is-read');
+
+                            const date = new Date(pubDate);
+                            const formattedDate = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                            link.innerHTML = `
+                                <span class="article-date">${formattedDate}</span>
+                                <span class="article-title">${title}</span>
+                                <span class="read-indicator"><i class="fas fa-eye"></i></span>
+                            `;
+                            articleList.appendChild(link);
                         });
 
-                        categoryGroup.appendChild(header);
-                        categoryGroup.appendChild(articleList);
-                        sitemapContainer.appendChild(categoryGroup);
+                        categoryDiv.appendChild(header);
+                        categoryDiv.appendChild(articleList);
+                        sitemapContainer.appendChild(categoryDiv);
                     });
 
                     statsElement.textContent = `Menampilkan ${totalArticles} artikel dalam ${sortedCategories.length} kategori.`;
@@ -229,26 +239,42 @@
             };
             
             function addEventListeners() {
+                sitemapContainer.addEventListener('click', (event) => {
+                    const header = event.target.closest('.category-header');
+                    if (!header) return;
+                    
+                    header.classList.toggle('active');
+                    const articleList = header.nextElementSibling;
+                    articleList.classList.toggle('open');
+                });
+
                 filterInput.addEventListener('input', () => {
                     const query = filterInput.value.toLowerCase();
                     const hasQuery = query.length > 0;
 
-                    document.querySelectorAll('.category-group').forEach(categoryGroup => {
-                        const links = categoryGroup.querySelectorAll('.timeline li');
+                    document.querySelectorAll('.category-item').forEach(categoryDiv => {
+                        const links = categoryDiv.querySelectorAll('.article-list a');
+                        const header = categoryDiv.querySelector('.category-header');
+                        const articleList = categoryDiv.querySelector('.article-list');
                         let hasVisibleLink = false;
                         
-                        links.forEach(listItem => {
-                            const title = listItem.querySelector('a').textContent.toLowerCase();
+                        links.forEach(link => {
+                            const title = link.querySelector('.article-title').textContent.toLowerCase();
                             
                             if (title.includes(query)) {
-                                listItem.style.opacity = '1';
+                                link.style.display = 'flex';
                                 hasVisibleLink = true;
                             } else {
-                                listItem.style.opacity = hasQuery ? '0.2' : '1';
+                                link.style.display = 'none';
                             }
                         });
+                        
+                        categoryDiv.style.display = hasVisibleLink ? 'block' : 'none';
 
-                        categoryGroup.style.display = (hasQuery && !hasVisibleLink) ? 'none' : 'block';
+                        if (hasQuery && hasVisibleLink && !articleList.classList.contains('open')) {
+                            header.classList.add('active');
+                            articleList.classList.add('open');
+                        }
                     });
                 });
             }
