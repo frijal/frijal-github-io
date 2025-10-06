@@ -167,41 +167,58 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH (DIGABUNGKAN) --- */
+/* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH --- */
 a.kategori-kiri-bawah {
     position: fixed;
     bottom: 5%;
     left: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     z-index: 998;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    text-decoration: none; /* Menghilangkan garis bawah */
+    text-decoration: none;
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
-a.kategori-kiri-bawah:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Efek hover */
-}
-
+/* Status saat terlihat */
 a.kategori-kiri-bawah.visible {
     opacity: 1;
     transform: translateY(0);
 } 
 
-/* --- (5) PENYESUAIAN RESPONSIf & MODE GELAP --- */
+/* --- (5) PENYESUAIAN TEMA & RESPONSIVITAS --- */
+
+/* Aturan default (Mode Gelap) */
+a.kategori-kiri-bawah {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+a.kategori-kiri-bawah:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+/* Aturan khusus saat Mode Terang aktif */
+@media (prefers-color-scheme: light) {
+    a.kategori-kiri-bawah {
+        background-color: #e9ecef; /* Latar belakang terang */
+        color: #212121;             /* Warna teks gelap */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    a.kategori-kiri-bawah:hover {
+        background-color: #dee2e6; /* Efek hover lebih gelap */
+    }
+}
+
+/* Aturan untuk ikon navigasi lainnya */
 @media (max-width: 400px) {
   .ikon-kanan-bawah a {
     max-width: 2.4em;
   }
 }
-
 @media (prefers-color-scheme: dark) {
   .ikon-kanan-bawah svg {
     box-shadow: 0 2px 6px rgba(255,255,255,0.2);
