@@ -1,18 +1,13 @@
-// build-page.js (ESM)
-import fs from 'fs/promises';
-import path from 'path';
-import Parser from 'rss-parser';
-import { fileURLToPath } from 'url';
-
-// Untuk menggantikan __dirname di ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs').promises;
+const path = require('path');
+const Parser = require('rss-parser');
 
 // Menentukan path absolut agar skrip bisa dijalankan dari mana saja di dalam proyek
 const projectRoot = path.resolve(__dirname, '..'); 
 const rssPath = path.join(projectRoot, 'rss.xml');
 const templatePath = path.join(projectRoot, 'ext', 'template.html');
 const outputPath = path.join(projectRoot, 'rss.html');
+
 
 async function buildPage() {
     console.log('Mulai membuat halaman artikel terbaru...');
@@ -62,4 +57,3 @@ async function buildPage() {
 buildPage().catch(error => {
     console.error('❌ Terjadi kesalahan:', error);
 });
-
