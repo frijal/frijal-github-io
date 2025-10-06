@@ -22,25 +22,25 @@
 
     <style>
         :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b3b3b3;
-            --accent-color: #bb86fc; /* Purple Accent */
-            --border-color: #2c2c2c;
-            --hover-color: #333333;
-            --read-color: #6c757d; 
+            --bg-color: #000000;
+            --surface-color: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+            --accent-color: #0099ff; /* Warna biru terang */
+            --border-color: #333333;
+            --hover-color: #2a2a2a;
+            --read-color: #555555; 
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f8f9fa;
-                --surface-color: #ffffff;
-                --text-primary: #212529;
-                --text-secondary: #6c757d;
-                --accent-color: #6f42c1;
+                --bg-color: #ffffff;
+                --surface-color: #f1f3f5;
+                --text-primary: #000000;
+                --text-secondary: #555555;
+                --accent-color: #007bff;
                 --border-color: #dee2e6;
-                --hover-color: #f1f3f5;
+                --hover-color: #e9ecef;
                 --read-color: #adb5bd;
             }
         }
@@ -52,59 +52,68 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.7;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
-        .header { text-align: center; margin-bottom: 2.5rem; animation: fadeInDown 0.8s ease-out; }
+        .header { text-align: center; margin-bottom: 2.5rem; }
         h1 { color: var(--accent-color); font-size: 2.5rem; }
-        #stats { color: var(--text-secondary); font-style: italic; }
+        #stats { color: var(--text-secondary); }
 
+        #filter-wrapper { position: relative; margin-bottom: 2rem; }
         #filterInput {
             width: 100%;
-            padding: 12px 20px;
-            margin-bottom: 2rem;
+            padding: 12px 45px 12px 20px;
             font-size: 1rem;
             border-radius: 25px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             background-color: var(--surface-color);
             color: var(--text-primary);
             outline: none;
-            transition: all 0.3s;
         }
-        #filterInput:focus { border-color: var(--accent-color); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-color) 20%, transparent); }
+        #filterInput:focus { border-color: var(--accent-color); }
+        
+        #clearSearch {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none; /* Sembunyikan secara default */
+        }
 
         #sitemap-container { display: flex; flex-direction: column; gap: 0.8rem; }
-        .category-item { animation: popIn 0.5s ease-out backwards; transition: opacity 0.3s; }
+        .category-item { transition: opacity 0.3s; }
         
         .category-header {
             background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             padding: 1rem 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s, border-radius 0.3s;
         }
         .category-header:hover { background-color: var(--hover-color); }
         .category-header.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
         .category-header .title { font-size: 1.1rem; font-weight: 600; }
         .category-header .count { font-size: 0.9rem; color: var(--text-secondary); }
-        .category-header .toggle-icon { transition: transform 0.3s ease; }
+        .category-header .toggle-icon { transition: transform 0.2s; }
         .category-header.active .toggle-icon { transform: rotate(90deg); }
 
         .article-list {
-            max-height: 0;
-            overflow: hidden;
-            background-color: color-mix(in srgb, var(--surface-color) 50%, transparent);
-            border: 1px solid var(--border-color);
+            display: none; /* Sembunyikan secara default */
+            background-color: var(--surface-color);
+            border: 2px solid var(--border-color);
             border-top: none;
             border-radius: 0 0 8px 8px;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0.5rem 0;
         }
-        .article-list.open { max-height: 2000px; padding: 0.5rem 0; }
+        .article-list.open { display: block; }
         
         .article-list a {
             display: flex;
@@ -112,38 +121,16 @@
             padding: 12px 1.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s, background-color 0.3s;
             gap: 1rem;
         }
         .article-list a:hover { color: var(--accent-color); background-color: var(--hover-color); }
         
-        .article-date {
-            font-size: 0.8em;
-            font-weight: 600;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-            width: 90px;
-        }
-        .article-title {
-            flex-grow: 1;
-        }
-        .read-indicator {
-            width: 24px;
-            flex-shrink: 0;
-            text-align: right;
-            font-size: 0.9em;
-            color: var(--read-color);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .article-list a.is-read .read-indicator {
-            opacity: 1;
-        }
+        .article-date { font-size: 0.8em; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; width: 90px; }
+        .article-title { flex-grow: 1; }
+        .read-indicator { width: 24px; flex-shrink: 0; text-align: right; font-size: 0.9em; color: var(--read-color); opacity: 0; }
+        .article-list a.is-read .read-indicator { opacity: 1; }
 
         #loading { text-align: center; padding: 2rem; }
-
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -154,7 +141,10 @@
             <p id="stats"></p>
         </div>
         
-        <input type="text" id="filterInput" placeholder="Ketik untuk filter artikel...">
+        <div id="filter-wrapper">
+            <input type="text" id="filterInput" placeholder="Ketik untuk filter artikel...">
+            <button id="clearSearch">×</button>
+        </div>
         
         <div id="sitemap-container">
             <div id="loading">Memuat...</div>
@@ -167,6 +157,7 @@
             const sitemapContainer = document.getElementById('sitemap-container');
             const statsElement = document.getElementById('stats');
             const filterInput = document.getElementById('filterInput');
+            const clearButton = document.getElementById('clearSearch');
             const loadingIndicator = document.getElementById('loading');
             
             let readArticles = [];
@@ -185,7 +176,7 @@
 
                     const sortedCategories = Object.keys(data).sort((a, b) => a.localeCompare(b));
 
-                    sortedCategories.forEach((category, index) => {
+                    sortedCategories.forEach(category => {
                         const articles = data[category];
                         if (!articles || articles.length === 0) return;
                         
@@ -193,7 +184,6 @@
                         
                         const categoryDiv = document.createElement('div');
                         categoryDiv.className = 'category-item';
-                        categoryDiv.style.animationDelay = `${index * 50}ms`;
 
                         const header = document.createElement('button');
                         header.className = 'category-header';
@@ -210,8 +200,7 @@
                             const link = document.createElement('a');
                             link.href = `artikel/${url}`;
                             
-                            const isRead = readArticles.includes(url);
-                            if(isRead) link.classList.add('is-read');
+                            if(readArticles.includes(url)) link.classList.add('is-read');
 
                             const date = new Date(pubDate);
                             const formattedDate = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
@@ -244,38 +233,47 @@
                     if (!header) return;
                     
                     header.classList.toggle('active');
-                    const articleList = header.nextElementSibling;
-                    articleList.classList.toggle('open');
+                    header.nextElementSibling.classList.toggle('open');
                 });
 
-                filterInput.addEventListener('input', () => {
-                    const query = filterInput.value.toLowerCase();
-                    const hasQuery = query.length > 0;
+                filterInput.addEventListener('input', handleFilter);
+                
+                clearButton.addEventListener('click', () => {
+                    filterInput.value = '';
+                    handleFilter(); // Panggil fungsi filter untuk mereset tampilan
+                    filterInput.focus();
+                });
+            }
 
-                    document.querySelectorAll('.category-item').forEach(categoryDiv => {
-                        const links = categoryDiv.querySelectorAll('.article-list a');
-                        const header = categoryDiv.querySelector('.category-header');
-                        const articleList = categoryDiv.querySelector('.article-list');
-                        let hasVisibleLink = false;
-                        
-                        links.forEach(link => {
-                            const title = link.querySelector('.article-title').textContent.toLowerCase();
-                            
-                            if (title.includes(query)) {
-                                link.style.display = 'flex';
-                                hasVisibleLink = true;
-                            } else {
-                                link.style.display = 'none';
-                            }
-                        });
-                        
-                        categoryDiv.style.display = hasVisibleLink ? 'block' : 'none';
+            function handleFilter() {
+                const query = filterInput.value.toLowerCase();
+                const hasQuery = query.length > 0;
+                
+                clearButton.style.display = hasQuery ? 'block' : 'none';
 
-                        if (hasQuery && hasVisibleLink && !articleList.classList.contains('open')) {
-                            header.classList.add('active');
-                            articleList.classList.add('open');
+                document.querySelectorAll('.category-item').forEach(categoryDiv => {
+                    const links = categoryDiv.querySelectorAll('.article-list a');
+                    const header = categoryDiv.querySelector('.category-header');
+                    const articleList = categoryDiv.querySelector('.article-list');
+                    let hasVisibleLink = false;
+                    
+                    links.forEach(link => {
+                        const title = link.querySelector('.article-title').textContent.toLowerCase();
+                        
+                        if (title.includes(query)) {
+                            link.style.display = 'flex';
+                            hasVisibleLink = true;
+                        } else {
+                            link.style.display = 'none';
                         }
                     });
+                    
+                    categoryDiv.style.display = hasVisibleLink ? 'block' : 'none';
+
+                    if (hasQuery && hasVisibleLink && !articleList.classList.contains('open')) {
+                        header.classList.add('active');
+                        articleList.classList.add('open');
+                    }
                 });
             }
 
