@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apa Itu PKGBUILD? Memahami File Resep Rahasia di Arch Linux dan AUR</title>
+    <title>Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain</title>
     
-    <meta name="description" content="Penjelasan santai dan mendalam tentang PKGBUILD, file script yang berisi resep untuk membuat paket software di Arch Linux, CachyOS, dan AUR.">
-    <meta name="keywords" content="PKGBUILD, Arch Linux, AUR, makepkg, Paru, Source Code, Kompilasi, Resep Software">
-    <link rel="canonical" href="https://frijal.github.io/artikel/apa-itu-pkgbuild.html">
+    <meta name="description" content="Langkah-langkah lengkap dan santai cara instalasi dan penggunaan AUR Helper Paru di luar CachyOS, termasuk Arch Linux murni, Manjaro, dan EndeavourOS.">
+    <meta name="keywords" content="Paru, AUR Helper, Instalasi Paru, Arch Linux, Manjaro, EndeavourOS, Pacman, makepkg">
+    <link rel="canonical" href="https://frijal.github.io/artikel/cara-instal-paru-arch.html">
     
-    <meta property="og:title" content="Apa Itu PKGBUILD? Memahami File Resep Rahasia di Arch Linux dan AUR">
-    <meta property="og:description" content="Kue, resep, dan coding: PKGBUILD adalah cetak biru untuk setiap software di AUR.">
+    <meta property="og:title" content="Cara Instal dan Pakai Paru di Distro Arch Mana Pun!">
+    <meta property="og:description" content="Paru adalah AUR Helper terbaik. Pelajari cara menginstalnya di sistem berbasis Arch Anda.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/apa-itu-pkgbuild.html">
-    <meta property="og:image" content="https://frijal.github.io/artikel/apa-itu-pkgbuild.jpg"> <meta property="og:site_name" content="Frijal's Articles">
+    <meta property="og:url" content="https://frijal.github.io/artikel/cara-instal-paru-arch.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/cara-instal-paru-arch.jpg"> <meta property="og:site_name" content="Frijal's Articles">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Mengenal PKGBUILD">
-    <meta name="twitter:description" content="Mengapa PKGBUILD sangat penting untuk keamanan dan instalasi software di Arch!">
-    <meta name="twitter:image" content="https://frijal.github.io/artikel/apa-itu-pkgbuild.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Instal Paru di Arch/Manjaro">
+    <meta name="twitter:description" content="Panduan mudah instalasi Paru di luar CachyOS!">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/cara-instal-paru-arch.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         :root {
-            --color-bg: #101010;
-            --color-text: #ffffff;
-            --color-primary: #f0f8ff; /* Warna terang/putih untuk kontras */
-            --color-secondary: #252525;
-            --color-card-bg: #1e1e1e;
+            --color-bg: #0d0d00; /* Darker, slightly yellowish tint for code focus */
+            --color-text: #f0f0f0;
+            --color-primary: #ffff00; /* Kuning Neon/Aura Code */
+            --color-secondary: #222200;
+            --color-card-bg: #1f1f0f;
             --padding-base: 20px;
         }
 
@@ -39,7 +39,7 @@
         }
 
         body {
-            font-family: 'Roboto Mono', monospace; /* Font coding */
+            font-family: 'Consolas', monospace;
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.7;
@@ -65,7 +65,7 @@
             color: var(--color-primary);
             margin-bottom: 10px;
             font-size: 2.8em;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 5px var(--color-primary);
         }
         h2 {
             border-bottom: 2px solid var(--color-primary);
@@ -81,7 +81,7 @@
         }
         code {
             background-color: #333;
-            color: #ff9900; /* Warna kode kontras */
+            color: var(--color-primary);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'Consolas', monospace;
@@ -100,7 +100,7 @@
             display: block;
             padding: 0;
             background: none;
-            color: #fff;
+            color: var(--color-primary);
         }
         ul {
             margin-left: 25px;
@@ -152,7 +152,7 @@
         }
         .gallery img:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
         }
         
         /* LIGHTBOX */
@@ -197,12 +197,12 @@
             font-size: 24px;
             transition: 0.6s ease;
             user-select: none;
-            background-color: rgba(240, 248, 255, 0.3);
+            background-color: rgba(255, 255, 0, 0.7);
             border-radius: 5px;
         }
         .next { right: 15px; }
         .prev { left: 15px; }
-        .prev:hover, .next:hover { background-color: var(--color-primary); color: #111;}
+        .prev:hover, .next:hover { background-color: var(--color-primary); }
 
         /* MEDIA QUERIES (Mobile-Friendly) */
         @media (max-width: 768px) {
@@ -212,12 +212,15 @@
             .gallery { grid-template-columns: 1fr; }
         }
     </style>
+<meta property="og:image:alt" content="Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/cara-instal-paru-arch.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div id="fb-root"></div>
     
     <header>
-        <h1><i class="fas fa-file-code"></i> PKGBUILD: Resep Rahasia Software Arch dan AUR</h1>
+        <h1><i class="fas fa-terminal"></i> Paru Anti Ribet: Cara Instal dan Pakai di Distro Arch Mana Saja</h1>
     </header>
 
     <div class="container">
@@ -232,100 +235,99 @@
 
         <article>
             <p>
-                Tentu, jangan khawatir! <b>PKGBUILD</b> adalah konsep yang sangat penting dan keren di dunia Arch Linux (termasuk CachyOS dan distro turunannya). Meskipun namanya terlihat teknis, PKGBUILD sebenarnya adalah inti dari bagaimana Arch mengelola <code><b>software</b></code>, terutama yang berasal dari AUR.
+                Mantap! Karena <b>Paru</b> itu adalah <b>AUR Helper</b> yang dibuat untuk <b>ekosistem Arch Linux</b>, Anda tidak perlu khawatir. Meskipun Anda tidak menggunakan CachyOS, Paru bisa diinstal dan bekerja sempurna di <b>Arch Linux murni, Manjaro, EndeavourOS,</b> dan turunan Arch lainnya.
+            </p>
+            <p>
+                Paru bekerja dengan memanfaatkan <b>Pacman</b> dan kemampuan sistem Anda untuk mengkompilasi paket dari <b>AUR</b>. Berikut panduan santai langkah demi langkahnya!
             </p>
 
             <section>
-                <h2><i class="fas fa-book-open"></i> Definisi Santai: PKGBUILD = Resep Kue</h2>
+                <h2><i class="fas fa-download"></i> 1. Instalasi Paru (Kompilasi dari AUR)</h2>
                 <p>
-                    Bayangkan <b>PKGBUILD</b> sebagai <B>resep kue</B> di dunia <code><b>coding</b></code>.
-                    <br>
-                    Ini adalah file <b>script shell</b> (biasanya ditulis dalam Bash) yang berisi semua instruksi yang dibutuhkan oleh program bernama <b>makepkg</b> untuk membuat sebuah paket <code><b>software</b></code> yang siap diinstal di sistem Anda.
+                    Karena Paru sendiri berasal dari AUR, kita harus mengkompilasinya. Ini membutuhkan *build tools* dasar di sistem Anda.
                 </p>
+
+                <h3>A. Pastikan Build Tools Tersedia</h3>
                 <p>
-                    Resep ini tidak berisi <code><b>software</b></code>-nya secara langsung, tetapi berisi langkah-langkah detail tentang:
-                    <ol>
-                        <li><i class="fas fa-shopping-basket"></i> Bahan-bahan apa saja yang dibutuhkan (<B>dependencies</B>).</li>
-                        <li><i class="fas fa-globe"></i> Di mana tempat membeli bahan (<B>URL source code</B> dari developer asli).</li>
-                        <li><i class="fas fa-utensils"></i> Bagaimana cara mengolah atau memasaknya (<B>build process</B> atau <B>kompilasi</B>).</li>
-                        <li><i class="fas fa-box-open"></i> Bagaimana mengemas produk akhir agar siap dijual/dipasang (membuat paket <code>.pkg.tar.zst</code>).</li>
-                    </ol>
+                    Langkah pertama adalah memastikan Anda memiliki paket yang diperlukan untuk kompilasi (mengubah kode sumber menjadi program yang bisa dijalankan).
+                </p>
+                <pre><code># Pastikan base-devel (untuk makepkg) dan git sudah terpasang
+sudo pacman -S --needed base-devel git
+</code></pre>
+
+                <h3>B. Kloning dan Build Paru</h3>
+                <p>
+                    Sekarang kita akan mengambil kode sumber Paru dari AUR menggunakan Git, dan mengkompilasinya menggunakan <code>makepkg</code>.
+                </p>
+                <pre><code># 1. Masuk ke folder sementara (direktori /tmp atau di home Anda)
+cd /tmp
+
+# 2. Kloning repository Paru dari AUR
+git clone https://aur.archlinux.org/paru.git
+
+# 3. Masuk ke folder yang baru dikloning
+cd paru
+
+# 4. Bangun (build) dan instal Paru
+# Perintah -si akan menginstal dependensi yang dibutuhkan secara otomatis
+makepkg -si
+</code></pre>
+                <p>
+                    Anda mungkin akan diminta memasukkan <code>password</code> Anda beberapa kali selama proses ini. Setelah selesai, <b>Paru sudah terinstal</b>! Anda bisa menghapus folder <code>/tmp/paru</code>.
                 </p>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-code"></i> Elemen-Elemen Kunci dalam PKGBUILD</h2>
+                <h2><i class="fas fa-tasks"></i> 2. Cara Menggunakan Paru (Perintah Harian)</h2>
                 <p>
-                    Setiap file PKGBUILD, terutama yang ada di AUR, wajib memiliki baris-baris ini untuk memberitahu <code>makepkg</code> apa yang harus dilakukan:
+                    Selamat! Sekarang Anda bisa menggunakan <b>Paru</b> sebagai pengganti <code>pacman</code> untuk hampir semua tugas harian. Keuntungannya? Paru akan mengurus Pacman dan AUR sekaligus!
                 </p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Elemen</th>
-                            <th>Fungsi</th>
-                            <th>Contoh</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>pkgname</b></td>
-                            <td>Nama paket hasil instalasi.</td>
-                            <td><code><b>pkgname=spotify</b></code></td>
-                        </tr>
-                        <tr>
-                            <td><b>pkgver</b></td>
-                            <td>Nomor versi <code><b>software</b></code> yang diunduh.</td>
-                            <td><code><b>pkgver=1.2.3.456</b></code></td>
-                        </tr>
-                        <tr>
-                            <td><b>depends</b></td>
-                            <td>Daftar paket lain yang harus terinstal lebih dulu (bahan baku).</td>
-                            <td><code><b>depends=('glibc' 'git')</b></code></td>
-                        </tr>
-                        <tr>
-                            <td><b>source</b></td>
-                            <td>URL tempat kode sumber program asli berada.</td>
-                            <td><code><b>source=("https://.../program.tar.gz")</b></code></td>
-                        </tr>
-                        <tr>
-                            <td><b>build()</b></td>
-                            <td>Fungsi yang menjalankan perintah kompilasi (misalnya <code>./configure; make</code>).</td>
-                            <td>(Langkah pembuatannya)</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h3><i class="fas fa-sync-alt"></i> Update Sistem Penuh (Pacman + AUR)</h3>
+                    <p>Ini adalah perintah ajaib yang paling sering Anda gunakan:</p>
+                    <pre><code>paru</code></pre>
+                    <p>atau secara eksplisit:</p>
+                    <pre><code>paru -Syu</code></pre>
+                </div>
+                
+                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h3><i class="fas fa-puzzle-piece"></i> Instal Paket Baru (Dari Pacman/AUR)</h3>
+                    <p>Paru akan mencari di repositori resmi dulu, lalu di AUR. Lebih cerdas dari Pacman!</p>
+                    <pre><code>paru -S [nama_paket]</code></pre>
+                </div>
+
+                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h3><i class="fas fa-search"></i> Mencari Paket di Kedua Repositori</h3>
+                    <p>Mencari paket di Repositori Resmi dan AUR:</p>
+                    <pre><code>paru -Ss [kata_kunci]</code></pre>
+                </div>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-link"></i> Kaitan PKGBUILD dan Paru</h2>
+                <h2><i class="fas fa-magic"></i> 3. Keunggulan Paru di AUR</h2>
                 <p>
-                    Anda mungkin bertanya, apa hubungannya dengan <b>Paru</b>? Di sinilah Paru berperan sebagai <b>juru masak otomatis</b> Anda:
+                    Saat Anda menggunakan Paru untuk menginstal paket dari AUR, Paru akan otomatis bertanya dan melakukan langkah-langkah yang biasanya Anda lakukan manual (seperti mengunduh Git, menjalankan <code>makepkg</code>, dan menginstal dependensi).
                 </p>
-                <ol>
-                    <li><i class="fas fa-search-location"></i> Anda meminta Paru menginstal paket AUR.</li>
-                    <li><i class="fas fa-download"></i> Paru secara otomatis mengunduh file <b>PKGBUILD</b> dari AUR.</li>
-                    <li><i class="fas fa-check"></i> Paru menawarkan untuk <B>meninjau</B> (membaca) isi PKGBUILD tersebut kepada Anda (Inilah fitur keamanan utamanya!).</li>
-                    <li><i class="fas fa-play"></i> Jika Anda setuju, Paru menjalankan <code>makepkg</code>, yang kemudian membaca resep di PKGBUILD dan mengikuti semua langkahnya hingga paket siap diinstal.</li>
-                </ol>
                 <p>
-                    Karena <code><b>software</b></code> dari AUR adalah komunitas, <b>meninjau PKGBUILD</b> sebelum kompilasi sangat penting. Paru memudahkan Anda melihat resep tersebut agar Anda yakin tidak ada bahan atau langkah yang mencurigakan (risiko keamanan).
+                    Saat proses instalasi paket dari AUR, Paru akan menyajikan langkah-langkah konfirmasi dan menampilkan <code>PKGBUILD</code> (skrip kompilasi) agar Anda dapat meninjaunya terlebih dahulu, menjadikannya lebih aman dan transparan!
                 </p>
             </section>
             
             <section class="social-share">
-                <p>Bagikan ilmu tentang resep <code><b>software</b></code> ini:</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/apa-itu-pkgbuild.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/apa-itu-pkgbuild.html&text=PKGBUILD%3A%20Resep%20Software%20di%20Arch%20Linux%20dan%20AUR!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://wa.me/?text=Penting!%20Cari%20tahu%20apa%20itu%20PKGBUILD%20dan%20fungsinya%20di%20Arch%20Linux%3A%20https://frijal.github.io/artikel/apa-itu-pkgbuild.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <p>Bantu teman Linux Anda beralih ke Paru:</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/cara-instal-paru-arch.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/cara-instal-paru-arch.html&text=Instal%20Paru%20di%20Arch%20Linux%20Murni!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/?text=Panduan%20instalasi%20Paru%20di%20distro%20Arch%20lain%3A%20https://frijal.github.io/artikel/cara-instal-paru-arch.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </section>
             <section id="fb-comments-container">
                 <h2><i class="far fa-comment-dots"></i> Diskusi & Komentar</h2>
                 <div class="fb-comments" 
-                    data-href="https://frijal.github.io/artikel/apa-itu-pkgbuild.html" 
+                    data-href="https://frijal.github.io/artikel/cara-instal-paru-arch.html" 
                     data-width="100%" 
                     data-numposts="5">
                 </div>
@@ -342,7 +344,7 @@
     </div>
 
     <footer>
-        <p>🄯 2024 Artikel Frijal. Sekarang Anda sudah lebih paham tentang dapur Arch Linux!</p>
+        <p>🄯 2024 Artikel Frijal. Nikmati kemudahan mengelola paket Arch Anda!</p>
     </footer>
 
     <script>
@@ -486,5 +488,7 @@
             getGeoLocation();
         });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>

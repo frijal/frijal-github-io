@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain</title>
+    <title>Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)</title>
     
-    <meta name="description" content="Langkah-langkah lengkap dan santai cara instalasi dan penggunaan AUR Helper Paru di luar CachyOS, termasuk Arch Linux murni, Manjaro, dan EndeavourOS.">
-    <meta name="keywords" content="Paru, AUR Helper, Instalasi Paru, Arch Linux, Manjaro, EndeavourOS, Pacman, makepkg">
-    <link rel="canonical" href="https://frijal.github.io/artikel/cara-instal-paru-arch.html">
+    <meta name="description" content="Penjelasan mendalam tentang peran Paru sebagai AUR Helper untuk menginstal software yang tidak tersedia di repositori resmi Pacman, serta keuntungannya.">
+    <meta name="keywords" content="Paru, AUR Helper, AUR, Arch User Repository, Software Komunitas, Pacman, Instalasi Linux">
+    <link rel="canonical" href="https://frijal.github.io/artikel/paru-software-nonresmi.html">
     
-    <meta property="og:title" content="Cara Instal dan Pakai Paru di Distro Arch Mana Pun!">
-    <meta property="og:description" content="Paru adalah AUR Helper terbaik. Pelajari cara menginstalnya di sistem berbasis Arch Anda.">
+    <meta property="og:title" content="Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)">
+    <meta property="og:description" content="Mau instal Spotify, VS Code, atau paket langka di Arch? Paru adalah jawabannya!">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/cara-instal-paru-arch.html">
-    <meta property="og:image" content="https://frijal.github.io/artikel/cara-instal-paru-arch.jpg"> <meta property="og:site_name" content="Frijal's Articles">
+    <meta property="og:url" content="https://frijal.github.io/artikel/paru-software-nonresmi.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"> <meta property="og:site_name" content="Frijal's Articles">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Instal Paru di Arch/Manjaro">
-    <meta name="twitter:description" content="Panduan mudah instalasi Paru di luar CachyOS!">
-    <meta name="twitter:image" content="https://frijal.github.io/artikel/cara-instal-paru-arch.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Paru dan Software Luar Repositori Resmi">
+    <meta name="twitter:description" content="Cara Paru membantu Anda mengakses ribuan software dari AUR!">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         :root {
-            --color-bg: #0d0d00; /* Darker, slightly yellowish tint for code focus */
-            --color-text: #f0f0f0;
-            --color-primary: #ffff00; /* Kuning Neon/Aura Code */
-            --color-secondary: #222200;
-            --color-card-bg: #1f1f0f;
+            --color-bg: #00000d; /* Darker, slightly blue tint for tech focus */
+            --color-text: #e6e6ff;
+            --color-primary: #8a2be2; /* Blue Violet/Ungu Khas Komunitas */
+            --color-secondary: #1a1a33;
+            --color-card-bg: #1f1f44;
             --padding-base: 20px;
         }
 
@@ -39,7 +39,7 @@
         }
 
         body {
-            font-family: 'Consolas', monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.7;
@@ -65,7 +65,7 @@
             color: var(--color-primary);
             margin-bottom: 10px;
             font-size: 2.8em;
-            text-shadow: 0 0 5px var(--color-primary);
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
         }
         h2 {
             border-bottom: 2px solid var(--color-primary);
@@ -100,7 +100,7 @@
             display: block;
             padding: 0;
             background: none;
-            color: var(--color-primary);
+            color: #ccc;
         }
         ul {
             margin-left: 25px;
@@ -152,7 +152,7 @@
         }
         .gallery img:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
         }
         
         /* LIGHTBOX */
@@ -197,7 +197,7 @@
             font-size: 24px;
             transition: 0.6s ease;
             user-select: none;
-            background-color: rgba(255, 255, 0, 0.7);
+            background-color: rgba(138, 43, 226, 0.7);
             border-radius: 5px;
         }
         .next { right: 15px; }
@@ -212,12 +212,15 @@
             .gallery { grid-template-columns: 1fr; }
         }
     </style>
+<meta property="og:image:alt" content="Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div id="fb-root"></div>
     
     <header>
-        <h1><i class="fas fa-terminal"></i> Paru Anti Ribet: Cara Instal dan Pakai di Distro Arch Mana Saja</h1>
+        <h1><i class="fas fa-cubes"></i> Paru dan Software Komunitas: Menguak Kekuatan AUR</h1>
     </header>
 
     <div class="container">
@@ -232,99 +235,72 @@
 
         <article>
             <p>
-                Mantap! Karena <b>Paru</b> itu adalah <b>AUR Helper</b> yang dibuat untuk <b>ekosistem Arch Linux</b>, Anda tidak perlu khawatir. Meskipun Anda tidak menggunakan CachyOS, Paru bisa diinstal dan bekerja sempurna di <b>Arch Linux murni, Manjaro, EndeavourOS,</b> dan turunan Arch lainnya.
+                Betul sekali! Inilah fungsi utama <b>Paru</b> yang sebenarnya. Paru memang dirancang untuk memasang <code><b>software</b></code> yang berada <b>di luar repositori resmi</b> Pacman, yaitu <code><b>software</b></code> dari <b>AUR (Arch User Repository)</b>.
             </p>
             <p>
-                Paru bekerja dengan memanfaatkan <b>Pacman</b> dan kemampuan sistem Anda untuk mengkompilasi paket dari <b>AUR</b>. Berikut panduan santai langkah demi langkahnya!
+                Jadi, jika ada <code><b>software</b></code> yang tidak muncul saat Anda menggunakan <code>sudo pacman -S</code>, Paru adalah alat yang akan membantu Anda mencarinya, mengunduh, mengkompilasi, dan menginstalnya dari AUR.
             </p>
 
             <section>
-                <h2><i class="fas fa-download"></i> 1. Instalasi Paru (Kompilasi dari AUR)</h2>
+                <h2><i class="fas fa-globe"></i> Apa Itu AUR (Arch User Repository)?</h2>
                 <p>
-                    Karena Paru sendiri berasal dari AUR, kita harus mengkompilasinya. Ini membutuhkan *build tools* dasar di sistem Anda.
-                </p>
-
-                <h3>A. Pastikan Build Tools Tersedia</h3>
-                <p>
-                    Langkah pertama adalah memastikan Anda memiliki paket yang diperlukan untuk kompilasi (mengubah kode sumber menjadi program yang bisa dijalankan).
-                </p>
-                <pre><code># Pastikan base-devel (untuk makepkg) dan git sudah terpasang
-sudo pacman -S --needed base-devel git
-</code></pre>
-
-                <h3>B. Kloning dan Build Paru</h3>
-                <p>
-                    Sekarang kita akan mengambil kode sumber Paru dari AUR menggunakan Git, dan mengkompilasinya menggunakan <code>makepkg</code>.
-                </p>
-                <pre><code># 1. Masuk ke folder sementara (direktori /tmp atau di home Anda)
-cd /tmp
-
-# 2. Kloning repository Paru dari AUR
-git clone https://aur.archlinux.org/paru.git
-
-# 3. Masuk ke folder yang baru dikloning
-cd paru
-
-# 4. Bangun (build) dan instal Paru
-# Perintah -si akan menginstal dependensi yang dibutuhkan secara otomatis
-makepkg -si
-</code></pre>
-                <p>
-                    Anda mungkin akan diminta memasukkan <code>password</code> Anda beberapa kali selama proses ini. Setelah selesai, <b>Paru sudah terinstal</b>! Anda bisa menghapus folder <code>/tmp/paru</code>.
+                    AUR adalah gudang repositori besar yang isinya berupa <b>PKGBUILD</b> (skrip kompilasi) yang dikelola oleh komunitas Arch Linux. Paket-paket ini biasanya meliputi:
+                    <ul>
+                        <li><i class="fas fa-music"></i> <b>Aplikasi Populer:</b> Misalnya Spotify, Google Chrome, Visual Studio Code (versi tertentu).</li>
+                        <li><i class="fas fa-laptop-code"></i> <b>Versi Pengembangan:</b> Versi <code><b>beta</b></code> atau <code><b>git</b></code> dari sebuah program.</li>
+                        <li><i class="fas fa-cogs"></i> <b>Software Khusus:</b> Driver atau program yang kurang diminati massal.</li>
+                    </ul>
+                    Karena paket ini tidak di-<code><b>build</b></code> dan diuji secara resmi oleh tim Arch, mereka dikategorikan sebagai <b>non-resmi:</b>, dan di sinilah Paru berperan.
                 </p>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-tasks"></i> 2. Cara Menggunakan Paru (Perintah Harian)</h2>
+                <h2><i class="fas fa-tools"></i> Peran Paru dalam Menjembatani AUR</h2>
                 <p>
-                    Selamat! Sekarang Anda bisa menggunakan <b>Paru</b> sebagai pengganti <code>pacman</code> untuk hampir semua tugas harian. Keuntungannya? Paru akan mengurus Pacman dan AUR sekaligus!
+                    Sebelum ada AUR Helper seperti Paru (dan sebelumnya Yaourt/Pacaur), menginstal dari AUR adalah pekerjaan yang ribet, harus menggunakan perintah <code>git clone</code>, <code>makepkg</code>, dan mengurus dependensi manual.
                 </p>
-
-                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <h3><i class="fas fa-sync-alt"></i> Update Sistem Penuh (Pacman + AUR)</h3>
-                    <p>Ini adalah perintah ajaib yang paling sering Anda gunakan:</p>
-                    <pre><code>paru</code></pre>
-                    <p>atau secara eksplisit:</p>
-                    <pre><code>paru -Syu</code></pre>
-                </div>
-                
-                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <h3><i class="fas fa-puzzle-piece"></i> Instal Paket Baru (Dari Pacman/AUR)</h3>
-                    <p>Paru akan mencari di repositori resmi dulu, lalu di AUR. Lebih cerdas dari Pacman!</p>
-                    <pre><code>paru -S [nama_paket]</code></pre>
-                </div>
-
-                <div style="background-color: #111; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                    <h3><i class="fas fa-search"></i> Mencari Paket di Kedua Repositori</h3>
-                    <p>Mencari paket di Repositori Resmi dan AUR:</p>
-                    <pre><code>paru -Ss [kata_kunci]</code></pre>
-                </div>
+                <p>
+                    <b>Paru mengotomatisasi seluruh proses tersebut.</b>
+                </p>
+                <p>
+                    Saat Anda menggunakan <code>paru -S [nama_software]</code>, Paru akan:
+                    <ol>
+                        <li><i class="fas fa-search-dollar"></i> Mencari paket di repositori Pacman dan AUR.</li>
+                        <li><i class="fas fa-code-branch"></i> Jika ditemukan di AUR, Paru akan mengunduh kode sumbernya (<code>git clone</code>).</li>
+                        <li><i class="fas fa-eye"></i> <b>Menampilkan PKGBUILD</b> (skrip kompilasi) dan meminta persetujuan Anda (Penting!).</li>
+                        <li><i class="fas fa-hammer"></i> Mengkompilasi paket menggunakan <code>makepkg</code> dan menginstal semua dependensi yang dibutuhkan secara otomatis.</li>
+                    </ol>
+                </p>
+                <p>
+                    Dengan Paru, instalasi <code><b>software</b></code> dari AUR terasa semudah menginstal dari repositori resmi.
+                </p>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-magic"></i> 3. Keunggulan Paru di AUR</h2>
+                <h2><i class="fas fa-shield-alt"></i> Peringatan Penting: Keamanan AUR</h2>
                 <p>
-                    Saat Anda menggunakan Paru untuk menginstal paket dari AUR, Paru akan otomatis bertanya dan melakukan langkah-langkah yang biasanya Anda lakukan manual (seperti mengunduh Git, menjalankan <code>makepkg</code>, dan menginstal dependensi).
-                </p>
-                <p>
-                    Saat proses instalasi paket dari AUR, Paru akan menyajikan langkah-langkah konfirmasi dan menampilkan <code>PKGBUILD</code> (skrip kompilasi) agar Anda dapat meninjaunya terlebih dahulu, menjadikannya lebih aman dan transparan!
+                    Meskipun Paru sangat memudahkan, perlu diingat bahwa <b>software dari AUR dikelola oleh komunitas, bukan oleh pengembang resmi distro Anda</b>. Ada beberapa hal yang harus Anda perhatikan:
+                    <ul>
+                        <li><b>Tinjau PKGBUILD:</b> Selalu baca dan tinjau skrip (PKGBUILD) yang ditampilkan oleh Paru sebelum Anda menyetujui proses kompilasi. Ini adalah kunci untuk memastikan tidak ada kode berbahaya yang masuk ke sistem Anda.</li>
+                        <li><b>Dependencies:</b> Paket AUR mungkin memiliki dependensi yang rumit atau memerlukan paket AUR lain. Paru akan membantu mengurusnya, tetapi pastikan Anda mengerti apa yang diinstal.</li>
+                    </ul>
                 </p>
             </section>
             
             <section class="social-share">
-                <p>Bantu teman Linux Anda beralih ke Paru:</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/cara-instal-paru-arch.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/cara-instal-paru-arch.html&text=Instal%20Paru%20di%20Arch%20Linux%20Murni!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://wa.me/?text=Panduan%20instalasi%20Paru%20di%20distro%20Arch%20lain%3A%20https://frijal.github.io/artikel/cara-instal-paru-arch.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <p>Bagikan info penting tentang AUR dan Paru ini:</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/paru-software-nonresmi.html&text=Paru%20membuka%20akses%20ke%20ribuan%20software%20komunitas%20di%20AUR!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/?text=Penting!%20Cara%20Paru%20menginstal%20software%20luar%20repositori%20resmi%3A%20https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </section>
             <section id="fb-comments-container">
                 <h2><i class="far fa-comment-dots"></i> Diskusi & Komentar</h2>
                 <div class="fb-comments" 
-                    data-href="https://frijal.github.io/artikel/cara-instal-paru-arch.html" 
+                    data-href="https://frijal.github.io/artikel/paru-software-nonresmi.html" 
                     data-width="100%" 
                     data-numposts="5">
                 </div>
@@ -341,7 +317,7 @@ makepkg -si
     </div>
 
     <footer>
-        <p>🄯 2024 Artikel Frijal. Nikmati kemudahan mengelola paket Arch Anda!</p>
+        <p>🄯 2024 Artikel Frijal. Gunakan Paru dengan bijak dan aman!</p>
     </footer>
 
     <script>
@@ -485,5 +461,7 @@ makepkg -si
             getGeoLocation();
         });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>

@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paru Bukan Hanya Milik CachyOS! AUR Helper Lintas Distro Arch</title>
+    <title>Mempercepat Upgrade PARU di CachyOS dengan Mirror Terdekat</title>
     
-    <meta name="description" content="Penjelasan bahwa Paru, AUR Helper, dapat digunakan di Arch Linux, Manjaro, EndeavourOS, dan semua distro berbasis Arch lainnya, bukan hanya CachyOS.">
-    <meta name="keywords" content="Paru, AUR Helper, CachyOS, Arch Linux, Manjaro, EndeavourOS, Pacman, Distro Linux">
-    <link rel="canonical" href="https://frijal.github.io/artikel/paru-lintas-distro.html">
+    <meta name="description" content="Panduan lengkap dan santai cara mempercepat proses update dan upgrade PARU/Pacman di CachyOS dengan memilih mirror tercepat menggunakan reflector dan optimasi konfigurasi.">
+    <meta name="keywords" content="CachyOS, PARU, Pacman, Upgrade Cepat, Mirror Terdekat, Reflector, Linux, Optimasi">
+    <link rel="canonical" href="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html">
     
-    <meta property="og:title" content="Paru Bukan Hanya Milik CachyOS! AUR Helper Lintas Distro Arch">
-    <meta property="og:description" content="Cari tahu distro apa saja yang bisa menikmati kemudahan update menggunakan Paru!">
+    <meta property="og:title" content="Upgrade PARU Anti Lelet: Pilih Mirror Tercepat di CachyOS!">
+    <meta property="og:description" content="Kunci utama mempercepat update di CachyOS adalah dengan mengoptimalkan daftar mirror Pacman.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/paru-lintas-distro.html">
-    <meta property="og:image" content="https://frijal.github.io/artikel/paru-lintas-distro.jpg"> <meta property="og:site_name" content="Frijal's Articles">
+    <meta property="og:url" content="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.jpg"> <meta property="og:site_name" content="Frijal's Articles">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Paru Lintas Distro Arch">
-    <meta name="twitter:description" content="Semua distro berbasis Arch bisa pakai Paru. Cek penjelasannya di sini!">
-    <meta name="twitter:image" content="https://frijal.github.io/artikel/paru-lintas-distro.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Mempercepat PARU CachyOS">
+    <meta name="twitter:description" content="Yuk, setting reflector biar update CachyOS secepat kilat!">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         :root {
-            --color-bg: #0d0d0d;
+            --color-bg: #0a0a0a;
             --color-text: #f0f0f0;
-            --color-primary: #0099ff; /* Biru/Cyan Khas Arch */
+            --color-primary: #00ff99; /* Neon Green/Hijau Khas Kecepatan */
             --color-secondary: #1a1a1a;
             --color-card-bg: #1f1f1f;
             --padding-base: 20px;
@@ -39,7 +39,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.7;
@@ -65,7 +65,7 @@
             color: var(--color-primary);
             margin-bottom: 10px;
             font-size: 2.8em;
-            text-shadow: 0 0 5px rgba(0, 153, 255, 0.5);
+            text-shadow: 0 0 5px var(--color-primary);
         }
         h2 {
             border-bottom: 2px solid var(--color-primary);
@@ -87,15 +87,23 @@
             font-family: 'Consolas', monospace;
             display: inline-block;
             margin: 2px 0;
-            white-space: pre-wrap;
+            white-space: pre-wrap; /* Mengizinkan wrapping untuk kode panjang */
+        }
+        pre {
+            background-color: #111;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        pre code {
+            display: block;
+            padding: 0;
+            background: none;
         }
         ul {
             margin-left: 25px;
             margin-bottom: 15px;
-        }
-        .distro-list li {
-            font-size: 1.1em;
-            margin-bottom: 8px;
         }
         
         /* USER INFO CARD */
@@ -125,7 +133,7 @@
             color: var(--color-primary);
         }
 
-        /* GALLERY & LIGHTBOX STYLES */
+        /* GALLERY & LAZY LOAD */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -143,9 +151,9 @@
         }
         .gallery img:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(0, 153, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
         }
-        
+
         /* LIGHTBOX */
         .lightbox {
             display: none;
@@ -159,6 +167,7 @@
             background-color: rgba(0, 0, 0, 0.95);
             place-items: center;
         }
+        /* ... (CSS Lightbox sisanya sama seperti sebelumnya) ... */
         .lightbox-content {
             margin: auto;
             display: block;
@@ -188,12 +197,18 @@
             font-size: 24px;
             transition: 0.6s ease;
             user-select: none;
-            background-color: rgba(0, 153, 255, 0.7);
+            background-color: rgba(0, 255, 153, 0.7);
             border-radius: 5px;
         }
-        .next { right: 15px; }
-        .prev { left: 15px; }
-        .prev:hover, .next:hover { background-color: var(--color-primary); }
+        .next {
+            right: 15px;
+        }
+        .prev {
+            left: 15px;
+        }
+        .prev:hover, .next:hover {
+            background-color: var(--color-primary);
+        }
 
         /* MEDIA QUERIES (Mobile-Friendly) */
         @media (max-width: 768px) {
@@ -203,12 +218,15 @@
             .gallery { grid-template-columns: 1fr; }
         }
     </style>
+<meta property="og:image:alt" content="Mempercepat Upgrade PARU di CachyOS dengan Mirror Terdekat">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div id="fb-root"></div>
     
     <header>
-        <h1><i class="fas fa-satellite-dish"></i> Paru Bisa Dipakai di Mana Saja? Tentu Saja!</h1>
+        <h1><i class="fas fa-bolt"></i> Upgrade PARU Anti Lelet: Taktik Mirror Terdekat</h1>
     </header>
 
     <div class="container">
@@ -223,72 +241,103 @@
 
         <article>
             <p>
-                Betul sekali! Pertanyaan bagus. <b>Paru</b> itu adalah *tool* yang sangat serbaguna. Meskipun kita sering membahasnya dalam konteks CachyOS, perlu dicatat bahwa Paru <b>tidak terikat hanya pada CachyOS</b>.
-            </p>
-            <p>
-                Pada dasarnya, Paru adalah <b>AUR Helper</b> (Arch User Repository Helper) yang berfungsi sebagai antarmuka canggih yang bekerja di atas <b>Pacman</b>. Jadi, selama sistem operasi Anda menggunakan Pacman dan memiliki akses ke AUR, Paru akan berfungsi dengan sempurna!
+                Betul sekali! Kecepatan proses upgrade Paru (`paru -Syu`) di CachyOS itu sangat bisa dipercepat, dan kunci utamanya adalah memilih <b>repository (mirror) yang terdekat</b> dari lokasi Anda. Karena Paru menggunakan Pacman untuk repositori resminya, Pacman-lah yang harus kita optimalkan.
             </p>
 
             <section>
-                <h2><i class="fas fa-link"></i> Inti Paru: Ketergantungan pada Ekosistem Arch</h2>
+                <h2><i class="fas fa-cogs"></i> Kenapa Upgrade Paru Terkadang Lambat?</h2>
                 <p>
-                    Kunci penggunaan Paru terletak pada dua pilar utama ekosistem Linux:
+                    Proses upgrade Paru melibatkan dua tahapan yang berbeda kecepatannya:
                     <ol>
-                        <li><b>Pacman:</b> Paru mengandalkan Pacman sebagai manajer paket dasar untuk mengelola repositori resmi distro Anda.</li>
-                        <li><b>AUR (Arch User Repository):</b> Paru adalah "pembantu" yang mempermudah Anda berinteraksi dengan AUR, tempat komunitas Arch menyimpan ribuan skrip untuk membangun paket.</li>
+                        <li><b>Pacman (Repositori Resmi):</b> Ini adalah bagian yang paling terpengaruh oleh jarak. Jika sistem Anda menggunakan mirror di Amerika atau Eropa, paket harus menempuh jarak yang jauh, menyebabkan <b>latensi</b> (keterlambatan respons) dan kecepatan unduh yang rendah.</li>
+                        <li><b>AUR (Kompilasi Paru):</b> Kecepatan di tahap ini lebih bergantung pada kekuatan <b>CPU</b> Anda, karena paket dari AUR (Arch User Repository) perlu diunduh, di-<code>compile</code>, dan dipasang secara lokal.</li>
                     </ol>
                 </p>
                 <p>
-                    Karena kedua pilar ini hadir di semua distro Arch, Paru otomatis kompatibel dengan mereka. Paru hanya perlu dikompilasi (dibangun) di sistem tersebut.
+                    Fokus kita untuk mempercepat unduhan paket adalah di bagian Pacman, dengan merapikan daftar <b>Mirrorlist</b>.
                 </p>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-list-ul"></i> Distro Arch Mana Saja yang Bisa Pakai Paru?</h2>
+                <h2><i class="fas fa-location-arrow"></i> 1. Optimasi Mirrorlist dengan Reflector</h2>
                 <p>
-                    Anda bisa menginstal dan menikmati kemudahan Paru di hampir semua distribusi Linux yang berbasis Arch. Ini hanyalah beberapa contoh yang paling populer:
+                    Ini adalah jurus pamungkas untuk memastikan CachyOS (Pacman) selalu mengambil paket dari server tercepat yang ada di dekat Anda. Kita akan menggunakan <code>tool</code> keren bernama <b>Reflector</b> untuk mencari, mengurutkan, dan menyimpan daftar <code>mirror</code> terbaik.
                 </p>
-                <ul class="distro-list">
-                    <li><i class="fas fa-archway"></i> <b>Arch Linux Asli:</b> Tentu saja, ini adalah rumah asli Paru.</li>
-                    <li><i class="fas fa-mountain"></i> <b>Manjaro:</b> Salah satu distro Arch paling populer yang berfokus pada kestabilan dan kemudahan.</li>
-                    <li><i class="fas fa-star"></i> <b>EndeavourOS:</b> Distro yang bertujuan untuk sedekat mungkin dengan Arch murni, tapi dengan kemudahan instalasi.</li>
-                    <li><i class="fas fa-skull"></i> <b>BlackArch:</b> Distro yang fokus pada keamanan siber.</li>
-                    <li><i class="fas fa-desktop"></i> <b>ArcoLinux:</b> Distro yang menyediakan banyak pilihan <code>Desktop Environment</code>.</li>
-                    <li><i class="fas fa-infinity"></i> <b>Semua Turunan Arch Lainnya:</b> Termasuk juga CachyOS, Artix (jika menggunakan Pacman), dan lain-lain.</li>
-                </ul>
+
+                <h3>A. Pastikan Reflector Sudah Terinstal</h3>
+                <pre><code># Instal Reflector jika belum ada di sistem Anda
+sudo pacman -S reflector
+</code></pre>
+
+                <h3>B. Jalankan Reflector untuk Mengurutkan Mirror</h3>
+                <p>
+                    Perintah ini akan mencari 5 <code>mirror</code> terbaru dari Indonesia (atau negara terdekat lainnya), mengurutkannya berdasarkan kecepatan unduh (rate), dan menulis hasilnya langsung ke file konfigurasi Pacman.
+                </p>
+                <pre><code># Ganti /etc/pacman.d/mirrorlist dengan mirror Indonesia tercepat
+sudo reflector --verbose --latest 5 --sort rate --country Indonesia --save /etc/pacman.d/mirrorlist
+</code></pre>
+                <p>
+                    <b>Tips Santai:</b> Jika Anda merasa server luar negeri (misalnya Singapura/SG) lebih cepat, Anda bisa mencoba menambahkan negara tersebut:
+                    <pre><code>sudo reflector --verbose --latest 5 --sort rate --country Indonesia,Singapore --save /etc/pacman.d/mirrorlist</code></pre>
+                </p>
+
+                <h3>C. Sinkronisasi Ulang Pacman</h3>
+                <p>Setelah file mirrorlist diubah, Anda harus memaksa Pacman untuk membaca dan menggunakan daftar server yang baru:</p>
+                <pre><code>sudo pacman -Syy</code></pre>
             </section>
 
             <hr>
 
             <section>
-                <h2><i class="fas fa-recycle"></i> Paru Tetap Konsisten Lintas Distro</h2>
+                <h2><i class="fas fa-tasks"></i> 2. Optimasi Paralel Download di Pacman</h2>
                 <p>
-                    Meskipun Anda berganti dari CachyOS ke distro Arch lain, cara kerja Paru tetap konsisten:
+                    Secara bawaan, Pacman hanya mengunduh satu paket dalam satu waktu. Kita bisa mengubahnya agar dapat mengunduh banyak paket secara bersamaan, sehingga total waktu *upgrade* terpangkas.
                 </p>
+
+                <h3>A. Edit File Konfigurasi Pacman</h3>
+                <p>Buka file konfigurasi utama Pacman:</p>
+                <pre><code>sudo nano /etc/pacman.conf</code></pre>
+
+                <h3>B. Aktifkan Max Parallel Downloads</h3>
+                <p>Cari baris yang ada tulisan `#MaxParallelDownloads`. Hapus tanda pagar (<code>#</code>) di depannya dan set nilainya, misalnya, 8:</p>
+                <pre><code># Di bagian [options], cari dan ubah menjadi:
+MaxParallelDownloads = 8
+</code></pre>
+                <p>Angka 8 adalah nilai yang cukup aman untuk koneksi internet rumahan yang baik. Simpan dan tutup file.</p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2><i class="fas fa-microchip"></i> 3. Maksimalkan CPU untuk Kompilasi AUR</h2>
                 <p>
-                    Saat Anda mengetik <code>paru -Syu</code>:
-                    <ul>
-                        <li><i class="fas fa-database"></i> <b>Repositori Resmi:</b> Paru akan memanggil Pacman untuk mengambil paket dari <code>mirror</code> resmi distro yang sedang Anda gunakan saat itu (misalnya, <code>mirror</code> Manjaro), bukan dari <code>mirror</code> CachyOS.</li>
-                        <li><i class="fas fa-code"></i> <b>AUR:</b> Paru akan mengambil skrip dari AUR dan mengkompilasinya. Karena AUR adalah sumber yang sama untuk semua distro Arch, proses ini akan berjalan normal.</li>
-                    </ul>
+                    Jika proses terasa lambat saat Paru sedang di tahap "Building" (kompilasi), artinya CPU Anda sedang bekerja. Kita bisa memintanya bekerja lebih keras dengan memanfaatkan semua *core* yang tersedia.
                 </p>
-                <p>
-                    Jadi, jika Anda sudah nyaman menggunakan Paru, jangan ragu untuk membawanya ke distro Arch favorit Anda yang lain!
-                </p>
+
+                <h3>A. Edit File Konfigurasi makepkg</h3>
+                <p>Perintah ini mengontrol bagaimana paket AUR dikompilasi:</p>
+                <pre><code>sudo nano /etc/makepkg.conf</code></pre>
+
+                <h3>B. Aktifkan Semua Core CPU</h3>
+                <p>Cari baris yang dimulai dengan `#MAKEFLAGS`. Ubah baris tersebut menjadi:</p>
+                <pre><code># Ubah baris ini menjadi:
+MAKEFLAGS="-j$(nproc)"
+</code></pre>
+                <p>Fungsi <code>$(nproc)</code> secara otomatis mendeteksi jumlah *thread* CPU Anda dan menggunakannya untuk kompilasi. Ini bisa mempercepat proses kompilasi AUR secara signifikan!</p>
             </section>
             
             <section class="social-share">
-                <p>Bagikan fakta keren ini kepada sesama pengguna Linux:</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/paru-lintas-distro.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/paru-lintas-distro.html&text=Paru%20Bukan%20Hanya%20Milik%20CachyOS!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://wa.me/?text=Fakta%20tentang%20AUR%20Helper%20Paru%20dan%20Distro%20Arch%3A%20https://frijal.github.io/artikel/paru-lintas-distro.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <p>Upgrade Anda sudah cepat? Bagikan panduan ini ke komunitas:</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html&text=Fix%20Gagal%20Update%20PARU%20CachyOS%20Ampuh!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/?text=Cara%20mengatasi%20PARU%20gagal%20update%20di%20CachyOS%3A%20https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </section>
             <section id="fb-comments-container">
                 <h2><i class="far fa-comment-dots"></i> Diskusi & Komentar</h2>
                 <div class="fb-comments" 
-                    data-href="https://frijal.github.io/artikel/paru-lintas-distro.html" 
+                    data-href="https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.html" 
                     data-width="100%" 
                     data-numposts="5">
                 </div>
@@ -305,7 +354,7 @@
     </div>
 
     <footer>
-        <p>🄯 2024 Artikel Frijal. Happy Arching!</p>
+        <p>🄯 2024 Artikel Frijal. Nikmati kecepatan CachyOS Anda!</p>
     </footer>
 
     <script>
@@ -449,5 +498,7 @@
             getGeoLocation();
         });
     </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 </body>
 </html>
