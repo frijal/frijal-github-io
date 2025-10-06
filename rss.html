@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSS Feed Reader</title>
+    <title>RSS Feed - Artikel Terbaru</title>
+    <meta name="description" content="Kumpulan artikel terbaru dari berbagai topik. Baca update terkini langsung dari sumbernya melalui RSS feed reader ini.">
+    <link rel="canonical" href="https://frijal.github.io/rss.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📡</text></svg>">
+
+    <meta property="og:title" content="RSS Feed - Artikel Terbaru">
+    <meta property="og:description" content="Kumpulan artikel terbaru dari berbagai topik. Baca update terkini langsung dari sumbernya.">
+    <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
+    <meta property="og:url" content="https://frijal.github.io/rss.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Frijal's Page">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RSS Feed - Artikel Terbaru">
+    <meta name="twitter:description" content="Kumpulan artikel terbaru dari berbagai topik. Baca update terkini langsung dari sumbernya.">
+    <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* Variabel Warna untuk Mode Gelap */
+        /* Variabel Warna DEFAULT (Mode Gelap) */
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
@@ -20,6 +34,26 @@
             --secondary-text-color: #b3b3b3;
             --accent-color: #03dac6;
             --border-color: #2c2c2c;
+            --shadow-color: rgba(3, 218, 198, 0.1);
+            --error-bg: #4e1a1a;
+            --error-text: #ffc4c4;
+            --error-border: #a83c3c;
+        }
+
+        /* Otomatis aktif jika browser/OS dalam mode terang */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-color: #f4f4f9;
+                --surface-color: #ffffff;
+                --primary-text-color: #212121;
+                --secondary-text-color: #666666;
+                --accent-color: #009688; /* Warna aksen disesuaikan untuk kontras */
+                --border-color: #e0e0e0;
+                --shadow-color: rgba(0, 150, 136, 0.15);
+                --error-bg: #ffebee;
+                --error-text: #c62828;
+                --error-border: #ef9a9a;
+            }
         }
 
         /* Reset & Gaya Dasar */
@@ -34,11 +68,11 @@
             background-color: var(--bg-color);
             color: var(--primary-text-color);
             line-height: 1.7;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Kontainer Utama */
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
@@ -50,39 +84,61 @@
             font-size: 2.5rem;
         }
 
-        /* Kontainer untuk Item Feed */
         #feed-container {
             display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
         }
 
-        /* Gaya Kartu untuk Setiap Item Feed */
         .feed-item {
             background-color: var(--surface-color);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
         }
 
         .feed-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(3, 218, 198, 0.1);
+            box-shadow: 0 8px 25px var(--shadow-color);
         }
 
-        .feed-item h2 {
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
+        .feed-item-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #333;
+            overflow: hidden;
         }
 
-        .feed-item h2 a {
+        .feed-item-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .feed-item-thumbnail img.loaded {
+            opacity: 1;
+        }
+
+        .feed-item-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feed-item-content h2 a {
             color: var(--primary-text-color);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .feed-item h2 a:hover {
+        .feed-item-content h2 a:hover {
             color: var(--accent-color);
         }
         
@@ -90,20 +146,38 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--secondary-text-color);
             margin-bottom: 1rem;
         }
         
-        .feed-meta i {
+        .feed-meta i { color: var(--accent-color); }
+        .feed-item-content p { color: var(--secondary-text-color); font-size: 0.9rem; }
+        
+        .social-share {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .social-share span, .social-share a {
+            font-size: 0.8rem;
+            color: var(--secondary-text-color);
+        }
+
+        .social-share a {
+            font-size: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-share a:hover {
+            transform: scale(1.2);
             color: var(--accent-color);
         }
 
-        .feed-item p {
-            color: var(--secondary-text-color);
-        }
-        
-        /* Animasi Loading */
         #loading {
             border: 5px solid var(--border-color);
             border-top: 5px solid var(--accent-color);
@@ -114,116 +188,155 @@
             margin: 4rem auto;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* Pesan Error */
         .error-message {
-            background-color: #4e1a1a;
-            color: #ffc4c4;
-            border: 1px solid #a83c3c;
+            background-color: var(--error-bg);
+            color: var(--error-text);
+            border: 1px solid var(--error-border);
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
         }
-        
-        /* Desain Responsif */
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .feed-item h2 {
-                font-size: 1.25rem;
-            }
+            h1 { font-size: 2rem; }
+            .feed-item-content h2 { font-size: 1.25rem; }
         }
     </style>
+    
 </head>
 <body>
 
     <div class="container">
-        <h1>RSS Feed Reader</h1>
-        
+        <h1>RSS Feed Artikel Terbaru</h1>
         <div id="loading"></div>
-        
         <div id="feed-container"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // URL ke file rss.xml Anda. 
-            // Sesuaikan jika lokasinya berbeda, contoh: 'https://frijal.github.io/rss.xml'
             const RSS_URL = 'rss.xml';
+            const DEFAULT_THUMBNAIL = 'https://frijal.github.io/thumbnail.jpg'; // Gambar fallback
 
             const feedContainer = document.getElementById('feed-container');
             const loadingIndicator = document.getElementById('loading');
+            const parser = new DOMParser();
+
+            function extractThumbnail(item) {
+                // 1. Cek tag <media:thumbnail>
+                const mediaThumbnail = item.querySelector('media\\:thumbnail, thumbnail');
+                if (mediaThumbnail) return mediaThumbnail.getAttribute('url');
+
+                // 2. Cek tag <media:content>
+                const mediaContent = item.querySelector('media\\:content, content');
+                if (mediaContent && mediaContent.getAttribute('medium') === 'image') {
+                    return mediaContent.getAttribute('url');
+                }
+
+                // 3. Cek <img> di dalam <description>
+                const descriptionHTML = item.querySelector('description')?.textContent;
+                if (descriptionHTML) {
+                    const doc = parser.parseFromString(descriptionHTML, 'text/html');
+                    const img = doc.querySelector('img');
+                    if (img) return img.getAttribute('src');
+                }
+
+                // 4. Jika semua gagal, gunakan gambar default
+                return DEFAULT_THUMBNAIL;
+            }
 
             const fetchAndDisplayFeed = async () => {
                 try {
                     const response = await fetch(RSS_URL);
-                    if (!response.ok) {
-                        throw new Error(`Gagal mengambil data: Status ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`Status ${response.status}`);
+                    
                     const xmlText = await response.text();
-                    
-                    // Parse teks XML menjadi dokumen XML
-                    const parser = new DOMParser();
                     const doc = parser.parseFromString(xmlText, "application/xml");
-                    
                     const items = doc.querySelectorAll('item');
                     
                     if (items.length === 0) {
                        feedContainer.innerHTML = '<p class="error-message">Tidak ada item ditemukan di dalam feed.</p>';
-                       return; // Keluar dari fungsi
+                       return;
                     }
                     
                     let feedHTML = '';
 
                     items.forEach(item => {
-                        // Ambil data dari setiap tag di dalam <item>
                         const title = item.querySelector('title')?.textContent || 'Tanpa Judul';
                         const link = item.querySelector('link')?.textContent || '#';
-                        const description = item.querySelector('description')?.textContent || 'Tidak ada deskripsi.';
+                        const description = item.querySelector('description')?.textContent.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || 'Tidak ada deskripsi.';
                         const pubDateStr = item.querySelector('pubDate')?.textContent;
+                        const thumbnailUrl = extractThumbnail(item);
                         
                         let formattedDate = '';
                         if (pubDateStr) {
-                            const pubDate = new Date(pubDateStr);
-                            // Format tanggal menjadi format lokal Indonesia (misal: 6 Oktober 2025)
-                            formattedDate = new Intl.DateTimeFormat('id-ID', {
-                                dateStyle: 'long'
-                            }).format(pubDate);
+                            formattedDate = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(pubDateStr));
                         }
                         
-                        // Buat kartu HTML untuk setiap item
+                        const encodedLink = encodeURIComponent(link);
+                        const encodedTitle = encodeURIComponent(title);
+
                         feedHTML += `
                             <div class="feed-item">
-                                <h2><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h2>
-                                <div class="feed-meta">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>${formattedDate}</span>
+                                <div class="feed-item-thumbnail">
+                                    <img data-src="${thumbnailUrl}" alt="${title}" loading="lazy">
                                 </div>
-                                <p>${description}</p>
+                                <div class="feed-item-content">
+                                    <h2><a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a></h2>
+                                    <div class="feed-meta">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>${formattedDate}</span>
+                                    </div>
+                                    <p>${description}</p>
+                                    <div class="social-share">
+                                        <span>Bagikan:</span>
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedLink}" target="_blank" title="Bagikan ke Facebook"><i class="fab fa-facebook"></i></a>
+                                        <a href="https://twitter.com/intent/tweet?url=${encodedLink}&text=${encodedTitle}" target="_blank" title="Bagikan ke Twitter"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedLink}" target="_blank" title="Bagikan ke WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                        <a href="https://t.me/share/url?url=${encodedLink}&text=${encodedTitle}" target="_blank" title="Bagikan ke Telegram"><i class="fab fa-telegram"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         `;
                     });
 
                     feedContainer.innerHTML = feedHTML;
+                    setupLazyLoading();
 
                 } catch (error) {
-                    console.error('Terjadi kesalahan saat memuat RSS feed:', error);
-                    feedContainer.innerHTML = `
-                        <div class="error-message">
-                            <strong>Oops! Terjadi Kesalahan</strong>
-                            <p>Tidak dapat memuat feed dari ${RSS_URL}. Silakan periksa kembali URL atau coba lagi nanti.</p>
-                        </div>
-                    `;
+                    console.error('Terjadi kesalahan:', error);
+                    feedContainer.innerHTML = `<div class="error-message"><strong>Oops!</strong> Tidak dapat memuat feed dari ${RSS_URL}.</div>`;
                 } finally {
-                    // Sembunyikan indikator loading setelah selesai (baik berhasil maupun gagal)
                     loadingIndicator.style.display = 'none';
                 }
             };
+
+            function setupLazyLoading() {
+                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+                if ("IntersectionObserver" in window) {
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                img.src = img.dataset.src;
+                                img.classList.add('loaded');
+                                observer.unobserve(img);
+                            }
+                        });
+                    });
+
+                    lazyImages.forEach(img => {
+                        imageObserver.observe(img);
+                    });
+                } else {
+                    // Fallback untuk browser lama
+                    lazyImages.forEach(img => {
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                    });
+                }
+            }
 
             fetchAndDisplayFeed();
         });
