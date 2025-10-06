@@ -3,9 +3,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { titleToCategory } from "./titleToCategory.js";
 
-// ===================================================================
-// KONFIGURASI TERPUSAT
-// ===================================================================
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,10 +17,6 @@ const CONFIG = {
     xmlPriority: "0.6",
     xmlChangeFreq: "monthly"
 };
-
-// ===================================================================
-// FUNGSI-FUNGSI BANTUAN (HELPER FUNCTIONS)
-// ===================================================================
 
 function formatISO8601(date) {
     const d = new Date(date);
@@ -58,20 +51,22 @@ function fixTitleOneLine(content) {
     return content.replace(/<title>([\s\S]*?)<\/title>/gi, (m, p1) => `<title>${p1.trim()}</title>`);
 }
 
-function extractImage(content, file) {
-    let src = null;
+function extractImage(content) {
     const ogMatch = content.match(/<meta[^>]+property=["']og:image["'][^>]+content=["'](.*?)["']/i);
-    if (ogMatch && ogMatch[1]) src = ogMatch[1].trim();
-    if (!src) {
-        const imgMatch = content.match(/<img[^>]+src=["'](.*?)["']/i);
-        if (imgMatch && imgMatch[1]) {
-            src = imgMatch[1].trim();
-        }
+    if (ogMatch && ogMatch[1]) {
+        const src = ogMatch[1].trim();
+        const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
+        if (validExt.test(src.split("?")[0])) return src;
     }
-    if (!src) return CONFIG.defaultThumbnail;
-    const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
-    if (!validExt.test(src.split("?")[0])) return CONFIG.defaultThumbnail;
-    return src;
+    
+    const imgMatch = content.match(/<img[^>]+src=["'](.*?)["']/i);
+    if (imgMatch && imgMatch[1]) {
+        const src = imgMatch[1].trim();
+        const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
+        if (validExt.test(src.split("?")[0])) return src;
+    }
+    
+    return CONFIG.defaultThumbnail;
 }
 
 function formatJsonOutput(obj) {
@@ -81,26 +76,22 @@ function formatJsonOutput(obj) {
         .replace(/(\],)\s*\[/g, '$1\n      [');
 }
 
-/** Membuat halaman HTML untuk setiap kategori secara otomatis. */
 async function generateCategoryPages(groupedData) {
     console.log("🔄 Memulai pembuatan halaman kategori...");
-    const templatePath = path.join(CONFIG.rootDir, '-', 'template-kategori.html');
     const kategoriDir = path.join(CONFIG.rootDir, '-');
+    const templatePath = path.join(kategoriDir, 'template-kategori.html');
 
     try {
-        await fs.mkdir(kategoriDir, { recursive: true });
+        await fs.access(templatePath); // Cek dulu templatenya ada atau tidak
         const templateContent = await fs.readFile(templatePath, 'utf8');
 
         for (const categoryName in groupedData) {
             const noEmoji = categoryName.replace(/^[^\w\s]*/, '').trim();
             const slug = noEmoji.toLowerCase().replace(/ & /g, '-and-').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
             const fileName = `${slug}.html`;
-            
             const canonicalUrl = `${CONFIG.baseUrl}/-/${fileName}`;
             const icon = categoryName.match(/^[^\w\s]/)?.[0] || '📁';
 
-            // --- PERUBAHAN DI SINI ---
-            // Prefix "Arsip Kategori: " telah dihilangkan dari penggantian %%TITLE%%
             let pageContent = templateContent
                 .replace(/%%TITLE%%/g, noEmoji) 
                 .replace(/%%DESCRIPTION%%/g, noEmoji)
@@ -113,16 +104,12 @@ async function generateCategoryPages(groupedData) {
         }
         console.log("👍 Semua halaman kategori berhasil dibuat.");
     } catch (error) {
-        console.error("❌ Gagal membuat halaman kategori:", error.message);
+        console.error("❌ Gagal membuat halaman kategori. Pastikan 'template-kategori.html' ada di dalam folder '-'.", error.message);
     }
 }
 
-// ===================================================================
-// FUNGSI UTAMA (MAIN GENERATOR)
-// ===================================================================
 const generate = async () => {
     console.log("🚀 Memulai proses generator...");
-
     try {
         await fs.access(CONFIG.artikelDir);
     } catch {
@@ -140,7 +127,6 @@ const generate = async () => {
         console.log("📂 Master JSON berhasil dimuat.");
     } catch {
         console.warn("⚠️ Master JSON (artikel/artikel.json) tidak ditemukan, memulai dari awal.");
-        grouped = {};
     }
 
     const cleanedGrouped = {};
@@ -180,7 +166,7 @@ const generate = async () => {
 
             const title = extractTitle(content);
             const category = titleToCategory(title);
-            const image = extractImage(content, file);
+            const image = extractImage(content);
             const description = extractDescription(content);
 
             let pubDate = extractPubDate(content);
