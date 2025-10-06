@@ -155,7 +155,7 @@ function initNavIcons(allArticlesData, currentFilename) {
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <!-- Ikon RSS (RESTORED) -->
+      <!-- Ikon RSS -->
       <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
@@ -205,7 +205,7 @@ function initNavIcons(allArticlesData, currentFilename) {
     `;
     document.body.appendChild(iconContainer);
 
-    // --- Logika Navigasi Berbasis Kategori ---
+    // --- Logika Navigasi & Penampil Kategori ---
     let currentCategoryName = null;
     let articlesInCurrentCategory = [];
     let currentIndexInCategory = -1;
@@ -219,7 +219,21 @@ function initNavIcons(allArticlesData, currentFilename) {
             break;
         }
     }
+    
+    // Menampilkan kategori jika ditemukan
+    if (currentCategoryName) {
+        const categoryDisplay = document.createElement('div');
+        categoryDisplay.className = 'kategori-kiri-bawah'; // Menggunakan kelas dari CSS
+        categoryDisplay.textContent = currentCategoryName;
+        document.body.appendChild(categoryDisplay);
 
+        // Memicu animasi dengan menambahkan kelas 'visible'
+        setTimeout(() => {
+            categoryDisplay.classList.add('visible');
+        }, 100);
+    }
+
+    // Logika untuk tombol navigasi
     if (!articlesInCurrentCategory.length) {
         document.getElementById('next-article').style.display = 'none';
         document.getElementById('prev-article').style.display = 'none';
@@ -233,14 +247,10 @@ function initNavIcons(allArticlesData, currentFilename) {
     function updateUI() {
         const nextIndex = (currentIndexInCategory + 1) % total;
         const prevIndex = (currentIndexInCategory - 1 + total) % total;
-
         const nextArticle = articlesInCurrentCategory[nextIndex];
         const prevArticle = articlesInCurrentCategory[prevIndex];
-
         nextBtn.href = `/artikel/${nextArticle[1]}`;
         prevBtn.href = `/artikel/${prevArticle[1]}`;
-
-        // Update tooltip with format: Judul Artikel - Kategori
         nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
         prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
     }
@@ -249,14 +259,12 @@ function initNavIcons(allArticlesData, currentFilename) {
 
     nextBtn.addEventListener('click', e => {
         e.preventDefault();
-        const nextIndex = (currentIndexInCategory + 1) % total;
-        window.location.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
+        window.location.href = `/artikel/${articlesInCurrentCategory[(currentIndexInCategory + 1) % total][1]}`;
     });
 
     prevBtn.addEventListener('click', e => {
         e.preventDefault();
-        const prevIndex = (currentIndexInCategory - 1 + total) % total;
-        window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
+        window.location.href = `/artikel/${articlesInCurrentCategory[(currentIndexInCategory - 1 + total) % total][1]}`;
     });
 }
 
