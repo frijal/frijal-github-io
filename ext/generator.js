@@ -77,7 +77,42 @@ function formatJsonOutput(obj) {
         .replace(/\]\s*\]/g, ']\n    ]')
         .replace(/(\],)\s*\[/g, '$1\n      [');
 }
+// ... (setelah fungsi formatJsonOutput)
 
+/** Membuat halaman HTML untuk setiap kategori secara otomatis. */
+async function generateCategoryPages(groupedData) {
+    console.log("🔄 Memulai pembuatan halaman kategori...");
+    const templatePath = path.join(CONFIG.rootDir, '_category-template.html');
+    const kategoriDir = path.join(CONFIG.rootDir, 'kategori');
+
+    try {
+        await fs.mkdir(kategoriDir, { recursive: true });
+        const templateContent = await fs.readFile(templatePath, 'utf8');
+
+        for (const categoryName in groupedData) {
+            // Fungsi untuk membuat slug URL (bisa disalin dari skrip marquee-url.js Anda)
+            const noEmoji = categoryName.replace(/^[^\w\s]*/, '').trim();
+            const slug = noEmoji.toLowerCase().replace(/ \& /g, '-and-').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+            const fileName = `${slug}.html`;
+            
+            const canonicalUrl = `${CONFIG.baseUrl}/kategori/${fileName}`;
+
+            // Ganti placeholder di template dengan data sebenarnya
+            let pageContent = templateContent
+                .replace(/%%TITLE%%/g, categoryName)
+                .replace(/%%DESCRIPTION%%/g, categoryName)
+                .replace(/%%CANONICAL_URL%%/g, canonicalUrl)
+                .replace(/%%CATEGORY_NAME%%/g, categoryName);
+
+            // Tulis file HTML baru
+            await fs.writeFile(path.join(kategoriDir, fileName), pageContent, 'utf8');
+            console.log(`✅ Halaman kategori dibuat: ${fileName}`);
+        }
+        console.log("👍 Semua halaman kategori berhasil dibuat.");
+    } catch (error) {
+        console.error("❌ Gagal membuat halaman kategori:", error.message);
+    }
+}
 // ===================================================================
 // FUNGSI UTAMA (MAIN GENERATOR)
 // ===================================================================
