@@ -171,14 +171,14 @@
 a.kategori-kiri-bawah {
     position: fixed;
     bottom: 5%;
-    left: 20px;
+    left: 15px;
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     z-index: 998;
     text-decoration: none;
-    opacity: 0;
+    opacity: 30;
     transform: translateY(10px);
     transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
 }
