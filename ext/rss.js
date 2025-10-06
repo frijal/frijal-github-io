@@ -1,3 +1,4 @@
+// ext/rss.js
 import fs from "fs/promises";
 import path from "path";
 import { DOMParser } from "@xmldom/xmldom";
@@ -72,7 +73,7 @@ const generateRSS = async () => {
     try {
       await fs.access(artikelJsonPath);
     } catch {
-      console.error("❌ ERROR: File artikel.json tidak ditemukan. Jalankan generator.js terlebih dahulu.");
+      console.error("❌ ERROR: File artikel.json tidak ditemukan.");
       process.exit(1);
     }
 
@@ -146,6 +147,6 @@ ${items}
   }
 };
 
-// Jalankan
+// --- Jalankan sekali saja ---
 generateRSS();
 
