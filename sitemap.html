@@ -9,16 +9,11 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
 
     <meta property="og:title" content="Sitemap - Daftar Isi Lengkap">
-    <meta property="og:description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori atau gunakan pencarian untuk menemukan topik spesifik.">
+    <meta property="og:description" content="Jelajahi semua artikel yang pernah dipublikasikan.">
     <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
     <meta property="og:url" content="https://frijal.github.io/sitemap.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Frijal's Page">
-
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sitemap - Daftar Isi Lengkap">
-    <meta name="twitter:description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori atau gunakan pencarian untuk menemukan topik spesifik.">
-    <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,22 +22,26 @@
 
     <style>
         :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --primary-text-color: #e0e0e0;
-            --secondary-text-color: #b3b3b3;
-            --accent-color: #10b981; /* Green Accent */
-            --border-color: #2c2c2c;
+            --bg-color: #0b1522;
+            --surface-color: rgba(255, 255, 255, 0.05);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b3b3b3;
+            --accent-color: #06b6d4; /* Cyan Accent */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-color: rgba(255, 255, 255, 0.1);
+            --read-color: #5d6d7e; /* Warna untuk artikel yang sudah dibaca */
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --bg-color: #f4f4f9;
-                --surface-color: #ffffff;
-                --primary-text-color: #212121;
-                --secondary-text-color: #666666;
-                --accent-color: #00897b;
-                --border-color: #e0e0e0;
+                --bg-color: #f0f2f5;
+                --surface-color: rgba(255, 255, 255, 0.8);
+                --text-primary: #212121;
+                --text-secondary: #5f6368;
+                --accent-color: #007bff;
+                --border-color: #dee2e6;
+                --hover-color: #e9ecef;
+                --read-color: #90a4ae;
             }
         }
 
@@ -51,86 +50,104 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
-            color: var(--primary-text-color);
+            color: var(--text-primary);
             line-height: 1.7;
-            transition: background-color 0.3s, color 0.3s;
+            background-image: url('https://frijal.github.io/assets/bg-texture.png');
+            background-attachment: fixed;
         }
 
         .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
-        h1 { text-align: center; color: var(--accent-color); margin-bottom: 1rem; font-size: 2.5rem; }
-        
-        #stats { text-align: center; color: var(--secondary-text-color); margin-bottom: 2rem; font-style: italic; }
+        .header { text-align: center; margin-bottom: 2rem; }
+        h1 { color: var(--accent-color); font-size: 2.8rem; animation: fadeInDown 0.8s ease-out; }
+        #stats { color: var(--text-secondary); font-style: italic; animation: fadeInUp 0.8s ease-out 0.2s; }
 
+        #filter-wrapper { position: relative; margin-bottom: 2.5rem; animation: fadeInUp 0.8s ease-out 0.4s; }
         #filterInput {
             width: 100%;
-            padding: 12px 20px;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-            border-radius: 25px;
-            border: 1px solid var(--border-color);
-            background-color: var(--surface-color);
-            color: var(--primary-text-color);
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        #filterInput:focus { border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); }
-
-        #sitemap-container { display: flex; flex-direction: column; gap: 0.5rem; }
-        
-        .category-header {
-            width: 100%;
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            text-align: left;
-            font-family: 'Poppins', sans-serif;
+            padding: 15px 50px 15px 25px;
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-text-color);
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        #filterInput:focus { border-color: var(--accent-color); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-color) 20%, transparent); }
+        .search-icon { position: absolute; top: 50%; right: 20px; transform: translateY(-50%); color: var(--text-secondary); }
+
+        #sitemap-container { display: flex; flex-direction: column; gap: 0.8rem; }
+        
+        .category-item { animation: popIn 0.5s ease-out backwards; }
+
+        .category-header {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
-        .category-header:hover { background-color: var(--border-color); }
-        .category-header .count { font-size: 0.9rem; color: var(--secondary-text-color); }
+        .category-header:hover { background-color: var(--hover-color); }
+        .category-header.active { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+        .category-header .title { font-size: 1.2rem; font-weight: 600; }
+        .category-header .count { font-size: 0.9rem; color: var(--text-secondary); }
         .category-header .toggle-icon { transition: transform 0.3s ease; }
         .category-header.active .toggle-icon { transform: rotate(90deg); }
 
         .article-list {
             max-height: 0;
             overflow: hidden;
-            background-color: transparent;
-            padding-left: 1.5rem;
-            border-left: 2px solid var(--border-color);
-            margin-left: 1rem;
-            transition: max-height 0.4s ease-out;
+            background: color-mix(in srgb, var(--surface-color) 50%, transparent);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            backdrop-filter: blur(10px);
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
         }
-        .article-list.open { max-height: 2000px; /* Adjust if needed */ }
+        .article-list.open { max-height: 2000px; padding: 0.5rem 0; }
+        
         .article-list a {
-            display: block;
-            padding: 10px 15px;
-            color: var(--secondary-text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 2rem;
+            color: var(--text-secondary);
             text-decoration: none;
-            border-radius: 5px;
-            transition: color 0.3s, background-color 0.3s;
+            transition: color 0.3s, background-color 0.3s, opacity 0.3s;
         }
-        .article-list a:hover { color: var(--accent-color); background-color: var(--surface-color); }
-
-        #loading { text-align: center; padding: 2rem; color: var(--secondary-text-color); }
+        .article-list a:hover { color: var(--accent-color); background-color: var(--hover-color); }
+        .article-list a.read-article { color: var(--read-color); }
+        .article-list a .read-indicator { font-size: 0.8em; width: 20px; text-align: center; }
+        
+        /* Animasi */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
+        #loading { text-align: center; padding: 2rem; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Daftar Isi Lengkap</h1>
-        <p id="stats"></p>
-        <input type="text" id="filterInput" placeholder="Ketik untuk filter artikel...">
+        <div class="header">
+            <h1>Daftar Isi Artikel</h1>
+            <p id="stats"></p>
+        </div>
+        
+        <div id="filter-wrapper">
+            <input type="text" id="filterInput" placeholder="Ketik untuk filter artikel...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
         
         <div id="sitemap-container">
-            <div id="loading">Memuat daftar artikel...</div>
+            <div id="loading">Memuat...</div>
         </div>
     </div>
 
@@ -141,21 +158,25 @@
             const statsElement = document.getElementById('stats');
             const filterInput = document.getElementById('filterInput');
             const loadingIndicator = document.getElementById('loading');
+            
+            let readArticles = [];
 
             const fetchAndBuildSitemap = async () => {
                 try {
+                    // Muat daftar artikel yang sudah dibaca dari localStorage
+                    readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
+
                     const response = await fetch(`${DATA_URL}?v=${new Date().getTime()}`);
                     if (!response.ok) throw new Error(`Status ${response.status}`);
                     
                     const data = await response.json();
                     let totalArticles = 0;
-                    const totalCategories = Object.keys(data).length;
                     
-                    sitemapContainer.innerHTML = ''; // Clear loading message
+                    sitemapContainer.innerHTML = '';
 
                     const sortedCategories = Object.keys(data).sort((a, b) => a.localeCompare(b));
 
-                    sortedCategories.forEach(category => {
+                    sortedCategories.forEach((category, index) => {
                         const articles = data[category];
                         if (!articles || articles.length === 0) return;
                         
@@ -163,11 +184,12 @@
                         
                         const categoryDiv = document.createElement('div');
                         categoryDiv.className = 'category-item';
+                        categoryDiv.style.animationDelay = `${index * 50}ms`;
 
                         const header = document.createElement('button');
                         header.className = 'category-header';
                         header.innerHTML = `
-                            <span>${category}</span>
+                            <span class="title">${category}</span>
                             <span class="count">${articles.length} artikel <i class="fas fa-chevron-right toggle-icon"></i></span>
                         `;
                         
@@ -178,7 +200,14 @@
                             const [title, url] = article;
                             const link = document.createElement('a');
                             link.href = `artikel/${url}`;
-                            link.textContent = title;
+                            
+                            const isRead = readArticles.includes(url);
+                            if(isRead) link.classList.add('read-article');
+
+                            link.innerHTML = `
+                                <span class="read-indicator">${isRead ? '<i class="fas fa-eye"></i>' : ''}</span>
+                                <span class="article-title">${title}</span>
+                            `;
                             articleList.appendChild(link);
                         });
 
@@ -187,12 +216,12 @@
                         sitemapContainer.appendChild(categoryDiv);
                     });
 
-                    statsElement.textContent = `Menampilkan ${totalArticles} artikel dalam ${totalCategories} kategori.`;
+                    statsElement.textContent = `Menampilkan ${totalArticles} artikel dalam ${sortedCategories.length} kategori.`;
                     addEventListeners();
 
                 } catch (error) {
                     loadingIndicator.innerHTML = '<p style="color: #ff6b6b;">Oops! Gagal memuat daftar isi.</p>';
-                    console.error('Error fetching sitemap data:', error);
+                    console.error('Error:', error);
                 }
             };
             
@@ -208,21 +237,40 @@
 
                 filterInput.addEventListener('input', () => {
                     const query = filterInput.value.toLowerCase();
+                    const hasQuery = query.length > 0;
+
                     document.querySelectorAll('.category-item').forEach(categoryDiv => {
                         const links = categoryDiv.querySelectorAll('.article-list a');
+                        const header = categoryDiv.querySelector('.category-header');
+                        const articleList = categoryDiv.querySelector('.article-list');
                         let hasVisibleLink = false;
                         
                         links.forEach(link => {
-                            const title = link.textContent.toLowerCase();
+                            const titleElement = link.querySelector('.article-title');
+                            const title = titleElement.textContent.toLowerCase();
+                            
                             if (title.includes(query)) {
-                                link.style.display = 'block';
+                                link.style.display = 'flex';
                                 hasVisibleLink = true;
+                                // Highlight a search term
+                                const regex = new RegExp(`(${query})`, 'gi');
+                                titleElement.innerHTML = titleElement.textContent.replace(regex, `<mark>$1</mark>`);
                             } else {
                                 link.style.display = 'none';
+                                titleElement.innerHTML = titleElement.textContent; // remove highlight
                             }
                         });
 
-                        categoryDiv.style.display = hasVisibleLink ? 'block' : 'none';
+                        categoryDiv.style.opacity = (hasQuery && !hasVisibleLink) ? '0.3' : '1';
+
+                        // Auto open/close accordion
+                        if (hasQuery && hasVisibleLink) {
+                            header.classList.add('active');
+                            articleList.classList.add('open');
+                        } else if (hasQuery && !hasVisibleLink) {
+                            header.classList.remove('active');
+                            articleList.classList.remove('open');
+                        }
                     });
                 });
             }
