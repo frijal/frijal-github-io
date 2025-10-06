@@ -47,7 +47,7 @@ jobs:
           sleep 2
           
           echo "Mulai memproses file HTML untuk screenshot..."
-          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.55.1-jammy"
+          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.56.0-jammy"
           
           # === Loop sekarang mencari file di folder 'artikel/' ===
           find artikel -name "*.html" | while read -r HTML_FILE; do
