@@ -183,7 +183,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         categoryLink.className = 'kategori-kiri-bawah'; 
         categoryLink.textContent = currentCategoryName;
         const categoryUrl = generateCategoryUrl(currentCategoryName);
-        categoryLink.href = `/artikel/-/${categoryUrl}`;
+        categoryLink.href = `/kategori/${categoryUrl}`; 
         document.body.appendChild(categoryLink);
 
         setTimeout(() => categoryLink.classList.add('visible'), 100);
