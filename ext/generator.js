@@ -76,20 +76,29 @@ function formatJsonOutput(obj) {
         .replace(/(\],)\s*\[/g, '$1\n      [');
 }
 
+/** Membuat halaman HTML untuk setiap kategori secara otomatis. */
 async function generateCategoryPages(groupedData) {
     console.log("🔄 Memulai pembuatan halaman kategori...");
-    const kategoriDir = path.join(CONFIG.rootDir, '-');
+
+    // --- PERBAIKAN DI SINI ---
+    // Mengarahkan path ke dalam folder 'artikel'
+    const kategoriDir = path.join(CONFIG.artikelDir, '-'); 
     const templatePath = path.join(kategoriDir, 'template-kategori.html');
 
     try {
-        await fs.access(templatePath); // Cek dulu templatenya ada atau tidak
+        // Baris ini akan membuat folder /artikel/-/ jika belum ada
+        await fs.mkdir(kategoriDir, { recursive: true }); 
+        
         const templateContent = await fs.readFile(templatePath, 'utf8');
 
         for (const categoryName in groupedData) {
             const noEmoji = categoryName.replace(/^[^\w\s]*/, '').trim();
             const slug = noEmoji.toLowerCase().replace(/ & /g, '-and-').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
             const fileName = `${slug}.html`;
-            const canonicalUrl = `${CONFIG.baseUrl}/-/${fileName}`;
+            
+            // --- PERBAIKAN DI SINI ---
+            // Menyesuaikan URL publik agar sesuai dengan struktur folder
+            const canonicalUrl = `${CONFIG.baseUrl}/artikel/-/${fileName}`;
             const icon = categoryName.match(/^[^\w\s]/)?.[0] || '📁';
 
             let pageContent = templateContent
@@ -104,7 +113,7 @@ async function generateCategoryPages(groupedData) {
         }
         console.log("👍 Semua halaman kategori berhasil dibuat.");
     } catch (error) {
-        console.error("❌ Gagal membuat halaman kategori. Pastikan 'template-kategori.html' ada di dalam folder '-'.", error.message);
+        console.error("❌ Gagal membuat halaman kategori. Pastikan 'template-kategori.html' ada di folder 'artikel/-'.", error.message);
     }
 }
 
