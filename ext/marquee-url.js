@@ -1,13 +1,17 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v9: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
- * (Dark mode sudah dihapus)
+ * SKRIP GABUNGAN v8: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
+ * - Fetch data hanya satu kali untuk semua fitur.
+ * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
+ * - Tooltip judul artikel yang lebih deskriptif.
+ * - Ikon RSS dikembalikan.
  */
 
 // -------------------------------------------------------------------
 // FUNGSI-FUNGSI BANTUAN (HELPER FUNCTIONS)
 // -------------------------------------------------------------------
+
 function isMobileDevice() {
     return (window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 }
@@ -41,7 +45,11 @@ function searchArticles(query, jsonData) {
             const title = article[0] || '';
             const description = article[4] || '';
             if (title.toLowerCase().includes(lowerCaseQuery) || description.toLowerCase().includes(lowerCaseQuery)) {
-                results.push({ category, title, url: article[1] });
+                results.push({
+                    category: category,
+                    title: title,
+                    url: article[1]
+                });
             }
         });
     }
@@ -51,6 +59,7 @@ function searchArticles(query, jsonData) {
 // -------------------------------------------------------------------
 // FUNGSI INTI (CORE FUNCTIONS)
 // -------------------------------------------------------------------
+
 function initCategoryMarquee(allData, currentFilename) {
     const marqueeContainer = document.getElementById('related-marquee-container');
     if (!marqueeContainer) return;
@@ -58,7 +67,6 @@ function initCategoryMarquee(allData, currentFilename) {
     try {
         let targetCategory = null;
         let articlesInCategory = [];
-
         for (const categoryName in allData) {
             const articleMatch = allData[categoryName].find(item => item[1] === currentFilename);
             if (articleMatch) {
@@ -67,32 +75,31 @@ function initCategoryMarquee(allData, currentFilename) {
                 break;
             }
         }
+        
         if (!targetCategory) return;
-
         const filteredArticles = articlesInCategory.filter(item => item[1] !== currentFilename);
         const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
         const unreadArticles = filteredArticles.filter(item => !readArticles.includes(item[1]));
-
         if (unreadArticles.length === 0) {
-            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color:#aaa; font-style:italic;">Semua artikel terkait sudah dibaca. 😊</p>';
-            return;
+            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
+            return; 
         }
-
+        
         unreadArticles.sort(() => 0.5 - Math.random());
+        let contentHTML = '';
         const separator = ' • ';
         const isMobile = isMobileDevice();
-        const contentHTML = unreadArticles.map(post => {
+        unreadArticles.forEach(post => {
             const [title, articleId, , , description] = post;
             const url = `/artikel/${articleId}`;
             const tooltipText = isMobile ? title : (description || title);
-            return `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
-        }).join('');
-
+            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
+        });
         marqueeContainer.innerHTML = `<div class="marquee-content">${contentHTML.repeat(30)}</div>`;
-        registerReadTracker();
+        registerReadTracker(); 
 
     } catch (error) {
-        console.error("Marquee Error:", error);
+        console.error(`Marquee Error:`, error);
     }
 }
 
@@ -104,10 +111,9 @@ function initFloatingSearch(allArticlesData) {
 
     searchInput.addEventListener('keyup', () => {
         const query = searchInput.value;
-        clearButton.style.display = query.length > 0 ? 'block' : 'none';
+        clearButton.style.display = (query.length > 0) ? 'block' : 'none';
         const results = searchArticles(query, allArticlesData);
         resultsContainer.innerHTML = '';
-
         if (results.length > 0) {
             results.slice(0, 10).forEach(item => {
                 const link = document.createElement('a');
@@ -120,14 +126,12 @@ function initFloatingSearch(allArticlesData) {
             resultsContainer.style.display = 'none';
         }
     });
-
     clearButton.addEventListener('click', () => {
         searchInput.value = '';
         resultsContainer.style.display = 'none';
         clearButton.style.display = 'none';
         searchInput.focus();
     });
-
     document.addEventListener('click', (event) => {
         const searchContainer = document.querySelector('.search-floating-container');
         if (searchContainer && !searchContainer.contains(event.target)) {
@@ -151,8 +155,8 @@ function initNavIcons(allArticlesData, currentFilename) {
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <!-- Ikon RSS -->
-      <a href="https://frijal.github.io/rss.html" title="RSS Feed">
+      <!-- Ikon RSS (RESTORED) -->
+      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
@@ -201,7 +205,7 @@ function initNavIcons(allArticlesData, currentFilename) {
     `;
     document.body.appendChild(iconContainer);
 
-    // Navigasi artikel
+    // --- Logika Navigasi Berbasis Kategori ---
     let currentCategoryName = null;
     let articlesInCurrentCategory = [];
     let currentIndexInCategory = -1;
@@ -236,6 +240,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         nextBtn.href = `/artikel/${nextArticle[1]}`;
         prevBtn.href = `/artikel/${prevArticle[1]}`;
 
+        // Update tooltip with format: Judul Artikel - Kategori
         nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
         prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
     }
@@ -260,6 +265,7 @@ function initActiveCategoryText(allArticlesData, currentFilename) {
     if (!kategoriDiv) return;
 
     let kategoriAktif = null;
+
     for (const [kategori, articles] of Object.entries(allArticlesData)) {
         const idx = articles.findIndex(a => a[1] === currentFilename);
         if (idx !== -1) {
@@ -268,28 +274,37 @@ function initActiveCategoryText(allArticlesData, currentFilename) {
         }
     }
 
-    if (kategoriAktif) kategoriDiv.textContent = kategoriAktif;
+    if (kategoriAktif) {
+        kategoriDiv.textContent = kategoriAktif;
+    }
 }
 
+
 // -------------------------------------------------------------------
-// INIT APP UTAMA
+// FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
 // -------------------------------------------------------------------
-export async function initApp() {
+async function initializeApp() {
     try {
         const response = await fetch('/artikel.json');
-        if (!response.ok) throw new Error('Gagal memuat artikel.json');
+        if (!response.ok) throw new Error(`Gagal memuat artikel.json`);
         const allArticlesData = await response.json();
 
         const currentURL = window.location.pathname;
         const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
 
-        initCategoryMarquee(allArticlesData, currentFilename);
-        initFloatingSearch(allArticlesData);
-        initNavIcons(allArticlesData, currentFilename);
-        initActiveCategoryText(allArticlesData, currentFilename);
+        const clearButton = document.getElementById('floatingSearchClear');
+        if (clearButton) {
+            clearButton.innerHTML = '&times;';
+        }
+
+	// Initialize all features with the fetched data
+	initCategoryMarquee(allArticlesData, currentFilename);
+	initFloatingSearch(allArticlesData);
+	initNavIcons(allArticlesData, currentFilename);
+	initActiveCategoryText(allArticlesData, currentFilename);
 
     } catch (error) {
-        console.error('Gagal menginisialisasi aplikasi:', error);
+        console.error("Gagal menginisialisasi aplikasi:", error);
         const searchInput = document.getElementById('floatingSearchInput');
         if (searchInput) {
             searchInput.placeholder = "Gagal memuat data";
@@ -298,6 +313,7 @@ export async function initApp() {
     }
 }
 
-// Jalankan otomatis saat DOM siap
-document.addEventListener('DOMContentLoaded', initApp);
+// Menjalankan semua fungsi saat dokumen siap
+document.addEventListener('DOMContentLoaded', initializeApp);
+
 
