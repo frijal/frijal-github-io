@@ -67,8 +67,6 @@
     header {text-align: center; margin-bottom: 40px;}
     header h1 {font-size: 2.5rem; color: #fff;}
     #articles-container {display: grid; gap: 25px;}
-
-    /* Artikel Card */
     .article-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -115,53 +113,11 @@
       text-decoration: none;
       font-weight: bold;
     }
-
     @media (max-width: 768px) {
       .article-card {flex-direction: column; align-items: stretch;}
       .card-image {width: 100%; max-width: none; border-radius: 12px 12px 0 0;}
       .card-content {padding: 15px;}
       .article-card h3 {font-size: 1.2rem;}
-    }
-
-    /* Floating Search */
-    .search-floating-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-    }
-    .search-floating-container input {
-      border: none;
-      background: transparent;
-      color: var(--text-color);
-      padding: 5px 10px;
-      font-size: 0.95rem;
-      outline: none;
-    }
-    .clear-button {
-      cursor: pointer;
-      margin-left: 5px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: var(--primary-color);
-    }
-    .floating-results-container {
-      position: absolute;
-      bottom: 50px;
-      right: 0;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      max-height: 300px;
-      overflow-y: auto;
-      width: 250px;
-      display: none;
     }
   </style>
 </head>
@@ -172,6 +128,8 @@
       <p>30 artikel terbaru hari ini.</p>
     </header>
     <main>
+      <div id="articles-container"></div>
+
       <section id="related-marquee-section">
         <div id="related-marquee-container"></div>
       </section>
@@ -185,7 +143,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="/ext/marquee-url.js" type="module"></script>
+  <script src="/ext/marquee-url.js"></script>
 </body>
 </html>
-
