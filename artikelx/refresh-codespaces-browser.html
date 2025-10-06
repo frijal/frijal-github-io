@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="id-ID" prefix="og: http://ogp.me/ns#">
+<head>
+  <!-- Charset & viewport -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Title & meta description -->
+  <title>Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart</title>
+  <meta name="description" content="Cheat sheet cara refresh GitHub Codespaces langsung dari browser: Rebuild Container, Full Rebuild, Restart/Stop-Start. Plus tips cepat kapan pilih yang mana.">
+
+  <!-- Canonical & robots -->
+  <link rel="canonical" href="https://frijal.github.io/artikel/refresh-codespaces-browser.html">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0c111a">
+
+  <!-- Favicon & icons -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico">
+  <link rel="mask-icon" href="https://frijal.github.io/assets/safari-pinned-tab.svg" color="#00d1b2">
+  <meta name="msapplication-TileColor" content="#0c111a">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Frijal Artikel">
+  <meta property="og:url" content="https://frijal.github.io/artikel/refresh-codespaces-browser.html">
+  <meta property="og:title" content="Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart">
+  <meta property="og:description" content="Cheat sheet langkah di VS Code web: Rebuild Container, Full Rebuild, Restart/Stop-Start. Bedanya apa, kapan dipakai, dan tips praktis.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png">
+  <meta property="og:image:alt" content="Ilustrasi rebuild GitHub Codespaces di browser">
+  <meta property="article:section" content="Dev Workflow">
+  <meta property="article:tag" content="Codespaces">
+  <meta property="article:tag" content="Dev Containers">
+  <meta property="article:tag" content="VS Code Web">
+  <meta property="article:published_time" content="2025-10-06T21:05:00+08:00">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart">
+  <meta name="twitter:description" content="Langsung dari VS Code web: Rebuild vs Full Rebuild, Restart/Stop-Start, dan tips cepat kapan kamu perlu masing-masing.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png">
+
+  <!-- JSON-LD Article -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart",
+    "description":"Cheat sheet cara refresh GitHub Codespaces langsung dari browser: Rebuild Container, Full Rebuild, Restart/Stop-Start. Plus tips cepat kapan pilih yang mana.",
+    "image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png"],
+    "author":{"@type":"Person","name":"Frijal"},
+    "publisher":{"@type":"Organization","name":"Frijal Artikel","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico"}},
+    "datePublished":"2025-10-06T21:05:00+08:00",
+    "dateModified":"2025-10-06T21:05:00+08:00",
+    "mainEntityOfPage":"https://frijal.github.io/artikel/refresh-codespaces-browser.html",
+    "inLanguage":"id-ID"
+  }
+  </script>
+
+  <!-- Styles: Dark-mode 1 kolom, widescreen, fullscreen, mobile-friendly -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --bg2: #0a0e13;
+      --glass: rgba(255,255,255,0.06);
+      --glass-strong: rgba(255,255,255,0.12);
+      --text: #e6edf3;
+      --muted: #9fb0c0;
+      --brand: #00d1b2;
+      --accent: #7aa2f7;
+      --border: #1b2432;
+      --radius: 22px;
+      --shadow-dark: rgba(0,0,0,0.55);
+      --shadow-light: rgba(255,255,255,0.08);
+      --maxw: 980px;
+    }
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 800px at 20% 0%, #0b0f14, #0a0d12 60%, #07090d) fixed,
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none }
+    a:hover { text-decoration: underline }
+
+    .wrap { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto }
+
+    header.hero { padding: clamp(16px, 5vw, 40px); display: grid; justify-items: center }
+    .card-hero {
+      width: 100%; max-width: var(--maxw);
+      border-radius: var(--radius);
+      background: var(--glass);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      box-shadow:
+        14px 14px 36px var(--shadow-dark),
+        -10px -10px 28px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: clamp(18px, 4.5vw, 32px);
+    }
+    .title-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
+    .title-row h1 {
+      margin: 0; font-size: clamp(24px, 4.8vw, 44px);
+      color: var(--brand); letter-spacing: .3px;
+    }
+    .sub { margin: 6px 0 0; color: var(--muted); font-size: 0.98rem }
+
+    .meta-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; color: var(--muted) }
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 999px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        6px 6px 18px var(--shadow-dark),
+        -6px -6px 18px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.35);
+    }
+
+    main { padding: 0 clamp(16px, 5vw, 40px) clamp(24px, 5vw, 50px); display: grid; justify-items: center }
+    article.content { width: 100%; max-width: var(--maxw) }
+    section.card {
+      border-radius: var(--radius);
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        14px 14px 36px var(--shadow-dark),
+        -10px -10px 28px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.3);
+      padding: clamp(16px, 4.2vw, 28px);
+    }
+    .lead { font-size: 1.06rem; color: #cbd6e2; margin: 0 0 14px }
+    .original {
+      padding: 14px; border-radius: 16px; background: var(--glass-strong);
+      border: 1px solid rgba(255,255,255,0.1); white-space: pre-wrap;
+      box-shadow:
+        inset 6px 6px 18px var(--shadow-dark),
+        inset -6px -6px 18px var(--shadow-light);
+    }
+    .sep { margin: 18px 0; border-top: 1px dashed rgba(255,255,255,0.14) }
+
+    h2, h3 { margin: 12px 0; letter-spacing: .2px }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.95rem }
+    th, td { border: 1px solid rgba(255,255,255,0.12); padding: 10px; text-align: left }
+    th { background: rgba(255,255,255,0.08) }
+
+    /* Gallery */
+    figure.gallery { margin: 0; display: grid; grid-template-columns: 1fr; gap: 12px }
+    .gallery img {
+      width: 100%; height: auto; border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      box-shadow:
+        10px 10px 26px var(--shadow-dark),
+        -8px -8px 22px var(--shadow-light);
+      cursor: zoom-in;
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+      filter: saturate(110%);
+    }
+    .gallery img:hover { transform: scale(1.015); box-shadow: 0 16px 44px rgba(0,0,0,0.5) }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; display: none;
+      background: rgba(7,9,13,0.92);
+      backdrop-filter: blur(10px);
+      align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .lightbox.open { display: flex }
+    .lightbox img {
+      max-width: min(94vw, 1200px);
+      max-height: 88vh;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      box-shadow:
+        14px 14px 36px var(--shadow-dark),
+        -10px -10px 28px var(--shadow-light);
+    }
+    .lightbox .nav { position: absolute; display: flex; gap: 14px; bottom: 24px; left: 50%; transform: translateX(-50%) }
+    .icon-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07);
+      color: var(--text); cursor: pointer;
+      box-shadow:
+        8px 8px 22px var(--shadow-dark),
+        -8px -8px 22px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.35);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .icon-btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px) }
+    .close-btn { position: absolute; top: 18px; right: 18px }
+
+    .share { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px }
+    .share a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.07); color: var(--text);
+      box-shadow:
+        8px 8px 22px var(--shadow-dark),
+        -8px -8px 22px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.35);
+    }
+
+    footer { padding: 20px clamp(16px, 5vw, 40px) 40px; color: var(--muted); font-size: 0.92rem; display: grid; justify-items: center }
+    .foot-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center }
+    .pill {
+      padding: 8px 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.07);
+      box-shadow:
+        8px 8px 22px var(--shadow-dark),
+        -8px -8px 22px var(--shadow-light),
+        inset 2px 2px 6px var(--shadow-light),
+        inset -2px -2px 6px rgba(0,0,0,0.35);
+    }
+
+    @media (min-width: 1200px) { header.hero { padding-top: 60px } .title-row h1 { font-size: 46px } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important } }
+  </style>
+</head>
+<body>
+  <div id="fb-root"></div>
+  <div class="wrap">
+    <!-- Hero -->
+    <header class="hero" role="banner">
+      <div class="card-hero">
+        <div class="title-row">
+          <h1>Refresh GitHub Codespaces dari browser</h1>
+        </div>
+        <p class="sub">Rebuild, full rebuild, restart, atau stop-start—kapan pakai yang mana. Satu kolom, dark-mode, responsif, widescreen, fullscreen.</p>
+
+        <div class="meta-bar" aria-label="metadata">
+          <span class="badge" id="ua-badge">
+            <svg id="ua-icon" width="20" height="20" aria-hidden="true"></svg>
+            <span id="ua-text">Mengenali perangkat…</span>
+          </span>
+          <span class="badge" id="loc-badge">
+            <span id="flag">🏳️</span>
+            <span id="loc-text">Deteksi ringan via IP…</span>
+          </span>
+          <span class="badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5h-2v6l5 3 .9-1.45-3.9-2.25V7z"/>
+            </svg>
+            <time datetime="2025-10-06">Diperbarui: 06 Okt 2025</time>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main role="main">
+      <article class="content">
+        <section class="card" aria-label="narasi">
+          <p class="lead">
+            Penjelasan singkat dan langsung dipakai. Konten asli di bawah ini tetap utuh; aku tambahkan contoh praktis biar makin mantap.
+          </p>
+
+         <div class="container">
+        <h2>🔄 Cara Rebuild Codespace dari Browser</h2>
+        <ol>
+            <li>Buka repositori Anda di GitHub, lalu klik tab **Codespaces** → pilih codespace yang mau dibuka.</li>
+            <li>Codespace akan terbuka di browser dengan tampilan mirip VS Code.</li>
+            <li>Tekan <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows/Linux) atau <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Mac) untuk membuka *Command Palette*.</li>
+            <li>Ketik `Rebuild` → pilih salah satu:
+                <ul>
+                    <li><strong>Codespaces: Rebuild Container</strong> → rebuild cepat dengan cache.</li>
+                    <li><strong>Codespaces: Full Rebuild Container</strong> → rebuild total, semua cache Docker dibersihkan dan container dibangun ulang dari nol.</li>
+                </ul>
+            </li>
+            <li>Tunggu proses selesai. Semua file kode Anda tetap aman, hanya *environment* (dev container) yang di-refresh.</li>
+        </ol>
+
+        <h2>✨ Perbedaan Rebuild vs Full Rebuild</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Apa yang dilakukan</th>
+                    <th>Kapan dipakai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Rebuild</strong></td>
+                    <td>Menggunakan cache image lama untuk mempercepat build.</td>
+                    <td>Kalau hanya ada perubahan kecil di <code>devcontainer.json</code> atau ingin environment segar tanpa buang waktu lama.</td>
+                </tr>
+                <tr>
+                    <td><strong>Full Rebuild</strong></td>
+                    <td>Hapus semua cache image, download ulang base image, jalankan semua setup dari awal.</td>
+                    <td>Kalau environment error, dependency rusak, atau ingin benar‑benar fresh.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>⚡ Tips</h2>
+        <ul>
+            <li>Kalau cuma ingin "restart" service (misalnya Node, Python, server dev), cukup jalankan ulang service itu di terminal, tidak perlu rebuild penuh.</li>
+            <li>Kalau sering rebuild, pilih rebuild biasa dulu. Full rebuild hanya kalau masalah tidak hilang.</li>
+        </ul>
+    </div>
+
+          <div class="sep"></div>
+
+          <!-- Tambahan singkat -->
+          <section aria-label="catatan-tambahan">
+            <h2 style="margin-top:0">Shortcut & menu cepat di VS Code web</h2>
+            <table>
+              <thead>
+                <tr><th>Aksi</th><th>Cara Cepat</th><th>Keterangan</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rebuild Container</td>
+                  <td>Ctrl+Shift+P / Cmd+Shift+P → “Rebuild” → pilih Rebuild</td>
+                  <td>Refresh pakai cache, biasanya cukup cepat.</td>
+                </tr>
+                <tr>
+                  <td>Full Rebuild Container</td>
+                  <td>Ctrl+Shift+P / Cmd+Shift+P → “Rebuild” → pilih Full Rebuild</td>
+                  <td>Hapus cache, build ulang dari nol, lebih lama tapi bersih.</td>
+                </tr>
+                <tr>
+                  <td>Restart Codespace</td>
+                  <td>Menu … (More Actions) kiri bawah → Restart Codespace</td>
+                  <td>Restart instance tanpa rebuild container.</td>
+                </tr>
+                <tr>
+                  <td>Stop & Start</td>
+                  <td>GitHub → tab Codespaces → pilih → Stop, lalu Start</td>
+                  <td>Mirip reboot server; berguna kalau sesi terasa “stuck”.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <div class="sep"></div>
+
+          <!-- Gallery -->
+          <figure class="gallery" aria-label="galeri">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png" alt="Tampilan VS Code web untuk Codespaces" loading="lazy" data-index="0">
+          </figure>
+
+          <!-- Share -->
+          <div class="share" aria-label="bagikan">
+            <a id="share-x" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke X">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 3H22l-9.4 10.7L20.8 21h-7l-5.4-6.3L3.2 21H2l9.8-11.2L3.6 3h7l5 5.8L18.9 3z"/></svg>
+              X
+            </a>
+            <a id="share-fb" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 12A10 10 0 1 0 10.6 22v-7h-2.1V12h2.1V9.7c0-2.1 1.3-3.2 3.1-3.2.9 0 1.8.1 1.8.1v2H14c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg>
+              Facebook
+            </a>
+            <a id="share-li" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.6v1.7h.1c.5-.9 1.7-1.9 3.6-1.9 3.8 0 4.5 2.5 4.5 5.8V21h-4v-5.1c0-1.2 0-2.7-1.7-2.7-1.7 0-2 1.3-2 2.6V21h-4V9z"/></svg>
+              LinkedIn
+            </a>
+            <a id="share-wa" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 12a8 8 0 0 1-11.9 6.9L4 21l2.1-4.1A8 8 0 1 1 20 12zm-4 2.3c-.2-.1-1.3-.7-1.5-.8s-.3-.1-.5.1-.5.8-.6.9c-.1.1-.2.2-.4.1-.2-.1-.9-.3-1.7-.9-.6-.5-1-1.1-1.1-1.2-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2 0-.3 0-.1-.5-1.2-.7-1.6-.2-.4-.3-.4-.5-.4h-.4c-.1 0-.3 0-.5.2s-.7.6-.7 1.5.7 1.7.8 1.8c.1.1 1.5 2.3 3.6 3.1 1.3.5 1.8.5 2.4.4.4-.1 1.3-.6 1.5-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.1-.4-.2z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+
+          <div class="sep"></div>
+          <!-- Komentar -->
+          <section aria-label="komentar">
+            <h3 style="margin-top:0">Komentar</h3>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/refresh-codespaces-browser.html" data-width="100%" data-numposts="8"></div>
+          </section>
+        </section>
+      </article>
+
+      <!-- Lightbox overlay -->
+      <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="lightbox">
+        <button class="icon-btn close-btn" id="close" aria-label="Tutup">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3 10.6 10.6 16.9 4.3z"/>
+          </svg>
+        </button>
+        <img id="lightbox-img" alt="">
+        <div class="nav">
+          <button class="icon-btn" id="prev" aria-label="Sebelumnya">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 7.41 14 6 8 12l6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <button class="icon-btn" id="next" aria-label="Berikutnya">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L12.17 12z"/></svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="foot-row">
+        <span class="pill">© 2025 Frijal Artikel</span>
+        <span class="pill">Satu kolom • Dark-mode • Widescreen • Fullscreen • Responsif</span>
+        <span class="pill">SEO siap: canonical, OG, Twitter Card, JSON‑LD</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Facebook SDK (appId) -->
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023" nonce="frijal"></script>
+
+  <!-- Scripts -->
+  <script>
+    // Helper: current URL
+    const pageURL = document.currentScript?.ownerDocument?.location?.href || location.href;
+
+    // Share links
+    (function initShare(){
+      const text = encodeURIComponent("Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart");
+      const url = encodeURIComponent(pageURL);
+      document.getElementById('share-x').href =
+        `https://x.com/intent/tweet?text=${text}&url=${url}`;
+      document.getElementById('share-fb').href =
+        `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      document.getElementById('share-li').href =
+        `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+      document.getElementById('share-wa').href =
+        `https://wa.me/?text=${text}%20${url}`;
+    })();
+
+    // Lightbox for gallery
+    (function lightbox(){
+      const imgs = [...document.querySelectorAll('figure.gallery img')];
+      const overlay = document.getElementById('lightbox');
+      const imgEl = document.getElementById('lightbox-img');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      const close = document.getElementById('close');
+      let index = 0;
+
+      function open(i){
+        index = i;
+        imgEl.src = imgs[i].src;
+        imgEl.alt = imgs[i].alt || 'Gambar';
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function move(d){
+        index = (index + d + imgs.length) % imgs.length;
+        imgEl.src = imgs[index].src;
+        imgEl.alt = imgs[index].alt || 'Gambar';
+      }
+      imgs.forEach((img, i) => {
+        img.dataset.index = i;
+        img.addEventListener('click', () => open(i));
+      });
+      prev.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(+1));
+      close.addEventListener('click', () => {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close.click();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') close.click();
+        if (e.key === 'ArrowLeft') prev.click();
+        if (e.key === 'ArrowRight') next.click();
+      });
+    })();
+
+    // Detect Browser & OS icon
+    (function detectUA(){
+      const ua = navigator.userAgent;
+      const platform = navigator.platform || '';
+      const icon = document.getElementById('ua-icon');
+      const text = document.getElementById('ua-text');
+
+      function draw(pathD){
+        icon.setAttribute('viewBox','0 0 24 24');
+        icon.innerHTML = `<path fill="currentColor" d="${pathD}"/>`;
+      }
+
+      let browser = 'Browser tidak dikenal';
+      if (/Edg\//.test(ua)) { browser = 'Microsoft Edge'; draw('M12 2a10 10 0 1 0 0 20 9.9 9.9 0 0 0 9.9-8.8c-4.3 3.6-9.9 1.9-9.9-2.9 0-3.7 3.3-6.5 7.2-6.1A10 10 0 0 0 12 2z'); }
+      else if (/Chrome\//.test(ua)) { browser = 'Google Chrome'; draw('M12 4a8 8 0 0 1 6.9 4h-6.9a4 4 0 0 0-3.5 2l-3.5-6A8 8 0 0 1 12 4zm8 8a8 8 0 0 1-1.1 4.1l-3.4-5.9A4 4 0 0 0 12 10h8zm-8 8a8 8 0 0 1-6.9-4h6.9a4 4 0 0 0 3.5-2l3.5 6A8 8 0 0 1 12 20z'); }
+      else if (/Firefox\//.test(ua)) { browser = 'Mozilla Firefox'; draw('M12 2c5.5 0 10 4.5 10 10a10 10 0 0 1-17.4 6.6c.6-3.3 2.7-5.1 5-6.3-.3-1.2.1-2.7 1.1-3.8 1.6-1.7 4.3-1.9 6.2-.8-.7-2.1-2.4-3.7-4.4.7-.2 1.4-.3 2.1-.3z'); }
+      else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) { browser = 'Safari'; draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 5.5-2.8 6.5-6.2 2.5 2.8-6.5 6.2-2.5z'); }
+      else if (/OPR\//.test(ua)) { browser = 'Opera'; draw('M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10c-3.5 0-6.6-1.8-8.4-4.6C6.5 18.6 9 16 9 12.1 9 8.2 6.5 5.6 3.6 4.6 5.4 2 8.5 0 12 0c0 .7 0 1.3 0 2z'); }
+      else { draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'); }
+
+      let os = 'OS tidak dikenal';
+      if (/Win/.test(platform)) os = 'Windows';
+      else if (/Mac/.test(platform)) os = 'macOS';
+      else if (/Linux/.test(platform)) os = 'Linux';
+      else if (/Android/.test(ua)) os = 'Android';
+      else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+
+      text.textContent = `${browser} • ${os}`;
+    })();
+
+    // Location & flag: IP (via ipify) + language fallback
+    (function detectLocation(){
+      const badgeText = document.getElementById('loc-text');
+      const flag = document.getElementById('flag');
+
+      const lang = (navigator.language || 'id-ID').toLowerCase();
+      const country = lang.split('-')[1] || 'ID';
+      const mapFlag = {
+        'ID':'🇮🇩','US':'🇺🇸','GB':'🇬🇧','FR':'🇫🇷','DE':'🇩🇪','JP':'🇯🇵','CN':'🇨🇳','IN':'🇮🇳','BR':'🇧🇷','CA':'🇨🇦','AU':'🇦🇺','ES':'🇪🇸','IT':'🇮🇹','MX':'🇲🇽','SG':'🇸🇬','MY':'🇲🇾'
+      };
+      flag.textContent = mapFlag[country.toUpperCase()] || '🌐';
+      badgeText.textContent = `Bahasa: ${lang} • Perkiraan negara: ${country.toUpperCase()}`;
+
+      fetch('https://api.ipify.org?format=json&ipv4')
+        .then(r => r.json())
+        .then(d => { badgeText.textContent += ` • IP: ${d.ip}`; })
+        .catch(() => { badgeText.textContent += ' • IP: (gagal memuat)'; });
+    })();
+  </script>
+</body>
+</html>

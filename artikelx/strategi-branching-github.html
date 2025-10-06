@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Strategi Branching Populer di GitHub</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Perbandingan strategi branching populer: Git Flow, Trunk Based, dan GitHub Flow. Dijelaskan santai, lengkap, dengan tabel interaktif, dark-mode, responsif, plus galeri, lightbox, share, komentar Facebook, dan deteksi perangkat." />
+  <link rel="canonical" href="https://frijal.github.io/artikel/strategi-branching-github.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Strategi Branching Populer di GitHub" />
+  <meta property="og:description" content="Perbandingan Git Flow, Trunk Based, dan GitHub Flow untuk memahami kenapa branch bisa banyak di repo kamu." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://frijal.github.io/artikel/strategi-branching-github.html" />
+  <meta property="og:image" content="https://frijal.github.io/artikel/strategi-branching-github" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Strategi Branching Populer di GitHub" />
+  <meta name="twitter:description" content="Perbandingan Git Flow, Trunk Based, dan GitHub Flow untuk memahami kenapa branch bisa banyak di repo kamu." />
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/strategi-branching-github" />
+
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" />
+
+  <style>
+    body {margin:0; font-family:system-ui,sans-serif; background:#0d1117; color:#e6edf3; line-height:1.6;}
+    header, footer {padding:1rem; background:#161b22;}
+    main {max-width:960px; margin:auto; padding:1rem;}
+    h1,h2,h3 {color:#58a6ff;}
+    table {width:100%; border-collapse:collapse; margin:1rem 0;}
+    th,td {border:1px solid #30363d; padding:.75rem; text-align:left;}
+    th {background:#21262d;}
+    tr:nth-child(even){background:#161b22;}
+    .gallery {display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:1rem 0;}
+    .gallery img {width:100%; border-radius:8px; cursor:pointer;}
+    .lightbox {position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center;}
+    .lightbox img {max-width:90%; max-height:80%;}
+    .lightbox nav {position:absolute; top:50%; width:100%; display:flex; justify-content:space-between;}
+    .lightbox button {background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;}
+    .share {margin:1rem 0; display:flex; gap:10px; flex-wrap:wrap;}
+    .share a {padding:.5rem 1rem; border:1px solid #30363d; border-radius:6px; text-decoration:none; color:#e6edf3;}
+    .env {margin-top:2rem; padding:1rem; border:1px solid #30363d; border-radius:8px;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Strategi Branching Populer</h1>
+  </header>
+  <main>
+    <article>
+      <p>Selain alasan kolaborasi dan eksperimen, banyaknya branch di repo juga bisa dipengaruhi oleh strategi branching yang dipakai. Berikut tabel perbandingan tiga strategi populer:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Strategi</th>
+            <th>Ciri Utama</th>
+            <th>Kelebihan</th>
+            <th>Kekurangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Git Flow</strong></td>
+            <td>Gunakan banyak branch: <code>main</code>, <code>develop</code>, <code>feature/*</code>, <code>release/*</code>, <code>hotfix/*</code></td>
+            <td>Struktur jelas, cocok untuk rilis terjadwal</td>
+            <td>Banyak branch menumpuk, agak ribet untuk tim kecil</td>
+          </tr>
+          <tr>
+            <td><strong>Trunk Based</strong></td>
+            <td>Semua commit langsung ke <code>main</code> (trunk), branch feature sangat singkat</td>
+            <td>Integrasi cepat, konflik minim, cocok CI/CD</td>
+            <td>Butuh disiplin tinggi, testing otomatis wajib</td>
+          </tr>
+          <tr>
+            <td><strong>GitHub Flow</strong></td>
+            <td>Branch dari <code>main</code> untuk setiap fitur/bug, lalu PR → merge</td>
+            <td>Sederhana, cocok untuk tim remote dan deploy cepat</td>
+            <td>Kurang cocok untuk proyek dengan rilis besar & kompleks</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>📸 Galeri Ilustrasi</h2>
+      <div class="gallery">
+        <img src="https://frijal.github.io/assets/gallery/gitflow.jpg" alt="Diagram Git Flow" loading="lazy" data-index="0">
+        <img src="https://frijal.github.io/assets/gallery/trunkbased.jpg" alt="Diagram Trunk Based" loading="lazy" data-index="1">
+        <img src="https://frijal.github.io/assets/gallery/githubflow.jpg" alt="Diagram GitHub Flow" loading="lazy" data-index="2">
+      </div>
+      <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="">
+        <nav>
+          <button id="prev">⟨</button>
+          <button id="next">⟩</button>
+        </nav>
+      </div>
+
+      <div class="share">
+        <a id="share-twitter" target="_blank">Twitter</a>
+        <a id="share-fb" target="_blank">Facebook</a>
+        <a id="share-ln" target="_blank">LinkedIn</a>
+      </div>
+
+      <div id="fb-root"></div>
+      <div class="fb-comments" data-href="https://frijal.github.io/artikel/strategi-branching-github.html" data-width="100%" data-numposts="5"></div>
+
+      <div class="env">
+        <h3>🔍 Info Perangkat Kamu</h3>
+        <p><strong>Browser:</strong> <span id="browser">...</span></p>
+        <p><strong>OS:</strong> <span id="os">...</span></p>
+        <p><strong>Lokasi/IP:</strong> <span id="loc">...</span> <span id="flag">🏳️</span></p>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 Frijal — Artikel</p>
+  </footer>
+
+  <!-- Facebook SDK -->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=1471267430691023"></script>
+
+  <script>
+    // Lightbox
+    const gallery=document.querySelectorAll('.gallery img');
+    const lightbox=document.getElementById('lightbox');
+    const lightboxImg=document.getElementById('lightbox-img');
+    let current=0;
+    function show(i){current=i;lightboxImg.src=gallery[i].src;lightbox.style.display='flex';}
+    gallery.forEach((img,i)=>img.addEventListener('click',()=>show(i)));
+    document.getElementById('prev').onclick=()=>show((current-1+gallery.length)%gallery.length);
+    document.getElementById('next').onclick=()=>show((current+1)%gallery.length);
+    lightbox.onclick=e=>{if(e.target===lightbox) lightbox.style.display='none';};
+
+    // Share
+    const url=encodeURIComponent(location.href), title=encodeURIComponent(document.title);
+    document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+    document.getElementById('share-fb').href=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    document.getElementById('share-ln').href=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+
+    // Browser & OS
+    const ua=navigator.userAgent;
+    document.getElementById('browser').textContent=/Chrome/.test(ua)?'Chrome':/Firefox/.test(ua)?'Firefox':/Safari/.test

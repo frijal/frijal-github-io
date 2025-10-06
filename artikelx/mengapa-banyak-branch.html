@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mengapa Banyak Branch di Repo GitHub?</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Penjelasan santai kenapa repo GitHub bisa punya banyak branch. Dibahas dengan gaya ringan, interaktif, dark-mode, responsif, plus galeri, lightbox, ikon sharing, komentar Facebook, dan deteksi browser/OS/lokasi." />
+  <link rel="canonical" href="https://frijal.github.io/artikel/mengapa-banyak-branch.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mengapa Banyak Branch di Repo GitHub?" />
+  <meta property="og:description" content="Jawaban santai dan lengkap tentang alasan banyak branch di repo GitHub kamu." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://frijal.github.io/artikel/mengapa-banyak-branch.html" />
+  <meta property="og:image" content="https://frijal.github.io/artikel/mengapa-banyak-branch.jpg" />
+  <meta property="og:site_name" content="Frijal — Artikel" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mengapa Banyak Branch di Repo GitHub?" />
+  <meta name="twitter:description" content="Jawaban santai dan lengkap tentang alasan banyak branch di repo GitHub kamu." />
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/mengapa-banyak-branch.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" />
+
+  <style>
+    body {
+      margin:0; font-family:system-ui, sans-serif;
+      background:#0d1117; color:#e6edf3;
+      line-height:1.6;
+    }
+    header, footer {padding:1rem; background:#161b22;}
+    main {max-width:860px; margin:auto; padding:1rem;}
+    h1,h2,h3 {color:#58a6ff;}
+    a {color:#58a6ff;}
+    .gallery {display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:1rem 0;}
+    .gallery img {width:100%; border-radius:8px; cursor:pointer;}
+    .lightbox {position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center;}
+    .lightbox img {max-width:90%; max-height:80%;}
+    .lightbox nav {position:absolute; top:50%; width:100%; display:flex; justify-content:space-between;}
+    .lightbox button {background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;}
+    .share {margin:1rem 0; display:flex; gap:10px; flex-wrap:wrap;}
+    .share a {padding:.5rem 1rem; border:1px solid #30363d; border-radius:6px; text-decoration:none; color:#e6edf3;}
+    .env {margin-top:2rem; padding:1rem; border:1px solid #30363d; border-radius:8px;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🤔 Kenapa Banyak Branch di Repo GitHub?</h1>
+  </header>
+  <main>
+    <article>
+      <p>Kalau kamu buka repo GitHub dan lihat branch-nya bejibun, jangan panik dulu. Banyak branch itu wajar banget, apalagi kalau repo dipakai rame-rame. Yuk kita bahas alasan utamanya:</p>
+
+      <h2>🔹 Alasan Kenapa Branch Bisa Banyak</h2>
+      <ul>
+        <li><strong>Kolaborasi tim:</strong> setiap orang bikin branch sendiri buat fitur/bugfix biar nggak ganggu <code>main</code>.</li>
+        <li><strong>Eksperimen:</strong> kadang ada branch khusus buat coba-coba ide baru.</li>
+        <li><strong>Workflow tertentu:</strong> misalnya Git Flow, yang memang butuh banyak branch (develop, release, hotfix, dll).</li>
+        <li><strong>Branch lama belum dihapus:</strong> setelah merge, branch kadang lupa dihapus, jadi numpuk.</li>
+      </ul>
+
+      <h2>🔹 Apa yang Bisa Dilakuin?</h2>
+      <p>Kalau repo kamu penuh branch, coba:</p>
+      <ol>
+        <li>Hapus branch yang sudah di-merge dan nggak dipakai lagi.</li>
+        <li>Pakai <em>branch protection</em> biar branch utama tetap aman.</li>
+        <li>Gunakan penamaan branch yang jelas, misalnya <code>feature/login</code> atau <code>bugfix/issue-123</code>.</li>
+      </ol>
+
+      <h2>📸 Galeri Ilustrasi</h2>
+      <div class="gallery">
+        <img src="https://frijal.github.io/assets/gallery/many-branches-1.jpg" alt="Ilustrasi banyak branch" loading="lazy" data-index="0">
+        <img src="https://frijal.github.io/assets/gallery/many-branches-2.jpg" alt="Branch lama menumpuk" loading="lazy" data-index="1">
+      </div>
+      <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="">
+        <nav>
+          <button id="prev">⟨</button>
+          <button id="next">⟩</button>
+        </nav>
+      </div>
+
+      <div class="share">
+        <a id="share-twitter" target="_blank">Bagikan ke Twitter</a>
+        <a id="share-fb" target="_blank">Bagikan ke Facebook</a>
+        <a id="share-ln" target="_blank">Bagikan ke LinkedIn</a>
+      </div>
+
+      <div id="fb-root"></div>
+      <div class="fb-comments" data-href="https://frijal.github.io/artikel/mengapa-banyak-branch.html" data-width="100%" data-numposts="5"></div>
+
+      <div class="env">
+        <h3>🔍 Info Perangkat Kamu</h3>
+        <p><strong>Browser:</strong> <span id="browser">...</span></p>
+        <p><strong>OS:</strong> <span id="os">...</span></p>
+        <p><strong>Lokasi/IP:</strong> <span id="loc">...</span> <span id="flag">🏳️</span></p>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 Frijal — Artikel</p>
+  </footer>
+
+  <!-- Facebook SDK -->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=1471267430691023"></script>
+
+  <script>
+    // Lightbox
+    const gallery = document.querySelectorAll('.gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let current = 0;
+    function show(i){ current=i; lightboxImg.src=gallery[i].src; lightbox.style.display='flex'; }
+    gallery.forEach((img,i)=>img.addEventListener('click',()=>show(i)));
+    document.getElementById('prev').onclick=()=>show((current-1+gallery.length)%gallery.length);
+    document.getElementById('next').onclick=()=>show((current+1)%gallery.length);
+    lightbox.onclick=e=>{if(e.target===lightbox) lightbox.style.display='none';};
+
+    // Share
+    const url=encodeURIComponent(location.href), title=encodeURIComponent(document.title);
+    document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+    document.getElementById('share-fb').href=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    document.getElementById('share-ln').href=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+
+    // Browser & OS
+    const ua=navigator.userAgent;
+    document.getElementById('browser').textContent = ua.match(/Chrome/) ? 'Chrome' : ua.match(/Firefox/) ? 'Firefox' : ua.match(/Safari/) ? 'Safari' : 'Browser lain';
+    document.getElementById('os').textContent = ua.match(/Win/) ? 'Windows' : ua.match(/Mac/) ? 'macOS' : ua.match(/Linux/) ? 'Linux' : ua.match(/Android/) ? 'Android' : ua.match(/iPhone|iPad/) ? 'iOS' : 'OS lain';
+
+    // IP & lokasi
+    fetch('https://api.ipify.org?format=json&ipv4').then(r=>r.json()).then(d=>{
+
