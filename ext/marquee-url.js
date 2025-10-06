@@ -5,7 +5,7 @@
  * - Fetch data hanya satu kali untuk semua fitur.
  * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
  * - Tooltip judul artikel yang lebih deskriptif.
- * - Ikon RSS dikembalikan.
+ * - Ikon RSS dan penampil kategori yang bisa diklik.
  */
 
 // -------------------------------------------------------------------
@@ -68,8 +68,7 @@ function initCategoryMarquee(allData, currentFilename) {
         let targetCategory = null;
         let articlesInCategory = [];
         for (const categoryName in allData) {
-            const articleMatch = allData[categoryName].find(item => item[1] === currentFilename);
-            if (articleMatch) {
+            if (allData[categoryName].find(item => item[1] === currentFilename)) {
                 targetCategory = categoryName;
                 articlesInCategory = allData[categoryName];
                 break;
@@ -144,68 +143,21 @@ function initNavIcons(allArticlesData, currentFilename) {
     const iconContainer = document.createElement("div");
     iconContainer.className = "ikon-kanan-bawah";
     iconContainer.innerHTML = `
-      <!-- Panah Kanan (Next) -->
       <a id="next-article" href="#" title="Artikel Berikutnya">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="gNext" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#gNext)"/>
-          <path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><linearGradient id="gNext" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#gNext)"/><path d="M20 14l10 10-10 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <!-- Ikon RSS -->
-      <a href="https://frijal.github.io/feed.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#g1)"/>
-          <circle cx="14" cy="34" r="4" fill="#fff"/>
-          <path d="M12 22a16 16 0 0 1 14 14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </svg>
+      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#g1)"/><circle cx="14" cy="34" r="4" fill="#fff"/><path d="M12 22a16 16 0 0 1 14 14" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
       </a>
-      <!-- Ikon Home -->
-      <a href="https://frijal.github.io" title="Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#g2)"/>
-          <path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/>
-        </svg>
+      <a href="https://frijal.github.io/home.html" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#g2)"/><path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/></svg>
       </a>
-      <!-- Ikon Sitemap -->
-      <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#g3)"/>
-          <rect x="18" y="10" width="12" height="8" rx="2" fill="#fff"/>
-          <line x1="24" y1="18" x2="24" y2="26" stroke="#fff" stroke-width="2"/>
-          <rect x="8" y="28" width="8" height="8" rx="2" fill="#fff"/>
-          <rect x="20" y="28" width="8" height="8" rx="2" fill="#fff"/>
-          <rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/>
-        </svg>
+      <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#g3)"/><rect x="18" y="10" width="12" height="8" rx="2" fill="#fff"/><line x1="24" y1="18" x2="24" y2="26" stroke="#fff" stroke-width="2"/><rect x="8" y="28" width="8" height="8" rx="2" fill="#fff"/><rect x="20" y="28" width="8" height="8" rx="2" fill="#fff"/><rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/></svg>
       </a>
-      <!-- Panah Kiri (Prev) -->
       <a id="prev-article" href="#" title="Artikel Sebelumnya">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <defs><linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
-          </linearGradient></defs>
-          <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
-          <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/></linearGradient></defs><rect width="48" height="48" rx="12" fill="url(#gPrev)"/><path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     `;
     document.body.appendChild(iconContainer);
 
-    // --- Logika Navigasi & Penampil Kategori ---
     let currentCategoryName = null;
     let articlesInCurrentCategory = [];
     let currentIndexInCategory = -1;
@@ -220,20 +172,23 @@ function initNavIcons(allArticlesData, currentFilename) {
         }
     }
     
-    // Menampilkan kategori jika ditemukan
-    if (currentCategoryName) {
-        const categoryDisplay = document.createElement('div');
-        categoryDisplay.className = 'kategori-kiri-bawah'; // Menggunakan kelas dari CSS
-        categoryDisplay.textContent = currentCategoryName;
-        document.body.appendChild(categoryDisplay);
-
-        // Memicu animasi dengan menambahkan kelas 'visible'
-        setTimeout(() => {
-            categoryDisplay.classList.add('visible');
-        }, 100);
+    function generateCategoryUrl(name) {
+        const noEmoji = name.replace(/^[^\w\s]*/, '').trim();
+        const slug = noEmoji.toLowerCase().replace(/ \& /g, '-and-').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+        return `${slug}.html`;
     }
 
-    // Logika untuk tombol navigasi
+    if (currentCategoryName) {
+        const categoryLink = document.createElement('a');
+        categoryLink.className = 'kategori-kiri-bawah'; 
+        categoryLink.textContent = currentCategoryName;
+        const categoryUrl = generateCategoryUrl(currentCategoryName);
+        categoryLink.href = `/kategori/${categoryUrl}`; 
+        document.body.appendChild(categoryLink);
+
+        setTimeout(() => categoryLink.classList.add('visible'), 100);
+    }
+
     if (!articlesInCurrentCategory.length) {
         document.getElementById('next-article').style.display = 'none';
         document.getElementById('prev-article').style.display = 'none';
@@ -244,29 +199,17 @@ function initNavIcons(allArticlesData, currentFilename) {
     const nextBtn = document.getElementById('next-article');
     const prevBtn = document.getElementById('prev-article');
 
-    function updateUI() {
-        const nextIndex = (currentIndexInCategory + 1) % total;
-        const prevIndex = (currentIndexInCategory - 1 + total) % total;
-        const nextArticle = articlesInCurrentCategory[nextIndex];
-        const prevArticle = articlesInCurrentCategory[prevIndex];
-        nextBtn.href = `/artikel/${nextArticle[1]}`;
-        prevBtn.href = `/artikel/${prevArticle[1]}`;
-        nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
-        prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
-    }
+    const nextIndex = (currentIndexInCategory + 1) % total;
+    const prevIndex = (currentIndexInCategory - 1 + total) % total;
+    const nextArticle = articlesInCurrentCategory[nextIndex];
+    const prevArticle = articlesInCurrentCategory[prevIndex];
 
-    updateUI();
-
-    nextBtn.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = `/artikel/${articlesInCurrentCategory[(currentIndexInCategory + 1) % total][1]}`;
-    });
-
-    prevBtn.addEventListener('click', e => {
-        e.preventDefault();
-        window.location.href = `/artikel/${articlesInCurrentCategory[(currentIndexInCategory - 1 + total) % total][1]}`;
-    });
+    nextBtn.href = `/artikel/${nextArticle[1]}`;
+    prevBtn.href = `/artikel/${prevArticle[1]}`;
+    nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
+    prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
 }
+
 
 // -------------------------------------------------------------------
 // FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
@@ -285,7 +228,6 @@ async function initializeApp() {
             clearButton.innerHTML = '&times;';
         }
 
-        // Initialize all features with the fetched data
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
         initNavIcons(allArticlesData, currentFilename);
@@ -302,5 +244,3 @@ async function initializeApp() {
 
 // Menjalankan semua fungsi saat dokumen siap
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-
