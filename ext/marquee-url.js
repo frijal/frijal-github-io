@@ -41,11 +41,7 @@ function searchArticles(query, jsonData) {
             const title = article[0] || '';
             const description = article[4] || '';
             if (title.toLowerCase().includes(lowerCaseQuery) || description.toLowerCase().includes(lowerCaseQuery)) {
-                results.push({
-                    category: category,
-                    title: title,
-                    url: article[1]
-                });
+                results.push({ category, title, url: article[1] });
             }
         });
     }
@@ -62,6 +58,7 @@ function initCategoryMarquee(allData, currentFilename) {
     try {
         let targetCategory = null;
         let articlesInCategory = [];
+
         for (const categoryName in allData) {
             const articleMatch = allData[categoryName].find(item => item[1] === currentFilename);
             if (articleMatch) {
@@ -77,25 +74,25 @@ function initCategoryMarquee(allData, currentFilename) {
         const unreadArticles = filteredArticles.filter(item => !readArticles.includes(item[1]));
 
         if (unreadArticles.length === 0) {
-            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
+            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color:#aaa; font-style:italic;">Semua artikel terkait sudah dibaca. 😊</p>';
             return;
         }
 
         unreadArticles.sort(() => 0.5 - Math.random());
-        let contentHTML = '';
         const separator = ' • ';
         const isMobile = isMobileDevice();
-        unreadArticles.forEach(post => {
+        const contentHTML = unreadArticles.map(post => {
             const [title, articleId, , , description] = post;
             const url = `/artikel/${articleId}`;
             const tooltipText = isMobile ? title : (description || title);
-            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
-        });
+            return `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
+        }).join('');
+
         marqueeContainer.innerHTML = `<div class="marquee-content">${contentHTML.repeat(30)}</div>`;
         registerReadTracker();
 
     } catch (error) {
-        console.error(`Marquee Error:`, error);
+        console.error("Marquee Error:", error);
     }
 }
 
@@ -107,9 +104,10 @@ function initFloatingSearch(allArticlesData) {
 
     searchInput.addEventListener('keyup', () => {
         const query = searchInput.value;
-        clearButton.style.display = (query.length > 0) ? 'block' : 'none';
+        clearButton.style.display = query.length > 0 ? 'block' : 'none';
         const results = searchArticles(query, allArticlesData);
         resultsContainer.innerHTML = '';
+
         if (results.length > 0) {
             results.slice(0, 10).forEach(item => {
                 const link = document.createElement('a');
@@ -279,14 +277,11 @@ function initActiveCategoryText(allArticlesData, currentFilename) {
 export async function initApp() {
     try {
         const response = await fetch('/artikel.json');
-        if (!response.ok) throw new Error(`Gagal memuat artikel.json`);
+        if (!response.ok) throw new Error('Gagal memuat artikel.json');
         const allArticlesData = await response.json();
 
         const currentURL = window.location.pathname;
         const currentFilename = currentURL.substring(currentURL.lastIndexOf('/') + 1);
-
-        const clearButton = document.getElementById('floatingSearchClear');
-        if (clearButton) clearButton.innerHTML = '&times;';
 
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
@@ -294,7 +289,7 @@ export async function initApp() {
         initActiveCategoryText(allArticlesData, currentFilename);
 
     } catch (error) {
-        console.error("Gagal menginisialisasi aplikasi:", error);
+        console.error('Gagal menginisialisasi aplikasi:', error);
         const searchInput = document.getElementById('floatingSearchInput');
         if (searchInput) {
             searchInput.placeholder = "Gagal memuat data";
@@ -303,6 +298,6 @@ export async function initApp() {
     }
 }
 
-// Jalankan otomatis
+// Jalankan otomatis saat DOM siap
 document.addEventListener('DOMContentLoaded', initApp);
 
