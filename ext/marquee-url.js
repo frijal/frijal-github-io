@@ -1,4 +1,4 @@
-Script marquee-url.js: /**
+/**
  * ===================================================================
  * SKRIP GABUNGAN v8: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
@@ -168,7 +168,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         </svg>
       </a>
       <!-- Ikon Home -->
-      <a href="https://frijal.github.io" title="Home">
+      <a href="https://frijal.github.io/home.html" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
@@ -260,26 +260,6 @@ function initNavIcons(allArticlesData, currentFilename) {
     });
 }
 
-function initActiveCategoryText(allArticlesData, currentFilename) {
-    const kategoriDiv = document.getElementById('kategori-aktif');
-    if (!kategoriDiv) return;
-
-    let kategoriAktif = null;
-
-    for (const [kategori, articles] of Object.entries(allArticlesData)) {
-        const idx = articles.findIndex(a => a[1] === currentFilename);
-        if (idx !== -1) {
-            kategoriAktif = kategori;
-            break;
-        }
-    }
-
-    if (kategoriAktif) {
-        kategoriDiv.textContent = kategoriAktif;
-    }
-}
-
-
 // -------------------------------------------------------------------
 // FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
 // -------------------------------------------------------------------
@@ -297,11 +277,10 @@ async function initializeApp() {
             clearButton.innerHTML = '&times;';
         }
 
-	// Initialize all features with the fetched data
-	initCategoryMarquee(allArticlesData, currentFilename);
-	initFloatingSearch(allArticlesData);
-	initNavIcons(allArticlesData, currentFilename);
-	initActiveCategoryText(allArticlesData, currentFilename);
+        // Initialize all features with the fetched data
+        initCategoryMarquee(allArticlesData, currentFilename);
+        initFloatingSearch(allArticlesData);
+        initNavIcons(allArticlesData, currentFilename);
 
     } catch (error) {
         console.error("Gagal menginisialisasi aplikasi:", error);
@@ -315,4 +294,5 @@ async function initializeApp() {
 
 // Menjalankan semua fungsi saat dokumen siap
 document.addEventListener('DOMContentLoaded', initializeApp);
+
 
