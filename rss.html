@@ -54,6 +54,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
 
+  <!-- Google Verification -->
+  <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
+
   <!-- Styles -->
   <link rel="stylesheet" href="/ext/marquee-url.css">
   <style>
@@ -70,24 +73,13 @@
       color: var(--text-color);
       line-height: 1.7;
       margin: 0;
-      transition: background-color 0.3s, color 0.3s;
     }
-    body.dark-mode {
-      --bg-color: #f9f9f9;
-      --text-color: #1a1a1a;
-      --card-bg: #fff;
-      --border-color: #ccc;
-      --primary-color: #4d90fe;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
+    .container {max-width: 900px; margin: 0 auto; padding: 40px 20px;}
+    header {text-align: center; margin-bottom: 40px;}
+    header h1 {font-size: 2.5rem; color: #fff;}
+    #articles-container {display: grid; gap: 25px;}
 
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-    header { text-align: center; margin-bottom: 40px; }
-    header h1 { font-size: 2.5rem; color: #fff; }
-    body.dark-mode header h1 { color: var(--text-color); }
-    #articles-container { display: grid; gap: 25px; }
-
+    /* Artikel Card */
     .article-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -112,17 +104,15 @@
       flex-shrink: 0;
       border-radius: 12px 0 0 12px;
     }
-    .card-content { padding: 20px; flex-grow: 1; }
-    .article-card h3 { margin-top: 0; font-size: 1.3rem; }
+    .card-content {padding: 20px; flex-grow: 1;}
+    .article-card h3 {margin-top: 0; font-size: 1.3rem;}
     .article-card h3 a {
       text-decoration: none;
       color: #fff;
       transition: color 0.3s;
     }
-    body.dark-mode .article-card h3 a { color: var(--text-color); }
-    .article-card h3 a:hover { color: var(--primary-color); }
-    .article-card .snippet { color: #ccc; margin-top: 10px; font-size: 0.95rem; }
-    body.dark-mode .article-card .snippet { color: #666; }
+    .article-card h3 a:hover {color: var(--primary-color);}
+    .article-card .snippet {color: #ccc; margin-top: 10px; font-size: 0.95rem;}
     .article-card .meta {
       display: flex;
       justify-content: space-between;
@@ -131,16 +121,20 @@
       font-size: 0.85rem;
       color: #aaa;
     }
-    body.dark-mode .article-card .meta { color: #555; }
-    .article-card .read-more { color: var(--primary-color); text-decoration: none; font-weight: bold; }
-
-    @media (max-width: 768px) {
-      .article-card { flex-direction: column; align-items: stretch; }
-      .card-image { width: 100%; max-width: none; border-radius: 12px 12px 0 0; }
-      .card-content { padding: 15px; }
-      .article-card h3 { font-size: 1.2rem; }
+    .article-card .read-more {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
     }
 
+    @media (max-width: 768px) {
+      .article-card {flex-direction: column; align-items: stretch;}
+      .card-image {width: 100%; max-width: none; border-radius: 12px 12px 0 0;}
+      .card-content {padding: 15px;}
+      .article-card h3 {font-size: 1.2rem;}
+    }
+
+    /* Floating Search */
     .search-floating-container {
       position: fixed;
       bottom: 20px;
@@ -180,26 +174,9 @@
       width: 250px;
       display: none;
     }
-    /* Dark mode toggle button */
-    #darkSwitchContainer {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1100;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.9rem;
-      color: var(--text-color);
-    }
   </style>
 </head>
 <body>
-  <div id="darkSwitchContainer">
-    <label for="darkSwitch">Dark Mode</label>
-    <input type="checkbox" id="darkSwitch">
-  </div>
-
   <div class="container">
     <header>
       <h1>Artikel Terbaru</h1>
@@ -222,10 +199,7 @@
   </div>
 
   <!-- Scripts -->
-  <script type="module">
-    import { initializeApp } from '/ext/marquee-url.js';
-    document.addEventListener('DOMContentLoaded', initializeApp);
-  </script>
+  <script type="module" src="/ext/marquee-url.js"></script>
 </body>
 </html>
 

@@ -1,104 +1,113 @@
-// marquee-url.js (ESM-ready, integrated with dark mode)
-export function initDarkMode() {
-    const darkSwitch = document.getElementById("darkSwitch");
-    if (!darkSwitch) return;
+/**
+ * ===================================================================
+ * SKRIP GABUNGAN v9: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
+ * (Dark mode sudah dihapus)
+ * ===================================================================
+ */
 
-    const darkPref = localStorage.getItem("darkMode") === "true";
-    document.body.classList.toggle("dark-mode", darkPref);
-    darkSwitch.checked = darkPref;
-
-    darkSwitch.addEventListener("change", () => {
-        document.body.classList.toggle("dark-mode", darkSwitch.checked);
-        localStorage.setItem("darkMode", darkSwitch.checked);
-    });
-}
-
-// Helper functions
+// -------------------------------------------------------------------
+// FUNGSI-FUNGSI BANTUAN (HELPER FUNCTIONS)
+// -------------------------------------------------------------------
 function isMobileDevice() {
-    return window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    return (window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 }
 
 function registerReadTracker() {
     const marqueeContainer = document.getElementById('related-marquee-container');
-    if (!marqueeContainer) return;
-    marqueeContainer.addEventListener('click', (event) => {
-        const clickedLink = event.target.closest('a');
-        if (!clickedLink) return;
-        const articleId = clickedLink.getAttribute('data-article-id');
-        if (!articleId) return;
-        const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
-        if (!readArticles.includes(articleId)) {
-            readArticles.push(articleId);
-            localStorage.setItem('read_marquee_articles', JSON.stringify(readArticles));
-        }
-    });
+    if (marqueeContainer) {
+        marqueeContainer.addEventListener('click', function(event) {
+            const clickedLink = event.target.closest('a');
+            if (clickedLink) {
+                const articleId = clickedLink.getAttribute('data-article-id');
+                if (articleId) {
+                    const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
+                    if (!readArticles.includes(articleId)) {
+                        readArticles.push(articleId);
+                        localStorage.setItem('read_marquee_articles', JSON.stringify(readArticles));
+                    }
+                }
+            }
+        });
+    }
 }
 
 function searchArticles(query, jsonData) {
     const results = [];
-    const lowerQuery = query.toLowerCase().trim();
-    if (lowerQuery.length < 2) return [];
+    const lowerCaseQuery = query.toLowerCase().trim();
+    if (lowerCaseQuery.length < 2) return [];
+
     for (const category in jsonData) {
         jsonData[category].forEach(article => {
             const title = article[0] || '';
             const description = article[4] || '';
-            if (title.toLowerCase().includes(lowerQuery) || description.toLowerCase().includes(lowerQuery)) {
-                results.push({ category, title, url: article[1] });
+            if (title.toLowerCase().includes(lowerCaseQuery) || description.toLowerCase().includes(lowerCaseQuery)) {
+                results.push({
+                    category: category,
+                    title: title,
+                    url: article[1]
+                });
             }
         });
     }
     return results;
 }
 
-// Core features
+// -------------------------------------------------------------------
+// FUNGSI INTI (CORE FUNCTIONS)
+// -------------------------------------------------------------------
 function initCategoryMarquee(allData, currentFilename) {
     const marqueeContainer = document.getElementById('related-marquee-container');
     if (!marqueeContainer) return;
 
-    let targetCategory = null;
-    let articlesInCategory = [];
-    for (const cat in allData) {
-        const match = allData[cat].find(item => item[1] === currentFilename);
-        if (match) {
-            targetCategory = cat;
-            articlesInCategory = allData[cat];
-            break;
+    try {
+        let targetCategory = null;
+        let articlesInCategory = [];
+        for (const categoryName in allData) {
+            const articleMatch = allData[categoryName].find(item => item[1] === currentFilename);
+            if (articleMatch) {
+                targetCategory = categoryName;
+                articlesInCategory = allData[categoryName];
+                break;
+            }
         }
+        if (!targetCategory) return;
+
+        const filteredArticles = articlesInCategory.filter(item => item[1] !== currentFilename);
+        const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
+        const unreadArticles = filteredArticles.filter(item => !readArticles.includes(item[1]));
+
+        if (unreadArticles.length === 0) {
+            marqueeContainer.innerHTML = '<p style="margin:0; text-align:center; color: #aaa; font-style: italic;">Semua artikel terkait sudah dibaca. 😊</p>';
+            return;
+        }
+
+        unreadArticles.sort(() => 0.5 - Math.random());
+        let contentHTML = '';
+        const separator = ' • ';
+        const isMobile = isMobileDevice();
+        unreadArticles.forEach(post => {
+            const [title, articleId, , , description] = post;
+            const url = `/artikel/${articleId}`;
+            const tooltipText = isMobile ? title : (description || title);
+            contentHTML += `<a href="${url}" data-article-id="${articleId}" title="${tooltipText}">${title}</a>${separator}`;
+        });
+        marqueeContainer.innerHTML = `<div class="marquee-content">${contentHTML.repeat(30)}</div>`;
+        registerReadTracker();
+
+    } catch (error) {
+        console.error(`Marquee Error:`, error);
     }
-    if (!targetCategory) return;
-
-    const filtered = articlesInCategory.filter(item => item[1] !== currentFilename);
-    const readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
-    const unread = filtered.filter(item => !readArticles.includes(item[1]));
-
-    if (!unread.length) {
-        marqueeContainer.innerHTML = '<p style="margin:0;text-align:center;color:#aaa;font-style:italic;">Semua artikel terkait sudah dibaca. 😊</p>';
-        return;
-    }
-
-    unread.sort(() => 0.5 - Math.random());
-    const separator = ' • ';
-    const isMobile = isMobileDevice();
-    let html = '';
-    unread.forEach(post => {
-        const [title, articleId, , , description] = post;
-        const url = `/artikel/${articleId}`;
-        const tooltip = isMobile ? title : (description || title);
-        html += `<a href="${url}" data-article-id="${articleId}" title="${tooltip}">${title}</a>${separator}`;
-    });
-    marqueeContainer.innerHTML = `<div class="marquee-content">${html.repeat(30)}</div>`;
-    registerReadTracker();
 }
 
 function initFloatingSearch(allArticlesData) {
-    const input = document.getElementById('floatingSearchInput');
+    const searchInput = document.getElementById('floatingSearchInput');
     const resultsContainer = document.getElementById('floatingSearchResults');
     const clearButton = document.getElementById('floatingSearchClear');
-    if (!input || !resultsContainer || !clearButton) return;
+    if (!searchInput || !resultsContainer || !clearButton) return;
 
-    input.addEventListener('keyup', () => {
-        const query = input.value;
-        clearButton.style.display = query.length > 0 ? 'block' : 'none';
+    searchInput.addEventListener('keyup', () => {
+        const query = searchInput.value;
+        clearButton.style.display = (query.length > 0) ? 'block' : 'none';
         const results = searchArticles(query, allArticlesData);
         resultsContainer.innerHTML = '';
         if (results.length > 0) {
@@ -115,10 +124,10 @@ function initFloatingSearch(allArticlesData) {
     });
 
     clearButton.addEventListener('click', () => {
-        input.value = '';
+        searchInput.value = '';
         resultsContainer.style.display = 'none';
         clearButton.style.display = 'none';
-        input.focus();
+        searchInput.focus();
     });
 
     document.addEventListener('click', (event) => {
@@ -130,10 +139,10 @@ function initFloatingSearch(allArticlesData) {
 }
 
 function initNavIcons(allArticlesData, currentFilename) {
-    const iconContainer = document.createElement('div');
+    const iconContainer = document.createElement("div");
     iconContainer.className = "ikon-kanan-bawah";
     iconContainer.innerHTML = `
-      <!-- Panah Kanan -->
+      <!-- Panah Kanan (Next) -->
       <a id="next-article" href="#" title="Artikel Berikutnya">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="gNext" x1="0" y1="0" x2="0" y2="1">
@@ -144,8 +153,8 @@ function initNavIcons(allArticlesData, currentFilename) {
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <!-- RSS -->
-      <a href="https://frijal.github.io/rss.html" title="RSS">
+      <!-- Ikon RSS -->
+      <a href="https://frijal.github.io/rss.html" title="RSS Feed">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
@@ -156,25 +165,64 @@ function initNavIcons(allArticlesData, currentFilename) {
           <path d="M12 14a24 24 0 0 1 22 22" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
         </svg>
       </a>
+      <!-- Ikon Home -->
+      <a href="https://frijal.github.io" title="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g2)"/>
+          <path d="M24 14L12 24h4v10h8v-6h4v6h8V24h4L24 14z" fill="#fff"/>
+        </svg>
+      </a>
+      <!-- Ikon Sitemap -->
+      <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#g3)"/>
+          <rect x="18" y="10" width="12" height="8" rx="2" fill="#fff"/>
+          <line x1="24" y1="18" x2="24" y2="26" stroke="#fff" stroke-width="2"/>
+          <rect x="8" y="28" width="8" height="8" rx="2" fill="#fff"/>
+          <rect x="20" y="28" width="8" height="8" rx="2" fill="#fff"/>
+          <rect x="32" y="28" width="8" height="8" rx="2" fill="#fff"/>
+        </svg>
+      </a>
+      <!-- Panah Kiri (Prev) -->
+      <a id="prev-article" href="#" title="Artikel Sebelumnya">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <defs><linearGradient id="gPrev" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>
+          </linearGradient></defs>
+          <rect width="48" height="48" rx="12" fill="url(#gPrev)"/>
+          <path d="M28 14L18 24l10 10" stroke="#fff" stroke-width="4" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     `;
     document.body.appendChild(iconContainer);
 
-    // Logic navigasi
+    // Navigasi artikel
     let currentCategoryName = null;
     let articlesInCurrentCategory = [];
     let currentIndexInCategory = -1;
 
-    for (const [cat, articles] of Object.entries(allArticlesData)) {
+    for (const [category, articles] of Object.entries(allArticlesData)) {
         const idx = articles.findIndex(a => a[1] === currentFilename);
         if (idx !== -1) {
-            currentCategoryName = cat;
+            currentCategoryName = category;
             articlesInCurrentCategory = articles;
             currentIndexInCategory = idx;
             break;
         }
     }
 
-    if (!articlesInCurrentCategory.length) return;
+    if (!articlesInCurrentCategory.length) {
+        document.getElementById('next-article').style.display = 'none';
+        document.getElementById('prev-article').style.display = 'none';
+        return;
+    }
 
     const total = articlesInCurrentCategory.length;
     const nextBtn = document.getElementById('next-article');
@@ -183,10 +231,15 @@ function initNavIcons(allArticlesData, currentFilename) {
     function updateUI() {
         const nextIndex = (currentIndexInCategory + 1) % total;
         const prevIndex = (currentIndexInCategory - 1 + total) % total;
-        nextBtn.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
-        prevBtn.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
-        nextBtn.title = `${articlesInCurrentCategory[nextIndex][0]} - ${currentCategoryName}`;
-        prevBtn.title = `${articlesInCurrentCategory[prevIndex][0]} - ${currentCategoryName}`;
+
+        const nextArticle = articlesInCurrentCategory[nextIndex];
+        const prevArticle = articlesInCurrentCategory[prevIndex];
+
+        nextBtn.href = `/artikel/${nextArticle[1]}`;
+        prevBtn.href = `/artikel/${prevArticle[1]}`;
+
+        nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`;
+        prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`;
     }
 
     updateUI();
@@ -196,34 +249,37 @@ function initNavIcons(allArticlesData, currentFilename) {
         const nextIndex = (currentIndexInCategory + 1) % total;
         window.location.href = `/artikel/${articlesInCurrentCategory[nextIndex][1]}`;
     });
-    if (prevBtn) {
-        prevBtn.addEventListener('click', e => {
-            e.preventDefault();
-            const prevIndex = (currentIndexInCategory - 1 + total) % total;
-            window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
-        });
-    }
+
+    prevBtn.addEventListener('click', e => {
+        e.preventDefault();
+        const prevIndex = (currentIndexInCategory - 1 + total) % total;
+        window.location.href = `/artikel/${articlesInCurrentCategory[prevIndex][1]}`;
+    });
 }
 
 function initActiveCategoryText(allArticlesData, currentFilename) {
     const kategoriDiv = document.getElementById('kategori-aktif');
     if (!kategoriDiv) return;
-    let activeCategory = null;
-    for (const [cat, articles] of Object.entries(allArticlesData)) {
+
+    let kategoriAktif = null;
+    for (const [kategori, articles] of Object.entries(allArticlesData)) {
         const idx = articles.findIndex(a => a[1] === currentFilename);
         if (idx !== -1) {
-            activeCategory = cat;
+            kategoriAktif = kategori;
             break;
         }
     }
-    if (activeCategory) kategoriDiv.textContent = activeCategory;
+
+    if (kategoriAktif) kategoriDiv.textContent = kategoriAktif;
 }
 
-// Main trigger
-export async function initializeApp() {
+// -------------------------------------------------------------------
+// INIT APP UTAMA
+// -------------------------------------------------------------------
+export async function initApp() {
     try {
         const response = await fetch('/artikel.json');
-        if (!response.ok) throw new Error('Gagal memuat artikel.json');
+        if (!response.ok) throw new Error(`Gagal memuat artikel.json`);
         const allArticlesData = await response.json();
 
         const currentURL = window.location.pathname;
@@ -232,13 +288,13 @@ export async function initializeApp() {
         const clearButton = document.getElementById('floatingSearchClear');
         if (clearButton) clearButton.innerHTML = '&times;';
 
-        initDarkMode();
         initCategoryMarquee(allArticlesData, currentFilename);
         initFloatingSearch(allArticlesData);
         initNavIcons(allArticlesData, currentFilename);
         initActiveCategoryText(allArticlesData, currentFilename);
-    } catch (err) {
-        console.error('Gagal menginisialisasi aplikasi:', err);
+
+    } catch (error) {
+        console.error("Gagal menginisialisasi aplikasi:", error);
         const searchInput = document.getElementById('floatingSearchInput');
         if (searchInput) {
             searchInput.placeholder = "Gagal memuat data";
@@ -246,4 +302,7 @@ export async function initializeApp() {
         }
     }
 }
+
+// Jalankan otomatis
+document.addEventListener('DOMContentLoaded', initApp);
 
