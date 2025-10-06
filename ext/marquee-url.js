@@ -1,4 +1,4 @@
-/**
+Script marquee-url.js: /**
  * ===================================================================
  * SKRIP GABUNGAN v8: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
@@ -315,5 +315,4 @@ async function initializeApp() {
 
 // Menjalankan semua fungsi saat dokumen siap
 document.addEventListener('DOMContentLoaded', initializeApp);
-
 
