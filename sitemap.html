@@ -3,41 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitemap - Daftar Isi Artikel</title>
-    <meta name="description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori atau gunakan pencarian untuk menemukan topik spesifik dengan mudah.">
+    <title>Sitemap - Daftar Isi Dinamis</title>
+    <meta name="description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori, gunakan pencarian, dan lacak artikel yang sudah dibaca.">
     <link rel="canonical" href="https://frijal.github.io/sitemap.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
-    <meta property="og:title" content="Sitemap - Daftar Isi Artikel">
+    <meta property="og:title" content="Sitemap - Daftar Isi Dinamis">
     <meta property="og:description" content="Jelajahi semua artikel yang pernah dipublikasikan.">
     <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
     <meta property="og:url" content="https://frijal.github.io/sitemap.html">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* --- DESAIN BARU --- */
+        /* --- DESAIN BARU YANG DISESUAIKAN DENGAN sitemap.js --- */
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
+            --bg-light: #f8f9fa;
+            --surface-light: #ffffff;
+            --text-light: #212529;
+            --text-muted-light: #6c757d;
+            --border-light: #dee2e6;
+            --hover-light: #f1f3f5;
+
+            --bg-dark: #0d1117;
+            --surface-dark: #161b22;
+            --text-dark: #e6edf3;
+            --text-muted-dark: #8b949e;
+            --border-dark: #30363d;
+            --hover-dark: rgba(139, 148, 158, 0.1);
+            
             --accent-color: #58a6ff;
-            --border-color: #30363d;
-            --hover-bg: rgba(139, 148, 158, 0.1); /* Latar belakang hover yang lembut */
-            --read-color: #3fb950; /* Warna hijau untuk status 'read' */
+            --highlight-bg: #ffe066;
+            --highlight-text: #333;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg-light);
+            color: var(--text-light);
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
         }
 
         .container {
@@ -46,324 +58,490 @@
             padding: 2rem 1.5rem 4rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
+        .header { text-align: center; margin-bottom: 2rem; }
+        h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        #totalCount {
+             color: var(--text-muted-light);
+             font-size: 1.1rem;
         }
-
-        h1 {
-            color: var(--text-primary);
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        body.dark-mode #totalCount { color: var(--text-muted-dark); }
+        
+        /* Marquee */
+        #marquee {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--surface-light);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.75rem 0;
+            margin: 1.5rem 0;
+            white-space: nowrap;
         }
-
-        #stats {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+        body.dark-mode #marquee {
+            background-color: var(--surface-dark);
+            border-color: var(--border-dark);
         }
-
-        #filter-wrapper {
-            position: relative;
-            margin-bottom: 2.5rem;
+        #marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 60s linear infinite;
         }
+        #marquee-content a {
+            color: var(--text-muted-light);
+            text-decoration: none;
+            margin: 0 1.5rem;
+        }
+        body.dark-mode #marquee-content a { color: var(--text-muted-dark); }
+        #marquee-content a:hover { color: var(--accent-color); }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
-        #filterInput {
+        /* Controls: Dark Mode Toggle & Buka/Tutup */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background-color: var(--surface-light);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+        body.dark-mode .controls {
+            background-color: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+        #tocToggle {
+            background-color: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-muted-light);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        body.dark-mode #tocToggle {
+            border-color: var(--border-dark);
+            color: var(--text-muted-dark);
+        }
+        #tocToggle:hover { background-color: var(--hover-light); }
+        body.dark-mode #tocToggle:hover { background-color: var(--hover-dark); }
+        
+        /* Dark Mode Switch */
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; inset: 0; background-color: #ccc; border-radius: 26px; transition: .4s; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .4s; }
+        input:checked + .slider { background-color: var(--accent-color); }
+        input:checked + .slider:before { transform: translateX(24px); }
+        .switch-label { display: flex; align-items: center; gap: 10px; color: var(--text-muted-light); }
+        body.dark-mode .switch-label { color: var(--text-muted-dark); }
+
+        /* Search Input */
+        #search-wrapper { position: relative; margin-bottom: 1.5rem; }
+        #search {
             width: 100%;
             padding: 14px 45px 14px 20px;
             font-size: 1rem;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: var(--surface-color);
-            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            background-color: var(--surface-light);
+            color: var(--text-light);
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-
-        #filterInput:focus {
+        body.dark-mode #search {
+            border-color: var(--border-dark);
+            background-color: var(--surface-dark);
+            color: var(--text-dark);
+        }
+        #search:focus {
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
         }
-        
         #clearSearch {
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            line-height: 1;
+            position: absolute; top: 50%; right: 15px; transform: translateY(-50%);
+            background: none; border: none; color: var(--text-muted-light);
+            font-size: 1.5rem; cursor: pointer; display: none; line-height: 1;
         }
+        body.dark-mode #clearSearch { color: var(--text-muted-dark); }
 
-        #sitemap-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .category-item {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden; /* Penting untuk radius saat accordion terbuka */
-            transition: background-color 0.2s;
-        }
-        .category-item:focus-within {
-             box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-             border-color: var(--accent-color);
-        }
+        /* TOC Container */
+        #toc { display: flex; flex-direction: column; gap: 0.75rem; }
+        .category { transition: opacity 0.3s; }
 
         .category-header {
-            background-color: var(--surface-color);
-            padding: 1.25rem 1.5rem;
+            padding: 1rem 1.25rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            border: none; /* Tombol tanpa border */
-            color: inherit;
-            font-size: inherit;
-            text-align: left;
+            border-radius: 8px;
+            color: #fff; /* Teks putih agar kontras dengan gradient */
+            font-weight: bold;
         }
-        
-        .category-header .title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
+        .badge {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
         }
-
-        .category-header .count {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+        .toc-list {
+            padding: 0.5rem 0;
+            display: none; /* Default tertutup */
+        }
+        .toc-item {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 6px;
         }
-
-        .category-header .toggle-icon {
-            transition: transform 0.2s ease-in-out;
-        }
-        
-        /* State saat accordion aktif/terbuka */
-        .category-header.active .toggle-icon {
-            transform: rotate(90deg);
-        }
-
-        .article-list {
-            display: none;
-            padding: 0;
-            background-color: var(--bg-color);
-        }
-
-        .article-list.open {
-            display: block;
-        }
-        
-        .article-list a {
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            color: var(--text-secondary);
+        .toc-title { width: 100%; }
+        .toc-item a {
+            color: var(--text-light);
             text-decoration: none;
-            gap: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            transition: color 0.2s, background-color 0.2s;
+            display: block;
+            margin-bottom: 0.25rem;
         }
-
-        .article-list a:hover {
-            color: var(--accent-color);
-            background-color: var(--hover-bg);
-        }
-        
-        .article-date {
-            font-size: 0.85em;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-            width: 90px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .article-title {
-            flex-grow: 1;
-            color: var(--text-primary);
-            transition: color 0.2s;
-        }
-        .article-list a:hover .article-title {
-            color: var(--accent-color);
-        }
-
-        .read-indicator {
-            width: 24px;
-            flex-shrink: 0;
-            text-align: right;
-            font-size: 0.9em;
-            color: var(--read-color); /* Warna hijau */
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        
-        /* State saat artikel sudah dibaca */
-        .article-list a.is-read .article-title {
-            color: var(--text-secondary);
+        body.dark-mode .toc-item a { color: var(--text-dark); }
+        .toc-item a:hover { color: var(--accent-color); }
+        .toc-item a.visited {
+            color: var(--text-muted-light);
             opacity: 0.8;
         }
-        .article-list a.is-read .read-indicator {
-            opacity: 1;
-        }
+        body.dark-mode .toc-item a.visited { color: var(--text-muted-dark); }
 
-        #loading {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
+        /* Status Labels */
+        .label-visited, .label-new {
+            font-size: 0.75rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem;
+        }
+        .label-visited { color: #198754; background-color: #d1e7dd; }
+        .label-new { color: #6c757d; background-color: #e9ecef; }
+        body.dark-mode .label-visited { color: #7ee2a8; background-color: #0d2818; }
+        body.dark-mode .label-new { color: #8b949e; background-color: #21262d; }
+
+        .highlight {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
+            padding: 2px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
             <h1>Daftar Isi Artikel</h1>
-            <p id="stats"></p>
+            <p id="totalCount">Total artikel: 0</p>
+        </header>
+
+        <div id="marquee"><div id="marquee-content">Memuat artikel...</div></div>
+        
+        <div class="controls">
+            <div class="switch-label">
+                <span>🌙</span>
+                <label class="switch">
+                    <input type="checkbox" id="darkSwitch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <button id="tocToggle">Tutup</button>
         </div>
-                
-        <div id="filter-wrapper">
-            <input type="text" id="filterInput" placeholder="Cari judul artikel...">
+
+        <div id="search-wrapper">
+            <input type="text" id="search" placeholder="Ketik untuk filter artikel...">
             <button id="clearSearch" title="Hapus pencarian">×</button>
         </div>
-                
-        <div id="sitemap-container">
-            <div id="loading">Memuat...</div>
+        
+        <div id="toc">
+            <p>Memuat daftar isi...</p>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const DATA_URL = 'artikel.json';
-            const sitemapContainer = document.getElementById('sitemap-container');
-            const statsElement = document.getElementById('stats');
-            const filterInput = document.getElementById('filterInput');
-            const clearButton = document.getElementById('clearSearch');
-            const loadingIndicator = document.getElementById('loading');
-            
-            let readArticles = [];
-            const fetchAndBuildSitemap = async () => {
-                try {
-                    readArticles = JSON.parse(localStorage.getItem('read_marquee_articles') || '[]');
-                    const response = await fetch(`${DATA_URL}?v=${new Date().getTime()}`);
-                    if (!response.ok) throw new Error(`Status ${response.status}`);
-                    
-                    const data = await response.json();
-                    let totalArticles = 0;
-                    
-                    sitemapContainer.innerHTML = '';
-                    const sortedCategories = Object.keys(data).sort((a, b) => a.localeCompare(b));
+        //<![CDATA[
+        const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
+        let grouped = {};
 
-                    sortedCategories.forEach(category => {
-                        const articles = data[category];
-                        if (!articles || articles.length === 0) return;
-                        
-                        totalArticles += articles.length;
-                        
-                        const categoryDiv = document.createElement('div');
-                        categoryDiv.className = 'category-item';
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            if (isNaN(d)) return "";
+            const dd = String(d.getDate()).padStart(2, "0");
+            const mm = String(d.getMonth() + 1).padStart(2, "0");
+            const yy = String(d.getFullYear()).slice(-2);
+            return `${dd}.${mm}.${yy}`;
+        }
 
-                        const header = document.createElement('button');
-                        header.className = 'category-header';
-                        header.innerHTML = `
-                            <span class="title">${category}</span>
-                            <span class="count">${articles.length} artikel <i class="fas fa-chevron-right toggle-icon"></i></span>
+        async function loadTOC() {
+            try {
+                const res = await fetch("artikel.json");
+                const data = await res.json();
+                const toc = document.getElementById("toc");
+                toc.innerHTML = "";
+
+                const totalCount = document.getElementById("totalCount");
+
+                grouped = {};
+                Object.keys(data).forEach(cat => {
+                    grouped[cat] = data[cat]
+                        .map(arr => ({
+                            title: arr[0],
+                            file: arr[1],
+                            image: arr[2],
+                            lastmod: arr[3],
+                            description: arr[4],
+                            category: cat
+                        }))
+                        .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
+                });
+
+                const totalArticles = Object.values(grouped).reduce(
+                    (sum, arr) => sum + arr.length,
+                    0
+                );
+                totalCount.textContent = `Total artikel: ${totalArticles}`;
+
+                Object.keys(grouped)
+                    .sort((a, b) => grouped[b].length - grouped[a].length)
+                    .forEach(cat => {
+                        const catDiv = document.createElement("div");
+                        catDiv.className = "category";
+
+                        catDiv.innerHTML = `
+                          <div class="category-header">
+                            ${cat} <span class="badge">${grouped[cat].length}</span>
+                          </div>
+                          <div class="toc-list" style="display: block;"></div>
                         `;
-                        
-                        const articleList = document.createElement('div');
-                        articleList.className = 'article-list';
-                        
-                        articles.forEach(article => {
-                            const [title, url, , pubDate] = article;
-                            const link = document.createElement('a');
-                            link.href = `artikel/${url}`;
-                            
-                            if(readArticles.includes(url)) link.classList.add('is-read');
 
-                            const date = new Date(pubDate);
-                            const formattedDate = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                        const catList = catDiv.querySelector(".toc-list");
 
-                            link.innerHTML = `
-                                <span class="article-date">${formattedDate}</span>
-                                <span class="article-title">${title}</span>
-                                <span class="read-indicator"><i class="fas fa-eye"></i></span>
-                            `;
-                            articleList.appendChild(link);
+                        grouped[cat].forEach((item, i) => {
+                            const el = document.createElement("div");
+                            el.className = "toc-item";
+                            el.dataset.text = item.title.toLowerCase();
+
+                            const a = document.createElement("a");
+                            a.href = `artikel/${item.file}`;
+                            a.textContent = `[${formatDate(item.lastmod)}] ${item.title}`;
+
+                            const statusSpan = document.createElement("span");
+                            if (visitedLinks.includes(item.file)) {
+                                statusSpan.className = "label-visited";
+                                statusSpan.textContent = "sudah dibaca 👍";
+                                a.classList.add("visited");
+                            } else {
+                                statusSpan.className = "label-new";
+                                statusSpan.textContent = "📚 belum dibaca";
+                            }
+
+                            a.addEventListener("click", () => {
+                                if (!visitedLinks.includes(item.file)) {
+                                    visitedLinks.push(item.file);
+                                    localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
+                                    statusSpan.className = "label-visited";
+                                    statusSpan.textContent = "sudah dibaca 👍";
+                                    a.classList.add("visited");
+                                }
+                            });
+
+                            const titleDiv = document.createElement("div");
+                            titleDiv.className = "toc-title";
+                            titleDiv.appendChild(a);
+                            titleDiv.appendChild(statusSpan);
+
+                            el.appendChild(titleDiv);
+                            catList.appendChild(el);
                         });
 
-                        categoryDiv.appendChild(header);
-                        categoryDiv.appendChild(articleList);
-                        sitemapContainer.appendChild(categoryDiv);
+                        catDiv
+                            .querySelector(".category-header")
+                            .addEventListener("click", () => {
+                                catList.style.display =
+                                    catList.style.display === "block" ? "none" : "block";
+                                updateTOCToggleText();
+                            });
+
+                        toc.appendChild(catDiv);
                     });
 
-                    statsElement.textContent = `Menampilkan ${totalArticles} artikel dalam ${sortedCategories.length} kategori.`;
-                    addEventListeners();
-                } catch (error) {
-                    loadingIndicator.innerHTML = '<p style="color: #ff6b6b;">Oops! Gagal memuat daftar isi.</p>';
-                    console.error('Error:', error);
+                const m = document.getElementById("marquee-content");
+                const allArticles = Object.values(grouped).flat();
+
+                function shuffle(arr) {
+                    for (let i = arr.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [arr[i], arr[j]] = [arr[j], arr[i]];
+                    }
+                    return arr;
                 }
-            };
-            
-            function addEventListeners() {
-                sitemapContainer.addEventListener('click', (event) => {
-                    const header = event.target.closest('.category-header');
-                    if (!header) return;
-                    
-                    header.classList.toggle('active');
-                    header.nextElementSibling.classList.toggle('open');
-                });
 
-                filterInput.addEventListener('input', handleFilter);
-                
-                clearButton.addEventListener('click', () => {
-                    filterInput.value = '';
-                    handleFilter();
-                    filterInput.focus();
-                });
+                const shuffled = shuffle(allArticles);
+                m.innerHTML = shuffled
+                    .map(d => `<a href="artikel/${d.file}">${d.title}</a>`)
+                    .join(" &bull; ");
+            } catch (e) {
+                console.error("Gagal load artikel.json", e);
+                document.getElementById("toc").innerHTML = '<p style="color: red;">Gagal memuat daftar isi. Pastikan file artikel.json ada dan valid.</p>';
             }
+        }
 
-            function handleFilter() {
-                const query = filterInput.value.toLowerCase();
-                const hasQuery = query.length > 0;
-                
-                clearButton.style.display = hasQuery ? 'block' : 'none';
+        const searchInput = document.getElementById("search");
+        const clearBtn = document.getElementById("clearSearch");
 
-                document.querySelectorAll('.category-item').forEach(categoryDiv => {
-                    const links = categoryDiv.querySelectorAll('.article-list a');
-                    const header = categoryDiv.querySelector('.category-header');
-                    const articleList = categoryDiv.querySelector('.article-list');
-                    let hasVisibleLink = false;
-                    
-                    links.forEach(link => {
-                        const title = link.querySelector('.article-title').textContent.toLowerCase();
-                        
-                        if (title.includes(query)) {
-                            link.style.display = 'flex';
-                            hasVisibleLink = true;
+        searchInput.addEventListener("input", function () {
+            const term = this.value.toLowerCase();
+            clearBtn.style.display = this.value ? "block" : "none";
+
+            let countVisible = 0;
+            const allArticlesCount = Object.values(grouped).flat().length;
+
+            document.querySelectorAll(".category").forEach(category => {
+                let catVisible = false;
+                category.querySelectorAll(".toc-item").forEach(item => {
+                    const text = item.dataset.text;
+                    const link = item.querySelector("a");
+                    if (term && text.includes(term)) {
+                        item.style.display = "flex";
+                        catVisible = true;
+                        countVisible++;
+                        const regex = new RegExp(`(${term})`, "gi");
+                        link.innerHTML = `[${formatDate(link.href)}] ${item.dataset.text}`.replace(
+                            regex,
+                            '<span class="highlight">$1</span>'
+                        );
+                    } else {
+                        item.style.display = "flex";
+                        link.innerHTML = `[${formatDate(link.href)}] ${item.dataset.text}`;
+                        if (!term) {
+                           item.style.display = "flex";
+                           catVisible = true;
                         } else {
-                            link.style.display = 'none';
+                           item.style.display = "none";
                         }
-                    });
-                    
-                    categoryDiv.style.display = hasVisibleLink ? 'block' : 'none';
-
-                    // Otomatis buka accordion jika ada hasil pencarian
-                    if (hasQuery && hasVisibleLink && !articleList.classList.contains('open')) {
-                        header.classList.add('active');
-                        articleList.classList.add('open');
                     }
                 });
-            }
-            
-            fetchAndBuildSitemap();
+                
+                category.style.display = catVisible ? "block" : "none";
+                const tocList = category.querySelector(".toc-list");
+                if (tocList) {
+                   tocList.style.display = (term && catVisible) ? "block" : tocList.style.display;
+                }
+            });
+
+            document.getElementById("totalCount").textContent = term ? 
+                `Menemukan ${countVisible} artikel` : 
+                `Total artikel: ${allArticlesCount}`;
+            updateTOCToggleText();
         });
+
+        clearBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            searchInput.dispatchEvent(new Event("input"));
+        });
+
+        let tocCollapsed = false;
+        const tocToggleBtn = document.getElementById("tocToggle");
+
+        function updateTOCToggleText() {
+            const allLists = Array.from(document.querySelectorAll(".toc-list"));
+            if (allLists.length === 0) return;
+            const allCollapsed = allLists.every(list => list.style.display === "none");
+            tocCollapsed = allCollapsed;
+            tocToggleBtn.textContent = tocCollapsed ? "Buka Semua" : "Tutup Semua";
+        }
+
+        tocToggleBtn.addEventListener("click", () => {
+            tocCollapsed = !tocCollapsed;
+            document.querySelectorAll(".toc-list").forEach(list => {
+                list.style.display = tocCollapsed ? "none" : "block";
+            });
+            updateTOCToggleText();
+        });
+
+        function getHeaderName(el) {
+            if (!el) return "";
+            const badge = el.querySelector && el.querySelector('.badge');
+            return badge ? el.textContent.replace(badge.textContent, '').trim() : el.textContent.trim();
+        }
+
+        function hashString(str) {
+            let h = 0;
+            for (let i = 0; i < str.length; i++) {
+                h = (h << 5) - h + str.charCodeAt(i);
+                h |= 0;
+            }
+            return Math.abs(h);
+        }
+
+        const gradients = [
+            "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
+            "linear-gradient(90deg, #d38312 0%, #a83279 100%)",
+            "linear-gradient(90deg, #00b09b 0%, #96c93d 100%)",
+            "linear-gradient(90deg, #cb2d3e 0%, #ef473a 100%)",
+            "linear-gradient(90deg, #11998e 0%, #38ef7d 100%)",
+            "linear-gradient(90deg, #108dc7 0%, #ef8e38 100%)",
+            "linear-gradient(90deg, #c0392b 0%, #8e44ad 100%)",
+            "linear-gradient(90deg, #16a085 0%, #f4d03f 100%)",
+        ];
+
+        function generateGradientMap(categories) {
+            const map = {};
+            (categories || []).forEach(cat => {
+                map[cat] = gradients[hashString(cat) % gradients.length];
+            });
+            return map;
+        }
+
+        function isDarkModeActive() {
+            return document.body.classList.contains('dark-mode');
+        }
+
+        function applyGradients(categories) {
+            const gradientMap = generateGradientMap(categories || []);
+            document.querySelectorAll('.category-header').forEach(el => {
+                const name = getHeaderName(el);
+                const gradient = gradientMap[name] || gradients[0];
+                el.style.background = isDarkModeActive() ? "#30363d" : gradient;
+            });
+        }
+
+        function initDarkMode(categories) {
+            const darkSwitch = document.getElementById('darkSwitch');
+            const saved = localStorage.getItem('darkMode');
+            
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    document.body.classList.add('dark-mode');
+                    if (darkSwitch) darkSwitch.checked = true;
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    if (darkSwitch) darkSwitch.checked = false;
+                }
+                applyGradients(categories);
+            }
+
+            if (saved !== null) {
+                setDarkMode(saved === 'true');
+            } else {
+                setDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            }
+
+            if (darkSwitch) {
+                darkSwitch.addEventListener('change', () => {
+                    localStorage.setItem('darkMode', darkSwitch.checked);
+                    setDarkMode(darkSwitch.checked);
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadTOC().then(() => {
+                const categories = Object.keys(grouped);
+                initDarkMode(categories);
+                updateTOCToggleText();
+            });
+        });
+        //]]>
     </script>
 </body>
 </html>
