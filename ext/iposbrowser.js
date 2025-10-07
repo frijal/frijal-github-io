@@ -241,41 +241,86 @@ const browserIcons = {
 </svg>`
 };
 
-const osIcons = {
-  "Windows": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <rect x="4" y="8" width="26" height="22" fill="#0078D7"/>
-  <rect x="4" y="36" width="26" height="22" fill="#0078D7"/>
-  <rect x="34" y="8" width="26" height="22" fill="#00A4EF"/>
-  <rect x="34" y="36" width="26" height="22" fill="#00A4EF"/>
+const browserIcons = {
+  "Firefox": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    firefox
+  </text>
 </svg>`,
-  "macOS": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#111"/>
-  <path d="M42 14c-4 0-7 3-7 7 0 3 2 6 5 7 3 1 6 0 8-2 2-3 1-7-2-10-1-1-3-2-4-2z" fill="#fff"/>
+  "Chrome": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    chrome
+  </text>
 </svg>`,
-  "Linux": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#FFD600"/>
-  <circle cx="26" cy="24" r="3" fill="#000"/>
-  <circle cx="38" cy="24" r="3" fill="#000"/>
-  <path d="M24 30h16v12c-5 3-11 3-16 0z" fill="#000"/>
+  "Edge": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    edge
+  </text>
 </svg>`,
-  "Android": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <rect x="12" y="12" width="40" height="40" rx="12" fill="#3DDC84"/>
-  <circle cx="24" cy="26" r="3" fill="#fff"/>
-  <circle cx="40" cy="26" r="3" fill="#fff"/>
-</svg>`,
-  "iOS": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#000"/>
-  <path d="M32 20c-5 0-9 4-9 9 0 4 3 8 7 8 2 0 3-1 4-2 1 1 2 2 4 2 4 0 7-4 7-8 0-5-4-9-9-9z" fill="#fff"/>
+  "Safari": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    safari
+  </text>
 </svg>`,
   "Unknown": `
-<svg class="icon responsive-icon" viewBox="0 0 48 48">
-  <circle cx="24" cy="24" r="20" fill="#777"/>
-  <text x="24" y="29" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    unknown
+  </text>
+</svg>`
+};
+
+const osIcons = {
+  "Windows": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    windows
+  </text>
+</svg>`,
+  "macOS": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    macos
+  </text>
+</svg>`,
+  "Linux": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    linux
+  </text>
+</svg>`,
+  "Android": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    android
+  </text>
+</svg>`,
+  "iOS": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    ios
+  </text>
+</svg>`,
+  "Unknown": `
+<svg class="icon responsive-icon" viewBox="0 0 100 24">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="14" font-family="monospace" fill="currentColor">
+    unknown
+  </text>
 </svg>`
 };
 
