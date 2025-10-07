@@ -473,45 +473,7 @@
       toggleTheme.textContent = next === 'dark' ? '🌙 Dark' : '☀️ Light';
     });
 
-    // Device info
-    function parseOS(ua) {
-      if (/Windows NT/i.test(ua)) return 'Windows';
-      if (/Mac OS X/i.test(ua)) return 'macOS';
-      if (/Android/i.test(ua)) return 'Android';
-      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-      if (/Linux/i.test(ua)) return 'Linux';
-      return 'Tidak diketahui';
-    }
-    function parseBrowser(ua) {
-      if (/Edg\//.test(ua)) return 'Microsoft Edge';
-      if (/Chrome\//.test(ua)) return 'Google Chrome';
-      if (/Firefox\//.test(ua)) return 'Mozilla Firefox';
-      if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
-      return 'Browser lain';
-    }
-    document.getElementById('infoOS').textContent = parseOS(navigator.userAgent);
-    document.getElementById('infoBrowser').textContent = parseBrowser(navigator.userAgent);
 
-    // IP + flag
-    async function loadIP() {
-      try {
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        const ipJson = await ipRes.json();
-        document.getElementById('infoIP').textContent = ipJson.ip;
-      } catch(e) {
-        document.getElementById('infoIP').textContent = '—';
-      }
-      try {
-        const geoRes = await fetch('https://ipapi.co/json/');
-        const geo = await geoRes.json();
-        const cc = (geo.country_code || '').toLowerCase();
-        if (cc) {
-          const flag = document.getElementById('infoFlag');
-          flag.innerHTML = `<img src="https://flagcdn.com/${cc}.svg" alt="${geo.country_name}" style="width:22px;height:16px;border-radius:2px;border:1px solid var(--border)" />`;
-        }
-      } catch(e) { /* ignore */ }
-    }
-    loadIP();
 
     // Lazy-load gallery images + Lightbox
     const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));

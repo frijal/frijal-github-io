@@ -1,70 +1,57 @@
 ========================================================
-Ditemukan di: 24nabi-isa.html
+Ditemukan di: 13nabi-shuaib.html
 ========================================================
-    // Deteksi browser & OS
-    function getBrowserOS(){
+    // Info chips: Browser, OS, IP, Country + flag
+    (function() {
+      const chipBrowser = document.getElementById('chip-browser');
+      const chipOS = document.getElementById('chip-os');
+      const chipIP = document.getElementById('chip-ip');
+      const chipCountry = document.getElementById('chip-country');
+
+      // Browser & OS detection (simple heuristic)
       const ua = navigator.userAgent;
-      let browser = 'Tidak diketahui';
-      if(ua.includes('Edg')) browser = 'Microsoft Edge';
-      else if(ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera';
-      else if(ua.includes('Chrome')) browser = 'Google Chrome';
-      else if(ua.includes('Safari')) browser = 'Safari';
-      else if(ua.includes('Firefox')) browser = 'Mozilla Firefox';
-      else if(ua.includes('SamsungBrowser')) browser = 'Samsung Internet';
+      const platform = navigator.platform || 'unknown';
+      const isEdge = ua.includes('Edg/');
+      const isChrome = ua.includes('Chrome') && !ua.includes('Chromium') && !isEdge;
+      const isFirefox = ua.includes('Firefox');
+      const isSafari = ua.includes('Safari') && !ua.includes('Chrome');
+      const browser =
+        (isEdge && 'Microsoft Edge') ||
+        (isChrome && 'Google Chrome') ||
+        (isFirefox && 'Mozilla Firefox') ||
+        (isSafari && 'Safari') ||
+        'Browser tidak dikenal';
+      chipBrowser.textContent = `🧭 Browser: ${browser}`;
 
-      let os = 'Tidak diketahui';
-      if(ua.includes('Windows')) os = 'Windows';
-      else if(ua.includes('Mac OS') || ua.includes('Macintosh')) os = 'macOS';
-      else if(ua.includes('Android')) os = 'Android';
-      else if(ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS/iPadOS';
-      else if(ua.includes('Linux')) os = 'Linux';
+      const os =
+        (/Windows/i.test(ua) && 'Windows') ||
+        (/Mac OS X|Macintosh/i.test(ua) && 'macOS') ||
+        (/Android/i.test(ua) && 'Android') ||
+        (/iPhone|iPad|iOS/i.test(ua) && 'iOS/iPadOS') ||
+        (/Linux/i.test(ua) && 'Linux') ||
+        platform;
+      chipOS.textContent = `💻 OS: ${os}`;
 
-      return { browser, os };
-    }
-
-    // Bendera negara dari kode (emoji regional indicator)
-    function countryFlag(cc){
-      if(!cc || cc.length !== 2) return '🏳️';
-      const code = cc.toUpperCase();
-      const base = 127397;
-      return String.fromCodePoint(code.charCodeAt(0) + base) + String.fromCodePoint(code.charCodeAt(1) + base);
-    }
-
-    // Render info chips: Browser, OS, IP, Country
-    async function renderInfo(){
-      const { browser, os } = getBrowserOS();
-      const info = document.getElementById('info-chips');
-      const chips = [
-        `<div class="chip"><b>Browser:</b> ${browser}</div>`,
-        `<div class="chip"><b>OS:</b> ${os}</div>`
-      ];
-
-      let ip = 'Memuat...', country = 'ID', flag = '🇮🇩';
-      try{
-        const res = await fetch('https://ipapi.co/json/');
-        if(res.ok){
-          const data = await res.json();
-          ip = data.ip || 'Tidak diketahui';
-          country = data.country || 'ID';
-          flag = countryFlag(country);
-        }else{
-          throw new Error('fallback');
+      // IP & Country via ipapi.co (fallback-safe)
+      const setCountryFlag = (code, name) => {
+        if (!code) {
+          chipCountry.textContent = '🏳️ Negara: Tidak diketahui';
+          return;
         }
-      }catch(e){
-        try{
-          const res2 = await fetch('https://ipinfo.io/json?token=');
-          const data2 = await res2.json();
-          ip = (data2 && data2.ip) ? data2.ip : 'Tidak diketahui';
-          country = (data2 && data2.country) ? data2.country : 'ID';
-          flag = countryFlag(country);
-        }catch(e2){
-          ip = 'Tidak diketahui';
-          country = 'ID';
-          flag = '🇮🇩';
-        }
-      }
-      chips.push(`<div class="chip"><b>IP:</b> ${ip}</div>`);
-      chips.push(`<div class="chip"><b>Negara:</b> ${flag} ${country}</div>`);
-      info.innerHTML = chips.join('');
-    }
+        const cc = (code.length === 2 ? code : (name || '')).toLowerCase();
+        const flagUrl = `https://flagcdn.com/24x18/${cc}.png`;
+        chipCountry.innerHTML = `🏳️ Negara: <img src="${flagUrl}" alt="${name}" width="24" height="18" style="vertical-align:middle;border-radius:3px;border:1px solid #223;"> ${name || code}`;
+      };
+
+      fetch('https://ipapi.co/json/', { mode: 'cors' })
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+          chipIP.textContent = `🌐 IP: ${data.ip || 'Tidak diketahui'}`;
+          setCountryFlag(data.country || data.country_code, data.country_name || data.country);
+        })
+        .catch(() => {
+          chipIP.textContent = '🌐 IP: Tidak diketahui';
+          setCountryFlag(null, null);
+        });
+    })();
 

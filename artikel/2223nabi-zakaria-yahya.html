@@ -369,72 +369,7 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0"></script>
 
   <script>
-  // Helper: detect browser & OS
-  function getBrowserOS(){
-    const ua = navigator.userAgent;
-    let browser = 'Tidak diketahui';
-    if(ua.includes('Edg')) browser='Microsoft Edge';
-    else if(ua.includes('OPR')||ua.includes('Opera')) browser='Opera';
-    else if(ua.includes('Chrome')) browser='Google Chrome';
-    else if(ua.includes('Safari')) browser='Safari';
-    else if(ua.includes('Firefox')) browser='Mozilla Firefox';
-    else if(ua.includes('SamsungBrowser')) browser='Samsung Internet';
 
-    let os='Tidak diketahui';
-    if(ua.includes('Windows')) os='Windows';
-    else if(ua.includes('Mac OS')||ua.includes('Macintosh')) os='macOS';
-    else if(ua.includes('Android')) os='Android';
-    else if(ua.includes('iPhone')||ua.includes('iPad')) os='iOS/iPadOS';
-    else if(ua.includes('Linux')) os='Linux';
-    return {browser, os};
-  }
-
-  // Helper: country code to flag emoji
-  function countryFlag(cc){
-    if(!cc || cc.length !== 2) return '🏳️';
-    const code = cc.toUpperCase();
-    const base = 127397;
-    return String.fromCodePoint(code.charCodeAt(0)+base) + String.fromCodePoint(code.charCodeAt(1)+base);
-  }
-
-  // Render info chips: Browser, OS, IP, Country
-  async function renderInfo(){
-    const {browser, os} = getBrowserOS();
-    const info = document.getElementById('info-chips');
-    const chips = [];
-
-    chips.push(`<div class="chip"><b>Browser:</b> ${browser}</div>`);
-    chips.push(`<div class="chip"><b>OS:</b> ${os}</div>`);
-
-    let ip='Terisi otomatis', country='ID', flag='🇮🇩';
-    try{
-      const res = await fetch('https://ipapi.co/json/');
-      if(res.ok){
-        const data = await res.json();
-        ip = data.ip || 'Tidak diketahui';
-        country = data.country || 'ID';
-        flag = countryFlag(country);
-      } else {
-        throw new Error('fallback ipinfo');
-      }
-    }catch(e){
-      try{
-        const res2 = await fetch('https://ipinfo.io/json?token=');
-        const data2 = await res2.json();
-        ip = (data2 && data2.ip) ? data2.ip : 'Tidak diketahui';
-        country = (data2 && data2.country) ? data2.country : 'ID';
-        flag = countryFlag(country);
-      }catch(e2){
-        ip = 'Tidak diketahui';
-        country = 'ID';
-        flag = '🇮🇩';
-      }
-    }
-    chips.push(`<div class="chip"><b>IP:</b> ${ip}</div>`);
-    chips.push(`<div class="chip"><b>Negara:</b> ${flag} ${country}</div>`);
-
-    info.innerHTML = chips.join('');
-  }
 
   // Share links
   function initShare(){

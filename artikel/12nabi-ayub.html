@@ -344,59 +344,7 @@
       });
     })();
 
-    // Info chips: Browser, OS, IP, Country + flag
-    (function() {
-      const chipBrowser = document.getElementById('chip-browser');
-      const chipOS = document.getElementById('chip-os');
-      const chipIP = document.getElementById('chip-ip');
-      const chipCountry = document.getElementById('chip-country');
 
-      // Browser & OS detection (light heuristic)
-      const ua = navigator.userAgent;
-      const platform = navigator.platform || 'unknown';
-      const isEdge = ua.includes('Edg/');
-      const isChrome = ua.includes('Chrome') && !ua.includes('Chromium') && !isEdge;
-      const isFirefox = ua.includes('Firefox');
-      const isSafari = ua.includes('Safari') && !ua.includes('Chrome');
-      const browser =
-        (isEdge && 'Microsoft Edge') ||
-        (isChrome && 'Google Chrome') ||
-        (isFirefox && 'Mozilla Firefox') ||
-        (isSafari && 'Safari') ||
-        'Browser tidak dikenal';
-      chipBrowser.textContent = `🧭 Browser: ${browser}`;
-
-      const os =
-        (/Windows/i.test(ua) && 'Windows') ||
-        (/Mac OS X|Macintosh/i.test(ua) && 'macOS') ||
-        (/Android/i.test(ua) && 'Android') ||
-        (/iPhone|iPad|iOS/i.test(ua) && 'iOS/iPadOS') ||
-        (/Linux/i.test(ua) && 'Linux') ||
-        platform;
-      chipOS.textContent = `💻 OS: ${os}`;
-
-      // IP & Country via ipapi.co (fallback-safe)
-      const setCountryFlag = (code, name) => {
-        if (!code) {
-          chipCountry.textContent = '🏳️ Negara: Tidak diketahui';
-          return;
-        }
-        const cc = code.toLowerCase();
-        const flagUrl = `https://flagcdn.com/24x18/${cc}.png`;
-        chipCountry.innerHTML = `🏳️ Negara: <img src="${flagUrl}" alt="${name}" width="24" height="18" style="vertical-align:middle;border-radius:3px;border:1px solid #223;"> ${name || code}`;
-      };
-
-      fetch('https://ipapi.co/json/', { mode: 'cors' })
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then(data => {
-          chipIP.textContent = `🌐 IP: ${data.ip || 'Tidak diketahui'}`;
-          setCountryFlag(data.country || data.country_code, data.country_name || data.country);
-        })
-        .catch(() => {
-          chipIP.textContent = '🌐 IP: Tidak diketahui';
-          setCountryFlag(null, null);
-        });
-    })();
 
     // Simple lightbox with arrow navigation
     (function() {
