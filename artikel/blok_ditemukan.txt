@@ -1,58 +1,39 @@
 ========================================================
-Ditemukan di: yarmuk-yerusalem.html
+Ditemukan di: istighfar-kunci-keberkahan-dan-rezeki.html
 ========================================================
-  // === Info Browser & Lokasi ===
-  async function fetchBrowserInfo() {
-    // Deteksi OS
-    var os = (() => {
-      let osName = "Unknown";
-      let ua = navigator.userAgent;
-      if (/Windows/i.test(ua)) osName = "Windows";
-      else if (/Macintosh/i.test(ua)) osName = "Mac";
-      else if (/Linux/i.test(ua)) osName = "Linux";
-      else if (/Android/i.test(ua)) osName = "Android";
-      else if (/iPhone|iPad/i.test(ua)) osName = "iOS";
-      return osName;
-    })();
+  // system info (ikon seperti aslinya)
+        const ua = navigator.userAgent
+        document.getElementById('browser').textContent = ua.includes('Firefox')
+          ? 'Firefox'
+          : ua.includes('Chrome')
+            ? 'Chrome'
+            : ua.includes('Safari')
+              ? 'Safari'
+              : 'Browser'
+        document.getElementById('os').textContent = /Windows/.test(ua)
+          ? 'Windows'
+          : /Mac/.test(ua)
+            ? 'macOS'
+            : /Linux/.test(ua)
+              ? 'Linux'
+              : /Android/.test(ua)
+                ? 'Android'
+                : /iPhone|iPad/.test(ua)
+                  ? 'iOS'
+                  : 'OS'
 
-    // Deteksi Browser
-    var ua = navigator.userAgent;
-    var browser = ua.includes("Edg/")
-      ? "Microsoft Edge"
-      : ua.includes("OPR") || ua.includes("Opera")
-      ? "Opera"
-      : ua.includes("Chrome")
-      ? "Chrome"
-      : ua.includes("Safari") && !ua.includes("Chrome")
-      ? "Safari"
-      : ua.includes("Firefox")
-      ? "Firefox"
-      : ua.includes("MSIE") || ua.includes("Trident")
-      ? "Internet Explorer"
-      : "Browser Lain";
-
-    // Dapatkan Info IP & Lokasi
-    let info = {
-      city: "?",
-      country: "?",
-      countryCode: "",
-      flag: "",
-      ip: "?",
-    };
-
-    try {
-      let res = await fetch("https://ipapi.co/json/");
-      info = await res.json();
-      info.flag = info.country_code
-        ? `https://flagcdn.com/32x24/${info.country_code.toLowerCase()}.png`
-        : "";
-    } catch {}
-
-    // Render Informasi
-    let html = "";
-    if (info.flag)
-      html += `<img class="flag" src="${info.flag}" alt="Bendera ${info.country}">`;
-
-    html += `Kota: <b>${info.city}</b>, Negara: <b>${info.country_name || info.country}</b> <br>`;
-    html += `IP: <code>${info.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        fetch('https://ipapi.co/json/')
+          .then((r) => r.json())
+          .then((d) => {
+            const flags = { ID: '🇮🇩', US: '🇺🇸', GB: '🇬🇧', JP: '🇯🇵', CN: '🇨🇳' }
+            document.getElementById('loc').textContent =
+              (flags[d.country_code] || '🌍') +
+              ' ' +
+              (d.city || d.region) +
+              ', ' +
+              d.country_name
+          })
+          .catch(() => {
+            document.getElementById('loc').textContent = '🌍 Tidak diketahui'
+          })
 
