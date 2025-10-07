@@ -1124,68 +1124,7 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
           window.open(shareUrl, '_blank', 'noopener')
         }
 
-        // Detect browser & OS, show inline SVG icons (simple, lightweight)
-        const ua = navigator.userAgent
-        let browserName = 'Browser tidak diketahui'
-        let osName = 'OS tidak diketahui'
-        let browserSVG = ''
-        let osSVG = ''
-
-        if (/firefox/i.test(ua)) {
-          browserName = 'Mozilla Firefox'
-          browserSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" fill="#ff9400"/>
-        <path d="M6 12c0-3.3 2.7-6 6-6 1.2 0 2.3.3 3.3.8C15.4 7 12 11 12 15c0 1.6.5 3.1 1.4 4.2C9.4 19.8 6 16.7 6 12z" fill="#002b54"/>
-      </svg>`
-        } else if (/chrome|chromium/i.test(ua)) {
-          browserName = 'Google Chrome'
-          browserSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" fill="#f4b400"/>
-        <path d="M12 2v10l6 3A10 10 0 0 0 12 2z" fill="#db4437"/>
-      </svg>`
-        } else if (/edg/i.test(ua)) {
-          browserName = 'Microsoft Edge'
-          browserSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="#0078d7"/></svg>`
-        } else if (/safari/i.test(ua) && !/chrome/i.test(ua)) {
-          browserName = 'Safari'
-          browserSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1e90ff"/></svg>`
-        }
-
-        if (/linux/i.test(ua)) {
-          osName = 'Linux'
-          osSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24"><path d="M4 20c1-4 5-7 8-7s7 3 8 7H4z" fill="#000"/><circle cx="12" cy="8" r="3" fill="#000"/></svg>`
-        } else if (/win/i.test(ua)) {
-          osName = 'Windows'
-          osSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24"><rect x="2" y="4" width="9" height="7" fill="#00a4ef"/><rect x="13" y="4" width="9" height="7" fill="#0067b8"/><rect x="2" y="13" width="9" height="7" fill="#008a3d"/><rect x="13" y="13" width="9" height="7" fill="#00bcff"/></svg>`
-        } else if (/macintosh|mac os|mac_powerpc|mac os x/i.test(ua)) {
-          osName = 'macOS'
-          osSVG = `
-      <svg width="28" height="20" viewBox="0 0 24 24"><path d="M16 2c-1 0-3 1-4 3-1 2-1 5 0 7 2 3 6 3 8 1 0 0 0-7-4-11z" fill="#000"/></svg>`
-        }
-
-        document.getElementById('browser-svg').innerHTML = browserSVG
-        document.getElementById('os-svg').innerHTML = osSVG
-        document.getElementById('client-info').textContent =
-          `${browserName} • ${osName}`
-
-        // IP + country flag with public API
-        fetch('https://ipapi.co/json/')
-          .then((r) => r.json())
-          .then((d) => {
-            const flag = `https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png`
-            document.getElementById('ip-flag').innerHTML =
-              `IP Anda: ${d.ip} • Negara: ${d.country_name} <img src="${flag}" alt="${d.country_name} flag" style="vertical-align:middle;margin-left:6px" />`
-          })
-          .catch(() => {
-            document.getElementById('ip-flag').textContent =
-              'IP/Negara: tidak tersedia'
-          })
+        
 
         // set FB comments data-href (already done above) and highlight Prism
         document.addEventListener('DOMContentLoaded', () => {

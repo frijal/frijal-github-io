@@ -253,14 +253,7 @@
 
     <div class="tooltip" id="tooltip"></div>
 
-    <!-- Info Browser & OS -->
-    <div id="info-browser">
-      <strong>Browser:</strong> <span id="browser-name"></span>
-      <span id="browser-icon"></span>
-    </div>
-    <div id="info-os">
-      <strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span>
-    </div>
+    
 
     <!-- Facebook Comments Plugin -->
     <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
@@ -285,11 +278,7 @@
       ></div>
     </div>
 
-    <!-- IP & Bendera -->
-    <div id="ip-country">
-      <strong>IP & Negara:</strong> <span id="ip-address"></span>
-      <img id="flag" src="" alt="Flag" width="24" />
-    </div>
+    
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
@@ -322,32 +311,7 @@
           })
         })
 
-        // Browser & OS info
-        const ua = navigator.userAgent
-        let browser = 'Unknown',
-          os = 'Unknown'
-        if (ua.indexOf('Firefox') > -1) browser = 'Firefox 🦊'
-        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome 🟢'
-        else if (ua.indexOf('Safari') > -1) browser = 'Safari 🍏'
-        else if (ua.indexOf('Edge') > -1) browser = 'Edge 🟦'
-        document.getElementById('browser-name').textContent = browser
-
-        if (ua.indexOf('Windows') > -1) os = 'Windows 🪟'
-        else if (ua.indexOf('Linux') > -1) os = 'Linux 🐧'
-        else if (ua.indexOf('Mac') > -1) os = 'macOS 🍎'
-        document.getElementById('os-name').textContent = os
-
-        // IP & Flag
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip-address').textContent =
-              data.ip + ' - ' + data.country_name
-            document.getElementById('flag').src =
-              'https://flagcdn.com/24x18/' +
-              data.country_code.toLowerCase() +
-              '.png'
-          })
+        
 
         // Facebook Comments setup
         const currentUrl = window.location.href
