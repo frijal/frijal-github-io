@@ -1,88 +1,60 @@
 ========================================================
-Ditemukan di: biskuit-linux-itu-nyata.html
+Ditemukan di: 4nabi-hud.html
 ========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
+// Info browser & OS
+        function parseUA() {
+          const ua = navigator.userAgent
+          const browser = ua.includes('Firefox/')
+            ? 'Firefox'
+            : ua.includes('Edg/')
+              ? 'Microsoft Edge'
+              : ua.includes('Chrome/') && !ua.includes('Chromium')
+                ? 'Google Chrome'
+                : ua.includes('Safari/') && !ua.includes('Chrome')
+                  ? 'Safari'
+                  : ua.includes('OPR/')
+                    ? 'Opera'
+                    : 'Browser tidak dikenal'
+          const platform = navigator.platform || 'unknown'
+          const os = /Win/i.test(platform)
+            ? 'Windows'
+            : /Mac/i.test(platform)
+              ? 'macOS'
+              : /Linux/i.test(platform)
+                ? 'Linux'
+                : /Android/i.test(ua)
+                  ? 'Android'
+                  : /iPhone|iPad|iPod/i.test(ua)
+                    ? 'iOS'
+                    : 'OS tidak dikenal'
+          return { browser, os }
+        }
+        const { browser, os } = parseUA()
+        document.getElementById('browser').textContent = browser
+        document.getElementById('os').textContent = os
 
-========================================================
-Ditemukan di: boomerang-berita-cuaca.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: gcos-2009-ngoprek-spg-ubuntu-jogja.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: iwan-fals-bangunlah-putra-putri-pertiwi.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: peramban-ringan-linux-terbaik.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: pesan-imam-syafii-belajar.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: ujian-nasional-catatan-video.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
-
-========================================================
-Ditemukan di: unboxing-respiro-jne-balikpapan.html
-========================================================
-<div class="info" id="device-info">
-            <span class="flag" id="flag">🏳️</span>
-            <span id="geo">Mencari kota…</span>
-            <span>•</span>
-            <span id="ua-inline">Perangkat kamu: …</span>
-          </div>
-        </div>
+        // Info IP & negara + bendera
+        async function loadIP() {
+          try {
+            // Anda bisa mengganti endpoint sesuai preferensi kebijakan CORS
+            const res = await fetch('https://ipapi.co/json/')
+            if (!res.ok) throw new Error('IP fetch gagal')
+            const data = await res.json()
+            const ip = data.ip || 'Tidak diketahui'
+            const country = data.country_name || 'Tidak diketahui'
+            const code = (data.country_code || '').toLowerCase()
+            document.getElementById('ip').textContent = ip
+            document.getElementById('country').textContent = country
+            const flag = document.getElementById('flag')
+            if (code) {
+              flag.src = `https://flagcdn.com/w40/${code}.png`
+              flag.style.display = 'inline-block'
+              flag.alt = `Bendera ${country}`
+            }
+          } catch (e) {
+            document.getElementById('ip').textContent = 'Gagal memuat'
+            document.getElementById('country').textContent = '—'
+          }
+        }
+        loadIP()
 
