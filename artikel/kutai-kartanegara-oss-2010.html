@@ -608,41 +608,7 @@
             </p>
           </div>
           <aside>
-            <h2>Info teknis kamu</h2>
-            <div class="tech">
-              <div class="card">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#FF7A59"
-                    d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 17.93V20h-2v-.07A8.015 8.015 0 0 1 4.07 13H4v-2h.07A8.015 8.015 0 0 1 11 4.07V4h2v.07A8.015 8.015 0 0 1 19.93 11H20v2h-.07A8.015 8.015 0 0 1 13 19.93Z"
-                  />
-                </svg>
-                <div>
-                  <div style="font-weight: 700">Browser</div>
-                  <div id="ua-browser" class="muted">Mendeteksi…</div>
-                </div>
-              </div>
-              <div class="card">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="#5ED3F3"
-                    d="M4 6a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v2H4Z"
-                  />
-                  <path
-                    fill="#5ED3F3"
-                    d="M4 10h20v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"
-                  />
-                </svg>
-                <div>
-                  <div style="font-weight: 700">Sistem Operasi</div>
-                  <div id="ua-os" class="muted">Mendeteksi…</div>
-                </div>
-              </div>
-              <div class="card">
-                <img id="flag" class="flag" alt="Bendera" src="" />
-                <div>
-                  <div style="font-weight: 700">Lokasi Perkiraan</div>
-                  <div id="geo" class="muted">Mencari kota via IP…</div>
+            
                 </div>
               </div>
             </div>
@@ -815,56 +781,7 @@
         const CANON =
           document.querySelector('link[rel="canonical"]')?.href || location.href
 
-        // Deteksi sederhana Browser & OS
-        ;(function detectUA() {
-          const ua = navigator.userAgent
-          const bMap = [
-            { k: /Edg\//, n: 'Microsoft Edge' },
-            { k: /OPR\//, n: 'Opera' },
-            { k: /Chrome\//, n: 'Google Chrome' },
-            { k: /Safari\//, n: 'Safari' },
-            { k: /Firefox\//, n: 'Mozilla Firefox' },
-          ]
-          const oMap = [
-            { k: /Windows NT 10|Windows NT 11/, n: 'Windows 10/11' },
-            { k: /Windows NT 6\./, n: 'Windows 7/8' },
-            { k: /Android/, n: 'Android' },
-            { k: /iPhone|iPad|iPod/, n: 'iOS' },
-            { k: /Mac OS X/, n: 'macOS' },
-            { k: /Linux/, n: 'Linux' },
-          ]
-          const b = (
-            bMap.find((x) => x.k.test(ua)) || { n: 'Browser tak dikenal' }
-          ).n
-          const o = (oMap.find((x) => x.k.test(ua)) || { n: 'OS tak dikenal' })
-            .n
-          document.getElementById('ua-browser').textContent = b
-          document.getElementById('ua-os').textContent = o
-        })()
-
-        // Lokasi berdasarkan IP (ipapi.co)
-        ;(function geoIP() {
-          const geoEl = document.getElementById('geo')
-          const flagEl = document.getElementById('flag')
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-            .then((d) => {
-              const city = d.city || 'Kota tidak diketahui'
-              const country = d.country_name || ''
-              const cc = (d.country_code || '').toLowerCase()
-              geoEl.textContent = city + (country ? ', ' + country : '')
-              if (cc) {
-                flagEl.src = `https://flagcdn.com/w40/${cc}.png`
-                flagEl.alt = `Bendera ${country || cc.toUpperCase()}`
-              } else {
-                flagEl.src =
-                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-              }
-            })
-            .catch(() => {
-              geoEl.textContent = 'Lokasi tidak tersedia'
-            })
-        })()
+        
 
         // Lazy-load untuk galeri (IntersectionObserver)
         ;(function lazyLoad() {

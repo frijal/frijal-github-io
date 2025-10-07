@@ -1,28 +1,50 @@
-// Deteksi Info Pengguna
-        document.addEventListener('DOMContentLoaded', function() {
-            // Browser & OS
-            const ua = navigator.userAgent;
-            const platform = navigator.platform;
-            let browser = "Browser tidak dikenal";
-            if (ua.includes("Firefox/")) browser = `Firefox 🔥`;
-            else if (ua.includes("Chrome/")) browser = `Chrome 🚀`;
-            else if (ua.includes("Safari/")) browser = `Safari 🧭`;
-            document.getElementById('browser-info').textContent = `Browser: ${browser}`;
-            
-            let os = "OS tidak dikenal";
-            if (platform.includes("Win")) os = "Windows 💻";
-            else if (platform.includes("Mac")) os = "macOS 🍎";
-            else if (platform.includes("Linux")) os = "Linux 🐧";
-            document.getElementById('os-info').textContent = `Sistem Operasi: ${os}`;
-            
-            // Lokasi via IP
-            const locationInfoEl = document.getElementById('location-info');
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
-                    locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle;">`;
-                })
-                .catch(error => {
-                    locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.';
-                    console.error('Error fetching location:', error);
+// Deteksi sederhana Browser & OS
+        ;(function detectUA() {
+          const ua = navigator.userAgent
+          const bMap = [
+            { k: /Edg\//, n: 'Microsoft Edge' },
+            { k: /OPR\//, n: 'Opera' },
+            { k: /Chrome\//, n: 'Google Chrome' },
+            { k: /Safari\//, n: 'Safari' },
+            { k: /Firefox\//, n: 'Mozilla Firefox' },
+          ]
+          const oMap = [
+            { k: /Windows NT 10|Windows NT 11/, n: 'Windows 10/11' },
+            { k: /Windows NT 6\./, n: 'Windows 7/8' },
+            { k: /Android/, n: 'Android' },
+            { k: /iPhone|iPad|iPod/, n: 'iOS' },
+            { k: /Mac OS X/, n: 'macOS' },
+            { k: /Linux/, n: 'Linux' },
+          ]
+          const b = (
+            bMap.find((x) => x.k.test(ua)) || { n: 'Browser tak dikenal' }
+          ).n
+          const o = (oMap.find((x) => x.k.test(ua)) || { n: 'OS tak dikenal' })
+            .n
+          document.getElementById('ua-browser').textContent = b
+          document.getElementById('ua-os').textContent = o
+        })()
+
+        // Lokasi berdasarkan IP (ipapi.co)
+        ;(function geoIP() {
+          const geoEl = document.getElementById('geo')
+          const flagEl = document.getElementById('flag')
+          fetch('https://ipapi.co/json/')
+            .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+            .then((d) => {
+              const city = d.city || 'Kota tidak diketahui'
+              const country = d.country_name || ''
+              const cc = (d.country_code || '').toLowerCase()
+              geoEl.textContent = city + (country ? ', ' + country : '')
+              if (cc) {
+                flagEl.src = `https://flagcdn.com/w40/${cc}.png`
+                flagEl.alt = `Bendera ${country || cc.toUpperCase()}`
+              } else {
+                flagEl.src =
+                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+              }
+            })
+            .catch(() => {
+              geoEl.textContent = 'Lokasi tidak tersedia'
+            })
+        })()
