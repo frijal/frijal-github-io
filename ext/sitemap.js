@@ -67,7 +67,6 @@ async function loadTOC() {
         
         const shuffledColors = shuffle([...categoryColors]);
         
-        // TAMBAHKAN: Referensi ke tooltip kategori
         const categoryTooltip = document.getElementById('category-tooltip');
 
         Object.keys(grouped)
@@ -91,7 +90,6 @@ async function loadTOC() {
                 `;
                 const catList = catDiv.querySelector(".toc-list");
                 grouped[cat].forEach((item) => {
-                    // ... (logika pembuatan item artikel tetap sama)
                     const el = document.createElement("div");
                     el.className = "toc-item";
                     el.dataset.text = item.title.toLowerCase();
@@ -122,6 +120,21 @@ async function loadTOC() {
                             updateStats(totalArticles, visitedLinks.length);
                         }
                     });
+
+                    // ===== PERUBAHAN DI SINI: Tambahkan event listener untuk tooltip judul artikel =====
+                    const description = item.description || 'Tidak ada deskripsi.';
+                    a.addEventListener('mouseenter', () => {
+                        categoryTooltip.innerHTML = description;
+                        categoryTooltip.style.display = 'block';
+                    });
+                    a.addEventListener('mousemove', (e) => {
+                        categoryTooltip.style.left = e.clientX + 15 + 'px';
+                        categoryTooltip.style.top = e.clientY + 15 + 'px';
+                    });
+                    a.addEventListener('mouseleave', () => {
+                        categoryTooltip.style.display = 'none';
+                    });
+                    
                     titleDiv.appendChild(a);
                     titleDiv.appendChild(statusSpan);
                     titleDiv.appendChild(dateSpan);
@@ -135,7 +148,6 @@ async function loadTOC() {
                     updateTOCToggleText();
                 });
                 
-                // TAMBAHKAN: Logika untuk tooltip kategori
                 const recentArticles = grouped[cat].slice(0, 3).map(article => `<li>${article.title}</li>`).join('');
                 const tooltipHTML = `<strong>Artikel Terbaru:</strong><ul>${recentArticles}</ul>`;
 
@@ -190,7 +202,6 @@ async function loadTOC() {
     }
 }
 
-// ... (sisa kode JavaScript lainnya tetap sama, tidak perlu diubah)
 const searchInput = document.getElementById("search");
 const clearBtn = document.getElementById("clearSearch");
 
