@@ -100,7 +100,7 @@ style.textContent = `
   gap: 10px;
   text-align: center;
   font-size: 0.9rem;
-  color: var(--text-color, currentColor);
+  color: inherit;
   border-radius: 0;
   padding: 4px 8px;
   margin: 0 auto;
