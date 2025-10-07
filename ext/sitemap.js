@@ -14,7 +14,7 @@ const categoryColors = [
     'linear-gradient(45deg, #607d8b, #9e9e9e)'  // Blue Grey
 ];
 
-function shuffle(array) {a
+function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -38,6 +38,7 @@ function updateStats(total, read, term = '') {
          return;
     }
     const unread = total - read;
+    // PERBAIKAN: Ganti karakter emoji yang rusak
     totalCountEl.innerHTML = `
         <span class="total-stat">Total: <strong>${total}</strong></span>
         <span class="separator">|</span>
@@ -99,6 +100,7 @@ async function loadTOC() {
                     a.href = `artikel/${item.file}`;
                     a.textContent = item.title;
                     const statusSpan = document.createElement("span");
+                    // PERBAIKAN: Ganti karakter emoji yang rusak
                     if (visitedLinks.includes(item.file)) {
                         statusSpan.className = "label-visited";
                         statusSpan.textContent = "sudah dibaca 👍";
@@ -120,8 +122,7 @@ async function loadTOC() {
                             updateStats(totalArticles, visitedLinks.length);
                         }
                     });
-
-                    // ===== PERUBAHAN DI SINI: Tambahkan event listener untuk tooltip judul artikel =====
+                    
                     const description = item.description || 'Tidak ada deskripsi.';
                     a.addEventListener('mouseenter', () => {
                         categoryTooltip.innerHTML = description;
