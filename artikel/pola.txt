@@ -1,29 +1,71 @@
-// Info browser, OS, lokasi IP
-    async function loadInfo() {
-        const infoBox = document.querySelector(".info-box");
-        let ua = navigator.userAgent;
-        let browser = "Unknown", os = "Unknown";
-
-        if (ua.includes("Firefox")) browser = "Firefox";
-        else if (ua.includes("Chrome")) browser = "Chrome";
-        else if (ua.includes("Safari")) browser = "Safari";
-
-        if (ua.includes("Windows")) os = "Windows";
-        else if (ua.includes("Linux")) os = "Linux";
-        else if (ua.includes("Android")) os = "Android";
-        else if (ua.includes("Mac")) os = "MacOS";
-
-        let ipInfo = "Lokasi tidak diketahui";
-        try {
-            let res = await fetch("https://ipapi.co/json/");
-            let data = await res.json();
-            if (data.city && data.country_name && data.country_code) {
-                ipInfo = `${data.city}, ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="flag">`;
-            }
-        } catch (e) {
-            console.error("Failed to fetch IP info:", e);
+// Get user info & IP
+      function getBrowserAndOS() {
+        const userAgent = navigator.userAgent;
+        let browser = "Tidak Dikenal";
+        let os = "Tidak Dikenal";
+        
+        // OS detection
+        if (userAgent.match(/Windows/i)) {
+          os = "Windows";
+        } else if (userAgent.match(/Macintosh|Mac OS X/i)) {
+          os = "macOS";
+        } else if (userAgent.match(/Linux/i)) {
+          os = "Linux";
+        } else if (userAgent.match(/Android/i)) {
+          os = "Android";
+        } else if (userAgent.match(/iOS|iPhone|iPad/i)) {
+          os = "iOS";
         }
 
-        infoBox.innerHTML = `🖥️ ${os}<br>🌐 ${browser}<br>📍 ${ipInfo}`;
-    }
-    loadInfo();
+        // Browser detection
+        if (userAgent.match(/Edge/i)) {
+          browser = "Edge";
+        } else if (userAgent.match(/Chrome/i)) {
+          browser = "Chrome";
+        } else if (userAgent.match(/Safari/i)) {
+          browser = "Safari";
+        } else if (userAgent.match(/Firefox/i)) {
+          browser = "Firefox";
+        }
+
+        document.getElementById('browser-info').innerHTML = `${browser} ${getBrowserIcon(browser)}`;
+        document.getElementById('os-info').innerHTML = `${os} ${getOSIcon(os)}`;
+      }
+
+      function getBrowserIcon(browser) {
+        switch(browser) {
+          case 'Chrome': return '<i class="fab fa-chrome" style="color:#4285f4;"></i>';
+          case 'Firefox': return '<i class="fab fa-firefox-browser" style="color:#e66000;"></i>';
+          case 'Safari': return '<i class="fab fa-safari" style="color:#1d71b8;"></i>';
+          case 'Edge': return '<i class="fab fa-edge" style="color:#0078d7;"></i>';
+          default: return '';
+        }
+      }
+
+      function getOSIcon(os) {
+        switch(os) {
+          case 'Windows': return '<i class="fab fa-windows" style="color:#0078d7;"></i>';
+          case 'macOS': return '<i class="fab fa-apple" style="color:#555;"></i>';
+          case 'Linux': return '<i class="fab fa-linux" style="color:#333;"></i>';
+          case 'Android': return '<i class="fab fa-android" style="color:#3ddc84;"></i>';
+          case 'iOS': return '<i class="fab fa-apple" style="color:#555;"></i>';
+          default: return '';
+        }
+      }
+      getBrowserAndOS();
+
+      // Get IP and Location
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const ipInfoElement = document.getElementById('ip-info');
+          if (data.ip) {
+            ipInfoElement.innerHTML = `${data.ip} - ${data.city}, ${data.country_name} <img src="https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png" alt="${data.country_name} flag" style="vertical-align: middle;">`;
+          } else {
+            ipInfoElement.textContent = "IP tidak ditemukan.";
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching IP info:", error);
+          document.getElementById('ip-info').textContent = "Gagal mengambil informasi IP.";
+        });
