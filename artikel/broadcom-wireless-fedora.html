@@ -97,9 +97,7 @@
         </div>
 
         
-        <div class="visitor-info" id="visitor-info">
-            <p>⏳ Mendeteksi informasi pengunjung...</p>
-        </div>
+        
 
         
         <h2>Jaga Data Pribadi Tetap Aman</h2>
@@ -159,45 +157,7 @@ document.addEventListener(DOMContentLoaded, () => {
                 }
             };
             
-            // 3. Visitor Info Detection
-            const visitorInfoDiv = document.getElementById("visitor-info");
-
-            async function getVisitorInfo() {
-                try {
-                    const res = await fetch("https://ipapi.co/json/");
-                    const data = await res.json();
-                    const ip = data.ip;
-                    const countryCode = data.country_code;
-                    const countryName = data.country_name;
-                    const city = data.city;
-                    const flag = countryCode ? `<img src="https://flagcdn.com/24x18/${countryCode.toLowerCase()}.png" alt="${countryName}" style="vertical-align: middle; margin-left: 5px;">` : '';
-
-                    let os = "OS Tidak Dikenal";
-                    const userAgent = navigator.userAgent;
-                    if (userAgent.includes("Win")) os = "Windows";
-                    else if (userAgent.includes("Mac")) os = "macOS";
-                    else if (userAgent.includes("Linux")) os = "Linux";
-                    else if (userAgent.includes("Android")) os = "Android";
-                    else if (userAgent.includes("like Mac OS X")) os = "iOS";
-
-                    let browser = "Browser Tidak Dikenal";
-                    if (userAgent.includes("Firefox")) browser = "Firefox";
-                    else if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) browser = "Chrome";
-                    else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) browser = "Safari";
-                    else if (userAgent.includes("Edg")) browser = "Edge";
-                    else if (userAgent.includes("OPR") || userAgent.includes("Opera")) browser = "Opera";
-                    
-                    visitorInfoDiv.innerHTML = `
-                        <p>📍 **Lokasi:** ${city}, ${countryName} ${flag}</p>
-                        <p>💻 **IP:** ${ip}</p>
-                        <p>🌐 **Browser:** ${browser}</p>
-                        <p>🖥️ **Sistem Operasi:** ${os}</p>
-                    `;
-                } catch (error) {
-                    visitorInfoDiv.innerHTML = "Tidak dapat mendeteksi informasi pengunjung.";
-                }
-            }
-            getVisitorInfo();
+            
         });
 });
     </script>

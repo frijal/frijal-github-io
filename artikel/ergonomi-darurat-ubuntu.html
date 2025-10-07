@@ -356,20 +356,7 @@
         </div>
       </section>
 
-      <!-- Info Sistem -->
-      <section class="card mt-10">
-        <h2 class="text-2xl font-semibold mb-4 text-green-400">
-          💻 Jaga Data Pribadi Tetap Aman & Lokasi
-        </h2>
-        <div class="grid md:grid-cols-2 gap-6 text-gray-300">
-          <div><strong>Browser:</strong> <span id="browser"></span></div>
-          <div><strong>Versi:</strong> <span id="version"></span></div>
-          <div><strong>OS/Platform:</strong> <span id="platform"></span></div>
-          <div><strong>User Agent:</strong> <span id="ua"></span></div>
-          <div><strong>IP Publik:</strong> <span id="ip"></span></div>
-          <div><strong>Lokasi Perkiraan:</strong> <span id="loc"></span></div>
-        </div>
-      </section>
+      
 
       <script>
         document.addEventListener(DOMContentLoaded, () => {
@@ -386,24 +373,7 @@
           document.getElementById('share-tg').href =
             `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
 
-          // Info Sistem
-          document.getElementById('browser').textContent = navigator.appName
-          document.getElementById('version').textContent = navigator.appVersion
-          document.getElementById('platform').textContent = navigator.platform
-          document.getElementById('ua').textContent = navigator.userAgent
-
-          // Ambil IP & Lokasi
-          fetch('https://ipapi.co/json/')
-            .then((res) => res.json())
-            .then((data) => {
-              document.getElementById('ip').textContent = data.ip
-              document.getElementById('loc').textContent =
-                `${data.city}, ${data.region}, ${data.country_name}`
-            })
-            .catch(() => {
-              document.getElementById('ip').textContent = 'Tidak terdeteksi'
-              document.getElementById('loc').textContent = 'Tidak tersedia'
-            })
+          
         })
       </script>
 

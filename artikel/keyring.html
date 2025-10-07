@@ -332,54 +332,11 @@ sudo reboot</code></pre>
         </script>
       </div>
 
-      <!-- Info Browser & OS -->
-      <div class="info-section">
-        <div class="info-item">
-          <svg width="20" height="20" fill="#3498db">
-            <circle cx="10" cy="10" r="10" /></svg
-          >Browser: <span id="browser-info"></span>
-        </div>
-        <div class="info-item">
-          <svg width="20" height="20" fill="#2ecc71">
-            <rect width="20" height="20" /></svg
-          >OS: <span id="os-info"></span>
-        </div>
-        <div class="info-item">
-          <svg width="20" height="20" fill="#e74c3c">
-            <polygon points="0,0 20,0 20,20 0,20" /></svg
-          >IP: <span id="ip-info"></span>
-        </div>
-        <div class="info-item">
-          <img id="ip-flag" src="" alt="Bendera" width="24" height="16" />
-        </div>
-      </div>
-    </div>
+      
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        // Browser & OS info
-        const ua = navigator.userAgent
-        let browser = 'Unknown',
-          os = 'Unknown'
-        if (ua.includes('Firefox')) browser = 'Firefox'
-        else if (ua.includes('Chrome')) browser = 'Chrome'
-        else if (ua.includes('Safari')) browser = 'Safari'
-        if (ua.includes('Windows')) os = 'Windows'
-        else if (ua.includes('Linux')) os = 'Linux'
-        else if (ua.includes('Mac')) os = 'MacOS'
-        document.getElementById('browser-info').textContent = browser
-        document.getElementById('os-info').textContent = os
-
-        // Get public IP & country
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip-info').textContent = data.ip
-            document.getElementById('ip-flag').src =
-              'https://flagcdn.com/24x18/' +
-              data.country_code.toLowerCase() +
-              '.png'
-          })
+        
       })
     </script>
     });

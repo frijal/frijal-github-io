@@ -862,26 +862,7 @@ recordmydesktop --on-the-fly-encoding --fps 25 --full-shots --v_quality 63 --s_q
         </aside>
       </section>
 
-      <section class="card" style="margin-top: 24px">
-        <div class="hd">Lingkungan Anda saat membuka halaman ini</div>
-        <div class="bd">
-          <div class="env" id="env">
-            <div class="row">
-              <span class="ico" id="ico-browser"></span>
-              <div><b>Browser:</b> <span id="ua-browser">-</span></div>
-            </div>
-            <div class="row">
-              <span class="ico" id="ico-os"></span>
-              <div><b>Sistem Operasi:</b> <span id="ua-os">-</span></div>
-            </div>
-          </div>
-          <p class="muted" style="margin-top: 8px">
-            Ikon dan versi diambil dari
-            <span class="kbd">navigator.userAgent</span>, hasilnya bisa berbeda
-            tergantung mode privasi/peramban.
-          </p>
-        </div>
-      </section>
+      
     </main>
 
     <footer>
@@ -1069,123 +1050,7 @@ recordmydesktop --on-the-fly-encoding --fps 25 --full-shots --v_quality 63 --s_q
           }
         })()
 
-        // 4. User Agent (Browser & OS) Detection & IP Geolocation
-        document.addEventListener('DOMContentLoaded', () => {
-          const ua = navigator.userAgent
-
-          // --- UA DETECTION ---
-          const iconMap = {
-            Chrome: {
-              name: 'Google Chrome',
-              icon: '<svg viewBox="0 0 24 24"><path fill="#db4437" d="M21.54 7H12l-3.46-6A10.01 10.01 0 0 1 21.54 7z"/><path fill="#ffcd40" d="M2.46 7 8.54 17h6.92A10 10 0 0 1 2.46 7z"/><path fill="#0f9d58" d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12C2 6.5 6.5 2 12 2z"/><circle cx="12" cy="12" r="5" fill="#4285f4"/></svg>',
-            },
-            Firefox: {
-              name: 'Mozilla Firefox',
-              icon: '<svg viewBox="0 0 24 24"><path fill="#ff9500" d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12C2 6.5 6.5 2 12 2z"/><path fill="#fff" d="M7 16c1.5 1.8 3.8 2.3 6 1.5 2.2-.8 3.8-2.8 4-5-.7 1.3-2 2.2-3.5 2.5-1.6.3-3.2-.2-4.3-1.3C8 12.6 7.5 11.4 7.5 10c-.9 1-1.5 2.3-1.5 3.7 0 .9.3 1.7 1 2.3z"/></svg>',
-            },
-            Edge: {
-              name: 'Microsoft Edge',
-              icon: '<svg viewBox="0 0 24 24"><path fill="#0c59a4" d="M12 2a10 10 0 1 0 10 10C22 6.5 17.5 2 12 2z"/><path fill="#37c7f4" d="M6 16c1.5 2.5 4.5 4 7.5 3.5 3-.5 5.5-2.8 6.3-5.7-1.7 2-4.4 3.2-7.2 3.2C10.5 17 8 16.4 6 16z"/></svg>',
-            },
-            Safari: {
-              name: 'Safari',
-              icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0fb5ee"/><path d="M12 6l3 6-6 3 3-9z" fill="#fff"/></svg>',
-            },
-            Opera: {
-              name: 'Opera',
-              icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff1b2d"/><ellipse cx="12" cy="12" rx="5" ry="8" fill="#fff"/></svg>',
-            },
-            Unknown: {
-              name: 'Unknown',
-              icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#9aa3b2"/></svg>',
-            },
-          }
-
-          let browser = 'Unknown',
-            bVersion = '',
-            bKey = 'Unknown'
-          if (/Edg\/(\d+(\.\d+)?)/.test(ua)) {
-            browser = 'Microsoft Edge'
-            bVersion = RegExp.$1
-            bKey = 'Edge'
-          } else if (/OPR\/(\d+(\.\d+)?)/.test(ua) || /Opera/.test(ua)) {
-            browser = 'Opera'
-            bVersion = RegExp.$1
-            bKey = 'Opera'
-          } else if (/Chrome\/(\d+(\.\d+)?)/.test(ua) && !/Edg|OPR/.test(ua)) {
-            browser = 'Google Chrome'
-            bVersion = RegExp.$1
-            bKey = 'Chrome'
-          } else if (/Firefox\/(\d+(\.\d+)?)/.test(ua)) {
-            browser = 'Mozilla Firefox'
-            bVersion = RegExp.$1
-            bKey = 'Firefox'
-          } else if (
-            /Safari\/(\d+(\.\d+)?)/.test(ua) &&
-            !/Chrome|Edg|OPR/.test(ua)
-          ) {
-            browser = 'Safari'
-            bVersion = RegExp.$1
-            bKey = 'Safari'
-          }
-
-          let os = 'Unknown',
-            oVersion = ''
-          if (/Windows NT ([0-9.]+)/.test(ua)) {
-            os = 'Windows'
-            oVersion = RegExp.$1 == '10.0' ? '10/11' : RegExp.$1
-          } else if (/Android ([0-9.]+)/.test(ua)) {
-            os = 'Android'
-            oVersion = RegExp.$1
-          } else if (
-            /iPhone OS ([0-9_]+)/.test(ua) ||
-            /iPad; CPU OS ([0-9_]+)/.test(ua)
-          ) {
-            os = 'iOS'
-            oVersion = (RegExp.$1 || '').replace(/_/g, '.')
-          } else if (/Mac OS X ([0-9_]+)/.test(ua)) {
-            os = 'macOS'
-            oVersion = RegExp.$1.replace(/_/g, '.')
-          } else if (/Linux/.test(ua)) {
-            os = 'Linux'
-          }
-
-          document.getElementById('ua-browser').textContent =
-            browser + (bVersion ? ' ' + bVersion : '')
-          document.getElementById('ua-os').textContent =
-            os + (oVersion ? ' ' + oVersion : '')
-          document.getElementById('ico-browser').innerHTML =
-            iconMap[bKey]?.icon || iconMap['Unknown'].icon
-
-          // --- IP GEOLOCATION ---
-          const ipEl = document.getElementById('ip'),
-            cityEl = document.getElementById('city'),
-            countryEl = document.getElementById('country'),
-            flagEl = document.getElementById('flag')
-          fetch('https://ipapi.co/json/')
-            .then((r) => r.json())
-            .then((data) => {
-              const countryCode = String(data.country_code || '').toLowerCase()
-              ipEl.textContent = data.ip || '-'
-              cityEl.textContent = data.city || '-'
-              countryEl.textContent =
-                (data.country_name || '-') +
-                (data.country_code ? ' (' + data.country_code + ')' : '')
-
-              if (countryCode) {
-                flagEl.src = `https://flagcdn.com/48x36/${countryCode}.png`
-                flagEl.alt =
-                  'Bendera ' + (data.country_name || countryCode.toUpperCase())
-              } else {
-                flagEl.style.display = 'none'
-              }
-            })
-            .catch((e) => {
-              ipEl.textContent =
-                cityEl.textContent =
-                countryEl.textContent =
-                  'Tidak tersedia'
-              flagEl.style.display = 'none'
+        
             })
         })
       })
