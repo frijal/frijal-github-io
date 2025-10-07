@@ -34,7 +34,7 @@ async function fetchGeoIP() {
             ipAddress = ip4Data.ip;
             console.log("Deteksi berhasil menggunakan IPv4:", ipAddress);
         } catch (ipv4Error) {
-            console.warn("Gagal mendapatkan IPv4, mencoba fallback ke IPv6...", ipv4Error);
+            console.warn("gagal mendapatkan IPv4, mencoba fallback ke IPv6...", ipv4Error);
             
             // Langkah 2: Jika IPv4 gagal, coba dapatkan IPv6
             const ip6Res = await fetch('https://api64.ipify.org?format=json');
@@ -46,7 +46,7 @@ async function fetchGeoIP() {
 
         // Langkah 3: Jika salah satu IP berhasil didapat, cari lokasinya
         const locRes = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-        if (!locRes.ok) throw new Error('Gagal mengambil data lokasi');
+        if (!locRes.ok) throw new Error('gagal mengambil data lokasi');
         const locData = await locRes.json();
         
         return {
@@ -65,8 +65,6 @@ async function fetchGeoIP() {
 document.addEventListener("DOMContentLoaded", async () => {
   const target = document.getElementById("iposbrowser");
   if (!target) return;
-
-  target.textContent = 'Memuat info...';
 
   const browser = detectBrowser();
   const os = detectOS();
