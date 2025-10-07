@@ -1,780 +1,212 @@
 ========================================================
-Ditemukan di: biskuit-linux-itu-nyata.html
+Ditemukan di: 2nabi-idris.html
 ========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
+<span class="chip" id="info-browser" title="Info Browser">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 9h18M9 21V9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+              </svg>
+              <span data-browser>Browser</span>
+            </span>
+            <span class="chip" id="info-os" title="Sistem Operasi">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="4"
+                  y="4"
+                  width="16"
+                  height="12"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path d="M8 20h8" stroke="currentColor" stroke-width="1.3" />
+              </svg>
+              <span data-os>OS</span>
+            </span>
+            <span class="chip" id="info-ip" title="IP & Negara">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                />
+              </svg>
+              <span data-ip>IP</span> <span data-flag>🏳️</span>
+            </span>
 
 ========================================================
-Ditemukan di: boomerang-berita-cuaca.html
+Ditemukan di: 3nabi-nuh.html
 ========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
+<span class="chip" id="info-browser" title="Info Browser">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 9h18M9 21V9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+              </svg>
+              <span data-browser>Browser</span>
+            </span>
+            <span class="chip" id="info-os" title="Sistem Operasi">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="4"
+                  y="4"
+                  width="16"
+                  height="12"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path d="M8 20h8" stroke="currentColor" stroke-width="1.3" />
+              </svg>
+              <span data-os>OS</span>
+            </span>
+            <span class="chip" id="info-ip" title="IP & Negara">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                />
+              </svg>
+              <span data-ip>IP</span> <span data-flag>🏳️</span>
+            </span>
 
 ========================================================
-Ditemukan di: gcos-2009-ngoprek-spg-ubuntu-jogja.html
+Ditemukan di: 5nabi-saleh.html
 ========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
+<span class="chip" id="info-browser" title="Info Browser">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 9h18M9 21V9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+              </svg>
+              <span data-browser>Browser</span>
+            </span>
+            <span class="chip" id="info-os" title="Sistem Operasi">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="4"
+                  y="4"
+                  width="16"
+                  height="12"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path d="M8 20h8" stroke="currentColor" stroke-width="1.3" />
+              </svg>
+              <span data-os>OS</span>
+            </span>
+            <span class="chip" id="info-ip" title="IP & Negara">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                />
+              </svg>
+              <span data-ip>IP</span> <span data-flag>🏳️</span>
+            </span>
 
 ========================================================
-Ditemukan di: iwan-fals-bangunlah-putra-putri-pertiwi.html
+Ditemukan di: 6nabi-ibrahim.html
 ========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: kpli-balikpapan-rilis-party-ubuntu-1604.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: lirik-pulang-nostalgia.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: peramban-ringan-linux-terbaik.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: pesan-imam-syafii-belajar.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: ujian-nasional-catatan-video.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
-
-========================================================
-Ditemukan di: unboxing-respiro-jne-balikpapan.html
-========================================================
-// UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
-          const os = /Windows NT/.test(ua)
-            ? 'Windows'
-            : /Android/.test(ua)
-              ? 'Android'
-              : /iPhone|iPad|iPod/.test(ua)
-                ? 'iOS'
-                : /Mac OS X/.test(ua)
-                  ? 'macOS'
-                  : /Linux/.test(ua)
-                    ? 'Linux'
-                    : 'OS?'
-          const br = /Edg\//.test(ua)
-            ? 'Edge'
-            : /OPR\//.test(ua)
-              ? 'Opera'
-              : /Chrome\//.test(ua)
-                ? 'Chrome'
-                : /Safari\//.test(ua) && !/Chrome\//.test(ua)
-                  ? 'Safari'
-                  : /Firefox\//.test(ua)
-                    ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          if (uaInline) uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
-
-        // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
-          const toFlag = (cc) =>
-            !cc
-              ? '🏳️'
-              : String.fromCodePoint(
-                  ...cc
-                    .trim()
-                    .toUpperCase()
-                    .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              if (geo) geo.textContent = t
-              if (flag) flag.textContent = toFlag(cc)
-            })
-            .catch(() =>
-              fetch('https://ipwho.is/')
-                .then((r) => r.json())
-                .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  if (geo) geo.textContent = t
-                  if (flag) flag.textContent = toFlag(cc)
-                })
-                .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  if (geo) geo.textContent = 'Lokasi tidak tersedia'
-                  if (flag) flag.textContent = '🏳️'
+<span class="chip" id="info-browser" title="Info Browser">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 9h18M9 21V9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+              </svg>
+              <span data-browser>Browser</span>
+            </span>
+            <span class="chip" id="info-os" title="Sistem Operasi">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="4"
+                  y="4"
+                  width="16"
+                  height="12"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path d="M8 20h8" stroke="currentColor" stroke-width="1.3" />
+              </svg>
+              <span data-os>OS</span>
+            </span>
+            <span class="chip" id="info-ip" title="IP & Negara">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                />
+                <path
+                  d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"
+                  stroke="currentColor"
+                  stroke-width="1.1"
+                />
+              </svg>
+              <span data-ip>IP</span> <span data-flag>🏳️</span>
+            </span>
 
