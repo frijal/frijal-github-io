@@ -51,8 +51,7 @@
             background-color: var(--bg-dark);
             color: var(--text-dark);
         }
-
-        /* ===== PERUBAHAN: Tanpa .container, lebar 1200px ===== */
+        
         .sticky-controls {
             position: sticky;
             top: 0;
@@ -67,18 +66,10 @@
             border-bottom-color: var(--border-dark);
         }
         .sticky-controls-content {
-             max-width: 1200px; /* Lebar baru */
+             max-width: 1200px;
              margin: 0 auto;
         }
-        /* Terapkan lebar dan centering ke elemen utama lainnya */
-        #marquee, #toc {
-            max-width: 1200px; /* Lebar baru */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
+        
         .title-and-search {
             display: flex;
             justify-content: space-between;
@@ -87,8 +78,35 @@
             margin-bottom: 1rem;
         }
         .title-block h1 { font-size: 1.8rem; font-weight: 600; line-height: 1.2; margin: 0;}
-        .title-block p { color: var(--text-muted-light); margin: 0; }
-        body.dark-mode .title-block p { color: var(--text-muted-dark); }
+        
+        /* ===== PERUBAHAN CSS: Penataan Statistik Baca ===== */
+        #totalCount {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem 0.75rem; /* Jarak vertikal dan horizontal antar item */
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted-light);
+            margin-top: 4px;
+        }
+        body.dark-mode #totalCount { color: var(--text-muted-dark); }
+        
+        #totalCount strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        body.dark-mode #totalCount strong { color: var(--text-dark); }
+
+        .separator {
+            color: var(--border-light);
+        }
+        body.dark-mode .separator { color: var(--border-dark); }
+        .read-stat, .unread-stat {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
         #search-wrapper { flex-grow: 1; max-width: 400px; position: relative; }
         
         .controls {
@@ -149,10 +167,14 @@
         }
         body.dark-mode #clearSearch { color: var(--text-muted-dark); }
 
+        #marquee, #toc {
+            max-width: 1200px; margin-left: auto; margin-right: auto;
+            padding-left: 1.5rem; padding-right: 1.5rem;
+        }
         #marquee {
             width: 100%; overflow: hidden; background-color: var(--surface-light);
             border: 1px solid var(--border-light); border-radius: 8px;
-            padding: 0.75rem 0; margin-top: 1.5rem; margin-bottom: 1.5rem; white-space: nowrap;
+            padding-top: 0.75rem; padding-bottom: 0.75rem; margin-top: 1.5rem; margin-bottom: 1.5rem; white-space: nowrap;
         }
         body.dark-mode #marquee {
             background-color: var(--surface-dark); border-color: var(--border-dark);
@@ -196,11 +218,8 @@
         body.dark-mode .toc-item:hover { background-color: var(--hover-dark); }
         
         .toc-title {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            width: 100%;
-            flex-wrap: wrap;
+            display: flex; align-items: center; gap: 0.75rem;
+            width: 100%; flex-wrap: wrap;
         }
         .toc-title a {
             color: var(--text-light); text-decoration: none;
@@ -211,10 +230,8 @@
         .toc-title a.visited { color: var(--text-muted-light); opacity: 0.8; }
         body.dark-mode .toc-title a.visited { color: var(--text-muted-dark); }
         .toc-date {
-            font-size: 0.8rem;
-            color: var(--text-muted-light);
-            white-space: nowrap;
-            font-family: monospace;
+            font-size: 0.8rem; color: var(--text-muted-light);
+            white-space: nowrap; font-family: monospace;
         }
         body.dark-mode .toc-date { color: var(--text-muted-dark); }
 
@@ -247,7 +264,7 @@
             <div class="title-and-search">
                 <div class="title-block">
                     <h1>Daftar Isi Artikel</h1>
-                    <p id="totalCount">Total artikel: 0</p>
+                    <p id="totalCount">Memuat statistik...</p>
                 </div>
                 <div id="search-wrapper">
                     <input type="text" id="search" placeholder="Cari artikel...">
@@ -283,6 +300,23 @@
             const yy = String(d.getFullYear()).slice(-2);
             return `${dd}.${mm}.${yy}`;
         }
+        
+        // ===== PERUBAHAN JS: Fungsi untuk update statistik =====
+        function updateStats(total, read, term = '') {
+            const totalCountEl = document.getElementById("totalCount");
+            if (term) {
+                 totalCountEl.innerHTML = `Menemukan <strong>${total}</strong> artikel dari pencarian "${term}"`;
+                 return;
+            }
+            const unread = total - read;
+            totalCountEl.innerHTML = `
+                <span class="total-stat">Total: <strong>${total}</strong></span>
+                <span class="separator">|</span>
+                <span class="read-stat">Dibaca: <strong>${read}</strong> 👍</span>
+                <span class="separator">|</span>
+                <span class="unread-stat">Belum Dibaca: <strong>${unread}</strong> 📚</span>
+            `;
+        }
 
         async function loadTOC() {
             try {
@@ -290,7 +324,7 @@
                 const data = await res.json();
                 const toc = document.getElementById("toc");
                 toc.innerHTML = "";
-                const totalCount = document.getElementById("totalCount");
+
                 grouped = {};
                 Object.keys(data).forEach(cat => {
                     grouped[cat] = data[cat]
@@ -300,8 +334,10 @@
                         }))
                         .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
                 });
+
                 const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
-                totalCount.textContent = `Total artikel: ${totalArticles}`;
+                updateStats(totalArticles, visitedLinks.length); // Panggil fungsi statistik
+
                 Object.keys(grouped)
                     .sort((a, b) => grouped[b].length - grouped[a].length)
                     .forEach(cat => {
@@ -342,6 +378,8 @@
                                     statusSpan.className = "label-visited";
                                     statusSpan.textContent = "sudah dibaca 👍";
                                     a.classList.add("visited");
+                                    // Update statistik saat ada perubahan
+                                    updateStats(totalArticles, visitedLinks.length);
                                 }
                             });
                             titleDiv.appendChild(a);
@@ -350,6 +388,7 @@
                             el.appendChild(titleDiv);
                             catList.appendChild(el);
                         });
+
                         catDiv.querySelector(".category-header").addEventListener("click", () => {
                             catList.style.display = catList.style.display === "block" ? "none" : "block";
                             updateTOCToggleText();
@@ -381,6 +420,7 @@
             clearBtn.style.display = this.value ? "block" : "none";
             let countVisible = 0;
             const allArticlesCount = Object.values(grouped).flat().length;
+
             document.querySelectorAll(".category").forEach(category => {
                 let catVisible = false;
                 category.querySelectorAll(".toc-item").forEach(item => {
@@ -403,12 +443,15 @@
                 category.style.display = catVisible ? "block" : "none";
                 const tocList = category.querySelector(".toc-list");
                 if (tocList) {
-                   tocList.style.display = (term && catVisible) ? "block" : tocList.style.display;
+                   tocList.style.display = (term && catVisible) ? "block" : "none";
                 }
             });
-            document.getElementById("totalCount").textContent = term ? 
-                `Menemukan ${countVisible} artikel` : 
-                `Total artikel: ${allArticlesCount}`;
+            // ===== PERUBAHAN JS: Gunakan fungsi statistik saat mencari =====
+            if (term) {
+                updateStats(countVisible, visitedLinks.length, term);
+            } else {
+                updateStats(allArticlesCount, visitedLinks.length);
+            }
             updateTOCToggleText();
         });
 
