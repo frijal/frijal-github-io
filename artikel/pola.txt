@@ -1,3 +1,14 @@
-        <p id="browser-info">Memuat info browser...</p>
-        <p id="os-info">Memuat info OS...</p>
-        <p id="location-info">📍 Melacak lokasi...</p>
+<div class="info-box" id="infoBox">
+        <div class="info-item">
+          <img src="" id="browserIcon" alt="Browser Icon" />
+          <span id="browserText">Browser: ...</span>
+        </div>
+        <div class="info-item">
+          <img src="" id="osIcon" alt="OS Icon" />
+          <span id="osText">OS: ...</span>
+        </div>
+        <div class="info-item">
+          <img src="" id="flagIcon" alt="Country Flag" />
+          <span id="ipText">IP: ...</span>
+        </div>
+      </div>
