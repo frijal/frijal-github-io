@@ -1,3 +1,31 @@
-          <div class="info-pill" id="browser-pill">🧭 Browser: …</div>
-          <div class="info-pill" id="os-pill">💻 OS: …</div>
-          </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userAgent = navigator.userAgent;
+            const browserInfo = document.getElementById('browser-info');
+            const osInfo = document.getElementById('os-info');
+            
+            let browserName = 'Tidak Diketahui';
+            let osName = 'Tidak Diketahui';
+
+            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) {
+                browserName = 'Chrome';
+            } else if (userAgent.includes('Firefox')) {
+                browserName = 'Firefox';
+            } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
+                browserName = 'Safari';
+            } else if (userAgent.includes('Edg')) {
+                browserName = 'Edge';
+            }
+
+            if (userAgent.includes('Win')) {
+                osName = 'Windows';
+            } else if (userAgent.includes('Mac')) {
+                osName = 'macOS/iOS';
+            } else if (userAgent.includes('Linux')) {
+                osName = 'Linux';
+            } else if (userAgent.includes('Android')) {
+                osName = 'Android';
+            } 
+
+            browserInfo.innerHTML = `<i class="fas fa-desktop"></i> Browser: ${browserName}`;
+            osInfo.innerHTML = `<i class="fas fa-laptop-code"></i> OS: ${osName}`;
+        });

@@ -228,11 +228,7 @@
 
     <div class="container">
         
-        <div class="info-bar">
-            <span id="browser-info"><i class="fas fa-desktop"></i> Browser: Loading...</span>
-            <span id="os-info"><i class="fas fa-laptop-code"></i> OS: Loading...</span>
-            <span><i class="fas fa-map-marker-alt"></i> Lokasi Wafat: Basrah, Irak <span class="flag-icon">🇮🇶</span></span>
-        </div>
+
 
         <div id="kategori-aktif"></div><section id="masa-kecil">
             <h2>Bab 1: Lahir di Yatsrib & Didikan Sang Ibu Pemberani</h2>
@@ -374,38 +370,7 @@ document.addEventListener(DOMContentLoaded, () => {
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        // 1. INFO BROWSER/OS
-        document.addEventListener('DOMContentLoaded', () => {
-            const userAgent = navigator.userAgent;
-            const browserInfo = document.getElementById('browser-info');
-            const osInfo = document.getElementById('os-info');
-            
-            let browserName = 'Tidak Diketahui';
-            let osName = 'Tidak Diketahui';
-
-            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) {
-                browserName = 'Chrome';
-            } else if (userAgent.includes('Firefox')) {
-                browserName = 'Firefox';
-            } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
-                browserName = 'Safari';
-            } else if (userAgent.includes('Edg')) {
-                browserName = 'Edge';
-            }
-
-            if (userAgent.includes('Win')) {
-                osName = 'Windows';
-            } else if (userAgent.includes('Mac')) {
-                osName = 'macOS/iOS';
-            } else if (userAgent.includes('Linux')) {
-                osName = 'Linux';
-            } else if (userAgent.includes('Android')) {
-                osName = 'Android';
-            } 
-
-            browserInfo.innerHTML = `<i class="fas fa-desktop"></i> Browser: ${browserName}`;
-            osInfo.innerHTML = `<i class="fas fa-laptop-code"></i> OS: ${osName}`;
-        });
+        
 
         // 2. LAZY LOAD (Menggunakan data-src dan Intersection Observer)
         document.addEventListener("DOMContentLoaded", function() {

@@ -547,11 +547,7 @@
         </div>
 
         <div class="info-bar">
-          <div class="pill" id="browser-pill">🧭 Browser: …</div>
-          <div class="pill" id="os-pill">💻 OS: …</div>
-          <div class="pill">
-            📍 Balikpapan Utara, Kalimantan Timur, Indonesia 🇮🇩
-          </div>
+
           <div class="pill">
             ℹ️ Klik gambar untuk lightbox, pakai panah untuk navigasi
           </div>
@@ -652,29 +648,7 @@
             }
           })
 
-        // Browser & OS detection
-        function detectBrowser() {
-          const ua = navigator.userAgent
-          if (/Edg\//.test(ua)) return 'Microsoft Edge 🟦'
-          if (/OPR\//.test(ua) || /Opera/.test(ua)) return 'Opera 🔴'
-          if (/Chrome\//.test(ua) && !/Edg\//.test(ua))
-            return 'Google Chrome 🔵'
-          if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari 🟢'
-          if (/Firefox\//.test(ua)) return 'Firefox 🟠'
-          return 'Browser tidak dikenal 🧭'
-        }
-        function detectOS() {
-          const ua = navigator.userAgent
-          if (/Windows NT/.test(ua)) return 'Windows 🪟'
-          if (/Mac OS X/.test(ua)) return 'macOS 🍎'
-          if (/Android/.test(ua)) return 'Android 🤖'
-          if (/iPhone|iPad|iPod/.test(ua)) return 'iOS 📱'
-          if (/Linux/.test(ua)) return 'Linux 🐧'
-          return 'OS tidak dikenal 💻'
-        }
-        document.getElementById('browser-pill').textContent =
-          '🧭 Browser: ' + detectBrowser()
-        document.getElementById('os-pill').textContent = '💻 OS: ' + detectOS()
+        
 
         // Lightbox
         const gallery = Array.from(document.querySelectorAll('#gallery .card'))
