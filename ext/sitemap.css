@@ -377,3 +377,72 @@ body.dark-mode #feed-link svg {
             width: 16px;
             height: 16px;
         }
+        
+/* ================================
+   IPOSBROWSER INFO (Browser + OS + Lokasi)
+   ================================ */
+
+#ipos-browser-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted-light);
+  background-color: var(--surface-light);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-right: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+body.dark-mode #ipos-browser-info {
+  color: var(--text-muted-dark);
+  background-color: var(--surface-dark);
+  border-color: var(--border-dark);
+}
+
+/* Hover efek lembut */
+#ipos-browser-info:hover {
+  background-color: var(--hover-light);
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.2);
+}
+body.dark-mode #ipos-browser-info:hover {
+  background-color: var(--hover-dark);
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.25);
+}
+
+/* Ikon responsif dan animasi ringan */
+#ipos-browser-info .icon svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+#ipos-browser-info .icon svg:hover {
+  transform: scale(1.15) rotate(3deg);
+  filter: drop-shadow(0 0 4px rgba(88,166,255,0.3));
+}
+
+/* Teks lokasi */
+#ipos-browser-info .info-text {
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* Tambahkan jarak antara ikon dan teks */
+#ipos-browser-info .browser,
+#ipos-browser-info .os {
+  display: flex;
+  align-items: center;
+}
+
+/* Sembunyikan di layar kecil (mobile) */
+@media (max-width: 600px) {
+  #ipos-browser-info {
+    display: none !important;
+  }
+}
+
