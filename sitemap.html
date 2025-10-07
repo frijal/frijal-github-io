@@ -52,12 +52,7 @@
             color: var(--text-dark);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem 4rem;
-        }
-
+        /* ===== PERUBAHAN: Tanpa .container, lebar 1200px ===== */
         .sticky-controls {
             position: sticky;
             top: 0;
@@ -66,16 +61,24 @@
             border-bottom: 1px solid var(--border-light);
             padding: 1rem 1.5rem;
             width: 100%;
-            margin-bottom: 1.5rem;
         }
         body.dark-mode .sticky-controls {
             background-color: var(--bg-dark);
             border-bottom-color: var(--border-dark);
         }
         .sticky-controls-content {
-             max-width: 800px;
+             max-width: 1200px; /* Lebar baru */
              margin: 0 auto;
         }
+        /* Terapkan lebar dan centering ke elemen utama lainnya */
+        #marquee, #toc {
+            max-width: 1200px; /* Lebar baru */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
         .title-and-search {
             display: flex;
             justify-content: space-between;
@@ -86,7 +89,7 @@
         .title-block h1 { font-size: 1.8rem; font-weight: 600; line-height: 1.2; margin: 0;}
         .title-block p { color: var(--text-muted-light); margin: 0; }
         body.dark-mode .title-block p { color: var(--text-muted-dark); }
-        #search-wrapper { flex-grow: 1; max-width: 400px; }
+        #search-wrapper { flex-grow: 1; max-width: 400px; position: relative; }
         
         .controls {
             display: flex;
@@ -149,7 +152,7 @@
         #marquee {
             width: 100%; overflow: hidden; background-color: var(--surface-light);
             border: 1px solid var(--border-light); border-radius: 8px;
-            padding: 0.75rem 0; margin-bottom: 1.5rem; white-space: nowrap;
+            padding: 0.75rem 0; margin-top: 1.5rem; margin-bottom: 1.5rem; white-space: nowrap;
         }
         body.dark-mode #marquee {
             background-color: var(--surface-dark); border-color: var(--border-dark);
@@ -192,19 +195,16 @@
         .toc-item:hover { background-color: var(--hover-light); }
         body.dark-mode .toc-item:hover { background-color: var(--hover-dark); }
         
-        /* ===== PERUBAHAN: Tata Letak Inline untuk Judul, Status, Tanggal ===== */
         .toc-title {
             display: flex;
             align-items: center;
-            gap: 0.75rem; /* Jarak antar elemen */
+            gap: 0.75rem;
             width: 100%;
-            flex-wrap: wrap; /* Agar rapi di layar kecil */
+            flex-wrap: wrap;
         }
         .toc-title a {
-            color: var(--text-light);
-            text-decoration: none;
-            flex-grow: 1; /* Judul mengambil sisa ruang */
-            margin-right: auto; /* Mendorong status & tanggal ke kanan */
+            color: var(--text-light); text-decoration: none;
+            flex-grow: 1; margin-right: auto;
         }
         body.dark-mode .toc-title a { color: var(--text-dark); }
         .toc-title a:hover { color: var(--accent-color); }
@@ -213,17 +213,15 @@
         .toc-date {
             font-size: 0.8rem;
             color: var(--text-muted-light);
-            white-space: nowrap; /* Mencegah tanggal terpotong */
+            white-space: nowrap;
             font-family: monospace;
         }
         body.dark-mode .toc-date { color: var(--text-muted-dark); }
 
-
-        /* Status Labels */
         .label-visited, .label-new {
             font-size: 0.75rem; padding: 0.1rem 0.5rem;
             border-radius: 1rem; font-weight: 500;
-            white-space: nowrap; /* Mencegah label terpotong */
+            white-space: nowrap;
         }
         .label-visited { color: #1a7f37; background-color: #dafbe1; }
         .label-new { color: #57606a; background-color: #f6f8fa; border: 1px solid #d0d7de;}
@@ -235,7 +233,6 @@
             padding: 2px; border-radius: 3px;
         }
 
-        /* Responsive */
         @media(max-width: 768px) {
             body { padding-top: 120px; }
             .title-and-search { flex-direction: column; align-items: stretch; gap: 0.5rem; }
@@ -244,6 +241,7 @@
     </style>
 </head>
 <body>
+
     <div class="sticky-controls">
         <div class="sticky-controls-content">
             <div class="title-and-search">
@@ -269,13 +267,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <div id="marquee"><div id="marquee-content">Memuat artikel...</div></div>
-        
-        <div id="toc">
-            <p>Memuat daftar isi...</p>
-        </div>
-    </div>
+    <div id="marquee"><div id="marquee-content">Memuat artikel...</div></div>
+    <div id="toc"><p>Memuat daftar isi...</p></div>
 
     <script>
         //<![CDATA[
@@ -325,15 +318,11 @@
                             const el = document.createElement("div");
                             el.className = "toc-item";
                             el.dataset.text = item.title.toLowerCase();
-
-                            // ===== PERUBAHAN: BUAT ELEMEN SECARA TERPISAH =====
                             const titleDiv = document.createElement("div");
                             titleDiv.className = "toc-title";
-                            
                             const a = document.createElement("a");
                             a.href = `artikel/${item.file}`;
-                            a.textContent = item.title; // Hanya judul
-
+                            a.textContent = item.title;
                             const statusSpan = document.createElement("span");
                             if (visitedLinks.includes(item.file)) {
                                 statusSpan.className = "label-visited";
@@ -343,11 +332,9 @@
                                 statusSpan.className = "label-new";
                                 statusSpan.textContent = "📚 belum dibaca";
                             }
-                            
                             const dateSpan = document.createElement("span");
                             dateSpan.className = "toc-date";
                             dateSpan.textContent = `[${formatDate(item.lastmod)}]`;
-
                             a.addEventListener("click", () => {
                                 if (!visitedLinks.includes(item.file)) {
                                     visitedLinks.push(item.file);
@@ -357,23 +344,18 @@
                                     a.classList.add("visited");
                                 }
                             });
-
-                            // Masukkan semua elemen ke dalam .toc-title dengan urutan baru
                             titleDiv.appendChild(a);
                             titleDiv.appendChild(statusSpan);
                             titleDiv.appendChild(dateSpan);
-                            
                             el.appendChild(titleDiv);
                             catList.appendChild(el);
                         });
-
                         catDiv.querySelector(".category-header").addEventListener("click", () => {
                             catList.style.display = catList.style.display === "block" ? "none" : "block";
                             updateTOCToggleText();
                         });
                         toc.appendChild(catDiv);
                     });
-
                 const m = document.getElementById("marquee-content");
                 const allArticles = Object.values(grouped).flat();
                 function shuffle(arr) {
@@ -399,36 +381,31 @@
             clearBtn.style.display = this.value ? "block" : "none";
             let countVisible = 0;
             const allArticlesCount = Object.values(grouped).flat().length;
-
             document.querySelectorAll(".category").forEach(category => {
                 let catVisible = false;
                 category.querySelectorAll(".toc-item").forEach(item => {
                     const text = item.dataset.text;
-                    const titleLink = item.querySelector("a"); // Targetkan link judulnya saja
-
+                    const titleLink = item.querySelector("a");
                     if (term && text.includes(term)) {
                         item.style.display = "flex";
                         catVisible = true;
                         countVisible++;
                         const regex = new RegExp(`(${term})`, "gi");
-                        // Ganti innerHTML dari link judul saja, bukan seluruh baris
                         titleLink.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
                     } else if (!term) {
                         item.style.display = "flex";
-                        titleLink.textContent = text; // Kembalikan ke teks asli
+                        titleLink.textContent = text;
                         catVisible = true;
                     } else {
                         item.style.display = "none";
                     }
                 });
-                
                 category.style.display = catVisible ? "block" : "none";
                 const tocList = category.querySelector(".toc-list");
                 if (tocList) {
                    tocList.style.display = (term && catVisible) ? "block" : tocList.style.display;
                 }
             });
-
             document.getElementById("totalCount").textContent = term ? 
                 `Menemukan ${countVisible} artikel` : 
                 `Total artikel: ${allArticlesCount}`;
@@ -459,7 +436,7 @@
             updateTOCToggleText();
         });
 
-        function initDarkMode(categories) {
+        function initDarkMode() {
             const darkSwitch = document.getElementById('darkSwitch');
             const saved = localStorage.getItem('darkMode');
             
@@ -485,8 +462,7 @@
         
         document.addEventListener("DOMContentLoaded", () => {
             loadTOC().then(() => {
-                const categories = Object.keys(grouped);
-                initDarkMode(categories);
+                initDarkMode();
                 updateTOCToggleText();
             });
         });
