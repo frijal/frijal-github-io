@@ -657,34 +657,7 @@
           </div>
         </section>
 
-        <!-- Info perangkat -->
-        <section class="card">
-          <div class="pad">
-            <div class="title">
-              <span class="mark"></span>
-              <h2>Pelan Kiri</h2>
-            </div>
-            <div class="meta-list" id="env">
-              <div class="meta-item">
-                <strong>Browser:</strong
-                ><span id="env-browser">Mendeteksi…</span>
-              </div>
-              <div class="meta-item">
-                <strong>OS:</strong><span id="env-os">Mendeteksi…</span>
-              </div>
-              <div class="meta-item">
-                <strong>Resolusi:</strong><span id="env-res">Mendeteksi…</span>
-              </div>
-              <div class="meta-item">
-                <strong>Lokasi:</strong><span id="env-geo">Mencari kota…</span>
-                <span class="flag" id="env-flag" aria-hidden="true">🏳️</span>
-              </div>
-              <div class="meta-item">
-                <strong>IP:</strong><span id="env-ip">—</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         <!-- Komentar -->
         <section class="card fb-wrap">
@@ -773,12 +746,7 @@
     <!-- Interaksi, lazy-load, share, env info -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        // Helper: flag emoji dari country code
-        function countryCodeToFlagEmoji(code) {
-          if (!code) return '🏳️'
-          return code
-            .toUpperCase()
-            .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt()))
+        
         }
 
         // Lazy load gambar
@@ -864,64 +832,7 @@
         document.getElementById('share-linkedin').href =
           `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
 
-        // Deteksi lingkungan
-        function detectEnv() {
-          const ua = navigator.userAgent || ''
-          let browser = 'Tidak diketahui',
-            os = 'Tidak diketahui'
-          if (/Edg\//.test(ua)) browser = 'Microsoft Edge'
-          else if (/OPR\//.test(ua)) browser = 'Opera'
-          else if (/Chrome\//.test(ua)) browser = 'Chrome'
-          else if (/Safari\//.test(ua) && !/Chrome\//.test(ua))
-            browser = 'Safari'
-          else if (/Firefox\//.test(ua)) browser = 'Firefox'
-
-          if (/Windows/i.test(ua)) os = 'Windows'
-          else if (/Android/i.test(ua)) os = 'Android'
-          else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS'
-          else if (/Mac OS X|Macintosh/i.test(ua)) os = 'macOS'
-          else if (/Linux/i.test(ua)) os = 'Linux'
-
-          document.getElementById('env-browser').textContent = browser
-          document.getElementById('env-os').textContent = os
-          document.getElementById('env-res').textContent =
-            `${window.screen.width}×${window.screen.height}`
-        }
-        detectEnv()
-
-        // Geo by IP
-        async function fetchGeo() {
-          const geoEl = document.getElementById('env-geo')
-          const flagEl = document.getElementById('env-flag')
-          const ipEl = document.getElementById('env-ip')
-          try {
-            let res = await fetch('https://ipapi.co/json/')
-            if (!res.ok) throw new Error('ipapi fail')
-            let data = await res.json()
-            const city = data.city || 'Kota tidak diketahui'
-            const cc = data.country || data.country_code || ''
-            const ip = data.ip || '—'
-            geoEl.textContent = city + (data.region ? `, ${data.region}` : '')
-            flagEl.textContent = countryCodeToFlagEmoji(cc)
-            ipEl.textContent = ip
-          } catch (e) {
-            try {
-              let res = await fetch('https://ipinfo.io/json?token=')
-              let data = await res.json()
-              const city = data.city || 'Kota tidak diketahui'
-              const cc = data.country || ''
-              const ip = data.ip || '—'
-              geoEl.textContent = city + (data.region ? `, ${data.region}` : '')
-              flagEl.textContent = countryCodeToFlagEmoji(cc)
-              ipEl.textContent = ip
-            } catch (e2) {
-              geoEl.textContent = 'Tidak diketahui'
-              flagEl.textContent = '🏳️'
-              ipEl.textContent = '—'
-            }
-          }
-        }
-        fetchGeo()
+        
       })
     </script>
     });

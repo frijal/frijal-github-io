@@ -238,12 +238,7 @@
             <p>Untuk info lebih lanjut atau jika kamu butuh versi lain, jangan ragu buat mampir ke situs resminya <a href="http://www.virtualbox.org/wiki/Downloads" target="">di sini</a>. Selamat bernostalgia!</p>
         </article>
 
-        <div id="user-info">
-            <h3>Info Sesi Kamu</h3>
-            <p id="browser-info">Mendeteksi browser...</p>
-            <p id="os-info">Mendeteksi OS...</p>
-            <p id="location-info">📍 Melacak lokasi...</p>
-        </div>
+       
 
         <div class="social-share">
             <h3>Bagikan Tutorial Ini</h3>
@@ -291,34 +286,7 @@ document.addEventListener(DOMContentLoaded, () => {
             });
         }
         
-        // Deteksi Info Pengguna
-        document.addEventListener('DOMContentLoaded', function() {
-            // Browser & OS
-            const ua = navigator.userAgent;
-            const platform = navigator.platform;
-            let browser = "Browser tidak dikenal";
-            if (ua.includes("Firefox/")) browser = `Firefox 🔥`;
-            else if (ua.includes("Chrome/")) browser = `Chrome 🚀`;
-            else if (ua.includes("Safari/")) browser = `Safari 🧭`;
-            document.getElementById('browser-info').textContent = `Browser: ${browser}`;
-            
-            let os = "OS tidak dikenal";
-            if (platform.includes("Win")) os = "Windows 💻";
-            else if (platform.includes("Mac")) os = "macOS 🍎";
-            else if (platform.includes("Linux")) os = "Linux 🐧";
-            document.getElementById('os-info').textContent = `Sistem Operasi: ${os}`;
-            
-            // Lokasi via IP
-            const locationInfoEl = document.getElementById('location-info');
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
-                    locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle;">`;
-                })
-                .catch(error => {
-                    locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.';
-                    console.error('Error fetching location:', error);
+        
                 });
         });
 });
