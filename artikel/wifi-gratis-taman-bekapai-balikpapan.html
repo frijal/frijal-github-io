@@ -451,68 +451,7 @@
     nonce="frijal"></script>
 
   <script>
-    // Detect browser & OS
-    (function detectEnv(){
-      const ua = navigator.userAgent, plat = navigator.platform;
-      const elBrowser = document.getElementById('browser');
-      const elOS = document.getElementById('os');
-      function getBrowser(){
-        if(/Edg\//.test(ua)) return "Microsoft Edge";
-        if(/OPR\//.test(ua) || /Opera/.test(ua)) return "Opera";
-        if(/Chrome\//.test(ua) && !/Edg\//.test(ua)) return "Google Chrome";
-        if(/Safari\//.test(ua) && /Version\//.test(ua) && !/Chrome/.test(ua)) return "Safari";
-        if(/Firefox\//.test(ua)) return "Mozilla Firefox";
-        if(/MSIE|Trident/.test(ua)) return "Internet Explorer";
-        return "Browser tidak dikenal";
-      }
-      function getOS(){
-        if(/Win/.test(plat)) return "Windows";
-        if(/Mac/.test(plat)) return "macOS";
-        if(/Linux/.test(plat)) return "Linux";
-        if(/Android/.test(ua)) return "Android";
-        if(/iPhone|iPad|iPod/.test(ua)) return "iOS";
-        return "OS tidak dikenal";
-      }
-      elBrowser.textContent = getBrowser();
-      elOS.textContent = getOS();
-    })();
-
-    // IP Geolocation (public API)
-    (function geolocate(){
-      const geo = document.getElementById('geo');
-      const ipEl = document.getElementById('ip');
-      const flagEl = document.getElementById('flag');
-      // Try ipapi.co first, fallback to ipinfo.io
-      fetch('https://ipapi.co/json/')
-        .then(r=>r.ok?r.json():Promise.reject())
-        .then(d=>{
-          ipEl.textContent = d.ip || '—';
-          const city = d.city || 'Kota tidak diketahui';
-          const country = d.country_name || '';
-          const cc = d.country_code || '';
-          geo.textContent = city + (country?`, ${country}`:'');
-          flagEl.textContent = cc ? ccToEmoji(cc) : '🏳️';
-        })
-        .catch(()=>{
-          fetch('https://ipinfo.io/json?token=')
-            .then(r=>r.json())
-            .then(d=>{
-              ipEl.textContent = d.ip || '—';
-              const loc = (d.city||'') + (d.country?`, ${d.country}`:'');
-              geo.textContent = loc || 'Lokasi tidak diketahui';
-              flagEl.textContent = d.country ? ccToEmoji(d.country) : '🏳️';
-            })
-            .catch(()=>{
-              geo.textContent = 'Lokasi tidak diketahui';
-              ipEl.textContent = '—';
-              flagEl.textContent = '🏳️';
-            });
-        });
-
-      function ccToEmoji(cc){
-        return cc.toUpperCase().replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt()));
-      }
-    })();
+    
 
     // Share links
     (function share(){
