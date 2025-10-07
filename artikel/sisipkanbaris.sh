@@ -17,7 +17,7 @@ for file in *.html; do
     echo "ℹ️ Sudah ada skrip related di $file"
   else
     sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
-    echo "✅ Ditambahkan skrip related di $file"
+    echo "✅ Ditambahkan skrip iposbrowser di $file"
   fi
 
 done
