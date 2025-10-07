@@ -5,7 +5,11 @@
   "description": "[](https://frijal.github.io/index.html)",
   "main": "index.js",
   "scripts": {
-    "start": "node ext/rss.js"
+    "start": "node ext/rss.js",
+    "lint": "eslint .",
+    "lint:html": "npx htmlhint \"artikel/**/*.html\"",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"artikel/**/*.html\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +23,10 @@
   },
   "homepage": "https://github.com/frijal/frijal.github.io#readme",
   "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
     "html-minifier": "^4.0.0",
     "node-html-parser": "^7.0.1",
     "prettier": "^3.6.2"

@@ -1,423 +1,528 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jelajahi Artikel: Windows, Linux (Ubuntu, Arch, Fedora), Religi, & Karir | Frijal</title>
-  <meta name="description" content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux (Ubuntu, Debian, Arch, RedHat, Fedora), inspirasi kehidupan, komunitas, hingga artikel religi dan Islam, serta tips karir.">
-  <meta name="keywords" content="Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal">
-  <meta name="author" content="Fakhrul">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://frijal.github.io/">
-  <meta property="og:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
-  <meta property="og:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir. Temukan topik yang relevan dengan minat Anda.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://frijal.github.io/">
-  <meta property="og:site_name" content="Frijal">
-  <meta property="og:locale" content="id_ID">
-  <meta property="og:image" content="https://frijal.github.io/thumbnail.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir">
-  <meta name="twitter:description" content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir.">
-  <meta name="twitter:site" content="@frijal">
-  <meta name="twitter:creator" content="@frijal">
-  <meta name="twitter:image" content="https://frijal.github.io/thumbnail.jpg">
-  <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
-  <link rel="manifest" href="https://frijal.github.io/site.webmanifest">  
-  <style>
-    /* === Quick Nav === */
-    #quick-nav {
-      position: fixed;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .nav-button {
-      cursor: pointer;
-      font-size: 1.4em;
-      line-height: 1;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: transform 0.2s, color 0.2s;
-    }
-    .nav-button:hover {
-      transform: scale(1.2);
-      color: var(--text-secondary);
-    }
-    .nav-icon { pointer-events: none; }
-
-    /* Animasi ikon */
-    .nav-button.up:hover .nav-icon { transform: translateY(-4px); }
-    .nav-button.windows:hover .nav-icon { transform: rotate(20deg); }
-    .nav-button.linux:hover .nav-icon { animation: wobble 0.6s ease; }
-    .nav-button.religi:hover .nav-icon { transform: rotate(360deg); }
-    .nav-button.karir:hover .nav-icon { transform: scale(1.3); }
-    .nav-button.sitemap:hover .nav-icon { transform: translateX(4px); }
-    .nav-button.rss:hover .nav-icon { animation: pulse 0.6s ease; }
-    .nav-button.multimedia:hover .nav-icon { transform: translateX(3px); }
-    .nav-button.catatan:hover .nav-icon { animation: pulse 0.6s ease; }
-    .nav-button.budaya:hover .nav-icon { transform: translateY(-2px) scale(1.1); }
-
-    @keyframes wobble {
-      0%,100% { transform: rotate(0deg); }
-      25% { transform: rotate(-15deg); }
-      75% { transform: rotate(15deg); }
-    }
-    @keyframes pulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    /* === Theme Default (Light Mode) === */
-    :root {
-      --bg-page: #f0f2f5;
-      --bg-section: #fff;
-      --bg-card: #f8f9fa;
-      --text-primary: #333;
-      --text-secondary: #007bff;
-      --text-muted: #6c757d;
-      --border-color: #e9ecef;
-      --shadow: 0 4px 10px rgba(0,0,0,0.1);
-      --nav-bg: #fff;
-      --nav-border: #ddd;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-page);
-      margin: 0; padding: 20px;
-      color: var(--text-primary);
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-    h1 { text-align: center; margin-bottom: 40px; }
-
-    section.category-section {
-      background-color: var(--bg-section);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-      margin-bottom: 30px;
-    }
-    section.category-section h2 {
-      font-size: 1.8em;
-      color: var(--text-secondary);
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-    .article-card {
-      background-color: var(--bg-card);
-      border-radius: 8px;
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      min-height: 250px;
-    }
-    .article-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .article-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-    }
-    .article-card .card-content {
-      padding: 15px;
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .article-card .card-content h3 {
-      font-size: 1.1em;
-      margin: 0;
-      line-height: 1.4;
-    }
-    .page-footer {
-      padding: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    /* === Dark Mode === */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-page: #121212;
-        --bg-section: #1e1e1e;
-        --bg-card: #2c2c2c;
-        --text-primary: #f0f0f0;
-        --text-secondary: #5dade2;
-        --text-muted: #aaa;
-        --border-color: #383838;
-        --shadow: 0 4px 10px rgba(0,0,0,0.4);
-        --nav-bg: #2c2c2c;
-        --nav-border: #444;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Jelajahi Artikel: Windows, Linux (Ubuntu, Arch, Fedora), Religi, & Karir |
+      Frijal
+    </title>
+    <meta
+      name="description"
+      content="Jelajahi beragam topik mulai dari panduan sistem operasi Windows dan Linux (Ubuntu, Debian, Arch, RedHat, Fedora), inspirasi kehidupan, komunitas, hingga artikel religi dan Islam, serta tips karir."
+    />
+    <meta
+      name="keywords"
+      content="Artikel, Linux, Ubuntu, Arch, Fedora, Windows, panduan OS, religi, Islam, karir, teknologi, Frijal"
+    />
+    <meta name="author" content="Fakhrul" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://frijal.github.io/" />
+    <meta
+      property="og:title"
+      content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir"
+    />
+    <meta
+      property="og:description"
+      content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir. Temukan topik yang relevan dengan minat Anda."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frijal.github.io/" />
+    <meta property="og:site_name" content="Frijal" />
+    <meta property="og:locale" content="id_ID" />
+    <meta
+      property="og:image"
+      content="https://frijal.github.io/thumbnail.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Galeri Artikel Frijal: Teknologi, Linux, Religi, dan Karir"
+    />
+    <meta
+      name="twitter:description"
+      content="Kumpulan artikel terbaru tentang Linux (Arch, Ubuntu), Windows, Islam, dan tips karir."
+    />
+    <meta name="twitter:site" content="@frijal" />
+    <meta name="twitter:creator" content="@frijal" />
+    <meta
+      name="twitter:image"
+      content="https://frijal.github.io/thumbnail.jpg"
+    />
+    <meta
+      name="google-site-verification"
+      content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA"
+    />
+    <link rel="manifest" href="https://frijal.github.io/site.webmanifest" />
+    <style>
+      /* === Quick Nav === */
+      #quick-nav {
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Galeri Artikel</h1>
-    <div id="main-container"></div>
-  </div>
+      .nav-button {
+        cursor: pointer;
+        font-size: 1.4em;
+        line-height: 1;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          color 0.2s;
+      }
+      .nav-button:hover {
+        transform: scale(1.2);
+        color: var(--text-secondary);
+      }
+      .nav-icon {
+        pointer-events: none;
+      }
 
-  <footer class="page-footer">
-    <div id="footerInfo"></div>
-  </footer>
+      /* Animasi ikon */
+      .nav-button.up:hover .nav-icon {
+        transform: translateY(-4px);
+      }
+      .nav-button.windows:hover .nav-icon {
+        transform: rotate(20deg);
+      }
+      .nav-button.linux:hover .nav-icon {
+        animation: wobble 0.6s ease;
+      }
+      .nav-button.religi:hover .nav-icon {
+        transform: rotate(360deg);
+      }
+      .nav-button.karir:hover .nav-icon {
+        transform: scale(1.3);
+      }
+      .nav-button.sitemap:hover .nav-icon {
+        transform: translateX(4px);
+      }
+      .nav-button.rss:hover .nav-icon {
+        animation: pulse 0.6s ease;
+      }
+      .nav-button.multimedia:hover .nav-icon {
+        transform: translateX(3px);
+      }
+      .nav-button.catatan:hover .nav-icon {
+        animation: pulse 0.6s ease;
+      }
+      .nav-button.budaya:hover .nav-icon {
+        transform: translateY(-2px) scale(1.1);
+      }
 
-  <nav id="quick-nav" aria-label="Navigasi cepat"></nav>
-
-  <script>
-    // --- KONSTANTA BARU ---
-    const IDX_TITLE = 0;
-    const IDX_FILENAME = 1;
-    const IDX_IMAGE = 2;
-    const IDX_DATE = 3;
-    const IDX_DESCRIPTION = 4;
-    const DEFAULT_THUMBNAIL = '/thumbnail.jpg';
-
-    const CATEGORY_ICON_MAP = [
-      { key: "Linux & Open Source", icon: "🐧", cls: "linux" },
-      { key: "Islam & Kehidupan", icon: "📚", cls: "religi" },
-      { key: "Lainnya", icon: "🗂️", cls: "lainnya" },
-      { key: "Multimedia & Editing", icon: "📽️", cls: "multimedia" },
-      { key: "Catatan & Sosial", icon: "📰", cls: "catatan" },
-      { key: "Budaya, Kuliner & Lifestyle", icon: "🏞️", cls: "budaya" },
-      { key: "Windows & Teknologi Umum", icon: "💻", cls: "windows" }
-    ];
-
-    function getIconAndClass(categoryName) {
-      const found = CATEGORY_ICON_MAP.find(m => categoryName.includes(m.key));
-      return found ? found : { icon: "📂", cls: "default" };
-    }
-    
-    function categoryToId(categoryName) {
-        return categoryName
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^a-z0-9-]/g, '');
-    }
-
-    /**
-     * Memformat string tanggal ISO menjadi format yang lebih mudah dibaca (DD MMMM YYYY).
-     */
-    function formatDate(dateString) {
-        try {
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return 'Tanggal tidak diketahui';
-            
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return date.toLocaleDateString('id-ID', options);
-        } catch (e) {
-            return 'Tanggal tidak diketahui';
+      @keyframes wobble {
+        0%,
+        100% {
+          transform: rotate(0deg);
         }
-    }
+        25% {
+          transform: rotate(-15deg);
+        }
+        75% {
+          transform: rotate(15deg);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
 
-    /**
-     * Membuat dan mengembalikan elemen card artikel dengan tanggal.
-     */
-    function createArticleCard(item) {
-        const title = item[IDX_TITLE];
-        const fileName = item[IDX_FILENAME];
-        const jsonImage = item[IDX_IMAGE] || "";
-        const dateString = item[IDX_DATE] ? formatDate(item[IDX_DATE]) : 'Tanggal tidak diketahui';
-        const description = item[IDX_DESCRIPTION] || title;
-        const articleUrl = `artikel/${fileName}`;
-        
-        let thumbnailUrl = jsonImage;
-        if (!thumbnailUrl || !/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(thumbnailUrl)) {
-            thumbnailUrl = DEFAULT_THUMBNAIL;
+      /* === Theme Default (Light Mode) === */
+      :root {
+        --bg-page: #f0f2f5;
+        --bg-section: #fff;
+        --bg-card: #f8f9fa;
+        --text-primary: #333;
+        --text-secondary: #007bff;
+        --text-muted: #6c757d;
+        --border-color: #e9ecef;
+        --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        --nav-bg: #fff;
+        --nav-border: #ddd;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: var(--bg-page);
+        margin: 0;
+        padding: 20px;
+        color: var(--text-primary);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      section.category-section {
+        background-color: var(--bg-section);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+      section.category-section h2 {
+        font-size: 1.8em;
+        color: var(--text-secondary);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+      .article-card {
+        background-color: var(--bg-card);
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        min-height: 250px;
+      }
+      .article-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      .article-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+      .article-card .card-content {
+        padding: 15px;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .article-card .card-content h3 {
+        font-size: 1.1em;
+        margin: 0;
+        line-height: 1.4;
+      }
+      .page-footer {
+        padding: 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      /* === Dark Mode === */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-page: #121212;
+          --bg-section: #1e1e1e;
+          --bg-card: #2c2c2c;
+          --text-primary: #f0f0f0;
+          --text-secondary: #5dade2;
+          --text-muted: #aaa;
+          --border-color: #383838;
+          --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+          --nav-bg: #2c2c2c;
+          --nav-border: #444;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Galeri Artikel</h1>
+      <div id="main-container"></div>
+    </div>
+
+    <footer class="page-footer">
+      <div id="footerInfo"></div>
+    </footer>
+
+    <nav id="quick-nav" aria-label="Navigasi cepat"></nav>
+
+    <script>
+      // --- KONSTANTA BARU ---
+      const IDX_TITLE = 0
+      const IDX_FILENAME = 1
+      const IDX_IMAGE = 2
+      const IDX_DATE = 3
+      const IDX_DESCRIPTION = 4
+      const DEFAULT_THUMBNAIL = '/thumbnail.jpg'
+
+      const CATEGORY_ICON_MAP = [
+        { key: 'Linux & Open Source', icon: '🐧', cls: 'linux' },
+        { key: 'Islam & Kehidupan', icon: '📚', cls: 'religi' },
+        { key: 'Lainnya', icon: '🗂️', cls: 'lainnya' },
+        { key: 'Multimedia & Editing', icon: '📽️', cls: 'multimedia' },
+        { key: 'Catatan & Sosial', icon: '📰', cls: 'catatan' },
+        { key: 'Budaya, Kuliner & Lifestyle', icon: '🏞️', cls: 'budaya' },
+        { key: 'Windows & Teknologi Umum', icon: '💻', cls: 'windows' },
+      ]
+
+      function getIconAndClass(categoryName) {
+        const found = CATEGORY_ICON_MAP.find((m) =>
+          categoryName.includes(m.key),
+        )
+        return found ? found : { icon: '📂', cls: 'default' }
+      }
+
+      function categoryToId(categoryName) {
+        return categoryName
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '')
+      }
+
+      /**
+       * Memformat string tanggal ISO menjadi format yang lebih mudah dibaca (DD MMMM YYYY).
+       */
+      function formatDate(dateString) {
+        try {
+          const date = new Date(dateString)
+          if (isNaN(date.getTime())) return 'Tanggal tidak diketahui'
+
+          const options = { year: 'numeric', month: 'long', day: 'numeric' }
+          return date.toLocaleDateString('id-ID', options)
+        } catch (e) {
+          return 'Tanggal tidak diketahui'
+        }
+      }
+
+      /**
+       * Membuat dan mengembalikan elemen card artikel dengan tanggal.
+       */
+      function createArticleCard(item) {
+        const title = item[IDX_TITLE]
+        const fileName = item[IDX_FILENAME]
+        const jsonImage = item[IDX_IMAGE] || ''
+        const dateString = item[IDX_DATE]
+          ? formatDate(item[IDX_DATE])
+          : 'Tanggal tidak diketahui'
+        const description = item[IDX_DESCRIPTION] || title
+        const articleUrl = `artikel/${fileName}`
+
+        let thumbnailUrl = jsonImage
+        if (
+          !thumbnailUrl ||
+          !/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(thumbnailUrl)
+        ) {
+          thumbnailUrl = DEFAULT_THUMBNAIL
         }
         if (!/^https?:\/\//i.test(thumbnailUrl)) {
-            thumbnailUrl = `artikel/${thumbnailUrl}`;
+          thumbnailUrl = `artikel/${thumbnailUrl}`
         }
 
-        const link = document.createElement('a');
-        link.href = articleUrl;
-        link.classList.add('article-card');
-        link.title = description;
+        const link = document.createElement('a')
+        link.href = articleUrl
+        link.classList.add('article-card')
+        link.title = description
 
-        const image = document.createElement('img');
-        image.src = thumbnailUrl;
-        image.alt = `Gambar artikel: ${title}`;
-        image.loading = 'lazy';
+        const image = document.createElement('img')
+        image.src = thumbnailUrl
+        image.alt = `Gambar artikel: ${title}`
+        image.loading = 'lazy'
 
-        const content = document.createElement('div');
-        content.classList.add('card-content');
-        
+        const content = document.createElement('div')
+        content.classList.add('card-content')
+
         content.innerHTML = `
             <h3>${title}</h3>
             <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 5px; margin-bottom: 0;">${dateString}</p>
-        `;
+        `
 
-        link.appendChild(image);
-        link.appendChild(content);
-        return link;
-    }
+        link.appendChild(image)
+        link.appendChild(content)
+        return link
+      }
 
+      function createQuickNav(categories) {
+        const quickNav = document.getElementById('quick-nav')
+        quickNav.innerHTML = ''
 
-    function createQuickNav(categories) {
-        const quickNav = document.getElementById('quick-nav');
-        quickNav.innerHTML = '';
-        
         const allNavItems = [
-            // Tambahkan tombol "Terbaru" di awal
-            { name: "Artikel Terbaru", icon: "🔥", cls: "latest", url: '#terbaru' },
-            { name: "Daftar Isi", icon: "📑", cls: "sitemap", url: 'https://frijal.github.io/sitemap.html' },
-        ];
+          // Tambahkan tombol "Terbaru" di awal
+          {
+            name: 'Artikel Terbaru',
+            icon: '🔥',
+            cls: 'latest',
+            url: '#terbaru',
+          },
+          {
+            name: 'Daftar Isi',
+            icon: '📑',
+            cls: 'sitemap',
+            url: 'https://frijal.github.io/sitemap.html',
+          },
+        ]
 
         // Tambahkan Kategori Dinamis
-        categories.forEach(categoryName => {
-            const { icon, cls } = getIconAndClass(categoryName);
-            const categoryId = categoryToId(categoryName);
-            allNavItems.push({ name: categoryName, icon: icon, cls: cls, url: `#${categoryId}` });
-        });
+        categories.forEach((categoryName) => {
+          const { icon, cls } = getIconAndClass(categoryName)
+          const categoryId = categoryToId(categoryName)
+          allNavItems.push({
+            name: categoryName,
+            icon: icon,
+            cls: cls,
+            url: `#${categoryId}`,
+          })
+        })
 
         // Tambahkan RSS dan Atas
         allNavItems.push(
-            { name: "RSS Feed", icon: "📰", cls: "rss", url: 'https://frijal.github.io/rss' },
-            { name: "Kembali ke atas", icon: "↑↑", cls: "up", url: '#top' }
-        );
+          {
+            name: 'RSS Feed',
+            icon: '📰',
+            cls: 'rss',
+            url: 'https://frijal.github.io/rss',
+          },
+          { name: 'Kembali ke atas', icon: '↑↑', cls: 'up', url: '#top' },
+        )
 
         // Render semua tombol
-        allNavItems.forEach(item => {
-            const button = document.createElement('a');
-            button.href = item.url;
-            button.className = `nav-button ${item.cls}`;
-            button.title = item.name;
-            button.innerHTML = `<span class="nav-icon">${item.icon}</span>`;
+        allNavItems.forEach((item) => {
+          const button = document.createElement('a')
+          button.href = item.url
+          button.className = `nav-button ${item.cls}`
+          button.title = item.name
+          button.innerHTML = `<span class="nav-icon">${item.icon}</span>`
 
-            if (item.url.startsWith('#')) {
-                // Penanganan smooth scroll untuk anchor lokal
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.url.substring(1);
+          if (item.url.startsWith('#')) {
+            // Penanganan smooth scroll untuk anchor lokal
+            button.addEventListener('click', (e) => {
+              e.preventDefault()
+              const targetId = item.url.substring(1)
 
-                    // --- PERBAIKAN LOGIKA SCROLL KE ATAS ---
-                    if (targetId === 'top') {
-                        // Jika target adalah #top, gunakan window.scrollTo(0,0) untuk memastikan kembali ke atas
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        // Jika target adalah kategori, cari elemen dan scroll ke sana
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-                        }
-                    }
-                });
-            }
-            quickNav.appendChild(button);
-        });
-    }
-
-    // --- Logika Utama Pemuatan Artikel (Sorting dipertahankan) ---
-    document.addEventListener('DOMContentLoaded', async () => {
-        const mainContainer = document.getElementById('main-container');
-        let allCategories = [];
-        
-        try {
-            const response = await fetch('artikel.json');
-            if (!response.ok) throw new Error('Gagal memuat artikel.json');
-            const data = await response.json();
-
-            let allArticles = [];
-
-            // 1. Kumpulkan semua artikel dari semua kategori
-            for (const category in data) {
-                if (data.hasOwnProperty(category)) {
-                    allCategories.push(category);
-                    data[category].forEach(item => {
-                        const dateValue = item[IDX_DATE];
-                        if (dateValue) {
-                            allArticles.push({
-                                item: item, 
-                                date: new Date(dateValue)
-                            });
-                        }
-                    });
+              // --- PERBAIKAN LOGIKA SCROLL KE ATAS ---
+              if (targetId === 'top') {
+                // Jika target adalah #top, gunakan window.scrollTo(0,0) untuk memastikan kembali ke atas
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              } else {
+                // Jika target adalah kategori, cari elemen dan scroll ke sana
+                const targetElement = document.getElementById(targetId)
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                  })
                 }
+              }
+            })
+          }
+          quickNav.appendChild(button)
+        })
+      }
+
+      // --- Logika Utama Pemuatan Artikel (Sorting dipertahankan) ---
+      document.addEventListener('DOMContentLoaded', async () => {
+        const mainContainer = document.getElementById('main-container')
+        let allCategories = []
+
+        try {
+          const response = await fetch('artikel.json')
+          if (!response.ok) throw new Error('Gagal memuat artikel.json')
+          const data = await response.json()
+
+          let allArticles = []
+
+          // 1. Kumpulkan semua artikel dari semua kategori
+          for (const category in data) {
+            if (data.hasOwnProperty(category)) {
+              allCategories.push(category)
+              data[category].forEach((item) => {
+                const dateValue = item[IDX_DATE]
+                if (dateValue) {
+                  allArticles.push({
+                    item: item,
+                    date: new Date(dateValue),
+                  })
+                }
+              })
             }
-            
-            // 2. Urutkan semua artikel secara global (Terbaru ke Terlama)
-            allArticles.sort((a, b) => b.date.getTime() - a.date.getTime());
+          }
 
-            // --- Bagian 3: Tampilkan Artikel Terbaru (Global) ---
-            if (allArticles.length > 0) {
-                const latestSection = document.createElement('section');
-                latestSection.classList.add('category-section');
-                
-                const latestHeading = document.createElement('h2');
-                latestHeading.id = 'terbaru';
-                latestHeading.textContent = 'Artikel Terbaru 🔥';
-                latestSection.appendChild(latestHeading);
+          // 2. Urutkan semua artikel secara global (Terbaru ke Terlama)
+          allArticles.sort((a, b) => b.date.getTime() - a.date.getTime())
 
-                const latestGrid = document.createElement('div');
-                latestGrid.classList.add('article-grid');
-                
-                const maxLatest = 12; 
-                allArticles.slice(0, maxLatest).forEach(articleObj => {
-                    latestGrid.appendChild(createArticleCard(articleObj.item));
-                });
-                
-                latestSection.appendChild(latestGrid);
-                mainContainer.appendChild(latestSection);
-            }
+          // --- Bagian 3: Tampilkan Artikel Terbaru (Global) ---
+          if (allArticles.length > 0) {
+            const latestSection = document.createElement('section')
+            latestSection.classList.add('category-section')
 
-            // --- Bagian 4: Tampilkan Artikel Berdasarkan Kategori Asli (Diurutkan) ---
-            allCategories.forEach(category => {
-                const articles = data[category];
+            const latestHeading = document.createElement('h2')
+            latestHeading.id = 'terbaru'
+            latestHeading.textContent = 'Artikel Terbaru 🔥'
+            latestSection.appendChild(latestHeading)
 
-                // Urutkan artikel di dalam KATEGORI (Terbaru ke Terlama)
-                articles.sort((a, b) => {
-                    // Gunakan 0 jika tanggal tidak ada, sehingga artikel tanpa tanggal akan berada di akhir
-                    const dateA = new Date(a[IDX_DATE] || 0).getTime(); 
-                    const dateB = new Date(b[IDX_DATE] || 0).getTime();
-                    return dateB - dateA;
-                });
+            const latestGrid = document.createElement('div')
+            latestGrid.classList.add('article-grid')
 
-                const section = document.createElement('section');
-                section.classList.add('category-section');
+            const maxLatest = 12
+            allArticles.slice(0, maxLatest).forEach((articleObj) => {
+              latestGrid.appendChild(createArticleCard(articleObj.item))
+            })
 
-                const categoryId = categoryToId(category);
+            latestSection.appendChild(latestGrid)
+            mainContainer.appendChild(latestSection)
+          }
 
-                const heading = document.createElement('h2');
-                heading.id = categoryId;
-                heading.textContent = category;
-                section.appendChild(heading);
+          // --- Bagian 4: Tampilkan Artikel Berdasarkan Kategori Asli (Diurutkan) ---
+          allCategories.forEach((category) => {
+            const articles = data[category]
 
-                const grid = document.createElement('div');
-                grid.classList.add('article-grid');
+            // Urutkan artikel di dalam KATEGORI (Terbaru ke Terlama)
+            articles.sort((a, b) => {
+              // Gunakan 0 jika tanggal tidak ada, sehingga artikel tanpa tanggal akan berada di akhir
+              const dateA = new Date(a[IDX_DATE] || 0).getTime()
+              const dateB = new Date(b[IDX_DATE] || 0).getTime()
+              return dateB - dateA
+            })
 
-                articles.forEach((item) => {
-                    grid.appendChild(createArticleCard(item));
-                });
+            const section = document.createElement('section')
+            section.classList.add('category-section')
 
-                section.appendChild(grid);
-                mainContainer.appendChild(section);
-            });
+            const categoryId = categoryToId(category)
 
-            // 5. Bangun navigasi cepat
-            createQuickNav(allCategories);
-            
+            const heading = document.createElement('h2')
+            heading.id = categoryId
+            heading.textContent = category
+            section.appendChild(heading)
+
+            const grid = document.createElement('div')
+            grid.classList.add('article-grid')
+
+            articles.forEach((item) => {
+              grid.appendChild(createArticleCard(item))
+            })
+
+            section.appendChild(grid)
+            mainContainer.appendChild(section)
+          })
+
+          // 5. Bangun navigasi cepat
+          createQuickNav(allCategories)
         } catch (error) {
-            console.error('Ada masalah saat memuat artikel.json:', error);
-            mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. (${error.message})</p>`;
+          console.error('Ada masalah saat memuat artikel.json:', error)
+          mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. (${error.message})</p>`
         }
-    });
-  </script>
-</body>
+      })
+    </script>
+  </body>
 </html>

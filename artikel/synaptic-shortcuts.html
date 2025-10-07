@@ -1,187 +1,438 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- prettier-ignore -->
-<title>Kombinasi Tombol Synaptic Interaktif</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- prettier-ignore -->
+    <title>Kombinasi Tombol Synaptic Interaktif</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<!-- SEO Metadata -->
-<link rel="canonical" href="https://frijal.github.io/artikel/synaptic-shortcuts.html">
-<meta name="description" content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard.">
-<meta property="og:title" content="Kombinasi Tombol Synaptic Interaktif">
-<meta property="og:description" content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://frijal.github.io/artikel/synaptic-shortcuts.html">
-<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kombinasi Tombol Synaptic Interaktif">
-<meta name="twitter:description" content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard.">
-<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png">
+    <!-- SEO Metadata -->
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/synaptic-shortcuts.html"
+    />
+    <meta
+      name="description"
+      content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard."
+    />
+    <meta property="og:title" content="Kombinasi Tombol Synaptic Interaktif" />
+    <meta
+      property="og:description"
+      content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/synaptic-shortcuts.html"
+    />
+    <meta
+      property="og:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kombinasi Tombol Synaptic Interaktif" />
+    <meta
+      name="twitter:description"
+      content="Panduan interaktif kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png"
+    />
 
-<!-- Prism.js for syntax highlighting -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-});
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Prism.js for syntax highlighting -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
-<style>
-body { font-family: Arial, sans-serif; max-width:1200px; margin:auto; padding:20px; line-height:1.6; }
-h1 { color:#007bff; }
-img { max-width:100%; height:auto; }
-table { width:100%; border-collapse:collapse; margin-top:20px; }
-table th, table td { border:1px solid #ccc; padding:10px; text-align:left; position:relative; }
-table th { background-color:#f2f2f2; }
-.tooltip {
-  position: absolute;
-  background: rgba(0,0,0,0.85);
-  color:#fff;
-  padding:5px 10px;
-  border-radius:4px;
-  font-size:12px;
-  display:none;
-  z-index:10;
-  max-width:300px;
-}
-button.copy-btn { margin-left:5px; background:#007bff; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:12px; }
-#info-browser, #info-os, #ip-country { margin-top:20px; padding:10px; background:#f9f9f9; border-radius:5px; }
-#btn-home-left, #btn-home-right { position: fixed; display: flex; align-items: center; background-color: #007bff; color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: background 0.3s ease, transform 0.2s ease; z-index: 9999;}
-#btn-home-left:hover, #btn-home-right:hover { background-color: #0056b3; transform: scale(1.05); }
-#btn-home-left { left:10px; top:30%; transform:translateY(-50%); }
-#btn-home-right { right:10px; bottom:20%; transform:translateY(50%); }
-#btn-home-left svg, #btn-home-right svg { flex-shrink:0; }
-</style>
-<meta name="date" content="2025-09-28">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      h1 {
+        color: #007bff;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      table th,
+      table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        position: relative;
+      }
+      table th {
+        background-color: #f2f2f2;
+      }
+      .tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        display: none;
+        z-index: 10;
+        max-width: 300px;
+      }
+      button.copy-btn {
+        margin-left: 5px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      #info-browser,
+      #info-os,
+      #ip-country {
+        margin-top: 20px;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 5px;
+      }
+      #btn-home-left,
+      #btn-home-right {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition:
+          background 0.3s ease,
+          transform 0.2s ease;
+        z-index: 9999;
+      }
+      #btn-home-left:hover,
+      #btn-home-right:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      #btn-home-left {
+        left: 10px;
+        top: 30%;
+        transform: translateY(-50%);
+      }
+      #btn-home-right {
+        right: 10px;
+        bottom: 20%;
+        transform: translateY(50%);
+      }
+      #btn-home-left svg,
+      #btn-home-right svg {
+        flex-shrink: 0;
+      }
+    </style>
+    <meta name="date" content="2025-09-28" />
 
-  <meta property="og:image:alt" content="Kombinasi Tombol Synaptic Interaktif">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/synaptic-shortcuts.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-15T11:00:00+08:00"></head>
-<body>
+    <meta
+      property="og:image:alt"
+      content="Kombinasi Tombol Synaptic Interaktif"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-15T11:00:00+08:00"
+    />
+  </head>
+  <body>
+    <h1>Kombinasi Tombol Synaptic Interaktif</h1>
+    <div id="iposbrowser"></div>
+    <p>
+      Berikut panduan interaktif kombinasi tombol Synaptic Package Manager.
+      Arahkan mouse untuk melihat tooltip, dan klik tombol
+      <strong>copy</strong> untuk menyalin kombinasi.
+    </p>
 
-<h1>Kombinasi Tombol Synaptic Interaktif</h1>
-<div id="iposbrowser"></div>
-<p>Berikut panduan interaktif kombinasi tombol Synaptic Package Manager. Arahkan mouse untuk melihat tooltip, dan klik tombol <strong>copy</strong> untuk menyalin kombinasi.</p>
+    <div style="text-align: center">
+      <a
+        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png"
+        target=""
+      >
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png"
+          alt="Synaptic Package Manager"
+        />
+      </a>
+    </div>
 
-<div style="text-align:center;">
-  <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png" target="">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRZOjBPeuzNkuePP75hWA2M1BkOtmpP1yVDim19LOzZP7BkJ1dEd2OuRLWLeA_Ad61nD0A9y2Q3-Z7gXCXqHnwB8-72byUdWqb1EtSKHkVQhcXfqjqNLqHrCLSGBZAAlcLxklqe-4d2J2zs2H1QFHlGk75V-IqbXp9G6P-_5hQujhSSP_Pqnam29Wd1E4/s1600/synaptic.png" alt="Synaptic Package Manager">
-  </a>
-</div>
+    <table id="shortcut-table">
+      <thead>
+        <tr>
+          <th>Keterangan</th>
+          <th>Kombinasi Tombol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-tooltip="Perbarui daftar semua perangkat lunak Synaptic.">
+          <td>Perbarui Daftar Perangkat Lunak</td>
+          <td>Ctrl + R <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Buka dialog untuk mencari paket tertentu.">
+          <td>Buka dialog untuk mencari Paket</td>
+          <td>Ctrl + F <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Tampilkan properti dari paket yang dipilih.">
+          <td>Tampilkan properti dari paket</td>
+          <td>Ctrl + O <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Tandai paket agar dipasang.">
+          <td>Tandai paket untuk dipasangkan</td>
+          <td>Ctrl + I <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Tandai paket agar diperbarui.">
+          <td>Tandai paket untuk diperbaharui</td>
+          <td>Ctrl + U <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Tandai paket agar dihapus.">
+          <td>Tandai paket untuk dihapus</td>
+          <td>Delete <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Hapus paket secara menyeluruh.">
+          <td>Tandai paket untuk dihapus menyeluruh</td>
+          <td>Shift + Delete <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Lepaskan tanda centang dari semua paket.">
+          <td>Lepaskan Tanda Contreng</td>
+          <td>Ctrl + N <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Perbarui semua perangkat lunak yang ada.">
+          <td>Perbaharui semua perangkat lunak</td>
+          <td>Ctrl + G <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Paksa memasang paket dengan versi tertentu.">
+          <td>Paksa pemasangan paket</td>
+          <td>Ctrl + E <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Kembali ke tahapan sebelumnya.">
+          <td>Kembali ke tahapan sebelumnya</td>
+          <td>Ctrl + Z <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Menuju tahapan selanjutnya.">
+          <td>Menuju ke tahapan selanjutnya</td>
+          <td>Ctrl + Shift + Z <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Jalankan semua perubahan yang telah dibuat.">
+          <td>Jalankan semua perubahan</td>
+          <td>Ctrl + P <button class="copy-btn">Copy</button></td>
+        </tr>
+        <tr data-tooltip="Keluar dari Synaptic.">
+          <td>Keluar dari Synaptic</td>
+          <td>Ctrl + Q <button class="copy-btn">Copy</button></td>
+        </tr>
+      </tbody>
+    </table>
 
-<table id="shortcut-table">
-<thead>
-<tr><th>Keterangan</th><th>Kombinasi Tombol</th></tr>
-</thead>
-<tbody>
-<tr data-tooltip="Perbarui daftar semua perangkat lunak Synaptic."><td>Perbarui Daftar Perangkat Lunak</td><td>Ctrl + R <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Buka dialog untuk mencari paket tertentu."><td>Buka dialog untuk mencari Paket</td><td>Ctrl + F <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Tampilkan properti dari paket yang dipilih."><td>Tampilkan properti dari paket</td><td>Ctrl + O <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Tandai paket agar dipasang."><td>Tandai paket untuk dipasangkan</td><td>Ctrl + I <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Tandai paket agar diperbarui."><td>Tandai paket untuk diperbaharui</td><td>Ctrl + U <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Tandai paket agar dihapus."><td>Tandai paket untuk dihapus</td><td>Delete <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Hapus paket secara menyeluruh."><td>Tandai paket untuk dihapus menyeluruh</td><td>Shift + Delete <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Lepaskan tanda centang dari semua paket."><td>Lepaskan Tanda Contreng</td><td>Ctrl + N <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Perbarui semua perangkat lunak yang ada."><td>Perbaharui semua perangkat lunak</td><td>Ctrl + G <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Paksa memasang paket dengan versi tertentu."><td>Paksa pemasangan paket</td><td>Ctrl + E <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Kembali ke tahapan sebelumnya."><td>Kembali ke tahapan sebelumnya</td><td>Ctrl + Z <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Menuju tahapan selanjutnya."><td>Menuju ke tahapan selanjutnya</td><td>Ctrl + Shift + Z <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Jalankan semua perubahan yang telah dibuat."><td>Jalankan semua perubahan</td><td>Ctrl + P <button class="copy-btn">Copy</button></td></tr>
-<tr data-tooltip="Keluar dari Synaptic."><td>Keluar dari Synaptic</td><td>Ctrl + Q <button class="copy-btn">Copy</button></td></tr>
-</tbody>
-</table>
+    <div class="tooltip" id="tooltip"></div>
 
-<div class="tooltip" id="tooltip"></div>
+    <!-- Info Browser & OS -->
+    <div id="info-browser">
+      <strong>Browser:</strong> <span id="browser-name"></span>
+      <span id="browser-icon"></span>
+    </div>
+    <div id="info-os">
+      <strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span>
+    </div>
 
-<!-- Info Browser & OS -->
-<div id="info-browser"><strong>Browser:</strong> <span id="browser-name"></span> <span id="browser-icon"></span></div>
-<div id="info-os"><strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span></div>
+    <!-- Facebook Comments Plugin -->
+    <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
+      <span id="current-url" class="small-muted"></span>
+    </div>
+    <div style="margin-top: 18px">
+      <div id="fb-root"></div>
+      <script
+        async
+        defer
+        crossorigin="anonymous"
+        src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+      >
+        });
+      </script>
+      <div
+        class="fb-comments"
+        id="fb-comments"
+        data-href=""
+        data-width="100%"
+        data-numposts="5"
+      ></div>
+    </div>
 
-<!-- Facebook Comments Plugin -->
-<div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
-<div style="margin-top:18px">
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-          src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
-});
-  </script>
-  <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
-</div>
+    <!-- IP & Bendera -->
+    <div id="ip-country">
+      <strong>IP & Negara:</strong> <span id="ip-address"></span>
+      <img id="flag" src="" alt="Flag" width="24" />
+    </div>
 
+    <script>
+      document.addEventListener(DOMContentLoaded, () => {
+        // Tooltip Interaktif
+        const tooltip = document.getElementById('tooltip')
+        document.querySelectorAll('#shortcut-table tbody tr').forEach((row) => {
+          row.addEventListener('mouseenter', (e) => {
+            tooltip.textContent = row.dataset.tooltip
+            const rect = row.getBoundingClientRect()
+            tooltip.style.top = rect.top - 30 + window.scrollY + 'px'
+            tooltip.style.left = rect.left + 10 + 'px'
+            tooltip.style.display = 'block'
+          })
+          row.addEventListener('mouseleave', (e) => {
+            tooltip.style.display = 'none'
+          })
+        })
 
+        // Tombol copy
+        document.querySelectorAll('.copy-btn').forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const combo = e.target.parentElement.textContent
+              .replace('Copy', '')
+              .trim()
+            navigator.clipboard.writeText(combo)
+            btn.textContent = 'Copied!'
+            setTimeout(() => {
+              btn.textContent = 'Copy'
+            }, 1500)
+          })
+        })
 
-<!-- IP & Bendera -->
-<div id="ip-country"><strong>IP & Negara:</strong> <span id="ip-address"></span> <img id="flag" src="" alt="Flag" width="24"></div>
+        // Browser & OS info
+        const ua = navigator.userAgent
+        let browser = 'Unknown',
+          os = 'Unknown'
+        if (ua.indexOf('Firefox') > -1) browser = 'Firefox 🦊'
+        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome 🟢'
+        else if (ua.indexOf('Safari') > -1) browser = 'Safari 🍏'
+        else if (ua.indexOf('Edge') > -1) browser = 'Edge 🟦'
+        document.getElementById('browser-name').textContent = browser
 
-<script>
-document.addEventListener(DOMContentLoaded, () => {
-// Tooltip Interaktif
-const tooltip = document.getElementById('tooltip');
-document.querySelectorAll('#shortcut-table tbody tr').forEach(row=>{
-  row.addEventListener('mouseenter', e=>{
-    tooltip.textContent = row.dataset.tooltip;
-    const rect = row.getBoundingClientRect();
-    tooltip.style.top = (rect.top - 30 + window.scrollY)+'px';
-    tooltip.style.left = (rect.left + 10)+'px';
-    tooltip.style.display='block';
-  });
-  row.addEventListener('mouseleave', e=>{
-    tooltip.style.display='none';
-  });
-});
+        if (ua.indexOf('Windows') > -1) os = 'Windows 🪟'
+        else if (ua.indexOf('Linux') > -1) os = 'Linux 🐧'
+        else if (ua.indexOf('Mac') > -1) os = 'macOS 🍎'
+        document.getElementById('os-name').textContent = os
 
-// Tombol copy
-document.querySelectorAll('.copy-btn').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    const combo = e.target.parentElement.textContent.replace('Copy','').trim();
-    navigator.clipboard.writeText(combo);
-    btn.textContent='Copied!';
-    setTimeout(()=>{btn.textContent='Copy';},1500);
-  });
-});
+        // IP & Flag
+        fetch('https://ipapi.co/json/')
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById('ip-address').textContent =
+              data.ip + ' - ' + data.country_name
+            document.getElementById('flag').src =
+              'https://flagcdn.com/24x18/' +
+              data.country_code.toLowerCase() +
+              '.png'
+          })
 
-// Browser & OS info
-const ua = navigator.userAgent;
-let browser='Unknown', os='Unknown';
-if(ua.indexOf('Firefox')>-1) browser='Firefox 🦊';
-else if(ua.indexOf('Chrome')>-1) browser='Chrome 🟢';
-else if(ua.indexOf('Safari')>-1) browser='Safari 🍏';
-else if(ua.indexOf('Edge')>-1) browser='Edge 🟦';
-document.getElementById('browser-name').textContent=browser;
+        // Facebook Comments setup
+        const currentUrl = window.location.href
+        document.getElementById('current-url').textContent = currentUrl
+        document
+          .getElementById('fb-comments')
+          .setAttribute('data-href', currentUrl)
+        window.fbAsyncInit = function () {
+          if (typeof FB !== 'undefined') {
+            try {
+              FB.XFBML.parse()
+            } catch (e) {}
+          }
+        }
+      })
+    </script>
 
-if(ua.indexOf('Windows')>-1) os='Windows 🪟';
-else if(ua.indexOf('Linux')>-1) os='Linux 🐧';
-else if(ua.indexOf('Mac')>-1) os='macOS 🍎';
-document.getElementById('os-name').textContent=os;
+    <!-- JSON-LD -->
+    });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Kombinasi Tombol Synaptic Interaktif",
+        "description": "Panduan kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard.",
+        "author": {
+          "@type": "Person",
+          "name": "Pelan Kiri Rijal",
+          "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Bak.Xo.je",
+          "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+        },
+        "datePublished": "2025-09-15",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://frijal.github.io/artikel/synaptic-shortcuts.html",
+          "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+        },
+        "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+      }
+    </script>
 
-// IP & Flag
-fetch('https://ipapi.co/json/')
-.then(res=>res.json())
-.then(data=>{
-  document.getElementById('ip-address').textContent=data.ip + ' - ' + data.country_name;
-  document.getElementById('flag').src='https://flagcdn.com/24x18/'+data.country_code.toLowerCase()+'.png';
-});
+    });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://frijal.github.io/sitemap.html",
+            "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Synaptic Shortcuts",
+            "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+          }
+        ],
+        "image": "https://frijal.github.io/artikel/synaptic-shortcuts.jpg"
+      }
+    </script>
 
-// Facebook Comments setup
-const currentUrl = window.location.href;
-document.getElementById("current-url").textContent = currentUrl;
-document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-window.fbAsyncInit = function(){if(typeof FB!=='undefined'){try{FB.XFBML.parse();}catch(e){}}};
-});
-</script>
-
-<!-- JSON-LD -->
-});
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Kombinasi Tombol Synaptic Interaktif","description":"Panduan kombinasi tombol Synaptic Package Manager dengan tooltip dan copy ke clipboard.","author":{"@type":"Person","name":"Pelan Kiri Rijal","image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"},"publisher":{"@type":"Organization","name":"Bak.Xo.je","image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"},"datePublished":"2025-09-15","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/synaptic-shortcuts.html","image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"},"image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"}</script>
-
-});
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io/sitemap.html","image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"},{"@type":"ListItem","position":2,"name":"Synaptic Shortcuts","image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"}],"image":"https://frijal.github.io/artikel/synaptic-shortcuts.jpg"}</script>
-
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>
-

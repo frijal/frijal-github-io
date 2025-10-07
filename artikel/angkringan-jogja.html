@@ -48,11 +48,9 @@
     />
     <!-- prettier-ignore -->
     <title>Angkringan Jogja - Kuliner Tradisional Yang Legendaris</title>
-    
 
     <meta name="date" content="2025-09-27" />
-    
-    
+
     <link
       rel="icon"
       type="image/svg+xml"
@@ -121,7 +119,7 @@
         box-sizing: border-box;
       }
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.7;
         background: var(--background);
         min-height: 100vh;
@@ -278,7 +276,7 @@
         padding: 20px;
         border-radius: 10px;
         margin-top: 40px;
-        font-family: "Courier New", monospace;
+        font-family: 'Courier New', monospace;
         font-size: 0.9rem;
       }
       .system-info h4 {
@@ -322,7 +320,7 @@
         padding: 12px 20px;
         border-radius: 50px;
         text-decoration: none;
-        font-family: "Segoe UI", sans-serif;
+        font-family: 'Segoe UI', sans-serif;
         font-size: 14px;
         font-weight: 600;
         box-shadow: 0 8px 25px rgba(255, 105, 0, 0.3);
@@ -389,16 +387,25 @@
       }
     </style>
 
-    <meta property="og:image:alt" content="Angkringan Jogja - Kuliner Tradisional Yang Legendaris">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/angkringan-jogja.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
+    <meta
+      property="og:image:alt"
+      content="Angkringan Jogja - Kuliner Tradisional Yang Legendaris"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/angkringan-jogja.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-16T11:00:00+08:00"
+    />
+  </head>
   <body>
-
     <div class="container">
       <header class="fade-in">
         <h1>🍢 Angkringan Jogja</h1>
-<div id="iposbrowser"></div>
+        <div id="iposbrowser"></div>
         <p class="subtitle">
           Kuliner Legendaris yang Tak Pernah Terlupakan di Hati Warga Yogyakarta
         </p>
@@ -585,7 +592,7 @@
             defer="defer"
             crossorigin="anonymous"
             src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-});
+            });
           ></script>
           <div
             class="fb-comments"
@@ -618,116 +625,128 @@
         </div>
       </main>
     </div>
-});
+    });
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script>
-document.addEventListener(DOMContentLoaded, () => {
-      document.addEventListener("DOMContentLoaded", function () {
-        let e = document.querySelectorAll(".lazy-image"),
-          t = new IntersectionObserver((e, n) => {
-            e.forEach((t) => {
-              if (t.isIntersecting) {
-                let e = t.target;
-                ((e.src = e.dataset.src),
-                  (e.onload = () => e.classList.add("loaded")),
-                  n.unobserve(e));
-              }
-            });
-          });
-        e.forEach((e) => t.observe(e));
-      });
-      let currentUrl = window.location.href;
-      function detectBrowser() {
-        var e = navigator.userAgent;
-        return e.includes("Firefox")
-          ? "Mozilla Firefox"
-          : e.includes("Chrome") && !e.includes("Edg")
-            ? "Google Chrome"
-            : e.includes("Safari") && !e.includes("Chrome")
-              ? "Safari"
-              : e.includes("Edg")
-                ? "Microsoft Edge"
-                : "Browser tidak dikenal";
-      }
-      function detectOS() {
-        var e = navigator.userAgent;
-        return e.includes("Win")
-          ? "Windows"
-          : e.includes("Mac")
-            ? "MacOS"
-            : e.includes("Linux")
-              ? "Linux"
-              : /Android/.test(e)
-                ? "Android"
-                : /iPhone|iPad/.test(e)
-                  ? "iOS"
-                  : "OS tidak dikenal";
-      }
-      ((document.getElementById("current-url").textContent = currentUrl),
-        document
-          .getElementById("fb-comments")
-          .setAttribute("data-href", currentUrl),
-        (window.fbAsyncInit = function () {
-          if ("undefined" != typeof FB)
-            try {
-              FB.XFBML.parse();
-            } catch (e) {}
-        }),
-        (document.getElementById("browser-info").textContent =
-          "🌐 " + detectBrowser()),
-        (document.getElementById("os-info").textContent = "💻 " + detectOS()),
-        fetch("https://ipapi.co/json/")
-          .then((e) => e.json())
-          .then((e) => {
-            ((document.getElementById("ip-info").textContent =
-              "🔑 IP: " + e.ip),
-              (document.getElementById("country-info").innerHTML =
-                "🏳️ Negara: " +
-                e.country_name +
-                " <img src='https://flagcdn.com/16x12/" +
-                e.country_code.toLowerCase() +
-                ".png' alt='flag'>"));
-          })
-          .catch(() => {
-            ((document.getElementById("ip-info").textContent =
-              "Gagal memuat IP"),
-              (document.getElementById("country-info").textContent =
-                "Gagal memuat Negara"));
-          }));
-});
+      document.addEventListener(DOMContentLoaded, () => {
+        document.addEventListener('DOMContentLoaded', function () {
+          let e = document.querySelectorAll('.lazy-image'),
+            t = new IntersectionObserver((e, n) => {
+              e.forEach((t) => {
+                if (t.isIntersecting) {
+                  let e = t.target
+                  ;((e.src = e.dataset.src),
+                    (e.onload = () => e.classList.add('loaded')),
+                    n.unobserve(e))
+                }
+              })
+            })
+          e.forEach((e) => t.observe(e))
+        })
+        let currentUrl = window.location.href
+        function detectBrowser() {
+          var e = navigator.userAgent
+          return e.includes('Firefox')
+            ? 'Mozilla Firefox'
+            : e.includes('Chrome') && !e.includes('Edg')
+              ? 'Google Chrome'
+              : e.includes('Safari') && !e.includes('Chrome')
+                ? 'Safari'
+                : e.includes('Edg')
+                  ? 'Microsoft Edge'
+                  : 'Browser tidak dikenal'
+        }
+        function detectOS() {
+          var e = navigator.userAgent
+          return e.includes('Win')
+            ? 'Windows'
+            : e.includes('Mac')
+              ? 'MacOS'
+              : e.includes('Linux')
+                ? 'Linux'
+                : /Android/.test(e)
+                  ? 'Android'
+                  : /iPhone|iPad/.test(e)
+                    ? 'iOS'
+                    : 'OS tidak dikenal'
+        }
+        ;((document.getElementById('current-url').textContent = currentUrl),
+          document
+            .getElementById('fb-comments')
+            .setAttribute('data-href', currentUrl),
+          (window.fbAsyncInit = function () {
+            if ('undefined' != typeof FB)
+              try {
+                FB.XFBML.parse()
+              } catch (e) {}
+          }),
+          (document.getElementById('browser-info').textContent =
+            '🌐 ' + detectBrowser()),
+          (document.getElementById('os-info').textContent = '💻 ' + detectOS()),
+          fetch('https://ipapi.co/json/')
+            .then((e) => e.json())
+            .then((e) => {
+              ;((document.getElementById('ip-info').textContent =
+                '🔑 IP: ' + e.ip),
+                (document.getElementById('country-info').innerHTML =
+                  '🏳️ Negara: ' +
+                  e.country_name +
+                  " <img src='https://flagcdn.com/16x12/" +
+                  e.country_code.toLowerCase() +
+                  ".png' alt='flag'>"))
+            })
+            .catch(() => {
+              ;((document.getElementById('ip-info').textContent =
+                'Gagal memuat IP'),
+                (document.getElementById('country-info').textContent =
+                  'Gagal memuat Negara'))
+            }))
+      })
     </script>
     <div class="lightbox" id="lightbox">
       <span class="lightbox-close" id="lightboxClose">&times;</span>
       <img src="" alt="Preview" id="lightboxImg" />
     </div>
     <script>
-document.addEventListener(DOMContentLoaded, () => {
-      let lightbox = document.getElementById("lightbox"),
-        lightboxImg = document.getElementById("lightboxImg"),
-        lightboxClose = document.getElementById("lightboxClose");
-      (document.querySelectorAll(".image-item img").forEach((t) => {
-        t.addEventListener("click", () => {
-          (lightbox.classList.add("active"),
-            (lightboxImg.src = t.getAttribute("data-src") || t.src),
-            (lightboxImg.alt = t.alt));
-        });
-      }),
-        lightboxClose.addEventListener("click", () => {
-          lightbox.classList.remove("active");
+      document.addEventListener(DOMContentLoaded, () => {
+        let lightbox = document.getElementById('lightbox'),
+          lightboxImg = document.getElementById('lightboxImg'),
+          lightboxClose = document.getElementById('lightboxClose')
+        ;(document.querySelectorAll('.image-item img').forEach((t) => {
+          t.addEventListener('click', () => {
+            ;(lightbox.classList.add('active'),
+              (lightboxImg.src = t.getAttribute('data-src') || t.src),
+              (lightboxImg.alt = t.alt))
+          })
         }),
-        lightbox.addEventListener("click", (t) => {
-          t.target === lightbox && lightbox.classList.remove("active");
-        }),
-        document.addEventListener("keydown", (t) => {
-          "Escape" === t.key && lightbox.classList.remove("active");
-        }));
-});
+          lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active')
+          }),
+          lightbox.addEventListener('click', (t) => {
+            t.target === lightbox && lightbox.classList.remove('active')
+          }),
+          document.addEventListener('keydown', (t) => {
+            'Escape' === t.key && lightbox.classList.remove('active')
+          }))
+      })
     </script>
 
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>

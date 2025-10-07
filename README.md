@@ -1,6 +1,7 @@
 [](https://frijal.github.io/index.html)
 
 ## 🌟 Lisensi UNLICENSE
+
 <details>
 <summary>Public Domain</summary>
 
@@ -51,6 +52,7 @@
 [![TikTok](https://img.shields.io/badge/TikTok-@gibah.dilarang-000000?logo=tiktok&logoColor=white)](https://www.tiktok.com/@gibah.dilarang)
 [![Instagram](https://img.shields.io/badge/Instagram-frijal-E4405F?logo=instagram&logoColor=white)](https://instagram.com/frijal)
 [![Gist](https://img.shields.io/badge/Gist-Available-black?logo=github&logoColor=white)](https://gist.github.com/frijal)
+
 </details>
 
 ## 🇮🇩 Bahasa Indonesia (Terjemahan)

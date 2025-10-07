@@ -2,9 +2,9 @@ name: Proses ArtikelX lalu Pindahkan ke Artikel
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
     paths:
-      - "artikelx/*.html"
+      - 'artikelx/*.html'
   workflow_dispatch:
 
 permissions:
@@ -92,11 +92,11 @@ jobs:
               echo "✅ Ditambahkan skrip related di $file"
             fi            
           done
-    
+
       # ===================================================================
       # SETELAH SEMUA MODIFIKASI SELESAI, PINDAHKAN FILE
       # ===================================================================
-      
+
       - name: 5. Pindahkan file HTML yang sudah bersih ke folder artikel/
         run: |
           mv -f artikelx/*.html artikel/ || true

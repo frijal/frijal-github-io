@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!-- prettier-ignore -->
     <title>Sulit Buang Air Besar (Sembelit) — Penyebab, Cara Mengatasi & Pencegahan</title>
-    
+
     <meta
       name="description"
       content="Panduan ringkas tentang penyebab sulit buang air besar (sembelit), cara aman mengatasinya di rumah, kapan harus ke dokter, dan pencegahan."
@@ -68,9 +68,9 @@
           ui-sans-serif,
           system-ui,
           -apple-system,
-          "Segoe UI",
+          'Segoe UI',
           Roboto,
-          "Helvetica Neue",
+          'Helvetica Neue',
           Arial;
         color: #e6eef6;
         background: linear-gradient(180deg, #071018 0, #071827 60%);
@@ -286,10 +286,20 @@
         border: 0;
       }
     </style>
-    <meta property="og:image:alt" content="Sulit Buang Air Besar (Sembelit) — Penyebab, Cara Mengatasi & Pencegahan">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/sembelit.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-14T11:00:00+08:00"></head>
+    <meta
+      property="og:image:alt"
+      content="Sulit Buang Air Besar (Sembelit) — Penyebab, Cara Mengatasi & Pencegahan"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/sembelit.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-14T11:00:00+08:00"
+    />
+  </head>
   <body>
     <div class="wrap">
       <header class="site-header">
@@ -311,7 +321,7 @@
           </svg>
           <div>
             <h1>SihatRingkas</h1>
-<div id="iposbrowser"></div>
+            <div id="iposbrowser"></div>
             <div class="meta-row small-muted">
               Artikel kesehatan — Mudah dipahami
             </div>
@@ -526,7 +536,7 @@
               defer="defer"
               crossorigin="anonymous"
               src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-});
+              });
             ></script>
             <div
               class="fb-comments"
@@ -536,20 +546,20 @@
               data-numposts="5"
             ></div>
             <script>
-document.addEventListener(DOMContentLoaded, () => {
-              let currentUrl = window.location.href;
-              ((document.getElementById("current-url").textContent =
-                currentUrl),
-                document
-                  .getElementById("fb-comments")
-                  .setAttribute("data-href", currentUrl),
-                (window.fbAsyncInit = function () {
-                  if ("undefined" != typeof FB)
-                    try {
-                      FB.XFBML.parse();
-                    } catch (t) {}
-                }));
-});
+              document.addEventListener(DOMContentLoaded, () => {
+                let currentUrl = window.location.href
+                ;((document.getElementById('current-url').textContent =
+                  currentUrl),
+                  document
+                    .getElementById('fb-comments')
+                    .setAttribute('data-href', currentUrl),
+                  (window.fbAsyncInit = function () {
+                    if ('undefined' != typeof FB)
+                      try {
+                        FB.XFBML.parse()
+                      } catch (t) {}
+                  }))
+              })
             </script>
           </div>
         </main>
@@ -703,276 +713,285 @@ document.addEventListener(DOMContentLoaded, () => {
         </aside>
       </div>
       <footer class="page-footer">
-        <div>
-          🄯 <span id="year"></span> SihatRingkas — Semua hak dilindungi
-        </div>
+        <div>🄯 <span id="year"></span> SihatRingkas — Semua hak dilindungi</div>
         <div class="small-muted">Made with ❤️ · Template satu halaman</div>
       </footer>
     </div>
     <script>
-document.addEventListener(DOMContentLoaded, () => {
-      function setText(t, e) {
-        (t = document.getElementById(t)) && (t.textContent = e);
-      }
-      let pubDate = new Date();
-      (setText(
-        "published-date",
-        pubDate.toLocaleDateString("id-ID", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-      ),
-        setText("year", pubDate.getFullYear()),
-        (() => {
-          var t = Array.from(document.querySelectorAll("article.content"))
-            .map((t) => t.innerText)
-            .join(" ")
-            .trim()
-            .split(/\s+/).length;
-          setText("read-time", Math.max(1, Math.round(t / 220)) + " menit");
-        })(),
-        (() => {
-          let t = navigator.userAgent || "Unknown",
-            e = "Unknown",
-            n = "Unknown";
-          (/Firefox\/\d+/i.test(t)
-            ? (e = t.match(/Firefox\/[^\s]+/i)[0])
-            : /Edg\/\d+/i.test(t)
-              ? (e = t.match(/Edg\/[^\s]+/i)[0])
-              : /Chrome\/\d+/i.test(t)
-                ? (e = t.match(/Chrome\/[^\s]+/i)[0])
-                : /Safari\/\d+/i.test(t) &&
-                  /Version\/\d+/i.test(t) &&
-                  (e =
-                    "Safari " + t.match(/Version\/[^\s]+/i)[0].split("/")[1]),
-            /Windows NT/i.test(t)
-              ? (n = t.match(/Windows NT [^\s;]+/i)[0])
-              : /Android/i.test(t)
-                ? (n = t.match(/Android [^\s;]+/i)
-                    ? t.match(/Android [^\s;]+/i)[0]
-                    : "Android")
-                : /iPhone OS|iPad; CPU OS/i.test(t)
-                  ? (n = /iPad/.test(t) ? "iPad / iOS" : "iPhone / iOS")
-                  : /Mac OS X/i.test(t) && (n = "macOS"),
-            setText("browser-info", e),
-            setText("os-info", n));
-        })(),
-        (() => {
-          let e = window.location.href;
-          var t = document.title,
-            n =
+      document.addEventListener(DOMContentLoaded, () => {
+        function setText(t, e) {
+          ;(t = document.getElementById(t)) && (t.textContent = e)
+        }
+        let pubDate = new Date()
+        ;(setText(
+          'published-date',
+          pubDate.toLocaleDateString('id-ID', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+        ),
+          setText('year', pubDate.getFullYear()),
+          (() => {
+            var t = Array.from(document.querySelectorAll('article.content'))
+              .map((t) => t.innerText)
+              .join(' ')
+              .trim()
+              .split(/\s+/).length
+            setText('read-time', Math.max(1, Math.round(t / 220)) + ' menit')
+          })(),
+          (() => {
+            let t = navigator.userAgent || 'Unknown',
+              e = 'Unknown',
+              n = 'Unknown'
+            ;(/Firefox\/\d+/i.test(t)
+              ? (e = t.match(/Firefox\/[^\s]+/i)[0])
+              : /Edg\/\d+/i.test(t)
+                ? (e = t.match(/Edg\/[^\s]+/i)[0])
+                : /Chrome\/\d+/i.test(t)
+                  ? (e = t.match(/Chrome\/[^\s]+/i)[0])
+                  : /Safari\/\d+/i.test(t) &&
+                    /Version\/\d+/i.test(t) &&
+                    (e =
+                      'Safari ' + t.match(/Version\/[^\s]+/i)[0].split('/')[1]),
+              /Windows NT/i.test(t)
+                ? (n = t.match(/Windows NT [^\s;]+/i)[0])
+                : /Android/i.test(t)
+                  ? (n = t.match(/Android [^\s;]+/i)
+                      ? t.match(/Android [^\s;]+/i)[0]
+                      : 'Android')
+                  : /iPhone OS|iPad; CPU OS/i.test(t)
+                    ? (n = /iPad/.test(t) ? 'iPad / iOS' : 'iPhone / iOS')
+                    : /Mac OS X/i.test(t) && (n = 'macOS'),
+              setText('browser-info', e),
+              setText('os-info', n))
+          })(),
+          (() => {
+            let e = window.location.href
+            var t = document.title,
+              n =
+                document
+                  .querySelector('meta[name="description"]')
+                  .getAttribute('content') || '',
+              a = document.getElementById('canonical-link')
+            ;(a && a.setAttribute('href', e),
+              [
+                ['og-url', 'property', 'og:url', e],
+                ['og-title', 'property', 'og:title', t],
+                ['og-desc', 'property', 'og:description', n],
+                ['og-image', 'property', 'og:image', ''],
+                ['tw-title', 'name', 'twitter:title', t],
+                ['tw-desc', 'name', 'twitter:description', n],
+                ['tw-image', 'name', 'twitter:image', ''],
+              ].forEach(function (t) {
+                var e = t[0],
+                  n = t[1],
+                  a = t[2],
+                  t = t[3]
+                ;((e = document.getElementById(e)) &&
+                  void 0 !== t &&
+                  e.setAttribute(n, a),
+                  e && t && e.setAttribute('content', t))
+              }),
               document
-                .querySelector('meta[name="description"]')
-                .getAttribute("content") || "",
-            a = document.getElementById("canonical-link");
-          (a && a.setAttribute("href", e),
-            [
-              ["og-url", "property", "og:url", e],
-              ["og-title", "property", "og:title", t],
-              ["og-desc", "property", "og:description", n],
-              ["og-image", "property", "og:image", ""],
-              ["tw-title", "name", "twitter:title", t],
-              ["tw-desc", "name", "twitter:description", n],
-              ["tw-image", "name", "twitter:image", ""],
-            ].forEach(function (t) {
-              var e = t[0],
-                n = t[1],
-                a = t[2],
-                t = t[3];
-              ((e = document.getElementById(e)) &&
-                void 0 !== t &&
-                e.setAttribute(n, a),
-                e && t && e.setAttribute("content", t));
-            }),
-            document
-              .querySelectorAll('meta[property="og:url"]')
-              .forEach((t) => t.setAttribute("content", e)),
-            document
-              .querySelectorAll('meta[name="twitter:url"]')
-              .forEach((t) => t.setAttribute("content", e)),
-            document.getElementById("og-url").setAttribute("content", e),
-            (a = {
-              "@context": "https://schema.org",
-              "@type": "Article",
-              mainEntityOfPage: { "@type": "WebPage", "@id": e },
-              headline:
-                "Sulit Buang Air Besar (Sembelit) — Penyebab, Cara Aman Mengatasi & Pencegahan",
-              description: n,
-              author: { "@type": "Person", name: "SihatRingkas" },
-              publisher: {
-                "@type": "Organization",
-                name: "SihatRingkas",
-                logo: {
-                  "@type": "ImageObject",
-                  url: window.location.origin + "/favicon.svg",
+                .querySelectorAll('meta[property="og:url"]')
+                .forEach((t) => t.setAttribute('content', e)),
+              document
+                .querySelectorAll('meta[name="twitter:url"]')
+                .forEach((t) => t.setAttribute('content', e)),
+              document.getElementById('og-url').setAttribute('content', e),
+              (a = {
+                '@context': 'https://schema.org',
+                '@type': 'Article',
+                mainEntityOfPage: { '@type': 'WebPage', '@id': e },
+                headline:
+                  'Sulit Buang Air Besar (Sembelit) — Penyebab, Cara Aman Mengatasi & Pencegahan',
+                description: n,
+                author: { '@type': 'Person', name: 'SihatRingkas' },
+                publisher: {
+                  '@type': 'Organization',
+                  name: 'SihatRingkas',
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: window.location.origin + '/favicon.svg',
+                  },
                 },
-              },
-              datePublished: pubDate.toISOString(),
-              dateModified: pubDate.toISOString(),
-            }),
-            (t = {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Beranda",
-                  item: window.location.origin + "/",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Artikel Kesehatan",
-                  item: window.location.origin + "/kategori/kesehatan",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: "Sulit Buang Air Besar",
-                  item: e,
-                },
-              ],
-            }),
-            ((n = document.createElement("script")).type =
-              "application/ld+json"),
-            (n.text =
-              JSON.stringify(a, null, 2) +
-              "\n" +
-              JSON.stringify(t, null, 2) +
-              "\n" +
-              JSON.stringify(
-                {
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: [
-                    {
-                      "@type": "Question",
-                      name: "Apa penyebab umum sembelit?",
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: "Kurang serat, kurang minum, kurang aktivitas, perubahan rutinitas, atau obat tertentu.",
+                datePublished: pubDate.toISOString(),
+                dateModified: pubDate.toISOString(),
+              }),
+              (t = {
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Beranda',
+                    item: window.location.origin + '/',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Artikel Kesehatan',
+                    item: window.location.origin + '/kategori/kesehatan',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: 'Sulit Buang Air Besar',
+                    item: e,
+                  },
+                ],
+              }),
+              ((n = document.createElement('script')).type =
+                'application/ld+json'),
+              (n.text =
+                JSON.stringify(a, null, 2) +
+                '\n' +
+                JSON.stringify(t, null, 2) +
+                '\n' +
+                JSON.stringify(
+                  {
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: [
+                      {
+                        '@type': 'Question',
+                        name: 'Apa penyebab umum sembelit?',
+                        acceptedAnswer: {
+                          '@type': 'Answer',
+                          text: 'Kurang serat, kurang minum, kurang aktivitas, perubahan rutinitas, atau obat tertentu.',
+                        },
                       },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Kapan harus ke dokter?",
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: "Jika nyeri hebat, muntah, perdarahan, atau gejala menetap >2 minggu.",
+                      {
+                        '@type': 'Question',
+                        name: 'Kapan harus ke dokter?',
+                        acceptedAnswer: {
+                          '@type': 'Answer',
+                          text: 'Jika nyeri hebat, muntah, perdarahan, atau gejala menetap >2 minggu.',
+                        },
                       },
-                    },
-                    {
-                      "@type": "Question",
-                      name: "Apakah pencahar aman?",
-                      acceptedAnswer: {
-                        "@type": "Answer",
-                        text: "Pencahar jangka pendek umumnya aman bila dipakai sesuai aturan; hindari penggunaan kronis tanpa saran medis.",
+                      {
+                        '@type': 'Question',
+                        name: 'Apakah pencahar aman?',
+                        acceptedAnswer: {
+                          '@type': 'Answer',
+                          text: 'Pencahar jangka pendek umumnya aman bila dipakai sesuai aturan; hindari penggunaan kronis tanpa saran medis.',
+                        },
                       },
-                    },
-                  ],
-                },
-                null,
-                2,
-              )),
-            document.head.appendChild(n));
-        })(),
-        (() => {
-          var t = encodeURIComponent(window.location.href),
-            e = encodeURIComponent(
-              "Sulit Buang Air Besar (Sembelit): penyebab, cara mengatasi & pencegahan — baca selengkapnya:",
-            );
-          (document
-            .getElementById("share-facebook")
-            .setAttribute(
-              "href",
-              "https://www.facebook.com/sharer/sharer.php?u=" + t,
-            ),
-            document
-              .getElementById("share-twitter")
+                    ],
+                  },
+                  null,
+                  2,
+                )),
+              document.head.appendChild(n))
+          })(),
+          (() => {
+            var t = encodeURIComponent(window.location.href),
+              e = encodeURIComponent(
+                'Sulit Buang Air Besar (Sembelit): penyebab, cara mengatasi & pencegahan — baca selengkapnya:',
+              )
+            ;(document
+              .getElementById('share-facebook')
               .setAttribute(
-                "href",
-                `https://twitter.com/intent/tweet?text=${e}&url=` + t,
+                'href',
+                'https://www.facebook.com/sharer/sharer.php?u=' + t,
               ),
-            document
-              .getElementById("share-whatsapp")
-              .setAttribute("href", `https://wa.me/?text=${e}%20` + t),
-            document
-              .getElementById("share-telegram")
-              .setAttribute(
-                "href",
-                `https://t.me/share/url?url=${t}&text=` + e,
-              ),
-            document
-              .getElementById("share-instagram")
-              .setAttribute("href", "https://www.instagram.com/"),
-            document
-              .getElementById("share-threads")
-              .setAttribute("href", "https://www.threads.net/"),
-            document
-              .getElementById("share-tiktok")
-              .setAttribute("href", "https://www.tiktok.com/"),
-            document
-              .getElementById("copy-link")
-              .addEventListener("click", async function () {
-                try {
-                  (await navigator.clipboard.writeText(window.location.href),
-                    (this.textContent = "Tersalin ✅"),
-                    setTimeout(() => (this.textContent = "Copy Link"), 1600));
-                } catch (t) {
-                  alert(
-                    "Gagal menyalin. Silakan salin secara manual: " +
-                      window.location.href,
-                  );
-                }
-              }));
-        })(),
-        (() => {
-          let i = document.getElementById("ip-public"),
-            r = document.getElementById("ip-country");
-          fetch("https://ipapi.co/json/")
-            .then((t) => {
-              if (t.ok) return t.json();
-              throw new Error("Network response not ok");
-            })
-            .then((t) => {
-              var e = t.ip || "—",
-                n = t.country_name || t.country || "—",
-                a = t.country_code ? t.country_code.toLowerCase() : null;
-              ((i.textContent = e),
-                a
-                  ? (r.innerHTML = `<svg width="28" height="20" viewBox="0 0 640 480" style="border-radius:3px"><rect width="100%" height="100%" fill="#eee" /></svg> <span>${n} (${t.country_code})</span>`)
-                  : (r.textContent = n));
-            })
-            .catch((t) => {
-              ((i.textContent = "Tidak tersedia"),
-                (r.textContent = "Tidak tersedia"),
-                console.warn("Gagal ambil IP publik:", t));
-            });
-        })(),
-        (() => {
-          var t = document.createElement("style");
-          ((t.textContent =
-            ".btn:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:2px}"),
-            document.head.appendChild(t));
-        })(),
-        (() => {
-          var t = window.location.href,
-            e = document.querySelector(
-              'article meta[itemprop="mainEntityOfPage"]',
-            );
-          e && e.setAttribute("content", t);
-        })());
-});
+              document
+                .getElementById('share-twitter')
+                .setAttribute(
+                  'href',
+                  `https://twitter.com/intent/tweet?text=${e}&url=` + t,
+                ),
+              document
+                .getElementById('share-whatsapp')
+                .setAttribute('href', `https://wa.me/?text=${e}%20` + t),
+              document
+                .getElementById('share-telegram')
+                .setAttribute(
+                  'href',
+                  `https://t.me/share/url?url=${t}&text=` + e,
+                ),
+              document
+                .getElementById('share-instagram')
+                .setAttribute('href', 'https://www.instagram.com/'),
+              document
+                .getElementById('share-threads')
+                .setAttribute('href', 'https://www.threads.net/'),
+              document
+                .getElementById('share-tiktok')
+                .setAttribute('href', 'https://www.tiktok.com/'),
+              document
+                .getElementById('copy-link')
+                .addEventListener('click', async function () {
+                  try {
+                    ;(await navigator.clipboard.writeText(window.location.href),
+                      (this.textContent = 'Tersalin ✅'),
+                      setTimeout(() => (this.textContent = 'Copy Link'), 1600))
+                  } catch (t) {
+                    alert(
+                      'Gagal menyalin. Silakan salin secara manual: ' +
+                        window.location.href,
+                    )
+                  }
+                }))
+          })(),
+          (() => {
+            let i = document.getElementById('ip-public'),
+              r = document.getElementById('ip-country')
+            fetch('https://ipapi.co/json/')
+              .then((t) => {
+                if (t.ok) return t.json()
+                throw new Error('Network response not ok')
+              })
+              .then((t) => {
+                var e = t.ip || '—',
+                  n = t.country_name || t.country || '—',
+                  a = t.country_code ? t.country_code.toLowerCase() : null
+                ;((i.textContent = e),
+                  a
+                    ? (r.innerHTML = `<svg width="28" height="20" viewBox="0 0 640 480" style="border-radius:3px"><rect width="100%" height="100%" fill="#eee" /></svg> <span>${n} (${t.country_code})</span>`)
+                    : (r.textContent = n))
+              })
+              .catch((t) => {
+                ;((i.textContent = 'Tidak tersedia'),
+                  (r.textContent = 'Tidak tersedia'),
+                  console.warn('Gagal ambil IP publik:', t))
+              })
+          })(),
+          (() => {
+            var t = document.createElement('style')
+            ;((t.textContent =
+              '.btn:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:2px}'),
+              document.head.appendChild(t))
+          })(),
+          (() => {
+            var t = window.location.href,
+              e = document.querySelector(
+                'article meta[itemprop="mainEntityOfPage"]',
+              )
+            e && e.setAttribute('content', t)
+          })())
+      })
     </script>
-    
-    
+
     <div></div>
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>

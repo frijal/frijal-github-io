@@ -1,379 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <!-- Basic HTML5 -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <!-- Basic HTML5 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Title & Description -->
-  <title>Optimasi Windows 11 untuk CPU Lawas</title>
-  <meta name="description" content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0.">
+    <!-- Title & Description -->
+    <title>Optimasi Windows 11 untuk CPU Lawas</title>
+    <meta
+      name="description"
+      content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0."
+    />
 
-  <!-- Canonical (sesuaikan dengan slug halaman) -->
-  <link rel="canonical" href="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html">
+    <!-- Canonical (sesuaikan dengan slug halaman) -->
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html"
+    />
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png">
+    <!-- Favicon -->
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png" />
 
-  <!-- SEO tambahan -->
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Pelan Kiri">
-  <meta name="theme-color" content="#0f172a">
+    <!-- SEO tambahan -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Pelan Kiri" />
+    <meta name="theme-color" content="#0f172a" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Optimasi Windows 11 untuk CPU Lawas">
-  <meta property="og:description" content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0.">
-  <meta property="og:url" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html">
-  <meta property="og:image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
-  <meta property="og:image:alt" content="Optimasi Windows 11 untuk CPU Lawas">
-  <meta property="article:published_time" content="2025-09-13T11:00:00+08:00">
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Optimasi Windows 11 untuk CPU Lawas" />
+    <meta
+      property="og:description"
+      content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0."
+    />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html"
+    />
+    <meta
+      property="og:image"
+      content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="Optimasi Windows 11 untuk CPU Lawas"
+    />
+    <meta
+      property="article:published_time"
+      content="2025-09-13T11:00:00+08:00"
+    />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Optimasi Windows 11 untuk CPU Lawas">
-  <meta name="twitter:description" content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0.">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Optimasi Windows 11 untuk CPU Lawas" />
+    <meta
+      name="twitter:description"
+      content="Cara membuat Windows 11 menjadi lebih ringan dan cepat untuk CPU lawas yang tidak didukung secara resmi. Pelajari tentang Tiny11 dan modifikasi ISO untuk melewati persyaratan sistem seperti TPM 2.0."
+    />
+    <meta
+      name="twitter:image"
+      content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg"
+    />
 
-  <!-- Schema.org (minimal) -->
-  <meta itemprop="name" content="Optimasi Windows 11 untuk CPU Lawas">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg">
-  <meta name="date" content="2025-09-28">
+    <!-- Schema.org (minimal) -->
+    <meta itemprop="name" content="Optimasi Windows 11 untuk CPU Lawas" />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg"
+    />
+    <meta name="date" content="2025-09-28" />
 
-  <!-- CSS: Dark mode permanen, 1 kolom, responsif widescreen/fullscreen/mobile -->
-  <style>
-    :root {
-      --bg: #0f172a;          /* slate-900 */
-      --text: #e5e7eb;        /* gray-200 */
-      --muted: #94a3b8;       /* slate-400 */
-      --accent: #3b82f6;      /* blue-500 */
-      --accent-2: #f97316;    /* orange-500 */
-      --card: #111827;        /* gray-900 */
-      --border: #1f2937;      /* gray-800 */
-      --code-bg: #0b1220;
-      --link: #60a5fa;
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --shadow: 0 2px 14px rgba(0,0,0,.35);
-      --radius: 14px;
-      --radius-sm: 10px;
-      --container: 860px;
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    <!-- CSS: Dark mode permanen, 1 kolom, responsif widescreen/fullscreen/mobile -->
+    <style>
+      :root {
+        --bg: #0f172a; /* slate-900 */
+        --text: #e5e7eb; /* gray-200 */
+        --muted: #94a3b8; /* slate-400 */
+        --accent: #3b82f6; /* blue-500 */
+        --accent-2: #f97316; /* orange-500 */
+        --card: #111827; /* gray-900 */
+        --border: #1f2937; /* gray-800 */
+        --code-bg: #0b1220;
+        --link: #60a5fa;
+        --success: #22c55e;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+        --radius: 14px;
+        --radius-sm: 10px;
+        --container: 860px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial,
+          'Noto Sans',
+          'Liberation Sans',
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
 
-    /* Layout 1 kolom, responsif */
-    .wrapper {
-      display: grid;
-      grid-template-columns: 1fr;
-      align-content: start;
-      min-height: 100vh;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: saturate(120%) blur(6px);
-      background: rgba(17,24,39,.75);
-      border-bottom: 1px solid var(--border);
-    }
-    .header-inner {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 16px 20px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .site-title {
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: .2px;
-      font-size: 1.05rem;
-    }
-    .share-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 9px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-    }
-    .share-btn:hover { transform: translateY(-2px); background: #0c1424; border-color: #233249; }
-    .share-btn img { width: 18px; height: 18px; display: block; }
+      /* Layout 1 kolom, responsif */
+      .wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-content: start;
+        min-height: 100vh;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: saturate(120%) blur(6px);
+        background: rgba(17, 24, 39, 0.75);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 16px 20px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-title {
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.2px;
+        font-size: 1.05rem;
+      }
+      .share-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .share-btn:hover {
+        transform: translateY(-2px);
+        background: #0c1424;
+        border-color: #233249;
+      }
+      .share-btn img {
+        width: 18px;
+        height: 18px;
+        display: block;
+      }
 
-    main {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 28px 20px 40px;
-    }
-    .hero {
-      background: linear-gradient(180deg, rgba(37,99,235,.08), transparent 50%), var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-    .hero h1 {
-      margin: 0 0 6px;
-      font-size: clamp(1.4rem, 2.2vw, 2rem);
-      color: var(--accent);
-      letter-spacing: .3px;
-    }
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      color: var(--muted);
-      font-size: .95rem;
-      margin-top: 6px;
-    }
+      main {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 28px 20px 40px;
+      }
+      .hero {
+        background:
+          linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 50%),
+          var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+      .hero h1 {
+        margin: 0 0 6px;
+        font-size: clamp(1.4rem, 2.2vw, 2rem);
+        color: var(--accent);
+        letter-spacing: 0.3px;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-top: 6px;
+      }
 
-    .content {
-      margin-top: 22px;
-      display: grid;
-      gap: 18px;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .card h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-      color: var(--accent);
-    }
-    .card p { margin: 4px 0 8px; }
-    .card ul { margin: 8px 0; padding-left: 1.2rem; }
-    .card li { margin: 6px 0; }
+      .content {
+        margin-top: 22px;
+        display: grid;
+        gap: 18px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+        color: var(--accent);
+      }
+      .card p {
+        margin: 4px 0 8px;
+      }
+      .card ul {
+        margin: 8px 0;
+        padding-left: 1.2rem;
+      }
+      .card li {
+        margin: 6px 0;
+      }
 
-    /* Code block */
-    pre {
-      background: var(--code-bg);
-      color: #e5e7eb;
-      border: 1px solid #13203a;
-      padding: 14px 16px 20px;
-      border-radius: 12px;
-      overflow-x: auto;
-      position: relative;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
-    }
-    .copy-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: .85rem;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-    .copy-btn:hover { filter: brightness(1.1); }
+      /* Code block */
+      pre {
+        background: var(--code-bg);
+        color: #e5e7eb;
+        border: 1px solid #13203a;
+        padding: 14px 16px 20px;
+        border-radius: 12px;
+        overflow-x: auto;
+        position: relative;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+      .copy-btn:hover {
+        filter: brightness(1.1);
+      }
 
-    /* Info sistem grid */
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .info-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      background: #0c1424;
-      border: 1px solid #13203a;
-      border-radius: 10px;
-    }
-    .info-item img { width: 28px; height: 28px; border-radius: 6px; }
+      /* Info sistem grid */
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: #0c1424;
+        border: 1px solid #13203a;
+        border-radius: 10px;
+      }
+      .info-item img {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+      }
 
-    /* Galeri foto + lightbox */
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #0b1220;
-      cursor: zoom-in;
-    }
-    /* Lightbox overlay */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-    }
-    .lightbox.active { display: flex; }
-    .lightbox-content {
-      max-width: 92vw;
-      max-height: 92vh;
-      position: relative;
-    }
-    .lightbox-img {
-      max-width: 92vw;
-      max-height: 92vh;
-      border-radius: 10px;
-      background: #0b1220;
-      border: 1px solid #1b2a44;
-    }
-    .lightbox-close, .lightbox-prev, .lightbox-next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(17,24,39,.85);
-      color: #fff;
-      border: 1px solid #233249;
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-    .lightbox-close {
-      top: -54px;
-      right: 0;
-      transform: none;
-    }
-    .lightbox-prev { left: -56px; }
-    .lightbox-next { right: -56px; }
+      /* Galeri foto + lightbox */
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: #0b1220;
+        cursor: zoom-in;
+      }
+      /* Lightbox overlay */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+      }
+      .lightbox.active {
+        display: flex;
+      }
+      .lightbox-content {
+        max-width: 92vw;
+        max-height: 92vh;
+        position: relative;
+      }
+      .lightbox-img {
+        max-width: 92vw;
+        max-height: 92vh;
+        border-radius: 10px;
+        background: #0b1220;
+        border: 1px solid #1b2a44;
+      }
+      .lightbox-close,
+      .lightbox-prev,
+      .lightbox-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(17, 24, 39, 0.85);
+        color: #fff;
+        border: 1px solid #233249;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+      .lightbox-close {
+        top: -54px;
+        right: 0;
+        transform: none;
+      }
+      .lightbox-prev {
+        left: -56px;
+      }
+      .lightbox-next {
+        right: -56px;
+      }
 
-    /* Jaga Data Pribadi Tetap Aman️ */
-    .comments {
-      margin-top: 8px;
-      padding: 12px;
-      background: #0c1424;
-      border: 1px solid #13203a;
-      border-radius: 10px;
-    }
+      /* Jaga Data Pribadi Tetap Aman️ */
+      .comments {
+        margin-top: 8px;
+        padding: 12px;
+        background: #0c1424;
+        border: 1px solid #13203a;
+        border-radius: 10px;
+      }
 
-    /* Footer kecil */
-    footer {
-      max-width: var(--container);
-      margin: 10px auto 40px;
-      padding: 0 20px;
-      color: var(--muted);
-      font-size: .92rem;
-      display: grid;
-      gap: 6px;
-    }
+      /* Footer kecil */
+      footer {
+        max-width: var(--container);
+        margin: 10px auto 40px;
+        padding: 0 20px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        display: grid;
+        gap: 6px;
+      }
 
-    /* Responsif kecil */
-    @media (min-width: 960px) {
-      .gallery { grid-template-columns: 1fr 1fr; }
-      .info-grid { grid-template-columns: 1fr 1fr 1fr; }
-    }
-    @media (min-width: 1280px) {
-      main { padding: 36px 24px 48px; }
-      .hero { padding: 24px; }
-    }
-  </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-  <div class="wrapper">
-    <!-- Header -->
-    <header>
-      <div class="header-inner">
-        <div class="site-title">Optimasi Windows 11 • CPU Lawas</div>
-        <!-- Ikon resmi sharing media sosial -->
-        <div class="share-row" aria-label="Jaga Data Pribadi Tetap Aman">
-          <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html" target="_blank" rel="noopener" title="Bagikan ke Facebook">
-            <img alt="Facebook" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg">
-          </a>
-          <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas" target="_blank" rel="noopener" title="Bagikan ke X/Twitter">
-            <img alt="X/Twitter" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg">
-          </a>
-          <a class="share-btn" href="https://wa.me/?text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas%20-%20https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html" target="_blank" rel="noopener" title="Bagikan ke WhatsApp">
-            <img alt="WhatsApp" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-          </a>
-          <a class="share-btn" href="https://t.me/share/url?url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas" target="_blank" rel="noopener" title="Bagikan ke Telegram">
-            <img alt="Telegram" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-          </a>
-          <a class="share-btn" href="https://www.linkedin.com/shareArticle?mini=true&url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&title=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas" target="_blank" rel="noopener" title="Bagikan ke LinkedIn">
-            <img alt="LinkedIn" src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg">
-          </a>
+      /* Responsif kecil */
+      @media (min-width: 960px) {
+        .gallery {
+          grid-template-columns: 1fr 1fr;
+        }
+        .info-grid {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+      @media (min-width: 1280px) {
+        main {
+          padding: 36px 24px 48px;
+        }
+        .hero {
+          padding: 24px;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Header -->
+      <header>
+        <div class="header-inner">
+          <div class="site-title">Optimasi Windows 11 • CPU Lawas</div>
+          <!-- Ikon resmi sharing media sosial -->
+          <div class="share-row" aria-label="Jaga Data Pribadi Tetap Aman">
+            <a
+              class="share-btn"
+              href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html"
+              target="_blank"
+              rel="noopener"
+              title="Bagikan ke Facebook"
+            >
+              <img
+                alt="Facebook"
+                src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"
+              />
+            </a>
+            <a
+              class="share-btn"
+              href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas"
+              target="_blank"
+              rel="noopener"
+              title="Bagikan ke X/Twitter"
+            >
+              <img
+                alt="X/Twitter"
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
+              />
+            </a>
+            <a
+              class="share-btn"
+              href="https://wa.me/?text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas%20-%20https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html"
+              target="_blank"
+              rel="noopener"
+              title="Bagikan ke WhatsApp"
+            >
+              <img
+                alt="WhatsApp"
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              />
+            </a>
+            <a
+              class="share-btn"
+              href="https://t.me/share/url?url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&text=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas"
+              target="_blank"
+              rel="noopener"
+              title="Bagikan ke Telegram"
+            >
+              <img
+                alt="Telegram"
+                src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+              />
+            </a>
+            <a
+              class="share-btn"
+              href="https://www.linkedin.com/shareArticle?mini=true&url=https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html&title=Optimasi%20Windows%2011%20untuk%20CPU%20Lawas"
+              target="_blank"
+              rel="noopener"
+              title="Bagikan ke LinkedIn"
+            >
+              <img
+                alt="LinkedIn"
+                src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg"
+              />
+            </a>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <!-- Main -->
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <h1>Membuat Windows 11 Lebih Ringan untuk CPU Lawas</h1>
-<div id="iposbrowser"></div>
-        <div class="meta">
-          <span>Dipublikasikan: 13 Sep 2025, 11:00 WITA</span>
-          <span>Terakhir diperbarui: 28 Sep 2025</span>
-          <span>Format: Panduan ringan, tips & script</span>
-        </div>
-        <p style="margin-top:12px">
-          Windows 11 bisa terasa berat pada komputer dengan CPU lawas. Di halaman ini, kita bahas cara-cara praktis
-          agar performa meningkat tanpa mengorbankan kestabilan. Kamu tetap pakai narasi asli, dan kalau perlu
-          ditambah tekstur penjelasan biar makin lengkap dan enak diikuti.
-        </p>
-      </section>
+      <!-- Main -->
+      <main>
+        <!-- Hero -->
+        <section class="hero">
+          <h1>Membuat Windows 11 Lebih Ringan untuk CPU Lawas</h1>
+          <div id="iposbrowser"></div>
+          <div class="meta">
+            <span>Dipublikasikan: 13 Sep 2025, 11:00 WITA</span>
+            <span>Terakhir diperbarui: 28 Sep 2025</span>
+            <span>Format: Panduan ringan, tips & script</span>
+          </div>
+          <p style="margin-top: 12px">
+            Windows 11 bisa terasa berat pada komputer dengan CPU lawas. Di
+            halaman ini, kita bahas cara-cara praktis agar performa meningkat
+            tanpa mengorbankan kestabilan. Kamu tetap pakai narasi asli, dan
+            kalau perlu ditambah tekstur penjelasan biar makin lengkap dan enak
+            diikuti.
+          </p>
+        </section>
 
-      <!-- Konten asli + pelengkap -->
-      <section class="content">
-        <article class="card">
-          <h2>Langkah-langkah Optimasi</h2>
-          <p>Berikut beberapa langkah optimasi agar performa meningkat. Jalankan satu per satu, lalu rasakan perbedaannya. Kombinasi kecil sering punya dampak besar.</p>
-          <ul>
-            <li>Matikan efek visual & animasi yang tidak perlu.</li>
-            <li>Nonaktifkan startup program yang tidak penting.</li>
-            <li>Gunakan tema ringan (misal tema Windows klasik).</li>
-            <li>Nonaktifkan layanan background yang tidak diperlukan.</li>
-            <li>Gunakan Storage Sense untuk mengelola cache & temporary files.</li>
-            <li>Update driver secara berkala.</li>
-            <li>Gunakan antivirus ringan atau built-in Windows Defender.</li>
-          </ul>
-          <p>Kalau pakai perangkat sangat lawas, pertimbangkan Tiny11 atau instalasi custom untuk melewati syarat seperti TPM 2.0. Pastikan tetap paham risikonya, backup dulu, dan coba di perangkat non‑kritikal.</p>
-        </article>
+        <!-- Konten asli + pelengkap -->
+        <section class="content">
+          <article class="card">
+            <h2>Langkah-langkah Optimasi</h2>
+            <p>
+              Berikut beberapa langkah optimasi agar performa meningkat.
+              Jalankan satu per satu, lalu rasakan perbedaannya. Kombinasi kecil
+              sering punya dampak besar.
+            </p>
+            <ul>
+              <li>Matikan efek visual & animasi yang tidak perlu.</li>
+              <li>Nonaktifkan startup program yang tidak penting.</li>
+              <li>Gunakan tema ringan (misal tema Windows klasik).</li>
+              <li>Nonaktifkan layanan background yang tidak diperlukan.</li>
+              <li>
+                Gunakan Storage Sense untuk mengelola cache & temporary files.
+              </li>
+              <li>Update driver secara berkala.</li>
+              <li>Gunakan antivirus ringan atau built-in Windows Defender.</li>
+            </ul>
+            <p>
+              Kalau pakai perangkat sangat lawas, pertimbangkan Tiny11 atau
+              instalasi custom untuk melewati syarat seperti TPM 2.0. Pastikan
+              tetap paham risikonya, backup dulu, dan coba di perangkat
+              non‑kritikal.
+            </p>
+          </article>
 
-        <article class="card">
-          <h2>Contoh Perintah / Script PowerShell Ringan</h2>
-          <pre><code id="win11Code">
+          <article class="card">
+            <h2>Contoh Perintah / Script PowerShell Ringan</h2>
+            <pre><code id="win11Code">
 # Matikan animasi dan efek transparan
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Type Binary -Value 90,12,03,80,10,00,00,00
 
@@ -385,226 +536,348 @@ Stop-Service "Diagsvc" -Force
 Set-Service "Diagsvc" -StartupType Disabled
 </code>
 <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
-          <p>Kamu bisa jalankan baris tertentu dulu, uji dampaknya, lalu lanjutkan. Hindari mematikan layanan inti yang dibutuhkan sistem atau aplikasi kerjamu.</p>
-        </article>
+            <p>
+              Kamu bisa jalankan baris tertentu dulu, uji dampaknya, lalu
+              lanjutkan. Hindari mematikan layanan inti yang dibutuhkan sistem
+              atau aplikasi kerjamu.
+            </p>
+          </article>
 
-        <!-- Info Sistem (icon & narasi tetap) -->
-        <article class="card">
-          <h2>Info Sistem</h2>
-          <div class="info-grid">
-            <div class="info-item">
-              <img src="" id="browserIcon" alt="Browser Icon">
-              <span id="browserText">Browser: ...</span>
+          <!-- Info Sistem (icon & narasi tetap) -->
+          <article class="card">
+            <h2>Info Sistem</h2>
+            <div class="info-grid">
+              <div class="info-item">
+                <img src="" id="browserIcon" alt="Browser Icon" />
+                <span id="browserText">Browser: ...</span>
+              </div>
+              <div class="info-item">
+                <img src="" id="osIcon" alt="OS Icon" />
+                <span id="osText">OS: ...</span>
+              </div>
+              <div class="info-item">
+                <img src="" id="flagIcon" alt="Country Flag" />
+                <span id="ipText">IP: ...</span>
+              </div>
             </div>
-            <div class="info-item">
-              <img src="" id="osIcon" alt="OS Icon">
-              <span id="osText">OS: ...</span>
+            <p style="margin-top: 10px">
+              Deteksi sederhana ini ngebantu mengenali browser, OS, dan lokasi
+              berdasarkan IP publik. Cocok buat debugging dan personalisasi
+              ringan.
+            </p>
+          </article>
+
+          <!-- Galeri Foto (lazy-load + lightbox + panah navigasi) -->
+          <article class="card">
+            <h2>Galeri optimasi</h2>
+            <p>
+              Kumpulan tangkapan layar langkah optimasi. Klik gambar untuk
+              melihat mode layar penuh, lalu navigasi dengan panah.
+            </p>
+            <div class="gallery" id="gallery">
+              <img
+                loading="lazy"
+                src="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg"
+                alt="Ilustrasi optimasi Windows 11 untuk CPU lawas"
+                data-index="0"
+              />
+              <img
+                loading="lazy"
+                src="https://frijal.github.io/artikel/optimasi-visual-windows11.jpg"
+                alt="Mematikan efek visual dan transparansi"
+                data-index="1"
+              />
+              <img
+                loading="lazy"
+                src="https://frijal.github.io/artikel/storage-sense-windows11.jpg"
+                alt="Storage Sense untuk cache & temporary files"
+                data-index="2"
+              />
+              <img
+                loading="lazy"
+                src="https://frijal.github.io/artikel/startup-task-manager.jpg"
+                alt="Nonaktifkan startup program di Task Manager"
+                data-index="3"
+              />
             </div>
-            <div class="info-item">
-              <img src="" id="flagIcon" alt="Country Flag">
-              <span id="ipText">IP: ...</span>
+
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox" aria-hidden="true">
+              <div class="lightbox-content">
+                <img class="lightbox-img" id="lightboxImg" alt="" />
+                <button
+                  class="lightbox-close"
+                  id="lightboxClose"
+                  title="Tutup"
+                  aria-label="Tutup"
+                >
+                  ✕
+                </button>
+                <button
+                  class="lightbox-prev"
+                  id="lightboxPrev"
+                  title="Sebelumnya"
+                  aria-label="Sebelumnya"
+                >
+                  ◀
+                </button>
+                <button
+                  class="lightbox-next"
+                  id="lightboxNext"
+                  title="Berikutnya"
+                  aria-label="Berikutnya"
+                >
+                  ▶
+                </button>
+              </div>
             </div>
-          </div>
-          <p style="margin-top:10px">Deteksi sederhana ini ngebantu mengenali browser, OS, dan lokasi berdasarkan IP publik. Cocok buat debugging dan personalisasi ringan.</p>
-        </article>
+          </article>
 
-        <!-- Galeri Foto (lazy-load + lightbox + panah navigasi) -->
-        <article class="card">
-          <h2>Galeri optimasi</h2>
-          <p>Kumpulan tangkapan layar langkah optimasi. Klik gambar untuk melihat mode layar penuh, lalu navigasi dengan panah.</p>
-          <div class="gallery" id="gallery">
-            <img loading="lazy" src="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.jpg" alt="Ilustrasi optimasi Windows 11 untuk CPU lawas" data-index="0">
-            <img loading="lazy" src="https://frijal.github.io/artikel/optimasi-visual-windows11.jpg" alt="Mematikan efek visual dan transparansi" data-index="1">
-            <img loading="lazy" src="https://frijal.github.io/artikel/storage-sense-windows11.jpg" alt="Storage Sense untuk cache & temporary files" data-index="2">
-            <img loading="lazy" src="https://frijal.github.io/artikel/startup-task-manager.jpg" alt="Nonaktifkan startup program di Task Manager" data-index="3">
-          </div>
-
-          <!-- Lightbox -->
-          <div class="lightbox" id="lightbox" aria-hidden="true">
-            <div class="lightbox-content">
-              <img class="lightbox-img" id="lightboxImg" alt="">
-              <button class="lightbox-close" id="lightboxClose" title="Tutup" aria-label="Tutup">✕</button>
-              <button class="lightbox-prev" id="lightboxPrev" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
-              <button class="lightbox-next" id="lightboxNext" title="Berikutnya" aria-label="Berikutnya">▶</button>
+          <!-- Jaga Data Pribadi Tetap Aman Facebook -->
+          <article class="card">
+            <h2>Diskusi & komentar</h2>
+            <p>
+              Bagikan pengalamanmu optimasi di perangkat lawas. Tips kecil yang
+              kamu temukan bisa sangat membantu orang lain.
+            </p>
+            <div id="fb-root"></div>
+            <div class="comments">
+              <div
+                class="fb-comments"
+                data-href="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html"
+                data-width="100%"
+                data-numposts="5"
+                data-order-by="reverse_time"
+              ></div>
             </div>
-          </div>
-        </article>
+          </article>
+        </section>
+      </main>
 
-        <!-- Jaga Data Pribadi Tetap Aman Facebook -->
-        <article class="card">
-          <h2>Diskusi & komentar</h2>
-          <p>Bagikan pengalamanmu optimasi di perangkat lawas. Tips kecil yang kamu temukan bisa sangat membantu orang lain.</p>
-          <div id="fb-root"></div>
-          <div class="comments">
-            <div class="fb-comments" data-href="https://frijal.github.io/artikel/Windows-11-lebih-ringan-untuk-CPU-lawas.html" data-width="100%" data-numposts="5" data-order-by="reverse_time"></div>
-          </div>
-        </article>
-      </section>
-    </main>
+      <!-- Footer -->
+      <footer>
+        <div>🄯 2025 • Frijal Artikel • Optimasi Windows 11 untuk CPU lawas</div>
+        <div>
+          Halaman ini pakai desain 1 kolom dark‑mode, responsif untuk
+          widescreen, fullscreen, dan mobile.
+        </div>
+        <div>
+          <a href="https://frijal.github.io/artikel/sitemap.html">Sitemap</a> •
+          <a href="https://frijal.github.io/">Beranda</a>
+        </div>
+      </footer>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-      <div>🄯 2025 • Frijal Artikel • Optimasi Windows 11 untuk CPU lawas</div>
-      <div>Halaman ini pakai desain 1 kolom dark‑mode, responsif untuk widescreen, fullscreen, dan mobile.</div>
-      <div><a href="https://frijal.github.io/artikel/sitemap.html">Sitemap</a> • <a href="https://frijal.github.io/">Beranda</a></div>
-    </footer>
-  </div>
+    <!-- JS: Copy, deteksi browser/OS, IP (ipify) -> lokasi (ipapi) -> bendera -->
+    <script>
+      document.addEventListener(DOMContentLoaded, () => {
+        // Copy script
+        function copyCode() {
+          const code = document.getElementById('win11Code').textContent
+          navigator.clipboard.writeText(code).then(() => {
+            alert('Script disalin!')
+          })
+        }
 
-  <!-- JS: Copy, deteksi browser/OS, IP (ipify) -> lokasi (ipapi) -> bendera -->
-  <script>
-document.addEventListener(DOMContentLoaded, () => {
-    // Copy script
-    function copyCode() {
-      const code = document.getElementById('win11Code').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        alert('Script disalin!');
-      });
-    }
+        // Browser detection (ikon resmi)
+        function getBrowserInfo() {
+          const ua = navigator.userAgent
+          let name = 'Unknown',
+            icon = '',
+            version = ''
 
-    // Browser detection (ikon resmi)
-    function getBrowserInfo() {
-      const ua = navigator.userAgent;
-      let name = "Unknown", icon = "", version = "";
-
-      if (ua.includes("Brave")) {
-        name = "Brave";
-        icon = "https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg";
-      } else if (ua.includes("Firefox")) {
-        name = "Firefox";
-        version = (ua.match(/Firefox\/([\d.]+)/) || [,''])[1];
-        icon = "https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg";
-      } else if (ua.includes("Edg")) {
-        name = "Edge";
-        version = (ua.match(/Edg\/([\d.]+)/) || [,''])[1];
-        icon = "https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg";
-      } else if (ua.includes("OPR")) {
-        name = "Opera";
-        version = (ua.match(/OPR\/([\d.]+)/) || [,''])[1];
-        icon = "https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg";
-      } else if (ua.includes("Chrome")) {
-        name = "Chrome";
-        version = (ua.match(/Chrome\/([\d.]+)/) || [,''])[1];
-        icon = "https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png";
-      } else if (ua.includes("Safari")) {
-        name = "Safari";
-        version = (ua.match(/Version\/([\d.]+)/) || [,''])[1];
-        icon = "https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg";
-      }
-      return { name, version, icon };
-    }
-
-    // OS detection (ikon resmi)
-    function getOSInfo(){
-      const platform=navigator.platform.toLowerCase();
-      const ua=navigator.userAgent.toLowerCase();
-      let name="Unknown OS", version="", icon="";
-      if(platform.includes("win")){ name="Windows"; const m=ua.match(/windows nt ([0-9.]+)/); version=m?m[1]:""; icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg"; }
-      else if(platform.includes("mac")){ name="macOS"; const m=ua.match(/mac os x ([0-9_]+)/); version=m?m[1].replace(/_/g,"."):""; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"; }
-      else if(platform.includes("linux")){ name="Linux"; icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"; }
-      else if(/android/.test(ua)){ name="Android"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"; }
-      else if(/iphone|ipad|ipod/.test(ua)){ name="iOS"; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"; }
-      return { name, version, icon };
-    }
-
-    // Render browser & OS
-    (function renderClientInfo(){
-      const b = getBrowserInfo();
-      document.getElementById('browserIcon').src = b.icon || '';
-      document.getElementById('browserText').textContent = `Browser: ${b.name}${b.version ? ' ' + b.version : ''}`;
-
-      const os = getOSInfo();
-      document.getElementById('osIcon').src = os.icon || '';
-      document.getElementById('osText').textContent = `OS: ${os.name}${os.version ? ' ' + os.version : ''}`;
-    })();
-
-    // IP via ipify -> geolokasi via ipapi.co -> bendera
-    (function fetchIPAndGeo(){
-      fetch('https://api.ipify.org?format=json&ipv4=true')
-        .then(r => r.json())
-        .then(({ ip }) => {
-          // Ambil detail lokasi dari ipapi.co
-          return fetch(`https://ipapi.co/${ip}/json/`).then(res => res.json());
-        })
-        .then(data => {
-          const ipEl = document.getElementById('ipText');
-          const flagEl = document.getElementById('flagIcon');
-          ipEl.textContent = `IP: ${data.ip} (${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'})`;
-          if (data.country_code) {
-            flagEl.src = `https://flagcdn.com/48x36/${String(data.country_code).toLowerCase()}.png`;
-          } else {
-            flagEl.alt = 'Bendera tidak tersedia';
+          if (ua.includes('Brave')) {
+            name = 'Brave'
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg'
+          } else if (ua.includes('Firefox')) {
+            name = 'Firefox'
+            version = (ua.match(/Firefox\/([\d.]+)/) || [, ''])[1]
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg'
+          } else if (ua.includes('Edg')) {
+            name = 'Edge'
+            version = (ua.match(/Edg\/([\d.]+)/) || [, ''])[1]
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg'
+          } else if (ua.includes('OPR')) {
+            name = 'Opera'
+            version = (ua.match(/OPR\/([\d.]+)/) || [, ''])[1]
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg'
+          } else if (ua.includes('Chrome')) {
+            name = 'Chrome'
+            version = (ua.match(/Chrome\/([\d.]+)/) || [, ''])[1]
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png'
+          } else if (ua.includes('Safari')) {
+            name = 'Safari'
+            version = (ua.match(/Version\/([\d.]+)/) || [, ''])[1]
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg'
           }
-        })
-        .catch(() => {
-          document.getElementById('ipText').textContent = 'IP: Tidak dapat diambil';
-        });
-    })();
+          return { name, version, icon }
+        }
 
-    // Lightbox galeri
-    (function initLightbox(){
-      const gallery = document.getElementById('gallery');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightboxImg');
-      const btnClose = document.getElementById('lightboxClose');
-      const btnPrev = document.getElementById('lightboxPrev');
-      const btnNext = document.getElementById('lightboxNext');
+        // OS detection (ikon resmi)
+        function getOSInfo() {
+          const platform = navigator.platform.toLowerCase()
+          const ua = navigator.userAgent.toLowerCase()
+          let name = 'Unknown OS',
+            version = '',
+            icon = ''
+          if (platform.includes('win')) {
+            name = 'Windows'
+            const m = ua.match(/windows nt ([0-9.]+)/)
+            version = m ? m[1] : ''
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg'
+          } else if (platform.includes('mac')) {
+            name = 'macOS'
+            const m = ua.match(/mac os x ([0-9_]+)/)
+            version = m ? m[1].replace(/_/g, '.') : ''
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'
+          } else if (platform.includes('linux')) {
+            name = 'Linux'
+            icon = 'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png'
+          } else if (/android/.test(ua)) {
+            name = 'Android'
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg'
+          } else if (/iphone|ipad|ipod/.test(ua)) {
+            name = 'iOS'
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'
+          }
+          return { name, version, icon }
+        }
 
-      const items = Array.from(gallery.querySelectorAll('img'));
-      let currentIndex = 0;
+        // Render browser & OS
+        ;(function renderClientInfo() {
+          const b = getBrowserInfo()
+          document.getElementById('browserIcon').src = b.icon || ''
+          document.getElementById('browserText').textContent =
+            `Browser: ${b.name}${b.version ? ' ' + b.version : ''}`
 
-      function openLightbox(index) {
-        currentIndex = index;
-        const img = items[currentIndex];
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-      }
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden', 'true');
-      }
-      function prev() {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        openLightbox(currentIndex);
-      }
-      function next() {
-        currentIndex = (currentIndex + 1) % items.length;
-        openLightbox(currentIndex);
-      }
+          const os = getOSInfo()
+          document.getElementById('osIcon').src = os.icon || ''
+          document.getElementById('osText').textContent =
+            `OS: ${os.name}${os.version ? ' ' + os.version : ''}`
+        })()
 
-      items.forEach(img => {
-        img.addEventListener('click', () => openLightbox(parseInt(img.dataset.index, 10)));
-      });
-      btnClose.addEventListener('click', closeLightbox);
-      btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
-      btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-      window.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') prev();
-        if (e.key === 'ArrowRight') next();
-      });
-    })();
+        // IP via ipify -> geolokasi via ipapi.co -> bendera
+        ;(function fetchIPAndGeo() {
+          fetch('https://api.ipify.org?format=json&ipv4=true')
+            .then((r) => r.json())
+            .then(({ ip }) => {
+              // Ambil detail lokasi dari ipapi.co
+              return fetch(`https://ipapi.co/${ip}/json/`).then((res) =>
+                res.json(),
+              )
+            })
+            .then((data) => {
+              const ipEl = document.getElementById('ipText')
+              const flagEl = document.getElementById('flagIcon')
+              ipEl.textContent = `IP: ${data.ip} (${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'})`
+              if (data.country_code) {
+                flagEl.src = `https://flagcdn.com/48x36/${String(data.country_code).toLowerCase()}.png`
+              } else {
+                flagEl.alt = 'Bendera tidak tersedia'
+              }
+            })
+            .catch(() => {
+              document.getElementById('ipText').textContent =
+                'IP: Tidak dapat diambil'
+            })
+        })()
 
-    // Facebook SDK untuk komentar
-    (function loadFBSDK(){
-      const script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.crossOrigin = "anonymous";
-      script.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0";
-      document.body.appendChild(script);
-    })();
-});
-  </script>
-});
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+        // Lightbox galeri
+        ;(function initLightbox() {
+          const gallery = document.getElementById('gallery')
+          const lightbox = document.getElementById('lightbox')
+          const lightboxImg = document.getElementById('lightboxImg')
+          const btnClose = document.getElementById('lightboxClose')
+          const btnPrev = document.getElementById('lightboxPrev')
+          const btnNext = document.getElementById('lightboxNext')
+
+          const items = Array.from(gallery.querySelectorAll('img'))
+          let currentIndex = 0
+
+          function openLightbox(index) {
+            currentIndex = index
+            const img = items[currentIndex]
+            lightboxImg.src = img.src
+            lightboxImg.alt = img.alt
+            lightbox.classList.add('active')
+            lightbox.setAttribute('aria-hidden', 'false')
+          }
+          function closeLightbox() {
+            lightbox.classList.remove('active')
+            lightbox.setAttribute('aria-hidden', 'true')
+          }
+          function prev() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length
+            openLightbox(currentIndex)
+          }
+          function next() {
+            currentIndex = (currentIndex + 1) % items.length
+            openLightbox(currentIndex)
+          }
+
+          items.forEach((img) => {
+            img.addEventListener('click', () =>
+              openLightbox(parseInt(img.dataset.index, 10)),
+            )
+          })
+          btnClose.addEventListener('click', closeLightbox)
+          btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation()
+            prev()
+          })
+          btnNext.addEventListener('click', (e) => {
+            e.stopPropagation()
+            next()
+          })
+          lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox()
+          })
+          window.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return
+            if (e.key === 'Escape') closeLightbox()
+            if (e.key === 'ArrowLeft') prev()
+            if (e.key === 'ArrowRight') next()
+          })
+        })()
+
+        // Facebook SDK untuk komentar
+        ;(function loadFBSDK() {
+          const script = document.createElement('script')
+          script.async = true
+          script.defer = true
+          script.crossOrigin = 'anonymous'
+          script.src =
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0'
+          document.body.appendChild(script)
+        })()
+      })
+    </script>
+    });
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div id="kategori-aktif"></div>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">&times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>

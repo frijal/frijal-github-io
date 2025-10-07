@@ -1,137 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id-ID">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
 
-  <title>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</title>
-  <meta name="description" content="SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet." />
-  <link rel="canonical" href="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" />
-  <meta name="robots" content="index,follow" />
-  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
-  <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
-  <meta name="theme-color" content="#0f121a" />
+    <title>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</title>
+    <meta
+      name="description"
+      content="SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet."
+    />
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
+    <meta name="theme-color" content="#0f121a" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Frijal" />
-  <meta property="og:url" content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" />
-  <meta property="og:title" content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern" />
-  <meta property="og:description" content="Fondasi HTTP/3, QUIC, dan TLS 1.3 membawa SSH ke masa depan: cepat, aman, dan fleksibel, dengan autentikasi modern dan koneksi tahan gangguan." />
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg" />
-  <meta property="og:image:alt" content="Ilustrasi SSH3 modern" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Frijal" />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
+    />
+    <meta
+      property="og:title"
+      content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern"
+    />
+    <meta
+      property="og:description"
+      content="Fondasi HTTP/3, QUIC, dan TLS 1.3 membawa SSH ke masa depan: cepat, aman, dan fleksibel, dengan autentikasi modern dan koneksi tahan gangguan."
+    />
+    <meta
+      property="og:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
+    />
+    <meta property="og:image:alt" content="Ilustrasi SSH3 modern" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern" />
-  <meta name="twitter:description" content="SSH di atas HTTP/3: Zero-RTT, multiplexing, SSO modern, koneksi tahan pindah jaringan—remote akses yang relevan untuk internet modern." />
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg" />
-  <meta name="twitter:site" content="@frijal" />
-  <meta name="twitter:creator" content="@frijal" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern"
+    />
+    <meta
+      name="twitter:description"
+      content="SSH di atas HTTP/3: Zero-RTT, multiplexing, SSO modern, koneksi tahan pindah jaringan—remote akses yang relevan untuk internet modern."
+    />
+    <meta
+      name="twitter:image"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
+    />
+    <meta name="twitter:site" content="@frijal" />
+    <meta name="twitter:creator" content="@frijal" />
 
-  <!-- Schema.org -->
-});
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern","description":"SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"],"author":{"@type":"Person","name":"Frijal","url":"https://frijal.github.io","image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"publisher":{"@type":"Organization","name":"Frijal","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"datePublished":"2025-09-28T17:30:00+08:00","dateModified":"2025-09-28T17:30:00+08:00","mainEntityOfPage":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html","inLanguage":"id-ID"}</script>
-
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box }
-    body { font-family:'Segoe UI',Arial,sans-serif; background:#f9f9f9; color:#333; line-height:1.6; padding:20px; max-width:1200px; margin:auto }
-    .article { background:#fff; padding:20px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.05); margin-bottom:40px }
-    .article h1 { font-size:2rem; margin-bottom:15px }
-    .article h2 { margin-top:20px; margin-bottom:10px; font-size:1.5rem }
-    .article p { margin-bottom:15px }
-    .article-images { text-align:center; margin-bottom:20px }
-    .article-images img { max-width:100%; border-radius:6px; cursor:pointer; transition:transform .2s }
-    .article-images img:hover { transform:scale(1.03) }
-    .share-buttons { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap }
-    .share-buttons .btn { display:inline-flex; align-items:center; gap:5px; padding:8px 12px; background:#007BFF; color:#fff; text-decoration:none; border-radius:4px; transition:background .2s; cursor:pointer }
-    .share-buttons .btn:hover { background:#0056b3 }
-    #lightbox { display:flex; visibility:hidden; opacity:0; transition:opacity .3s; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999 }
-    #lightbox.show { visibility:visible; opacity:1 }
-    #lightbox img { max-width:90%; max-height:80%; border-radius:6px }
-    .lb-close { position:absolute; top:20px; right:30px; font-size:2rem; color:#fff; cursor:pointer; background:none; border:none }
-    footer { text-align:center; padding:15px; font-size:.85rem; color:#555; margin-top:40px }
-  </style>
-<meta itemprop="image" content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-
-<article class="article" role="article">
-  <h1>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</h1>
-<div id="iposbrowser"></div>
-
-  <p>Jika Anda pernah berinteraksi dengan server melalui protokol SSH (Secure Shell), Anda mungkin sudah familiar dengan versi-versi sebelumnya yang menekankan keamanan dan kemudahan akses. SSH3 hadir sebagai evolusi dari teknologi ini, menghadirkan kombinasi keamanan yang lebih kuat, performa yang lebih cepat, dan fitur-fitur modern yang relevan untuk kebutuhan server dan cloud masa kini.</p>
-
-  <p>Berbeda dengan pendahulunya, SSH3 menggunakan algoritma enkripsi terbaru yang lebih tahan terhadap serangan brute force maupun serangan kriptografi canggih. Protokol ini juga mengurangi overhead komunikasi sehingga latensi koneksi lebih rendah, sangat ideal untuk server dengan trafik tinggi dan aplikasi real-time.</p>
-
-    <div class="article-images">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-         data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-         alt="Ilustrasi protokol SSH3 modern" />
-  </div>
-
-  <h2>Keamanan yang Ditingkatkan</h2>
-  <p>SSH3 memperkenalkan sistem enkripsi hybrid yang menggabungkan AES‑256 dengan elliptic curve cryptography (ECC). Kombinasi ini memastikan bahwa setiap sesi SSH tidak hanya aman dari serangan klasik, tetapi juga lebih tahan terhadap potensi serangan kuantum di masa depan.</p>
-
-  <p>Selain itu, SSH3 mendukung otentikasi multi‑faktor (MFA) yang bisa dikonfigurasi dengan token hardware maupun aplikasi otentikator. Hal ini membuat akses server jauh lebih aman dibandingkan hanya menggunakan password atau kunci publik sederhana.</p>
-
-  <h2>Performa dan Kecepatan</h2>
-  <p>Salah satu fokus utama SSH3 adalah mengurangi latency dan meningkatkan throughput. Dengan protokol yang dioptimalkan, transfer file besar antar server menjadi lebih cepat. SSH3 juga memiliki mekanisme kompresi adaptif yang menyesuaikan dengan tipe data sehingga transfer lebih efisien.</p>
-
-  <p>Fitur koneksi <em>persistent</em> memungkinkan sesi tetap hidup meskipun terjadi gangguan jaringan sementara, sehingga pengguna tidak perlu selalu melakukan reconnect dari awal.</p>
-
-  <h2>Fitur Modern</h2>
-  <p>SSH3 dilengkapi dengan kemampuan multiplexing, yang memungkinkan beberapa sesi berjalan melalui satu koneksi TCP. Hal ini sangat membantu bagi administrator yang harus mengelola banyak server sekaligus.</p>
-
-  <p>Selain itu, SSH3 mendukung integrasi dengan container dan orchestrator modern seperti Docker dan Kubernetes, memudahkan deployment dan maintenance infrastruktur cloud.</p>
-
-  <h2>Kesimpulan</h2>
-  <p>Dengan keamanan yang diperkuat, performa lebih tinggi, dan dukungan fitur modern, SSH3 menjadi protokol ideal untuk era digital saat ini. Baik untuk pengelolaan server, cloud, maupun infrastruktur IoT, SSH3 memastikan koneksi aman, cepat, dan handal.</p>
-
-  <div class="share-buttons">
-    <button class="btn" id="copyLink">🔗 Salin Link</button>
-    <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" target="_blank" rel="noopener">📘 Facebook</a>
-    <a class="btn" href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html&text=SSH3%3A%20Evolusi%20Keamanan%20dan%20Kecepatan" target="_blank" rel="noopener">🐦 Twitter</a>
-  </div>
-</article>
-
-<!-- Lightbox -->
-<div id="lightbox" role="dialog" aria-modal="true">
-  <button class="lb-close" aria-label="Tutup">&times;</button>
-  <img src="" alt="Gambar artikel SSH3">
-</div>
-
-<footer>
-  <small>🄯 2025 Pelan Kiri Rijal. Semua hak cipta dilindungi.</small>
-</footer>
-
-<script>
-document.addEventListener(DOMContentLoaded, () => {
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = lightbox.querySelector('img');
-  document.querySelectorAll('.article-images img').forEach(img => {
-    img.addEventListener('click', () => {
-      lbImg.src = img.dataset.full || img.src;
-      lightbox.classList.add('show');
+    <!-- Schema.org -->
     });
-  });
-  document.querySelector('.lb-close').addEventListener('click', () => lightbox.classList.remove('show'));
-  lightbox.addEventListener('click', e => { if(e.target === lightbox) lightbox.classList.remove('show'); });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern",
+        "description": "SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet.",
+        "image": [
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
+        ],
+        "author": {
+          "@type": "Person",
+          "name": "Frijal",
+          "url": "https://frijal.github.io",
+          "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Frijal",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://frijal.github.io/favicon.ico",
+            "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
+          },
+          "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
+        },
+        "datePublished": "2025-09-28T17:30:00+08:00",
+        "dateModified": "2025-09-28T17:30:00+08:00",
+        "mainEntityOfPage": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html",
+        "inLanguage": "id-ID"
+      }
+    </script>
 
-  // Copy Link
-  document.getElementById('copyLink').addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href).then(() => alert('Link artikel disalin!'));
-  });
-});
-</script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .article {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+      }
+      .article h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+      .article h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+      .article p {
+        margin-bottom: 15px;
+      }
+      .article-images {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .article-images img {
+        max-width: 100%;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .article-images img:hover {
+        transform: scale(1.03);
+      }
+      .share-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .share-buttons .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 12px;
+        background: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.2s;
+        cursor: pointer;
+      }
+      .share-buttons .btn:hover {
+        background: #0056b3;
+      }
+      #lightbox {
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      #lightbox.show {
+        visibility: visible;
+        opacity: 1;
+      }
+      #lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 6px;
+      }
+      .lb-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 0.85rem;
+        color: #555;
+        margin-top: 40px;
+      }
+    </style>
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+  </head>
+  <body>
+    <article class="article" role="article">
+      <h1>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</h1>
+      <div id="iposbrowser"></div>
 
-});
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+      <p>
+        Jika Anda pernah berinteraksi dengan server melalui protokol SSH (Secure
+        Shell), Anda mungkin sudah familiar dengan versi-versi sebelumnya yang
+        menekankan keamanan dan kemudahan akses. SSH3 hadir sebagai evolusi dari
+        teknologi ini, menghadirkan kombinasi keamanan yang lebih kuat, performa
+        yang lebih cepat, dan fitur-fitur modern yang relevan untuk kebutuhan
+        server dan cloud masa kini.
+      </p>
+
+      <p>
+        Berbeda dengan pendahulunya, SSH3 menggunakan algoritma enkripsi terbaru
+        yang lebih tahan terhadap serangan brute force maupun serangan
+        kriptografi canggih. Protokol ini juga mengurangi overhead komunikasi
+        sehingga latensi koneksi lebih rendah, sangat ideal untuk server dengan
+        trafik tinggi dan aplikasi real-time.
+      </p>
+
+      <div class="article-images">
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
+          data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
+          alt="Ilustrasi protokol SSH3 modern"
+        />
+      </div>
+
+      <h2>Keamanan yang Ditingkatkan</h2>
+      <p>
+        SSH3 memperkenalkan sistem enkripsi hybrid yang menggabungkan AES‑256
+        dengan elliptic curve cryptography (ECC). Kombinasi ini memastikan bahwa
+        setiap sesi SSH tidak hanya aman dari serangan klasik, tetapi juga lebih
+        tahan terhadap potensi serangan kuantum di masa depan.
+      </p>
+
+      <p>
+        Selain itu, SSH3 mendukung otentikasi multi‑faktor (MFA) yang bisa
+        dikonfigurasi dengan token hardware maupun aplikasi otentikator. Hal ini
+        membuat akses server jauh lebih aman dibandingkan hanya menggunakan
+        password atau kunci publik sederhana.
+      </p>
+
+      <h2>Performa dan Kecepatan</h2>
+      <p>
+        Salah satu fokus utama SSH3 adalah mengurangi latency dan meningkatkan
+        throughput. Dengan protokol yang dioptimalkan, transfer file besar antar
+        server menjadi lebih cepat. SSH3 juga memiliki mekanisme kompresi
+        adaptif yang menyesuaikan dengan tipe data sehingga transfer lebih
+        efisien.
+      </p>
+
+      <p>
+        Fitur koneksi <em>persistent</em> memungkinkan sesi tetap hidup meskipun
+        terjadi gangguan jaringan sementara, sehingga pengguna tidak perlu
+        selalu melakukan reconnect dari awal.
+      </p>
+
+      <h2>Fitur Modern</h2>
+      <p>
+        SSH3 dilengkapi dengan kemampuan multiplexing, yang memungkinkan
+        beberapa sesi berjalan melalui satu koneksi TCP. Hal ini sangat membantu
+        bagi administrator yang harus mengelola banyak server sekaligus.
+      </p>
+
+      <p>
+        Selain itu, SSH3 mendukung integrasi dengan container dan orchestrator
+        modern seperti Docker dan Kubernetes, memudahkan deployment dan
+        maintenance infrastruktur cloud.
+      </p>
+
+      <h2>Kesimpulan</h2>
+      <p>
+        Dengan keamanan yang diperkuat, performa lebih tinggi, dan dukungan
+        fitur modern, SSH3 menjadi protokol ideal untuk era digital saat ini.
+        Baik untuk pengelolaan server, cloud, maupun infrastruktur IoT, SSH3
+        memastikan koneksi aman, cepat, dan handal.
+      </p>
+
+      <div class="share-buttons">
+        <button class="btn" id="copyLink">🔗 Salin Link</button>
+        <a
+          class="btn"
+          href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
+          target="_blank"
+          rel="noopener"
+          >📘 Facebook</a
+        >
+        <a
+          class="btn"
+          href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html&text=SSH3%3A%20Evolusi%20Keamanan%20dan%20Kecepatan"
+          target="_blank"
+          rel="noopener"
+          >🐦 Twitter</a
+        >
+      </div>
+    </article>
+
+    <!-- Lightbox -->
+    <div id="lightbox" role="dialog" aria-modal="true">
+      <button class="lb-close" aria-label="Tutup">&times;</button>
+      <img src="" alt="Gambar artikel SSH3" />
+    </div>
+
+    <footer>
+      <small>🄯 2025 Pelan Kiri Rijal. Semua hak cipta dilindungi.</small>
+    </footer>
+
+    <script>
+      document.addEventListener(DOMContentLoaded, () => {
+        // Lightbox
+        const lightbox = document.getElementById('lightbox')
+        const lbImg = lightbox.querySelector('img')
+        document.querySelectorAll('.article-images img').forEach((img) => {
+          img.addEventListener('click', () => {
+            lbImg.src = img.dataset.full || img.src
+            lightbox.classList.add('show')
+          })
+        })
+        document
+          .querySelector('.lb-close')
+          .addEventListener('click', () => lightbox.classList.remove('show'))
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) lightbox.classList.remove('show')
+        })
+
+        // Copy Link
+        document.getElementById('copyLink').addEventListener('click', () => {
+          navigator.clipboard
+            .writeText(window.location.href)
+            .then(() => alert('Link artikel disalin!'))
+        })
+      })
+    </script>
+
+    });
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div id="kategori-aktif"></div>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">&times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>
-

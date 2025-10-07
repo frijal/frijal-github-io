@@ -4,19 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       targetDir:
-        description: "Folder target tempat file akan dihapus (contoh: mini, logs, cache)"
+        description: 'Folder target tempat file akan dihapus (contoh: mini, logs, cache)'
         required: true
-        default: "mini"
+        default: 'mini'
       extension:
-        description: "Ekstensi file yang ingin dihapus (contoh: mp3, wav, zip, txt)"
+        description: 'Ekstensi file yang ingin dihapus (contoh: mp3, wav, zip, txt)'
         required: true
-        default: "mp3"
+        default: 'mp3'
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # penting agar bisa commit & push
+      contents: write # penting agar bisa commit & push
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

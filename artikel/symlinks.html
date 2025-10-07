@@ -1,147 +1,381 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- prettier-ignore -->
-<title>Membersihkan Symbolic Links dengan SYMLINKS</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- prettier-ignore -->
+    <title>Membersihkan Symbolic Links dengan SYMLINKS</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<!-- SEO Metadata -->
-<link rel="canonical" href="https://frijal.github.io/artikel/symlinks.html">
-<meta name="description" content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux.">
-<meta property="og:title" content="Membersihkan Symbolic Links dengan SYMLINKS">
-<meta property="og:description" content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://frijal.github.io/artikel/symlinks.html">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Membersihkan Symbolic Links dengan SYMLINKS">
-<meta name="twitter:description" content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux.">
+    <!-- SEO Metadata -->
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/symlinks.html"
+    />
+    <meta
+      name="description"
+      content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux."
+    />
+    <meta
+      property="og:title"
+      content="Membersihkan Symbolic Links dengan SYMLINKS"
+    />
+    <meta
+      property="og:description"
+      content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/symlinks.html"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Membersihkan Symbolic Links dengan SYMLINKS"
+    />
+    <meta
+      name="twitter:description"
+      content="Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux."
+    />
 
-<!-- Prism.js -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-});
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Prism.js -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
-<style>
-body { font-family: Arial, sans-serif; max-width:1200px; margin:auto; padding:20px; line-height:1.6; }
-h1 { color:#007bff; }
-img { max-width:100%; height:auto; }
-pre { background:#f5f5f5; padding:10px; border-radius:5px; position:relative; overflow-x:auto; }
-button.copy-btn { position:absolute; top:5px; right:5px; background:#007bff; color:#fff; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; }
-#info-browser, #info-os, #ip-country { margin-top:20px; padding:10px; background:#f9f9f9; border-radius:5px; }
-#btn-home-left, #btn-home-right { position: fixed; display: flex; align-items: center; background-color: #007bff; color: #fff; padding: 12px 18px; border-radius: 8px; text-decoration: none; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: background 0.3s ease, transform 0.2s ease; z-index: 9999;}
-#btn-home-left:hover, #btn-home-right:hover { background-color: #0056b3; transform: scale(1.05); }
-#btn-home-left { left:10px; top:30%; transform:translateY(-50%); }
-#btn-home-right { right:10px; bottom:20%; transform:translateY(50%); }
-#btn-home-left svg, #btn-home-right svg { flex-shrink:0; }
-</style>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      h1 {
+        color: #007bff;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      pre {
+        background: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+        overflow-x: auto;
+      }
+      button.copy-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #info-browser,
+      #info-os,
+      #ip-country {
+        margin-top: 20px;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 5px;
+      }
+      #btn-home-left,
+      #btn-home-right {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition:
+          background 0.3s ease,
+          transform 0.2s ease;
+        z-index: 9999;
+      }
+      #btn-home-left:hover,
+      #btn-home-right:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      #btn-home-left {
+        left: 10px;
+        top: 30%;
+        transform: translateY(-50%);
+      }
+      #btn-home-right {
+        right: 10px;
+        bottom: 20%;
+        transform: translateY(50%);
+      }
+      #btn-home-left svg,
+      #btn-home-right svg {
+        flex-shrink: 0;
+      }
+    </style>
 
-<meta name="date" content="2025-09-28">
+    <meta name="date" content="2025-09-28" />
 
-  <meta property="og:image" content="https://frijal.github.io/artikel/symlinks.jpg">
-  <meta property="og:image:alt" content="Membersihkan Symbolic Links dengan SYMLINKS">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/symlinks.jpg">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/symlinks.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-15T11:00:00+08:00"></head>
-<body>
+    <meta
+      property="og:image"
+      content="https://frijal.github.io/artikel/symlinks.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="Membersihkan Symbolic Links dengan SYMLINKS"
+    />
+    <meta
+      name="twitter:image"
+      content="https://frijal.github.io/artikel/symlinks.jpg"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/symlinks.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-15T11:00:00+08:00"
+    />
+  </head>
+  <body>
+    <h1>Membersihkan Symbolic Links dengan SYMLINKS</h1>
+    <div id="iposbrowser"></div>
 
-<h1>Membersihkan Symbolic Links dengan SYMLINKS</h1>
-<div id="iposbrowser"></div>
+    <p>
+      Tautan atau Shortcut yang juga dikenal sebagai
+      <b>Symbolic-Links</b> terkadang berguna untuk menghemat ruang di HDD/SSD,
+      namun jika targetnya berpindah atau hilang, tautan ini bisa menambah
+      kekacauan. Untuk merapikan, kita dapat menggunakan aplikasi
+      <b>SYMLINKS</b>.
+    </p>
 
-<p>Tautan atau Shortcut yang juga dikenal sebagai <b>Symbolic-Links</b> terkadang berguna untuk menghemat ruang di HDD/SSD, namun jika targetnya berpindah atau hilang, tautan ini bisa menambah kekacauan. Untuk merapikan, kita dapat menggunakan aplikasi <b>SYMLINKS</b>.</p>
+    <blockquote>
+      <code>sudo apt-get install symlinks</code>
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    </blockquote>
 
-<blockquote><code>sudo apt-get install symlinks</code> <button class="copy-btn" onclick="copyCode(this)">Copy</button></blockquote>
+    <p>Setelah terpasang, kita bisa melihat opsi bantuan dengan:</p>
+    <pre><code class="language-bash">symlinks -h</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
 
-<p>Setelah terpasang, kita bisa melihat opsi bantuan dengan:</p>
-<pre><code class="language-bash">symlinks -h</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+    <div style="text-align: center">
+      <a
+        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhDaYpy0zALLu31wzygY1U4a23KFhyphenhyphenGiGYs6f6Z5-uHFM94wq0OeJVlOf-5lvOrorc6CyJfWjUHsLxSmewvPruNARWQeXR9l9kpg2FAYhEBf38MZX2tzUuuUjU0ja3zp_T7b4K9UrrPKUT/s1600/kurangkerjaan002.png"
+        target=""
+      >
+        <img
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhDaYpy0zALLu31wzygY1U4a23KFhyphenhyphenGiGYs6f6Z5-uHFM94wq0OeJVlOf-5lvOrorc6CyJfWjUHsLxSmewvPruNARWQeXR9l9kpg2FAYhEBf38MZX2tzUuuUjU0ja3zp_T7b4K9UrrPKUT/s320/kurangkerjaan002.png"
+          alt="SYMLINKS Screenshot"
+        />
+      </a>
+    </div>
 
-<div style="text-align:center;">
-  <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhDaYpy0zALLu31wzygY1U4a23KFhyphenhyphenGiGYs6f6Z5-uHFM94wq0OeJVlOf-5lvOrorc6CyJfWjUHsLxSmewvPruNARWQeXR9l9kpg2FAYhEBf38MZX2tzUuuUjU0ja3zp_T7b4K9UrrPKUT/s1600/kurangkerjaan002.png" target="">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhDaYpy0zALLu31wzygY1U4a23KFhyphenhyphenGiGYs6f6Z5-uHFM94wq0OeJVlOf-5lvOrorc6CyJfWjUHsLxSmewvPruNARWQeXR9l9kpg2FAYhEBf38MZX2tzUuuUjU0ja3zp_T7b4K9UrrPKUT/s320/kurangkerjaan002.png" alt="SYMLINKS Screenshot">
-  </a>
-</div>
+    <p>
+      Dijamin setelah ini, ruang HDD atau SSD akan menjadi lebih rapi, dan akses
+      menjadi lebih ringan. ;)
+    </p>
 
-<p>Dijamin setelah ini, ruang HDD atau SSD akan menjadi lebih rapi, dan akses menjadi lebih ringan. ;)</p>
+    <!-- Info Browser & OS -->
+    <div id="info-browser">
+      <strong>Browser:</strong> <span id="browser-name"></span>
+      <span id="browser-icon"></span>
+    </div>
+    <div id="info-os">
+      <strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span>
+    </div>
 
-<!-- Info Browser & OS -->
-<div id="info-browser"><strong>Browser:</strong> <span id="browser-name"></span> <span id="browser-icon"></span></div>
-<div id="info-os"><strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span></div>
+    <!-- Facebook Comments Plugin -->
+    <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
+      <span id="current-url" class="small-muted"></span>
+    </div>
+    <div style="margin-top: 18px">
+      <div id="fb-root"></div>
+      <script
+        async
+        defer
+        crossorigin="anonymous"
+        src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
+      >
+        });
+      </script>
+      <div
+        class="fb-comments"
+        id="fb-comments"
+        data-href=""
+        data-width="100%"
+        data-numposts="5"
+      ></div>
+      <script>
+        document.addEventListener(DOMContentLoaded, () => {
+          const currentUrl = window.location.href
+          document.getElementById('current-url').textContent = currentUrl
+          document
+            .getElementById('fb-comments')
+            .setAttribute('data-href', currentUrl)
+          window.fbAsyncInit = function () {
+            if (typeof FB !== 'undefined') {
+              try {
+                FB.XFBML.parse()
+              } catch (e) {}
+            }
+          }
+        })
+      </script>
+    </div>
 
-<!-- Facebook Comments Plugin -->
-<div style="margin-top:18px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
-<div style="margin-top:18px">
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-          src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
-});
-  </script>
-  <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
-  <script>
-document.addEventListener(DOMContentLoaded, () => {
-    const currentUrl = window.location.href;
-    document.getElementById("current-url").textContent = currentUrl;
-    document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-    window.fbAsyncInit = function() {
-      if (typeof FB !== 'undefined') { try { FB.XFBML.parse(); } catch(e){} }
-    }
-});
-  </script>
-</div>
+    <!-- IP & Bendera -->
+    <div id="ip-country">
+      <strong>IP & Negara:</strong> <span id="ip-info"></span>
+      <img
+        id="country-flag"
+        style="height: 16px; vertical-align: middle; margin-left: 5px"
+      />
+    </div>
 
+    <script>
+      document.addEventListener(DOMContentLoaded, () => {
+        // Copy snippet button
+        function copyCode(btn) {
+          const code = btn.previousElementSibling
+            ? btn.previousElementSibling.innerText
+            : btn.parentElement.innerText
+          navigator.clipboard
+            .writeText(code)
+            .then(() => alert('Command berhasil disalin!'))
+        }
 
+        // Detect Browser & OS
+        const ua = navigator.userAgent
+        let browser = 'Unknown',
+          os = 'Unknown',
+          browserIcon = '',
+          osIcon = ''
+        if (/Firefox/.test(ua)) {
+          browser = 'Firefox'
+          browserIcon = '🦊'
+        } else if (/Chrome/.test(ua)) {
+          browser = 'Chrome'
+          browserIcon = '🌐'
+        } else if (/Edg/.test(ua)) {
+          browser = 'Edge'
+          browserIcon = '🔵'
+        } else if (/Safari/.test(ua)) {
+          browser = 'Safari'
+          browserIcon = '🍏'
+        }
 
-<!-- IP & Bendera -->
-<div id="ip-country"><strong>IP & Negara:</strong> <span id="ip-info"></span> <img id="country-flag" style="height:16px; vertical-align:middle; margin-left:5px;"></div>
+        if (/Win/.test(ua)) {
+          os = 'Windows'
+          osIcon = '🪟'
+        } else if (/Mac/.test(ua)) {
+          os = 'macOS'
+          osIcon = '🍎'
+        } else if (/Linux/.test(ua)) {
+          os = 'Linux'
+          osIcon = '🐧'
+        }
 
-<script>
-document.addEventListener(DOMContentLoaded, () => {
-// Copy snippet button
-function copyCode(btn){
-  const code = btn.previousElementSibling ? btn.previousElementSibling.innerText : btn.parentElement.innerText;
-  navigator.clipboard.writeText(code).then(()=>alert('Command berhasil disalin!'));
-}
+        document.getElementById('browser-name').innerText = browser
+        document.getElementById('browser-icon').innerText = browserIcon
+        document.getElementById('os-name').innerText = os
+        document.getElementById('os-icon').innerText = osIcon
 
-// Detect Browser & OS
-const ua = navigator.userAgent;
-let browser = "Unknown", os = "Unknown", browserIcon="", osIcon="";
-if(/Firefox/.test(ua)) { browser="Firefox"; browserIcon="🦊"; }
-else if(/Chrome/.test(ua)) { browser="Chrome"; browserIcon="🌐"; }
-else if(/Edg/.test(ua)) { browser="Edge"; browserIcon="🔵"; }
-else if(/Safari/.test(ua)) { browser="Safari"; browserIcon="🍏"; }
+        // Fetch IP & country
+        fetch('https://ipapi.co/json/')
+          .then((res) => res.json())
+          .then((data) => {
+            document.getElementById('ip-info').innerText =
+              data.ip + ' (' + data.country_name + ')'
+            document.getElementById('country-flag').src =
+              'https://flagcdn.com/16x12/' +
+              data.country_code.toLowerCase() +
+              '.png'
+          })
+      })
+    </script>
 
-if(/Win/.test(ua)) { os="Windows"; osIcon="🪟"; }
-else if(/Mac/.test(ua)) { os="macOS"; osIcon="🍎"; }
-else if(/Linux/.test(ua)) { os="Linux"; osIcon="🐧"; }
+    <!-- JSON-LD -->
+    });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Membersihkan Symbolic Links dengan SYMLINKS",
+        "description": "Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux.",
+        "author": {
+          "@type": "Person",
+          "name": "Pelan Kiri Rijal",
+          "image": "https://frijal.github.io/artikel/symlinks.jpg"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Bak.Xo.je",
+          "image": "https://frijal.github.io/artikel/symlinks.jpg"
+        },
+        "datePublished": "2025-09-15",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://frijal.github.io/artikel/symlinks.html",
+          "image": "https://frijal.github.io/artikel/symlinks.jpg"
+        },
+        "image": "https://frijal.github.io/artikel/symlinks.jpg"
+      }
+    </script>
 
-document.getElementById('browser-name').innerText=browser;
-document.getElementById('browser-icon').innerText=browserIcon;
-document.getElementById('os-name').innerText=os;
-document.getElementById('os-icon').innerText=osIcon;
+    });
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://frijal.github.io/sitemap.html",
+            "image": "https://frijal.github.io/artikel/symlinks.jpg"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "SYMLINKS",
+            "image": "https://frijal.github.io/artikel/symlinks.jpg"
+          }
+        ],
+        "image": "https://frijal.github.io/artikel/symlinks.jpg"
+      }
+    </script>
 
-// Fetch IP & country
-fetch('https://ipapi.co/json/')
-.then(res=>res.json())
-.then(data=>{
-  document.getElementById('ip-info').innerText = data.ip + ' ('+data.country_name+')';
-  document.getElementById('country-flag').src = 'https://flagcdn.com/16x12/'+data.country_code.toLowerCase()+'.png';
-});
-});
-</script>
-
-<!-- JSON-LD -->
-});
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Membersihkan Symbolic Links dengan SYMLINKS","description":"Panduan membersihkan symbolic links atau shortcut menggunakan aplikasi SYMLINKS untuk merapikan HDD/SSD di Linux.","author":{"@type":"Person","name":"Pelan Kiri Rijal","image":"https://frijal.github.io/artikel/symlinks.jpg"},"publisher":{"@type":"Organization","name":"Bak.Xo.je","image":"https://frijal.github.io/artikel/symlinks.jpg"},"datePublished":"2025-09-15","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/symlinks.html","image":"https://frijal.github.io/artikel/symlinks.jpg"},"image":"https://frijal.github.io/artikel/symlinks.jpg"}</script>
-
-});
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io/sitemap.html","image":"https://frijal.github.io/artikel/symlinks.jpg"},{"@type":"ListItem","position":2,"name":"SYMLINKS","image":"https://frijal.github.io/artikel/symlinks.jpg"}],"image":"https://frijal.github.io/artikel/symlinks.jpg"}</script>
-
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>
-

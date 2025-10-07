@@ -8,7 +8,7 @@ on:
         required: true
         default: 'artikel'
   schedule:
-   - cron: '0 13 * * *'
+    - cron: '0 13 * * *'
 
 jobs:
   count_and_report:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-           
+
       - name: Hitung dan Buat Laporan File
         id: file_counting
         run: |
@@ -150,6 +150,6 @@ jobs:
       - name: Commit File Laporan & Badge ke Repositori
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Laporan & Badge Dinamis: Update jumlah file di folder ${{ github.event.inputs.target_folder }}"
+          commit_message: 'Laporan & Badge Dinamis: Update jumlah file di folder ${{ github.event.inputs.target_folder }}'
           branch: ${{ github.ref_name }}
           file_pattern: mini/* ext/*

@@ -6,7 +6,9 @@
       name="viewport"
       content="width=device-width,initial-scale=1,viewport-fit=cover"
     />
-    <title>💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</title>
+    <title>
+      💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux
+    </title>
     <meta
       name="description"
       content="Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount. Termasuk penjelasan tmpfs/devtmpfs, contoh output, galeri gambar, dan tips."
@@ -57,30 +59,30 @@
       content="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png"
     />
     <script type="application/ld+json">
-      {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": "Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux",
-          "description": "Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount.",
-          "inLanguage": "id-ID",
-          "author": { "@type": "Person", "name": "Pelan Kiri" },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Frijal",
-            "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/logo.png" }
-          },
-          "image": [
-            "https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png",
-            "https://frijal.github.io/assets/gallery/df-h.jpg",
-            "https://frijal.github.io/assets/gallery/mount-output.jpg"
-          ],
-          "mainEntityOfPage": { "@type": "WebPage", "url": "https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html" },
-          "datePublished": "2025-09-26",
-          "dateModified": "2025-09-26"
-        }
-});
+            {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux",
+                "description": "Panduan santai dan lengkap melihat jumlah disk dan partisi yang ter-mount di Linux dengan df dan mount.",
+                "inLanguage": "id-ID",
+                "author": { "@type": "Person", "name": "Pelan Kiri" },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Frijal",
+                  "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/logo.png" }
+                },
+                "image": [
+                  "https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png",
+                  "https://frijal.github.io/assets/gallery/df-h.jpg",
+                  "https://frijal.github.io/assets/gallery/mount-output.jpg"
+                ],
+                "mainEntityOfPage": { "@type": "WebPage", "url": "https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.html" },
+                "datePublished": "2025-09-26",
+                "dateModified": "2025-09-26"
+              }
+      });
     </script>
-    <meta name="date" content="2025-09-27">
+    <meta name="date" content="2025-09-27" />
     <meta name="theme-color" content="#2A7F62" />
     <style>
       :root {
@@ -119,13 +121,13 @@
           ui-sans-serif,
           system-ui,
           -apple-system,
-          "Segoe UI",
+          'Segoe UI',
           Roboto,
-          "Helvetica Neue",
+          'Helvetica Neue',
           Arial,
-          "Noto Sans",
-          "Liberation Sans",
-          "Nimbus Sans",
+          'Noto Sans',
+          'Liberation Sans',
+          'Nimbus Sans',
           sans-serif;
         line-height: 1.7;
       }
@@ -254,7 +256,7 @@
         overflow: auto;
         font-family:
           ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
+          'Liberation Mono', 'Courier New', monospace;
         color: #cde5ff;
       }
       .gallery {
@@ -426,17 +428,26 @@
         }
       }
     </style>
-    <meta property="og:image:alt" content="💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux">
-    <meta itemprop="image" content="https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.jpg">
-    <link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-09-26T11:00:00+08:00">
-</head>
-<body>
+    <meta
+      property="og:image:alt"
+      content="💽 Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/berapa-banyak-disk-dan-partisi-ter-mount.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-26T11:00:00+08:00"
+    />
+  </head>
+  <body>
     <header>
       <div class="title">
         <span class="emoji">💽</span>
         <h1>Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</h1>
-<div id="iposbrowser"></div>
+        <div id="iposbrowser"></div>
       </div>
       <div class="meta">
         <span>Ditulis dengan cinta—bahasa santai, inti tetap tajam</span>
@@ -589,10 +600,12 @@ Filesystem      Size  Used Avail Use% Mounted on
           <div class="code"><pre>mount</pre></div>
           <p>Contoh potongan output:</p>
           <div class="code">
-            <pre>/dev/sda1 on / type ext4 (rw,relatime)
+            <pre>
+/dev/sda1 on / type ext4 (rw,relatime)
 tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
 
-/dev/sdb1 on /backup type ext4 (rw,relatime)</pre>
+/dev/sdb1 on /backup type ext4 (rw,relatime)</pre
+            >
           </div>
           <p>
             Di sini kamu bisa lihat jenisnya (<code>ext4</code>,
@@ -757,124 +770,132 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
       </button>
       <img id="lb-img" src="" alt="Preview" />
     </div>
-   
+
     <script>
-document.addEventListener(DOMContentLoaded, () => {
-      ((() => {
-        var e = navigator.userAgent.toLowerCase();
-        let t = "Tidak diketahui",
-          n =
-            (e.includes("edg")
-              ? (t = "Microsoft Edge")
-              : e.includes("chrome")
-                ? (t = "Google Chrome")
-                : e.includes("safari") && !e.includes("chrome")
-                  ? (t = "Safari")
-                  : e.includes("firefox")
-                    ? (t = "Mozilla Firefox")
-                    : (e.includes("opera") || e.includes("opr")) &&
-                      (t = "Opera"),
-            "Tidak diketahui");
-        (e.includes("windows")
-          ? (n = "Windows")
-          : e.includes("mac os") || e.includes("macintosh")
-            ? (n = "macOS")
-            : e.includes("android")
-              ? (n = "Android")
-              : e.includes("iphone") || e.includes("ipad")
-                ? (n = "iOS")
-                : e.includes("linux") && (n = "Linux"),
-          (document.querySelector("#chip-browser span").textContent =
-            "Browser: " + t),
-          (document.querySelector("#chip-os span").textContent = "OS: " + n),
-          "geolocation" in navigator &&
-            navigator.geolocation.getCurrentPosition(
-              function (e) {
-                var t = e.coords.latitude.toFixed(3),
-                  e = e.coords.longitude.toFixed(3);
-                document.querySelector("#chip-location span").textContent =
-                  `Lokasi: Koordinat ${t}, ${e} (🌏)`;
-              },
-              function () {},
-              { timeout: 3e3 },
-            ));
-      })(),
-        (() => {
-          Array.from(document.querySelectorAll(".gallery figure"));
-          let n = Array.from(document.querySelectorAll(".gallery img")),
-            o = document.getElementById("lightbox"),
-            r = document.getElementById("lb-img");
-          var e = document.getElementById("lb-prev"),
-            t = document.getElementById("lb-next"),
-            i = document.getElementById("lb-close");
-          let c = 0;
-          function d(e) {
-            ((c = (c + e + n.length) % n.length),
-              (r.src = n[c].dataset.full || n[c].src));
-          }
-          function l() {
-            (o.classList.remove("open"), (r.src = ""));
-          }
-          (n.forEach((e, t) => {
-            ((e.style.cursor = "zoom-in"),
-              e.addEventListener("click", () => {
-                return (
-                  (e = t),
-                  (c = e),
-                  (r.src = n[c].dataset.full || n[c].src),
-                  void o.classList.add("open")
-                );
-                var e;
-              }));
-          }),
-            e.addEventListener("click", () => d(-1)),
-            t.addEventListener("click", () => d(1)),
-            i.addEventListener("click", l),
-            o.addEventListener("click", (e) => {
-              e.target === o && l();
+      document.addEventListener(DOMContentLoaded, () => {
+        ;((() => {
+          var e = navigator.userAgent.toLowerCase()
+          let t = 'Tidak diketahui',
+            n =
+              (e.includes('edg')
+                ? (t = 'Microsoft Edge')
+                : e.includes('chrome')
+                  ? (t = 'Google Chrome')
+                  : e.includes('safari') && !e.includes('chrome')
+                    ? (t = 'Safari')
+                    : e.includes('firefox')
+                      ? (t = 'Mozilla Firefox')
+                      : (e.includes('opera') || e.includes('opr')) &&
+                        (t = 'Opera'),
+              'Tidak diketahui')
+          ;(e.includes('windows')
+            ? (n = 'Windows')
+            : e.includes('mac os') || e.includes('macintosh')
+              ? (n = 'macOS')
+              : e.includes('android')
+                ? (n = 'Android')
+                : e.includes('iphone') || e.includes('ipad')
+                  ? (n = 'iOS')
+                  : e.includes('linux') && (n = 'Linux'),
+            (document.querySelector('#chip-browser span').textContent =
+              'Browser: ' + t),
+            (document.querySelector('#chip-os span').textContent = 'OS: ' + n),
+            'geolocation' in navigator &&
+              navigator.geolocation.getCurrentPosition(
+                function (e) {
+                  var t = e.coords.latitude.toFixed(3),
+                    e = e.coords.longitude.toFixed(3)
+                  document.querySelector('#chip-location span').textContent =
+                    `Lokasi: Koordinat ${t}, ${e} (🌏)`
+                },
+                function () {},
+                { timeout: 3e3 },
+              ))
+        })(),
+          (() => {
+            Array.from(document.querySelectorAll('.gallery figure'))
+            let n = Array.from(document.querySelectorAll('.gallery img')),
+              o = document.getElementById('lightbox'),
+              r = document.getElementById('lb-img')
+            var e = document.getElementById('lb-prev'),
+              t = document.getElementById('lb-next'),
+              i = document.getElementById('lb-close')
+            let c = 0
+            function d(e) {
+              ;((c = (c + e + n.length) % n.length),
+                (r.src = n[c].dataset.full || n[c].src))
+            }
+            function l() {
+              ;(o.classList.remove('open'), (r.src = ''))
+            }
+            ;(n.forEach((e, t) => {
+              ;((e.style.cursor = 'zoom-in'),
+                e.addEventListener('click', () => {
+                  return (
+                    (e = t),
+                    (c = e),
+                    (r.src = n[c].dataset.full || n[c].src),
+                    void o.classList.add('open')
+                  )
+                  var e
+                }))
             }),
-            document.addEventListener("keydown", (e) => {
-              o.classList.contains("open") &&
-                ("Escape" === e.key && l(),
-                "ArrowLeft" === e.key && d(-1),
-                "ArrowRight" === e.key) &&
-                d(1);
-            }));
-        })(),
-        (() => {
-          var e = encodeURIComponent(
-              document.querySelector('link[rel="canonical"]')?.href ||
-                location.href,
-            ),
-            t = encodeURIComponent(document.title);
-          ((document.getElementById("share-twitter").href =
-            `https://twitter.com/intent/tweet?url=${e}&text=` + t),
-            (document.getElementById("share-fb").href =
-              "https://www.facebook.com/sharer/sharer.php?u=" + e),
-            (document.getElementById("share-whatsapp").href =
-              `https://wa.me/?text=${t}%20` + e),
-            (document.getElementById("share-linkedin").href =
-              "https://www.linkedin.com/sharing/share-offsite/?url=" + e));
-        })(),
-        ((e, t, n) => {
-          var o = e.getElementsByTagName(t)[0];
-          e.getElementById(n) ||
-            (((e = e.createElement(t)).id = n),
-            (e.src =
-              "https://connect.facebook.net/id_ID/sdk.js#xfml=1&version=v19.0"),
-            o.parentNode.insertBefore(e, o));
-        })(document, "script", "facebook-jssdk"));
-});
+              e.addEventListener('click', () => d(-1)),
+              t.addEventListener('click', () => d(1)),
+              i.addEventListener('click', l),
+              o.addEventListener('click', (e) => {
+                e.target === o && l()
+              }),
+              document.addEventListener('keydown', (e) => {
+                o.classList.contains('open') &&
+                  ('Escape' === e.key && l(),
+                  'ArrowLeft' === e.key && d(-1),
+                  'ArrowRight' === e.key) &&
+                  d(1)
+              }))
+          })(),
+          (() => {
+            var e = encodeURIComponent(
+                document.querySelector('link[rel="canonical"]')?.href ||
+                  location.href,
+              ),
+              t = encodeURIComponent(document.title)
+            ;((document.getElementById('share-twitter').href =
+              `https://twitter.com/intent/tweet?url=${e}&text=` + t),
+              (document.getElementById('share-fb').href =
+                'https://www.facebook.com/sharer/sharer.php?u=' + e),
+              (document.getElementById('share-whatsapp').href =
+                `https://wa.me/?text=${t}%20` + e),
+              (document.getElementById('share-linkedin').href =
+                'https://www.linkedin.com/sharing/share-offsite/?url=' + e))
+          })(),
+          ((e, t, n) => {
+            var o = e.getElementsByTagName(t)[0]
+            e.getElementById(n) ||
+              (((e = e.createElement(t)).id = n),
+              (e.src =
+                'https://connect.facebook.net/id_ID/sdk.js#xfml=1&version=v19.0'),
+              o.parentNode.insertBefore(e, o))
+          })(document, 'script', 'facebook-jssdk'))
+      })
     </script>
-    <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section>
-});
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    });
     <script src="/ext/marquee-url.js"></script>
-    <div class='search-floating-container'>
-        <input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'>
-        <span id='floatingSearchClear' class='clear-button'>&times;</span>
-        <div id='floatingSearchResults' class='floating-results-container'></div>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      />
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>

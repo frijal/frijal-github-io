@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       search:
-        description: "Teks yang mau diganti (case-sensitive)"
+        description: 'Teks yang mau diganti (case-sensitive)'
         required: true
-        default: "makan siang bersama"
+        default: 'makan siang bersama'
       replace:
-        description: "Teks pengganti"
+        description: 'Teks pengganti'
         required: true
-        default: "mandi pagi sendirian"
+        default: 'mandi pagi sendirian'
       folder:
-        description: "Folder target (misal: content, src, docs). Kosong = root repo"
+        description: 'Folder target (misal: content, src, docs). Kosong = root repo'
         required: false
-        default: "."
+        default: '.'
       globs:
-        description: "Polanya file (misal: **/*.txt,**/*.html)"
+        description: 'Polanya file (misal: **/*.txt,**/*.html)'
         required: false
-        default: "**/*.txt,**/*.html"
+        default: '**/*.txt,**/*.html'
 
 jobs:
   replace:

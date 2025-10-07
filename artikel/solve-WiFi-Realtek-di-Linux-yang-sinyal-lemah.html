@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!-- prettier-ignore -->
     <title>WiFi Realtek Linux: Sinyal Lemah Fix</title>
-<meta name="description" content="Cara mengatasi sinyal WiFi Realtek yang lemah di Linux. Panduan ini menunjukkan cara memperbaiki masalah koneksi dengan mengubah opsi ant_sel pada driver kernel untuk meningkatkan kekuatan sinyal.">    
+    <meta
+      name="description"
+      content="Cara mengatasi sinyal WiFi Realtek yang lemah di Linux. Panduan ini menunjukkan cara memperbaiki masalah koneksi dengan mengubah opsi ant_sel pada driver kernel untuk meningkatkan kekuatan sinyal."
+    />
     <meta name="date" content="2025-09-27" />
-    
-    
+
     <style>
       :root {
         --bg-light: #f0f8ff;
@@ -21,7 +23,7 @@
       body {
         margin: 0;
         padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--bg-light);
         color: var(--text-light);
         transition:
@@ -129,18 +131,34 @@
       }
     </style>
 
-    <meta property="og:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-  <meta property="og:image:alt" content="WiFi Realtek Linux: Sinyal Lemah Fix">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-13T11:00:00+08:00"></head>
+    <meta
+      property="og:image"
+      content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="WiFi Realtek Linux: Sinyal Lemah Fix"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg"
+    />
+    <meta
+      itemprop="image"
+      content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-09-13T11:00:00+08:00"
+    />
+  </head>
   <body>
     <button id="toggleDark">Toggle Dark Mode</button>
     <div class="container">
       <h1>Fix WiFi Realtek di Linux (Sinyal Lemah)</h1>
-<div id="iposbrowser"></div>
+      <div id="iposbrowser"></div>
       <p>
         Jika kamu menggunakan adapter WiFi Realtek di Linux dan mengalami sinyal
         lemah, beberapa perintah <strong>iw</strong> dan
@@ -193,7 +211,7 @@ sudo iwlist wlan0 scan</code>
           defer="defer"
           crossorigin="anonymous"
           src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-});
+          });
         ></script>
         <div
           class="fb-comments"
@@ -203,19 +221,19 @@ sudo iwlist wlan0 scan</code>
           data-numposts="5"
         ></div>
         <script>
-document.addEventListener(DOMContentLoaded, () => {
-          let currentUrl = window.location.href;
-          ((document.getElementById("current-url").textContent = currentUrl),
-            document
-              .getElementById("fb-comments")
-              .setAttribute("data-href", currentUrl),
-            (window.fbAsyncInit = function () {
-              if ("undefined" != typeof FB)
-                try {
-                  FB.XFBML.parse();
-                } catch (t) {}
-            }));
-});
+          document.addEventListener(DOMContentLoaded, () => {
+            let currentUrl = window.location.href
+            ;((document.getElementById('current-url').textContent = currentUrl),
+              document
+                .getElementById('fb-comments')
+                .setAttribute('data-href', currentUrl),
+              (window.fbAsyncInit = function () {
+                if ('undefined' != typeof FB)
+                  try {
+                    FB.XFBML.parse()
+                  } catch (t) {}
+              }))
+          })
         </script>
         <div class="info-box" id="infoBox">
           <div class="info-item">
@@ -233,127 +251,138 @@ document.addEventListener(DOMContentLoaded, () => {
         </div>
       </div>
       <script>
-document.addEventListener(DOMContentLoaded, () => {
-        let body = document.body,
-          prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)",
-          ).matches;
-        function copyCode() {
-          var e = document.getElementById("wifiCode").textContent;
-          (navigator.clipboard.writeText(e), alert("Syntax copied!"));
-        }
-        function getBrowserInfo() {
-          let e = navigator.userAgent,
-            o = "Unknown",
-            i = "",
-            t = "N/A";
-          return (
-            -1 < e.indexOf("Brave")
-              ? ((o = "Brave"),
-                (i =
-                  "https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg"))
-              : -1 < e.indexOf("Firefox")
-                ? ((o = "Firefox"),
-                  (t = e.match(/Firefox\/([0-9\.]+)/)[1]),
+        document.addEventListener(DOMContentLoaded, () => {
+          let body = document.body,
+            prefersDark = window.matchMedia(
+              '(prefers-color-scheme: dark)',
+            ).matches
+          function copyCode() {
+            var e = document.getElementById('wifiCode').textContent
+            ;(navigator.clipboard.writeText(e), alert('Syntax copied!'))
+          }
+          function getBrowserInfo() {
+            let e = navigator.userAgent,
+              o = 'Unknown',
+              i = '',
+              t = 'N/A'
+            return (
+              -1 < e.indexOf('Brave')
+                ? ((o = 'Brave'),
                   (i =
-                    "https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"))
-                : -1 < e.indexOf("Chrome") && -1 == e.indexOf("Edg")
-                  ? ((o = "Chrome"),
-                    (t = e.match(/Chrome\/([0-9\.]+)/)[1]),
+                    'https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg'))
+                : -1 < e.indexOf('Firefox')
+                  ? ((o = 'Firefox'),
+                    (t = e.match(/Firefox\/([0-9\.]+)/)[1]),
                     (i =
-                      "https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png"))
-                  : -1 < e.indexOf("Chromium")
-                    ? ((o = "Chromium"),
+                      'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg'))
+                  : -1 < e.indexOf('Chrome') && -1 == e.indexOf('Edg')
+                    ? ((o = 'Chrome'),
+                      (t = e.match(/Chrome\/([0-9\.]+)/)[1]),
                       (i =
-                        "https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg"))
-                    : -1 < e.indexOf("Safari") && -1 == e.indexOf("Chrome")
-                      ? ((o = "Safari"),
-                        (t = e.match(/Version\/([0-9\.]+)/)[1]),
+                        'https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png'))
+                    : -1 < e.indexOf('Chromium')
+                      ? ((o = 'Chromium'),
                         (i =
-                          "https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"))
-                      : -1 < e.indexOf("Edg")
-                        ? ((o = "Edge"),
-                          (t = e.match(/Edg\/([0-9\.]+)/)[1]),
+                          'https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg'))
+                      : -1 < e.indexOf('Safari') && -1 == e.indexOf('Chrome')
+                        ? ((o = 'Safari'),
+                          (t = e.match(/Version\/([0-9\.]+)/)[1]),
                           (i =
-                            "https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg"))
-                        : -1 < e.indexOf("OPR") &&
-                          ((o = "Opera"),
-                          (t = e.match(/OPR\/([0-9\.]+)/)[1]),
-                          (i =
-                            "https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg")),
-            { name: o, version: t, icon: i }
-          );
-        }
-        function getOSInfo() {
-          var e,
-            o = navigator.platform.toLowerCase(),
-            i = navigator.userAgent.toLowerCase();
-          let t = "Unknown OS",
-            n = "",
-            a = "";
-          return (
-            -1 !== o.indexOf("win")
-              ? ((t = "Windows"),
-                (e = i.match(/windows nt ([0-9\.]+)/)),
-                (n = e ? e[1] : ""),
-                (a =
-                  "https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg"))
-              : -1 !== o.indexOf("mac")
-                ? ((t = "macOS"),
-                  (e = i.match(/mac os x ([0-9_]+)/)),
-                  (n = e ? e[1].replace(/_/g, ".") : ""),
+                            'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg'))
+                        : -1 < e.indexOf('Edg')
+                          ? ((o = 'Edge'),
+                            (t = e.match(/Edg\/([0-9\.]+)/)[1]),
+                            (i =
+                              'https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg'))
+                          : -1 < e.indexOf('OPR') &&
+                            ((o = 'Opera'),
+                            (t = e.match(/OPR\/([0-9\.]+)/)[1]),
+                            (i =
+                              'https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg')),
+              { name: o, version: t, icon: i }
+            )
+          }
+          function getOSInfo() {
+            var e,
+              o = navigator.platform.toLowerCase(),
+              i = navigator.userAgent.toLowerCase()
+            let t = 'Unknown OS',
+              n = '',
+              a = ''
+            return (
+              -1 !== o.indexOf('win')
+                ? ((t = 'Windows'),
+                  (e = i.match(/windows nt ([0-9\.]+)/)),
+                  (n = e ? e[1] : ''),
                   (a =
-                    "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"))
-                : -1 !== o.indexOf("linux")
-                  ? ((t = "Linux"),
+                    'https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg'))
+                : -1 !== o.indexOf('mac')
+                  ? ((t = 'macOS'),
+                    (e = i.match(/mac os x ([0-9_]+)/)),
+                    (n = e ? e[1].replace(/_/g, '.') : ''),
                     (a =
-                      "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"))
-                  : /android/.test(i)
-                    ? ((t = "Android"),
+                      'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'))
+                  : -1 !== o.indexOf('linux')
+                    ? ((t = 'Linux'),
                       (a =
-                        "https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"))
-                    : /iphone|ipad|ipod/.test(i) &&
-                      ((t = "iOS"),
-                      (a =
-                        "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg")),
-            { name: t, version: n, icon: a }
-          );
-        }
-        (prefersDark && body.classList.add("dark"),
-          document
-            .getElementById("toggleDark")
-            .addEventListener("click", () => {
-              body.classList.toggle("dark");
-            }));
-        let browser = getBrowserInfo(),
-          os =
-            ((document.getElementById("browserIcon").src = browser.icon),
-            (document.getElementById("browserText").textContent =
-              `Browser: ${browser.name} ` + browser.version),
-            getOSInfo());
-        ((document.getElementById("osIcon").src = os.icon),
-          (document.getElementById("osText").textContent =
-            `OS: ${os.name} ` + os.version),
-          fetch("https://ipapi.co/json/")
-            .then((e) => e.json())
-            .then((e) => {
-              ((document.getElementById("ipText").textContent =
-                `IP: ${e.ip} (${e.country_name})`),
-                (document.getElementById("flagIcon").src =
-                  `https://flagcdn.com/48x36/${e.country_code.toLowerCase()}.png`));
-            })
-            .catch(() => {
-              document.getElementById("ipText").textContent =
-                "IP: Tidak dapat diambil";
-            }));
-});
+                        'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png'))
+                    : /android/.test(i)
+                      ? ((t = 'Android'),
+                        (a =
+                          'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg'))
+                      : /iphone|ipad|ipod/.test(i) &&
+                        ((t = 'iOS'),
+                        (a =
+                          'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg')),
+              { name: t, version: n, icon: a }
+            )
+          }
+          ;(prefersDark && body.classList.add('dark'),
+            document
+              .getElementById('toggleDark')
+              .addEventListener('click', () => {
+                body.classList.toggle('dark')
+              }))
+          let browser = getBrowserInfo(),
+            os =
+              ((document.getElementById('browserIcon').src = browser.icon),
+              (document.getElementById('browserText').textContent =
+                `Browser: ${browser.name} ` + browser.version),
+              getOSInfo())
+          ;((document.getElementById('osIcon').src = os.icon),
+            (document.getElementById('osText').textContent =
+              `OS: ${os.name} ` + os.version),
+            fetch('https://ipapi.co/json/')
+              .then((e) => e.json())
+              .then((e) => {
+                ;((document.getElementById('ipText').textContent =
+                  `IP: ${e.ip} (${e.country_name})`),
+                  (document.getElementById('flagIcon').src =
+                    `https://flagcdn.com/48x36/${e.country_code.toLowerCase()}.png`))
+              })
+              .catch(() => {
+                document.getElementById('ipText').textContent =
+                  'IP: Tidak dapat diambil'
+              }))
+        })
       </script>
-      
     </div>
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    });
+    <div id="kategori-aktif"></div>
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <script src="/ext/marquee-url.js"></script>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    });
+    <script defer src="/ext/iposbrowser.js"></script>
+  </body>
 </html>

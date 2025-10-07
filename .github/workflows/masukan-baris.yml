@@ -8,8 +8,8 @@ on:
         type: choice
         default: 'sesudah'
         options:
-        - sesudah
-        - sebelum
+          - sesudah
+          - sebelum
       target_string:
         description: 'Masukkan teks target (contoh: <body>, </body>)'
         required: true
@@ -57,7 +57,7 @@ jobs:
           echo "Folder Target: $DIRECTORY"
           echo "Posisi: $POSITION"
           echo "Target: $TARGET"
-          
+
           # MODIFIKASI: Perintah 'find' sekarang menggunakan ekstensi file yang dinamis
           if [[ "$POSITION" == "sesudah" ]]; then
             find "$DIRECTORY" -type f -name "*.$EXTENSION" -exec sed -i "s|$ESCAPED_TARGET|&\n$SENTENCE|" {} +
@@ -69,7 +69,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
+
           if ! git diff --quiet; then
             git add .
             git commit -m "CI: Auto-inject content into *.$EXTENSION files [skip ci]"
