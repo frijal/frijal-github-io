@@ -1,4 +1,4 @@
-       // Client Info Detection
+// Client Info Detection
         document.addEventListener('DOMContentLoaded', function () {
           // --- OS & Browser Detection ---
           const ua = navigator.userAgent
@@ -51,8 +51,11 @@
             .then((response) => response.json())
             .then((data) => {
               const ipInfoEl = document.getElementById('ip-info')
+              const countryFlagEl = document.getElementById('country-flag')
 
               const flagUrl = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`
+              countryFlagEl.src = flagUrl
+              countryFlagEl.alt = `Bendera ${data.country_name}`
 
               ipInfoEl.innerHTML = `<img id="country-flag" src="${flagUrl}" alt="Bendera ${data.country_name}"> ${data.ip} (${data.country_name})`
             })
@@ -60,3 +63,4 @@
               console.error('Error fetching IP info:', error)
               document.getElementById('ip-info').textContent =
                 'Gagal memuat info IP.'
+            })
