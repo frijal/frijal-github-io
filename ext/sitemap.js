@@ -73,11 +73,13 @@ const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
                         const color = categoryColors[simpleHash(cat) % categoryColors.length];
                         catDiv.style.setProperty('--category-color', color);
                         catDiv.innerHTML = `
-                          <div class="category-header">
-                            ${cat} <span class="badge">${grouped[cat].length}</span>
-                          </div>
-                          <div class="toc-list" style="display: none;"></div>
-                        `;
+  			<div class="category-content">
+			      <div class="category-header">
+		        ${cat} <span class="badge">${grouped[cat].length}</span>
+			      </div>
+			      <div class="toc-list" style="display: none;"></div>
+			  </div>
+			`;
                         const catList = catDiv.querySelector(".toc-list");
                         grouped[cat].forEach((item) => {
                             const el = document.createElement("div");
