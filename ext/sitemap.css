@@ -355,3 +355,25 @@ body.dark-mode #feed-link svg {
     /* Sembunyikan footer info di layar kecil agar tidak penuh */
     #footerInfo { display: none !important; }
 }
+
+       /* CSS opsional untuk menata tampilan info IP */
+        #footerInfo {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ddd;
+            font-family: sans-serif;
+            font-size: 0.9em;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .info-item svg {
+            width: 16px;
+            height: 16px;
+        }
