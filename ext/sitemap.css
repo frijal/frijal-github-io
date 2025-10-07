@@ -363,8 +363,6 @@ body.dark-mode #feed-link svg {
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-         /*   background-color: #f1f1f1; */
-         /*   border-top: 1px solid #ddd; */
             font-family: sans-serif;
             font-size: 0.9em;
         }
@@ -377,3 +375,41 @@ body.dark-mode #feed-link svg {
             width: 16px;
             height: 16px;
         }
+
+// ---------------------------
+// 4️⃣ CSS TAMBAHAN
+// ---------------------------
+const style = document.createElement("style");
+style.textContent = `
+#ipos-browser-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--text-color, #555);
+}
+.icon-hover {
+  transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.icon-hover:hover {
+  transform: scale(1.15) rotate(3deg);
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+}
+@media (prefers-color-scheme: dark) {
+  .icon-hover {
+    filter: brightness(1.1) contrast(1.05);
+  }
+  .icon-hover:hover {
+    filter: drop-shadow(0 0 8px rgba(0,255,255,0.4));
+  }
+}
+.responsive-icon { width: 24px; height: 24px; }
+@media (max-width: 600px) {
+  .responsive-icon { width: 16px; height: 16px; }
+  #ipos-browser-info { font-size: 0.8rem; }
+}
+`;
+document.head.appendChild(style);

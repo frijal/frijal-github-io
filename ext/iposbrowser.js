@@ -1,19 +1,92 @@
-// Aset Ikon SVG yang lebih baik dan dapat diwarnai dengan CSS
+// ============================================================
+// ICON RESMI BERWARNA + DARK/LIGHT MODE + HOVER + SKALA RESPONSIF
+// ============================================================
+
 const browserIcons = {
-    "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.49 5.85c.18.81-.31 1.83-1.12 2.37-1.16.78-2.61.94-3.59.62-.23-.07-.37-.11-.37-.11s.14.04.37.11c1.86.53 3.32-.73 3.79-1.92.51-1.28.1-2.62-.87-3.41-.9-.73-2.2-1.04-3.32-1.02-.3 0-.5.17-.43.44.11.41.29.83.47 1.23.29.64.66 1.25 1.1 1.83.82 1.1 2.02 1.63 3.58 1.86zM12 14.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>',
-    "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>',
-    "Edge": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4.5-9.5c0-2.48 2.02-4.5 4.5-4.5s4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5-4.5-2.02-4.5-4.5z"/></svg>',
-    "Safari": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9l10 5-5-10-5 5z"/></svg>',
-    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>'
+  "Firefox": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="firefoxGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="100%" stop-color="#FF2D55"/>
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="24" r="22" fill="url(#firefoxGradient)" />
+  <path fill="#fff" d="M33 14c-2-1-4-1-6 0-3 1-5 4-5 7 0 4 3 7 7 7 2 0 4-1 5-3 1-1 2-3 1-5-1-2-2-4-4-6z"/>
+</svg>
+  `,
+  "Chrome": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="22" fill="#DB4437"/>
+  <path fill="#0F9D58" d="M24 24h22A22 22 0 0 1 2 24h22z"/>
+  <path fill="#F4B400" d="M24 24L13 4a22 22 0 0 1 35 20H24z"/>
+  <circle cx="24" cy="24" r="7" fill="#4285F4"/>
+</svg>
+  `,
+  "Edge": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#0A84FF" d="M24 2a22 22 0 1 1 0 44 22 22 0 0 1 0-44z"/>
+  <path fill="#00C6FF" d="M14 24c0 6 4 10 10 10 3 0 5-2 5-4 0-3-4-3-7-3-3 0-6-1-8-3z"/>
+</svg>
+  `,
+  "Safari": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="22" fill="#0A84FF"/>
+  <polygon points="24,10 28,24 24,38 20,24" fill="#fff"/>
+</svg>
+  `,
+  "Unknown": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 24 24" fill="gray" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+           10-4.48 10-10S17.52 2 12 2zm-1 13h2v2h-2zm0-8h2v6h-2z"/>
+</svg>
+  `
 };
+
 const osIcons = {
-    "Windows": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2 3h9v9H2zm11 0h9v9h-9zM2 12h9v9H2zm11 0h9v9h-9z"/></svg>',
-    "macOS": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>',
-    "Linux": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-4-4H9V8h2v4zm4 0h-2V8h2v4z"/></svg>',
-    "Android": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12v20H6zM4 4h2v16H4zm16 0h-2v16h2z"/></svg>',
-    "iOS": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10v20H7zM5 4h2v16H5zm14 0h-2v16h2z"/></svg>',
-    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>'
+  "Windows": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="6" width="20" height="16" fill="#0078D7"/>
+  <rect x="2" y="26" width="20" height="16" fill="#0078D7"/>
+  <rect x="26" y="6" width="20" height="16" fill="#00A4EF"/>
+  <rect x="26" y="26" width="20" height="16" fill="#00A4EF"/>
+</svg>
+  `,
+  "macOS": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="22" fill="#000"/>
+  <path fill="#fff" d="M30 10c-2 0-4 1-5 3-1 2-1 4 1 6 1 1 3 2 5 2 2 0 4-1 5-2 1-2 1-4-1-6-1-2-3-3-5-3z"/>
+</svg>
+  `,
+  "Linux": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="22" fill="#FCC624"/>
+  <path fill="#000" d="M17 14h14v20H17z"/>
+  <circle cx="20" cy="18" r="2" fill="#fff"/>
+  <circle cx="28" cy="18" r="2" fill="#fff"/>
+</svg>
+  `,
+  "Android": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="28" height="28" rx="6" fill="#3DDC84"/>
+  <circle cx="18" cy="20" r="2" fill="#fff"/>
+  <circle cx="30" cy="20" r="2" fill="#fff"/>
+</svg>
+  `,
+  "iOS": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#000" d="M24 2C12 2 4 10 4 22c0 8 4 14 9 18s8 4 11 4c5 0 9-2 12-5 3-3 4-7 4-11 0-8-5-14-10-16-3-2-6-2-6-2z"/>
+</svg>
+  `,
+  "Unknown": `
+<svg class="icon-hover responsive-icon" viewBox="0 0 24 24" fill="gray" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+           10-4.48 10-10S17.52 2 12 2zm-1 13h2v2h-2zm0-8h2v6h-2z"/>
+</svg>
+  `
 };
+
+
 
 // --- Deteksi Browser ---
 function getBrowserInfo() {
@@ -64,7 +137,7 @@ async function renderClientInfo() {
     const countryCode = (locData.country_code || "??").toUpperCase();
     const flagEmoji = countryCode.split("").map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join("");
     
-    html += `<div class="info-item"><span>${locData.city}, ${locData.country_name} ${flagEmoji}</span></div>`;
+    html += `<div class="info-item"><span>${flagEmoji} ${locData.city}, ${locData.country_name}</span></div>`;
 
   } catch (err) {
     console.error("Gagal memuat info lokasi:", err);
