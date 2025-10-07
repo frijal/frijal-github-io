@@ -238,23 +238,7 @@ sudo dd if=linux.iso of=/dev/sdX bs=4M status=progress oflag=sync
                   } catch (t) {}
               }))
           })
-        </script>
-        <div class="info-box" id="infoBox">
-          <div class="info-item">
-            <img src="" id="browserIcon" alt="Browser Icon" />
-            <span id="browserText">Browser: ...</span>
-          </div>
-          <div class="info-item">
-            <img src="" id="osIcon" alt="OS Icon" />
-            <span id="osText">OS: ...</span>
-          </div>
-          <div class="info-item">
-            <img src="" id="flagIcon" alt="Country Flag" />
-            <span id="ipText">IP: ...</span>
-          </div>
-        </div>
-      </div>
-      <script>
+
         document.addEventListener(DOMContentLoaded, () => {
           let body = document.body,
             prefersDark = window.matchMedia(
