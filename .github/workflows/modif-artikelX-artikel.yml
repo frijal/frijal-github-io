@@ -73,18 +73,24 @@ jobs:
               sed -i '/<\/head>/i <link rel="stylesheet" href=\"/ext/marquee-url.css\">' "$file"
               echo "✅ Ditambahkan ext/marquee-url.css di $file"
             fi
-            if grep -qi 'related-marquee-section' "$file"; then
-              echo "ℹ️ Sudah ada skrip related di $file"
+            if grep -qi 'iposbrowser' "$file"; then
+              echo "ℹ️ Sudah ada ext/marquee-url.css di $file"
             else
-              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>' "$file"
-              echo "✅ Ditambahkan skrip related di $file"
-            fi
+              sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
+              echo "✅ Ditambahkan iposbrowser di $file"
+            fi                      
             if grep -qi 'search-floating-container' "$file"; then
               echo "ℹ️ Sudah ada kolom pencarian di $file"
             else
               sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
               echo "✅ Ditambahkan kolom pencarian di $file"
             fi
+            if grep -qi 'related-marquee-section' "$file"; then
+              echo "ℹ️ Sudah ada skrip related di $file"
+            else
+              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>' "$file"
+              echo "✅ Ditambahkan skrip related di $file"
+            fi            
           done
     
       # ===================================================================
