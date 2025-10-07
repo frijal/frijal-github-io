@@ -321,22 +321,7 @@
 
   <!-- Scripts: detect Browser/OS, lightbox, share links -->
   <script>
-    // Detect browser & OS
-    (function(){
-      const ua = navigator.userAgent.toLowerCase();
-      let b='Tidak diketahui', o='Tidak diketahui';
-      if(ua.includes('edg')) b='Microsoft Edge';
-      else if(ua.includes('chrome')) b='Google Chrome';
-      else if(ua.includes('safari')) b='Safari';
-      else if(ua.includes('firefox')) b='Mozilla Firefox';
-      if(ua.includes('windows')) o='Windows';
-      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
-      else if(ua.includes('android')) o='Android';
-      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
-      else if(ua.includes('linux')) o='Linux';
-      document.getElementById('browser').textContent='Browser: '+b;
-      document.getElementById('os').textContent='OS: '+o;
-    })();
+    
 
     // Lightbox gallery
     (function(){

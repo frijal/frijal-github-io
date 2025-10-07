@@ -1,238 +1,220 @@
 ========================================================
-Ditemukan di: canva-magic-studio-desain-ai.html
+Ditemukan di: balikpapan-1900-wajah-asli.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: chatgpt-asisten-virtual-umkm.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: copy-ai-konten-otomatis.html
+Ditemukan di: bsd-kisah-berkeley.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: faq-ai-umkm.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: gemini-asisten-virtual-umkm.html
+Ditemukan di: dna-muhammadiyah.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: grammarly-ai-writing-assistant.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: jasper-ai-content-writer.html
+Ditemukan di: istighfar-kunci-rezeki.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: kesimpulan-ai-umkm.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: lumen5-video-maker-ai.html
+Ditemukan di: kesultanan-utsmaniyah.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: notion-ai-productivity-partner.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: pictory-ai-video-marketing.html
+Ditemukan di: linux-tanpa-terminal.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
-
-========================================================
-Ditemukan di: quickbooks-ai-keuangan-umkm.html
-========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: tidio-chatbot-ai.html
+Ditemukan di: menepis-gelap-menyambut-terang.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
 ========================================================
-Ditemukan di: tren-masa-depan-ai-umkm.html
+Ditemukan di: mx-linux-25-infinity-beta.html
 ========================================================
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
-        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
-        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+========================================================
+Ditemukan di: perniagaan-paling-jitu.html
+========================================================
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
+
+========================================================
+Ditemukan di: pusat-instalasi-linux.html
+========================================================
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
+
+========================================================
+Ditemukan di: wine-bukan-emulator.html
+========================================================
+// Detect browser & OS
+    (function(){
+      const ua = navigator.userAgent.toLowerCase();
+      let b='Tidak diketahui', o='Tidak diketahui';
+      if(ua.includes('edg')) b='Microsoft Edge';
+      else if(ua.includes('chrome')) b='Google Chrome';
+      else if(ua.includes('safari')) b='Safari';
+      else if(ua.includes('firefox')) b='Mozilla Firefox';
+      if(ua.includes('windows')) o='Windows';
+      else if(ua.includes('mac os')||ua.includes('macintosh')) o='macOS';
+      else if(ua.includes('android')) o='Android';
+      else if(ua.includes('iphone')||ua.includes('ipad')) o='iOS';
+      else if(ua.includes('linux')) o='Linux';
+      document.getElementById('browser').textContent='Browser: '+b;
+      document.getElementById('os').textContent='OS: '+o;
+    })();
 

@@ -455,28 +455,7 @@ Log untuk file: contoh.html
             }
         }
 
-        const ua = navigator.userAgent;
-        let browser = "Lainnya", os = "Lainnya", browserIcon = "🌐", osIcon = "💻";
-        if (ua.includes("Firefox")) { browser = "Firefox"; browserIcon = "🦊"; }
-        else if (ua.includes("Edg")) { browser = "Edge"; browserIcon = "엣"; }
-        else if (ua.includes("Chrome")) { browser = "Chrome"; browserIcon = "🎨"; }
-        else if (ua.includes("Safari")) { browser = "Safari"; browserIcon = "🧭"; }
-        if (ua.includes("Win")) { os = "Windows"; osIcon = "🪟"; }
-        else if (ua.includes("Mac")) { os = "macOS"; osIcon = "🍏"; }
-        else if (ua.includes("Linux")) { os = "Linux"; osIcon = "🐧"; }
-        else if (ua.includes("Android")) { os = "Android"; osIcon = "🤖"; }
-        else if (/iPad|iPhone|iPod/.test(ua)) { os = "iOS"; osIcon = "📱"; }
-        document.getElementById('browser-info').innerHTML = `<span class="icon">${browserIcon}</span> ${browser}`;
-        document.getElementById('os-info').innerHTML = `<span class="icon">${osIcon}</span> ${os}`;
-
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then(data => {
-                const flag = data.country_code ? [...data.country_code.toUpperCase()].map(char => String.fromCodePoint(127397 + char.charCodeAt())).join('') : '🌏';
-                document.getElementById('ip-info').innerHTML = `<span class="icon">${flag}</span> ${data.city || 'Lokasi'}, ${data.country_name || 'Tidak diketahui'}`;
-            }).catch(() => {
-                document.getElementById('ip-info').innerHTML = `<span class="icon">🌏</span> Lokasi tidak diketahui`;
-            });
+        
 
     });
 
