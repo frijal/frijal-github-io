@@ -1,53 +1,50 @@
-// Info chips: Browser, OS, IP, Country + flag
-    (function() {
-      const chipBrowser = document.getElementById('chip-browser');
-      const chipOS = document.getElementById('chip-os');
-      const chipIP = document.getElementById('chip-ip');
-      const chipCountry = document.getElementById('chip-country');
+      // --- Environment Info Logic ---
+      function detectEnvironment() {
+        const ua = navigator.userAgent;
+        let browser = 'Browser Lain', browserIcon = '🌐';
+        let os = 'OS Lain', osIcon = '💻';
 
-      // Browser & OS detection (heuristic)
-      const ua = navigator.userAgent;
-      const platform = navigator.platform || 'unknown';
-      const isEdge = ua.includes('Edg/');
-      const isChrome = ua.includes('Chrome') && !ua.includes('Chromium') && !isEdge;
-      const isFirefox = ua.includes('Firefox');
-      const isSafari = ua.includes('Safari') && !ua.includes('Chrome');
-      const browser =
-        (isEdge && 'Microsoft Edge') ||
-        (isChrome && 'Google Chrome') ||
-        (isFirefox && 'Mozilla Firefox') ||
-        (isSafari && 'Safari') ||
-        'Browser tidak dikenal';
-      chipBrowser.textContent = `🧭 Browser: ${browser}`;
+        // Detect OS
+        if (/Windows/.test(ua))   { os = 'Windows'; osIcon = '🪟'; }
+        else if (/Macintosh|Mac OS X/.test(ua)) { os = 'macOS'; osIcon = ''; }
+        else if (/Android/.test(ua))  { os = 'Android'; osIcon = '🤖'; }
+        else if (/Linux/.test(ua))    { os = 'Linux'; osIcon = '🐧'; }
+        else if (/iPhone|iPad|iPod/.test(ua)) { os = 'iOS'; osIcon = '📱'; }
 
-      const os =
-        (/Windows/i.test(ua) && 'Windows') ||
-        (/Mac OS X|Macintosh/i.test(ua) && 'macOS') ||
-        (/Android/i.test(ua) && 'Android') ||
-        (/iPhone|iPad|iOS/i.test(ua) && 'iOS/iPadOS') ||
-        (/Linux/i.test(ua) && 'Linux') ||
-        platform;
-      chipOS.textContent = `💻 OS: ${os}`;
+        // Detect Browser
+        if (/Edg/.test(ua))       { browser = 'Edge'; browserIcon = '엣'; }
+        else if (/Firefox/.test(ua)) { browser = 'Firefox'; browserIcon = '🦊'; }
+        else if (/Chrome/.test(ua) && !/Chromium/.test(ua)) { browser = 'Chrome'; browserIcon = '🌈'; }
+        else if (/Safari/.test(ua) && !/Chrome/.test(ua)) { browser = 'Safari'; browserIcon = '🧭'; }
+        else if (/OPR/.test(ua)) { browser = 'Opera'; browserIcon = '🅾️'; }
 
-      // IP & Country via ipapi.co
-      const setCountryFlag = (code, name) => {
-        if (!code) {
-          chipCountry.textContent = '🏳️ Negara: Tidak diketahui';
-          return;
-        }
-        const cc = (code.length === 2 ? code : (name || '')).toLowerCase();
-        const flagUrl = `https://flagcdn.com/24x18/${cc}.png`;
-        chipCountry.innerHTML = `🏳️ Negara: <img src="${flagUrl}" alt="${name}" width="24" height="18" style="vertical-align:middle;border-radius:3px;border:1px solid #223;"> ${name || code}`;
-      };
+        document.getElementById('browser').textContent = browser;
+        document.getElementById('browser_icon').textContent = browserIcon;
+        document.getElementById('os').textContent = os;
+        document.getElementById('os_icon').textContent = osIcon;
+      }
+      
+      async function fetchLocationInfo() {
+          try {
+              // API ip-api.com langsung memberikan info lokasi dari IP publik kita
+              const response = await fetch('http://ip-api.com/json/?fields=status,message,country,countryCode,city,query');
+              const data = await response.json();
 
-      fetch('https://ipapi.co/json/', { mode: 'cors' })
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then(data => {
-          chipIP.textContent = `🌐 IP: ${data.ip || 'Tidak diketahui'}`;
-          setCountryFlag(data.country || data.country_code, data.country_name || data.country);
-        })
-        .catch(() => {
-          chipIP.textContent = '🌐 IP: Tidak diketahui';
-          setCountryFlag(null, null);
-        });
-    })();
+              if (data.status === 'success') {
+                  const countryCode = data.countryCode;
+                  const flag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
+                  
+                  document.getElementById('loc').textContent = `${data.city}, ${data.country} (${data.query})`;
+                  document.getElementById('flag').textContent = flag;
+              } else {
+                  document.getElementById('loc').textContent = 'Gagal mendeteksi lokasi.';
+              }
+          } catch (error) {
+              console.error('Error fetching location:', error);
+              document.getElementById('loc').textContent = 'Tidak bisa terhubung ke server lokasi.';
+          }
+      }
+
+      // Run detection functions
+      detectEnvironment();
+      fetchLocationInfo();
