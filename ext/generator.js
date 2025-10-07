@@ -101,7 +101,7 @@ async function generateCategoryPages(groupedData) {
 
             let pageContent = templateContent
                 .replace(/%%TITLE%%/g, noEmoji) 
-                .replace(/%%DESCRIPTION%%/g, `Arsip artikel untuk kategori ${noEmoji}`)
+                .replace(/%%DESCRIPTION%%/g, `topik ${noEmoji}`)
                 .replace(/%%CANONICAL_URL%%/g, canonicalUrl)
                 .replace(/%%CATEGORY_NAME%%/g, categoryName)
                 .replace(/%%ICON%%/g, icon);
