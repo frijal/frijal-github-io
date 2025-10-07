@@ -298,35 +298,7 @@
         });
     });
 
-    // Info browser, OS, lokasi IP
-    async function loadInfo() {
-        const infoBox = document.querySelector(".info-box");
-        let ua = navigator.userAgent;
-        let browser = "Unknown", os = "Unknown";
-
-        if (ua.includes("Firefox")) browser = "Firefox";
-        else if (ua.includes("Chrome")) browser = "Chrome";
-        else if (ua.includes("Safari")) browser = "Safari";
-
-        if (ua.includes("Windows")) os = "Windows";
-        else if (ua.includes("Linux")) os = "Linux";
-        else if (ua.includes("Android")) os = "Android";
-        else if (ua.includes("Mac")) os = "MacOS";
-
-        let ipInfo = "Lokasi tidak diketahui";
-        try {
-            let res = await fetch("https://ipapi.co/json/");
-            let data = await res.json();
-            if (data.city && data.country_name && data.country_code) {
-                ipInfo = `${data.city}, ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="flag">`;
-            }
-        } catch (e) {
-            console.error("Failed to fetch IP info:", e);
-        }
-
-        infoBox.innerHTML = `🖥️ ${os}<br>🌐 ${browser}<br>📍 ${ipInfo}`;
-    }
-    loadInfo();
+    
 </script>
 
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v17.0"></script>

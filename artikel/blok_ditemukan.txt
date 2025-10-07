@@ -1,3 +1,6 @@
+========================================================
+Ditemukan di: bukalapak-berbagi-2017.html
+========================================================
 // Info browser, OS, lokasi IP
     async function loadInfo() {
         const infoBox = document.querySelector(".info-box");
@@ -27,3 +30,4 @@
         infoBox.innerHTML = `🖥️ ${os}<br>🌐 ${browser}<br>📍 ${ipInfo}`;
     }
     loadInfo();
+
