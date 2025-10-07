@@ -181,6 +181,7 @@
     <a href="https://frijal.github.io" id="home-btn" class="floating-btn" title="Beranda" aria-label="Beranda">🏠</a>
 
     <div id="fb-root"></div>
+});
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="aBcDeFgH"></script>
 
     <main class="container">
@@ -289,9 +290,12 @@ document.addEventListener(DOMContentLoaded, () => {
         const osInfo=getOSInfo(),browserInfo=getBrowserInfo();document.getElementById('os-info').innerHTML=`${osInfo.icon} ${osInfo.name}`;document.getElementById('browser-info').innerHTML=`${browserInfo.icon} ${browserInfo.name}`;
         fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{const flag=`https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;document.getElementById('ip-info').innerHTML=`<img src="${flag}" alt="${data.country_name}" width="20"> ${data.city||'Lokasi tidak diketahui'}, ${data.country_name}`}).catch(()=>{document.getElementById('ip-info').textContent='Lokasi tidak terdeteksi'});
     });
+});
     </script>
+});
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+});
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

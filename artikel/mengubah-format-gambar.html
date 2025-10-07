@@ -155,6 +155,7 @@
     <div style="margin-top:18px">
       <div id="fb-root"></div>
       <script async defer crossorigin="anonymous"
+});
         src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
       <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
       <script>
@@ -165,6 +166,7 @@ document.addEventListener(DOMContentLoaded, () => {
         window.fbAsyncInit = function() {
           if (typeof FB !== 'undefined') { try { FB.XFBML.parse(); } catch(e) {} }
         }
+});
       </script>
     </div>
 
@@ -182,7 +184,9 @@ document.addEventListener(DOMContentLoaded, () => {
   </footer>
 
   <!-- Prism.js -->
+});
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+});
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
   <!-- Copy -->
@@ -192,6 +196,7 @@ document.addEventListener(DOMContentLoaded, () => {
       navigator.clipboard.writeText("mogrify -format jpg *.png");
       alert("Perintah disalin!");
     }
+});
   </script>
 
   <!-- Browser & OS Info -->
@@ -209,6 +214,7 @@ document.addEventListener(DOMContentLoaded, () => {
     else if (/Mac/.test(ua)) os = "MacOS";
 
     document.getElementById("info-box").innerHTML = `<b>Browser:</b> ${browser}<br><b>OS:</b> ${os}`;
+});
   </script>
 
   <!-- IP & Country -->
@@ -218,16 +224,22 @@ document.addEventListener(DOMContentLoaded, () => {
       document.getElementById("ip-box").innerHTML =
         `<b>IP Anda:</b> ${data.ip}<br><b>Negara:</b> <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}`;
     });
+});
   </script>
 
   <!-- JSON-LD Article + Breadcrumb + FAQ -->
+});
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Mengubah Format Gambar Massal dengan ImageMagick","author":{"@type":"Person","name":"Pelan Kiri Rijal","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},"publisher":{"@type":"Organization","name":"Panduan Linux","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},"mainEntityOfPage":"https://frijal.github.io/artikel/mengubah-format-gambar.html","datePublished":"2025-09-15","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4plrIZN7XWwHE-H8sc81qshP12EzBLwgat2ZWKHBoBr3DnYGwBeUjAlBkFfK_H1ImgnfI0STp4cgiFTsEKoDg3ye8NGElqV6GJJIKltBrx1iJm5xXTOug8bp1-QzUlRXI9kMEvkjJXH2q/s1600/Logo_Imagemagick.png"}</script>
 
+});
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/mengubah-format-gambar.html","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},{"@type":"ListItem","position":3,"name":"Mengubah Format Gambar","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"}],"image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"}</script>
 
+});
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa fungsi perintah mogrify di ImageMagick?","acceptedAnswer":{"@type":"Answer","text":"Perintah mogrify digunakan untuk memodifikasi banyak gambar sekaligus, termasuk mengubah format, ukuran, atau kompresi.","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},"image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},{"@type":"Question","name":"Apakah mogrify membuat file baru?","acceptedAnswer":{"@type":"Answer","text":"Tidak, mogrify akan menimpa file asli. Jika ingin menyimpan file baru, gunakan convert.","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},"image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},{"@type":"Question","name":"Format gambar apa saja yang didukung?","acceptedAnswer":{"@type":"Answer","text":"ImageMagick mendukung berbagai format populer seperti JPG, PNG, GIF, TIFF, WebP, dan lainnya.","image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"},"image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"}],"image":"https://frijal.github.io/artikel/mengubah-format-gambar.jpg"}</script>
+});
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+});
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -412,10 +412,13 @@ document.addEventListener(DOMContentLoaded, () => {
       lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
       document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') move(-1); if(e.key==='ArrowRight') move(1); });
     })();
+});
   </script>
 
   <!-- Facebook SDK + Comments -->
+});
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
+});
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
 document.addEventListener(DOMContentLoaded, () => {
 
@@ -427,12 +430,16 @@ document.addEventListener(DOMContentLoaded, () => {
       ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));
       document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))
     });
+});
   </script>
 
   <!-- JSON-LD -->
+});
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicComposition","name":"Berita Cuaca","composer":{"@type":"Person","name":"Boomerang","image":"https://frijal.github.io/artikel/boomerang-berita-cuaca.jpg"},"inLanguage":"id","lyricist":{"@type":"Person","name":"Boomerang","image":"https://frijal.github.io/artikel/boomerang-berita-cuaca.jpg"},"publisher":{"@type":"Organization","name":"frijal.github.io","image":"https://frijal.github.io/artikel/boomerang-berita-cuaca.jpg"},"sameAs":"https://www.youtube.com/watch?v=SATDJMRRYx8","image":"https://frijal.github.io/artikel/boomerang-berita-cuaca.jpg"}</script>
+});
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+});
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
