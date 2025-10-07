@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart</title>
-  <meta name="description" content="Cheat sheet cara refresh GitHub Codespaces langsung dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.">
+  <meta name="description" content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.">
 
   <link rel="canonical" href="https://frijal.github.io/artikel/refresh-codespaces-browser.html">
   <meta name="robots" content="index,follow">
@@ -13,46 +13,69 @@
   <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Frijal Artikel">
   <meta property="og:url" content="https://frijal.github.io/artikel/refresh-codespaces-browser.html">
   <meta property="og:title" content="Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart">
-  <meta property="og:description" content="Langkah di VS Code web: Restart, Rebuild, Full Rebuild. Bedanya apa, kapan dipakai, dan tips praktis.">
+  <meta property="og:description" content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png">
   <meta property="og:image:alt" content="Ilustrasi rebuild GitHub Codespaces di browser">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart">
-  <meta name="twitter:description" content="Langkah di VS Code web: Restart, Rebuild, Full Rebuild. Bedanya apa, kapan dipakai, dan tips praktis.">
+  <meta name="twitter:description" content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png">
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart","description":"Cheat sheet cara refresh GitHub Codespaces langsung dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png"],"author":{"@type":"Person","name":"Frijal","image":"https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg"},"publisher":{"@type":"Organization","name":"Frijal Artikel","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg"},"image":"https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg"},"datePublished":"2025-10-06T21:50:00+08:00","dateModified":"2025-10-06T21:50:00+08:00","mainEntityOfPage":"https://frijal.github.io/artikel/refresh-codespaces-browser.html","inLanguage":"id-ID"}</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart",
+    "description": "Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.",
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png",
+    "author": {
+      "@type": "Person",
+      "name": "Frijal",
+      "image": "https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Frijal Artikel",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://frijal.github.io/favicon.ico"
+      }
+    },
+    "datePublished": "2025-10-06T21:50:00+08:00",
+    "dateModified": "2025-10-06T21:50:00+08:00",
+    "mainEntityOfPage": "https://frijal.github.io/artikel/refresh-codespaces-browser.html",
+    "inLanguage": "id-ID"
+  }
+  </script>
+
+  <link rel="stylesheet" href="/ext/marquee-url.css">
 
   <style>
-    body {margin:0;font:16px/1.7 system-ui;background:#0b0f14;color:#e6edf3}
-    main {max-width:960px;margin:auto;padding:20px}
-    h1,h2,h3 {color:#00d1b2}
-    .gallery img {width:100%;border-radius:12px;cursor:zoom-in}
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:9999}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:90%;max-height:90%}
-    .share a{margin-right:10px;color:#e6edf3;text-decoration:none}
-    footer{padding:20px;text-align:center;color:#9fb0c0}
-    table{width:100%;border-collapse:collapse;margin:20px 0}
-    th,td{border:1px solid #333;padding:8px}
-    th{background:#111}
+    body {margin: 0; font: 16px/1.7 system-ui; background: #0b0f14; color: #e6edf3;}
+    main {max-width: 960px; margin: auto; padding: 20px;}
+    h1, h2, h3 {color: #00d1b2;}
+    figure {margin: 0;}
+    kbd {background-color: #333; border-radius: 3px; border: 1px solid #555; padding: 2px 4px; font-size: 0.9em;}
+    .gallery img {width: 100%; border-radius: 12px; cursor: zoom-in;}
+    .lightbox {position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; z-index: 9999;}
+    .lightbox.open {display: flex;}
+    .lightbox img {max-width: 90%; max-height: 90%;}
+    .share a {margin-right: 10px; color: #e6edf3; text-decoration: none;}
+    footer {padding: 20px; text-align: center; color: #9fb0c0;}
+    table {width: 100%; border-collapse: collapse; margin: 20px 0;}
+    th, td {border: 1px solid #333; padding: 8px; text-align: left;}
+    th {background: #111;}
   </style>
-<meta itemprop="image" content="https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-10-07T00:02:59.222+00:00">
 </head>
 <body>
   <main>
     <h1>Refresh GitHub Codespaces dari browser</h1>
-<div id="iposbrowser"></div>
+    <div id="iposbrowser"></div>
     <p>Rebuild, full rebuild, restart, atau stop-start—kapan pakai yang mana. Artikel ini menjelaskan langkah-langkah di VS Code web, plus diagram alur singkat biar gampang diingat.</p>
 
     <h2>Cara Rebuild Codespace dari Browser</h2>
@@ -65,9 +88,25 @@
 
     <h2>Perbedaan Rebuild vs Full Rebuild</h2>
     <table>
-      <tr><th>Mode</th><th>Apa yang dilakukan</th><th>Kapan dipakai</th></tr>
-      <tr><td>Rebuild</td><td>Pakai cache image lama</td><td>Perubahan kecil, refresh ringan</td></tr>
-      <tr><td>Full Rebuild</td><td>Hapus cache, build ulang dari nol</td><td>Error aneh, dependency rusak, ubah konfigurasi besar</td></tr>
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Apa yang dilakukan</th>
+          <th>Kapan dipakai</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rebuild</td>
+          <td>Pakai cache image lama</td>
+          <td>Perubahan kecil, refresh ringan</td>
+        </tr>
+        <tr>
+          <td>Full Rebuild</td>
+          <td>Hapus cache, build ulang dari nol</td>
+          <td>Error aneh, dependency rusak, ubah konfigurasi besar</td>
+        </tr>
+      </tbody>
     </table>
 
     <h2>Tips Praktis</h2>
@@ -94,23 +133,48 @@
   </main>
 
   <footer>
-    🄯 2025 Frijal Artikel • Dark-mode • Responsif • SEO siap
+    &copy; 2025 Frijal Artikel • Dark-mode • Responsif • SEO siap
   </footer>
 
-  <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" alt="Tampilan gambar diperbesar">
+  </div>
 
+  <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023"></script>
+  
   <script>
-document.addEventListener(DOMContentLoaded, () => {
-    const imgs=document.querySelectorAll('.gallery img');
-    const lb=document.getElementById('lightbox');
-    const lbImg=document.getElementById('lightbox-img');
-    imgs.forEach(img=>img.addEventListener('click',()=>{lbImg.src=img.src;lb.classList.add('open');}));
-    lb.addEventListener('click',()=>lb.classList.remove('open'));
+    document.addEventListener('DOMContentLoaded', () => {
+      const imgs = document.querySelectorAll('.gallery img');
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+
+      imgs.forEach(img => {
+        img.addEventListener('click', () => {
+          lbImg.src = img.src;
+          lb.classList.add('open');
+        });
+      });
+
+      lb.addEventListener('click', () => {
+        lb.classList.remove('open');
+      });
+    });
   </script>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<script defer src="/ext/iposbrowser.js"></script>
+
+  <section id="related-marquee-section">
+    <div id="related-marquee-container"></div>
+  </section>
+  <script defer src="/ext/marquee-url.js"></script>
+
+  <div id="kategori-aktif"></div>
+  
+  <div class="search-floating-container">
+    <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off">
+    <span id="floatingSearchClear" class="clear-button">&times;</span>
+    <div id="floatingSearchResults" class="floating-results-container"></div>
+  </div>
+  
+  <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-
