@@ -1,42 +1,19 @@
 ========================================================
-Ditemukan di: hijrah-habasyah.html
+Ditemukan di: qordoba-kilau-peradaban-andalusia.html
 ========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
-
-========================================================
-Ditemukan di: hittin.html
-========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
-
-========================================================
-Ditemukan di: nabi-ilyasa.html
-========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
-
-========================================================
-Ditemukan di: nabi-zakaria.html
-========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
-
-========================================================
-Ditemukan di: umar-bin-khattab.html
-========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
-
-========================================================
-Ditemukan di: utsman-bin-affan.html
-========================================================
-      <div id="browser-info" class="browser-info">
-        ⏳ Mengambil info browser & lokasi...
-      </div>
+<!-- System info -->
+        <div class="sysinfo" aria-label="Info sistem dan lokasi">
+          <div class="chip">
+            <span class="ico" aria-hidden="true">🌐</span
+            ><span id="browser-info" aria-live="polite">Memuat...</span>
+          </div>
+          <div class="chip">
+            <span class="ico" aria-hidden="true">💻</span
+            ><span id="os-info" aria-live="polite">Memuat...</span>
+          </div>
+          <div class="chip">
+            <span class="ico" aria-hidden="true">📍</span
+            ><span id="location-info" aria-live="polite">Memuat lokasi...</span>
+          </div>
+        </div>
 
