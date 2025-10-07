@@ -189,58 +189,6 @@ document.head.appendChild(style);
 // ============================================================
 // Ikon Browser & OS
 // ============================================================
-
-const browserIcons = {
-  "Firefox": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="url(#firefoxGradient)"/>
-  <defs>
-    <radialGradient id="firefoxGradient" cx="35%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#ffb300"/>
-      <stop offset="50%" stop-color="#ff5a00"/>
-      <stop offset="100%" stop-color="#d500f9"/>
-    </radialGradient>
-  </defs>
-  <path d="M44 18c-6-4-14 0-16 7-2 7 3 14 10 15 6 1 12-4 12-10 0-5-2-9-6-12z" fill="#fff" opacity="0.9"/>
-</svg>`,
-  "Chrome": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#fff"/>
-  <path fill="#EA4335" d="M32 32L12 12a30 30 0 0 1 40-2L32 32z"/>
-  <path fill="#FBBC05" d="M32 32h30a30 30 0 0 0-10-22L32 32z"/>
-  <path fill="#34A853" d="M32 32L12 52a30 30 0 0 0 40-2L32 32z"/>
-  <circle cx="32" cy="32" r="10" fill="#4285F4"/>
-</svg>`,
-  "Edge": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <defs>
-    <radialGradient id="edgeGradient" cx="30%" cy="30%" r="70%">
-      <stop offset="0%" stop-color="#00C6FF"/>
-      <stop offset="100%" stop-color="#0078D7"/>
-    </radialGradient>
-  </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#edgeGradient)"/>
-  <path d="M20 34c2 8 10 12 18 10 6-2 8-8 4-12-3-3-8-3-12-2-4 1-7 2-10 4z" fill="#fff" opacity="0.9"/>
-</svg>`,
-  "Safari": `
-<svg class="icon responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="url(#safariGradient)"/>
-  <defs>
-    <radialGradient id="safariGradient" cx="40%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#40a9ff"/>
-      <stop offset="100%" stop-color="#0077b6"/>
-    </radialGradient>
-  </defs>
-  <circle cx="32" cy="32" r="20" fill="none" stroke="#fff" stroke-width="2"/>
-  <polygon points="32,14 38,32 32,50 26,32" fill="#fff"/>
-</svg>`,
-  "Unknown": `
-<svg class="icon responsive-icon" viewBox="0 0 48 48">
-  <circle cx="24" cy="24" r="20" fill="#bbb"/>
-  <text x="24" y="29" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
-</svg>`
-};
-
 const browserIcons = {
   "Firefox": `
 <svg class="icon responsive-icon" viewBox="0 0 100 24">
