@@ -1,22 +1,23 @@
-// Fetch public IP + country flag using public API (client-side)
-    (function fetchIp(){
-      // ipapi.co JSON endpoint (no key, simple)
-      fetch('https://ipapi.co/json/')
-        .then(r=>r.json())
-        .then(data=>{
-          const ip = data.ip || '—';
-          const country = data.city || data.country || '';
-          const flag = data.country_code ? `https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png` : '';
-          document.querySelector('#ip-info span').textContent = ip + (country? (' - ' + country): '');
-          if(flag){
-            document.getElementById('flag').src = flag;
-            document.getElementById('flag').alt = data.country_name || data.country_code;
-          }
-          // Update structured data with geo
-          window.__clientLocation = {ip, country, countryCode: data.country_code};
-          generateJsonLd();
-        }).catch(err=>{
-          document.querySelector('#ip-info span').textContent = 'Gagal ambil IP publik';
-          generateJsonLd();
-        });
-    })();
+fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ipAddress = data.ip;
+                    fetch(`https://ipapi.co/${ipAddress}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.city && data.country_name && data.country_code) {
+                                const flag = data.country_code.toLowerCase();
+                                document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: ${data.city}, ${data.country_name} <img src="https://flagcdn.com/16x12/${flag}.png" alt="${data.country_name} flag" class="inline-block ml-1">`;
+                            } else {
+                                document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Alamat IP Anda adalah ${ipAddress}`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching IP details:', error);
+                            document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Gagal mendapatkan info lokasi.`;
+                        });
+                })
+                .catch(error => {
+                    console.error('Error fetching IP:', error);
+                    document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Gagal mendeteksi.`;
+                });

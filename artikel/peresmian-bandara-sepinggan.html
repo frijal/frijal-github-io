@@ -316,49 +316,7 @@
             }
         };
 
-        // Mendeteksi Info Browser, OS, dan IP
-        document.addEventListener('DOMContentLoaded', () => {
-            // OS & Browser
-            const osInfo = document.getElementById('os-info');
-            const browserInfo = document.getElementById('browser-info');
-            const userAgent = navigator.userAgent;
-
-            if (userAgent.includes('Win')) osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Windows';
-            else if (userAgent.includes('Mac')) osInfo.innerHTML = '<strong>Sistem Operasi</strong>: macOS';
-            else if (userAgent.includes('Linux')) osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Linux';
-            else if (userAgent.includes('Android')) osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Android';
-            else osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Lainnya';
-
-            if (userAgent.includes('Chrome')) browserInfo.innerHTML = '<strong>Browser</strong>: Chrome';
-            else if (userAgent.includes('Firefox')) browserInfo.innerHTML = '<strong>Browser</strong>: Firefox';
-            else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) browserInfo.innerHTML = '<strong>Browser</strong>: Safari';
-            else if (userAgent.includes('Edge')) browserInfo.innerHTML = '<strong>Browser</strong>: Edge';
-            else browserInfo.innerHTML = '<strong>Browser</strong>: Lainnya';
-
-            // Lokasi IP
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    const ipAddress = data.ip;
-                    fetch(`https://ipapi.co/${ipAddress}/json/`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.city && data.country_name && data.country_code) {
-                                const flag = data.country_code.toLowerCase();
-                                document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: ${data.city}, ${data.country_name} <img src="https://flagcdn.com/16x12/${flag}.png" alt="${data.country_name} flag" class="inline-block ml-1">`;
-                            } else {
-                                document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Alamat IP Anda adalah ${ipAddress}`;
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching IP details:', error);
-                            document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Gagal mendapatkan info lokasi.`;
-                        });
-                })
-                .catch(error => {
-                    console.error('Error fetching IP:', error);
-                    document.getElementById('ip-info').innerHTML = `<strong>Lokasi IP</strong>: Gagal mendeteksi.`;
-                });
+        
 
             // Social Sharing
             const pageUrl = encodeURIComponent(window.location.href);
