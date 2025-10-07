@@ -44,7 +44,6 @@
             color: var(--text-light);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
-            /* Beri ruang di atas untuk sticky header */
             padding-top: 80px; 
         }
 
@@ -59,7 +58,6 @@
             padding: 1rem 1.5rem 4rem;
         }
 
-        /* ===== PERUBAHAN: STICKY CONTROLS ===== */
         .sticky-controls {
             position: sticky;
             top: 0;
@@ -68,7 +66,6 @@
             border-bottom: 1px solid var(--border-light);
             padding: 1rem 1.5rem;
             width: 100%;
-            /* Atur ulang padding body karena sticky header sekarang punya padding sendiri */
             margin-bottom: 1.5rem;
         }
         body.dark-mode .sticky-controls {
@@ -91,7 +88,6 @@
         body.dark-mode .title-block p { color: var(--text-muted-dark); }
         #search-wrapper { flex-grow: 1; max-width: 400px; }
         
-        /* Pindahkan controls ke bawah search bar */
         .controls {
             display: flex;
             justify-content: space-between;
@@ -114,7 +110,6 @@
         #tocToggle:hover { background-color: var(--hover-light); }
         body.dark-mode #tocToggle:hover { background-color: var(--hover-dark); }
         
-        /* Dark Mode Switch */
         .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; inset: 0; background-color: #ccc; border-radius: 26px; transition: .4s; }
@@ -124,7 +119,6 @@
         .switch-label { display: flex; align-items: center; gap: 10px; color: var(--text-muted-light); }
         body.dark-mode .switch-label { color: var(--text-muted-dark); }
 
-        /* Search Input */
         #search {
             width: 100%;
             padding: 10px 40px 10px 15px;
@@ -152,7 +146,6 @@
         }
         body.dark-mode #clearSearch { color: var(--text-muted-dark); }
 
-        /* Marquee */
         #marquee {
             width: 100%; overflow: hidden; background-color: var(--surface-light);
             border: 1px solid var(--border-light); border-radius: 8px;
@@ -171,7 +164,6 @@
         #marquee-content a:hover { color: var(--accent-color); text-decoration: underline; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
-        /* TOC Container (Tidak berubah banyak) */
         #toc { display: flex; flex-direction: column; gap: 0.75rem; }
         .category {
             border: 1px solid var(--border-light);
@@ -200,20 +192,38 @@
         .toc-item:hover { background-color: var(--hover-light); }
         body.dark-mode .toc-item:hover { background-color: var(--hover-dark); }
         
-        .toc-title { width: 100%; }
-        .toc-item a {
-            color: var(--text-light); text-decoration: none;
-            display: block; margin-bottom: 0.25rem;
+        /* ===== PERUBAHAN: Tata Letak Inline untuk Judul, Status, Tanggal ===== */
+        .toc-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* Jarak antar elemen */
+            width: 100%;
+            flex-wrap: wrap; /* Agar rapi di layar kecil */
         }
-        body.dark-mode .toc-item a { color: var(--text-dark); }
-        .toc-item a:hover { color: var(--accent-color); }
-        .toc-item a.visited { color: var(--text-muted-light); opacity: 0.8; }
-        body.dark-mode .toc-item a.visited { color: var(--text-muted-dark); }
+        .toc-title a {
+            color: var(--text-light);
+            text-decoration: none;
+            flex-grow: 1; /* Judul mengambil sisa ruang */
+            margin-right: auto; /* Mendorong status & tanggal ke kanan */
+        }
+        body.dark-mode .toc-title a { color: var(--text-dark); }
+        .toc-title a:hover { color: var(--accent-color); }
+        .toc-title a.visited { color: var(--text-muted-light); opacity: 0.8; }
+        body.dark-mode .toc-title a.visited { color: var(--text-muted-dark); }
+        .toc-date {
+            font-size: 0.8rem;
+            color: var(--text-muted-light);
+            white-space: nowrap; /* Mencegah tanggal terpotong */
+            font-family: monospace;
+        }
+        body.dark-mode .toc-date { color: var(--text-muted-dark); }
+
 
         /* Status Labels */
         .label-visited, .label-new {
             font-size: 0.75rem; padding: 0.1rem 0.5rem;
             border-radius: 1rem; font-weight: 500;
+            white-space: nowrap; /* Mencegah label terpotong */
         }
         .label-visited { color: #1a7f37; background-color: #dafbe1; }
         .label-new { color: #57606a; background-color: #f6f8fa; border: 1px solid #d0d7de;}
@@ -227,14 +237,13 @@
 
         /* Responsive */
         @media(max-width: 768px) {
-            body { padding-top: 120px; } /* Sesuaikan padding untuk sticky header yang lebih tinggi di mobile */
+            body { padding-top: 120px; }
             .title-and-search { flex-direction: column; align-items: stretch; gap: 0.5rem; }
             .title-block h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-
     <div class="sticky-controls">
         <div class="sticky-controls-content">
             <div class="title-and-search">
@@ -288,9 +297,7 @@
                 const data = await res.json();
                 const toc = document.getElementById("toc");
                 toc.innerHTML = "";
-
                 const totalCount = document.getElementById("totalCount");
-
                 grouped = {};
                 Object.keys(data).forEach(cat => {
                     grouped[cat] = data[cat]
@@ -300,34 +307,32 @@
                         }))
                         .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
                 });
-
                 const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
                 totalCount.textContent = `Total artikel: ${totalArticles}`;
-
                 Object.keys(grouped)
                     .sort((a, b) => grouped[b].length - grouped[a].length)
                     .forEach(cat => {
                         const catDiv = document.createElement("div");
                         catDiv.className = "category";
-
-                        // ===== PERUBAHAN: COLLAPSE ON LOAD =====
                         catDiv.innerHTML = `
                           <div class="category-header">
                             ${cat} <span class="badge">${grouped[cat].length}</span>
                           </div>
                           <div class="toc-list" style="display: none;"></div>
                         `;
-
                         const catList = catDiv.querySelector(".toc-list");
-
-                        grouped[cat].forEach((item, i) => {
+                        grouped[cat].forEach((item) => {
                             const el = document.createElement("div");
                             el.className = "toc-item";
                             el.dataset.text = item.title.toLowerCase();
 
+                            // ===== PERUBAHAN: BUAT ELEMEN SECARA TERPISAH =====
+                            const titleDiv = document.createElement("div");
+                            titleDiv.className = "toc-title";
+                            
                             const a = document.createElement("a");
                             a.href = `artikel/${item.file}`;
-                            a.textContent = `[${formatDate(item.lastmod)}] ${item.title}`;
+                            a.textContent = item.title; // Hanya judul
 
                             const statusSpan = document.createElement("span");
                             if (visitedLinks.includes(item.file)) {
@@ -338,6 +343,10 @@
                                 statusSpan.className = "label-new";
                                 statusSpan.textContent = "📚 belum dibaca";
                             }
+                            
+                            const dateSpan = document.createElement("span");
+                            dateSpan.className = "toc-date";
+                            dateSpan.textContent = `[${formatDate(item.lastmod)}]`;
 
                             a.addEventListener("click", () => {
                                 if (!visitedLinks.includes(item.file)) {
@@ -349,29 +358,24 @@
                                 }
                             });
 
-                            const titleDiv = document.createElement("div");
-                            titleDiv.className = "toc-title";
+                            // Masukkan semua elemen ke dalam .toc-title dengan urutan baru
                             titleDiv.appendChild(a);
                             titleDiv.appendChild(statusSpan);
-
+                            titleDiv.appendChild(dateSpan);
+                            
                             el.appendChild(titleDiv);
                             catList.appendChild(el);
                         });
 
-                        catDiv
-                            .querySelector(".category-header")
-                            .addEventListener("click", () => {
-                                catList.style.display =
-                                    catList.style.display === "block" ? "none" : "block";
-                                updateTOCToggleText();
-                            });
-
+                        catDiv.querySelector(".category-header").addEventListener("click", () => {
+                            catList.style.display = catList.style.display === "block" ? "none" : "block";
+                            updateTOCToggleText();
+                        });
                         toc.appendChild(catDiv);
                     });
 
                 const m = document.getElementById("marquee-content");
                 const allArticles = Object.values(grouped).flat();
-
                 function shuffle(arr) {
                     for (let i = arr.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
@@ -379,12 +383,11 @@
                     }
                     return arr;
                 }
-
                 const shuffled = shuffle(allArticles);
                 m.innerHTML = shuffled.map(d => `<a href="artikel/${d.file}">${d.title}</a>`).join(" &bull; ");
             } catch (e) {
                 console.error("Gagal load artikel.json", e);
-                document.getElementById("toc").innerHTML = '<p style="color: red;">Gagal memuat daftar isi. Pastikan file artikel.json ada dan valid.</p>';
+                toc.innerHTML = '<p style="color: red;">Gagal memuat daftar isi.</p>';
             }
         }
 
@@ -401,17 +404,18 @@
                 let catVisible = false;
                 category.querySelectorAll(".toc-item").forEach(item => {
                     const text = item.dataset.text;
-                    const link = item.querySelector("a");
+                    const titleLink = item.querySelector("a"); // Targetkan link judulnya saja
+
                     if (term && text.includes(term)) {
                         item.style.display = "flex";
                         catVisible = true;
                         countVisible++;
                         const regex = new RegExp(`(${term})`, "gi");
-                        const originalText = `[${formatDate(link.href.split('/').pop())}] ${item.dataset.text}`;
-                        link.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
+                        // Ganti innerHTML dari link judul saja, bukan seluruh baris
+                        titleLink.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
                     } else if (!term) {
                         item.style.display = "flex";
-                        link.innerHTML = `[${formatDate(link.href.split('/').pop())}] ${item.dataset.text}`;
+                        titleLink.textContent = text; // Kembalikan ke teks asli
                         catVisible = true;
                     } else {
                         item.style.display = "none";
@@ -455,20 +459,14 @@
             updateTOCToggleText();
         });
 
-        function isDarkModeActive() { return document.body.classList.contains('dark-mode'); }
-
         function initDarkMode(categories) {
             const darkSwitch = document.getElementById('darkSwitch');
             const saved = localStorage.getItem('darkMode');
             
             function setDarkMode(isDark) {
-                if (isDark) {
-                    document.body.classList.add('dark-mode');
-                    if (darkSwitch) darkSwitch.checked = true;
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    if (darkSwitch) darkSwitch.checked = false;
-                }
+                if (isDark) document.body.classList.add('dark-mode');
+                else document.body.classList.remove('dark-mode');
+                if (darkSwitch) darkSwitch.checked = isDark;
             }
 
             if (saved !== null) {
