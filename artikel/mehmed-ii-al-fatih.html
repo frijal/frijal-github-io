@@ -744,28 +744,7 @@
                   d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 3V5Z"
                 />
               </svg>
-              <div class="label">Info browser</div>
-              <div class="value" id="info-browser">Memuat...</div>
-            </div>
-            <div class="chip">
-              <svg viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M4 6a2 2 0 0 1 2-2h6l2 2h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"
-                />
-              </svg>
-              <div class="label">Info OS</div>
-              <div class="value" id="info-os">Memuat...</div>
-            </div>
-            <div class="chip">
-              <svg viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M12 2a9 9 0 0 1 9 9c0 6.5-9 11-9 11S3 17.5 3 11a9 9 0 0 1 9-9Zm0 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                />
-              </svg>
-              <div class="label">IP & Negara</div>
-              <div class="value" id="info-ip">Memuat...</div>
+              
             </div>
           </div>
 
@@ -918,55 +897,7 @@
           })
         })()
 
-        // Browser, OS, IP + flag
-        ;(function env() {
-          const ua = navigator.userAgent
-          const infoBrowser = document.getElementById('info-browser')
-          const infoOS = document.getElementById('info-os')
-          const infoIP = document.getElementById('info-ip')
-
-          const browsers = [
-            [/Edg\//, 'Microsoft Edge'],
-            [/Chrome\//, 'Google Chrome'],
-            [/Safari\//, 'Safari'],
-            [/Firefox\//, 'Mozilla Firefox'],
-            [/OPR\//, 'Opera'],
-            [/MSIE|Trident/, 'Internet Explorer'],
-          ]
-          const systems = [
-            [/Windows NT/, 'Windows'],
-            [/Mac OS X/, 'macOS'],
-            [/Android/, 'Android'],
-            [/iPhone|iPad|iPod/, 'iOS'],
-            [/Linux/, 'Linux'],
-          ]
-          const detect = (list, def = 'Tidak diketahui') => {
-            for (const [re, name] of list) if (re.test(ua)) return name
-            return def
-          }
-          infoBrowser.textContent = detect(browsers)
-          infoOS.textContent = detect(systems)
-
-          const flagEmoji = (cc) => {
-            if (!cc || cc.length !== 2) return '🏳️'
-            const A = 0x1f1e6
-            const up = cc.toUpperCase()
-            return String.fromCodePoint(
-              A + (up.charCodeAt(0) - 65),
-              A + (up.charCodeAt(1) - 65),
-            )
-          }
-
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((d) => {
-              const ip = d.ip
-              const cc = d.country || ''
-              const cn = d.country_name || 'Tidak diketahui'
-              infoIP.textContent = `${flagEmoji(cc)} ${ip} • ${cn}`
-            })
-            .catch(() => {
-              infoIP.textContent = '⚠️ Tidak dapat memuat IP/Negara'
+        
             })
         })()
       })

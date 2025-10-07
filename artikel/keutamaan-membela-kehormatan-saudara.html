@@ -552,20 +552,7 @@
           </button>
         </div>
 
-        <div class="info">
-          <div class="chip">
-            <div class="label">Info browser</div>
-            <div class="value" id="info-browser">Memuat...</div>
-          </div>
-          <div class="chip">
-            <div class="label">Info OS</div>
-            <div class="value" id="info-os">Memuat...</div>
-          </div>
-          <div class="chip">
-            <div class="label">IP & Negara</div>
-            <div class="value" id="info-ip">Memuat...</div>
-          </div>
-        </div>
+        
 
         <!-- Facebook Comments -->
         <div id="fb-root"></div>
@@ -706,56 +693,7 @@
           })
         })()
 
-        // Browser & OS detection (lightweight)
-        ;(function envInfo() {
-          const ua = navigator.userAgent
-          const infoBrowser = document.getElementById('info-browser')
-          const infoOS = document.getElementById('info-os')
-          const infoIP = document.getElementById('info-ip')
-
-          const browsers = [
-            [/Edg\//, 'Microsoft Edge'],
-            [/Chrome\//, 'Google Chrome'],
-            [/Safari\//, 'Safari'],
-            [/Firefox\//, 'Mozilla Firefox'],
-            [/OPR\//, 'Opera'],
-            [/MSIE|Trident/, 'Internet Explorer'],
-          ]
-          const systems = [
-            [/Windows NT/, 'Windows'],
-            [/Mac OS X/, 'macOS'],
-            [/Android/, 'Android'],
-            [/iPhone|iPad|iPod/, 'iOS'],
-            [/Linux/, 'Linux'],
-          ]
-          const detect = (list, def = 'Tidak diketahui') => {
-            for (const [re, name] of list) if (re.test(ua)) return name
-            return def
-          }
-          infoBrowser.textContent = detect(browsers)
-          infoOS.textContent = detect(systems)
-
-          const flagEmoji = (cc) => {
-            if (!cc || cc.length !== 2) return '🏳️'
-            const A = 0x1f1e6
-            const code = cc.toUpperCase()
-            return String.fromCodePoint(
-              A + (code.charCodeAt(0) - 65),
-              A + (code.charCodeAt(1) - 65),
-            )
-          }
-
-          // Public IP & country (no key)
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject()))
-            .then((d) => {
-              const ip = d.ip
-              const cc = d.country || ''
-              const cn = d.country_name || 'Tidak diketahui'
-              infoIP.textContent = `${flagEmoji(cc)} ${ip} • ${cn}`
-            })
-            .catch(() => {
-              infoIP.textContent = '⚠️ Tidak dapat memuat IP/Negara'
+        
             })
         })()
       })

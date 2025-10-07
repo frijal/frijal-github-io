@@ -485,29 +485,7 @@
           </svg>
           Diperbarui: 28 Sep 2025</span
         >
-        <span class="chip"
-          ><svg viewBox="0 0 24 24">
-            <path d="M4 5h16v10H4V5Zm0 12h16v2H4v-2Z" />
-          </svg>
-          Browser: <strong id="browser">—</strong></span
-        >
-        <span class="chip"
-          ><svg viewBox="0 0 24 24">
-            <path
-              d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 3.1L18.6 8 12 11.9 5.4 8 12 5.1Z"
-            />
-          </svg>
-          OS: <strong id="os">—</strong></span
-        >
-        <span class="chip"
-          ><svg viewBox="0 0 24 24">
-            <path
-              d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"
-            />
-          </svg>
-          Lokasi: <span id="geo">—</span>
-          <span class="flag" id="geo-flag"></span
-        ></span>
+        
       </div>
     </header>
 
@@ -742,51 +720,7 @@
           setIfEmpty('meta[itemprop="image"]')
         })()
 
-        // 1) Device info (ikon Browser/OS + label)
-        ;(function deviceInfo() {
-          const ua = navigator.userAgent
-          let browserName = 'Browser lain'
-          if (/Edg\//.test(ua)) browserName = 'Microsoft Edge'
-          else if (/Chrome\//.test(ua)) browserName = 'Google Chrome'
-          else if (/Firefox\//.test(ua)) browserName = 'Mozilla Firefox'
-          else if (/Safari\//.test(ua) && !/Chrome\//.test(ua))
-            browserName = 'Safari'
-          document.getElementById('browser').textContent = browserName
-
-          let osName = 'OS lain'
-          if (/Windows NT/.test(ua)) osName = 'Windows'
-          else if (/Mac OS X/.test(ua)) osName = 'macOS'
-          else if (/Android/.test(ua)) osName = 'Android'
-          else if (/iPhone|iPad|iPod/.test(ua)) osName = 'iOS'
-          else if (/Linux/.test(ua)) osName = 'Linux'
-          document.getElementById('os').textContent = osName
-        })()
-
-        // 2) Geolocation via IP + bendera (emoji)
-        ;(async function geo() {
-          try {
-            const res = await fetch('https://ipapi.co/json/')
-            if (!res.ok) throw new Error('Gagal mengambil data IP')
-            const d = await res.json()
-            const city = d.city || 'Kota tak dikenal'
-            const country = d.country_name || d.country || 'Negara tak dikenal'
-            const code = (d.country_code || '').toUpperCase()
-            document.getElementById('geo').textContent = city + ', ' + country
-            document.getElementById('geo-flag').textContent = code
-              ? ccToFlag(code)
-              : ''
-          } catch (e) {
-            document.getElementById('geo').textContent = 'Lokasi tidak tersedia'
-            document.getElementById('geo-flag').textContent = ''
-          }
-          function ccToFlag(cc) {
-            // Convert country code (e.g., ID) to emoji flag
-            if (!/^[A-Z]{2}$/.test(cc)) return ''
-            const base = 127397
-            return (
-              String.fromCodePoint(cc.charCodeAt(0) + base) +
-              String.fromCodePoint(cc.charCodeAt(1) + base)
-            )
+        
           }
         })()
 

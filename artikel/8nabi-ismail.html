@@ -372,22 +372,7 @@
             #RamadahanTales oleh: Saudari Sharifah Syazreen Al-Idrus
           </p>
 
-          <!-- Info chips: Browser, OS, IP, Negara -->
-          <div class="meta-chips" id="info-chips" aria-label="Info perangkat">
-            <span class="chip"
-              ><strong>Browser:</strong> <span id="chip-browser">-</span></span
-            >
-            <span class="chip"
-              ><strong>OS:</strong> <span id="chip-os">-</span></span
-            >
-            <span class="chip"
-              ><strong>IP:</strong> <span id="chip-ip">-</span></span
-            >
-            <span class="chip"
-              ><span class="flag" id="chip-flag">🏳️</span>
-              <strong>Negara:</strong> <span id="chip-country">-</span></span
-            >
-          </div>
+          
         </header>
 
         <section class="grid-1">
@@ -657,72 +642,7 @@
         const CANONICAL =
           document.querySelector('link[rel="canonical"]')?.href || location.href
 
-        // Info chips: Browser & OS detection
-        function detectOS(ua) {
-          ua = ua.toLowerCase()
-          if (ua.includes('windows')) return 'Windows'
-          if (ua.includes('mac os') || ua.includes('macintosh')) return 'macOS'
-          if (ua.includes('android')) return 'Android'
-          if (
-            ua.includes('iphone') ||
-            ua.includes('ipad') ||
-            ua.includes('ios')
-          )
-            return 'iOS'
-          if (ua.includes('linux')) return 'Linux'
-          return 'Tak dikenal'
-        }
-        function detectBrowser(ua) {
-          if (ua.includes('edg/')) return 'Microsoft Edge'
-          if (ua.includes('chrome/')) return 'Google Chrome'
-          if (ua.includes('safari/') && !ua.includes('chrome/')) return 'Safari'
-          if (ua.includes('firefox/')) return 'Firefox'
-          if (ua.includes('brave/')) return 'Brave'
-          return 'Browser'
-        }
-        ;(function fillDevice() {
-          const ua = navigator.userAgent || ''
-          document.getElementById('chip-browser').textContent =
-            detectBrowser(ua)
-          document.getElementById('chip-os').textContent = detectOS(ua)
-        })()
-
-        // IP & country: try ipapi.co then fallback to ipwho.is
-        async function setIPInfo() {
-          const ipEl = document.getElementById('chip-ip')
-          const countryEl = document.getElementById('chip-country')
-          const flagEl = document.getElementById('chip-flag')
-          try {
-            const r = await fetch('https://ipapi.co/json/')
-            if (!r.ok) throw new Error('ipapi failed')
-            const j = await r.json()
-            ipEl.textContent = j.ip || '-'
-            countryEl.textContent = j.country_name || '-'
-            flagEl.textContent = countryEmoji(j.country_code || '')
-          } catch (e) {
-            try {
-              const r2 = await fetch('https://ipwho.is/')
-              const j2 = await r2.json()
-              ipEl.textContent = j2.ip || '-'
-              countryEl.textContent = (j2.success ? j2.country : '-') || '-'
-              flagEl.textContent = countryEmoji(j2.country_code || '')
-            } catch (e2) {
-              ipEl.textContent = '-'
-              countryEl.textContent = '-'
-              flagEl.textContent = '🏳️'
-            }
-          }
-        }
-        function countryEmoji(code) {
-          if (!code || code.length !== 2) return '🏳️'
-          const A = 127397 // Regional Indicator Symbol offset
-          const up = code.toUpperCase()
-          return (
-            String.fromCodePoint(up.charCodeAt(0) + A) +
-            String.fromCodePoint(up.charCodeAt(1) + A)
-          )
-        }
-        setIPInfo()
+        
 
         // Gallery lightbox
         const gallery = Array.from(document.querySelectorAll('#gallery img'))
