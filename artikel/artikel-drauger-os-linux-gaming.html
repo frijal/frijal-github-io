@@ -394,18 +394,7 @@
     </header>
 
     <div class="container">
-      <div class="info-bar" id="user-info">
-        <span
-          ><i class="fa fa-globe"></i>
-          <span id="geo-info">Deteksi Lokasi...</span></span
-        >
-        <span
-          ><i class="fa fa-laptop-code"></i> Browser:
-          <span id="browser-info">-</span></span
-        >
-        <span
-          ><i class="fa fa-desktop"></i> OS: <span id="os-info">-</span></span
-        >
+      
       </div>
 
       <div class="share-bar">
@@ -648,37 +637,7 @@
       window.addEventListener('DOMContentLoaded', setupGallery)
       let shareUrl = encodeURIComponent(location.href),
         shareText = encodeURIComponent(document.title)
-      function getOS() {
-        var e = navigator.userAgent
-        return /windows/i.test(e)
-          ? 'Windows'
-          : /android/i.test(e)
-            ? 'Android'
-            : /linux/i.test(e)
-              ? 'Linux'
-              : /iphone|ipad|ipod/i.test(e)
-                ? 'iOS'
-                : /macintosh|mac os x/i.test(e)
-                  ? 'MacOS'
-                  : 'Tidak dikenal'
-      }
-      function getBrowser() {
-        var e = navigator.userAgent
-        return /edg/i.test(e)
-          ? 'Edge'
-          : /chrome/i.test(e) && !/edg/i.test(e)
-            ? 'Chrome'
-            : /firefox/i.test(e)
-              ? 'Firefox'
-              : /safari/i.test(e) && !/chrome/i.test(e)
-                ? 'Safari'
-                : /opr|opera/i.test(e)
-                  ? 'Opera'
-                  : 'Tidak dikenal'
-      }
-      function getFlagEmoji(e) {
-        return String.fromCodePoint(
-          ...[...e.toUpperCase()].map((e) => 127397 + e.charCodeAt()),
+     
         )
       }
       ;((document.getElementById('share-wa').href =
