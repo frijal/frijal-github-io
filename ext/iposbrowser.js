@@ -97,14 +97,19 @@ style.textContent = `
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
   font-size: 0.9rem;
-  color: inherit;
-  border-radius: 0;
+  color: var(--ipos-text, #222);
   padding: 4px 8px;
   margin: 0 auto;
   transition: color 0.3s ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  #ipos-browser-info {
+    color: var(--ipos-text-dark, #eee);
+  }
 }
 
 body.dark-mode #ipos-browser-info { color: #ddd; }
@@ -141,6 +146,21 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
   transform: scale(1.15) rotate(8deg);
   filter: drop-shadow(0 0 6px rgba(88,166,255,0.45));
   animation: pulse 0.6s ease-in-out;
+}
+
+/* Teks lokasi dan deskripsi */
+#ipos-browser-info .info-text {
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* Flex per ikon + teks */
+#ipos-browser-info .browser,
+#ipos-browser-info .os {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Pulse keyframes */
