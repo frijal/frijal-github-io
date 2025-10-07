@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kenalan Sama Strategi Branching Populer di GitHub 📊</title>
+
+  <meta name="description" content="Bingung kenapa repo bisa banyak branch? Yuk, kenalan sama Git Flow, Trunk Based, dan GitHub Flow. Dijelasin santai, lengkap dengan perbandingan, plus fitur interaktif." />
+  <meta name="author" content="Frijal" />
+  <meta name="keywords" content="git flow, github flow, trunk based development, strategi branching, git, github, version control, tutorial git indonesia" />
+  <link rel="canonical" href="https://frijal.github.io/artikel/strategi-branching-github.html" />
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://frijal.github.io/assets/logo-192.png">
+  <meta name="theme-color" content="#161b22">
+
+  <meta property="og:title" content="Kenalan Sama Strategi Branching Populer di GitHub 📊" />
+  <meta property="og:description" content="Bingung kenapa repo bisa banyak branch? Yuk, kenalan sama Git Flow, Trunk Based, dan GitHub Flow." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://frijal.github.io/artikel/strategi-branching-github.html" />
+  <meta property="og:image" content="https://frijal.github.io/artikel/strategi-branching-github.jpg" />
+  <meta property="og:image:alt" content="Ilustrasi tiga strategi branching Git yang populer" />
+  <meta property="og:site_name" content="Frijal's Artikel" />
+  <meta property="article:published_time" content="2025-10-07T08:22:00+08:00" />
+  <meta property="article:author" content="https://github.com/frijal" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@frijal" />
+  <meta name="twitter:creator" content="@frijal" />
+  <meta name="twitter:title" content="Kenalan Sama Strategi Branching Populer di GitHub 📊" />
+  <meta name="twitter:description" content="Bingung kenapa repo bisa banyak branch? Yuk, kenalan sama Git Flow, Trunk Based, dan GitHub Flow." />
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/strategi-branching-github.jpg" />
+  <meta name="twitter:image:alt" content="Ilustrasi tiga strategi branching Git yang populer" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Kenalan Sama Strategi Branching Populer di GitHub",
+    "author": {
+      "@type": "Person",
+      "name": "Frijal",
+      "url": "https://github.com/frijal"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Frijal's Artikel",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://frijal.github.io/assets/logo-192.png"
+        }
+    },
+    "datePublished": "2025-10-07T08:22:00+08:00",
+    "image": "https://frijal.github.io/artikel/strategi-branching-github.jpg",
+    "description": "Perbandingan strategi branching populer: Git Flow, Trunk Based, dan GitHub Flow. Dijelaskan santai, lengkap, dengan tabel interaktif, dark-mode, responsif, plus galeri, lightbox, share, komentar Facebook, dan deteksi perangkat.",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://frijal.github.io/artikel/strategi-branching-github.html"
+    }
+  }
+  </script>
+
+  <style>
+    /* Reset & Basic Styles */
+    :root {
+      --bg-color: #0d1117;
+      --surface-color: #161b22;
+      --border-color: #30363d;
+      --text-color: #e6edf3;
+      --primary-color: #58a6ff;
+      --muted-text-color: #8b949e;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+    }
+    /* Layout */
+    header, footer {
+      padding: 1.5rem;
+      background: var(--surface-color);
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1, h2, h3 {
+      color: var(--primary-color);
+      line-height: 1.3;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+    }
+    h1 { font-size: 2.5rem; border: none; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, li { font-size: 1.1rem; }
+    a { color: var(--primary-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img, video { max-width: 100%; height: auto; border-radius: 8px; }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      white-space: nowrap;
+    }
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      text-align: left;
+    }
+    th {
+      background: #21262d;
+      font-size: 1.1rem;
+    }
+    tbody tr:nth-child(even) { background: var(--surface-color); }
+
+    /* Gallery & Lightbox */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .gallery img {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+    .lightbox nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+    .lightbox button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .lightbox button:hover { background: rgba(0,0,0,0.8); }
+
+    /* Share Buttons */
+    .share {
+      margin: 2rem 0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .share-label {
+        font-weight: bold;
+    }
+    .share a {
+      display: inline-block;
+      padding: 0.5rem;
+      border: 1px solid transparent;
+      border-radius: 50%; /* Membuat jadi lingkaran */
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .share a:hover {
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+    .share svg {
+        width: 28px;
+        height: 28px;
+        fill: var(--muted-text-color);
+    }
+    #share-twitter:hover { background-color: #1DA1F2; }
+    #share-fb:hover { background-color: #1877F2; }
+    #share-ln:hover { background-color: #0A66C2; }
+    #share-wa:hover { background-color: #25D366; }
+    #share-tg:hover { background-color: #24A1DE; }
+    .share a:hover svg { fill: #fff; }
+
+    /* Environment Info Box */
+    .env {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--surface-color);
+    }
+    .env p {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .env strong {
+        color: var(--muted-text-color);
+        min-width: 80px;
+    }
+    .env span.icon {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    /* Facebook Comments */
+    .fb-comments {
+        background: #fff;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Kenalan Sama Strategi Branching Populer 📊</h1>
+    <p style="color: var(--muted-text-color);">Biar nggak pusing lihat `branch` bejibun di repositori kamu!</p>
+  </header>
+
+  <main>
+    <article>
+      <p>Pernah nggak sih, kamu buka repositori di GitHub terus kaget lihat `branch`-nya ada banyak banget? Selain `main` atau `master`, ada `develop`, `feature/login`, `hotfix/bug-css`, dan lain-lain. Nah, itu bukan karena developernya iseng, lho. Kemungkinan besar, mereka pakai <strong>strategi branching</strong> tertentu.</p>
+      <p>Strategi branching itu kayak aturan main dalam tim buat ngelola kode. Tujuannya biar kerjaan nggak tubrukan, fitur baru bisa dikembangin dengan aman, dan rilis aplikasi jadi lebih teratur. Yuk, kita bedah tiga strategi yang paling populer dipakai di dunia per-Git-an!</p>
+
+      <h2>Perbandingan 3 Strategi Populer</h2>
+      <p>Setiap strategi punya kelebihan dan kekurangannya masing-masing, cocok buat skenario yang beda-beda. Cek tabel di bawah buat lihat perbandingannya secara singkat.</p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Strategi</th>
+              <th>Ciri Khas</th>
+              <th>Paling Cocok Buat</th>
+              <th>Kelebihan 👍</th>
+              <th>Kekurangan 👎</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Git Flow</strong></td>
+              <td>Paling terstruktur, pakai banyak jenis branch: <code>main</code>, <code>develop</code>, <code>feature/*</code>, <code>release/*</code>, <code>hotfix/*</code>.</td>
+              <td>Proyek besar dengan jadwal rilis yang jelas (misal: rilis versi 1.0, 2.0).</td>
+              <td>Alur kerja super jelas, memisahkan kode stabil dengan yang masih dikembangkan.</td>
+              <td>Agak ribet dan lambat karena banyak proses merge. Bisa jadi `overkill` untuk tim kecil.</td>
+            </tr>
+            <tr>
+              <td><strong>Trunk Based Dev</strong></td>
+              <td>Semua developer commit langsung ke branch utama (<code>main</code>/<code>trunk</code>). Kalaupun ada `feature branch`, umurnya sangat pendek (beberapa jam/hari).</td>
+              <td>Tim yang butuh integrasi super cepat dan `deploy` berkali-kali dalam sehari (CI/CD).</td>
+              <td>Kode selalu `up-to-date`, konflik merge minim, proses rilis jadi ngebut.</td>
+              <td>Butuh disiplin tinggi dan *automated testing* yang solid. Kalau nggak, `main` bisa sering rusak.</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub Flow</strong></td>
+              <td>Versi simpel dari Git Flow. Branch utama cuma <code>main</code>. Semua development (fitur/bugfix) dibuat di `branch` baru, lalu di-`merge` via Pull Request (PR).</td>
+              <td>Kebanyakan proyek di GitHub, terutama yang butuh `deploy` cepat dan sering, cocok untuk tim remote.</td>
+              <td>Sederhana dan gampang dimengerti. Alur PR mendorong adanya *code review*.</td>
+              <td>Kurang pas buat proyek yang perlu ngelola beberapa versi rilis sekaligus.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>📸 Galeri Ilustrasi Biar Makin Paham</h2>
+      <p>Kata orang, satu gambar bisa bermakna seribu kata. Biar kebayang alurnya, coba lihat diagram-diagram di bawah ini.</p>
+      <div class="gallery">
+        <img src="https://frijal.github.io/assets/gallery/gitflow.jpg" alt="Diagram alur kerja Git Flow" loading="lazy" data-index="0">
+        <img src="https://frijal.github.io/assets/gallery/trunkbased.jpg" alt="Diagram alur kerja Trunk Based Development" loading="lazy" data-index="1">
+        <img src="https://frijal.github.io/assets/gallery/githubflow.jpg" alt="Diagram alur kerja GitHub Flow" loading="lazy" data-index="2">
+      </div>
+      
+      <div class="lightbox" id="lightbox">
+        <nav>
+          <button id="prev" title="Gambar sebelumnya">⟨</button>
+        </nav>
+        <img id="lightbox-img" alt="Gambar yang diperbesar">
+        <nav>
+          <button id="next" title="Gambar selanjutnya">⟩</button>
+        </nav>
+      </div>
+
+      <h2>🗣️ Suka Artikelnya? Bagikan Yuk!</h2>
+      <div class="share">
+        <span class="share-label">Share ke:</span>
+        <a id="share-twitter" target="_blank" title="Bagikan ke Twitter/X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a id="share-fb" target="_blank" title="Bagikan ke Facebook">
+            <svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06c0 5.52 4.5 10.02 10 10.02s10-4.5 10-10.02C22 6.53 17.5 2.04 12 2.04zm3.6 7.93h-2.1v-1.4c0-.5.4-.6.6-.6h1.5v-2.4h-2.1c-2.2 0-2.6 1.6-2.6 2.6v1.8H9.4v2.4h1.5v7.1h3v-7.1h2.1l.3-2.4z"/></svg>
+        </a>
+        <a id="share-ln" target="_blank" title="Bagikan ke LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.25 6.5 1.75 1.75 0 0 1 6.5 8.25zM19 19h-3v-4.74c0-1.42-.6-2.12-1.5-2.12-.83 0-1.5.7-1.5 2.12V19h-3v-9h2.9v1.3a3.1 3.1 0 0 1 2.8-1.5c2 0 3.3 1.4 3.3 4.2z"/></svg>
+        </a>
+        <a id="share-wa" target="_blank" title="Bagikan ke WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.77.46 3.45 1.28 4.95L2 22l5.25-1.38c1.45.77 3.06 1.18 4.79 1.18h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM9.53 8.5c.23-.24.52-.39.73-.13l.8.53c.25.17.3.5.2.73l-.42.94c-.1.22.02.5.24.7l1.65 1.65c.2.22.48.33.7.24l.94-.42c.23-.1.56-.05.73.2l.53.8c.26.2.1.5-.13.73l-.6 1.04c-.3.52-.92.7-1.44.38-1.35-.84-2.58-1.9-3.56-3.23-.42-.52-.24-1.14.38-1.44zm2.5-1.12c2.97 0 5.4 2.42 5.4 5.4s-2.42 5.4-5.4 5.4-5.4-2.42-5.4-5.4c0-1.5.6-2.85 1.58-3.82S9.56 5.38 12.04 5.38m0-1.5C8.01 3.88 4.63 7.26 4.63 12s3.38 8.12 7.4 8.12S19.45 16.74 19.45 12 16.07 3.88 12.04 3.88z"/></svg>
+        </a>
+        <a id="share-tg" target="_blank" title="Bagikan ke Telegram">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.69 7.61l-1.32 6.22c-.14.67-.54.84-.93.53l-2.53-1.86-1.23.95c-.24.18-.45.28-.68.28l.18-2.6 4.68-4.2c.2-.18-.05-.28-.32-.11L8.5 13.06l-2.48-.77c-.66-.2-1.05-.65-.9-.94.14-.28.9-.6 1.5-.85l7.08-2.9z"/></svg>
+        </a>
+      </div>
+
+      <h2>💬 Diskusi & Komentar</h2>
+      <p>Punya pertanyaan, pengalaman, atau pendapat lain soal strategi branching ini? Langsung aja tinggalin jejak di kolom komentar di bawah ini. Kita diskusi bareng!</p>
+      
+      <div id="fb-root"></div>
+      <div class="fb-comments" data-href="https://frijal.github.io/artikel/strategi-branching-github.html" data-width="100%" data-numposts="5"></div>
+
+      <div class="env">
+        <h3>🔍 Info Perangkat & Lokasi Kamu</h3>
+        <p><strong>Browser</strong> <span id="browser_icon" class="icon"></span> <span id="browser">Memuat...</span></p>
+        <p><strong>OS</strong> <span id="os_icon" class="icon"></span> <span id="os">Memuat...</span></p>
+        <p><strong>Lokasi</strong> <span id="flag" class="icon">🏳️</span> <span id="loc">Memuat...</span></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>Dibuat dengan ❤️ di Balikpapan</p>
+    <p><strong>&copy; 2025 Frijal — Artikel Interaktif</strong></p>
+  </footer>
+
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="aBcDeFgH"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Lightbox Logic ---
+      const galleryImages = document.querySelectorAll('.gallery img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      let currentIndex = 0;
+
+      function showImage(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryImages[index].src;
+        lightboxImg.alt = galleryImages[index].alt;
+        lightbox.style.display = 'flex';
+      }
+
+      galleryImages.forEach((img, i) => {
+        img.addEventListener('click', () => showImage(i));
+      });
+
+      prevBtn.addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        showImage(newIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % galleryImages.length;
+        showImage(newIndex);
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+        }
+      });
+      
+      document.addEventListener('keydown', (e) => {
+          if (lightbox.style.display === 'flex') {
+              if (e.key === 'ArrowLeft') prevBtn.click();
+              if (e.key === 'ArrowRight') nextBtn.click();
+              if (e.key === 'Escape') lightbox.style.display = 'none';
+          }
+      });
+
+      // --- Share Links Logic ---
+      const pageUrl = encodeURIComponent(location.href);
+      const pageTitle = encodeURIComponent(document.title);
+      const shareText = encodeURIComponent("Cek artikel keren soal strategi branching Git ini, deh!");
+
+      document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${shareText}`;
+      document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      document.getElementById('share-ln').href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+      document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}`;
+      document.getElementById('share-tg').href = `https://t.me/share/url?url=${pageUrl}&text=${shareText}`;
+
+      // --- Environment Info Logic ---
+      function detectEnvironment() {
+        const ua = navigator.userAgent;
+        let browser = 'Browser Lain', browserIcon = '🌐';
+        let os = 'OS Lain', osIcon = '💻';
+
+        // Detect OS
+        if (/Windows/.test(ua))   { os = 'Windows'; osIcon = '🪟'; }
+        else if (/Macintosh|Mac OS X/.test(ua)) { os = 'macOS'; osIcon = ''; }
+        else if (/Android/.test(ua))  { os = 'Android'; osIcon = '🤖'; }
+        else if (/Linux/.test(ua))    { os = 'Linux'; osIcon = '🐧'; }
+        else if (/iPhone|iPad|iPod/.test(ua)) { os = 'iOS'; osIcon = '📱'; }
+
+        // Detect Browser
+        if (/Edg/.test(ua))       { browser = 'Edge'; browserIcon = '엣'; }
+        else if (/Firefox/.test(ua)) { browser = 'Firefox'; browserIcon = '🦊'; }
+        else if (/Chrome/.test(ua) && !/Chromium/.test(ua)) { browser = 'Chrome'; browserIcon = '🌈'; }
+        else if (/Safari/.test(ua) && !/Chrome/.test(ua)) { browser = 'Safari'; browserIcon = '🧭'; }
+        else if (/OPR/.test(ua)) { browser = 'Opera'; browserIcon = '🅾️'; }
+
+        document.getElementById('browser').textContent = browser;
+        document.getElementById('browser_icon').textContent = browserIcon;
+        document.getElementById('os').textContent = os;
+        document.getElementById('os_icon').textContent = osIcon;
+      }
+      
+      async function fetchLocationInfo() {
+          try {
+              // API ip-api.com langsung memberikan info lokasi dari IP publik kita
+              const response = await fetch('http://ip-api.com/json/?fields=status,message,country,countryCode,city,query');
+              const data = await response.json();
+
+              if (data.status === 'success') {
+                  const countryCode = data.countryCode;
+                  const flag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
+                  
+                  document.getElementById('loc').textContent = `${data.city}, ${data.country} (${data.query})`;
+                  document.getElementById('flag').textContent = flag;
+              } else {
+                  document.getElementById('loc').textContent = 'Gagal mendeteksi lokasi.';
+              }
+          } catch (error) {
+              console.error('Error fetching location:', error);
+              document.getElementById('loc').textContent = 'Tidak bisa terhubung ke server lokasi.';
+          }
+      }
+
+      // Run detection functions
+      detectEnvironment();
+      fetchLocationInfo();
+    });
+  </script>
+</body>
+</html>
