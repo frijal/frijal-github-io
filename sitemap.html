@@ -113,6 +113,12 @@
             justify-content: space-between;
             align-items: center;
         }
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
         #tocToggle {
             background-color: var(--surface-light);
             border: 1px solid var(--border-light);
@@ -191,21 +197,20 @@
         #toc { display: flex; flex-direction: column; gap: 0.75rem; }
         
         .category {
-            --category-color: var(--border-light);
+            --category-color: linear-gradient(45deg, #ccc, #eee); /* Fallback */
             border: 1px solid var(--border-light);
-            border-left: 5px solid var(--category-color);
+            border-left: 5px solid;
+            border-image: var(--category-color) 1;
             border-radius: 8px; 
             overflow: hidden; 
-            transition: border-color 0.2s;
             background-color: var(--surface-light);
         }
         body.dark-mode .category {
             border-color: var(--border-dark);
-            border-left-color: var(--category-color);
+            border-image: var(--category-color) 1;
             background-color: var(--surface-dark);
         }
 
-        /* ===== PERUBAHAN CSS: Latar Belakang Warna Kategori ===== */
         .category-header {
             padding: 1rem 1.25rem; 
             cursor: pointer; 
@@ -213,21 +218,24 @@
             justify-content: space-between;
             align-items: center; 
             font-weight: bold;
-            /* Light Mode: Latar belakang berwarna, teks gelap */
-            background-color: var(--category-color);
-            color: #212529; /* Teks gelap agar kontras */
-            transition: background-color 0.3s, color 0.3s;
+            background: var(--category-color);
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            transition: filter 0.2s;
         }
-        /* Dark Mode: Latar belakang gelap, teks berwarna */
+        .category-header:hover {
+            filter: brightness(1.1);
+        }
         body.dark-mode .category-header {
-            background-color: var(--surface-dark);
-            color: var(--category-color);
+            filter: brightness(0.85) saturate(0.9);
+        }
+        body.dark-mode .category-header:hover {
+            filter: brightness(1) saturate(1);
         }
         
         .badge {
-            background-color: rgba(0, 0, 0, 0.1); /* Latar belakang badge lebih transparan */
-            color: inherit; /* Mewarisi warna teks header */
-            opacity: 0.8;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ffffff;
             padding: 0.25rem 0.6rem; 
             border-radius: 1rem; 
             font-size: 0.8rem;
@@ -287,6 +295,21 @@
             border-radius: 3px;
         }
 
+        /* ===== PERUBAHAN CSS: Gaya untuk Ikon Feed ===== */
+        #feed-link svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-muted-light);
+            transition: fill 0.2s ease-in-out;
+        }
+        body.dark-mode #feed-link svg {
+            fill: var(--text-muted-dark);
+        }
+        #feed-link:hover svg {
+            fill: #ee802f; /* Warna oranye khas RSS */
+        }
+
+
         @media(max-width: 768px) {
             body { padding-top: 120px; }
             .title-and-search { flex-direction: column; align-items: stretch; gap: 0.5rem; }
@@ -316,7 +339,16 @@
                         <span class="slider"></span>
                     </label>
                 </div>
-                <button id="tocToggle">Buka Semua</button>
+                <div class="action-buttons">
+                    <a href="https://frijal.github.io/feed.html" id="feed-link" title="Langganan via RSS Feed" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path d="M4 11a9 9 0 0 1 9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M4 4a16 16 0 0 1 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <circle cx="5" cy="19" r="1" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <button id="tocToggle">Buka Semua</button>
+                </div>
             </div>
         </div>
     </div>
@@ -329,18 +361,18 @@
         const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
         let grouped = {};
 
-        // ===== PERUBAHAN JS: Palet Warna Baru yang Lebih Lembut =====
+        // ===== PERUBAHAN JS: Palet Warna Solid/Gradien Baru =====
         const categoryColors = [
-            '#a8d8ea', // Soft Blue
-            '#aa96da', // Lavender
-            '#fcbad3', // Pink
-            '#ffffd2', // Pale Yellow
-            '#a8e6cf', // Mint Green
-            '#ffd3b6', // Peach
-            '#d4a5a5', // Dusty Rose
-            '#8ed6d3', // Teal
-            '#dbcdf0', // Light Purple
-            '#f7d9c4'  // Light Orange
+            'linear-gradient(45deg, #d32f2f, #f44336)', // Red
+            'linear-gradient(45deg, #303f9f, #3f51b5)', // Indigo
+            'linear-gradient(45deg, #00796b, #009688)', // Teal
+            'linear-gradient(45deg, #f57c00, #ff9800)', // Orange
+            'linear-gradient(45deg, #512da8, #673ab7)', // Deep Purple
+            'linear-gradient(45deg, #c2185b, #e91e63)', // Pink
+            'linear-gradient(45deg, #1976d2, #2196f3)', // Blue
+            'linear-gradient(45deg, #0288d1, #03a9f4)', // Light Blue
+            'linear-gradient(45deg, #388e3c, #4caf50)', // Green
+            'linear-gradient(45deg, #7b1fa2, #9c27b0)'  // Purple
         ];
         function simpleHash(str) {
             let hash = 0;
