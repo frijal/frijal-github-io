@@ -459,43 +459,7 @@
     window.shareTo = shareTo;
     window.copyLink = copyLink;
 
-    // Browser, OS, IP, Geo Info
-    async function fetchBrowserInfo() {
-        function getOS() {
-            let os = "Unknown";
-            let ua = navigator.userAgent;
-            if (/Windows/i.test(ua)) os = "Windows";
-            else if (/Macintosh/i.test(ua)) os = "Mac";
-            else if (/Linux/i.test(ua)) os = "Linux";
-            else if (/Android/i.test(ua)) os = "Android";
-            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
-            return os;
-        }
-        function getBrowser() {
-            let ua = navigator.userAgent;
-            if (ua.includes("Edg/")) return "Microsoft Edge";
-            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
-            if (ua.includes("Chrome")) return "Chrome";
-            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
-            if (ua.includes("Firefox")) return "Firefox";
-            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
-            return "Browser Lain";
-        }
-        let os = getOS();
-        let browser = getBrowser();
-        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
-        try {
-            let res = await fetch("https://ipapi.co/json/");
-            geo = await res.json();
-            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
-        } catch {}
-        let info = '';
-        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
-        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
-        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
-        document.getElementById('browser-info').innerHTML = info;
-    }
-    fetchBrowserInfo();
+
     </script>
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>

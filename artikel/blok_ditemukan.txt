@@ -1,102 +1,246 @@
 ========================================================
-Ditemukan di: excel-40-tahun.html
+Ditemukan di: hijrah-habasyah.html
 ========================================================
-// System info: Browser, OS, IP, City, Flag
-    function detectOS(ua = navigator.userAgent) {
-      if (/Windows NT/i.test(ua)) return 'Windows';
-      if (/Android/i.test(ua)) return 'Android';
-      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-      if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
-      if (/Linux/i.test(ua)) return 'Linux';
-      return 'Unknown';
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
     }
-    document.getElementById('ua').textContent = navigator.userAgent;
-    document.getElementById('os').textContent = detectOS();
-
-    function flagEmoji(cc) {
-      if (!cc || cc.length !== 2) return '🏳️';
-      const base = 127397;
-      return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
-    }
-
-    (async () => {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const j = await r.json();
-        document.getElementById('ip').textContent = j.ip || 'N/A';
-        document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
-        document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
-      } catch {
-        document.getElementById('ip').textContent = 'Tidak tersedia';
-        document.getElementById('city').textContent = '—';
-        document.getElementById('flag').textContent = '🏳️';
-      }
-
-========================================================
-Ditemukan di: meta-opt-out.html
-========================================================
-// System info: Browser, OS, IP, City, Flag
-    function detectOS(ua = navigator.userAgent) {
-      if (/Windows NT/i.test(ua)) return 'Windows';
-      if (/Android/i.test(ua)) return 'Android';
-      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-      if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
-      if (/Linux/i.test(ua)) return 'Linux';
-      return 'Unknown';
-    }
-    document.getElementById('ua').textContent = navigator.userAgent;
-    document.getElementById('os').textContent = detectOS();
-
-    function flagEmoji(cc) {
-      if (!cc || cc.length !== 2) return '🏳️';
-      const base = 127397;
-      return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
-    }
-
-    (async () => {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const j = await r.json();
-        document.getElementById('ip').textContent = j.ip || 'N/A';
-        document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
-        document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
-      } catch {
-        document.getElementById('ip').textContent = 'Tidak tersedia';
-        document.getElementById('city').textContent = '—';
-        document.getElementById('flag').textContent = '🏳️';
-      }
+    fetchBrowserInfo();
 
 ========================================================
-Ditemukan di: remove-old-kernels.html
+Ditemukan di: hittin.html
 ========================================================
-// System info: Browser, OS, IP, City, Flag
-    function detectOS(ua = navigator.userAgent) {
-      if (/Windows NT/i.test(ua)) return 'Windows';
-      if (/Android/i.test(ua)) return 'Android';
-      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-      if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
-      if (/Linux/i.test(ua)) return 'Linux';
-      return 'Unknown';
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
     }
-    document.getElementById('ua').textContent = navigator.userAgent;
-    document.getElementById('os').textContent = detectOS();
+    fetchBrowserInfo();
 
-    function flagEmoji(cc) {
-      if (!cc || cc.length !== 2) return '🏳️';
-      const base = 127397;
-      return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
+========================================================
+Ditemukan di: nabi-ilyasa.html
+========================================================
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
     }
+    fetchBrowserInfo();
 
-    (async () => {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const j = await r.json();
-        document.getElementById('ip').textContent = j.ip || 'N/A';
-        document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
-        document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
-      } catch {
-        document.getElementById('ip').textContent = 'Tidak tersedia';
-        document.getElementById('city').textContent = '—';
-        document.getElementById('flag').textContent = '🏳️';
-      }
+========================================================
+Ditemukan di: nabi-zakaria.html
+========================================================
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
+    }
+    fetchBrowserInfo();
+
+========================================================
+Ditemukan di: umar-bin-khattab.html
+========================================================
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
+    }
+    fetchBrowserInfo();
+
+========================================================
+Ditemukan di: utsman-bin-affan.html
+========================================================
+    // Browser, OS, IP, Geo Info
+    async function fetchBrowserInfo() {
+        function getOS() {
+            let os = "Unknown";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) os = "Windows";
+            else if (/Macintosh/i.test(ua)) os = "Mac";
+            else if (/Linux/i.test(ua)) os = "Linux";
+            else if (/Android/i.test(ua)) os = "Android";
+            else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+            return os;
+        }
+        function getBrowser() {
+            let ua = navigator.userAgent;
+            if (ua.includes("Edg/")) return "Microsoft Edge";
+            if (ua.includes("OPR") || ua.includes("Opera")) return "Opera";
+            if (ua.includes("Chrome")) return "Chrome";
+            if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+            if (ua.includes("Firefox")) return "Firefox";
+            if (ua.includes("MSIE") || ua.includes("Trident")) return "Internet Explorer";
+            return "Browser Lain";
+        }
+        let os = getOS();
+        let browser = getBrowser();
+        let geo = {city:"?", country:"?", countryCode:"", flag:"", ip:"?"};
+        try {
+            let res = await fetch("https://ipapi.co/json/");
+            geo = await res.json();
+            geo.flag = geo.country_code ? `https://flagcdn.com/32x24/${geo.country_code.toLowerCase()}.png` : "";
+        } catch {}
+        let info = '';
+        if (geo.flag) info += `<img class="flag" src="${geo.flag}" alt="Bendera ${geo.country}">`;
+        info += `Kota: <b>${geo.city}</b>, Negara: <b>${geo.country_name || geo.country}</b> <br>`;
+        info += `IP: <code>${geo.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+        document.getElementById('browser-info').innerHTML = info;
+    }
+    fetchBrowserInfo();
 

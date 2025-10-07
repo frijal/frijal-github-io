@@ -454,58 +454,7 @@
         if (el) el.textContent = `Waktu baca: ~${min} menit`;
       });
 
-      // Info chips: browser & OS
-      safe(() => {
-        const ua = navigator.userAgent;
-        const browserEl = document.querySelector('[data-browser]');
-        const osEl = document.querySelector('[data-os]');
 
-        const browser = /Edg\//.test(ua) ? 'Microsoft Edge'
-                      : /Chrome\//.test(ua) ? 'Google Chrome'
-                      : /Safari\//.test(ua) && !/Chrome\//.test(ua) ? 'Safari'
-                      : /Firefox\//.test(ua) ? 'Firefox'
-                      : /OPR\//.test(ua) ? 'Opera'
-                      : 'Browser';
-
-        const os = /Windows NT/.test(ua) ? 'Windows'
-                 : /Mac OS X/.test(ua) ? 'macOS'
-                 : /Android/.test(ua) ? 'Android'
-                 : /iPhone|iPad|iPod/.test(ua) ? 'iOS'
-                 : /Linux/.test(ua) ? 'Linux'
-                 : 'OS';
-
-        if (browserEl) browserEl.textContent = browser;
-        if (osEl) osEl.textContent = os;
-      });
-
-      // IP + Country flag (graceful fallback; timeout 2500ms)
-      safe(() => {
-        const ipEl = document.querySelector('[data-ip]');
-        const flagEl = document.querySelector('[data-flag]');
-        const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
-        const ccToFlagEmoji = (code) =>
-          code.replace(/./g, c => String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1F1E6));
-
-        const fetchIPInfo = async () => {
-          try {
-            const res = await Promise.race([
-              fetch('https://ipapi.co/json/', { cache: 'no-store' }),
-              timeout(2500)
-            ]);
-            if (!res || !res.ok) throw new Error('ipapi unavailable');
-            const j = await res.json();
-            if (ipEl) ipEl.textContent = j.ip || '—';
-            const cc = (j.country || j.country_name || '').toString();
-            const code = (j.country_code || '').toUpperCase();
-            const flag = code ? ccToFlagEmoji(code) : '🏳️';
-            if (flagEl) flagEl.textContent = flag + (cc ? ` ${cc}` : '');
-          } catch (e) {
-            if (ipEl) ipEl.textContent = '—';
-            if (flagEl) flagEl.textContent = '🏳️';
-          }
-        };
-        fetchIPInfo();
-      });
 
       // Share buttons
       safe(() => {
