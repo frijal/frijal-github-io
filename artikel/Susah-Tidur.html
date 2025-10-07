@@ -427,52 +427,7 @@
         window.open('https://www.tiktok.com/', '_blank');
       });
 
-      // Fetch public IP & location (client-side). We'll try ipapi.co (no key required) and fallback to ipinfo.io
-      (async function fetchIP(){
-        const ipEl = document.getElementById('ip-info');
-        const flagEl = document.getElementById('country-flag');
-        try {
-          const res = await fetch('https://ipapi.co/json/');
-          if(!res.ok) throw new Error('no');
-          const data = await res.json();
-          const ip = data.ip || 'N/A';
-          const country = data.country || data.country_name || '';
-          const countryCode = (data.country_code || '').toLowerCase();
-          ipEl.textContent = ip + (country ? (' • ' + country) : '');
-          if(countryCode){
-            // Use flagcdn (svg)
-            const img = document.createElement('img');
-            img.src = `https://flagcdn.com/24x18/${countryCode}.png`;
-            img.alt = country;
-            img.style.verticalAlign = 'middle';
-            img.style.marginLeft = '6px';
-            flagEl.textContent = 'Negara: ' + (country || countryCode.toUpperCase());
-            flagEl.appendChild(img);
-          }
-        } catch(e){
-          // fallback try ipinfo
-          try {
-            const res2 = await fetch('https://ipinfo.io/json?token=');
-            if(res2.ok){
-              const d2 = await res2.json();
-              ipEl.textContent = d2.ip || 'N/A';
-              if(d2.country){
-                const img2 = document.createElement('img');
-                img2.src = `https://flagcdn.com/24x18/${d2.country.toLowerCase()}.png`;
-                img2.alt = d2.country;
-                img2.style.verticalAlign='middle';
-                img2.style.marginLeft='6px';
-                flagEl.textContent = 'Negara: ' + d2.country;
-                flagEl.appendChild(img2);
-              }
-            } else {
-              ipEl.textContent = 'Tidak dapat mengambil IP';
-            }
-          } catch(err){
-            ipEl.textContent = 'Tidak dapat mengambil IP';
-          }
-        }
-      })();
+      
 
       // When FB SDK loaded, reparse to apply new data-href (if present)
       // If FB SDK not defined yet, set an observer to call parse later

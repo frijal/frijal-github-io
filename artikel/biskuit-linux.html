@@ -149,47 +149,13 @@
     <script>
         const currentUrl = window.location.href;
         
-        function detectBrowser() {
-            const e = navigator.userAgent;
-            if (e.includes("Firefox")) return { name: "Firefox", icon: '<svg fill="#FF7139" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>' };
-            if (e.includes("Chrome") && !e.includes("Edg")) return { name: "Chrome", icon: '<svg fill="#4285F4" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>' };
-            if (e.includes("Safari") && !e.includes("Chrome")) return { name: "Safari", icon: '<svg fill="#060" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>' };
-            if (e.includes("Edg")) return { name: "Edge", icon: '<svg fill="#0078D7" width="20" height="20"><rect width="20" height="20"/></svg>' };
-            return { name: "Tidak dikenal", icon: "" };
-        }
-
-        function detectOS() {
-            const e = navigator.platform;
-            if (e.startsWith("Win")) return { name: "Windows", icon: '<svg fill="#00A2ED" width="20" height="20"><rect width="20" height="20"/></svg>' };
-            if (e.startsWith("Linux")) return { name: "Linux", icon: '<svg fill="#000" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>' };
-            if (e.startsWith("Mac")) return { name: "MacOS", icon: '<svg fill="#6D6D6D" width="20" height="20"><rect width="20" height="20" rx="5"/></svg>' };
-            if (/android/i.test(navigator.userAgent)) return { name: "Android", icon: '<svg fill="#3DDC84" width="20" height="20"><rect width="20" height="20"/></svg>' };
-            return { name: "Tidak dikenal", icon: "" };
-        }
+        
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("current-url").textContent = currentUrl;
             document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
 
-            const b = detectBrowser();
-            const o = detectOS();
             
-            document.getElementById("browser").textContent = b.name;
-            document.getElementById("browser-icon").innerHTML = b.icon;
-            document.getElementById("os").textContent = o.name;
-            document.getElementById("os-icon").innerHTML = o.icon;
-
-            // Ambil Info IP & Lokasi
-            fetch("https://ipapi.co/json/")
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById("ip").textContent = `${data.ip} (${data.city}, ${data.country_name})`;
-                    document.getElementById("flag").src = `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`;
-                    document.getElementById("flag").alt = `Bendera ${data.country_name}`;
-                })
-                .catch(() => {
-                    document.getElementById("ip").textContent = "Tidak tersedia";
-                    document.getElementById("flag").style.display = 'none';
                 });
         });
     </script>

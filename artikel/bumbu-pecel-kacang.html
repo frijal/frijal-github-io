@@ -300,24 +300,7 @@
             }
         });
 
-        // 4. Device/IP Info Logic
-        function detectBrowser(){let t=navigator.userAgent,e="Unknown",n="";return/Chrome\/(\d+)/.test(t)&&!1===/Edg\//.test(t)&&!1===/OPR\//.test(t)&&(e="Chrome",n=t.match(/Chrome\/(\d+\.\d+\.\d+\.\d+|\d+\.\d+)/)?.[1]||""),/Firefox\/(\d+)/.test(t)&&(e="Firefox",n=t.match(/Firefox\/(\d+\.\d+)/)?.[1]),/Edg\/(\d+)/.test(t)&&(e="Edge",n=t.match(/Edg\/(\d+\.\d+)/)?.[1]),/Safari\/(\d+)/.test(t)&&!1===/Chrome\//.test(t)&&(e="Safari",n=t.match(/Version\/(\d+\.\d+)/)?.[1]),/OPR\/(\d+)/.test(t)&&(e="Opera",n=t.match(/OPR\/(\d+\.\d+)/)?.[1]),{name:e,ver:n,ua:t}}
-        function detectOS(){var t=navigator.userAgent;return/Windows NT 10/.test(t)?"Windows 10+":/Windows NT 6.1/.test(t)?"Windows 7/Server 2008 R2":/Android/.test(t)?t.match(/Android\s([0-9\.]+)/)?.[0]||"Android":/iPhone|iPad|iPod/.test(t)?"iOS":/Mac OS X/.test(t)?"macOS":/Linux/.test(t)?"Linux":"Unknown"}
         
-        let b = detectBrowser(), os = detectOS();
-        document.getElementById("device-info").textContent = `${b.name} ${b.ver} — ${os}`;
-        
-        // 5. IP Lookup
-        fetch("https://ipapi.co/json/")
-            .then(t => t.json())
-            .then(t => {
-                var { ip, country_name: countryName, country_code: countryCode } = t;
-                const getFlagEmoji = (code) => code ? code.toUpperCase().replace(/./g, char => String.fromCharCode(127397 + char.charCodeAt())) : "";
-                document.getElementById("ip-info").textContent = `${ip} — ${countryName || ""} ${getFlagEmoji(countryCode)} `;
-            })
-            .catch(t => {
-                document.getElementById("ip-info").textContent = "Tidak dapat mengambil IP publik";
-            });
             
         // 6. Manual FB Parse (for SPA/Dynamic Content)
         window.fbAsyncInit = function() {

@@ -1,75 +1,22 @@
 ========================================================
-Ditemukan di: kuliner-karang-rejo-balikpapan.html
+Ditemukan di: bumbu-pecel-kacang.html
 ========================================================
-// Get user info & IP
-      function getBrowserAndOS() {
-        const userAgent = navigator.userAgent;
-        let browser = "Tidak Dikenal";
-        let os = "Tidak Dikenal";
+// 4. Device/IP Info Logic
+        function detectBrowser(){let t=navigator.userAgent,e="Unknown",n="";return/Chrome\/(\d+)/.test(t)&&!1===/Edg\//.test(t)&&!1===/OPR\//.test(t)&&(e="Chrome",n=t.match(/Chrome\/(\d+\.\d+\.\d+\.\d+|\d+\.\d+)/)?.[1]||""),/Firefox\/(\d+)/.test(t)&&(e="Firefox",n=t.match(/Firefox\/(\d+\.\d+)/)?.[1]),/Edg\/(\d+)/.test(t)&&(e="Edge",n=t.match(/Edg\/(\d+\.\d+)/)?.[1]),/Safari\/(\d+)/.test(t)&&!1===/Chrome\//.test(t)&&(e="Safari",n=t.match(/Version\/(\d+\.\d+)/)?.[1]),/OPR\/(\d+)/.test(t)&&(e="Opera",n=t.match(/OPR\/(\d+\.\d+)/)?.[1]),{name:e,ver:n,ua:t}}
+        function detectOS(){var t=navigator.userAgent;return/Windows NT 10/.test(t)?"Windows 10+":/Windows NT 6.1/.test(t)?"Windows 7/Server 2008 R2":/Android/.test(t)?t.match(/Android\s([0-9\.]+)/)?.[0]||"Android":/iPhone|iPad|iPod/.test(t)?"iOS":/Mac OS X/.test(t)?"macOS":/Linux/.test(t)?"Linux":"Unknown"}
         
-        // OS detection
-        if (userAgent.match(/Windows/i)) {
-          os = "Windows";
-        } else if (userAgent.match(/Macintosh|Mac OS X/i)) {
-          os = "macOS";
-        } else if (userAgent.match(/Linux/i)) {
-          os = "Linux";
-        } else if (userAgent.match(/Android/i)) {
-          os = "Android";
-        } else if (userAgent.match(/iOS|iPhone|iPad/i)) {
-          os = "iOS";
-        }
-
-        // Browser detection
-        if (userAgent.match(/Edge/i)) {
-          browser = "Edge";
-        } else if (userAgent.match(/Chrome/i)) {
-          browser = "Chrome";
-        } else if (userAgent.match(/Safari/i)) {
-          browser = "Safari";
-        } else if (userAgent.match(/Firefox/i)) {
-          browser = "Firefox";
-        }
-
-        document.getElementById('browser-info').innerHTML = `${browser} ${getBrowserIcon(browser)}`;
-        document.getElementById('os-info').innerHTML = `${os} ${getOSIcon(os)}`;
-      }
-
-      function getBrowserIcon(browser) {
-        switch(browser) {
-          case 'Chrome': return '<i class="fab fa-chrome" style="color:#4285f4;"></i>';
-          case 'Firefox': return '<i class="fab fa-firefox-browser" style="color:#e66000;"></i>';
-          case 'Safari': return '<i class="fab fa-safari" style="color:#1d71b8;"></i>';
-          case 'Edge': return '<i class="fab fa-edge" style="color:#0078d7;"></i>';
-          default: return '';
-        }
-      }
-
-      function getOSIcon(os) {
-        switch(os) {
-          case 'Windows': return '<i class="fab fa-windows" style="color:#0078d7;"></i>';
-          case 'macOS': return '<i class="fab fa-apple" style="color:#555;"></i>';
-          case 'Linux': return '<i class="fab fa-linux" style="color:#333;"></i>';
-          case 'Android': return '<i class="fab fa-android" style="color:#3ddc84;"></i>';
-          case 'iOS': return '<i class="fab fa-apple" style="color:#555;"></i>';
-          default: return '';
-        }
-      }
-      getBrowserAndOS();
-
-      // Get IP and Location
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const ipInfoElement = document.getElementById('ip-info');
-          if (data.ip) {
-            ipInfoElement.innerHTML = `${data.ip} - ${data.city}, ${data.country_name} <img src="https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png" alt="${data.country_name} flag" style="vertical-align: middle;">`;
-          } else {
-            ipInfoElement.textContent = "IP tidak ditemukan.";
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching IP info:", error);
-          document.getElementById('ip-info').textContent = "Gagal mengambil informasi IP.";
-        });
+        let b = detectBrowser(), os = detectOS();
+        document.getElementById("device-info").textContent = `${b.name} ${b.ver} — ${os}`;
+        
+        // 5. IP Lookup
+        fetch("https://ipapi.co/json/")
+            .then(t => t.json())
+            .then(t => {
+                var { ip, country_name: countryName, country_code: countryCode } = t;
+                const getFlagEmoji = (code) => code ? code.toUpperCase().replace(/./g, char => String.fromCharCode(127397 + char.charCodeAt())) : "";
+                document.getElementById("ip-info").textContent = `${ip} — ${countryName || ""} ${getFlagEmoji(countryCode)} `;
+            })
+            .catch(t => {
+                document.getElementById("ip-info").textContent = "Tidak dapat mengambil IP publik";
+            });
 

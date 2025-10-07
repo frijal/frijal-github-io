@@ -210,31 +210,7 @@
             window.open(a,"");
         }
         
-        // Logika Deteksi Browser/OS
-        function getBrowserInfo(){
-            let e=navigator.userAgent,n="Unknown",t="Unknown";
-            e.includes("Firefox")?n="Mozilla Firefox":e.includes("Chrome")?n="Google Chrome":e.includes("Safari")?n="Safari":e.includes("Edg")&&(n="Microsoft Edge"),
-            e.includes("Win")?t="Windows":e.includes("Mac")?t="MacOS":e.includes("Linux")?t="Linux":/Android/i.test(e)?t="Android":/iPhone|iPad/i.test(e)&&(t="iOS"),
-            document.getElementById("browser-os").innerHTML=`
-                <p><strong>Browser:</strong> ${n} | <strong>OS:</strong> ${t}</p>
-            `;
-        }
         
-        // Logika Deteksi IP & Lokasi
-        function getIpInfo() {
-            fetch("https://ipapi.co/json/")
-                .then(e=>e.json())
-                .then(e=>{
-                    document.getElementById("ip-info").innerHTML=`IP Anda: ${e.ip} | Negara: <img src="https://flagcdn.com/16x12/${e.country_code.toLowerCase()}.png" alt="${e.country_code}"> ${e.country_name}`;
-                })
-                .catch(e => {
-                    document.getElementById("ip-info").innerHTML = "IP Anda: Tidak dapat mengambil data lokasi";
-                });
-        }
-
-        // Inisialisasi
-        getBrowserInfo();
-        getIpInfo();
 
         // Set Current URL
         document.getElementById("current-url").textContent = window.location.href;
