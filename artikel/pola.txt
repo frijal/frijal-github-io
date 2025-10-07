@@ -1,2 +1,75 @@
-<div class="pill" id="env-pill"><strong>Perangkat:</strong> <span id="env-text">Mendeteksi…</span></div>
-                <div class="pill" id="ip-pill"><strong>Lokasi IP:</strong> <span id="ip-text">Memuat…</span></div>
+// Deteksi Browser & OS (sederhana, defensif)
+          const ua =
+            navigator.userAgent || navigator.vendor || window.opera || ''
+          function detectBrowser() {
+            if (/Edg\//.test(ua)) return 'Microsoft Edge'
+            if (/OPR\//.test(ua)) return 'Opera'
+            if (/Chrome\//.test(ua)) return 'Google Chrome'
+            if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari'
+            if (/Firefox\//.test(ua)) return 'Mozilla Firefox'
+            return 'Browser tidak dikenal'
+          }
+          function detectOS() {
+            if (/Windows NT/.test(ua)) return 'Windows'
+            if (/Mac OS X/.test(ua)) return 'macOS'
+            if (/Android/.test(ua)) return 'Android'
+            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
+            if (/Linux/.test(ua)) return 'Linux'
+            return 'OS tidak dikenal'
+          }
+          function iconForBrowser(name) {
+            const map = {
+              'Google Chrome': '🔵',
+              'Mozilla Firefox': '🟠',
+              Safari: '⚪',
+              'Microsoft Edge': '🟦',
+              Opera: '🔴',
+            }
+            return map[name] || '🧭'
+          }
+          function iconForOS(name) {
+            const map = {
+              Windows: '🪟',
+              macOS: '🍎',
+              Android: '🤖',
+              iOS: '📱',
+              Linux: '🐧',
+            }
+            return map[name] || '💻'
+          }
+          const bName = detectBrowser()
+          const oName = detectOS()
+          const bEl = document.getElementById('badge-browser')
+          const oEl = document.getElementById('badge-os')
+          if (bEl)
+            bEl.textContent = `${iconForBrowser(bName)} Browser: ${bName}`
+          if (oEl) oEl.textContent = `${iconForOS(oName)} OS: ${oName}`
+
+          // Bendera negara + kota berdasarkan IP (fallback aman)
+          function flagEmoji(cc) {
+            if (!cc || cc.length !== 2) return '🇮🇩' // fallback Indonesia
+            const codePoints = [...cc.toUpperCase()].map(
+              (c) => 127397 + c.charCodeAt(0),
+            )
+            return String.fromCodePoint(...codePoints)
+          }
+          function updateLocBadge(city, cc) {
+            const locEl = document.getElementById('badge-loc')
+            const flag = flagEmoji(cc)
+            const text = city
+              ? `${flag} ${city}, ${cc}`
+              : `${flag} Lokasi: ${cc || 'ID'}`
+            if (locEl) locEl.textContent = text
+          }
+          // Default
+          updateLocBadge(null, 'ID')
+
+          // Optional: geolokasi IP (hidupkan jika perlu)
+          fetch('https://ipapi.co/json/')
+            .then((r) => r.json())
+            .then((d) => {
+              const cc = (d && d.country_code) || 'ID'
+              const city = (d && d.city) || null
+              updateLocBadge(city, cc)
+            })
+            .catch(() => {}) // keep silent
