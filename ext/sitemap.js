@@ -2,16 +2,16 @@ const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
 let grouped = {};
 
 const categoryColors = [
-    'linear-gradient(45deg, #d32f2f, #f44336)', // Red
-    'linear-gradient(45deg, #1976d2, #2196f3)', // Blue
-    'linear-gradient(45deg, #00796b, #009688)', // Teal
-    'linear-gradient(45deg, #f57c00, #ff9800)', // Orange
-    'linear-gradient(45deg, #388e3c, #4caf50)', // Green
-    'linear-gradient(45deg, #c2185b, #e91e63)', // Pink
-    'linear-gradient(45deg, #0288d1, #03a9f4)', // Light Blue
-    'linear-gradient(45deg, #fbc02d, #ffeb3b)', // Yellow
-    'linear-gradient(45deg, #cddc39, #8bc34a)', // Lime
-    'linear-gradient(45deg, #607d8b, #9e9e9e)'  // Blue Grey
+    'linear-gradient(90deg, #d32f2f, #f44336)', // Red
+    'linear-gradient(90deg, #1976d2, #2196f3)', // Blue
+    'linear-gradient(90deg, #00796b, #009688)', // Teal
+    'linear-gradient(90deg, #f57c00, #ff9800)', // Orange
+    'linear-gradient(90deg, #388e3c, #4caf50)', // Green
+    'linear-gradient(90deg, #c2185b, #e91e63)', // Pink
+    'linear-gradient(90deg, #0288d1, #03a9f4)', // Light Blue
+    'linear-gradient(90deg, #fbc02d, #ffeb3b)', // Yellow
+    'linear-gradient(90deg, #cddc39, #8bc34a)', // Lime
+    'linear-gradient(90deg, #607d8b, #9e9e9e)'  // Blue Grey
 ];
 
 function shuffle(array) {
@@ -38,7 +38,6 @@ function updateStats(total, read, term = '') {
          return;
     }
     const unread = total - read;
-    // PERBAIKAN: Ganti karakter emoji yang rusak
     totalCountEl.innerHTML = `
         <span class="total-stat">Total: <strong>${total}</strong></span>
         <span class="separator">|</span>
@@ -100,7 +99,6 @@ async function loadTOC() {
                     a.href = `artikel/${item.file}`;
                     a.textContent = item.title;
                     const statusSpan = document.createElement("span");
-                    // PERBAIKAN: Ganti karakter emoji yang rusak
                     if (visitedLinks.includes(item.file)) {
                         statusSpan.className = "label-visited";
                         statusSpan.textContent = "sudah dibaca 👍";
@@ -149,20 +147,7 @@ async function loadTOC() {
                     updateTOCToggleText();
                 });
                 
-                const recentArticles = grouped[cat].slice(0, 3).map(article => `<li>${article.title}</li>`).join('');
-                const tooltipHTML = `<strong>Artikel Terbaru:</strong><ul>${recentArticles}</ul>`;
-
-                catHeader.addEventListener('mouseenter', () => {
-                    categoryTooltip.innerHTML = tooltipHTML;
-                    categoryTooltip.style.display = 'block';
-                });
-                catHeader.addEventListener('mousemove', (e) => {
-                    categoryTooltip.style.left = e.clientX + 15 + 'px';
-                    categoryTooltip.style.top = e.clientY + 15 + 'px';
-                });
-                catHeader.addEventListener('mouseleave', () => {
-                    categoryTooltip.style.display = 'none';
-                });
+                // ===== PERUBAHAN DI SINI: Semua kode tooltip untuk header kategori telah dihapus =====
                 
                 toc.appendChild(catDiv);
             });
