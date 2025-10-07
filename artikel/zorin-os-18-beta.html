@@ -438,25 +438,7 @@
           </div>
         </section>
 
-        <!-- System info -->
-        <section class="sysinfo">
-          <h2>Pelan Kiri</h2>
-          <div class="sys-grid">
-            <div class="card glass">
-              <h3>Browser & OS</h3>
-              <p id="ua"></p>
-              <p id="os"></p>
-              <p id="lang"></p>
-            </div>
-            <div class="card glass">
-              <h3>Lokasi IP</h3>
-              <p id="ip"></p>
-              <p id="city"></p>
-              <p id="country"></p>
-              <div id="flag-wrap"></div>
-            </div>
-          </div>
-        </section>
+       
 
         <!-- Facebook Comments -->
         <section class="comments">
@@ -983,51 +965,7 @@
           })
         })()
 
-        // Browser & OS info
-        ;(function () {
-          const ua = navigator.userAgent
-          const platform = navigator.platform || 'unknown'
-          const lang =
-            navigator.language ||
-            (navigator.languages && navigator.languages[0]) ||
-            'id'
-          document.getElementById('ua').textContent = `Browser: ${ua}`
-          document.getElementById('os').textContent = `OS: ${platform}`
-          document.getElementById('lang').textContent = `Bahasa: ${lang}`
-        })()
-
-        // IP geolocation (city + flag)
-        ;(async function () {
-          try {
-            const r = await fetch('https://ipapi.co/json/')
-            if (!r.ok) throw new Error('ipapi error')
-            const data = await r.json()
-            const ip = data.ip || '—'
-            const city = data.city || '—'
-            const country = data.country_name || '—'
-            const cc = (data.country_code || '').toLowerCase()
-
-            document.getElementById('ip').textContent = `IP: ${ip}`
-            document.getElementById('city').textContent = `Kota: ${city}`
-            document.getElementById('country').textContent =
-              `Negara: ${country}`
-            if (cc) {
-              const img = document.createElement('img')
-              img.src = `https://flagcdn.com/${cc}.svg`
-              img.alt = `Bendera ${country}`
-              img.width = 48
-              img.height = 36
-              img.style.border = '1px solid rgba(255,255,255,.12)'
-              img.style.borderRadius = '6px'
-              document.getElementById('flag-wrap').appendChild(img)
-            }
-          } catch (e) {
-            document.getElementById('city').textContent =
-              'Kota: tidak terdeteksi'
-            document.getElementById('country').textContent =
-              'Negara: tidak terdeteksi'
-          }
-        })()
+        
 
         // Facebook SDK
         ;(function (d, s, id) {
@@ -1041,13 +979,7 @@
           fjs.parentNode.insertBefore(js, fjs)
         })(document, 'script', 'facebook-jssdk')
 
-        // Related posts toggle
-        document
-          .getElementById('related-posts-toggle')
-          .addEventListener('click', () => {
-            document
-              .getElementById('related-posts-container')
-              .classList.toggle('open')
+        
           })
       })
     </script>
