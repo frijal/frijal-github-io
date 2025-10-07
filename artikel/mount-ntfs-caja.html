@@ -278,7 +278,7 @@
     </main>
 
     <footer>
-      <div id="client-info">Mendeteksi informasi perangkat...</div>
+     
       <div>🄯 2025 Tutorial Linux - frijal.github.io</div>
     </footer>
 
@@ -292,30 +292,7 @@
             setTimeout(() => (btn.textContent = 'Copy'), 2000)
           })
         }
-        async function getClientInfo() {
-          const ua = navigator.userAgent
-          let browser = '?',
-            os = '?'
-          if (ua.includes('Firefox')) browser = 'Firefox'
-          else if (ua.includes('Chrome')) browser = 'Chrome'
-          else if (ua.includes('Safari')) browser = 'Safari'
-          else if (ua.includes('Edg')) browser = 'Edge'
-          if (ua.includes('Windows')) os = 'Windows'
-          else if (ua.includes('Linux')) os = 'Linux'
-          else if (ua.includes('Mac OS')) os = 'MacOS'
-          else if (/Android/.test(ua)) os = 'Android'
-          else if (/iPhone|iPad/.test(ua)) os = 'iOS'
-          try {
-            const res = await fetch('https://ipapi.co/json/')
-            const d = await res.json()
-            document.getElementById('client-info').innerHTML =
-              `Browser: ${browser} | OS: ${os}<br>IP: ${d.ip} | Negara: ${d.country_name} <img src="https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png">`
-          } catch {
-            document.getElementById('client-info').textContent =
-              `Browser: ${browser} | OS: ${os}`
-          }
-        }
-        getClientInfo()
+ 
       })
     </script>
 

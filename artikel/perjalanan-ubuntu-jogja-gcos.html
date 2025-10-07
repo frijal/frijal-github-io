@@ -418,26 +418,7 @@
       </div>
 
       <footer>
-        <h2>Jaga Data Pribadi Tetap Aman & Lokasi</h2>
-        <div class="footer-info">
-          <div>
-            <strong>Browser:</strong> <span id="browser-name"></span>
-            <svg id="browser-icon"></svg>
-          </div>
-          <div>
-            <strong>OS:</strong> <span id="os-name"></span>
-            <svg id="os-icon"></svg>
-          </div>
-          <div>
-            <strong>IP:</strong> <span id="ip-address"></span>
-            <img
-              id="flag-icon"
-              src=""
-              alt="Bendera Negara"
-              style="width: 25px; height: 16px"
-            />
-          </div>
-        </div>
+        
       </footer>
 
       <!-- JSON-LD Article & Breadcrumb -->
@@ -496,26 +477,7 @@
     <!-- Platform + IP -->
     });
     <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js"></script>
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        const browser = platform.name + ' ' + platform.version
-        const os = platform.os.family + ' ' + platform.os.version
-        document.getElementById('browser-name').textContent = browser
-        document.getElementById('os-name').textContent = os
-        document.getElementById('browser-icon').innerHTML =
-          '<circle cx="10" cy="10" r="8" fill="#ff9900"/>'
-        document.getElementById('os-icon').innerHTML =
-          '<rect x="2" y="2" width="16" height="16" fill="#0078d7"/>'
-
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip-address').textContent = data.ip
-            document.getElementById('flag-icon').src =
-              `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`
-          })
-      })
-    </script>
+    
 
     <!-- Lightbox Script -->
     <script>

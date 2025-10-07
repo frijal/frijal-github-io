@@ -174,50 +174,8 @@ window.fbAsyncInit = function() {
 });
 </script>
 
-<div class="visitor-info" id="visitor-info">
-<p>Mendeteksi info pengunjung...</p>
-</div>
-</div>
 
-<script>
-document.addEventListener(DOMContentLoaded, () => {
-// Info Visitor: IP + Country Flag + Browser + OS
-async function visitorInfo(){
-  const info = document.getElementById('visitor-info');
-  try{
-    const res = await fetch('https://ipapi.co/json/');
-    const data = await res.json();
-    const ip = data.ip;
-    const country = data.country_code;
-    const flag = `<img src="https://flagcdn.com/24x18/${country.toLowerCase()}.png" alt="${country}">`;
-    let os = "Unknown OS";
-    const ua = navigator.userAgent;
-    if(ua.indexOf("Win")!=-1) os="Windows";
-    else if(ua.indexOf("Mac")!=-1) os="MacOS";
-    else if(ua.indexOf("X11")!=-1) os="UNIX";
-    else if(ua.indexOf("Linux")!=-1) os="Linux";
-    let browser = "Unknown Browser";
-    if(ua.indexOf("Firefox")!=-1) browser="Firefox";
-    else if(ua.indexOf("Chrome")!=-1) browser="Chrome";
-    else if(ua.indexOf("Safari")!=-1 && ua.indexOf("Chrome")==-1) browser="Safari";
-    else if(ua.indexOf("Edge")!=-1) browser="Edge";
-    const osIcon = {
-      "Windows":"<svg width='16' height='16' viewBox='0 0 512 512'><path fill='#00a4ef' d='M0 93.7l211 16.2v188.4H0V93.7zm0 324.6l211 16.2V322.6H0v95.7zm301-324.6l211-16.2v188.4H301V93.7zm0 324.6l211 16.2V322.6H301v95.7z'/></svg>",
-      "MacOS":"<svg width='16' height='16' viewBox='0 0 512 512'><path fill='#000' d='M349 172c0-47-38-85-85-85s-85 38-85 85c0 47 38 85 85 85s85-38 85-85z'/></svg>",
-      "Linux":"<svg width='16' height='16' viewBox='0 0 512 512'><path fill='#f0f0f0' d='M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0z'/></svg>",
-      "UNIX":"<svg width='16' height='16' viewBox='0 0 512 512'><path fill='#ff9900' d='M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0z'/></svg>"
-    };
-    const browserIcon = {
-      "Firefox":"🦊","Chrome":"🌐","Safari":"🧭","Edge":"🔵","Unknown Browser":"❓"
-    };
-    info.innerHTML = `IP: ${ip} ${flag} <br> OS: ${os} ${osIcon[os]||''} <br> Browser: ${browser} ${browserIcon[browser]||''}`;
-  }catch(e){
-    info.innerHTML = "Tidak dapat mendeteksi info pengunjung.";
-  }
-}
-visitorInfo();
-});
-</script>
+
 
 });
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
