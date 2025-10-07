@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sitemap - Daftar Isi Dinamis</title>
+    <title>Sitemap - Daftar Isi Artikel</title>
     <meta name="description" content="Jelajahi semua artikel yang pernah dipublikasikan. Temukan tulisan berdasarkan kategori, gunakan pencarian, dan lacak artikel yang sudah dibaca.">
     <link rel="canonical" href="https://frijal.github.io/sitemap.html">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
@@ -14,14 +14,13 @@
     <meta name="twitter:card" content="summary_large_image">
     
     <style>
-        /* --- DESAIN BARU YANG DISESUAIKAN DENGAN sitemap.js --- */
         :root {
-            --bg-light: #f8f9fa;
-            --surface-light: #ffffff;
-            --text-light: #212529;
-            --text-muted-light: #6c757d;
-            --border-light: #dee2e6;
-            --hover-light: #f1f3f5;
+            --bg-light: #ffffff;
+            --surface-light: #f6f8fa;
+            --text-light: #24292e;
+            --text-muted-light: #586069;
+            --border-light: #e1e4e8;
+            --hover-light: #f3f4f6;
 
             --bg-dark: #0d1117;
             --surface-dark: #161b22;
@@ -45,6 +44,8 @@
             color: var(--text-light);
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
+            /* Beri ruang di atas untuk sticky header */
+            padding-top: 80px; 
         }
 
         body.dark-mode {
@@ -55,70 +56,58 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
+            padding: 1rem 1.5rem 4rem;
         }
 
-        .header { text-align: center; margin-bottom: 2rem; }
-        h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-        #totalCount {
-             color: var(--text-muted-light);
-             font-size: 1.1rem;
-        }
-        body.dark-mode #totalCount { color: var(--text-muted-dark); }
-        
-        /* Marquee */
-        #marquee {
+        /* ===== PERUBAHAN: STICKY CONTROLS ===== */
+        .sticky-controls {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 1.5rem;
             width: 100%;
-            overflow: hidden;
-            background-color: var(--surface-light);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 0.75rem 0;
-            margin: 1.5rem 0;
-            white-space: nowrap;
+            /* Atur ulang padding body karena sticky header sekarang punya padding sendiri */
+            margin-bottom: 1.5rem;
         }
-        body.dark-mode #marquee {
-            background-color: var(--surface-dark);
-            border-color: var(--border-dark);
+        body.dark-mode .sticky-controls {
+            background-color: var(--bg-dark);
+            border-bottom-color: var(--border-dark);
         }
-        #marquee-content {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 60s linear infinite;
+        .sticky-controls-content {
+             max-width: 800px;
+             margin: 0 auto;
         }
-        #marquee-content a {
-            color: var(--text-muted-light);
-            text-decoration: none;
-            margin: 0 1.5rem;
+        .title-and-search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
         }
-        body.dark-mode #marquee-content a { color: var(--text-muted-dark); }
-        #marquee-content a:hover { color: var(--accent-color); }
-        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-
-        /* Controls: Dark Mode Toggle & Buka/Tutup */
+        .title-block h1 { font-size: 1.8rem; font-weight: 600; line-height: 1.2; margin: 0;}
+        .title-block p { color: var(--text-muted-light); margin: 0; }
+        body.dark-mode .title-block p { color: var(--text-muted-dark); }
+        #search-wrapper { flex-grow: 1; max-width: 400px; }
+        
+        /* Pindahkan controls ke bawah search bar */
         .controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            background-color: var(--surface-light);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-        }
-        body.dark-mode .controls {
-            background-color: var(--surface-dark);
-            border-color: var(--border-dark);
         }
         #tocToggle {
-            background-color: transparent;
+            background-color: var(--surface-light);
             border: 1px solid var(--border-light);
             color: var(--text-muted-light);
             padding: 0.5rem 1rem;
             border-radius: 6px;
             cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
         }
         body.dark-mode #tocToggle {
+            background-color: var(--surface-dark);
             border-color: var(--border-dark);
             color: var(--text-muted-dark);
         }
@@ -136,12 +125,11 @@
         body.dark-mode .switch-label { color: var(--text-muted-dark); }
 
         /* Search Input */
-        #search-wrapper { position: relative; margin-bottom: 1.5rem; }
         #search {
             width: 100%;
-            padding: 14px 45px 14px 20px;
+            padding: 10px 40px 10px 15px;
             font-size: 1rem;
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px solid var(--border-light);
             background-color: var(--surface-light);
             color: var(--text-light);
@@ -164,93 +152,116 @@
         }
         body.dark-mode #clearSearch { color: var(--text-muted-dark); }
 
-        /* TOC Container */
+        /* Marquee */
+        #marquee {
+            width: 100%; overflow: hidden; background-color: var(--surface-light);
+            border: 1px solid var(--border-light); border-radius: 8px;
+            padding: 0.75rem 0; margin-bottom: 1.5rem; white-space: nowrap;
+        }
+        body.dark-mode #marquee {
+            background-color: var(--surface-dark); border-color: var(--border-dark);
+        }
+        #marquee-content {
+            display: inline-block; padding-left: 100%; animation: marquee 60s linear infinite;
+        }
+        #marquee-content a {
+            color: var(--text-muted-light); text-decoration: none; margin: 0 1.5rem;
+        }
+        body.dark-mode #marquee-content a { color: var(--text-muted-dark); }
+        #marquee-content a:hover { color: var(--accent-color); text-decoration: underline; }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+
+        /* TOC Container (Tidak berubah banyak) */
         #toc { display: flex; flex-direction: column; gap: 0.75rem; }
-        .category { transition: opacity 0.3s; }
+        .category {
+            border: 1px solid var(--border-light);
+            border-radius: 8px; overflow: hidden; transition: border-color 0.2s;
+        }
+        body.dark-mode .category { border-color: var(--border-dark); }
 
         .category-header {
-            padding: 1rem 1.25rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px;
-            color: #fff; /* Teks putih agar kontras dengan gradient */
-            font-weight: bold;
+            padding: 1rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: bold; background-color: var(--surface-light);
         }
+        body.dark-mode .category-header { background-color: var(--surface-dark); }
         .badge {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 0.25rem 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
+            background-color: var(--border-light); color: var(--text-muted-light);
+            padding: 0.25rem 0.6rem; border-radius: 1rem; font-size: 0.8rem;
         }
-        .toc-list {
-            padding: 0.5rem 0;
-            display: none; /* Default tertutup */
+        body.dark-mode .badge {
+            background-color: var(--border-dark); color: var(--text-muted-dark);
         }
+        .toc-list { padding: 0.5rem 0; display: none; }
         .toc-item {
-            display: flex;
-            padding: 0.5rem;
-            border-radius: 6px;
+            display: flex; padding: 0.75rem 1.25rem;
+            border-top: 1px solid var(--border-light);
         }
+        body.dark-mode .toc-item { border-top-color: var(--border-dark); }
+        .toc-item:hover { background-color: var(--hover-light); }
+        body.dark-mode .toc-item:hover { background-color: var(--hover-dark); }
+        
         .toc-title { width: 100%; }
         .toc-item a {
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.25rem;
+            color: var(--text-light); text-decoration: none;
+            display: block; margin-bottom: 0.25rem;
         }
         body.dark-mode .toc-item a { color: var(--text-dark); }
         .toc-item a:hover { color: var(--accent-color); }
-        .toc-item a.visited {
-            color: var(--text-muted-light);
-            opacity: 0.8;
-        }
+        .toc-item a.visited { color: var(--text-muted-light); opacity: 0.8; }
         body.dark-mode .toc-item a.visited { color: var(--text-muted-dark); }
 
         /* Status Labels */
         .label-visited, .label-new {
-            font-size: 0.75rem;
-            padding: 0.1rem 0.5rem;
-            border-radius: 1rem;
+            font-size: 0.75rem; padding: 0.1rem 0.5rem;
+            border-radius: 1rem; font-weight: 500;
         }
-        .label-visited { color: #198754; background-color: #d1e7dd; }
-        .label-new { color: #6c757d; background-color: #e9ecef; }
+        .label-visited { color: #1a7f37; background-color: #dafbe1; }
+        .label-new { color: #57606a; background-color: #f6f8fa; border: 1px solid #d0d7de;}
         body.dark-mode .label-visited { color: #7ee2a8; background-color: #0d2818; }
-        body.dark-mode .label-new { color: #8b949e; background-color: #21262d; }
+        body.dark-mode .label-new { color: #8b949e; background-color: #21262d; border: 1px solid transparent;}
 
         .highlight {
-            background-color: var(--highlight-bg);
-            color: var(--highlight-text);
-            padding: 2px;
-            border-radius: 3px;
+            background-color: var(--highlight-bg); color: var(--highlight-text);
+            padding: 2px; border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            body { padding-top: 120px; } /* Sesuaikan padding untuk sticky header yang lebih tinggi di mobile */
+            .title-and-search { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+            .title-block h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>Daftar Isi Artikel</h1>
-            <p id="totalCount">Total artikel: 0</p>
-        </header>
 
-        <div id="marquee"><div id="marquee-content">Memuat artikel...</div></div>
-        
-        <div class="controls">
-            <div class="switch-label">
-                <span>🌙</span>
-                <label class="switch">
-                    <input type="checkbox" id="darkSwitch">
-                    <span class="slider"></span>
-                </label>
+    <div class="sticky-controls">
+        <div class="sticky-controls-content">
+            <div class="title-and-search">
+                <div class="title-block">
+                    <h1>Daftar Isi Artikel</h1>
+                    <p id="totalCount">Total artikel: 0</p>
+                </div>
+                <div id="search-wrapper">
+                    <input type="text" id="search" placeholder="Cari artikel...">
+                    <button id="clearSearch" title="Hapus pencarian">×</button>
+                </div>
             </div>
-            <button id="tocToggle">Tutup</button>
+            <div class="controls">
+                <div class="switch-label">
+                    <span>🌙</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkSwitch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <button id="tocToggle">Buka Semua</button>
+            </div>
         </div>
+    </div>
 
-        <div id="search-wrapper">
-            <input type="text" id="search" placeholder="Ketik untuk filter artikel...">
-            <button id="clearSearch" title="Hapus pencarian">×</button>
-        </div>
+    <div class="container">
+        <div id="marquee"><div id="marquee-content">Memuat artikel...</div></div>
         
         <div id="toc">
             <p>Memuat daftar isi...</p>
@@ -284,20 +295,13 @@
                 Object.keys(data).forEach(cat => {
                     grouped[cat] = data[cat]
                         .map(arr => ({
-                            title: arr[0],
-                            file: arr[1],
-                            image: arr[2],
-                            lastmod: arr[3],
-                            description: arr[4],
-                            category: cat
+                            title: arr[0], file: arr[1], image: arr[2], lastmod: arr[3],
+                            description: arr[4], category: cat
                         }))
                         .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
                 });
 
-                const totalArticles = Object.values(grouped).reduce(
-                    (sum, arr) => sum + arr.length,
-                    0
-                );
+                const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
                 totalCount.textContent = `Total artikel: ${totalArticles}`;
 
                 Object.keys(grouped)
@@ -306,11 +310,12 @@
                         const catDiv = document.createElement("div");
                         catDiv.className = "category";
 
+                        // ===== PERUBAHAN: COLLAPSE ON LOAD =====
                         catDiv.innerHTML = `
                           <div class="category-header">
                             ${cat} <span class="badge">${grouped[cat].length}</span>
                           </div>
-                          <div class="toc-list" style="display: block;"></div>
+                          <div class="toc-list" style="display: none;"></div>
                         `;
 
                         const catList = catDiv.querySelector(".toc-list");
@@ -376,9 +381,7 @@
                 }
 
                 const shuffled = shuffle(allArticles);
-                m.innerHTML = shuffled
-                    .map(d => `<a href="artikel/${d.file}">${d.title}</a>`)
-                    .join(" &bull; ");
+                m.innerHTML = shuffled.map(d => `<a href="artikel/${d.file}">${d.title}</a>`).join(" &bull; ");
             } catch (e) {
                 console.error("Gagal load artikel.json", e);
                 document.getElementById("toc").innerHTML = '<p style="color: red;">Gagal memuat daftar isi. Pastikan file artikel.json ada dan valid.</p>';
@@ -391,7 +394,6 @@
         searchInput.addEventListener("input", function () {
             const term = this.value.toLowerCase();
             clearBtn.style.display = this.value ? "block" : "none";
-
             let countVisible = 0;
             const allArticlesCount = Object.values(grouped).flat().length;
 
@@ -405,19 +407,14 @@
                         catVisible = true;
                         countVisible++;
                         const regex = new RegExp(`(${term})`, "gi");
-                        link.innerHTML = `[${formatDate(link.href)}] ${item.dataset.text}`.replace(
-                            regex,
-                            '<span class="highlight">$1</span>'
-                        );
-                    } else {
+                        const originalText = `[${formatDate(link.href.split('/').pop())}] ${item.dataset.text}`;
+                        link.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
+                    } else if (!term) {
                         item.style.display = "flex";
-                        link.innerHTML = `[${formatDate(link.href)}] ${item.dataset.text}`;
-                        if (!term) {
-                           item.style.display = "flex";
-                           catVisible = true;
-                        } else {
-                           item.style.display = "none";
-                        }
+                        link.innerHTML = `[${formatDate(link.href.split('/').pop())}] ${item.dataset.text}`;
+                        catVisible = true;
+                    } else {
+                        item.style.display = "none";
                     }
                 });
                 
@@ -458,52 +455,7 @@
             updateTOCToggleText();
         });
 
-        function getHeaderName(el) {
-            if (!el) return "";
-            const badge = el.querySelector && el.querySelector('.badge');
-            return badge ? el.textContent.replace(badge.textContent, '').trim() : el.textContent.trim();
-        }
-
-        function hashString(str) {
-            let h = 0;
-            for (let i = 0; i < str.length; i++) {
-                h = (h << 5) - h + str.charCodeAt(i);
-                h |= 0;
-            }
-            return Math.abs(h);
-        }
-
-        const gradients = [
-            "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)",
-            "linear-gradient(90deg, #d38312 0%, #a83279 100%)",
-            "linear-gradient(90deg, #00b09b 0%, #96c93d 100%)",
-            "linear-gradient(90deg, #cb2d3e 0%, #ef473a 100%)",
-            "linear-gradient(90deg, #11998e 0%, #38ef7d 100%)",
-            "linear-gradient(90deg, #108dc7 0%, #ef8e38 100%)",
-            "linear-gradient(90deg, #c0392b 0%, #8e44ad 100%)",
-            "linear-gradient(90deg, #16a085 0%, #f4d03f 100%)",
-        ];
-
-        function generateGradientMap(categories) {
-            const map = {};
-            (categories || []).forEach(cat => {
-                map[cat] = gradients[hashString(cat) % gradients.length];
-            });
-            return map;
-        }
-
-        function isDarkModeActive() {
-            return document.body.classList.contains('dark-mode');
-        }
-
-        function applyGradients(categories) {
-            const gradientMap = generateGradientMap(categories || []);
-            document.querySelectorAll('.category-header').forEach(el => {
-                const name = getHeaderName(el);
-                const gradient = gradientMap[name] || gradients[0];
-                el.style.background = isDarkModeActive() ? "#30363d" : gradient;
-            });
-        }
+        function isDarkModeActive() { return document.body.classList.contains('dark-mode'); }
 
         function initDarkMode(categories) {
             const darkSwitch = document.getElementById('darkSwitch');
@@ -517,7 +469,6 @@
                     document.body.classList.remove('dark-mode');
                     if (darkSwitch) darkSwitch.checked = false;
                 }
-                applyGradients(categories);
             }
 
             if (saved !== null) {
@@ -533,7 +484,7 @@
                 });
             }
         }
-
+        
         document.addEventListener("DOMContentLoaded", () => {
             loadTOC().then(() => {
                 const categories = Object.keys(grouped);
