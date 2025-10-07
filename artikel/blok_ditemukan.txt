@@ -1,252 +1,70 @@
 ========================================================
-Ditemukan di: canva-magic-studio-desain-ai.html
+Ditemukan di: 24nabi-isa.html
 ========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+    // Deteksi browser & OS
+    function getBrowserOS(){
+      const ua = navigator.userAgent;
+      let browser = 'Tidak diketahui';
+      if(ua.includes('Edg')) browser = 'Microsoft Edge';
+      else if(ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera';
+      else if(ua.includes('Chrome')) browser = 'Google Chrome';
+      else if(ua.includes('Safari')) browser = 'Safari';
+      else if(ua.includes('Firefox')) browser = 'Mozilla Firefox';
+      else if(ua.includes('SamsungBrowser')) browser = 'Samsung Internet';
 
-========================================================
-Ditemukan di: chatgpt-asisten-virtual-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+      let os = 'Tidak diketahui';
+      if(ua.includes('Windows')) os = 'Windows';
+      else if(ua.includes('Mac OS') || ua.includes('Macintosh')) os = 'macOS';
+      else if(ua.includes('Android')) os = 'Android';
+      else if(ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS/iPadOS';
+      else if(ua.includes('Linux')) os = 'Linux';
 
-========================================================
-Ditemukan di: copy-ai-konten-otomatis.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+      return { browser, os };
+    }
 
-========================================================
-Ditemukan di: faq-ai-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+    // Bendera negara dari kode (emoji regional indicator)
+    function countryFlag(cc){
+      if(!cc || cc.length !== 2) return '🏳️';
+      const code = cc.toUpperCase();
+      const base = 127397;
+      return String.fromCodePoint(code.charCodeAt(0) + base) + String.fromCodePoint(code.charCodeAt(1) + base);
+    }
 
-========================================================
-Ditemukan di: gemini-asisten-virtual-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+    // Render info chips: Browser, OS, IP, Country
+    async function renderInfo(){
+      const { browser, os } = getBrowserOS();
+      const info = document.getElementById('info-chips');
+      const chips = [
+        `<div class="chip"><b>Browser:</b> ${browser}</div>`,
+        `<div class="chip"><b>OS:</b> ${os}</div>`
+      ];
 
-========================================================
-Ditemukan di: grammarly-ai-writing-assistant.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: jasper-ai-content-writer.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: kesimpulan-ai-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: lumen5-video-maker-ai.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: notion-ai-productivity-partner.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: pictory-ai-video-marketing.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: quickbooks-ai-keuangan-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: tidio-chatbot-ai.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
-
-========================================================
-Ditemukan di: tren-masa-depan-ai-umkm.html
-========================================================
-<div class="info-box">
-                    <div class="info-item">
-                        <img src="" id="browserIcon" alt="Ikon Browser">
-                        <span id="browserText">Browser: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="osIcon" alt="Ikon OS">
-                        <span id="osText">OS: ...</span>
-                    </div>
-                    <div class="info-item">
-                        <img src="" id="flagIcon" alt="Bendera Negara">
-                        <span id="ipText">Lokasi: ...</span>
-                    </div>
-                </div>
+      let ip = 'Memuat...', country = 'ID', flag = '🇮🇩';
+      try{
+        const res = await fetch('https://ipapi.co/json/');
+        if(res.ok){
+          const data = await res.json();
+          ip = data.ip || 'Tidak diketahui';
+          country = data.country || 'ID';
+          flag = countryFlag(country);
+        }else{
+          throw new Error('fallback');
+        }
+      }catch(e){
+        try{
+          const res2 = await fetch('https://ipinfo.io/json?token=');
+          const data2 = await res2.json();
+          ip = (data2 && data2.ip) ? data2.ip : 'Tidak diketahui';
+          country = (data2 && data2.country) ? data2.country : 'ID';
+          flag = countryFlag(country);
+        }catch(e2){
+          ip = 'Tidak diketahui';
+          country = 'ID';
+          flag = '🇮🇩';
+        }
+      }
+      chips.push(`<div class="chip"><b>IP:</b> ${ip}</div>`);
+      chips.push(`<div class="chip"><b>Negara:</b> ${flag} ${country}</div>`);
+      info.innerHTML = chips.join('');
+    }
 
