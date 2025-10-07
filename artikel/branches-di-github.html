@@ -470,71 +470,7 @@ git checkout fitur-login
       return svg;
     }
 
-    // Deteksi browser
-    (function(){
-      const ua = navigator.userAgent || '';
-      const nameEl = document.getElementById('browserName');
-      const iconEl = document.getElementById('browserIcon');
-      let name = 'Tidak diketahui', iconPath = 'M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z';
-
-      if (/Edg\//.test(ua)) { name = 'Microsoft Edge'; iconPath = 'M12 2c5.52 0 10 4.48 10 10 0 5.5-4.5 10-10 10-5.7 0-10-4.6-10-10 0-4.7 3.1-8.7 7.4-9.8-.9 1.2-1.4 2.6-1.4 4 0 3.9 3.1 7 7 7 2.3 0 4.3-1.1 5.6-2.8-.4 5-4.6 8.6-9.6 8.6-5.3 0-9.6-4.3-9.6-9.6S6.7 2.4 12 2z'; }
-      else if (/Chrome\//.test(ua) && !/OPR\//.test(ua)) { name = 'Google Chrome'; iconPath = 'M12 2a10 10 0 0 1 8.7 5.02H12a5 5 0 0 0-4.33 2.5L5.17 6.02A10 10 0 0 1 12 2zm0 20a10 10 0 0 1-8.83-6h5.5a5 5 0 0 0 4.33-2.5l2.5 4.33A10 10 0 0 1 12 22zm9.83-8a10 10 0 0 1-3.16 6.02l-3.17-5.49A5 5 0 0 0 12 7h6.7A10 10 0 0 1 21.83 14z'; }
-      else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) { name = 'Safari'; iconPath = 'M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zm2 2l-2 8-8 2 8-2 2-8 8-2-8 2z'; }
-      else if (/Firefox\//.test(ua)) { name = 'Firefox'; iconPath = 'M12 2c5.5 0 10 4.5 10 10 0 4.8-3.4 8.8-8 9.8 2.2-1.2 3.8-3.6 3.8-6.4 0-4.1-3.3-7.4-7.4-7.4-3.2 0-6 2-7 4.9.3-6.1 5.4-10.9 11.6-10.9z'; }
-      else if (/OPR\//.test(ua) || /Opera/.test(ua)) { name = 'Opera'; iconPath = 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.5 0 6.6-1.8 8.4-4.5C19.8 16.2 18 12 18 12s1.8-4.2 2.4-5.5C18.6 3.8 15.5 2 12 2z'; }
-
-      nameEl.textContent = name;
-      iconEl.appendChild(svgIcon(iconPath));
-    })();
-
-    // Deteksi OS
-    (function(){
-      const ua = navigator.userAgent || navigator.platform || '';
-      const nameEl = document.getElementById('osName');
-      const iconEl = document.getElementById('osIcon');
-      let name = 'Tidak diketahui', iconPath = 'M3 5h18v14H3z';
-
-      if (/Windows NT/.test(ua)) { name = 'Windows'; iconPath = 'M3 5l8-1v8H3V5zm8 9v8l-8-1v-7h8zm2-10l8-1v9h-8V4zm8 11v7l-8-1v-6h8z'; }
-      else if (/Mac OS X|Macintosh/.test(ua)) { name = 'macOS'; iconPath = 'M12 2c2.2 0 3.8 1 4.8 2.4-1.4.8-2.6 2.1-2.9 3.8 0 0-1.2-.1-2.4-.1-1.2 0-2.4.1-2.4.1-.3-1.7-1.5-3-2.9-3.8C8.2 3 9.8 2 12 2zm-5 7c-2 .5-3.7 2.2-4.2 4.3-.8 3.2 1.5 6.7 4.4 6.7 1.3 0 2.1-.5 3.2-.5s1.9.5 3.2.5c2.9 0 5.2-3.5 4.4-6.7-.5-2.1-2.2-3.8-4.2-4.3-1.1-.3-2.1-.4-3.4-.4s-2.3.1-3.4.4z'; }
-      else if (/Android/.test(ua)) { name = 'Android'; iconPath = 'M6 8h12v10H6zM7 6l2-3m6 3l-2-3M5 18l-2 3m16-3l2 3'; }
-      else if (/Linux|X11/.test(ua)) { name = 'Linux'; iconPath = 'M12 2c2.2 0 4 1.8 4 4v3c2.2 0 4 1.8 4 4v7H4v-7c0-2.2 1.8-4 4-4V6c0-2.2 1.8-4 4-4z'; }
-      else if (/iPhone|iPad|iPod/.test(ua)) { name = 'iOS'; iconPath = 'M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z'; }
-
-      nameEl.textContent = name;
-      iconEl.appendChild(svgIcon(iconPath));
-    })();
-
-    // IP & lokasi berdasarkan ipify, lalu geo lookup (ipapi.co)
-    (function(){
-      const locationEl = document.getElementById('location');
-      const flagEl = document.getElementById('flag');
-
-      function flagEmoji(cc) {
-        if (!cc || cc.length !== 2) return '🏳️';
-        const codePoints = [...cc.toUpperCase()].map(c => 127397 + c.charCodeAt(0));
-        return String.fromCodePoint(...codePoints);
-      }
-
-      fetch('https://api.ipify.org?format=json&ipv4')
-        .then(r => r.json())
-        .then(({ ip }) => {
-          locationEl.textContent = `IP: ${ip} — mencari negara…`;
-          // Geo lookup
-          return fetch('https://ipapi.co/json/');
-        })
-        .then(r => r.json())
-        .then(data => {
-          const city = data.city || 'Kota tidak diketahui';
-          const region = data.region || '';
-          const country = data.country_name || 'Negara tidak diketahui';
-          const cc = data.country || '';
-          flagEl.textContent = flagEmoji(cc);
-          locationEl.textContent = `${city}${region ? ', ' + region : ''}, ${country} — IP terdeteksi.`;
-        })
-        .catch(() => {
-          locationEl.textContent = 'Gagal mendeteksi lokasi. IP terdeteksi, tapi layanan geo sedang tidak tersedia.';
-          flagEl.textContent = '🏳️';
-        });
+    
     })();
   </script>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>

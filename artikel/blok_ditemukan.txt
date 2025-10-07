@@ -1,54 +1,51 @@
 ========================================================
-Ditemukan di: strategi-branching-github.html
+Ditemukan di: refresh-codespaces-browser.html
 ========================================================
-      // --- Environment Info Logic ---
-      function detectEnvironment() {
-        const ua = navigator.userAgent;
-        let browser = 'Browser Lain', browserIcon = '🌐';
-        let os = 'OS Lain', osIcon = '💻';
+ // Detect Browser & OS icon
+    (function detectUA(){
+      const ua = navigator.userAgent;
+      const platform = navigator.platform || '';
+      const icon = document.getElementById('ua-icon');
+      const text = document.getElementById('ua-text');
 
-        // Detect OS
-        if (/Windows/.test(ua))   { os = 'Windows'; osIcon = '🪟'; }
-        else if (/Macintosh|Mac OS X/.test(ua)) { os = 'macOS'; osIcon = ''; }
-        else if (/Android/.test(ua))  { os = 'Android'; osIcon = '🤖'; }
-        else if (/Linux/.test(ua))    { os = 'Linux'; osIcon = '🐧'; }
-        else if (/iPhone|iPad|iPod/.test(ua)) { os = 'iOS'; osIcon = '📱'; }
-
-        // Detect Browser
-        if (/Edg/.test(ua))       { browser = 'Edge'; browserIcon = '엣'; }
-        else if (/Firefox/.test(ua)) { browser = 'Firefox'; browserIcon = '🦊'; }
-        else if (/Chrome/.test(ua) && !/Chromium/.test(ua)) { browser = 'Chrome'; browserIcon = '🌈'; }
-        else if (/Safari/.test(ua) && !/Chrome/.test(ua)) { browser = 'Safari'; browserIcon = '🧭'; }
-        else if (/OPR/.test(ua)) { browser = 'Opera'; browserIcon = '🅾️'; }
-
-        document.getElementById('browser').textContent = browser;
-        document.getElementById('browser_icon').textContent = browserIcon;
-        document.getElementById('os').textContent = os;
-        document.getElementById('os_icon').textContent = osIcon;
-      }
-      
-      async function fetchLocationInfo() {
-          try {
-              // API ip-api.com langsung memberikan info lokasi dari IP publik kita
-              const response = await fetch('http://ip-api.com/json/?fields=status,message,country,countryCode,city,query');
-              const data = await response.json();
-
-              if (data.status === 'success') {
-                  const countryCode = data.countryCode;
-                  const flag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                  
-                  document.getElementById('loc').textContent = `${data.city}, ${data.country} (${data.query})`;
-                  document.getElementById('flag').textContent = flag;
-              } else {
-                  document.getElementById('loc').textContent = 'Gagal mendeteksi lokasi.';
-              }
-          } catch (error) {
-              console.error('Error fetching location:', error);
-              document.getElementById('loc').textContent = 'Tidak bisa terhubung ke server lokasi.';
-          }
+      function draw(pathD){
+        icon.setAttribute('viewBox','0 0 24 24');
+        icon.innerHTML = `<path fill="currentColor" d="${pathD}"/>`;
       }
 
-      // Run detection functions
-      detectEnvironment();
-      fetchLocationInfo();
+      let browser = 'Browser tidak dikenal';
+      if (/Edg\//.test(ua)) { browser = 'Microsoft Edge'; draw('M12 2a10 10 0 1 0 0 20 9.9 9.9 0 0 0 9.9-8.8c-4.3 3.6-9.9 1.9-9.9-2.9 0-3.7 3.3-6.5 7.2-6.1A10 10 0 0 0 12 2z'); }
+      else if (/Chrome\//.test(ua)) { browser = 'Google Chrome'; draw('M12 4a8 8 0 0 1 6.9 4h-6.9a4 4 0 0 0-3.5 2l-3.5-6A8 8 0 0 1 12 4zm8 8a8 8 0 0 1-1.1 4.1l-3.4-5.9A4 4 0 0 0 12 10h8zm-8 8a8 8 0 0 1-6.9-4h6.9a4 4 0 0 0 3.5-2l3.5 6A8 8 0 0 1 12 20z'); }
+      else if (/Firefox\//.test(ua)) { browser = 'Mozilla Firefox'; draw('M12 2c5.5 0 10 4.5 10 10a10 10 0 0 1-17.4 6.6c.6-3.3 2.7-5.1 5-6.3-.3-1.2.1-2.7 1.1-3.8 1.6-1.7 4.3-1.9 6.2-.8-.7-2.1-2.4-3.7-4.4.7-.2 1.4-.3 2.1-.3z'); }
+      else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) { browser = 'Safari'; draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 5.5-2.8 6.5-6.2 2.5 2.8-6.5 6.2-2.5z'); }
+      else if (/OPR\//.test(ua)) { browser = 'Opera'; draw('M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10c-3.5 0-6.6-1.8-8.4-4.6C6.5 18.6 9 16 9 12.1 9 8.2 6.5 5.6 3.6 4.6 5.4 2 8.5 0 12 0c0 .7 0 1.3 0 2z'); }
+      else { draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'); }
+
+      let os = 'OS tidak dikenal';
+      if (/Win/.test(platform)) os = 'Windows';
+      else if (/Mac/.test(platform)) os = 'macOS';
+      else if (/Linux/.test(platform)) os = 'Linux';
+      else if (/Android/.test(ua)) os = 'Android';
+      else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+
+      text.textContent = `${browser} • ${os}`;
+    })();
+
+    // Location & flag: IP (via ipify) + language fallback
+    (function detectLocation(){
+      const badgeText = document.getElementById('loc-text');
+      const flag = document.getElementById('flag');
+
+      const lang = (navigator.language || 'id-ID').toLowerCase();
+      const country = lang.split('-')[1] || 'ID';
+      const mapFlag = {
+        'ID':'🇮🇩','US':'🇺🇸','GB':'🇬🇧','FR':'🇫🇷','DE':'🇩🇪','JP':'🇯🇵','CN':'🇨🇳','IN':'🇮🇳','BR':'🇧🇷','CA':'🇨🇦','AU':'🇦🇺','ES':'🇪🇸','IT':'🇮🇹','MX':'🇲🇽','SG':'🇸🇬','MY':'🇲🇾'
+      };
+      flag.textContent = mapFlag[country.toUpperCase()] || '🌐';
+      badgeText.textContent = `Bahasa: ${lang} • Perkiraan negara: ${country.toUpperCase()}`;
+
+      fetch('https://api.ipify.org?format=json&ipv4')
+        .then(r => r.json())
+        .then(d => { badgeText.textContent += ` • IP: ${d.ip}`; })
+        .catch(() => { badgeText.textContent += ' • IP: (gagal memuat)'; });
 
