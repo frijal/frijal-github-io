@@ -1,7 +1,10 @@
 // ============================================================
-// ICON RESMI BERWARNA + DARK/LIGHT MODE + HOVER + SKALA RESPONSIF
+// IPOSBROWSER.JS — Deteksi Browser & OS + Ikon Adaptif Modern
 // ============================================================
 
+// ---------------------------
+// 1️⃣ IKON RESMI BERWARNA
+// ---------------------------
 const browserIcons = {
   "Firefox": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -13,34 +16,29 @@ const browserIcons = {
   </defs>
   <circle cx="24" cy="24" r="22" fill="url(#firefoxGradient)" />
   <path fill="#fff" d="M33 14c-2-1-4-1-6 0-3 1-5 4-5 7 0 4 3 7 7 7 2 0 4-1 5-3 1-1 2-3 1-5-1-2-2-4-4-6z"/>
-</svg>
-  `,
+</svg>`,
   "Chrome": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <circle cx="24" cy="24" r="22" fill="#DB4437"/>
   <path fill="#0F9D58" d="M24 24h22A22 22 0 0 1 2 24h22z"/>
   <path fill="#F4B400" d="M24 24L13 4a22 22 0 0 1 35 20H24z"/>
   <circle cx="24" cy="24" r="7" fill="#4285F4"/>
-</svg>
-  `,
+</svg>`,
   "Edge": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <path fill="#0A84FF" d="M24 2a22 22 0 1 1 0 44 22 22 0 0 1 0-44z"/>
   <path fill="#00C6FF" d="M14 24c0 6 4 10 10 10 3 0 5-2 5-4 0-3-4-3-7-3-3 0-6-1-8-3z"/>
-</svg>
-  `,
+</svg>`,
   "Safari": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <circle cx="24" cy="24" r="22" fill="#0A84FF"/>
   <polygon points="24,10 28,24 24,38 20,24" fill="#fff"/>
-</svg>
-  `,
+</svg>`,
   "Unknown": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 24 24" fill="gray" xmlns="http://www.w3.org/2000/svg">
   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
            10-4.48 10-10S17.52 2 12 2zm-1 13h2v2h-2zm0-8h2v6h-2z"/>
-</svg>
-  `
+</svg>`
 };
 
 const osIcons = {
@@ -50,101 +48,113 @@ const osIcons = {
   <rect x="2" y="26" width="20" height="16" fill="#0078D7"/>
   <rect x="26" y="6" width="20" height="16" fill="#00A4EF"/>
   <rect x="26" y="26" width="20" height="16" fill="#00A4EF"/>
-</svg>
-  `,
+</svg>`,
   "macOS": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <circle cx="24" cy="24" r="22" fill="#000"/>
   <path fill="#fff" d="M30 10c-2 0-4 1-5 3-1 2-1 4 1 6 1 1 3 2 5 2 2 0 4-1 5-2 1-2 1-4-1-6-1-2-3-3-5-3z"/>
-</svg>
-  `,
+</svg>`,
   "Linux": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <circle cx="24" cy="24" r="22" fill="#FCC624"/>
   <path fill="#000" d="M17 14h14v20H17z"/>
   <circle cx="20" cy="18" r="2" fill="#fff"/>
   <circle cx="28" cy="18" r="2" fill="#fff"/>
-</svg>
-  `,
+</svg>`,
   "Android": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <rect x="10" y="10" width="28" height="28" rx="6" fill="#3DDC84"/>
   <circle cx="18" cy="20" r="2" fill="#fff"/>
   <circle cx="30" cy="20" r="2" fill="#fff"/>
-</svg>
-  `,
+</svg>`,
   "iOS": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
   <path fill="#000" d="M24 2C12 2 4 10 4 22c0 8 4 14 9 18s8 4 11 4c5 0 9-2 12-5 3-3 4-7 4-11 0-8-5-14-10-16-3-2-6-2-6-2z"/>
-</svg>
-  `,
+</svg>`,
   "Unknown": `
 <svg class="icon-hover responsive-icon" viewBox="0 0 24 24" fill="gray" xmlns="http://www.w3.org/2000/svg">
   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
            10-4.48 10-10S17.52 2 12 2zm-1 13h2v2h-2zm0-8h2v6h-2z"/>
-</svg>
-  `
+</svg>`
 };
 
-
-
-// --- Deteksi Browser ---
-function getBrowserInfo() {
+// ---------------------------
+// 2️⃣ DETEKSI BROWSER & OS
+// ---------------------------
+function detectBrowser() {
   const ua = navigator.userAgent;
-  let name = "Unknown";
-  if (/(firefox|fxios)/i.test(ua)) name = "Firefox";
-  else if (/edg/i.test(ua)) name = "Edge";
-  else if (/chrome|crios/i.test(ua) && !/edg/i.test(ua)) name = "Chrome";
-  else if (/safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)) name = "Safari";
-  return { name, icon: browserIcons[name] || browserIcons["Unknown"] };
+  if (ua.includes("Firefox")) return "Firefox";
+  if (ua.includes("Edg")) return "Edge";
+  if (ua.includes("Chrome")) return "Chrome";
+  if (ua.includes("Safari")) return "Safari";
+  return "Unknown";
 }
 
-// --- Deteksi OS ---
-function getOSInfo() {
-  const ua = navigator.userAgent.toLowerCase();
-  let name = "Unknown";
-  if (/android/.test(ua)) name = "Android";
-  else if (/iphone|ipad|ipod/.test(ua)) name = "iOS";
-  else if (/win/.test(ua)) name = "Windows";
-  else if (/mac/.test(ua)) name = "macOS";
-  else if (/linux/.test(ua)) name = "Linux";
-  return { name, icon: osIcons[name] || osIcons["Unknown"] };
+function detectOS() {
+  const ua = navigator.userAgent;
+  if (ua.includes("Windows")) return "Windows";
+  if (ua.includes("Mac")) return "macOS";
+  if (ua.includes("Linux")) return "Linux";
+  if (/Android/i.test(ua)) return "Android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+  return "Unknown";
 }
 
-// --- Render Info ke Halaman ---
-async function renderClientInfo() {
-  const infoContainer = document.getElementById("footerInfo");
-  if (!infoContainer) return; // Keluar jika elemen tidak ditemukan
+// ---------------------------
+// 3️⃣ TAMBAHKAN KE HALAMAN
+// ---------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const browser = detectBrowser();
+  const os = detectOS();
 
-  const browser = getBrowserInfo();
-  const os = getOSInfo();
-
-  let html = `
-    <div class="info-item">${browser.icon}<span>${browser.name}</span></div>
-    <div class="info-item">${os.icon}<span>${os.name}</span></div>
+  const infoBox = document.createElement("div");
+  infoBox.id = "ipos-browser-info";
+  infoBox.innerHTML = `
+    <span class="icon browser">${browserIcons[browser]}</span>
+    <span class="icon os">${osIcons[os]}</span>
+    <span class="info-text">${browser} di ${os}</span>
   `;
 
-  try {
-    // 1. Ambil alamat IPv4 terlebih dahulu
-    const ipRes = await fetch('https://api.ipify.org?format=json');
-    const ipData = await ipRes.json();
-    const ipv4 = ipData.ip;
+  // sisipkan di header sticky sitemap
+  const header = document.querySelector(".sticky-controls-content");
+  if (header) header.appendChild(infoBox);
+});
 
-    // 2. Gunakan IPv4 untuk mencari info lokasi
-    const locRes = await fetch(`https://ipapi.co/${ipv4}/json/`);
-    const locData = await locRes.json();
-
-    const countryCode = (locData.country_code || "??").toUpperCase();
-    const flagEmoji = countryCode.split("").map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join("");
-    
-    html += `<div class="info-item"><span>${flagEmoji} ${locData.city}, ${locData.country_name}</span></div>`;
-
-  } catch (err) {
-    console.error("Gagal memuat info lokasi:", err);
-    html += `<div class="info-item"><span>Lokasi tidak terdeteksi</span></div>`;
-  }
-  
-  infoContainer.innerHTML = html;
+// ---------------------------
+// 4️⃣ CSS TAMBAHAN
+// ---------------------------
+const style = document.createElement("style");
+style.textContent = `
+#ipos-browser-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--text-color, #555);
 }
+.icon-hover {
+  transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.icon-hover:hover {
+  transform: scale(1.15) rotate(3deg);
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+}
+@media (prefers-color-scheme: dark) {
+  .icon-hover {
+    filter: brightness(1.1) contrast(1.05);
+  }
+  .icon-hover:hover {
+    filter: drop-shadow(0 0 8px rgba(0,255,255,0.4));
+  }
+}
+.responsive-icon { width: 24px; height: 24px; }
+@media (max-width: 600px) {
+  .responsive-icon { width: 16px; height: 16px; }
+  #ipos-browser-info { font-size: 0.8rem; }
+}
+`;
+document.head.appendChild(style);
 
-document.addEventListener("DOMContentLoaded", renderClientInfo);
