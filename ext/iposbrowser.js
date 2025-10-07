@@ -21,25 +21,43 @@ function detectOS() {
     return "Unknown";
 }
 
-async function fetchGeoIP() {
-    try {
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        if (!ipRes.ok) throw new Error('Gagal mengambil IP');
-        const ipData = await ipRes.json();
-        const ipv4 = ipData.ip;
 
-        const locRes = await fetch(`https://ipapi.co/${ipv4}/json/`);
+async function fetchGeoIP() {
+    let ipAddress = null;
+
+    try {
+        // Langkah 1: Coba dapatkan IPv4
+        try {
+            const ip4Res = await fetch('https://api.ipify.org?format=json');
+            if (!ip4Res.ok) throw new Error('API IPv4 tidak merespons');
+            const ip4Data = await ip4Res.json();
+            ipAddress = ip4Data.ip;
+            console.log("Deteksi berhasil menggunakan IPv4:", ipAddress);
+        } catch (ipv4Error) {
+            console.warn("Gagal mendapatkan IPv4, mencoba fallback ke IPv6...", ipv4Error);
+            
+            // Langkah 2: Jika IPv4 gagal, coba dapatkan IPv6
+            const ip6Res = await fetch('https://api64.ipify.org?format=json');
+            if (!ip6Res.ok) throw new Error('API IPv6 juga tidak merespons');
+            const ip6Data = await ip6Res.json();
+            ipAddress = ip6Data.ip;
+            console.log("Deteksi berhasil menggunakan IPv6:", ipAddress);
+        }
+
+        // Langkah 3: Jika salah satu IP berhasil didapat, cari lokasinya
+        const locRes = await fetch(`https://ipapi.co/${ipAddress}/json/`);
         if (!locRes.ok) throw new Error('Gagal mengambil data lokasi');
         const locData = await locRes.json();
         
         return {
-            ip: ipv4,
+            ip: ipAddress,
             city: locData.city,
             country: locData.country_name,
             code: locData.country_code
         };
+
     } catch (err) {
-        console.error("GeoIP Error:", err);
+        console.error("GeoIP Error Final:", err);
         return null;
     }
 }
