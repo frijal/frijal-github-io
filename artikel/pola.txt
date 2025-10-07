@@ -1,50 +1,93 @@
-// Deteksi sederhana Browser & OS
-        ;(function detectUA() {
-          const ua = navigator.userAgent
-          const bMap = [
-            { k: /Edg\//, n: 'Microsoft Edge' },
-            { k: /OPR\//, n: 'Opera' },
-            { k: /Chrome\//, n: 'Google Chrome' },
-            { k: /Safari\//, n: 'Safari' },
-            { k: /Firefox\//, n: 'Mozilla Firefox' },
-          ]
-          const oMap = [
-            { k: /Windows NT 10|Windows NT 11/, n: 'Windows 10/11' },
-            { k: /Windows NT 6\./, n: 'Windows 7/8' },
-            { k: /Android/, n: 'Android' },
-            { k: /iPhone|iPad|iPod/, n: 'iOS' },
-            { k: /Mac OS X/, n: 'macOS' },
-            { k: /Linux/, n: 'Linux' },
-          ]
-          const b = (
-            bMap.find((x) => x.k.test(ua)) || { n: 'Browser tak dikenal' }
-          ).n
-          const o = (oMap.find((x) => x.k.test(ua)) || { n: 'OS tak dikenal' })
-            .n
-          document.getElementById('ua-browser').textContent = b
-          document.getElementById('ua-os').textContent = o
-        })()
-
-        // Lokasi berdasarkan IP (ipapi.co)
-        ;(function geoIP() {
-          const geoEl = document.getElementById('geo')
-          const flagEl = document.getElementById('flag')
-          fetch('https://ipapi.co/json/')
-            .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-            .then((d) => {
-              const city = d.city || 'Kota tidak diketahui'
-              const country = d.country_name || ''
-              const cc = (d.country_code || '').toLowerCase()
-              geoEl.textContent = city + (country ? ', ' + country : '')
-              if (cc) {
-                flagEl.src = `https://flagcdn.com/w40/${cc}.png`
-                flagEl.alt = `Bendera ${country || cc.toUpperCase()}`
-              } else {
-                flagEl.src =
-                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-              }
-            })
-            .catch(() => {
-              geoEl.textContent = 'Lokasi tidak tersedia'
-            })
-        })()
+let e = 'Browser Tidak Dikenal',
+              t = '',
+              c = 'OS Tidak Dikenal',
+              i = ''
+            ;(/Edg\/(\d+(\.\d+)?)/.test((a = navigator.userAgent))
+              ? ((e = 'Microsoft Edge'), (t = RegExp.$1))
+              : /OPR\/(\d+(\.\d+)?)/.test(a) || /Opera\/(\d+(\.\d+)?)/.test(a)
+                ? ((e = 'Opera'), (t = RegExp.$1))
+                : !/Chrome\/(\d+(\.\d+)?)/.test(a) ||
+                    /Chromium/.test(a) ||
+                    /Edg\//.test(a)
+                  ? /Firefox\/(\d+(\.\d+)?)/.test(a)
+                    ? ((e = 'Mozilla Firefox'), (t = RegExp.$1))
+                    : /Safari\/(\d+(\.\d+)?)/.test(a) &&
+                        /Version\/(\d+(\.\d+)?)/.test(a)
+                      ? ((e = 'Safari'), (t = RegExp.$1))
+                      : /Chromium\/(\d+(\.\d+)?)/.test(a) &&
+                        ((e = 'Chromium'), (t = RegExp.$1))
+                  : ((e = 'Google Chrome'), (t = RegExp.$1)),
+              /Windows NT ([0-9.]+)/.test(a)
+                ? ((c = 'Windows'),
+                  (i =
+                    { '10.0': '10/11', 6.3: '8.1', 6.2: '8', 6.1: '7' }[
+                      RegExp.$1
+                    ] || RegExp.$1))
+                : /Android ([0-9.]+)/.test(a)
+                  ? ((c = 'Android'), (i = RegExp.$1))
+                  : /iPhone OS ([0-9_]+)/.test(a) ||
+                      /iPad; CPU OS ([0-9_]+)/.test(a)
+                    ? ((c = 'iOS'), (i = (RegExp.$1 || '').replace(/_/g, '.')))
+                    : /Mac OS X ([0-9_]+)/.test(a)
+                      ? ((c = 'macOS'), (i = RegExp.$1.replace(/_/g, '.')))
+                      : /CrOS/.test(a)
+                        ? (c = 'ChromeOS')
+                        : /Linux/.test(a) && (c = 'Linux'))
+            var a =
+                {
+                  'Google Chrome':
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#db4437"/><path d="M21.54 7H12l-3.46-6A10.01 10.01 0 0 1 21.54 7z" fill="#ffcd40"/><path d="M2.46 7 8.54 17h6.92A10 10 0 0 1 2.46 7z" fill="#0f9d58"/><circle cx="12" cy="12" r="5" fill="#4285f4"/></svg>',
+                  'Mozilla Firefox':
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF9500"/><path fill="#fff" d="M7 16c1.5 1.8 3.8 2.3 6 1.5 2.2-.8 3.8-2.8 4-5-.7 1.3-2 2.2-3.5 2.5-1.6.3-3.2-.2-4.3-1.3C8 12.6 7.5 11.4 7.5 10c-.9 1-1.5 2.3-1.5 3.7 0 .9.3 1.7 1 2.3z"/></svg>',
+                  'Microsoft Edge':
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0c59a4"/><path d="M5 16c2.5 4 9 5 13 1-2 1.5-6 1.5-8.5.5S6.5 16.5 5 16z" fill="#37c7f4"/></svg>',
+                  Safari:
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0fb5ee"/><path d="M12 6l3 6-6 3 3-9z" fill="#fff"/></svg>',
+                  Opera:
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff1b2d"/><ellipse cx="12" cy="12" rx="5" ry="8" fill="#fff"/></svg>',
+                  Chromium:
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#5f98f7"/><circle cx="12" cy="12" r="5" fill="#2e6ae8"/></svg>',
+                }[e] ||
+                '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>',
+              r =
+                {
+                  Windows:
+                    '<svg class="ico" viewBox="0 0 24 24"><path fill="#00A4EF" d="M3 4l8-1v9H3M12 3l9-1v10h-9M3 13h8v9l-8-1M12 13h9v10l-9-1"/></svg>',
+                  macOS:
+                    '<svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M16 2c-1 0-2 .6-2.6 1.5-.6.9-1.2 2.2-.9 3.4 1.2.1 2.5-.7 3.2-1.6.7-.9 1.1-2.1 1.2-3.3z"/><path fill="#A3AAAE" d="M20.7 17.2c-.5 1.1-1.2 2.2-2.1 3.2-.7.8-1.5 1.6-2.5 1.6-1 .1-1.3-.5-2.5-.5-1.2 0-1.5.6-2.5.5-1-.1-1.8-.8-2.5-1.6-1.8-2-3.1-5-2.1-7.6.8-2.1 2.7-3.4 4.7-3.5 1 .1 1.9.6 2.6.6.7 0 1.7-.7 2.9-.6 1.1.1 2.2.5 2.9 1.4-2.6 1.6-2.2 5.4.6 6.5z"/></svg>',
+                  Linux:
+                    '<svg class="ico" viewBox="0 0 24 24"><path fill="#FCC624" d="M12 2c2.8 0 5 2.2 5 5v2c2.2.3 4 2.2 4 4.5 0 2.5-2 4.5-4.5 4.5H7.5C5 18 3 16 3 13.5 3 11.2 4.8 9.3 7 9V7c0-2.8 2.2-5 5-5z"/><circle cx="9.5" cy="7.5" r="1" fill="#000"/><circle cx="14.5" cy="7.5" r="1" fill="#000"/></svg>',
+                  Android:
+                    '<svg class="ico" viewBox="0 0 24 24"><path fill="#3DDC84" d="M7 8h10v10a2 2 0 0 1-2 2h-1v2h-2v-2H9a2 2 0 0 1-2-2V8z"/><path fill="#3DDC84" d="M7 6l-2-3m12 3l2-3" stroke="#3DDC84" stroke-width="1.5"/></svg>',
+                  iOS: '<svg class="ico" viewBox="0 0 24 24"><path fill="#fff" d="M16.36 2.64a4.5 4.5 0 0 1-1.66 3.04A4.2 4.2 0 0 1 11.99 7a4.2 4.2 0 0 1 1.69-3.39A4.5 4.5 0 0 1 16.36 2.64z"/><path fill="#A3AAAE" d="M20 17.2c-.5 1.1-1.2 2.2-2.1 3.2-.7.8-1.5 1.6-2.5 1.6-1 .1-1.3-.5-2.5-.5-1.2 0-1.5.6-2.5.5-1-.1-1.8-.8-2.5-1.6C6.1 18.9 5 16.4 5.9 14c.8-2.1 2.7-3.4 4.7-3.5 1 .1 1.9.6 2.6.6.7 0 1.7-.7 2.9-.6 1.1.1 2.2.5 2.9 1.4-2.6 1.6-2.2 5.4.6 6.5z"/></svg>',
+                  ChromeOS:
+                    '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M2 12a10 10 0 0 1 18-6H12L6.5 6.5" fill="#EA4335"/></svg>',
+                }[c] ||
+                '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>'
+            ;((document.getElementById('ua-browser').textContent =
+              e + (t ? ' ' + t : '')),
+              (document.getElementById('ua-os').textContent =
+                c + (i ? ' ' + i : '')),
+              (document.getElementById('ico-browser').innerHTML = a),
+              (document.getElementById('ico-os').innerHTML = r))
+          })(),
+          (() => {
+            let c = document.getElementById('ip'),
+              i = document.getElementById('city'),
+              a = document.getElementById('country'),
+              r = document.getElementById('flag')
+            fetch('https://ipapi.co/json/')
+              .then((e) => e.json())
+              .then((e) => {
+                var t
+                ;((c.textContent = e.ip || '-'),
+                  (i.textContent = e.city || '-'),
+                  (a.textContent =
+                    (e.country_name || '-') +
+                    (e.country_code ? ' (' + e.country_code + ')' : '')),
+                  e.country_code
+                    ? ((t = String(e.country_code).toLowerCase()),
+                      (r.src = `https://flagcdn.com/48x36/${t}.png`),
+                      (r.alt =
+                        'Bendera ' + (e.country_name || t.toUpperCase())))
+                    : (r.style.display = 'none'))
