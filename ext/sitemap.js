@@ -1,7 +1,6 @@
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
 let grouped = {};
 
-// ===== Palet Warna Baru (Tanpa Ungu/Violet) =====
 const categoryColors = [
     'linear-gradient(45deg, #d32f2f, #f44336)', // Red
     'linear-gradient(45deg, #1976d2, #2196f3)', // Blue
@@ -15,7 +14,6 @@ const categoryColors = [
     'linear-gradient(45deg, #607d8b, #9e9e9e)'  // Blue Grey
 ];
 
-// Fungsi shuffle akan kita gunakan untuk mengacak warna
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -78,10 +76,8 @@ async function loadTOC() {
             .forEach((cat, index) => {
                 const catDiv = document.createElement("div");
                 catDiv.className = "category";
-                
                 const color = shuffledColors[index % shuffledColors.length];
                 catDiv.style.setProperty('--category-color', color);
-                
                 catDiv.innerHTML = `
                   <div class="category-content">
                       <div class="category-header">
@@ -134,15 +130,51 @@ async function loadTOC() {
                 });
                 toc.appendChild(catDiv);
             });
+
         const m = document.getElementById("marquee-content");
         const allArticles = Object.values(grouped).flat();
         const shuffledMarquee = shuffle([...allArticles]);
-        m.innerHTML = shuffledMarquee.map(d => `<a href="artikel/${d.file}">${d.title}</a>`).join(" &bull; ");
+
+        // UBAH: Tambahkan data-description ke setiap link di marquee
+        const marqueeHTML = shuffledMarquee.map(d => {
+            // Escape tanda kutip dalam deskripsi untuk mencegah HTML rusak
+            const cleanDescription = (d.description || 'Tidak ada deskripsi.').replace(/"/g, '&quot;');
+            return `<a href="artikel/${d.file}" data-description="${cleanDescription}">${d.title}</a>`;
+        }).join(" &bull; ");
+        m.innerHTML = marqueeHTML;
+
+        // TAMBAHKAN: Logika untuk Tooltip Marquee
+        const tooltip = document.getElementById('marquee-tooltip');
+        const marqueeLinks = document.querySelectorAll('#marquee-content a');
+
+        marqueeLinks.forEach(link => {
+            link.addEventListener('mouseover', (e) => {
+                const description = e.target.getAttribute('data-description');
+                if (description) {
+                    tooltip.innerHTML = description;
+                    tooltip.style.display = 'block';
+                }
+            });
+
+            link.addEventListener('mousemove', (e) => {
+                // Posisi tooltip sedikit di bawah dan di kanan kursor
+                tooltip.style.left = e.clientX + 15 + 'px';
+                tooltip.style.top = e.clientY + 15 + 'px';
+            });
+
+            link.addEventListener('mouseout', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+
     } catch (e) {
         console.error("Gagal load artikel.json", e);
         toc.innerHTML = '<p style="color: red;">Gagal memuat daftar isi.</p>';
     }
 }
+
+// ... (sisa kode JavaScript lainnya tetap sama)
+// ... (fungsi searchInput, clearBtn, updateTOCToggleText, tocToggleBtn, initDarkMode)
 
 const searchInput = document.getElementById("search");
 const clearBtn = document.getElementById("clearSearch");
@@ -232,7 +264,7 @@ function initDarkMode() {
         });
     }
 }
-
+        
 document.addEventListener("DOMContentLoaded", () => {
     loadTOC().then(() => {
         initDarkMode();

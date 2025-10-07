@@ -11,7 +11,7 @@
     --text-dark: #e6edf3;
     --text-muted-dark: #8b949e;
     --border-dark: #30363d;
-    --hover-dark: rgba(139, 148, 158, 0.1);
+    --hover-dark: rgba(139, 158, 0.1);
     
     --accent-color: #58a6ff;
     --highlight-bg: #ffe066;
@@ -169,14 +169,46 @@ body.dark-mode #marquee {
     background-color: var(--surface-dark); border-color: var(--border-dark);
 }
 #marquee-content {
-    display: inline-block; padding-left: 100%; animation: marquee 60s linear infinite;
+    display: inline-block; 
+    padding-left: 100%; 
+    /* UBAH: Kecepatan animasi dilambatkan */
+    animation: marquee 1200s linear infinite;
 }
+
+/* TAMBAHKAN: Efek pause saat hover */
+#marquee:hover #marquee-content {
+    animation-play-state: paused;
+}
+
 #marquee-content a {
     color: var(--text-muted-light); text-decoration: none; margin: 0 1.5rem;
 }
 body.dark-mode #marquee-content a { color: var(--text-muted-dark); }
 #marquee-content a:hover { color: var(--accent-color); text-decoration: underline; }
 @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+
+/* TAMBAHKAN: Gaya untuk Tooltip */
+#marquee-tooltip {
+    position: fixed;
+    display: none;
+    background-color: var(--surface-dark);
+    color: var(--text-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    max-width: 350px;
+    font-size: 0.85rem;
+    z-index: 1001; /* Tampil di atas sticky header */
+    pointer-events: none; /* Agar tooltip tidak mengganggu hover mouse */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+body:not(.dark-mode) #marquee-tooltip {
+    background-color: var(--surface-light);
+    color: var(--text-light);
+    border-color: var(--border-light);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 
 #toc { display: flex; flex-direction: column; gap: 0.75rem; }
 
@@ -283,16 +315,13 @@ body.dark-mode .label-new { color: #8b949e; background-color: #21262d; border: 1
 #feed-link svg {
     width: 22px;
     height: 22px;
-    /* UBAH: Gunakan 'color' agar semua bagian SVG (stroke & fill) ikut berubah */
     color: var(--text-muted-light);
     transition: color 0.2s ease-in-out;
 }
 body.dark-mode #feed-link svg {
-    /* UBAH: Gunakan 'color' */
     color: var(--text-muted-dark);
 }
 #feed-link:hover svg {
-    /* UBAH: Gunakan 'color' */
     color: #ee802f;
 }
 
