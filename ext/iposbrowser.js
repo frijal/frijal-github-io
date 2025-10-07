@@ -90,6 +90,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const style = document.createElement("style");
 style.textContent = `
+/* ================================
+   Container Info
+================================ */
 #ipos-browser-info {
   display: flex;
   align-items: center;
@@ -123,14 +126,38 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
   vertical-align: middle;
 }
 
+/* ================================
+   Ikon + Animasi Hover
+================================ */
 #ipos-browser-info .icon svg {
   width: 24px;
   height: 24px;
+  cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
+
+/* Hover: kombinasi scale + rotate + glow + pulse */
 #ipos-browser-info .icon svg:hover {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 5px rgba(88,166,255,0.35));
+  transform: scale(1.15) rotate(8deg);
+  filter: drop-shadow(0 0 6px rgba(88,166,255,0.45));
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Pulse keyframes */
+@keyframes pulse {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.2) rotate(8deg); }
+  100% { transform: scale(1.15) rotate(8deg); }
+}
+
+/* Light mode: shadow lebih gelap */
+body:not(.dark-mode) #ipos-browser-info .icon svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Dark mode: shadow lebih terang */
+body.dark-mode #ipos-browser-info .icon svg {
+  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.2));
 }
 
 @media (max-width: 600px) {
@@ -145,27 +172,27 @@ document.head.appendChild(style);
 
 const browserIcons = {
   "Firefox": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="url(#firefoxGradient)"/>
   <defs>
     <radialGradient id="firefoxGradient" cx="35%" cy="35%" r="65%">
       <stop offset="0%" stop-color="#ffb300"/>
-      <stop offset="45%" stop-color="#ff5a00"/>
+      <stop offset="50%" stop-color="#ff5a00"/>
       <stop offset="100%" stop-color="#d500f9"/>
     </radialGradient>
   </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#firefoxGradient)"/>
-  <path fill="#fff" opacity="0.9" d="M45 20c-3-2-6-2-9 0-4 2-7 6-7 10 0 6 4 10 10 10 3 0 6-2 8-5 1-2 2-5 0-8-1-3-2-5-2-7z"/>
+  <path d="M44 18c-6-4-14 0-16 7-2 7 3 14 10 15 6 1 12-4 12-10 0-5-2-9-6-12z" fill="#fff" opacity="0.9"/>
 </svg>`,
   "Chrome": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#4285F4"/>
-  <path fill="#EA4335" d="M32 32L10 14a30 30 0 0 1 44-4L32 32z"/>
-  <path fill="#FBBC05" d="M32 32l22-22a30 30 0 0 1 6 22H32z"/>
-  <path fill="#34A853" d="M32 32H2a30 30 0 0 0 30 30V32z"/>
-  <circle cx="32" cy="32" r="9" fill="#fff" opacity="0.95"/>
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="#fff"/>
+  <path fill="#EA4335" d="M32 32L12 12a30 30 0 0 1 40-2L32 32z"/>
+  <path fill="#FBBC05" d="M32 32h30a30 30 0 0 0-10-22L32 32z"/>
+  <path fill="#34A853" d="M32 32L12 52a30 30 0 0 0 40-2L32 32z"/>
+  <circle cx="32" cy="32" r="10" fill="#4285F4"/>
 </svg>`,
   "Edge": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <defs>
     <radialGradient id="edgeGradient" cx="30%" cy="30%" r="70%">
       <stop offset="0%" stop-color="#00C6FF"/>
@@ -173,60 +200,62 @@ const browserIcons = {
     </radialGradient>
   </defs>
   <circle cx="32" cy="32" r="30" fill="url(#edgeGradient)"/>
-  <path fill="#fff" opacity="0.9" d="M20 32c0 9 7 14 14 14 4 0 7-2 7-5 0-5-6-4-10-4-4 0-8-2-11-5z"/>
+  <path d="M20 34c2 8 10 12 18 10 6-2 8-8 4-12-3-3-8-3-12-2-4 1-7 2-10 4z" fill="#fff" opacity="0.9"/>
 </svg>`,
   "Safari": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="url(#safariGradient)"/>
   <defs>
     <radialGradient id="safariGradient" cx="40%" cy="40%" r="60%">
       <stop offset="0%" stop-color="#40a9ff"/>
       <stop offset="100%" stop-color="#0077b6"/>
     </radialGradient>
   </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#safariGradient)"/>
-  <polygon points="32,12 38,32 32,52 26,32" fill="#fff" opacity="0.9"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#fff" stroke-width="2"/>
+  <polygon points="32,14 38,32 32,50 26,32" fill="#fff"/>
 </svg>`,
   "Unknown": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 48 48">
-  <circle cx="24" cy="24" r="20" fill="#aaa"/>
-  <text x="24" y="29" font-size="14" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
+<svg class="icon responsive-icon" viewBox="0 0 48 48">
+  <circle cx="24" cy="24" r="20" fill="#bbb"/>
+  <text x="24" y="29" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
 </svg>`
 };
 
 const osIcons = {
   "Windows": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <rect x="4" y="8" width="26" height="22" fill="#0078D7"/>
   <rect x="4" y="36" width="26" height="22" fill="#0078D7"/>
   <rect x="34" y="8" width="26" height="22" fill="#00A4EF"/>
   <rect x="34" y="36" width="26" height="22" fill="#00A4EF"/>
 </svg>`,
   "macOS": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="30" fill="#111"/>
-  <path fill="#fff" opacity="0.9" d="M42 14c-3 0-6 2-7 5s0 6 2 8c2 2 5 3 8 3s6-2 7-4c2-3 1-7-2-10-2-2-5-2-8-2z"/>
+  <path d="M42 14c-4 0-7 3-7 7 0 3 2 6 5 7 3 1 6 0 8-2 2-3 1-7-2-10-1-1-3-2-4-2z" fill="#fff"/>
 </svg>`,
   "Linux": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="30" fill="#FFD600"/>
-  <circle cx="26" cy="24" r="3" fill="#fff"/>
-  <circle cx="38" cy="24" r="3" fill="#fff"/>
-  <path d="M24 28h16v14c-5 3-11 3-16 0z" fill="#000"/>
+  <circle cx="26" cy="24" r="3" fill="#000"/>
+  <circle cx="38" cy="24" r="3" fill="#000"/>
+  <path d="M24 30h16v12c-5 3-11 3-16 0z" fill="#000"/>
 </svg>`,
   "Android": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <rect x="12" y="12" width="40" height="40" rx="12" fill="#3DDC84"/>
   <circle cx="24" cy="26" r="3" fill="#fff"/>
   <circle cx="40" cy="26" r="3" fill="#fff"/>
 </svg>`,
   "iOS": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 64 64">
+<svg class="icon responsive-icon" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="30" fill="#000"/>
-  <path fill="#fff" opacity="0.9" d="M32 20c-5 0-9 4-9 9 0 4 3 8 7 8 2 0 3-1 4-2 1 1 2 2 4 2 4 0 7-4 7-8 0-5-4-9-9-9z"/>
+  <path d="M32 20c-5 0-9 4-9 9 0 4 3 8 7 8 2 0 3-1 4-2 1 1 2 2 4 2 4 0 7-4 7-8 0-5-4-9-9-9z" fill="#fff"/>
 </svg>`,
   "Unknown": `
-<svg class="icon-hover responsive-icon" viewBox="0 0 48 48">
+<svg class="icon responsive-icon" viewBox="0 0 48 48">
   <circle cx="24" cy="24" r="20" fill="#777"/>
-  <text x="24" y="29" font-size="14" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
+  <text x="24" y="29" font-size="16" text-anchor="middle" fill="#fff" font-family="monospace">?</text>
 </svg>`
 };
+
