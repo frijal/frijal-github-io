@@ -455,6 +455,7 @@ X-GNOME-Autostart-enabled=true
 
 <!-- Facebook SDK (komentar) -->
 <script>
+document.addEventListener(DOMContentLoaded, () => {
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1471267430691023',
@@ -473,6 +474,7 @@ X-GNOME-Autostart-enabled=true
 
 <!-- Helper SVG icons -->
 <script>
+document.addEventListener(DOMContentLoaded, () => {
   const icons = {
     browser: {
       chrome: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M21.8 8.2A10 10 0 0 0 12 2h9.8v6.2z" fill="#EA4335"/><path d="M2.2 8.2A10 10 0 0 1 12 2L6.2 12H2.2V8.2z" fill="#FBBC05"/><path d="M6.2 12 12 22a10 10 0 0 0 9.8-13.8H6.2z" fill="#34A853"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg>',
@@ -495,6 +497,7 @@ X-GNOME-Autostart-enabled=true
 
 <!-- Core JS: deteksi, share, galeri lightbox, ipify + geolokasi -->
 <script>
+document.addEventListener(DOMContentLoaded, () => {
   // Share URLs
   const url = 'https://frijal.github.io/artikel/ubuntu-25-10-startup-applications.html';
   const title = 'Ubuntu 25.10 Menghapus Startup Applications: Cara Autostart Sekarang';

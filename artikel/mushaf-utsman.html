@@ -416,6 +416,7 @@
 
   <!-- Scripts -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Helper: safe query
     const $ = (sel, ctx=document) => ctx.querySelector(sel);
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
@@ -551,9 +552,11 @@
 
   <!-- Set FB comments href ke current URL -->
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
+document.addEventListener(DOMContentLoaded, () => {
 
   <!-- Auto-ensure og:image, twitter:image, og:url -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener("DOMContentLoaded",()=>{
       let s=(document.querySelector("main section img")||{}).src||"";
       ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));

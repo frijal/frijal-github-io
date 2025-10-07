@@ -369,6 +369,7 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
 
   <!-- JS: share, lightbox, deteksi lingkungan, lokasi/flags -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
   (function(){
     const CANON = document.querySelector('link[rel="canonical"]')?.href || location.href;
 

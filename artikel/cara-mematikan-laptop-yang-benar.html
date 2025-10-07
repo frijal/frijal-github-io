@@ -198,6 +198,7 @@ sudo reboot
         <script sync defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
         <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
         <script>
+document.addEventListener(DOMContentLoaded, () => {
           let currentUrl = window.location.href;
           ((document.getElementById("current-url").textContent = currentUrl),
             document
@@ -227,9 +228,11 @@ sudo reboot
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         hljs.highlightAll();
       </script>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         let body = document.body;
         function copyCode(o) {
           ((o = document.getElementById(o).textContent),

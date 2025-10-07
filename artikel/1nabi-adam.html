@@ -392,6 +392,7 @@
 
   <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), fallbacks -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     (function() {
       const safe = (f) => { try { f(); } catch (e) { /* lanjut */ } };
 

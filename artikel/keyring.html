@@ -100,6 +100,7 @@ sudo reboot</code></pre>
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
     <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       const currentUrl = window.location.href;
       document.getElementById("current-url").textContent = currentUrl;
       document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -120,6 +121,7 @@ sudo reboot</code></pre>
 </div>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
   // Browser & OS info
   const ua = navigator.userAgent;
   let browser = "Unknown", os = "Unknown";

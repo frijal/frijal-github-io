@@ -164,6 +164,7 @@
     </script>
     <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       const currentUrl = window.location.href;
       document.getElementById("current-url").textContent = currentUrl;
       document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -182,6 +183,7 @@
 </footer>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 function copyCode(btn){
   const code = btn.parentElement.querySelector("code").innerText;
   navigator.clipboard.writeText(code).then(()=>{

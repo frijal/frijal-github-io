@@ -293,6 +293,7 @@ N. Kirim ke editor (1 hari)</code></pre>
                      data-width="100%"
                      data-numposts="5"></div>
                 <script>
+document.addEventListener(DOMContentLoaded, () => {
                     const currentUrl = window.location.href;
                     document.getElementById("current-url").textContent = currentUrl;
                     document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -314,6 +315,7 @@ N. Kirim ke editor (1 hari)</code></pre>
     </div>
 
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         // Syntax highlighting (Prism.js)
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();

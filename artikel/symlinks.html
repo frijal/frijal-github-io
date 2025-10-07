@@ -77,6 +77,7 @@ button.copy-btn { position:absolute; top:5px; right:5px; background:#007bff; col
   </script>
   <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const currentUrl = window.location.href;
     document.getElementById("current-url").textContent = currentUrl;
     document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -92,6 +93,7 @@ button.copy-btn { position:absolute; top:5px; right:5px; background:#007bff; col
 <div id="ip-country"><strong>IP & Negara:</strong> <span id="ip-info"></span> <img id="country-flag" style="height:16px; vertical-align:middle; margin-left:5px;"></div>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 // Copy snippet button
 function copyCode(btn){
   const code = btn.previousElementSibling ? btn.previousElementSibling.innerText : btn.parentElement.innerText;

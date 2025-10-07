@@ -163,6 +163,7 @@
            data-width="100%"
            data-numposts="5"></div>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         const currentUrl = window.location.href;
         document.getElementById("current-url").textContent = currentUrl;
         document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -194,6 +195,7 @@
 
   <!-- Script Deteksi Browser & OS -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function detectBrowser() {
       const ua = navigator.userAgent;
       if (ua.includes("Firefox")) return "Mozilla Firefox";

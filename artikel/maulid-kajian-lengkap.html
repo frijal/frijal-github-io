@@ -203,6 +203,7 @@
                     <div id="fb-root"></div>
                     <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
                     <script>
+document.addEventListener(DOMContentLoaded, () => {
                         let currentUrl=window.location.href;
                         document.getElementById("current-url").textContent=currentUrl;
                         document.getElementById("fb-comments").setAttribute("data-href",currentUrl);
@@ -255,6 +256,7 @@
     
     <script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         // Inisialisasi FB XFBML.parse
         window.fbAsyncInit = function() {
             if (typeof FB !== 'undefined') {
@@ -267,6 +269,7 @@
     <div></div>
 
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         // Skrip untuk memuat PrismJS
         (()=>{var t=t=>{var e=document.createElement("script");e.src=t,document.head.appendChild(e)};t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"),t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"),t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"),t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js")})();
 

@@ -100,6 +100,7 @@
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
     <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       const currentUrl = window.location.href;
       document.getElementById("current-url").textContent = currentUrl;
       document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -119,6 +120,7 @@
 
 <!-- Script copy + client info -->
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 function copyCode(btn){
   const code = btn.nextElementSibling.innerText;
   navigator.clipboard.writeText(code).then(()=>{

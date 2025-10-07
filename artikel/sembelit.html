@@ -535,6 +535,7 @@
               data-numposts="5"
             ></div>
             <script>
+document.addEventListener(DOMContentLoaded, () => {
               let currentUrl = window.location.href;
               ((document.getElementById("current-url").textContent =
                 currentUrl),
@@ -707,6 +708,7 @@
       </footer>
     </div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       function setText(t, e) {
         (t = document.getElementById(t)) && (t.textContent = e);
       }

@@ -173,6 +173,7 @@
            data-width="100%"
            data-numposts="5"></div>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         const currentUrl = window.location.href;
         document.getElementById("current-url").textContent = currentUrl;
         document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -199,6 +200,7 @@
 
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function copyCode(btn) {
       const code = btn.previousElementSibling.innerText;
       navigator.clipboard.writeText(code);

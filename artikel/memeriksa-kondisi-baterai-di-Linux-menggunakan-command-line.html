@@ -179,8 +179,10 @@ cat /sys/class/power_supply/BAT0/status
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+document.addEventListener(DOMContentLoaded, () => {
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 // Dark mode auto + toggle
 const body = document.body;
 if(window.matchMedia('(prefers-color-scheme: dark)').matches) body.classList.add('dark');

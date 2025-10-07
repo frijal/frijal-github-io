@@ -619,6 +619,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       document.addEventListener("DOMContentLoaded", function () {
         let e = document.querySelectorAll(".lazy-image"),
           t = new IntersectionObserver((e, n) => {
@@ -697,6 +698,7 @@
       <img src="" alt="Preview" id="lightboxImg" />
     </div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       let lightbox = document.getElementById("lightbox"),
         lightboxImg = document.getElementById("lightboxImg"),
         lightboxClose = document.getElementById("lightboxClose");

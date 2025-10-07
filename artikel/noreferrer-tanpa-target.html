@@ -204,6 +204,7 @@
 
   <!-- JS untuk lightbox -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const gallery = document.querySelectorAll('.gallery img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -229,6 +230,7 @@
 
   <!-- JS untuk deteksi browser, OS, dan lokasi -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function getBrowserInfo() {
       const ua = navigator.userAgent;
       if (ua.includes("Firefox")) return "🦊 Firefox";

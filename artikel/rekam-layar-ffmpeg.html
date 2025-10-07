@@ -332,6 +332,7 @@
                 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
                 <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
                 <script>
+document.addEventListener(DOMContentLoaded, () => {
                     const currentUrl = window.location.href;
                     document.getElementById("current-url").textContent = currentUrl;
                     document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -374,6 +375,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
             // Function to handle the copy button
             const copyButton = document.querySelector('.copy-button');

@@ -422,6 +422,7 @@
 
   <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), accessibility, fallbacks -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     (function() {
       const safe = (f) => { try { f(); } catch (e) { /* diam, tetap jalan */ } };
 

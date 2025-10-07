@@ -452,6 +452,7 @@ Set-Service "Diagsvc" -StartupType Disabled
 
   <!-- JS: Copy, deteksi browser/OS, IP (ipify) -> lokasi (ipapi) -> bendera -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Copy script
     function copyCode() {
       const code = document.getElementById('win11Code').textContent;

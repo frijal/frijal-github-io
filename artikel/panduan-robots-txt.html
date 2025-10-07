@@ -274,6 +274,7 @@ Disallow: /</code></pre>
     </div>
 
     <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener('DOMContentLoaded', function() {
         // --- Lightbox Logic ---
         const galleryItems=document.querySelectorAll('.gallery-item'),lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightbox-img'),closeBtn=document.querySelector('.lightbox-close'),prevBtn=document.querySelector('.lightbox-prev'),nextBtn=document.querySelector('.lightbox-next');let currentIndex;const images=Array.from(galleryItems).map(item=>item.href);function showImage(index){if(index<0)index=images.length-1;if(index>=images.length)index=0;lightboxImg.src=images[index];currentIndex=index}

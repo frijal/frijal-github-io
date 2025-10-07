@@ -126,6 +126,7 @@
 
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // system info (ikon seperti aslinya)
     const ua = navigator.userAgent;
     document.getElementById('browser').textContent = ua.includes('Firefox') ? 'Firefox' : ua.includes('Chrome') ? 'Chrome' : ua.includes('Safari') ? 'Safari' : 'Browser';

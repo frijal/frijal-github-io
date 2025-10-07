@@ -145,6 +145,7 @@
        data-numposts="5"></div>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const currentUrl = window.location.href;
     document.getElementById("current-url").textContent = currentUrl;
     // Set data-href FB Comments ke URL halaman ini
@@ -185,6 +186,7 @@
 </div>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 function openLightbox(img){document.getElementById("lightbox").style.display="flex";document.getElementById("lightbox-img").src=img.src;}
 function closeLightbox(){document.getElementById("lightbox").style.display="none";}
 </script>

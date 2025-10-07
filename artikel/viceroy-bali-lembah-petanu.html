@@ -359,6 +359,7 @@
 
   <!-- Scripts -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // UA detect
     (function(){
       const chip = document.getElementById('ua-chip');
@@ -467,9 +468,11 @@
   <!-- Facebook SDK -->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
+document.addEventListener(DOMContentLoaded, () => {
 
   <!-- Auto-set OG image + twitter image + og:url (sesuai permintaan) -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener("DOMContentLoaded",()=>{
       let s=(document.querySelector("main section img")||{}).src||"";
       ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));

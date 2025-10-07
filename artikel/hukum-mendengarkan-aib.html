@@ -336,6 +336,7 @@
                  data-width="100%"
                  data-numposts="5"></div>
             <script>
+document.addEventListener(DOMContentLoaded, () => {
               // Ambil URL unik halaman saat ini
               const currentUrl = window.location.href;
               // Pastikan elemen current-url ada; jika tak ada, buat elemen hidden
@@ -398,6 +399,7 @@
 
   <!-- Client-side JS to detect browser, OS, fetch IP + country flag (uses public API) -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // ---------- Browser & OS detection ----------
     function getBrowserInfo() {
       // Modern browsers may support navigator.userAgentData

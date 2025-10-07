@@ -111,6 +111,7 @@ img.lazy:hover {transform: scale(1.05);}
         src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
 <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 const currentUrl = window.location.href;
 document.getElementById("current-url").textContent = currentUrl;
 document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -143,6 +144,7 @@ window.fbAsyncInit = function() { if(typeof FB!=='undefined'){try{FB.XFBML.parse
 </div> <!-- container -->
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 // Lazy-load
 document.addEventListener("DOMContentLoaded", function(){
   const lazyImages = document.querySelectorAll("img.lazy");

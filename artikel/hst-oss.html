@@ -484,6 +484,7 @@ footer {
 </div>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 const shareOptions = document.getElementById('shareOptions');
 document.querySelector('.share-btn')?.addEventListener('click', () => {
   shareOptions.style.display = shareOptions.style.display === 'flex' ? 'none' : 'flex';
@@ -520,6 +521,7 @@ function showInfo() {
 </footer>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 // Generate TOC otomatis
 const toc = document.getElementById('toc');
 const sections = document.querySelectorAll('main section');

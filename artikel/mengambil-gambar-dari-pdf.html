@@ -113,6 +113,7 @@
            data-width="100%"
            data-numposts="5"></div>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         const currentUrl = window.location.href;
         document.getElementById("current-url").textContent = currentUrl;
         document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -138,6 +139,7 @@
 </footer>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
   function detectBrowser() {
     let userAgent = navigator.userAgent;
     if (userAgent.includes("Firefox")) return {name:"Firefox", svg:`<svg viewBox="0 0 48 48"><circle fill="#FF7139" cx="24" cy="24" r="24"/></svg>`};

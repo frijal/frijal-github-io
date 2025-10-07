@@ -197,6 +197,7 @@
 
   <!-- Fallback OG/Twitter image ke *.jpg jika artikel tanpa gambar -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     (function() {
       const hasImg = !!document.querySelector('meta[property="og:image"]')?.content;
       if (!hasImg) {
@@ -317,6 +318,7 @@
 
   <!-- JS interaksi: info browser/OS, share, lightbox, galeri -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Info Browser & OS
     (function() {
       const infoRow = document.getElementById("info-row");

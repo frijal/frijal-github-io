@@ -193,6 +193,7 @@ echo "[DONE] Mirror tercepat berhasil dipasang!"</code>
           data-numposts="5"
         ></div>
         <script>
+document.addEventListener(DOMContentLoaded, () => {
           let currentUrl = window.location.href;
           ((document.getElementById("current-url").textContent = currentUrl),
             document
@@ -214,6 +215,7 @@ echo "[DONE] Mirror tercepat berhasil dipasang!"</code>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       function copyCode(t) {
         var e = t.nextElementSibling.innerText;
         navigator.clipboard.writeText(e).then(() => {

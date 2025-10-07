@@ -171,6 +171,7 @@ echo "[DONE] Mirror slackpkg berhasil diatur ke $MIRROR_URL"</code>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function copyCode(btn) {
       const code = btn.nextElementSibling.innerText;
       navigator.clipboard.writeText(code).then(() => {

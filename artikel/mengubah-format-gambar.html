@@ -158,6 +158,7 @@
         src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
       <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
       <script>
+document.addEventListener(DOMContentLoaded, () => {
         const currentUrl = window.location.href;
         document.getElementById("current-url").textContent = currentUrl;
         document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -186,6 +187,7 @@
 
   <!-- Copy -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function copyCode() {
       navigator.clipboard.writeText("mogrify -format jpg *.png");
       alert("Perintah disalin!");
@@ -194,6 +196,7 @@
 
   <!-- Browser & OS Info -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const ua = navigator.userAgent;
     let browser = "Browser tidak dikenal", os = "OS tidak dikenal";
     if (/Firefox/.test(ua)) browser = "Mozilla Firefox";
@@ -210,6 +213,7 @@
 
   <!-- IP & Country -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     fetch("https://ipapi.co/json/").then(res => res.json()).then(data => {
       document.getElementById("ip-box").innerHTML =
         `<b>IP Anda:</b> ${data.ip}<br><b>Negara:</b> <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}`;

@@ -323,6 +323,7 @@
              data-width="100%"
              data-numposts="5"></div>
         <script>
+document.addEventListener(DOMContentLoaded, () => {
           const currentUrl = window.location.href;
           document.getElementById("current-url").textContent = currentUrl;
           // Set data-href FB Comments ke URL halaman ini
@@ -369,6 +370,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener('DOMContentLoaded', () => {
       // Lightbox untuk galeri
       const galleryImages = document.querySelectorAll('.gallery img');

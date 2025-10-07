@@ -171,6 +171,7 @@
   </div>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Update dynamic metadata and timestamps
     document.getElementById('updated-time').textContent = new Date().toLocaleString('id-ID', {year:'numeric',month:'long',day:'numeric'});
     document.getElementById('year').textContent = new Date().getFullYear();

@@ -155,6 +155,7 @@
   </div>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Dynamic metadata & FB comments url
     document.getElementById('updated-time').textContent = new Date().toLocaleString('id-ID', {year:'numeric',month:'long',day:'numeric'});
     document.getElementById('date-side').textContent = new Date().toLocaleDateString('id-ID');

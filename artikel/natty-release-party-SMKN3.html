@@ -425,6 +425,7 @@
                data-width="100%"
                data-numposts="5"></div>
           <script>
+document.addEventListener(DOMContentLoaded, () => {
             const currentUrl = window.location.href;
             document.getElementById("current-url").textContent = currentUrl;
             // Set data-href FB Comments ke URL halaman ini
@@ -494,6 +495,7 @@
   </div>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // ====== Share URLs (gunakan canonical) ======
     (function(){
       const canonical = (document.querySelector('link[rel="canonical"]')?.href) || location.href;

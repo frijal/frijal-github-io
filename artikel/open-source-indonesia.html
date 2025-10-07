@@ -372,6 +372,7 @@ Changes:
                data-width="100%"
                data-numposts="5"></div>
           <script>
+document.addEventListener(DOMContentLoaded, () => {
             const currentUrl = window.location.href;
             document.getElementById("current-url").textContent = currentUrl;
             // Set data-href FB Comments ke URL halaman ini
@@ -435,6 +436,7 @@ Changes:
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-LmNld8Fj0RzTeqkQ5w0tXGx4r4K9H8w6f8tV5bJzS0XH5Cw6g9tFQfF3r2d9z+H2Q1K1tH5yH1vTn7m1eTn0Sg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Tahun footer
     document.getElementById('y').textContent = new Date().getFullYear();
 

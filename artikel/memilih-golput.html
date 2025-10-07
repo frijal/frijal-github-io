@@ -155,6 +155,7 @@
   </div>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.getElementById('updated-time').textContent = new Date().toLocaleString('id-ID', {year:'numeric',month:'long',day:'numeric'});
     document.getElementById('updated-short').textContent = new Date().toLocaleDateString('id-ID');
     document.getElementById('year').textContent = new Date().getFullYear();

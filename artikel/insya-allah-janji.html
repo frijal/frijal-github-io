@@ -129,6 +129,7 @@ echo "Saya akan hadir besok, Insya Allah."</code><button class="copy-btn" onclic
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         function copyCode(e){var t=e.previousElementSibling.innerText;navigator.clipboard.writeText(t),e.innerText="Copied!",setTimeout(()=>e.innerText="Copy",2e3)}
         
         let currentUrl=window.location.href,ua=navigator.userAgent;

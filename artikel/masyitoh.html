@@ -143,6 +143,7 @@
     <div></div>
     
     <script>
+document.addEventListener(DOMContentLoaded, () => {
         // Skrip Info Lingkungan & IP
         (()=>{let a=document.getElementById("env-text"),n=document.getElementById("ip-text");{let t=navigator.userAgent,e="OS tidak diketahui",i=(/Windows NT/.test(t)?e="Windows":/Mac OS X/.test(t)?e="macOS":/Android/.test(t)?e="Android":/iPhone|iPad|iPod/.test(t)?e="iOS":/Linux/.test(t)&&(e="Linux"),"Browser tidak diketahui");/Edg\//.test(t)?i="Microsoft Edge":/Chrome\//.test(t)?i="Chrome":/Safari\//.test(t)&&!/Chrome\//.test(t)?i="Safari":/Firefox\//.test(t)&&(i="Firefox"),a.textContent=i+" di "+e}(async()=>{try{var t=await fetch("https://ipapi.co/json/");if(!t.ok)throw new Error("fail");var e=await t.json(),i=e.city||"Kota tidak diketahui",a=e.country_name||"Negara",o=(e.country_code||"").toLowerCase(),r=o?`https://flagcdn.com/24x18/${o}.png`:"";n.innerHTML=(r?`<img src="${r}" alt="${a}" style="vertical-align:middle;margin-right:6px;border:1px solid #223;"/>`:"")+i+", "+a}catch(t){n.textContent="Lokasi IP tidak tersedia"}})()})();
         

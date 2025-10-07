@@ -638,6 +638,7 @@
       <button class="nav" id="next" onclick="changeSlide(1)">&#10095;</button>
     </div>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       let images = [
           "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiW1aHLmti_J5Ex2F1b03eq0si5h-8l5yRtI1R6c9G1JURYwyAQWnEFMdEEapYJtqa-j8WbL-9WG6McBjvSeQR-7-Hiy5eWmnSVTMaiNd2wHQi8qs_U9M4dMG6iw4GxBXjbNHcpADldeIjy/s1600/IMG_20121218_180722.jpg",
           "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhihpsIS5Ju7KzfKVuEXVC0FePuTM8sCmZbyFFERInyQc568_sBm6qLU0FxV-zrBDgtYWvjwFbpEYpmd7FS5Cx75NLfoWsI-E_WXDcS-cAnkSOYvipSJL1_NNQkspyUGL1xA6Y2bXGGtv7V/s1600/IMG_20121218_182904.jpg",
@@ -690,11 +691,13 @@
       });
     </script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       function scrollToSection(o) {
         document.getElementById(o).scrollIntoView({ behavior: "smooth" });
       }
     </script>
     <script>
+document.addEventListener(DOMContentLoaded, () => {
       document.addEventListener("DOMContentLoaded", () => {
         let n =
           (document.querySelector("main section img") || {}).src ||

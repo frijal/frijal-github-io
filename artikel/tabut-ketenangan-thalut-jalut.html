@@ -323,6 +323,7 @@
 
   <!-- Scripts -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Scroll progress
     const progress=document.getElementById('progress');
     const onScroll=()=>{const h=document.documentElement; const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100; progress.style.width=p+'%';};
@@ -380,9 +381,11 @@
   <!-- Facebook SDK dan auto data-href -->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
+document.addEventListener(DOMContentLoaded, () => {
 
   <!-- Auto og:image/twitter:image fallback dan og:url -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener("DOMContentLoaded",()=>{
       let s=(document.querySelector("main section img")||{}).src||"";
       ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));

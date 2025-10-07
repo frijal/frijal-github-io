@@ -245,6 +245,7 @@
                  data-numposts="5"></div>
 
             <script>
+document.addEventListener(DOMContentLoaded, () => {
               // Ambil URL unik halaman saat ini
               const currentUrl = window.location.href;
               // tampilkan (opsional)
@@ -354,6 +355,7 @@
   </script>
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // Utility: escape for query param
     function urlEncode(s){return encodeURIComponent(s)}
 
@@ -463,6 +465,7 @@
 
 
   <script>
+document.addEventListener(DOMContentLoaded, () => {
   const gallery = Array.from(document.querySelectorAll('#gallery img'));
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');

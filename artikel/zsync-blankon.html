@@ -250,6 +250,7 @@
     }
   </style>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     document.addEventListener('DOMContentLoaded', function() {
       // Lazy load images
       const lazyImages = document.querySelectorAll('.lazy-image');
@@ -328,6 +329,7 @@
     });
   </script>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     // JSON-LD Structured Data
     const jsonLd = {
       "@context": "https://schema.org",
@@ -516,6 +518,7 @@
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
         <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
         <script>
+document.addEventListener(DOMContentLoaded, () => {
           const currentUrl = window.location.href;
           document.getElementById("current-url").textContent = currentUrl;
           // Set data-href FB Comments ke URL halaman ini

@@ -139,6 +139,7 @@ Lepas baterai atau putuskan aliran listrik dari PLN untuk laptop/PC.</li>
   </script>
   <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const currentUrl = window.location.href;
     document.getElementById("current-url").textContent = currentUrl;
     document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
@@ -160,6 +161,7 @@ Lepas baterai atau putuskan aliran listrik dari PLN untuk laptop/PC.</li>
 </footer>
 
 <script>
+document.addEventListener(DOMContentLoaded, () => {
 // Browser & OS
 document.getElementById('browser-name').textContent = navigator.userAgent;
 document.getElementById('os-name').textContent = navigator.platform;

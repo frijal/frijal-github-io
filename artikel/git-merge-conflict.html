@@ -201,6 +201,7 @@
 
   <!-- Lightbox Script -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     const gallery = document.querySelectorAll('.gallery img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -227,6 +228,7 @@
 
   <!-- Deteksi Browser, OS, dan Lokasi -->
   <script>
+document.addEventListener(DOMContentLoaded, () => {
     function detectBrowserOS() {
       const ua = navigator.userAgent;
       let browser = "Tidak diketahui", os = "Tidak diketahui";
