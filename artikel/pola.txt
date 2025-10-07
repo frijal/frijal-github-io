@@ -1,14 +1,6 @@
-<div class="info-box" id="infoBox">
-        <div class="info-item">
-          <img src="" id="browserIcon" alt="Browser Icon" />
-          <span id="browserText">Browser: ...</span>
-        </div>
-        <div class="info-item">
-          <img src="" id="osIcon" alt="OS Icon" />
-          <span id="osText">OS: ...</span>
-        </div>
-        <div class="info-item">
-          <img src="" id="flagIcon" alt="Country Flag" />
-          <span id="ipText">IP: ...</span>
-        </div>
-      </div>
+<section class="info-section">
+          <h3>Pelan Kiri</h3>
+          <div id="user-info-display">
+            <span id="loading-info">Mendeteksi info...</span>
+          </div>
+        </section>
