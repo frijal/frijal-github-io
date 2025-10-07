@@ -1,6 +1,6 @@
 // ============================================================
-// IPOSBROWSER.JS — Versi Final
-// (Ikon Cantik + GeoIP ipapi.co + Dark/Light Mode + Layout Baru)
+// IPOSBROWSER.JS — UNIVERSAL VERSION
+// Bisa digunakan di mana saja dengan <div id="iposbrowser"></div>
 // ============================================================
 
 // ========== 1️⃣ Ikon Browser ==========
@@ -121,11 +121,10 @@ function detectOS() {
   return "Unknown";
 }
 
-// ========== 4️⃣ Fetch GeoIP (IPv4 first) ==========
+// ========== 4️⃣ Fetch GeoIP ==========
 async function fetchGeoIP() {
   try {
     const res = await fetch("https://ipapi.co/json/");
-    if (!res.ok) throw new Error("GeoIP gagal diambil");
     const data = await res.json();
     return {
       ip: data.ip,
@@ -133,14 +132,16 @@ async function fetchGeoIP() {
       country: data.country_name,
       code: data.country_code
     };
-  } catch (err) {
-    console.warn("Gagal ambil IP:", err);
+  } catch {
     return null;
   }
 }
 
-// ========== 5️⃣ Render ke halaman ==========
+// ========== 5️⃣ Render ke target div ==========
 document.addEventListener("DOMContentLoaded", async () => {
+  const target = document.getElementById("iposbrowser");
+  if (!target) return; // hanya tampil jika ada div-nya
+
   const browser = detectBrowser();
   const os = detectOS();
   const geo = await fetchGeoIP();
@@ -149,48 +150,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     ? `<img class="geo-flag" src="https://flagcdn.com/24x18/${geo.code.toLowerCase()}.png" alt="${geo.country}" />`
     : "";
 
-  const infoBox = document.createElement("div");
-  infoBox.id = "ipos-browser-info";
-
-  infoBox.innerHTML = `
-    <div class="browser-block">
-      <span class="icon browser">${browserIcons[browser]}</span>
-      <span class="text">${browser}</span>
-    </div>
-    <div class="os-block">
-      <span class="icon os">${osIcons[os]}</span>
-      <span class="text">${os}</span>
-    </div>
-    <div class="geo-block">
-      ${flag}
-      ${geo ? `<span class="text">${geo.city ? geo.city + ' - ' : ''}${geo.country} • ${geo.ip}</span>` : ""}
+  target.innerHTML = `
+    <div id="ipos-browser-info">
+      <div class="browser-block">
+        <span class="icon browser">${browserIcons[browser]}</span>
+        <span class="text">${browser}</span>
+      </div>
+      <div class="os-block">
+        <span class="icon os">${osIcons[os]}</span>
+        <span class="text">${os}</span>
+      </div>
+      <div class="geo-block">
+        ${flag}
+        ${geo ? `<span class="text">${geo.city ? geo.city + ' - ' : ''}${geo.country} • ${geo.ip}</span>` : ""}
+      </div>
     </div>
   `;
-
-  const feedLink = document.getElementById("feed-link");
-  if (feedLink && feedLink.parentNode) {
-    feedLink.parentNode.insertBefore(infoBox, feedLink);
-  }
 });
 
 // ========== 6️⃣ Style Adaptif ==========
 const style = document.createElement("style");
 style.textContent = `
-:root {
-  color-scheme: light dark;
-}
-
 #ipos-browser-info {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
+  gap: 10px;
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-color, currentColor);
-  transition: color 0.3s ease;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 4px 8px;
+  margin: 0 auto;
+  transition: color 0.3s ease-in-out;
 }
+
+body.dark-mode #ipos-browser-info { color: #ddd; }
+body:not(.dark-mode) #ipos-browser-info { color: #222; }
 
 #ipos-browser-info .browser-block,
 #ipos-browser-info .os-block,
@@ -200,34 +198,25 @@ style.textContent = `
   gap: 6px;
 }
 
-.geo-flag {
+#ipos-browser-info .geo-flag {
   width: 20px;
   height: auto;
+  margin-left: 4px;
   border-radius: 2px;
   vertical-align: middle;
 }
 
-.icon-hover {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-.icon-hover:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
-}
-
-.responsive-icon {
+#ipos-browser-info .icon svg {
   width: 22px;
   height: 22px;
-  vertical-align: middle;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+#ipos-browser-info .icon svg:hover {
+  transform: scale(1.15) rotate(3deg);
+  filter: drop-shadow(0 0 5px rgba(88,166,255,0.35));
 }
 
-@media (prefers-color-scheme: dark) {
-  #ipos-browser-info { color: #ddd; }
-}
-@media (prefers-color-scheme: light) {
-  #ipos-browser-info { color: #222; }
-}
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   #ipos-browser-info { display: none !important; }
 }
 `;
