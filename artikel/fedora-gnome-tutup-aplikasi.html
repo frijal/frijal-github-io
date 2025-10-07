@@ -457,17 +457,7 @@
         </div>
 
         <aside>
-          <section class="card">
-            <h2>Jaga Data Pribadi Tetap Aman</h2>
-            <div class="sys">
-              <div><strong>Browser:</strong> <span id="browser"></span></div>
-              <div>
-                <strong>OS/Platform:</strong> <span id="platform"></span>
-              </div>
-              <div><strong>IP Publik:</strong> <span id="ip"></span></div>
-              <div><strong>Lokasi:</strong> <span id="loc"></span></div>
-            </div>
-          </section>
+          
 
           <section class="card">
             <h2>Komentar</h2>
@@ -507,21 +497,7 @@
         document.getElementById('share-tg').href =
           `https://t.me/share/url?url=${u}&text=${t}`
 
-        // Info sistem
-        document.getElementById('browser').textContent =
-          navigator.appName + ' (' + navigator.appVersion + ')'
-        document.getElementById('platform').textContent = navigator.platform
-        fetch('https://ipapi.co/json/')
-          .then((r) => r.json())
-          .then((d) => {
-            document.getElementById('ip').textContent = d.ip
-            document.getElementById('loc').textContent =
-              d.city + ', ' + d.region + ', ' + d.country_name
-          })
-          .catch(() => {
-            document.getElementById('ip').textContent = 'Tidak terdeteksi'
-            document.getElementById('loc').textContent = 'Tidak tersedia'
-          })
+        
       })
     </script>
 
