@@ -1,18 +1,42 @@
-// 4. Device/IP Info Logic
-        function detectBrowser(){let t=navigator.userAgent,e="Unknown",n="";return/Chrome\/(\d+)/.test(t)&&!1===/Edg\//.test(t)&&!1===/OPR\//.test(t)&&(e="Chrome",n=t.match(/Chrome\/(\d+\.\d+\.\d+\.\d+|\d+\.\d+)/)?.[1]||""),/Firefox\/(\d+)/.test(t)&&(e="Firefox",n=t.match(/Firefox\/(\d+\.\d+)/)?.[1]),/Edg\/(\d+)/.test(t)&&(e="Edge",n=t.match(/Edg\/(\d+\.\d+)/)?.[1]),/Safari\/(\d+)/.test(t)&&!1===/Chrome\//.test(t)&&(e="Safari",n=t.match(/Version\/(\d+\.\d+)/)?.[1]),/OPR\/(\d+)/.test(t)&&(e="Opera",n=t.match(/OPR\/(\d+\.\d+)/)?.[1]),{name:e,ver:n,ua:t}}
-        function detectOS(){var t=navigator.userAgent;return/Windows NT 10/.test(t)?"Windows 10+":/Windows NT 6.1/.test(t)?"Windows 7/Server 2008 R2":/Android/.test(t)?t.match(/Android\s([0-9\.]+)/)?.[0]||"Android":/iPhone|iPad|iPod/.test(t)?"iOS":/Mac OS X/.test(t)?"macOS":/Linux/.test(t)?"Linux":"Unknown"}
-        
-        let b = detectBrowser(), os = detectOS();
-        document.getElementById("device-info").textContent = `${b.name} ${b.ver} — ${os}`;
-        
-        // 5. IP Lookup
-        fetch("https://ipapi.co/json/")
-            .then(t => t.json())
-            .then(t => {
-                var { ip, country_name: countryName, country_code: countryCode } = t;
-                const getFlagEmoji = (code) => code ? code.toUpperCase().replace(/./g, char => String.fromCharCode(127397 + char.charCodeAt())) : "";
-                document.getElementById("ip-info").textContent = `${ip} — ${countryName || ""} ${getFlagEmoji(countryCode)} `;
-            })
-            .catch(t => {
-                document.getElementById("ip-info").textContent = "Tidak dapat mengambil IP publik";
-            });
+// --- User Info Detection ---
+            const detectUserInfo = async () => {
+                const infoContainer = document.getElementById('user-info-display');
+                const loadingInfo = document.getElementById('loading-info');
+
+                // 1. Browser & OS Detection
+                const ua = navigator.userAgent;
+                let browserIcon = '<i class="fa-solid fa-globe"></i>';
+                let osIcon = '<i class="fa-solid fa-desktop"></i>';
+                
+                if (/firefox/i.test(ua)) browserIcon = '<i class="fab fa-firefox-browser"></i>';
+                if (/chrome/i.test(ua) && !/edge/i.test(ua)) browserIcon = '<i class="fab fa-chrome"></i>';
+                if (/safari/i.test(ua) && !/chrome/i.test(ua)) browserIcon = '<i class="fab fa-safari"></i>';
+                if (/edg/i.test(ua)) browserIcon = '<i class="fab fa-edge"></i>';
+                
+                if (/windows/i.test(ua)) osIcon = '<i class="fab fa-windows"></i>';
+                if (/macintosh/i.test(ua)) osIcon = '<i class="fab fa-apple"></i>';
+                if (/linux/i.test(ua)) osIcon = '<i class="fab fa-linux"></i>';
+                if (/android/i.test(ua)) osIcon = '<i class="fab fa-android"></i>';
+                if (/iphone|ipad|ipod/i.test(ua)) osIcon = '<i class="fab fa-apple"></i>';
+
+                let browserInfoHTML = `<span class="info-item" title="Browser">${browserIcon} Browser</span>`;
+                let osInfoHTML = `<span class="info-item" title="Sistem Operasi">${osIcon} OS</span>`;
+                
+                // 2. Location Detection using ipapi.co
+                try {
+                    const response = await fetch('https://ipapi.co/json/');
+                    const data = await response.json();
+                    
+                    const flag = data.country_code.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
+                    
+                    let locationInfoHTML = `<span class="info-item" title="Lokasi">${flag} ${data.city}, ${data.country_name}</span>`;
+                    
+                    infoContainer.innerHTML = `${locationInfoHTML} ${browserInfoHTML} ${osInfoHTML}`;
+
+                } catch (error) {
+                    console.error("Gagal mendeteksi lokasi:", error);
+                    infoContainer.innerHTML = `${browserInfoHTML} ${osInfoHTML} <span class="info-item" title="Lokasi"><i class="fa-solid fa-location-crosshairs"></i> Lokasi tidak terdeteksi</span>`;
+                }
+            };
+
+            detectUserInfo();
