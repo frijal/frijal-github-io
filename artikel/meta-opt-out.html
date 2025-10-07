@@ -212,14 +212,7 @@
           </section>
 
           <!-- System info -->
-          <section>
-            <h2 class="section-title">Info sistem kamu</h2>
-            <div class="sysinfo" id="sysinfo">
-              <div class="sysline"><strong>Browser:</strong> <span id="ua">...</span></div>
-              <div class="sysline"><strong>OS:</strong> <span id="os">...</span></div>
-              <div class="sysline"><strong>IPv4 & Kota:</strong> <span id="ip">...</span> • <span id="city">...</span> <span class="flag" id="flag">🏳️</span></div>
-            </div>
-          </section>
+          
 
           <!-- Facebook comments -->
           <section>
@@ -291,36 +284,7 @@
       if (e.key === 'ArrowRight') nextLB();
     });
 
-    // System info: Browser, OS, IP, City, Flag
-    function detectOS(ua = navigator.userAgent) {
-      if (/Windows NT/i.test(ua)) return 'Windows';
-      if (/Android/i.test(ua)) return 'Android';
-      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-      if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
-      if (/Linux/i.test(ua)) return 'Linux';
-      return 'Unknown';
-    }
-    document.getElementById('ua').textContent = navigator.userAgent;
-    document.getElementById('os').textContent = detectOS();
-
-    function flagEmoji(cc) {
-      if (!cc || cc.length !== 2) return '🏳️';
-      const base = 127397;
-      return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
-    }
-
-    (async () => {
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        const j = await r.json();
-        document.getElementById('ip').textContent = j.ip || 'N/A';
-        document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
-        document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
-      } catch {
-        document.getElementById('ip').textContent = 'Tidak tersedia';
-        document.getElementById('city').textContent = '—';
-        document.getElementById('flag').textContent = '🏳️';
-      }
+    
     })();
   </script>
 

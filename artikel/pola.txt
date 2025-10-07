@@ -1,25 +1,30 @@
-  // Info Browser & OS
-  const userAgent = navigator.userAgent;
-  let browser = "Unknown Browser", os = "Unknown OS";
-  if (userAgent.includes("Firefox")) browser = "Mozilla Firefox";
-  else if (userAgent.includes("Chrome")) browser = "Google Chrome";
-  else if (userAgent.includes("Safari")) browser = "Safari";
-  else if (userAgent.includes("Edg")) browser = "Microsoft Edge";
+// System info: Browser, OS, IP, City, Flag
+    function detectOS(ua = navigator.userAgent) {
+      if (/Windows NT/i.test(ua)) return 'Windows';
+      if (/Android/i.test(ua)) return 'Android';
+      if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+      if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
+      if (/Linux/i.test(ua)) return 'Linux';
+      return 'Unknown';
+    }
+    document.getElementById('ua').textContent = navigator.userAgent;
+    document.getElementById('os').textContent = detectOS();
 
-  if (userAgent.includes("Win")) os = "Windows";
-  else if (userAgent.includes("Mac")) os = "MacOS";
-  else if (userAgent.includes("Linux")) os = "Linux";
-  else if (/Android/i.test(userAgent)) os = "Android";
-  else if (/iPhone|iPad|iPod/i.test(userAgent)) os = "iOS";
+    function flagEmoji(cc) {
+      if (!cc || cc.length !== 2) return '🏳️';
+      const base = 127397;
+      return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
+    }
 
-  // Info IP & Lokasi
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      const info = document.getElementById("info");
-      info.innerHTML = `
-        🌍 ${data.city}, ${data.country_name} 
-        <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="flag">
-        | 🖥 ${os} | 🌐 ${browser}
-      `;
-    });
+    (async () => {
+      try {
+        const r = await fetch('https://ipapi.co/json/');
+        const j = await r.json();
+        document.getElementById('ip').textContent = j.ip || 'N/A';
+        document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
+        document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
+      } catch {
+        document.getElementById('ip').textContent = 'Tidak tersedia';
+        document.getElementById('city').textContent = '—';
+        document.getElementById('flag').textContent = '🏳️';
+      }
