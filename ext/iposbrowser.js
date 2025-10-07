@@ -1,92 +1,77 @@
+// Aset Ikon SVG yang lebih baik dan dapat diwarnai dengan CSS
 const browserIcons = {
-  "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#FF7139" d="M12.9 6.2c0-1.8-1-3.2-2.5-4.2C9.4 1.2 8.3.9 7.2 1.3c-1.1.4-2 .8-2.9 1.4-.8.6-1.6 1.3-2.2 2-.5.8-.8 1.6-.8 2.5 0 2 1.2 3.5 3 4.6 1.8 1.1 4 1.7 6.4 1.7.3-.2.6-.5.9-.9.4-.4.8-1 1-1.7.3-.8.4-1.6.4-2.5 0-.4-.1-.8-.2-1.2z"/></svg>',
-  "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#EA4335"/><circle cx="8" cy="8" r="5.5" fill="#FBBC05"/><circle cx="8" cy="8" r="4" fill="#4285F4"/></svg>',
-  "Edge": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#0078D7"/></svg>',
-  "Safari": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#00ADEF"/><path fill="#fff" d="M8 4l1 4-4-1z"/></svg>',
-  "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
+    "Firefox": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.49 5.85c.18.81-.31 1.83-1.12 2.37-1.16.78-2.61.94-3.59.62-.23-.07-.37-.11-.37-.11s.14.04.37.11c1.86.53 3.32-.73 3.79-1.92.51-1.28.1-2.62-.87-3.41-.9-.73-2.2-1.04-3.32-1.02-.3 0-.5.17-.43.44.11.41.29.83.47 1.23.29.64.66 1.25 1.1 1.83.82 1.1 2.02 1.63 3.58 1.86zM12 14.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>',
+    "Chrome": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>',
+    "Edge": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4.5-9.5c0-2.48 2.02-4.5 4.5-4.5s4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5-4.5-2.02-4.5-4.5z"/></svg>',
+    "Safari": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9l10 5-5-10-5 5z"/></svg>',
+    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>'
 };
-
 const osIcons = {
-  "Windows": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#00A4EF" d="M8.5 2.1L2.4 3.1 2 7.7l6.5-.8zM2.4 8l-.4 4.6 6.5-.8-.1-4.7zM9.1 7.1v6.8L14 13.1V8zM9.1 2.3v4.7L14 7V3.1z"/></svg>',
-  "macOS": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/></svg>',
-  "Linux": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#000"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="10" cy="6" r="1" fill="#fff"/></svg>',
-  "Android": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#3DDC84" d="M4 2h8v12H4z"/><circle cx="6" cy="6" r="1" fill="#fff"/><circle cx="10" cy="6" r="1" fill="#fff"/></svg>',
-  "iOS": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff"></text></svg>',
-  "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#999"/><text x="8" y="11" font-size="8" text-anchor="middle" fill="#fff">?</text></svg>'
+    "Windows": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2 3h9v9H2zm11 0h9v9h-9zM2 12h9v9H2zm11 0h9v9h-9z"/></svg>',
+    "macOS": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>',
+    "Linux": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm4 0h-2v-2h2v2zm-4-4H9V8h2v4zm4 0h-2V8h2v4z"/></svg>',
+    "Android": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12v20H6zM4 4h2v16H4zm16 0h-2v16h2z"/></svg>',
+    "iOS": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10v20H7zM5 4h2v16H5zm14 0h-2v16h2z"/></svg>',
+    "Unknown": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>'
 };
-
-const globeIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#4CAF50"/><path fill="#fff" d="M8 3a5 5 0 010 10 5 5 0 010-10z"/></svg>';
 
 // --- Deteksi Browser ---
 function getBrowserInfo() {
   const ua = navigator.userAgent;
-  let name = "Unknown", version = "N/A";
-  if (ua.includes("Firefox")) name = "Firefox", version = ua.match(/Firefox\/([\d.]+)/)[1];
-  else if (ua.includes("Edg")) name = "Edge", version = ua.match(/Edg\/([\d.]+)/)[1];
-  else if (ua.includes("Chrome") && !ua.includes("Edg")) name = "Chrome", version = ua.match(/Chrome\/([\d.]+)/)[1];
-  else if (ua.includes("Safari") && !ua.includes("Chrome")) name = "Safari", version = ua.match(/Version\/([\d.]+)/)[1];
-  return { name, version, icon: browserIcons[name] || browserIcons["Unknown"] };
+  let name = "Unknown";
+  if (/(firefox|fxios)/i.test(ua)) name = "Firefox";
+  else if (/edg/i.test(ua)) name = "Edge";
+  else if (/chrome|crios/i.test(ua) && !/edg/i.test(ua)) name = "Chrome";
+  else if (/safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)) name = "Safari";
+  return { name, icon: browserIcons[name] || browserIcons["Unknown"] };
 }
 
 // --- Deteksi OS ---
 function getOSInfo() {
   const ua = navigator.userAgent.toLowerCase();
-  const platform = navigator.platform.toLowerCase();
   let name = "Unknown";
   if (/android/.test(ua)) name = "Android";
   else if (/iphone|ipad|ipod/.test(ua)) name = "iOS";
-  else if (platform.includes("win")) name = "Windows";
-  else if (platform.includes("mac")) name = "macOS";
-  else if (platform.includes("linux")) name = "Linux";
+  else if (/win/.test(ua)) name = "Windows";
+  else if (/mac/.test(ua)) name = "macOS";
+  else if (/linux/.test(ua)) name = "Linux";
   return { name, icon: osIcons[name] || osIcons["Unknown"] };
 }
 
-// --- Render Footer Compact ---
-function renderClientInfo() {
-  const footer = document.getElementById("footerInfo");
-  if (!footer) return;
+// --- Render Info ke Halaman ---
+async function renderClientInfo() {
+  const infoContainer = document.getElementById("footerInfo");
+  if (!infoContainer) return; // Keluar jika elemen tidak ditemukan
 
   const browser = getBrowserInfo();
   const os = getOSInfo();
 
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      const countryCode = (data.country_code || "??").toUpperCase();
-      const flagEmoji = countryCode.split("").map(c => String.fromCodePoint(c.charCodeAt(0)+127397)).join("");
+  let html = `
+    <div class="info-item">${browser.icon}<span>${browser.name}</span></div>
+    <div class="info-item">${os.icon}<span>${os.name}</span></div>
+  `;
 
-      const items = [
-        {icon: browser.icon, label: `${browser.name} ${browser.version}`},
-        {icon: os.icon, label: os.name},
-        {icon: globeIcon, label: `${data.ip} (${data.city}, ${data.region}, ${data.country_name}) ${flagEmoji}`}
-      ];
+  try {
+    // 1. Ambil alamat IPv4 terlebih dahulu
+    const ipRes = await fetch('https://api.ipify.org?format=json');
+    const ipData = await ipRes.json();
+    const ipv4 = ipData.ip;
 
-      footer.innerHTML = items.map(it => `
-        <div class="info-item" style="display:flex; align-items:center; gap:4px; transition: all 0.2s; margin-right:16px;">
-          <span style="width:16px;height:16px;display:inline-block;">${it.icon}</span>
-          <span>${it.label}</span>
-        </div>
-      `).join("");
+    // 2. Gunakan IPv4 untuk mencari info lokasi
+    const locRes = await fetch(`https://ipapi.co/${ipv4}/json/`);
+    const locData = await locRes.json();
 
-      footer.style.display = "flex";
-      footer.style.flexWrap = "wrap";
-      footer.style.alignItems = "center";
+    const countryCode = (locData.country_code || "??").toUpperCase();
+    const flagEmoji = countryCode.split("").map(c => String.fromCodePoint(c.charCodeAt(0) + 127397)).join("");
+    
+    html += `<div class="info-item"><span>${locData.city}, ${locData.country_name} ${flagEmoji}</span></div>`;
 
-      document.querySelectorAll(".info-item").forEach(el => {
-        el.addEventListener("mouseenter", () => {
-          el.style.transform = "scale(1.05)";
-          el.style.color = "#007BFF";
-        });
-        el.addEventListener("mouseleave", () => {
-          el.style.transform = "scale(1)";
-          el.style.color = "inherit";
-        });
-      });
-    })
-    .catch(err => {
-      footer.textContent = "Gagal memuat info IP.";
-      console.error(err);
-    });
+  } catch (err) {
+    console.error("Gagal memuat info lokasi:", err);
+    html += `<div class="info-item"><span>Lokasi tidak terdeteksi</span></div>`;
+  }
+  
+  infoContainer.innerHTML = html;
 }
 
 document.addEventListener("DOMContentLoaded", renderClientInfo);
