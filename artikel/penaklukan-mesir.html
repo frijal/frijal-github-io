@@ -471,13 +471,7 @@ sub-section#refleksi p {
     </article>
 
     <footer class="site">
-      <h3 style="margin:0 0 8px;">Info sistem & lokasi</h3>
-      <div class="sys-info" aria-label="Informasi sistem pengguna">
-        <div class="badge"><span>🧩</span><div><strong>Browser:</strong> <span id="br"></span></div></div>
-        <div class="badge"><span>💻</span><div><strong>OS:</strong> <span id="os"></span></div></div>
-        <div class="badge"><img class="flag" id="flag" alt="Bendera negara"><div><strong>Kota & IP:</strong> <span id="city"></span> · <span id="ip"></span></div></div>
-        <div class="badge"><span>🌍</span><div><strong>Negara:</strong> <span id="country"></span></div></div>
-      </div>
+      
     </footer>
   </div>
 
@@ -500,54 +494,7 @@ sub-section#refleksi p {
 
   <script>
 document.addEventListener(DOMContentLoaded, () => {
-    // Basic UA parsing for browser/OS
-    (function(){
-      const ua = navigator.userAgent;
-      const brMap = [
-        {name:"Edge", re:/Edg/i},
-        {name:"Chrome", re:/Chrome|CriOS/i},
-        {name:"Firefox", re:/Firefox/i},
-        {name:"Safari", re:/Safari/i},
-        {name:"Opera", re:/OPR|Opera/i}
-      ];
-      const osMap = [
-        {name:"Windows", re:/Windows NT/i},
-        {name:"macOS", re:/Mac OS X|Macintosh/i},
-        {name:"Linux", re:/Linux/i},
-        {name:"Android", re:/Android/i},
-        {name:"iOS", re:/iPhone|iPad|iPod/i}
-      ];
-      const br = (brMap.find(b=>b.re.test(ua))||{name:"Browser tak dikenal"}).name;
-      const os = (osMap.find(o=>o.re.test(ua))||{name:"OS tak dikenal"}).name;
-      document.getElementById('br').textContent = br;
-      document.getElementById('os').textContent = os;
-    })();
-
-    // IP geolocation (city/country/IP + flag)
-    (function(){
-      const cityEl = document.getElementById('city');
-      const ipEl = document.getElementById('ip');
-      const countryEl = document.getElementById('country');
-      const flagEl = document.getElementById('flag');
-
-      fetch('https://ipapi.co/json/')
-        .then(r=>r.json())
-        .then(d=>{
-          cityEl.textContent = d.city || 'Kota tidak diketahui';
-          ipEl.textContent = d.ip || '—';
-          countryEl.textContent = (d.country_name || 'Negara tidak diketahui') + (d.region ? ' ('+d.region+')' : '');
-          const cc = (d.country_code || 'XX').toLowerCase();
-          flagEl.src = 'https://flagcdn.com/w40/'+cc+'.png';
-          flagEl.alt = 'Bendera '+(d.country_name||'unknown');
-        })
-        .catch(()=>{
-          cityEl.textContent = 'Gagal memuat';
-          ipEl.textContent = '—';
-          countryEl.textContent = '—';
-          flagEl.src = '';
-          flagEl.alt = '';
-        });
-    })();
+    
 
     // Lightbox gallery
     (function(){

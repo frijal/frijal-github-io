@@ -403,30 +403,7 @@
       <h1>Baghdad: Kisah Dinasti Abbasiyah</h1>
       <div id="iposbrowser"></div>
       <p>Kota Seribu Malam, Cahaya Ilmu, dan Peradaban Dunia</p>
-      <div class="meta-icons">
-        <span title="Info Browser"
-          ><img
-            src="https://img.icons8.com/fluency/24/chrome.png"
-            alt="Browser"
-            width="22" />
-          <span id="browser-info"></span
-        ></span>
-        <span title="Operating System"
-          ><img
-            src="https://img.icons8.com/color/24/windows-10.png"
-            alt="OS"
-            width="22" />
-          <span id="os-info"></span
-        ></span>
-        <span title="Lokasi Kota"
-          ><img
-            src="https://img.icons8.com/color/24/iraq.png"
-            alt="Iraq Flag"
-            width="22"
-          />
-          Baghdad, Irak</span
-        >
-      </div>
+      
     </header>
     <main>
       <div class="info-bar">
@@ -781,19 +758,7 @@
           window.location.href = 'https://frijal.github.io'
         }
 
-        // Info browser & OS
-        document.getElementById('browser-info').textContent =
-          navigator.userAgent.split(' ')[0].split('/')[0]
-        function getOS() {
-          let userAgent = window.navigator.userAgent
-          if (/Windows NT/.test(userAgent)) return 'Windows'
-          if (/Mac OS/.test(userAgent)) return 'MacOS'
-          if (/Linux/.test(userAgent)) return 'Linux'
-          if (/Android/.test(userAgent)) return 'Android'
-          if (/iPhone|iPad|iPod/.test(userAgent)) return 'iOS'
-          return 'Unknown'
-        }
-        document.getElementById('os-info').textContent = getOS()
+       
 
         // Gallery lazy-load & lightbox
         const gallery = document.getElementById('gallery')
