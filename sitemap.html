@@ -190,9 +190,8 @@
 
         #toc { display: flex; flex-direction: column; gap: 0.75rem; }
         
-        /* ===== PERUBAHAN CSS: Aksen Warna Kategori ===== */
         .category {
-            --category-color: var(--border-light); /* Fallback color */
+            --category-color: var(--border-light);
             border: 1px solid var(--border-light);
             border-left: 5px solid var(--category-color);
             border-radius: 8px; 
@@ -206,6 +205,7 @@
             background-color: var(--surface-dark);
         }
 
+        /* ===== PERUBAHAN CSS: Latar Belakang Warna Kategori ===== */
         .category-header {
             padding: 1rem 1.25rem; 
             cursor: pointer; 
@@ -213,21 +213,26 @@
             justify-content: space-between;
             align-items: center; 
             font-weight: bold;
-            /* Warnai teks header sesuai aksen kategori */
+            /* Light Mode: Latar belakang berwarna, teks gelap */
+            background-color: var(--category-color);
+            color: #212529; /* Teks gelap agar kontras */
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Dark Mode: Latar belakang gelap, teks berwarna */
+        body.dark-mode .category-header {
+            background-color: var(--surface-dark);
             color: var(--category-color);
         }
         
         .badge {
-            background-color: var(--border-light); 
-            color: var(--text-muted-light);
+            background-color: rgba(0, 0, 0, 0.1); /* Latar belakang badge lebih transparan */
+            color: inherit; /* Mewarisi warna teks header */
+            opacity: 0.8;
             padding: 0.25rem 0.6rem; 
             border-radius: 1rem; 
             font-size: 0.8rem;
         }
-        body.dark-mode .badge {
-            background-color: var(--border-dark); 
-            color: var(--text-muted-dark);
-        }
+        
         .toc-list { padding: 0.5rem 0; display: none; }
         .toc-item {
             display: flex; 
@@ -252,7 +257,7 @@
             margin-right: auto;
         }
         body.dark-mode .toc-title a { color: var(--text-dark); }
-        .toc-title a:hover { color: var(--category-color); } /* Hover dengan warna kategori */
+        .toc-title a:hover { color: var(--accent-color); }
         .toc-title a.visited { color: var(--text-muted-light); opacity: 0.8; }
         body.dark-mode .toc-title a.visited { color: var(--text-muted-dark); }
         .toc-date {
@@ -324,10 +329,18 @@
         const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
         let grouped = {};
 
-        // ===== PERUBAHAN JS: Fungsi dan Palet Warna untuk Kategori =====
+        // ===== PERUBAHAN JS: Palet Warna Baru yang Lebih Lembut =====
         const categoryColors = [
-            '#58a6ff', '#3fb950', '#f1e05a', '#e85d75', '#c9d1d9', 
-            '#a371f7', '#79c0ff', '#ffab70', '#e06c75', '#98c379'
+            '#a8d8ea', // Soft Blue
+            '#aa96da', // Lavender
+            '#fcbad3', // Pink
+            '#ffffd2', // Pale Yellow
+            '#a8e6cf', // Mint Green
+            '#ffd3b6', // Peach
+            '#d4a5a5', // Dusty Rose
+            '#8ed6d3', // Teal
+            '#dbcdf0', // Light Purple
+            '#f7d9c4'  // Light Orange
         ];
         function simpleHash(str) {
             let hash = 0;
@@ -353,7 +366,6 @@
                  totalCountEl.innerHTML = `Menemukan <strong>${total}</strong> artikel dari pencarian "${term}"`;
                  return;
             }
-            // ===== PERUBAHAN JS: Teks "Dibaca" menjadi "Sudah Dibaca" =====
             const unread = total - read;
             totalCountEl.innerHTML = `
                 <span class="total-stat">Total: <strong>${total}</strong></span>
@@ -370,7 +382,6 @@
                 const data = await res.json();
                 const toc = document.getElementById("toc");
                 toc.innerHTML = "";
-
                 grouped = {};
                 Object.keys(data).forEach(cat => {
                     grouped[cat] = data[cat]
@@ -380,20 +391,15 @@
                         }))
                         .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
                 });
-
                 const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
                 updateStats(totalArticles, visitedLinks.length);
-
                 Object.keys(grouped)
                     .sort((a, b) => grouped[b].length - grouped[a].length)
                     .forEach(cat => {
                         const catDiv = document.createElement("div");
                         catDiv.className = "category";
-
-                        // ===== PERUBAHAN JS: Terapkan warna unik ke kategori =====
                         const color = categoryColors[simpleHash(cat) % categoryColors.length];
                         catDiv.style.setProperty('--category-color', color);
-
                         catDiv.innerHTML = `
                           <div class="category-header">
                             ${cat} <span class="badge">${grouped[cat].length}</span>
@@ -438,7 +444,6 @@
                             el.appendChild(titleDiv);
                             catList.appendChild(el);
                         });
-
                         catDiv.querySelector(".category-header").addEventListener("click", () => {
                             catList.style.display = catList.style.display === "block" ? "none" : "block";
                             updateTOCToggleText();
@@ -470,7 +475,6 @@
             clearBtn.style.display = this.value ? "block" : "none";
             let countVisible = 0;
             const allArticlesCount = Object.values(grouped).flat().length;
-
             document.querySelectorAll(".category").forEach(category => {
                 let catVisible = false;
                 category.querySelectorAll(".toc-item").forEach(item => {
