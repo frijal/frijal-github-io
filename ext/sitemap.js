@@ -1,238 +1,241 @@
 const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
-        let grouped = {};
+let grouped = {};
 
-        // ===== PERUBAHAN JS: Palet Warna Solid/Gradien Baru =====
-        const categoryColors = [
-            'linear-gradient(45deg, #d32f2f, #f44336)', // Red
-            'linear-gradient(45deg, #303f9f, #3f51b5)', // Indigo
-            'linear-gradient(45deg, #00796b, #009688)', // Teal
-            'linear-gradient(45deg, #f57c00, #ff9800)', // Orange
-            'linear-gradient(45deg, #512da8, #673ab7)', // Deep Purple
-            'linear-gradient(45deg, #c2185b, #e91e63)', // Pink
-            'linear-gradient(45deg, #1976d2, #2196f3)', // Blue
-            'linear-gradient(45deg, #0288d1, #03a9f4)', // Light Blue
-            'linear-gradient(45deg, #388e3c, #4caf50)', // Green
-            'linear-gradient(45deg, #7b1fa2, #9c27b0)'  // Purple
-        ];
-        function simpleHash(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = (hash << 5) - hash + str.charCodeAt(i);
-                hash |= 0;
-            }
-            return Math.abs(hash);
-        }
+// ===== Palet Warna Baru (Tanpa Ungu/Violet) =====
+const categoryColors = [
+    'linear-gradient(45deg, #d32f2f, #f44336)', // Red
+    'linear-gradient(45deg, #1976d2, #2196f3)', // Blue
+    'linear-gradient(45deg, #00796b, #009688)', // Teal
+    'linear-gradient(45deg, #f57c00, #ff9800)', // Orange
+    'linear-gradient(45deg, #388e3c, #4caf50)', // Green
+    'linear-gradient(45deg, #c2185b, #e91e63)', // Pink
+    'linear-gradient(45deg, #0288d1, #03a9f4)', // Light Blue
+    'linear-gradient(45deg, #fbc02d, #ffeb3b)', // Yellow
+    'linear-gradient(45deg, #cddc39, #8bc34a)', // Lime
+    'linear-gradient(45deg, #607d8b, #9e9e9e)'  // Blue Grey
+];
 
-        function formatDate(dateStr) {
-            const d = new Date(dateStr);
-            if (isNaN(d)) return "";
-            const dd = String(d.getDate()).padStart(2, "0");
-            const mm = String(d.getMonth() + 1).padStart(2, "0");
-            const yy = String(d.getFullYear()).slice(-2);
-            return `${dd}.${mm}.${yy}`;
-        }
+// Fungsi shuffle akan kita gunakan untuk mengacak warna
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    if (isNaN(d)) return "";
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yy = String(d.getFullYear()).slice(-2);
+    return `${dd}.${mm}.${yy}`;
+}
+
+function updateStats(total, read, term = '') {
+    const totalCountEl = document.getElementById("totalCount");
+    if (term) {
+         totalCountEl.innerHTML = `Menemukan <strong>${total}</strong> artikel dari pencarian "${term}"`;
+         return;
+    }
+    const unread = total - read;
+    totalCountEl.innerHTML = `
+        <span class="total-stat">Total: <strong>${total}</strong></span>
+        <span class="separator">|</span>
+        <span class="read-stat">Sudah Dibaca: <strong>${read}</strong> 👍</span>
+        <span class="separator">|</span>
+        <span class="unread-stat">Belum Dibaca: <strong>${unread}</strong> 📚</span>
+    `;
+}
+
+async function loadTOC() {
+    try {
+        const res = await fetch("artikel.json");
+        const data = await res.json();
+        const toc = document.getElementById("toc");
+        toc.innerHTML = "";
+        grouped = {};
+        Object.keys(data).forEach(cat => {
+            grouped[cat] = data[cat]
+                .map(arr => ({
+                    title: arr[0], file: arr[1], image: arr[2], lastmod: arr[3],
+                    description: arr[4], category: cat
+                }))
+                .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
+        });
+        const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
+        updateStats(totalArticles, visitedLinks.length);
         
-        function updateStats(total, read, term = '') {
-            const totalCountEl = document.getElementById("totalCount");
-            if (term) {
-                 totalCountEl.innerHTML = `Menemukan <strong>${total}</strong> artikel dari pencarian "${term}"`;
-                 return;
-            }
-            const unread = total - read;
-            totalCountEl.innerHTML = `
-                <span class="total-stat">Total: <strong>${total}</strong></span>
-                <span class="separator">|</span>
-                <span class="read-stat">Sudah Dibaca: <strong>${read}</strong> 👍</span>
-                <span class="separator">|</span>
-                <span class="unread-stat">Belum Dibaca: <strong>${unread}</strong> 📚</span>
-            `;
-        }
+        const shuffledColors = shuffle([...categoryColors]);
 
-        async function loadTOC() {
-            try {
-                const res = await fetch("artikel.json");
-                const data = await res.json();
-                const toc = document.getElementById("toc");
-                toc.innerHTML = "";
-                grouped = {};
-                Object.keys(data).forEach(cat => {
-                    grouped[cat] = data[cat]
-                        .map(arr => ({
-                            title: arr[0], file: arr[1], image: arr[2], lastmod: arr[3],
-                            description: arr[4], category: cat
-                        }))
-                        .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod));
-                });
-                const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
-                updateStats(totalArticles, visitedLinks.length);
-                Object.keys(grouped)
-                    .sort((a, b) => grouped[b].length - grouped[a].length)
-                    .forEach(cat => {
-                        const catDiv = document.createElement("div");
-                        catDiv.className = "category";
-                        const color = categoryColors[simpleHash(cat) % categoryColors.length];
-                        catDiv.style.setProperty('--category-color', color);
-                        catDiv.innerHTML = `
-  			<div class="category-content">
-			      <div class="category-header">
-		        ${cat} <span class="badge">${grouped[cat].length}</span>
-			      </div>
-			      <div class="toc-list" style="display: none;"></div>
-			  </div>
-			`;
-                        const catList = catDiv.querySelector(".toc-list");
-                        grouped[cat].forEach((item) => {
-                            const el = document.createElement("div");
-                            el.className = "toc-item";
-                            el.dataset.text = item.title.toLowerCase();
-                            const titleDiv = document.createElement("div");
-                            titleDiv.className = "toc-title";
-                            const a = document.createElement("a");
-                            a.href = `artikel/${item.file}`;
-                            a.textContent = item.title;
-                            const statusSpan = document.createElement("span");
-                            if (visitedLinks.includes(item.file)) {
-                                statusSpan.className = "label-visited";
-                                statusSpan.textContent = "sudah dibaca 👍";
-                                a.classList.add("visited");
-                            } else {
-                                statusSpan.className = "label-new";
-                                statusSpan.textContent = "📚 belum dibaca";
-                            }
-                            const dateSpan = document.createElement("span");
-                            dateSpan.className = "toc-date";
-                            dateSpan.textContent = `[${formatDate(item.lastmod)}]`;
-                            a.addEventListener("click", () => {
-                                if (!visitedLinks.includes(item.file)) {
-                                    visitedLinks.push(item.file);
-                                    localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
-                                    statusSpan.className = "label-visited";
-                                    statusSpan.textContent = "sudah dibaca 👍";
-                                    a.classList.add("visited");
-                                    updateStats(totalArticles, visitedLinks.length);
-                                }
-                            });
-                            titleDiv.appendChild(a);
-                            titleDiv.appendChild(statusSpan);
-                            titleDiv.appendChild(dateSpan);
-                            el.appendChild(titleDiv);
-                            catList.appendChild(el);
-                        });
-                        catDiv.querySelector(".category-header").addEventListener("click", () => {
-                            catList.style.display = catList.style.display === "block" ? "none" : "block";
-                            updateTOCToggleText();
-                        });
-                        toc.appendChild(catDiv);
-                    });
-                const m = document.getElementById("marquee-content");
-                const allArticles = Object.values(grouped).flat();
-                function shuffle(arr) {
-                    for (let i = arr.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [arr[i], arr[j]] = [arr[j], arr[i]];
-                    }
-                    return arr;
-                }
-                const shuffled = shuffle(allArticles);
-                m.innerHTML = shuffled.map(d => `<a href="artikel/${d.file}">${d.title}</a>`).join(" &bull; ");
-            } catch (e) {
-                console.error("Gagal load artikel.json", e);
-                toc.innerHTML = '<p style="color: red;">Gagal memuat daftar isi.</p>';
-            }
-        }
-
-        const searchInput = document.getElementById("search");
-        const clearBtn = document.getElementById("clearSearch");
-
-        searchInput.addEventListener("input", function () {
-            const term = this.value.toLowerCase();
-            clearBtn.style.display = this.value ? "block" : "none";
-            let countVisible = 0;
-            const allArticlesCount = Object.values(grouped).flat().length;
-            document.querySelectorAll(".category").forEach(category => {
-                let catVisible = false;
-                category.querySelectorAll(".toc-item").forEach(item => {
-                    const text = item.dataset.text;
-                    const titleLink = item.querySelector("a");
-                    if (term && text.includes(term)) {
-                        item.style.display = "flex";
-                        catVisible = true;
-                        countVisible++;
-                        const regex = new RegExp(`(${term})`, "gi");
-                        titleLink.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
-                    } else if (!term) {
-                        item.style.display = "flex";
-                        titleLink.textContent = text;
-                        catVisible = true;
+        Object.keys(grouped)
+            .sort((a, b) => {
+                const lastUpdateA = new Date(grouped[a][0].lastmod);
+                const lastUpdateB = new Date(grouped[b][0].lastmod);
+                return lastUpdateB - lastUpdateA;
+            })
+            .forEach((cat, index) => {
+                const catDiv = document.createElement("div");
+                catDiv.className = "category";
+                
+                const color = shuffledColors[index % shuffledColors.length];
+                catDiv.style.setProperty('--category-color', color);
+                
+                catDiv.innerHTML = `
+                  <div class="category-content">
+                      <div class="category-header">
+                        ${cat} <span class="badge">${grouped[cat].length}</span>
+                      </div>
+                      <div class="toc-list" style="display: none;"></div>
+                  </div>
+                `;
+                const catList = catDiv.querySelector(".toc-list");
+                grouped[cat].forEach((item) => {
+                    const el = document.createElement("div");
+                    el.className = "toc-item";
+                    el.dataset.text = item.title.toLowerCase();
+                    const titleDiv = document.createElement("div");
+                    titleDiv.className = "toc-title";
+                    const a = document.createElement("a");
+                    a.href = `artikel/${item.file}`;
+                    a.textContent = item.title;
+                    const statusSpan = document.createElement("span");
+                    if (visitedLinks.includes(item.file)) {
+                        statusSpan.className = "label-visited";
+                        statusSpan.textContent = "sudah dibaca 👍";
+                        a.classList.add("visited");
                     } else {
-                        item.style.display = "none";
+                        statusSpan.className = "label-new";
+                        statusSpan.textContent = "📚 belum dibaca";
                     }
+                    const dateSpan = document.createElement("span");
+                    dateSpan.className = "toc-date";
+                    dateSpan.textContent = `[${formatDate(item.lastmod)}]`;
+                    a.addEventListener("click", () => {
+                        if (!visitedLinks.includes(item.file)) {
+                            visitedLinks.push(item.file);
+                            localStorage.setItem("visitedLinks", JSON.stringify(visitedLinks));
+                            statusSpan.className = "label-visited";
+                            statusSpan.textContent = "sudah dibaca 👍";
+                            a.classList.add("visited");
+                            updateStats(totalArticles, visitedLinks.length);
+                        }
+                    });
+                    titleDiv.appendChild(a);
+                    titleDiv.appendChild(statusSpan);
+                    titleDiv.appendChild(dateSpan);
+                    el.appendChild(titleDiv);
+                    catList.appendChild(el);
                 });
-                category.style.display = catVisible ? "block" : "none";
-                const tocList = category.querySelector(".toc-list");
-                if (tocList) {
-                   tocList.style.display = (term && catVisible) ? "block" : "none";
-                }
-            });
-            if (term) {
-                updateStats(countVisible, visitedLinks.length, term);
-            } else {
-                updateStats(allArticlesCount, visitedLinks.length);
-            }
-            updateTOCToggleText();
-        });
-
-        clearBtn.addEventListener("click", () => {
-            searchInput.value = "";
-            searchInput.dispatchEvent(new Event("input"));
-        });
-
-        let tocCollapsed = false;
-        const tocToggleBtn = document.getElementById("tocToggle");
-
-        function updateTOCToggleText() {
-            const allLists = Array.from(document.querySelectorAll(".toc-list"));
-            if (allLists.length === 0) return;
-            const allCollapsed = allLists.every(list => list.style.display === "none");
-            tocCollapsed = allCollapsed;
-            tocToggleBtn.textContent = tocCollapsed ? "Buka Semua" : "Tutup Semua";
-        }
-
-        tocToggleBtn.addEventListener("click", () => {
-            tocCollapsed = !tocCollapsed;
-            document.querySelectorAll(".toc-list").forEach(list => {
-                list.style.display = tocCollapsed ? "none" : "block";
-            });
-            updateTOCToggleText();
-        });
-
-        function initDarkMode() {
-            const darkSwitch = document.getElementById('darkSwitch');
-            const saved = localStorage.getItem('darkMode');
-            
-            function setDarkMode(isDark) {
-                if (isDark) document.body.classList.add('dark-mode');
-                else document.body.classList.remove('dark-mode');
-                if (darkSwitch) darkSwitch.checked = isDark;
-            }
-
-            if (saved !== null) {
-                setDarkMode(saved === 'true');
-            } else {
-                setDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            }
-
-            if (darkSwitch) {
-                darkSwitch.addEventListener('change', () => {
-                    localStorage.setItem('darkMode', darkSwitch.checked);
-                    setDarkMode(darkSwitch.checked);
+                catDiv.querySelector(".category-header").addEventListener("click", () => {
+                    catList.style.display = catList.style.display === "block" ? "none" : "block";
+                    updateTOCToggleText();
                 });
-            }
-        }
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            loadTOC().then(() => {
-                initDarkMode();
-                updateTOCToggleText();
+                toc.appendChild(catDiv);
             });
+        const m = document.getElementById("marquee-content");
+        const allArticles = Object.values(grouped).flat();
+        const shuffledMarquee = shuffle([...allArticles]);
+        m.innerHTML = shuffledMarquee.map(d => `<a href="artikel/${d.file}">${d.title}</a>`).join(" &bull; ");
+    } catch (e) {
+        console.error("Gagal load artikel.json", e);
+        toc.innerHTML = '<p style="color: red;">Gagal memuat daftar isi.</p>';
+    }
+}
+
+const searchInput = document.getElementById("search");
+const clearBtn = document.getElementById("clearSearch");
+
+searchInput.addEventListener("input", function () {
+    const term = this.value.toLowerCase();
+    clearBtn.style.display = this.value ? "block" : "none";
+    let countVisible = 0;
+    const allArticlesCount = Object.values(grouped).flat().length;
+    document.querySelectorAll(".category").forEach(category => {
+        let catVisible = false;
+        category.querySelectorAll(".toc-item").forEach(item => {
+            const text = item.dataset.text;
+            const titleLink = item.querySelector("a");
+            if (term && text.includes(term)) {
+                item.style.display = "flex";
+                catVisible = true;
+                countVisible++;
+                const regex = new RegExp(`(${term})`, "gi");
+                titleLink.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
+            } else if (!term) {
+                item.style.display = "flex";
+                titleLink.textContent = text;
+                catVisible = true;
+            } else {
+                item.style.display = "none";
+            }
         });
+        category.style.display = catVisible ? "block" : "none";
+        const tocList = category.querySelector(".toc-list");
+        if (tocList) {
+           tocList.style.display = (term && catVisible) ? "block" : "none";
+        }
+    });
+    if (term) {
+        updateStats(countVisible, visitedLinks.length, term);
+    } else {
+        updateStats(allArticlesCount, visitedLinks.length);
+    }
+    updateTOCToggleText();
+});
+
+clearBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    searchInput.dispatchEvent(new Event("input"));
+});
+
+let tocCollapsed = false;
+const tocToggleBtn = document.getElementById("tocToggle");
+
+function updateTOCToggleText() {
+    const allLists = Array.from(document.querySelectorAll(".toc-list"));
+    if (allLists.length === 0) return;
+    const allCollapsed = allLists.every(list => list.style.display === "none");
+    tocCollapsed = allCollapsed;
+    tocToggleBtn.textContent = tocCollapsed ? "Buka Semua" : "Tutup Semua";
+}
+
+tocToggleBtn.addEventListener("click", () => {
+    tocCollapsed = !tocCollapsed;
+    document.querySelectorAll(".toc-list").forEach(list => {
+        list.style.display = tocCollapsed ? "none" : "block";
+    });
+    updateTOCToggleText();
+});
+
+function initDarkMode() {
+    const darkSwitch = document.getElementById('darkSwitch');
+    const saved = localStorage.getItem('darkMode');
+    
+    function setDarkMode(isDark) {
+        if (isDark) document.body.classList.add('dark-mode');
+        else document.body.classList.remove('dark-mode');
+        if (darkSwitch) darkSwitch.checked = isDark;
+    }
+
+    if (saved !== null) {
+        setDarkMode(saved === 'true');
+    } else {
+        setDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    if (darkSwitch) {
+        darkSwitch.addEventListener('change', () => {
+            localStorage.setItem('darkMode', darkSwitch.checked);
+            setDarkMode(darkSwitch.checked);
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadTOC().then(() => {
+        initDarkMode();
+        updateTOCToggleText();
+    });
+});
