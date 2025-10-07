@@ -79,11 +79,10 @@
         }
         .title-block h1 { font-size: 1.8rem; font-weight: 600; line-height: 1.2; margin: 0;}
         
-        /* ===== PERUBAHAN CSS: Penataan Statistik Baca ===== */
         #totalCount {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.25rem 0.75rem; /* Jarak vertikal dan horizontal antar item */
+            gap: 0.25rem 0.75rem;
             align-items: center;
             font-size: 0.85rem;
             color: var(--text-muted-light);
@@ -190,27 +189,49 @@
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
         #toc { display: flex; flex-direction: column; gap: 0.75rem; }
+        
+        /* ===== PERUBAHAN CSS: Aksen Warna Kategori ===== */
         .category {
+            --category-color: var(--border-light); /* Fallback color */
             border: 1px solid var(--border-light);
-            border-radius: 8px; overflow: hidden; transition: border-color 0.2s;
+            border-left: 5px solid var(--category-color);
+            border-radius: 8px; 
+            overflow: hidden; 
+            transition: border-color 0.2s;
+            background-color: var(--surface-light);
         }
-        body.dark-mode .category { border-color: var(--border-dark); }
+        body.dark-mode .category {
+            border-color: var(--border-dark);
+            border-left-color: var(--category-color);
+            background-color: var(--surface-dark);
+        }
 
         .category-header {
-            padding: 1rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between;
-            align-items: center; font-weight: bold; background-color: var(--surface-light);
+            padding: 1rem 1.25rem; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            font-weight: bold;
+            /* Warnai teks header sesuai aksen kategori */
+            color: var(--category-color);
         }
-        body.dark-mode .category-header { background-color: var(--surface-dark); }
+        
         .badge {
-            background-color: var(--border-light); color: var(--text-muted-light);
-            padding: 0.25rem 0.6rem; border-radius: 1rem; font-size: 0.8rem;
+            background-color: var(--border-light); 
+            color: var(--text-muted-light);
+            padding: 0.25rem 0.6rem; 
+            border-radius: 1rem; 
+            font-size: 0.8rem;
         }
         body.dark-mode .badge {
-            background-color: var(--border-dark); color: var(--text-muted-dark);
+            background-color: var(--border-dark); 
+            color: var(--text-muted-dark);
         }
         .toc-list { padding: 0.5rem 0; display: none; }
         .toc-item {
-            display: flex; padding: 0.75rem 1.25rem;
+            display: flex; 
+            padding: 0.75rem 1.25rem;
             border-top: 1px solid var(--border-light);
         }
         body.dark-mode .toc-item { border-top-color: var(--border-dark); }
@@ -218,26 +239,35 @@
         body.dark-mode .toc-item:hover { background-color: var(--hover-dark); }
         
         .toc-title {
-            display: flex; align-items: center; gap: 0.75rem;
-            width: 100%; flex-wrap: wrap;
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem;
+            width: 100%; 
+            flex-wrap: wrap;
         }
         .toc-title a {
-            color: var(--text-light); text-decoration: none;
-            flex-grow: 1; margin-right: auto;
+            color: var(--text-light); 
+            text-decoration: none;
+            flex-grow: 1; 
+            margin-right: auto;
         }
         body.dark-mode .toc-title a { color: var(--text-dark); }
-        .toc-title a:hover { color: var(--accent-color); }
+        .toc-title a:hover { color: var(--category-color); } /* Hover dengan warna kategori */
         .toc-title a.visited { color: var(--text-muted-light); opacity: 0.8; }
         body.dark-mode .toc-title a.visited { color: var(--text-muted-dark); }
         .toc-date {
-            font-size: 0.8rem; color: var(--text-muted-light);
-            white-space: nowrap; font-family: monospace;
+            font-size: 0.8rem; 
+            color: var(--text-muted-light);
+            white-space: nowrap; 
+            font-family: monospace;
         }
         body.dark-mode .toc-date { color: var(--text-muted-dark); }
 
         .label-visited, .label-new {
-            font-size: 0.75rem; padding: 0.1rem 0.5rem;
-            border-radius: 1rem; font-weight: 500;
+            font-size: 0.75rem; 
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem; 
+            font-weight: 500;
             white-space: nowrap;
         }
         .label-visited { color: #1a7f37; background-color: #dafbe1; }
@@ -246,8 +276,10 @@
         body.dark-mode .label-new { color: #8b949e; background-color: #21262d; border: 1px solid transparent;}
 
         .highlight {
-            background-color: var(--highlight-bg); color: var(--highlight-text);
-            padding: 2px; border-radius: 3px;
+            background-color: var(--highlight-bg); 
+            color: var(--highlight-text);
+            padding: 2px; 
+            border-radius: 3px;
         }
 
         @media(max-width: 768px) {
@@ -292,6 +324,20 @@
         const visitedLinks = JSON.parse(localStorage.getItem("visitedLinks") || "[]");
         let grouped = {};
 
+        // ===== PERUBAHAN JS: Fungsi dan Palet Warna untuk Kategori =====
+        const categoryColors = [
+            '#58a6ff', '#3fb950', '#f1e05a', '#e85d75', '#c9d1d9', 
+            '#a371f7', '#79c0ff', '#ffab70', '#e06c75', '#98c379'
+        ];
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash << 5) - hash + str.charCodeAt(i);
+                hash |= 0;
+            }
+            return Math.abs(hash);
+        }
+
         function formatDate(dateStr) {
             const d = new Date(dateStr);
             if (isNaN(d)) return "";
@@ -301,18 +347,18 @@
             return `${dd}.${mm}.${yy}`;
         }
         
-        // ===== PERUBAHAN JS: Fungsi untuk update statistik =====
         function updateStats(total, read, term = '') {
             const totalCountEl = document.getElementById("totalCount");
             if (term) {
                  totalCountEl.innerHTML = `Menemukan <strong>${total}</strong> artikel dari pencarian "${term}"`;
                  return;
             }
+            // ===== PERUBAHAN JS: Teks "Dibaca" menjadi "Sudah Dibaca" =====
             const unread = total - read;
             totalCountEl.innerHTML = `
                 <span class="total-stat">Total: <strong>${total}</strong></span>
                 <span class="separator">|</span>
-                <span class="read-stat">Dibaca: <strong>${read}</strong> 👍</span>
+                <span class="read-stat">Sudah Dibaca: <strong>${read}</strong> 👍</span>
                 <span class="separator">|</span>
                 <span class="unread-stat">Belum Dibaca: <strong>${unread}</strong> 📚</span>
             `;
@@ -336,13 +382,18 @@
                 });
 
                 const totalArticles = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
-                updateStats(totalArticles, visitedLinks.length); // Panggil fungsi statistik
+                updateStats(totalArticles, visitedLinks.length);
 
                 Object.keys(grouped)
                     .sort((a, b) => grouped[b].length - grouped[a].length)
                     .forEach(cat => {
                         const catDiv = document.createElement("div");
                         catDiv.className = "category";
+
+                        // ===== PERUBAHAN JS: Terapkan warna unik ke kategori =====
+                        const color = categoryColors[simpleHash(cat) % categoryColors.length];
+                        catDiv.style.setProperty('--category-color', color);
+
                         catDiv.innerHTML = `
                           <div class="category-header">
                             ${cat} <span class="badge">${grouped[cat].length}</span>
@@ -378,7 +429,6 @@
                                     statusSpan.className = "label-visited";
                                     statusSpan.textContent = "sudah dibaca 👍";
                                     a.classList.add("visited");
-                                    // Update statistik saat ada perubahan
                                     updateStats(totalArticles, visitedLinks.length);
                                 }
                             });
@@ -446,7 +496,6 @@
                    tocList.style.display = (term && catVisible) ? "block" : "none";
                 }
             });
-            // ===== PERUBAHAN JS: Gunakan fungsi statistik saat mencari =====
             if (term) {
                 updateStats(countVisible, visitedLinks.length, term);
             } else {
