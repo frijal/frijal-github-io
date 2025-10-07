@@ -200,51 +200,7 @@ function copyCode(){
   alert("Syntax copied!");
 }
 
-// Browser detection
-function getBrowserInfo() {
-  const ua = navigator.userAgent;
-  let name="Unknown", icon="", version="N/A";
 
-  if(ua.indexOf("Brave") > -1){name="Brave"; icon="https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg";}
-  else if(ua.indexOf("Firefox")>-1){name="Firefox"; version=ua.match(/Firefox\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg";}
-  else if(ua.indexOf("Chrome")>-1 && ua.indexOf("Edg")==-1){name="Chrome"; version=ua.match(/Chrome\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png";}
-  else if(ua.indexOf("Chromium")>-1){name="Chromium"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg";}
-  else if(ua.indexOf("Safari")>-1 && ua.indexOf("Chrome")==-1){name="Safari"; version=ua.match(/Version\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg";}
-  else if(ua.indexOf("Edg")>-1){name="Edge"; version=ua.match(/Edg\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg";}
-  else if(ua.indexOf("OPR")>-1){name="Opera"; version=ua.match(/OPR\/([0-9\.]+)/)[1]; icon="https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg";}
-  return {name, version, icon};
-}
-
-// OS detection
-function getOSInfo(){
-  const platform=navigator.platform.toLowerCase();
-  const ua=navigator.userAgent.toLowerCase();
-  let name="Unknown OS", version="", icon="";
-  if(platform.indexOf("win")!==-1){name="Windows"; const m=ua.match(/windows nt ([0-9\.]+)/); version=m?m[1]:""; icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg";}
-  else if(platform.indexOf("mac")!==-1){name="macOS"; const m=ua.match(/mac os x ([0-9_]+)/); version=m?m[1].replace(/_/g,"."):""; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
-  else if(platform.indexOf("linux")!==-1){name="Linux"; icon="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png";}
-  else if(/android/.test(ua)){name="Android"; icon="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg";}
-  else if(/iphone|ipad|ipod/.test(ua)){name="iOS"; icon="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg";}
-  return {name, version, icon};
-}
-
-// Display info
-const browser = getBrowserInfo();
-document.getElementById('browserIcon').src = browser.icon;
-document.getElementById('browserText').textContent = `Browser: ${browser.name} ${browser.version}`;
-
-const os = getOSInfo();
-document.getElementById('osIcon').src = os.icon;
-document.getElementById('osText').textContent = `OS: ${os.name} ${os.version}`;
-
-// Fetch IP & flag
-fetch('https://ipapi.co/json/')
-  .then(res=>res.json())
-  .then(data=>{
-    document.getElementById('ipText').textContent=`IP: ${data.ip} (${data.country_name})`;
-    document.getElementById('flagIcon').src=`https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
-  })
-  .catch(()=>{document.getElementById('ipText').textContent='IP: Tidak dapat diambil';});
 </script>
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
