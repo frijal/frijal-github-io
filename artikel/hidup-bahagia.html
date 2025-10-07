@@ -303,8 +303,7 @@
     </main>
 
     <footer>
-      <div id="sys-info">Mendeteksi sistem Anda...</div>
-      <div id="ip-info">Mendeteksi alamat IP...</div>
+      
     </footer>
 
     <script>
@@ -316,27 +315,7 @@
           .getElementById('fb-comments')
           .setAttribute('data-href', currentUrl)
 
-        // Info Browser & OS
-        const ua = navigator.userAgent
-        document.getElementById('sys-info').innerHTML =
-          'Browser: ' +
-          navigator.appName +
-          ' | ' +
-          'Versi: ' +
-          navigator.appVersion
-
-        // IP + Country Flag
-        fetch('https://ipapi.co/json/')
-          .then((r) => r.json())
-          .then((d) => {
-            document.getElementById('ip-info').innerHTML =
-              'IP Anda: ' +
-              d.ip +
-              ' | Negara: ' +
-              d.country_name +
-              " <img src='https://flagcdn.com/24x18/" +
-              d.country_code.toLowerCase() +
-              ".png' alt='flag'>"
+        
           })
       })
     </script>

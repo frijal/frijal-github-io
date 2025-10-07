@@ -678,36 +678,7 @@ sudo apt upgrade</code></pre>
       <footer class="mt-12 text-center text-gray-600 dark:text-gray-400">
         <div class="grid-3 mb-8">
           <div class="info-card">
-            <h3>Versi Browser</h3>
-            <div class="info-row">
-              <svg
-                id="browser-icon"
-                class="icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              ></svg>
-              <p id="browser-version">Mendeteksi...</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <h3>Versi OS</h3>
-            <div class="info-row">
-              <svg
-                id="os-icon"
-                class="icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              ></svg>
-              <p id="os-version">Mendeteksi...</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <h3>Lokasi Anda</h3>
-            <div class="info-row">
-              <span id="country-flag" class="mr-2"></span>
-              <p id="ip-address">Mendeteksi...</p>
-            </div>
-          </div>
+            
         </div>
 
         <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
@@ -836,70 +807,7 @@ sudo apt upgrade</code></pre>
           })
         }
 
-        // --- USER AGENT & IP INFO ---
-        const getUserInfo = async () => {
-          const userAgent = navigator.userAgent
-
-          // Icon data simplified for brevity (using placeholders from the original code logic)
-          const osIcons = {
-            Windows:
-              '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.625 15.688l.006 4.904c0 .351.272.639.61.64h6.046c.338 0 .61-.289.61-.64l.007-4.904h-7.279zm0-11.375h7.279l.006 4.903c0 .351-.272.64-.61.64H5.241c-.338 0-.61-.289-.61-.64l.006-4.903zm8.286 0h7.279c.338 0 .61.289.61.64l.007 4.903h-7.896c-.338 0-.61-.289-.61-.64l.007-4.903zm-.016 6.185h7.896l.007 4.904c0 .351-.272.64-.61.64h-7.279c-.338 0-.61-.289-.61-.64l.006-4.904zM24 12c0 6.627-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0s12 5.373 12 12z"/></svg>',
-            Mac: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-1.39 0-2.8.5-3.8 1.5-1.1 1-1.7 2.4-1.7 3.8 0 1.4.6 2.8 1.7 3.8 1 1 2.4 1.7 3.8 1.7s2.8-.6 3.8-1.7c1.1-1 1.7-2.4 1.7-3.8 0-1.4-.6-2.8-1.7-3.8-1-1-2.4-1.7-3.8-1.7zM16.5 14h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v2h-1v-2c0-.55-.45-1-1-1h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5h1c.55 0 1-.45 1-1V7.5c0-.55.45-1 1-1h1c.55 0 1-.45 1-1V3.5c0-.55.45-1 1-1h1c.55 0 1 .45 1 1V5c0-.55.45-1 1-1h1c.55 0 1 .45 1 1V6.5c0-.55.45-1 1-1h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-1c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>',
-            Linux:
-              '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM9.5 7.5c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm5 0c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1zm-2.5 5c-1.657 0-3 1.343-3 3h6c0-1.657-1.343-3-3-3z"/></svg>',
-            Android:
-              '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm.5 16h-1c-.28 0-.5-.22-.5-.5v-1c0-.28.22-.5.5-.5h1c.28 0 .5.22.5.5v1c0 .28-.22.5-.5.5zm1.5-6h-3c-.55 0-1-.45-1-1V8.5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1V11c0 .55-.45 1-1 1z"/></svg>',
-            iOS: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.82 5.09c.3.17.4.52.23.82l-2.73 4.73c-.22.38-.68.5-.96.22l-.76-.76c-.28-.28-.36-.72-.18-1.05l2.73-4.73c.17-.3.52-.4.82-.23zM9.9 14.8c-.28.28-.72.36-1.05.18L6.12 12.25c-.3-.17-.4-.52-.23-.82l2.73-4.73c.17-.3.52-.4.82-.23l2.73 4.73c.18.33.1.77-.18 1.05l-.76.76c-.28.28-.36.72-.18 1.05l2.73 4.73c.17.3.52.4.82.23l2.73-4.73c.17-.3.52-.4.82-.23l2.73-4.73c.3-.17.4-.52.23-.82l-2.73-4.73c-.17-.3-.52-.4-.82-.23zM12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm-4 4h-2v2h2v-2zM12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm-2 2h-2v2h2v-2zm4 0h-2v2h2v-2zM12 6h-2v2h2v-2z"/></svg>',
-            Unknown:
-              '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM11 11h2v-2h-2v2zm0 4h2v-2h-2v2z"/></svg>',
-          }
-
-          let osKey = 'Unknown',
-            browserKey = 'Unknown',
-            browserIcon = osIcons['Unknown']
-
-          // OS Detection
-          if (userAgent.includes('Win')) osKey = 'Windows'
-          else if (userAgent.includes('Mac')) osKey = 'Mac'
-          else if (userAgent.includes('Linux')) osKey = 'Linux'
-          else if (userAgent.includes('Android')) osKey = 'Android'
-          else if (userAgent.includes('iPhone') || userAgent.includes('iPad'))
-            osKey = 'iOS'
-
-          // Browser Detection
-          if (userAgent.includes('Edg')) {
-            browserKey = 'Edge'
-            browserIcon = browserIcons['Edge']
-          } else if (userAgent.includes('Chrome')) {
-            browserKey = 'Chrome'
-            browserIcon = browserIcons['Chrome']
-          } else if (userAgent.includes('Safari')) {
-            browserKey = 'Safari'
-            browserIcon = browserIcons['Safari']
-          } else if (userAgent.includes('Firefox')) {
-            browserKey = 'Firefox'
-            browserIcon = browserIcons['Firefox']
-          }
-
-          document.getElementById('browser-version').textContent = browserKey
-          document.getElementById('browser-icon').innerHTML = browserIcon
-          document.getElementById('os-version').textContent = osKey
-          document.getElementById('os-icon').innerHTML =
-            osIcons[osKey] || osIcons['Unknown']
-
-          // IP Address and Country
-          try {
-            const response = await fetch('https://ipapi.co/json/')
-            const data = await response.json()
-            document.getElementById('ip-address').textContent =
-              `${data.ip} (${data.country_name})`
-            document.getElementById('country-flag').innerHTML =
-              `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="Flag of ${data.country_name}" class="inline-block rounded-sm" />`
-          } catch (error) {
-            document.getElementById('ip-address').textContent =
-              'Gagal mendapatkan data IP.'
-          }
-        }
+        
 
         // --- RUNTIME ---
         document.addEventListener('DOMContentLoaded', () => {

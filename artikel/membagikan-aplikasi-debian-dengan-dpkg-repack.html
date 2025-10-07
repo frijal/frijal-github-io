@@ -309,12 +309,7 @@
         ></div>
       </div>
 
-      <div class="info-box" id="client-info">
-        <h3>Jaga Data Pribadi Tetap Aman</h3>
-        <p><strong>Browser:</strong> <span id="browser-info"></span></p>
-        <p><strong>OS:</strong> <span id="os-info"></span></p>
-        <p><strong>IP & Negara:</strong> <span id="ip-info"></span></p>
-      </div>
+     
     </main>
 
     <footer>🄯 2025 Linux Tips ID. Semua Hak Dilindungi.</footer>
@@ -330,36 +325,7 @@
           })
         }
 
-        // Deteksi Browser & OS
-        const ua = navigator.userAgent
-        let browser = 'Tidak diketahui',
-          os = 'Tidak diketahui'
-
-        if (ua.includes('Firefox')) browser = 'Mozilla Firefox 🦊'
-        else if (ua.includes('Chrome')) browser = 'Google Chrome 🌐'
-        else if (ua.includes('Safari')) browser = 'Safari 🍏'
-        else if (ua.includes('Edg')) browser = 'Microsoft Edge'
-
-        if (ua.includes('Windows')) os = 'Windows 💻'
-        else if (ua.includes('Linux')) os = 'Linux 🐧'
-        else if (ua.includes('Mac')) os = 'macOS 🍎'
-        else if (/Android/i.test(ua)) os = 'Android 📱'
-        else if (/iPhone|iPad/i.test(ua)) os = 'iOS 📱'
-
-        document.getElementById('browser-info').textContent = browser
-        document.getElementById('os-info').textContent = os
-
-        // Ambil IP dan Negara
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip-info').innerHTML =
-              data.ip +
-              ' - ' +
-              data.country_name +
-              " <img class='flag' src='https://flagcdn.com/24x18/" +
-              data.country_code.toLowerCase() +
-              ".png'>"
+        
           })
 
         // FB Comment data-href

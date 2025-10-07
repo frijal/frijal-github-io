@@ -277,7 +277,7 @@ boot</code><button class="copy-btn">Copy</button></pre>
     </div>
 
     <footer>
-      <div class="system-info" id="system-info">Mendeteksi sistem...</div>
+
     </footer>
 
     <!-- Prism.js -->
@@ -305,73 +305,11 @@ boot</code><button class="copy-btn">Copy</button></pre>
           .getElementById('fb-comments')
           .setAttribute('data-href', currentUrl)
 
-        // Info Sistem
-        function getBrowserInfo() {
-          const ua = navigator.userAgent
-          if (ua.includes('Firefox')) return { name: 'Firefox', icon: '🔥' }
-          if (ua.includes('Chrome')) return { name: 'Chrome', icon: '🌐' }
-          if (ua.includes('Safari')) return { name: 'Safari', icon: '🧭' }
-          if (ua.includes('Edg')) return { name: 'Edge', icon: '🌀' }
-          return { name: 'Browser', icon: '💻' }
-        }
-        function getOSInfo() {
-          const p = navigator.platform.toLowerCase()
-          if (p.includes('win')) return { name: 'Windows', icon: '🪟' }
-          if (p.includes('linux')) return { name: 'Linux', icon: '🐧' }
-          if (p.includes('mac')) return { name: 'MacOS', icon: '🍎' }
-          return { name: 'OS', icon: '💻' }
-        }
-        ;(async () => {
-          const browser = getBrowserInfo()
-          const os = getOSInfo()
-          let ipData = await fetch('https://ipapi.co/json/')
-            .then((r) => r.json())
-            .catch(() => null)
-          const ip = ipData ? ipData.ip : 'Tidak diketahui'
-          const country = ipData ? ipData.country_name : 'Unknown'
-          const flag = ipData
-            ? `<img src="https://flagcdn.com/24x18/${ipData.country_code.toLowerCase()}.png">`
-            : ''
-          document.getElementById('system-info').innerHTML =
-            `${browser.icon} Browser: ${browser.name} &nbsp; | &nbsp; ${os.icon} OS: ${os.name} <br> 🌍 IP: ${ip} ${flag} ${country}`
-        })()
+       
       })
     </script>
 
-    <style>
-      #btn-home-left,
-      #btn-home-right {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        background: #0066ff;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition:
-          background 0.3s,
-          transform 0.2s;
-        z-index: 9999;
-      }
-      #btn-home-left:hover,
-      #btn-home-right:hover {
-        background: #00cc99;
-        transform: scale(1.05);
-      }
-      #btn-home-left {
-        left: 10px;
-        top: 30%;
-        transform: translateY(-50%);
-      }
-      #btn-home-right {
-        right: 10px;
-        bottom: 20%;
-        transform: translateY(50%);
-      }
-    </style>
+    
 
     });
     <div id="kategori-aktif"></div>

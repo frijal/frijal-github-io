@@ -316,86 +316,11 @@
         </script>
       </div>
 
-      <!-- System Info -->
-      <div id="system-info">
-        <h3>Jaga Data Pribadi Tetap Aman</h3>
-        <p><strong>Browser:</strong> <span id="browser"></span></p>
-        <p><strong>Sistem Operasi:</strong> <span id="os"></span></p>
-        <p>
-          <strong>Alamat IP:</strong> <span id="ip"></span>
-          <span id="flag"></span>
-        </p>
-      </div>
+      
     </main>
 
-    <style>
-      #btn-home-left,
-      #btn-home-right {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        background-color: #0066cc;
-        color: #fff;
-        padding: 12px 18px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: bold;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition:
-          background 0.3s ease,
-          transform 0.2s ease;
-        z-index: 9999;
-      }
-      #btn-home-left:hover,
-      #btn-home-right:hover {
-        background-color: #004080;
-        transform: scale(1.05);
-      }
-      #btn-home-left {
-        left: 10px;
-        top: 30%;
-        transform: translateY(-50%);
-      }
-      #btn-home-right {
-        right: 10px;
-        bottom: 20%;
-        transform: translateY(50%);
-      }
-    </style>
 
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        // Deteksi browser & OS
-        function detectSystem() {
-          const ua = navigator.userAgent
-          let browser = 'Unknown',
-            os = 'Unknown'
 
-          if (ua.indexOf('Firefox') > -1) browser = 'Firefox 🦊'
-          else if (ua.indexOf('Chrome') > -1) browser = 'Chrome 🌐'
-          else if (ua.indexOf('Safari') > -1) browser = 'Safari 🍏'
-          else if (ua.indexOf('Edge') > -1) browser = 'Edge 🟦'
-
-          if (ua.indexOf('Win') > -1) os = 'Windows 💻'
-          else if (ua.indexOf('Linux') > -1) os = 'Linux 🐧'
-          else if (ua.indexOf('Mac') > -1) os = 'MacOS 🍎'
-
-          document.getElementById('browser').textContent = browser
-          document.getElementById('os').textContent = os
-        }
-        detectSystem()
-
-        // Ambil IP & Bendera
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip').textContent = data.ip
-            document.getElementById('flag').innerHTML =
-              `<img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="flag"> ${data.country_name}`
-          })
-      })
-    </script>
     });
     <div id="kategori-aktif"></div>
     <section id="related-marquee-section">
