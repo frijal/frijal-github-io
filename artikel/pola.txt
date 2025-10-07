@@ -1,47 +1,13 @@
- // Detect Browser & OS icon
-    (function detectUA(){
-      const ua = navigator.userAgent;
-      const platform = navigator.platform || '';
-      const icon = document.getElementById('ua-icon');
-      const text = document.getElementById('ua-text');
+        // --- DETEKSI INFO PENGUNJUNG ---
+        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
+        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
+        
+        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
+        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
 
-      function draw(pathD){
-        icon.setAttribute('viewBox','0 0 24 24');
-        icon.innerHTML = `<path fill="currentColor" d="${pathD}"/>`;
-      }
-
-      let browser = 'Browser tidak dikenal';
-      if (/Edg\//.test(ua)) { browser = 'Microsoft Edge'; draw('M12 2a10 10 0 1 0 0 20 9.9 9.9 0 0 0 9.9-8.8c-4.3 3.6-9.9 1.9-9.9-2.9 0-3.7 3.3-6.5 7.2-6.1A10 10 0 0 0 12 2z'); }
-      else if (/Chrome\//.test(ua)) { browser = 'Google Chrome'; draw('M12 4a8 8 0 0 1 6.9 4h-6.9a4 4 0 0 0-3.5 2l-3.5-6A8 8 0 0 1 12 4zm8 8a8 8 0 0 1-1.1 4.1l-3.4-5.9A4 4 0 0 0 12 10h8zm-8 8a8 8 0 0 1-6.9-4h6.9a4 4 0 0 0 3.5-2l3.5 6A8 8 0 0 1 12 20z'); }
-      else if (/Firefox\//.test(ua)) { browser = 'Mozilla Firefox'; draw('M12 2c5.5 0 10 4.5 10 10a10 10 0 0 1-17.4 6.6c.6-3.3 2.7-5.1 5-6.3-.3-1.2.1-2.7 1.1-3.8 1.6-1.7 4.3-1.9 6.2-.8-.7-2.1-2.4-3.7-4.4.7-.2 1.4-.3 2.1-.3z'); }
-      else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) { browser = 'Safari'; draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 5.5-2.8 6.5-6.2 2.5 2.8-6.5 6.2-2.5z'); }
-      else if (/OPR\//.test(ua)) { browser = 'Opera'; draw('M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10c-3.5 0-6.6-1.8-8.4-4.6C6.5 18.6 9 16 9 12.1 9 8.2 6.5 5.6 3.6 4.6 5.4 2 8.5 0 12 0c0 .7 0 1.3 0 2z'); }
-      else { draw('M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z'); }
-
-      let os = 'OS tidak dikenal';
-      if (/Win/.test(platform)) os = 'Windows';
-      else if (/Mac/.test(platform)) os = 'macOS';
-      else if (/Linux/.test(platform)) os = 'Linux';
-      else if (/Android/.test(ua)) os = 'Android';
-      else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
-
-      text.textContent = `${browser} • ${os}`;
-    })();
-
-    // Location & flag: IP (via ipify) + language fallback
-    (function detectLocation(){
-      const badgeText = document.getElementById('loc-text');
-      const flag = document.getElementById('flag');
-
-      const lang = (navigator.language || 'id-ID').toLowerCase();
-      const country = lang.split('-')[1] || 'ID';
-      const mapFlag = {
-        'ID':'🇮🇩','US':'🇺🇸','GB':'🇬🇧','FR':'🇫🇷','DE':'🇩🇪','JP':'🇯🇵','CN':'🇨🇳','IN':'🇮🇳','BR':'🇧🇷','CA':'🇨🇦','AU':'🇦🇺','ES':'🇪🇸','IT':'🇮🇹','MX':'🇲🇽','SG':'🇸🇬','MY':'🇲🇾'
-      };
-      flag.textContent = mapFlag[country.toUpperCase()] || '🌐';
-      badgeText.textContent = `Bahasa: ${lang} • Perkiraan negara: ${country.toUpperCase()}`;
-
-      fetch('https://api.ipify.org?format=json&ipv4')
-        .then(r => r.json())
-        .then(d => { badgeText.textContent += ` • IP: ${d.ip}`; })
-        .catch(() => { badgeText.textContent += ' • IP: (gagal memuat)'; });
+        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
+            
+        // --- SOCIAL SHARING ---
+        const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
+        const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
+        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};

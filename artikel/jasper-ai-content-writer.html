@@ -332,20 +332,11 @@
                 if (e.key === 'Escape') lightbox.style.display = 'none';
             }
         };
-        
-        // --- DETEKSI INFO PENGUNJUNG ---
-        const getBrowserInfo=()=>{const a=navigator.userAgent;if(a.includes("Firefox"))return{name:"Firefox",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"};if(a.includes("Edg"))return{name:"Edge",icon:"https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"};if(a.includes("Chrome"))return{name:"Chrome",icon:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"};if(a.includes("Safari"))return{name:"Safari",icon:"https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"};return{name:"Unknown",icon:""}};
-        const getOSInfo=()=>{const a=navigator.platform.toLowerCase();if(a.includes("win"))return{name:"Windows",icon:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg"};if(a.includes("mac"))return{name:"macOS",icon:"https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg"};if(a.includes("linux"))return{name:"Linux",icon:"https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg"};if(/android/.test(navigator.userAgent.toLowerCase()))return{name:"Android",icon:"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"};if(/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))return{name:"iOS",icon:"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"};return{name:"Unknown",icon:""}};
-        
-        const browser=getBrowserInfo();document.getElementById('browserIcon').src=browser.icon;document.getElementById('browserText').textContent=`Browser: ${browser.name}`;
-        const os=getOSInfo();document.getElementById('osIcon').src=os.icon;document.getElementById('osText').textContent=`OS: ${os.name}`;
-
-        fetch('https://ipapi.co/json/').then(res=>res.json()).then(data=>{document.getElementById('ipText').textContent=`Lokasi: ${data.city}, ${data.country_name}`;document.getElementById('flagIcon').src=`https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`}).catch(()=>document.getElementById('ipText').textContent='Lokasi: Gagal dimuat');
-            
-        // --- SOCIAL SHARING ---
+// --- SOCIAL SHARING ---
         const pageUrl=encodeURIComponent(window.location.href);const pageTitle=encodeURIComponent(document.title);
         const shareLinks={shareFacebook:`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,shareTwitter:`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,shareWhatsApp:`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`};
-        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};
+        for(const id in shareLinks){const link=document.getElementById(id);if(link){link.href=shareLinks[id];link.addEventListener('click',function(e){e.preventDefault();window.open(this.href,'share-window','height=450,width=550')})}};        
+
     });
     </script>
 <div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
