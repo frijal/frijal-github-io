@@ -91,8 +91,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 const style = document.createElement("style");
 style.textContent = `
 /* ================================
-   Container Info
-================================ */
+   🌗 MODE WARNA ADAPTIF UNTUK IPOSBROWSER
+   ================================ */
+
+/* Default (Light mode) */
+:root {
+  --ipos-text-color: #222; /* teks gelap */
+}
+
+/* Jika user/device pakai dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ipos-text-color: #eee; /* teks terang */
+  }
+}
+
+/* Override manual class di body */
+body.dark-mode {
+  --ipos-text-color: #e6e6e6;
+}
+body:not(.dark-mode) {
+  --ipos-text-color: #222;
+}
+
+/* ================================
+   💡 IPOSBROWSER INFO BOX
+   ================================ */
 #ipos-browser-info {
   display: flex;
   align-items: center;
@@ -100,20 +124,13 @@ style.textContent = `
   gap: 8px;
   text-align: center;
   font-size: 0.9rem;
-  color: var(--ipos-text, #222);
+  color: var(--ipos-text-color);
+  background: none;
+  border: none;
   padding: 4px 8px;
   margin: 0 auto;
   transition: color 0.3s ease-in-out;
 }
-
-@media (prefers-color-scheme: dark) {
-  #ipos-browser-info {
-    color: var(--ipos-text-dark, #eee);
-  }
-}
-
-body.dark-mode #ipos-browser-info { color: #ddd; }
-body:not(.dark-mode) #ipos-browser-info { color: #222; }
 
 #ipos-browser-info .browser-block,
 #ipos-browser-info .os-block,
@@ -123,6 +140,9 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
   gap: 6px;
 }
 
+/* ================================
+   🏳️ BENDERA GEO + TEKS
+   ================================ */
 #ipos-browser-info .geo-flag {
   width: 20px;
   height: auto;
@@ -132,8 +152,8 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
 }
 
 /* ================================
-   Ikon + Animasi Hover
-================================ */
+   🌀 IKON + ANIMASI
+   ================================ */
 #ipos-browser-info .icon svg {
   width: 24px;
   height: 24px;
@@ -141,21 +161,30 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover: kombinasi scale + rotate + glow + pulse */
 #ipos-browser-info .icon svg:hover {
   transform: scale(1.15) rotate(8deg);
   filter: drop-shadow(0 0 6px rgba(88,166,255,0.45));
   animation: pulse 0.6s ease-in-out;
 }
 
-/* Teks lokasi dan deskripsi */
+/* Efek bayangan sesuai mode */
+body:not(.dark-mode) #ipos-browser-info .icon svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+body.dark-mode #ipos-browser-info .icon svg {
+  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.2));
+}
+
+/* ================================
+   ✨ TEKS
+   ================================ */
 #ipos-browser-info .info-text {
   font-weight: 500;
   font-size: 0.9rem;
   line-height: 1.2;
 }
 
-/* Flex per ikon + teks */
+/* Flex antar ikon + teks */
 #ipos-browser-info .browser,
 #ipos-browser-info .os {
   display: flex;
@@ -163,25 +192,20 @@ body:not(.dark-mode) #ipos-browser-info { color: #222; }
   gap: 4px;
 }
 
-/* Pulse keyframes */
+/* Animasi Pulse */
 @keyframes pulse {
   0%   { transform: scale(1) rotate(0deg); }
   50%  { transform: scale(1.2) rotate(8deg); }
   100% { transform: scale(1.15) rotate(8deg); }
 }
 
-/* Light mode: shadow lebih gelap */
-body:not(.dark-mode) #ipos-browser-info .icon svg {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-}
-
-/* Dark mode: shadow lebih terang */
-body.dark-mode #ipos-browser-info .icon svg {
-  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.2));
-}
-
+/* ================================
+   📱 RESPONSIVE
+   ================================ */
 @media (max-width: 600px) {
-  #ipos-browser-info { display: none !important; }
+  #ipos-browser-info {
+    display: none !important;
+  }
 }
 `;
 document.head.appendChild(style);
