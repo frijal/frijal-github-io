@@ -1,8 +1,75 @@
-<!-- Info Browser & OS -->
-    <div id="info-browser">
-      <strong>Browser:</strong> <span id="browser-name"></span>
-      <span id="browser-icon"></span>
-    </div>
-    <div id="info-os">
-      <strong>OS:</strong> <span id="os-name"></span> <span id="os-icon"></span>
-    </div>
+ // ------------------------------------
+        // 4. Info Lokasi (Geolocation API - Perlu Izin)
+        // ------------------------------------
+        function getLocationInfo() {
+          const locationEl = document.getElementById('location-info')
+          const flagEl = document.getElementById('flag-info')
+
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                // Catatan: Mendapatkan nama kota/negara dari koordinat secara akurat
+                // memerlukan Reverse Geocoding API (berbayar/berizin), jadi di sini
+                // kita akan menggunakan data statis/IP-based lookup (jika ada API)
+                // atau menampilkan koordinat sebagai placeholder.
+
+                // Placeholder (Karena tanpa API)
+                locationEl.textContent = 'Jakarta' // Ganti dengan lokasi default/perkiraan
+                flagEl.innerHTML = '🇮🇩' // Indonesia
+
+                // Jika ingin mencoba IP-based lookup (membutuhkan external service)
+                fetch('https://ipapi.co/json/')
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.city && data.country_code) {
+                      locationEl.textContent = data.city
+                      flagEl.innerHTML = getFlagEmoji(data.country_code)
+                    }
+                  })
+                  .catch((error) =>
+                    console.log('Gagal mendapatkan lokasi IP: ' + error),
+                  )
+              },
+              (error) => {
+                // Jika ditolak atau error
+                locationEl.textContent = 'Bumi'
+                flagEl.innerHTML = '🌍'
+                console.error('Geolocation Error:', error.message)
+
+                // Fallback ke IP-based lookup jika Geolocation error/ditolak
+                fetch('https://ipapi.co/json/')
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.city && data.country_code) {
+                      locationEl.textContent = data.city
+                      flagEl.innerHTML = getFlagEmoji(data.country_code)
+                    }
+                  })
+                  .catch((error) => {
+                    console.log('Gagal mendapatkan lokasi IP: ' + error)
+                    locationEl.textContent = 'ID-Area'
+                    flagEl.innerHTML = '🇮🇩'
+                  })
+              },
+            )
+          } else {
+            locationEl.textContent = 'ID-Area'
+            flagEl.innerHTML = '🇮🇩'
+          }
+        }
+
+        // Fungsi untuk konversi kode negara 2 huruf ke emoji bendera (unicode)
+        function getFlagEmoji(countryCode) {
+          const codePoints = countryCode
+            .toUpperCase()
+            .split('')
+            .map((char) => 127397 + char.charCodeAt())
+          return String.fromCodePoint(...codePoints)
+        }
+
+        // ------------------------------------
+        // 5. Inisialisasi
+        // ------------------------------------
+        getBrowserInfo()
+        getLocationInfo()
+      })

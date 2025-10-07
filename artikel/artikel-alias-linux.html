@@ -653,19 +653,7 @@ alias server="python3 -m http.server" # Untuk cepat bikin web server lokal!
         </main>
 
         <footer class="footer-info">
-          <span
-            ><i class="fas fa-desktop"></i> Browser:
-            <strong id="browser-info"></strong
-          ></span>
-          <span
-            ><i class="fas fa-laptop-code"></i> OS:
-            <strong id="os-info"></strong
-          ></span>
-          <span
-            ><i class="fas fa-map-marker-alt"></i> Lokasi:
-            <strong id="location-info"></strong>
-            <span id="flag-info" class="flag"></span
-          ></span>
+          
         </footer>
       </div>
     </div>
@@ -758,119 +746,9 @@ alias server="python3 -m http.server" # Untuk cepat bikin web server lokal!
           }
         })
 
-        // ------------------------------------
-        // 3. Info Browser dan OS (Sederhana)
-        // ------------------------------------
-        function getBrowserInfo() {
-          const userAgent = navigator.userAgent
-          let browserName = 'Unknown'
-          let osName = 'Unknown'
+        
 
-          // OS Detection (Sederhana)
-          if (userAgent.indexOf('Win') !== -1) osName = 'Windows'
-          else if (userAgent.indexOf('Mac') !== -1) osName = 'macOS'
-          else if (userAgent.indexOf('Linux') !== -1) osName = 'Linux'
-          else if (userAgent.indexOf('Android') !== -1) osName = 'Android'
-          else if (userAgent.indexOf('iPhone') !== -1) osName = 'iOS'
-
-          // Browser Detection (Sederhana)
-          if (userAgent.indexOf('Firefox') !== -1) browserName = 'Firefox'
-          else if (
-            userAgent.indexOf('Chrome') !== -1 &&
-            userAgent.indexOf('Edge') === -1
-          )
-            browserName = 'Chrome'
-          else if (
-            userAgent.indexOf('Safari') !== -1 &&
-            userAgent.indexOf('Chrome') === -1
-          )
-            browserName = 'Safari'
-          else if (userAgent.indexOf('Edge') !== -1) browserName = 'Edge'
-          else if (
-            userAgent.indexOf('MSIE') !== -1 ||
-            userAgent.indexOf('Trident') !== -1
-          )
-            browserName = 'IE'
-
-          document.getElementById('browser-info').textContent = browserName
-          document.getElementById('os-info').textContent = osName
-        }
-
-        // ------------------------------------
-        // 4. Info Lokasi (Geolocation API - Perlu Izin)
-        // ------------------------------------
-        function getLocationInfo() {
-          const locationEl = document.getElementById('location-info')
-          const flagEl = document.getElementById('flag-info')
-
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                // Catatan: Mendapatkan nama kota/negara dari koordinat secara akurat
-                // memerlukan Reverse Geocoding API (berbayar/berizin), jadi di sini
-                // kita akan menggunakan data statis/IP-based lookup (jika ada API)
-                // atau menampilkan koordinat sebagai placeholder.
-
-                // Placeholder (Karena tanpa API)
-                locationEl.textContent = 'Jakarta' // Ganti dengan lokasi default/perkiraan
-                flagEl.innerHTML = '🇮🇩' // Indonesia
-
-                // Jika ingin mencoba IP-based lookup (membutuhkan external service)
-                fetch('https://ipapi.co/json/')
-                  .then((response) => response.json())
-                  .then((data) => {
-                    if (data.city && data.country_code) {
-                      locationEl.textContent = data.city
-                      flagEl.innerHTML = getFlagEmoji(data.country_code)
-                    }
-                  })
-                  .catch((error) =>
-                    console.log('Gagal mendapatkan lokasi IP: ' + error),
-                  )
-              },
-              (error) => {
-                // Jika ditolak atau error
-                locationEl.textContent = 'Bumi'
-                flagEl.innerHTML = '🌍'
-                console.error('Geolocation Error:', error.message)
-
-                // Fallback ke IP-based lookup jika Geolocation error/ditolak
-                fetch('https://ipapi.co/json/')
-                  .then((response) => response.json())
-                  .then((data) => {
-                    if (data.city && data.country_code) {
-                      locationEl.textContent = data.city
-                      flagEl.innerHTML = getFlagEmoji(data.country_code)
-                    }
-                  })
-                  .catch((error) => {
-                    console.log('Gagal mendapatkan lokasi IP: ' + error)
-                    locationEl.textContent = 'ID-Area'
-                    flagEl.innerHTML = '🇮🇩'
-                  })
-              },
-            )
-          } else {
-            locationEl.textContent = 'ID-Area'
-            flagEl.innerHTML = '🇮🇩'
-          }
-        }
-
-        // Fungsi untuk konversi kode negara 2 huruf ke emoji bendera (unicode)
-        function getFlagEmoji(countryCode) {
-          const codePoints = countryCode
-            .toUpperCase()
-            .split('')
-            .map((char) => 127397 + char.charCodeAt())
-          return String.fromCodePoint(...codePoints)
-        }
-
-        // ------------------------------------
-        // 5. Inisialisasi
-        // ------------------------------------
-        getBrowserInfo()
-        getLocationInfo()
-      })
+       
     </script>
 
     <div id="fb-root"></div>
