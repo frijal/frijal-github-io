@@ -11,7 +11,7 @@
     --text-dark: #e6edf3;
     --text-muted-dark: #8b949e;
     --border-dark: #30363d;
-    --hover-dark: rgba(139, 158, 0.1);
+    --hover-dark: rgba(139, 148, 158, 0.1);
     
     --accent-color: #58a6ff;
     --highlight-bg: #ffe066;
@@ -156,8 +156,25 @@ body.dark-mode #search {
 }
 body.dark-mode #clearSearch { color: var(--text-muted-dark); }
 
-/* PERBAIKAN: Semua gaya untuk #footerInfo dan .info-item dihapus dari sini */
-/* Skrip iposbrowser.js akan menyuntikkan gayanya sendiri */
+/* TAMBAHKAN: Gaya untuk #footerInfo */
+#footerInfo {
+    flex-grow: 1;
+    justify-content: center; /* Membuat item di dalamnya center */
+    font-size: 0.8rem;
+    color: var(--text-muted-light);
+    display: none; /* Disembunyikan dulu, JS akan menampilkannya */
+    overflow: hidden;
+}
+body.dark-mode #footerInfo {
+    color: var(--text-muted-dark);
+}
+#footerInfo .info-item {
+    margin: 2px 8px; /* Atur jarak antar item */
+}
+#footerInfo .info-item span {
+    white-space: nowrap; /* Mencegah teks terpotong */
+}
+
 
 #marquee, #toc {
     max-width: 1200px; margin-left: auto; margin-right: auto;
@@ -335,4 +352,28 @@ body.dark-mode #feed-link svg {
     body { padding-top: 120px; }
     .title-and-search { flex-direction: column; align-items: stretch; gap: 0.5rem; }
     .title-block h1 { font-size: 1.5rem; }
+    /* Sembunyikan footer info di layar kecil agar tidak penuh */
+    #footerInfo { display: none !important; }
 }
+
+       /* CSS opsional untuk menata tampilan info IP */
+        #footerInfo {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+         /*   background-color: #f1f1f1; */
+         /*   border-top: 1px solid #ddd; */
+            font-family: sans-serif;
+            font-size: 0.9em;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .info-item svg {
+            width: 16px;
+            height: 16px;
+        }
