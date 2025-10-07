@@ -66,6 +66,9 @@ async function loadTOC() {
         updateStats(totalArticles, visitedLinks.length);
         
         const shuffledColors = shuffle([...categoryColors]);
+        
+        // TAMBAHKAN: Referensi ke tooltip kategori
+        const categoryTooltip = document.getElementById('category-tooltip');
 
         Object.keys(grouped)
             .sort((a, b) => {
@@ -88,6 +91,7 @@ async function loadTOC() {
                 `;
                 const catList = catDiv.querySelector(".toc-list");
                 grouped[cat].forEach((item) => {
+                    // ... (logika pembuatan item artikel tetap sama)
                     const el = document.createElement("div");
                     el.className = "toc-item";
                     el.dataset.text = item.title.toLowerCase();
@@ -124,10 +128,29 @@ async function loadTOC() {
                     el.appendChild(titleDiv);
                     catList.appendChild(el);
                 });
-                catDiv.querySelector(".category-header").addEventListener("click", () => {
+
+                const catHeader = catDiv.querySelector(".category-header");
+                catHeader.addEventListener("click", () => {
                     catList.style.display = catList.style.display === "block" ? "none" : "block";
                     updateTOCToggleText();
                 });
+                
+                // TAMBAHKAN: Logika untuk tooltip kategori
+                const recentArticles = grouped[cat].slice(0, 3).map(article => `<li>${article.title}</li>`).join('');
+                const tooltipHTML = `<strong>Artikel Terbaru:</strong><ul>${recentArticles}</ul>`;
+
+                catHeader.addEventListener('mouseenter', () => {
+                    categoryTooltip.innerHTML = tooltipHTML;
+                    categoryTooltip.style.display = 'block';
+                });
+                catHeader.addEventListener('mousemove', (e) => {
+                    categoryTooltip.style.left = e.clientX + 15 + 'px';
+                    categoryTooltip.style.top = e.clientY + 15 + 'px';
+                });
+                catHeader.addEventListener('mouseleave', () => {
+                    categoryTooltip.style.display = 'none';
+                });
+                
                 toc.appendChild(catDiv);
             });
 
@@ -135,35 +158,29 @@ async function loadTOC() {
         const allArticles = Object.values(grouped).flat();
         const shuffledMarquee = shuffle([...allArticles]);
 
-        // UBAH: Tambahkan data-description ke setiap link di marquee
         const marqueeHTML = shuffledMarquee.map(d => {
-            // Escape tanda kutip dalam deskripsi untuk mencegah HTML rusak
             const cleanDescription = (d.description || 'Tidak ada deskripsi.').replace(/"/g, '&quot;');
             return `<a href="artikel/${d.file}" data-description="${cleanDescription}">${d.title}</a>`;
         }).join(" &bull; ");
         m.innerHTML = marqueeHTML;
 
-        // TAMBAHKAN: Logika untuk Tooltip Marquee
-        const tooltip = document.getElementById('marquee-tooltip');
+        const marqueeTooltip = document.getElementById('marquee-tooltip');
         const marqueeLinks = document.querySelectorAll('#marquee-content a');
 
         marqueeLinks.forEach(link => {
             link.addEventListener('mouseover', (e) => {
                 const description = e.target.getAttribute('data-description');
                 if (description) {
-                    tooltip.innerHTML = description;
-                    tooltip.style.display = 'block';
+                    marqueeTooltip.innerHTML = description;
+                    marqueeTooltip.style.display = 'block';
                 }
             });
-
             link.addEventListener('mousemove', (e) => {
-                // Posisi tooltip sedikit di bawah dan di kanan kursor
-                tooltip.style.left = e.clientX + 15 + 'px';
-                tooltip.style.top = e.clientY + 15 + 'px';
+                marqueeTooltip.style.left = e.clientX + 15 + 'px';
+                marqueeTooltip.style.top = e.clientY + 15 + 'px';
             });
-
             link.addEventListener('mouseout', () => {
-                tooltip.style.display = 'none';
+                marqueeTooltip.style.display = 'none';
             });
         });
 
@@ -173,9 +190,7 @@ async function loadTOC() {
     }
 }
 
-// ... (sisa kode JavaScript lainnya tetap sama)
-// ... (fungsi searchInput, clearBtn, updateTOCToggleText, tocToggleBtn, initDarkMode)
-
+// ... (sisa kode JavaScript lainnya tetap sama, tidak perlu diubah)
 const searchInput = document.getElementById("search");
 const clearBtn = document.getElementById("clearSearch");
 
