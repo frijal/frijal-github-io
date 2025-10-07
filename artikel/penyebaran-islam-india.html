@@ -390,9 +390,7 @@
       </div>
       <div class="meta-bar" id="meta-bar">
         <span class="flag">🇮🇳</span> <span class="city" id="city">India</span>
-        <span class="os" id="os"><i class="fa-solid fa-laptop"></i>...</span>
-        <span class="browser" id="browser"
-          ><i class="fa-solid fa-globe"></i>...</span
+        </span
         >
         <span><i class="fa-solid fa-calendar-days"></i> 26 Sep 2025</span>
       </div>
@@ -723,63 +721,7 @@
             document.querySelector('.lightbox .nav.next').click()
         })
 
-        // Info OS & browser
-        function getOS() {
-          const ua = navigator.userAgent
-          if (/windows/i.test(ua))
-            return { icon: 'fa-windows', name: 'Windows' }
-          if (/android/i.test(ua))
-            return { icon: 'fa-android', name: 'Android' }
-          if (/linux/i.test(ua)) return { icon: 'fa-linux', name: 'Linux' }
-          if (/iphone|ipad|ipod/i.test(ua))
-            return { icon: 'fa-apple', name: 'iOS' }
-          if (/mac/i.test(ua)) return { icon: 'fa-apple', name: 'MacOS' }
-          return { icon: 'fa-desktop', name: 'Unknown' }
-        }
-        function getBrowser() {
-          const ua = navigator.userAgent
-          if (ua.includes('Firefox'))
-            return { icon: 'fa-firefox', name: 'Firefox' }
-          if (ua.includes('Edg')) return { icon: 'fa-edge', name: 'Edge' }
-          if (ua.includes('Chrome'))
-            return { icon: 'fa-chrome', name: 'Chrome' }
-          if (ua.includes('Safari'))
-            return { icon: 'fa-safari', name: 'Safari' }
-          return { icon: 'fa-globe', name: 'Browser' }
-        }
-        const os = getOS(),
-          br = getBrowser()
-        document.getElementById('os').innerHTML =
-          `<i class="fa-brands ${os.icon}"></i> ${os.name}`
-        document.getElementById('browser').innerHTML =
-          `<i class="fa-brands ${br.icon}"></i> ${br.name}`
-        document.getElementById('info-os').innerHTML =
-          `<i class="fa-brands ${os.icon}"></i> OS: <b>${os.name}</b>`
-        document.getElementById('info-browser').innerHTML =
-          `<i class="fa-brands ${br.icon}"></i> Browser: <b>${br.name}</b>`
-
-        // GeoIP: Kota & bendera negara (gratis, fallback: India)
-        fetch('https://ipapi.co/json/')
-          .then((r) => r.json())
-          .then((data) => {
-            const flag = data.country
-              ? String.fromCodePoint(
-                  ...[...data.country_code].map(
-                    (x) => 0x1f1e6 - 65 + x.charCodeAt(),
-                  ),
-                )
-              : '🇮🇳'
-            document.getElementById('city').textContent =
-              data.city || data.country_name || 'India'
-            document.querySelector('.meta-bar .flag').textContent = flag
-            document.getElementById('info-location').innerHTML =
-              `<span class="flag">${flag}</span> ${data.city || ''} ${data.country_name ? `(${data.country_name})` : ''}`
-          })
-          .catch(() => {
-            document.getElementById('city').textContent = 'India'
-            document.querySelector('.meta-bar .flag').textContent = '🇮🇳'
-            document.getElementById('info-location').innerHTML =
-              `<span class="flag">🇮🇳</span> India`
+        
           })
       })
     </script>

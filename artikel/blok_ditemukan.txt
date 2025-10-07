@@ -1,3 +1,6 @@
+========================================================
+Ditemukan di: yarmuk-yerusalem.html
+========================================================
   // === Info Browser & Lokasi ===
   async function fetchBrowserInfo() {
     // Deteksi OS
@@ -52,3 +55,4 @@
 
     html += `Kota: <b>${info.city}</b>, Negara: <b>${info.country_name || info.country}</b> <br>`;
     html += `IP: <code>${info.ip}</code> &middot; Browser: <b>${browser}</b> &middot; OS: <b>${os}</b>`;
+
