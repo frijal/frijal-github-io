@@ -1,19 +1,19 @@
- // Display System Info
-            document.getElementById("browser-info").textContent = getBrowser();
-            document.getElementById("os-info").textContent = getOS();
+// Display System Info
+          document.getElementById('browser-info').textContent = getBrowser()
+          document.getElementById('os-info').textContent = getOS()
 
-            // Fetch Location Info
-            fetch("https://ipapi.co/json/")
-                .then(res => res.json())
-                .then(data => {
-                    const locationSpan = document.getElementById("location-info");
-                    if (data && data.city && data.country_name && data.country_code) {
-                        locationSpan.innerHTML = `<span class="flag">${getFlagEmoji(data.country_code)}</span> ${data.city}, ${data.country_name}`;
-                    } else {
-                        locationSpan.textContent = "Lokasi tidak diketahui";
-                    }
-                })
-                .catch(error => {
-                    console.error("Gagal mendapatkan info IP:", error);
-                    document.getElementById("location-info").textContent = "Lokasi tidak tersedia";
-                });
+          // Fetch Location Info
+          fetch('https://ipapi.co/json/')
+            .then((res) => res.json())
+            .then((data) => {
+              const locationSpan = document.getElementById('location-info')
+              if (data && data.city && data.country_name && data.country_code) {
+                locationSpan.innerHTML = `<span class="flag">${getFlagEmoji(data.country_code)}</span> ${data.city}, ${data.country_name}`
+              } else {
+                locationSpan.textContent = 'Lokasi tidak diketahui'
+              }
+            })
+            .catch((error) => {
+              console.error('Gagal mendapatkan info IP:', error)
+              document.getElementById('location-info').textContent =
+                'Lokasi tidak tersedia'
