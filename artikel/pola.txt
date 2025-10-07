@@ -1,19 +1,32 @@
-// Display System Info
-          document.getElementById('browser-info').textContent = getBrowser()
-          document.getElementById('os-info').textContent = getOS()
-
-          // Fetch Location Info
-          fetch('https://ipapi.co/json/')
-            .then((res) => res.json())
-            .then((data) => {
-              const locationSpan = document.getElementById('location-info')
-              if (data && data.city && data.country_name && data.country_code) {
-                locationSpan.innerHTML = `<span class="flag">${getFlagEmoji(data.country_code)}</span> ${data.city}, ${data.country_name}`
-              } else {
-                locationSpan.textContent = 'Lokasi tidak diketahui'
-              }
-            })
-            .catch((error) => {
-              console.error('Gagal mendapatkan info IP:', error)
-              document.getElementById('location-info').textContent =
-                'Lokasi tidak tersedia'
+<span>Browser: mendeteksi…</span>
+      </div>
+      <div class="chip" id="chip-os">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect
+            x="3"
+            y="4"
+            width="18"
+            height="14"
+            rx="2"
+            stroke="#8ED1C0"
+            stroke-width="1.5"
+          />
+          <path
+            d="M9 20h6"
+            stroke="#8ED1C0"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+        <span>OS: mendeteksi…</span>
+      </div>
+      <div class="chip" id="chip-location">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 21s7-4.5 7-10a7 7 0 10-14 0c0 5.5 7 10 7 10z"
+            stroke="#8ED1C0"
+            stroke-width="1.5"
+          />
+          <circle cx="12" cy="11" r="3" stroke="#8ED1C0" stroke-width="1.5" />
+        </svg>
+        <span>Lokasi: Surabaya, 🇮🇩 Indonesia</span>

@@ -630,31 +630,7 @@
         let shareUrl = encodeURIComponent(location.href),
           shareText = encodeURIComponent(document.title)
 
-        function getOS() {
-          var e = navigator.userAgent
-          if (/windows/i.test(e)) return 'Windows'
-          if (/android/i.test(e)) return 'Android'
-          if (/linux/i.test(e)) return 'Linux'
-          if (/iphone|ipad|ipod/i.test(e)) return 'iOS'
-          if (/macintosh|mac os x/i.test(e)) return 'MacOS'
-          return 'Tidak dikenal'
-        }
-
-        function getBrowser() {
-          var e = navigator.userAgent
-          if (/edg/i.test(e)) return 'Edge'
-          if (/chrome/i.test(e) && !/edg/i.test(e)) return 'Chrome'
-          if (/firefox/i.test(e)) return 'Firefox'
-          if (/safari/i.test(e) && !/chrome/i.test(e)) return 'Safari'
-          if (/opr|opera/i.test(e)) return 'Opera'
-          return 'Tidak dikenal'
-        }
-
-        function getFlagEmoji(e) {
-          return String.fromCodePoint(
-            ...[...e.toUpperCase()].map((e) => 127397 + e.charCodeAt()),
-          )
-        }
+        
 
         // 1. Set Share Links
         document.getElementById('share-wa').href =
@@ -666,27 +642,7 @@
         document.getElementById('share-tg').href =
           `https://t.me/share/url?url=${shareUrl}&text=` + shareText
 
-        // 2. Set OS and Browser Info
-        document.getElementById('browser-info').textContent = getBrowser()
-        document.getElementById('os-info').textContent = getOS()
-
-        // 3. Fetch Geo Info
-        fetch('https://ipapi.co/json/')
-          .then((e) => e.json())
-          .then((e) => {
-            var t = document.getElementById('geo-info')
-            if (e && e.city && e.country_name && e.country_code) {
-              t.innerHTML =
-                `<span class="flag">${getFlagEmoji(e.country_code)}</span> ${e.city}, ` +
-                e.country_name
-            } else {
-              t.textContent = 'Lokasi tidak diketahui'
-            }
-          })
-          .catch(() => {
-            document.getElementById('geo-info').textContent =
-              'Lokasi tidak tersedia'
-          })
+        
 
         // 4. Set FB Comments data-href
         document
