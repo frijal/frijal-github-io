@@ -1,8 +1,6 @@
-<span class="badge" id="ua-badge">
-            <svg id="ua-icon" width="20" height="20" aria-hidden="true"></svg>
-            <span id="ua-text">Mengenali perangkat…</span>
-          </span>
-          <span class="badge" id="loc-badge">
-            <span id="flag">🏳️</span>
-            <span id="loc-text">Deteksi ringan via IP…</span>
-          </span>
+  <section class="chips" aria-label="Info perangkat dan lokasi">
+    <div class="chip"><span class="i">🧩</span><span id="browser">Browser: mendeteksi...</span></div>
+    <div class="chip"><span class="i">💻</span><span id="os">OS: mendeteksi...</span></div>
+    <div class="chip"><span class="i">📍</span><span id="loc">Lokasi: Surabaya, Jawa Timur 🇮🇩</span></div>
+    <div class="chip"><span class="i">ℹ️</span><span>Tata letak: 1 kolom, wide fullscreen, responsif</span></div>
+  </section>
