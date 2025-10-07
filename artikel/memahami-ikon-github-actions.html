@@ -472,10 +472,7 @@
     </main>
 
     <footer>
-      <div id="user-info">
-        <span id="browser-info"></span> | <span id="os-info"></span> |
-        <span id="ip-info"></span>
-      </div>
+     
       <p>🄯 2025 Frijal. Dibuat dengan penuh ☕ di Balikpapan.</p>
     </footer>
 
@@ -547,48 +544,7 @@
           document.getElementById('share-linkedin').href =
             `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
 
-          // --- User Info Logic ---
-          function getOS() {
-            const userAgent = window.navigator.userAgent
-            if (userAgent.indexOf('Win') != -1) return 'Windows'
-            if (userAgent.indexOf('Mac') != -1) return 'MacOS'
-            if (userAgent.indexOf('Linux') != -1) return 'Linux'
-            if (userAgent.indexOf('Android') != -1) return 'Android'
-            if (userAgent.indexOf('like Mac') != -1) return 'iOS'
-            return 'Unknown OS'
-          }
-
-          function getBrowser() {
-            const userAgent = window.navigator.userAgent
-            if (userAgent.indexOf('Firefox') > -1) return 'Firefox'
-            if (userAgent.indexOf('SamsungBrowser') > -1)
-              return 'Samsung Browser'
-            if (
-              userAgent.indexOf('Opera') > -1 ||
-              userAgent.indexOf('OPR') > -1
-            )
-              return 'Opera'
-            if (userAgent.indexOf('Trident') > -1) return 'Internet Explorer'
-            if (userAgent.indexOf('Edge') > -1) return 'Edge'
-            if (userAgent.indexOf('Chrome') > -1) return 'Chrome'
-            if (userAgent.indexOf('Safari') > -1) return 'Safari'
-            return 'Unknown Browser'
-          }
-
-          document.getElementById('os-info').textContent = `OS: ${getOS()}`
-          document.getElementById('browser-info').textContent =
-            `Browser: ${getBrowser()}`
-
-          fetch('https://ipapi.co/json/')
-            .then((response) => response.json())
-            .then((data) => {
-              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`
-              document.getElementById('ip-info').innerHTML =
-                `IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`
-            })
-            .catch(() => {
-              document.getElementById('ip-info').textContent =
-                'IP: Tidak terdeteksi'
+          
             })
         })
       })
