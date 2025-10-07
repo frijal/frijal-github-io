@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Demo Text-SVG Icons</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  body.dark-mode {
+    background: #111;
+    color: #ddd;
+  }
+
+  #ipos-browser-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  #ipos-browser-info .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    gap: 6px;
+  }
+  #ipos-browser-info .icon svg {
+    width: 64px;
+    height: 64px;
+  }
+  #ipos-browser-info .icon text {
+    font-size: 16px;
+    font-family: monospace;
+    font-weight: 600;
+    fill: currentColor;
+    text-transform: lowercase;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  /* Hover umum */
+  .icon:hover text {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 6px rgba(88,166,255,0.6));
+  }
+
+  /* Variasi animasi */
+  .icon.firefox:hover text { animation: pulse 0.6s ease-in-out infinite; }
+  .icon.chrome:hover text { animation: spin 1s linear; }
+  .icon.edge:hover text   { animation: wave 0.6s ease-in-out; }
+  .icon.safari:hover text { animation: spin 2s linear infinite; }
+  .icon.linux:hover text  { animation: bounce 0.5s ease-in-out; }
+  .icon.android:hover text{ animation: tilt 0.5s ease-in-out; }
+
+  /* Keyframes */
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg) scale(1.1); }
+    to   { transform: rotate(360deg) scale(1.1); }
+  }
+  @keyframes wave {
+    0%,100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes tilt {
+    0%,100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+  }
+</style>
+</head>
+<body class="dark-mode">
+<h2>Demo Text-SVG Icons</h2>
+<div id="ipos-browser-info">
+
+  <div class="icon firefox">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        firefox
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon chrome">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        chrome
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon edge">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        edge
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon safari">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        safari
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon windows">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        windows
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon macos">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        macos
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon linux">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        linux
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon android">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        android
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon ios">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        ios
+      </text>
+    </svg>
+  </div>
+
+  <div class="icon unknown">
+    <svg viewBox="0 0 64 64">
+      <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">
+        unknown
+      </text>
+    </svg>
+  </div>
+
+</div>
+</body>
+</html>
