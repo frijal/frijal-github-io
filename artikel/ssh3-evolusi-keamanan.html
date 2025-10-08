@@ -1,367 +1,294 @@
-<!doctype html>
-<html lang="id-ID">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Charset & Viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <title>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</title>
-    <meta
-      name="description"
-      content="SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
-    />
-    <meta name="robots" content="index,follow" />
-    <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
-    <meta name="theme-color" content="#0f121a" />
+  <!-- Title & Description -->
+  <!-- prettier-ignore -->
+<title>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</title>
+  <meta name="description" content="SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet." />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Frijal" />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
-    />
-    <meta
-      property="og:title"
-      content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern"
-    />
-    <meta
-      property="og:description"
-      content="Fondasi HTTP/3, QUIC, dan TLS 1.3 membawa SSH ke masa depan: cepat, aman, dan fleksibel, dengan autentikasi modern dan koneksi tahan gangguan."
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-    />
-    <meta property="og:image:alt" content="Ilustrasi SSH3 modern" />
+  <!-- Canonical & Robots -->
+  <link rel="canonical" href="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern"
-    />
-    <meta
-      name="twitter:description"
-      content="SSH di atas HTTP/3: Zero-RTT, multiplexing, SSO modern, koneksi tahan pindah jaringan—remote akses yang relevan untuk internet modern."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-    />
-    <meta name="twitter:site" content="@frijal" />
-    <meta name="twitter:creator" content="@frijal" />
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
+  <meta name="theme-color" content="#0f121a" />
 
-    <!-- Schema.org -->
-    });
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern",
-        "description": "SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet.",
-        "image": [
-          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-        ],
-        "author": {
-          "@type": "Person",
-          "name": "Frijal",
-          "url": "https://frijal.github.io",
-          "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Frijal",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://frijal.github.io/favicon.ico",
-            "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
-          },
-          "image": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
-        },
-        "datePublished": "2025-09-28T17:30:00+08:00",
-        "dateModified": "2025-09-28T17:30:00+08:00",
-        "mainEntityOfPage": "https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html",
-        "inLanguage": "id-ID"
-      }
-    </script>
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Frijal" />
+  <meta property="og:url" content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" />
+  <meta property="og:title" content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern" />
+  <meta property="og:description" content="Fondasi HTTP/3, QUIC, dan TLS 1.3 membawa SSH ke masa depan: cepat, aman, dan fleksibel, dengan autentikasi modern dan koneksi tahan gangguan." />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg" />
+  <meta property="article:section" content="Teknologi" />
+  <meta property="article:published_time" content="2025-09-28T17:30:00+08:00" />
+  <meta property="article:modified_time" content="2025-09-28T17:30:00+08:00" />
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: #f9f9f9;
-        color: #333;
-        line-height: 1.6;
-        padding: 20px;
-        max-width: 1200px;
-        margin: auto;
-      }
-      .article {
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        margin-bottom: 40px;
-      }
-      .article h1 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-      }
-      .article h2 {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-size: 1.5rem;
-      }
-      .article p {
-        margin-bottom: 15px;
-      }
-      .article-images {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .article-images img {
-        max-width: 100%;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: transform 0.2s;
-      }
-      .article-images img:hover {
-        transform: scale(1.03);
-      }
-      .share-buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        flex-wrap: wrap;
-      }
-      .share-buttons .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 8px 12px;
-        background: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background 0.2s;
-        cursor: pointer;
-      }
-      .share-buttons .btn:hover {
-        background: #0056b3;
-      }
-      #lightbox {
-        display: flex;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.3s;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      }
-      #lightbox.show {
-        visibility: visible;
-        opacity: 1;
-      }
-      #lightbox img {
-        max-width: 90%;
-        max-height: 80%;
-        border-radius: 6px;
-      }
-      .lb-close {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 2rem;
-        color: #fff;
-        cursor: pointer;
-        background: none;
-        border: none;
-      }
-      footer {
-        text-align: center;
-        padding: 15px;
-        font-size: 0.85rem;
-        color: #555;
-        margin-top: 40px;
-      }
-    </style>
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-  </head>
-  <body>
-    <article class="article" role="article">
-      <h1>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</h1>
-      <div id="iposbrowser"></div>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern" />
+  <meta name="twitter:description" content="SSH di atas HTTP/3: Zero-RTT, multiplexing, SSO modern, koneksi tahan pindah jaringan—remote akses yang relevan untuk internet modern." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg" />
+  <meta name="twitter:site" content="@frijal" />
 
-      <p>
-        Jika Anda pernah berinteraksi dengan server melalui protokol SSH (Secure
-        Shell), Anda mungkin sudah familiar dengan versi-versi sebelumnya yang
-        menekankan keamanan dan kemudahan akses. SSH3 hadir sebagai evolusi dari
-        teknologi ini, menghadirkan kombinasi keamanan yang lebih kuat, performa
-        yang lebih cepat, dan fitur-fitur modern yang relevan untuk kebutuhan
-        server dan cloud masa kini.
-      </p>
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern","description":"SSH3 dibangun di atas HTTP/3 (QUIC + TLS 1.3): lebih cepat, lebih aman, lebih fleksibel. Autentikasi modern, resiliensi koneksi, dan multiplexing untuk era internet.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"],"author":{"@type":"Person","name":"Frijal","image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"publisher":{"@type":"Organization","name":"Frijal","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"image":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg"},"datePublished":"2025-09-28T17:30:00+08:00","dateModified":"2025-09-28T17:30:00+08:00","inLanguage":"id-ID","mainEntityOfPage":"https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"}</script>
 
-      <p>
-        Berbeda dengan pendahulunya, SSH3 menggunakan algoritma enkripsi terbaru
-        yang lebih tahan terhadap serangan brute force maupun serangan
-        kriptografi canggih. Protokol ini juga mengurangi overhead komunikasi
-        sehingga latensi koneksi lebih rendah, sangat ideal untuk server dengan
-        trafik tinggi dan aplikasi real-time.
-      </p>
+  <!-- Styles: single-column, dark glass tech theme, wide fullscreen -->
+  <style>
+:root{
+  --bg:#0f121a;
+  --layer1:#0f121a;
+  --layer2:#111a28;
+  --panel:#171e2bcc;
+  --card:#161d2a;
+  --ink:#e9eef7;
+  --muted:#b8c3d8;
+  --accent:#60a5fa;   /* blue */
+  --accent2:#22d3ee;  /* cyan */
+  --border:#233248;
+  --maxw:960px;
+  --shadow:0 16px 50px rgba(0,0,0,.45);
+  --glass: blur(8px) saturate(1.15);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  color:var(--ink);
+  background:
+radial-gradient(1200px 800px at 12% -10%, #141b29, transparent 60%),
+radial-gradient(1200px 800px at 88% 0%, #0f1520, transparent 60%),
+linear-gradient(180deg, var(--layer1), var(--layer2));
+  line-height:1.8;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
 
-      <div class="article-images">
-        <img
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-          data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg"
-          alt="Ilustrasi protokol SSH3 modern"
-        />
-      </div>
+/* Hero */
+header.hero{
+  position:relative;min-height:44vh;display:grid;place-items:center;overflow:hidden;
+  background:
+linear-gradient(180deg, rgba(23,30,43,.18), rgba(23,30,43,.86));
+  border-bottom:1px solid var(--border);
+}
+.title{
+  width:min(95%, 980px);
+  text-align:center;padding:2rem 1rem;
+  backdrop-filter: var(--glass);
+  background: linear-gradient(180deg, rgba(22,29,42,.45), rgba(22,29,42,.7));
+  border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);
+}
+.title h1{margin:0 0 .6rem;font-size:clamp(2rem,5vw,3rem)}
+.kicker{margin:.5rem auto 0;color:var(--muted);max-width:64ch;font-size:1.03rem}
 
-      <h2>Keamanan yang Ditingkatkan</h2>
-      <p>
-        SSH3 memperkenalkan sistem enkripsi hybrid yang menggabungkan AES‑256
-        dengan elliptic curve cryptography (ECC). Kombinasi ini memastikan bahwa
-        setiap sesi SSH tidak hanya aman dari serangan klasik, tetapi juga lebih
-        tahan terhadap potensi serangan kuantum di masa depan.
-      </p>
+/* Chips info */
+.chips{
+  display:grid;grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:.8rem;padding:1rem;background:rgba(23,30,43,.55);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  backdrop-filter: var(--glass);
+}
+.chip{
+  display:flex;align-items:center;gap:.6rem;padding:.7rem .9rem;
+  background:#161d2a;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);
+  font-size:.98rem;
+}
+.chip .i{font-size:1.2rem}
 
-      <p>
-        Selain itu, SSH3 mendukung otentikasi multi‑faktor (MFA) yang bisa
-        dikonfigurasi dengan token hardware maupun aplikasi otentikator. Hal ini
-        membuat akses server jauh lebih aman dibandingkan hanya menggunakan
-        password atau kunci publik sederhana.
-      </p>
+/* Article */
+.article{
+  width:min(100%, var(--maxw));margin:2rem auto;padding:1.3rem 1.3rem 1.8rem;
+  background:linear-gradient(180deg, #151c29, #161d2a);
+  border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);
+}
+.article h2,.article h3{margin-top:1.25rem;margin-bottom:.6rem;font-size:clamp(1.25rem,2.4vw,1.6rem)}
+.article p,.article li, .article blockquote{color:#e9eef7}
+.article blockquote{
+  margin:1rem 0;padding:.8rem 1rem;border-left:4px solid var(--accent2);
+  background:#131926;border-radius:12px;color:#dbe6ff
+}
+.article hr{border:none;height:1px;background:linear-gradient(90deg, transparent, #233248, transparent);margin:1rem 0}
 
-      <h2>Performa dan Kecepatan</h2>
-      <p>
-        Salah satu fokus utama SSH3 adalah mengurangi latency dan meningkatkan
-        throughput. Dengan protokol yang dioptimalkan, transfer file besar antar
-        server menjadi lebih cepat. SSH3 juga memiliki mekanisme kompresi
-        adaptif yang menyesuaikan dengan tipe data sehingga transfer lebih
-        efisien.
-      </p>
+/* Gallery */
+.gallery{width:min(100%, var(--maxw));margin:2rem auto;display:grid;grid-template-columns:1fr;gap:.95rem}
+.thumb{position:relative;overflow:hidden;cursor:zoom-in;border:1px solid var(--border);border-radius:18px;background:#161d2a}
+.thumb img{
+  display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;
+  filter:saturate(1.03) contrast(1.02);
+  transition:transform .5s ease, opacity .3s ease;
+}
+.thumb:hover img{transform:scale(1.02)}
+.caption{
+  position:absolute;left:0;right:0;bottom:0;padding:.65rem .9rem;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.25) 40%, rgba(0,0,0,.55));
+  color:#f0f6ff;font-size:.95rem;text-shadow:0 1px 2px rgba(0,0,0,.35)
+}
 
-      <p>
-        Fitur koneksi <em>persistent</em> memungkinkan sesi tetap hidup meskipun
-        terjadi gangguan jaringan sementara, sehingga pengguna tidak perlu
-        selalu melakukan reconnect dari awal.
-      </p>
+/* Lightbox */
+.lightbox{position:fixed;inset:0;display:none;background:rgba(13,17,26,.78);backdrop-filter: blur(3px);z-index:9999}
+.lightbox.open{display:grid;place-items:center}
+.lightbox img{max-width:min(92vw,1400px);max-height:82vh;border-radius:16px;box-shadow:0 28px 98px rgba(0,0,0,.52)}
+.lb-controls{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none}
+.lb-btn{
+  pointer-events:auto;position:fixed;top:50%;transform:translateY(-50%);
+  background:linear-gradient(180deg, #233248, #161d2a);border:1px solid var(--border);color:#eaf2ff;
+  padding:.6rem .95rem;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)
+}
+.lb-prev{left:2vw}
+.lb-next{right:2vw}
+.lb-close{top:2vh;right:2vw;transform:none;border-radius:10px}
 
-      <h2>Fitur Modern</h2>
-      <p>
-        SSH3 dilengkapi dengan kemampuan multiplexing, yang memungkinkan
-        beberapa sesi berjalan melalui satu koneksi TCP. Hal ini sangat membantu
-        bagi administrator yang harus mengelola banyak server sekaligus.
-      </p>
+/* Share bar */
+.share{width:min(100%, var(--maxw));margin:1rem auto 2rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.58rem .9rem;border-radius:12px;
+  border:1px solid var(--border);background:#161d2a;color:#eaf2ff;cursor:pointer;box-shadow:var(--shadow)
+}
+.btn .sicon{font-size:1.15rem}
 
-      <p>
-        Selain itu, SSH3 mendukung integrasi dengan container dan orchestrator
-        modern seperti Docker dan Kubernetes, memudahkan deployment dan
-        maintenance infrastruktur cloud.
-      </p>
+/* Floating buttons */
+.float-left{position:fixed;left:1rem;top:30%;z-index:999}
+.float-right{position:fixed;right:1rem;bottom:20%;z-index:999}
+.float-btn{
+  display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.05rem;
+  background:linear-gradient(180deg, #60a5fa, #3b82f6);color:#0e1420;border:none;border-radius:14px;box-shadow:var(--shadow);cursor:pointer
+}
+.float-btn:hover{filter:brightness(1.05)}
 
-      <h2>Kesimpulan</h2>
-      <p>
-        Dengan keamanan yang diperkuat, performa lebih tinggi, dan dukungan
-        fitur modern, SSH3 menjadi protokol ideal untuk era digital saat ini.
-        Baik untuk pengelolaan server, cloud, maupun infrastruktur IoT, SSH3
-        memastikan koneksi aman, cepat, dan handal.
-      </p>
+/* Comments */
+.comments{width:min(100%, var(--maxw));margin:2rem auto;padding:1rem;background:#161d2a;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
 
-      <div class="share-buttons">
-        <button class="btn" id="copyLink">🔗 Salin Link</button>
-        <a
-          class="btn"
-          href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html"
-          target="_blank"
-          rel="noopener"
-          >📘 Facebook</a
-        >
-        <a
-          class="btn"
-          href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html&text=SSH3%3A%20Evolusi%20Keamanan%20dan%20Kecepatan"
-          target="_blank"
-          rel="noopener"
-          >🐦 Twitter</a
-        >
-      </div>
-    </article>
+/* Footer */
+footer{text-align:center;padding:2rem 1rem 3rem;color:var(--muted)}
 
-    <!-- Lightbox -->
-    <div id="lightbox" role="dialog" aria-modal="true">
-      <button class="lb-close" aria-label="Tutup">&times;</button>
-      <img src="" alt="Gambar artikel SSH3" />
-    </div>
+@media (max-width:640px){
+  .lb-prev,.lb-next{display:none}
+  header.hero{min-height:38vh}
+}
+  </style>
+<meta name="date" content="2025-09-28">
 
-    <footer>
-      <small>🄯 2025 Pelan Kiri Rijal. Semua hak cipta dilindungi.</small>
-    </footer>
 
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        // Lightbox
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = lightbox.querySelector('img');
-        document.querySelectorAll('.article-images img').forEach((img) => {
-          img.addEventListener('click', () => {
-            lbImg.src = img.dataset.full || img.src;
-            lightbox.classList.add('show');
-          });
-        });
-        document
-          .querySelector('.lb-close')
-          .addEventListener('click', () => lightbox.classList.remove('show'));
-        lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) lightbox.classList.remove('show');
-        });
+  <meta property="og:image:alt" content="SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-28T11:00:00+08:00"></head>
+<body>
+  <!-- Facebook SDK -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0"></script>
 
-        // Copy Link
-        document.getElementById('copyLink').addEventListener('click', () => {
-          navigator.clipboard
-            .writeText(window.location.href)
-            .then(() => alert('Link artikel disalin!'));
-        });
-      });
-    </script>
 
-    });
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div id="kategori-aktif"></div>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+
+  <!-- Hero -->
+  <header class="hero" role="banner">
+<div class="title">
+  <h1>SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</h1>
+<div id="iposbrowser"></div>
+  <p class="kicker">HTTP/3, QUIC, dan TLS 1.3 mengangkat SSH ke masa depan: cepat, aman, fleksibel, dan siap integrasi.</p>
+</div>
+  </header>
+
+
+
+  <!-- Article: original content (unchanged) -->
+  <article class="article" role="article">
+<div class="content-original">
+  <div class="separator" style="clear: both; text-align: justify;"><div _ngcontent-ng-c3724181855="" class="markdown markdown-main-panel stronger enable-updated-hr-color" dir="ltr" id="model-response-message-contentr_1f7fe8c6fe6ef88c" style="--animation-duration: 400ms; --fade-animation-function: linear; font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><hr style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;" /><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h1 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern</h1><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Jika Anda pernah berinteraksi dengan server atau mengelola <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">remote machine</i>, Anda pasti familiar dengan <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH (Secure Shell)</b>. Protokol ini sudah menjadi tulang punggung keamanan koneksi jarak jauh selama puluhan tahun. Ia seperti gerbang aman menuju "otak" server kita.</p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Namun, dunia internet terus bergerak. Kecepatan makin tinggi, ancaman makin canggih, dan kebutuhan autentikasi makin beragam. Di tengah evolusi ini, lahirlah sebuah bintang baru yang menjanjikan revolusi: <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3</b>.</p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3 bukan sekadar versi minor dari SSH klasik; ia adalah lompatan besar. Alih-alih dibangun di atas TCP/IP tradisional, SSH3 didasarkan pada <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">HTTP/3</b> yang canggih (yang sendiri dibangun di atas <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">QUIC + TLS 1.3</b>). Mari kita bedah mengapa ini adalah berita besar.</p><hr style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;" /><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h2 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Fondasi Baru: HTTP/3, QUIC, dan TLS 1.3</h2><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Untuk memahami kehebatan SSH3, kita perlu sedikit memahami fondasinya:</p><ol start="1" style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">QUIC (Quick UDP Internet Connections):</b> Ini adalah protokol transportasi baru yang dirancang oleh Google untuk mengatasi keterbatasan TCP. QUIC berjalan di atas UDP (User Datagram Protocol), yang lebih cepat karena minim <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">overhead</i> koneksi. Fitur andalannya adalah:</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Zero RTT (Round Trip Time):</b> Koneksi bisa terbentuk lebih cepat.</p></li><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Multiplexing:</b> Mengirim beberapa <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">stream</i> data secara independen di satu koneksi, jadi jika satu <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">stream</i> macet, yang lain tidak terpengaruh.</p></li><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Perlindungan Koneksi:</b> Pergantian jaringan (misalnya dari Wi-Fi ke seluler) tidak memutus koneksi.</p></li></ul></li><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">TLS 1.3 (Transport Layer Security 1.3):</b> Ini adalah versi terbaru dari standar keamanan yang kita pakai setiap hari untuk <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">browsing</i> situs web aman (HTTPS). TLS 1.3 jauh lebih efisien dan aman daripada versi sebelumnya, dengan <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">handshake</i> (proses jabat tangan untuk membuat koneksi aman) yang lebih cepat.</p></li><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">HTTP/3:</b> Ini adalah versi terbaru protokol web, yang menggunakan QUIC dan TLS 1.3 sebagai fondasinya. Jadi, HTTP/3 adalah tentang web yang lebih cepat dan aman.</p></li></ol><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Dengan menumpangkan SSH di atas teknologi-teknologi ini, SSH3 mewarisi semua keunggulan dasar tersebut.</p><hr style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;" /><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h2 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Keuntungan Kunci SSH3: Lebih Cepat, Lebih Aman, Lebih Fleksibel</h2><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Inilah poin-poin mengapa SSH3 akan menjadi <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">game changer</i>:</p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h3 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">1. Penyiapan Sesi Lebih Cepat (Faster Session Setup)</h3><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Koneksi SSH klasik berbasis TCP membutuhkan beberapa langkah <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">handshake</i> yang bisa terasa lambat, terutama di jaringan dengan latensi tinggi.</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3, berkat QUIC dan TLS 1.3, dapat membangun sesi jauh lebih cepat.</b> Ini berarti Anda bisa terhubung ke server <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">remote</i> dalam waktu singkat, mengurangi waktu tunggu yang seringkali menjengkelkan. Bayangkan bekerja di server dengan latensi rendah, setiap detik berharga!</p></li></ul><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h3 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">2. Autentikasi Modern dan Fleksibel</h3><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH klasik bergantung pada <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">password</i> atau kunci SSH. Meskipun kunci SSH itu aman, pengelolaannya bisa jadi merepotkan untuk skala besar atau bagi pengguna yang terbiasa dengan sistem autentikasi modern.</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3 mendukung metode autentikasi modern seperti OAuth 2.0 dan OpenID Connect</b>, di samping metode tradisional. Ini membuka pintu bagi integrasi yang lebih mulus dengan sistem <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Single Sign-On (SSO)</i> perusahaan atau penyedia identitas pihak ketiga. Bayangkan bisa masuk ke server Anda dengan akun Google atau GitHub Anda! Ini menyederhanakan manajemen identitas dan meningkatkan keamanan dengan mengurangi penggunaan <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">password</i> yang rentan.</p></li></ul><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h3 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">3. Keamanan Tingkat Lanjut: "Tidak Terlihat" dari <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Port Scanning</i></h3><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Ini adalah salah satu fitur keamanan paling menarik. SSH klasik biasanya berjalan di <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> 22. <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Port scanning</i> adalah teknik yang digunakan penyerang untuk mencari <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> yang terbuka dan layanan yang berjalan di sana, termasuk SSH.</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3, karena berjalan di atas HTTP/3, dapat "menyembunyikan" dirinya di <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> HTTP/3 (biasanya <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> 443).</b> Ini membuat koneksi SSH Anda secara efektif <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">"tidak terlihat"</b> oleh <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port scanner</i> yang mencari <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> SSH standar. Ini adalah lapisan keamanan tambahan yang cerdas, mengurangi "permukaan serangan" yang terekspos ke dunia luar.</p></li></ul><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h3 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">4. Resiliensi Koneksi yang Lebih Baik</h3><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Seringkali koneksi SSH klasik terputus saat Anda berpindah dari Wi-Fi ke jaringan seluler, atau saat ada gangguan jaringan sesaat.</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">QUIC di balik SSH3 dirancang untuk mengatasi ini.</b> Jika alamat IP atau <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">port</i> Anda berubah, koneksi SSH3 bisa bertahan karena ia mengidentifikasi koneksi berdasarkan ID unik, bukan alamat IP. Ini berarti koneksi Anda akan tetap stabil meskipun Anda berpindah jaringan.</p></li></ul><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h3 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">5. Multi-Streaming (Channel Multiplexing)</h3><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH klasik menggunakan satu saluran untuk semua data. Jika satu saluran macet (misalnya, karena <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">file transfer</i> besar), perintah lain yang Anda ketik bisa terasa lambat.</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3, dengan kemampuan <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">multiplexing</i> QUIC, memungkinkan beberapa "saluran" data berjalan secara independen.</b> Ini berarti Anda bisa melakukan <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">file transfer</i> sambil tetap menjalankan perintah Terminal dengan lancar dan responsif di saluran terpisah.</p></li></ul><hr style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;" /><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><h2 style="font-family: Google Sans, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Potensi dan Masa Depan SSH3</h2><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"></p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3 masih dalam tahap awal pengembangan dan adopsi, tetapi potensinya sangat besar. Ini bukan hanya tentang kecepatan atau keamanan, tetapi juga tentang:</p><ul style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; padding-inline-start: 32px;"><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Kemudahan Integrasi:</b> Dengan fondasi web modern, SSH3 lebih mudah diintegrasikan dengan aplikasi web dan <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">browser</i>.</p></li><li style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;"><b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Efisiensi Sumber Daya:</b> Penggunaan QUIC yang lebih efisien dapat mengurangi <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">overhead</i> server, terutama untuk koneksi yang banyak dan sering terputus-sambung.</p></li></ul><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">Singkatnya, <b style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">SSH3 adalah lompatan evolusioner</b> yang membawa protokol SSH ke era internet modern. Ia menjanjikan pengalaman <i style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important;">remote access</i> yang lebih cepat, lebih aman, dan jauh lebih fleksibel, membuka jalan bagi cara-cara baru dalam berinteraksi dengan server kita. Ini adalah masa depan yang menarik bagi siapa pun yang peduli dengan keamanan dan efisiensi di dunia digital.</p><p style="font-family: Google Sans Text, sans-serif !important; line-height: 1.15 !important; margin-top: 0px !important; text-align: center;"><img alt="" border="0" data-original-height="181" data-original-width="502" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg" /></p></div></div>
+<div id="iposbrowser"></div>
+</div>
+  </article>
+
+  <!-- Gallery -->
+  <section class="gallery" aria-label="Galeri SSH3">
+<div class="thumb" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg">
+  <img loading="lazy" alt="SSH3 di atas HTTP/3 dengan QUIC dan TLS 1.3" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjaupjz-fdFQV0A_v0YyQgVyVylHGjgPX684A5qgSH_44BaahHcOudPRKWjpkEh_b0BDxL2vFsMa_foPKT9eWBBtbGgBe3dPwl8jlux8krkBXChY5TVJw0oK9E-G4DYAKlf52BnRwK-DNCKEqhxFnATCL6N2EazUCWjNI1hUKoK8tAb6XDiHV0YAsh3kBY/s1600/ssh3.jpg">
+  <div class="caption">SSH3: protokol modern yang memanfaatkan QUIC dan TLS 1.3.</div>
+</div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+<img id="lb-img" alt="Gambar galeri ukuran penuh" />
+<div class="lb-controls">
+  <button class="lb-btn lb-prev" aria-label="Sebelumnya">◀</button>
+  <button class="lb-btn lb-next" aria-label="Berikutnya">▶</button>
+  <button class="lb-btn lb-close" aria-label="Tutup">✕</button>
+</div>
+  </div>
+
+  <!-- Share -->
+  <div class="share" aria-label="Bagikan artikel">
+<button class="btn" id="copyLink"><span class="sicon">🔗</span><span>Salin tautan</span></button>
+<a class="btn" id="waShare" href="#" rel="noreferrer"><span class="sicon">🟢</span><span>WhatsApp</span></a>
+<a class="btn" id="fbShare" href="#" rel="noreferrer"><span class="sicon">🔵</span><span>Facebook</span></a>
+<a class="btn" id="xShare" href="#" rel="noreferrer"><span class="sicon">⚫</span><span>X (Twitter)</span></a>
+<a class="btn" id="tgShare" href="#" rel="noreferrer"><span class="sicon">🔷</span><span>Telegram</span></a>
+  </div>
+
+  <!-- Facebook Comments -->
+  <section class="comments" aria-label="Komentar Facebook">
+<h2 style="margin-top:0">Kolom komentar</h2>
+<div class="fb-comments" data-href="https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html" data-width="100%" data-numposts="5" data-order-by="reverse_time"></div>
+  </section>
+
+  <footer>
+🄯 2025 Frijal • Teknologi: SSH3—remote akses yang cepat, aman, dan fleksibel.
+  </footer>
+
+  <!-- Scripts: detect Browser/OS, lightbox, share links -->
+  <script>
+
+
+// Lightbox gallery
+(function(){
+  const thumbs=[...document.querySelectorAll('.gallery .thumb')];
+  const lb=document.getElementById('lightbox');
+  const img=document.getElementById('lb-img');
+  const prev=document.querySelector('.lb-prev');
+  const next=document.querySelector('.lb-next');
+  const close=document.querySelector('.lb-close');
+  let i=0;
+  function open(n){ i=n; img.src=thumbs[i].dataset.full; lb.classList.add('open'); }
+  function step(d){ i=(i+d+thumbs.length)%thumbs.length; img.src=thumbs[i].dataset.full; }
+  function hide(){ lb.classList.remove('open'); }
+  thumbs.forEach((t,idx)=> t.addEventListener('click',()=>open(idx)));
+  prev.addEventListener('click',()=>step(-1));
+  next.addEventListener('click',()=>step(1));
+  close.addEventListener('click',hide);
+  lb.addEventListener('click',e=>{ if(e.target===lb) hide(); });
+  document.addEventListener('keydown',e=>{
+if(!lb.classList.contains('open')) return;
+if(e.key==='Escape') hide();
+if(e.key==='ArrowLeft') step(-1);
+if(e.key==='ArrowRight') step(1);
+  });
+})();
+
+// Share links
+(function(){
+  const url = encodeURIComponent('https://frijal.github.io/artikel/ssh3-evolusi-keamanan.html');
+  const title = encodeURIComponent('SSH3: Evolusi Keamanan dan Kecepatan di Era Internet Modern');
+  document.getElementById('copyLink').addEventListener('click', async ()=>{
+try{ await navigator.clipboard.writeText(decodeURIComponent(url)); alert('Tautan disalin!'); }
+catch{ prompt('Salin tautan secara manual:', decodeURIComponent(url)); }
+  });
+  document.getElementById('waShare').href = `https://wa.me/?text=${title}%20${url}`;
+  document.getElementById('fbShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  document.getElementById('xShare').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+  document.getElementById('tgShare').href = `https://t.me/share/url?url=${url}&text=${title}`;
+})();
+  </script>
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>

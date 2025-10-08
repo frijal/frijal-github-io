@@ -1,824 +1,554 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif."
-    />
-    <meta
-      name="keywords"
-      content="BlankOn, ZSync, ISO, Linux, Download, Hemat Kuota, Panduan, Tutorial"
-    />
-    <meta name="author" content="Komunitas BlankOn" />
-    <meta
-      property="og:title"
-      content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien"
-    />
-    <meta
-      property="og:description"
-      content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/zsync-blankon.html"
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien"
-    />
-    <meta
-      name="twitter:description"
-      content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg"
-    />
-    <meta name="twitter:site" content="@BlankOnLinux" />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/zsync-blankon.html"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>"
-      type="image/svg+xml"
-    />
-    <!-- prettier-ignore -->
-    <title>Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien</title>
-    });
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    });
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    });
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.css"
-    />
-    <style>
-      :root {
-        --primary: #4a6fa5;
-        --secondary: #166088;
-        --accent: #4fc3f7;
-        --light: #f8f9fa;
-        --dark: #343a40;
-        --success: #28a745;
-        --warning: #ffc107;
-        --danger: #dc3545;
-        --muted: #6c757d;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --radius: 8px;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: var(--dark);
-        background-color: var(--light);
-        padding: 0;
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      header {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 1.5rem;
-        text-align: center;
-        box-shadow: var(--shadow);
-      }
-      main {
-        flex: 1;
-        max-width: 1200px;
-        width: 100%;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-      footer {
-        background-color: var(--dark);
-        color: white;
-        text-align: center;
-        padding: 1.5rem;
-        margin-top: 2rem;
-      }
-      h1,
-      h2,
-      h3 {
-        color: var(--secondary);
-        margin-bottom: 1rem;
-      }
-      p {
-        margin-bottom: 1rem;
-      }
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      .container {
-        background: white;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .btn {
-        display: inline-block;
-        background-color: var(--primary);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius);
-        text-decoration: none;
-        margin: 0.5rem 0;
-        transition: background-color 0.3s;
-      }
-      .btn:hover {
-        background-color: var(--secondary);
-      }
-      .code-block {
-        position: relative;
-        margin: 1.5rem 0;
-        border-radius: var(--radius);
-        overflow: hidden;
-      }
-      .code-block pre {
-        margin: 0;
-        padding: 1rem;
-        overflow-x: auto;
-      }
-      .copy-btn {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 0.25rem 0.5rem;
-        border-radius: var(--radius);
-        cursor: pointer;
-        font-size: 0.8rem;
-      }
-      .copy-btn:hover {
-        background: var(--secondary);
-      }
-      .share-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 1.5rem 0;
-      }
-      .share-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius);
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        transition: transform 0.2s;
-      }
-      .share-btn:hover {
-        transform: translateY(-2px);
-      }
-      .share-btn.facebook {
-        background-color: #3b5998;
-      }
-      .share-btn.twitter {
-        background-color: #1da1f2;
-      }
-      .share-btn.whatsapp {
-        background-color: #25d366;
-      }
-      .share-btn.telegram {
-        background-color: #0088cc;
-      }
-      .share-btn.instagram {
-        background-color: #e4405f;
-      }
-      .share-btn.threads {
-        background-color: #000;
-      }
-      .share-btn.tiktok {
-        background-color: #000;
-      }
-      .info-box {
-        background-color: #f8f9fa;
-        border-left: 4px solid var(--accent);
-        padding: 1rem;
-        margin: 1.5rem 0;
-        border-radius: var(--radius);
-      }
-      .lazy-image {
-        width: 100%;
-        height: auto;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        transition: opacity 0.3s;
-      }
-      .lazy-image[loading='lazy'] {
-        opacity: 0;
-      }
-      .lazy-image.loaded {
-        opacity: 1;
-      }
-      #btn-home-left,
-      #btn-home-right {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        background-color: var(--primary);
-        color: white;
-        padding: 0.75rem 1rem;
-        border-radius: var(--radius);
-        text-decoration: none;
-        font-family: inherit;
-        font-size: 0.9rem;
-        font-weight: bold;
-        box-shadow: var(--shadow);
-        transition:
-          background 0.3s ease,
-          transform 0.2s ease;
-        z-index: 9999;
-      }
-      #btn-home-left:hover,
-      #btn-home-right:hover {
-        background-color: var(--secondary);
-        transform: scale(1.05);
-      }
-      #btn-home-left {
-        left: 10px;
-        top: 30%;
-        transform: translateY(-50%);
-      }
-      #btn-home-right {
-        right: 10px;
-        bottom: 20%;
-        transform: translateY(50%);
-      }
-      #btn-home-left svg,
-      #btn-home-right svg {
-        width: 16px;
-        height: 16px;
-        margin-right: 6px;
-      }
-      .browser-os-info {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin: 1.5rem 0;
-        padding: 1rem;
-        background-color: #f8f9fa;
-        border-radius: var(--radius);
-      }
-      .info-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .info-item svg {
-        width: 20px;
-        height: 20px;
-      }
-      @media (max-width: 768px) {
-        main {
-          padding: 0 0.5rem;
-        }
-        .container {
-          padding: 1rem;
-        }
-        #btn-home-left,
-        #btn-home-right {
-          padding: 0.5rem 0.75rem;
-          font-size: 0.8rem;
-        }
-      }
-    </style>
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.addEventListener('DOMContentLoaded', function () {
-          // Lazy load images
-          const lazyImages = document.querySelectorAll('.lazy-image');
-          const lazyLoad = (img) => {
-            img.setAttribute('src', img.getAttribute('data-src'));
-            img.onload = () => {
-              img.classList.add('loaded');
-            };
-          };
-          if ('IntersectionObserver' in window) {
-            const lazyImageObserver = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  lazyLoad(entry.target);
-                  lazyImageObserver.unobserve(entry.target);
-                }
-              });
-            });
-            lazyImages.forEach((img) => {
-              lazyImageObserver.observe(img);
-            });
-          } else {
-            lazyImages.forEach(lazyLoad);
-          }
-          // Set current year in footer
-          document.getElementById('current-year').textContent =
-            new Date().getFullYear();
-          // Detect browser and OS
-          const userAgent = navigator.userAgent;
-          let browserName, browserIcon, osName, osIcon;
-          if (userAgent.includes('Firefox')) {
-            browserName = 'Mozilla Firefox';
-            browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
-          } else if (userAgent.includes('Edg')) {
-            browserName = 'Microsoft Edge';
-            browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
-          } else if (userAgent.includes('Chrome')) {
-            browserName = 'Google Chrome';
-            browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
-          } else if (userAgent.includes('Safari')) {
-            browserName = 'Apple Safari';
-            browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 10.44c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm-12 0c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm13.49-3.14c-.11-.77-.31-1.51-.58-2.2-.32-.83-.73-1.61-1.2-2.31-.52-.78-1.13-1.45-1.8-1.95-.63-.47-1.3-.8-2-.97-.7-.17-1.42-.18-2.14-.02-.72.16-1.42.45-2.07.85-.59.37-1.15.83-1.68 1.36-.6.6-.99 1.31-1.18 2.1-.14.59-.15 1.2.02 1.8.17.6.5.18 1.2.18 1.65 0 3.15-1.17 3.9-2.85.18-.45.45-.85.78-1.18.37-.37.82-.68 1.32-.88.55-.22 1.14-.3 1.75-.2 1.3.2 2.48 1.1 3.1 2.45.37.85.58 1.75.58 2.65 0 .3-.05.6-.15.88-.2.55-.5 1.07-.88 1.53-.43.5-.94.93-1.5.93-.56 0-1.07-.43-1.5-.93-.38-.46-.7-.98-.88-1.53z"/></svg>';
-          } else {
-            browserName = 'Browser Lain';
-            browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>';
-          }
-          if (userAgent.includes('Windows')) {
-            osName = 'Windows';
-            osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 1.5v13H6V7h1V5.5h4.5V7H12zm5.5 0h-1v1.5h1c.83 0 1.5.67 1.5 1.5v8c0 .83-.67 1.5-1.5 1.5h-1v1.5h1c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3zm-3 1.5h-1v1.5h1v8h-1V7z"/></svg>';
-          } else if (userAgent.includes('Mac')) {
-            osName = 'macOS';
-            osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 0c.8 0 1.5.7 1.5 1.5v18c0 .8-.7 1.5-1.5 1.5H5.5C4.7 21 4 20.3 4 19.5v-18C4 .7 4.7 0 5.5 0h13zM15 19H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 17H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 15H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 13H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1z"/></svg>';
-          } else if (userAgent.includes('Linux')) {
-            osName = 'Linux';
-            osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
-          } else if (userAgent.includes('Android')) {
-            osName = 'Android';
-            osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-.83-.67-1.5-1.5-1.5h-7c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h.5v3.5h2V14H15v-2h2.5M19 1H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-7 17.5v-2h2v2h-2zm-5.5-3h11c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H5.5C4.67 14 4 14.67 4 15.5S4.67 17 5.5 17z"/></svg>';
-          } else {
-            osName = 'Sistem Operasi Lain';
-            osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 18H7V6h10v12zm-7-1l4 2.5V19l-4-2.5V15zM7 2c-.55 0-1 .45-1 1v18c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H7zm1 17.5l-4-2.5V15h4v4.5z"/></svg>';
-          }
-          document.getElementById('browser-info').innerHTML =
-            `${browserIcon} <span>${browserName}</span>`;
-          document.getElementById('os-info').innerHTML =
-            `${osIcon} <span>${osName}</span>`;
-          // Fetch IP info
-          fetch('https://ipapi.co/json/')
-            .then((response) => response.json())
-            .then((data) => {
-              const flagEmoji = data.country_calling_code
-                ? String.fromCodePoint(
-                    ...[...data.country_calling_code].map(
-                      (c) => 0x1f1a5 + c.charCodeAt(0) - 65
-                    )
-                  )
-                : '';
-              document.getElementById('ip-info').innerHTML = `
-            ${flagEmoji} <span>${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'}</span>
-          `;
-            })
-            .catch(() => {
-              document.getElementById('ip-info').innerHTML =
-                'Lokasi tidak dapat dideteksi';
-            });
-        });
-      });
-    </script>
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        // JSON-LD Structured Data
-        const jsonLd = {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline:
-            'Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien',
-          description:
-            'Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif.',
-          author: {
-            '@type': 'Organization',
-            name: 'Komunitas BlankOn',
-          },
-          datePublished: '2025-09-17',
-          dateModified: '2025-09-17',
-          image:
-            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg',
-          publisher: {
-            '@type': 'Organization',
-            name: 'BlankOn Linux',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://frijal.github.io/logo.png',
-            },
-          },
-          mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': 'https://frijal.github.io/artikel/zsync-blankon.html',
-          },
-          breadcrumb: {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://frijal.github.io/',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Artikel',
-                item: 'https://frijal.github.io/',
-              },
-              {
-                '@type': 'ListItem',
-                position: 3,
-                name: 'Panduan ZSync untuk ISO BlankOn Rote',
-              },
-            ],
-          },
-        };
-      });
-    </script>
-    <script type="application/ld+json">
-          ${JSON.stringify(jsonLd)}
-      });
-    </script>
-    <meta name="date" content="2025-09-28" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif.">
+  <meta name="keywords" content="BlankOn, ZSync, ISO, Linux, Download, Hemat Kuota, Panduan, Tutorial">
+  <meta name="author" content="Komunitas BlankOn">
+  <meta property="og:title" content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien">
+  <meta property="og:description" content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.github.io/artikel/zsync-blankon.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien">
+  <meta name="twitter:description" content="Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg">
+  <meta name="twitter:site" content="@BlankOnLinux">
+  <link rel="canonical" href="https://frijal.github.io/artikel/zsync-blankon.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>" type="image/svg+xml">
+  <!-- prettier-ignore -->
+<title>Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien</title>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.css">
+  <style>
+:root {
+  --primary: #4a6fa5;
+  --secondary: #166088;
+  --accent: #4fc3f7;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --muted: #6c757d;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: var(--light);
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+footer {
+  background-color: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+h1, h2, h3 {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+p {
+  margin-bottom: 1rem;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.container {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  margin: 0.5rem 0;
+  transition: background-color 0.3s;
+}
+.btn:hover {
+  background-color: var(--secondary);
+}
+.code-block {
+  position: relative;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.copy-btn:hover {
+  background: var(--secondary);
+}
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+.share-btn:hover {
+  transform: translateY(-2px);
+}
+.share-btn.facebook { background-color: #3b5998; }
+.share-btn.twitter { background-color: #1da1f2; }
+.share-btn.whatsapp { background-color: #25d366; }
+.share-btn.telegram { background-color: #0088cc; }
+.share-btn.instagram { background-color: #e4405f; }
+.share-btn.threads { background-color: #000; }
+.share-btn.tiktok { background-color: #000; }
+.info-box {
+  background-color: #f8f9fa;
+  border-left: 4px solid var(--accent);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+}
+.lazy-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s;
+}
+.lazy-image[loading="lazy"] {
+  opacity: 0;
+}
+.lazy-image.loaded {
+  opacity: 1;
+}
+#btn-home-left, #btn-home-right {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+#btn-home-left:hover, #btn-home-right:hover {
+  background-color: var(--secondary);
+  transform: scale(1.05);
+}
+#btn-home-left {
+  left: 10px;
+  top: 30%;
+  transform: translateY(-50%);
+}
+#btn-home-right {
+  right: 10px;
+  bottom: 20%;
+  transform: translateY(50%);
+}
+#btn-home-left svg, #btn-home-right svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+.browser-os-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--radius);
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.info-item svg {
+  width: 20px;
+  height: 20px;
+}
+@media (max-width: 768px) {
+  main {
+padding: 0 0.5rem;
+  }
+  .container {
+padding: 1rem;
+  }
+  #btn-home-left, #btn-home-right {
+padding: 0.5rem 0.75rem;
+font-size: 0.8rem;
+  }
+}
+  </style>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Lazy load images
+  const lazyImages = document.querySelectorAll('.lazy-image');
+  const lazyLoad = (img) => {
+img.setAttribute('src', img.getAttribute('data-src'));
+img.onload = () => {
+  img.classList.add('loaded');
+};
+  };
+  if ('IntersectionObserver' in window) {
+const lazyImageObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+if (entry.isIntersecting) {
+  lazyLoad(entry.target);
+  lazyImageObserver.unobserve(entry.target);
+}
+  });
+});
+lazyImages.forEach((img) => {
+  lazyImageObserver.observe(img);
+});
+  } else {
+lazyImages.forEach(lazyLoad);
+  }
+  // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+  // Detect browser and OS
+  const userAgent = navigator.userAgent;
+  let browserName, browserIcon, osName, osIcon;
+  if (userAgent.includes('Firefox')) {
+browserName = 'Mozilla Firefox';
+browserIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
+  } else if (userAgent.includes('Edg')) {
+browserName = 'Microsoft Edge';
+browserIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
+  } else if (userAgent.includes('Chrome')) {
+browserName = 'Google Chrome';
+browserIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
+  } else if (userAgent.includes('Safari')) {
+browserName = 'Apple Safari';
+browserIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 10.44c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm-12 0c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm13.49-3.14c-.11-.77-.31-1.51-.58-2.2-.32-.83-.73-1.61-1.2-2.31-.52-.78-1.13-1.45-1.8-1.95-.63-.47-1.3-.8-2-.97-.7-.17-1.42-.18-2.14-.02-.72.16-1.42.45-2.07.85-.59.37-1.15.83-1.68 1.36-.6.6-.99 1.31-1.18 2.1-.14.59-.15 1.2.02 1.8.17.6.5.18 1.2.18 1.65 0 3.15-1.17 3.9-2.85.18-.45.45-.85.78-1.18.37-.37.82-.68 1.32-.88.55-.22 1.14-.3 1.75-.2 1.3.2 2.48 1.1 3.1 2.45.37.85.58 1.75.58 2.65 0 .3-.05.6-.15.88-.2.55-.5 1.07-.88 1.53-.43.5-.94.93-1.5.93-.56 0-1.07-.43-1.5-.93-.38-.46-.7-.98-.88-1.53z"/></svg>';
+  } else {
+browserName = 'Browser Lain';
+browserIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>';
+  }
+  if (userAgent.includes('Windows')) {
+osName = 'Windows';
+osIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 1.5v13H6V7h1V5.5h4.5V7H12zm5.5 0h-1v1.5h1c.83 0 1.5.67 1.5 1.5v8c0 .83-.67 1.5-1.5 1.5h-1v1.5h1c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3zm-3 1.5h-1v1.5h1v8h-1V7z"/></svg>';
+  } else if (userAgent.includes('Mac')) {
+osName = 'macOS';
+osIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 0c.8 0 1.5.7 1.5 1.5v18c0 .8-.7 1.5-1.5 1.5H5.5C4.7 21 4 20.3 4 19.5v-18C4 .7 4.7 0 5.5 0h13zM15 19H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 17H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 15H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 13H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1z"/></svg>';
+  } else if (userAgent.includes('Linux')) {
+osName = 'Linux';
+osIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
+  } else if (userAgent.includes('Android')) {
+osName = 'Android';
+osIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-.83-.67-1.5-1.5-1.5h-7c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h.5v3.5h2V14H15v-2h2.5M19 1H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-7 17.5v-2h2v2h-2zm-5.5-3h11c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H5.5C4.67 14 4 14.67 4 15.5S4.67 17 5.5 17z"/></svg>';
+  } else {
+osName = 'Sistem Operasi Lain';
+osIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 18H7V6h10v12zm-7-1l4 2.5V19l-4-2.5V15zM7 2c-.55 0-1 .45-1 1v18c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H7zm1 17.5l-4-2.5V15h4v4.5z"/></svg>';
+  }
+  document.getElementById('browser-info').innerHTML = `${browserIcon} <span>${browserName}</span>`;
+  document.getElementById('os-info').innerHTML = `${osIcon} <span>${osName}</span>`;
+  // Fetch IP info
+  fetch('https://ipapi.co/json/')
+.then(response => response.json())
+.then(data => {
+  const flagEmoji = data.country_calling_code ? String.fromCodePoint(...[...data.country_calling_code].map(c => 0x1F1A5 + c.charCodeAt(0) - 65)) : '';
+  document.getElementById('ip-info').innerHTML = `
+${flagEmoji} <span>${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'}</span>
+  `;
+})
+.catch(() => {
+  document.getElementById('ip-info').innerHTML = 'Lokasi tidak dapat dideteksi';
+});
+});
+  </script>
+  <script>
+// JSON-LD Structured Data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien",
+  "description": "Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif.",
+  "author": {
+"@type": "Organization",
+"name": "Komunitas BlankOn"
+  },
+  "datePublished": "2025-09-17",
+  "dateModified": "2025-09-17",
+  "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg",
+  "publisher": {
+"@type": "Organization",
+"name": "BlankOn Linux",
+"logo": {
+  "@type": "ImageObject",
+  "url": "https://frijal.github.io/logo.png"
+}
+  },
+  "mainEntityOfPage": {
+"@type": "WebPage",
+"@id": "https://frijal.github.io/artikel/zsync-blankon.html"
+  },
+  "breadcrumb": {
+"@type": "BreadcrumbList",
+"itemListElement": [
+  {
+"@type": "ListItem",
+"position": 1,
+"name": "Home",
+"item": "https://frijal.github.io/"
+  },
+  {
+"@type": "ListItem",
+"position": 2,
+"name": "Artikel",
+"item": "https://frijal.github.io/"
+  },
+  {
+"@type": "ListItem",
+"position": 3,
+"name": "Panduan ZSync untuk ISO BlankOn Rote"
+  }
+]
+  }
+};
+  </script>
+  <script type="application/ld+json">
+${JSON.stringify(jsonLd)}
+  </script>
+<meta name="date" content="2025-09-28">
 
-    <meta
-      property="og:image:alt"
-      content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/zsync-blankon.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-09-16T11:00:00+08:00"
-    />
-  </head>
-  <body>
-    <header>
-      <h1>Panduan ZSync untuk ISO BlankOn Rote</h1>
-      <div id="iposbrowser"></div>
-      <p>Hemat Kuota & Efisien dalam Mengunduh ISO BlankOn Terbaru</p>
-    </header>
-    <main>
-      <article class="container">
-        <img
-          class="lazy-image"
-          data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg"
-          alt="BlankOn Rote ZSync"
-          loading="lazy"
-        />
-        <p style="text-align: center; font-style: italic; color: var(--muted)">
-          Gambar: Logo BlankOn Rote
-        </p>
-        <section>
-          <h2>Pendahuluan</h2>
-          <p>
-            Bagi Anda yang hobi mencoba hal baru, terutama dalam hal
-            <strong>ISO terbaru dari distribusi Linux BlankOn</strong>, artikel
-            ini akan membahas cara menggunakan <strong>ZSync</strong> untuk
-            mengunduh ISO BlankOn Rote dengan efisien dan hemat kuota.
-          </p>
-          <p>
-            BlankOn Rote dikenal sebagai distribusi Linux yang rajin dalam
-            merilis <strong>CD harian (daily build)</strong>. Saat ini, BlankOn
-            Rote sudah mencapai versi <strong>Jahitan Lima</strong>.
-          </p>
-          <div class="info-box">
-            <p>
-              Artikel ini ditujukan bagi para
-              <strong>Pendekar BlankOn</strong> agar dapat meluangkan waktu
-              untuk menyediakan versi <code>*.iso.zsync</code> bagi setiap
-              update CD harian. Dengan begitu, pengguna dengan kuota terbatas
-              (seperti di daerah terpencil) tetap bisa ikut menguji dan
-              melaporkan bug pada setiap pembaruan.
-            </p>
-          </div>
-        </section>
-        <section>
-          <h2>Apa Itu ZSync?</h2>
-          <p>
-            ZSync adalah alat yang memungkinkan Anda untuk
-            <strong>mengunduh hanya perubahan-perubahan</strong> pada file ISO,
-            bukan seluruh file ISO yang berukuran besar (rata-rata 700MB).
-            Dengan ZSync, Anda hanya perlu mengunduh bagian yang berubah dari
-            versi sebelumnya.
-          </p>
-          <div class="info-box">
-            <p><strong>Manfaat ZSync:</strong></p>
-            <ul>
-              <li>Hemat kuota internet</li>
-              <li>Proses unduhan lebih cepat</li>
-              <li>Mudah digunakan</li>
-            </ul>
-          </div>
-        </section>
-        <section>
-          <h2>Cara Menggunakan ZSync</h2>
-          <p>
-            Berikut adalah langkah-langkah menggunakan ZSync untuk mengunduh ISO
-            BlankOn Rote:
-          </p>
-          <ol>
-            <li>
-              <h3>Install Paket ZSync</h3>
-              <p>
-                Pastikan paket <code>zsync</code> sudah terinstall di sistem
-                Anda. Jika belum, install dengan perintah:
-              </p>
-              <div class="code-block">
-                <button
-                  class="copy-btn"
-                  onclick="navigator.clipboard.writeText('sudo apt install zsync')"
-                >
-                  Copy
-                </button>
-                <pre><code class="language-bash">sudo apt install zsync</code></pre>
-              </div>
-            </li>
-            <li>
-              <h3>Ganti Nama File ISO Lama</h3>
-              <p>
-                Ganti nama file ISO lama Anda agar sesuai dengan format yang
-                diharapkan ZSync. Contoh:
-              </p>
-              <div class="code-block">
-                <button
-                  class="copy-btn"
-                  onclick="navigator.clipboard.writeText('mv BlankOn-8.0-Jahitan-5-desktop-amd64.iso rote-desktop-amd64.iso')"
-                >
-                  Copy
-                </button>
-                <pre><code class="language-bash">mv BlankOn-8.0-Jahitan-5-desktop-amd64.iso rote-desktop-amd64.iso</code></pre>
-              </div>
-            </li>
-            <li>
-              <h3>Jalankan ZSync</h3>
-              <p>
-                Jalankan ZSync dari terminal dengan menunjuk ke alamat ISO
-                terbaru yang memiliki ekstensi <code>.zsync</code>:
-              </p>
-              <div class="code-block">
-                <button
-                  class="copy-btn"
-                  onclick="navigator.clipboard.writeText('zsync http://cdimage.blankonlinux.or.id/blankon/livecd-harian/20120502/rote-desktop-amd64.iso.zsync')"
-                >
-                  Copy
-                </button>
-                <pre><code class="language-bash">zsync http://cdimage.blankonlinux.or.id/blankon/livecd-harian/20120502/rote-desktop-amd64.iso.zsync</code></pre>
-              </div>
-              <p>Atau, jika Anda ingin menunjuk file ISO lama sebagai basis:</p>
-              <div class="code-block">
-                <button
-                  class="copy-btn"
-                  onclick="navigator.clipboard.writeText('zsync -i BlankOn-8.0-Jahitan-5-desktop-amd64.iso http://alamat-servernya/BlankOn-8.0-cd-desktop-amd64.iso.zsync')"
-                >
-                  Copy
-                </button>
-                <pre><code class="language-bash">zsync -i BlankOn-8.0-Jahitan-5-desktop-amd64.iso http://alamat-servernya/BlankOn-8.0-cd-desktop-amd64.iso.zsync</code></pre>
-              </div>
-            </li>
-          </ol>
-        </section>
-        <section>
-          <h2>Kesimpulan</h2>
-          <p>
-            Dengan menggunakan ZSync, Anda dapat menghemat kuota internet dan
-            waktu dalam mengunduh ISO BlankOn Rote terbaru. Semoga panduan ini
-            bermanfaat bagi seluruh <strong>Pendekar BlankOn</strong>!
-          </p>
-          <p>
-            Semoga <strong>Pabrik CD BlankOn</strong> selalu dalam keadaan sehat
-            wal afiat.
-          </p>
-        </section>
 
-        <div class="share-buttons">
-          <a
-            href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/zsync-blankon.html"
-            class="share-btn facebook"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-              />
-            </svg>
-            Facebook
-          </a>
-          <a
-            href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/zsync-blankon.html&text=Panduan%20ZSync%20untuk%20ISO%20BlankOn%20Rote%20-%20Hemat%20Kuota%20%26%20Efisien"
-            class="share-btn twitter"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.47 1.88-2.67-.83.5-1.77.85-2.78 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 6.8 5.53 5.11 3.6 2.47.88 4.45 0 7.23 0 10.47c0 2.34 1.56 4.43 3.68 5.03-.06.12-.1.25-.1.39 0 2.21 1.79 4 4 4 .57 0 1.12-.19 1.62-.52.33 1.24.87 2.39 1.58 3.35.1.77.44 3.47 1 4.97 0 0 1.57-.19 4.5-.55-1.56-.77-2.8-2.31-3.3-3.95-.37 1.29-.9 2.48-1.55 3.44.77-.02 1.52-.13 2.24-.33.38 1.52.42 3.1.1 4.65-.02-.6-.04-1.2-.04-1.8 0-.93.14-1.83.38-2.68-.86.9-1.86 1.56-2.93 1.89-.35-.79-.59-1.65-.59-2.54 0-.83.18-1.61.48-2.33-.84.56-1.8 1-2.82 1-2.35 0-4.27-1.92-4.27-4.29 0-.34.04-.67.11-.99 1.18-2.67 3.9-4.36 6.82-4.36 1.16 0 2.25.35 3.22 1.05 1.33-1.7 3.6-2.78 6.16-2.78 1.6 0 3.08.67 4.25 1.77.93-1.83 2.45-3.05 4.22-3.05.5 0 .98.09 1.44.24.69-1.17 1.04-2.59 1.04-4.14 0-.23-.02-.46-.05-.69.78-.2 1.53-.47 2.24-.8.58 1.38.93 2.89.93 4.44 0 1.42-.67 2.73-1.76 3.58.1.03.17 2.08.17 3.14 0 1.14-.9 2.15-2.03 2.15-.42 0-.82-.09-1.2-.25.49 1.31.74 2.75.74 4.25 0 1.6-.97 2.98-2.37 3.34.32.09.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14C23.54 2.45 24 3.73 24 5.11c0 .71-.19 1.39-.52 2.02.84-.61 1.52-1.48 2-2.5-.83.5-1.77.85-2.78 1.05-1.34.25-2.6.25-3.83.01.53 1.17.84 2.45.84 3.77 0 1.38-.67 2.65-1.62 3.47.25.06.5.1.75.1.65 0 1.25-.26 1.7-.72-.33.5-1.04.75-1.9.75-1.58 0-2.93-.67-3.8-1.65.45.18.93.28 1.43.28.37 0 .73-.07 1.08-.2.45 1.17.5 2.45.08 3.67-.25.7-.84 1.28-1.64 1.58-.87.33-1.8.49-2.74.41.65.78 1.03 1.75 1.03 2.81 0 1.6-.97 2.98-2.37 3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14z"
-              />
-            </svg>
-            Twitter
-          </a>
-          <a
-            href="https://wa.me/?text=https://frijal.github.io/artikel/zsync-blankon.html"
-            class="share-btn whatsapp"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-              />
-            </svg>
-            WhatsApp
-          </a>
-          <a
-            href="https://t.me/share/url?url=https://frijal.github.io/artikel/zsync-blankon.html"
-            class="share-btn telegram"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5c0 .83-.67 1.5-1.5 1.5S8.5 7.83 8.5 7s.67-1.5 1.5-1.5S11.5 6.17 11.5 7zm5.5 0c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-7 1c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-              />
-            </svg>
-            Telegram
-          </a>
-          <a
-            href="https://www.instagram.com/"
-            class="share-btn instagram"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M7.5 3H2v18h18V7.5h-3.5c-.8 0-1.5.7-1.5 1.5v9c0 .8.7 1.5 1.5 1.5H19V21H5v-3h2c.8 0 1.5-.7 1.5-1.5v-9c0-.8-.7-1.5-1.5-1.5H7.5V3zM12 4.5c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5S7.5 11 7.5 8.5 9.5 4 12 4zM12 13c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm7-4.5c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3 3 1.3 3 3z"
-              />
-            </svg>
-            Instagram
-          </a>
-          <a
-            href="https://www.threads.net/"
-            class="share-btn threads"
-            target=""
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5c0 .83-.67 1.5-1.5 1.5S8.5 7.83 8.5 7s.67-1.5 1.5-1.5S11.5 6.17 11.5 7zm5.5 0c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-7 1c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-              />
-            </svg>
-            Threads
-          </a>
-          <a href="https://www.tiktok.com/" class="share-btn tiktok" target="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 12V8.5l6 3.5-6 3.5z"
-              />
-            </svg>
-            TikTok
-          </a>
-        </div>
-        <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
-        <div style="margin-top: 16px; color: var(--muted); font-size: 10px">
-          <span id="current-url" class="small-muted"></span>
-        </div>
-        <!-- Facebook Comments Plugin (user-provided) -->
-        <div style="margin-top: 18px">
-          <!-- Facebook Comments Plugin -->
-          <div id="fb-root"></div>
-          });
-          <script
-            async
-            defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-          ></script>
-          <div
-            class="fb-comments"
-            id="fb-comments"
-            data-href=""
-            data-width="100%"
-            data-numposts="5"
-          ></div>
-          <script>
-            document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href;
-              document.getElementById('current-url').textContent = currentUrl;
-              // Set data-href FB Comments ke URL halaman ini
-              document
-                .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl);
-              // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
-              window.fbAsyncInit = function () {
-                if (typeof FB !== 'undefined') {
-                  try {
-                    FB.XFBML.parse();
-                  } catch (e) {
-                    /* ignore */
-                  }
-                }
-              };
-            });
-          </script>
-        </div>
-      </article>
-    </main>
-    <footer>
-      <p>
-        🄯 <span id="current-year"></span> Komunitas BlankOn. Hak Cipta
-        Dilindungi.
-      </p>
-    </footer>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+  <meta property="og:image:alt" content="Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/zsync-blankon.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
+<body>
+  <!-- Tombol Home Kiri -->
+  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-left" title="Kembali ke Home">
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;">
+  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+</svg>
+Home
+  </a>
+  <!-- Tombol Home Kanan -->
+  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-right" title="Kembali ke Home">
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" style="margin-right:6px;">
+  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+</svg>
+Home
+  </a>
+  <header>
+<h1>Panduan ZSync untuk ISO BlankOn Rote</h1>
+<div id="iposbrowser"></div>
+<p>Hemat Kuota & Efisien dalam Mengunduh ISO BlankOn Terbaru</p>
+  </header>
+  <main>
+<article class="container">
+  <img
+class="lazy-image"
+data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg"
+alt="BlankOn Rote ZSync"
+loading="lazy"
+  >
+  <p style="text-align: center; font-style: italic; color: var(--muted);">Gambar: Logo BlankOn Rote</p>
+  <section>
+<h2>Pendahuluan</h2>
+<p>Bagi Anda yang hobi mencoba hal baru, terutama dalam hal <strong>ISO terbaru dari distribusi Linux BlankOn</strong>, artikel ini akan membahas cara menggunakan <strong>ZSync</strong> untuk mengunduh ISO BlankOn Rote dengan efisien dan hemat kuota.</p>
+<p>BlankOn Rote dikenal sebagai distribusi Linux yang rajin dalam merilis <strong>CD harian (daily build)</strong>. Saat ini, BlankOn Rote sudah mencapai versi <strong>Jahitan Lima</strong>.</p>
+<div class="info-box">
+  <p>Artikel ini ditujukan bagi para <strong>Pendekar BlankOn</strong> agar dapat meluangkan waktu untuk menyediakan versi <code>*.iso.zsync</code> bagi setiap update CD harian. Dengan begitu, pengguna dengan kuota terbatas (seperti di daerah terpencil) tetap bisa ikut menguji dan melaporkan bug pada setiap pembaruan.</p>
+</div>
+  </section>
+  <section>
+<h2>Apa Itu ZSync?</h2>
+<p>ZSync adalah alat yang memungkinkan Anda untuk <strong>mengunduh hanya perubahan-perubahan</strong> pada file ISO, bukan seluruh file ISO yang berukuran besar (rata-rata 700MB). Dengan ZSync, Anda hanya perlu mengunduh bagian yang berubah dari versi sebelumnya.</p>
+<div class="info-box">
+  <p><strong>Manfaat ZSync:</strong></p>
+  <ul>
+<li>Hemat kuota internet</li>
+<li>Proses unduhan lebih cepat</li>
+<li>Mudah digunakan</li>
+  </ul>
+</div>
+  </section>
+  <section>
+<h2>Cara Menggunakan ZSync</h2>
+<p>Berikut adalah langkah-langkah menggunakan ZSync untuk mengunduh ISO BlankOn Rote:</p>
+<ol>
+  <li>
+<h3>Install Paket ZSync</h3>
+<p>Pastikan paket <code>zsync</code> sudah terinstall di sistem Anda. Jika belum, install dengan perintah:</p>
+<div class="code-block">
+  <button class="copy-btn" onclick="navigator.clipboard.writeText('sudo apt install zsync')">Copy</button>
+  <pre><code class="language-bash">sudo apt install zsync</code></pre>
+</div>
+  </li>
+  <li>
+<h3>Ganti Nama File ISO Lama</h3>
+<p>Ganti nama file ISO lama Anda agar sesuai dengan format yang diharapkan ZSync. Contoh:</p>
+<div class="code-block">
+  <button class="copy-btn" onclick="navigator.clipboard.writeText('mv BlankOn-8.0-Jahitan-5-desktop-amd64.iso rote-desktop-amd64.iso')">Copy</button>
+  <pre><code class="language-bash">mv BlankOn-8.0-Jahitan-5-desktop-amd64.iso rote-desktop-amd64.iso</code></pre>
+</div>
+  </li>
+  <li>
+<h3>Jalankan ZSync</h3>
+<p>Jalankan ZSync dari terminal dengan menunjuk ke alamat ISO terbaru yang memiliki ekstensi <code>.zsync</code>:</p>
+<div class="code-block">
+  <button class="copy-btn" onclick="navigator.clipboard.writeText('zsync http://cdimage.blankonlinux.or.id/blankon/livecd-harian/20120502/rote-desktop-amd64.iso.zsync')">Copy</button>
+  <pre><code class="language-bash">zsync http://cdimage.blankonlinux.or.id/blankon/livecd-harian/20120502/rote-desktop-amd64.iso.zsync</code></pre>
+</div>
+<p>Atau, jika Anda ingin menunjuk file ISO lama sebagai basis:</p>
+<div class="code-block">
+  <button class="copy-btn" onclick="navigator.clipboard.writeText('zsync -i BlankOn-8.0-Jahitan-5-desktop-amd64.iso http://alamat-servernya/BlankOn-8.0-cd-desktop-amd64.iso.zsync')">Copy</button>
+  <pre><code class="language-bash">zsync -i BlankOn-8.0-Jahitan-5-desktop-amd64.iso http://alamat-servernya/BlankOn-8.0-cd-desktop-amd64.iso.zsync</code></pre>
+</div>
+  </li>
+</ol>
+  </section>
+  <section>
+<h2>Kesimpulan</h2>
+<p>Dengan menggunakan ZSync, Anda dapat menghemat kuota internet dan waktu dalam mengunduh ISO BlankOn Rote terbaru. Semoga panduan ini bermanfaat bagi seluruh <strong>Pendekar BlankOn</strong>!</p>
+<p>Semoga <strong>Pabrik CD BlankOn</strong> selalu dalam keadaan sehat wal afiat.</p>
+  </section>
+  <section>
+<h2>Informasi Sistem & Lokasi</h2>
+<div class="browser-os-info">
+  <div class="info-item">
+<span id="browser-info"></span>
+  </div>
+  <div class="info-item">
+<span id="os-info"></span>
+  </div>
+  <div class="info-item">
+<span>IP: </span>
+<span id="ip-info">Mendeteksi lokasi...</span>
+  </div>
+</div>
+  </section>
+  <div class="share-buttons">
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/zsync-blankon.html" class="share-btn facebook" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+  Facebook
+</a>
+<a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/zsync-blankon.html&text=Panduan%20ZSync%20untuk%20ISO%20BlankOn%20Rote%20-%20Hemat%20Kuota%20%26%20Efisien" class="share-btn twitter" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.47 1.88-2.67-.83.5-1.77.85-2.78 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 6.8 5.53 5.11 3.6 2.47.88 4.45 0 7.23 0 10.47c0 2.34 1.56 4.43 3.68 5.03-.06.12-.1.25-.1.39 0 2.21 1.79 4 4 4 .57 0 1.12-.19 1.62-.52.33 1.24.87 2.39 1.58 3.35.1.77.44 3.47 1 4.97 0 0 1.57-.19 4.5-.55-1.56-.77-2.8-2.31-3.3-3.95-.37 1.29-.9 2.48-1.55 3.44.77-.02 1.52-.13 2.24-.33.38 1.52.42 3.1.1 4.65-.02-.6-.04-1.2-.04-1.8 0-.93.14-1.83.38-2.68-.86.9-1.86 1.56-2.93 1.89-.35-.79-.59-1.65-.59-2.54 0-.83.18-1.61.48-2.33-.84.56-1.8 1-2.82 1-2.35 0-4.27-1.92-4.27-4.29 0-.34.04-.67.11-.99 1.18-2.67 3.9-4.36 6.82-4.36 1.16 0 2.25.35 3.22 1.05 1.33-1.7 3.6-2.78 6.16-2.78 1.6 0 3.08.67 4.25 1.77.93-1.83 2.45-3.05 4.22-3.05.5 0 .98.09 1.44.24.69-1.17 1.04-2.59 1.04-4.14 0-.23-.02-.46-.05-.69.78-.2 1.53-.47 2.24-.8.58 1.38.93 2.89.93 4.44 0 1.42-.67 2.73-1.76 3.58.1.03.17 2.08.17 3.14 0 1.14-.9 2.15-2.03 2.15-.42 0-.82-.09-1.2-.25.49 1.31.74 2.75.74 4.25 0 1.6-.97 2.98-2.37 3.34.32.09.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14C23.54 2.45 24 3.73 24 5.11c0 .71-.19 1.39-.52 2.02.84-.61 1.52-1.48 2-2.5-.83.5-1.77.85-2.78 1.05-1.34.25-2.6.25-3.83.01.53 1.17.84 2.45.84 3.77 0 1.38-.67 2.65-1.62 3.47.25.06.5.1.75.1.65 0 1.25-.26 1.7-.72-.33.5-1.04.75-1.9.75-1.58 0-2.93-.67-3.8-1.65.45.18.93.28 1.43.28.37 0 .73-.07 1.08-.2.45 1.17.5 2.45.08 3.67-.25.7-.84 1.28-1.64 1.58-.87.33-1.8.49-2.74.41.65.78 1.03 1.75 1.03 2.81 0 1.6-.97 2.98-2.37 3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.33.1.66.14 1 .14.34 0 .67-.05 1-.14 1.4-.36 2.37-1.74 2.37-3.34 0-1.5-.97-2.88-2.37-3.34.32.1.66.14 1 .14.34 0 .67-.05 1-.14z"/></svg>
+  Twitter
+</a>
+<a href="https://wa.me/?text=https://frijal.github.io/artikel/zsync-blankon.html" class="share-btn whatsapp" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+  WhatsApp
+</a>
+<a href="https://t.me/share/url?url=https://frijal.github.io/artikel/zsync-blankon.html" class="share-btn telegram" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5c0 .83-.67 1.5-1.5 1.5S8.5 7.83 8.5 7s.67-1.5 1.5-1.5S11.5 6.17 11.5 7zm5.5 0c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-7 1c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+  Telegram
+</a>
+<a href="https://www.instagram.com/" class="share-btn instagram" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 3H2v18h18V7.5h-3.5c-.8 0-1.5.7-1.5 1.5v9c0 .8.7 1.5 1.5 1.5H19V21H5v-3h2c.8 0 1.5-.7 1.5-1.5v-9c0-.8-.7-1.5-1.5-1.5H7.5V3zM12 4.5c2.5 0 4.5 2 4.5 4.5s-2 4.5-4.5 4.5S7.5 11 7.5 8.5 9.5 4 12 4zM12 13c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm7-4.5c0 1.7-1.3 3-3 3s-3-1.3-3-3 1.3-3 3-3 3 1.3 3 3z"/></svg>
+  Instagram
+</a>
+<a href="https://www.threads.net/" class="share-btn threads" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 5c0 .83-.67 1.5-1.5 1.5S8.5 7.83 8.5 7s.67-1.5 1.5-1.5S11.5 6.17 11.5 7zm5.5 0c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-7 1c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+  Threads
+</a>
+<a href="https://www.tiktok.com/" class="share-btn tiktok" target="">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 12V8.5l6 3.5-6 3.5z"/></svg>
+  TikTok
+</a>
+  </div>
+  <!-- Container for FB comments plugin requirement (user script uses id="current-url") -->
+  <div style="margin-top:16px;color:var(--muted);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+  <!-- Facebook Comments Plugin (user-provided) -->
+  <div style="margin-top:18px">
+<!-- Facebook Comments Plugin -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+<div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+<script>
+  const currentUrl = window.location.href;
+  document.getElementById("current-url").textContent = currentUrl;
+  // Set data-href FB Comments ke URL halaman ini
+  document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+  // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+  window.fbAsyncInit = function() {
+if (typeof FB !== 'undefined') {
+  try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+}
+  }
+</script>
+  </div>
+</article>
+  </main>
+  <footer>
+<p>🄯 <span id="current-year"></span> Komunitas BlankOn. Hak Cipta Dilindungi.</p>
+  </footer>
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>
