@@ -1,138 +1,138 @@
 <!doctype html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!-- prettier-ignore -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- prettier-ignore -->
 <title>Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧</title>
 
-    <meta name="description" content="Panduan lengkap cara menggunakan perintah chroot di Debian, termasuk kegunaan, langkah dasar mount/unmount filesystem, dan contoh skrip shell untuk otomatisasi setup dan cleanup." />
-    <meta name="keywords" content="chroot, debian, linux, bash, terminal, debootstrap, isolasi sistem, live CD" />
-    <link rel="canonical" href="https://frijal.github.io/artikel/tutorial-chroot-debian.html" />
-    <meta name="date" content="2025-09-27" />
-    
+<meta name="description" content="Panduan lengkap cara menggunakan perintah chroot di Debian, termasuk kegunaan, langkah dasar mount/unmount filesystem, dan contoh skrip shell untuk otomatisasi setup dan cleanup." />
+<meta name="keywords" content="chroot, debian, linux, bash, terminal, debootstrap, isolasi sistem, live CD" />
+<link rel="canonical" href="https://frijal.github.io/artikel/tutorial-chroot-debian.html" />
+<meta name="date" content="2025-09-27" />
 
-    <meta property="og:title" content="Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧" />
-    <meta property="og:description" content="Pelajari cara chroot: membuat lingkungan isolasi di Debian untuk pemeliharaan atau pengembangan, lengkap dengan skrip mount otomatis." />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://frijal.github.io/artikel/tutorial-chroot-debian.html" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧" />
-    <meta name="twitter:description" content="Pelajari cara chroot: membuat lingkungan isolasi di Debian untuk pemeliharaan atau pengembangan, lengkap dengan skrip mount otomatis." />
+<meta property="og:title" content="Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧" />
+<meta property="og:description" content="Pelajari cara chroot: membuat lingkungan isolasi di Debian untuk pemeliharaan atau pengembangan, lengkap dengan skrip mount otomatis." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://frijal.github.io/artikel/tutorial-chroot-debian.html" />
 
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧" />
+<meta name="twitter:description" content="Pelajari cara chroot: membuat lingkungan isolasi di Debian untuk pemeliharaan atau pengembangan, lengkap dengan skrip mount otomatis." />
 
-    <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #222;
-            transition: background 0.3s, color 0.3s;
-        }
-        header {
-            background: #07c;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 2rem;
-        }
-        h1, h2 {
-            color: #07c;
-        }
-        pre {
-            position: relative;
-            background: #2d2d2d;
-            border-radius: 8px;
-            padding: 1rem;
-            overflow-x: auto;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #07c;
-            color: #fff;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        .copy-btn:hover {
-            background: #005fa3;
-        }
-        .dark-mode {
-            background-color: #1e1e1e;
-            color: #ddd;
-        }
-        .dark-mode header {
-            background: #111;
-        }
-        .toggle-btn {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            background: #07c;
-            color: #fff;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-        .toggle-btn:hover {
-            background: #005fa3;
-        }
 
-        /* Styling Tombol Floating */
-        #btn-sitemap-left,
-        #btn-home-right {
-            position: fixed;
-            display: flex;
-            align-items: center;
-            background-color: #007bff;
-            color: #fff;
-            padding: 12px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.2s ease;
-            z-index: 9999;
-        }
-        #btn-sitemap-left:hover,
-        #btn-home-right:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        #btn-sitemap-left {
-            left: 10px;
-            top: 30%; /* Kiri Top 30% */
-            transform: translateY(-50%);
-        }
-        #btn-home-right {
-            right: 10px;
-            bottom: 20%; /* Kanan Bottom 20% */
-            transform: translateY(50%);
-        }
-        #btn-sitemap-left svg,
-        #btn-home-right svg {
-            flex-shrink: 0;
-            margin-right: 6px;
-        }
-    </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+<style>
+body {
+font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+line-height: 1.6;
+margin: 0;
+padding: 0;
+background-color: #f9f9f9;
+color: #222;
+transition: background 0.3s, color 0.3s;
+}
+header {
+background: #07c;
+color: #fff;
+padding: 1rem;
+text-align: center;
+}
+.container {
+max-width: 900px;
+margin: auto;
+padding: 2rem;
+}
+h1, h2 {
+color: #07c;
+}
+pre {
+position: relative;
+background: #2d2d2d;
+border-radius: 8px;
+padding: 1rem;
+overflow-x: auto;
+}
+.copy-btn {
+position: absolute;
+top: 8px;
+right: 8px;
+background: #07c;
+color: #fff;
+border: none;
+padding: 4px 8px;
+border-radius: 4px;
+cursor: pointer;
+font-size: 0.8rem;
+}
+.copy-btn:hover {
+background: #005fa3;
+}
+.dark-mode {
+background-color: #1e1e1e;
+color: #ddd;
+}
+.dark-mode header {
+background: #111;
+}
+.toggle-btn {
+position: fixed;
+bottom: 70%;
+right: 1rem;
+background: #07c;
+color: #fff;
+border: none;
+padding: 10px 14px;
+border-radius: 50%;
+cursor: pointer;
+font-size: 1.2rem;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.toggle-btn:hover {
+background: #005fa3;
+}
+
+/* Styling Tombol Floating */
+#btn-sitemap-left,
+#btn-home-right {
+position: fixed;
+display: flex;
+align-items: center;
+background-color: #007bff;
+color: #fff;
+padding: 12px 18px;
+border-radius: 8px;
+text-decoration: none;
+font-family: Arial, sans-serif;
+font-size: 14px;
+font-weight: 700;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: background 0.3s ease, transform 0.2s ease;
+z-index: 9999;
+}
+#btn-sitemap-left:hover,
+#btn-home-right:hover {
+background-color: #0056b3;
+transform: scale(1.05);
+}
+#btn-sitemap-left {
+left: 10px;
+top: 30%; /* Kiri Top 30% */
+transform: translateY(-50%);
+}
+#btn-home-right {
+right: 10px;
+bottom: 20%; /* Kanan Bottom 20% */
+transform: translateY(50%);
+}
+#btn-sitemap-left svg,
+#btn-home-right svg {
+flex-shrink: 0;
+margin-right: 6px;
+}
+</style>
   <meta property="og:image" content="https://frijal.github.io/artikel/chroot-tutorial.jpg">
   <meta property="og:image:alt" content="Tutorial CHROOT di Debian: Mengisolasi Sistem Kerja Anda 🐧">
   <meta name="twitter:image" content="https://frijal.github.io/artikel/chroot-tutorial.jpg">
@@ -143,39 +143,39 @@
 
 
 
-    <header>
-        <h1>Tutorial CHROOT di Debian</h1>
+<header>
+<h1>Tutorial CHROOT di Debian</h1>
 <div id="iposbrowser"></div>
-        <p>Pengenalan singkat, kegunaan, dan cara pakai <code>chroot</code></p>
-    </header>
-    <div class="container">
-        <section>
-            <h2>Apa itu CHROOT?</h2>
-            <p>
-                <strong>chroot</strong> adalah perintah di sistem operasi berbasis
-                Unix/Linux yang berfungsi untuk mengganti root direktori proses
-                menjadi direktori lain. Dengan kata lain, kita bisa membuat sebuah
-                **"ruang isolasi"** di mana aplikasi berjalan seolah-olah itu adalah
-                sistem terpisah.
-            </p>
-        </section>
-        <section>
-            <h2>Kegunaan CHROOT</h2>
-            <ul>
-                <li>🔧 Membuat lingkungan uji coba tanpa merusak sistem utama.</li>
-                <li>🐧 Instalasi ulang sistem dari luar, misalnya lewat live CD (pemulihan sistem).</li>
-                <li>
-                    🛡️ Menjalankan aplikasi lawas atau khusus dengan isolasi sederhana.
-                </li>
-                <li>
-                    📦 Menyiapkan image sistem sebelum dipaketkan ke container/VM.
-                </li>
-            </ul>
-        </section>
-        <section>
-            <h2>Langkah Dasar CHROOT di Debian</h2>
-            <p>Langkah dasar membuat dan masuk ke <code>chroot</code>:</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash"># 1. Buat direktori untuk chroot
+<p>Pengenalan singkat, kegunaan, dan cara pakai <code>chroot</code></p>
+</header>
+<div class="container">
+<section>
+<h2>Apa itu CHROOT?</h2>
+<p>
+<strong>chroot</strong> adalah perintah di sistem operasi berbasis
+Unix/Linux yang berfungsi untuk mengganti root direktori proses
+menjadi direktori lain. Dengan kata lain, kita bisa membuat sebuah
+**"ruang isolasi"** di mana aplikasi berjalan seolah-olah itu adalah
+sistem terpisah.
+</p>
+</section>
+<section>
+<h2>Kegunaan CHROOT</h2>
+<ul>
+<li>🔧 Membuat lingkungan uji coba tanpa merusak sistem utama.</li>
+<li>🐧 Instalasi ulang sistem dari luar, misalnya lewat live CD (pemulihan sistem).</li>
+<li>
+🛡️ Menjalankan aplikasi lawas atau khusus dengan isolasi sederhana.
+</li>
+<li>
+📦 Menyiapkan image sistem sebelum dipaketkan ke container/VM.
+</li>
+</ul>
+</section>
+<section>
+<h2>Langkah Dasar CHROOT di Debian</h2>
+<p>Langkah dasar membuat dan masuk ke <code>chroot</code>:</p>
+<pre><button class="copy-btn">Copy</button><code class="language-bash"># 1. Buat direktori untuk chroot
 sudo mkdir -p /srv/chroot/debian
 
 # 2. Instal sistem dasar Debian ke dalam direktori tersebut (perlu paket debootstrap)
@@ -189,27 +189,27 @@ sudo mount -t sysfs /sys /srv/chroot/debian/sys
 
 # 4. Masuk ke chroot
 sudo chroot /srv/chroot/debian /bin/bash</code></pre>
-        </section>
-        <section>
-            <h2>Keluar dan Cleanup CHROOT</h2>
-            <p>
-                Setelah selesai, ketik <code>exit</code> untuk keluar, lalu **unmount**
-                filesystem agar sistem utama bersih:
-            </p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">exit
+</section>
+<section>
+<h2>Keluar dan Cleanup CHROOT</h2>
+<p>
+Setelah selesai, ketik <code>exit</code> untuk keluar, lalu **unmount**
+filesystem agar sistem utama bersih:
+</p>
+<pre><button class="copy-btn">Copy</button><code class="language-bash">exit
 sudo umount /srv/chroot/debian/dev/pts
 sudo umount /srv/chroot/debian/dev
 sudo umount /srv/chroot/debian/proc
 sudo umount /srv/chroot/debian/sys</code></pre>
-        </section>
-        <section>
-            <h2>Skrip Otomatis: Setup & Cleanup chroot</h2>
-            <p>
-                Untuk memudahkan, berikut contoh skrip shell agar tidak perlu mengetik
-                semua perintah mount/umount secara manual (ideal untuk pemulihan sistem):
-            </p>
-            <h3>1. Skrip Masuk (<code>enter-chroot.sh</code>)</h3>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+</section>
+<section>
+<h2>Skrip Otomatis: Setup & Cleanup chroot</h2>
+<p>
+Untuk memudahkan, berikut contoh skrip shell agar tidak perlu mengetik
+semua perintah mount/umount secara manual (ideal untuk pemulihan sistem):
+</p>
+<h3>1. Skrip Masuk (<code>enter-chroot.sh</code>)</h3>
+<pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
 # enter-chroot.sh
 # Gunakan: sudo ./enter-chroot.sh /srv/chroot/debian
 
@@ -231,8 +231,8 @@ cp /etc/resolv.conf "$CHROOT_DIR/etc/"
 
 # Masuk ke chroot
 chroot "$CHROOT_DIR" /bin/bash</code></pre>
-            <h3>2. Skrip Keluar (<code>exit-chroot.sh</code>)</h3>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
+<h3>2. Skrip Keluar (<code>exit-chroot.sh</code>)</h3>
+<pre><button class="copy-btn">Copy</button><code class="language-bash">#!/bin/bash
 # exit-chroot.sh
 # Gunakan: sudo ./exit-chroot.sh /srv/chroot/debian
 
@@ -247,91 +247,75 @@ umount "$CHROOT_DIR/dev/pts"
 umount "$CHROOT_DIR/dev"
 umount "$CHROOT_DIR/proc"
 umount "$CHROOT_DIR/sys"</code></pre>
-            <p>Pastikan memberi izin eksekusi:</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">chmod +x enter-chroot.sh exit-chroot.sh</code></pre>
-            <p>Sekarang cukup jalankan:</p>
-            <pre><button class="copy-btn">Copy</button><code class="language-bash">sudo ./enter-chroot.sh /srv/chroot/debian
+<p>Pastikan memberi izin eksekusi:</p>
+<pre><button class="copy-btn">Copy</button><code class="language-bash">chmod +x enter-chroot.sh exit-chroot.sh</code></pre>
+<p>Sekarang cukup jalankan:</p>
+<pre><button class="copy-btn">Copy</button><code class="language-bash">sudo ./enter-chroot.sh /srv/chroot/debian
 # ...kerja di dalam chroot...
 exit
 sudo ./exit-chroot.sh /srv/chroot/debian</code></pre>
-            <p>Dengan cara ini, mount/umount jadi lebih aman dan konsisten ✅</p>
-        </section>
-        
-        <div style="margin-top: 30px">
-            <div id="fb-root"></div>
-            <div
-                class="fb-comments"
-                id="fb-comments"
-                data-href="https://frijal.github.io/artikel/tutorial-chroot-debian.html"
-                data-width="100%"
-                data-numposts="5"
-            ></div>
-        </div>
-    </div>
+<p>Dengan cara ini, mount/umount jadi lebih aman dan konsisten ✅</p>
+</section>
+<div style="margin-top: 30px">
+<div id="fb-root"></div>
+<div
+class="fb-comments"
+id="fb-comments"
+data-href="https://frijal.github.io/artikel/tutorial-chroot-debian.html"
+data-width="100%"
+data-numposts="5"
+></div>
+</div>
+</div>
 
-    <button
-        class="toggle-btn"
-        onclick='document.body.classList.toggle("dark-mode")'
-    >
-        🌙
-    </button>
-    
-    
-        
-    </div>
+<button
+class="toggle-btn"
+onclick='document.body.classList.toggle("dark-mode")'
+>
+🌙
+</button>
+
+</div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script 
+  async 
+  defer="defer" 
+  crossorigin="anonymous" 
+  src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+</script>
+<script>
+// Logika Copy Button
+document.querySelectorAll(".copy-btn").forEach((t) => {
+t.addEventListener("click", () => {
+var e = t.nextElementSibling.innerText;
+// Menghapus baris kosong yang mungkin tersalin dari PRE
+e = e.trim().replace(/\n{2,}/g, '\n');
+navigator.clipboard.writeText(e).then(() => {
+t.innerText = "Copied!";
+setTimeout(() => (t.innerText = "Copy"), 1500);
+}).catch(err => {
+console.error('Failed to copy text: ', err);
+alert('Gagal menyalin teks!');
 });
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 });
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    
-    <script 
-      async 
-      defer="defer" 
-      crossorigin="anonymous" 
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
 });
-    </script>
-    
-    <script>
-document.addEventListener(DOMContentLoaded, () => {
-        // Logika Copy Button
-        document.querySelectorAll(".copy-btn").forEach((t) => {
-            t.addEventListener("click", () => {
-                var e = t.nextElementSibling.innerText;
-                // Menghapus baris kosong yang mungkin tersalin dari PRE
-                e = e.trim().replace(/\n{2,}/g, '\n');
-                
-                navigator.clipboard.writeText(e).then(() => {
-                    t.innerText = "Copied!";
-                    setTimeout(() => (t.innerText = "Copy"), 1500);
-                }).catch(err => {
-                    console.error('Failed to copy text: ', err);
-                    alert('Gagal menyalin teks!');
-                });
-            });
-        });
-        
-        // Manual FB Parse (opsional, tapi sering disertakan)
-        window.fbAsyncInit = function () {
-            if (typeof FB !== 'undefined') {
-                try {
-                    FB.XFBML.parse();
-                } catch (t) {}
-            }
-        };
-        
-        // Untuk compatibility jika elemen #current-url masih digunakan
-        const currentUrl = "https://frijal.github.io/artikel/tutorial-chroot-debian.html";
-        const urlDisplay = document.getElementById("current-url");
-        if (urlDisplay) urlDisplay.textContent = currentUrl;
-});
-    </script>
-});
-<div id="kategori-aktif"></div><section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
+// Manual FB Parse (opsional, tapi sering disertakan)
+window.fbAsyncInit = function () {
+if (typeof FB !== 'undefined') {
+try {
+FB.XFBML.parse();
+} catch (t) {}
+}
+};
+// Untuk compatibility jika elemen #current-url masih digunakan
+const currentUrl = "https://frijal.github.io/artikel/tutorial-chroot-debian.html";
+const urlDisplay = document.getElementById("current-url");
+if (urlDisplay) urlDisplay.textContent = currentUrl;
+</script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
 </body>
 </html>
