@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!-- prettier-ignore -->
     <title>Catatan Perjalanan 2012</title>
-    <meta
-      name="description"
-      content="Arsip dan daftar lengkap artikel yang dipublikasikan sepanjang tahun 2012 di Frijal. Temukan semua tulisan dan tutorial dari tahun 2012 dalam satu halaman."
-    />
-
+    <link rel="stylesheet" href="/ext/related.css" />
+    <div></div>
+    
+    <div></div>
     <meta name="date" content="2025-09-27" />
-
+    <meta
+      name="google-site-verification"
+      content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA"
+    />
+    <link rel="stylesheet" href="/ext/related.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <style>
       *,
@@ -22,7 +25,7 @@
         box-sizing: border-box;
       }
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         background: #f0f2f5;
         color: #333;
@@ -100,29 +103,16 @@
       }
     </style>
 
-    <meta
-      property="og:image"
-      content="https://frijal.github.io/artikel/2012.jpg"
-    />
-    <meta property="og:image:alt" content="Catatan Perjalanan 2012" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:image"
-      content="https://frijal.github.io/artikel/2012.jpg"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/2012.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-09-16T11:00:00+08:00"
-    />
-  </head>
+    <meta property="og:image" content="https://frijal.github.io/artikel/2012.jpg">
+  <meta property="og:image:alt" content="Catatan Perjalanan 2012">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/2012.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/2012.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
   <body>
     <header><h1>Catatan Perjalanan Cuti Tahunan 2012</h1></header>
-    <div id="iposbrowser"></div>
+<div id="iposbrowser"></div>
     <main>
       <style>
         section {
@@ -582,108 +572,103 @@
         }
       </style>
       <script>
-        document.addEventListener(DOMContentLoaded, () => {
-          let sections = document.querySelectorAll('main section'),
-            images = [],
-            captions = [],
-            overlay =
-              (sections.forEach((e) => {
-                var t = e.querySelector('img');
-                t &&
-                  (images.push(t.src),
-                  (t = e.querySelector('figcaption')
-                    ? e.querySelector('figcaption').textContent
-                    : ''),
-                  captions.push(t));
-              }),
-              document.getElementById('slideshow-overlay')),
-            lightImg = document.getElementById('slideshow-img'),
-            lightCap = document.getElementById('slideshow-caption'),
-            closeBtn = document.getElementById('slideshow-close'),
-            prevBtn = document.getElementById('prev-btn'),
-            nextBtn = document.getElementById('next-btn'),
-            thumbContainer = document.getElementById('slideshow-thumbnails'),
-            index = 0,
-            observer = new IntersectionObserver(
-              (e, t) => {
-                e.forEach((e) => {
-                  e.isIntersecting &&
-                    (((e = e.target).src = e.dataset.src),
-                    e.classList.remove('lazy-img'),
-                    t.unobserve(e));
-                });
-              },
-              { root: thumbContainer, threshold: 0.1 }
-            );
-          function showImage(n) {
-            ((lightImg.src = images[n]),
-              (lightCap.textContent = captions[n]),
-              Array.from(thumbContainer.children).forEach((e, t) => {
-                e.classList.toggle('active', n === t);
-              }));
-          }
-          function nextImage() {
-            showImage((index = (index + 1) % images.length));
-          }
-          function prevImage() {
-            showImage((index = (index - 1 + images.length) % images.length));
-          }
-          (images.forEach((e, t) => {
-            var n = document.createElement('img');
-            ((n.dataset.src = e),
-              n.classList.add('lazy-img'),
-              n.addEventListener('click', () => {
-                (showImage((index = t)), resetInterval());
-              }),
-              thumbContainer.appendChild(n),
-              observer.observe(n));
-          }),
-            showImage(index),
-            nextBtn.addEventListener('click', () => {
-              (nextImage(), resetInterval());
+        let sections = document.querySelectorAll("main section"),
+          images = [],
+          captions = [],
+          overlay =
+            (sections.forEach((e) => {
+              var t = e.querySelector("img");
+              t &&
+                (images.push(t.src),
+                (t = e.querySelector("figcaption")
+                  ? e.querySelector("figcaption").textContent
+                  : ""),
+                captions.push(t));
             }),
-            prevBtn.addEventListener('click', () => {
-              (prevImage(), resetInterval());
-            }),
-            closeBtn.addEventListener('click', () => {
-              overlay.style.display = 'none';
-            }),
-            overlay.addEventListener('click', (e) => {
-              e.target === overlay && (overlay.style.display = 'none');
+            document.getElementById("slideshow-overlay")),
+          lightImg = document.getElementById("slideshow-img"),
+          lightCap = document.getElementById("slideshow-caption"),
+          closeBtn = document.getElementById("slideshow-close"),
+          prevBtn = document.getElementById("prev-btn"),
+          nextBtn = document.getElementById("next-btn"),
+          thumbContainer = document.getElementById("slideshow-thumbnails"),
+          index = 0,
+          observer = new IntersectionObserver(
+            (e, t) => {
+              e.forEach((e) => {
+                e.isIntersecting &&
+                  (((e = e.target).src = e.dataset.src),
+                  e.classList.remove("lazy-img"),
+                  t.unobserve(e));
+              });
+            },
+            { root: thumbContainer, threshold: 0.1 },
+          );
+        function showImage(n) {
+          ((lightImg.src = images[n]),
+            (lightCap.textContent = captions[n]),
+            Array.from(thumbContainer.children).forEach((e, t) => {
+              e.classList.toggle("active", n === t);
             }));
-          let slideshowInterval = setInterval(nextImage, 3e3);
-          function resetInterval() {
-            (clearInterval(slideshowInterval),
-              (slideshowInterval = setInterval(nextImage, 3e3)));
-          }
-        });
+        }
+        function nextImage() {
+          showImage((index = (index + 1) % images.length));
+        }
+        function prevImage() {
+          showImage((index = (index - 1 + images.length) % images.length));
+        }
+        (images.forEach((e, t) => {
+          var n = document.createElement("img");
+          ((n.dataset.src = e),
+            n.classList.add("lazy-img"),
+            n.addEventListener("click", () => {
+              (showImage((index = t)), resetInterval());
+            }),
+            thumbContainer.appendChild(n),
+            observer.observe(n));
+        }),
+          showImage(index),
+          nextBtn.addEventListener("click", () => {
+            (nextImage(), resetInterval());
+          }),
+          prevBtn.addEventListener("click", () => {
+            (prevImage(), resetInterval());
+          }),
+          closeBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+          }),
+          overlay.addEventListener("click", (e) => {
+            e.target === overlay && (overlay.style.display = "none");
+          }));
+        let slideshowInterval = setInterval(nextImage, 3e3);
+        function resetInterval() {
+          (clearInterval(slideshowInterval),
+            (slideshowInterval = setInterval(nextImage, 3e3)));
+        }
       </script>
       <script>
-        document.addEventListener(DOMContentLoaded, () => {
-          let touchStartX = 0,
-            touchEndX = 0;
-          function handleSwipeGesture() {
-            var e = touchEndX - touchStartX;
-            50 < e
-              ? (prevImage(), resetInterval())
-              : e < -50 && (nextImage(), resetInterval());
-          }
-          (overlay.addEventListener(
-            'touchstart',
+        let touchStartX = 0,
+          touchEndX = 0;
+        function handleSwipeGesture() {
+          var e = touchEndX - touchStartX;
+          50 < e
+            ? (prevImage(), resetInterval())
+            : e < -50 && (nextImage(), resetInterval());
+        }
+        (overlay.addEventListener(
+          "touchstart",
+          (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+          },
+          { passive: !0 },
+        ),
+          overlay.addEventListener(
+            "touchend",
             (e) => {
-              touchStartX = e.changedTouches[0].screenX;
+              ((touchEndX = e.changedTouches[0].screenX), handleSwipeGesture());
             },
-            { passive: !0 }
-          ),
-            overlay.addEventListener(
-              'touchend',
-              (e) => {
-                ((touchEndX = e.changedTouches[0].screenX),
-                  handleSwipeGesture());
-              },
-              { passive: !0 }
-            ));
-        });
+            { passive: !0 },
+          ));
       </script>
       <div style="margin-top: 16px; color: var(--muted); font-size: 10px">
         <span id="current-url" class="small-muted"></span>
@@ -695,7 +680,6 @@
           defer="defer"
           crossorigin="anonymous"
           src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-          });
         ></script>
         <div
           class="fb-comments"
@@ -705,86 +689,71 @@
           data-numposts="5"
         ></div>
         <script>
-          document.addEventListener(DOMContentLoaded, () => {
-            let currentUrl = window.location.href;
-            ((document.getElementById('current-url').textContent = currentUrl),
-              document
-                .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl),
-              (window.fbAsyncInit = function () {
-                if ('undefined' != typeof FB)
-                  try {
-                    FB.XFBML.parse();
-                  } catch (t) {}
-              }));
-          });
+          let currentUrl = window.location.href;
+          ((document.getElementById("current-url").textContent = currentUrl),
+            document
+              .getElementById("fb-comments")
+              .setAttribute("data-href", currentUrl),
+            (window.fbAsyncInit = function () {
+              if ("undefined" != typeof FB)
+                try {
+                  FB.XFBML.parse();
+                } catch (t) {}
+            }));
         </script>
       </div>
+      
     </main>
-    <footer>🄯 2012 Pelan Kiri Rijal - Semua Hak Dilindungi</footer>
+    <footer>🄯 2012 Fakhrul Rijal - Semua Hak Dilindungi</footer>
     <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.addEventListener('DOMContentLoaded', () => {
-          document
-            .querySelectorAll('img')
-            .forEach((e) => e.setAttribute('loading', 'lazy'));
-          let e = document.querySelectorAll('section'),
-            t = new IntersectionObserver(
-              (e) => {
-                e.forEach((e) => {
-                  e.isIntersecting &&
-                    ((e.target.style.opacity = '1'),
-                    (e.target.style.transform = 'translateY(0)'),
-                    t.unobserve(e.target));
-                });
-              },
-              { threshold: 0.1 }
-            );
-          e.forEach((e) => t.observe(e));
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll("img")
+          .forEach((e) => e.setAttribute("loading", "lazy"));
+        let e = document.querySelectorAll("section"),
+          t = new IntersectionObserver(
+            (e) => {
+              e.forEach((e) => {
+                e.isIntersecting &&
+                  ((e.target.style.opacity = "1"),
+                  (e.target.style.transform = "translateY(0)"),
+                  t.unobserve(e.target));
+              });
+            },
+            { threshold: 0.1 },
+          );
+        e.forEach((e) => t.observe(e));
       });
     </script>
     <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.addEventListener('DOMContentLoaded', () => {
-          let n = (document.querySelector('main section img') || {}).src || '';
-          (['og:image', 'twitter:image'].forEach((e, t) =>
-            document.head.appendChild(
-              document.querySelector(
-                (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`
-              ) ||
-                Object.assign(document.createElement('meta'), {
-                  [t ? 'name' : 'property']: e,
-                  content: n,
-                })
-            )
+      document.addEventListener("DOMContentLoaded", () => {
+        let n =
+          (document.querySelector("main section img") || {}).src ||
+          "";
+        (["og:image", "twitter:image"].forEach((e, t) =>
+          document.head.appendChild(
+            document.querySelector(
+              (t ? "meta[name=" : "meta[property=") + `"${e}"]`,
+            ) ||
+              Object.assign(document.createElement("meta"), {
+                [t ? "name" : "property"]: e,
+                content: n,
+              }),
           ),
-            document.head.appendChild(
-              document.querySelector('meta[property="og:url"]') ||
-                Object.assign(document.createElement('meta'), {
-                  property: 'og:url',
-                  content: location.href,
-                })
-            ));
-        });
+        ),
+          document.head.appendChild(
+            document.querySelector('meta[property="og:url"]') ||
+              Object.assign(document.createElement("meta"), {
+                property: "og:url",
+                content: location.href,
+              }),
+          ));
       });
     </script>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+    <div></div>
+    
+    <div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>
