@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- prettier-ignore -->
+<title>Desktop GNOME Terbaru</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+<style>
+:root {
+  --bg-light: #f5f5f5;
+  --text-light: #111;
+  --bg-dark: #111;
+  --text-dark: #f5f5f5;
+  --accent: #4caf50;
+  --secondary: #ff5722;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.5s, color 0.5s;
+}
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--accent);
+}
+h2 {
+  margin-top: 30px;
+  font-size: 1.8rem;
+  color: var(--secondary);
+}
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+img.step-img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 10px auto 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+pre {
+  background: linear-gradient(120deg, #f5f5f5, #e0f7fa);
+  padding: 15px;
+  border-radius: 12px;
+  overflow-x: auto;
+  position: relative;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.copy-btn:hover {
+  opacity: 0.8;
+}
+#toggleDark {
+  position: fixed;
+  top: 30%;
+  right: 15px;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.info-box {
+  margin-top: 50px;
+  padding: 20px;
+  background: linear-gradient(120deg, #e0f7fa, #f5f5f5);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.1rem;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+@media(max-width:600px){
+  h1 {font-size:2rem;}
+  h2 {font-size:1.5rem;}
+  p {font-size:1rem;}
+  pre {font-size:1rem;}
+  .info-item img {width:24px;height:24px;}
+}
+</style>
+<meta name="date" content="2025-09-28">
+
+
+  <meta property="og:image" content="https://frijal.github.io/artikel/Desktop-GNOME.jpg">
+  <meta property="og:image:alt" content="Desktop GNOME Terbaru">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/Desktop-GNOME.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/Desktop-GNOME.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-13T11:00:00+08:00"></head>
+<body>
+<button id="toggleDark">Toggle Dark Mode</button>
+<div class="container">
+  <h1>Desktop GNOME Terbaru</h1>
+
+  <h2>Apa itu GNOME?</h2>
+  <p>GNOME adalah salah satu desktop environment populer untuk Linux, fokus pada kesederhanaan, modern, dan produktivitas.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/GNOME_logo.svg" alt="Logo GNOME" class="step-img">
+
+  <h2>Fitur Utama GNOME Terbaru</h2>
+  <ul>
+<li>Antarmuka minimalis dan konsisten.</li>
+<li>Workspace dinamis untuk multitasking.</li>
+<li>Notification center & quick settings modern.</li>
+<li>GNOME Extensions untuk menambah fungsionalitas.</li>
+  </ul>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/GNOME_Screenshot.png" alt="GNOME Desktop" class="step-img">
+
+  <h2>Kelebihan GNOME</h2>
+  <ul>
+<li>Desain modern & bersih.</li>
+<li>Produktivitas tinggi dengan workspace dan keyboard shortcuts.</li>
+<li>Dukungan ekstensi yang banyak.</li>
+<li>Kompatibilitas luas dengan distro Linux terbaru.</li>
+  </ul>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/GNOME_Shell_Extensions.png" alt="GNOME Extensions" class="step-img">
+
+  <h2>Kekurangan GNOME</h2>
+  <ul>
+<li>Agak berat untuk komputer dengan spesifikasi rendah.</li>
+<li>Beberapa pengaturan memerlukan adaptasi karena berbeda dengan desktop environment klasik.</li>
+  </ul>
+
+  <h2>Contoh Perintah Mengelola GNOME</h2>
+  <pre><code id="gnomeCode">
+# Install GNOME Extensions (Ubuntu/Debian)
+sudo apt install gnome-shell-extensions
+
+# Restart GNOME Shell
+Alt + F2, ketik 'r', Enter
+
+# Update semua paket GNOME
+sudo apt update && sudo apt upgrade
+</code>
+  <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
+ </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<script>
+// Dark mode auto + toggle
+const body = document.body;
+if(window.matchMedia('(prefers-color-scheme: dark)').matches) body.classList.add('dark');
+document.getElementById('toggleDark').addEventListener('click', ()=>{ body.classList.toggle('dark'); });
+
+// Copy syntax highlighter
+function copyCode(){
+  const code = document.getElementById('gnomeCode').textContent;
+  navigator.clipboard.writeText(code);
+  alert("Syntax copied!");
+}
+</script>
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
