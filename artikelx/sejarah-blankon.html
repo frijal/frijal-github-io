@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- prettier-ignore -->
+<title>Sejarah Linux BlankOn: Distro Kebanggaan Indonesia</title>
+
+<!-- Favicon (Inline SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23e74c3c' d='M50,10 C20,10 10,40 10,40 C10,60 40,90 50,90 C60,90 90,60 90,40 C90,40 80,10 50,10 Z' /%3E%3C/svg%3E">
+
+<!-- SEO Metadata -->
+<meta name="description" content="Mengupas tuntas sejarah Linux BlankOn, distro asli Indonesia. Dari awal berdiri, basis sistem operasi yang digunakan, hingga perkembangannya di masa depan.">
+<link rel="canonical" href="https://frijal.github.io/artikel/sejarah-blankon.html">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.github.io/artikel/sejarah-blankon.html">
+<meta property="og:title" content="Sejarah Linux BlankOn: Distro Kebanggaan Indonesia">
+<meta property="og:description" content="Selami perjalanan BlankOn, sistem operasi karya anak bangsa yang dirancang khusus untuk kebutuhan pengguna komputer di Indonesia.">
+
+<!-- Twitter Card -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://frijal.github.io/artikel/sejarah-blankon.html">
+<meta property="twitter:title" content="Sejarah Linux BlankOn: Distro Kebanggaan Indonesia">
+<meta property="twitter:description" content="Selami perjalanan BlankOn, sistem operasi karya anak bangsa yang dirancang khusus untuk kebutuhan pengguna komputer di Indonesia.">
+
+<!-- Prism.js for Syntax Highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!-- CSS3 Styles -->
+<style>
+:root {
+--bg-color: #ffffff;
+--text-color: #333333;
+--header-bg: #f8f9fa;
+--header-text: #2c3e50;
+--accent-color: #e74c3c; /* BlankOn Red */
+--card-bg: #fdfdfd;
+--card-shadow: rgba(0, 0, 0, 0.05);
+--muted-color: #6c757d;
+--code-bg: #2d2d2d;
+--border-color: #e9ecef;
+}
+
+[data-theme="dark"] {
+--bg-color: #121212;
+--text-color: #e0e0e0;
+--header-bg: #1e1e1e;
+--header-text: #ffffff;
+--accent-color: #e74c3c;
+--card-bg: #1e1e1e;
+--card-shadow: rgba(0, 0, 0, 0.2);
+--muted-color: #a0a0a0;
+--code-bg: #2d2d2d;
+--border-color: #333333;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+line-height: 1.7;
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 0;
+transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+
+header {
+background-color: var(--header-bg);
+padding: 40px 20px;
+text-align: center;
+border-bottom: 1px solid var(--border-color);
+transition: background-color 0.3s;
+}
+
+header h1 {
+font-size: 3rem;
+font-weight: 900;
+color: var(--header-text);
+margin: 0 0 10px 0;
+}
+
+header p {
+font-size: 1.2rem;
+color: var(--muted-color);
+max-width: 800px;
+margin: 0 auto;
+}
+
+main {
+padding: 40px 0;
+}
+
+article img {
+max-width: 100%;
+height: auto;
+border-radius: 12px;
+margin: 30px 0;
+box-shadow: 0 8px 25px var(--card-shadow);
+}
+
+h2 {
+font-size: 2.2rem;
+font-weight: 700;
+color: var(--accent-color);
+margin-top: 40px;
+margin-bottom: 20px;
+border-bottom: 2px solid var(--accent-color);
+padding-bottom: 10px;
+}
+
+p, li {
+font-size: 1.1rem;
+margin-bottom: 15px;
+}
+
+a {
+color: var(--accent-color);
+text-decoration: none;
+font-weight: bold;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+/* Syntax Highlighting */
+pre[class*="language-"] {
+position: relative;
+background: var(--code-bg) !important;
+border-radius: 8px;
+padding: 20px;
+font-family: 'Source Code Pro', monospace;
+overflow: auto;
+}
+.copy-button {
+position: absolute;
+top: 10px;
+right: 10px;
+background-color: #4a4a4a;
+color: white;
+border: none;
+padding: 8px 12px;
+border-radius: 5px;
+cursor: pointer;
+font-size: 14px;
+opacity: 0.7;
+transition: opacity 0.2s;
+}
+
+.copy-button:hover {
+opacity: 1;
+}
+.copy-button:active {
+background-color: var(--accent-color);
+}
+/* Social Share */
+.social-share {
+margin: 40px 0;
+text-align: center;
+}
+.social-share h3 {
+margin-bottom: 20px;
+}
+.social-share a {
+margin: 0 8px;
+display: inline-block;
+transition: transform 0.2s;
+}
+.social-share a:hover {
+transform: scale(1.1);
+}
+.social-share svg {
+width: 40px;
+height: 40px;
+}
+/* Footer & Info Section */
+footer {
+background-color: var(--header-bg);
+color: var(--muted-color);
+padding: 40px 20px;
+margin-top: 40px;
+text-align: center;
+font-size: 0.9rem;
+}
+.info-section {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 30px;
+margin-bottom: 30px;
+}
+
+.info-card {
+background-color: var(--card-bg);
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 4px 15px var(--card-shadow);
+display: flex;
+align-items: center;
+gap: 15px;
+min-width: 250px;
+}
+.info-card svg {
+width: 32px;
+height: 32px;
+fill: var(--accent-color);
+}
+
+.info-card-content p {
+margin: 0;
+font-size: 1rem;
+color: var(--text-color);
+text-align: left;
+}
+
+.info-card-content p strong {
+display: block;
+color: var(--muted-color);
+font-size: 0.8rem;
+margin-bottom: 4px;
+}
+#country-flag {
+width: 24px;
+height: auto;
+margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+header h1 {
+font-size: 2.5rem;
+}
+header p {
+font-size: 1rem;
+}
+h2 {
+font-size: 1.8rem;
+}
+.info-card {
+width: 100%;
+justify-content: flex-start;
+}
+}
+</style>
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/sejarah-blankon.html","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},"headline":"Sejarah Linux BlankOn: Distro Kebanggaan Indonesia","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg","datePublished":"2025-09-15T00:25:00+08:00","dateModified":"2025-09-15T00:25:00+08:00","author":{"@type":"Organization","name":"Gemini AI","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},"publisher":{"@type":"Organization","name":"Gemini AI","logo":{"@type":"ImageObject","url":"https://placehold.co/600x60/333/fff?text=Gemini","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},"image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},"description":"Mengupas tuntas sejarah Linux BlankOn, distro asli Indonesia. Dari awal berdiri, basis sistem operasi yang digunakan, hingga perkembangannya di masa depan."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"},{"@type":"ListItem","position":3,"name":"Sejarah Linux BlankOn","image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"}],"image":"https://frijal.github.io/artikel/sejarah-blankon.jpg"}</script>
+
+<meta name="date" content="2025-09-28">
+
+
+  <meta property="og:image" content="https://frijal.github.io/artikel/sejarah-blankon.jpg">
+  <meta property="og:image:alt" content="Sejarah Linux BlankOn: Distro Kebanggaan Indonesia">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/sejarah-blankon.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/sejarah-blankon.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-15T11:00:00+08:00"></head>
+<body>
+
+<header>
+<div class="container">
+<h1>Sejarah Lengkap Linux BlankOn</h1>
+<p>Sebuah perjalanan sistem operasi karya anak bangsa yang dirancang "pas" untuk pengguna Indonesia.</p>
+</div>
+</header>
+
+<main class="container">
+<article>
+<p>Di tengah dominasi sistem operasi global, Indonesia memiliki sebuah proyek membanggakan yang dikenal sebagai <strong>Linux BlankOn</strong>. Lebih dari sekadar sistem operasi, BlankOn adalah cerminan semangat gotong royong komunitas sumber terbuka di Indonesia. Distro ini dirancang secara khusus untuk memenuhi kebutuhan pengguna komputer di tanah air, mulai dari dukungan bahasa, konten lokal, hingga tampilan yang bernuansakan budaya Indonesia.</p>
+<img src="https://placehold.co/1200x600/2c3e50/ffffff?text=Desktop+BlankOn+Manokwari" 
+ onerror="this.onerror=null;this.src='https://placehold.co/1200x600/cccccc/ffffff?text=Gagal+Memuat+Gambar';" 
+ alt="Tampilan Desktop Manokwari, lingkungan desktop khas Linux BlankOn">
+<h2>Awal Mula: Semangat Komunitas untuk Kemandirian</h2>
+<p>Proyek BlankOn digagas pada tahun <strong>2007</strong> oleh <strong>Yayasan Penggerak Linux Indonesia (YPLI)</strong> bekerja sama dengan Komunitas Ubuntu Indonesia. Latar belakangnya adalah keinginan untuk menciptakan sebuah distro Linux yang benar-benar sesuai dengan karakteristik dan kebutuhan masyarakat Indonesia. Nama "BlankOn" sendiri diambil dari nama penutup kepala khas beberapa suku di Indonesia, yang melambangkan identitas dan kemandirian.</p>
+<p>Rilis perdana, <strong>BlankOn 1.0 "Bianglala"</strong>, meluncur pada tahun 2008. Sejak awal, proyek ini dikembangkan secara terbuka dan melibatkan kontribusi dari berbagai individu dan kelompok di seluruh Indonesia, mulai dari programmer, desainer grafis, penerjemah, hingga pengguna biasa yang memberikan masukan.</p>
+
+<h2>Sistem Operasi Dasar: Evolusi dari Ubuntu ke Debian</h2>
+<p>Pada awalnya, BlankOn dibangun di atas fondasi yang sangat populer, yaitu <strong>Ubuntu</strong>. Rilis-rilis awal, dari versi 1.0 hingga 8.0 "Rote", menggunakan Ubuntu sebagai basisnya. Pilihan ini memungkinkan tim pengembang untuk fokus pada kustomisasi, lokalisasi, dan penambahan fitur khas Indonesia tanpa harus membangun sistem dari nol.</p>
+<p>Namun, sebuah perubahan strategis terjadi. Dimulai dari rilis <strong>BlankOn X "Tambora"</strong>, tim pengembang memutuskan untuk beralih basis dari Ubuntu ke "induk"-nya langsung, yaitu <strong>Debian</strong>. Alasan di balik migrasi ini antara lain untuk mendapatkan kontrol yang lebih besar atas paket-paket dasar, siklus rilis yang lebih stabil, dan untuk membangun infrastruktur yang lebih mandiri. Hingga kini, BlankOn terus dikembangkan di atas fondasi Debian yang terkenal akan kestabilan dan keamanannya.</p>
+<img src="https://placehold.co/1200x600/c0392b/ffffff?text=Logo+Linux+BlankOn" 
+ onerror="this.onerror=null;this.src='https://placehold.co/1200x600/cccccc/ffffff?text=Gagal+Memuat+Gambar';" 
+ alt="Logo Linux BlankOn yang khas">
+<h2>Fitur Khas: Cita Rasa Indonesia</h2>
+<p>Yang membuat BlankOn istimewa adalah sentuhan lokal yang kental di dalamnya. Berikut adalah beberapa fitur unggulannya:</p>
+<ul>
+<li><strong>Desktop Manokwari</strong>: BlankOn mengembangkan lingkungan desktopnya sendiri yang disebut Manokwari. Dibangun menggunakan teknologi GTK+ dan HTML5, Manokwari menawarkan tampilan yang modern, bersih, dan intuitif, dengan beberapa elemen yang terinspirasi dari GNOME Shell.</li>
+<li><strong>Konten Lokal</strong>: BlankOn menyertakan beragam konten khas Indonesia, seperti wallpaper yang menampilkan keindahan alam dan budaya Indonesia, ikon-ikon yang unik, serta perangkat lunak yang relevan untuk pengguna lokal.</li>
+<li><strong>Dukungan Aksara Nusantara</strong>: Salah satu fitur penting adalah dukungan bawaan untuk aksara-aksara daerah di Indonesia, menjadikannya platform yang ideal untuk pendidikan dan pelestarian budaya.</li>
+<li><strong>Perangkat Lunak Siap Pakai</strong>: Sudah terinstal aplikasi-aplikasi esensial untuk perkantoran (LibreOffice), grafis (GIMP), multimedia, dan peramban web, semuanya dalam Bahasa Indonesia.</li>
+</ul>
+<p>Karena kini berbasis Debian, perintah untuk memutakhirkan sistem menggunakan manajer paket `apt`:</p>
+<div class="code-container">
+<pre><code class="language-bash">sudo apt update && sudo apt upgrade</code></pre>
+<button class="copy-button" onclick="copyCode(this)">Copy</button>
+</div>
+
+<h2>Bagaimana Nasib BlankOn di Tahun 2025?</h2>
+<p>Ini adalah topik yang kompleks. Perlu diakui bahwa dalam beberapa tahun terakhir, siklus pengembangan BlankOn mengalami perlambatan. Rilis stabil terakhir adalah <strong>BlankOn XI "Uluwatu"</strong> pada tahun 2018 yang berbasis Debian 9 "Stretch". Setelah itu, pengembangan <strong>BlankOn XII "Verbeek"</strong> (berbasis Debian 10) telah dimulai namun belum mencapai rilis stabil final hingga saat ini.</p>
+<p>Dengan kondisi tersebut, sulit untuk memprediksi secara pasti apakah pada tahun 2025 BlankOn akan mencapai versi tertentu. Namun, semangat komunitas masih ada. Jika proyek ini berhasil direvitalisasi, ada kemungkinan kita akan melihat rilis baru, mungkin <strong>BlankOn XIII</strong>, yang akan melompati beberapa versi Debian dan langsung menargetkan basis yang lebih modern seperti Debian 12 "Bookworm" atau bahkan Debian 13 "Trixie" yang diperkirakan rilis pada pertengahan 2025.</p>
+<p>Masa depan BlankOn sangat bergantung pada partisipasi aktif dari para pengembang dan komunitasnya. Meskipun menghadapi tantangan, BlankOn tetap menjadi simbol penting dari kemampuan dan semangat gotong royong komunitas teknologi di Indonesia.</p>
+<!-- Social Sharing Buttons -->
+<div class="social-share">
+<h3>Bagikan Artikel Ini</h3>
+<a href="#" id="share-fb" title="Bagikan ke Facebook">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06c0 5.52 4.5 10.02 10 10.02s10-4.5 10-10.02C22 6.53 17.5 2.04 12 2.04zM13.6 19.95V13.6h2.2l.33-2.55h-2.53v-1.62c0-.74.2-1.23 1.25-1.23h1.34V5.88c-.23-.03-.9-.1-1.9-.1-1.9 0-3.2 1.16-3.2 3.3v1.88H9.05v2.55h2.25v6.35h2.3z"></path></svg>
+</a>
+<a href="#" id="share-tw" title="Bagikan ke X (Twitter)">
+ <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a href="#" id="share-wa" title="Bagikan ke WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.8L2 22l5.3-1.38c1.37.74 2.93 1.18 4.58 1.18h.1c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zm0 18.26c-1.55 0-3.03-.4-4.33-1.12L4.5 19.95l.8-3.1c-.8-1.35-1.28-2.9-1.28-4.58 0-4.58 3.73-8.31 8.31-8.31s8.31 3.73 8.31 8.31-3.74 8.31-8.31 8.31zm4.45-6.21c-.24-.12-1.45-.71-1.67-.8s-.39-.12-.55.12c-.16.24-.63.8-.78.96-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.64-1.18-1.43-1.32-1.67-.14-.24-.01-.37.11-.48.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.55-1.32-.76-1.82c-.2-.5-.4-.43-.55-.44h-.48c-.16 0-.42.06-.64.3.22.24-.85 1.02-.85 2.48s.87 2.88 1 3.08c.12.2 1.72 2.63 4.18 3.7.59.26 1.05.41 1.41.52.6.18 1.14.15 1.56.09.48-.06 1.45-.59 1.65-1.16.2-.57.2-.96.14-1.16-.06-.19-.22-.3-.46-.42z"></path></svg>
+</a>
+<a href="#" id="share-tg" title="Bagikan ke Telegram">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.95 2C6.45 2 2 6.45 2 11.95s4.45 9.95 9.95 9.95 9.95-4.45 9.95-9.95S17.45 2 11.95 2zm4.52 7.62l-1.4 6.5c-.14.65-.54.81-.97.5l-3.22-2.37-1.55 1.5c-.17.17-.3.3-.6.3l.22-3.27 5.8-5.26c.25-.22-.05-.34-.38-.12L7.9 13.1l-3.14-.98c-.64-.2-.66-.62.13-.92l7.9-3.08c.53-.2 1.01.12.82.78z"></path></svg>
+</a>
+<a href="#" id="share-ig" title="Bagikan ke Instagram">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg>
+</a>
+ <a href="#" id="share-th" title="Bagikan ke Threads">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.1,8.65c-1.29-0.53-2.43-1.26-3.29-2.2c-0.43-0.47-0.72-1-0.89-1.57c-0.17-0.57-0.22-1.16-0.16-1.76C9.82,2.5,10.15,2,10.6,1.71c0.45-0.29,0.99-0.4,1.55-0.34c0.57,0.06,1.11,0.28,1.57,0.64c0.46,0.36,0.82,0.84,1.06,1.4c0.24,0.56,0.35,1.16,0.33,1.78c-0.02,0.61-0.2,1.2-0.51,1.73c-0.31,0.53-0.74,0.98-1.25,1.32C12.8,8.54,12.24,8.65,11.67,8.65c-0.19,0-0.38-0.01-0.57-0.03C11.67,8.62,12.3,8.65,14.1,8.65z M22.79,13.88c-0.31-1.39-0.88-2.67-1.68-3.81c-0.8-1.14-1.82-2.12-2.99-2.91c-1.17-0.8-2.48-1.39-3.86-1.78c-1.38-0.39-2.8-0.58-4.22-0.58c-1.42,0-2.84,0.19-4.22,0.58C4.44,5.95,3.13,6.54,1.96,7.34C0.79,8.13-0.23,9.11-1.03,10.25C-1.83,11.39-2.39,12.67-2.7,14.06C-3.09,15.44-3.28,16.86-3.28,18.28c0,1.42,0.19,2.84,0.58,4.22c0.39,1.38,0.98,2.69,1.78,3.86c0.8,1.17,1.8,2.18,2.97,2.97c1.17,0.8,2.45,1.37,3.83,1.68c1.38,0.31,2.78,0.49,4.18,0.49c1.4,0,2.8-0.18,4.18-0.49c1.38-0.31,2.66-0.88,3.83-1.68c1.17-0.8,2.18-1.8,2.97-2.97c0.8-1.17,1.37-2.48,1.68-3.86c0.31-1.38,0.49-2.78,0.49-4.18C23.28,16.86,23.1,15.27,22.79,13.88z M11.67,20.35c-4.48,0-8.12-3.64-8.12-8.12s3.64-8.12,8.12-8.12c4.48,0,8.12,3.64,8.12,8.12S16.15,20.35,11.67,20.35z"/></svg>
+</a>
+ <a href="#" id="share-tt" title="Bagikan ke Tiktok">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.77-1.8-2.6-4.28-2.5-6.75s.88-4.82 2.53-6.64c1.54-1.7 3.5-2.65 5.6-2.71.03-2.5.01-5 .01-7.5z"/></svg>
+</a>
+</div>
+
+<!-- Facebook Comments Plugin -->
+<div id="fb-comments-container">
+<h2>Komentar</h2>
+<div style="margin-top:18px;color:var(--muted-color);font-size:10px"><span id="current-url" class="small-muted"></span></div>
+<div style="margin-top:18px">
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
+<div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+<script>
+try {
+const currentUrl = window.location.href;
+document.getElementById("current-url").textContent = currentUrl;
+document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+window.fbAsyncInit = function() {
+if (typeof FB !== 'undefined') {
+try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+}
+};
+} catch (e) {
+console.error("Error setting up Facebook comments:", e);
+}
+</script>
+</div>
+</div>
+</article>
+</main>
+<footer>
+<div class="container">
+<div class="info-section">
+<!-- Info: Browser -->
+<div class="info-card">
+ <div id="browser-icon">
+<!-- SVG will be injected here by JS -->
+ </div>
+ <div class="info-card-content">
+<strong>Browser</strong>
+<p id="browser-info">Mendeteksi...</p>
+ </div>
+</div>
+<!-- Info: OS -->
+ <div class="info-card">
+ <div id="os-icon">
+<!-- SVG will be injected here by JS -->
+ </div>
+ <div class="info-card-content">
+<strong>Sistem Operasi</strong>
+<p id="os-info">Mendeteksi...</p>
+ </div>
+</div>
+<!-- Info: IP Address -->
+ <div class="info-card">
+<!-- IP Icon -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+ <div class="info-card-content">
+<strong>Alamat IP & Lokasi</strong>
+<p id="ip-info"><span id="country-flag"></span>Mendeteksi...</p>
+ </div>
+</div>
+</div>
+<p>&copy; 2025 - Artikel ini dibuat oleh Gemini. Semua hak dilindungi.</p>
+</div>
+</footer>
+<!-- Prism.js for Syntax Highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+// Copy Code Function
+function copyCode(button) {
+const pre = button.previousElementSibling;
+const code = pre.querySelector('code');
+const text = code.innerText;
+
+navigator.clipboard.writeText(text).then(() => {
+button.innerText = 'Tersalin!';
+setTimeout(() => {
+button.innerText = 'Copy';
+}, 2000);
+}).catch(err => {
+console.error('Gagal menyalin teks: ', err);
+});
+}
+// Social Sharing Logic
+document.addEventListener('DOMContentLoaded', function() {
+const pageUrl = encodeURIComponent(window.location.href);
+const pageTitle = encodeURIComponent(document.title);
+document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+document.getElementById('share-tw').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+document.getElementById('share-tg').href = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+// NOTE: Direct sharing to IG, Threads, TikTok is limited via web intents
+document.getElementById('share-ig').href = `https://www.instagram.com`;
+document.getElementById('share-th').href = `https://www.threads.net`;
+document.getElementById('share-tt').href = `https://www.tiktok.com`;
+
+// Open in new window
+const socialLinks = document.querySelectorAll('.social-share a');
+socialLinks.forEach(link => {
+link.setAttribute('target', '_blank');
+link.setAttribute('rel', 'noopener noreferrer');
+});
+});
+
+// Client Info Detection
+document.addEventListener('DOMContentLoaded', function() {
+// --- OS & Browser Detection ---
+const ua = navigator.userAgent;
+let os = "Tidak Dikenali";
+let browser = "Tidak Dikenali";
+let osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>`;
+let browserIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>`;
+// OS Detection
+if (ua.includes("Win")) {
+os = "Windows";
+osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,12V6.75L9,5.43V11.91L3,12M20,3L10.5,4.53V11.91L21,11.91V4.22C21,3.55 20.55,3 20,3M3,12.09L9,12.09V18.57L3,17.25V12.09M10.5,12.09L21,12.09V19.78C21,20.45 20.55,21 20,21L10.5,19.47V12.09Z"/></svg>`;
+} else if (ua.includes("Mac")) {
+os = "macOS";
+osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5,18.5C18.84,18.5 18.25,18.25 17.8,17.8C17.06,16.93 16.79,15.74 16.96,14.54C17,14.54 17.03,14.53 17.06,14.53C18,14.5 18.91,14.06 19.64,13.34C20.3,12.68 20.73,11.85 20.79,10.95C20.8,10.95 20.8,10.93 20.8,10.92C20.76,10.92 20.74,10.91 20.71,10.91C19.81,10.88 18.95,11.2 18.2,11.83C17.47,12.45 17.03,13.3 16.95,14.28L16.94,14.34C16.94,14.41 16.94,14.5 16.96,14.54C15.6,13.75 14.5,12.18 14.5,10.43C14.5,8.14 15.93,6.13 18,5.5C17.32,4.22 15.93,3.5 14.29,3.5C12.5,3.5 11.04,4.38 10.13,5.65C9.28,5.13 8.21,4.84 7,4.84C5,4.84 3.3,5.83 2.5,7.5C1.61,11.38 3.8,15.15 6.25,17.13C7.29,18 8.5,18.5 9.84,18.5C10.5,18.5 11.2,18.33 11.83,18C12.5,18.33 13.25,18.5 14.05,18.5C15.6,18.5 16.85,17.75 17.74,16.71C18.3,17.88 19.5,18.5 19.5,18.5M13.4,3.2C13.4,3.13 13.4,3.08 13.4,3C12.1,1.9 10.2,1.9 9,3C9.7,3.6 10,4.8 10,5.6C11,7.2 12.5,7.8 13.4,7.8C13.5,6.1 14.3,4.4 13.4,3.2Z" /></svg>`;
+} else if (ua.includes("Linux")) {
+os = "Linux";
+osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.5,12.03C15.2,11.33 15.5,10.37 15.5,9.5C15.5,7.5 14,6 12,6C10,6 8.5,7.5 8.5,9.5C8.5,10.38 8.8,11.33 9.5,12.03C6.3,12.13 4.1,13.13 3,14.5C4.3,17.83 7.83,20 12,20C16.17,20 19.7,17.83 21,14.5C19.9,13.13 17.7,12.13 14.5,12.03M12,4C12,4 12,4 12,4C12,4 12,4 12,4C11.5,4 11,4.1 10.5,4.2L10.4,4.3C10.5,4.3 10.5,4.3 10.5,4.3C10.3,4.1 10,4 9.6,4C8.2,4 7,5.2 7,6.6V6.7C7,6.8 7.1,6.9 7.1,7C5,7.3 3.3,8.7 2.5,10.5C2.2,11.3 2,12.1 2,13C2,17.7 6.3,21.7 11,22C15.7,21.7 20,17.7 20,13C20,12.1 19.8,11.3 19.5,10.5C18.7,8.7 17,7.3 14.9,7C14.9,6.9 15,6.8 15,6.7V6.6C15,5.2 13.8,4 12.4,4C12,4 11.7,4.1 11.5,4.3C11.5,4.3 11.5,4.3 11.6,4.3L11.5,4.2C11.3,4.1 11.2,4.1 11.1,4C11.1,4 11.1,4 11,4H11.5C11.3,4 11.2,4 11,4M12,18C8.69,18 5.81,16.13 4.5,13.4C5.5,12.23 7.6,11.23 10.5,11.03C11,11.53 11.5,12 12,12C12.5,12 13,11.53 13.5,11.03C16.4,11.23 18.5,12.23 19.5,13.4C18.19,16.13 15.31,18 12,18Z" /></svg>`;
+} else if (ua.includes("Android")) {
+os = "Android";
+osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.2,18.2C15.2,18.2 15.2,18.2 15.2,18.2C14.6,18.2 14,18.5 13.6,18.9C13.1,19.4 12.6,19.6 12,19.6C11.4,19.6 10.9,19.4 10.4,18.9C10,18.5 9.4,18.2 8.8,18.2C8.2,18.2 7.6,18.5 7.1,18.9C6.7,19.4 6.2,19.6 5.6,19.6C5,19.6 4.5,19.4 4.1,18.9C3.6,18.5 3,18.2 2.4,18.2C1.8,18.2 1.3,18.5 0.8,18.9C0.4,19.4 0.2,20 0.2,20.5C0.2,21.1 0.4,21.7 0.8,22.1C1.3,22.5 1.8,22.8 2.4,22.8C3,22.8 3.6,22.5 4,22.1C4.5,21.7 5,21.4 5.6,21.4C6.2,21.4 6.7,21.7 7.2,22.1C7.6,22.5 8.2,22.8 8.8,22.8C9.4,22.8 10,22.5 10.4,22.1C10.9,21.7 11.4,21.4 12,21.4C12.6,21.4 13.1,21.7 13.6,22.1C14,22.5 14.6,22.8 15.2,22.8C15.8,22.8 16.3,22.5 16.8,22.1C17.2,21.7 17.4,21.1 17.4,20.5C17.4,20 17.2,19.4 16.8,18.9C16.3,18.5 15.8,18.2 15.2,18.2M6,17.2L6,17.2L12,17.2C12.3,17.2 12.6,17.1 12.8,16.8L16.2,13.4C16.4,13.2 16.5,12.9 16.5,12.6C16.5,12.3 16.4,12.1 16.2,11.9L12.8,8.5C12.6,8.2 12.3,8.1 12,8.1L6,8.1L6,8.1C2.7,8.1 0,10.8 0,14.1C0,14.9 0.2,15.6 0.5,16.3C1.1,17 1.8,17.4 2.6,17.4C2.6,17.4 2.6,17.4 2.6,17.4C3.2,17.5 3.8,17.3 4.2,16.9C4.7,16.4 5.3,16.2 6,16.2C6,16.2 6,16.2 6,17.2M2.6,9.2C3.1,9.2 3.6,9 4,8.6C4.5,8.2 4.7,7.6 4.7,7.1C4.7,6.5 4.5,6 4,5.6C3.6,5.1 3.1,4.9 2.6,4.9C2,4.9 1.5,5.1 1.1,5.6C0.6,6 0.4,6.5 0.4,7.1C0.4,7.6 0.6,8.2 1.1,8.6C1.5,9 2,9.2 2.6,9.2M22.9,8.6C23.4,8.2 23.6,7.6 23.6,7.1C23.6,6.5 23.4,6 22.9,5.6C22.5,5.1 22,4.9 21.4,4.9C20.8,4.9 20.3,5.1 19.9,5.6C19.4,6 19.2,6.5 19.2,7.1C19.2,7.6 19.4,8.2 19.9,8.6C20.3,9 20.8,9.2 21.4,9.2C22,9.2 22.5,9 22.9,8.6M12,16.2H7V9.1H12C12.1,9.1 12.3,9.2 12.4,9.3L15.1,12L12.4,14.7C12.3,14.8 12.1,14.9 12,14.9V16.2Z" /></svg>`;
+} else if (ua.includes("like Mac")) { // iOS
+os = "iOS";
+osIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17,1H7A2,2 0 0,0 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3A2,2 0 0,0 17,1M17,19H7V5H17V19M12,2A1,1 0 0,1 11,3A1,1 0 0,1 12,4A1,1 0 0,1 13,3A1,1 0 0,1 12,2M12,6A1,1 0 0,1 13,7V9A1,1 0 0,1 12,10A1,1 0 0,1 11,9V7A1,1 0 0,1 12,6Z" /></svg>`;
+}
+
+// Browser Detection
+if (ua.includes("Firefox")) {
+browser = `Firefox ${ua.split('Firefox/')[1].split(' ')[0]}`;
+browserIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10zm-1.68-3.92c-.32.06-.63.18-.9.34-.3-.1-.6-.15-.9-.15-1.1 0-2.2.47-3.02 1.25-.4.4-.73.88-1 1.4-.72-1.2-1.8-2.22-3.2-2.73-.2-.08-.4-.14-.6-.2-.5-.18-1.03.16-1.1.68-.05.4.18.8.5.9.15.05.3.1.44.15.65.25 1.22.68 1.66 1.2.22.25.42.52.6.8-.7.2-1.3.6-1.8 1.1-.5.5-.9 1.1-1.1 1.8-.18.7.13 1.48.8 1.7.3.1.6.1.9 0 .4-.14.7-.4.9-.7.4-.8.9-1.5 1.5-2.1.3-.3.6-.5.9-.7 1.4-1.1 3.2-1.7 5.1-1.5.3 0 .6.1.9.2.3.1.6.2.8.4.3.1.5.1.7-.1.4-.3.5-.8.2-1.2-.1-.2-.3-.3-.4-.4z"/></svg>`;
+} else if (ua.includes("Chrome") && !ua.includes("Edg")) {
+browser = `Chrome ${ua.match(/Chrome\/([\d.]+)/)[1]}`;
+browserIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`;
+} else if (ua.includes("Edg")) {
+browser = `Edge ${ua.match(/Edg\/([\d.]+)/)[1]}`;
+browserIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.2 15.29c-1.42-.42-2.63-1.2-3.54-2.25.32.1.65.16.98.16 1.84 0 3.5-.88 4.56-2.28-.48.06-.97.09-1.46.09-2.28 0-4.38-1.03-5.76-2.62.3.04.6.06.9.06 1.1 0 2.14-.33 3.02-.92-.6-.1-1.16-.36-1.65-.74-1.62-1.25-2.6-3.15-2.6-5.24h.02c.48.27 1.02.43 1.58.44-.94-.63-1.55-1.7-1.55-2.92 0-.64.17-1.25.48-1.78 1.7 2.08 4.25 3.44 7.15 3.62-.06-.28-.09-.56-.09-.85 0-2.04 1.65-3.69 3.69-3.69.98 0 1.9.43 2.58 1.13.78-.15 1.52-.44 2.18-.83-.26.8-.8 1.48-1.5 1.9.7-.08 1.36-.27 1.98-.54-.46.68-1.05 1.27-1.72 1.75-.02.93-.16 1.85-.43 2.72-1.02 3.32-3.64 5.72-6.9 6.22-1.3.2-2.63.15-3.92-.15z"/></svg>`;
+} else if (ua.includes("Safari") && !ua.includes("Chrome")) {
+browser = `Safari ${ua.match(/Version\/([\d.]+)/)[1]}`;
+browserIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M13.5,15L8.5,9L15.5,11.5L12,12.5L13.5,15Z" /></svg>`;
+}
+
+document.getElementById('os-info').textContent = os;
+document.getElementById('browser-info').textContent = browser;
+document.getElementById('os-icon').innerHTML = osIcon;
+document.getElementById('browser-icon').innerHTML = browserIcon;
+// --- IP & Country Fetch ---
+fetch('https://ipapi.co/json/')
+.then(response => response.json())
+.then(data => {
+const ipInfoEl = document.getElementById('ip-info');
+const flagUrl = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
+ipInfoEl.innerHTML = `<img id="country-flag" src="${flagUrl}" alt="Bendera ${data.country_name}"> ${data.ip} (${data.country_name})`;
+})
+.catch(error => {
+console.error('Error fetching IP info:', error);
+document.getElementById('ip-info').textContent = "Gagal memuat info IP.";
+});
+});
+
+</script>
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+
+
