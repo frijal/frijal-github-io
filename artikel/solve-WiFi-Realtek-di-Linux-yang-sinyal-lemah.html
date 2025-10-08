@@ -1,414 +1,142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<!-- prettier-ignore -->
-<title>WiFi Realtek Linux: Sinyal Lemah Fix</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Realtek Linux: Sinyal Lemah Fix</title>
 
-<meta name="date" content="2025-09-27" />
+    <meta name="description" content="Panduan mudah memperbaiki sinyal WiFi lemah pada adapter Realtek di Linux menggunakan beberapa perintah sederhana di terminal.">
+    <meta name="keywords" content="wifi realtek linux, sinyal wifi lemah, rtl8723be, linux wifi fix, driver realtek linux, modprobe, iwconfig">
+    <meta name="author" content="Frijal">
+    <meta name="date" content="2025-09-27">
 
+    <link rel="canonical" href="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.html">
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
 
-<style>
-  :root {
---bg-light: #f0f8ff;
---text-light: #111;
---bg-dark: #111;
---text-dark: #f0f8ff;
---accent: #ff6347;
---secondary: #00bfff;
-  }
-  body {
-margin: 0;
-padding: 0;
-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-background-color: var(--bg-light);
-color: var(--text-light);
-transition:
-  background-color 0.5s,
-  color 0.5s;
-  }
-  body.dark {
-background-color: var(--bg-dark);
-color: var(--text-dark);
-  }
-  .container {
-max-width: 1000px;
-margin: 0 auto;
-padding: 40px 20px;
-  }
-  h1 {
-text-align: center;
-font-size: 2.5rem;
-margin-bottom: 30px;
-color: var(--accent);
-  }
-  h2 {
-margin-top: 30px;
-font-size: 1.8rem;
-color: var(--secondary);
-  }
-  p {
-font-size: 1.2rem;
-line-height: 1.6;
-  }
-  pre {
-background: linear-gradient(120deg, #f0f8ff, #ffe4e1);
-padding: 15px;
-border-radius: 12px;
-overflow-x: auto;
-position: relative;
-font-family: monospace;
-font-size: 1.1rem;
-  }
-  .copy-btn {
-position: absolute;
-top: 10px;
-right: 10px;
-background-color: var(--accent);
-color: #fff;
-border: none;
-padding: 5px 10px;
-border-radius: 8px;
-cursor: pointer;
-  }
-  .copy-btn:hover {
-opacity: 0.8;
-  }
-  #toggleDark {
-position: fixed;
-top: 15px;
-right: 15px;
-background-color: var(--secondary);
-color: #fff;
-border: none;
-padding: 10px 15px;
-border-radius: 10px;
-cursor: pointer;
-z-index: 1000;
-  }
-  .info-box {
-margin-top: 50px;
-padding: 20px;
-background: linear-gradient(120deg, #ffe4e1, #f0f8ff);
-border-radius: 12px;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 15px;
-font-size: 1.1rem;
-  }
-  .info-item {
-display: flex;
-align-items: center;
-gap: 10px;
-  }
-  .info-item img {
-width: 32px;
-height: 32px;
-object-fit: contain;
-border-radius: 6px;
-  }
-  @media (max-width: 600px) {
-h1 {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 1.5rem;
-}
-p {
-  font-size: 1rem;
-}
-pre {
-  font-size: 1rem;
-}
-.info-item img {
-  width: 24px;
-  height: 24px;
-}
-  }
-</style>
+    <meta property="og:title" content="WiFi Realtek Linux: Sinyal Lemah Fix">
+    <meta property="og:description" content="Panduan mudah memperbaiki sinyal WiFi lemah pada adapter Realtek di Linux menggunakan beberapa perintah sederhana di terminal.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
+    <meta property="og:image:alt" content="Logo WiFi dengan sinyal kuat di atas logo Linux Tux">
+    <meta property="og:site_name" content="Frijal Articles">
+    <meta property="article:published_time" content="2025-09-13T11:00:00+08:00">
 
-<meta property="og:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-  <meta property="og:image:alt" content="WiFi Realtek Linux: Sinyal Lemah Fix">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-13T11:00:00+08:00"></head>
-  <body>
-<button id="toggleDark">Toggle Dark Mode</button>
-<div class="container">
-  <h1>Fix WiFi Realtek di Linux (Sinyal Lemah)</h1>
-<div id="iposbrowser"></div>
-  <p>
-Jika kamu menggunakan adapter WiFi Realtek di Linux dan mengalami sinyal
-lemah, beberapa perintah <strong>iw</strong> dan
-<strong>modprobe</strong> dapat membantu memperbaikinya.
-  </p>
-  <pre><code id="wifiCode"># Cek interface WiFi
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WiFi Realtek Linux: Sinyal Lemah Fix">
+    <meta name="twitter:description" content="Panduan mudah memperbaiki sinyal WiFi lemah pada adapter Realtek di Linux menggunakan beberapa perintah sederhana di terminal.">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg">
+    <meta name="twitter:image:alt" content="Logo WiFi dengan sinyal kuat di atas logo Linux Tux">
+
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.7; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px; }
+        header { text-align: center; color: #c0392b; padding-bottom: 10px; border-bottom: 2px solid #e74c3c; }
+        h1, h2 { color: #c0392b; }
+        .gallery { margin: 2rem 0; }
+        .gallery img { width: 100%; height: auto; border-radius: 12px; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
+        .gallery img:hover { transform: scale(1.05); }
+        .social-sharing { text-align: center; margin-top: 2rem; }
+        .social-sharing h2 { border: none; font-size: 1.2em; }
+        .social-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .social-buttons a { display: inline-block; transition: transform 0.2s; }
+        .social-buttons a:hover { transform: scale(1.15); }
+        .social-buttons svg { width: 32px; height: 32px; }
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; }
+        .lightbox-content { max-width: 90vw; max-height: 85vh; border-radius: 12px; }
+        .lightbox-close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
+        pre { background: #2d2d2d; color: #f1f1f1; padding: 15px; border-radius: 8px; overflow-x: auto; position: relative; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .copy-btn { position: absolute; top: 10px; right: 10px; background-color: #e74c3c; color: #fff; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="aBcDeFgH"></script>
+
+    <main class="container">
+        <header>
+            <h1>Fix WiFi Realtek di Linux (Sinyal Lemah)</h1>
+        </header>
+        <div id="iposbrowser"></div>
+
+        <article>
+            <p>Jika Anda menggunakan adapter WiFi Realtek di Linux (seperti pada beberapa model laptop) dan mengalami sinyal yang lemah atau tidak stabil, masalah ini seringkali bisa diatasi dengan mengatur ulang modul driver dan memilih antena yang tepat.</p>
+            
+            <section class="gallery">
+                <img loading="lazy" src="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.jpg" alt="Logo WiFi dengan sinyal kuat di atas logo Linux Tux">
+            </section>
+            
+            <section>
+                <h2>Langkah-langkah Perbaikan</h2>
+                <p>Berikut adalah langkah-langkah yang bisa Anda coba melalui terminal. Perintah ini secara spesifik menargetkan driver <code>rtl8723be</code>, salah satu yang paling umum bermasalah.</p>
+                <pre><code id="wifiCode"># Cek nama interface WiFi Anda (misal: wlan0, wlp2s0)
 iwconfig
 
-# Hentikan interface yang bermasalah
+# Matikan interface WiFi
 sudo ifconfig wlan0 down
 
-# Muat ulang modul dengan opsi optimasi
+# Bongkar pasang modul driver dengan opsi antena
 sudo modprobe -r rtl8723be
 sudo modprobe rtl8723be ant_sel=2
 
-# Aktifkan kembali interface
-sudo ifconfig wlan0 up
+# Aktifkan kembali interface WiFi
+sudo ifconfig wlan0 up</code><button class="copy-btn" onclick="copyCode()">Copy</button></pre>
+                <p><strong>Catatan:</strong> Ganti <code>wlan0</code> dengan nama interface WiFi Anda. Opsi <code>ant_sel=2</code> memaksa driver untuk menggunakan antena kedua, yang seringkali memiliki penerimaan sinyal lebih baik. Jika tidak berhasil, Anda bisa mencoba <code>ant_sel=1</code>.</p>
+            </section>
+            
+            <section class="social-sharing">
+                <h2>Bagikan Tips Ini</h2>
+                <div class="social-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.html" target="_blank" rel="noopener noreferrer" title="Facebook"><svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.5V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"/></svg></a>
+                    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.html&text=Fix%20WiFi%20Realtek%20di%20Linux%20(Sinyal%20Lemah)" target="_blank" rel="noopener noreferrer" title="Twitter"><svg viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.49-1.74.85-2.7 1.03A4.2 4.2 0 0016.31 4c-2.38 0-4.3 1.92-4.3 4.3 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.36-.21-1.94-.53v.05c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.3 4.3 0 004 2.98 8.62 8.62 0 01-5.33 1.84c-.35 0-.69-.02-1.03-.06A12.18 12.18 0 008.5 20c7.8 0 12.07-6.47 12.07-12.07 0-.18 0-.36-.01-.54.83-.6 1.56-1.35 2.14-2.22z"/></svg></a>
+                </div>
+            </section>
+            
+            <h2>Diskusi & Komentar</h2>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/solve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.html" data-width="100%" data-numposts="5"></div>
+        </article>
+    </main>
 
-# Scan jaringan WiFi
-sudo iwlist wlan0 scan</code>
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" />
+    </div>
 
-  <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
-  <h2>Penjelasan Perintah</h2>
-  <p>
-<strong>iwconfig</strong>: Melihat interface wireless dan statusnya.
-  </p>
-  <p>
-<strong>ifconfig wlan0 down/up</strong>: Menonaktifkan/aktifkan kembali
-interface WiFi.
-  </p>
-  <p>
-<strong>modprobe -r rtl8723be</strong>: Melepaskan modul kernel WiFi
-Realtek.
-  </p>
-  <p>
-<strong>modprobe rtl8723be ant_sel=2</strong>: Memuat ulang modul dengan
-opsi antenna selection, sering meningkatkan sinyal.
-  </p>
-  <p>
-<strong>iwlist wlan0 scan</strong>: Memindai jaringan WiFi yang
-tersedia.
-  </p>
-  <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
-<span id="current-url" class="small-muted"></span>
-  </div>
-  <div style="margin-top: 18px">
-<div id="fb-root"></div>
-<script
-  async
-  defer="defer"
-  crossorigin="anonymous"
-  src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-></script>
-<div
-  class="fb-comments"
-  id="fb-comments"
-  data-href=""
-  data-width="100%"
-  data-numposts="5"
-></div>
-<script>
-  let currentUrl = window.location.href;
-  ((document.getElementById("current-url").textContent = currentUrl),
-document
-  .getElementById("fb-comments")
-  .setAttribute("data-href", currentUrl),
-(window.fbAsyncInit = function () {
-  if ("undefined" != typeof FB)
-try {
-  FB.XFBML.parse();
-} catch (t) {}
-}));
-</script>
+    <script src="/ext/iposbrowser.js" defer></script>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("wifiCode").innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Perintah berhasil disalin!");
+            });
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll(".gallery img");
+            if (images.length > 0) {
+                const lightbox = document.getElementById("lightbox");
+                const lightboxImg = document.getElementById("lightbox-img");
+                const closeBtn = document.querySelector(".lightbox-close");
 
-</div>
-  </div>
-  <script>
-let body = document.body,
-  prefersDark = window.matchMedia(
-"(prefers-color-scheme: dark)",
-  ).matches;
-function copyCode() {
-  var e = document.getElementById("wifiCode").textContent;
-  (navigator.clipboard.writeText(e), alert("Syntax copied!"));
-}
-function getBrowserInfo() {
-  let e = navigator.userAgent,
-o = "Unknown",
-i = "",
-t = "N/A";
-  return (
--1 < e.indexOf("Brave")
-  ? ((o = "Brave"),
-(i =
-  "https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg"))
-  : -1 < e.indexOf("Firefox")
-? ((o = "Firefox"),
-  (t = e.match(/Firefox\/([0-9\.]+)/)[1]),
-  (i =
-"https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"))
-: -1 < e.indexOf("Chrome") && -1 == e.indexOf("Edg")
-  ? ((o = "Chrome"),
-(t = e.match(/Chrome\/([0-9\.]+)/)[1]),
-(i =
-  "https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png"))
-  : -1 < e.indexOf("Chromium")
-? ((o = "Chromium"),
-  (i =
-"https://upload.wikimedia.org/wikipedia/commons/d/d5/Chromium_Logo.svg"))
-: -1 < e.indexOf("Safari") && -1 == e.indexOf("Chrome")
-  ? ((o = "Safari"),
-(t = e.match(/Version\/([0-9\.]+)/)[1]),
-(i =
-  "https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg"))
-  : -1 < e.indexOf("Edg")
-? ((o = "Edge"),
-  (t = e.match(/Edg\/([0-9\.]+)/)[1]),
-  (i =
-"https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg"))
-: -1 < e.indexOf("OPR") &&
-  ((o = "Opera"),
-  (t = e.match(/OPR\/([0-9\.]+)/)[1]),
-  (i =
-"https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg")),
-{ name: o, version: t, icon: i }
-  );
-}
-function getOSInfo() {
-  var e,
-o = navigator.platform.toLowerCase(),
-i = navigator.userAgent.toLowerCase();
-  let t = "Unknown OS",
-n = "",
-a = "";
-  return (
--1 !== o.indexOf("win")
-  ? ((t = "Windows"),
-(e = i.match(/windows nt ([0-9\.]+)/)),
-(n = e ? e[1] : ""),
-(a =
-  "https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg"))
-  : -1 !== o.indexOf("mac")
-? ((t = "macOS"),
-  (e = i.match(/mac os x ([0-9_]+)/)),
-  (n = e ? e[1].replace(/_/g, ".") : ""),
-  (a =
-"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"))
-: -1 !== o.indexOf("linux")
-  ? ((t = "Linux"),
-(a =
-  "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"))
-  : /android/.test(i)
-? ((t = "Android"),
-  (a =
-"https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"))
-: /iphone|ipad|ipod/.test(i) &&
-  ((t = "iOS"),
-  (a =
-"https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg")),
-{ name: t, version: n, icon: a }
-  );
-}
-(prefersDark && body.classList.add("dark"),
-  document
-.getElementById("toggleDark")
-.addEventListener("click", () => {
-  body.classList.toggle("dark");
-}));
-let browser = getBrowserInfo(),
-  os =
-((document.getElementById("browserIcon").src = browser.icon),
-(document.getElementById("browserText").textContent =
-  `Browser: ${browser.name} ` + browser.version),
-getOSInfo());
-((document.getElementById("osIcon").src = os.icon),
-  (document.getElementById("osText").textContent =
-`OS: ${os.name} ` + os.version),
-  fetch("https://ipapi.co/json/")
-.then((e) => e.json())
-.then((e) => {
-  ((document.getElementById("ipText").textContent =
-`IP: ${e.ip} (${e.country_name})`),
-(document.getElementById("flagIcon").src =
-  `https://flagcdn.com/48x36/${e.country_code.toLowerCase()}.png`));
-})
-.catch(() => {
-  document.getElementById("ipText").textContent =
-"IP: Tidak dapat diambil";
-}));
-  </script>
-  <a
-href="https://frijal.github.io/sitemap.html"
-target=""
-id="btn-home-left"
-title="Kembali ke Home"
-><svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 576 512"
-  width="18"
-  height="18"
-  fill="currentColor"
-  style="margin-right: 6px"
->
-  <path
-d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
-  />
-</svg>
-Home </a
-  ><a
-href="https://frijal.github.io/sitemap.html"
-target=""
-id="btn-home-right"
-title="Kembali ke Home"
-><svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 576 512"
-  width="18"
-  height="18"
-  fill="currentColor"
-  style="margin-right: 6px"
->
-  <path
-d="M541 229.16l-61-53.6V56a24 24 0 0 0-24-24h-56a24 24 0 0 0-24 24v24.51L314.59 43a35.38 35.38 0 0 0-47.19 0L35 229.16a12 12 0 0 0-1.6 16.9l25.5 28a12 12 0 0 0 16.9 1.6L96 239.64V456a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V360h64v96a24 24 0 0 0 24 24h112a24 24 0 0 0 24-24V239.64l20.2 17.9a12 12 0 0 0 16.9-1.6l25.5-28a12 12 0 0 0-1.6-16.9z"
-  />
-</svg>
-Home</a
-  ><style>
-#btn-home-left,
-#btn-home-right {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  background-color: #007bff;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition:
-background 0.3s ease,
-transform 0.2s ease;
-  z-index: 9999;
-}
-#btn-home-left:hover,
-#btn-home-right:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-#btn-home-left {
-  left: 10px;
-  top: 30%;
-  transform: translateY(-50%);
-}
-#btn-home-right {
-  right: 10px;
-  bottom: 20%;
-  transform: translateY(50%);
-}
-#btn-home-left svg,
-#btn-home-right svg {
-  flex-shrink: 0;
-}</style
-  >
-</div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+                images.forEach((img) => {
+                    img.addEventListener("click", () => {
+                        lightbox.style.display = "flex";
+                        lightboxImg.src = img.src;
+                    });
+                });
+                
+                function closeLightbox() {
+                    lightbox.style.display = "none";
+                }
+
+                closeBtn.addEventListener("click", closeLightbox);
+                lightbox.addEventListener("click", (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
