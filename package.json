@@ -6,9 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node ext/rss.js",
-    "lint": "eslint .",
+    "lint": "eslint \"artikel/**/*.html\"",
     "lint:html": "npx htmlhint \"artikel/**/*.html\"",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint \"artikel/**/*.html\" --fix",
     "format": "prettier --write \"artikel/**/*.html\""
   },
   "repository": {
