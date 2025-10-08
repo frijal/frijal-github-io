@@ -777,7 +777,7 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
                     `Lokasi: Koordinat ${t}, ${e} (🌏)`;
                 },
                 function () {},
-                { timeout: 3e3 },
+                { timeout: 3e3 }
               ));
         })(),
           (() => {
@@ -825,7 +825,7 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
           (() => {
             var e = encodeURIComponent(
                 document.querySelector('link[rel="canonical"]')?.href ||
-                  location.href,
+                  location.href
               ),
               t = encodeURIComponent(document.title);
             ((document.getElementById('share-twitter').href =

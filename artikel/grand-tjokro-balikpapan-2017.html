@@ -1311,7 +1311,7 @@
             if (!cc) return '🏳️';
             const code = cc.trim().toUpperCase();
             return String.fromCodePoint(
-              ...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
+              ...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
             );
           }
 
@@ -1340,7 +1340,7 @@
                   if (geoSpan) geoSpan.textContent = '📍 ' + txt;
                   if (geoInline) geoInline.textContent = txt;
                   if (flag) flag.textContent = emoji;
-                }),
+                })
             )
             .catch(() => {
               if (geoSpan) geoSpan.textContent = '📍 Lokasi tidak tersedia';
@@ -1353,7 +1353,7 @@
         (function () {
           const url = encodeURIComponent(location.href);
           const text = encodeURIComponent(
-            'Hotel Tour Grand Tjokro Balikpapan — Kopdar Blogger & Influencer (2017)',
+            'Hotel Tour Grand Tjokro Balikpapan — Kopdar Blogger & Influencer (2017)'
           );
           const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
           const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
@@ -1401,7 +1401,7 @@
                       }
                     });
                   },
-                  { rootMargin: '200px' },
+                  { rootMargin: '200px' }
                 )
               : null;
           imgs.forEach((img) => {
@@ -1506,20 +1506,20 @@
           ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
-                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
+                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [j ? 'name' : 'property']: p,
                   content: s,
-                }),
-            ),
+                })
+            )
           );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
-              }),
+              })
           );
         });
       });

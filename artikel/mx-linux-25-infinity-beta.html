@@ -701,7 +701,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -720,10 +720,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html',
+            'https://frijal.github.io/artikel/mx-linux-25-infinity-beta.html'
           );
           const title = encodeURIComponent(
-            'MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”',
+            'MX Linux 25 “Infinity” beta: Beralih ke Debian 13 “Trixie”'
           );
           document
             .getElementById('copyLink')

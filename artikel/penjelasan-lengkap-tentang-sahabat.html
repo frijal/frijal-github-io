@@ -822,7 +822,7 @@
                   ? code
                       .toUpperCase()
                       .replace(/./g, (char) =>
-                        String.fromCodePoint(127397 + char.charCodeAt(0)),
+                        String.fromCodePoint(127397 + char.charCodeAt(0))
                       )
                   : '—';
               country.innerHTML =
@@ -848,8 +848,8 @@
               window.open(
                 `https://www.facebook.com/sharer/sharer.php?u=${url}`,
                 '',
-                'noopener',
-              ),
+                'noopener'
+              )
             );
           document
             .getElementById('share-x')
@@ -857,8 +857,8 @@
               window.open(
                 `https://twitter.com/intent/tweet?text=${title}&url=${url}`,
                 '',
-                'noopener',
-              ),
+                'noopener'
+              )
             );
           document
             .getElementById('share-wa')
@@ -866,8 +866,8 @@
               window.open(
                 `https://api.whatsapp.com/send?text=${title}%20${url}`,
                 '',
-                'noopener',
-              ),
+                'noopener'
+              )
             );
           document
             .getElementById('share-tg')
@@ -875,8 +875,8 @@
               window.open(
                 `https://t.me/share/url?url=${url}&text=${title}`,
                 '',
-                'noopener',
-              ),
+                'noopener'
+              )
             );
 
           document
@@ -889,14 +889,14 @@
               } catch (e) {
                 alert(
                   'Salin otomatis gagal. Silakan salin secara manual: ' +
-                    canonicalUrl,
+                    canonicalUrl
                 );
               }
             });
           document
             .getElementById('open-in-new')
             .addEventListener('click', () =>
-              window.open(canonicalUrl, '', 'noopener'),
+              window.open(canonicalUrl, '', 'noopener')
             );
 
           // Set URL display in sidebar

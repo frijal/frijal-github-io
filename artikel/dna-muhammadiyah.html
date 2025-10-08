@@ -716,7 +716,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -735,10 +735,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/dna-muhammadiyah.html',
+            'https://frijal.github.io/artikel/dna-muhammadiyah.html'
           );
           const title = encodeURIComponent(
-            'Memahami DNA Muhammadiyah – Teologi Al‑Ma’un Menjadi Aksi Nyata',
+            'Memahami DNA Muhammadiyah – Teologi Al‑Ma’un Menjadi Aksi Nyata'
           );
           document
             .getElementById('copyLink')

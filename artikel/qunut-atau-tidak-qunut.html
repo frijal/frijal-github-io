@@ -897,7 +897,7 @@
             return cc
               .toUpperCase()
               .replace(/./g, (c) =>
-                String.fromCodePoint(127397 + c.charCodeAt()),
+                String.fromCodePoint(127397 + c.charCodeAt())
               );
           }
         })();
@@ -905,12 +905,11 @@
         // Share links
         (function share() {
           const url = encodeURIComponent(
-            document.querySelector('link[rel=canonical]')?.href ||
-              location.href,
+            document.querySelector('link[rel=canonical]')?.href || location.href
           );
           const title = encodeURIComponent(document.title);
           const text = encodeURIComponent(
-            'Qunut atau tidak qunut? Tenang, jangan ribut:',
+            'Qunut atau tidak qunut? Tenang, jangan ribut:'
           );
           const pairs = [
             ['share-wa', 'https://wa.me/?text=' + text + '%20' + url],
@@ -987,7 +986,7 @@
             a.addEventListener('click', (e) => {
               e.preventDefault();
               open(i);
-            }),
+            })
           );
           close.addEventListener('click', closeLB);
           prev.addEventListener('click', () => move(-1));

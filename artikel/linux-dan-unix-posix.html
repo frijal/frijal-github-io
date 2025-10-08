@@ -570,7 +570,7 @@
           ?.addEventListener('click', async () => {
             try {
               await navigator.clipboard.writeText(
-                'https://frijal.github.io/artikel/linux-dan-unix-posix.html',
+                'https://frijal.github.io/artikel/linux-dan-unix-posix.html'
               );
               const btn = document.getElementById('copyLink');
               btn.textContent = '✅ Tautan disalin';
@@ -582,7 +582,7 @@
 
         // Lazy-load gallery via IntersectionObserver
         const figures = Array.from(
-          document.querySelectorAll('.gallery figure'),
+          document.querySelectorAll('.gallery figure')
         );
         const io = new IntersectionObserver(
           (entries) => {
@@ -598,7 +598,7 @@
               }
             });
           },
-          { rootMargin: '200px' },
+          { rootMargin: '200px' }
         );
         figures.forEach((f) => io.observe(f));
 

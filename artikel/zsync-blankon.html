@@ -399,8 +399,8 @@
               const flagEmoji = data.country_calling_code
                 ? String.fromCodePoint(
                     ...[...data.country_calling_code].map(
-                      (c) => 0x1f1a5 + c.charCodeAt(0) - 65,
-                    ),
+                      (c) => 0x1f1a5 + c.charCodeAt(0) - 65
+                    )
                   )
                 : '';
               document.getElementById('ip-info').innerHTML = `

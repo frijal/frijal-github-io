@@ -729,7 +729,7 @@
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          }),
+          })
         ),
           setText('year', pubDate.getFullYear()),
           (() => {
@@ -882,26 +882,26 @@
                     ],
                   },
                   null,
-                  2,
+                  2
                 )),
               document.head.appendChild(n));
           })(),
           (() => {
             var t = encodeURIComponent(window.location.href),
               e = encodeURIComponent(
-                'Sulit Buang Air Besar (Sembelit): penyebab, cara mengatasi & pencegahan — baca selengkapnya:',
+                'Sulit Buang Air Besar (Sembelit): penyebab, cara mengatasi & pencegahan — baca selengkapnya:'
               );
             (document
               .getElementById('share-facebook')
               .setAttribute(
                 'href',
-                'https://www.facebook.com/sharer/sharer.php?u=' + t,
+                'https://www.facebook.com/sharer/sharer.php?u=' + t
               ),
               document
                 .getElementById('share-twitter')
                 .setAttribute(
                   'href',
-                  `https://twitter.com/intent/tweet?text=${e}&url=` + t,
+                  `https://twitter.com/intent/tweet?text=${e}&url=` + t
                 ),
               document
                 .getElementById('share-whatsapp')
@@ -910,7 +910,7 @@
                 .getElementById('share-telegram')
                 .setAttribute(
                   'href',
-                  `https://t.me/share/url?url=${t}&text=` + e,
+                  `https://t.me/share/url?url=${t}&text=` + e
                 ),
               document
                 .getElementById('share-instagram')
@@ -931,7 +931,7 @@
                   } catch (t) {
                     alert(
                       'Gagal menyalin. Silakan salin secara manual: ' +
-                        window.location.href,
+                        window.location.href
                     );
                   }
                 }));
@@ -968,7 +968,7 @@
           (() => {
             var t = window.location.href,
               e = document.querySelector(
-                'article meta[itemprop="mainEntityOfPage"]',
+                'article meta[itemprop="mainEntityOfPage"]'
               );
             e && e.setAttribute('content', t);
           })());

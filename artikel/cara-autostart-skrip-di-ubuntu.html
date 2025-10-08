@@ -893,7 +893,7 @@ X-GNOME-Autostart-enabled=true
             setBadge(
               'deteksi-lokasi',
               icons.loc,
-              `${city}${region ? ', ' + region : ''} • ${country}`,
+              `${city}${region ? ', ' + region : ''} • ${country}`
             );
 
             const flagEmoji =
@@ -901,7 +901,7 @@ X-GNOME-Autostart-enabled=true
                 ? cc
                     .toUpperCase()
                     .replace(/./g, (c) =>
-                      String.fromCodePoint(127397 + c.charCodeAt(0)),
+                      String.fromCodePoint(127397 + c.charCodeAt(0))
                     )
                 : '🏳️';
             setBadge('deteksi-flag', icons.flag, flagEmoji);
@@ -936,7 +936,7 @@ X-GNOME-Autostart-enabled=${enabled}`;
 
         // Galeri Lightbox
         const gallery = Array.from(
-          document.querySelectorAll('#gallery figure img'),
+          document.querySelectorAll('#gallery figure img')
         );
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');

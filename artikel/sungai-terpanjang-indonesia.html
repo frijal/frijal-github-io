@@ -729,7 +729,7 @@
           const next = () => open((index + 1) % images.length);
 
           images.forEach((el, i) =>
-            el.addEventListener('click', () => open(i)),
+            el.addEventListener('click', () => open(i))
           );
           closeBtn.addEventListener('click', close);
           prevBtn.addEventListener('click', prev);
@@ -748,10 +748,10 @@
         // 5) Share handlers
         (function share() {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/sungai-terpanjang-indonesia.html',
+            'https://frijal.github.io/artikel/sungai-terpanjang-indonesia.html'
           );
           const text = encodeURIComponent(
-            '10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!',
+            '10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!'
           );
           const w = document.getElementById('share-whatsapp');
           const t = document.getElementById('share-twitter');

@@ -774,7 +774,7 @@ Set-Service "Diagsvc" -StartupType Disabled
             .then(({ ip }) => {
               // Ambil detail lokasi dari ipapi.co
               return fetch(`https://ipapi.co/${ip}/json/`).then((res) =>
-                res.json(),
+                res.json()
               );
             })
             .then((data) => {
@@ -828,7 +828,7 @@ Set-Service "Diagsvc" -StartupType Disabled
 
           items.forEach((img) => {
             img.addEventListener('click', () =>
-              openLightbox(parseInt(img.dataset.index, 10)),
+              openLightbox(parseInt(img.dataset.index, 10))
             );
           });
           btnClose.addEventListener('click', closeLightbox);

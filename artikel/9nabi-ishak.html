@@ -715,7 +715,7 @@
         // Lazy-load gallery dengan IntersectionObserver
         (function lazyLoadGallery() {
           const cards = Array.from(
-            document.querySelectorAll('.gallery .card img'),
+            document.querySelectorAll('.gallery .card img')
           );
           const io = new IntersectionObserver(
             (entries, obs) => {
@@ -731,7 +731,7 @@
                 }
               });
             },
-            { rootMargin: '150px' },
+            { rootMargin: '150px' }
           );
           cards.forEach((img) => io.observe(img));
         })();
@@ -772,7 +772,7 @@
 
           figs.forEach((fig) => {
             fig.addEventListener('click', () =>
-              open(Number(fig.getAttribute('data-index'))),
+              open(Number(fig.getAttribute('data-index')))
             );
           });
           prev.addEventListener('click', () => move(-1));
@@ -802,7 +802,7 @@
             window.open(
               u,
               '_blank',
-              'noopener,noreferrer,width=680,height=540',
+              'noopener,noreferrer,width=680,height=540'
             );
           }
           btns.forEach((btn) => {
@@ -811,27 +811,27 @@
               switch (t) {
                 case 'whatsapp':
                   openWin(
-                    `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`,
+                    `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`
                   );
                   break;
                 case 'twitter':
                   openWin(
-                    `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+                    `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`
                   );
                   break;
                 case 'facebook':
                   openWin(
-                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
                   );
                   break;
                 case 'linkedin':
                   openWin(
-                    `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+                    `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
                   );
                   break;
                 case 'telegram':
                   openWin(
-                    `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
+                    `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
                   );
                   break;
                 case 'copy':

@@ -586,7 +586,7 @@
                   }
                 });
               },
-              { rootMargin: '150px' },
+              { rootMargin: '150px' }
             );
             lazyImgs.forEach((img) => observer.observe(img));
           } else {
@@ -597,7 +597,7 @@
 
         // Lightbox Gallery
         const galleryImgs = Array.from(
-          document.querySelectorAll('.gallery img'),
+          document.querySelectorAll('.gallery img')
         );
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -621,7 +621,7 @@
         document.getElementById('lightbox-prev').onclick = (e) => {
           e.stopPropagation();
           showLightbox(
-            (lightboxIndex - 1 + galleryImgs.length) % galleryImgs.length,
+            (lightboxIndex - 1 + galleryImgs.length) % galleryImgs.length
           );
         };
         document.getElementById('lightbox-next').onclick = (e) => {
@@ -649,12 +649,12 @@
           if (platform === 'facebook') {
             window.open(
               `https://www.facebook.com/sharer.php?u=${url}`,
-              '_blank',
+              '_blank'
             );
           } else if (platform === 'twitter') {
             window.open(
               `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
-              '_blank',
+              '_blank'
             );
           } else if (platform === 'whatsapp') {
             window.open(`https://wa.me/?text=${title}%20${url}`, '_blank');

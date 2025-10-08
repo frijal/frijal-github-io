@@ -633,7 +633,7 @@ makepkg -si
           try {
             // Step 1: Dapatkan IP dari ipify
             const ipResponse = await fetch(
-              'https://api.ipify.org?format=json&ipv4',
+              'https://api.ipify.org?format=json&ipv4'
             );
             const ipData = await ipResponse.json();
             const userIP = ipData.ip;
@@ -641,7 +641,7 @@ makepkg -si
 
             // Step 2: Gunakan IP untuk Geolocation (Menggunakan API pihak ketiga - ip-api.com)
             const geoResponse = await fetch(
-              `http://ip-api.com/json/${userIP}?fields=status,country,countryCode,city`,
+              `http://ip-api.com/json/${userIP}?fields=status,country,countryCode,city`
             );
             const geoData = await geoResponse.json();
 
@@ -649,7 +649,7 @@ makepkg -si
               // Konversi kode negara 2 huruf ke emoji bendera (Unicode Regional Indicator Symbols)
               const countryCode = geoData.countryCode.toUpperCase();
               const flagEmoji = countryCode.replace(/./g, (char) =>
-                String.fromCodePoint(char.charCodeAt(0) + 127397),
+                String.fromCodePoint(char.charCodeAt(0) + 127397)
               );
 
               geoSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i> Lokasi: ${geoData.city}, ${geoData.country} ${flagEmoji}`;

@@ -730,7 +730,7 @@
             .getElementById('meta-description')
             .setAttribute(
               'content',
-              document.querySelector('meta[name="description"]').content,
+              document.querySelector('meta[name="description"]').content
             );
         })();
 
@@ -851,7 +851,7 @@
           document.getElementById('ld-json').textContent = JSON.stringify(
             article,
             null,
-            2,
+            2
           );
         }
 
@@ -896,7 +896,7 @@
         }
 
         gallery.forEach((img, i) =>
-          img.addEventListener('click', () => open(i)),
+          img.addEventListener('click', () => open(i))
         );
         btnPrev.addEventListener('click', prev);
         btnNext.addEventListener('click', next);

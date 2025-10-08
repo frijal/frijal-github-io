@@ -949,7 +949,7 @@
                     .trim()
                     .toUpperCase()
                     .split('')
-                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
+                    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
                 );
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
@@ -978,7 +978,7 @@
                   geoChip.textContent = '📍 Lokasi tidak tersedia';
                   geo.textContent = 'Lokasi tidak tersedia';
                   flag.textContent = '🏳️';
-                }),
+                })
             );
         })();
 
@@ -986,7 +986,7 @@
         (function () {
           const url = encodeURIComponent(location.href);
           const text = encodeURIComponent(
-            'Kopdar Berbuka & Berbagi - Komunitas Bukalapak Balikpapan (2017)',
+            'Kopdar Berbuka & Berbagi - Komunitas Bukalapak Balikpapan (2017)'
           );
           const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
           const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
@@ -1036,7 +1036,7 @@
                       }
                     });
                   },
-                  { rootMargin: '200px' },
+                  { rootMargin: '200px' }
                 )
               : null;
           imgs.forEach((img) => {
@@ -1137,20 +1137,20 @@
           ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
-                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
+                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [j ? 'name' : 'property']: p,
                   content: s,
-                }),
-            ),
+                })
+            )
           );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
-              }),
+              })
           );
         });
       });

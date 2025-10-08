@@ -475,7 +475,7 @@
           }
           filterButtons.forEach((button) => {
             button.addEventListener('click', () =>
-              filterDalil(button.dataset.filter),
+              filterDalil(button.dataset.filter)
             );
           });
           filterDalil('quran');
@@ -489,7 +489,7 @@
             .join('');
 
           const exceptionsContainer = document.getElementById(
-            'exceptions-container',
+            'exceptions-container'
           );
           const exceptionsList = document.createElement('ol');
           exceptionsList.className =
@@ -497,7 +497,7 @@
           exceptionsList.innerHTML = data.exceptions
             .map(
               (ex) =>
-                `<li><strong class="text-text-primary">Kondisi ${exceptionsList.children.length + 1}:</strong> ${ex}</li>`,
+                `<li><strong class="text-text-primary">Kondisi ${exceptionsList.children.length + 1}:</strong> ${ex}</li>`
             )
             .join('');
           exceptionsContainer.appendChild(exceptionsList);

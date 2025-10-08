@@ -407,7 +407,7 @@ rm -rf ~/.cache/pip/wheels
             if (idx < gallery.length - 1) openAt(idx + 1);
           }
           gallery.forEach((el, i) =>
-            el.addEventListener('click', () => openAt(i)),
+            el.addEventListener('click', () => openAt(i))
           );
           lb.querySelector('.lb-close').onclick = closeLb;
           lb.querySelector('.lb-prev').onclick = prev;

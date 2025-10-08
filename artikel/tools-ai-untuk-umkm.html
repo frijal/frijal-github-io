@@ -474,7 +474,7 @@
 
           const images = Array.from(
             { length: 8 },
-            (_, i) => `https://picsum.photos/id/${10 + i}/800/600`,
+            (_, i) => `https://picsum.photos/id/${10 + i}/800/600`
           );
 
           images.forEach((src, index) => {
@@ -498,7 +498,7 @@
                   lazyLoadObserver.unobserve(img);
                 }
               });
-            },
+            }
           );
           lazyImages.forEach((img) => lazyLoadObserver.observe(img));
 

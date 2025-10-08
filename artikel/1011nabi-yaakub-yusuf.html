@@ -997,7 +997,7 @@
 
         // Lazy-load gallery images + Lightbox
         const galleryItems = Array.from(
-          document.querySelectorAll('.gallery-item'),
+          document.querySelectorAll('.gallery-item')
         );
         const imgs = [];
         const io = new IntersectionObserver(
@@ -1014,7 +1014,7 @@
               }
             });
           },
-          { rootMargin: '150px' },
+          { rootMargin: '150px' }
         );
         galleryItems.forEach((box) => io.observe(box));
 
@@ -1093,7 +1093,7 @@
               window.open(
                 shareUrl,
                 '_blank',
-                'noopener,noreferrer,width=740,height=560',
+                'noopener,noreferrer,width=740,height=560'
               );
           });
         });

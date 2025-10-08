@@ -205,38 +205,38 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const TARGET_CATEGORY = '🗂️ Lainnya'
-        const DATA_URL = '../../artikel.json'
-        const articleGrid = document.getElementById('article-grid')
-        const loadingIndicator = document.getElementById('loading')
-        const pageTitle = document.getElementById('page-title')
+        const TARGET_CATEGORY = '🗂️ Lainnya';
+        const DATA_URL = '../../artikel.json';
+        const articleGrid = document.getElementById('article-grid');
+        const loadingIndicator = document.getElementById('loading');
+        const pageTitle = document.getElementById('page-title');
 
         const fetchAndDisplayCategory = async () => {
-          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim()
-          pageTitle.textContent = titleText
+          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
+          pageTitle.textContent = titleText;
 
           try {
             const response = await fetch(
-              `${DATA_URL}?v=${new Date().getTime()}`,
-            )
-            if (!response.ok) throw new Error(`Status ${response.status}`)
+              `${DATA_URL}?v=${new Date().getTime()}`
+            );
+            if (!response.ok) throw new Error(`Status ${response.status}`);
 
-            const allData = await response.json()
-            const articles = allData[TARGET_CATEGORY]
+            const allData = await response.json();
+            const articles = allData[TARGET_CATEGORY];
 
             if (!articles || articles.length === 0) {
-              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`
-              return
+              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
+              return;
             }
 
-            let articlesHTML = ''
-            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]))
+            let articlesHTML = '';
+            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
 
             articles.forEach((article) => {
-              const [title, url, image, pubDate, description] = article
+              const [title, url, image, pubDate, description] = article;
               const formattedDate = new Intl.DateTimeFormat('id-ID', {
                 dateStyle: 'long',
-              }).format(new Date(pubDate))
+              }).format(new Date(pubDate));
 
               articlesHTML += `
                             <a href="../${url}" class="article-card">
@@ -249,19 +249,19 @@
                                     <span class="card-meta">${formattedDate}</span>
                                 </div>
                             </a>
-                        `
-            })
+                        `;
+            });
 
-            articleGrid.innerHTML = articlesHTML
+            articleGrid.innerHTML = articlesHTML;
           } catch (error) {
-            console.error('Terjadi kesalahan:', error)
-            articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`
+            console.error('Terjadi kesalahan:', error);
+            articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`;
           } finally {
-            loadingIndicator.style.display = 'none'
+            loadingIndicator.style.display = 'none';
           }
-        }
-        fetchAndDisplayCategory()
-      })
+        };
+        fetchAndDisplayCategory();
+      });
     </script>
   </body>
 </html>

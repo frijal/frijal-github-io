@@ -681,7 +681,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -700,10 +700,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/wine-bukan-emulator.html',
+            'https://frijal.github.io/artikel/wine-bukan-emulator.html'
           );
           const title = encodeURIComponent(
-            'Wine: Si Penerjemah Ajaib, Bukan Emulator',
+            'Wine: Si Penerjemah Ajaib, Bukan Emulator'
           );
           document
             .getElementById('copyLink')

@@ -893,7 +893,7 @@
           window.addEventListener(
             'resize',
             () =>
-              (kvRes.textContent = `${window.screen.width}×${window.screen.height}`),
+              (kvRes.textContent = `${window.screen.width}×${window.screen.height}`)
           );
         })();
 
@@ -905,7 +905,7 @@
           function ccToEmoji(cc) {
             if (!cc || cc.length !== 2) return '🏳️';
             const codePoints = [...cc.toUpperCase()].map(
-              (c) => 127397 + c.charCodeAt(),
+              (c) => 127397 + c.charCodeAt()
             );
             return String.fromCodePoint(...codePoints);
           }
@@ -1013,20 +1013,20 @@
           ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
-                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
+                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [j ? 'name' : 'property']: p,
                   content: s,
-                }),
-            ),
+                })
+            )
           );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
-              }),
+              })
           );
         });
       });

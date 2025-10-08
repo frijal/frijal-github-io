@@ -659,7 +659,7 @@ sudo apt history-list | grep curl</code></pre>
             ?.addEventListener('click', async () => {
               try {
                 await navigator.clipboard.writeText(
-                  'https://frijal.github.io/artikel/apt-debian-history.html',
+                  'https://frijal.github.io/artikel/apt-debian-history.html'
                 );
                 let t = document.getElementById('copy-link'),
                   e = t.textContent;
@@ -677,7 +677,7 @@ sudo apt history-list | grep curl</code></pre>
               r = e.querySelector('.lb-prev'),
               o = e.querySelector('.lb-next'),
               c = Array.from(
-                document.querySelectorAll('img[data-lb="true"]'),
+                document.querySelectorAll('img[data-lb="true"]')
               ).map((t) => ({
                 src: t.currentSrc || t.src,
                 alt: t.alt || '',
@@ -709,7 +709,7 @@ sudo apt history-list | grep curl</code></pre>
                   0 <=
                     (t = c.findIndex((t) => t.src === (e.currentSrc || e.src)))
                     ? t
-                    : 0,
+                    : 0
                 );
             }),
               t.addEventListener('click', l),

@@ -902,19 +902,19 @@
               }
               if (type === 'facebook')
                 open(
-                  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`,
+                  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`
                 );
               if (type === 'twitter')
                 open(
-                  `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`,
+                  `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`
                 );
               if (type === 'whatsapp')
                 open(
-                  `https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`,
+                  `https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`
                 );
               if (type === 'telegram')
                 open(
-                  `https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`,
+                  `https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`
                 );
             });
           });
@@ -928,7 +928,7 @@
             const next = lb.querySelector('.lb-next');
             const close = lb.querySelector('.lb-close');
             const items = Array.from(
-              document.querySelectorAll('#hero-image, .gallery img'),
+              document.querySelectorAll('#hero-image, .gallery img')
             );
             let idx = 0;
 

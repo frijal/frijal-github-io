@@ -735,7 +735,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -754,10 +754,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/pusat-instalasi-linux.html',
+            'https://frijal.github.io/artikel/pusat-instalasi-linux.html'
           );
           const title = encodeURIComponent(
-            'Pusat Instalasi Linux: Ide gila yang dibutuhkan — layanan tatap muka untuk semua',
+            'Pusat Instalasi Linux: Ide gila yang dibutuhkan — layanan tatap muka untuk semua'
           );
           document
             .getElementById('copyLink')

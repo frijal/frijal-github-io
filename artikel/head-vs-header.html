@@ -355,7 +355,7 @@
             if (idx < gallery.length - 1) openAt(idx + 1);
           }
           gallery.forEach((el, i) =>
-            el.addEventListener('click', () => openAt(i)),
+            el.addEventListener('click', () => openAt(i))
           );
           document.getElementById('lb-close').onclick = closeLb;
           document.getElementById('lb-prev').onclick = prev;
@@ -420,7 +420,7 @@
           function flagEmoji(cc) {
             if (!cc || cc.length !== 2) return '🌐';
             return String.fromCodePoint(
-              ...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0)),
+              ...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0))
             );
           }
           function updateLocBadge(city, cc) {

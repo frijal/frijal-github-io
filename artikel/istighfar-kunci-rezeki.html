@@ -725,7 +725,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -744,10 +744,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/istighfar-kunci-rezeki.html',
+            'https://frijal.github.io/artikel/istighfar-kunci-rezeki.html'
           );
           const title = encodeURIComponent(
-            'Istighfar: Kunci Pembuka Pintu Langit dan Rezeki',
+            'Istighfar: Kunci Pembuka Pintu Langit dan Rezeki'
           );
           document
             .getElementById('copyLink')

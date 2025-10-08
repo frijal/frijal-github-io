@@ -750,7 +750,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -769,10 +769,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/linux-tanpa-terminal.html',
+            'https://frijal.github.io/artikel/linux-tanpa-terminal.html'
           );
           const title = encodeURIComponent(
-            'Dilema Pengguna Biasa Pindah ke Linux: Nyaman Tanpa Terminal',
+            'Dilema Pengguna Biasa Pindah ke Linux: Nyaman Tanpa Terminal'
           );
           document
             .getElementById('copyLink')

@@ -808,7 +808,7 @@
         }
 
         images.forEach((img, i) =>
-          img.addEventListener('click', () => openLB(i)),
+          img.addEventListener('click', () => openLB(i))
         );
         lbClose.addEventListener('click', closeLB);
         lb.addEventListener('click', (e) => {
@@ -858,7 +858,7 @@
               .filter(Boolean)
               .join(', ');
             document.getElementById('flag').textContent = flagEmoji(
-              j.country || 'ID',
+              j.country || 'ID'
             );
           } catch {
             document.getElementById('ip').textContent = 'Tidak tersedia';

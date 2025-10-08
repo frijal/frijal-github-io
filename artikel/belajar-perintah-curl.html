@@ -602,7 +602,7 @@
               const flag = data.country_code
                 .toUpperCase()
                 .replace(/./g, (char) =>
-                  String.fromCodePoint(char.charCodeAt(0) + 127397),
+                  String.fromCodePoint(char.charCodeAt(0) + 127397)
                 );
               let locationInfoHTML = `<span class="info-item" title="Lokasi">${flag} ${data.city}, ${data.country_name}</span>`;
 
@@ -669,7 +669,7 @@
           }
 
           const pageUrl = encodeURIComponent(
-            'https://frijal.github.io/artikel/belajar-perintah-curl.html',
+            'https://frijal.github.io/artikel/belajar-perintah-curl.html'
           );
           const pageTitle = encodeURIComponent(document.title);
 

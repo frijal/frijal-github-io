@@ -900,7 +900,7 @@ winget install Nama.Paket.Resmi</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           const CANONICAL_URL = document.querySelector(
-            'link[rel="canonical"]',
+            'link[rel="canonical"]'
           ).href;
           const PAGE_TITLE = document.title;
           const SHARE_TEXT =
@@ -916,7 +916,7 @@ winget install Nama.Paket.Resmi</code></pre>
                   '>': '&gt;',
                   '"': '&quot;',
                   "'": '&#39;',
-                })[m],
+                })[m]
             );
 
           // --- 1. Lazy Loading & Lightbox ---
@@ -934,7 +934,7 @@ winget install Nama.Paket.Resmi</code></pre>
                     }
                   });
                 },
-                { rootMargin: '150px' },
+                { rootMargin: '150px' }
               );
               lazyImages.forEach((img) => observer.observe(img));
             } else {
@@ -1024,7 +1024,7 @@ winget install Nama.Paket.Resmi</code></pre>
                     window.open(
                       document.getElementById('share-x').href,
                       '_blank',
-                      'noopener noreferrer',
+                      'noopener noreferrer'
                     );
                   }
                 });
@@ -1108,7 +1108,7 @@ winget install Nama.Paket.Resmi</code></pre>
               .then((r) => r.json())
               .then((data) => {
                 const countryCode = String(
-                  data.country_code || '',
+                  data.country_code || ''
                 ).toLowerCase();
                 ipEl.textContent = data.ip || '-';
                 cityEl.textContent = data.city || '-';

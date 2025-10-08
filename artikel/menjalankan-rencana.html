@@ -670,7 +670,7 @@ N. Kirim ke editor (1 hari)</code></pre>
           browserName = 'Google Chrome';
           browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" fill="#4285F4"/><path d="M21.1 12H15a3 3 0 00-3-3V2.9c.9.2 1.8.5 2.6.9 2.5 1.5 4.3 3.8 5.5 6.4.4.8.7 1.7.9 2.6zM2.9 12h6a3 3 0 013 3v6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6zM12 2.9V9a3 3 0 013 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#EA4335"/><path d="M12 2.9V9a3 3 0 01-3 3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9v-6.1a3 3 0 013-3h6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6z" fill="#34A853"/><path d="M12 21.1V15a3 3 0 00-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#FBBC04"/></svg>`;
           const match = userAgent.match(
-            /(?:chrome|chromium|crios)\/(\d+(\.\d+)*)/i,
+            /(?:chrome|chromium|crios)\/(\d+(\.\d+)*)/i
           );
           if (match) browserVersion = match[1];
         } else if (userAgent.match(/firefox|fxios/i)) {

@@ -408,7 +408,7 @@
           lbImg.src = '';
         }
         gallery.forEach((el, i) =>
-          el.addEventListener('click', () => openAt(i)),
+          el.addEventListener('click', () => openAt(i))
         );
         document.getElementById('lb-close').onclick = closeLb;
         document.getElementById('lb-prev').onclick = () => {
@@ -444,7 +444,7 @@
         function flagEmoji(cc) {
           if (!cc || cc.length !== 2) return '🇮🇩';
           const codePoints = [...cc.toUpperCase()].map(
-            (c) => 127397 + c.charCodeAt(0),
+            (c) => 127397 + c.charCodeAt(0)
           );
           return String.fromCodePoint(...codePoints);
         }

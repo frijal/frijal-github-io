@@ -788,11 +788,11 @@
             const flagEl = document.querySelector('[data-flag]');
             const timeout = (ms) =>
               new Promise((_, rej) =>
-                setTimeout(() => rej(new Error('timeout')), ms),
+                setTimeout(() => rej(new Error('timeout')), ms)
               );
             const ccToFlagEmoji = (code) =>
               code.replace(/./g, (c) =>
-                String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1f1e6),
+                String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1f1e6)
               );
 
             const fetchIPInfo = async () => {
@@ -847,19 +847,19 @@
               }
               if (type === 'facebook')
                 open(
-                  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`,
+                  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`
                 );
               if (type === 'twitter')
                 open(
-                  `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`,
+                  `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`
                 );
               if (type === 'whatsapp')
                 open(
-                  `https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`,
+                  `https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`
                 );
               if (type === 'telegram')
                 open(
-                  `https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`,
+                  `https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`
                 );
             });
           });
@@ -873,7 +873,7 @@
             const next = lb.querySelector('.lb-next');
             const close = lb.querySelector('.lb-close');
             const items = Array.from(
-              document.querySelectorAll('.gallery img, #hero-image'),
+              document.querySelectorAll('.gallery img, #hero-image')
             );
             let idx = 0;
 

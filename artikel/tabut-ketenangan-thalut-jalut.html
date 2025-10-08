@@ -1036,7 +1036,7 @@
           lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
         }
         imgs.forEach((img, i) =>
-          img.addEventListener('click', () => openLB(i)),
+          img.addEventListener('click', () => openLB(i))
         );
         btnClose.addEventListener('click', closeLB);
         btnNext.addEventListener('click', next);
@@ -1077,20 +1077,20 @@
           ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
-                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
+                (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [j ? 'name' : 'property']: p,
                   content: s,
-                }),
-            ),
+                })
+            )
           );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
-              }),
+              })
           );
         });
       });

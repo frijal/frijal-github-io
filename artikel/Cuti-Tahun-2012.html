@@ -782,20 +782,20 @@
           (['og:image', 'twitter:image'].forEach((e, t) =>
             document.head.appendChild(
               document.querySelector(
-                (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`,
+                (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [t ? 'name' : 'property']: e,
                   content: n,
-                }),
-            ),
+                })
+            )
           ),
             document.head.appendChild(
               document.querySelector('meta[property="og:url"]') ||
                 Object.assign(document.createElement('meta'), {
                   property: 'og:url',
                   content: location.href,
-                }),
+                })
             ));
         });
       });

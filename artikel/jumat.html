@@ -615,11 +615,11 @@
         // Lazy Load Gallery
         document.addEventListener('DOMContentLoaded', function () {
           let lazyImages = [].slice.call(
-            document.querySelectorAll('.galeri-item img'),
+            document.querySelectorAll('.galeri-item img')
           );
           if ('IntersectionObserver' in window) {
             let lazyImageObserver = new IntersectionObserver(function (
-              entries,
+              entries
             ) {
               entries.forEach(function (entry) {
                 if (entry.isIntersecting) {

@@ -906,7 +906,7 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
           }
 
           gallery.forEach((el, i) =>
-            el.addEventListener('click', () => openAt(i)),
+            el.addEventListener('click', () => openAt(i))
           );
           document
             .getElementById('lb-close')

@@ -291,7 +291,7 @@ apt install --reinstall linux-image-amd64</code>
         }
         function downloadScript() {
           const code = document.querySelector(
-            '#otomatis code.language-bash',
+            '#otomatis code.language-bash'
           ).innerText;
           const blob = new Blob([code], { type: 'text/x-sh' });
           const url = URL.createObjectURL(blob);

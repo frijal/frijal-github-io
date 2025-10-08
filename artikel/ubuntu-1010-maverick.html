@@ -714,28 +714,28 @@
           const url =
             'https://frijal.github.io/artikel/ubuntu-1010-maverick.html';
           const text = encodeURIComponent(
-            'Pesta Rilis Ubuntu 10.10 Maverick Meerkat — STMIK STIKOM Balikpapan',
+            'Pesta Rilis Ubuntu 10.10 Maverick Meerkat — STMIK STIKOM Balikpapan'
           );
           const $ = (sel) => document.querySelector(sel);
           $('.fb').setAttribute(
             'href',
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
           );
           $('.tw').setAttribute(
             'href',
-            `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${text}`,
+            `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${text}`
           );
           $('.x').setAttribute(
             'href',
-            `https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${text}`,
+            `https://x.com/intent/post?url=${encodeURIComponent(url)}&text=${text}`
           );
           $('.wa').setAttribute(
             'href',
-            `https://wa.me/?text=${text}%20${encodeURIComponent(url)}`,
+            `https://wa.me/?text=${text}%20${encodeURIComponent(url)}`
           );
           $('.tg').setAttribute(
             'href',
-            `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${text}`,
+            `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${text}`
           );
         })();
       });

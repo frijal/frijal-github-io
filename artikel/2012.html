@@ -613,7 +613,7 @@
                     t.unobserve(e));
                 });
               },
-              { root: thumbContainer, threshold: 0.1 },
+              { root: thumbContainer, threshold: 0.1 }
             );
           function showImage(n) {
             ((lightImg.src = images[n]),
@@ -673,7 +673,7 @@
             (e) => {
               touchStartX = e.changedTouches[0].screenX;
             },
-            { passive: !0 },
+            { passive: !0 }
           ),
             overlay.addEventListener(
               'touchend',
@@ -681,7 +681,7 @@
                 ((touchEndX = e.changedTouches[0].screenX),
                   handleSwipeGesture());
               },
-              { passive: !0 },
+              { passive: !0 }
             ));
         });
       </script>
@@ -738,7 +738,7 @@
                     t.unobserve(e.target));
                 });
               },
-              { threshold: 0.1 },
+              { threshold: 0.1 }
             );
           e.forEach((e) => t.observe(e));
         });
@@ -751,20 +751,20 @@
           (['og:image', 'twitter:image'].forEach((e, t) =>
             document.head.appendChild(
               document.querySelector(
-                (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`,
+                (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`
               ) ||
                 Object.assign(document.createElement('meta'), {
                   [t ? 'name' : 'property']: e,
                   content: n,
-                }),
-            ),
+                })
+            )
           ),
             document.head.appendChild(
               document.querySelector('meta[property="og:url"]') ||
                 Object.assign(document.createElement('meta'), {
                   property: 'og:url',
                   content: location.href,
-                }),
+                })
             ));
         });
       });

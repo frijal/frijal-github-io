@@ -404,7 +404,7 @@
           lightbox.style.display = 'flex';
         }
         gallery.forEach((img, i) =>
-          img.addEventListener('click', () => showLightbox(i)),
+          img.addEventListener('click', () => showLightbox(i))
         );
         document.querySelector('.prev').onclick = () =>
           showLightbox((current - 1 + gallery.length) % gallery.length);

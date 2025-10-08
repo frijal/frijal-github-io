@@ -813,36 +813,36 @@
           timeStyle: 'medium',
         });
         document.getElementById('time-local').textContent = fmt.format(
-          new Date(),
+          new Date()
         );
 
         // Link share (gunakan URL artikel Anda)
         const shareUrl = 'https://frijal.github.io/artikel/oss-di-sekolah.html';
         const shareText = encodeURIComponent(
-          'Kampanye OSS di Sekolah: Hemat Anggaran, Tingkatkan Kreativitas',
+          'Kampanye OSS di Sekolah: Hemat Anggaran, Tingkatkan Kreativitas'
         );
         const share = document.getElementById('share');
         const setHref = (sel, url) =>
           share.querySelector(sel)?.setAttribute('href', url);
         setHref(
           '.fb',
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
         );
         setHref(
           '.tw',
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`,
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`
         );
         setHref(
           '.x',
-          `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${shareText}`,
+          `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${shareText}`
         );
         setHref(
           '.wa',
-          `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`,
+          `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`
         );
         setHref(
           '.tg',
-          `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`,
+          `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`
         );
         setHref('.ig', `https://www.instagram.com/`); // Instagram belum punya web share URL resmi
         setHref('.threads', `https://www.threads.net/`); // Threads belum punya web share URL resmi

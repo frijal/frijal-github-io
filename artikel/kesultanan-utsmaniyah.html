@@ -751,7 +751,7 @@
             lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
-            t.addEventListener('click', () => open(idx)),
+            t.addEventListener('click', () => open(idx))
           );
           prev.addEventListener('click', () => step(-1));
           next.addEventListener('click', () => step(1));
@@ -770,10 +770,10 @@
         // Share links
         (function () {
           const url = encodeURIComponent(
-            'https://frijal.github.io/artikel/kesultanan-utsmaniyah.html',
+            'https://frijal.github.io/artikel/kesultanan-utsmaniyah.html'
           );
           const title = encodeURIComponent(
-            'Kesultanan Utsmaniyah: Osman, Orhan, Murad, Bayezid, dan Masa Interregnum',
+            'Kesultanan Utsmaniyah: Osman, Orhan, Murad, Bayezid, dan Masa Interregnum'
           );
           document
             .getElementById('copyLink')

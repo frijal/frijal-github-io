@@ -1223,7 +1223,7 @@
             return cc
               .toUpperCase()
               .replace(/./g, (c) =>
-                String.fromCodePoint(127397 + c.charCodeAt()),
+                String.fromCodePoint(127397 + c.charCodeAt())
               );
           }
         })();
@@ -1231,12 +1231,11 @@
         // Share links
         (function share() {
           const url = encodeURIComponent(
-            document.querySelector('link[rel=canonical]')?.href ||
-              location.href,
+            document.querySelector('link[rel=canonical]')?.href || location.href
           );
           const title = encodeURIComponent(document.title);
           const text = encodeURIComponent(
-            'Baca perbandingan instal pertama Ubuntu vs Windows:',
+            'Baca perbandingan instal pertama Ubuntu vs Windows:'
           );
           const shareTargets = [
             ['share-wa', 'https://wa.me/?text=' + text + '%20' + url],
