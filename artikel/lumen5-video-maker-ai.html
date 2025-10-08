@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- prettier-ignore -->
     <title>Lumen5: Sulap Tulisan Jadi Video Keren untuk Media Sosial</title>
-
-    <!-- Meta SEO Utama -->
     <meta
       name="description"
       content="Nggak jago edit video? Pakai Lumen5! Tool AI ini bisa mengubah artikel atau teks jadi video profesional siap tayang di Instagram, TikTok, atau YouTube."
@@ -26,8 +23,6 @@
       type="image/svg+xml"
     />
     <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png" />
-
-    <!-- Open Graph (untuk Facebook, dll.) -->
     <meta
       property="og:title"
       content="Lumen5: Sulap Tulisan Jadi Video Keren untuk Media Sosial"
@@ -50,8 +45,6 @@
       content="Ilustrasi proses pembuatan video dari teks menggunakan AI Lumen5"
     />
     <meta property="fb:app_id" content="1471267430691023" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@frijal" />
     <meta name="twitter:creator" content="@frijal" />
@@ -67,24 +60,24 @@
       name="twitter:image"
       content="https://frijal.github.io/artikel/lumen5-video-maker-ai.jpg"
     />
-
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-10-04T15:37:18.172+00:00"
+    />
     <style>
       :root {
-        --bg-color: #0c0c1e;
-        --surface-color: #1c1c3c;
-        --primary-color: #a259ff;
+        --bg-color: #0a0f18;
+        --surface-color: #151c2c;
+        --primary-color: #ff007f;
         --secondary-color: #00d4ff;
         --text-color: #e4e4ff;
         --text-muted: #a0a0b0;
         --border-color: #2c2c5c;
         --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        --font-main:
-          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Helvetica, Arial, sans-serif;
+        --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       }
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
       body {
         font-family: var(--font-main);
         margin: 0;
@@ -93,19 +86,11 @@
         line-height: 1.8;
         font-size: 1.1rem;
       }
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+      .container { max-width: 900px; margin: 0 auto; padding: 20px; }
       header {
         text-align: center;
         padding: 60px 20px;
-        background: linear-gradient(
-          145deg,
-          var(--surface-color),
-          var(--bg-color)
-        );
+        background: linear-gradient(145deg, rgba(255, 0, 127, 0.1), rgba(0, 246, 255, 0.1));
         border-bottom: 2px solid var(--primary-color);
       }
       header h1 {
@@ -113,12 +98,9 @@
         color: var(--primary-color);
         margin: 0;
         font-weight: 800;
+        text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
       }
-      header .subtitle {
-        font-size: 1.3rem;
-        color: var(--text-muted);
-        margin-top: 15px;
-      }
+      header .subtitle { font-size: 1.3rem; color: var(--text-muted); margin-top: 15px; }
       article {
         background: var(--surface-color);
         border-radius: 15px;
@@ -135,8 +117,21 @@
         padding-bottom: 10px;
         font-weight: 700;
       }
-
-      /* Galeri Foto */
+      .feature-list { list-style: none; padding-left: 0; }
+      .feature-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+      }
+      .feature-list li::before {
+        content: '►';
+        color: var(--secondary-color);
+        font-size: 1.2rem;
+        margin-right: 15px;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse { 50% { color: var(--primary-color); } }
       .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -149,75 +144,33 @@
         object-fit: cover;
         border-radius: 10px;
         cursor: pointer;
-        transition:
-          transform 0.3s,
-          filter 0.3s;
+        transition: transform 0.3s, filter 0.3s;
       }
-      .gallery img:hover {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 10px var(--secondary-color));
-      }
-      /* Lightbox */
+      .gallery img:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px var(--secondary-color)); }
       .lightbox {
         display: none;
         position: fixed;
         z-index: 9999;
         inset: 0;
-        width: 100%;
-        height: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         justify-content: center;
         align-items: center;
       }
-      .lightbox-content {
-        max-width: 90%;
-        max-height: 85%;
-        animation: fadeIn 0.4s ease;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: scale(0.9);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-      .lightbox-close,
-      .lightbox-prev,
-      .lightbox-next {
+      .lightbox-content { max-width: 90%; max-height: 85%; animation: fadeIn 0.4s ease; }
+      @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+      .lightbox-close, .lightbox-prev, .lightbox-next {
         position: absolute;
         color: white;
         font-size: 40px;
-        font-weight: bold;
         cursor: pointer;
         user-select: none;
         transition: opacity 0.3s;
       }
-      .lightbox-close:hover,
-      .lightbox-prev:hover,
-      .lightbox-next:hover {
-        opacity: 0.7;
-      }
-      .lightbox-close {
-        top: 15px;
-        right: 30px;
-      }
-      .lightbox-prev,
-      .lightbox-next {
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 10px;
-      }
-      .lightbox-prev {
-        left: 15px;
-      }
-      .lightbox-next {
-        right: 15px;
-      }
-
-      /* Sharing & Info Box */
+      .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.7; }
+      .lightbox-close { top: 15px; right: 30px; }
+      .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); padding: 10px; }
+      .lightbox-prev { left: 15px; }
+      .lightbox-next { right: 15px; }
       .action-section {
         text-align: center;
         margin: 40px 0;
@@ -226,312 +179,183 @@
         border-radius: 12px;
         border: 1px solid var(--border-color);
       }
-      .action-section h3 {
-        margin-top: 0;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-      }
-      .share-icons-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-      .share-icon {
-        display: inline-block;
-        transition: transform 0.2s ease;
-      }
-      .share-icon:hover {
-        transform: scale(1.15);
-      }
-      .share-icon svg {
-        width: 40px;
-        height: 40px;
-      }
-
-      .info-box {
-        margin: 50px 0;
-        padding: 25px;
-        background: var(--surface-color);
-        border-radius: 12px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 25px;
-        font-size: 1rem;
-        border: 1px solid var(--border-color);
-      }
-      .info-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .info-item img {
-        width: 32px;
-        height: 32px;
-        object-fit: contain;
-      }
-
-      footer {
-        text-align: center;
-        padding: 25px;
-        margin-top: 40px;
-        font-size: 1rem;
-        color: var(--text-muted);
-      }
-
+      .action-section h3 { margin-top: 0; font-size: 1.5rem; color: var(--primary-color); }
+      .share-icons-container { display: flex; justify-content: center; gap: 20px; }
+      .share-icon { display: inline-block; transition: transform 0.2s ease; }
+      .share-icon:hover { transform: scale(1.15); }
+      .share-icon svg { width: 40px; height: 40px; }
+      footer { text-align: center; padding: 25px; margin-top: 40px; font-size: 1rem; color: var(--text-muted); }
       @media (max-width: 768px) {
-        body {
-          font-size: 1rem;
-        }
-        header h1 {
-          font-size: 2.5rem;
-        }
-        article {
-          padding: 20px;
-        }
-        h2 {
-          font-size: 1.8rem;
-        }
+        body { font-size: 1rem; }
+        header h1 { font-size: 2.5rem; }
+        article { padding: 20px; }
+        h2 { font-size: 1.8rem; }
       }
     </style>
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/lumen5-video-maker-ai.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-10-04T15:37:18.172+00:00"
-    />
   </head>
   <body>
     <div id="fb-root"></div>
-    });
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1"
-      nonce="ABCDEF"
-    ></script>
-
     <div class="container">
       <header>
-        <h1>Lumen5: Bikin Video Keren dari Tulisan Doang!</h1>
+        <h1>Lumen5: Ubah Tulisan Jadi Emas Pemasaran</h1>
         <div id="iposbrowser"></div>
         <p class="subtitle">
           Asisten Produksi Video AI untuk Konten Media Sosialmu
         </p>
       </header>
-
       <main>
         <article>
-          <h2>Nggak Jago Bikin Video? Nggak Masalah!</h2>
+          <h2>Konten Video Itu Raja, Jangan Ketinggalan!</h2>
           <p>
-            Terakhir, tapi jelas bukan yang paling akhir, ada
-            <strong>Lumen5</strong>. Tool ini adalah jawaban buat kamu yang mau
-            bikin konten visual tapi nggak punya waktu atau keahlian buat ngedit
-            video yang rumit.
+            Bagi Anda yang sering bermain media sosial, pasti sadar kalau
+            konten video sedang merajai dunia digital. Algoritma suka, penonton
+            juga betah. Tapi, membuat video itu kan rumit? Kenalkan
+            <strong>Lumen5</strong>, sihir AI yang siap membantu Anda membuat
+            video keren, bahkan tanpa pengalaman *editing* sama sekali!
           </p>
           <p>
-            Cara kerjanya simpel banget: kamu tinggal masukkan link artikel blog
-            atau salin-tempel tulisanmu, dan biarkan AI-nya bekerja. Lumen5 akan
-            secara otomatis menganalisis teksmu dan membuat video singkat dengan
-            gaya profesional, lengkap dengan klip-klip video yang relevan dari
+            Cara kerjanya simpel: Anda tinggal masukkan tautan artikel blog atau
+            salin-tempel tulisan Anda, dan biarkan AI-nya bekerja. Lumen5 akan
+            secara otomatis menganalisis teks dan membuat video singkat dengan
+            gaya profesional, lengkap dengan klip video yang relevan dari
             perpustakaan mereka.
           </p>
-
-          <h2>Kustomisasi Sesuai Gayamu</h2>
+          <h2>Kustomisasi Sesuai Gaya Anda</h2>
           <p>
-            Yang bikin Lumen5 makin keren, kamu bisa dengan mudah menambahkan
-            logo, menyesuaikan warna brand, dan memilih musik latar yang pas
-            dengan seleramu. Hasilnya? Sebuah video marketing yang siap tayang
-            di Instagram, TikTok, YouTube, atau platform lainnya!
+            Yang membuat Lumen5 makin keren, Anda bisa dengan mudah menambahkan
+            logo, menyesuaikan warna merek, dan memilih musik latar yang pas.
+            Hasilnya? Sebuah video pemasaran yang siap tayang di Instagram,
+            TikTok, YouTube, atau platform lainnya!
           </p>
-          <p>
-            Dengan Lumen5, UMKM bisa tampil lebih modern dan profesional tanpa
-            perlu pusing mikirin tim desain atau biaya produksi video yang
-            mahal. Ini adalah cara cerdas untuk mengubah konten tulisanmu
-            menjadi format video yang lebih menarik dan disukai audiens masa
-            kini.
-          </p>
-
-          <h2>Contoh Hasil Video dari Lumen5</h2>
+          <h2>Kelebihan Utama Lumen5:</h2>
+          <ul class="feature-list">
+            <li>Konversi teks ke video secara otomatis, hemat waktu.</li>
+            <li>
+              *Subtitle* otomatis untuk menjangkau penonton yang lebih luas.
+            </li>
+            <li>
+              Banyak pilihan *template* profesional yang siap pakai.
+            </li>
+            <li>Koleksi jutaan klip video dan musik bebas royalti.</li>
+          </ul>
           <div class="gallery" id="photoGallery">
-            <!-- Gambar-gambar akan diisi oleh JavaScript -->
-          </div>
-
+            </div>
           <div class="action-section">
             <h3>Bagikan Alat Kreatif Ini!</h3>
             <div class="share-icons-container">
-              <a
-                href="#"
-                class="share-icon"
-                id="shareFacebook"
-                title="Bagikan ke Facebook"
-              >
+              <a href="#" class="share-icon" id="shareFacebook" title="Bagikan ke Facebook" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="#1877F2">
-                  <path
-                    d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"
-                  />
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
                 </svg>
               </a>
-              <a
-                href="#"
-                class="share-icon"
-                id="shareTwitter"
-                title="Bagikan ke Twitter"
-              >
+              <a href="#" class="share-icon" id="shareTwitter" title="Bagikan ke Twitter" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="#1DA1F2">
-                  <path
-                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.55v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.35 0-.69-.02-1.03-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
-                  />
+                  <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.55v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.35 0-.69-.02-1.03-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
                 </svg>
               </a>
-              <a
-                href="#"
-                class="share-icon"
-                id="shareWhatsApp"
-                title="Bagikan ke WhatsApp"
-              >
+              <a href="#" class="share-icon" id="shareWhatsApp" title="Bagikan ke WhatsApp" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="#25D366">
-                  <path
-                    d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.82l-1.36 4.95 5.07-1.33c1.38.71 2.92 1.12 4.55 1.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM17.47 14.38c-.2-.1-.97-.48-1.12-.53-.15-.05-.26-.08-.37.08-.11.16-.42.53-.52.64-.1.1-.19.12-.35.04-.16-.08-.68-.25-1.3-.8-.48-.43-.81-.95-.9-1.11-.1-.16-.01-.25.07-.32.08-.07.16-.19.25-.28.08-.1.11-.16.16-.26s.03-.2-.01-.28c-.05-.08-.37-.88-.51-1.21-.13-.32-.27-.28-.37-.28h-.19c-.1 0-.26.03-.4.16-.14.12-.54.53-.54 1.29s.55 1.5.63 1.61c.08.1.97 1.48 2.37 2.08.34.15.54.2.8.31.53.22.97.19 1.31.11.39-.08 1.12-.46 1.28-.9s.16-.81.11-.88c-.05-.07-.16-.11-.35-.21z"
-                  />
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.82l-1.36 4.95 5.07-1.33c1.38.71 2.92 1.12 4.55 1.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM17.47 14.38c-.2-.1-.97-.48-1.12-.53-.15-.05-.26-.08-.37.08-.11.16-.42.53-.52.64-.1.1-.19.12-.35.04-.16-.08-.68-.25-1.3-.8-.48-.43-.81-.95-.9-1.11-.1-.16-.01-.25.07-.32.08-.07.16-.19.25-.28.08-.1.11-.16.16-.26s.03-.2-.01-.28c-.05-.08-.37-.88-.51-1.21-.13-.32-.27-.28-.37-.28h-.19c-.1 0-.26.03-.4.16-.14.12-.54.53-.54 1.29s.55 1.5.63 1.61c.08.1.97 1.48 2.37 2.08.34.15.54.2.8.31.53.22.97.19 1.31.11.39-.08 1.12-.46 1.28-.9s.16-.81.11-.88c-.05-.07-.16-.11-.35-.21z"/>
                 </svg>
               </a>
             </div>
           </div>
-
-          <h2>Tertarik Bikin Video dari Tulisan?</h2>
-          <div
-            class="fb-comments"
-            data-href="https://frijal.github.io/artikel/lumen5-video-maker-ai.html"
-            data-width="100%"
-            data-numposts="5"
-            data-colorscheme="dark"
-          ></div>
+          <h2>Tertarik Membuat Video dari Tulisan?</h2>
+          <div class="fb-comments" data-href="https://frijal.github.io/artikel/lumen5-video-maker-ai.html" data-width="100%" data-numposts="5" data-colorscheme="dark"></div>
         </article>
       </main>
-
       <footer>
         <p>🄯 2025 Frijal. Dari kata jadi karya visual.</p>
       </footer>
     </div>
-
-    <!-- Struktur Lightbox -->
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close">&times;</span>
       <a class="lightbox-prev">&#10094;</a>
       <a class="lightbox-next">&#10095;</a>
-      <img class="lightbox-content" id="lightboxImg" />
+      <img class="lightbox-content" id="lightboxImg" alt="Gambar diperbesar" />
     </div>
 
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.addEventListener('DOMContentLoaded', function () {
-          // --- GALERI & LIGHTBOX ---
-          const gallery = document.getElementById('photoGallery');
-          const lightbox = document.getElementById('lightbox');
-          const lightboxImg = document.getElementById('lightboxImg');
-          const galleryImages = Array.from(
-            { length: 6 },
-            (_, i) => `https://picsum.photos/id/${130 + i}/800/600`
-          );
-          let currentIndex;
-
-          galleryImages.forEach((src) => {
-            const img = document.createElement('img');
-            img.setAttribute('data-src', src);
-            img.alt = `Contoh video yang dibuat dengan Lumen5`;
-            img.loading = 'lazy';
-            img.className = 'lazy-load';
-            gallery.appendChild(img);
-          });
-
-          const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy-load');
-                obs.unobserve(img);
-              }
-            });
-          });
-          document
-            .querySelectorAll('img.lazy-load')
-            .forEach((img) => observer.observe(img));
-
-          const updateLightboxImage = (index) => {
-            const images = Array.from(gallery.children);
-            if (index < 0) index = images.length - 1;
-            if (index >= images.length) index = 0;
-            currentIndex = index;
-            lightboxImg.src = images[currentIndex].src;
-          };
-
-          gallery.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-              currentIndex = Array.from(gallery.children).indexOf(e.target);
-              updateLightboxImage(currentIndex);
-              lightbox.style.display = 'flex';
-            }
-          });
-
-          document.querySelector('.lightbox-close').onclick = () =>
-            (lightbox.style.display = 'none');
-          document.querySelector('.lightbox-prev').onclick = () =>
-            updateLightboxImage(currentIndex - 1);
-          document.querySelector('.lightbox-next').onclick = () =>
-            updateLightboxImage(currentIndex + 1);
-          lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none';
-          };
-          document.onkeydown = (e) => {
-            if (lightbox.style.display === 'flex') {
-              if (e.key === 'ArrowLeft') updateLightboxImage(currentIndex - 1);
-              if (e.key === 'ArrowRight') updateLightboxImage(currentIndex + 1);
-              if (e.key === 'Escape') lightbox.style.display = 'none';
-            }
-          };
-          // --- SOCIAL SHARING ---
-          const pageUrl = encodeURIComponent(window.location.href);
-          const pageTitle = encodeURIComponent(document.title);
-          const shareLinks = {
-            shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
-            shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
-            shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
-          };
-          for (const id in shareLinks) {
-            const link = document.getElementById(id);
-            if (link) {
-              link.href = shareLinks[id];
-              link.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(this.href, 'share-window', 'height=450,width=550');
-              });
-            }
-          }
-        });
-      });
-    </script>
-    });
-    <div id="kategori-aktif"></div>
     <section id="related-marquee-section">
       <div id="related-marquee-container"></div>
     </section>
-    <script src="/ext/marquee-url.js"></script>
+    <div id="kategori-aktif"></div>
     <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">&times;</span>
+      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
       <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="ABCDEF"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // --- GALERI & LIGHTBOX ---
+        const gallery = document.getElementById('photoGallery');
+        const lightbox = document.getElementById('lightbox');
+        if (gallery && lightbox) {
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const prevBtn = document.querySelector('.lightbox-prev');
+            const nextBtn = document.querySelector('.lightbox-next');
+            let currentIndex;
+
+            const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/id/${130 + i}/800/600`);
+            images.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Contoh video yang dibuat dengan Lumen5 ${index + 1}`;
+                img.loading = 'lazy';
+                gallery.appendChild(img);
+            });
+            
+            const imagesInGallery = Array.from(gallery.children);
+
+            function showImage(index) {
+                if (index >= imagesInGallery.length) currentIndex = 0;
+                else if (index < 0) currentIndex = imagesInGallery.length - 1;
+                else currentIndex = index;
+                lightboxImg.src = imagesInGallery[currentIndex].src;
+            }
+
+            gallery.addEventListener('click', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    const clickedIndex = imagesInGallery.indexOf(e.target);
+                    lightbox.style.display = 'flex';
+                    showImage(clickedIndex);
+                }
+            });
+
+            closeBtn.addEventListener('click', () => (lightbox.style.display = 'none'));
+            prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+            nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) lightbox.style.display = 'none';
+            });
+        }
+        
+        // --- SOCIAL SHARING ---
+        (() => {
+            const pageUrl = encodeURIComponent(document.querySelector("link[rel='canonical']")?.href || location.href);
+            const pageTitle = encodeURIComponent(document.title);
+            const shareLinks = {
+                shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+                shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
+                shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
+            };
+
+            for (const id in shareLinks) {
+                const link = document.getElementById(id);
+                if (link) {
+                    link.href = shareLinks[id];
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        window.open(this.href, 'share-window', 'height=450,width=550');
+                    });
+                }
+            }
+        })();
+      });
+    </script>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script src="/ext/iposbrowser.js" defer></script>
   </body>
 </html>
