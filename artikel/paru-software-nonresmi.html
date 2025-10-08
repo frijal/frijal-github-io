@@ -1,474 +1,414 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)</title>
-    
-    <meta name="description" content="Penjelasan mendalam tentang peran Paru sebagai AUR Helper untuk menginstal software yang tidak tersedia di repositori resmi Pacman, serta keuntungannya.">
-    <meta name="keywords" content="Paru, AUR Helper, AUR, Arch User Repository, Software Komunitas, Pacman, Instalasi Linux">
-    <link rel="canonical" href="https://frijal.github.io/artikel/paru-software-nonresmi.html">
-    
-    <meta property="og:title" content="Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)">
-    <meta property="og:description" content="Mau instal Spotify, VS Code, atau paket langka di Arch? Paru adalah jawabannya!">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/paru-software-nonresmi.html">
-    <meta property="og:image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"> <meta property="og:site_name" content="Frijal's Articles">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@frijal"> <meta name="twitter:title" content="Paru dan Software Luar Repositori Resmi">
-    <meta name="twitter:description" content="Cara Paru membantu Anda mengakses ribuan software dari AUR!">
-    <meta name="twitter:image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"> <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <meta
+      name="description"
+      content="Penjelasan mendalam tentang peran Paru sebagai AUR Helper untuk menginstal software yang tidak tersedia di repositori resmi Pacman, serta keuntungannya."
+    />
+    <meta
+      name="keywords"
+      content="Paru, AUR Helper, AUR, Arch User Repository, Software Komunitas, Pacman, Instalasi Linux"
+    />
+    <link
+      rel="canonical"
+      href="https://frijal.github.io/artikel/paru-software-nonresmi.html"
+    />
+    <meta
+      property="og:title"
+      content="Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)"
+    />
+    <meta
+      property="og:description"
+      content="Mau instal Spotify, VS Code, atau paket langka di Arch? Paru adalah jawabannya!"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://frijal.github.io/artikel/paru-software-nonresmi.html"
+    />
+    <meta
+      property="og:image"
+      content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="Logo Paru dan Arch User Repository (AUR)"
+    />
+    <meta property="og:site_name" content="Frijal's Articles" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@frijal" />
+    <meta
+      name="twitter:title"
+      content="Paru dan Software Luar Repositori Resmi"
+    />
+    <meta
+      name="twitter:description"
+      content="Cara Paru membantu Anda mengakses ribuan software dari AUR!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg"
+    />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+      property="article:published_time"
+      content="2025-10-06T06:06:53.376+00:00"
+    />
     <style>
-        :root {
-            --color-bg: #00000d; /* Darker, slightly blue tint for tech focus */
-            --color-text: #e6e6ff;
-            --color-primary: #8a2be2; /* Blue Violet/Ungu Khas Komunitas */
-            --color-secondary: #1a1a33;
-            --color-card-bg: #1f1f44;
-            --padding-base: 20px;
-        }
-
-        /* RESET & BASE */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.7;
-            padding: 0;
-        }
-
-        /* HEADER & FOOTER */
-        header, footer {
-            text-align: center;
-            padding: var(--padding-base);
-            background-color: var(--color-secondary);
-        }
-
-        /* ONE-COLUMN LAYOUT */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: var(--padding-base);
-        }
-
-        /* TYPOGRAPHY & TEXT STYLES */
+      :root {
+        --color-bg: #00000d;
+        --color-text: #e6e6ff;
+        --color-primary: #8a2be2;
+        --color-secondary: #1a1a33;
+        --color-card-bg: #1f1f44;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+      }
+      header,
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: var(--color-secondary);
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: var(--color-primary);
+        margin-bottom: 10px;
+        font-size: 2.8em;
+      }
+      h2 {
+        border-bottom: 2px solid var(--color-primary);
+        padding-bottom: 5px;
+        margin-top: 35px;
+        margin-bottom: 20px;
+        font-size: 2em;
+      }
+      code {
+        background-color: #333;
+        color: var(--color-primary);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Consolas', monospace;
+      }
+      pre {
+        background-color: #111;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+      pre code {
+        display: block;
+        padding: 0;
+        background: none;
+        color: #ccc;
+      }
+      ul,
+      ol {
+        padding-left: 25px;
+        margin-bottom: 15px;
+      }
+      .social-share {
+        text-align: center;
+        margin: 30px 0;
+        padding: 15px;
+        border-top: 1px solid var(--color-secondary);
+        border-bottom: 1px solid var(--color-secondary);
+      }
+      .social-share a {
+        color: var(--color-text);
+        font-size: 28px;
+        margin: 0 12px;
+        transition: color 0.3s;
+      }
+      .social-share a:hover {
+        color: var(--color-primary);
+      }
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        place-items: center;
+      }
+      .lightbox-content {
+        display: block;
+        width: 90%;
+        max-width: 1100px;
+        max-height: 90vh;
+      }
+      .close-btn,
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        color: white;
+        transition: 0.3s;
+        user-select: none;
+      }
+      .close-btn {
+        top: 20px;
+        right: 45px;
+        font-size: 45px;
+        font-weight: bold;
+      }
+      .prev,
+      .next {
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 18px;
+        font-size: 24px;
+        background-color: rgba(138, 43, 226, 0.7);
+        border-radius: 5px;
+      }
+      .next {
+        right: 15px;
+      }
+      .prev {
+        left: 15px;
+      }
+      .prev:hover,
+      .next:hover,
+      .close-btn:hover {
+        color: var(--color-primary);
+      }
+      @media (max-width: 768px) {
         h1 {
-            color: var(--color-primary);
-            margin-bottom: 10px;
-            font-size: 2.8em;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+          font-size: 2em;
         }
         h2 {
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 5px;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            font-size: 2em;
+          font-size: 1.6em;
         }
-        h3 {
-            color: var(--color-primary);
-            margin-top: 20px;
-            font-size: 1.4em;
+        .container {
+          padding: 10px;
         }
-        code {
-            background-color: #333;
-            color: var(--color-primary);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Consolas', monospace;
-            display: inline-block;
-            margin: 2px 0;
-            white-space: pre-wrap;
-        }
-        pre {
-            background-color: #111;
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 15px 0;
-        }
-        pre code {
-            display: block;
-            padding: 0;
-            background: none;
-            color: #ccc;
-        }
-        ul {
-            margin-left: 25px;
-            margin-bottom: 15px;
-        }
-        
-        /* USER INFO CARD */
-        #user-info {
-            background-color: var(--color-card-bg);
-            padding: var(--padding-base);
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border-left: 5px solid var(--color-primary);
-        }
-        
-        /* SHARING ICONS */
-        .social-share {
-            text-align: center;
-            margin: 30px 0;
-            padding: 15px;
-            border-top: 1px solid var(--color-secondary);
-            border-bottom: 1px solid var(--color-secondary);
-        }
-        .social-share a {
-            color: var(--color-text);
-            font-size: 28px;
-            margin: 0 12px;
-            transition: color 0.3s;
-        }
-        .social-share a:hover {
-            color: var(--color-primary);
-        }
-
-        /* GALLERY & LIGHTBOX STYLES */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .gallery img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid var(--color-secondary);
-        }
-        .gallery img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-        }
-        
-        /* LIGHTBOX */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.95);
-            place-items: center;
-        }
-        .lightbox-content {
-            margin: auto;
-            display: block;
-            width: 90%;
-            max-width: 1100px;
-            max-height: 90vh;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 45px;
-            color: #fff;
-            font-size: 45px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 18px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
-            transition: 0.6s ease;
-            user-select: none;
-            background-color: rgba(138, 43, 226, 0.7);
-            border-radius: 5px;
-        }
-        .next { right: 15px; }
-        .prev { left: 15px; }
-        .prev:hover, .next:hover { background-color: var(--color-primary); }
-
-        /* MEDIA QUERIES (Mobile-Friendly) */
-        @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            h2 { font-size: 1.6em; }
-            .container { padding: 10px; }
-            .gallery { grid-template-columns: 1fr; }
-        }
+      }
     </style>
-<meta property="og:image:alt" content="Fungsi Sebenarnya Paru: Menginstal Software Komunitas (AUR)">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/paru-software-nonresmi.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-10-06T06:06:53.376+00:00">
-</head>
-<body>
+  </head>
+  <body>
     <div id="fb-root"></div>
-    
     <header>
-        <h1><i class="fas fa-cubes"></i> Paru dan Software Komunitas: Menguak Kekuatan AUR</h1>
-<div id="iposbrowser"></div>
+      <h1>
+        <i class="fas fa-cubes"></i> Paru dan Software Komunitas: Menguak
+        Kekuatan AUR
+      </h1>
+      <div id="iposbrowser"></div>
     </header>
 
     <div class="container">
-        
-        <div id="user-info">
-            <h2><i class="fas fa-info-circle"></i> Hai! Ini Info Kunjungan Kamu</h2>
-            <p><i class="fas fa-globe-asia"></i> IP Address: <span id="user-ip">...</span></p>
-            <p><span id="user-geo"><i class="fas fa-map-marker-alt"></i> Lokasi: Sedang dideteksi...</span></p>
-            <p><span id="user-os"><i class="fas fa-desktop"></i> Sistem Operasi: ...</span></p>
-            <p><span id="user-browser"><i class="fas fa-chrome"></i> Browser: ...</span></p>
-        </div>
+      <article>
+        <p>
+          Betul sekali! Inilah fungsi utama <b>Paru</b> yang sebenarnya. Paru
+          memang dirancang untuk memasang perangkat lunak yang berada
+          <b>di luar repositori resmi</b> Pacman, yaitu dari
+          <b>AUR (Arch User Repository)</b>.
+        </p>
+        <p>
+          Jadi, jika ada perangkat lunak yang tidak muncul saat Anda menggunakan
+          <code>sudo pacman -S</code>, Paru adalah alat yang akan membantu Anda
+          mencarinya, mengunduh, mengkompilasi, dan menginstalnya dari AUR.
+        </p>
 
-        <article>
-            <p>
-                Betul sekali! Inilah fungsi utama <b>Paru</b> yang sebenarnya. Paru memang dirancang untuk memasang <code><b>software</b></code> yang berada <b>di luar repositori resmi</b> Pacman, yaitu <code><b>software</b></code> dari <b>AUR (Arch User Repository)</b>.
-            </p>
-            <p>
-                Jadi, jika ada <code><b>software</b></code> yang tidak muncul saat Anda menggunakan <code>sudo pacman -S</code>, Paru adalah alat yang akan membantu Anda mencarinya, mengunduh, mengkompilasi, dan menginstalnya dari AUR.
-            </p>
+        <section>
+          <h2><i class="fas fa-globe"></i> Apa Itu AUR?</h2>
+          <p>
+            AUR adalah gudang repositori besar berisi
+            <b>PKGBUILD</b> (skrip instalasi) yang dikelola oleh komunitas Arch
+            Linux. Paket-paket ini biasanya meliputi:
+          </p>
+          <ul>
+            <li>
+              <i class="fas fa-music"></i> <b>Aplikasi Populer:</b> Misalnya
+              Spotify, Google Chrome, Visual Studio Code.
+            </li>
+            <li>
+              <i class="fas fa-laptop-code"></i> <b>Versi Pengembangan:</b>
+              Versi <code>beta</code> atau <code>git</code> dari sebuah program.
+            </li>
+            <li>
+              <i class="fas fa-cogs"></i> <b>Perangkat Lunak Khusus:</b>
+              Driver atau program yang lebih spesifik.
+            </li>
+          </ul>
+        </section>
+        <hr />
+        <section>
+          <h2><i class="fas fa-tools"></i> Peran Paru dalam Menjembatani AUR</h2>
+          <p>
+            Sebelum ada AUR Helper seperti Paru, menginstal dari AUR adalah
+            pekerjaan manual yang cukup merepotkan. <b>Paru mengotomatisasi
+            seluruh proses tersebut.</b>
+          </p>
+          <p>
+            Saat Anda menggunakan <code>paru -S [nama-software]</code>, Paru
+            akan:
+          </p>
+          <ol>
+            <li>
+              <i class="fas fa-search-dollar"></i> Mencari paket di repositori
+              resmi dan AUR.
+            </li>
+            <li>
+              <i class="fas fa-code-branch"></i> Jika ditemukan di AUR, Paru akan
+              mengunduh kode sumbernya.
+            </li>
+            <li>
+              <i class="fas fa-eye"></i> <b>Menampilkan PKGBUILD</b> (skrip
+              instalasi) untuk Anda periksa (Penting!).
+            </li>
+            <li>
+              <i class="fas fa-hammer"></i> Mengkompilasi paket dan menginstal
+              semua dependensi yang dibutuhkan secara otomatis.
+            </li>
+          </ol>
+          <p>
+            Dengan Paru, instalasi dari AUR terasa semudah dari repositori
+            resmi.
+          </p>
+        </section>
+        <hr />
+        <section>
+          <h2><i class="fas fa-shield-alt"></i> Peringatan Penting: Keamanan AUR</h2>
+          <p>
+            Perlu diingat bahwa <b>perangkat lunak dari AUR dikelola oleh
+            komunitas, bukan oleh pengembang resmi distro Anda</b>.
+            Perhatikan hal berikut:
+          </p>
+          <ul>
+            <li>
+              <b>Tinjau PKGBUILD:</b> Selalu baca dan tinjau skrip yang
+              ditampilkan Paru sebelum menyetujui proses kompilasi untuk
+              memastikan tidak ada kode berbahaya.
+            </li>
+            <li>
+              <b>Pahami Dependensi:</b> Paket AUR mungkin memiliki dependensi yang
+              rumit. Paru akan membantu mengurusnya, tetapi pastikan Anda
+              mengerti apa yang diinstal.
+            </li>
+          </ul>
+        </section>
 
-            <section>
-                <h2><i class="fas fa-globe"></i> Apa Itu AUR (Arch User Repository)?</h2>
-                <p>
-                    AUR adalah gudang repositori besar yang isinya berupa <b>PKGBUILD</b> (skrip kompilasi) yang dikelola oleh komunitas Arch Linux. Paket-paket ini biasanya meliputi:
-                    <ul>
-                        <li><i class="fas fa-music"></i> <b>Aplikasi Populer:</b> Misalnya Spotify, Google Chrome, Visual Studio Code (versi tertentu).</li>
-                        <li><i class="fas fa-laptop-code"></i> <b>Versi Pengembangan:</b> Versi <code><b>beta</b></code> atau <code><b>git</b></code> dari sebuah program.</li>
-                        <li><i class="fas fa-cogs"></i> <b>Software Khusus:</b> Driver atau program yang kurang diminati massal.</li>
-                    </ul>
-                    Karena paket ini tidak di-<code><b>build</b></code> dan diuji secara resmi oleh tim Arch, mereka dikategorikan sebagai <b>non-resmi:</b>, dan di sinilah Paru berperan.
-                </p>
-            </section>
+        <section class="social-share">
+          <p>Bagikan info penting tentang AUR dan Paru ini:</p>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" rel="noopener noreferrer" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/paru-software-nonresmi.html&text=Paru%20membuka%20akses%20ke%20ribuan%20software%20komunitas%20di%20AUR!" target="_blank" rel="noopener noreferrer" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://wa.me/?text=Penting!%20Cara%20Paru%20menginstal%20software%20luar%20repositori%20resmi%3A%20https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" rel="noopener noreferrer" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </section>
 
-            <hr>
-
-            <section>
-                <h2><i class="fas fa-tools"></i> Peran Paru dalam Menjembatani AUR</h2>
-                <p>
-                    Sebelum ada AUR Helper seperti Paru (dan sebelumnya Yaourt/Pacaur), menginstal dari AUR adalah pekerjaan yang ribet, harus menggunakan perintah <code>git clone</code>, <code>makepkg</code>, dan mengurus dependensi manual.
-                </p>
-                <p>
-                    <b>Paru mengotomatisasi seluruh proses tersebut.</b>
-                </p>
-                <p>
-                    Saat Anda menggunakan <code>paru -S [nama_software]</code>, Paru akan:
-                    <ol>
-                        <li><i class="fas fa-search-dollar"></i> Mencari paket di repositori Pacman dan AUR.</li>
-                        <li><i class="fas fa-code-branch"></i> Jika ditemukan di AUR, Paru akan mengunduh kode sumbernya (<code>git clone</code>).</li>
-                        <li><i class="fas fa-eye"></i> <b>Menampilkan PKGBUILD</b> (skrip kompilasi) dan meminta persetujuan Anda (Penting!).</li>
-                        <li><i class="fas fa-hammer"></i> Mengkompilasi paket menggunakan <code>makepkg</code> dan menginstal semua dependensi yang dibutuhkan secara otomatis.</li>
-                    </ol>
-                </p>
-                <p>
-                    Dengan Paru, instalasi <code><b>software</b></code> dari AUR terasa semudah menginstal dari repositori resmi.
-                </p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2><i class="fas fa-shield-alt"></i> Peringatan Penting: Keamanan AUR</h2>
-                <p>
-                    Meskipun Paru sangat memudahkan, perlu diingat bahwa <b>software dari AUR dikelola oleh komunitas, bukan oleh pengembang resmi distro Anda</b>. Ada beberapa hal yang harus Anda perhatikan:
-                    <ul>
-                        <li><b>Tinjau PKGBUILD:</b> Selalu baca dan tinjau skrip (PKGBUILD) yang ditampilkan oleh Paru sebelum Anda menyetujui proses kompilasi. Ini adalah kunci untuk memastikan tidak ada kode berbahaya yang masuk ke sistem Anda.</li>
-                        <li><b>Dependencies:</b> Paket AUR mungkin memiliki dependensi yang rumit atau memerlukan paket AUR lain. Paru akan membantu mengurusnya, tetapi pastikan Anda mengerti apa yang diinstal.</li>
-                    </ul>
-                </p>
-            </section>
-            
-            <section class="social-share">
-                <p>Bagikan info penting tentang AUR dan Paru ini:</p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/paru-software-nonresmi.html&text=Paru%20membuka%20akses%20ke%20ribuan%20software%20komunitas%20di%20AUR!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://wa.me/?text=Penting!%20Cara%20Paru%20menginstal%20software%20luar%20repositori%20resmi%3A%20https://frijal.github.io/artikel/paru-software-nonresmi.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            </section>
-            <section id="fb-comments-container">
-                <h2><i class="far fa-comment-dots"></i> Pelan Kiri</h2>
-                <div class="fb-comments" 
-                    data-href="https://frijal.github.io/artikel/paru-software-nonresmi.html" 
-                    data-width="100%" 
-                    data-numposts="5">
-                </div>
-            </section>
-
-        </article>
+        <section id="fb-comments-container">
+          <h2><i class="far fa-comment-dots"></i> Beri Komentar</h2>
+          <div
+            class="fb-comments"
+            data-href="https://frijal.github.io/artikel/paru-software-nonresmi.html"
+            data-width="100%"
+            data-numposts="5"
+          ></div>
+        </section>
+      </article>
     </div>
 
-    <div id="lightbox-modal" class="lightbox" style="display: none;">
-        <span class="close-btn">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-        <a class="prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></a>
-        <a class="next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></a>
+    <div id="lightbox-modal" class="lightbox">
+      <span class="close-btn">&times;</span>
+      <img class="lightbox-content" id="lightbox-img" alt="Gambar diperbesar" />
+      <a class="prev"><i class="fas fa-chevron-left"></i></a>
+      <a class="next"><i class="fas fa-chevron-right"></i></a>
     </div>
 
     <footer>
-        <p>🄯 2024 Artikel Frijal. Gunakan Paru dengan bijak dan aman!</p>
+      <p>🄯 2024 Artikel Frijal. Gunakan Paru dengan bijak dan aman!</p>
     </footer>
 
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+    <div id="kategori-aktif"></div>
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      /><span id="floatingSearchClear" class="clear-button">&times;</span>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+    </div>
+    
     <script>
-document.addEventListener(DOMContentLoaded, () => {
-        // --- 1. LIGHTBOX GALLERY & NAVIGATION ---
-        const galleryImages = document.querySelectorAll('.gallery img');
+      document.addEventListener('DOMContentLoaded', () => {
+        // --- Lightbox Gallery (disembunyikan jika tidak ada gambar) ---
+        const galleryImages = Array.from(document.querySelectorAll('.gallery img'));
         const lightboxModal = document.getElementById('lightbox-modal');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.close-btn');
-        let currentIndex = 0;
+        if (galleryImages.length > 0 && lightboxModal) {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = lightboxModal.querySelector('.close-btn');
+            const prevBtn = lightboxModal.querySelector('.prev');
+            const nextBtn = lightboxModal.querySelector('.next');
+            let currentIndex = 0;
 
-        galleryImages.forEach((img, index) => {
-            img.addEventListener('click', () => {
-                lightboxModal.style.display = "grid"; 
-                lightboxImg.src = img.src;
+            function openLightbox(index) {
+                lightboxModal.style.display = 'grid';
+                lightboxImg.src = galleryImages[index].src;
                 currentIndex = index;
+            }
+            function closeLightbox() {
+                lightboxModal.style.display = 'none';
+            }
+            function changeImage(n) {
+                currentIndex = (currentIndex + n + galleryImages.length) % galleryImages.length;
+                lightboxImg.src = galleryImages[currentIndex].src;
+            }
+
+            galleryImages.forEach((img, index) => img.addEventListener('click', () => openLightbox(index)));
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', () => changeImage(-1));
+            nextBtn.addEventListener('click', () => changeImage(1));
+            lightboxModal.addEventListener('click', (e) => (e.target === lightboxModal) && closeLightbox());
+            document.addEventListener('keydown', (e) => {
+                if (lightboxModal.style.display === 'grid') {
+                    if (e.key === 'ArrowLeft') changeImage(-1);
+                    if (e.key === 'ArrowRight') changeImage(1);
+                    if (e.key === 'Escape') closeLightbox();
+                }
             });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightboxModal.style.display = "none";
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (lightboxModal.style.display === "grid") {
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
-                if (e.key === 'Escape') lightboxModal.style.display = "none";
-            }
-        });
-
-        window.onclick = function(event) {
-            if (event.target == lightboxModal) {
-                lightboxModal.style.display = "none";
-            }
         }
-
-        window.changeImage = function(n) {
-            currentIndex += n;
-            if (currentIndex < 0) {
-                currentIndex = galleryImages.length - 1;
-            } else if (currentIndex >= galleryImages.length) {
-                currentIndex = 0;
-            }
-            lightboxImg.src = galleryImages[currentIndex].src;
-        }
-
-        // --- 2. FACEBOOK COMMENTS SDK ---
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '1471267430691023', // App ID Anda
-                xfbml: true,
-                version: 'v19.0'
-            });
-        };
+        
+        // --- Facebook SDK ---
         (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/id_ID/sdk.js"; // Bahasa Indonesia
-            fjs.parentNode.insertBefore(js, fjs);
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1";
+          fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        // --- 3. DETEKSI INFO PENGGUNA (IP, OS, Browser, Lokasi) ---
-
-        function getOSIcon(os) {
-            if (os.includes('Windows')) return `<i class="fab fa-windows"></i> ${os}`;
-            if (os.includes('Mac')) return `<i class="fab fa-apple"></i> ${os}`;
-            if (os.includes('Linux')) return `<i class="fab fa-linux"></i> ${os}`;
-            if (os.includes('Android')) return `<i class="fab fa-android"></i> ${os}`;
-            if (os.includes('iOS')) return `<i class="fab fa-apple"></i> ${os}`;
-            return `<i class="fas fa-desktop"></i> ${os}`;
-        }
-
-        function getBrowserIcon(browser) {
-            if (browser.includes('Chrome')) return `<i class="fab fa-chrome"></i> ${browser}`;
-            if (browser.includes('Firefox')) return `<i class="fab fa-firefox"></i> ${browser}`;
-            if (browser.includes('Safari')) return `<i class="fab fa-safari"></i> ${browser}`;
-            if (browser.includes('Edge')) return `<i class="fab fa-edge"></i> ${browser}`;
-            if (browser.includes('Opera')) return `<i class="fab fa-opera"></i> ${browser}`;
-            return `<i class="fas fa-globe"></i> ${browser}`;
-        }
-
-        function detectUserInfo() {
-            const userAgent = navigator.userAgent;
-            
-            // Deteksi OS
-            let os = "Lainnya";
-            if (userAgent.match(/Win/)) os = "Windows";
-            else if (userAgent.match(/Mac/)) os = "macOS";
-            else if (userAgent.match(/Linux/)) os = "Linux";
-            else if (userAgent.match(/Android/)) os = "Android";
-            else if (userAgent.match(/iPhone|iPad|iPod/)) os = "iOS";
-
-            // Deteksi Browser
-            let browser = "Lainnya";
-            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) browser = "Chrome";
-            else if (userAgent.includes('Firefox')) browser = "Firefox";
-            else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) browser = "Safari";
-            else if (userAgent.includes('Edg')) browser = "Edge";
-            else if (userAgent.includes('Opera')) browser = "Opera";
-            
-            document.getElementById('user-os').innerHTML = getOSIcon(os);
-            document.getElementById('user-browser').innerHTML = getBrowserIcon(browser);
-        }
-
-        async function getGeoLocation() {
-            const ipSpan = document.getElementById('user-ip');
-            const geoSpan = document.getElementById('user-geo');
-            
-            try {
-                // Step 1: Dapatkan IP dari ipify
-                const ipResponse = await fetch('https://api.ipify.org?format=json&ipv4');
-                const ipData = await ipResponse.json();
-                const userIP = ipData.ip;
-                ipSpan.textContent = userIP;
-
-                // Step 2: Gunakan IP untuk Geolocation (Menggunakan API pihak ketiga - ip-api.com)
-                const geoResponse = await fetch(`http://ip-api.com/json/${userIP}?fields=status,country,countryCode,city`);
-                const geoData = await geoResponse.json();
-
-                if (geoData.status === 'success') {
-                    // Konversi kode negara 2 huruf ke emoji bendera (Unicode Regional Indicator Symbols)
-                    const countryCode = geoData.countryCode.toUpperCase();
-                    const flagEmoji = countryCode.replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                    
-                    geoSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i> Lokasi: ${geoData.city}, ${geoData.country} ${flagEmoji}`;
-                } else {
-                    geoSpan.innerHTML = '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi GeoIP.';
-                }
-
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-                ipSpan.textContent = 'Gagal Mendeteksi.';
-                geoSpan.innerHTML = '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi.';
-            }
-        }
-
-        // Panggil fungsi setelah DOM siap
-        document.addEventListener('DOMContentLoaded', () => {
-            detectUserInfo();
-            getGeoLocation();
-        });
-});
+        // --- Blok deteksi info pengguna DIHAPUS ---
+      });
     </script>
-});
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-});
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script src="/ext/iposbrowser.js" defer></script>
+  </body>
 </html>

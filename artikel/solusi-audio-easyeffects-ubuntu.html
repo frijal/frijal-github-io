@@ -6,7 +6,6 @@
     <title>
       Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O
     </title>
-
     <meta
       name="description"
       content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen. Solusi masalah EasyEffects yang sering berhenti dan cara optimalkannya."
@@ -24,7 +23,6 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>"
     />
-
     <meta
       property="og:title"
       content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
@@ -44,30 +42,35 @@
       content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg169gbWlw-wwW_FZ57pmqzw8iN6XH__YjdoaVRbm8Ovj6NecI0T6ABjPI_xBnYEiV44MxCteqXQIfp3wiCRahP_yw4AKvlnN3eHZpYbP44s_8qt5zSf9Za4zo_AcNCyCNZwOaGrfi4YYNMnLwC2RohEnpHInOJ0-e7DPMtDwoffRUqU6xTyD0EgCuJi9s/s1600/hpbo.png"
     />
     <meta
+      property="og:image:alt"
+      content="Ilustrasi audio laptop HP Bang & Olufsen"
+    />
+    <meta
       name="twitter:image"
       content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg169gbWlw-wwW_FZ57pmqzw8iN6XH__YjdoaVRbm8Ovj6NecI0T6ABjPI_xBnYEiV44MxCteqXQIfp3wiCRahP_yw4AKvlnN3eHZpYbP44s_8qt5zSf9Za4zo_AcNCyCNZwOaGrfi4YYNMnLwC2RohEnpHInOJ0-e7DPMtDwoffRUqU6xTyD0EgCuJi9s/s1600/hpbo.png"
     />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
       content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
     />
     <meta
       name="twitter:description"
-      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen. Solusi masalah EasyEffects yang sering berhenti dan cara optimalkannya."
+      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen."
     />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
-
     <style>
       :root {
         --bg-color: #121212;
@@ -78,7 +81,6 @@
         --border-color: #2c2c2c;
         --code-bg: #282c34;
       }
-
       * {
         box-sizing: border-box;
         margin: 0;
@@ -104,18 +106,18 @@
         margin-bottom: 1rem;
       }
       h1 {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         text-align: center;
         border-bottom: 2px solid var(--border-color);
         padding-bottom: 1rem;
         margin-bottom: 2rem;
       }
       h2 {
-        font-size: 2.8rem;
+        font-size: 2rem;
         margin-top: 2.5rem;
       }
       h3 {
-        font-size: 2.4rem;
+        font-size: 1.5rem;
         margin-top: 2rem;
         color: #90caf9;
         border-left: 3px solid var(--accent-color);
@@ -126,7 +128,8 @@
         margin-bottom: 1rem;
         color: var(--secondary-text-color);
       }
-      ul {
+      ul,
+      ol {
         padding-left: 1.5rem;
       }
       a {
@@ -137,20 +140,18 @@
       a:hover {
         color: #f3e5f5;
       }
-
       pre {
         background-color: var(--code-bg);
         border-radius: 8px;
         padding: 1rem;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
         border: 1px solid var(--border-color);
         overflow-x: auto;
       }
       code {
         font-family: 'Fira Code', monospace;
         color: var(--primary-text-color);
-        white-space: pre-wrap;
-        word-wrap: break-word;
+        white-space: pre; /* Menggunakan 'pre' agar tidak wrap di dalam <pre> */
       }
       strong {
         color: var(--primary-text-color);
@@ -163,54 +164,32 @@
         font-style: italic;
         color: var(--secondary-text-color);
       }
-
-      .lightbox {
-        display: none;
-      }
       hr {
         border: 0;
         height: 1px;
         background: var(--border-color);
         margin: 2.5rem 0;
       }
-
-      .info-section,
-      .social-share {
+      .social-share,
+      .comments-section {
         background-color: var(--surface-color);
         padding: 1.5rem;
         border-radius: 12px;
         margin-top: 2rem;
         border: 1px solid var(--border-color);
       }
-      .info-section h3,
-      .social-share h3 {
+      .social-share h3,
+      .comments-section h2 {
         color: var(--primary-text-color);
         margin: 0 0 1rem 0;
         padding: 0;
         border: none;
       }
-      #user-info-display {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-      .info-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .info-item i {
-        font-size: 1.5rem;
-        color: var(--accent-color);
-      }
       .social-share-icons a {
         font-size: 2rem;
         margin-right: 1.5rem;
         color: var(--secondary-text-color);
-        transition:
-          color 0.3s,
-          transform 0.3s;
+        transition: color 0.3s, transform 0.3s;
       }
       .social-share-icons a:hover {
         transform: scale(1.2);
@@ -221,7 +200,6 @@
         border-radius: 12px;
         padding: 1rem;
       }
-
       @media screen and (max-width: 768px) {
         h1 {
           font-size: 2rem;
@@ -229,31 +207,18 @@
         h2 {
           font-size: 1.5rem;
         }
-        .container {
-          padding: 1.5rem 0.5rem;
+        h3 {
+          font-size: 1.25rem;
         }
-        #user-info-display {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 1rem;
+        .container {
+          padding: 1.5rem 1rem;
         }
       }
     </style>
-    <meta
-      property="og:image:alt"
-      content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/solusi-audio-easyeffects-ubuntu.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-10-07T00:02:59.247+00:00"
-    />
-  </head>
+    </head>
   <body>
+    <div id="fb-root"></div>
+
     <main class="container">
       <article>
         <h1>
@@ -269,7 +234,7 @@
         </p>
         <blockquote>
           Di Windows, driver audio khusus dari Bang & Olufsen (B&O) bukan
-          sekadar driver biasa, tapi juga software *Digital Signal Processing*
+          sekadar driver biasa, tapi juga software <em>Digital Signal Processing</em>
           (DSP) yang sudah di-tuning khusus untuk speaker laptopmu. Hal ini yang
           membuat suara terdengar lebih ngebass dan bertenaga. Sayangnya, driver
           ini tidak tersedia untuk Linux, sehingga suara bawaan terdengar "flat"
@@ -277,14 +242,12 @@
         </blockquote>
         <p>
           Kabar baiknya, masalah ini bisa diatasi! Aplikasi seperti
-          **EasyEffects** adalah solusi paling populer untuk mengembalikan
+          <strong>EasyEffects</strong> adalah solusi paling populer untuk mengembalikan
           "warna" audio di Linux. Namun, kadang aplikasi ini suka berhenti
           sendiri saat berjalan di latar belakang, misalnya saat ganti video
           YouTube. Mari kita bahas kenapa ini terjadi dan solusinya.
         </p>
-
         <hr />
-
         <h2>🔧 Kenapa EasyEffects Sering Berhenti Sendiri?</h2>
         <p>
           Aplikasi ini bekerja di atas server audio Linux (PipeWire). Ada
@@ -293,7 +256,7 @@
         <ul>
           <li>
             <strong>Instalasi Flatpak:</strong> Aplikasi Flatpak berjalan di
-            lingkungan terisolasi (*sandbox*). Kadang, koneksinya ke server
+            lingkungan terisolasi (<em>sandbox</em>). Kadang, koneksinya ke server
             audio tidak menyambung ulang secara otomatis saat ada stream audio
             baru (seperti saat video YouTube berikutnya diputar).
           </li>
@@ -308,15 +271,12 @@
             ditutup atau saat ada perubahan audio yang signifikan.
           </li>
         </ul>
-
         <hr />
-
         <h2>✅ Solusi Paling Praktis dan Stabil</h2>
         <p>
           Berikut adalah langkah-langkah yang direkomendasikan untuk membuat
           EasyEffects berjalan stabil, diurutkan dari yang paling penting.
         </p>
-
         <h3>1. Hapus Versi Flatpak dan Install dari Repository Resmi</h3>
         <p>
           Ini adalah langkah paling krusial. Versi aplikasi dari repository
@@ -333,18 +293,16 @@
         <pre><code>sudo add-apt-repository ppa:mikhailnov/pulseeffects -y
 sudo apt update
 sudo apt install easyeffects</code></pre>
-
         <h3>2. Jalankan EasyEffects sebagai Service Latar Belakang</h3>
         <p>
           Agar EasyEffects tidak mati saat jendelanya ditutup atau saat stream
-          audio berganti, jalankan sebagai *daemon* (layanan latar belakang).
+          audio berganti, jalankan sebagai <em>daemon</em> (layanan latar belakang).
         </p>
         <pre><code>systemctl --user enable --now easyeffects</code></pre>
         <p>
           Dengan perintah ini, EasyEffects akan otomatis aktif saat Anda login
           dan terus berjalan di latar belakang.
         </p>
-
         <h3>3. Pastikan Tidak Ada Opsi "Quit on Window Close"</h3>
         <p>
           Walaupun sudah berjalan sebagai service, tidak ada salahnya memastikan
@@ -352,10 +310,9 @@ sudo apt install easyeffects</code></pre>
         </p>
         <ol>
           <li>Buka aplikasi EasyEffects.</li>
-          <li>Klik menu hamburger (tiga garis) dan pilih **Preferences**.</li>
-          <li>Pastikan opsi **"Quit on Window Close"** tidak dicentang.</li>
+          <li>Klik menu hamburger (tiga garis) dan pilih <strong>Preferences</strong>.</li>
+          <li>Pastikan opsi <strong>"Quit on Window Close"</strong> tidak dicentang.</li>
         </ol>
-
         <h3>4. Restart Layanan Audio Jika Perlu</h3>
         <p>
           Jika suatu saat audio kembali bermasalah, Anda bisa me-restart server
@@ -363,9 +320,7 @@ sudo apt install easyeffects</code></pre>
         </p>
         <pre><code>systemctl --user restart pipewire.service
 systemctl --user restart pipewire-pulse.service</code></pre>
-
         <hr />
-
         <h2>🎶 Tips Tambahan untuk Kualitas Suara Maksimal</h2>
         <p>
           Meskipun sudah stabil, Anda masih bisa meningkatkan kualitas suaranya
@@ -380,8 +335,8 @@ systemctl --user restart pipewire-pulse.service</code></pre>
           </li>
           <li>
             <strong>Mulai dengan Efek Minimal:</strong> Jangan langsung
-            mengaktifkan banyak efek. Kombinasi **Bass Enhancer** dan
-            **Limiter** biasanya sudah cukup untuk memberi "power" pada suara
+            mengaktifkan banyak efek. Kombinasi <strong>Bass Enhancer</strong> dan
+            <strong>Limiter</strong> biasanya sudah cukup untuk memberi "power" pada suara
             tanpa membuatnya pecah.
           </li>
           <li>
@@ -409,52 +364,28 @@ systemctl --user restart pipewire-pulse.service</code></pre>
           seharusnya masalah EasyEffects yang sering berhenti sendiri bisa
           teratasi. Selamat menikmati kualitas audio yang lebih baik di Ubuntu!
         </p>
-
         <hr />
-
         <section class="social-share">
           <h3>Bagikan Artikel Ini</h3>
           <div class="social-share-icons">
-            <a
-              href="#"
-              id="share-fb"
-              target="_blank"
-              title="Bagikan ke Facebook"
-              ><i class="fab fa-facebook"></i
-            ></a>
-            <a
-              href="#"
-              id="share-twitter"
-              target="_blank"
-              title="Bagikan ke Twitter"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              href="#"
-              id="share-whatsapp"
-              target="_blank"
-              title="Bagikan ke WhatsApp"
-              ><i class="fab fa-whatsapp"></i
-            ></a>
-            <a
-              href="#"
-              id="share-telegram"
-              target="_blank"
-              title="Bagikan ke Telegram"
-              ><i class="fab fa-telegram"></i
-            ></a>
-            <a
-              href="#"
-              id="share-linkedin"
-              target="_blank"
-              title="Bagikan ke LinkedIn"
-              ><i class="fab fa-linkedin"></i
-            ></a>
+            <a href="#" id="share-fb" target="_blank" title="Bagikan ke Facebook">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" id="share-twitter" target="_blank" title="Bagikan ke Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" id="share-whatsapp" target="_blank" title="Bagikan ke WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" id="share-telegram" target="_blank" title="Bagikan ke Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" id="share-linkedin" target="_blank" title="Bagikan ke LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
           </div>
         </section>
-
         <hr />
-
         <section class="comments-section">
           <h2>Beri Komentar</h2>
           <div
@@ -467,35 +398,9 @@ systemctl --user restart pipewire-pulse.service</code></pre>
       </article>
     </main>
 
-    <div id="fb-root"></div>
-    });
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1"
-      nonce="aBcDeFgH"
-    ></script>
-
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-
-
-                  const pageUrl = encodeURIComponent(document.querySelector("link[rel='canonical']").href);
-                  const pageTitle = encodeURIComponent(document.title);
-                  document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-                  document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
-                  document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
-                  document.getElementById('share-telegram').href = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
-                  document.getElementById('share-linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
-              });
-      });
-    </script>
-    });
     <section id="related-marquee-section">
       <div id="related-marquee-container"></div>
     </section>
-    <script src="/ext/marquee-url.js"></script>
     <div id="kategori-aktif"></div>
     <div class="search-floating-container">
       <input
@@ -506,7 +411,35 @@ systemctl --user restart pipewire-pulse.service</code></pre>
       /><span id="floatingSearchClear" class="clear-button">&times;</span>
       <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
-    });
+
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1"
+      nonce="aBcDeFgH"
+    ></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Logika untuk tombol share
+        const canonicalUrl = document.querySelector("link[rel='canonical']");
+        const pageUrl = encodeURIComponent(
+          canonicalUrl ? canonicalUrl.href : window.location.href
+        );
+        const pageTitle = encodeURIComponent(document.title);
+        document.getElementById('share-fb').href =
+          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        document.getElementById('share-twitter').href =
+          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        document.getElementById('share-whatsapp').href =
+          `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+        document.getElementById('share-telegram').href =
+          `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+        document.getElementById('share-linkedin').href =
+          `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+      });
+    </script>
+    <script src="/ext/marquee-url.js"></script>
     <script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>

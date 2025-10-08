@@ -6,15 +6,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-
     <title>
-      Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart
+      Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart
     </title>
     <meta
       name="description"
-      content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana."
+      content="Cheat sheet cara refresh GitHub Codespaces langsung dari browser: Rebuild Container, Full Rebuild, Restart/Stop-Start. Plus tips cepat kapan pilih yang mana."
     />
-
     <link
       rel="canonical"
       href="https://frijal.github.io/artikel/refresh-codespaces-browser.html"
@@ -23,7 +21,12 @@
     <meta name="theme-color" content="#0c111a" />
     <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="https://frijal.github.io/favicon.ico" />
-
+    <link
+      rel="mask-icon"
+      href="https://frijal.github.io/favicon.svg"
+      color="#00d1b2"
+    />
+    <meta name="msapplication-TileColor" content="#0c111a" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Frijal Artikel" />
     <meta
@@ -32,102 +35,214 @@
     />
     <meta
       property="og:title"
-      content="Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart"
+      content="Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart"
     />
     <meta
       property="og:description"
-      content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana."
+      content="Cheat sheet langkah di VS Code web: Rebuild Container, Full Rebuild, Restart/Stop-Start. Bedanya apa, kapan dipakai, dan tips praktis."
     />
     <meta
       property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png"
     />
     <meta
       property="og:image:alt"
       content="Ilustrasi rebuild GitHub Codespaces di browser"
     />
-
+    <meta property="article:section" content="Dev Workflow" />
+    <meta property="article:tag" content="Codespaces, Dev Containers, VS Code Web" />
+    <meta
+      property="article:published_time"
+      content="2025-10-06T21:05:00+08:00"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart"
+      content="Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart"
     />
     <meta
       name="twitter:description"
-      content="Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana."
+      content="Langsung dari VS Code web: Rebuild vs Full Rebuild, Restart/Stop-Start, dan tips cepat kapan kamu perlu masing-masing."
     />
     <meta
       name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png"
     />
-
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": "Refresh GitHub Codespaces dari browser: Rebuild, Full Rebuild, Restart",
-          "description": "Cheat sheet cara refresh GitHub Codespaces dari browser: Restart, Rebuild Container, Full Rebuild. Plus diagram alur singkat kapan pilih yang mana.",
-          "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png",
-          "author": {
-            "@type": "Person",
-            "name": "Frijal",
-            "image": "https://frijal.github.io/artikel/refresh-codespaces-browser-github.jpg"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Frijal Artikel",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://frijal.github.io/favicon.ico"
-            }
-          },
-          "datePublished": "2025-10-06T21:50:00+08:00",
-          "dateModified": "2025-10-06T21:50:00+08:00",
-          "mainEntityOfPage": "https://frijal.github.io/artikel/refresh-codespaces-browser.html",
-          "inLanguage": "id-ID"
-        }
-      });
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Refresh GitHub Codespaces dari browser: Rebuild, full rebuild, dan restart",
+        "description": "Cheat sheet cara refresh GitHub Codespaces langsung dari browser.",
+        "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png",
+        "author": { "@type": "Person", "name": "Frijal" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Frijal Artikel",
+          "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/favicon.ico" }
+        },
+        "datePublished": "2025-10-06T21:05:00+08:00",
+        "dateModified": "2025-10-06T21:05:00+08:00",
+        "mainEntityOfPage": "https://frijal.github.io/artikel/refresh-codespaces-browser.html",
+        "inLanguage": "id-ID"
+      }
     </script>
-
     <link rel="stylesheet" href="/ext/marquee-url.css" />
-
     <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0f14;
+        --bg2: #0a0e13;
+        --glass: rgba(255, 255, 255, 0.06);
+        --text: #e6edf3;
+        --muted: #9fb0c0;
+        --brand: #00d1b2;
+        --accent: #7aa2f7;
+        --border: #1b2432;
+        --radius: 22px;
+        --shadow-dark: rgba(0, 0, 0, 0.55);
+        --shadow-light: rgba(255, 255, 255, 0.08);
+        --maxw: 980px;
+      }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
-        font: 16px/1.7 system-ui;
-        background: #0b0f14;
-        color: #e6edf3;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        overflow-x: hidden;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+      header.hero {
+        padding: clamp(16px, 5vw, 40px);
+        display: grid;
+        justify-items: center;
+      }
+      .card-hero {
+        width: 100%;
+        max-width: var(--maxw);
+        border-radius: var(--radius);
+        background: var(--glass);
+        backdrop-filter: blur(20px) saturate(160%);
+        box-shadow: 14px 14px 36px var(--shadow-dark), -10px -10px 28px var(--shadow-light);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: clamp(18px, 4.5vw, 32px);
+      }
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .title-row h1 {
+        margin: 0;
+        font-size: clamp(24px, 4.8vw, 44px);
+        color: var(--brand);
+        letter-spacing: 0.3px;
+      }
+      .sub {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+      .meta-bar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+        color: var(--muted);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
       main {
-        max-width: 960px;
-        margin: auto;
-        padding: 20px;
+        padding: 0 clamp(16px, 5vw, 40px) clamp(24px, 5vw, 50px);
+        display: grid;
+        justify-items: center;
       }
-      h1,
+      article.content {
+        width: 100%;
+        max-width: var(--maxw);
+      }
+      section.card {
+        border-radius: var(--radius);
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 14px 14px 36px var(--shadow-dark), -10px -10px 28px var(--shadow-light);
+        padding: clamp(16px, 4.2vw, 28px);
+      }
+      .lead {
+        font-size: 1.06rem;
+        color: #cbd6e2;
+        margin: 0 0 14px;
+      }
+      .sep {
+        margin: 18px 0;
+        border-top: 1px dashed rgba(255, 255, 255, 0.14);
+      }
       h2,
       h3 {
-        color: #00d1b2;
+        margin: 12px 0;
+        letter-spacing: 0.2px;
       }
-      figure {
-        margin: 0;
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 0.95rem;
+      }
+      th,
+      td {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: rgba(255, 255, 255, 0.08);
       }
       kbd {
-        background-color: #333;
-        border-radius: 3px;
-        border: 1px solid #555;
-        padding: 2px 4px;
-        font-size: 0.9em;
+        font-family: monospace;
+      }
+      figure.gallery {
+        margin: 0;
       }
       .gallery img {
         width: 100%;
-        border-radius: 12px;
+        height: auto;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 10px 10px 26px var(--shadow-dark), -8px -8px 22px var(--shadow-light);
         cursor: zoom-in;
+        transition: transform 0.22s ease;
+      }
+      .gallery img:hover {
+        transform: scale(1.015);
       }
       .lightbox {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.9);
         display: none;
+        background: rgba(7, 9, 13, 0.92);
+        backdrop-filter: blur(10px);
         align-items: center;
         justify-content: center;
         z-index: 9999;
@@ -136,186 +251,354 @@
         display: flex;
       }
       .lightbox img {
-        max-width: 90%;
-        max-height: 90%;
+        max-width: min(94vw, 1200px);
+        max-height: 88vh;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 14px 14px 36px var(--shadow-dark), -10px -10px 28px var(--shadow-light);
+      }
+      .lightbox .nav {
+        position: absolute;
+        display: flex;
+        gap: 14px;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--text);
+        cursor: pointer;
+        transition: transform 0.12s ease, background 0.12s ease;
+      }
+      .icon-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-1px);
+      }
+      .close-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+      }
+      .share {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
       }
       .share a {
-        margin-right: 10px;
-        color: #e6edf3;
-        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--text);
       }
       footer {
-        padding: 20px;
+        padding: 20px clamp(16px, 5vw, 40px) 40px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        display: grid;
+        justify-items: center;
         text-align: center;
-        color: #9fb0c0;
       }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
+      .foot-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
       }
-      th,
-      td {
-        border: 1px solid #333;
-        padding: 8px;
-        text-align: left;
+      .pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.07);
       }
-      th {
-        background: #111;
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Refresh GitHub Codespaces dari browser</h1>
-      <div id="iposbrowser"></div>
-      <p>
-        Rebuild, full rebuild, restart, atau stop-start—kapan pakai yang mana.
-        Artikel ini menjelaskan langkah-langkah di VS Code web, plus diagram
-        alur singkat biar gampang diingat.
-      </p>
-
-      <h2>Cara Rebuild Codespace dari Browser</h2>
-      <ol>
-        <li>
-          Buka repositori di GitHub → tab <strong>Codespaces</strong> → pilih
-          codespace.
-        </li>
-        <li>Codespace terbuka di browser (VS Code web).</li>
-        <li>
-          Tekan <kbd>Ctrl+Shift+P</kbd> / <kbd>Cmd+Shift+P</kbd> → ketik
-          <em>Rebuild</em>.
-        </li>
-        <li>
-          Pilih <strong>Rebuild Container</strong> (cepat, pakai cache) atau
-          <strong>Full Rebuild Container</strong> (bersih total, lebih lama).
-        </li>
-      </ol>
-
-      <h2>Perbedaan Rebuild vs Full Rebuild</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Mode</th>
-            <th>Apa yang dilakukan</th>
-            <th>Kapan dipakai</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Rebuild</td>
-            <td>Pakai cache image lama</td>
-            <td>Perubahan kecil, refresh ringan</td>
-          </tr>
-          <tr>
-            <td>Full Rebuild</td>
-            <td>Hapus cache, build ulang dari nol</td>
-            <td>Error aneh, dependency rusak, ubah konfigurasi besar</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>Tips Praktis</h2>
-      <ul>
-        <li>Mulai dari <strong>Restart</strong> dulu, paling cepat.</li>
-        <li>Kalau masih bermasalah, coba <strong>Rebuild</strong>.</li>
-        <li>Kalau tetap error, baru <strong>Full Rebuild</strong>.</li>
-      </ul>
-
-      <h2>Diagram Alur Singkat</h2>
-      <figure class="gallery">
-        <img
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxYcyBbPN-C9uuE7TIR7rRoO1JA9OCZRoXze_Tc87jcbAyPffQkSljn9UiyfLZrZVW33-ItxUUbnrZse-5izb7XYzWGaLnEXhwFIjbStJKPfC1LDcoYIwoMOOVEUyPAcnpCwFTNRiJf1nfU2xYs59sRUq-CkFjHrxxR4mzj317JUK8asTKAYJ8UfBP98/s1600/Copilot_20251006_215118.png"
-          alt="Diagram alur kapan pilih Restart, Rebuild, atau Full Rebuild"
-          loading="lazy"
-        />
-      </figure>
-
-      <div class="share">
-        <a
-          href="https://x.com/intent/tweet?url=https://frijal.github.io/artikel/refresh-codespaces-browser.html"
-          >Bagikan ke X</a
-        >
-        <a
-          href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/refresh-codespaces-browser.html"
-          >Facebook</a
-        >
-        <a
-          href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.github.io/artikel/refresh-codespaces-browser.html"
-          >LinkedIn</a
-        >
-        <a
-          href="https://wa.me/?text=Refresh%20Codespaces%20https://frijal.github.io/artikel/refresh-codespaces-browser.html"
-          >WhatsApp</a
-        >
-      </div>
-
-      <h2>Komentar</h2>
-      <div
-        class="fb-comments"
-        data-href="https://frijal.github.io/artikel/refresh-codespaces-browser.html"
-        data-width="100%"
-        data-numposts="5"
-      ></div>
-    </main>
-
-    <footer>
-      &copy; 2025 Frijal Artikel • Dark-mode • Responsif • SEO siap
-    </footer>
-
-    <div class="lightbox" id="lightbox">
-      <img id="lightbox-img" alt="Tampilan gambar diperbesar" />
-    </div>
-
     <div id="fb-root"></div>
-    });
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023"
-    ></script>
+    <div class="wrap">
+      <header class="hero" role="banner">
+        <div class="card-hero">
+          <div class="title-row">
+            <h1>Refresh GitHub Codespaces dari Browser</h1>
+            <div id="iposbrowser"></div>
+          </div>
+          <p class="sub">
+            Rebuild, full rebuild, restart, atau stop-start—kapan pakai yang
+            mana. Disajikan dalam format satu kolom yang nyaman untuk semua
+            perangkat.
+          </p>
+          <div class="meta-bar" aria-label="metadata">
+            <span class="badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5h-2v6l5 3 .9-1.45-3.9-2.25V7z"
+                />
+              </svg>
+              <time datetime="2025-10-06">Diperbarui: 06 Okt 2025</time>
+            </span>
+          </div>
+        </div>
+      </header>
 
-    <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const imgs = document.querySelectorAll('.gallery img');
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
+      <main role="main">
+        <article class="content">
+          <section class="card" aria-labelledby="narasi-heading">
+            <h2 id="narasi-heading" class="visually-hidden">
+              Panduan Rebuild Codespaces
+            </h2>
+            <p class="lead">
+              Penjelasan singkat dan langsung bisa dipakai. Berikut adalah
+              langkah-langkah praktis untuk me-refresh environment Codespaces
+              Anda.
+            </p>
 
-            imgs.forEach(img => {
-              img.addEventListener('click', () => {
-                lbImg.src = img.src;
-                lb.classList.add('open');
-              });
-            });
+            <h3>🔄 Cara Rebuild Codespace dari Browser</h3>
+            <ol>
+              <li>
+                Buka repositori Anda di GitHub, lalu klik tab **Codespaces** →
+                pilih codespace yang mau dibuka.
+              </li>
+              <li>
+                Tekan <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>
+                (Windows/Linux) atau <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>
+                (Mac) untuk membuka *Command Palette*.
+              </li>
+              <li>
+                Ketik `Rebuild` → pilih salah satu:
+                <ul>
+                  <li>
+                    <strong>Codespaces: Rebuild Container</strong> → rebuild
+                    cepat dengan cache.
+                  </li>
+                  <li>
+                    <strong>Codespaces: Full Rebuild Container</strong> →
+                    rebuild total dari nol.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Tunggu proses selesai. File kode Anda tetap aman, hanya
+                environment yang di-refresh.
+              </li>
+            </ol>
+            <div class="sep"></div>
 
-            lb.addEventListener('click', () => {
-              lb.classList.remove('open');
-            });
-          });
-      });
-    </script>
+            <h3>✨ Perbedaan Rebuild vs Full Rebuild</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Mode</th>
+                  <th>Apa yang dilakukan</th>
+                  <th>Kapan dipakai</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Rebuild</strong></td>
+                  <td>Menggunakan cache image lama untuk mempercepat proses.</td>
+                  <td>
+                    Perubahan kecil di <code>devcontainer.json</code> atau saat
+                    butuh refresh cepat.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Full Rebuild</strong></td>
+                  <td>Hapus semua cache dan bangun ulang container dari awal.</td>
+                  <td>
+                    Saat environment error, dependency rusak, atau ingin
+                    memastikan setup benar-benar fresh.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="sep"></div>
+
+            <h3>⚡ Tips Tambahan</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Aksi</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Restart Codespace</strong></td>
+                  <td>
+                    Mirip restart komputer, lebih cepat dari rebuild. Akses dari
+                    menu kiri bawah.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Stop & Start</strong></td>
+                  <td>
+                    Mematikan dan menyalakan ulang dari dashboard GitHub.
+                    Berguna jika sesi "stuck".
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="sep"></div>
+            <figure class="gallery" aria-label="galeri">
+              <img
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png"
+                alt="Tampilan VS Code web untuk Codespaces"
+                loading="lazy"
+              />
+            </figure>
+
+            <div class="share" aria-label="bagikan">
+              <a id="share-x" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke X">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M18.9 3H22l-9.4 10.7L20.8 21h-7l-5.4-6.3L3.2 21H2l9.8-11.2L3.6 3h7l5 5.8L18.9 3z"/>
+                </svg>
+                X
+              </a>
+              <a id="share-fb" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M22 12A10 10 0 1 0 10.6 22v-7h-2.1V12h2.1V9.7c0-2.1 1.3-3.2 3.1-3.2.9 0 1.8.1 1.8.1v2H14c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/>
+                </svg>
+                Facebook
+              </a>
+              <a id="share-wa" href="#" rel="noopener" target="_blank" aria-label="Bagikan ke WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M20 12a8 8 0 0 1-11.9 6.9L4 21l2.1-4.1A8 8 0 1 1 20 12zm-4 2.3c-.2-.1-1.3-.7-1.5-.8s-.3-.1-.5.1-.5.8-.6.9c-.1.1-.2.2-.4.1-.2-.1-.9-.3-1.7-.9-.6-.5-1-1.1-1.1-1.2-.1-.2 0-.3.1-.4.1-.1.2-.3.3-.4.1-.1.1-.2 0-.3 0-.1-.5-1.2-.7-1.6-.2-.4-.3-.4-.5-.4h-.4c-.1 0-.3 0-.5.2s-.7.6-.7 1.5.7 1.7.8 1.8c.1.1 1.5 2.3 3.6 3.1 1.3.5 1.8.5 2.4.4.4-.1 1.3-.6 1.5-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.1-.4-.2z"/>
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+
+            <div class="sep"></div>
+            <section aria-label="komentar">
+              <h3 style="margin-top: 0">Komentar</h3>
+              <div
+                class="fb-comments"
+                data-href="https://frijal.github.io/artikel/refresh-codespaces-browser.html"
+                data-width="100%"
+                data-numposts="8"
+              ></div>
+            </section>
+          </section>
+        </article>
+
+        <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+          <button class="icon-btn close-btn" id="close" aria-label="Tutup">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3 10.6 10.6 16.9 4.3z"/>
+            </svg>
+          </button>
+          <img id="lightbox-img" alt="Gambar diperbesar" />
+          <div class="nav">
+            <button class="icon-btn" id="prev" aria-label="Sebelumnya">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M15.41 7.41 14 6 8 12l6 6 1.41-1.41L10.83 12z"/>
+              </svg>
+            </button>
+            <button class="icon-btn" id="next" aria-label="Berikutnya">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L12.17 12z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <div class="foot-row">
+          <span class="pill">🄯 2025 Frijal Artikel</span>
+          <span class="pill">Satu kolom • Dark-mode • Responsif</span>
+        </div>
+      </footer>
+    </div>
 
     <section id="related-marquee-section">
       <div id="related-marquee-container"></div>
     </section>
-    });
-    <script defer src="/ext/marquee-url.js"></script>
-
     <div id="kategori-aktif"></div>
-
     <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      />
+      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
       <span id="floatingSearchClear" class="clear-button">&times;</span>
       <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
 
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023" nonce="frijal"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Share links
+        (() => {
+          const url = encodeURIComponent(document.querySelector("link[rel='canonical']")?.href || location.href);
+          const title = encodeURIComponent(document.title);
+          document.getElementById('share-x').href = `https://x.com/intent/tweet?text=${title}&url=${url}`;
+          document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          document.getElementById('share-wa').href = `https://wa.me/?text=${title}%20${url}`;
+        })();
+
+        // Lightbox for gallery
+        (() => {
+          const imgs = Array.from(document.querySelectorAll('figure.gallery img'));
+          const overlay = document.getElementById('lightbox');
+          if (!imgs.length || !overlay) return;
+          const imgEl = document.getElementById('lightbox-img');
+          const prev = document.getElementById('prev');
+          const next = document.getElementById('next');
+          const close = document.getElementById('close');
+          let index = 0;
+
+          function open(i) {
+            index = i;
+            imgEl.src = imgs[i].src;
+            imgEl.alt = imgs[i].alt || 'Gambar diperbesar';
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+          function closeLightbox() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+          function move(d) {
+            index = (index + d + imgs.length) % imgs.length;
+            imgEl.src = imgs[index].src;
+            imgEl.alt = imgs[index].alt || 'Gambar diperbesar';
+          }
+
+          imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          close.addEventListener('click', closeLightbox);
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeLightbox();
+          });
+          document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prev.click();
+            if (e.key === 'ArrowRight') next.click();
+          });
+        })();
+      });
+    </script>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script src="/ext/iposbrowser.js" defer></script>
   </body>
 </html>
