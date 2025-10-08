@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node ext/rss.js",
     "lint": "eslint \"artikel/**/*.html\"",
+    "clean": "node ext/cleanup.js",
     "lint:html": "npx htmlhint \"artikel/**/*.html\"",
     "lint:fix": "eslint \"artikel/**/*.html\" --fix",
     "format": "prettier --write \"artikel/**/*.html\""
