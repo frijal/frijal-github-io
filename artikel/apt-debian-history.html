@@ -1,251 +1,239 @@
 <!doctype html>
 <html lang="id">
   <head>
-    <meta charset="utf-8" />
-    <!-- prettier-ignore -->
-    <title>APT Debian Tambah Native History: apt history-list & history-info</title>
+<meta charset="utf-8" />
+<!-- prettier-ignore -->
+<title>APT Debian Tambah Native History: apt history-list & history-info</title>
 
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover"
-    />
-    <meta
-      name="description"
-      content="APT Debian menambahkan perintah history bawaan untuk mengurai log secara native. Gunakan apt history-list dan history-info untuk melacak transaksi paket sebelumnya."
-    />
-    <meta
-      name="keywords"
-      content="APT Debian, apt history, history-list, history-info, native history parsing, manajer paket, log APT, Fedora DNF"
-    />
-    <link rel="icon" href="https://frijal.github.io/favicon.png" />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/apt-debian-history.html"
-    />
-    <meta name="theme-color" content="#14b8a6" />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:title"
-      content="APT Debian Tambah Native History: apt history-list & history-info"
-    />
-    <meta
-      property="og:description"
-      content="Perintah history baru di APT memudahkan kamu meninjau transaksi paket langsung dari terminal—tanpa skrip eksternal."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/apt-debian-history.html"
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-    />
-    <meta property="article:author" content="Pelan Kiri" />
-    <meta
-      property="article:section"
-      content="Linux, Paket & Manajemen Sistem"
-    />
-    <meta property="article:tag" content="APT" />
-    <meta property="article:tag" content="Debian" />
-    <meta property="article:tag" content="History" />
-    <meta property="article:tag" content="Sysadmin" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="APT Debian Tambah Native History: apt history-list & history-info"
-    />
-    <meta
-      name="twitter:description"
-      content="Melacak operasi paket jadi mudah dengan perintah history bawaan di APT Debian."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-    />
-    <script type="application/ld+json">
-            {
-                    "@context": "https://schema.org",
-                    "@type": "Article",
-                    "mainEntityOfPage": {
-                      "@type": "WebPage",
-                      "@id": "https://frijal.github.io/artikel/apt-debian-history.html"
-                    },
-                    "headline": "APT Debian Menambahkan Penguraian Riwayat (Native History Parsing) untuk Melacak Operasi Sebelumnya",
-                    "image": [
-                      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-                    ],
-                    "datePublished": "2025-09-25",
-                    "dateModified": "2025-09-25",
-                    "author": {
-                      "@type": "Person",
-                      "name": "Pelan Kiri"
-                    },
-                    "publisher": {
-                      "@type": "Organization",
-                      "name": "frijal.github.io",
-                      "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://frijal.github.io/logo.png"
-                      }
-                    },
-                    "description": "APT Debian menambahkan perintah history bawaan untuk mengurai log secara native: apt history-list dan apt history-info memudahkan peninjauan transaksi paket."
-
-            <meta name="date" content="2025-09-27">
-
-                  }
-      });
-    </script>
-    <meta
-      property="og:image:alt"
-      content="APT Debian Tambah Native History: apt history-list & history-info"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/apt-debian-history.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-09-25T11:00:00+08:00"
-    />
-  </head>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+/>
+<meta
+  name="description"
+  content="APT Debian menambahkan perintah history bawaan untuk mengurai log secara native. Gunakan apt history-list dan history-info untuk melacak transaksi paket sebelumnya."
+/>
+<meta
+  name="keywords"
+  content="APT Debian, apt history, history-list, history-info, native history parsing, manajer paket, log APT, Fedora DNF"
+/>
+<link rel="icon" href="https://frijal.github.io/favicon.png" />
+<link
+  rel="canonical"
+  href="https://frijal.github.io/artikel/apt-debian-history.html"
+/>
+<meta name="theme-color" content="#14b8a6" />
+<meta property="og:type" content="article" />
+<meta
+  property="og:title"
+  content="APT Debian Tambah Native History: apt history-list & history-info"
+/>
+<meta
+  property="og:description"
+  content="Perintah history baru di APT memudahkan kamu meninjau transaksi paket langsung dari terminal—tanpa skrip eksternal."
+/>
+<meta
+  property="og:url"
+  content="https://frijal.github.io/artikel/apt-debian-history.html"
+/>
+<meta
+  property="og:image"
+  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+/>
+<meta property="article:author" content="Fakhrul" />
+<meta
+  property="article:section"
+  content="Linux, Paket & Manajemen Sistem"
+/>
+<meta property="article:tag" content="APT" />
+<meta property="article:tag" content="Debian" />
+<meta property="article:tag" content="History" />
+<meta property="article:tag" content="Sysadmin" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta
+  name="twitter:title"
+  content="APT Debian Tambah Native History: apt history-list & history-info"
+/>
+<meta
+  name="twitter:description"
+  content="Melacak operasi paket jadi mudah dengan perintah history bawaan di APT Debian."
+/>
+<meta
+  name="twitter:image"
+  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+/>
+<script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+"@type": "WebPage",
+"@id": "https://frijal.github.io/artikel/apt-debian-history.html"
+  },
+  "headline": "APT Debian Menambahkan Penguraian Riwayat (Native History Parsing) untuk Melacak Operasi Sebelumnya",
+  "image": [
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+  ],
+  "datePublished": "2025-09-25",
+  "dateModified": "2025-09-25",
+  "author": {
+"@type": "Person",
+"name": "Fakhrul"
+  },
+  "publisher": {
+"@type": "Organization",
+"name": "frijal.github.io",
+"logo": {
+  "@type": "ImageObject",
+  "url": "https://frijal.github.io/logo.png"
+}
+  },
+  "description": "APT Debian menambahkan perintah history bawaan untuk mengurai log secara native: apt history-list dan apt history-info memudahkan peninjauan transaksi paket."
+<meta name="date" content="2025-09-27">
+  }
+</script>
+<meta property="og:image:alt" content="APT Debian Tambah Native History: apt history-list & history-info">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/apt-debian-history.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-25T11:00:00+08:00"></head>
   <body>
-    <header class="hero">
-      <div class="hero-grid"></div>
-      <div class="hero-inner">
-        <h1>APT Debian Menambahkan Native History Parsing</h1>
-        <div id="iposbrowser"></div>
-        <p class="subtitle">
-          Melacak operasi sebelumnya kini simpel: apt history-list &
-          history-info.
-        </p>
-        <div class="meta-inline">
-          <span>Ditulis oleh <strong>Pelan Kiri</strong></span> <span>•</span>
-          <time datetime="2025-09-25">25 Sep 2025</time> <span>•</span>
-          <span id="read-time">≈ 3 menit baca</span>
-        </div>
-        <figure class="hero-figure">
-          <img
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-            alt="Ilustrasi riwayat APT"
-            loading="eager"
-            data-lb="true"
-          />
-          <figcaption>
-            Riwayat transaksi APT: lebih mudah ditelusuri tanpa skrip tambahan.
-          </figcaption>
-        </figure>
-      </div>
-    </header>
-    <main class="container">
-      <article class="article">
-        <section class="intro">
-          <p>
-            Ada kabar bagus buat pengguna Debian dan turunan: APT bakal punya
-            perintah <em>history</em> bawaan untuk mengurai log secara native.
-            Artinya, kamu bisa lihat apa yang pernah diinstal, di-upgrade, atau
-            dihapus—langsung dari terminal, tanpa bergantung pada skrip atau
-            alat pihak ketiga.
-          </p>
-        </section>
-        <section class="highlights">
-          <h2>Sorotan fitur</h2>
-          <ul class="feature-list">
-            <li>
-              <strong>apt history-list:</strong> Buat daftar transaksi paket
-              sebelumnya dengan cepat dan rapi.
-            </li>
-            <li>
-              <strong>apt history-info:</strong> Tampilkan detail lengkap
-              transaksi terpilih—kapan, apa, dan bagaimana perubahannya.
-            </li>
-            <li>
-              <strong>Native parsing:</strong> Mengurai file log APT secara
-              bawaan. Tidak perlu <em>grep</em> panjang atau bongkar log manual.
-            </li>
-            <li>
-              <strong>Terinspirasi DNF:</strong> Mengambil semangat fitur
-              riwayat di DNF Fedora, tapi dipaketkan versi APT yang sederhana
-              dan familiar.
-            </li>
-          </ul>
-        </section>
-        <section class="original">
-          <h2>
-            APT Debian Menambahkan Penguraian Riwayat (<em
-              >Native History Parsing</em
-            >) untuk Melacak Operasi Sebelumnya
-          </h2>
-          <div class="prose">
-            <p>
-              Manajer paket APT Debian menambahkan perintah
-              <em>history</em> baru, yang memungkinkan pengguna untuk membuat
-              daftar dan memeriksa transaksi paket yang sudah dilakukan di masa
-              lalu.
-            </p>
-            <p>
-              Sebuah fitur yang sangat membantu akan hadir di manajer paket APT
-              Debian, yang diatur untuk mendapatkan peningkatan kegunaan yang
-              signifikan. Usulan penggabungan (<em>merge request</em>) yang baru
-              mengusulkan penambahan perintah <strong>history</strong> bawaan,
-              memberikan pengguna cara yang mudah untuk meninjau operasi paket
-              sebelumnya langsung dari terminal.
-            </p>
-            <div class="separator" style="clear: both">
-              <a
-                href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-                style="display: block; padding: 1em 0; text-align: center"
-                ><img
-                  alt=""
-                  border="0"
-                  data-original-height="900"
-                  data-original-width="1600"
-                  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-              /></a>
-            </div>
-            <p>
-              Ide ini terinspirasi oleh fitur lama di manajer paket DNF Fedora,
-              yang telah menawarkan pemeriksaan riwayat transaksi selama
-              bertahun-tahun. Dengan perubahan ini, APT memperkenalkan dua
-              <em>subcommand</em> baru:
-            </p>
-            <ul>
-              <li>
-                <strong><code>apt history-list</code></strong> – membuat daftar
-                transaksi paket sebelumnya.
-              </li>
-              <li>
-                <strong><code>apt history-info</code></strong> – menampilkan
-                informasi rinci tentang transaksi yang dipilih.
-              </li>
-            </ul>
-            <p>
-              Perintah-perintah ini dirancang untuk menguraikan file log APT
-              secara <em>native</em> (bawaan), tanpa memerlukan skrip eksternal
-              atau alat pihak ketiga. Secara praktis, ini berarti pengguna akan
-              dapat memeriksa kapan suatu paket diinstal, ditingkatkan
-              (<em>upgrade</em>), atau dihapus, bersama dengan detail transaksi
-              yang sesuai.
-            </p>
-            <p>
-              Dengan kata lain, kita tidak perlu lagi bergantung pada perintah
-              seperti <code>dpkg -l | grep some_package_name</code> untuk
-              mengetahui apakah suatu paket sudah terinstal, atau menyaring file
-              log yang tak ada habisnya untuk mencari tahu kapan suatu perubahan
-              terjadi.
-            </p>
-            <p>
-              Penambahan kapabilitas riwayat ke APT ini dilihat sebagai tambahan
-              yang bagus dan sangat dibutuhkan untuk manajer paket yang sudah
-              sangat dihormati ini. Saat ini, fitur tersebut masih dalam tahap
-              peninjauan.
-            </p>
-          </div>
-        </section>
-        <section class="usage">
-          <h2>Contoh pakai cepat</h2>
-          <p>Beberapa perintah sederhana yang bakal sering kepakai:</p>
-          <pre><code class="language-bash"># Lihat daftar transaksi terbaru
+
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+<h1>APT Debian Menambahkan Native History Parsing</h1>
+<div id="iposbrowser"></div>
+<p class="subtitle">
+  Melacak operasi sebelumnya kini simpel: apt history-list &
+  history-info.
+</p>
+<div class="meta-inline">
+  <span>Ditulis oleh <strong>Fakhrul</strong></span> <span>•</span>
+  <time datetime="2025-09-25">25 Sep 2025</time> <span>•</span>
+  <span id="read-time">≈ 3 menit baca</span>
+</div>
+<figure class="hero-figure">
+  <img
+src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+alt="Ilustrasi riwayat APT"
+loading="eager"
+data-lb="true"
+  />
+  <figcaption>
+Riwayat transaksi APT: lebih mudah ditelusuri tanpa skrip tambahan.
+  </figcaption>
+</figure>
+  </div>
+</header>
+<main class="container">
+  <article class="article">
+<section class="intro">
+  <p>
+Ada kabar bagus buat pengguna Debian dan turunan: APT bakal punya
+perintah <em>history</em> bawaan untuk mengurai log secara native.
+Artinya, kamu bisa lihat apa yang pernah diinstal, di-upgrade, atau
+dihapus—langsung dari terminal, tanpa bergantung pada skrip atau
+alat pihak ketiga.
+  </p>
+</section>
+<section class="highlights">
+  <h2>Sorotan fitur</h2>
+  <ul class="feature-list">
+<li>
+  <strong>apt history-list:</strong> Buat daftar transaksi paket
+  sebelumnya dengan cepat dan rapi.
+</li>
+<li>
+  <strong>apt history-info:</strong> Tampilkan detail lengkap
+  transaksi terpilih—kapan, apa, dan bagaimana perubahannya.
+</li>
+<li>
+  <strong>Native parsing:</strong> Mengurai file log APT secara
+  bawaan. Tidak perlu <em>grep</em> panjang atau bongkar log manual.
+</li>
+<li>
+  <strong>Terinspirasi DNF:</strong> Mengambil semangat fitur
+  riwayat di DNF Fedora, tapi dipaketkan versi APT yang sederhana
+  dan familiar.
+</li>
+  </ul>
+</section>
+<section class="original">
+  <h2>
+APT Debian Menambahkan Penguraian Riwayat (<em
+  >Native History Parsing</em
+>) untuk Melacak Operasi Sebelumnya
+  </h2>
+  <div class="prose">
+<p>
+  Manajer paket APT Debian menambahkan perintah
+  <em>history</em> baru, yang memungkinkan pengguna untuk membuat
+  daftar dan memeriksa transaksi paket yang sudah dilakukan di masa
+  lalu.
+</p>
+<p>
+  Sebuah fitur yang sangat membantu akan hadir di manajer paket APT
+  Debian, yang diatur untuk mendapatkan peningkatan kegunaan yang
+  signifikan. Usulan penggabungan (<em>merge request</em>) yang baru
+  mengusulkan penambahan perintah <strong>history</strong> bawaan,
+  memberikan pengguna cara yang mudah untuk meninjau operasi paket
+  sebelumnya langsung dari terminal.
+</p>
+<div class="separator" style="clear: both">
+  <a
+href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+style="display: block; padding: 1em 0; text-align: center"
+><img
+  alt=""
+  border="0"
+  data-original-height="900"
+  data-original-width="1600"
+  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+  /></a>
+</div>
+<p>
+  Ide ini terinspirasi oleh fitur lama di manajer paket DNF Fedora,
+  yang telah menawarkan pemeriksaan riwayat transaksi selama
+  bertahun-tahun. Dengan perubahan ini, APT memperkenalkan dua
+  <em>subcommand</em> baru:
+</p>
+<ul>
+  <li>
+<strong><code>apt history-list</code></strong> – membuat daftar
+transaksi paket sebelumnya.
+  </li>
+  <li>
+<strong><code>apt history-info</code></strong> – menampilkan
+informasi rinci tentang transaksi yang dipilih.
+  </li>
+</ul>
+<p>
+  Perintah-perintah ini dirancang untuk menguraikan file log APT
+  secara <em>native</em> (bawaan), tanpa memerlukan skrip eksternal
+  atau alat pihak ketiga. Secara praktis, ini berarti pengguna akan
+  dapat memeriksa kapan suatu paket diinstal, ditingkatkan
+  (<em>upgrade</em>), atau dihapus, bersama dengan detail transaksi
+  yang sesuai.
+</p>
+<p>
+  Dengan kata lain, kita tidak perlu lagi bergantung pada perintah
+  seperti <code>dpkg -l | grep some_package_name</code> untuk
+  mengetahui apakah suatu paket sudah terinstal, atau menyaring file
+  log yang tak ada habisnya untuk mencari tahu kapan suatu perubahan
+  terjadi.
+</p>
+<p>
+  Penambahan kapabilitas riwayat ke APT ini dilihat sebagai tambahan
+  yang bagus dan sangat dibutuhkan untuk manajer paket yang sudah
+  sangat dihormati ini. Saat ini, fitur tersebut masih dalam tahap
+  peninjauan.
+</p>
+  </div>
+</section>
+<section class="usage">
+  <h2>Contoh pakai cepat</h2>
+  <p>Beberapa perintah sederhana yang bakal sering kepakai:</p>
+  <pre><code class="language-bash"># Lihat daftar transaksi terbaru
 sudo apt history-list
 
 # Tampilkan detail transaksi tertentu (misal ID 42)
@@ -254,553 +242,495 @@ sudo apt history-info 42
 # Filter transaksi yang melibatkan paket 'curl' (opsional, tergantung dukungan)
 
 sudo apt history-list | grep curl</code></pre>
-          <p>
-            Catatan: sintaks final bisa berubah mengikuti hasil peninjauan. Cek
-            <em>man page</em> atau bantuan bawaan setelah fitur mendarat di
-            rilis stabil.
-          </p>
-        </section>
-        <section class="gallery">
-          <h2>Galeri</h2>
-          <div class="grid">
-            <figure>
-              <img
-                loading="lazy"
-                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
-                alt="APT history teaser"
-                data-lb="true"
-              />
-              <figcaption>APT history teaser</figcaption>
-            </figure>
-          </div>
-        </section>
-        <section class="share">
-          <h2>Jaga Data Pribadi Tetap Aman</h2>
-          <div class="share-row">
-            <a
-              class="share-btn twitter"
-              target=""
-              rel="noopener"
-              href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html&text=APT%20Debian%3A%20Native%20History%20Parsing%20%28history-list%20%26%20history-info%29"
-              >Twitter</a
-            >
-            <a
-              class="share-btn facebook"
-              target=""
-              rel="noopener"
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html"
-              >Facebook</a
-            >
-            <a
-              class="share-btn whatsapp"
-              target=""
-              rel="noopener"
-              href="https://wa.me/?text=APT%20Debian%20Native%20History%20%2D%20https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html"
-              >WhatsApp</a
-            >
-            <a
-              class="share-btn telegram"
-              target=""
-              rel="noopener"
-              href="https://t.me/share/url?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html&text=APT%20Debian%20Native%20History"
-              >Telegram</a
-            >
-            <button class="share-btn copy" id="copy-link">Salin Link</button>
-          </div>
-        </section>
-        <section class="sysinfo">
-          <h2>Pelan Kiri</h2>
-          <div class="sys-grid">
-            <div class="card">
-              <h3>Browser & OS</h3>
-              <p id="ua"></p>
-              <p id="os"></p>
-              <p id="lang"></p>
-            </div>
-            <div class="card">
-              <h3>Lokasi IP</h3>
-              <p id="ip"></p>
-              <p id="city"></p>
-              <p id="country"></p>
-              <div id="flag-wrap"></div>
-            </div>
-          </div>
-        </section>
-        <section class="comments">
-          <h2>Komentar</h2>
-          <div id="fb-root"></div>
-          <div
-            class="fb-comments"
-            data-href="https://frijal.github.io/artikel/apt-debian-history.html"
-            data-width="100%"
-            data-numposts="6"
-          ></div>
-        </section>
-      </article>
-    </main>
-    <div id="lightbox" aria-hidden="true">
-      <button class="lb-close" aria-label="Tutup">✕</button>
-      <img id="lightbox-img" alt="" />
-      <div class="lb-caption" id="lightbox-cap"></div>
-      <button class="lb-prev" aria-label="Sebelumnya">◀</button>
-      <button class="lb-next" aria-label="Berikutnya">▶</button>
-    </div>
-    <footer class="footer">
-      <p>🄯 2025 frijal.github.io • Artikel: APT Debian Native History</p>
-    </footer>
-    <style>
-      :root {
-        --bg: #0b1416;
-        --bg-soft: #0f1b1d;
-        --text: #e6f2f2;
-        --muted: #b7c9c9;
-        --brand: #14b8a6;
-        --brand-2: #22d3ee;
-        --accent: #f59e0b;
-        --card: #101a1c;
-        --shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-        --radius: 18px;
-        --maxw: 900px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        background: var(--bg);
-        color: var(--text);
-        font:
-          16px/1.7 system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Ubuntu,
-          Cantarell,
-          'Helvetica Neue',
-          Arial,
-          sans-serif;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      a {
-        color: var(--brand);
-        text-decoration: none;
-      }
-      a:hover {
-        color: #5eead4;
-        text-decoration: underline;
-      }
-      .hero {
-        position: relative;
-        min-height: 52vh;
-        display: grid;
-        place-items: center;
-        padding: 4.5rem 1rem;
-      }
-      .hero-grid {
-        position: absolute;
-        inset: 0;
-        opacity: 0.9;
-        background:
-          radial-gradient(
-            1200px 420px at 12% 25%,
-            rgba(20, 184, 166, 0.22),
-            transparent
-          ),
-          radial-gradient(
-            900px 340px at 85% 65%,
-            rgba(34, 211, 238, 0.2),
-            transparent
-          );
-        mask-image: radial-gradient(circle at center, #000, rgba(0, 0, 0, 0.3));
-        filter: blur(70px);
-      }
-      .hero-inner {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        max-width: var(--maxw);
-        text-align: center;
-      }
-      h1 {
-        margin: 0 0 0.6rem;
-        font-size: clamp(1.8rem, 3.6vw, 3rem);
-        letter-spacing: 0.4px;
-      }
-      .subtitle {
-        margin: 0.2rem auto 1rem;
-        color: var(--muted);
-      }
-      .meta-inline {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: center;
-        color: var(--muted);
-        flex-wrap: wrap;
-      }
-      .hero-figure {
-        margin: 2rem auto 0;
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        background: #071012;
-      }
-      .hero-figure figcaption {
-        padding: 0.75rem 1rem;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-      .container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-      .article {
-        width: 100%;
-        max-width: var(--maxw);
-        padding: 2rem 1rem;
-      }
-      .article h2 {
-        font-size: 1.6rem;
-        margin: 2rem 0 1rem;
-      }
-      .article h3 {
-        font-size: 1.25rem;
-        margin: 1.2rem 0 0.6rem;
-      }
-      .intro p {
-        background: linear-gradient(
-          180deg,
-          rgba(20, 184, 166, 0.13),
-          rgba(20, 184, 166, 0)
-        );
-        border: 1px solid rgba(20, 184, 166, 0.28);
-        padding: 1rem;
-        border-radius: var(--radius);
-      }
-      .feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 0.9rem;
-      }
-      .feature-list li {
-        background: var(--card);
-        padding: 1rem;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .prose ul {
-        padding-left: 1.1rem;
-      }
-      .usage pre {
-        background: #091316;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 1rem;
-        border-radius: 14px;
-        overflow: auto;
-      }
-      .gallery .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      .gallery figure {
-        margin: 0;
-        background: var(--card);
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .gallery figcaption {
-        padding: 0.6rem 1rem;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-      .share-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-      }
-      .share-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.6rem 0.9rem;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: #0b1214;
-        color: var(--text);
-      }
-      .share-btn:hover {
-        background: #0f171a;
-      }
-      .share-btn.twitter {
-        border-color: #1da1f2;
-      }
-      .share-btn.facebook {
-        border-color: #1877f2;
-      }
-      .share-btn.whatsapp {
-        border-color: #25d366;
-      }
-      .share-btn.telegram {
-        border-color: #26a5e4;
-      }
-      .share-btn.copy {
-        border-color: #22d3ee;
-      }
-      .sys-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      @media (min-width: 860px) {
-        .sys-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      .card {
-        background: var(--card);
-        padding: 1rem;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .card h3 {
-        margin: 0.2rem 0 1rem;
-      }
-      .comments {
-        margin-top: 2rem;
-      }
-      .footer {
-        padding: 2rem 1rem;
-        text-align: center;
-        color: var(--muted);
-      }
-      #lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(6, 10, 12, 0.86);
-        display: none;
-        place-items: center;
-        z-index: 50;
-      }
-      #lightbox[aria-hidden='false'] {
-        display: grid;
-      }
-      #lightbox-img {
-        max-width: 92vw;
-        max-height: 80vh;
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-      }
-      .lb-caption {
-        margin-top: 0.8rem;
-        color: var(--muted);
-        text-align: center;
-        max-width: 70ch;
-      }
-      .lb-close,
-      .lb-next,
-      .lb-prev {
-        position: absolute;
-        background: #0b1214;
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        padding: 0.5rem 0.7rem;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-      .lb-close {
-        top: 1rem;
-        right: 1rem;
-      }
-      .lb-prev {
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .lb-next {
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .lb-close:hover,
-      .lb-next:hover,
-      .lb-prev:hover {
-        background: #0f171a;
-      }
-      .btn-fixed {
-        position: fixed;
-        z-index: 60;
-        background: #0b1214;
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: var(--shadow);
-        padding: 0.55rem 0.7rem;
-        border-radius: 999px;
-      }
-    </style>
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        ((() => {
-          var t = document.body.innerText.trim().split(/\s+/).length,
-            t = Math.max(3, Math.round(t / 250)),
-            e = document.getElementById('read-time');
-          e && (e.textContent = `≈ ${t} menit baca`);
-        })(),
-          document
-            .getElementById('copy-link')
-            ?.addEventListener('click', async () => {
-              try {
-                await navigator.clipboard.writeText(
-                  'https://frijal.github.io/artikel/apt-debian-history.html'
-                );
-                let t = document.getElementById('copy-link'),
-                  e = t.textContent;
-                ((t.textContent = 'Tersalin ✓'),
-                  setTimeout(() => (t.textContent = e), 1600));
-              } catch (t) {
-                alert('Gagal menyalin link');
-              }
-            }),
-          (() => {
-            let e = document.getElementById('lightbox'),
-              n = document.getElementById('lightbox-img'),
-              a = document.getElementById('lightbox-cap'),
-              t = e.querySelector('.lb-close'),
-              r = e.querySelector('.lb-prev'),
-              o = e.querySelector('.lb-next'),
-              c = Array.from(
-                document.querySelectorAll('img[data-lb="true"]')
-              ).map((t) => ({
-                src: t.currentSrc || t.src,
-                alt: t.alt || '',
-                cap:
-                  t.closest('figure')?.querySelector('figcaption')
-                    ?.textContent || '',
-              })),
-              d = 0;
-            function i(t) {
-              ((d = t),
-                (n.src = c[d].src),
-                (n.alt = c[d].alt),
-                (a.textContent = c[d].cap),
-                e.setAttribute('aria-hidden', 'false'));
-            }
-            function l() {
-              (e.setAttribute('aria-hidden', 'true'),
-                (n.src = ''),
-                (a.textContent = ''));
-            }
-            function s(t) {
-              i((d = (d + t + c.length) % c.length));
-            }
-            (document.addEventListener('click', (t) => {
-              let e = t.target;
-              e instanceof HTMLImageElement &&
-                'true' === e.dataset.lb &&
-                i(
-                  0 <=
-                    (t = c.findIndex((t) => t.src === (e.currentSrc || e.src)))
-                    ? t
-                    : 0
-                );
-            }),
-              t.addEventListener('click', l),
-              r.addEventListener('click', () => s(-1)),
-              o.addEventListener('click', () => s(1)),
-              e.addEventListener('click', (t) => {
-                t.target === e && l();
-              }),
-              document.addEventListener('keydown', (t) => {
-                'false' === e.getAttribute('aria-hidden') &&
-                  ('Escape' === t.key && l(),
-                  'ArrowLeft' === t.key && s(-1),
-                  'ArrowRight' === t.key) &&
-                  s(1);
-              }));
-          })(),
-          (() => {
-            var t = navigator.userAgent,
-              e = navigator.platform || 'unknown',
-              n =
-                navigator.language ||
-                (navigator.languages && navigator.languages[0]) ||
-                'id';
-            ((document.getElementById('ua').textContent = 'Browser: ' + t),
-              (document.getElementById('os').textContent = 'OS: ' + e),
-              (document.getElementById('lang').textContent = 'Bahasa: ' + n));
-          })(),
-          (async () => {
-            try {
-              var t = await fetch('https://ipapi.co/json/');
-              if (!t.ok) throw new Error('ipapi error');
-              var e,
-                n = await t.json(),
-                a = n.ip || '—',
-                r = n.city || '—',
-                o = n.country_name || '—',
-                c = (n.country_code || '').toLowerCase();
-              ((document.getElementById('ip').textContent = 'IP: ' + a),
-                (document.getElementById('city').textContent = 'Kota: ' + r),
-                (document.getElementById('country').textContent =
-                  'Negara: ' + o),
-                c &&
-                  (((e = document.createElement('img')).src =
-                    `https://flagcdn.com/${c}.svg`),
-                  (e.alt = 'Bendera ' + o),
-                  (e.width = 48),
-                  (e.height = 36),
-                  (e.style.border = '1px solid rgba(255,255,255,.12)'),
-                  (e.style.borderRadius = '6px'),
-                  document.getElementById('flag-wrap').appendChild(e)));
-            } catch (t) {
-              ((document.getElementById('city').textContent =
-                'Kota: tidak terdeteksi'),
-                (document.getElementById('country').textContent =
-                  'Negara: tidak terdeteksi'));
-            }
-          })(),
-          ((t, e, n) => {
-            var a = t.getElementsByTagName(e)[0];
-            t.getElementById(n) ||
-              (((t = t.createElement(e)).id = n),
-              (t.src =
-                'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v17.0'),
-              a.parentNode.insertBefore(t, a));
-          })(document, 'script', 'facebook-jssdk'),
-          document
-            .getElementById('related-posts-toggle')
-            .addEventListener('click', () => {
-              document
-                .getElementById('related-posts-container')
-                .classList.toggle('open');
-            }));
-      });
-    </script>
+  <p>
+Catatan: sintaks final bisa berubah mengikuti hasil peninjauan. Cek
+<em>man page</em> atau bantuan bawaan setelah fitur mendarat di
+rilis stabil.
+  </p>
+</section>
+<section class="gallery">
+  <h2>Galeri</h2>
+  <div class="grid">
+<figure>
+  <img
+loading="lazy"
+src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GNgQgtwi84ncT4eejV4_28434gIZHOB46ob4Mf9OwTG-9E8OxZ7HQ_XtEsen9f71sdApPMTtHw4k1D4wtJ4YsfSXRyaXZhND_HXywFwP7IeIjXw5p1BbU77VVyIom-q5aLhxwVyIGUrtrBjsLwx46cgBch7RXaJGUfW_SqifwKMDjha4au-b1AMqljI/s1600/apt-history.jpg"
+alt="APT history teaser"
+data-lb="true"
+  />
+  <figcaption>APT history teaser</figcaption>
+</figure>
+  </div>
+</section>
+<section class="share">
+  <h2>Bagikan artikel</h2>
+  <div class="share-row">
+<a
+  class="share-btn twitter"
+  target=""
+  rel="noopener"
+  href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html&text=APT%20Debian%3A%20Native%20History%20Parsing%20%28history-list%20%26%20history-info%29"
+  >Twitter</a
+>
+<a
+  class="share-btn facebook"
+  target=""
+  rel="noopener"
+  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html"
+  >Facebook</a
+>
+<a
+  class="share-btn whatsapp"
+  target=""
+  rel="noopener"
+  href="https://wa.me/?text=APT%20Debian%20Native%20History%20%2D%20https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html"
+  >WhatsApp</a
+>
+<a
+  class="share-btn telegram"
+  target=""
+  rel="noopener"
+  href="https://t.me/share/url?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Fapt-debian-history.html&text=APT%20Debian%20Native%20History"
+  >Telegram</a
+>
+<button class="share-btn copy" id="copy-link">Salin Link</button>
+  </div>
+</section>
 
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+<section class="comments">
+  <h2>Komentar</h2>
+  <div id="fb-root"></div>
+  <div
+class="fb-comments"
+data-href="https://frijal.github.io/artikel/apt-debian-history.html"
+data-width="100%"
+data-numposts="6"
+  ></div>
+</section>
+  </article>
+</main>
+<div id="lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Tutup">✕</button>
+  <img id="lightbox-img" alt="" />
+  <div class="lb-caption" id="lightbox-cap"></div>
+  <button class="lb-prev" aria-label="Sebelumnya">◀</button>
+  <button class="lb-next" aria-label="Berikutnya">▶</button>
+</div>
+<footer class="footer">
+  <p>🄯 2025 frijal.github.io • Artikel: APT Debian Native History</p>
+</footer>
+<style>
+  :root {
+--bg: #0b1416;
+--bg-soft: #0f1b1d;
+--text: #e6f2f2;
+--muted: #b7c9c9;
+--brand: #14b8a6;
+--brand-2: #22d3ee;
+--accent: #f59e0b;
+--card: #101a1c;
+--shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+--radius: 18px;
+--maxw: 900px;
+  }
+  * {
+box-sizing: border-box;
+  }
+  body,
+  html {
+margin: 0;
+padding: 0;
+background: var(--bg);
+color: var(--text);
+font:
+  16px/1.7 system-ui,
+  -apple-system,
+  Segoe UI,
+  Roboto,
+  Ubuntu,
+  Cantarell,
+  "Helvetica Neue",
+  Arial,
+  sans-serif;
+  }
+  img {
+max-width: 100%;
+display: block;
+  }
+  a {
+color: var(--brand);
+text-decoration: none;
+  }
+  a:hover {
+color: #5eead4;
+text-decoration: underline;
+  }
+  .hero {
+position: relative;
+min-height: 52vh;
+display: grid;
+place-items: center;
+padding: 4.5rem 1rem;
+  }
+  .hero-grid {
+position: absolute;
+inset: 0;
+opacity: 0.9;
+background:
+  radial-gradient(
+1200px 420px at 12% 25%,
+rgba(20, 184, 166, 0.22),
+transparent
+  ),
+  radial-gradient(
+900px 340px at 85% 65%,
+rgba(34, 211, 238, 0.2),
+transparent
+  );
+mask-image: radial-gradient(circle at center, #000, rgba(0, 0, 0, 0.3));
+filter: blur(70px);
+  }
+  .hero-inner {
+position: relative;
+z-index: 1;
+width: 100%;
+max-width: var(--maxw);
+text-align: center;
+  }
+  h1 {
+margin: 0 0 0.6rem;
+font-size: clamp(1.8rem, 3.6vw, 3rem);
+letter-spacing: 0.4px;
+  }
+  .subtitle {
+margin: 0.2rem auto 1rem;
+color: var(--muted);
+  }
+  .meta-inline {
+display: flex;
+gap: 0.5rem;
+justify-content: center;
+color: var(--muted);
+flex-wrap: wrap;
+  }
+  .hero-figure {
+margin: 2rem auto 0;
+border-radius: var(--radius);
+overflow: hidden;
+box-shadow: var(--shadow);
+background: #071012;
+  }
+  .hero-figure figcaption {
+padding: 0.75rem 1rem;
+color: var(--muted);
+font-size: 0.95rem;
+  }
+  .container {
+width: 100%;
+display: flex;
+justify-content: center;
+  }
+  .article {
+width: 100%;
+max-width: var(--maxw);
+padding: 2rem 1rem;
+  }
+  .article h2 {
+font-size: 1.6rem;
+margin: 2rem 0 1rem;
+  }
+  .article h3 {
+font-size: 1.25rem;
+margin: 1.2rem 0 0.6rem;
+  }
+  .intro p {
+background: linear-gradient(
+  180deg,
+  rgba(20, 184, 166, 0.13),
+  rgba(20, 184, 166, 0)
+);
+border: 1px solid rgba(20, 184, 166, 0.28);
+padding: 1rem;
+border-radius: var(--radius);
+  }
+  .feature-list {
+list-style: none;
+padding: 0;
+margin: 0;
+display: grid;
+gap: 0.9rem;
+  }
+  .feature-list li {
+background: var(--card);
+padding: 1rem;
+border-radius: 14px;
+border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .prose ul {
+padding-left: 1.1rem;
+  }
+  .usage pre {
+background: #091316;
+border: 1px solid rgba(255, 255, 255, 0.08);
+padding: 1rem;
+border-radius: 14px;
+overflow: auto;
+  }
+  .gallery .grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+  }
+  .gallery figure {
+margin: 0;
+background: var(--card);
+border-radius: 14px;
+overflow: hidden;
+border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .gallery figcaption {
+padding: 0.6rem 1rem;
+color: var(--muted);
+font-size: 0.95rem;
+  }
+  .share-row {
+display: flex;
+flex-wrap: wrap;
+gap: 0.6rem;
+  }
+  .share-btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.6rem 0.9rem;
+border-radius: 999px;
+border: 1px solid rgba(255, 255, 255, 0.14);
+background: #0b1214;
+color: var(--text);
+  }
+  .share-btn:hover {
+background: #0f171a;
+  }
+  .share-btn.twitter {
+border-color: #1da1f2;
+  }
+  .share-btn.facebook {
+border-color: #1877f2;
+  }
+  .share-btn.whatsapp {
+border-color: #25d366;
+  }
+  .share-btn.telegram {
+border-color: #26a5e4;
+  }
+  .share-btn.copy {
+border-color: #22d3ee;
+  }
+  .sys-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+  }
+  @media (min-width: 860px) {
+.sys-grid {
+  grid-template-columns: 1fr 1fr;
+}
+  }
+  .card {
+background: var(--card);
+padding: 1rem;
+border-radius: 14px;
+border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .card h3 {
+margin: 0.2rem 0 1rem;
+  }
+  .comments {
+margin-top: 2rem;
+  }
+  .footer {
+padding: 2rem 1rem;
+text-align: center;
+color: var(--muted);
+  }
+  #lightbox {
+position: fixed;
+inset: 0;
+background: rgba(6, 10, 12, 0.86);
+display: none;
+place-items: center;
+z-index: 50;
+  }
+  #lightbox[aria-hidden="false"] {
+display: grid;
+  }
+  #lightbox-img {
+max-width: 92vw;
+max-height: 80vh;
+border-radius: 12px;
+box-shadow: var(--shadow);
+  }
+  .lb-caption {
+margin-top: 0.8rem;
+color: var(--muted);
+text-align: center;
+max-width: 70ch;
+  }
+  .lb-close,
+  .lb-next,
+  .lb-prev {
+position: absolute;
+background: #0b1214;
+color: #fff;
+border: 1px solid rgba(255, 255, 255, 0.12);
+padding: 0.5rem 0.7rem;
+border-radius: 10px;
+cursor: pointer;
+  }
+  .lb-close {
+top: 1rem;
+right: 1rem;
+  }
+  .lb-prev {
+left: 1rem;
+top: 50%;
+transform: translateY(-50%);
+  }
+  .lb-next {
+right: 1rem;
+top: 50%;
+transform: translateY(-50%);
+  }
+  .lb-close:hover,
+  .lb-next:hover,
+  .lb-prev:hover {
+background: #0f171a;
+  }
+  .btn-fixed {
+position: fixed;
+z-index: 60;
+background: #0b1214;
+color: #fff;
+border: 1px solid rgba(255, 255, 255, 0.12);
+box-shadow: var(--shadow);
+padding: 0.55rem 0.7rem;
+border-radius: 999px;
+  }
+  .btn-sitemap {
+left: 1rem;
+top: 30%;
+  }
+  .btn-home {
+right: 1rem;
+bottom: 20%;
+  }
+</style>
+<script>
+  ((() => {
+var t = document.body.innerText.trim().split(/\s+/).length,
+  t = Math.max(3, Math.round(t / 250)),
+  e = document.getElementById("read-time");
+e && (e.textContent = `≈ ${t} menit baca`);
+  })(),
+document
+  .getElementById("copy-link")
+  ?.addEventListener("click", async () => {
+try {
+  await navigator.clipboard.writeText(
+"https://frijal.github.io/artikel/apt-debian-history.html",
+  );
+  let t = document.getElementById("copy-link"),
+e = t.textContent;
+  ((t.textContent = "Tersalin ✓"),
+setTimeout(() => (t.textContent = e), 1600));
+} catch (t) {
+  alert("Gagal menyalin link");
+}
+  }),
+(() => {
+  let e = document.getElementById("lightbox"),
+n = document.getElementById("lightbox-img"),
+a = document.getElementById("lightbox-cap"),
+t = e.querySelector(".lb-close"),
+r = e.querySelector(".lb-prev"),
+o = e.querySelector(".lb-next"),
+c = Array.from(
+  document.querySelectorAll('img[data-lb="true"]'),
+).map((t) => ({
+  src: t.currentSrc || t.src,
+  alt: t.alt || "",
+  cap:
+t.closest("figure")?.querySelector("figcaption")?.textContent ||
+"",
+})),
+d = 0;
+  function i(t) {
+((d = t),
+  (n.src = c[d].src),
+  (n.alt = c[d].alt),
+  (a.textContent = c[d].cap),
+  e.setAttribute("aria-hidden", "false"));
+  }
+  function l() {
+(e.setAttribute("aria-hidden", "true"),
+  (n.src = ""),
+  (a.textContent = ""));
+  }
+  function s(t) {
+i((d = (d + t + c.length) % c.length));
+  }
+  (document.addEventListener("click", (t) => {
+let e = t.target;
+e instanceof HTMLImageElement &&
+  "true" === e.dataset.lb &&
+  i(
+0 <= (t = c.findIndex((t) => t.src === (e.currentSrc || e.src)))
+  ? t
+  : 0,
+  );
+  }),
+t.addEventListener("click", l),
+r.addEventListener("click", () => s(-1)),
+o.addEventListener("click", () => s(1)),
+e.addEventListener("click", (t) => {
+  t.target === e && l();
+}),
+document.addEventListener("keydown", (t) => {
+  "false" === e.getAttribute("aria-hidden") &&
+("Escape" === t.key && l(),
+"ArrowLeft" === t.key && s(-1),
+"ArrowRight" === t.key) &&
+s(1);
+}));
+})(),
+(((e = document.createElement("img")).src =
+  `https://flagcdn.com/${c}.svg`),
+(e.alt = "Bendera " + o),
+(e.width = 48),
+(e.height = 36),
+(e.style.border = "1px solid rgba(255,255,255,.12)"),
+(e.style.borderRadius = "6px"),
+document.getElementById("flag-wrap").appendChild(e)));
+  } catch (t) {
+((document.getElementById("city").textContent =
+  "Kota: tidak terdeteksi"),
+  (document.getElementById("country").textContent =
+"Negara: tidak terdeteksi"));
+  }
+})(),
+((t, e, n) => {
+  var a = t.getElementsByTagName(e)[0];
+  t.getElementById(n) ||
+(((t = t.createElement(e)).id = n),
+(t.src =
+  "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v17.0"),
+a.parentNode.insertBefore(t, a));
+})(document, "script", "facebook-jssdk"),
+document
+</script>
+
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>
