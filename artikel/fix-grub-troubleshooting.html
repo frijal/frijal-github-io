@@ -1,139 +1,158 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <!-- prettier-ignore -->
-<title>Troubleshooting GRUB Bootloader (Debian & Turunannya)</title>
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
-  <style>
-body {
-  font-family: "Segoe UI", sans-serif;
-  line-height: 1.6;
-  margin: 20px;
-  background: #fcfcfc;
-  color: #222;
-}
-h1, h2 {
-  color: #005f73;
-}
-pre {
-  position: relative;
-  padding: 1em;
-  border-radius: 8px;
-  background: #2d2d2d;
-  color: #f8f8f2;
-  overflow-x: auto;
-}
-.copy-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #005f73;
-  color: #fff;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8em;
-}
-ul li {
-  margin-bottom: 10px;
-}
-  </style>
-<meta name="date" content="2025-09-28">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting GRUB Bootloader (Debian & Turunannya)</title>
 
+    <meta name="description" content="Panduan troubleshooting GRUB bootloader di Debian/Ubuntu. Pelajari cara memperbaiki masalah UEFI, cek UUID, menggunakan Boot-Repair, dan reinstall kernel.">
+    <meta name="keywords" content="grub, bootloader, perbaiki grub, grub rescue, debian, ubuntu, linux, uefi, boot-repair, troubleshooting linux">
+    <meta name="author" content="Frijal">
+    <meta name="date" content="2025-09-28">
 
-  <meta property="og:image" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg">
-  <meta property="og:image:alt" content="Troubleshooting GRUB Bootloader (Debian & Turunannya)">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-14T11:00:00+08:00"></head>
+    <link rel="canonical" href="https://frijal.github.io/artikel/fix-grub-troubleshooting.html">
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Troubleshooting GRUB Bootloader (Debian & Turunannya)">
+    <meta property="og:description" content="Panduan troubleshooting GRUB bootloader di Debian/Ubuntu. Pelajari cara memperbaiki masalah UEFI, cek UUID, dan lainnya.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg">
+    <meta property="og:image:alt" content="Layar GRUB rescue yang sering muncul saat bootloader rusak">
+    <meta property="og:site_name" content="Frijal Articles">
+    <meta property="article:published_time" content="2025-09-14T11:00:00+08:00">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Troubleshooting GRUB Bootloader (Debian & Turunannya)">
+    <meta name="twitter:description" content="Panduan troubleshooting GRUB bootloader di Debian/Ubuntu. Pelajari cara memperbaiki masalah UEFI, cek UUID, dan lainnya.">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg">
+    <meta name="twitter:image:alt" content="Layar GRUB rescue yang sering muncul saat bootloader rusak">
+
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.7; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px; }
+        header { text-align: center; color: #005f73; padding-bottom: 10px; border-bottom: 2px solid #00796b; }
+        h1, h2 { color: #005f73; }
+        .gallery { margin: 2rem 0; }
+        .gallery img { width: 100%; height: auto; border-radius: 12px; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
+        .gallery img:hover { transform: scale(1.05); }
+        .social-sharing { text-align: center; margin-top: 2rem; }
+        .social-sharing h2 { border: none; font-size: 1.2em; }
+        .social-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .social-buttons a { display: inline-block; transition: transform 0.2s; }
+        .social-buttons a:hover { transform: scale(1.15); }
+        .social-buttons svg { width: 32px; height: 32px; }
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; }
+        .lightbox-content { max-width: 90vw; max-height: 85vh; border-radius: 12px; }
+        .lightbox-close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .copy-btn { position: absolute; top: 8px; right: 8px; background: #005f73; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8em; }
+    </style>
+</head>
 <body>
-  <h1>Troubleshooting GRUB Bootloader</h1>
-<div id="iposbrowser"></div>
-  <p>
-Kadang setelah melakukan <code>grub-install</code> dan <code>update-grub</code>, sistem masih gagal booting.  
-Berikut beberapa langkah tambahan untuk mencoba memperbaikinya.
-  </p>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="aBcDeFgH"></script>
 
-  <h2>1. Pastikan Partisi EFI (untuk sistem UEFI) Terpasang</h2>
-  <p>Jika menggunakan UEFI, mount partisi EFI (biasanya FAT32 ukuran 100–500 MB, contoh: <code>/dev/sda1</code>):</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo mount /dev/sda1 /mnt/boot/efi</code>
-  </pre>
-  <p>Kemudian jalankan kembali:</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian
-update-grub</code>
-  </pre>
+    <main class="container">
+        <header>
+            <h1>Troubleshooting GRUB Bootloader</h1>
+        </header>
+        <div id="iposbrowser"></div>
 
-  <h2>2. Cek UUID Partisi Root</h2>
-  <p>GRUB menggunakan UUID untuk mengenali partisi. Pastikan UUID di <code>/etc/fstab</code> sesuai.</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">blkid</code>
-  </pre>
-  <p>Bandingkan hasilnya dengan file <code>/etc/fstab</code>:</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">cat /etc/fstab</code>
-  </pre>
+        <article>
+            <p>Terkadang, setelah menjalankan <code>update-grub</code>, sistem masih gagal booting. Berikut adalah beberapa langkah tambahan untuk mengatasi masalah pada GRUB di Debian/Ubuntu.</p>
+            
+            <section class="gallery">
+                <img loading="lazy" src="https://frijal.github.io/artikel/fix-grub-troubleshooting.jpg" alt="Layar GRUB rescue">
+            </section>
+            
+            <section>
+                <h2>1. Perbaikan untuk Sistem UEFI</h2>
+                <p>Jika sistem Anda menggunakan UEFI, pastikan partisi EFI (biasanya <code>/dev/sda1</code>) ter-mount dengan benar di dalam <code>chroot</code> sebelum menginstal GRUB.</p>
+                <pre><code id="code1"># Mount partisi EFI Anda
+sudo mount /dev/sda1 /mnt/boot/efi
 
-  <h2>3. Gunakan Boot-Repair (Alternatif)</h2>
-  <p>Jika perbaikan manual rumit, gunakan <strong>Boot-Repair</strong> dari Live USB Ubuntu:</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo add-apt-repository ppa:yannubuntu/boot-repair
+# Instal ulang GRUB untuk UEFI
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
+update-grub</code><button class="copy-btn" onclick="copyCode('code1')">Copy</button></pre>
+            </section>
+
+            <section>
+                <h2>2. Gunakan Boot-Repair (Alternatif Mudah)</h2>
+                <p>Jika perbaikan manual terasa rumit, utilitas <strong>Boot-Repair</strong> dapat mendeteksi dan memperbaiki sebagian besar masalah GRUB secara otomatis. Jalankan dari Live USB Ubuntu.</p>
+                <pre><code id="code2">sudo add-apt-repository ppa:yannubuntu/boot-repair
 sudo apt update
-sudo apt install boot-repair
-boot-repair</code>
-  </pre>
-  <p>Lalu pilih opsi <em>Recommended Repair</em>.</p>
+sudo apt install -y boot-repair && boot-repair</code><button class="copy-btn" onclick="copyCode('code2')">Copy</button></pre>
+            </section>
+            
+            <section>
+                <h2>3. Cek Mode Boot & File Sistem</h2>
+                <p>Pastikan mode boot di BIOS/UEFI Anda (Legacy vs UEFI) konsisten dengan cara OS diinstal. Jika GRUB masih gagal membaca kernel, periksa integritas file sistem dengan <code>fsck</code>.</p>
+                <pre><code id="code3"># Ganti sda1 dengan partisi root Anda
+sudo fsck -f /dev/sda1</code><button class="copy-btn" onclick="copyCode('code3')">Copy</button></pre>
+            </section>
 
-  <h2>4. Pastikan Mode Boot (UEFI vs Legacy/BIOS) Sesuai</h2>
-  <p>
-Kadang masalah muncul karena install GRUB di mode berbeda dengan mode boot firmware.  
-Misalnya OS terinstall dengan UEFI, tapi laptop/PC boot dalam mode Legacy BIOS.  
-Cek BIOS/UEFI setting, pastikan konsisten.
-  </p>
+            <section class="social-sharing">
+                <h2>Bagikan Tips Ini</h2>
+                <div class="social-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/fix-grub-troubleshooting.html" target="_blank" rel="noopener noreferrer" title="Facebook"><svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.5V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"/></svg></a>
+                    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/fix-grub-troubleshooting.html&text=Troubleshooting%20GRUB%20Bootloader%20(Debian%20%26%20Turunannya)" target="_blank" rel="noopener noreferrer" title="Twitter"><svg viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.49-1.74.85-2.7 1.03A4.2 4.2 0 0016.31 4c-2.38 0-4.3 1.92-4.3 4.3 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.36-.21-1.94-.53v.05c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.3 4.3 0 004 2.98 8.62 8.62 0 01-5.33 1.84c-.35 0-.69-.02-1.03-.06A12.18 12.18 0 008.5 20c7.8 0 12.07-6.47 12.07-12.07 0-.18 0-.36-.01-.54.83-.6 1.56-1.35 2.14-2.22z"/></svg></a>
+                </div>
+            </section>
+            
+            <h2>Diskusi & Komentar</h2>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/fix-grub-troubleshooting.html" data-width="100%" data-numposts="5"></div>
+        </article>
+    </main>
 
-  <h2>5. Periksa File Sistem</h2>
-  <p>Kalau GRUB gagal membaca kernel/initrd, periksa integritas sistem:</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">fsck -f /dev/sda1</code>
-  </pre>
-  <p>Ganti <code>/dev/sda1</code> dengan partisi root kamu.</p>
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" />
+    </div>
 
-  <h2>6. Reinstall Kernel (Jika Perlu)</h2>
-  <p>Dalam beberapa kasus, kernel hilang atau rusak. Setelah masuk chroot:</p>
-  <pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">apt update
-apt install --reinstall linux-image-amd64</code>
-  </pre>
+    <script src="/ext/iposbrowser.js" defer></script>
+    <script>
+        function copyCode(id) {
+            const code = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Perintah berhasil disalin!");
+            });
+        }
 
-  <p>
-Dengan langkah-langkah ini, biasanya GRUB bisa dipulihkan.  
-Kalau tetap gagal, kemungkinan ada kerusakan hardware atau tabel partisi.
-  </p>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeId = this.previousElementSibling.id;
+                    copyCode(codeId);
+                });
+            });
 
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
-  <script>
-function copyCode(btn) {
-  const code = btn.nextElementSibling.innerText;
-  navigator.clipboard.writeText(code).then(() => {
-alert("Kode berhasil dicopy!");
-  });
-}
-  </script>
+            const images = document.querySelectorAll(".gallery img");
+            if (images.length > 0) {
+                const lightbox = document.getElementById("lightbox");
+                const lightboxImg = document.getElementById("lightbox-img");
+                const closeBtn = document.querySelector(".lightbox-close");
 
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+                images.forEach((img) => {
+                    img.addEventListener("click", () => {
+                        lightbox.style.display = "flex";
+                        lightboxImg.src = img.src;
+                    });
+                });
+                
+                function closeLightbox() {
+                    lightbox.style.display = "none";
+                }
+
+                closeBtn.addEventListener("click", closeLightbox);
+                lightbox.addEventListener("click", (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

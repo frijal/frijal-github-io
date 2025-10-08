@@ -1,264 +1,161 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<!-- prettier-ignore -->
-<title>Tutorial APT (Advanced Package Tool) di Debian</title>
-<meta name="description" content="Tutorial lengkap APT (Advanced Package Tool) untuk sistem Debian/Ubuntu: cara install, update, menghapus, dan membersihkan paket dari terminal." />
-<meta name="keywords" content="apt, debian, ubuntu, linux, package manager, install, upgrade, terminal" />
-<meta name="robots" content="index, follow" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial APT (Advanced Package Tool) di Debian/Ubuntu</title>
 
-<link rel="canonical" href="https://frijal.github.io/artikel/tutorial-apt-debian.html" /> 
-<meta name="date" content="2025-09-27" />
+    <meta name="description" content="Tutorial lengkap APT (Advanced Package Tool) untuk sistem Debian/Ubuntu: cara install, update, menghapus, dan membersihkan paket dari terminal.">
+    <meta name="keywords" content="apt, debian, ubuntu, linux, package manager, install, upgrade, terminal, command line">
+    <meta name="author" content="Frijal">
+    <meta name="date" content="2025-09-27">
 
+    <link rel="canonical" href="https://frijal.github.io/artikel/apt-tutorial.html">
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
 
-<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
-<style>
-body {
-font-family: "Segoe UI", sans-serif;
-line-height: 1.6;
-margin: 20px;
-background: #fdfdfd;
-color: #222;
-}
-h1,
-h2 {
-color: #005f73;
-}
-h1 {
-text-align: center;
-margin-bottom: 10px;
-}
-h2 {
-border-bottom: 2px solid #ccc;
-padding-bottom: 4px;
-margin-top: 30px;
-}
-p {
-margin-bottom: 10px;
-}
-pre {
-position: relative;
-background: #2d2d2d;
-color: #f8f8f2;
-padding: 1em;
-border-radius: 8px;
-overflow-x: auto;
-margin-bottom: 16px;
-}
-.copy-btn {
-position: absolute;
-top: 8px;
-right: 8px;
-background: #005f73;
-color: #fff;
-border: none;
-padding: 4px 8px;
-border-radius: 4px;
-cursor: pointer;
-font-size: 0.8em;
-}
-ul {
-margin-bottom: 20px;
-}
-.small-muted {
-color: #6b7280;
-font-size: 10px;
-}
-/* Style untuk fixed buttons (dipindahkan dari akhir <html>) */
-#btn-home-left,
-#btn-home-right {
-position: fixed;
-display: flex;
-align-items: center;
-background-color: #007bff;
-color: #fff;
-padding: 12px 18px;
-border-radius: 8px;
-text-decoration: none;
-font-family: Arial, sans-serif;
-font-size: 14px;
-font-weight: 700;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-transition: background 0.3s ease, transform 0.2s ease;
-z-index: 9999;
-}
-#btn-home-left:hover,
-#btn-home-right:hover {
-background-color: #0056b3;
-transform: scale(1.05);
-}
-#btn-home-left {
-left: 10px;
-top: 30%;
-transform: translateY(-50%);
-}
-#btn-home-right {
-right: 10px;
-bottom: 20%;
-transform: translateY(50%);
-}
-#btn-home-left svg,
-#btn-home-right svg {
-flex-shrink: 0;
-}
-</style>
-  <meta property="og:image" content="https://frijal.github.io/artikel/apt-tutorial.jpg">
-  <meta property="og:image:alt" content="Tutorial APT (Advanced Package Tool) di Debian">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://frijal.github.io/artikel/apt-tutorial.jpg">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/apt-tutorial.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-13T11:00:00+08:00"></head>
+    <meta property="og:title" content="Tutorial APT (Advanced Package Tool) di Debian/Ubuntu">
+    <meta property="og:description" content="Tutorial lengkap APT untuk sistem Debian/Ubuntu: cara install, update, menghapus, dan membersihkan paket dari terminal.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/apt-tutorial.html">
+    <meta property="og:image" content="https://frijal.github.io/artikel/apt-tutorial.jpg">
+    <meta property="og:image:alt" content="Logo Debian dan Ubuntu dengan terminal di latar belakang">
+    <meta property="og:site_name" content="Frijal Articles">
+    <meta property="article:published_time" content="2025-09-13T11:00:00+08:00">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tutorial APT (Advanced Package Tool) di Debian/Ubuntu">
+    <meta name="twitter:description" content="Tutorial lengkap APT untuk sistem Debian/Ubuntu: cara install, update, menghapus, dan membersihkan paket dari terminal.">
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/apt-tutorial.jpg">
+    <meta name="twitter:image:alt" content="Logo Debian dan Ubuntu dengan terminal di latar belakang">
+
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.7; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px; }
+        header { text-align: center; color: #005f73; padding-bottom: 10px; border-bottom: 2px solid #00796b; }
+        h1, h2 { color: #005f73; }
+        .gallery { margin: 2rem 0; }
+        .gallery img { width: 100%; height: auto; border-radius: 12px; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
+        .gallery img:hover { transform: scale(1.05); }
+        .social-sharing { text-align: center; margin-top: 2rem; }
+        .social-sharing h2 { border: none; font-size: 1.2em; }
+        .social-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .social-buttons a { display: inline-block; transition: transform 0.2s; }
+        .social-buttons a:hover { transform: scale(1.15); }
+        .social-buttons svg { width: 32px; height: 32px; }
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; }
+        .lightbox-content { max-width: 90vw; max-height: 85vh; border-radius: 12px; }
+        .lightbox-close { position: absolute; top: 15px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .copy-btn { position: absolute; top: 8px; right: 8px; background: #005f73; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8em; }
+    </style>
+</head>
 <body>
-<h1>📦 Tutorial APT (Advanced Package Tool)</h1>
-<div id="iposbrowser"></div>
-<p>
-APT adalah <strong>package manager</strong> bawaan sistem operasi Debian
-dan turunannya (seperti Ubuntu, Linux Mint, dll). Dengan APT, kita bisa
-dengan mudah
-<em>mencari, menginstal, menghapus, dan mengelola aplikasi</em> langsung
-dari terminal.
-</p>
-<h2>1. Fungsi Utama APT</h2>
-<ul>
-<li>Menginstal aplikasi dari repository resmi Debian.</li>
-<li>Menghapus aplikasi yang tidak diperlukan.</li>
-<li>Melakukan update dan upgrade sistem.</li>
-<li>Mencari aplikasi berdasarkan nama atau deskripsi.</li>
-<li>
-Mengelola dependensi secara otomatis (APT akan memasang paket tambahan
-yang dibutuhkan oleh aplikasi).
-</li>
-</ul>
-<h2>2. Cara Dasar Menggunakan APT</h2>
-<p>
-Semua perintah APT yang memerlukan hak administrator dijalankan di terminal dengan awalan <code>sudo</code>.
-</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt update        # Memperbarui daftar paket
-sudo apt upgrade       # Memperbarui semua aplikasi yang terpasang
-sudo apt full-upgrade # Upgrade penuh termasuk dependensi</code>
-</pre>
-<h2>3. Mencari Nama Aplikasi dengan APT</h2>
-<p>Gunakan perintah berikut untuk mencari aplikasi yang tersedia:</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">apt search nama-aplikasi</code>
-</pre>
-<p>Contoh mencari aplikasi <code>htop</code>:</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">apt search htop</code>
-</pre>
-<h2>4. Memasang Aplikasi dengan APT</h2>
-<p>Gunakan perintah berikut untuk memasang aplikasi:</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt install nama-aplikasi</code>
-</pre>
-<p>Contoh memasang <code>htop</code>:</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt install htop</code>
-</pre>
-<h2>5. Menghapus Aplikasi dengan APT</h2>
-<p>Jika aplikasi tidak diperlukan, bisa dihapus dengan:</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt remove nama-aplikasi</code>
-</pre>
-<p>Untuk menghapus sekaligus file konfigurasinya (penghapusan total):</p>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt purge nama-aplikasi</code>
-</pre>
-<h2>6. Kegunaan Lain dari APT</h2>
-<ul>
-<li>
-<strong>Membersihkan cache paket:</strong>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">sudo apt autoremove    # Menghapus paket yang tidak dipakai
-sudo apt clean         # Membersihkan semua cache paket
-sudo apt autoclean     # Hapus paket lama/usang dari cache</code>
-</pre>
-</li>
-<li>
-<strong>Melihat detail paket:</strong>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">apt show nama-aplikasi</code>
-</pre>
-</li>
-<li>
-<strong>Melihat aplikasi terinstal:</strong>
-<pre>
-<button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">apt list --installed</code>
-</pre>
-</li>
-</ul>
-<h2>Kesimpulan</h2>
-<p>
-APT memudahkan kita dalam mengelola aplikasi di Debian dan turunannya.
-Dengan APT, kita tidak perlu repot mengunduh file aplikasi manual satu per
-satu, karena semua paket disediakan di repository resmi dan bisa dipasang
-langsung dari terminal.
-</p>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1" nonce="aBcDeFgH"></script>
 
-<div style="margin-top: 18px; text-align: center;">
-<span id="current-url-display" class="small-muted"></span>
-</div>
+    <main class="container">
+        <header>
+            <h1>Tutorial APT (Advanced Package Tool)</h1>
+        </header>
+        <div id="iposbrowser"></div>
 
-<div style="margin-top: 18px">
-<div id="fb-root"></div>
-<div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
-</div>
+        <article>
+            <p>APT adalah manajer paket bawaan untuk sistem operasi Debian dan turunannya (seperti Ubuntu). Dengan APT, Anda bisa dengan mudah mencari, menginstal, menghapus, dan mengelola aplikasi langsung dari terminal.</p>
+            
+            <section class="gallery">
+                <img loading="lazy" src="https://frijal.github.io/artikel/apt-tutorial.jpg" alt="Logo Debian dan Ubuntu">
+            </section>
+            
+            <section>
+                <h2>1. Memperbarui Sistem</h2>
+                <p>Selalu mulai dengan memperbarui daftar paket Anda untuk memastikan Anda mendapatkan versi terbaru.</p>
+                <pre><code id="code1">sudo apt update && sudo apt upgrade -y</code><button class="copy-btn" onclick="copyCode('code1')">Copy</button></pre>
+            </section>
 
-</div>
+            <section>
+                <h2>2. Mencari dan Menginstal Aplikasi</h2>
+                <p>Gunakan <code>apt search</code> untuk menemukan nama paket dan <code>apt install</code> untuk memasangnya.</p>
+                <pre><code id="code2"># Mencari aplikasi (contoh: htop)
+apt search htop
 
+# Menginstal aplikasi
+sudo apt install htop -y</code><button class="copy-btn" onclick="copyCode('code2')">Copy</button></pre>
+            </section>
 
-<script async defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
-<script>
-// Copy Code Function
-function copyCode(e) {
-// Mengambil teks dari elemen <code> yang merupakan sibling berikutnya dari tombol
-const codeElement = e.nextElementSibling;
-if (codeElement && codeElement.tagName === 'CODE') {
-const code = codeElement.innerText;
-navigator.clipboard.writeText(code).then(() => {
-alert("Kode berhasil dicopy!");
-}).catch(err => {
-console.error('Could not copy text: ', err);
-alert("Gagal menyalin kode!");
-});
-}
-}
+            <section>
+                <h2>3. Menghapus Aplikasi dan Membersihkan Sistem</h2>
+                <p>Gunakan <code>apt remove</code> untuk menghapus aplikasi dan <code>autoremove</code> serta <code>clean</code> untuk membersihkan file sisa.</p>
+                <pre><code id="code3"># Menghapus aplikasi
+sudo apt remove htop -y
 
-// URL Update & FB Comments Logic
-const currentUrl = window.location.href;
-const currentUrlDisplay = document.getElementById("current-url-display");
-const fbComments = document.getElementById("fb-comments");
-if (currentUrlDisplay) currentUrlDisplay.textContent = currentUrl;
-if (fbComments) fbComments.setAttribute("data-href", currentUrl);
+# Menghapus paket yang tidak lagi diperlukan
+sudo apt autoremove -y
 
-// Re-parsing FB XFBML (Dipastikan ada di akhir body setelah elemennya)
-window.fbAsyncInit = function () {
-if (typeof FB !== 'undefined') {
-try {
-FB.XFBML.parse();
-} catch (t) {
-// Penanganan error jika FB gagal parse
-}
-}
-};
-</script>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+# Membersihkan cache paket
+sudo apt clean</code><button class="copy-btn" onclick="copyCode('code3')">Copy</button></pre>
+            </section>
+
+            <section class="social-sharing">
+                <h2>Bagikan Tutorial Ini</h2>
+                <div class="social-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/apt-tutorial.html" target="_blank" rel="noopener noreferrer" title="Facebook"><svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.5V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"/></svg></a>
+                    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/apt-tutorial.html&text=Tutorial%20APT%20(Advanced%20Package%20Tool)%20di%20Debian/Ubuntu" target="_blank" rel="noopener noreferrer" title="Twitter"><svg viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.49-1.74.85-2.7 1.03A4.2 4.2 0 0016.31 4c-2.38 0-4.3 1.92-4.3 4.3 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.36-.21-1.94-.53v.05c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.3 4.3 0 004 2.98 8.62 8.62 0 01-5.33 1.84c-.35 0-.69-.02-1.03-.06A12.18 12.18 0 008.5 20c7.8 0 12.07-6.47 12.07-12.07 0-.18 0-.36-.01-.54.83-.6 1.56-1.35 2.14-2.22z"/></svg></a>
+                </div>
+            </section>
+            
+            <h2>Diskusi & Komentar</h2>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/apt-tutorial.html" data-width="100%" data-numposts="5"></div>
+        </article>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" />
+    </div>
+
+    <script src="/ext/iposbrowser.js" defer></script>
+    <script>
+        function copyCode(id) {
+            const code = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Perintah berhasil disalin!");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const codeId = this.previousElementSibling.id;
+                    copyCode(codeId);
+                });
+            });
+
+            const images = document.querySelectorAll(".gallery img");
+            if (images.length > 0) {
+                const lightbox = document.getElementById("lightbox");
+                const lightboxImg = document.getElementById("lightbox-img");
+                const closeBtn = document.querySelector(".lightbox-close");
+
+                images.forEach((img) => {
+                    img.addEventListener("click", () => {
+                        lightbox.style.display = "flex";
+                        lightboxImg.src = img.src;
+                    });
+                });
+                
+                function closeLightbox() {
+                    lightbox.style.display = "none";
+                }
+
+                closeBtn.addEventListener("click", closeLightbox);
+                lightbox.addEventListener("click", (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
