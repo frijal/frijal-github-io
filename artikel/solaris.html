@@ -1,507 +1,247 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- prettier-ignore -->
-    <title>Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones</title>
-    <meta
-      name="description"
-      content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/solaris.html"
-    />
-    <link
-      rel="icon"
-      href="https://frijal.github.io/favicon.ico"
-      type="image/x-icon"
-    />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- prettier-ignore -->
+<title>Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones</title>
+  <meta name="description" content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/solaris.html">
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:title"
-      content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones"
-    />
-    <meta
-      property="og:description"
-      content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/solaris.html"
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg"
-    />
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones">
+  <meta property="og:description" content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/solaris.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones"
-    />
-    <meta
-      name="twitter:description"
-      content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg"
-    />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones">
+  <meta name="twitter:description" content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg">
 
-    <!-- Schema.org JSON-LD -->
-    });
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones",
-        "description": "Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem.",
-        "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg",
-        "author": {
-          "@type": "Person",
-          "name": "Pelan Kiri",
-          "image": "https://frijal.github.io/artikel/solaris.jpg"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "frijal.github.io",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://frijal.github.io/favicon.ico",
-            "image": "https://frijal.github.io/artikel/solaris.jpg"
-          },
-          "image": "https://frijal.github.io/artikel/solaris.jpg"
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://frijal.github.io/artikel/solaris.html",
-          "image": "https://frijal.github.io/artikel/solaris.jpg"
-        }
-      }
-    </script>
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones","description":"Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, share, komentar, dan info sistem.","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.github.io/artikel/solaris.jpg"},"publisher":{"@type":"Organization","name":"frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/solaris.jpg"},"image":"https://frijal.github.io/artikel/solaris.jpg"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/solaris.html","image":"https://frijal.github.io/artikel/solaris.jpg"}}</script>
 
-    <style>
-      body {
-        margin: 0;
-        background: #0b0b14;
-        color: #e8ecf8;
-        font-family: Inter, Arial, sans-serif;
-        line-height: 1.6;
-      }
-      header {
-        padding: 20px;
-        text-align: center;
-        background: rgba(16, 16, 34, 0.8);
-      }
-      header h1 {
-        margin: 0;
-        font-size: clamp(26px, 5vw, 40px);
-        color: #b388ff;
-      }
-      header p {
-        margin: 0;
-        color: #a4b1c9;
-      }
-      main {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      article {
-        background: #101022;
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      }
-      h2 {
-        color: #5ef1c8;
-      }
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 12px;
-      }
-      .gallery img {
-        width: 100%;
-        border-radius: 10px;
-        cursor: zoom-in;
-      }
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.9);
-        display: none;
-        place-items: center;
-        z-index: 50;
-      }
-      .lightbox.open {
-        display: grid;
-      }
-      .lightbox-inner {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .lightbox img {
-        max-width: 90vw;
-        max-height: 80vh;
-        border-radius: 12px;
-      }
-      .lb-close,
-      .lb-prev,
-      .lb-next {
-        background: rgba(255, 255, 255, 0.12);
-        color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 50%;
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-      .lb-close {
-        position: absolute;
-        bottom: -60px;
-        left: 0;
-      }
-      footer {
-        text-align: center;
-        padding: 20px;
-        color: #a4b1c9;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .btn-sitemap,
-      .btn-home {
-        position: fixed;
-        z-index: 99;
-        background: #b388ff;
-        color: #fff;
-        padding: 10px 14px;
-        border-radius: 8px;
-        text-decoration: none;
-      }
-      .btn-sitemap {
-        left: 10px;
-        top: 30%;
-      }
-      .btn-home {
-        right: 10px;
-        bottom: 20%;
-      }
-      .share {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin: 20px 0;
-      }
-      .share a {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 8px 12px;
-        border-radius: 8px;
-        color: #fff;
-        text-decoration: none;
-      }
-      .sysinfo {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 12px;
-        border-radius: 8px;
-        margin-top: 20px;
-        font-size: 14px;
-      }
-    </style>
-    <meta
-      property="og:image:alt"
-      content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/solaris.jpg"
-    />
-    <meta name="date" content="2025-10-01" />
+  <style>
+body{margin:0;background:#0b0b14;color:#e8ecf8;font-family:Inter,Arial,sans-serif;line-height:1.6}
+header{padding:20px;text-align:center;background:rgba(16,16,34,0.8)}
+header h1{margin:0;font-size:clamp(26px,5vw,40px);color:#b388ff}
+header p{margin:0;color:#a4b1c9}
+main{max-width:900px;margin:0 auto;padding:20px}
+article{background:#101022;border-radius:16px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+h2{color:#5ef1c8}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.gallery img{width:100%;border-radius:10px;cursor:zoom-in}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;place-items:center;z-index:50}
+.lightbox.open{display:grid}
+.lightbox-inner{position:relative;display:flex;align-items:center;gap:10px}
+.lightbox img{max-width:90vw;max-height:80vh;border-radius:12px}
+.lb-close,.lb-prev,.lb-next{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.lb-close{position:absolute;bottom:-60px;left:0}
+footer{text-align:center;padding:20px;color:#a4b1c9;border-top:1px solid rgba(255,255,255,0.1)}
+.btn-sitemap,.btn-home{position:fixed;z-index:99;background:#b388ff;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+.btn-sitemap{left:10px;top:30%}
+.btn-home{right:10px;bottom:20%}
+.share{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.share a{background:rgba(255,255,255,0.1);padding:8px 12px;border-radius:8px;color:#fff;text-decoration:none}
+.sysinfo{background:rgba(255,255,255,0.05);padding:12px;border-radius:8px;margin-top:20px;font-size:14px}
+  </style>
+  <meta property="og:image:alt" content="Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/solaris.jpg">
+<meta name="date" content="2025-10-01">
 
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-10-01T11:00:00+08:00"
-    />
-  </head>
-  <body>
-    <header>
-      <h1>Solaris: OS Enterprise Tangguh</h1>
-      <div id="iposbrowser"></div>
-      <p>Dark-mode 1 kolom, fullscreen, santai tapi informatif</p>
-    </header>
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-10-01T11:00:00+08:00"></head>
+<body>
+  <a class="btn-sitemap" href="https://frijal.github.io/sitemap.html">🗺️ Sitemap</a>
+  <a class="btn-home" href="https://frijal.github.io">🏠 Home</a>
 
-    <main>
-      <article>
-        <section>
-          <p>
-            <strong>Solaris</strong> adalah sistem operasi berbasis Unix yang
-            pertama kali dikembangkan oleh
-            <strong>Sun Microsystems</strong> pada awal 1990-an. Ia lahir
-            sebagai penerus dari <strong>SunOS</strong> (berbasis BSD UNIX),
-            lalu bertransformasi dengan mengadopsi
-            <strong>System V Release 4 (SVR4)</strong>. Setelah Oracle
-            mengakuisisi Sun Microsystems pada tahun 2010, namanya resmi menjadi
-            <strong>Oracle Solaris</strong>.
-          </p>
-        </section>
+  <header>
+<h1>Solaris: OS Enterprise Tangguh</h1>
+<div id="iposbrowser"></div>
+<p>Dark-mode 1 kolom, fullscreen, santai tapi informatif</p>
+  </header>
 
-        <section>
-          <h2>Fitur Utama Solaris</h2>
-          <ul>
-            <li>
-              <strong>Scalability</strong> - Mampu berjalan dari workstation
-              kecil hingga server enterprise raksasa.
-            </li>
-            <li>
-              <strong>Stability & Reliability</strong> - Dipercaya di lingkungan
-              mission-critical.
-            </li>
-            <li>
-              <strong>ZFS File System</strong> - Integritas data, snapshot,
-              kapasitas besar.
-            </li>
-            <li><strong>DTrace</strong> - Observasi performa real-time.</li>
-            <li>
-              <strong>Zones & Containers</strong> - Virtualisasi ringan untuk
-              isolasi aplikasi.
-            </li>
-            <li>
-              <strong>Security</strong> - RBAC, manajemen hak proses, keamanan
-              jaringan.
-            </li>
-            <li>
-              <strong>Multiprocessing Support</strong> - Optimasi untuk SMP dan
-              multi-core.
-            </li>
-          </ul>
-        </section>
+  <main>
+<article>
+  <section>
+<p><strong>Solaris</strong> adalah sistem operasi berbasis Unix yang pertama kali dikembangkan oleh <strong>Sun Microsystems</strong> pada awal 1990-an. Ia lahir sebagai penerus dari <strong>SunOS</strong> (berbasis BSD UNIX), lalu bertransformasi dengan mengadopsi <strong>System V Release 4 (SVR4)</strong>. Setelah Oracle mengakuisisi Sun Microsystems pada tahun 2010, namanya resmi menjadi <strong>Oracle Solaris</strong>.</p>
+  </section>
 
-        <section>
-          <h2>Sejarah Singkat</h2>
-          <ul>
-            <li>1982: SunOS diluncurkan (BSD-based).</li>
-            <li>1992: Solaris dirilis, gabungan SunOS + SVR4.</li>
-            <li>2005: Hadir OpenSolaris (open-source).</li>
-            <li>2010: Oracle akuisisi Sun → Oracle Solaris.</li>
-            <li>2017: Fokus pengembangan berkurang, update lebih jarang.</li>
-          </ul>
-        </section>
+  <section>
+<h2>Fitur Utama Solaris</h2>
+<ul>
+  <li><strong>Scalability</strong> - Mampu berjalan dari workstation kecil hingga server enterprise raksasa.</li>
+  <li><strong>Stability & Reliability</strong> - Dipercaya di lingkungan mission-critical.</li>
+  <li><strong>ZFS File System</strong> - Integritas data, snapshot, kapasitas besar.</li>
+  <li><strong>DTrace</strong> - Observasi performa real-time.</li>
+  <li><strong>Zones & Containers</strong> - Virtualisasi ringan untuk isolasi aplikasi.</li>
+  <li><strong>Security</strong> - RBAC, manajemen hak proses, keamanan jaringan.</li>
+  <li><strong>Multiprocessing Support</strong> - Optimasi untuk SMP dan multi-core.</li>
+</ul>
+  </section>
 
-        <section>
-          <h2>Penggunaan Solaris</h2>
-          <p>
-            Solaris banyak dipakai di sektor yang menuntut
-            <em>uptime</em> tinggi, keamanan, dan skalabilitas, misalnya:
-          </p>
-          <ul>
-            <li>Data center</li>
-            <li>Server enterprise</li>
-            <li>Telekomunikasi</li>
-            <li>Perbankan dan finansial</li>
-            <li>Sistem pemerintahan</li>
-          </ul>
-        </section>
+  <section>
+<h2>Sejarah Singkat</h2>
+<ul>
+  <li>1982: SunOS diluncurkan (BSD-based).</li>
+  <li>1992: Solaris dirilis, gabungan SunOS + SVR4.</li>
+  <li>2005: Hadir OpenSolaris (open-source).</li>
+  <li>2010: Oracle akuisisi Sun → Oracle Solaris.</li>
+  <li>2017: Fokus pengembangan berkurang, update lebih jarang.</li>
+</ul>
+  </section>
 
-        <section>
-          <h2>Solaris Hari Ini</h2>
-          <p>
-            Walaupun Linux makin dominan, Solaris masih bertahan di lingkungan
-            <strong>legacy enterprise</strong>. Alasannya sederhana:
-            stabilitasnya sulit ditandingi, fitur seperti
-            <strong>ZFS</strong> dan <strong>DTrace</strong> masih jadi andalan,
-            dan banyak sistem lama yang masih bergantung padanya. Oracle tetap
-            memberikan <strong>dukungan jangka panjang</strong>, meski
-            pengembangan aktifnya tidak secepat masa jayanya di era
-            1990-2000-an.
-          </p>
-        </section>
+  <section>
+<h2>Penggunaan Solaris</h2>
+<p>Solaris banyak dipakai di sektor yang menuntut <em>uptime</em> tinggi, keamanan, dan skalabilitas, misalnya:</p>
+<ul>
+  <li>Data center</li>
+  <li>Server enterprise</li>
+  <li>Telekomunikasi</li>
+  <li>Perbankan dan finansial</li>
+  <li>Sistem pemerintahan</li>
+</ul>
+  </section>
 
-        <section>
-          <h2>Ringkasan Santai</h2>
-          <ul>
-            <li>
-              Solaris itu <strong>OS Unix kelas berat</strong> yang dulu
-              primadona enterprise.
-            </li>
-            <li>
-              Fitur seperti <strong>ZFS, DTrace, dan Zones</strong> bikin dia
-              beda.
-            </li>
-            <li>
-              Hari ini, meski kalah populer dari Linux, Solaris masih dipakai di
-              sistem lama yang butuh <strong>stabilitas tanpa kompromi</strong>.
-            </li>
-          </ul>
-          <p>
-            ✨ Jadi, kalau kamu nemu server lama yang masih jalan pakai Solaris,
-            jangan heran. Itu bukti betapa tangguhnya OS ini, ibarat mobil
-            klasik yang meski tua, masih bisa melaju kencang dengan elegan.
-          </p>
-        </section>
+  <section>
+<h2>Solaris Hari Ini</h2>
+<p>Walaupun Linux makin dominan, Solaris masih bertahan di lingkungan <strong>legacy enterprise</strong>. Alasannya sederhana: stabilitasnya sulit ditandingi, fitur seperti <strong>ZFS</strong> dan <strong>DTrace</strong> masih jadi andalan, dan banyak sistem lama yang masih bergantung padanya. Oracle tetap memberikan <strong>dukungan jangka panjang</strong>, meski pengembangan aktifnya tidak secepat masa jayanya di era 1990-2000-an.</p>
+  </section>
 
-        <section>
-          <h2>Galeri</h2>
-          <div class="gallery">
-            <img
-              loading="lazy"
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg"
-              alt="Solaris"
-              data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg"
-            />
-          </div>
-        </section>
+  <section>
+<h2>Ringkasan Santai</h2>
+<ul>
+  <li>Solaris itu <strong>OS Unix kelas berat</strong> yang dulu primadona enterprise.</li>
+  <li>Fitur seperti <strong>ZFS, DTrace, dan Zones</strong> bikin dia beda.</li>
+  <li>Hari ini, meski kalah populer dari Linux, Solaris masih dipakai di sistem lama yang butuh <strong>stabilitas tanpa kompromi</strong>.</li>
+</ul>
+<p>✨ Jadi, kalau kamu nemu server lama yang masih jalan pakai Solaris, jangan heran. Itu bukti betapa tangguhnya OS ini, ibarat mobil klasik yang meski tua, masih bisa melaju kencang dengan elegan.</p>
+  </section>
 
-        <section>
-          <h2>Pelan Kiri</h2>
-          <div class="share">
-            <a id="share-twitter" target="">Twitter</a>
-            <a id="share-facebook" target="">Facebook</a>
-            <a id="share-wa" target="">WhatsApp</a>
-            <a id="share-tele" target="">Telegram</a>
-          </div>
-        </section>
+  <section>
+<h2>Galeri</h2>
+<div class="gallery">
+  <img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg" 
+   alt="Solaris" 
+   data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg">
+</div>
+  </section>
 
-        <section>
-          <h2>Komentar</h2>
-          <div id="fb-root"></div>
-          <div
-            class="fb-comments"
-            data-href="https://frijal.github.io/artikel/solaris.html"
-            data-width="100%"
-            data-numposts="5"
-            data-colorscheme="dark"
-          ></div>
-        </section>
+  <section>
+<h2>Bagikan Artikel</h2>
+<div class="share">
+  <a id="share-twitter" target="">Twitter</a>
+  <a id="share-facebook" target="">Facebook</a>
+  <a id="share-wa" target="">WhatsApp</a>
+  <a id="share-tele" target="">Telegram</a>
+</div>
+  </section>
 
-        <section>
-          <h2>Info Sistem Kamu</h2>
-          <div class="sysinfo">
-            <div><strong>Browser:</strong> <span id="ua">...</span></div>
-            <div><strong>OS:</strong> <span id="os">...</span></div>
-            <div>
-              <strong>IPv4 & Kota:</strong> <span id="ip">...</span> •
-              <span id="city">...</span> <span id="flag">🏳️</span>
-            </div>
-          </div>
-        </section>
-      </article>
-    </main>
+  <section>
+<h2>Komentar</h2>
+<div id="fb-root"></div>
+<div class="fb-comments" data-href="https://frijal.github.io/artikel/solaris.html" data-width="100%" data-numposts="5" data-colorscheme="dark"></div>
+  </section>
 
-    <footer>🄯 2025 frijal.github.io</footer>
+  <section>
+<h2>Info Sistem Kamu</h2>
+<div class="sysinfo">
+  <div><strong>Browser:</strong> <span id="ua">...</span></div>
+  <div><strong>OS:</strong> <span id="os">...</span></div>
+  <div><strong>IPv4 & Kota:</strong> <span id="ip">...</span> • <span id="city">...</span> <span id="flag">🏳️</span></div>
+</div>
+  </section>
+</article>
+  </main>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <div class="lightbox-inner">
-        <button class="lb-prev" id="lbPrev" aria-label="Sebelumnya">←</button>
-        <img id="lightbox-img" alt="Preview" />
-        <button class="lb-next" id="lbNext" aria-label="Berikutnya">→</button>
-        <button class="lb-close" id="lbClose" aria-label="Tutup">✕</button>
-      </div>
-    </div>
+  <footer>🄯 2025 frijal.github.io</footer>
 
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-          // Share links
-          const CANON=document.querySelector('link[rel=canonical]').href;
-          const TITLE=document.title;
-          document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(TITLE)}`;
-          document.getElementById('share-facebook').href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CANON)}`;
-          document.getElementById('share-wa').href=`https://wa.me/?text=${encodeURIComponent(TITLE+' '+CANON)}`;
-          document.getElementById('share-tele').href=`https://t.me/share/url?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(TITLE)}`;
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+<div class="lightbox-inner">
+  <button class="lb-prev" id="lbPrev" aria-label="Sebelumnya">←</button>
+  <img id="lightbox-img" alt="Preview">
+  <button class="lb-next" id="lbNext" aria-label="Berikutnya">→</button>
+  <button class="lb-close" id="lbClose" aria-label="Tutup">✕</button>
+</div>
+  </div>
 
-          // Lightbox
-          const images=Array.from(document.querySelectorAll('.gallery img'));
-          const lb=document.getElementById('lightbox');
-          const lbImg=document.getElementById('lightbox-img');
-          const lbClose=document.getElementById('lbClose');
-          const lbPrev=document.getElementById('lbPrev');
-          const lbNext=document.getElementById('lbNext');
-          let currentIndex=0;
-          function openLB(i){currentIndex=i;lbImg.src=images[i].dataset.full||images[i].src;lb.classList.add('open')}
-          function closeLB(){lb.classList.remove('open')}
-          function prevLB(){if(images.length)openLB((currentIndex-1+images.length)%images.length)}
-          function nextLB(){if(images.length)openLB((currentIndex+1)%images.length)}
-          images.forEach((img,i)=>img.addEventListener('click',()=>openLB(i)))
-          lbClose.addEventListener('click',closeLB)
-          lb.addEventListener('click',e=>{if(e.target===lb)closeLB()})
-          lbPrev.addEventListener('click',prevLB)
-          lbNext.addEventListener('click',nextLB
-              window.addEventListener('keydown', e => {
-            if (!lb.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLB();
-            if (e.key === 'ArrowLeft') prevLB();
-            if (e.key === 'ArrowRight') nextLB();
-          });
+  <script>
+// Share links
+const CANON=document.querySelector('link[rel=canonical]').href;
+const TITLE=document.title;
+document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(TITLE)}`;
+document.getElementById('share-facebook').href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CANON)}`;
+document.getElementById('share-wa').href=`https://wa.me/?text=${encodeURIComponent(TITLE+' '+CANON)}`;
+document.getElementById('share-tele').href=`https://t.me/share/url?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(TITLE)}`;
 
-          // Info sistem
-          function detectOS(ua = navigator.userAgent) {
-            if (/Windows NT/i.test(ua)) return 'Windows';
-            if (/Android/i.test(ua)) return 'Android';
-            if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-            if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
-            if (/Linux/i.test(ua)) return 'Linux';
-            return 'Unknown';
-          }
-          document.getElementById('ua').textContent = navigator.userAgent;
-          document.getElementById('os').textContent = detectOS();
+// Lightbox
+const images=Array.from(document.querySelectorAll('.gallery img'));
+const lb=document.getElementById('lightbox');
+const lbImg=document.getElementById('lightbox-img');
+const lbClose=document.getElementById('lbClose');
+const lbPrev=document.getElementById('lbPrev');
+const lbNext=document.getElementById('lbNext');
+let currentIndex=0;
+function openLB(i){currentIndex=i;lbImg.src=images[i].dataset.full||images[i].src;lb.classList.add('open')}
+function closeLB(){lb.classList.remove('open')}
+function prevLB(){if(images.length)openLB((currentIndex-1+images.length)%images.length)}
+function nextLB(){if(images.length)openLB((currentIndex+1)%images.length)}
+images.forEach((img,i)=>img.addEventListener('click',()=>openLB(i)))
+lbClose.addEventListener('click',closeLB)
+lb.addEventListener('click',e=>{if(e.target===lb)closeLB()})
+lbPrev.addEventListener('click',prevLB)
+lbNext.addEventListener('click',nextLB
+window.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') prevLB();
+  if (e.key === 'ArrowRight') nextLB();
+});
 
-          function flagEmoji(cc) {
-            if (!cc || cc.length !== 2) return '🏳️';
-            const base = 127397;
-            return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
-          }
+// Info sistem
+function detectOS(ua = navigator.userAgent) {
+  if (/Windows NT/i.test(ua)) return 'Windows';
+  if (/Android/i.test(ua)) return 'Android';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+  if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
+  if (/Linux/i.test(ua)) return 'Linux';
+  return 'Unknown';
+}
+document.getElementById('ua').textContent = navigator.userAgent;
+document.getElementById('os').textContent = detectOS();
 
-          (async () => {
-            try {
-              const r = await fetch('https://ipapi.co/json/');
-              const j = await r.json();
-              document.getElementById('ip').textContent = j.ip || 'N/A';
-              document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
-              document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
-            } catch (e) {
-              document.getElementById('ip').textContent = 'Tidak tersedia';
-              document.getElementById('city').textContent = ', ';
-              document.getElementById('flag').textContent = '🏳️';
-            }
-          })();
-      });
-    </script>
+function flagEmoji(cc) {
+  if (!cc || cc.length !== 2) return '🏳️';
+  const base = 127397;
+  return cc.toUpperCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0) + base)).join('');
+}
 
-    <!-- Facebook SDK -->
-    <script
-      async
-      defer
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"
-    >
-      });
-    </script>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+(async () => {
+  try {
+const r = await fetch('https://ipapi.co/json/');
+const j = await r.json();
+document.getElementById('ip').textContent = j.ip || 'N/A';
+document.getElementById('city').textContent = [j.city, j.region, j.country_name].filter(Boolean).join(', ');
+document.getElementById('flag').textContent = flagEmoji(j.country || 'ID');
+  } catch (e) {
+document.getElementById('ip').textContent = 'Tidak tersedia';
+document.getElementById('city').textContent = ', ';
+document.getElementById('flag').textContent = '🏳️';
+  }
+})();
+  </script>
+
+  <!-- Facebook SDK -->
+  <script async defer crossorigin="anonymous" 
+src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0">
+  </script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
 </html>
+
