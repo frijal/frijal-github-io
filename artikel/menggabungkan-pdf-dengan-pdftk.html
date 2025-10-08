@@ -1,446 +1,277 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- prettier-ignore -->
-    <title>Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- prettier-ignore -->
+<title>Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap</title>
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml;utf8,
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml;utf8,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-    <text y='.9em' font-size='90'>📄</text>
-  </svg>"
-      type="image/svg+xml"
-    />
+<text y='.9em' font-size='90'>📄</text>
+  </svg>" type="image/svg+xml">
 
-    <!-- SEO -->
-    <meta
-      name="description"
-      content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-    />
+  <!-- SEO -->
+  <meta name="description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis.">
+  <link rel="canonical" href="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html">
 
-    <!-- Open Graph -->
-    <meta
-      property="og:title"
-      content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap"
-    />
-    <meta
-      property="og:description"
-      content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png"
-    />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
+  <meta property="og:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap"
-    />
-    <meta
-      name="twitter:description"
-      content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png"
-    />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
+  <meta name="twitter:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
 
-    <!-- CSS -->
-    <style>
-      :root {
-        --primary: #2563eb;
-        --muted: #666;
-        --bg: #f9fafb;
-      }
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: var(--bg);
-        color: #111;
-      }
-      header {
-        background: var(--primary);
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-      main {
-        max-width: 960px;
-        margin: auto;
-        padding: 20px;
-        background: white;
-      }
-      h1,
-      h2 {
-        color: var(--primary);
-      }
-      pre {
-        position: relative;
-        background: #2d2d2d;
-        color: #f8f8f2;
-        padding: 12px;
-        border-radius: 8px;
-        overflow-x: auto;
-      }
-      button.copy-btn {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 4px 8px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 12px;
-      }
-      .share-buttons {
-        margin-top: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .share-buttons a {
-        text-decoration: none;
-        padding: 8px 12px;
-        border-radius: 8px;
-        font-size: 14px;
-        background: var(--primary);
-        color: white;
-      }
-      footer {
-        margin-top: 40px;
-        padding: 20px;
-        font-size: 14px;
-        text-align: center;
-        color: var(--muted);
-      }
-      .env-info {
-        margin-top: 12px;
-        font-size: 13px;
-        background: #f1f5f9;
-        padding: 10px;
-        border-radius: 6px;
-      }
-      .env-info svg {
-        width: 20px;
-        height: 20px;
-        vertical-align: middle;
-        margin-right: 6px;
-      }
-      .article-image {
-        text-align: center;
-        margin: 20px 0;
-      }
-      .article-image img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-      }
-    </style>
+  <!-- CSS -->
+  <style>
+:root {
+  --primary: #2563eb;
+  --muted: #666;
+  --bg: #f9fafb;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: #111;
+}
+header {
+  background: var(--primary);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+main {
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+}
+h1, h2 {
+  color: var(--primary);
+}
+pre {
+  position: relative;
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+button.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.share-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.share-buttons a {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--primary);
+  color: white;
+}
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--muted);
+}
+.env-info {
+  margin-top: 12px;
+  font-size: 13px;
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 6px;
+}
+.env-info svg {
+  width: 20px; height: 20px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.article-image {
+  text-align: center;
+  margin: 20px 0;
+}
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+  </style>
 
-    <!-- Prism.js for syntax highlighting -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
-      rel="stylesheet"
-    />
-    });
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    });
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
-    <!-- JSON-LD -->
-    });
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap",
-        "author": {
-          "@type": "Person",
-          "name": "Admin",
-          "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Pelan Kiri",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://frijal.github.io/logo.png",
-            "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-          },
-          "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-        },
-        "datePublished": "2025-09-15",
-        "dateModified": "2025-09-15",
-        "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-      }
-    </script>
-    });
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Beranda",
-            "item": "https://frijal.github.io/",
-            "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Artikel",
-            "item": "https://frijal.github.io/sitemap.html",
-            "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Menggabungkan PDF dengan PDFtk",
-            "item": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html",
-            "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-          }
-        ],
-        "image": "https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-      }
-    </script>
-    <meta name="date" content="2025-09-28" />
+  <!-- JSON-LD -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap","author":{"@type":"Person","name":"Admin","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"},"publisher":{"@type":"Organization","name":"Pelan Kiri","logo":{"@type":"ImageObject","url":"https://frijal.github.io/logo.png","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"},"image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"},"datePublished":"2025-09-15","dateModified":"2025-09-15","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/sitemap.html","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"},{"@type":"ListItem","position":3,"name":"Menggabungkan PDF dengan PDFtk","item":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html","image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"}],"image":"https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"}</script>
+<meta name="date" content="2025-09-28">
 
-    <meta
-      property="og:image:alt"
-      content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-09-15T11:00:00+08:00"
-    />
-  </head>
-  <body>
-    <header>
-      <h1>Menggabungkan Berkas PDF dengan PDFtk</h1>
-      <div id="iposbrowser"></div>
-      <p>Panduan Cepat, Efisien, dan Lengkap</p>
-    </header>
-    <main>
-      <div class="article-image">
-        <img
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png"
-          alt="Ilustrasi PDFtk"
-        />
-      </div>
-      <article>
-        <h2>Kenapa Perlu Menggabungkan PDF?</h2>
-        <p>
-          Sering kali kita memiliki banyak berkas PDF terpisah: laporan, bab
-          buku, atau dokumen pendukung. Menggabungkannya menjadi satu berkas
-          lebih praktis untuk arsip maupun berbagi.
-        </p>
 
-        <h2>1. Instalasi PDFtk</h2>
-        <p>Pastikan PDFtk sudah terpasang. Di Linux (Ubuntu/Debian):</p>
-        <pre><code class="language-bash">sudo apt-get install pdftk</code><button class="copy-btn">Copy</button></pre>
+  <meta property="og:image:alt" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-15T11:00:00+08:00"></head>
+<body>
+  <header>
+<h1>Menggabungkan Berkas PDF dengan PDFtk</h1>
+<div id="iposbrowser"></div>
+<p>Panduan Cepat, Efisien, dan Lengkap</p>
+  </header>
+  <main>
+<div class="article-image">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png" alt="Ilustrasi PDFtk">
+</div>
+<article>
+  <h2>Kenapa Perlu Menggabungkan PDF?</h2>
+  <p>
+Sering kali kita memiliki banyak berkas PDF terpisah: laporan, bab buku, atau dokumen pendukung.
+Menggabungkannya menjadi satu berkas lebih praktis untuk arsip maupun berbagi.
+  </p>
 
-        <h2>2. Menyiapkan Berkas</h2>
-        <ul>
-          <li>Kumpulkan semua berkas di satu folder.</li>
-          <li>
-            Gunakan nama sederhana tanpa spasi, misalnya:
-            <code>laporan-januari.pdf</code>.
-          </li>
-        </ul>
+  <h2>1. Instalasi PDFtk</h2>
+  <p>Pastikan PDFtk sudah terpasang. Di Linux (Ubuntu/Debian):</p>
+  <pre><code class="language-bash">sudo apt-get install pdftk</code><button class="copy-btn">Copy</button></pre>
 
-        <h2>3. Perintah Menggabungkan PDF</h2>
-        <pre><code class="language-bash">pdftk berkas1.pdf berkas2.pdf berkas3.pdf output gabungan.pdf</code><button class="copy-btn">Copy</button></pre>
-        <p>
-          Contoh:
-          <code>pdftk Bab1.pdf Bab2.pdf Bab3.pdf output Buku-Lengkap.pdf</code>
-        </p>
+  <h2>2. Menyiapkan Berkas</h2>
+  <ul>
+<li>Kumpulkan semua berkas di satu folder.</li>
+<li>Gunakan nama sederhana tanpa spasi, misalnya: <code>laporan-januari.pdf</code>.</li>
+  </ul>
 
-        <h2>Keunggulan PDFtk</h2>
-        <ul>
-          <li>⚡ Cepat: langsung lewat baris perintah.</li>
-          <li>🪶 Ringan: tidak boros sumber daya.</li>
-          <li>🤖 Otomatisasi: mudah dimasukkan ke skrip.</li>
-        </ul>
+  <h2>3. Perintah Menggabungkan PDF</h2>
+  <pre><code class="language-bash">pdftk berkas1.pdf berkas2.pdf berkas3.pdf output gabungan.pdf</code><button class="copy-btn">Copy</button></pre>
+  <p>
+Contoh: <code>pdftk Bab1.pdf Bab2.pdf Bab3.pdf output Buku-Lengkap.pdf</code>
+  </p>
 
-        <!-- Tombol Share -->
-        <div class="share-buttons">
-          <a
-            href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-            target=""
-            >Facebook</a
-          >
-          <a
-            href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-            target=""
-            >Twitter/X</a
-          >
-          <a
-            href="https://wa.me/?text=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-            target=""
-            >WhatsApp</a
-          >
-          <a
-            href="https://t.me/share/url?url=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html"
-            target=""
-            >Telegram</a
-          >
-          <a href="https://www.instagram.com/" target="">Instagram</a>
-          <a href="https://www.threads.net/" target="">Threads</a>
-          <a href="https://www.tiktok.com/" target="">TikTok</a>
-        </div>
-      </article>
+  <h2>Keunggulan PDFtk</h2>
+  <ul>
+<li>⚡ Cepat: langsung lewat baris perintah.</li>
+<li>🪶 Ringan: tidak boros sumber daya.</li>
+<li>🤖 Otomatisasi: mudah dimasukkan ke skrip.</li>
+  </ul>
 
-      <!-- FB Comments -->
-      <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
-        <span id="current-url" class="small-muted"></span>
-      </div>
-      <div style="margin-top: 18px">
-        <div id="fb-root"></div>
-        <script
-          async
-          defer
-          crossorigin="anonymous"
-          src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"
-        >
-          });
-        </script>
-        <div
-          class="fb-comments"
-          id="fb-comments"
-          data-href=""
-          data-width="100%"
-          data-numposts="5"
-        ></div>
-        <script>
-          document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href;
-            document.getElementById('current-url').textContent = currentUrl;
-            document
-              .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl);
-            window.fbAsyncInit = function () {
-              if (typeof FB !== 'undefined') {
-                try {
-                  FB.XFBML.parse();
-                } catch (e) {}
-              }
-            };
-          });
-        </script>
-      </div>
+  <!-- Tombol Share -->
+  <div class="share-buttons">
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html" target="">Facebook</a>
+<a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html" target="">Twitter/X</a>
+<a href="https://wa.me/?text=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html" target="">WhatsApp</a>
+<a href="https://t.me/share/url?url=https://frijal.github.io/artikel/menggabungkan-pdf-dengan-pdftk.html" target="">Telegram</a>
+<a href="https://www.instagram.com/" target="">Instagram</a>
+<a href="https://www.threads.net/" target="">Threads</a>
+<a href="https://www.tiktok.com/" target="">TikTok</a>
+  </div>
+</article>
 
-      <!-- Informasi Lingkungan -->
-      <div class="env-info" id="env-info">
-        <p><strong>Info Lingkungan:</strong></p>
-        <div id="browser-info"></div>
-        <div id="os-info"></div>
-        <div id="ip-info"></div>
-      </div>
-    </main>
+<!-- FB Comments -->
+<div style="margin-top:18px;color:var(--muted);font-size:10px">
+  <span id="current-url" class="small-muted"></span>
+</div>
+<div style="margin-top:18px">
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0">
+  </script>
+  <div class="fb-comments"
+   id="fb-comments"
+   data-href=""
+   data-width="100%"
+   data-numposts="5"></div>
+  <script>
+const currentUrl = window.location.href;
+document.getElementById("current-url").textContent = currentUrl;
+document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+window.fbAsyncInit = function() {
+  if (typeof FB !== 'undefined') {
+try { FB.XFBML.parse(); } catch(e) {}
+  }
+}
+  </script>
+</div>
 
-    <footer>
-      <p>🄯 2025 Pelan Kiri. Semua Hak Dilindungi.</p>
-    </footer>
+<!-- Informasi Lingkungan -->
+<div class="env-info" id="env-info">
+  <p><strong>Info Lingkungan:</strong></p>
+  <div id="browser-info"></div>
+  <div id="os-info"></div>
+  <div id="ip-info"></div>
+</div>
+  </main>
 
-    <!-- Script Copy -->
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.querySelectorAll('.copy-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const code = btn.previousElementSibling.innerText;
-            navigator.clipboard.writeText(code);
-            btn.textContent = 'Copied!';
-            setTimeout(() => (btn.textContent = 'Copy'), 1500);
-          });
-        });
-      });
-    </script>
+  <footer>
+<p>🄯 2025 Pelan Kiri. Semua Hak Dilindungi.</p>
+  </footer>
 
-    <!-- Browser & OS Info + IP & Flag -->
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        function detectOS() {
-          const ua = navigator.userAgent;
-          if (ua.includes('Win')) return 'Windows';
-          if (ua.includes('Mac')) return 'MacOS';
-          if (ua.includes('Linux')) return 'Linux';
-          if (/Android/i.test(ua)) return 'Android';
-          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-          return 'Unknown OS';
-        }
-        function detectBrowser() {
-          const ua = navigator.userAgent;
-          if (ua.includes('Firefox/')) return 'Mozilla Firefox';
-          if (ua.includes('Chrome/')) return 'Google Chrome';
-          if (ua.includes('Safari/') && !ua.includes('Chrome/'))
-            return 'Safari';
-          if (ua.includes('Edg/')) return 'Microsoft Edge';
-          return 'Unknown Browser';
-        }
-        document.getElementById('browser-info').innerHTML =
-          '🌐 Browser: ' + detectBrowser();
-        document.getElementById('os-info').innerHTML =
-          '💻 Sistem Operasi: ' + detectOS();
+  <!-- Script Copy -->
+  <script>
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+const code = btn.previousElementSibling.innerText;
+navigator.clipboard.writeText(code);
+btn.textContent = "Copied!";
+setTimeout(()=>btn.textContent="Copy", 1500);
+  });
+});
+  </script>
 
-        fetch('https://ipapi.co/json/')
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById('ip-info').innerHTML =
-              '🔑 IP: ' +
-              data.ip +
-              ' | Negara: ' +
-              data.country_name +
-              " <img src='https://flagcdn.com/24x18/" +
-              data.country_code.toLowerCase() +
-              ".png'>";
-          })
-          .catch(() => {
-            document.getElementById('ip-info').textContent =
-              'Tidak dapat memuat IP';
-          });
-      });
-    </script>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+  <!-- Browser & OS Info + IP & Flag -->
+  <script>
+function detectOS() {
+  const ua = navigator.userAgent;
+  if (ua.includes("Win")) return "Windows";
+  if (ua.includes("Mac")) return "MacOS";
+  if (ua.includes("Linux")) return "Linux";
+  if (/Android/i.test(ua)) return "Android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+  return "Unknown OS";
+}
+function detectBrowser() {
+  const ua = navigator.userAgent;
+  if (ua.includes("Firefox/")) return "Mozilla Firefox";
+  if (ua.includes("Chrome/")) return "Google Chrome";
+  if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari";
+  if (ua.includes("Edg/")) return "Microsoft Edge";
+  return "Unknown Browser";
+}
+document.getElementById("browser-info").innerHTML = "🌐 Browser: " + detectBrowser();
+document.getElementById("os-info").innerHTML = "💻 Sistem Operasi: " + detectOS();
+
+fetch("https://ipapi.co/json/")
+  .then(res=>res.json())
+  .then(data=>{
+document.getElementById("ip-info").innerHTML =
+  "🔑 IP: " + data.ip + " | Negara: " + data.country_name +
+  " <img src='https://flagcdn.com/24x18/" + data.country_code.toLowerCase() + ".png'>";
+  })
+  .catch(()=>{document.getElementById("ip-info").textContent="Tidak dapat memuat IP";});
+  </script>
+
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>

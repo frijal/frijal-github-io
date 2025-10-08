@@ -1,414 +1,394 @@
 <!doctype html>
 <html lang="id">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!-- prettier-ignore -->
-    <title>Pembaruan Otomatis Fedora: Perlukah? - Interaktif</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- prettier-ignore -->
+<title>Pembaruan Otomatis Fedora: Perlukah? - Interaktif</title>
 
-    <link
-      rel="icon"
-      href="https://frijal.github.io/favicon.ico"
-      type="image/x-icon"
-    />
-    <meta
-      name="description"
-      content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-    />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
-    <meta
-      property="og:description"
-      content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
-    <meta
-      name="twitter:description"
-      content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
-    />
-    <script type="application/ld+json">
-            {
-                    "@context": "https://schema.org",
-                    "@type": "Article",
-                    "headline": "Pembaruan Otomatis Fedora: Perlukah?",
-                    "image": [
-                      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
-                    ],
-                    "author": { "@type": "Person", "name": "Frijal" },
-                    "publisher": {
-                      "@type": "Organization",
-                      "name": "frijal.github.io",
-                      "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://frijal.github.io/favicon.ico"
-                      }
-                    },
-                    "datePublished": "2025-09-21",
-                    "dateModified": "2025-09-21",
-                    "mainEntityOfPage": "https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-
-            <meta name="date" content="2025-09-27">
-
-                  }
-      });
-    </script>
-    });
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      body {
-        scroll-behavior: smooth;
-        font-family: sans-serif;
-        background: #f0f4f8;
-        color: #1f2937;
-      }
-      header {
-        background: #2458a2;
-        color: #fff;
-        text-align: center;
-        padding: 2rem 1rem;
-      }
-      .article-image {
-        max-width: 100%;
-        border-radius: 0.5rem;
-        margin: 1.5rem 0;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .lightbox {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-      }
-      .lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 0.5rem;
-      }
-      .accordion-button {
-        background: #e0e7ff;
-        padding: 0.5rem;
-        width: 100%;
-        text-align: left;
-        border-radius: 0.3rem;
-        margin-top: 0.3rem;
-        cursor: pointer;
-      }
-      .accordion-content {
-        display: none;
-        padding: 0.5rem 1rem;
-        background: #f0f4ff;
-        border-left: 4px solid #2458a2;
-        border-radius: 0 0.3rem 0.3rem 0;
-        margin-bottom: 0.5rem;
-      }
-      .copy-btn {
-        background: #2458a2;
-        color: #fff;
-        padding: 0.3rem 0.5rem;
-        border-radius: 0.3rem;
-        cursor: pointer;
-        font-size: 0.85rem;
-        margin-top: 0.3rem;
-      }
-      .copy-btn:hover {
-        background: #1c447a;
-      }
-      pre {
-        background: #e0e7ff;
-        padding: 0.5rem;
-        border-radius: 0.3rem;
-        overflow-x: auto;
-      }
-      .social-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        padding: 0.5rem 0.7rem;
-        border-radius: 0.3rem;
-        text-decoration: none;
-        color: #fff;
-      }
-      .social-btn:hover {
-        opacity: 0.8;
-      }
-      .fixed-left {
-        position: fixed;
-        top: 30%;
-        left: 0;
-        z-index: 1000;
-        background: #08c;
-        padding: 0.7rem;
-        border-radius: 0.3rem 0 0 0.3rem;
-        color: #fff;
-      }
-      .fixed-right {
-        position: fixed;
-        bottom: 30%;
-        right: 0;
-        z-index: 1000;
-        background: #0af;
-        padding: 0.7rem;
-        border-radius: 0 0.3rem 0.3rem 0;
-        color: #fff;
-      }
-    </style>
-    <meta
-      property="og:image:alt"
-      content="Pembaruan Otomatis Fedora: Perlukah? - Interaktif"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-09-21T11:00:00+08:00"
-    />
-  </head>
+<link
+  rel="icon"
+  href="https://frijal.github.io/favicon.ico"
+  type="image/x-icon"
+/>
+<meta
+  name="description"
+  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
+/>
+<link
+  rel="canonical"
+  href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+/>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+<meta
+  property="og:description"
+  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
+/>
+<meta
+  property="og:url"
+  content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+/>
+<meta
+  property="og:image"
+  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+<meta
+  name="twitter:description"
+  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."
+/>
+<meta
+  name="twitter:image"
+  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
+/>
+<script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Pembaruan Otomatis Fedora: Perlukah?",
+  "image": [
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
+  ],
+  "author": { "@type": "Person", "name": "Frijal" },
+  "publisher": {
+"@type": "Organization",
+"name": "frijal.github.io",
+"logo": {
+  "@type": "ImageObject",
+  "url": "https://frijal.github.io/favicon.ico"
+}
+  },
+  "datePublished": "2025-09-21",
+  "dateModified": "2025-09-21",
+  "mainEntityOfPage": "https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+<meta name="date" content="2025-09-27">
+  }
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+scroll-behavior: smooth;
+font-family: sans-serif;
+background: #f0f4f8;
+color: #1f2937;
+  }
+  header {
+background: #2458a2;
+color: #fff;
+text-align: center;
+padding: 2rem 1rem;
+  }
+  .article-image {
+max-width: 100%;
+border-radius: 0.5rem;
+margin: 1.5rem 0;
+cursor: pointer;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .lightbox {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+justify-content: center;
+align-items: center;
+z-index: 100;
+  }
+  .lightbox img {
+max-width: 90%;
+max-height: 90%;
+border-radius: 0.5rem;
+  }
+  .accordion-button {
+background: #e0e7ff;
+padding: 0.5rem;
+width: 100%;
+text-align: left;
+border-radius: 0.3rem;
+margin-top: 0.3rem;
+cursor: pointer;
+  }
+  .accordion-content {
+display: none;
+padding: 0.5rem 1rem;
+background: #f0f4ff;
+border-left: 4px solid #2458a2;
+border-radius: 0 0.3rem 0.3rem 0;
+margin-bottom: 0.5rem;
+  }
+  .copy-btn {
+background: #2458a2;
+color: #fff;
+padding: 0.3rem 0.5rem;
+border-radius: 0.3rem;
+cursor: pointer;
+font-size: 0.85rem;
+margin-top: 0.3rem;
+  }
+  .copy-btn:hover {
+background: #1c447a;
+  }
+  pre {
+background: #e0e7ff;
+padding: 0.5rem;
+border-radius: 0.3rem;
+overflow-x: auto;
+  }
+  .social-btn {
+display: inline-flex;
+align-items: center;
+gap: 0.3rem;
+padding: 0.5rem 0.7rem;
+border-radius: 0.3rem;
+text-decoration: none;
+color: #fff;
+  }
+  .social-btn:hover {
+opacity: 0.8;
+  }
+  .fixed-left {
+position: fixed;
+top: 30%;
+left: 0;
+z-index: 1000;
+background: #08c;
+padding: 0.7rem;
+border-radius: 0.3rem 0 0 0.3rem;
+color: #fff;
+  }
+  .fixed-right {
+position: fixed;
+bottom: 30%;
+right: 0;
+z-index: 1000;
+background: #0af;
+padding: 0.7rem;
+border-radius: 0 0.3rem 0.3rem 0;
+color: #fff;
+  }
+</style>
+<meta property="og:image:alt" content="Pembaruan Otomatis Fedora: Perlukah? - Interaktif">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="article:published_time" content="2025-09-21T11:00:00+08:00"></head>
   <body>
-    <div
-      id="toast"
-      class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded opacity-0 transition-all z-50"
-    ></div>
-    <header>
-      <h1 class="text-3xl font-bold">Pembaruan Otomatis Fedora: Perlukah?</h1>
-      <div id="iposbrowser"></div>
-      <small>(berdasarkan artikel dari Fedora Project)</small>
-    </header>
-    <main class="max-w-4xl mx-auto p-6 space-y-6">
-      <p>
-        Tentu, sebagai pengguna Linux, kita pasti sering dihadapkan pada
-        pertanyaan ini: "Haruskah saya mengaktifkan pembaruan otomatis?"
-      </p>
-      <p>
-        Sebenarnya, tidak ada jawaban yang mutlak benar. Keputusan ini
-        sepenuhnya ada di tangan Anda, sebagai pemilik atau administrator
-        sistem. Mampu mengevaluasi fakta dan saran, lalu mengambil keputusan
-        sendiri, itulah salah satu ciri administrator yang baik.
-      </p>
-      <h2 class="text-2xl font-bold">Kapan Sebaiknya Tidak?</h2>
-      <p>
-        Secara umum, jika mesin Anda adalah server kritis yang tidak boleh
-        mengalami waktu henti tak terencana, sebaiknya hindari pembaruan
-        otomatis. Bayangkan, tiba-tiba ada pembaruan yang gagal dan layanan
-        penting Anda mati. Tentu ini akan sangat merepotkan, bukan?
-      </p>
-      <h2 class="text-2xl font-bold">Kapan Boleh?</h2>
-      <p>
-        Di luar skenario di atas, Anda bisa mempertimbangkan pembaruan otomatis.
-        Contohnya, jika mesin Anda:
-      </p>
-      <ul class="list-disc pl-6">
-        <li>Jarang Anda sentuh untuk pembaruan manual.</li>
-        <li>
-          Bukan mesin yang kritis, jadi waktu henti sesekali tidak masalah.
-        </li>
-        <li>
-          Anda siap jika suatu saat harus datang langsung ke lokasi untuk
-          perbaikan.
-        </li>
-        <li>
-          Tidak memiliki data tak tergantikan atau sudah memiliki cadangan yang
-          memadai.
-        </li>
-      </ul>
-      <p>
-        Jika kriteria ini cocok, pembaruan otomatis mungkin adalah pilihan
-        terbaik untuk menjaga keamanan sistem Anda.
-      </p>
-      <h2 class="text-2xl font-bold">Cara Mengaktifkan Pembaruan Otomatis</h2>
-      <p>
-        Di Fedora, kita bisa menggunakan paket <code>dnf-automatic</code> untuk
-        mengunduh dan menginstal pembaruan secara otomatis.
-      </p>
-      <div class="accordion-container">
-        <div class="accordion-button">Langkah 1: Instalasi dan Konfigurasi</div>
-        <div class="accordion-content">
-          <pre><code id="code1">sudo dnf install dnf-automatic
+<div
+  id="toast"
+  class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded opacity-0 transition-all z-50"
+></div>
+<header>
+  <h1 class="text-3xl font-bold">Pembaruan Otomatis Fedora: Perlukah?</h1>
+<div id="iposbrowser"></div>
+  <small>(berdasarkan artikel dari Fedora Project)</small>
+</header>
+<main class="max-w-4xl mx-auto p-6 space-y-6">
+  <p>
+Tentu, sebagai pengguna Linux, kita pasti sering dihadapkan pada
+pertanyaan ini: "Haruskah saya mengaktifkan pembaruan otomatis?"
+  </p>
+  <p>
+Sebenarnya, tidak ada jawaban yang mutlak benar. Keputusan ini
+sepenuhnya ada di tangan Anda, sebagai pemilik atau administrator
+sistem. Mampu mengevaluasi fakta dan saran, lalu mengambil keputusan
+sendiri, itulah salah satu ciri administrator yang baik.
+  </p>
+  <h2 class="text-2xl font-bold">Kapan Sebaiknya Tidak?</h2>
+  <p>
+Secara umum, jika mesin Anda adalah server kritis yang tidak boleh
+mengalami waktu henti tak terencana, sebaiknya hindari pembaruan
+otomatis. Bayangkan, tiba-tiba ada pembaruan yang gagal dan layanan
+penting Anda mati. Tentu ini akan sangat merepotkan, bukan?
+  </p>
+  <h2 class="text-2xl font-bold">Kapan Boleh?</h2>
+  <p>
+Di luar skenario di atas, Anda bisa mempertimbangkan pembaruan otomatis.
+Contohnya, jika mesin Anda:
+  </p>
+  <ul class="list-disc pl-6">
+<li>Jarang Anda sentuh untuk pembaruan manual.</li>
+<li>
+  Bukan mesin yang kritis, jadi waktu henti sesekali tidak masalah.
+</li>
+<li>
+  Anda siap jika suatu saat harus datang langsung ke lokasi untuk
+  perbaikan.
+</li>
+<li>
+  Tidak memiliki data tak tergantikan atau sudah memiliki cadangan yang
+  memadai.
+</li>
+  </ul>
+  <p>
+Jika kriteria ini cocok, pembaruan otomatis mungkin adalah pilihan
+terbaik untuk menjaga keamanan sistem Anda.
+  </p>
+  <h2 class="text-2xl font-bold">Cara Mengaktifkan Pembaruan Otomatis</h2>
+  <p>
+Di Fedora, kita bisa menggunakan paket <code>dnf-automatic</code> untuk
+mengunduh dan menginstal pembaruan secara otomatis.
+  </p>
+  <div class="accordion-container">
+<div class="accordion-button">Langkah 1: Instalasi dan Konfigurasi</div>
+<div class="accordion-content">
+  <pre><code id="code1">sudo dnf install dnf-automatic
 sudo nano /etc/dnf/automatic.conf
 [commands]
 apply_updates=True
 reboot=when-needed</code></pre>
-          <button class="copy-btn" data-target="code1">Salin Kode</button>
-        </div>
-        <div class="accordion-button">Langkah 2: Jalankan Layanan</div>
-        <div class="accordion-content">
-          <pre><code id="code2">sudo systemctl enable --now dnf-automatic.timer
+  <button class="copy-btn" data-target="code1">Salin Kode</button>
+</div>
+<div class="accordion-button">Langkah 2: Jalankan Layanan</div>
+<div class="accordion-content">
+  <pre><code id="code2">sudo systemctl enable --now dnf-automatic.timer
 
 systemctl status dnf-automatic.timer</code></pre>
-          <button class="copy-btn" data-target="code2">Salin Kode</button>
-        </div>
-        <div class="accordion-button">Apakah Pembaruan DNF Aman?</div>
-        <div class="accordion-content">
-          <p>
-            DNF di Fedora sudah dilengkapi pemeriksaan kunci GPG secara default.
-            Ini memastikan paket yang diunduh tidak rusak atau dimodifikasi oleh
-            pihak tak bertanggung jawab.
-          </p>
-          <p>Namun, setiap paket tetap berpotensi bug meskipun melalui QA.</p>
-        </div>
-        <div class="accordion-button">Praktik Terbaik</div>
-        <div class="accordion-content">
-          <ul class="list-disc pl-6">
-            <li>
-              Pantau log: periksa <code>/var/log/dnf.log</code> secara berkala.
-            </li>
-            <li>Aktifkan notifikasi email setelah setiap pembaruan.</li>
-          </ul>
-        </div>
-        <div class="accordion-button">Alternatif Lain</div>
-        <div class="accordion-content">
-          <ul class="list-disc pl-6">
-            <li>
-              <strong>Notifikasi Saja:</strong> Unduh pembaruan dan kirim
-              notifikasi email, tanpa menginstalnya.
-            </li>
-            <li>
-              <strong>Jadwal Fleksibel:</strong> Gunakan
-              <a
-                href="https://github.com/rackerlabs/auter"
-                target=""
-                class="text-blue-600"
-                >auter</a
-              >
-              untuk opsi penjadwalan lebih canggih, skrip kustom, dan reboot
-              otomatis.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <img
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
-        alt="Ilustrasi Pembaruan Otomatis Fedora"
-        class="article-image"
-        onclick="openLightbox(this.src)"
-      />
-      <section>
-        <h2 class="text-xl font-bold">Pelan Kiri</h2>
-        <div class="flex gap-2 mt-2">
-          <a
-            href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-            target=""
-            class="social-btn bg-blue-600"
-            >Facebook</a
-          >
-          <a
-            href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html&text=Pembaruan Otomatis Fedora"
-            target=""
-            class="social-btn bg-blue-400"
-            >Twitter</a
-          >
-          <a
-            href="https://www.linkedin.com/shareArticle?mini=true&url=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-            target=""
-            class="social-btn bg-blue-700"
-            >LinkedIn</a
-          >
-        </div>
-      </section>
-      <section class="mt-6">
-        <div id="fb-root"></div>
-        <div
-          class="fb-comments"
-          data-href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-          data-width="100%"
-          data-numposts="5"
-        ></div>
-      </section>
-    </main>
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-      <img id="lightbox-img" src="" alt="Gallery Image" />
-    </div>
+  <button class="copy-btn" data-target="code2">Salin Kode</button>
+</div>
+<div class="accordion-button">Apakah Pembaruan DNF Aman?</div>
+<div class="accordion-content">
+  <p>
+DNF di Fedora sudah dilengkapi pemeriksaan kunci GPG secara default.
+Ini memastikan paket yang diunduh tidak rusak atau dimodifikasi oleh
+pihak tak bertanggung jawab.
+  </p>
+  <p>Namun, setiap paket tetap berpotensi bug meskipun melalui QA.</p>
+</div>
+<div class="accordion-button">Praktik Terbaik</div>
+<div class="accordion-content">
+  <ul class="list-disc pl-6">
+<li>
+  Pantau log: periksa <code>/var/log/dnf.log</code> secara berkala.
+</li>
+<li>Aktifkan notifikasi email setelah setiap pembaruan.</li>
+  </ul>
+</div>
+<div class="accordion-button">Alternatif Lain</div>
+<div class="accordion-content">
+  <ul class="list-disc pl-6">
+<li>
+  <strong>Notifikasi Saja:</strong> Unduh pembaruan dan kirim
+  notifikasi email, tanpa menginstalnya.
+</li>
+<li>
+  <strong>Jadwal Fleksibel:</strong> Gunakan
+  <a
+href="https://github.com/rackerlabs/auter"
+target=""
+class="text-blue-600"
+>auter</a
+  >
+  untuk opsi penjadwalan lebih canggih, skrip kustom, dan reboot
+  otomatis.
+</li>
+  </ul>
+</div>
+  </div>
+  <img
+src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"
+alt="Ilustrasi Pembaruan Otomatis Fedora"
+class="article-image"
+onclick="openLightbox(this.src)"
+  />
+  <section>
+<h2 class="text-xl font-bold">Bagikan Artikel</h2>
+<div class="flex gap-2 mt-2">
+  <a
+href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+target=""
+class="social-btn bg-blue-600"
+>Facebook</a
+  >
+  <a
+href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html&text=Pembaruan Otomatis Fedora"
+target=""
+class="social-btn bg-blue-400"
+>Twitter</a
+  >
+  <a
+href="https://www.linkedin.com/shareArticle?mini=true&url=https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+target=""
+class="social-btn bg-blue-700"
+>LinkedIn</a
+  >
+</div>
+  </section>
+  <section class="mt-6">
+<div id="fb-root"></div>
+<div
+  class="fb-comments"
+  data-href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+  data-width="100%"
+  data-numposts="5"
+></div>
+  </section>
+</main>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Gallery Image" />
+</div>
+<a
+  href="https://frijal.github.io/home.html"
+  target=""
+  class="fixed-left"
+  >🏠 Home</a
+>
+<a
+  href="https://frijal.github.io/sitemap.html"
+  target=""
+  class="fixed-right"
+  >📄 Sitemap</a
+>
+<script
+  async
+  defer="defer"
+  crossorigin="anonymous"
+  src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"
+></script>
+<script>
+  let toast = document.getElementById("toast");
+  function showToast(t) {
+((toast.textContent = t),
+  toast.classList.add("opacity-100"),
+  setTimeout(() => toast.classList.remove("opacity-100"), 1500));
+  }
+  function openLightbox(t) {
+((document.getElementById("lightbox-img").src = t),
+  (document.getElementById("lightbox").style.display = "flex"));
+  }
+  function closeLightbox() {
+document.getElementById("lightbox").style.display = "none";
+  }
+  (document.querySelectorAll(".accordion-button").forEach((e) => {
+e.addEventListener("click", () => {
+  var t = e.nextElementSibling;
+  t.style.display = "block" === t.style.display ? "none" : "block";
+});
+  }),
+document.querySelectorAll(".copy-btn").forEach((e) => {
+  e.addEventListener("click", () => {
+var t = document.getElementById(e.getAttribute("data-target"));
+navigator.clipboard
+  .writeText(t.innerText)
+  .then(() => showToast("Kode disalin!"));
+  });
+}),
+fetch("https://ipapi.co/json/")
+  .then((t) => t.json())
+  .then((t) => {
+var e = document.createElement("div");
+((e.className =
+  "fixed bottom-2 left-2 p-2 bg-gray-200 rounded text-sm"),
+  (e.innerHTML = `Browser: ${navigator.userAgent}<br>IP: ${t.ip} (${t.city}, ${t.country_name}) <img src="https://flagcdn.com/24x18/${t.country_code.toLowerCase()}.png">`),
+  document.body.appendChild(e));
+  }));
+</script>
 
-    <script
-      async
-      defer="defer"
-      crossorigin="anonymous"
-      src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v15.0"
-      });
-    ></script>
-    <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        let toast = document.getElementById('toast');
-        function showToast(t) {
-          ((toast.textContent = t),
-            toast.classList.add('opacity-100'),
-            setTimeout(() => toast.classList.remove('opacity-100'), 1500));
-        }
-        function openLightbox(t) {
-          ((document.getElementById('lightbox-img').src = t),
-            (document.getElementById('lightbox').style.display = 'flex'));
-        }
-        function closeLightbox() {
-          document.getElementById('lightbox').style.display = 'none';
-        }
-        (document.querySelectorAll('.accordion-button').forEach((e) => {
-          e.addEventListener('click', () => {
-            var t = e.nextElementSibling;
-            t.style.display = 'block' === t.style.display ? 'none' : 'block';
-          });
-        }),
-          document.querySelectorAll('.copy-btn').forEach((e) => {
-            e.addEventListener('click', () => {
-              var t = document.getElementById(e.getAttribute('data-target'));
-              navigator.clipboard
-                .writeText(t.innerText)
-                .then(() => showToast('Kode disalin!'));
-            });
-          }),
-          fetch('https://ipapi.co/json/')
-            .then((t) => t.json())
-            .then((t) => {
-              var e = document.createElement('div');
-              ((e.className =
-                'fixed bottom-2 left-2 p-2 bg-gray-200 rounded text-sm'),
-                (e.innerHTML = `Browser: ${navigator.userAgent}<br>IP: ${t.ip} (${t.city}, ${t.country_name}) <img src="https://flagcdn.com/24x18/${t.country_code.toLowerCase()}.png">`),
-                document.body.appendChild(e));
-            }));
-      });
-    </script>
 
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
+  <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
 </html>
