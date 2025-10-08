@@ -115,7 +115,7 @@
                         "name": "Gaya Hijab Saat Berkendara Motor"
                       }
                     ]
-        
+
             <meta name="date" content="2025-09-27">
 
                   }
@@ -769,8 +769,8 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              let currentUrl = window.location.href
-              ;((document.getElementById('current-url').textContent =
+              let currentUrl = window.location.href;
+              ((document.getElementById('current-url').textContent =
                 currentUrl),
                 document
                   .getElementById('fb-comments')
@@ -778,10 +778,10 @@
                 (window.fbAsyncInit = function () {
                   if ('undefined' != typeof FB)
                     try {
-                      FB.XFBML.parse()
+                      FB.XFBML.parse();
                     } catch (t) {}
-                }))
-            })
+                }));
+            });
           </script>
         </div>
       </section>
@@ -813,32 +813,30 @@
     </footer>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;((() => {
+        ((() => {
           let i = document.getElementById('lightbox'),
             n = document.getElementById('lightbox-img'),
-            e = document.getElementById('lightbox-close')
+            e = document.getElementById('lightbox-close');
           function t() {
-            ;(i.classList.remove('open'),
+            (i.classList.remove('open'),
               (n.src = ''),
-              i.setAttribute('aria-hidden', 'true'))
+              i.setAttribute('aria-hidden', 'true'));
           }
-          ;(document
-            .querySelectorAll('[data-lightbox="image"]')
-            .forEach((t) => {
-              t.addEventListener('click', (e) => {
-                ;(e.preventDefault(),
-                  (n.src = t.getAttribute('href')),
-                  i.classList.add('open'),
-                  i.setAttribute('aria-hidden', 'false'))
-              })
-            }),
+          (document.querySelectorAll('[data-lightbox="image"]').forEach((t) => {
+            t.addEventListener('click', (e) => {
+              (e.preventDefault(),
+                (n.src = t.getAttribute('href')),
+                i.classList.add('open'),
+                i.setAttribute('aria-hidden', 'false'));
+            });
+          }),
             i.addEventListener('click', (e) => {
-              e.target === i && t()
+              e.target === i && t();
             }),
             e.addEventListener('click', t),
             document.addEventListener('keydown', (e) => {
-              'Escape' === e.key && t()
-            }))
+              'Escape' === e.key && t();
+            }));
         })(),
           (document.getElementById('page-url').textContent =
             window.location.href),
@@ -847,8 +845,8 @@
                 'https://frijal.github.io/artikel/gaya-hijab-berkendara-motor.html',
               t = encodeURIComponent(
                 'Gaya hijab saat berkendara motor — contoh foto & catatan sederhana.',
-              )
-            ;((document.getElementById('share-fb').href =
+              );
+            ((document.getElementById('share-fb').href =
               'https://www.facebook.com/sharer/sharer.php?u=' +
               encodeURIComponent(e)),
               (document.getElementById('share-twitter').href =
@@ -864,11 +862,11 @@
                 t),
               (document.getElementById('share-ig').href = e),
               (document.getElementById('share-threads').href = e),
-              (document.getElementById('share-tiktok').href = e))
+              (document.getElementById('share-tiktok').href = e));
           })(),
           (() => {
             let e = navigator.userAgent || navigator.userAgentData || '',
-              t = e.toString().toLowerCase()
+              t = e.toString().toLowerCase();
             function i() {
               return t.includes('edg/')
                 ? 'Edge'
@@ -880,7 +878,7 @@
                       ? 'Chrome'
                       : t.includes('safari/') && !t.includes('chrome/')
                         ? 'Safari'
-                        : 'Browser Lain'
+                        : 'Browser Lain';
             }
             function n() {
               return t.includes('windows nt')
@@ -895,7 +893,7 @@
                       ? 'iOS'
                       : t.includes('linux')
                         ? 'Linux'
-                        : 'OS Lain'
+                        : 'OS Lain';
             }
             var o = (o =
                 (o = {
@@ -962,11 +960,11 @@
                   '<svg width="22" height="22" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#FF1B2D"/><ellipse cx="12" cy="12" rx="4" ry="7" fill="#fff"/></svg>',
                 'Browser Lain':
                   '<svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#999"/></svg>',
-              }
-            ;((document.getElementById('device-os-icons').innerHTML =
+              };
+            ((document.getElementById('device-os-icons').innerHTML =
               c[n()] || c.Linux),
               (document.getElementById('device-browser-icons').innerHTML =
-                a[i()] || a['Browser Lain']))
+                a[i()] || a['Browser Lain']));
           })(),
           fetch('https://ipapi.co/json/')
             .then((e) => (e.ok ? e.json() : Promise.reject()))
@@ -974,18 +972,18 @@
               var t = e.ip || '—',
                 i = e.city || '—',
                 n = e.country_name || '—',
-                e = (e.country_code || '').toLowerCase()
-              ;((document.getElementById('ip-info').textContent = 'IP: ' + t),
+                e = (e.country_code || '').toLowerCase();
+              ((document.getElementById('ip-info').textContent = 'IP: ' + t),
                 (document.getElementById('city-info').textContent =
                   'Kota: ' + i),
                 (document.getElementById('country-info').textContent =
                   'Negara: ' + n),
                 e &&
                   (document.getElementById('flag-wrap').innerHTML =
-                    `<img src="https://flagcdn.com/w40/${e}.png" alt="Bendera ${n}" width="40" height="30" style="border-radius:6px;border:1px solid rgba(255,255,255,.25)" />`))
+                    `<img src="https://flagcdn.com/w40/${e}.png" alt="Bendera ${n}" width="40" height="30" style="border-radius:6px;border:1px solid rgba(255,255,255,.25)" />`));
             })
-            .catch(() => {}))
-      })
+            .catch(() => {}));
+      });
     </script>
 
     });

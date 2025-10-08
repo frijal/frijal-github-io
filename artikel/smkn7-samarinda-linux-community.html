@@ -769,81 +769,82 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- Script FUNGSI LIGHTBOX ---
-          const galleryLinks = document.querySelectorAll('.photo-gallery a')
+          const galleryLinks = document.querySelectorAll('.photo-gallery a');
           galleryLinks.forEach((link) => {
             link.addEventListener('click', (event) => {
-              event.preventDefault() // Mencegah link membuka tab baru
-              const imageUrl = link.href
+              event.preventDefault(); // Mencegah link membuka tab baru
+              const imageUrl = link.href;
               basicLightbox
                 .create(
                   `
                         <img src="${imageUrl}" alt="Tampilan Penuh">
                     `,
                 )
-                .show()
-            })
-          })
+                .show();
+            });
+          });
 
           // --- Script Jaga Data Pribadi Tetap Aman️ ---
           const currentUrl =
-            'https://frijal.github.io/artikel/smkn7-samarinda-linux-community.html'
-          const currentUrlSpan = document.getElementById('current-url')
-          if (currentUrlSpan) currentUrlSpan.textContent = currentUrl
+            'https://frijal.github.io/artikel/smkn7-samarinda-linux-community.html';
+          const currentUrlSpan = document.getElementById('current-url');
+          if (currentUrlSpan) currentUrlSpan.textContent = currentUrl;
 
-          const fbCommentsDiv = document.getElementById('fb-comments')
+          const fbCommentsDiv = document.getElementById('fb-comments');
           if (fbCommentsDiv)
-            fbCommentsDiv.setAttribute('data-href', currentUrl)
+            fbCommentsDiv.setAttribute('data-href', currentUrl);
 
             // Inisialisasi SDK Facebook
-          ;(function (d, s, id) {
+          (function (d, s, id) {
             var js,
-              fjs = d.getElementsByTagName(s)[0]
-            if (d.getElementById(id)) return
-            js = d.createElement(s)
-            js.id = id
+              fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
             js.src =
-              'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0'
-            fjs.parentNode.insertBefore(js, fjs)
-          })(document, 'script', 'facebook-jssdk')
+              'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0';
+            fjs.parentNode.insertBefore(js, fjs);
+          })(document, 'script', 'facebook-jssdk');
 
           // --- Script Tombol Share Media Sosial ---
-          const shareUrl = encodeURIComponent(currentUrl)
-          const shareTitle = encodeURIComponent(document.title)
+          const shareUrl = encodeURIComponent(currentUrl);
+          const shareTitle = encodeURIComponent(document.title);
 
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`
+            `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`;
           document.getElementById('share-wa').href =
-            `https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`
+            `https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`;
           document.getElementById('share-tg').href =
-            `https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`
+            `https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`;
 
-          document.getElementById('share-ig').href = 'https://www.instagram.com'
-          document.getElementById('share-th').href = 'https://www.threads.net'
-          document.getElementById('share-tt').href = 'https://www.tiktok.com'
+          document.getElementById('share-ig').href =
+            'https://www.instagram.com';
+          document.getElementById('share-th').href = 'https://www.threads.net';
+          document.getElementById('share-tt').href = 'https://www.tiktok.com';
 
           // --- Script Informasi Pengguna (IP, OS, Browser) ---
           const getInfo = async () => {
-            const infoContainer = document.getElementById('info-container')
-            const loader = document.getElementById('info-loader')
+            const infoContainer = document.getElementById('info-container');
+            const loader = document.getElementById('info-loader');
 
             try {
               // 1. Ambil Info IP Geografis
-              const response = await fetch('https://ipapi.co/json/')
-              if (!response.ok) throw new Error('Gagal mengambil data IP')
-              const data = await response.json()
+              const response = await fetch('https://ipapi.co/json/');
+              if (!response.ok) throw new Error('Gagal mengambil data IP');
+              const data = await response.json();
 
-              const ipInfoDiv = document.getElementById('ip-info')
+              const ipInfoDiv = document.getElementById('ip-info');
               ipInfoDiv.innerHTML = `
                         <img id="country-flag" src="https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}">
                         <span>${data.ip} (${data.city}, ${data.country_name})</span>
-                    `
+                    `;
 
               // 2. Deteksi OS & Browser
-              const userAgent = navigator.userAgent
-              const osInfoDiv = document.getElementById('os-info')
-              const browserInfoDiv = document.getElementById('browser-info')
+              const userAgent = navigator.userAgent;
+              const osInfoDiv = document.getElementById('os-info');
+              const browserInfoDiv = document.getElementById('browser-info');
 
               const icons = {
                 windows: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,12V6.75L9,5.43V11.91L3,12M21,12V4.5L9,3V11.91L21,12M3,13L9,13.09V19.57L3,18.25V13M21,13L9,13.09V21L21,19.5V13Z"/></svg>`,
@@ -855,70 +856,70 @@
                 firefox: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M17.5,14.6C17,14.7 16,14.8 15.1,14.4C14.8,15.1 14.3,15.6 13.7,16.1C13.8,16.6 13.8,17.1 13.7,17.6C13.4,18.9 12.1,19.9 10.7,19.9C9.2,19.9 8,18.8 7.8,17.4C7.6,16 8.4,14.7 9.8,14.4C10.1,14.3 10.5,14.3 10.8,14.4C11.2,14.1 11.5,13.7 11.7,13.3C11.3,13.1 11,13 10.6,13C9.1,13 7.9,14.2 7.8,15.6C7.2,15.8 5.8,15.9 5.8,14.5C5.8,13.1 7.9,13.2 8.1,11.7C8.2,10.2 6.5,9.6 6.5,8.1C6.5,6.6 8.4,6.7 8.5,5.2C8.6,4.5 8.3,3.8 7.8,3.2C8.4,3.1 9.1,3 9.7,3C11.8,3 13.5,4.1 14.5,5.7C15.1,5.1 16.3,4.5 17.5,4.5C18.2,4.5 18.9,4.7 19.4,5.1C19.2,5.7 19.1,6.3 19.1,7C19.1,8.3 19.7,9.5 20.6,10.4C19.8,11.3 18.7,12.2 17.5,12.2C16.8,12.2 16.1,12 15.6,11.7C15,12.7 14.1,13.5 13,14C14.4,14.2 15.8,14 17,13.4C17.3,13.6 17.5,13.9 17.5,14.2C17.6,14.3 17.6,14.5 17.5,14.6Z" /></svg>`,
                 edge: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10.2,18.4C9.1,18.4 8.2,18.2 7.4,17.9C6.5,17.6 5.8,17.1 5.2,16.5C4.6,15.9 4.2,15.1 3.9,14.3C3.6,13.4 3.5,12.5 3.5,11.4C3.5,9.5 4,8 5.1,6.8C6.2,5.6 7.6,5 9.4,5C10.4,5 11.2,5.2 11.9,5.5C12.6,5.8 13.2,6.3 13.6,6.9L12.3,8.1C12,7.7 11.6,7.5 11.2,7.3C10.8,7.1 10.3,7 9.7,7C8.6,7 7.7,7.4 7.1,8.2C6.5,9 6.2,10.1 6.2,11.5C6.2,12.9 6.5,14 7.2,14.8C7.9,15.6 8.8,16 10,16C10.5,16 11,15.9 11.4,15.7C11.8,15.5 12.2,15.2 12.5,14.8L13.7,16C13.2,16.6 12.5,17.1 11.8,17.5C11.2,17.8 10.2,18.4 10.2,18.4M18.8,12.1C18.8,12.1 18.8,12.1 18.8,12.1C18.8,11.1 18.5,10.3 18,9.6C17.5,8.9 16.8,8.4 16,8.1L16,16.4C16.9,16 17.6,15.4 18.1,14.6C18.6,13.8 18.8,13 18.8,12.1Z" /></svg>`,
                 safari: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M14.12,6.46L12.71,11.29L7.88,9.88L9.29,4.71L14.12,6.46M12,11.5C11.72,11.5 11.5,11.72 11.5,12C11.5,12.28 11.72,12.5 12,12.5C12.28,12.5 12.5,12.28 12.5,12C12.5,11.72 12.28,11.5 12,11.5M17.54,9.88L19.29,4.71L14.71,6.46L16.12,11.29L17.54,9.88M9.88,17.54L11.29,12.71L6.46,14.12L4.71,19.29L9.88,17.54Z" /></svg>`,
-              }
+              };
 
-              let os = 'Unknown OS'
-              let osIcon = ''
+              let os = 'Unknown OS';
+              let osIcon = '';
               if (userAgent.indexOf('Win') != -1) {
-                os = 'Windows'
-                osIcon = icons.windows
+                os = 'Windows';
+                osIcon = icons.windows;
               }
               if (userAgent.indexOf('Mac') != -1) {
-                os = 'macOS'
-                osIcon = icons.mac
+                os = 'macOS';
+                osIcon = icons.mac;
               }
               if (userAgent.indexOf('Linux') != -1) {
-                os = 'Linux'
-                osIcon = icons.linux
+                os = 'Linux';
+                osIcon = icons.linux;
               }
               if (userAgent.indexOf('Android') != -1) {
-                os = 'Android'
-                osIcon = icons.android
+                os = 'Android';
+                osIcon = icons.android;
               }
               if (userAgent.indexOf('like Mac') != -1) {
-                os = 'iOS'
-                osIcon = icons.ios
+                os = 'iOS';
+                osIcon = icons.ios;
               }
 
-              let browser = 'Unknown Browser'
-              let browserIcon = ''
+              let browser = 'Unknown Browser';
+              let browserIcon = '';
               if (userAgent.indexOf('Firefox') != -1) {
-                browser = 'Firefox'
-                browserIcon = icons.firefox
+                browser = 'Firefox';
+                browserIcon = icons.firefox;
               }
               if (
                 userAgent.indexOf('Chrome') != -1 &&
                 navigator.vendor.indexOf('Google Inc') != -1
               ) {
-                browser = 'Chrome'
-                browserIcon = icons.chrome
+                browser = 'Chrome';
+                browserIcon = icons.chrome;
               }
               if (
                 userAgent.indexOf('Safari') != -1 &&
                 navigator.vendor.indexOf('Apple') != -1
               ) {
-                browser = 'Safari'
-                browserIcon = icons.safari
+                browser = 'Safari';
+                browserIcon = icons.safari;
               }
               if (userAgent.indexOf('Edg') != -1) {
-                browser = 'Edge'
-                browserIcon = icons.edge
+                browser = 'Edge';
+                browserIcon = icons.edge;
               }
 
-              osInfoDiv.innerHTML = `${osIcon} <span>${os}</span>`
-              browserInfoDiv.innerHTML = `${browserIcon} <span>${browser}</span>`
+              osInfoDiv.innerHTML = `${osIcon} <span>${os}</span>`;
+              browserInfoDiv.innerHTML = `${browserIcon} <span>${browser}</span>`;
 
-              loader.style.display = 'none'
-              infoContainer.style.display = 'flex'
+              loader.style.display = 'none';
+              infoContainer.style.display = 'flex';
             } catch (error) {
-              console.error('Error fetching user info:', error)
-              loader.innerText = ''
+              console.error('Error fetching user info:', error);
+              loader.innerText = '';
             }
-          }
+          };
 
-          getInfo()
-        })
-      })
+          getInfo();
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

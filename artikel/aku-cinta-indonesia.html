@@ -360,8 +360,8 @@ INDONESIA!!</pre
               ></div>
               <script>
                 document.addEventListener(DOMContentLoaded, () => {
-                  let currentUrl = window.location.href
-                  ;((document.getElementById('current-url').textContent =
+                  let currentUrl = window.location.href;
+                  ((document.getElementById('current-url').textContent =
                     currentUrl),
                     document
                       .getElementById('fb-comments')
@@ -369,10 +369,10 @@ INDONESIA!!</pre
                     (window.fbAsyncInit = function () {
                       if ('undefined' != typeof FB)
                         try {
-                          FB.XFBML.parse()
+                          FB.XFBML.parse();
                         } catch (t) {}
-                    }))
-                })
+                    }));
+                });
               </script>
             </div>
           </article>
@@ -410,7 +410,7 @@ INDONESIA!!</pre
     </div>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;((document.getElementById('updated-time').textContent =
+        ((document.getElementById('updated-time').textContent =
           new Date().toLocaleString('id-ID', {
             year: 'numeric',
             month: 'long',
@@ -419,7 +419,7 @@ INDONESIA!!</pre
           (document.getElementById('date-side').textContent =
             new Date().toLocaleDateString('id-ID')),
           (document.getElementById('year').textContent =
-            new Date().getFullYear()))
+            new Date().getFullYear()));
         let currentUrl = window.location.href,
           metaOg = document.getElementById('meta-og-url'),
           canonical =
@@ -430,17 +430,16 @@ INDONESIA!!</pre
             document.getElementById('fb-comments')),
           cur =
             (fb && fb.setAttribute('data-href', currentUrl),
-            document.getElementById('current-url'))
-        ;(cur && (cur.textContent = currentUrl),
+            document.getElementById('current-url'));
+        (cur && (cur.textContent = currentUrl),
           window.addEventListener('load', () => {
             window.FB &&
               FB.XFBML &&
               'function' == typeof FB.XFBML.parse &&
-              FB.XFBML.parse()
-          }))
-      })
+              FB.XFBML.parse();
+          }));
+      });
     </script>
-
 
     });
     <div id="kategori-aktif"></div>

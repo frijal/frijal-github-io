@@ -62,8 +62,6 @@
 
     <meta name="date" content="2025-09-27" />
 
-
-
     });
     <script type="application/ld+json">
       {
@@ -917,25 +915,25 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
-          const currentUrl = encodeURIComponent(window.location.href)
-          const title = encodeURIComponent(document.title)
+          const currentUrl = encodeURIComponent(window.location.href);
+          const title = encodeURIComponent(document.title);
 
           // 1. Logic Share Buttons
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}`
+            `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}`;
           document.getElementById('share-wa').href =
-            `https://api.whatsapp.com/send?text=${title}%20${currentUrl}`
+            `https://api.whatsapp.com/send?text=${title}%20${currentUrl}`;
           document.getElementById('share-tg').href =
-            `https://t.me/share/url?url=${currentUrl}&text=${title}`
+            `https://t.me/share/url?url=${currentUrl}&text=${title}`;
 
           // 2. Logic URL dan FB Comments (Dipastikan dipanggil setelah DOM content load)
-          const decodedUrl = decodeURIComponent(currentUrl)
-          document.getElementById('current-url').textContent = decodedUrl
+          const decodedUrl = decodeURIComponent(currentUrl);
+          document.getElementById('current-url').textContent = decodedUrl;
           document
             .getElementById('fb-comments')
-            .setAttribute('data-href', decodedUrl)
+            .setAttribute('data-href', decodedUrl);
 
           // 3. Logic Visitor Info (Diubah menjadi async/await yang lebih rapi)
           const icons = {
@@ -959,49 +957,50 @@
               '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9e9e9e"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>',
             ip_generic:
               '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M12 5c-3.859 0-7 3.141-7 7s3.141 7 7 7 7-3.141 7-7-3.141-7-7-7zm0 12c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg>',
-          }
+          };
 
           // Detect OS and Browser (Simplified)
-          const ua = navigator.userAgent
-          let os = { name: 'Unknown OS', icon: icons.unknown }
-          let browser = { name: 'Unknown Browser', icon: icons.unknown }
+          const ua = navigator.userAgent;
+          let os = { name: 'Unknown OS', icon: icons.unknown };
+          let browser = { name: 'Unknown Browser', icon: icons.unknown };
 
-          if (/Windows/i.test(ua)) os = { name: 'Windows', icon: icons.windows }
+          if (/Windows/i.test(ua))
+            os = { name: 'Windows', icon: icons.windows };
           else if (/Macintosh|Mac OS/i.test(ua))
-            os = { name: 'macOS', icon: icons.macos }
+            os = { name: 'macOS', icon: icons.macos };
           else if (/Android/i.test(ua))
-            os = { name: 'Android', icon: icons.android }
+            os = { name: 'Android', icon: icons.android };
           else if (/iPhone|iPad|iPod/i.test(ua))
-            os = { name: 'iOS', icon: icons.ios }
-          else if (/Linux/i.test(ua)) os = { name: 'Linux', icon: icons.linux }
+            os = { name: 'iOS', icon: icons.ios };
+          else if (/Linux/i.test(ua)) os = { name: 'Linux', icon: icons.linux };
 
-          if (/Edg/i.test(ua)) browser = { name: 'Edge', icon: icons.edge }
+          if (/Edg/i.test(ua)) browser = { name: 'Edge', icon: icons.edge };
           else if (/Chrome/i.test(ua) && !/Edg/i.test(ua))
-            browser = { name: 'Chrome', icon: icons.chrome }
+            browser = { name: 'Chrome', icon: icons.chrome };
           else if (/Firefox/i.test(ua))
-            browser = { name: 'Firefox', icon: icons.firefox }
+            browser = { name: 'Firefox', icon: icons.firefox };
           else if (/Safari/i.test(ua) && !/Chrome/i.test(ua))
-            browser = { name: 'Safari', icon: icons.safari }
+            browser = { name: 'Safari', icon: icons.safari };
 
           document.getElementById('os-info').innerHTML =
-            `${os.icon} <span>${os.name}</span>`
+            `${os.icon} <span>${os.name}</span>`;
           document.getElementById('browser-info').innerHTML =
-            `${browser.icon} <span>${browser.name}</span>`
+            `${browser.icon} <span>${browser.name}</span>`;
 
           // Fetch IP and Geo Location (Async/Await)
           fetch('https://ipapi.co/json/')
             .then((e) => e.json())
             .then((e) => {
-              const flagUrl = `https://flagcdn.com/w40/${e.country_code.toLowerCase()}.png`
+              const flagUrl = `https://flagcdn.com/w40/${e.country_code.toLowerCase()}.png`;
               document.getElementById('ip-info').innerHTML =
-                `<img src="${flagUrl}" alt="${e.country_name} flag" title="${e.country_name}"> <span>${e.ip} (${e.city})</span>`
+                `<img src="${flagUrl}" alt="${e.country_name} flag" title="${e.country_name}"> <span>${e.ip} (${e.city})</span>`;
             })
             .catch(() => {
               document.getElementById('ip-info').innerHTML =
-                `${icons.ip_generic} <span>IP Tidak Terdeteksi</span>`
-            })
-        })
-      })
+                `${icons.ip_generic} <span>IP Tidak Terdeteksi</span>`;
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

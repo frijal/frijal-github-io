@@ -741,45 +741,45 @@
             'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgw8YccUNg9pIz-bfhidE1BJw5kp0d6eal5nMYwXPpUOTnXg24OV7POaPNO2qpTfyx4O9gKsyZ-GatrUM0EZ8ILrNU0lzAqlQiVJntSGgLE6RJ34_5RJ-YsvfSwvUPXka_pPDzfZCYNqMZ_/s16000/IMG_20121225_174841.jpg',
             'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXhYMbyZWCu1ohktcx8OBI-JjpA82NfUjg5e2laRhSMbeAg6lfOsL7T8vGkl0BhCWldkEUldrxD7iEMUS37P_nj_QqT12OZZ-JJ5NoiktgboPHnDWcpwdOLw8xum8kPdNGsybDvd1FC6pi/s16000/IMG_20121225_174852.jpg',
           ],
-          currentIndex = 0
+          currentIndex = 0;
         function scrollToSection(g) {
-          document.getElementById(g).scrollIntoView({ behavior: 'smooth' })
+          document.getElementById(g).scrollIntoView({ behavior: 'smooth' });
         }
         function toggleMenu() {
-          var g = document.getElementById('sideMenu')
-          g.style.display = 'flex' === g.style.display ? 'none' : 'flex'
+          var g = document.getElementById('sideMenu');
+          g.style.display = 'flex' === g.style.display ? 'none' : 'flex';
         }
         function openModal(g) {
-          ;((currentIndex = g),
+          ((currentIndex = g),
             (document.getElementById('imgModal').style.display = 'flex'),
-            (document.getElementById('modalImg').src = images[currentIndex]))
+            (document.getElementById('modalImg').src = images[currentIndex]));
         }
         function closeModal() {
-          document.getElementById('imgModal').style.display = 'none'
+          document.getElementById('imgModal').style.display = 'none';
         }
         function changeSlide(g) {
-          ;((currentIndex =
+          ((currentIndex =
             (currentIndex += g) < 0 ? images.length - 1 : currentIndex) >=
             images.length && (currentIndex = 0),
-            (document.getElementById('modalImg').src = images[currentIndex]))
+            (document.getElementById('modalImg').src = images[currentIndex]));
         }
         window.addEventListener('load', () => {
-          document.getElementById('sideMenu').style.display = 'flex'
-        })
-      })
+          document.getElementById('sideMenu').style.display = 'flex';
+        });
+      });
     </script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function scrollToSection(o) {
-          document.getElementById(o).scrollIntoView({ behavior: 'smooth' })
+          document.getElementById(o).scrollIntoView({ behavior: 'smooth' });
         }
-      })
+      });
     </script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let n = (document.querySelector('main section img') || {}).src || ''
-          ;(['og:image', 'twitter:image'].forEach((e, t) =>
+          let n = (document.querySelector('main section img') || {}).src || '';
+          (['og:image', 'twitter:image'].forEach((e, t) =>
             document.head.appendChild(
               document.querySelector(
                 (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`,
@@ -796,9 +796,9 @@
                   property: 'og:url',
                   content: location.href,
                 }),
-            ))
-        })
-      })
+            ));
+        });
+      });
     </script>
     <div class="search-floating-container">
       <input

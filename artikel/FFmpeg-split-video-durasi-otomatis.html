@@ -197,30 +197,28 @@ done</code>
         <strong>-c copy</strong>: Menyalin stream tanpa re-encoding untuk
         mempercepat proses.
       </p>
-
-      
     </div>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Dark mode auto + toggle
-        const body = document.body
+        const body = document.body;
         const prefersDark = window.matchMedia(
           '(prefers-color-scheme: dark)',
-        ).matches
-        if (prefersDark) body.classList.add('dark')
+        ).matches;
+        if (prefersDark) body.classList.add('dark');
 
         document.getElementById('toggleDark').addEventListener('click', () => {
-          body.classList.toggle('dark')
-        })
+          body.classList.toggle('dark');
+        });
 
         // Copy syntax
         function copyCode() {
-          const code = document.getElementById('ffmpegCode').textContent
-          navigator.clipboard.writeText(code)
-          alert('Syntax copied!')
+          const code = document.getElementById('ffmpegCode').textContent;
+          navigator.clipboard.writeText(code);
+          alert('Syntax copied!');
         }
-      })
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

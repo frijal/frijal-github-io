@@ -403,7 +403,6 @@
       <h1>Baghdad: Kisah Dinasti Abbasiyah</h1>
       <div id="iposbrowser"></div>
       <p>Kota Seribu Malam, Cahaya Ilmu, dan Peradaban Dunia</p>
-      
     </header>
     <main>
       <div class="info-bar">
@@ -752,77 +751,75 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Floating button navigation
         document.getElementById('sitemap-btn').onclick = function () {
-          window.location.href = 'https://frijal.github.io/sitemap.html'
-        }
+          window.location.href = 'https://frijal.github.io/sitemap.html';
+        };
         document.getElementById('home-btn').onclick = function () {
-          window.location.href = 'https://frijal.github.io'
-        }
-
-       
+          window.location.href = 'https://frijal.github.io';
+        };
 
         // Gallery lazy-load & lightbox
-        const gallery = document.getElementById('gallery')
-        const imgs = Array.from(gallery.querySelectorAll('img'))
+        const gallery = document.getElementById('gallery');
+        const imgs = Array.from(gallery.querySelectorAll('img'));
         imgs.forEach((img) => {
-          img.src = img.dataset.src // lazy-load fallback
-          img.loading = 'lazy'
-        })
-        let lbIndex = 0
-        const lightbox = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lb-img')
+          img.src = img.dataset.src; // lazy-load fallback
+          img.loading = 'lazy';
+        });
+        let lbIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
         function openLightbox(idx) {
-          lbIndex = idx
-          lbImg.src = imgs[lbIndex].dataset.src
-          lbImg.alt = imgs[lbIndex].alt
-          lightbox.style.display = 'flex'
+          lbIndex = idx;
+          lbImg.src = imgs[lbIndex].dataset.src;
+          lbImg.alt = imgs[lbIndex].alt;
+          lightbox.style.display = 'flex';
         }
         function closeLightbox() {
-          lightbox.style.display = 'none'
+          lightbox.style.display = 'none';
         }
         function showPrev() {
-          lbIndex = (lbIndex - 1 + imgs.length) % imgs.length
-          lbImg.src = imgs[lbIndex].dataset.src
-          lbImg.alt = imgs[lbIndex].alt
+          lbIndex = (lbIndex - 1 + imgs.length) % imgs.length;
+          lbImg.src = imgs[lbIndex].dataset.src;
+          lbImg.alt = imgs[lbIndex].alt;
         }
         function showNext() {
-          lbIndex = (lbIndex + 1) % imgs.length
-          lbImg.src = imgs[lbIndex].dataset.src
-          lbImg.alt = imgs[lbIndex].alt
+          lbIndex = (lbIndex + 1) % imgs.length;
+          lbImg.src = imgs[lbIndex].dataset.src;
+          lbImg.alt = imgs[lbIndex].alt;
         }
         imgs.forEach((img, i) => {
-          img.onclick = () => openLightbox(i)
-        })
-        document.getElementById('lb-close').onclick = closeLightbox
-        document.getElementById('lb-prev').onclick = showPrev
-        document.getElementById('lb-next').onclick = showNext
+          img.onclick = () => openLightbox(i);
+        });
+        document.getElementById('lb-close').onclick = closeLightbox;
+        document.getElementById('lb-prev').onclick = showPrev;
+        document.getElementById('lb-next').onclick = showNext;
         // Close lightbox on outside click
         lightbox.onclick = (e) => {
-          if (e.target === lightbox) closeLightbox()
-        }
+          if (e.target === lightbox) closeLightbox();
+        };
         // Keyboard navigation
         document.addEventListener('keydown', function (e) {
           if (lightbox.style.display === 'flex') {
-            if (e.key === 'ArrowLeft') showPrev()
-            if (e.key === 'ArrowRight') showNext()
-            if (e.key === 'Escape') closeLightbox()
+            if (e.key === 'ArrowLeft') showPrev();
+            if (e.key === 'ArrowRight') showNext();
+            if (e.key === 'Escape') closeLightbox();
           }
-        })
+        });
 
         // Facebook Comments Plugin
         window.fbAsyncInit = function () {
-          FB.init({ xfbml: true, version: 'v13.0' })
-        }
-        ;(function (d, s, id) {
+          FB.init({ xfbml: true, version: 'v13.0' });
+        };
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v13.0'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v13.0';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     });

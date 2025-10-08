@@ -581,21 +581,21 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {
                     /* ignore */
                   }
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
 
@@ -724,24 +724,24 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           // Function to handle the copy button
-          const copyButton = document.querySelector('.copy-button')
-          const codeBlock = document.querySelector('pre code')
+          const copyButton = document.querySelector('.copy-button');
+          const codeBlock = document.querySelector('pre code');
 
           if (copyButton && codeBlock) {
             copyButton.addEventListener('click', () => {
-              const textToCopy = codeBlock.textContent
+              const textToCopy = codeBlock.textContent;
               navigator.clipboard
                 .writeText(textToCopy)
                 .then(() => {
-                  copyButton.textContent = 'Tersalin!'
+                  copyButton.textContent = 'Tersalin!';
                   setTimeout(() => {
-                    copyButton.textContent = 'Salin'
-                  }, 2000)
+                    copyButton.textContent = 'Salin';
+                  }, 2000);
                 })
                 .catch((err) => {
-                  console.error('Gagal menyalin: ', err)
-                })
-            })
+                  console.error('Gagal menyalin: ', err);
+                });
+            });
           }
 
           // Function for info bar
@@ -751,74 +751,74 @@
               macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
               windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
               iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-              androidPlatforms = ['Android']
-            let os = null
+              androidPlatforms = ['Android'];
+            let os = null;
             if (macosPlatforms.indexOf(platform) !== -1) {
-              os = 'macOS'
+              os = 'macOS';
             } else if (iosPlatforms.indexOf(platform) !== -1) {
-              os = 'iOS'
+              os = 'iOS';
             } else if (windowsPlatforms.indexOf(platform) !== -1) {
-              os = 'Windows'
+              os = 'Windows';
             } else if (/Android/.test(userAgent)) {
-              os = 'Android'
+              os = 'Android';
             } else if (!os && /Linux/.test(platform)) {
-              os = 'Linux'
+              os = 'Linux';
             }
-            return os
+            return os;
           }
 
           function getBrowser() {
-            const userAgent = navigator.userAgent
-            let browser = 'Unknown'
+            const userAgent = navigator.userAgent;
+            let browser = 'Unknown';
             if (userAgent.match(/chrome|chromium|crios/i)) {
-              browser = 'Chrome'
+              browser = 'Chrome';
             } else if (userAgent.match(/firefox|fxios/i)) {
-              browser = 'Firefox'
+              browser = 'Firefox';
             } else if (userAgent.match(/safari/i)) {
-              browser = 'Safari'
+              browser = 'Safari';
             } else if (userAgent.match(/opr\//i)) {
-              browser = 'Opera'
+              browser = 'Opera';
             } else if (userAgent.match(/edg/i)) {
-              browser = 'Edge'
+              browser = 'Edge';
             }
-            return browser
+            return browser;
           }
 
           async function getIPInfo() {
             try {
-              const response = await fetch('https://ipapi.co/json/')
-              const data = await response.json()
+              const response = await fetch('https://ipapi.co/json/');
+              const data = await response.json();
               document.getElementById('ip-address').innerHTML =
-                `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg> Alamat IP: ${data.ip}`
+                `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 4c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg> Alamat IP: ${data.ip}`;
               document.getElementById('country-info').innerHTML =
-                `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg> Negara: ${data.country_name} (${data.country_code})`
+                `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg> Negara: ${data.country_name} (${data.country_code})`;
             } catch (error) {
-              console.error('Failed to fetch IP info:', error)
+              console.error('Failed to fetch IP info:', error);
             }
           }
 
           // Share button functionality
-          const articleTitle = encodeURIComponent(document.title)
-          const articleUrl = encodeURIComponent(window.location.href)
+          const articleTitle = encodeURIComponent(document.title);
+          const articleUrl = encodeURIComponent(window.location.href);
 
           document.getElementById('share-facebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`
+            `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`;
           document.getElementById('share-whatsapp').href =
-            `whatsapp://send?text=${articleTitle}%20${articleUrl}`
+            `whatsapp://send?text=${articleTitle}%20${articleUrl}`;
           document.getElementById('share-telegram').href =
-            `https://t.me/share/url?url=${articleUrl}&text=${articleTitle}`
+            `https://t.me/share/url?url=${articleUrl}&text=${articleTitle}`;
           document.getElementById('share-threads').href =
-            `https://www.threads.net/intent/post?text=${articleTitle}%20${articleUrl}`
+            `https://www.threads.net/intent/post?text=${articleTitle}%20${articleUrl}`;
 
           document.getElementById('os-info').innerHTML =
-            `<svg viewBox="0 0 24 24"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z"/><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg> OS: ${getOS()}`
+            `<svg viewBox="0 0 24 24"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z"/><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg> OS: ${getOS()}`;
           document.getElementById('browser-info').innerHTML =
-            `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 12h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg> Browser: ${getBrowser()}`
-          getIPInfo()
-        })
-      })
+            `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 12h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg> Browser: ${getBrowser()}`;
+          getIPInfo();
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

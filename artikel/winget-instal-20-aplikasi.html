@@ -394,74 +394,75 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const gallery = [...document.querySelectorAll('#gallery img')]
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lb-img')
-        let idx = -1
+        const gallery = [...document.querySelectorAll('#gallery img')];
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        let idx = -1;
         function openAt(i) {
-          idx = i
-          lbImg.src = gallery[i].dataset.full
-          lb.classList.add('open')
+          idx = i;
+          lbImg.src = gallery[i].dataset.full;
+          lb.classList.add('open');
         }
         function closeLb() {
-          lb.classList.remove('open')
-          lbImg.src = ''
+          lb.classList.remove('open');
+          lbImg.src = '';
         }
         gallery.forEach((el, i) =>
           el.addEventListener('click', () => openAt(i)),
-        )
-        document.getElementById('lb-close').onclick = closeLb
+        );
+        document.getElementById('lb-close').onclick = closeLb;
         document.getElementById('lb-prev').onclick = () => {
-          if (idx > 0) openAt(idx - 1)
-        }
+          if (idx > 0) openAt(idx - 1);
+        };
         document.getElementById('lb-next').onclick = () => {
-          if (idx < gallery.length - 1) openAt(idx + 1)
-        }
+          if (idx < gallery.length - 1) openAt(idx + 1);
+        };
 
         // Deteksi Browser & OS
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         function detectBrowser() {
-          if (/Edg\//.test(ua)) return 'Edge'
-          if (/Chrome\//.test(ua)) return 'Chrome'
-          if (/Firefox\//.test(ua)) return 'Firefox'
-          if (/Safari\//.test(ua)) return 'Safari'
-          return 'Unknown'
+          if (/Edg\//.test(ua)) return 'Edge';
+          if (/Chrome\//.test(ua)) return 'Chrome';
+          if (/Firefox\//.test(ua)) return 'Firefox';
+          if (/Safari\//.test(ua)) return 'Safari';
+          return 'Unknown';
         }
         function detectOS() {
-          if (/Windows NT/.test(ua)) return 'Windows'
-          if (/Mac OS X/.test(ua)) return 'macOS'
-          if (/Android/.test(ua)) return 'Android'
-          if (/iPhone|iPad/.test(ua)) return 'iOS'
-          if (/Linux/.test(ua)) return 'Linux'
-          return 'Unknown'
+          if (/Windows NT/.test(ua)) return 'Windows';
+          if (/Mac OS X/.test(ua)) return 'macOS';
+          if (/Android/.test(ua)) return 'Android';
+          if (/iPhone|iPad/.test(ua)) return 'iOS';
+          if (/Linux/.test(ua)) return 'Linux';
+          return 'Unknown';
         }
         document.getElementById('badge-browser').textContent =
-          '🧭 Browser: ' + detectBrowser()
-        document.getElementById('badge-os').textContent = '💻 OS: ' + detectOS()
+          '🧭 Browser: ' + detectBrowser();
+        document.getElementById('badge-os').textContent =
+          '💻 OS: ' + detectOS();
 
         // Bendera negara via IP (fallback ID)
         function flagEmoji(cc) {
-          if (!cc || cc.length !== 2) return '🇮🇩'
+          if (!cc || cc.length !== 2) return '🇮🇩';
           const codePoints = [...cc.toUpperCase()].map(
             (c) => 127397 + c.charCodeAt(0),
-          )
-          return String.fromCodePoint(...codePoints)
+          );
+          return String.fromCodePoint(...codePoints);
         }
         function updateLocBadge(city, cc) {
-          const locEl = document.getElementById('badge-loc')
-          const flag = flagEmoji(cc)
+          const locEl = document.getElementById('badge-loc');
+          const flag = flagEmoji(cc);
           locEl.textContent = city
             ? `${flag} ${city}, ${cc}`
-            : `${flag} Lokasi: ${cc || 'ID'}`
+            : `${flag} Lokasi: ${cc || 'ID'}`;
         }
-        updateLocBadge(null, 'ID')
+        updateLocBadge(null, 'ID');
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((d) => {
-            updateLocBadge(d.city, d.country_code)
+            updateLocBadge(d.city, d.country_code);
           })
-          .catch(() => {})
-      })
+          .catch(() => {});
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -253,8 +253,6 @@
 
     <div class="tooltip" id="tooltip"></div>
 
-    
-
     <!-- Facebook Comments Plugin -->
     <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
       <span id="current-url" class="small-muted"></span>
@@ -278,55 +276,51 @@
       ></div>
     </div>
 
-    
-
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Tooltip Interaktif
-        const tooltip = document.getElementById('tooltip')
+        const tooltip = document.getElementById('tooltip');
         document.querySelectorAll('#shortcut-table tbody tr').forEach((row) => {
           row.addEventListener('mouseenter', (e) => {
-            tooltip.textContent = row.dataset.tooltip
-            const rect = row.getBoundingClientRect()
-            tooltip.style.top = rect.top - 30 + window.scrollY + 'px'
-            tooltip.style.left = rect.left + 10 + 'px'
-            tooltip.style.display = 'block'
-          })
+            tooltip.textContent = row.dataset.tooltip;
+            const rect = row.getBoundingClientRect();
+            tooltip.style.top = rect.top - 30 + window.scrollY + 'px';
+            tooltip.style.left = rect.left + 10 + 'px';
+            tooltip.style.display = 'block';
+          });
           row.addEventListener('mouseleave', (e) => {
-            tooltip.style.display = 'none'
-          })
-        })
+            tooltip.style.display = 'none';
+          });
+        });
 
         // Tombol copy
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const combo = e.target.parentElement.textContent
               .replace('Copy', '')
-              .trim()
-            navigator.clipboard.writeText(combo)
-            btn.textContent = 'Copied!'
+              .trim();
+            navigator.clipboard.writeText(combo);
+            btn.textContent = 'Copied!';
             setTimeout(() => {
-              btn.textContent = 'Copy'
-            }, 1500)
-          })
-        })
-
-        
+              btn.textContent = 'Copy';
+            }, 1500);
+          });
+        });
 
         // Facebook Comments setup
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
-        }
-      })
+        };
+      });
     </script>
 
     <!-- JSON-LD -->

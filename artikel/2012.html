@@ -588,13 +588,13 @@
             captions = [],
             overlay =
               (sections.forEach((e) => {
-                var t = e.querySelector('img')
+                var t = e.querySelector('img');
                 t &&
                   (images.push(t.src),
                   (t = e.querySelector('figcaption')
                     ? e.querySelector('figcaption').textContent
                     : ''),
-                  captions.push(t))
+                  captions.push(t));
               }),
               document.getElementById('slideshow-overlay')),
             lightImg = document.getElementById('slideshow-img'),
@@ -610,80 +610,80 @@
                   e.isIntersecting &&
                     (((e = e.target).src = e.dataset.src),
                     e.classList.remove('lazy-img'),
-                    t.unobserve(e))
-                })
+                    t.unobserve(e));
+                });
               },
               { root: thumbContainer, threshold: 0.1 },
-            )
+            );
           function showImage(n) {
-            ;((lightImg.src = images[n]),
+            ((lightImg.src = images[n]),
               (lightCap.textContent = captions[n]),
               Array.from(thumbContainer.children).forEach((e, t) => {
-                e.classList.toggle('active', n === t)
-              }))
+                e.classList.toggle('active', n === t);
+              }));
           }
           function nextImage() {
-            showImage((index = (index + 1) % images.length))
+            showImage((index = (index + 1) % images.length));
           }
           function prevImage() {
-            showImage((index = (index - 1 + images.length) % images.length))
+            showImage((index = (index - 1 + images.length) % images.length));
           }
-          ;(images.forEach((e, t) => {
-            var n = document.createElement('img')
-            ;((n.dataset.src = e),
+          (images.forEach((e, t) => {
+            var n = document.createElement('img');
+            ((n.dataset.src = e),
               n.classList.add('lazy-img'),
               n.addEventListener('click', () => {
-                ;(showImage((index = t)), resetInterval())
+                (showImage((index = t)), resetInterval());
               }),
               thumbContainer.appendChild(n),
-              observer.observe(n))
+              observer.observe(n));
           }),
             showImage(index),
             nextBtn.addEventListener('click', () => {
-              ;(nextImage(), resetInterval())
+              (nextImage(), resetInterval());
             }),
             prevBtn.addEventListener('click', () => {
-              ;(prevImage(), resetInterval())
+              (prevImage(), resetInterval());
             }),
             closeBtn.addEventListener('click', () => {
-              overlay.style.display = 'none'
+              overlay.style.display = 'none';
             }),
             overlay.addEventListener('click', (e) => {
-              e.target === overlay && (overlay.style.display = 'none')
-            }))
-          let slideshowInterval = setInterval(nextImage, 3e3)
+              e.target === overlay && (overlay.style.display = 'none');
+            }));
+          let slideshowInterval = setInterval(nextImage, 3e3);
           function resetInterval() {
-            ;(clearInterval(slideshowInterval),
-              (slideshowInterval = setInterval(nextImage, 3e3)))
+            (clearInterval(slideshowInterval),
+              (slideshowInterval = setInterval(nextImage, 3e3)));
           }
-        })
+        });
       </script>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
           let touchStartX = 0,
-            touchEndX = 0
+            touchEndX = 0;
           function handleSwipeGesture() {
-            var e = touchEndX - touchStartX
+            var e = touchEndX - touchStartX;
             50 < e
               ? (prevImage(), resetInterval())
-              : e < -50 && (nextImage(), resetInterval())
+              : e < -50 && (nextImage(), resetInterval());
           }
-          ;(overlay.addEventListener(
+          (overlay.addEventListener(
             'touchstart',
             (e) => {
-              touchStartX = e.changedTouches[0].screenX
+              touchStartX = e.changedTouches[0].screenX;
             },
             { passive: !0 },
           ),
             overlay.addEventListener(
               'touchend',
               (e) => {
-                ;((touchEndX = e.changedTouches[0].screenX),
-                  handleSwipeGesture())
+                ((touchEndX = e.changedTouches[0].screenX),
+                  handleSwipeGesture());
               },
               { passive: !0 },
-            ))
-        })
+            ));
+        });
       </script>
       <div style="margin-top: 16px; color: var(--muted); font-size: 10px">
         <span id="current-url" class="small-muted"></span>
@@ -706,18 +706,18 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            let currentUrl = window.location.href
-            ;((document.getElementById('current-url').textContent = currentUrl),
+            let currentUrl = window.location.href;
+            ((document.getElementById('current-url').textContent = currentUrl),
               document
                 .getElementById('fb-comments')
                 .setAttribute('data-href', currentUrl),
               (window.fbAsyncInit = function () {
                 if ('undefined' != typeof FB)
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (t) {}
-              }))
-          })
+              }));
+          });
         </script>
       </div>
     </main>
@@ -727,7 +727,7 @@
         document.addEventListener('DOMContentLoaded', () => {
           document
             .querySelectorAll('img')
-            .forEach((e) => e.setAttribute('loading', 'lazy'))
+            .forEach((e) => e.setAttribute('loading', 'lazy'));
           let e = document.querySelectorAll('section'),
             t = new IntersectionObserver(
               (e) => {
@@ -735,20 +735,20 @@
                   e.isIntersecting &&
                     ((e.target.style.opacity = '1'),
                     (e.target.style.transform = 'translateY(0)'),
-                    t.unobserve(e.target))
-                })
+                    t.unobserve(e.target));
+                });
               },
               { threshold: 0.1 },
-            )
-          e.forEach((e) => t.observe(e))
-        })
-      })
+            );
+          e.forEach((e) => t.observe(e));
+        });
+      });
     </script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let n = (document.querySelector('main section img') || {}).src || ''
-          ;(['og:image', 'twitter:image'].forEach((e, t) =>
+          let n = (document.querySelector('main section img') || {}).src || '';
+          (['og:image', 'twitter:image'].forEach((e, t) =>
             document.head.appendChild(
               document.querySelector(
                 (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`,
@@ -765,9 +765,9 @@
                   property: 'og:url',
                   content: location.href,
                 }),
-            ))
-        })
-      })
+            ));
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -841,56 +841,56 @@ WS_FTP | gFTP | http://gftp.seul.org
 ZoneAlarm | Firestarter | http://www.fs-security.com
 ZoneAlarm | Guarddog | http://www.simonzone.com/software/guarddog
 Zscreen | Shutter | http://shutter-project.org
-`
-          const tableBody = document.querySelector('table tbody')
-          const loadingMessage = document.getElementById('loading-message')
-          const rows = rawData.trim().split('\n')
+`;
+          const tableBody = document.querySelector('table tbody');
+          const loadingMessage = document.getElementById('loading-message');
+          const rows = rawData.trim().split('\n');
 
           // Hapus pesan "Memuat" sebelum menambahkan data
           if (loadingMessage) {
-            tableBody.innerHTML = ''
+            tableBody.innerHTML = '';
           }
 
           rows.forEach((row) => {
-            const columns = row.split('|').map((s) => s.trim())
+            const columns = row.split('|').map((s) => s.trim());
             if (columns.length === 3) {
-              const tr = document.createElement('tr')
+              const tr = document.createElement('tr');
 
-              const url = columns[2].replace(/[()]$/, '') // Clean trailing parenthesis
+              const url = columns[2].replace(/[()]$/, ''); // Clean trailing parenthesis
 
               tr.innerHTML = `
                         <td data-label="Aplikasi Windows">${columns[0]}</td>
                         <td data-label="Alternatif di Linux">${columns[1]}</td>
                         <td data-label="Situs Web Resmi"><a href="${url}" rel="noreferrer">${url.replace(/^(http|https):\/\//, '').replace(/\/$/, '')}</a></td>
-                    `
-              tableBody.appendChild(tr)
+                    `;
+              tableBody.appendChild(tr);
             }
-          })
+          });
 
           // --- Sharing & Facebook Comment Initialization ---
-          const pageUrl = window.location.href
-          const encodedUrl = encodeURIComponent(pageUrl)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = window.location.href;
+          const encodedUrl = encodeURIComponent(pageUrl);
+          const pageTitle = encodeURIComponent(document.title);
 
           // Update Social Sharing Links
           document.querySelector('.social-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
           // Twitter and X share using the same intent URL
           document.querySelector('.social-tw').href =
-            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`;
           document.querySelector('.social-x').href =
-            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageTitle}`;
           document.querySelector('.social-wa').href =
-            `https://api.whatsapp.com/send?text=${pageTitle}%20${encodedUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle}%20${encodedUrl}`;
           document.querySelector('.social-tg').href =
-            `https://t.me/share/url?url=${encodedUrl}&text=${pageTitle}`
+            `https://t.me/share/url?url=${encodedUrl}&text=${pageTitle}`;
 
           // Update FB Comments URL
-          const currentUrlElem = document.getElementById('current-url')
-          if (currentUrlElem) currentUrlElem.textContent = pageUrl
+          const currentUrlElem = document.getElementById('current-url');
+          if (currentUrlElem) currentUrlElem.textContent = pageUrl;
 
-          const fbCommentsElem = document.getElementById('fb-comments')
-          if (fbCommentsElem) fbCommentsElem.setAttribute('data-href', pageUrl)
+          const fbCommentsElem = document.getElementById('fb-comments');
+          if (fbCommentsElem) fbCommentsElem.setAttribute('data-href', pageUrl);
 
           // --- User Info Detection ---
           const osIcons = {
@@ -900,67 +900,67 @@ Zscreen | Shutter | http://shutter-project.org
             Android: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.2,10.29L14.12,9.21L12,11.33L9.88,9.21L8.8,10.29L10.92,12.41L8.8,14.54L9.88,15.62L12,13.5L14.12,15.62L15.2,14.54L13.08,12.41L15.2,10.29M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,19H7V5H17V19Z" /></svg>`,
             iOS: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 2.13a8.48 8.48 0 0 0-2.5 0c-1.42 1.1-2.2 2.8-2.12 4.67.12 2.44 1.7 4.3 3.32 4.3.43 0 .88-.1 1.3-.3 1.1-.53 1.62-1.74 1.5-2.97-.1-1.28-.78-2.5-1.5-3.32zm3.83 2.62c-1.1-1.3-2.8-2-4.43-2-1 0-2 .3-2.8.8.8 1.1 1.22 2.4 1.1 3.7-.1 1.8-1.12 3.5-2.7 4.1-1.2.5-2.5.5-3.7 0-2.8-.9-4.72-3.5-4.72-6.5 0-3.3 2.3-6.2 5.3-6.9 1-.22 2.1-.3 3.1-.3 1.5 0 2.9.4 4.2 1.2 1.3.8 2.3 2 2.9 3.4-.4.2-.8.5-1.2.9z"/></svg>`,
             Unknown: ``,
-          }
+          };
           const browserIcons = {
             Firefox: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2Z"/></svg>`,
             Edge: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10.4,4.2C13.1,4.2 15.3,5.1 17.1,6.4L14.3,9.3C13.5,8.8 12.6,8.5 11.5,8.5C9.5,8.5 7.8,10 7.8,12C7.8,12.1 7.8,12.3 7.8,12.4L4.9,9.5C5.9,6.5 7.9,4.2 10.4,4.2M18.1,12C18.1,11.9 18.1,11.7 18.1,11.6L14.7,8.2C14.7,9 14.5,9.8 14.2,10.6L10.3,14.4C11.1,14.7 12,14.8 13,14.8C15,14.8 16.7,13.5 17.2,11.7C17.2,11.6 17.3,11.5 17.3,11.4C17.7,11.5 18,11.8 18.1,12M5.9,13.2C5.5,12.6 5.3,11.8 5.3,11C5.3,8.7 6.9,6.8 9,6.5L12.4,9.9C12.2,10.2 12.2,10.6 12.2,11C12.2,11.4 12.3,11.8 12.4,12.1L8.3,16.2C7.1,15.5 6.3,14.5 5.9,13.2Z"/></svg>`,
             Chrome: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2C6.47,2 2,6.5 2,12C2,17.5 6.47,22 12,22C17.53,22 22,17.5 22,12C22,6.5 17.53,2 12,2M0,12C0,5.37 5.37,0 12,0C18.63,0 24,5.37 24,12C24,18.63 18.63,24 12,24C5.37,24 0,18.63 0,12M17.3,8.3C16.3,6.7 14.3,5.8 12.3,5.8C8.8,5.8 6.1,8.5 6.1,12C6.1,15.5 8.8,18.2 12.3,18.2C14.3,18.2 16.3,17.3 17.3,15.7L15.3,14.7C14.7,15.7 13.5,16.2 12.3,16.2C9.8,16.2 8.1,14.2 8.1,12C8.1,9.8 9.8,7.8 12.3,7.8C13.5,7.8 14.7,8.3 15.3,9.3L17.3,8.3M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/></svg>`,
             Safari: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M15.5,6.5L14,14L6.5,15.5L8,8L15.5,6.5M12,10.9A1.1,1.1 0 0,0 10.9,12A1.1,1.1 0 0,0 12,13.1A1.1,1.1 0 0,0 13.1,12A1.1,1.1 0 0,0 12,10.9Z"/></svg>`,
             Unknown: ``,
-          }
+          };
 
           const getOS = () => {
-            const ua = navigator.userAgent
+            const ua = navigator.userAgent;
             if (ua.includes('Win'))
-              return { name: 'Windows', icon: osIcons.Windows }
+              return { name: 'Windows', icon: osIcons.Windows };
             if (ua.includes('Mac'))
-              return { name: 'macOS', icon: osIcons.macOS }
+              return { name: 'macOS', icon: osIcons.macOS };
             if (ua.includes('Linux'))
-              return { name: 'Linux', icon: osIcons.Linux }
+              return { name: 'Linux', icon: osIcons.Linux };
             if (ua.includes('Android'))
-              return { name: 'Android', icon: osIcons.Android }
+              return { name: 'Android', icon: osIcons.Android };
             if (ua.includes('iPhone') || ua.includes('iPad'))
-              return { name: 'iOS', icon: osIcons.iOS }
-            return { name: 'Unknown', icon: osIcons.Unknown }
-          }
+              return { name: 'iOS', icon: osIcons.iOS };
+            return { name: 'Unknown', icon: osIcons.Unknown };
+          };
 
           const getBrowser = () => {
-            const ua = navigator.userAgent
+            const ua = navigator.userAgent;
             if (ua.includes('Edg'))
-              return { name: 'Edge', icon: browserIcons.Edge } // Cek Edge sebelum Chrome
+              return { name: 'Edge', icon: browserIcons.Edge }; // Cek Edge sebelum Chrome
             if (ua.includes('Chrome'))
-              return { name: 'Chrome', icon: browserIcons.Chrome }
+              return { name: 'Chrome', icon: browserIcons.Chrome };
             if (ua.includes('Firefox'))
-              return { name: 'Firefox', icon: browserIcons.Firefox }
+              return { name: 'Firefox', icon: browserIcons.Firefox };
             if (ua.includes('Safari'))
-              return { name: 'Safari', icon: browserIcons.Safari }
-            return { name: 'Unknown', icon: browserIcons.Unknown }
-          }
+              return { name: 'Safari', icon: browserIcons.Safari };
+            return { name: 'Unknown', icon: browserIcons.Unknown };
+          };
 
-          const os = getOS()
-          document.getElementById('os-name').textContent = os.name
-          document.getElementById('os-icon').innerHTML = os.icon
+          const os = getOS();
+          document.getElementById('os-name').textContent = os.name;
+          document.getElementById('os-icon').innerHTML = os.icon;
 
-          const browser = getBrowser()
-          document.getElementById('browser-name').textContent = browser.name
-          document.getElementById('browser-icon').innerHTML = browser.icon
+          const browser = getBrowser();
+          document.getElementById('browser-name').textContent = browser.name;
+          document.getElementById('browser-icon').innerHTML = browser.icon;
 
           // Fetch IP and Flag
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
               document.getElementById('ip-address').textContent =
-                data.ip + ` (${data.city}, ${data.country_code})`
+                data.ip + ` (${data.city}, ${data.country_code})`;
               document.getElementById('country-flag').innerHTML =
-                `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}" width="16" height="12">`
+                `<img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}" width="16" height="12">`;
             })
             .catch((error) => {
               document.getElementById('ip-address').textContent =
-                'Tidak dapat memuat'
+                'Tidak dapat memuat';
               // console.error('Error fetching IP:', error); // Dihapus untuk output bersih
-            })
-        })
-      })
+            });
+        });
+      });
     </script>
     });
     <script

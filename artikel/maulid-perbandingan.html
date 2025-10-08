@@ -460,9 +460,9 @@
         document.addEventListener('DOMContentLoaded', () => {
           document
             .querySelectorAll('pre code')
-            .forEach((el) => hljs.highlightElement(el))
-        })
-      })
+            .forEach((el) => hljs.highlightElement(el));
+        });
+      });
     </script>
     <meta name="date" content="2025-09-28" />
 
@@ -882,23 +882,23 @@
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                const currentUrl = window.location.href
-                document.getElementById('current-url').textContent = currentUrl
+                const currentUrl = window.location.href;
+                document.getElementById('current-url').textContent = currentUrl;
                 // Set data-href FB Comments ke URL halaman ini
                 document
                   .getElementById('fb-comments')
-                  .setAttribute('data-href', currentUrl)
+                  .setAttribute('data-href', currentUrl);
                 // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
                 window.fbAsyncInit = function () {
                   if (typeof FB !== 'undefined') {
                     try {
-                      FB.XFBML.parse()
+                      FB.XFBML.parse();
                     } catch (e) {
                       /* ignore */
                     }
                   }
-                }
-              })
+                };
+              });
             </script>
           </div>
         </div>
@@ -1031,44 +1031,44 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        ;(function () {
-          const lb = document.getElementById('lightbox')
-          const img = document.getElementById('lb-img')
-          const cap = document.getElementById('lb-cap')
-          const closeBtn = document.getElementById('lb-close')
+        (function () {
+          const lb = document.getElementById('lightbox');
+          const img = document.getElementById('lb-img');
+          const cap = document.getElementById('lb-cap');
+          const closeBtn = document.getElementById('lb-close');
           document.querySelectorAll('a.lb').forEach((a) => {
             a.addEventListener('click', (e) => {
-              e.preventDefault()
-              img.src = a.getAttribute('href')
-              cap.textContent = a.getAttribute('data-caption') || ''
-              lb.classList.add('open')
-              document.body.style.overflow = 'hidden'
-            })
-          })
+              e.preventDefault();
+              img.src = a.getAttribute('href');
+              cap.textContent = a.getAttribute('data-caption') || '';
+              lb.classList.add('open');
+              document.body.style.overflow = 'hidden';
+            });
+          });
           function closeLB() {
-            lb.classList.remove('open')
-            img.src = ''
-            cap.textContent = ''
-            document.body.style.overflow = ''
+            lb.classList.remove('open');
+            img.src = '';
+            cap.textContent = '';
+            document.body.style.overflow = '';
           }
-          closeBtn.addEventListener('click', closeLB)
+          closeBtn.addEventListener('click', closeLB);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLB()
-          })
+            if (e.target === lb) closeLB();
+          });
           document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLB()
-          })
-        })()
+            if (e.key === 'Escape') closeLB();
+          });
+        })();
 
         // Share links (gunakan URL canonical)
-        ;(function () {
+        (function () {
           const url = encodeURIComponent(
             'https://frijal.github.io/artikel/maulid-perbandingan.html',
-          )
+          );
           const title = encodeURIComponent(
             'Perbandingan Pandangan Ulama tentang Maulid Nabi',
-          )
-          const s = document.getElementById('share')
+          );
+          const s = document.getElementById('share');
           const map = {
             '.fb': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
             '.tw': `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
@@ -1078,125 +1078,125 @@
             '.ig': `https://www.instagram.com/`,
             '.th': `https://www.threads.net/`,
             '.tt': `https://www.tiktok.com/`,
-          }
+          };
           Object.entries(map).forEach(([sel, href]) => {
-            const a = s.querySelector(sel)
-            if (a) a.href = href
-          })
-        })()
+            const a = s.querySelector(sel);
+            if (a) a.href = href;
+          });
+        })();
 
         // Copy button (untuk snippet)
         document.addEventListener('click', (e) => {
           if (e.target.matches('.copy-btn')) {
-            const pre = e.target.closest('.codewrap').querySelector('pre')
-            const text = pre ? pre.innerText : ''
+            const pre = e.target.closest('.codewrap').querySelector('pre');
+            const text = pre ? pre.innerText : '';
             if (navigator.clipboard && text) {
               navigator.clipboard.writeText(text).then(() => {
-                const old = e.target.textContent
-                e.target.textContent = 'Copied!'
-                setTimeout(() => (e.target.textContent = old), 1200)
-              })
+                const old = e.target.textContent;
+                e.target.textContent = 'Copied!';
+                setTimeout(() => (e.target.textContent = old), 1200);
+              });
             }
           }
-        })
+        });
 
         // UA parsing (sederhana)
-        ;(function () {
-          const ua = navigator.userAgent
-          const bEl = document.getElementById('ua-browser')
-          const oEl = document.getElementById('ua-os')
-          const icons = document.getElementById('ua-icons')
+        (function () {
+          const ua = navigator.userAgent;
+          const bEl = document.getElementById('ua-browser');
+          const oEl = document.getElementById('ua-os');
+          const icons = document.getElementById('ua-icons');
 
           function chip(svgPath, label) {
-            const div = document.createElement('div')
-            div.className = 'chip'
-            div.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="${svgPath}"></path></svg><span>${label}</span>`
-            return div
+            const div = document.createElement('div');
+            div.className = 'chip';
+            div.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="${svgPath}"></path></svg><span>${label}</span>`;
+            return div;
           }
 
           let browser = 'Tidak diketahui',
-            bIcon = 'M3 3h18v18H3z'
+            bIcon = 'M3 3h18v18H3z';
           if (/Edg\//.test(ua)) {
-            browser = 'Microsoft Edge'
+            browser = 'Microsoft Edge';
             bIcon =
-              'M12 2a10 10 0 1 0 0 20c5.5 0 8-3.5 8-7.5-2 1.5-5 2-7 2a4.5 4.5 0 1 1 0-9c2 0 5 .5 7 2C20 5.5 17.5 2 12 2z'
+              'M12 2a10 10 0 1 0 0 20c5.5 0 8-3.5 8-7.5-2 1.5-5 2-7 2a4.5 4.5 0 1 1 0-9c2 0 5 .5 7 2C20 5.5 17.5 2 12 2z';
           } else if (/Chrome\//.test(ua)) {
-            browser = 'Google Chrome'
+            browser = 'Google Chrome';
             bIcon =
-              'M12 2a10 10 0 0 1 8.66 5H12L7.67 7A10 10 0 0 1 12 2zm0 20A10 10 0 0 1 3.34 17H12l4.33.01A10 10 0 0 1 12 22zm10-10a10 10 0 0 1-1.34 5H12l-2.17-3.76L12 7h8.66c.22.95.34 1.96.34 3z'
+              'M12 2a10 10 0 0 1 8.66 5H12L7.67 7A10 10 0 0 1 12 2zm0 20A10 10 0 0 1 3.34 17H12l4.33.01A10 10 0 0 1 12 22zm10-10a10 10 0 0 1-1.34 5H12l-2.17-3.76L12 7h8.66c.22.95.34 1.96.34 3z';
           } else if (/Firefox\//.test(ua)) {
-            browser = 'Mozilla Firefox'
+            browser = 'Mozilla Firefox';
             bIcon =
-              'M12 2c5.5 0 10 4.5 10 10 0 4.42-2.86 8.17-6.82 9.5.46-1.53.72-3.38.18-5.02-1.67-5.19-6.78-4.34-8.86-9.27C5.37 7.48 5 8.7 5 10c0 3.87 3.13 7 7 7 1.66 0 3.19-.58 4.39-1.55C15.38 19.9 13.78 22 12 22 6.5 22 2 17.5 2 12S6.5 2 12 2z'
+              'M12 2c5.5 0 10 4.5 10 10 0 4.42-2.86 8.17-6.82 9.5.46-1.53.72-3.38.18-5.02-1.67-5.19-6.78-4.34-8.86-9.27C5.37 7.48 5 8.7 5 10c0 3.87 3.13 7 7 7 1.66 0 3.19-.58 4.39-1.55C15.38 19.9 13.78 22 12 22 6.5 22 2 17.5 2 12S6.5 2 12 2z';
           } else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) {
-            browser = 'Safari'
+            browser = 'Safari';
             bIcon =
-              'M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0 2l6 10-10 6L6 8l6-4z'
+              'M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0 2l6 10-10 6L6 8l6-4z';
           } else if (/OPR\//.test(ua) || /Opera/.test(ua)) {
-            browser = 'Opera'
+            browser = 'Opera';
             bIcon =
-              'M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 3c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z'
+              'M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 3c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z';
           }
 
           let os = 'Tidak diketahui',
-            oIcon = 'M3 3h18v18H3z'
+            oIcon = 'M3 3h18v18H3z';
           if (/Windows NT/.test(ua)) {
-            os = 'Windows'
+            os = 'Windows';
             oIcon =
-              'M3 4l8-1v9H3V4zm9-1l9-2v12h-9V3zM3 13h8v9l-8-1v-8zm9 0h9v10l-9-2V13z'
+              'M3 4l8-1v9H3V4zm9-1l9-2v12h-9V3zM3 13h8v9l-8-1v-8zm9 0h9v10l-9-2V13z';
           } else if (/Android/.test(ua)) {
-            os = 'Android'
+            os = 'Android';
             oIcon =
-              'M6 8h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8zm10.5-3.5L18 3l1.5 1.5-.7.7L16.5 3.7zm-9 0L8 3 6.5 4.5l.7.7L7.5 3.7zM12 5a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4zM5 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1zm14 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1z'
+              'M6 8h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8zm10.5-3.5L18 3l1.5 1.5-.7.7L16.5 3.7zm-9 0L8 3 6.5 4.5l.7.7L7.5 3.7zM12 5a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4zM5 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1zm14 0a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1z';
           } else if (/iPhone|iPad|iPod|Mac OS X|Macintosh/.test(ua)) {
-            os = 'Apple iOS/macOS'
+            os = 'Apple iOS/macOS';
             oIcon =
-              'M16.365 1.43c0 1.14-.48 2.24-1.25 3.1-.77.86-2.04 1.52-3.1 1.52-.15 0-.3-.01-.45-.03.02-1.1.49-2.25 1.27-3.1.78-.86 2.08-1.52 3.1-1.52.14 0 .29.01.43.03zM20.5 17.3c-.46 1.07-.69 1.55-1.29 2.5-.84 1.3-2.03 2.92-3.5 2.94-1.47.03-1.94-.93-3.15-.93-1.21 0-1.58.9-3.28.92-1.7.02-2.12-.74-3.59-2.14-1.95-1.34-3.47-3.94-3.47-6.83 0-3.23 1.7-5.22 3.38-6.37 1.61-1.05 2.73-.8 3.58-.8 1.45 0 2.02.73 3.74.75.41.01 1.43-.14 2.36-.52 1.02-.39 1.95-1.02 2.8-1.9.95-.89 1.94-2.32 2.17-3.42.14-.85.33-1.49.71-2 .35.79.51 1.49.65 2.06.14.61.44 1.57.94 2.7.57 1.27 1.38 2.24 2.4 3.47.78 1.03 1.43 2.37 1.43 3.91 0 1.26-.35 2.45-.88 3.64z'
+              'M16.365 1.43c0 1.14-.48 2.24-1.25 3.1-.77.86-2.04 1.52-3.1 1.52-.15 0-.3-.01-.45-.03.02-1.1.49-2.25 1.27-3.1.78-.86 2.08-1.52 3.1-1.52.14 0 .29.01.43.03zM20.5 17.3c-.46 1.07-.69 1.55-1.29 2.5-.84 1.3-2.03 2.92-3.5 2.94-1.47.03-1.94-.93-3.15-.93-1.21 0-1.58.9-3.28.92-1.7.02-2.12-.74-3.59-2.14-1.95-1.34-3.47-3.94-3.47-6.83 0-3.23 1.7-5.22 3.38-6.37 1.61-1.05 2.73-.8 3.58-.8 1.45 0 2.02.73 3.74.75.41.01 1.43-.14 2.36-.52 1.02-.39 1.95-1.02 2.8-1.9.95-.89 1.94-2.32 2.17-3.42.14-.85.33-1.49.71-2 .35.79.51 1.49.65 2.06.14.61.44 1.57.94 2.7.57 1.27 1.38 2.24 2.4 3.47.78 1.03 1.43 2.37 1.43 3.91 0 1.26-.35 2.45-.88 3.64z';
           } else if (/Linux/.test(ua)) {
-            os = 'Linux'
+            os = 'Linux';
             oIcon =
-              'M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1 4h2v4h-2V6zm0 6h2v6h-2v-6z'
+              'M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1 4h2v4h-2V6zm0 6h2v6h-2v-6z';
           }
 
           const bVer =
-            (ua.match(/(Edg|Chrome|Firefox|Version)\/([\d.]+)/) || [])[2] || ''
+            (ua.match(/(Edg|Chrome|Firefox|Version)\/([\d.]+)/) || [])[2] || '';
           let oVer =
             (ua.match(/Windows NT ([\d.]+)/) ||
               ua.match(/Android ([\d.]+)/) ||
               ua.match(/OS ([\d_]+)/) ||
-              [])[1] || ''
-          oVer = oVer ? oVer.replace(/_/g, '.') : oVer
+              [])[1] || '';
+          oVer = oVer ? oVer.replace(/_/g, '.') : oVer;
 
-          bEl.innerHTML = `<strong>Browser:</strong> ${browser} ${bVer ? 'v' + bVer : ''}`
-          oEl.innerHTML = `<strong>OS:</strong> ${os} ${oVer ? 'v' + oVer : ''}`
-          icons.appendChild(chip(bIcon, browser))
-          icons.appendChild(chip(oIcon, os))
-        })()
+          bEl.innerHTML = `<strong>Browser:</strong> ${browser} ${bVer ? 'v' + bVer : ''}`;
+          oEl.innerHTML = `<strong>OS:</strong> ${os} ${oVer ? 'v' + oVer : ''}`;
+          icons.appendChild(chip(bIcon, browser));
+          icons.appendChild(chip(oIcon, os));
+        })();
 
         // IP + flag (ipapi.co)
-        ;(function () {
-          const ipEl = document.getElementById('ip-info')
-          const cityEl = document.getElementById('city-info')
-          const flagImg = document.getElementById('flag')
-          const countryName = document.getElementById('country-name')
+        (function () {
+          const ipEl = document.getElementById('ip-info');
+          const cityEl = document.getElementById('city-info');
+          const flagImg = document.getElementById('flag');
+          const countryName = document.getElementById('country-name');
 
           fetch('https://ipapi.co/json/')
             .then((r) => r.json())
             .then((data) => {
-              ipEl.innerHTML = `<strong>IP Publik:</strong> ${data.ip || '—'}`
-              cityEl.innerHTML = `<strong>Kota:</strong> ${data.city || '—'}`
-              countryName.textContent = data.country_name || '—'
-              const code = (data.country_code || '').toLowerCase()
-              flagImg.src = code ? `https://flagcdn.com/w40/${code}.png` : ''
+              ipEl.innerHTML = `<strong>IP Publik:</strong> ${data.ip || '—'}`;
+              cityEl.innerHTML = `<strong>Kota:</strong> ${data.city || '—'}`;
+              countryName.textContent = data.country_name || '—';
+              const code = (data.country_code || '').toLowerCase();
+              flagImg.src = code ? `https://flagcdn.com/w40/${code}.png` : '';
               flagImg.alt = data.country_name
                 ? `Bendera ${data.country_name}`
-                : 'Bendera negara'
+                : 'Bendera negara';
             })
             .catch(() => {
               /* fallback silent */
-            })
-        })()
-      })
+            });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

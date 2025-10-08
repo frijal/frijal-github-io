@@ -62,8 +62,6 @@
     />
     <meta name="twitter:site" content="@frijal" />
 
-
-
     <style>
       :root {
         --emerald: #2a9d8f;
@@ -865,9 +863,9 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Script 1: Deteksi Lingkungan & IP
-        ;(() => {
+        (() => {
           let a = document.getElementById('env-text'),
-            n = document.getElementById('ip-text')
+            n = document.getElementById('ip-text');
           {
             let t = navigator.userAgent,
               e = 'OS tidak diketahui',
@@ -881,44 +879,44 @@
                       : /iPhone|iPad|iPod/.test(t)
                         ? (e = 'iOS')
                         : /Linux/.test(t) && (e = 'Linux'),
-                'Browser tidak diketahui')
-            ;(/Edg\//.test(t)
+                'Browser tidak diketahui');
+            (/Edg\//.test(t)
               ? (i = 'Microsoft Edge')
               : /Chrome\//.test(t)
                 ? (i = 'Chrome')
                 : /Safari\//.test(t) && !/Chrome\//.test(t)
                   ? (i = 'Safari')
                   : /Firefox\//.test(t) && (i = 'Firefox'),
-              (a.textContent = i + ' di ' + e))
+              (a.textContent = i + ' di ' + e));
           }
-          ;(async () => {
+          (async () => {
             try {
-              var t = await fetch('https://ipapi.co/json/')
-              if (!t.ok) throw new Error('fail')
+              var t = await fetch('https://ipapi.co/json/');
+              if (!t.ok) throw new Error('fail');
               var e = await t.json(),
                 i = e.city || 'Kota tidak diketahui',
                 a = e.country_name || 'Negara',
                 o = (e.country_code || '').toLowerCase(),
-                r = o ? `https://flagcdn.com/24x18/${o}.png` : ''
+                r = o ? `https://flagcdn.com/24x18/${o}.png` : '';
               n.innerHTML =
                 (r
                   ? `<img src="${r}" alt="${a}" style="vertical-align:middle;margin-right:6px;border:1px solid #223;"/>`
                   : '') +
                 i +
                 ', ' +
-                a
+                a;
             } catch (t) {
-              n.textContent = 'Lokasi IP tidak tersedia'
+              n.textContent = 'Lokasi IP tidak tersedia';
             }
-          })()
-        })()
-      })
+          })();
+        })();
+      });
     </script>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Script 2: Lightbox & Copy Link
-        ;(() => {
+        (() => {
           let t = Array.from(document.querySelectorAll('#gallery img')),
             n = document.getElementById('lightbox'),
             c = document.getElementById('lightbox-img'),
@@ -926,54 +924,54 @@
             e = document.getElementById('prev'),
             l = document.getElementById('next'),
             a = document.getElementById('close'),
-            o = 0
+            o = 0;
 
           function d(e) {
-            ;((o = e),
+            ((o = e),
               (e = t[o]),
               (c.src = e.src),
               (c.alt = e.alt || ''),
               (i.textContent = e.dataset.caption || ''),
-              n.classList.add('active'))
+              n.classList.add('active'));
           }
 
           function r() {
-            n.classList.remove('active')
+            n.classList.remove('active');
           }
 
           function s() {
-            d((o - 1 + t.length) % t.length)
+            d((o - 1 + t.length) % t.length);
           }
 
           function m() {
-            d((o + 1) % t.length)
+            d((o + 1) % t.length);
           }
-          ;(t.forEach((e, t) => e.addEventListener('click', () => d(t))),
+          (t.forEach((e, t) => e.addEventListener('click', () => d(t))),
             e.addEventListener('click', s),
             l.addEventListener('click', m),
             a.addEventListener('click', r),
             n.addEventListener('click', (e) => {
-              e.target === n && r()
+              e.target === n && r();
             }),
             document.addEventListener('keydown', (e) => {
               n.classList.contains('active') &&
                 ('ArrowLeft' === e.key && s(),
                 'ArrowRight' === e.key && m(),
                 'Escape' === e.key) &&
-                r()
-            }))
-          let g = document.getElementById('copy-link')
+                r();
+            }));
+          let g = document.getElementById('copy-link');
           g.addEventListener('click', async () => {
             try {
-              ;(await navigator.clipboard.writeText(location.href),
+              (await navigator.clipboard.writeText(location.href),
                 (g.textContent = '✅ Tersalin!'),
-                setTimeout(() => (g.textContent = '🔗 Salin Link'), 1500))
+                setTimeout(() => (g.textContent = '🔗 Salin Link'), 1500));
             } catch (e) {
-              alert('Gagal menyalin link')
+              alert('Gagal menyalin link');
             }
-          })
-        })()
-      })
+          });
+        })();
+      });
     </script>
 
     });

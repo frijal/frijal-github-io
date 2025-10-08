@@ -250,19 +250,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
@@ -279,16 +279,16 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode(btn) {
-          const code = btn.previousElementSibling.innerText
-          navigator.clipboard.writeText(code)
-          btn.textContent = 'Copied!'
-          setTimeout(() => (btn.textContent = 'Copy'), 1500)
+          const code = btn.previousElementSibling.innerText;
+          navigator.clipboard.writeText(code);
+          btn.textContent = 'Copied!';
+          setTimeout(() => (btn.textContent = 'Copy'), 1500);
         }
         // Deteksi browser dan OS
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         document.getElementById('browser-info').textContent =
-          'Browser: ' + navigator.appName + ' (' + navigator.appVersion + ')'
-        document.getElementById('os-info').textContent = 'User-Agent: ' + ua
+          'Browser: ' + navigator.appName + ' (' + navigator.appVersion + ')';
+        document.getElementById('os-info').textContent = 'User-Agent: ' + ua;
 
         // Ambil IP dan bendera
         fetch('https://ipapi.co/json/')
@@ -296,9 +296,9 @@
           .then((data) => {
             document.getElementById('ip-info').innerHTML =
               `IP: ${data.ip} | Negara: ${data.country_name} 
-        <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" style="vertical-align:middle">`
-          })
-      })
+        <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" style="vertical-align:middle">`;
+          });
+      });
     </script>
 
     <!-- JSON-LD Article + Breadcrumb -->

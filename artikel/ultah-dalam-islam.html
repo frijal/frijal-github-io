@@ -366,65 +366,65 @@
                 text: 'Kalian pasti akan mengikuti kebiasaan-kebiasaan orang-orang sebelum kalian sejengkal demi sejengkal dan sehasta demi sehasta, bahkan, seandainya mereka masuk ke dalam sarang biawak pun kalian mengikuti mereka.',
               },
             ],
-          }
+          };
 
-          const dalilContainer = document.getElementById('dalil-container')
+          const dalilContainer = document.getElementById('dalil-container');
           function renderDalil(data) {
-            dalilContainer.innerHTML = ''
+            dalilContainer.innerHTML = '';
             data.forEach((d) => {
-              const card = document.createElement('div')
-              card.className = `dalil-card bg-bg-card p-6 rounded-lg shadow-md border border-border-color`
+              const card = document.createElement('div');
+              card.className = `dalil-card bg-bg-card p-6 rounded-lg shadow-md border border-border-color`;
               card.innerHTML = `
                         <blockquote class="text-text-secondary italic">“${d.text}”</blockquote>
                         <cite class="block text-right mt-4 not-italic font-semibold text-accent-secondary">${d.source}</cite>
-                    `
-              dalilContainer.appendChild(card)
-            })
+                    `;
+              dalilContainer.appendChild(card);
+            });
           }
 
-          const filterButtons = document.querySelectorAll('.dalil-filter-btn')
+          const filterButtons = document.querySelectorAll('.dalil-filter-btn');
           function filterDalil(filter) {
-            filterButtons.forEach((btn) => btn.classList.remove('active'))
+            filterButtons.forEach((btn) => btn.classList.remove('active'));
             document
               .querySelector(`.dalil-filter-btn[data-filter="${filter}"]`)
-              .classList.add('active')
-            renderDalil(dalilData[filter])
+              .classList.add('active');
+            renderDalil(dalilData[filter]);
           }
           filterButtons.forEach((button) => {
             button.addEventListener('click', () =>
               filterDalil(button.dataset.filter),
-            )
-          })
-          filterDalil('quran')
+            );
+          });
+          filterDalil('quran');
 
-          const navLinks = document.querySelectorAll('.nav-link')
-          const sections = document.querySelectorAll('main section')
+          const navLinks = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('main section');
           window.addEventListener('scroll', () => {
-            let current = ''
+            let current = '';
             sections.forEach((section) => {
-              const sectionTop = section.offsetTop
+              const sectionTop = section.offsetTop;
               if (pageYOffset >= sectionTop - 65) {
-                current = section.getAttribute('id')
+                current = section.getAttribute('id');
               }
-            })
+            });
             navLinks.forEach((link) => {
-              link.classList.remove('active')
+              link.classList.remove('active');
               if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active')
+                link.classList.add('active');
               }
-            })
-          })
+            });
+          });
 
-          const menuBtn = document.getElementById('menu-btn')
-          const mobileMenu = document.getElementById('mobile-menu')
+          const menuBtn = document.getElementById('menu-btn');
+          const mobileMenu = document.getElementById('mobile-menu');
           menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden')
-          })
+            mobileMenu.classList.toggle('hidden');
+          });
           mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden')
-          })
-        })
-      })
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

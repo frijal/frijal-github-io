@@ -267,14 +267,14 @@ rsync -avz --delete -e ssh "$SRC" "$DEST" >> "$LOGFILE" 2>&1</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            const code = btn.nextElementSibling.innerText
+            const code = btn.nextElementSibling.innerText;
             navigator.clipboard.writeText(code).then(() => {
-              btn.innerText = 'Copied!'
-              setTimeout(() => (btn.innerText = 'Copy'), 1500)
-            })
-          })
-        })
-      })
+              btn.innerText = 'Copied!';
+              setTimeout(() => (btn.innerText = 'Copy'), 1500);
+            });
+          });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

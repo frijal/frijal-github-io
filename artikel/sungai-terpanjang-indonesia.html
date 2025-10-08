@@ -618,89 +618,90 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // 0) Fallback image for OG/Twitter if missing
-        ;(function ensureSocialImages() {
+        (function ensureSocialImages() {
           const fallback =
-            'https://frijal.github.io/sungai-terpanjang-indonesia.jpg'
+            'https://frijal.github.io/sungai-terpanjang-indonesia.jpg';
           const setIfEmpty = (sel) => {
-            const el = document.querySelector(sel)
-            if (!el) return
-            const val = el.getAttribute('content')
-            if (!val || !val.trim()) el.setAttribute('content', fallback)
-          }
-          setIfEmpty('meta[property="og:image"]')
-          setIfEmpty('meta[name="twitter:image"]')
-          setIfEmpty('meta[itemprop="image"]')
-        })()
+            const el = document.querySelector(sel);
+            if (!el) return;
+            const val = el.getAttribute('content');
+            if (!val || !val.trim()) el.setAttribute('content', fallback);
+          };
+          setIfEmpty('meta[property="og:image"]');
+          setIfEmpty('meta[name="twitter:image"]');
+          setIfEmpty('meta[itemprop="image"]');
+        })();
 
         // 1) Device info
-        ;(function deviceInfo() {
-          const ua = navigator.userAgent
-          let browserName = 'Browser lain'
-          if (/Chrome/.test(ua) && !/Edg/.test(ua)) browserName = 'Chrome'
-          else if (/Firefox/.test(ua)) browserName = 'Firefox'
-          else if (/Edg/.test(ua)) browserName = 'Edge'
-          document.getElementById('browser').textContent = browserName
+        (function deviceInfo() {
+          const ua = navigator.userAgent;
+          let browserName = 'Browser lain';
+          if (/Chrome/.test(ua) && !/Edg/.test(ua)) browserName = 'Chrome';
+          else if (/Firefox/.test(ua)) browserName = 'Firefox';
+          else if (/Edg/.test(ua)) browserName = 'Edge';
+          document.getElementById('browser').textContent = browserName;
 
-          let osName = 'OS lain'
-          if (/Win/.test(ua)) osName = 'Windows'
-          else if (/Mac/.test(ua)) osName = 'macOS'
-          else if (/Linux/.test(ua)) osName = 'Linux'
-          else if (/Android/.test(ua)) osName = 'Android'
-          else if (/iPhone|iPad|iPod/.test(ua)) osName = 'iOS'
-          document.getElementById('os').textContent = osName
-        })()
+          let osName = 'OS lain';
+          if (/Win/.test(ua)) osName = 'Windows';
+          else if (/Mac/.test(ua)) osName = 'macOS';
+          else if (/Linux/.test(ua)) osName = 'Linux';
+          else if (/Android/.test(ua)) osName = 'Android';
+          else if (/iPhone|iPad|iPod/.test(ua)) osName = 'iOS';
+          document.getElementById('os').textContent = osName;
+        })();
 
         // 2) Geolocation via IP, with flag
-        ;(async function geo() {
+        (async function geo() {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            if (!res.ok) throw new Error('Gagal mengambil data IP')
-            const data = await res.json()
-            const city = data.city || 'Kota tak dikenal'
-            const country = data.country_name || 'Negara tak dikenal'
-            const code = (data.country_code || '').toUpperCase()
-            document.getElementById('geo').textContent = city + ', ' + country
+            const res = await fetch('https://ipapi.co/json/');
+            if (!res.ok) throw new Error('Gagal mengambil data IP');
+            const data = await res.json();
+            const city = data.city || 'Kota tak dikenal';
+            const country = data.country_name || 'Negara tak dikenal';
+            const code = (data.country_code || '').toUpperCase();
+            document.getElementById('geo').textContent = city + ', ' + country;
             document.getElementById('flag').textContent = code
               ? ccToFlag(code)
-              : ''
+              : '';
           } catch (err) {
-            console.error(err)
-            document.getElementById('geo').textContent = 'Lokasi tidak tersedia'
-            document.getElementById('flag').textContent = ''
+            console.error(err);
+            document.getElementById('geo').textContent =
+              'Lokasi tidak tersedia';
+            document.getElementById('flag').textContent = '';
           }
 
           function ccToFlag(cc) {
             // Convert country code (e.g., ID) to emoji flag
-            if (!/^[A-Z]{2}$/.test(cc)) return ''
-            const base = 127397
+            if (!/^[A-Z]{2}$/.test(cc)) return '';
+            const base = 127397;
             return (
               String.fromCodePoint(cc.charCodeAt(0) + base) +
               String.fromCodePoint(cc.charCodeAt(1) + base)
-            )
+            );
           }
-        })()
+        })();
 
         // 3) Reading progress bar
-        ;(function progress() {
-          const bar = document.getElementById('progress')
+        (function progress() {
+          const bar = document.getElementById('progress');
           const onScroll = () => {
             const scrollTop =
-              document.documentElement.scrollTop || document.body.scrollTop
+              document.documentElement.scrollTop || document.body.scrollTop;
             const height =
               document.documentElement.scrollHeight -
-              document.documentElement.clientHeight
-            const percent = height ? (scrollTop / height) * 100 : 0
-            bar.style.width = percent + '%'
-          }
-          window.addEventListener('scroll', onScroll, { passive: true })
-          onScroll()
-        })()
+              document.documentElement.clientHeight;
+            const percent = height ? (scrollTop / height) * 100 : 0;
+            bar.style.width = percent + '%';
+          };
+          window.addEventListener('scroll', onScroll, { passive: true });
+          onScroll();
+        })();
 
         // 4) Lightbox for gallery with arrow/nav and keyboard
-        ;(function lightbox() {
-          const images = Array.from(document.querySelectorAll('.gallery img'))
-          const lb = document.createElement('div')
-          lb.className = 'lightbox'
+        (function lightbox() {
+          const images = Array.from(document.querySelectorAll('.gallery img'));
+          const lb = document.createElement('div');
+          lb.className = 'lightbox';
           lb.innerHTML = `
         <button class="btn lb-close" aria-label="Tutup">
           <svg viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg>
@@ -710,69 +711,71 @@
           <button class="btn lb-prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
           <button class="btn lb-next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
-      `
-          document.body.appendChild(lb)
-          const img = lb.querySelector('img')
-          const closeBtn = lb.querySelector('.lb-close')
-          const prevBtn = lb.querySelector('.lb-prev')
-          const nextBtn = lb.querySelector('.lb-next')
-          let index = 0
+      `;
+          document.body.appendChild(lb);
+          const img = lb.querySelector('img');
+          const closeBtn = lb.querySelector('.lb-close');
+          const prevBtn = lb.querySelector('.lb-prev');
+          const nextBtn = lb.querySelector('.lb-next');
+          let index = 0;
 
           const open = (i) => {
-            index = i
-            img.src = images[index].src
-            lb.classList.add('active')
-          }
-          const close = () => lb.classList.remove('active')
-          const prev = () => open((index - 1 + images.length) % images.length)
-          const next = () => open((index + 1) % images.length)
+            index = i;
+            img.src = images[index].src;
+            lb.classList.add('active');
+          };
+          const close = () => lb.classList.remove('active');
+          const prev = () => open((index - 1 + images.length) % images.length);
+          const next = () => open((index + 1) % images.length);
 
-          images.forEach((el, i) => el.addEventListener('click', () => open(i)))
-          closeBtn.addEventListener('click', close)
-          prevBtn.addEventListener('click', prev)
-          nextBtn.addEventListener('click', next)
+          images.forEach((el, i) =>
+            el.addEventListener('click', () => open(i)),
+          );
+          closeBtn.addEventListener('click', close);
+          prevBtn.addEventListener('click', prev);
+          nextBtn.addEventListener('click', next);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) close()
-          })
+            if (e.target === lb) close();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('active')) return
-            if (e.key === 'Escape') close()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
-        })()
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
+        })();
 
         // 5) Share handlers
-        ;(function share() {
+        (function share() {
           const url = encodeURIComponent(
             'https://frijal.github.io/artikel/sungai-terpanjang-indonesia.html',
-          )
+          );
           const text = encodeURIComponent(
             '10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!',
-          )
-          const w = document.getElementById('share-whatsapp')
-          const t = document.getElementById('share-twitter')
-          const f = document.getElementById('share-facebook')
-          const c = document.getElementById('share-copy')
-          w.href = `https://wa.me/?text=${text}%20${url}`
-          t.href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`
-          f.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+          );
+          const w = document.getElementById('share-whatsapp');
+          const t = document.getElementById('share-twitter');
+          const f = document.getElementById('share-facebook');
+          const c = document.getElementById('share-copy');
+          w.href = `https://wa.me/?text=${text}%20${url}`;
+          t.href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+          f.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           c.addEventListener('click', (e) => {
-            e.preventDefault()
+            e.preventDefault();
             navigator.clipboard
               .writeText(decodeURIComponent(url))
               .then(() => {
-                c.textContent = 'Tersalin!'
+                c.textContent = 'Tersalin!';
                 setTimeout(() => {
-                  c.textContent = 'Salin Link'
-                }, 1500)
+                  c.textContent = 'Salin Link';
+                }, 1500);
               })
               .catch(() => {
-                alert('Gagal menyalin tautan')
-              })
-          })
-        })()
-      })
+                alert('Gagal menyalin tautan');
+              });
+          });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

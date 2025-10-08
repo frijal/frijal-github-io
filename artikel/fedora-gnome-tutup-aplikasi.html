@@ -457,8 +457,6 @@
         </div>
 
         <aside>
-          
-
           <section class="card">
             <h2>Komentar</h2>
             <div id="fb-root"></div>
@@ -481,34 +479,31 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Tombol salin kode
         function copyCode() {
-          const c = document.getElementById('code').textContent
-          navigator.clipboard.writeText(c).then(() => alert('Kode disalin!'))
+          const c = document.getElementById('code').textContent;
+          navigator.clipboard.writeText(c).then(() => alert('Kode disalin!'));
         }
 
         // Tombol share
         const u = encodeURIComponent(location.href),
-          t = encodeURIComponent(document.title)
+          t = encodeURIComponent(document.title);
         document.getElementById('share-fb').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${u}`
+          `https://www.facebook.com/sharer/sharer.php?u=${u}`;
         document.getElementById('share-wa').href =
-          `https://wa.me/?text=${t}%20${u}`
+          `https://wa.me/?text=${t}%20${u}`;
         document.getElementById('share-tw').href =
-          `https://twitter.com/intent/tweet?url=${u}&text=${t}`
+          `https://twitter.com/intent/tweet?url=${u}&text=${t}`;
         document.getElementById('share-tg').href =
-          `https://t.me/share/url?url=${u}&text=${t}`
-
-        
-      })
+          `https://t.me/share/url?url=${u}&text=${t}`;
+      });
     </script>
 
-    
     <script
       async
       defer
       crossorigin="anonymous"
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023"
     ></script>
-    
+
     <div id="kategori-aktif"></div>
     <section id="related-marquee-section">
       <div id="related-marquee-container"></div>
@@ -523,7 +518,7 @@
       /><span id="floatingSearchClear" class="clear-button">times;</span>
       <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
-    
+
     <script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>

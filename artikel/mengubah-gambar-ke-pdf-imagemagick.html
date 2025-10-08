@@ -325,81 +325,81 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode() {
-          const code = document.querySelector('pre code').innerText
-          navigator.clipboard.writeText(code)
-          alert('Kode berhasil disalin!')
+          const code = document.querySelector('pre code').innerText;
+          navigator.clipboard.writeText(code);
+          alert('Kode berhasil disalin!');
         }
 
         // FB Comments data-href
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
-        }
+        };
 
         // Browser & OS detection sederhana
         function detectBrowser() {
-          let ua = navigator.userAgent
+          let ua = navigator.userAgent;
           if (ua.includes('Firefox'))
             return {
               name: 'Firefox',
               icon: `<svg fill="orange" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>`,
-            }
+            };
           if (ua.includes('Chrome'))
             return {
               name: 'Chrome',
               icon: `<svg fill="red" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>`,
-            }
+            };
           if (ua.includes('Safari'))
             return {
               name: 'Safari',
               icon: `<svg fill="blue" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>`,
-            }
-          return { name: 'Unknown', icon: '' }
+            };
+          return { name: 'Unknown', icon: '' };
         }
         function detectOS() {
-          let p = navigator.platform
+          let p = navigator.platform;
           if (p.startsWith('Win'))
             return {
               name: 'Windows',
               icon: `<svg fill="blue" width="20" height="20"><rect width="20" height="20"/></svg>`,
-            }
+            };
           if (p.startsWith('Linux'))
             return {
               name: 'Linux',
               icon: `<svg fill="black" width="20" height="20"><circle cx="10" cy="10" r="10"/></svg>`,
-            }
+            };
           if (p.startsWith('Mac'))
             return {
               name: 'MacOS',
               icon: `<svg fill="gray" width="20" height="20"><rect width="20" height="20" rx="5"/></svg>`,
-            }
-          return { name: 'Unknown', icon: '' }
+            };
+          return { name: 'Unknown', icon: '' };
         }
-        const b = detectBrowser()
-        const o = detectOS()
-        document.getElementById('browser').textContent = b.name
-        document.getElementById('browser-icon').innerHTML = b.icon
-        document.getElementById('os').textContent = o.name
-        document.getElementById('os-icon').innerHTML = o.icon
+        const b = detectBrowser();
+        const o = detectOS();
+        document.getElementById('browser').textContent = b.name;
+        document.getElementById('browser-icon').innerHTML = b.icon;
+        document.getElementById('os').textContent = o.name;
+        document.getElementById('os-icon').innerHTML = o.icon;
 
         // IP + Country Flag API
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((data) => {
-            document.getElementById('ip').textContent = data.ip
+            document.getElementById('ip').textContent = data.ip;
             document.getElementById('flag').src =
-              `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`
-            document.getElementById('flag').alt = data.country_name
-          })
-      })
+              `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`;
+            document.getElementById('flag').alt = data.country_name;
+          });
+      });
     </script>
 
     <style>

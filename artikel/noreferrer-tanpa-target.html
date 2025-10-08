@@ -289,69 +289,70 @@
     <!-- JS untuk lightbox -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const gallery = document.querySelectorAll('.gallery img')
-        const lightbox = document.getElementById('lightbox')
-        const lightboxImg = document.getElementById('lightbox-img')
-        let currentIndex = 0
+        const gallery = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        let currentIndex = 0;
 
         gallery.forEach((img, i) => {
           img.addEventListener('click', () => {
-            lightbox.style.display = 'flex'
-            lightboxImg.src = img.src
-            currentIndex = i
-          })
-        })
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            currentIndex = i;
+          });
+        });
 
         function changeImg(step) {
-          currentIndex = (currentIndex + step + gallery.length) % gallery.length
-          lightboxImg.src = gallery[currentIndex].src
+          currentIndex =
+            (currentIndex + step + gallery.length) % gallery.length;
+          lightboxImg.src = gallery[currentIndex].src;
         }
 
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) lightbox.style.display = 'none'
-        })
-      })
+          if (e.target === lightbox) lightbox.style.display = 'none';
+        });
+      });
     </script>
 
     <!-- JS untuk deteksi browser, OS, dan lokasi -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function getBrowserInfo() {
-          const ua = navigator.userAgent
-          if (ua.includes('Firefox')) return '🦊 Firefox'
-          if (ua.includes('Chrome')) return '🌐 Chrome'
+          const ua = navigator.userAgent;
+          if (ua.includes('Firefox')) return '🦊 Firefox';
+          if (ua.includes('Chrome')) return '🌐 Chrome';
           if (ua.includes('Safari') && !ua.includes('Chrome'))
-            return '🍎 Safari'
-          if (ua.includes('Edg')) return '🔵 Edge'
-          return '❓ Browser lain'
+            return '🍎 Safari';
+          if (ua.includes('Edg')) return '🔵 Edge';
+          return '❓ Browser lain';
         }
         function getOSInfo() {
-          const ua = navigator.userAgent
-          if (ua.includes('Win')) return '🖥 Windows'
-          if (ua.includes('Mac')) return '🍏 macOS'
-          if (ua.includes('Linux')) return '🐧 Linux'
-          if (/Android/i.test(ua)) return '🤖 Android'
-          if (/iPhone|iPad|iPod/i.test(ua)) return '📱 iOS'
-          return '❓ OS lain'
+          const ua = navigator.userAgent;
+          if (ua.includes('Win')) return '🖥 Windows';
+          if (ua.includes('Mac')) return '🍏 macOS';
+          if (ua.includes('Linux')) return '🐧 Linux';
+          if (/Android/i.test(ua)) return '🤖 Android';
+          if (/iPhone|iPad|iPod/i.test(ua)) return '📱 iOS';
+          return '❓ OS lain';
         }
         async function getLocation() {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            const data = await res.json()
-            return `📍 ${data.city}, ${data.country_name} (${data.country_code})`
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            return `📍 ${data.city}, ${data.country_name} (${data.country_code})`;
           } catch {
-            return 'Lokasi tidak bisa dideteksi'
+            return 'Lokasi tidak bisa dideteksi';
           }
         }
         async function showEnv() {
-          const info = document.getElementById('env-info')
-          const browser = getBrowserInfo()
-          const os = getOSInfo()
-          const loc = await getLocation()
-          info.textContent = `${browser} • ${os} • ${loc}`
+          const info = document.getElementById('env-info');
+          const browser = getBrowserInfo();
+          const os = getOSInfo();
+          const loc = await getLocation();
+          info.textContent = `${browser} • ${os} • ${loc}`;
         }
-        showEnv()
-      })
+        showEnv();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

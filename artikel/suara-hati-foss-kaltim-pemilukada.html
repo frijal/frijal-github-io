@@ -418,77 +418,77 @@
         // Mendeteksi Info Browser, OS, dan IP
         document.addEventListener('DOMContentLoaded', () => {
           // Social Sharing
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
           document.getElementById('share-facebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-linkedin').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
           // Lazy Load Images & Lightbox
-          const lazyImages = document.querySelectorAll('img[loading="lazy"]')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImage = document.getElementById('lightbox-image')
-          const prevButton = document.getElementById('lightbox-prev')
-          const nextButton = document.getElementById('lightbox-next')
+          const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImage = document.getElementById('lightbox-image');
+          const prevButton = document.getElementById('lightbox-prev');
+          const nextButton = document.getElementById('lightbox-next');
           const galleryItems = Array.from(
             document.querySelectorAll('.gallery-item img'),
-          )
-          let currentImageIndex = 0
+          );
+          let currentImageIndex = 0;
 
           const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                const img = entry.target
-                img.src = img.dataset.src
-                img.removeAttribute('data-src')
-                observer.unobserve(img)
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
               }
-            })
-          })
-          lazyImages.forEach((img) => observer.observe(img))
+            });
+          });
+          lazyImages.forEach((img) => observer.observe(img));
 
           galleryItems.forEach((item, index) => {
             item.addEventListener('click', (e) => {
-              lightboxImage.src = e.target.src
-              lightbox.classList.add('active')
-              currentImageIndex = index
-            })
-          })
+              lightboxImage.src = e.target.src;
+              lightbox.classList.add('active');
+              currentImageIndex = index;
+            });
+          });
 
           const navigate = (direction) => {
-            currentImageIndex += direction
+            currentImageIndex += direction;
             if (currentImageIndex < 0) {
-              currentImageIndex = galleryItems.length - 1
+              currentImageIndex = galleryItems.length - 1;
             } else if (currentImageIndex >= galleryItems.length) {
-              currentImageIndex = 0
+              currentImageIndex = 0;
             }
-            lightboxImage.src = galleryItems[currentImageIndex].src
-          }
+            lightboxImage.src = galleryItems[currentImageIndex].src;
+          };
 
-          prevButton.addEventListener('click', () => navigate(-1))
-          nextButton.addEventListener('click', () => navigate(1))
+          prevButton.addEventListener('click', () => navigate(-1));
+          nextButton.addEventListener('click', () => navigate(1));
 
           lightbox.addEventListener('click', (e) => {
             if (e.target.id === 'lightbox') {
-              lightbox.classList.remove('active')
+              lightbox.classList.remove('active');
             }
-          })
-        })
+          });
+        });
 
         // Facebook Comments SDK
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
-          js.src = `https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1`
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = `https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1`;
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     });

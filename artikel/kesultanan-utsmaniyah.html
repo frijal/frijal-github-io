@@ -730,71 +730,71 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox gallery
-        ;(function () {
-          const thumbs = [...document.querySelectorAll('.gallery .thumb')]
-          const lb = document.getElementById('lightbox')
-          const img = document.getElementById('lb-img')
-          const prev = document.querySelector('.lb-prev')
-          const next = document.querySelector('.lb-next')
-          const close = document.querySelector('.lb-close')
-          let i = 0
+        (function () {
+          const thumbs = [...document.querySelectorAll('.gallery .thumb')];
+          const lb = document.getElementById('lightbox');
+          const img = document.getElementById('lb-img');
+          const prev = document.querySelector('.lb-prev');
+          const next = document.querySelector('.lb-next');
+          const close = document.querySelector('.lb-close');
+          let i = 0;
           function open(n) {
-            i = n
-            img.src = thumbs[i].dataset.full
-            lb.classList.add('open')
+            i = n;
+            img.src = thumbs[i].dataset.full;
+            lb.classList.add('open');
           }
           function step(d) {
-            i = (i + d + thumbs.length) % thumbs.length
-            img.src = thumbs[i].dataset.full
+            i = (i + d + thumbs.length) % thumbs.length;
+            img.src = thumbs[i].dataset.full;
           }
           function hide() {
-            lb.classList.remove('open')
+            lb.classList.remove('open');
           }
           thumbs.forEach((t, idx) =>
             t.addEventListener('click', () => open(idx)),
-          )
-          prev.addEventListener('click', () => step(-1))
-          next.addEventListener('click', () => step(1))
-          close.addEventListener('click', hide)
+          );
+          prev.addEventListener('click', () => step(-1));
+          next.addEventListener('click', () => step(1));
+          close.addEventListener('click', hide);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) hide()
-          })
+            if (e.target === lb) hide();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') hide()
-            if (e.key === 'ArrowLeft') step(-1)
-            if (e.key === 'ArrowRight') step(1)
-          })
-        })()
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') hide();
+            if (e.key === 'ArrowLeft') step(-1);
+            if (e.key === 'ArrowRight') step(1);
+          });
+        })();
 
         // Share links
-        ;(function () {
+        (function () {
           const url = encodeURIComponent(
             'https://frijal.github.io/artikel/kesultanan-utsmaniyah.html',
-          )
+          );
           const title = encodeURIComponent(
             'Kesultanan Utsmaniyah: Osman, Orhan, Murad, Bayezid, dan Masa Interregnum',
-          )
+          );
           document
             .getElementById('copyLink')
             .addEventListener('click', async () => {
               try {
-                await navigator.clipboard.writeText(decodeURIComponent(url))
-                alert('Tautan disalin!')
+                await navigator.clipboard.writeText(decodeURIComponent(url));
+                alert('Tautan disalin!');
               } catch {
-                prompt('Salin tautan secara manual:', decodeURIComponent(url))
+                prompt('Salin tautan secara manual:', decodeURIComponent(url));
               }
-            })
+            });
           document.getElementById('waShare').href =
-            `https://wa.me/?text=${title}%20${url}`
+            `https://wa.me/?text=${title}%20${url}`;
           document.getElementById('fbShare').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           document.getElementById('xShare').href =
-            `https://twitter.com/intent/tweet?text=${title}&url=${url}`
+            `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
           document.getElementById('tgShare').href =
-            `https://t.me/share/url?url=${url}&text=${title}`
-        })()
-      })
+            `https://t.me/share/url?url=${url}&text=${title}`;
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

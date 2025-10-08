@@ -208,8 +208,6 @@
     </div>
     <div id="info-os"><strong>OS:</strong> <span id="os-name"></span></div>
 
-    
-
     <!-- Facebook Comments Plugin -->
     <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
       <span id="current-url" class="small-muted"></span>
@@ -240,31 +238,29 @@
           btn.addEventListener('click', (e) => {
             const code = e.target.parentElement
               .querySelector('code')
-              .textContent.trim()
-            navigator.clipboard.writeText(code)
-            btn.textContent = 'Copied!'
+              .textContent.trim();
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
             setTimeout(() => {
-              btn.textContent = 'Copy'
-            }, 1500)
-          })
-        })
-
-        
+              btn.textContent = 'Copy';
+            }, 1500);
+          });
+        });
 
         // Facebook Comments
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
-        }
-      })
+        };
+      });
     </script>
 
     <!-- JSON-LD -->

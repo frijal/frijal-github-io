@@ -1033,23 +1033,23 @@
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                const currentUrl = window.location.href
-                document.getElementById('current-url').textContent = currentUrl
+                const currentUrl = window.location.href;
+                document.getElementById('current-url').textContent = currentUrl;
                 // Set data-href FB Comments ke URL halaman ini
                 document
                   .getElementById('fb-comments')
-                  .setAttribute('data-href', currentUrl)
+                  .setAttribute('data-href', currentUrl);
                 // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
                 window.fbAsyncInit = function () {
                   if (typeof FB !== 'undefined') {
                     try {
-                      FB.XFBML.parse()
+                      FB.XFBML.parse();
                     } catch (e) {
                       /* ignore */
                     }
                   }
-                }
-              })
+                };
+              });
             </script>
           </div>
         </article>
@@ -1114,7 +1114,6 @@
     </main>
 
     <footer class="wrap">
-     
       <div class="small-muted">
         🄯 2025 BAK — Halaman interaktif wide fullscreen, responsive, tema
         terang.
@@ -1204,7 +1203,7 @@
           })
         })()
 
-        
+
             })
         })()
       })

@@ -616,34 +616,32 @@
             <script>
               document.addEventListener(DOMContentLoaded, () => {
                 try {
-                  const currentUrl = window.location.href
+                  const currentUrl = window.location.href;
                   document.getElementById('current-url').textContent =
-                    currentUrl
+                    currentUrl;
                   document
                     .getElementById('fb-comments')
-                    .setAttribute('data-href', currentUrl)
+                    .setAttribute('data-href', currentUrl);
                   window.fbAsyncInit = function () {
                     if (typeof FB !== 'undefined') {
                       try {
-                        FB.XFBML.parse()
+                        FB.XFBML.parse();
                       } catch (e) {
                         /* ignore */
                       }
                     }
-                  }
+                  };
                 } catch (e) {
-                  console.error('Error setting up Facebook comments:', e)
+                  console.error('Error setting up Facebook comments:', e);
                 }
-              })
+              });
             </script>
           </div>
         </div>
       </article>
     </main>
 
-    <footer>
-
-    </footer>
+    <footer></footer>
 
     <!-- Prism.js for Syntax Highlighting -->
     });
@@ -699,7 +697,7 @@
           })
         })
 
- 
+
             })
         })
       })

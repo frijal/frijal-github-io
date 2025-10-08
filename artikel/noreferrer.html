@@ -393,48 +393,48 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const gallery = document.querySelectorAll('.gallery img')
-        const lightbox = document.getElementById('lightbox')
-        const lightImg = lightbox.querySelector('img')
-        let current = 0
+        const gallery = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightImg = lightbox.querySelector('img');
+        let current = 0;
 
         function showLightbox(index) {
-          current = index
-          lightImg.src = gallery[index].src
-          lightbox.style.display = 'flex'
+          current = index;
+          lightImg.src = gallery[index].src;
+          lightbox.style.display = 'flex';
         }
         gallery.forEach((img, i) =>
           img.addEventListener('click', () => showLightbox(i)),
-        )
+        );
         document.querySelector('.prev').onclick = () =>
-          showLightbox((current - 1 + gallery.length) % gallery.length)
+          showLightbox((current - 1 + gallery.length) % gallery.length);
         document.querySelector('.next').onclick = () =>
-          showLightbox((current + 1) % gallery.length)
+          showLightbox((current + 1) % gallery.length);
         lightbox.onclick = (e) => {
-          if (e.target === lightbox) lightbox.style.display = 'none'
-        }
+          if (e.target === lightbox) lightbox.style.display = 'none';
+        };
 
         // Deteksi browser, OS
         function detectInfo() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let browser = 'Unknown Browser',
-            os = 'Unknown OS'
-          if (ua.indexOf('Firefox') != -1) browser = 'Firefox'
-          else if (ua.indexOf('Chrome') != -1) browser = 'Chrome'
-          else if (ua.indexOf('Safari') != -1) browser = 'Safari'
-          if (ua.indexOf('Win') != -1) os = 'Windows'
-          else if (ua.indexOf('Linux') != -1) os = 'Linux'
-          else if (ua.indexOf('Mac') != -1) os = 'MacOS'
+            os = 'Unknown OS';
+          if (ua.indexOf('Firefox') != -1) browser = 'Firefox';
+          else if (ua.indexOf('Chrome') != -1) browser = 'Chrome';
+          else if (ua.indexOf('Safari') != -1) browser = 'Safari';
+          if (ua.indexOf('Win') != -1) os = 'Windows';
+          else if (ua.indexOf('Linux') != -1) os = 'Linux';
+          else if (ua.indexOf('Mac') != -1) os = 'MacOS';
 
           fetch('https://ipapi.co/json/')
             .then((r) => r.json())
             .then((data) => {
               document.getElementById('infoBar').innerHTML =
-                `🌐 Browser: ${browser} | 💻 OS: ${os} | 📍 Lokasi: ${data.city}, ${data.country_name} <img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png">`
-            })
+                `🌐 Browser: ${browser} | 💻 OS: ${os} | 📍 Lokasi: ${data.city}, ${data.country_name} <img src="https://flagcdn.com/16x12/${data.country_code.toLowerCase()}.png">`;
+            });
         }
-        detectInfo()
-      })
+        detectInfo();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

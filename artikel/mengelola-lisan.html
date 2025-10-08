@@ -651,29 +651,30 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
-          const currentUrl = window.location.href
-          const currentUrlSpan = document.getElementById('current-url')
-          if (currentUrlSpan) currentUrlSpan.textContent = currentUrl
+          const currentUrl = window.location.href;
+          const currentUrlSpan = document.getElementById('current-url');
+          if (currentUrlSpan) currentUrlSpan.textContent = currentUrl;
 
-          const fbCommentsDiv = document.getElementById('fb-comments')
-          if (fbCommentsDiv) fbCommentsDiv.setAttribute('data-href', currentUrl)
+          const fbCommentsDiv = document.getElementById('fb-comments');
+          if (fbCommentsDiv)
+            fbCommentsDiv.setAttribute('data-href', currentUrl);
 
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
 
-          setupSocialSharing(currentUrl)
-          displayUserInfo()
-        })
+          setupSocialSharing(currentUrl);
+          displayUserInfo();
+        });
 
         function setupSocialSharing(url) {
-          const shareContainer = document.getElementById('share-buttons')
-          if (!shareContainer) return
-          const title = document.title
-          const encodedUrl = encodeURIComponent(url)
-          const encodedTitle = encodeURIComponent(title)
+          const shareContainer = document.getElementById('share-buttons');
+          if (!shareContainer) return;
+          const title = document.title;
+          const encodedUrl = encodeURIComponent(url);
+          const encodedTitle = encodeURIComponent(title);
           const platforms = {
             facebook: {
               url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
@@ -695,37 +696,37 @@
               icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.69 6.54l-1.63 7.63c-.15.7-.58.87-1.14.54l-2.43-1.78l-1.17 1.12c-.13.13-.24.24-.48.24l.17-2.48l4.46-4.04c.19-.17-.03-.27-.27-.1l-5.5 3.44l-2.37-.74c-.69-.22-.7-.73.14-1.07l9.42-3.61c.58-.22 1.04.14.87.8z"/></svg>`,
               class: 'share-tg',
             },
-          }
-          let buttonsHtml = ''
+          };
+          let buttonsHtml = '';
           for (const key in platforms) {
-            buttonsHtml += `<a href="${platforms[key].url}" rel="noreferrer" target="_blank" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}">${platforms[key].icon}</a>`
+            buttonsHtml += `<a href="${platforms[key].url}" rel="noreferrer" target="_blank" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}">${platforms[key].icon}</a>`;
           }
-          shareContainer.innerHTML = buttonsHtml
+          shareContainer.innerHTML = buttonsHtml;
         }
 
         function displayUserInfo() {
-          const ua = navigator.userAgent
-          let browserName = 'Browser Lain'
-          let osName = 'OS Lain'
+          const ua = navigator.userAgent;
+          let browserName = 'Browser Lain';
+          let osName = 'OS Lain';
 
-          if (ua.includes('Firefox')) browserName = 'Firefox'
-          else if (ua.includes('Edg')) browserName = 'Edge'
-          else if (ua.includes('Chrome')) browserName = 'Chrome'
-          else if (ua.includes('Safari')) browserName = 'Safari'
+          if (ua.includes('Firefox')) browserName = 'Firefox';
+          else if (ua.includes('Edg')) browserName = 'Edge';
+          else if (ua.includes('Chrome')) browserName = 'Chrome';
+          else if (ua.includes('Safari')) browserName = 'Safari';
 
-          if (ua.includes('Win')) osName = 'Windows'
-          else if (ua.includes('Mac')) osName = 'macOS'
-          else if (ua.includes('Linux')) osName = 'Linux'
-          else if (ua.includes('Android')) osName = 'Android'
-          else if (/iPad|iPhone|iPod/.test(ua)) osName = 'iOS'
+          if (ua.includes('Win')) osName = 'Windows';
+          else if (ua.includes('Mac')) osName = 'macOS';
+          else if (ua.includes('Linux')) osName = 'Linux';
+          else if (ua.includes('Android')) osName = 'Android';
+          else if (/iPad|iPhone|iPod/.test(ua)) osName = 'iOS';
 
-          const browserIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>`
-          const osIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 11h-3.4l-1.6-4.99h-4l-1.6 4.99H5l7 12zM12 4.44L13.8 9h-3.6z"/></svg>`
+          const browserIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>`;
+          const osIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 11h-3.4l-1.6-4.99h-4l-1.6 4.99H5l7 12zM12 4.44L13.8 9h-3.6z"/></svg>`;
 
           document.getElementById('user-browser').innerHTML =
-            `${browserIcon}<span>${browserName}</span>`
+            `${browserIcon}<span>${browserName}</span>`;
           document.getElementById('user-os').innerHTML =
-            `${osIcon}<span>${osName}</span>`
+            `${osIcon}<span>${osName}</span>`;
 
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
@@ -735,16 +736,16 @@
                     .split('')
                     .map((c) => String.fromCodePoint(127397 + c.charCodeAt(0)))
                     .join('')}</span>`
-                : ''
+                : '';
               document.getElementById('user-ip').innerHTML =
-                `${flag}<span style="margin-left: 8px;">IP: ${data.ip || 'N/A'}</span>`
+                `${flag}<span style="margin-left: 8px;">IP: ${data.ip || 'N/A'}</span>`;
             })
             .catch(() => {
               document.getElementById('user-ip').innerHTML =
-                '<span>Info IP tidak tersedia</span>'
-            })
+                '<span>Info IP tidak tersedia</span>';
+            });
         }
-      })
+      });
     </script>
 
     <div id="kategori-aktif"></div>

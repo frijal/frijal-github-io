@@ -599,73 +599,73 @@ print int($total_blocks / 2 + .5), "K\n";</code></pre>
         // --- Gallery Lazy Load, Lightbox, Arrow navigation
         const galleryImgs = Array.from(
           document.querySelectorAll('.gallery img'),
-        )
-        let lightboxIdx = null
-        const lightbox = document.getElementById('lightbox')
-        const lightboxImg = document.getElementById('lightbox-img')
+        );
+        let lightboxIdx = null;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
         function showLightbox(idx) {
-          lightboxIdx = idx
-          lightboxImg.src = galleryImgs[idx].getAttribute('data-src')
-          lightboxImg.alt = galleryImgs[idx].alt
-          lightbox.classList.add('active')
+          lightboxIdx = idx;
+          lightboxImg.src = galleryImgs[idx].getAttribute('data-src');
+          lightboxImg.alt = galleryImgs[idx].alt;
+          lightbox.classList.add('active');
         }
         function hideLightbox() {
-          lightbox.classList.remove('active')
+          lightbox.classList.remove('active');
           setTimeout(() => {
-            lightboxImg.src = ''
-          }, 180)
+            lightboxImg.src = '';
+          }, 180);
         }
         function nextLightbox(n) {
-          if (lightboxIdx == null) return
+          if (lightboxIdx == null) return;
           lightboxIdx =
-            (lightboxIdx + n + galleryImgs.length) % galleryImgs.length
-          showLightbox(lightboxIdx)
+            (lightboxIdx + n + galleryImgs.length) % galleryImgs.length;
+          showLightbox(lightboxIdx);
         }
         galleryImgs.forEach((img, idx) => {
-          img.addEventListener('click', () => showLightbox(idx))
-        })
-        document.getElementById('lightbox-next').onclick = () => nextLightbox(1)
+          img.addEventListener('click', () => showLightbox(idx));
+        });
+        document.getElementById('lightbox-next').onclick = () =>
+          nextLightbox(1);
         document.getElementById('lightbox-prev').onclick = () =>
-          nextLightbox(-1)
-        document.getElementById('lightbox-close').onclick = hideLightbox
+          nextLightbox(-1);
+        document.getElementById('lightbox-close').onclick = hideLightbox;
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) hideLightbox()
-        })
+          if (e.target === lightbox) hideLightbox();
+        });
         // Lazy load for gallery
         if ('IntersectionObserver' in window) {
           const io = new IntersectionObserver((entries, obs) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                let img = entry.target
-                img.src = img.dataset.src
-                io.unobserve(img)
+                let img = entry.target;
+                img.src = img.dataset.src;
+                io.unobserve(img);
               }
-            })
-          })
-          galleryImgs.forEach((img) => io.observe(img))
+            });
+          });
+          galleryImgs.forEach((img) => io.observe(img));
         } else {
-          galleryImgs.forEach((img) => (img.src = img.dataset.src))
+          galleryImgs.forEach((img) => (img.src = img.dataset.src));
         }
         // --- Share Button
         function share(network) {
-          let url = encodeURIComponent(location.href)
-          let title = encodeURIComponent(document.title)
-          let shareUrl = ''
+          let url = encodeURIComponent(location.href);
+          let title = encodeURIComponent(document.title);
+          let shareUrl = '';
           switch (network) {
             case 'facebook':
-              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-              break
+              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+              break;
             case 'twitter':
-              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
-              break
+              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+              break;
             case 'whatsapp':
-              shareUrl = `https://wa.me/?text=${title}%20${url}`
-              break
+              shareUrl = `https://wa.me/?text=${title}%20${url}`;
+              break;
           }
-          window.open(shareUrl, '_blank', 'width=600,height=500')
+          window.open(shareUrl, '_blank', 'width=600,height=500');
         }
-        
-      })
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

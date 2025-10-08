@@ -1276,210 +1276,210 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Detect Browser & OS (simple UA parsing)
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaSpan = document.getElementById('ua')
-          const ua = navigator.userAgent
+        (function () {
+          const chip = document.getElementById('ua-chip');
+          const uaSpan = document.getElementById('ua');
+          const ua = navigator.userAgent;
           function detectOS() {
-            if (/Windows NT/.test(ua)) return 'Windows'
-            if (/Android/.test(ua)) return 'Android'
-            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
-            if (/Mac OS X/.test(ua)) return 'macOS'
-            if (/Linux/.test(ua)) return 'Linux'
-            return 'OS tidak dikenal'
+            if (/Windows NT/.test(ua)) return 'Windows';
+            if (/Android/.test(ua)) return 'Android';
+            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+            if (/Mac OS X/.test(ua)) return 'macOS';
+            if (/Linux/.test(ua)) return 'Linux';
+            return 'OS tidak dikenal';
           }
           function detectBrowser() {
-            if (/Edg\//.test(ua)) return 'Microsoft Edge'
-            if (/OPR\//.test(ua)) return 'Opera'
-            if (/Chrome\//.test(ua)) return 'Chrome'
-            if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari'
-            if (/Firefox\//.test(ua)) return 'Firefox'
-            return 'Browser tidak dikenal'
+            if (/Edg\//.test(ua)) return 'Microsoft Edge';
+            if (/OPR\//.test(ua)) return 'Opera';
+            if (/Chrome\//.test(ua)) return 'Chrome';
+            if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+            if (/Firefox\//.test(ua)) return 'Firefox';
+            return 'Browser tidak dikenal';
           }
-          const info = detectBrowser() + ' • ' + detectOS()
-          chip.textContent = '🧩 ' + info
-          if (uaSpan) uaSpan.textContent = 'Perangkat kamu: ' + info
-        })()
+          const info = detectBrowser() + ' • ' + detectOS();
+          chip.textContent = '🧩 ' + info;
+          if (uaSpan) uaSpan.textContent = 'Perangkat kamu: ' + info;
+        })();
 
         // IP Geolocation (city + country flag)
-        ;(function () {
-          const geoSpan = document.getElementById('geo-chip')
-          const geoInline = document.getElementById('geo')
-          const flag = document.getElementById('flag')
+        (function () {
+          const geoSpan = document.getElementById('geo-chip');
+          const geoInline = document.getElementById('geo');
+          const flag = document.getElementById('flag');
 
           function toFlagEmoji(cc) {
-            if (!cc) return '🏳️'
-            const code = cc.trim().toUpperCase()
+            if (!cc) return '🏳️';
+            const code = cc.trim().toUpperCase();
             return String.fromCodePoint(
               ...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-            )
+            );
           }
 
           // Use ipapi.co (no key) fallback to ipwho.is
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
             .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const txt = `${city}${country ? ', ' + country : ''}`
-              const emoji = toFlagEmoji(cc)
-              if (geoSpan) geoSpan.textContent = '📍 ' + txt
-              if (geoInline) geoInline.textContent = txt
-              if (flag) flag.textContent = emoji
+              const city = j.city || 'Kota tidak diketahui';
+              const country = j.country_name || '';
+              const cc = j.country || '';
+              const txt = `${city}${country ? ', ' + country : ''}`;
+              const emoji = toFlagEmoji(cc);
+              if (geoSpan) geoSpan.textContent = '📍 ' + txt;
+              if (geoInline) geoInline.textContent = txt;
+              if (flag) flag.textContent = emoji;
             })
             .catch(() =>
               fetch('https://ipwho.is/')
                 .then((r) => r.json())
                 .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const txt = `${city}${country ? ', ' + country : ''}`
-                  const emoji = toFlagEmoji(cc)
-                  if (geoSpan) geoSpan.textContent = '📍 ' + txt
-                  if (geoInline) geoInline.textContent = txt
-                  if (flag) flag.textContent = emoji
+                  const city = j.city || 'Kota tidak diketahui';
+                  const country = j.country || '';
+                  const cc = j.country_code || '';
+                  const txt = `${city}${country ? ', ' + country : ''}`;
+                  const emoji = toFlagEmoji(cc);
+                  if (geoSpan) geoSpan.textContent = '📍 ' + txt;
+                  if (geoInline) geoInline.textContent = txt;
+                  if (flag) flag.textContent = emoji;
                 }),
             )
             .catch(() => {
-              if (geoSpan) geoSpan.textContent = '📍 Lokasi tidak tersedia'
-              if (geoInline) geoInline.textContent = 'Lokasi tidak tersedia'
-              if (flag) flag.textContent = '🏳️'
-            })
-        })()
+              if (geoSpan) geoSpan.textContent = '📍 Lokasi tidak tersedia';
+              if (geoInline) geoInline.textContent = 'Lokasi tidak tersedia';
+              if (flag) flag.textContent = '🏳️';
+            });
+        })();
 
         // Social share links
-        ;(function () {
-          const url = encodeURIComponent(location.href)
+        (function () {
+          const url = encodeURIComponent(location.href);
           const text = encodeURIComponent(
             'Hotel Tour Grand Tjokro Balikpapan — Kopdar Blogger & Influencer (2017)',
-          )
-          const wa = `https://wa.me/?text=${text}%20%7C%20${url}`
-          const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`
-          const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-          const tele = `https://t.me/share/url?url=${url}&text=${text}`
-          const ids = ['share-wa', 'share-x', 'share-fb', 'share-tele']
+          );
+          const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
+          const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+          const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          const tele = `https://t.me/share/url?url=${url}&text=${text}`;
+          const ids = ['share-wa', 'share-x', 'share-fb', 'share-tele'];
           ids.forEach((id, i) => {
-            const el = document.getElementById(id)
-            if (!el) return
-            el.href = [wa, x, fb, tele][i]
-          })
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.href = [wa, x, fb, tele][i];
+          });
           // Clone top buttons to other share containers
-          const top = document.getElementById('share-top')
-          ;['share-bottom', 'share-final'].forEach((cid) => {
-            const c = document.getElementById(cid)
+          const top = document.getElementById('share-top');
+          ['share-bottom', 'share-final'].forEach((cid) => {
+            const c = document.getElementById(cid);
             if (c && top) {
-              c.innerHTML = top.innerHTML
+              c.innerHTML = top.innerHTML;
               // rewire cloned anchors
               c.querySelectorAll('a').forEach((a) => {
-                const lbl = a.textContent.trim()
-                if (lbl.includes('WhatsApp')) a.href = wa
-                if (lbl === 'X') a.href = x
-                if (lbl.includes('Facebook')) a.href = fb
-                if (lbl.includes('Telegram')) a.href = tele
-                a.target = '_blank'
-                a.rel = 'noopener'
-              })
+                const lbl = a.textContent.trim();
+                if (lbl.includes('WhatsApp')) a.href = wa;
+                if (lbl === 'X') a.href = x;
+                if (lbl.includes('Facebook')) a.href = fb;
+                if (lbl.includes('Telegram')) a.href = tele;
+                a.target = '_blank';
+                a.rel = 'noopener';
+              });
             }
-          })
-        })()
+          });
+        })();
 
         // Lazy-load images with IntersectionObserver
-        ;(function () {
-          const imgs = document.querySelectorAll('img[data-src]')
+        (function () {
+          const imgs = document.querySelectorAll('img[data-src]');
           const io =
             'IntersectionObserver' in window
               ? new IntersectionObserver(
                   (entries, obs) => {
                     entries.forEach((e) => {
                       if (e.isIntersecting) {
-                        const img = e.target
-                        img.src = img.dataset.src
-                        img.removeAttribute('data-src')
-                        obs.unobserve(img)
+                        const img = e.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        obs.unobserve(img);
                       }
-                    })
+                    });
                   },
                   { rootMargin: '200px' },
                 )
-              : null
+              : null;
           imgs.forEach((img) => {
-            if (io) io.observe(img)
+            if (io) io.observe(img);
             else {
-              img.src = img.dataset.src
-              img.removeAttribute('data-src')
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
             }
-          })
-        })()
+          });
+        })();
 
         // Simple lightbox with next/prev per group
-        ;(function () {
-          const lightbox = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lb-img')
-          const lbCount = document.getElementById('lb-count')
-          const prev = document.getElementById('lb-prev')
-          const next = document.getElementById('lb-next')
-          const closeBtn = document.getElementById('lb-close')
+        (function () {
+          const lightbox = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lb-img');
+          const lbCount = document.getElementById('lb-count');
+          const prev = document.getElementById('lb-prev');
+          const next = document.getElementById('lb-next');
+          const closeBtn = document.getElementById('lb-close');
 
-          let groups = {}
-          let currentGroup = ''
-          let currentIndex = 0
+          let groups = {};
+          let currentGroup = '';
+          let currentIndex = 0;
 
           // collect groups
           document.querySelectorAll('.thumb').forEach((a, idx) => {
-            const g = a.dataset.group || 'default'
-            ;(groups[g] ||= []).push(a)
+            const g = a.dataset.group || 'default';
+            (groups[g] ||= []).push(a);
             a.addEventListener('click', (ev) => {
-              ev.preventDefault()
-              open(g, groups[g].indexOf(a))
-            })
-          })
+              ev.preventDefault();
+              open(g, groups[g].indexOf(a));
+            });
+          });
 
           function open(group, index) {
-            currentGroup = group
-            currentIndex = index
-            update()
-            lightbox.classList.add('open')
-            lightbox.setAttribute('aria-hidden', 'false')
-            document.body.style.overflow = 'hidden'
+            currentGroup = group;
+            currentIndex = index;
+            update();
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
           }
           function update() {
-            const arr = groups[currentGroup]
-            if (!arr) return
-            const el = arr[currentIndex]
-            const src = el.dataset.src
-            lbImg.src = src
-            lbImg.alt = el.querySelector('img')?.alt || 'Foto'
-            lbCount.textContent = currentIndex + 1 + ' / ' + arr.length
+            const arr = groups[currentGroup];
+            if (!arr) return;
+            const el = arr[currentIndex];
+            const src = el.dataset.src;
+            lbImg.src = src;
+            lbImg.alt = el.querySelector('img')?.alt || 'Foto';
+            lbCount.textContent = currentIndex + 1 + ' / ' + arr.length;
           }
           function move(delta) {
-            const arr = groups[currentGroup]
-            if (!arr) return
-            currentIndex = (currentIndex + delta + arr.length) % arr.length
-            update()
+            const arr = groups[currentGroup];
+            if (!arr) return;
+            currentIndex = (currentIndex + delta + arr.length) % arr.length;
+            update();
           }
           function close() {
-            lightbox.classList.remove('open')
-            lightbox.setAttribute('aria-hidden', 'true')
-            document.body.style.overflow = ''
-            lbImg.src = ''
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            lbImg.src = '';
           }
 
-          prev.addEventListener('click', () => move(-1))
-          next.addEventListener('click', () => move(1))
-          closeBtn.addEventListener('click', close)
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          closeBtn.addEventListener('click', close);
           lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) close()
-          })
+            if (e.target === lightbox) close();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('open')) return
-            if (e.key === 'Escape') close()
-            if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'ArrowRight') move(1)
-          })
-        })()
-      })
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') move(-1);
+            if (e.key === 'ArrowRight') move(1);
+          });
+        })();
+      });
     </script>
 
     <!-- Facebook SDK -->
@@ -1494,7 +1494,7 @@
     <script>
       document
         .querySelector('.fb-comments')
-        .setAttribute('data-href', location.href)
+        .setAttribute('data-href', location.href);
     </script>
     document.addEventListener(DOMContentLoaded, () => {
 
@@ -1502,8 +1502,8 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let s = (document.querySelector('main section img') || {}).src || ''
-          ;['og:image', 'twitter:image'].forEach((p, j) =>
+          let s = (document.querySelector('main section img') || {}).src || '';
+          ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
                 (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
@@ -1513,16 +1513,16 @@
                   content: s,
                 }),
             ),
-          )
+          );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
               }),
-          )
-        })
-      })
+          );
+        });
+      });
     </script>
 
     <!-- Structured Data (JSON-LD) -->

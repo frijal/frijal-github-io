@@ -299,73 +299,73 @@
     <!-- Lightbox Script -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const gallery = document.querySelectorAll('.gallery img')
-        const lightbox = document.getElementById('lightbox')
-        const lightboxImg = document.getElementById('lightbox-img')
-        let currentIndex = 0
+        const gallery = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        let currentIndex = 0;
 
         function showImage(index) {
-          lightbox.style.display = 'flex'
-          lightboxImg.src = gallery[index].src
-          currentIndex = index
+          lightbox.style.display = 'flex';
+          lightboxImg.src = gallery[index].src;
+          currentIndex = index;
         }
         gallery.forEach((img, i) => {
-          img.addEventListener('click', () => showImage(i))
-        })
+          img.addEventListener('click', () => showImage(i));
+        });
         document.querySelector('.lightbox .prev').onclick = () => {
-          currentIndex = (currentIndex - 1 + gallery.length) % gallery.length
-          lightboxImg.src = gallery[currentIndex].src
-        }
+          currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+          lightboxImg.src = gallery[currentIndex].src;
+        };
         document.querySelector('.lightbox .next').onclick = () => {
-          currentIndex = (currentIndex + 1) % gallery.length
-          lightboxImg.src = gallery[currentIndex].src
-        }
+          currentIndex = (currentIndex + 1) % gallery.length;
+          lightboxImg.src = gallery[currentIndex].src;
+        };
         lightbox.onclick = (e) => {
-          if (e.target === lightbox) lightbox.style.display = 'none'
-        }
-      })
+          if (e.target === lightbox) lightbox.style.display = 'none';
+        };
+      });
     </script>
 
     <!-- Deteksi Browser, OS, dan Lokasi -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function detectBrowserOS() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let browser = 'Tidak diketahui',
-            os = 'Tidak diketahui'
+            os = 'Tidak diketahui';
 
-          if (/chrome|crios/i.test(ua)) browser = 'Chrome'
-          else if (/firefox|fxios/i.test(ua)) browser = 'Firefox'
-          else if (/safari/i.test(ua)) browser = 'Safari'
-          else if (/edg/i.test(ua)) browser = 'Edge'
+          if (/chrome|crios/i.test(ua)) browser = 'Chrome';
+          else if (/firefox|fxios/i.test(ua)) browser = 'Firefox';
+          else if (/safari/i.test(ua)) browser = 'Safari';
+          else if (/edg/i.test(ua)) browser = 'Edge';
 
-          if (/windows/i.test(ua)) os = 'Windows'
-          else if (/mac/i.test(ua)) os = 'MacOS'
-          else if (/linux/i.test(ua)) os = 'Linux'
-          else if (/android/i.test(ua)) os = 'Android'
-          else if (/iphone|ipad/i.test(ua)) os = 'iOS'
+          if (/windows/i.test(ua)) os = 'Windows';
+          else if (/mac/i.test(ua)) os = 'MacOS';
+          else if (/linux/i.test(ua)) os = 'Linux';
+          else if (/android/i.test(ua)) os = 'Android';
+          else if (/iphone|ipad/i.test(ua)) os = 'iOS';
 
           document.getElementById('detect-info').innerText =
-            `🖥 Browser: ${browser} | 💻 OS: ${os}`
+            `🖥 Browser: ${browser} | 💻 OS: ${os}`;
         }
 
         async function detectCountry() {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            const data = await res.json()
-            const country = data.country_name
-            const city = data.city
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            const country = data.country_name;
+            const city = data.city;
             document.getElementById('detect-info').innerText +=
-              ` | 📍 Lokasi: ${city}, ${country}`
+              ` | 📍 Lokasi: ${city}, ${country}`;
           } catch (e) {
             document.getElementById('detect-info').innerText +=
-              ' | 📍 Lokasi: tidak terdeteksi'
+              ' | 📍 Lokasi: tidak terdeteksi';
           }
         }
 
-        detectBrowserOS()
-        detectCountry()
-      })
+        detectBrowserOS();
+        detectCountry();
+      });
     </script>
 
     <!-- Facebook SDK -->

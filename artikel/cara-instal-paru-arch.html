@@ -510,47 +510,47 @@ makepkg -si
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // --- 1. LIGHTBOX GALLERY & NAVIGATION ---
-        const galleryImages = document.querySelectorAll('.gallery img')
-        const lightboxModal = document.getElementById('lightbox-modal')
-        const lightboxImg = document.getElementById('lightbox-img')
-        const closeBtn = document.querySelector('.close-btn')
-        let currentIndex = 0
+        const galleryImages = document.querySelectorAll('.gallery img');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.close-btn');
+        let currentIndex = 0;
 
         galleryImages.forEach((img, index) => {
           img.addEventListener('click', () => {
-            lightboxModal.style.display = 'grid'
-            lightboxImg.src = img.src
-            currentIndex = index
-          })
-        })
+            lightboxModal.style.display = 'grid';
+            lightboxImg.src = img.src;
+            currentIndex = index;
+          });
+        });
 
         closeBtn.addEventListener('click', () => {
-          lightboxModal.style.display = 'none'
-        })
+          lightboxModal.style.display = 'none';
+        });
 
         document.addEventListener('keydown', (e) => {
           if (lightboxModal.style.display === 'grid') {
-            if (e.key === 'ArrowLeft') changeImage(-1)
-            if (e.key === 'ArrowRight') changeImage(1)
-            if (e.key === 'Escape') lightboxModal.style.display = 'none'
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'Escape') lightboxModal.style.display = 'none';
           }
-        })
+        });
 
         window.onclick = function (event) {
           if (event.target == lightboxModal) {
-            lightboxModal.style.display = 'none'
+            lightboxModal.style.display = 'none';
           }
-        }
+        };
 
         window.changeImage = function (n) {
-          currentIndex += n
+          currentIndex += n;
           if (currentIndex < 0) {
-            currentIndex = galleryImages.length - 1
+            currentIndex = galleryImages.length - 1;
           } else if (currentIndex >= galleryImages.length) {
-            currentIndex = 0
+            currentIndex = 0;
           }
-          lightboxImg.src = galleryImages[currentIndex].src
-        }
+          lightboxImg.src = galleryImages[currentIndex].src;
+        };
 
         // --- 2. FACEBOOK COMMENTS SDK ---
         window.fbAsyncInit = function () {
@@ -558,119 +558,119 @@ makepkg -si
             appId: '1471267430691023', // App ID Anda
             xfbml: true,
             version: 'v19.0',
-          })
-        }
-        ;(function (d, s, id) {
+          });
+        };
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
-          js.src = 'https://connect.facebook.net/id_ID/sdk.js' // Bahasa Indonesia
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk.js'; // Bahasa Indonesia
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
 
         // --- 3. DETEKSI INFO PENGGUNA (IP, OS, Browser, Lokasi) ---
 
         function getOSIcon(os) {
           if (os.includes('Windows'))
-            return `<i class="fab fa-windows"></i> ${os}`
-          if (os.includes('Mac')) return `<i class="fab fa-apple"></i> ${os}`
-          if (os.includes('Linux')) return `<i class="fab fa-linux"></i> ${os}`
+            return `<i class="fab fa-windows"></i> ${os}`;
+          if (os.includes('Mac')) return `<i class="fab fa-apple"></i> ${os}`;
+          if (os.includes('Linux')) return `<i class="fab fa-linux"></i> ${os}`;
           if (os.includes('Android'))
-            return `<i class="fab fa-android"></i> ${os}`
-          if (os.includes('iOS')) return `<i class="fab fa-apple"></i> ${os}`
-          return `<i class="fas fa-desktop"></i> ${os}`
+            return `<i class="fab fa-android"></i> ${os}`;
+          if (os.includes('iOS')) return `<i class="fab fa-apple"></i> ${os}`;
+          return `<i class="fas fa-desktop"></i> ${os}`;
         }
 
         function getBrowserIcon(browser) {
           if (browser.includes('Chrome'))
-            return `<i class="fab fa-chrome"></i> ${browser}`
+            return `<i class="fab fa-chrome"></i> ${browser}`;
           if (browser.includes('Firefox'))
-            return `<i class="fab fa-firefox"></i> ${browser}`
+            return `<i class="fab fa-firefox"></i> ${browser}`;
           if (browser.includes('Safari'))
-            return `<i class="fab fa-safari"></i> ${browser}`
+            return `<i class="fab fa-safari"></i> ${browser}`;
           if (browser.includes('Edge'))
-            return `<i class="fab fa-edge"></i> ${browser}`
+            return `<i class="fab fa-edge"></i> ${browser}`;
           if (browser.includes('Opera'))
-            return `<i class="fab fa-opera"></i> ${browser}`
-          return `<i class="fas fa-globe"></i> ${browser}`
+            return `<i class="fab fa-opera"></i> ${browser}`;
+          return `<i class="fas fa-globe"></i> ${browser}`;
         }
 
         function detectUserInfo() {
-          const userAgent = navigator.userAgent
+          const userAgent = navigator.userAgent;
 
           // Deteksi OS
-          let os = 'Lainnya'
-          if (userAgent.match(/Win/)) os = 'Windows'
-          else if (userAgent.match(/Mac/)) os = 'macOS'
-          else if (userAgent.match(/Linux/)) os = 'Linux'
-          else if (userAgent.match(/Android/)) os = 'Android'
-          else if (userAgent.match(/iPhone|iPad|iPod/)) os = 'iOS'
+          let os = 'Lainnya';
+          if (userAgent.match(/Win/)) os = 'Windows';
+          else if (userAgent.match(/Mac/)) os = 'macOS';
+          else if (userAgent.match(/Linux/)) os = 'Linux';
+          else if (userAgent.match(/Android/)) os = 'Android';
+          else if (userAgent.match(/iPhone|iPad|iPod/)) os = 'iOS';
 
           // Deteksi Browser
-          let browser = 'Lainnya'
+          let browser = 'Lainnya';
           if (userAgent.includes('Chrome') && !userAgent.includes('Edg'))
-            browser = 'Chrome'
-          else if (userAgent.includes('Firefox')) browser = 'Firefox'
+            browser = 'Chrome';
+          else if (userAgent.includes('Firefox')) browser = 'Firefox';
           else if (
             userAgent.includes('Safari') &&
             !userAgent.includes('Chrome')
           )
-            browser = 'Safari'
-          else if (userAgent.includes('Edg')) browser = 'Edge'
-          else if (userAgent.includes('Opera')) browser = 'Opera'
+            browser = 'Safari';
+          else if (userAgent.includes('Edg')) browser = 'Edge';
+          else if (userAgent.includes('Opera')) browser = 'Opera';
 
-          document.getElementById('user-os').innerHTML = getOSIcon(os)
+          document.getElementById('user-os').innerHTML = getOSIcon(os);
           document.getElementById('user-browser').innerHTML =
-            getBrowserIcon(browser)
+            getBrowserIcon(browser);
         }
 
         async function getGeoLocation() {
-          const ipSpan = document.getElementById('user-ip')
-          const geoSpan = document.getElementById('user-geo')
+          const ipSpan = document.getElementById('user-ip');
+          const geoSpan = document.getElementById('user-geo');
 
           try {
             // Step 1: Dapatkan IP dari ipify
             const ipResponse = await fetch(
               'https://api.ipify.org?format=json&ipv4',
-            )
-            const ipData = await ipResponse.json()
-            const userIP = ipData.ip
-            ipSpan.textContent = userIP
+            );
+            const ipData = await ipResponse.json();
+            const userIP = ipData.ip;
+            ipSpan.textContent = userIP;
 
             // Step 2: Gunakan IP untuk Geolocation (Menggunakan API pihak ketiga - ip-api.com)
             const geoResponse = await fetch(
               `http://ip-api.com/json/${userIP}?fields=status,country,countryCode,city`,
-            )
-            const geoData = await geoResponse.json()
+            );
+            const geoData = await geoResponse.json();
 
             if (geoData.status === 'success') {
               // Konversi kode negara 2 huruf ke emoji bendera (Unicode Regional Indicator Symbols)
-              const countryCode = geoData.countryCode.toUpperCase()
+              const countryCode = geoData.countryCode.toUpperCase();
               const flagEmoji = countryCode.replace(/./g, (char) =>
                 String.fromCodePoint(char.charCodeAt(0) + 127397),
-              )
+              );
 
-              geoSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i> Lokasi: ${geoData.city}, ${geoData.country} ${flagEmoji}`
+              geoSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i> Lokasi: ${geoData.city}, ${geoData.country} ${flagEmoji}`;
             } else {
               geoSpan.innerHTML =
-                '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi GeoIP.'
+                '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi GeoIP.';
             }
           } catch (error) {
-            console.error('Error fetching user info:', error)
-            ipSpan.textContent = 'Gagal Mendeteksi.'
+            console.error('Error fetching user info:', error);
+            ipSpan.textContent = 'Gagal Mendeteksi.';
             geoSpan.innerHTML =
-              '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi.'
+              '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi.';
           }
         }
 
         // Panggil fungsi setelah DOM siap
         document.addEventListener('DOMContentLoaded', () => {
-          detectUserInfo()
-          getGeoLocation()
-        })
-      })
+          detectUserInfo();
+          getGeoLocation();
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

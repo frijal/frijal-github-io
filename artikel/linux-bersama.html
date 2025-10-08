@@ -227,8 +227,6 @@
     </div>
     <div id="info-os"><strong>OS:</strong> <span id="os-name"></span></div>
 
-    
-
     <!-- Facebook Comments -->
     <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
       <span id="current-url" class="small-muted"></span>
@@ -258,56 +256,56 @@
           btn.addEventListener('click', (e) => {
             const code = e.target.parentElement
               .querySelector('code')
-              .textContent.trim()
-            navigator.clipboard.writeText(code)
-            btn.textContent = 'Copied!'
+              .textContent.trim();
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
             setTimeout(() => {
-              btn.textContent = 'Copy'
-            }, 1500)
-          })
-        })
+              btn.textContent = 'Copy';
+            }, 1500);
+          });
+        });
 
         // Browser & OS info
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Unknown',
-          os = 'Unknown'
-        if (ua.includes('Firefox')) browser = 'Firefox 🦊'
-        else if (ua.includes('Chrome')) browser = 'Chrome 🌐'
-        else if (ua.includes('Safari')) browser = 'Safari 🍏'
-        else if (ua.includes('Edge')) browser = 'Edge 🟦'
-        document.getElementById('browser-name').textContent = browser
+          os = 'Unknown';
+        if (ua.includes('Firefox')) browser = 'Firefox 🦊';
+        else if (ua.includes('Chrome')) browser = 'Chrome 🌐';
+        else if (ua.includes('Safari')) browser = 'Safari 🍏';
+        else if (ua.includes('Edge')) browser = 'Edge 🟦';
+        document.getElementById('browser-name').textContent = browser;
 
-        if (ua.includes('Windows')) os = 'Windows 🪟'
-        else if (ua.includes('Linux')) os = 'Linux 🐧'
-        else if (ua.includes('Mac')) os = 'macOS 🍎'
-        document.getElementById('os-name').textContent = os
+        if (ua.includes('Windows')) os = 'Windows 🪟';
+        else if (ua.includes('Linux')) os = 'Linux 🐧';
+        else if (ua.includes('Mac')) os = 'macOS 🍎';
+        document.getElementById('os-name').textContent = os;
 
         // IP & Flag
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
             document.getElementById('ip-address').textContent =
-              data.ip + ' - ' + data.country_name
+              data.ip + ' - ' + data.country_name;
             document.getElementById('flag').src =
               'https://flagcdn.com/24x18/' +
               data.country_code.toLowerCase() +
-              '.png'
-          })
+              '.png';
+          });
 
         // Facebook Comments
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
-        }
-      })
+        };
+      });
     </script>
 
     <!-- JSON-LD Article -->

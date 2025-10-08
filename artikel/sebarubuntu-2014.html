@@ -798,18 +798,19 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Canonical URL (untuk share)
         const CANON =
-          document.querySelector('link[rel="canonical"]')?.href || location.href
+          document.querySelector('link[rel="canonical"]')?.href ||
+          location.href;
 
         // Deteksi sederhana Browser & OS
-        ;(function detectUA() {
-          const ua = navigator.userAgent
+        (function detectUA() {
+          const ua = navigator.userAgent;
           const bMap = [
             { k: /Edg\//, n: 'Microsoft Edge' },
             { k: /OPR\//, n: 'Opera' },
             { k: /Chrome\//, n: 'Google Chrome' },
             { k: /Safari\//, n: 'Safari' },
             { k: /Firefox\//, n: 'Mozilla Firefox' },
-          ]
+          ];
           const oMap = [
             { k: /Windows NT 10|Windows NT 11/, n: 'Windows 10/11' },
             { k: /Windows NT 6\./, n: 'Windows 7/8' },
@@ -817,108 +818,108 @@
             { k: /iPhone|iPad|iPod/, n: 'iOS' },
             { k: /Mac OS X|Macintosh/, n: 'macOS' },
             { k: /Linux/, n: 'Linux' },
-          ]
+          ];
           const b = (
             bMap.find((x) => x.k.test(ua)) || { n: 'Browser tak dikenal' }
-          ).n
+          ).n;
           const o = (oMap.find((x) => x.k.test(ua)) || { n: 'OS tak dikenal' })
-            .n
-          document.getElementById('ua-browser').textContent = b
-          document.getElementById('ua-os').textContent = o
-        })()
+            .n;
+          document.getElementById('ua-browser').textContent = b;
+          document.getElementById('ua-os').textContent = o;
+        })();
 
         // Lokasi berdasarkan IP (ipapi.co)
-        ;(function geoIP() {
-          const geoEl = document.getElementById('geo')
-          const flagEl = document.getElementById('flag')
+        (function geoIP() {
+          const geoEl = document.getElementById('geo');
+          const flagEl = document.getElementById('flag');
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
             .then((d) => {
-              const city = d.city || 'Kota tidak diketahui'
-              const country = d.country_name || ''
-              const cc = (d.country_code || '').toLowerCase()
-              geoEl.textContent = city + (country ? ', ' + country : '')
+              const city = d.city || 'Kota tidak diketahui';
+              const country = d.country_name || '';
+              const cc = (d.country_code || '').toLowerCase();
+              geoEl.textContent = city + (country ? ', ' + country : '');
               if (cc) {
-                flagEl.src = `https://flagcdn.com/w40/${cc}.png`
-                flagEl.alt = `Bendera ${country || cc.toUpperCase()}`
+                flagEl.src = `https://flagcdn.com/w40/${cc}.png`;
+                flagEl.alt = `Bendera ${country || cc.toUpperCase()}`;
               } else {
                 flagEl.src =
-                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+                  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
               }
             })
             .catch(() => {
-              geoEl.textContent = 'Lokasi tidak tersedia'
-            })
-        })()
+              geoEl.textContent = 'Lokasi tidak tersedia';
+            });
+        })();
 
         // Lazy-load untuk galeri (IntersectionObserver)
-        ;(function lazyLoad() {
-          const imgs = document.querySelectorAll('#gallery img[data-src]')
+        (function lazyLoad() {
+          const imgs = document.querySelectorAll('#gallery img[data-src]');
           if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver(
               (entries, obs) => {
                 entries.forEach((e) => {
                   if (e.isIntersecting) {
-                    const img = e.target
-                    img.src = img.dataset.src
-                    img.removeAttribute('data-src')
-                    obs.unobserve(img)
+                    const img = e.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    obs.unobserve(img);
                   }
-                })
+                });
               },
               { rootMargin: '200px 0px' },
-            )
-            imgs.forEach((i) => io.observe(i))
+            );
+            imgs.forEach((i) => io.observe(i));
           } else {
-            imgs.forEach((img) => (img.src = img.dataset.src))
+            imgs.forEach((img) => (img.src = img.dataset.src));
           }
-        })()
+        })();
 
         // Lightbox sederhana
-        ;(function lightbox() {
-          const box = document.getElementById('lightbox')
-          const img = document.getElementById('lbImg')
-          const close = document.getElementById('lbClose')
+        (function lightbox() {
+          const box = document.getElementById('lightbox');
+          const img = document.getElementById('lbImg');
+          const close = document.getElementById('lbClose');
           document.getElementById('gallery').addEventListener('click', (e) => {
-            const a = e.target.closest('a')
-            if (!a) return
-            e.preventDefault()
-            img.src = a.dataset.full || a.href
-            box.classList.add('open')
-          })
+            const a = e.target.closest('a');
+            if (!a) return;
+            e.preventDefault();
+            img.src = a.dataset.full || a.href;
+            box.classList.add('open');
+          });
           const hide = () => {
-            box.classList.remove('open')
-            img.src = ''
-          }
-          close.addEventListener('click', hide)
+            box.classList.remove('open');
+            img.src = '';
+          };
+          close.addEventListener('click', hide);
           box.addEventListener('click', (e) => {
-            if (e.target === box) hide()
-          })
+            if (e.target === box) hide();
+          });
           document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') hide()
-          })
-        })()
+            if (e.key === 'Escape') hide();
+          });
+        })();
 
         // Tautan share
-        ;(function share() {
+        (function share() {
           const text = encodeURIComponent(
             '#SebarUbuntu - Komunitas Ubuntu Jogja',
-          )
-          const url = encodeURIComponent(CANON)
-          const via = encodeURIComponent('frijal')
+          );
+          const url = encodeURIComponent(CANON);
+          const via = encodeURIComponent('frijal');
 
           document.getElementById('share-wa').href =
-            `https://wa.me/?text=${text}%20${url}`
+            `https://wa.me/?text=${text}%20${url}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?text=${text}&url=${url}&via=${via}`
+            `https://twitter.com/intent/tweet?text=${text}&url=${url}&via=${via}`;
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           document.getElementById('share-li').href =
-            `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
+            `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
           document.getElementById('share-tg').href =
-            `https://t.me/share/url?url=${url}&text=${text}`
-        })()
-      })
+            `https://t.me/share/url?url=${url}&text=${text}`;
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

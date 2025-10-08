@@ -237,12 +237,12 @@
       <script>
         document.addEventListener(DOMContentLoaded, () => {
           function copyCode() {
-            const code = document.querySelector('pre code').innerText
+            const code = document.querySelector('pre code').innerText;
             navigator.clipboard.writeText(code).then(() => {
-              alert('Kode berhasil disalin!')
-            })
+              alert('Kode berhasil disalin!');
+            });
           }
-        })
+        });
       </script>
 
       <h2>Jaga Data Pribadi Tetap Aman</h2>
@@ -298,19 +298,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
     </main>
@@ -326,30 +326,30 @@
         document.addEventListener(DOMContentLoaded, () => {
           // Deteksi Browser dan OS
           function getBrowserInfo() {
-            let ua = navigator.userAgent
-            if (ua.includes('Firefox')) return 'Mozilla Firefox'
-            if (ua.includes('Chrome')) return 'Google Chrome'
-            if (ua.includes('Safari')) return 'Safari'
-            return 'Browser Tidak Dikenal'
+            let ua = navigator.userAgent;
+            if (ua.includes('Firefox')) return 'Mozilla Firefox';
+            if (ua.includes('Chrome')) return 'Google Chrome';
+            if (ua.includes('Safari')) return 'Safari';
+            return 'Browser Tidak Dikenal';
           }
           function getOSInfo() {
-            let os = 'OS Tidak Dikenal'
-            if (navigator.userAgent.includes('Win')) os = 'Windows'
-            if (navigator.userAgent.includes('Mac')) os = 'MacOS'
-            if (navigator.userAgent.includes('Linux')) os = 'Linux'
-            return os
+            let os = 'OS Tidak Dikenal';
+            if (navigator.userAgent.includes('Win')) os = 'Windows';
+            if (navigator.userAgent.includes('Mac')) os = 'MacOS';
+            if (navigator.userAgent.includes('Linux')) os = 'Linux';
+            return os;
           }
           document.getElementById('system-info').innerHTML =
-            `<p><b>Browser:</b> ${getBrowserInfo()} | <b>OS:</b> ${getOSInfo()}</p>`
+            `<p><b>Browser:</b> ${getBrowserInfo()} | <b>OS:</b> ${getOSInfo()}</p>`;
 
           // IP & Bendera
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
             .then((data) => {
               document.getElementById('ip-info').innerHTML =
-                `<p><b>IP Anda:</b> ${data.ip} | <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}</p>`
-            })
-        })
+                `<p><b>IP Anda:</b> ${data.ip} | <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}</p>`;
+            });
+        });
       </script>
     </footer>
 

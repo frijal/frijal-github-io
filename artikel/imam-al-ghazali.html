@@ -547,7 +547,6 @@
         </div>
 
         <div class="info-bar">
-
           <div class="pill">
             ℹ️ Klik gambar untuk lightbox, pakai panah untuk navigasi
           </div>
@@ -595,108 +594,107 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Facebook SDK
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
 
         const canonical =
-          document.querySelector('link[rel="canonical"]')?.href || location.href
+          document.querySelector('link[rel="canonical"]')?.href ||
+          location.href;
 
         // Share buttons
         document
           .getElementById('share-twitter')
           .addEventListener('click', () => {
-            const u = new URL('https://twitter.com/intent/tweet')
+            const u = new URL('https://twitter.com/intent/tweet');
             u.searchParams.set(
               'text',
               'Imam Al-Ghazali: Krisis, Rihlah Batin, dan Ihya’ ,  Kisah Sang Hujjatul Islam',
-            )
-            u.searchParams.set('url', canonical)
-            window.open(u.toString(), '_blank')
-          })
+            );
+            u.searchParams.set('url', canonical);
+            window.open(u.toString(), '_blank');
+          });
         document
           .getElementById('share-whatsapp')
           .addEventListener('click', () => {
-            const txt = `Imam Al-Ghazali ,  baca di: ${canonical}`
+            const txt = `Imam Al-Ghazali ,  baca di: ${canonical}`;
             const wa = /Android|iPhone|iPad/i.test(navigator.userAgent)
               ? `https://wa.me/?text=${encodeURIComponent(txt)}`
-              : `https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`
-            window.open(wa, '_blank')
-          })
+              : `https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`;
+            window.open(wa, '_blank');
+          });
         document
           .getElementById('share-facebook')
           .addEventListener('click', () => {
-            const u = new URL('https://www.facebook.com/sharer/sharer.php')
-            u.searchParams.set('u', canonical)
-            window.open(u.toString(), '_blank')
-          })
+            const u = new URL('https://www.facebook.com/sharer/sharer.php');
+            u.searchParams.set('u', canonical);
+            window.open(u.toString(), '_blank');
+          });
         document
           .getElementById('share-copy')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(canonical)
-              alert('Tautan disalin!')
+              await navigator.clipboard.writeText(canonical);
+              alert('Tautan disalin!');
             } catch (e) {
-              prompt('Salin tautan berikut:', canonical)
+              prompt('Salin tautan berikut:', canonical);
             }
-          })
-
-        
+          });
 
         // Lightbox
-        const gallery = Array.from(document.querySelectorAll('#gallery .card'))
-        const lightbox = document.getElementById('lightbox')
-        const img = document.getElementById('lightbox-img')
-        const prev = document.getElementById('nav-prev')
-        const next = document.getElementById('nav-next')
-        const closeBtn = document.getElementById('nav-close')
-        let index = 0
+        const gallery = Array.from(document.querySelectorAll('#gallery .card'));
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        const prev = document.getElementById('nav-prev');
+        const next = document.getElementById('nav-next');
+        const closeBtn = document.getElementById('nav-close');
+        let index = 0;
 
         function openLightbox(i) {
-          if (!gallery.length) return
-          index = i
+          if (!gallery.length) return;
+          index = i;
           const full =
             gallery[index].dataset.full ||
-            gallery[index].querySelector('img')?.src
-          img.src = full
-          lightbox.classList.add('open')
+            gallery[index].querySelector('img')?.src;
+          img.src = full;
+          lightbox.classList.add('open');
         }
         function closeLightbox() {
-          lightbox.classList.remove('open')
-          img.src = ''
+          lightbox.classList.remove('open');
+          img.src = '';
         }
         function nav(delta) {
-          const max = gallery.length
-          index = (index + delta + max) % max
+          const max = gallery.length;
+          index = (index + delta + max) % max;
           const full =
             gallery[index].dataset.full ||
-            gallery[index].querySelector('img')?.src
-          img.src = full
+            gallery[index].querySelector('img')?.src;
+          img.src = full;
         }
         gallery.forEach((card, i) => {
-          card.addEventListener('click', () => openLightbox(i))
-          card.style.cursor = 'zoom-in'
-        })
-        prev.addEventListener('click', () => nav(-1))
-        next.addEventListener('click', () => nav(1))
-        closeBtn.addEventListener('click', closeLightbox)
+          card.addEventListener('click', () => openLightbox(i));
+          card.style.cursor = 'zoom-in';
+        });
+        prev.addEventListener('click', () => nav(-1));
+        next.addEventListener('click', () => nav(1));
+        closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) closeLightbox()
-        })
+          if (e.target === lightbox) closeLightbox();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lightbox.classList.contains('open')) return
-          if (e.key === 'Escape') closeLightbox()
-          if (e.key === 'ArrowLeft') nav(-1)
-          if (e.key === 'ArrowRight') nav(1)
-        })
-      })
+          if (!lightbox.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') nav(-1);
+          if (e.key === 'ArrowRight') nav(1);
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

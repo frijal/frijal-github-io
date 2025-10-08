@@ -821,88 +821,91 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Detect browser & OS
-        ;(function detectEnv() {
+        (function detectEnv() {
           const ua = navigator.userAgent,
-            plat = navigator.platform
-          const elBrowser = document.getElementById('browser')
-          const elOS = document.getElementById('os')
+            plat = navigator.platform;
+          const elBrowser = document.getElementById('browser');
+          const elOS = document.getElementById('os');
           function getBrowser() {
-            if (/Edg\//.test(ua)) return 'Microsoft Edge'
-            if (/OPR\//.test(ua) || /Opera/.test(ua)) return 'Opera'
-            if (/Chrome\//.test(ua) && !/Edg\//.test(ua)) return 'Google Chrome'
+            if (/Edg\//.test(ua)) return 'Microsoft Edge';
+            if (/OPR\//.test(ua) || /Opera/.test(ua)) return 'Opera';
+            if (/Chrome\//.test(ua) && !/Edg\//.test(ua))
+              return 'Google Chrome';
             if (
               /Safari\//.test(ua) &&
               /Version\//.test(ua) &&
               !/Chrome/.test(ua)
             )
-              return 'Safari'
-            if (/Firefox\//.test(ua)) return 'Mozilla Firefox'
-            if (/MSIE|Trident/.test(ua)) return 'Internet Explorer'
-            return 'Browser tidak dikenal'
+              return 'Safari';
+            if (/Firefox\//.test(ua)) return 'Mozilla Firefox';
+            if (/MSIE|Trident/.test(ua)) return 'Internet Explorer';
+            return 'Browser tidak dikenal';
           }
           function getOS() {
-            if (/Win/.test(plat)) return 'Windows'
-            if (/Mac/.test(plat)) return 'macOS'
-            if (/Linux/.test(plat)) return 'Linux'
-            if (/Android/.test(ua)) return 'Android'
-            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
-            return 'OS tidak dikenal'
+            if (/Win/.test(plat)) return 'Windows';
+            if (/Mac/.test(plat)) return 'macOS';
+            if (/Linux/.test(plat)) return 'Linux';
+            if (/Android/.test(ua)) return 'Android';
+            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+            return 'OS tidak dikenal';
           }
-          if (elBrowser) elBrowser.textContent = getBrowser()
-          if (elOS) elOS.textContent = getOS()
-        })()
+          if (elBrowser) elBrowser.textContent = getBrowser();
+          if (elOS) elOS.textContent = getOS();
+        })();
 
         // IP Geolocation
-        ;(function geolocate() {
-          const geo = document.getElementById('geo')
-          const ipEl = document.getElementById('ip')
-          const flagEl = document.getElementById('flag')
+        (function geolocate() {
+          const geo = document.getElementById('geo');
+          const ipEl = document.getElementById('ip');
+          const flagEl = document.getElementById('flag');
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
             .then((d) => {
-              if (ipEl) ipEl.textContent = d.ip || '—'
-              const city = d.city || 'Kota tidak diketahui'
-              const country = d.country_name || ''
-              const cc = d.country_code || ''
-              if (geo) geo.textContent = city + (country ? `, ${country}` : '')
-              if (flagEl) flagEl.textContent = cc ? ccToEmoji(cc) : '🏳️'
+              if (ipEl) ipEl.textContent = d.ip || '—';
+              const city = d.city || 'Kota tidak diketahui';
+              const country = d.country_name || '';
+              const cc = d.country_code || '';
+              if (geo) geo.textContent = city + (country ? `, ${country}` : '');
+              if (flagEl) flagEl.textContent = cc ? ccToEmoji(cc) : '🏳️';
             })
             .catch(() => {
               fetch('https://ipinfo.io/json?token=')
                 .then((r) => r.json())
                 .then((d) => {
-                  if (ipEl) ipEl.textContent = d.ip || '—'
+                  if (ipEl) ipEl.textContent = d.ip || '—';
                   const loc =
-                    (d.city || '') + (d.country ? `, ${d.country}` : '')
-                  if (geo) geo.textContent = loc || 'Lokasi tidak diketahui'
+                    (d.city || '') + (d.country ? `, ${d.country}` : '');
+                  if (geo) geo.textContent = loc || 'Lokasi tidak diketahui';
                   if (flagEl)
-                    flagEl.textContent = d.country ? ccToEmoji(d.country) : '🏳️'
+                    flagEl.textContent = d.country
+                      ? ccToEmoji(d.country)
+                      : '🏳️';
                 })
                 .catch(() => {
-                  if (geo) geo.textContent = 'Lokasi tidak diketahui'
-                  if (ipEl) ipEl.textContent = '—'
-                  if (flagEl) flagEl.textContent = '🏳️'
-                })
-            })
+                  if (geo) geo.textContent = 'Lokasi tidak diketahui';
+                  if (ipEl) ipEl.textContent = '—';
+                  if (flagEl) flagEl.textContent = '🏳️';
+                });
+            });
           function ccToEmoji(cc) {
             return cc
               .toUpperCase()
               .replace(/./g, (c) =>
                 String.fromCodePoint(127397 + c.charCodeAt()),
-              )
+              );
           }
-        })()
+        })();
 
         // Share links
-        ;(function share() {
+        (function share() {
           const url = encodeURIComponent(
             document.querySelector('link[rel=canonical]')?.href ||
               location.href,
-          )
-          const title = encodeURIComponent(document.title)
+          );
+          const title = encodeURIComponent(document.title);
           const text = encodeURIComponent(
             'Menyambut Tahun Baru Hijriyah - ringkas, santai, dan tetap berpegang:',
-          )
+          );
           const pairs = [
             ['share-wa', 'https://wa.me/?text=' + text + '%20' + url],
             ['share-wa-2', 'https://wa.me/?text=' + text + '%20' + url],
@@ -927,73 +930,73 @@
               'share-ln-2',
               'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
             ],
-          ]
+          ];
           pairs.forEach(([id, href]) => {
-            const a = document.getElementById(id)
-            if (a) a.href = href
-          })
-          const btnCopy = document.getElementById('btn-copy')
+            const a = document.getElementById(id);
+            if (a) a.href = href;
+          });
+          const btnCopy = document.getElementById('btn-copy');
           if (btnCopy) {
             btnCopy.addEventListener('click', async () => {
               try {
-                await navigator.clipboard.writeText(decodeURIComponent(url))
+                await navigator.clipboard.writeText(decodeURIComponent(url));
                 btnCopy.innerHTML =
-                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg><span>Tautan disalin</span>'
+                  '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg><span>Tautan disalin</span>';
               } catch {
-                alert('Gagal menyalin tautan.')
+                alert('Gagal menyalin tautan.');
               }
-            })
+            });
           }
-        })()
+        })();
 
         // Lightbox
-        ;(function lightbox() {
-          const gallery = [...document.querySelectorAll('#gallery a')]
-          const lb = document.getElementById('lightbox')
-          const img = document.getElementById('lb-img')
-          const close = document.getElementById('lb-close')
-          const prev = document.getElementById('lb-prev')
-          const next = document.getElementById('lb-next')
-          let idx = 0
+        (function lightbox() {
+          const gallery = [...document.querySelectorAll('#gallery a')];
+          const lb = document.getElementById('lightbox');
+          const img = document.getElementById('lb-img');
+          const close = document.getElementById('lb-close');
+          const prev = document.getElementById('lb-prev');
+          const next = document.getElementById('lb-next');
+          let idx = 0;
 
           function open(i) {
-            idx = i
-            const href = gallery[idx].getAttribute('href')
+            idx = i;
+            const href = gallery[idx].getAttribute('href');
             const alt =
-              gallery[idx].querySelector('img')?.getAttribute('alt') || ''
-            img.src = href
-            img.alt = alt
-            lb.classList.add('open')
+              gallery[idx].querySelector('img')?.getAttribute('alt') || '';
+            img.src = href;
+            img.alt = alt;
+            lb.classList.add('open');
           }
           function move(delta) {
-            idx = (idx + delta + gallery.length) % gallery.length
-            open(idx)
+            idx = (idx + delta + gallery.length) % gallery.length;
+            open(idx);
           }
           function closeLB() {
-            lb.classList.remove('open')
-            img.src = ''
-            img.alt = ''
+            lb.classList.remove('open');
+            img.src = '';
+            img.alt = '';
           }
           gallery.forEach((a, i) =>
             a.addEventListener('click', (e) => {
-              e.preventDefault()
-              open(i)
+              e.preventDefault();
+              open(i);
             }),
-          )
-          close.addEventListener('click', closeLB)
-          prev.addEventListener('click', () => move(-1))
-          next.addEventListener('click', () => move(1))
+          );
+          close.addEventListener('click', closeLB);
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLB()
-          })
+            if (e.target === lb) closeLB();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') closeLB()
-            if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'ArrowRight') move(1)
-          })
-        })()
-      })
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLB();
+            if (e.key === 'ArrowLeft') move(-1);
+            if (e.key === 'ArrowRight') move(1);
+          });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

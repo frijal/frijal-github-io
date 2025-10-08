@@ -643,95 +643,95 @@
         function initShare() {
           const url =
             document.querySelector('link[rel="canonical"]')?.href ||
-            location.href
-          const title = document.title
+            location.href;
+          const title = document.title;
 
-          const tw = document.getElementById('share-twitter')
-          const fb = document.getElementById('share-fb')
-          const wa = document.getElementById('share-wa')
-          const cp = document.getElementById('copy-link')
+          const tw = document.getElementById('share-twitter');
+          const fb = document.getElementById('share-fb');
+          const wa = document.getElementById('share-wa');
+          const cp = document.getElementById('copy-link');
 
-          tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`
-          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
-          const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent)
+          tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
+          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
           wa.href = isMobile
             ? `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
-            : `https://web.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
+            : `https://web.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
 
           cp.addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(url)
-              cp.textContent = 'Tersalin!'
+              await navigator.clipboard.writeText(url);
+              cp.textContent = 'Tersalin!';
               setTimeout(() => {
-                cp.textContent = 'Salin Link'
-              }, 1500)
+                cp.textContent = 'Salin Link';
+              }, 1500);
             } catch (e) {
-              alert('Gagal menyalin link. Salin manual: ' + url)
+              alert('Gagal menyalin link. Salin manual: ' + url);
             }
-          })
+          });
         }
 
         // Gallery & Lightbox
         function initGallery() {
-          const gallery = document.getElementById('gallery')
-          const items = Array.from(gallery.querySelectorAll('figure'))
-          const lb = document.getElementById('lightbox')
-          const img = document.getElementById('lightbox-img')
-          const prev = lb.querySelector('.prev')
-          const next = lb.querySelector('.next')
-          const close = lb.querySelector('.close')
+          const gallery = document.getElementById('gallery');
+          const items = Array.from(gallery.querySelectorAll('figure'));
+          const lb = document.getElementById('lightbox');
+          const img = document.getElementById('lightbox-img');
+          const prev = lb.querySelector('.prev');
+          const next = lb.querySelector('.next');
+          const close = lb.querySelector('.close');
 
-          let current = 0
+          let current = 0;
 
           function open(index) {
-            current = index
-            const el = items[current].querySelector('img')
-            img.src = el.src
-            img.alt = el.alt || 'Pratinjau gambar'
-            lb.classList.add('active')
-            document.body.style.overflow = 'hidden'
+            current = index;
+            const el = items[current].querySelector('img');
+            img.src = el.src;
+            img.alt = el.alt || 'Pratinjau gambar';
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
           }
           function move(dir) {
-            current = (current + dir + items.length) % items.length
-            const el = items[current].querySelector('img')
-            img.src = el.src
-            img.alt = el.alt || 'Pratinjau gambar'
+            current = (current + dir + items.length) % items.length;
+            const el = items[current].querySelector('img');
+            img.src = el.src;
+            img.alt = el.alt || 'Pratinjau gambar';
           }
           function closeBox() {
-            lb.classList.remove('active')
-            document.body.style.overflow = ''
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
           }
 
           items.forEach((fig, idx) => {
-            fig.addEventListener('click', () => open(idx))
+            fig.addEventListener('click', () => open(idx));
             fig.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') open(idx)
-            })
-            fig.setAttribute('tabindex', '0')
-            fig.setAttribute('role', 'button')
-            fig.setAttribute('aria-label', 'Buka gambar')
-          })
+              if (e.key === 'Enter') open(idx);
+            });
+            fig.setAttribute('tabindex', '0');
+            fig.setAttribute('role', 'button');
+            fig.setAttribute('aria-label', 'Buka gambar');
+          });
 
-          prev.addEventListener('click', () => move(-1))
-          next.addEventListener('click', () => move(1))
-          close.addEventListener('click', closeBox)
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          close.addEventListener('click', closeBox);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeBox()
-          })
+            if (e.target === lb) closeBox();
+          });
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('active')) return
-            if (e.key === 'Escape') closeBox()
-            if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'ArrowRight') move(1)
-          })
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') closeBox();
+            if (e.key === 'ArrowLeft') move(-1);
+            if (e.key === 'ArrowRight') move(1);
+          });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-          renderInfo()
-          initShare()
-          initGallery()
-        })
-      })
+          renderInfo();
+          initShare();
+          initGallery();
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

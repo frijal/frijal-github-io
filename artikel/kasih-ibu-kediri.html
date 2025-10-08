@@ -782,23 +782,23 @@ Kasih Ibu Sepanjang Masa, semoga ibu selalu sehat.&lt;/div&gt;</code></pre>
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                const currentUrl = window.location.href
-                document.getElementById('current-url').textContent = currentUrl
+                const currentUrl = window.location.href;
+                document.getElementById('current-url').textContent = currentUrl;
                 // Set data-href FB Comments ke URL halaman ini
                 document
                   .getElementById('fb-comments')
-                  .setAttribute('data-href', currentUrl)
+                  .setAttribute('data-href', currentUrl);
                 // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
                 window.fbAsyncInit = function () {
                   if (typeof FB !== 'undefined') {
                     try {
-                      FB.XFBML.parse()
+                      FB.XFBML.parse();
                     } catch (e) {
                       /* ignore */
                     }
                   }
-                }
-              })
+                };
+              });
             </script>
           </div>
         </div>
@@ -839,73 +839,73 @@ Kasih Ibu Sepanjang Masa, semoga ibu selalu sehat.&lt;/div&gt;</code></pre>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        ;(function () {
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          const lbClose = document.getElementById('lightbox-close')
+        (function () {
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          const lbClose = document.getElementById('lightbox-close');
           document.querySelectorAll('[data-lightbox="image"]').forEach((a) => {
             a.addEventListener('click', (e) => {
-              e.preventDefault()
-              lbImg.src = a.getAttribute('href')
-              lb.classList.add('open')
-              lb.setAttribute('aria-hidden', 'false')
-            })
-          })
+              e.preventDefault();
+              lbImg.src = a.getAttribute('href');
+              lb.classList.add('open');
+              lb.setAttribute('aria-hidden', 'false');
+            });
+          });
           function closeLB() {
-            lb.classList.remove('open')
-            lbImg.src = ''
-            lb.setAttribute('aria-hidden', 'true')
+            lb.classList.remove('open');
+            lbImg.src = '';
+            lb.setAttribute('aria-hidden', 'true');
           }
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLB()
-          })
-          lbClose.addEventListener('click', closeLB)
+            if (e.target === lb) closeLB();
+          });
+          lbClose.addEventListener('click', closeLB);
           document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLB()
-          })
-        })()
+            if (e.key === 'Escape') closeLB();
+          });
+        })();
 
         // Page URL display
-        document.getElementById('page-url').textContent = window.location.href
+        document.getElementById('page-url').textContent = window.location.href;
 
         // Share links (canonical/share URL)
-        ;(function () {
+        (function () {
           const shareUrl =
-            'https://frijal.github.io/artikel/kasih-ibu-kediri.html'
+            'https://frijal.github.io/artikel/kasih-ibu-kediri.html';
           const text = encodeURIComponent(
             'Kasih Ibu Sepanjang Masa — Potret di Kediri saat senja.',
-          )
+          );
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${text}`
+            `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${text}`;
           document.getElementById('share-x').href =
-            `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${text}`
+            `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${text}`;
           document.getElementById('share-wa').href =
-            `https://wa.me/?text=${text}%20${encodeURIComponent(shareUrl)}`
+            `https://wa.me/?text=${text}%20${encodeURIComponent(shareUrl)}`;
           document.getElementById('share-telegram').href =
-            `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${text}`
+            `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${text}`;
           // IG/Threads/TikTok: arahkan ke URL agar mudah disalin.
-          document.getElementById('share-ig').href = shareUrl
-          document.getElementById('share-threads').href = shareUrl
-          document.getElementById('share-tiktok').href = shareUrl
-        })()
+          document.getElementById('share-ig').href = shareUrl;
+          document.getElementById('share-threads').href = shareUrl;
+          document.getElementById('share-tiktok').href = shareUrl;
+        })();
 
         // Device detection (sederhana)
-        ;(function () {
-          const ua = navigator.userAgent || navigator.userAgentData || ''
-          const lower = ua.toString().toLowerCase()
+        (function () {
+          const ua = navigator.userAgent || navigator.userAgentData || '';
+          const lower = ua.toString().toLowerCase();
 
           function detectBrowser() {
-            if (lower.includes('edg/')) return 'Edge'
+            if (lower.includes('edg/')) return 'Edge';
             if (lower.includes('opr/') || lower.includes('opera'))
-              return 'Opera'
-            if (lower.includes('firefox/')) return 'Firefox'
+              return 'Opera';
+            if (lower.includes('firefox/')) return 'Firefox';
             if (lower.includes('chrome/') && !lower.includes('edg/'))
-              return 'Chrome'
+              return 'Chrome';
             if (lower.includes('safari/') && !lower.includes('chrome/'))
-              return 'Safari'
-            return 'Browser Lain'
+              return 'Safari';
+            return 'Browser Lain';
           }
           function browserVersion(name) {
             const map = {
@@ -914,64 +914,64 @@ Kasih Ibu Sepanjang Masa, semoga ibu selalu sehat.&lt;/div&gt;</code></pre>
               Firefox: /firefox\/([\d\.]+)/i,
               Chrome: /chrome\/([\d\.]+)/i,
               Safari: /version\/([\d\.]+)/i,
-            }
-            const re = map[name]
-            if (!re) return ''
-            const m = ua.match(re)
-            return m ? m[m.length - 1] : ''
+            };
+            const re = map[name];
+            if (!re) return '';
+            const m = ua.match(re);
+            return m ? m[m.length - 1] : '';
           }
           function detectOS() {
-            if (lower.includes('windows nt')) return 'Windows'
-            if (lower.includes('mac os x')) return 'macOS'
-            if (lower.includes('android')) return 'Android'
+            if (lower.includes('windows nt')) return 'Windows';
+            if (lower.includes('mac os x')) return 'macOS';
+            if (lower.includes('android')) return 'Android';
             if (
               lower.includes('iphone') ||
               lower.includes('ipad') ||
               lower.includes('ipod')
             )
-              return 'iOS'
-            if (lower.includes('linux')) return 'Linux'
-            return 'OS Lain'
+              return 'iOS';
+            if (lower.includes('linux')) return 'Linux';
+            return 'OS Lain';
           }
           function osVersion(os) {
             if (os === 'Windows') {
-              const m = ua.match(/Windows NT ([\d\.]+)/i)
-              return m ? m[1] : ''
+              const m = ua.match(/Windows NT ([\d\.]+)/i);
+              return m ? m[1] : '';
             }
             if (os === 'macOS') {
-              const m = ua.match(/Mac OS X ([\d_]+)/i)
-              return m ? m[1].replace(/_/g, '.') : ''
+              const m = ua.match(/Mac OS X ([\d_]+)/i);
+              return m ? m[1].replace(/_/g, '.') : '';
             }
             if (os === 'Android') {
-              const m = ua.match(/Android ([\d\.]+)/i)
-              return m ? m[1] : ''
+              const m = ua.match(/Android ([\d\.]+)/i);
+              return m ? m[1] : '';
             }
             if (os === 'iOS') {
-              const m = ua.match(/OS ([\d_]+) like Mac OS X/i)
-              return m ? m[1].replace(/_/g, '.') : ''
+              const m = ua.match(/OS ([\d_]+) like Mac OS X/i);
+              return m ? m[1].replace(/_/g, '.') : '';
             }
             if (os === 'Linux') {
-              return ''
+              return '';
             }
-            return ''
+            return '';
           }
           function engine() {
-            if (lower.includes('applewebkit')) return 'WebKit/Blink'
-            if (lower.includes('gecko/')) return 'Gecko'
-            return '—'
+            if (lower.includes('applewebkit')) return 'WebKit/Blink';
+            if (lower.includes('gecko/')) return 'Gecko';
+            return '—';
           }
 
-          const bName = detectBrowser()
-          const bVer = browserVersion(bName)
-          const os = detectOS()
-          const osVer = osVersion(os)
+          const bName = detectBrowser();
+          const bVer = browserVersion(bName);
+          const os = detectOS();
+          const osVer = osVersion(os);
 
           document.getElementById('browser-info').textContent =
-            `Browser: ${bName} ${bVer}`.trim()
+            `Browser: ${bName} ${bVer}`.trim();
           document.getElementById('os-info').textContent =
-            `OS: ${os} ${osVer}`.trim()
+            `OS: ${os} ${osVer}`.trim();
           document.getElementById('engine-info').textContent =
-            `Engine: ${engine()}`
+            `Engine: ${engine()}`;
 
           const osIcons = {
             Windows:
@@ -983,7 +983,7 @@ Kasih Ibu Sepanjang Masa, semoga ibu selalu sehat.&lt;/div&gt;</code></pre>
             iOS: '<svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.6 13.1c-.03-3 2.44-4.45 2.55-4.52-1.39-2.04-3.55-2.32-4.31-2.36-1.83-.19-3.57 1.08-4.5 1.08-.95 0-2.38-1.06-3.92-1.03-2 .03-3.86 1.16-4.89 2.95-2.09 3.62-.53 8.97 1.49 11.91.99 1.43 2.16 3.03 3.71 2.98 1.5-.06 2.07-.96 3.89-.96 1.82 0 2.34.96 3.92.93 1.62-.03 2.64-1.46 3.62-2.9 1.13-1.65 1.6-3.24 1.62-3.33-.03-.01-3.08-1.18-3.09-4.75z"/></svg>',
             Linux:
               '<svg width="22" height="22" viewBox="0 0 24 24" fill="#FCC624"><path d="M12 2c-1.7 0-3 1.3-3 3v2H7c-1.1 0-2 .9-2 2v7c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4V9c0-1.1-.9-2-2-2h-2V5c0-1.7-1.3-3-3-3z"/></svg>',
-          }
+          };
           const browserIcons = {
             Chrome:
               '<svg width="22" height="22" viewBox="0 0 24 24"><path fill="#DB4437" d="M12 2a10 10 0 0 1 8.66 5H12z"/><path fill="#0F9D58" d="M3.34 7A10 10 0 0 0 12 22l4.33-7.5z"/><path fill="#F4B400" d="M20.66 7H12l4.33 7.5L12 22A10 10 0 0 0 20.66 7z"/><circle cx="12" cy="12" r="4" fill="#4285F4"/></svg>',
@@ -996,37 +996,38 @@ Kasih Ibu Sepanjang Masa, semoga ibu selalu sehat.&lt;/div&gt;</code></pre>
               '<svg width="22" height="22" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#FF1B2D"/><ellipse cx="12" cy="12" rx="4" ry="7" fill="#fff"/></svg>',
             'Browser Lain':
               '<svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#999"/></svg>',
-          }
+          };
           document.getElementById('device-os-icons').innerHTML =
-            osIcons[os] || osIcons['Linux']
+            osIcons[os] || osIcons['Linux'];
           document.getElementById('device-browser-icons').innerHTML =
-            browserIcons[bName] || browserIcons['Browser Lain']
-        })()
+            browserIcons[bName] || browserIcons['Browser Lain'];
+        })();
 
         // IP + Flag (public API: ipapi.co + flagcdn)
-        ;(function () {
+        (function () {
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
             .then((d) => {
-              const ip = d.ip || '—'
-              const city = d.city || '—'
-              const country = d.country_name || '—'
-              const cc = (d.country_code || '').toLowerCase()
+              const ip = d.ip || '—';
+              const city = d.city || '—';
+              const country = d.country_name || '—';
+              const cc = (d.country_code || '').toLowerCase();
 
-              document.getElementById('ip-info').textContent = `IP: ${ip}`
-              document.getElementById('city-info').textContent = `Kota: ${city}`
+              document.getElementById('ip-info').textContent = `IP: ${ip}`;
+              document.getElementById('city-info').textContent =
+                `Kota: ${city}`;
               document.getElementById('country-info').textContent =
-                `Negara: ${country}`
+                `Negara: ${country}`;
               if (cc) {
                 document.getElementById('flag-wrap').innerHTML =
-                  `<img src="https://flagcdn.com/w40/${cc}.png" alt="Bendera ${country}" width="40" height="30" style="border-radius:4px;border:1px solid rgba(255,255,255,.2)" />`
+                  `<img src="https://flagcdn.com/w40/${cc}.png" alt="Bendera ${country}" width="40" height="30" style="border-radius:4px;border:1px solid rgba(255,255,255,.2)" />`;
               }
             })
             .catch(() => {
               /* ignore */
-            })
-        })()
-      })
+            });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

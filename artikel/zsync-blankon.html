@@ -318,80 +318,80 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // Lazy load images
-          const lazyImages = document.querySelectorAll('.lazy-image')
+          const lazyImages = document.querySelectorAll('.lazy-image');
           const lazyLoad = (img) => {
-            img.setAttribute('src', img.getAttribute('data-src'))
+            img.setAttribute('src', img.getAttribute('data-src'));
             img.onload = () => {
-              img.classList.add('loaded')
-            }
-          }
+              img.classList.add('loaded');
+            };
+          };
           if ('IntersectionObserver' in window) {
             const lazyImageObserver = new IntersectionObserver((entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  lazyLoad(entry.target)
-                  lazyImageObserver.unobserve(entry.target)
+                  lazyLoad(entry.target);
+                  lazyImageObserver.unobserve(entry.target);
                 }
-              })
-            })
+              });
+            });
             lazyImages.forEach((img) => {
-              lazyImageObserver.observe(img)
-            })
+              lazyImageObserver.observe(img);
+            });
           } else {
-            lazyImages.forEach(lazyLoad)
+            lazyImages.forEach(lazyLoad);
           }
           // Set current year in footer
           document.getElementById('current-year').textContent =
-            new Date().getFullYear()
+            new Date().getFullYear();
           // Detect browser and OS
-          const userAgent = navigator.userAgent
-          let browserName, browserIcon, osName, osIcon
+          const userAgent = navigator.userAgent;
+          let browserName, browserIcon, osName, osIcon;
           if (userAgent.includes('Firefox')) {
-            browserName = 'Mozilla Firefox'
+            browserName = 'Mozilla Firefox';
             browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
           } else if (userAgent.includes('Edg')) {
-            browserName = 'Microsoft Edge'
+            browserName = 'Microsoft Edge';
             browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
           } else if (userAgent.includes('Chrome')) {
-            browserName = 'Google Chrome'
+            browserName = 'Google Chrome';
             browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.15 17.9c-2.5-.3-4.75-2.1-6.1-4.55C4.45 13.75 4 12.4 4 11c0-2.76 2.24-5 5-5 .85 0 1.65.15 2.35.4L12 5.5l-.85-.8C9.95 4.4 8.7 4 7.3 4c-2.65 0-4.85 1.25-6.1 3.15C.25 9.15 0 11.35 0 14c0 1.65.75 3.15 1.85 4.35 1.65 1.75 4.25 2.75 7 2.75 1.65 0 3.15-.55 4.35-1.45L12 19.5l.85.8c2.15.9 4.75 1.45 7.65 1.45 4.4 0 8-3.6 8-8s-3.6-8-8-8c-1.65 0-3.15.55-4.35 1.45L12 5.5l.85-.8C14.05 4.4 15.3 4 16.7 4c2.65 0 4.85 1.25 6.1 3.15 1.1-1.9 1.85-4.1 1.85-6.8 0-.65-.15-1.25-.4-1.8L19.5 2.5 12 10 4.5 2.5 2.7 4.35c-.25.55-.4 1.1-.4 1.8 0 2.7 1.15 5.9 1.85 8.65L12 19.5l.85-.8z"/></svg>';
           } else if (userAgent.includes('Safari')) {
-            browserName = 'Apple Safari'
+            browserName = 'Apple Safari';
             browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 10.44c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm-12 0c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm13.49-3.14c-.11-.77-.31-1.51-.58-2.2-.32-.83-.73-1.61-1.2-2.31-.52-.78-1.13-1.45-1.8-1.95-.63-.47-1.3-.8-2-.97-.7-.17-1.42-.18-2.14-.02-.72.16-1.42.45-2.07.85-.59.37-1.15.83-1.68 1.36-.6.6-.99 1.31-1.18 2.1-.14.59-.15 1.2.02 1.8.17.6.5.18 1.2.18 1.65 0 3.15-1.17 3.9-2.85.18-.45.45-.85.78-1.18.37-.37.82-.68 1.32-.88.55-.22 1.14-.3 1.75-.2 1.3.2 2.48 1.1 3.1 2.45.37.85.58 1.75.58 2.65 0 .3-.05.6-.15.88-.2.55-.5 1.07-.88 1.53-.43.5-.94.93-1.5.93-.56 0-1.07-.43-1.5-.93-.38-.46-.7-.98-.88-1.53z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 10.44c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm-12 0c-.09-.72-.24-1.42-.45-2.1-.19-.63-.5-1.2-.88-1.7-.43-.55-.94-.98-1.5-.98-.56 0-1.07.43-1.5.98-.38.5-.7 1.07-.88 1.7-.21.68-.36 1.38-.45 2.1-.06.37-.1.74-.1 1.12 0 1.3.57 2.47 1.5 3.34.93.87 2.17 1.3 3.5 1.3 1.33 0 2.57-.43 3.5-1.3.93-.87 1.5-2.04 1.5-3.34 0-.38-.04-.75-.1-1.12zm13.49-3.14c-.11-.77-.31-1.51-.58-2.2-.32-.83-.73-1.61-1.2-2.31-.52-.78-1.13-1.45-1.8-1.95-.63-.47-1.3-.8-2-.97-.7-.17-1.42-.18-2.14-.02-.72.16-1.42.45-2.07.85-.59.37-1.15.83-1.68 1.36-.6.6-.99 1.31-1.18 2.1-.14.59-.15 1.2.02 1.8.17.6.5.18 1.2.18 1.65 0 3.15-1.17 3.9-2.85.18-.45.45-.85.78-1.18.37-.37.82-.68 1.32-.88.55-.22 1.14-.3 1.75-.2 1.3.2 2.48 1.1 3.1 2.45.37.85.58 1.75.58 2.65 0 .3-.05.6-.15.88-.2.55-.5 1.07-.88 1.53-.43.5-.94.93-1.5.93-.56 0-1.07-.43-1.5-.93-.38-.46-.7-.98-.88-1.53z"/></svg>';
           } else {
-            browserName = 'Browser Lain'
+            browserName = 'Browser Lain';
             browserIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>';
           }
           if (userAgent.includes('Windows')) {
-            osName = 'Windows'
+            osName = 'Windows';
             osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 1.5v13H6V7h1V5.5h4.5V7H12zm5.5 0h-1v1.5h1c.83 0 1.5.67 1.5 1.5v8c0 .83-.67 1.5-1.5 1.5h-1v1.5h1c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3zm-3 1.5h-1v1.5h1v8h-1V7z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-7 1.5v13H6V7h1V5.5h4.5V7H12zm5.5 0h-1v1.5h1c.83 0 1.5.67 1.5 1.5v8c0 .83-.67 1.5-1.5 1.5h-1v1.5h1c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3zm-3 1.5h-1v1.5h1v8h-1V7z"/></svg>';
           } else if (userAgent.includes('Mac')) {
-            osName = 'macOS'
+            osName = 'macOS';
             osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 0c.8 0 1.5.7 1.5 1.5v18c0 .8-.7 1.5-1.5 1.5H5.5C4.7 21 4 20.3 4 19.5v-18C4 .7 4.7 0 5.5 0h13zM15 19H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 17H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 15H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 13H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 0c.8 0 1.5.7 1.5 1.5v18c0 .8-.7 1.5-1.5 1.5H5.5C4.7 21 4 20.3 4 19.5v-18C4 .7 4.7 0 5.5 0h13zM15 19H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 17H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 15H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1zM15 13H9c-.6 0-1-.4-1-1 0-.3.1-.5.3-.7.2-.2.5-.3.8-.3h4.4c.3 0 .6.1.8.3.2.2.3.4.3.7 0 .6-.4 1-1 1z"/></svg>';
           } else if (userAgent.includes('Linux')) {
-            osName = 'Linux'
+            osName = 'Linux';
             osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
           } else if (userAgent.includes('Android')) {
-            osName = 'Android'
+            osName = 'Android';
             osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-.83-.67-1.5-1.5-1.5h-7c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h.5v3.5h2V14H15v-2h2.5M19 1H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-7 17.5v-2h2v2h-2zm-5.5-3h11c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H5.5C4.67 14 4 14.67 4 15.5S4.67 17 5.5 17z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12.5c0-.83-.67-1.5-1.5-1.5h-7c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h.5v3.5h2V14H15v-2h2.5M19 1H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-7 17.5v-2h2v2h-2zm-5.5-3h11c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H5.5C4.67 14 4 14.67 4 15.5S4.67 17 5.5 17z"/></svg>';
           } else {
-            osName = 'Sistem Operasi Lain'
+            osName = 'Sistem Operasi Lain';
             osIcon =
-              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 18H7V6h10v12zm-7-1l4 2.5V19l-4-2.5V15zM7 2c-.55 0-1 .45-1 1v18c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H7zm1 17.5l-4-2.5V15h4v4.5z"/></svg>'
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 18H7V6h10v12zm-7-1l4 2.5V19l-4-2.5V15zM7 2c-.55 0-1 .45-1 1v18c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H7zm1 17.5l-4-2.5V15h4v4.5z"/></svg>';
           }
           document.getElementById('browser-info').innerHTML =
-            `${browserIcon} <span>${browserName}</span>`
+            `${browserIcon} <span>${browserName}</span>`;
           document.getElementById('os-info').innerHTML =
-            `${osIcon} <span>${osName}</span>`
+            `${osIcon} <span>${osName}</span>`;
           // Fetch IP info
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
@@ -402,17 +402,17 @@
                       (c) => 0x1f1a5 + c.charCodeAt(0) - 65,
                     ),
                   )
-                : ''
+                : '';
               document.getElementById('ip-info').innerHTML = `
             ${flagEmoji} <span>${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'}</span>
-          `
+          `;
             })
             .catch(() => {
               document.getElementById('ip-info').innerHTML =
-                'Lokasi tidak dapat dideteksi'
-            })
-        })
-      })
+                'Lokasi tidak dapat dideteksi';
+            });
+        });
+      });
     </script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
@@ -466,8 +466,8 @@
               },
             ],
           },
-        }
-      })
+        };
+      });
     </script>
     <script type="application/ld+json">
           ${JSON.stringify(jsonLd)}
@@ -627,7 +627,7 @@
             wal afiat.
           </p>
         </section>
-        
+
         <div class="share-buttons">
           <a
             href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/zsync-blankon.html"
@@ -776,23 +776,23 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               // Set data-href FB Comments ke URL halaman ini
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {
                     /* ignore */
                   }
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
       </article>

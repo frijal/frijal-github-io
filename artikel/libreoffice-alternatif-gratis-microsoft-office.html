@@ -511,8 +511,6 @@
           </div>
         </div>
 
-        
-
         <div id="fb-comments-container">
           <h3>Yuk, Ikut Diskusi!</h3>
           <p>
@@ -547,72 +545,72 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- Lightbox ---
-          const featuredImage = document.querySelector('.featured-image')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightbox-img')
-          const closeBtn = document.querySelector('.close')
+          const featuredImage = document.querySelector('.featured-image');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const closeBtn = document.querySelector('.close');
 
           featuredImage.addEventListener('click', () => {
-            lightboxImg.src = featuredImage.src
-            lightbox.style.display = 'flex'
-          })
+            lightboxImg.src = featuredImage.src;
+            lightbox.style.display = 'flex';
+          });
 
-          const closeLightbox = () => (lightbox.style.display = 'none')
-          closeBtn.addEventListener('click', closeLightbox)
+          const closeLightbox = () => (lightbox.style.display = 'none');
+          closeBtn.addEventListener('click', closeLightbox);
           lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox()
-          })
+            if (e.target === lightbox) closeLightbox();
+          });
 
           // --- Social Sharing ---
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
 
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-wa').href =
-            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
           document.getElementById('share-li').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
           // --- User Info ---
-          const userAgent = window.navigator.userAgent
+          const userAgent = window.navigator.userAgent;
 
           // OS
-          let os = 'Tidak Diketahui'
-          if (userAgent.includes('Win')) os = 'Windows'
-          if (userAgent.includes('Mac')) os = 'macOS'
-          if (userAgent.includes('Linux')) os = 'Linux'
-          if (userAgent.includes('Android')) os = 'Android'
-          if (userAgent.includes('like Mac')) os = 'iOS'
+          let os = 'Tidak Diketahui';
+          if (userAgent.includes('Win')) os = 'Windows';
+          if (userAgent.includes('Mac')) os = 'macOS';
+          if (userAgent.includes('Linux')) os = 'Linux';
+          if (userAgent.includes('Android')) os = 'Android';
+          if (userAgent.includes('like Mac')) os = 'iOS';
           document.getElementById('os-info').textContent =
-            `Sistem Operasi: ${os}`
+            `Sistem Operasi: ${os}`;
 
           // Browser
-          let browser = 'Tidak Diketahui'
-          if (userAgent.includes('Firefox')) browser = 'Mozilla Firefox'
+          let browser = 'Tidak Diketahui';
+          if (userAgent.includes('Firefox')) browser = 'Mozilla Firefox';
           else if (userAgent.includes('OPR') || userAgent.includes('Opera'))
-            browser = 'Opera'
-          else if (userAgent.includes('Edge')) browser = 'Microsoft Edge'
-          else if (userAgent.includes('Chrome')) browser = 'Google Chrome'
-          else if (userAgent.includes('Safari')) browser = 'Apple Safari'
+            browser = 'Opera';
+          else if (userAgent.includes('Edge')) browser = 'Microsoft Edge';
+          else if (userAgent.includes('Chrome')) browser = 'Google Chrome';
+          else if (userAgent.includes('Safari')) browser = 'Apple Safari';
           document.getElementById('browser-info').textContent =
-            `Browser: ${browser}`
+            `Browser: ${browser}`;
 
           // IP Info with Fetch
-          const ipInfo = document.getElementById('ip-info')
+          const ipInfo = document.getElementById('ip-info');
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
-              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`
-              ipInfo.innerHTML = `Alamat IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" style="margin-left: 8px;"> (${data.country_name})`
+              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;
+              ipInfo.innerHTML = `Alamat IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" style="margin-left: 8px;"> (${data.country_name})`;
             })
             .catch(() => {
-              ipInfo.textContent = 'Alamat IP: Gagal memuat info lokasi.'
-            })
-        })
-      })
+              ipInfo.textContent = 'Alamat IP: Gagal memuat info lokasi.';
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

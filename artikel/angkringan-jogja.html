@@ -634,18 +634,18 @@
             t = new IntersectionObserver((e, n) => {
               e.forEach((t) => {
                 if (t.isIntersecting) {
-                  let e = t.target
-                  ;((e.src = e.dataset.src),
+                  let e = t.target;
+                  ((e.src = e.dataset.src),
                     (e.onload = () => e.classList.add('loaded')),
-                    n.unobserve(e))
+                    n.unobserve(e));
                 }
-              })
-            })
-          e.forEach((e) => t.observe(e))
-        })
-        let currentUrl = window.location.href
+              });
+            });
+          e.forEach((e) => t.observe(e));
+        });
+        let currentUrl = window.location.href;
         function detectBrowser() {
-          var e = navigator.userAgent
+          var e = navigator.userAgent;
           return e.includes('Firefox')
             ? 'Mozilla Firefox'
             : e.includes('Chrome') && !e.includes('Edg')
@@ -654,10 +654,10 @@
                 ? 'Safari'
                 : e.includes('Edg')
                   ? 'Microsoft Edge'
-                  : 'Browser tidak dikenal'
+                  : 'Browser tidak dikenal';
         }
         function detectOS() {
-          var e = navigator.userAgent
+          var e = navigator.userAgent;
           return e.includes('Win')
             ? 'Windows'
             : e.includes('Mac')
@@ -668,16 +668,16 @@
                   ? 'Android'
                   : /iPhone|iPad/.test(e)
                     ? 'iOS'
-                    : 'OS tidak dikenal'
+                    : 'OS tidak dikenal';
         }
-        ;((document.getElementById('current-url').textContent = currentUrl),
+        ((document.getElementById('current-url').textContent = currentUrl),
           document
             .getElementById('fb-comments')
             .setAttribute('data-href', currentUrl),
           (window.fbAsyncInit = function () {
             if ('undefined' != typeof FB)
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {}
           }),
           (document.getElementById('browser-info').textContent =
@@ -686,22 +686,22 @@
           fetch('https://ipapi.co/json/')
             .then((e) => e.json())
             .then((e) => {
-              ;((document.getElementById('ip-info').textContent =
+              ((document.getElementById('ip-info').textContent =
                 '🔑 IP: ' + e.ip),
                 (document.getElementById('country-info').innerHTML =
                   '🏳️ Negara: ' +
                   e.country_name +
                   " <img src='https://flagcdn.com/16x12/" +
                   e.country_code.toLowerCase() +
-                  ".png' alt='flag'>"))
+                  ".png' alt='flag'>"));
             })
             .catch(() => {
-              ;((document.getElementById('ip-info').textContent =
+              ((document.getElementById('ip-info').textContent =
                 'Gagal memuat IP'),
                 (document.getElementById('country-info').textContent =
-                  'Gagal memuat Negara'))
-            }))
-      })
+                  'Gagal memuat Negara'));
+            }));
+      });
     </script>
     <div class="lightbox" id="lightbox">
       <span class="lightbox-close" id="lightboxClose">&times;</span>
@@ -711,24 +711,24 @@
       document.addEventListener(DOMContentLoaded, () => {
         let lightbox = document.getElementById('lightbox'),
           lightboxImg = document.getElementById('lightboxImg'),
-          lightboxClose = document.getElementById('lightboxClose')
-        ;(document.querySelectorAll('.image-item img').forEach((t) => {
+          lightboxClose = document.getElementById('lightboxClose');
+        (document.querySelectorAll('.image-item img').forEach((t) => {
           t.addEventListener('click', () => {
-            ;(lightbox.classList.add('active'),
+            (lightbox.classList.add('active'),
               (lightboxImg.src = t.getAttribute('data-src') || t.src),
-              (lightboxImg.alt = t.alt))
-          })
+              (lightboxImg.alt = t.alt));
+          });
         }),
           lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active')
+            lightbox.classList.remove('active');
           }),
           lightbox.addEventListener('click', (t) => {
-            t.target === lightbox && lightbox.classList.remove('active')
+            t.target === lightbox && lightbox.classList.remove('active');
           }),
           document.addEventListener('keydown', (t) => {
-            'Escape' === t.key && lightbox.classList.remove('active')
-          }))
-      })
+            'Escape' === t.key && lightbox.classList.remove('active');
+          }));
+      });
     </script>
 
     });

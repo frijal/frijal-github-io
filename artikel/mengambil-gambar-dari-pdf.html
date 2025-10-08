@@ -305,19 +305,19 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {}
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
 
@@ -337,65 +337,65 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function detectBrowser() {
-          let userAgent = navigator.userAgent
+          let userAgent = navigator.userAgent;
           if (userAgent.includes('Firefox'))
             return {
               name: 'Firefox',
               svg: `<svg viewBox="0 0 48 48"><circle fill="#FF7139" cx="24" cy="24" r="24"/></svg>`,
-            }
+            };
           if (userAgent.includes('Chrome'))
             return {
               name: 'Chrome',
               svg: `<svg viewBox="0 0 48 48"><circle fill="#4285F4" cx="24" cy="24" r="24"/></svg>`,
-            }
+            };
           if (userAgent.includes('Safari'))
             return {
               name: 'Safari',
               svg: `<svg viewBox="0 0 48 48"><circle fill="#00ADEF" cx="24" cy="24" r="24"/></svg>`,
-            }
+            };
           return {
             name: 'Browser Tidak Dikenal',
             svg: `<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`,
-          }
+          };
         }
         function detectOS() {
-          let platform = navigator.userAgent
+          let platform = navigator.userAgent;
           if (platform.includes('Win'))
             return {
               name: 'Windows',
               svg: `<svg viewBox="0 0 48 48"><rect fill="#00ADEF" width="48" height="48"/></svg>`,
-            }
+            };
           if (platform.includes('Linux'))
             return {
               name: 'Linux',
               svg: `<svg viewBox="0 0 48 48"><circle fill="#FCC624" cx="24" cy="24" r="24"/></svg>`,
-            }
+            };
           if (platform.includes('Mac'))
             return {
               name: 'macOS',
               svg: `<svg viewBox="0 0 48 48"><circle fill="#999" cx="24" cy="24" r="24"/></svg>`,
-            }
+            };
           return {
             name: 'OS Tidak Dikenal',
             svg: `<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`,
-          }
+          };
         }
-        const browser = detectBrowser()
-        const os = detectOS()
+        const browser = detectBrowser();
+        const os = detectOS();
         document.getElementById('browser-info').innerHTML =
-          browser.svg + ' Browser: ' + browser.name
+          browser.svg + ' Browser: ' + browser.name;
         document.getElementById('os-info').innerHTML =
-          os.svg + ' Sistem Operasi: ' + os.name
+          os.svg + ' Sistem Operasi: ' + os.name;
 
         // Ambil IP & Negara
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((data) => {
-            const flag = `<img class="flag-icon" src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`
+            const flag = `<img class="flag-icon" src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`;
             document.getElementById('ip-info').innerHTML =
-              flag + ' IP: ' + data.ip + ' - ' + data.country_name
-          })
-      })
+              flag + ' IP: ' + data.ip + ' - ' + data.country_name;
+          });
+      });
     </script>
 
     <style>

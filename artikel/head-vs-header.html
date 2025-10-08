@@ -217,7 +217,6 @@
         <code>&lt;header&gt;</code>? Yuk kita bahas dengan gaya santai, lengkap
         dengan contoh, diagram, dan demo.
       </p>
-      
     </header>
 
     <main>
@@ -312,8 +311,8 @@
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(function () {
-          const CANON = document.querySelector('link[rel="canonical"]').href
+        (function () {
+          const CANON = document.querySelector('link[rel="canonical"]').href;
           // Share
           const shareMap = {
             twitter: (u) =>
@@ -323,72 +322,72 @@
             whatsapp: (u) => `https://wa.me/?text=${encodeURIComponent(u)}`,
             linkedin: (u) =>
               `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(u)}`,
-          }
+          };
           document.querySelectorAll('.btn-share').forEach((b) => {
             b.onclick = () => {
-              window.open(shareMap[b.dataset.share](CANON), '_blank')
-            }
-          })
+              window.open(shareMap[b.dataset.share](CANON), '_blank');
+            };
+          });
 
           // Lightbox
-          const gallery = [...document.querySelectorAll('#gallery .item')]
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          const lbCap = document.getElementById('lb-cap')
-          let idx = -1
+          const gallery = [...document.querySelectorAll('#gallery .item')];
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          const lbCap = document.getElementById('lb-cap');
+          let idx = -1;
           function openAt(i) {
-            idx = i
-            const el = gallery[idx]
-            lbImg.src = el.dataset.full
-            lbCap.textContent = el.dataset.caption || ''
-            lb.classList.add('open')
+            idx = i;
+            const el = gallery[idx];
+            lbImg.src = el.dataset.full;
+            lbCap.textContent = el.dataset.caption || '';
+            lb.classList.add('open');
           }
           function closeLb() {
-            lb.classList.remove('open')
-            lbImg.src = ''
-            lbCap.textContent = ''
-            idx = -1
+            lb.classList.remove('open');
+            lbImg.src = '';
+            lbCap.textContent = '';
+            idx = -1;
           }
           function prev() {
-            if (idx > 0) openAt(idx - 1)
+            if (idx > 0) openAt(idx - 1);
           }
           function next() {
-            if (idx < gallery.length - 1) openAt(idx + 1)
+            if (idx < gallery.length - 1) openAt(idx + 1);
           }
           gallery.forEach((el, i) =>
             el.addEventListener('click', () => openAt(i)),
-          )
-          document.getElementById('lb-close').onclick = closeLb
-          document.getElementById('lb-prev').onclick = prev
-          document.getElementById('lb-next').onclick = next
+          );
+          document.getElementById('lb-close').onclick = closeLb;
+          document.getElementById('lb-prev').onclick = prev;
+          document.getElementById('lb-next').onclick = next;
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLb()
-          })
+            if (e.target === lb) closeLb();
+          });
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') closeLb()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
 
           // Deteksi Browser & OS
           const ua =
-            navigator.userAgent || navigator.vendor || window.opera || ''
+            navigator.userAgent || navigator.vendor || window.opera || '';
           function detectBrowser() {
-            if (/Edg\//.test(ua)) return 'Microsoft Edge'
-            if (/OPR\//.test(ua)) return 'Opera'
-            if (/Chrome\//.test(ua)) return 'Google Chrome'
-            if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari'
-            if (/Firefox\//.test(ua)) return 'Mozilla Firefox'
-            return 'Browser tidak dikenal'
+            if (/Edg\//.test(ua)) return 'Microsoft Edge';
+            if (/OPR\//.test(ua)) return 'Opera';
+            if (/Chrome\//.test(ua)) return 'Google Chrome';
+            if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+            if (/Firefox\//.test(ua)) return 'Mozilla Firefox';
+            return 'Browser tidak dikenal';
           }
           function detectOS() {
-            if (/Windows NT/.test(ua)) return 'Windows'
-            if (/Mac OS X/.test(ua)) return 'macOS'
-            if (/Android/.test(ua)) return 'Android'
-            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
-            if (/Linux/.test(ua)) return 'Linux'
-            return 'OS tidak dikenal'
+            if (/Windows NT/.test(ua)) return 'Windows';
+            if (/Mac OS X/.test(ua)) return 'macOS';
+            if (/Android/.test(ua)) return 'Android';
+            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+            if (/Linux/.test(ua)) return 'Linux';
+            return 'OS tidak dikenal';
           }
           function iconForBrowser(n) {
             return (
@@ -399,7 +398,7 @@
                 'Microsoft Edge': '🟦',
                 Opera: '🔴',
               }[n] || '🧭'
-            )
+            );
           }
           function iconForOS(n) {
             return (
@@ -410,48 +409,48 @@
                 iOS: '📱',
                 Linux: '🐧',
               }[n] || '💻'
-            )
+            );
           }
           document.getElementById('badge-browser').textContent =
-            `${iconForBrowser(detectBrowser())} Browser: ${detectBrowser()}`
+            `${iconForBrowser(detectBrowser())} Browser: ${detectBrowser()}`;
           document.getElementById('badge-os').textContent =
-            `${iconForOS(detectOS())} OS: ${detectOS()}`
+            `${iconForOS(detectOS())} OS: ${detectOS()}`;
 
           // Lokasi via IP
           function flagEmoji(cc) {
-            if (!cc || cc.length !== 2) return '🌐'
+            if (!cc || cc.length !== 2) return '🌐';
             return String.fromCodePoint(
               ...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0)),
-            )
+            );
           }
           function updateLocBadge(city, cc) {
             document.getElementById('badge-loc').textContent = city
               ? `${flagEmoji(cc)} ${city}, ${cc}`
-              : `${flagEmoji(cc)} Lokasi: ${cc || '??'}`
+              : `${flagEmoji(cc)} Lokasi: ${cc || '??'}`;
           }
-          updateLocBadge(null, 'ID')
+          updateLocBadge(null, 'ID');
           fetch('https://ipapi.co/json/')
             .then((r) => r.json())
             .then((d) => {
-              updateLocBadge(d.city, d.country_code)
+              updateLocBadge(d.city, d.country_code);
             })
-            .catch(() => {})
+            .catch(() => {});
 
           // Lazy-load fallback
           if (!('loading' in HTMLImageElement.prototype)) {
             document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-              const src = img.getAttribute('src')
+              const src = img.getAttribute('src');
               if (src) {
-                const i = new Image()
-                i.src = src
+                const i = new Image();
+                i.src = src;
                 i.onload = () => {
-                  img.src = src
-                }
+                  img.src = src;
+                };
               }
-            })
+            });
           }
-        })()
-      })
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

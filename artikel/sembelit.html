@@ -547,8 +547,8 @@
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                let currentUrl = window.location.href
-                ;((document.getElementById('current-url').textContent =
+                let currentUrl = window.location.href;
+                ((document.getElementById('current-url').textContent =
                   currentUrl),
                   document
                     .getElementById('fb-comments')
@@ -556,10 +556,10 @@
                   (window.fbAsyncInit = function () {
                     if ('undefined' != typeof FB)
                       try {
-                        FB.XFBML.parse()
+                        FB.XFBML.parse();
                       } catch (t) {}
-                  }))
-              })
+                  }));
+              });
             </script>
           </div>
         </main>
@@ -720,10 +720,10 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function setText(t, e) {
-          ;(t = document.getElementById(t)) && (t.textContent = e)
+          (t = document.getElementById(t)) && (t.textContent = e);
         }
-        let pubDate = new Date()
-        ;(setText(
+        let pubDate = new Date();
+        (setText(
           'published-date',
           pubDate.toLocaleDateString('id-ID', {
             year: 'numeric',
@@ -737,14 +737,14 @@
               .map((t) => t.innerText)
               .join(' ')
               .trim()
-              .split(/\s+/).length
-            setText('read-time', Math.max(1, Math.round(t / 220)) + ' menit')
+              .split(/\s+/).length;
+            setText('read-time', Math.max(1, Math.round(t / 220)) + ' menit');
           })(),
           (() => {
             let t = navigator.userAgent || 'Unknown',
               e = 'Unknown',
-              n = 'Unknown'
-            ;(/Firefox\/\d+/i.test(t)
+              n = 'Unknown';
+            (/Firefox\/\d+/i.test(t)
               ? (e = t.match(/Firefox\/[^\s]+/i)[0])
               : /Edg\/\d+/i.test(t)
                 ? (e = t.match(/Edg\/[^\s]+/i)[0])
@@ -764,17 +764,17 @@
                     ? (n = /iPad/.test(t) ? 'iPad / iOS' : 'iPhone / iOS')
                     : /Mac OS X/i.test(t) && (n = 'macOS'),
               setText('browser-info', e),
-              setText('os-info', n))
+              setText('os-info', n));
           })(),
           (() => {
-            let e = window.location.href
+            let e = window.location.href;
             var t = document.title,
               n =
                 document
                   .querySelector('meta[name="description"]')
                   .getAttribute('content') || '',
-              a = document.getElementById('canonical-link')
-            ;(a && a.setAttribute('href', e),
+              a = document.getElementById('canonical-link');
+            (a && a.setAttribute('href', e),
               [
                 ['og-url', 'property', 'og:url', e],
                 ['og-title', 'property', 'og:title', t],
@@ -787,11 +787,11 @@
                 var e = t[0],
                   n = t[1],
                   a = t[2],
-                  t = t[3]
-                ;((e = document.getElementById(e)) &&
+                  t = t[3];
+                ((e = document.getElementById(e)) &&
                   void 0 !== t &&
                   e.setAttribute(n, a),
-                  e && t && e.setAttribute('content', t))
+                  e && t && e.setAttribute('content', t));
               }),
               document
                 .querySelectorAll('meta[property="og:url"]')
@@ -884,14 +884,14 @@
                   null,
                   2,
                 )),
-              document.head.appendChild(n))
+              document.head.appendChild(n));
           })(),
           (() => {
             var t = encodeURIComponent(window.location.href),
               e = encodeURIComponent(
                 'Sulit Buang Air Besar (Sembelit): penyebab, cara mengatasi & pencegahan — baca selengkapnya:',
-              )
-            ;(document
+              );
+            (document
               .getElementById('share-facebook')
               .setAttribute(
                 'href',
@@ -925,56 +925,55 @@
                 .getElementById('copy-link')
                 .addEventListener('click', async function () {
                   try {
-                    ;(await navigator.clipboard.writeText(window.location.href),
+                    (await navigator.clipboard.writeText(window.location.href),
                       (this.textContent = 'Tersalin ✅'),
-                      setTimeout(() => (this.textContent = 'Copy Link'), 1600))
+                      setTimeout(() => (this.textContent = 'Copy Link'), 1600));
                   } catch (t) {
                     alert(
                       'Gagal menyalin. Silakan salin secara manual: ' +
                         window.location.href,
-                    )
+                    );
                   }
-                }))
+                }));
           })(),
           (() => {
             let i = document.getElementById('ip-public'),
-              r = document.getElementById('ip-country')
+              r = document.getElementById('ip-country');
             fetch('https://ipapi.co/json/')
               .then((t) => {
-                if (t.ok) return t.json()
-                throw new Error('Network response not ok')
+                if (t.ok) return t.json();
+                throw new Error('Network response not ok');
               })
               .then((t) => {
                 var e = t.ip || '—',
                   n = t.country_name || t.country || '—',
-                  a = t.country_code ? t.country_code.toLowerCase() : null
-                ;((i.textContent = e),
+                  a = t.country_code ? t.country_code.toLowerCase() : null;
+                ((i.textContent = e),
                   a
                     ? (r.innerHTML = `<svg width="28" height="20" viewBox="0 0 640 480" style="border-radius:3px"><rect width="100%" height="100%" fill="#eee" /></svg> <span>${n} (${t.country_code})</span>`)
-                    : (r.textContent = n))
+                    : (r.textContent = n));
               })
               .catch((t) => {
-                ;((i.textContent = 'Tidak tersedia'),
+                ((i.textContent = 'Tidak tersedia'),
                   (r.textContent = 'Tidak tersedia'),
-                  console.warn('Gagal ambil IP publik:', t))
-              })
+                  console.warn('Gagal ambil IP publik:', t));
+              });
           })(),
           (() => {
-            var t = document.createElement('style')
-            ;((t.textContent =
+            var t = document.createElement('style');
+            ((t.textContent =
               '.btn:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:2px}'),
-              document.head.appendChild(t))
+              document.head.appendChild(t));
           })(),
           (() => {
             var t = window.location.href,
               e = document.querySelector(
                 'article meta[itemprop="mainEntityOfPage"]',
-              )
-            e && e.setAttribute('content', t)
-          })())
-      })
+              );
+            e && e.setAttribute('content', t);
+          })());
+      });
     </script>
-
 
     });
     <div id="kategori-aktif"></div>

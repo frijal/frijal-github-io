@@ -650,15 +650,15 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const lightbox = document.querySelector('.lightbox')
-        const lightImg = lightbox.querySelector('img')
+        const lightbox = document.querySelector('.lightbox');
+        const lightImg = lightbox.querySelector('img');
         document.querySelectorAll('.image-gallery img').forEach((img) => {
           img.addEventListener('click', () => {
-            lightImg.src = img.dataset.full
-            lightbox.style.display = 'flex'
-          })
-        })
-      })
+            lightImg.src = img.dataset.full;
+            lightbox.style.display = 'flex';
+          });
+        });
+      });
     </script>
 
     });

@@ -464,165 +464,165 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- GALERI & LIGHTBOX ---
-          const gallery = document.getElementById('photoGallery')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
-          const closeBtn = document.querySelector('.lightbox-close')
-          const prevBtn = document.querySelector('.lightbox-prev')
-          const nextBtn = document.querySelector('.lightbox-next')
-          let currentIndex
+          const gallery = document.getElementById('photoGallery');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          const closeBtn = document.querySelector('.lightbox-close');
+          const prevBtn = document.querySelector('.lightbox-prev');
+          const nextBtn = document.querySelector('.lightbox-next');
+          let currentIndex;
 
           const images = Array.from(
             { length: 8 },
             (_, i) => `https://picsum.photos/id/${10 + i}/800/600`,
-          )
+          );
 
           images.forEach((src, index) => {
-            const img = document.createElement('img')
-            img.setAttribute('data-src', src)
-            img.alt = `Contoh Gambar AI ${index + 1}`
-            img.loading = 'lazy'
-            img.className = 'lazy'
-            gallery.appendChild(img)
-          })
+            const img = document.createElement('img');
+            img.setAttribute('data-src', src);
+            img.alt = `Contoh Gambar AI ${index + 1}`;
+            img.loading = 'lazy';
+            img.className = 'lazy';
+            gallery.appendChild(img);
+          });
 
           // Lazy loading
-          const lazyImages = document.querySelectorAll('img.lazy')
+          const lazyImages = document.querySelectorAll('img.lazy');
           const lazyLoadObserver = new IntersectionObserver(
             (entries, observer) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  const img = entry.target
-                  img.src = img.dataset.src
-                  img.classList.remove('lazy')
-                  lazyLoadObserver.unobserve(img)
+                  const img = entry.target;
+                  img.src = img.dataset.src;
+                  img.classList.remove('lazy');
+                  lazyLoadObserver.unobserve(img);
                 }
-              })
+              });
             },
-          )
-          lazyImages.forEach((img) => lazyLoadObserver.observe(img))
+          );
+          lazyImages.forEach((img) => lazyLoadObserver.observe(img));
 
           gallery.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
-              lightbox.style.display = 'flex'
-              lightboxImg.src = e.target.src
-              currentIndex = Array.from(gallery.children).indexOf(e.target)
+              lightbox.style.display = 'flex';
+              lightboxImg.src = e.target.src;
+              currentIndex = Array.from(gallery.children).indexOf(e.target);
             }
-          })
+          });
 
           const showImage = (index) => {
-            if (index >= images.length) currentIndex = 0
-            else if (index < 0) currentIndex = images.length - 1
-            else currentIndex = index
-            lightboxImg.src = gallery.children[currentIndex].src
-          }
+            if (index >= images.length) currentIndex = 0;
+            else if (index < 0) currentIndex = images.length - 1;
+            else currentIndex = index;
+            lightboxImg.src = gallery.children[currentIndex].src;
+          };
 
-          closeBtn.onclick = () => (lightbox.style.display = 'none')
-          prevBtn.onclick = () => showImage(currentIndex - 1)
-          nextBtn.onclick = () => showImage(currentIndex + 1)
+          closeBtn.onclick = () => (lightbox.style.display = 'none');
+          prevBtn.onclick = () => showImage(currentIndex - 1);
+          nextBtn.onclick = () => showImage(currentIndex + 1);
           lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none'
-          }
+            if (e.target === lightbox) lightbox.style.display = 'none';
+          };
 
           // --- DETEKSI INFO PENGUNJUNG ---
           function getBrowserInfo() {
-            const ua = navigator.userAgent
+            const ua = navigator.userAgent;
             let name = 'Unknown',
-              icon = ''
+              icon = '';
             if (ua.includes('Firefox')) {
-              name = 'Firefox'
+              name = 'Firefox';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg';
             } else if (ua.includes('Edg')) {
-              name = 'Edge'
+              name = 'Edge';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg';
             } else if (ua.includes('Chrome')) {
-              name = 'Chrome'
+              name = 'Chrome';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg';
             } else if (ua.includes('Safari')) {
-              name = 'Safari'
+              name = 'Safari';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg';
             }
-            return { name, icon }
+            return { name, icon };
           }
 
           function getOSInfo() {
-            const platform = navigator.platform.toLowerCase()
+            const platform = navigator.platform.toLowerCase();
             let name = 'Unknown',
-              icon = ''
+              icon = '';
             if (platform.includes('win')) {
-              name = 'Windows'
+              name = 'Windows';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg';
             } else if (platform.includes('mac')) {
-              name = 'macOS'
+              name = 'macOS';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg';
             } else if (platform.includes('linux')) {
-              name = 'Linux'
+              name = 'Linux';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg';
             } else if (/android/.test(navigator.userAgent.toLowerCase())) {
-              name = 'Android'
+              name = 'Android';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg';
             } else if (
               /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase())
             ) {
-              name = 'iOS'
+              name = 'iOS';
               icon =
-                'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'
+                'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';
             }
-            return { name, icon }
+            return { name, icon };
           }
 
-          const browser = getBrowserInfo()
-          document.getElementById('browserIcon').src = browser.icon
+          const browser = getBrowserInfo();
+          document.getElementById('browserIcon').src = browser.icon;
           document.getElementById('browserText').textContent =
-            `Browser: ${browser.name}`
+            `Browser: ${browser.name}`;
 
-          const os = getOSInfo()
-          document.getElementById('osIcon').src = os.icon
-          document.getElementById('osText').textContent = `OS: ${os.name}`
+          const os = getOSInfo();
+          document.getElementById('osIcon').src = os.icon;
+          document.getElementById('osText').textContent = `OS: ${os.name}`;
 
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
             .then((data) => {
               document.getElementById('ipText').textContent =
-                `Lokasi: ${data.city}, ${data.country_name}`
+                `Lokasi: ${data.city}, ${data.country_name}`;
               document.getElementById('flagIcon').src =
-                `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`
+                `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
             })
             .catch(() => {
               document.getElementById('ipText').textContent =
-                'Lokasi: Tidak dapat diambil'
-            })
+                'Lokasi: Tidak dapat diambil';
+            });
 
           // --- SOCIAL SHARING ---
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
 
           document.getElementById('shareFacebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('shareTwitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('shareWhatsApp').href =
-            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
           document.getElementById('shareTelegram').href =
-            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
+            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
 
           // Buka di jendela baru
           document.querySelectorAll('.share-icon').forEach((link) => {
             link.addEventListener('click', function (e) {
-              e.preventDefault()
-              window.open(this.href, 'share-window', 'height=450,width=550')
-            })
-          })
-        })
-      })
+              e.preventDefault();
+              window.open(this.href, 'share-window', 'height=450,width=550');
+            });
+          });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

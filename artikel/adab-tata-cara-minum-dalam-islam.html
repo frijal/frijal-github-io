@@ -476,33 +476,33 @@
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const currentUrl = window.location.href
+        const currentUrl = window.location.href;
 
         document.getElementById('updated-time').textContent =
           new Date().toLocaleString('id-ID', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          })
+          });
         document.getElementById('date-side').textContent =
-          new Date().toLocaleDateString('id-ID')
-        document.getElementById('year').textContent = new Date().getFullYear()
+          new Date().toLocaleDateString('id-ID');
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        const fbComments = document.getElementById('fb-comments')
+        const fbComments = document.getElementById('fb-comments');
         if (fbComments) {
-          fbComments.setAttribute('data-href', currentUrl)
+          fbComments.setAttribute('data-href', currentUrl);
         }
 
-        document.getElementById('current-url').textContent = currentUrl
+        document.getElementById('current-url').textContent = currentUrl;
 
         if (
           typeof FB !== 'undefined' &&
           FB.XFBML &&
           typeof FB.XFBML.parse === 'function'
         ) {
-          FB.XFBML.parse()
+          FB.XFBML.parse();
         }
-      })
+      });
     </script>
 
     <div id="kategori-aktif"></div>

@@ -320,44 +320,45 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const images = document.querySelectorAll('.gallery img')
-        let currentIndex = 0
+        const images = document.querySelectorAll('.gallery img');
+        let currentIndex = 0;
         function openLightbox(i) {
-          currentIndex = i
-          document.getElementById('lightbox-img').src = images[i].src
-          document.getElementById('lightbox').style.display = 'flex'
+          currentIndex = i;
+          document.getElementById('lightbox-img').src = images[i].src;
+          document.getElementById('lightbox').style.display = 'flex';
         }
         function closeLightbox() {
-          document.getElementById('lightbox').style.display = 'none'
+          document.getElementById('lightbox').style.display = 'none';
         }
         function changeSlide(dir) {
-          currentIndex = (currentIndex + dir + images.length) % images.length
-          document.getElementById('lightbox-img').src = images[currentIndex].src
+          currentIndex = (currentIndex + dir + images.length) % images.length;
+          document.getElementById('lightbox-img').src =
+            images[currentIndex].src;
         }
 
         // Deteksi Browser, OS, GeoIP
-        const ua = navigator.userAgent
-        let browser = 'Unknown Browser'
-        if (ua.indexOf('Firefox') > -1) browser = 'Firefox'
-        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome'
-        else if (ua.indexOf('Safari') > -1) browser = 'Safari'
+        const ua = navigator.userAgent;
+        let browser = 'Unknown Browser';
+        if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome';
+        else if (ua.indexOf('Safari') > -1) browser = 'Safari';
 
-        let os = 'Unknown OS'
-        if (ua.indexOf('Win') > -1) os = 'Windows'
-        else if (ua.indexOf('Linux') > -1) os = 'Linux'
-        else if (ua.indexOf('Mac') > -1) os = 'MacOS'
+        let os = 'Unknown OS';
+        if (ua.indexOf('Win') > -1) os = 'Windows';
+        else if (ua.indexOf('Linux') > -1) os = 'Linux';
+        else if (ua.indexOf('Mac') > -1) os = 'MacOS';
 
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
             document.getElementById('deteksi').innerText =
-              `Browser: ${browser}, OS: ${os}, Lokasi: ${data.city}, ${data.country_name} (${data.country_code})`
+              `Browser: ${browser}, OS: ${os}, Lokasi: ${data.city}, ${data.country_name} (${data.country_code})`;
           })
           .catch(() => {
             document.getElementById('deteksi').innerText =
-              `Browser: ${browser}, OS: ${os}, Lokasi: tidak terdeteksi`
-          })
-      })
+              `Browser: ${browser}, OS: ${os}, Lokasi: tidak terdeteksi`;
+          });
+      });
     </script>
 
     <!-- Facebook SDK -->

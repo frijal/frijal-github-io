@@ -247,25 +247,24 @@ echo "Aduk dengan sendok, bukan sikat gigi!"</code></pre>
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
     </main>
 
     <footer>
-     
       <div>🄯 2025 Edukasi Kebersihan - frijal.github.io</div>
     </footer>
 
@@ -312,14 +311,13 @@ echo "Aduk dengan sendok, bukan sikat gigi!"</code></pre>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode(btn) {
-          const code = btn.nextElementSibling.innerText
+          const code = btn.nextElementSibling.innerText;
           navigator.clipboard.writeText(code).then(() => {
-            btn.textContent = 'Copied!'
-            setTimeout(() => (btn.textContent = 'Copy'), 2000)
-          })
+            btn.textContent = 'Copied!';
+            setTimeout(() => (btn.textContent = 'Copy'), 2000);
+          });
         }
- 
-      })
+      });
     </script>
 
     <!-- JSON-LD -->

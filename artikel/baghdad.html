@@ -496,8 +496,6 @@
       ></div>
     </main>
 
-    
-
     <footer>
       <p>🄯 2025 Pelan Kiri Rijal | Artikel sejarah dan budaya</p>
     </footer>
@@ -515,31 +513,31 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Info browser & OS
         document.getElementById('browser').textContent =
-          navigator.userAgent.split(' ')[0]
-        document.getElementById('os').textContent = navigator.platform
+          navigator.userAgent.split(' ')[0];
+        document.getElementById('os').textContent = navigator.platform;
 
         // Lightbox
-        const images = document.querySelectorAll('.gallery img')
-        const lightbox = document.getElementById('lightbox')
-        const lightboxImg = document.getElementById('lightbox-img')
-        let currentIndex = 0
+        const images = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        let currentIndex = 0;
 
         images.forEach((img, i) => {
           img.addEventListener('click', () => {
-            lightbox.style.display = 'flex'
-            lightboxImg.src = img.src
-            currentIndex = i
-          })
-        })
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            currentIndex = i;
+          });
+        });
 
         function closeLightbox() {
-          lightbox.style.display = 'none'
+          lightbox.style.display = 'none';
         }
         function changeImage(step) {
-          currentIndex = (currentIndex + step + images.length) % images.length
-          lightboxImg.src = images[currentIndex].src
+          currentIndex = (currentIndex + step + images.length) % images.length;
+          lightboxImg.src = images[currentIndex].src;
         }
-      })
+      });
     </script>
 
     <!-- Facebook SDK -->

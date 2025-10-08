@@ -269,19 +269,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
@@ -299,44 +299,44 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function getBrowserInfo() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let browser = 'Unknown',
-            os = 'Unknown'
-          if (ua.indexOf('Firefox') > -1) browser = 'Firefox'
-          else if (ua.indexOf('Chrome') > -1) browser = 'Chrome'
-          else if (ua.indexOf('Safari') > -1) browser = 'Safari'
-          else if (ua.indexOf('Edg') > -1) browser = 'Edge'
+            os = 'Unknown';
+          if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+          else if (ua.indexOf('Chrome') > -1) browser = 'Chrome';
+          else if (ua.indexOf('Safari') > -1) browser = 'Safari';
+          else if (ua.indexOf('Edg') > -1) browser = 'Edge';
 
-          if (ua.indexOf('Win') > -1) os = 'Windows'
-          else if (ua.indexOf('Linux') > -1) os = 'Linux'
-          else if (ua.indexOf('Mac') > -1) os = 'MacOS'
-          else if (ua.indexOf('Android') > -1) os = 'Android'
-          else if (ua.indexOf('like Mac') > -1) os = 'iOS'
+          if (ua.indexOf('Win') > -1) os = 'Windows';
+          else if (ua.indexOf('Linux') > -1) os = 'Linux';
+          else if (ua.indexOf('Mac') > -1) os = 'MacOS';
+          else if (ua.indexOf('Android') > -1) os = 'Android';
+          else if (ua.indexOf('like Mac') > -1) os = 'iOS';
 
-          return { browser, os }
+          return { browser, os };
         }
 
         async function getIPInfo() {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            return await res.json()
+            const res = await fetch('https://ipapi.co/json/');
+            return await res.json();
           } catch {
-            return {}
+            return {};
           }
         }
 
-        ;(async () => {
-          const { browser, os } = getBrowserInfo()
-          const ipInfo = await getIPInfo()
+        (async () => {
+          const { browser, os } = getBrowserInfo();
+          const ipInfo = await getIPInfo();
           document.getElementById('client-info').innerHTML = `
       <b>Browser:</b> ${browser} <br>
       <b>OS:</b> ${os} <br>
       <b>IP:</b> ${ipInfo.ip || 'Tidak diketahui'} <br>
       <b>Negara:</b> ${ipInfo.country_name || 'Unknown'} 
       ${ipInfo.country_code ? `<img src="https://flagcdn.com/24x18/${ipInfo.country_code.toLowerCase()}.png" alt="Flag">` : ''}
-    `
-        })()
-      })
+    `;
+        })();
+      });
     </script>
 
     <!-- JSON-LD -->

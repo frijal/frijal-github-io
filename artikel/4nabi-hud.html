@@ -669,8 +669,6 @@
           </div>
         </div>
 
-        
-
         <div class="comments">
           <div
             class="fb-comments"
@@ -729,61 +727,59 @@
         const images = [
           'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhPsYkygbtjSh8AU73bKaVZo_EQOMcdEzgZs7TP-yV8BfUBzfJoDnjH05ut4_nhYjyXMebNtmR2ayIx-ZQXo8QDg0OM6CP38rIsgTDExB3CVebftFoNZVxh4_ZuXtF3O6YdHXNfTMAiTY4IwjyaVbRwKrfkfj5wXm5O1NRYUMpskvtWNvLLaW476Cwqts/s1600/Hud.jpg',
           // Tambah URL gambar lain bila ada
-        ]
-        const gallery = document.getElementById('gallery')
-        const lightbox = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lb-img')
-        const lbPrev = document.getElementById('lb-prev')
-        const lbNext = document.getElementById('lb-next')
-        const lbClose = document.getElementById('lb-close')
-        let currentIndex = 0
+        ];
+        const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbPrev = document.getElementById('lb-prev');
+        const lbNext = document.getElementById('lb-next');
+        const lbClose = document.getElementById('lb-close');
+        let currentIndex = 0;
 
         gallery.addEventListener('click', (e) => {
-          const thumb = e.target.closest('.thumb')
-          if (!thumb) return
-          currentIndex = Number(thumb.dataset.index || 0)
-          lbImg.src = images[currentIndex]
-          lightbox.classList.add('open')
-          lightbox.setAttribute('aria-hidden', 'false')
-        })
+          const thumb = e.target.closest('.thumb');
+          if (!thumb) return;
+          currentIndex = Number(thumb.dataset.index || 0);
+          lbImg.src = images[currentIndex];
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+        });
 
         function showImage(idx) {
-          currentIndex = (idx + images.length) % images.length
-          lbImg.src = images[currentIndex]
+          currentIndex = (idx + images.length) % images.length;
+          lbImg.src = images[currentIndex];
         }
-        lbPrev.addEventListener('click', () => showImage(currentIndex - 1))
-        lbNext.addEventListener('click', () => showImage(currentIndex + 1))
+        lbPrev.addEventListener('click', () => showImage(currentIndex - 1));
+        lbNext.addEventListener('click', () => showImage(currentIndex + 1));
         lbClose.addEventListener('click', () => {
-          lightbox.classList.remove('open')
-          lightbox.setAttribute('aria-hidden', 'true')
-          lbImg.src = ''
-        })
+          lightbox.classList.remove('open');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lbImg.src = '';
+        });
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) lbClose.click()
-        })
+          if (e.target === lightbox) lbClose.click();
+        });
 
         // Tombol share
-        const url = encodeURIComponent(window.location.href)
-        const title = encodeURIComponent(document.title)
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
         document.getElementById('share-whatsapp').href =
-          `https://wa.me/?text=${title}%20${url}`
+          `https://wa.me/?text=${title}%20${url}`;
         document.getElementById('share-twitter').href =
-          `https://twitter.com/intent/tweet?text=${title}&url=${url}`
+          `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
         document.getElementById('share-fb').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${url}`
+          `https://www.facebook.com/sharer/sharer.php?u=${url}`;
         document
           .getElementById('copy-link')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(window.location.href)
-              alert('Link disalin!')
+              await navigator.clipboard.writeText(window.location.href);
+              alert('Link disalin!');
             } catch {
-              prompt('Salin manual:', window.location.href)
+              prompt('Salin manual:', window.location.href);
             }
-          })
-
-        
-      })
+          });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

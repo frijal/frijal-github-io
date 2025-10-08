@@ -73,7 +73,7 @@
                     "@id": "https://frijal.github.io/artikel/ventoy-install-linux.html"
                   },
                   "datePublished": "2025-09-26"
-        
+
             <meta name="date" content="2025-09-27">
 
                 }
@@ -575,29 +575,29 @@ sudo sh Ventoy2Disk.sh -i /dev/sdX
         let galleryImgs = Array.from(document.querySelectorAll('.gallery img')),
           lightboxIdx = null,
           lightbox = document.getElementById('lightbox'),
-          lightboxImg = document.getElementById('lightbox-img')
+          lightboxImg = document.getElementById('lightbox-img');
         function showLightbox(t) {
-          ;((lightboxIdx = t),
+          ((lightboxIdx = t),
             (lightboxImg.src = galleryImgs[t].getAttribute('data-src')),
             (lightboxImg.alt = galleryImgs[t].alt),
-            lightbox.classList.add('active'))
+            lightbox.classList.add('active'));
         }
         function hideLightbox() {
-          ;(lightbox.classList.remove('active'),
+          (lightbox.classList.remove('active'),
             setTimeout(() => {
-              lightboxImg.src = ''
-            }, 180))
+              lightboxImg.src = '';
+            }, 180));
         }
         function nextLightbox(t) {
           null != lightboxIdx &&
             showLightbox(
               (lightboxIdx =
                 (lightboxIdx + t + galleryImgs.length) % galleryImgs.length),
-            )
+            );
         }
         if (
           (galleryImgs.forEach((t, e) => {
-            t.addEventListener('click', () => showLightbox(e))
+            t.addEventListener('click', () => showLightbox(e));
           }),
           (document.getElementById('lightbox-next').onclick = () =>
             nextLightbox(1)),
@@ -605,33 +605,33 @@ sudo sh Ventoy2Disk.sh -i /dev/sdX
             nextLightbox(-1)),
           (document.getElementById('lightbox-close').onclick = hideLightbox),
           lightbox.addEventListener('click', (t) => {
-            t.target === lightbox && hideLightbox()
+            t.target === lightbox && hideLightbox();
           }),
           'IntersectionObserver' in window)
         ) {
           let o = new IntersectionObserver((t, e) => {
             t.forEach((t) => {
               t.isIntersecting &&
-                (((t = t.target).src = t.dataset.src), o.unobserve(t))
-            })
-          })
-          galleryImgs.forEach((t) => o.observe(t))
-        } else galleryImgs.forEach((t) => (t.src = t.dataset.src))
+                (((t = t.target).src = t.dataset.src), o.unobserve(t));
+            });
+          });
+          galleryImgs.forEach((t) => o.observe(t));
+        } else galleryImgs.forEach((t) => (t.src = t.dataset.src));
         function share(t) {
           var e = encodeURIComponent(location.href),
-            o = encodeURIComponent(document.title)
-          let n = ''
+            o = encodeURIComponent(document.title);
+          let n = '';
           switch (t) {
             case 'facebook':
-              n = 'https://www.facebook.com/sharer/sharer.php?u=' + e
-              break
+              n = 'https://www.facebook.com/sharer/sharer.php?u=' + e;
+              break;
             case 'twitter':
-              n = `https://twitter.com/intent/tweet?url=${e}&text=` + o
-              break
+              n = `https://twitter.com/intent/tweet?url=${e}&text=` + o;
+              break;
             case 'whatsapp':
-              n = `https://wa.me/?text=${o}%20` + e
+              n = `https://wa.me/?text=${o}%20` + e;
           }
-          window.open(n, '', 'width=600,height=500')
+          window.open(n, '', 'width=600,height=500');
         }
         function getBrowserOS() {
           var t = navigator.userAgent,
@@ -640,8 +640,8 @@ sudo sh Ventoy2Disk.sh -i /dev/sdX
                 /(opera|chrome|safari|firefox|edge|trident(?=\/))\/?\s*([\d.]+)/i,
               ) || [],
             o = e[1] || navigator.appName,
-            e = e[2] || navigator.appVersion
-          let n = 'Unknown OS'
+            e = e[2] || navigator.appVersion;
+          let n = 'Unknown OS';
           return (
             -1 != navigator.userAgent.indexOf('Win')
               ? (n = 'Windows')
@@ -655,25 +655,25 @@ sudo sh Ventoy2Disk.sh -i /dev/sdX
                       ? (n = 'Android')
                       : /iPhone|iPad|iPod/i.test(t) && (n = 'iOS'),
             `${o} <span style="color:#bbb">v${e}</span> &bull; <b>${n}</b>`
-          )
+          );
         }
         function showCity(t, e, o) {
           o = o
             ? `<span class="flag">${String.fromCodePoint(127462 + o.charCodeAt(0) - 65, 127462 + o.charCodeAt(1) - 65)}</span>`
-            : ''
+            : '';
           document.getElementById('geo-city').innerHTML =
-            `Lokasi: <b>${t}</b> ` + o
+            `Lokasi: <b>${t}</b> ` + o;
         }
-        ;((document.getElementById('browser-os').innerHTML = getBrowserOS()),
+        ((document.getElementById('browser-os').innerHTML = getBrowserOS()),
           fetch('https://ipapi.co/json/')
             .then((t) => t.json())
             .then((t) => {
-              showCity(t.city, t.country_name, t.country_code)
+              showCity(t.city, t.country_name, t.country_code);
             })
             .catch(() => {
-              document.getElementById('geo-city').innerHTML = ''
-            }))
-      })
+              document.getElementById('geo-city').innerHTML = '';
+            }));
+      });
     </script>
 
     });

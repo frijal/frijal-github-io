@@ -300,14 +300,14 @@
       ></div>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
-          const currentUrl = window.location.href
+          const currentUrl = window.location.href;
           document
             .getElementById('fb-comments')
-            .setAttribute('data-href', currentUrl)
+            .setAttribute('data-href', currentUrl);
           if (typeof FB !== 'undefined') {
-            FB.XFBML.parse()
+            FB.XFBML.parse();
           }
-        })
+        });
       </script>
     </main>
 

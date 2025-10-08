@@ -63,7 +63,7 @@
                     "datePublished": "2025-09-21",
                     "dateModified": "2025-09-21",
                     "mainEntityOfPage": "https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-        
+
             <meta name="date" content="2025-09-27">
 
                   }
@@ -354,43 +354,43 @@ systemctl status dnf-automatic.timer</code></pre>
     ></script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        let toast = document.getElementById('toast')
+        let toast = document.getElementById('toast');
         function showToast(t) {
-          ;((toast.textContent = t),
+          ((toast.textContent = t),
             toast.classList.add('opacity-100'),
-            setTimeout(() => toast.classList.remove('opacity-100'), 1500))
+            setTimeout(() => toast.classList.remove('opacity-100'), 1500));
         }
         function openLightbox(t) {
-          ;((document.getElementById('lightbox-img').src = t),
-            (document.getElementById('lightbox').style.display = 'flex'))
+          ((document.getElementById('lightbox-img').src = t),
+            (document.getElementById('lightbox').style.display = 'flex'));
         }
         function closeLightbox() {
-          document.getElementById('lightbox').style.display = 'none'
+          document.getElementById('lightbox').style.display = 'none';
         }
-        ;(document.querySelectorAll('.accordion-button').forEach((e) => {
+        (document.querySelectorAll('.accordion-button').forEach((e) => {
           e.addEventListener('click', () => {
-            var t = e.nextElementSibling
-            t.style.display = 'block' === t.style.display ? 'none' : 'block'
-          })
+            var t = e.nextElementSibling;
+            t.style.display = 'block' === t.style.display ? 'none' : 'block';
+          });
         }),
           document.querySelectorAll('.copy-btn').forEach((e) => {
             e.addEventListener('click', () => {
-              var t = document.getElementById(e.getAttribute('data-target'))
+              var t = document.getElementById(e.getAttribute('data-target'));
               navigator.clipboard
                 .writeText(t.innerText)
-                .then(() => showToast('Kode disalin!'))
-            })
+                .then(() => showToast('Kode disalin!'));
+            });
           }),
           fetch('https://ipapi.co/json/')
             .then((t) => t.json())
             .then((t) => {
-              var e = document.createElement('div')
-              ;((e.className =
+              var e = document.createElement('div');
+              ((e.className =
                 'fixed bottom-2 left-2 p-2 bg-gray-200 rounded text-sm'),
                 (e.innerHTML = `Browser: ${navigator.userAgent}<br>IP: ${t.ip} (${t.city}, ${t.country_name}) <img src="https://flagcdn.com/24x18/${t.country_code.toLowerCase()}.png">`),
-                document.body.appendChild(e))
-            }))
-      })
+                document.body.appendChild(e));
+            }));
+      });
     </script>
 
     });

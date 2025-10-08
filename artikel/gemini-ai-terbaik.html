@@ -378,8 +378,6 @@
 
         <hr />
 
-        
-
         <section class="social-share">
           <h3>Jaga Data Pribadi Tetap Aman</h3>
           <div class="social-share-icons">
@@ -456,83 +454,83 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- Lightbox Gallery ---
-          const lightbox = document.getElementById('myLightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
-          const closeBtn = document.querySelector('.lightbox-close')
-          const galleryItems = document.querySelectorAll('.gallery-item')
-          let currentSlideIndex = 0
+          const lightbox = document.getElementById('myLightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          const closeBtn = document.querySelector('.lightbox-close');
+          const galleryItems = document.querySelectorAll('.gallery-item');
+          let currentSlideIndex = 0;
 
           galleryItems.forEach((item, index) => {
             item.addEventListener('click', () => {
-              lightbox.style.display = 'flex'
-              lightboxImg.src = item.dataset.src
-              currentSlideIndex = index
-              updateNavButtons()
-            })
-          })
+              lightbox.style.display = 'flex';
+              lightboxImg.src = item.dataset.src;
+              currentSlideIndex = index;
+              updateNavButtons();
+            });
+          });
 
           closeBtn.addEventListener('click', () => {
-            lightbox.style.display = 'none'
-          })
+            lightbox.style.display = 'none';
+          });
 
           window.changeSlide = (n) => {
-            currentSlideIndex += n
+            currentSlideIndex += n;
             if (currentSlideIndex >= galleryItems.length) {
-              currentSlideIndex = 0
+              currentSlideIndex = 0;
             }
             if (currentSlideIndex < 0) {
-              currentSlideIndex = galleryItems.length - 1
+              currentSlideIndex = galleryItems.length - 1;
             }
-            lightboxImg.src = galleryItems[currentSlideIndex].dataset.src
-            updateNavButtons()
-          }
+            lightboxImg.src = galleryItems[currentSlideIndex].dataset.src;
+            updateNavButtons();
+          };
 
           const updateNavButtons = () => {
             document.querySelector('.lightbox-prev').style.display =
-              galleryItems.length > 1 ? 'block' : 'none'
+              galleryItems.length > 1 ? 'block' : 'none';
             document.querySelector('.lightbox-next').style.display =
-              galleryItems.length > 1 ? 'block' : 'none'
-          }
+              galleryItems.length > 1 ? 'block' : 'none';
+          };
 
           // --- Lazy Loading (modern browsers handle loading="lazy" but this is for full compatibility) ---
-          const lazyImages = document.querySelectorAll('img[loading="lazy"]')
+          const lazyImages = document.querySelectorAll('img[loading="lazy"]');
           if ('IntersectionObserver' in window) {
             let lazyImageObserver = new IntersectionObserver(
               (entries, observer) => {
                 entries.forEach((entry) => {
                   if (entry.isIntersecting) {
-                    let lazyImage = entry.target
-                    lazyImage.src = lazyImage.dataset.src
-                    lazyImage.classList.remove('lazy')
-                    lazyImageObserver.unobserve(lazyImage)
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove('lazy');
+                    lazyImageObserver.unobserve(lazyImage);
                   }
-                })
+                });
               },
-            )
+            );
 
             lazyImages.forEach((lazyImage) => {
-              lazyImageObserver.observe(lazyImage)
-            })
+              lazyImageObserver.observe(lazyImage);
+            });
           }
 
           // --- Social Sharing ---
           const pageUrl = encodeURIComponent(
             'https://frijal.github.io/artikel/gemini-ai-terbaik.html',
-          )
-          const pageTitle = encodeURIComponent(document.title)
+          );
+          const pageTitle = encodeURIComponent(document.title);
 
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-whatsapp').href =
-            `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`;
           document.getElementById('share-telegram').href =
-            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
+            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-linkedin').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
-        })
-      })
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

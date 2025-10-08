@@ -461,84 +461,83 @@
     </main>
 
     <footer>
-     
       <p>🄯 2025 Frijal. Dibuat dengan penuh ☕ di Balikpapan.</p>
     </footer>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
-          const copyButtons = document.querySelectorAll('.copy-btn')
+          const copyButtons = document.querySelectorAll('.copy-btn');
           copyButtons.forEach((button) => {
             button.addEventListener('click', () => {
-              const code = button.nextElementSibling.textContent
+              const code = button.nextElementSibling.textContent;
               navigator.clipboard
                 .writeText(code)
                 .then(() => {
-                  const originalText = button.textContent
-                  button.textContent = 'Disalin!'
-                  button.classList.add('copied')
+                  const originalText = button.textContent;
+                  button.textContent = 'Disalin!';
+                  button.classList.add('copied');
                   setTimeout(() => {
-                    button.textContent = originalText
-                    button.classList.remove('copied')
-                  }, 2000)
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                  }, 2000);
                 })
-                .catch((err) => console.error('Gagal menyalin teks: ', err))
-            })
-          })
+                .catch((err) => console.error('Gagal menyalin teks: ', err));
+            });
+          });
 
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-facebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-whatsapp').href =
-            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
           document.getElementById('share-linkedin').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
           function getOS() {
-            const userAgent = window.navigator.userAgent
-            if (userAgent.indexOf('Win') != -1) return 'Windows'
-            if (userAgent.indexOf('Mac') != -1) return 'MacOS'
-            if (userAgent.indexOf('Linux') != -1) return 'Linux'
-            if (userAgent.indexOf('Android') != -1) return 'Android'
-            if (userAgent.indexOf('like Mac') != -1) return 'iOS'
-            return 'Unknown OS'
+            const userAgent = window.navigator.userAgent;
+            if (userAgent.indexOf('Win') != -1) return 'Windows';
+            if (userAgent.indexOf('Mac') != -1) return 'MacOS';
+            if (userAgent.indexOf('Linux') != -1) return 'Linux';
+            if (userAgent.indexOf('Android') != -1) return 'Android';
+            if (userAgent.indexOf('like Mac') != -1) return 'iOS';
+            return 'Unknown OS';
           }
           function getBrowser() {
-            const userAgent = window.navigator.userAgent
-            if (userAgent.indexOf('Firefox') > -1) return 'Firefox'
+            const userAgent = window.navigator.userAgent;
+            if (userAgent.indexOf('Firefox') > -1) return 'Firefox';
             if (userAgent.indexOf('SamsungBrowser') > -1)
-              return 'Samsung Browser'
+              return 'Samsung Browser';
             if (
               userAgent.indexOf('Opera') > -1 ||
               userAgent.indexOf('OPR') > -1
             )
-              return 'Opera'
-            if (userAgent.indexOf('Trident') > -1) return 'Internet Explorer'
-            if (userAgent.indexOf('Edge') > -1) return 'Edge'
-            if (userAgent.indexOf('Chrome') > -1) return 'Chrome'
-            if (userAgent.indexOf('Safari') > -1) return 'Safari'
-            return 'Unknown Browser'
+              return 'Opera';
+            if (userAgent.indexOf('Trident') > -1) return 'Internet Explorer';
+            if (userAgent.indexOf('Edge') > -1) return 'Edge';
+            if (userAgent.indexOf('Chrome') > -1) return 'Chrome';
+            if (userAgent.indexOf('Safari') > -1) return 'Safari';
+            return 'Unknown Browser';
           }
-          document.getElementById('os-info').textContent = `OS: ${getOS()}`
+          document.getElementById('os-info').textContent = `OS: ${getOS()}`;
           document.getElementById('browser-info').textContent =
-            `Browser: ${getBrowser()}`
+            `Browser: ${getBrowser()}`;
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
-              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`
+              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;
               document.getElementById('ip-info').innerHTML =
-                `IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`
+                `IP: ${data.ip} <img src="${flag}" alt="${data.country_name}" width="20">`;
             })
             .catch(() => {
               document.getElementById('ip-info').textContent =
-                'IP: Tidak terdeteksi'
-            })
-        })
-      })
+                'IP: Tidak terdeteksi';
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

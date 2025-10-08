@@ -276,9 +276,7 @@ boot</code><button class="copy-btn">Copy</button></pre>
       </div>
     </div>
 
-    <footer>
-
-    </footer>
+    <footer></footer>
 
     <!-- Prism.js -->
     });
@@ -291,25 +289,21 @@ boot</code><button class="copy-btn">Copy</button></pre>
         // Tombol copy
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            const code = btn.previousElementSibling.innerText
-            navigator.clipboard.writeText(code)
-            btn.textContent = 'Copied!'
-            setTimeout(() => (btn.textContent = 'Copy'), 2000)
-          })
-        })
+            const code = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => (btn.textContent = 'Copy'), 2000);
+          });
+        });
 
         // Facebook Comments auto URL
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
-
-       
-      })
+          .setAttribute('data-href', currentUrl);
+      });
     </script>
-
-    
 
     });
     <div id="kategori-aktif"></div>

@@ -545,7 +545,6 @@
       <div class="chips">
         <span class="chip">📍 Lapangan Merdeka, Balikpapan</span>
         <span class="chip">🗓️ 10 Juni 2017</span>
-        
       </div>
     </header>
 
@@ -906,10 +905,10 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // UA detect
-        ;(function () {
-          const chip = document.getElementById('ua-chip')
-          const uaInline = document.getElementById('ua-inline')
-          const ua = navigator.userAgent
+        (function () {
+          const chip = document.getElementById('ua-chip');
+          const uaInline = document.getElementById('ua-inline');
+          const ua = navigator.userAgent;
           const os = /Windows NT/.test(ua)
             ? 'Windows'
             : /Android/.test(ua)
@@ -920,7 +919,7 @@
                   ? 'macOS'
                   : /Linux/.test(ua)
                     ? 'Linux'
-                    : 'OS?'
+                    : 'OS?';
           const br = /Edg\//.test(ua)
             ? 'Edge'
             : /OPR\//.test(ua)
@@ -931,17 +930,17 @@
                   ? 'Safari'
                   : /Firefox\//.test(ua)
                     ? 'Firefox'
-                    : 'Browser?'
-          const txt = br + ' • ' + os
-          chip.textContent = '🧩 ' + txt
-          uaInline.textContent = 'Perangkat kamu: ' + txt
-        })()
+                    : 'Browser?';
+          const txt = br + ' • ' + os;
+          chip.textContent = '🧩 ' + txt;
+          uaInline.textContent = 'Perangkat kamu: ' + txt;
+        })();
 
         // IP Geolocation (city + flag)
-        ;(function () {
-          const geoChip = document.getElementById('geo-chip')
-          const geo = document.getElementById('geo')
-          const flag = document.getElementById('flag')
+        (function () {
+          const geoChip = document.getElementById('geo-chip');
+          const geo = document.getElementById('geo');
+          const flag = document.getElementById('flag');
           const toFlag = (cc) =>
             !cc
               ? '🏳️'
@@ -951,167 +950,167 @@
                     .toUpperCase()
                     .split('')
                     .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-                )
+                );
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
             .then((j) => {
-              const city = j.city || 'Kota tidak diketahui'
-              const country = j.country_name || ''
-              const cc = j.country || ''
-              const t = city + (country ? ', ' + country : '')
-              geoChip.textContent = '📍 ' + t
-              geo.textContent = t
-              flag.textContent = toFlag(cc)
+              const city = j.city || 'Kota tidak diketahui';
+              const country = j.country_name || '';
+              const cc = j.country || '';
+              const t = city + (country ? ', ' + country : '');
+              geoChip.textContent = '📍 ' + t;
+              geo.textContent = t;
+              flag.textContent = toFlag(cc);
             })
             .catch(() =>
               fetch('https://ipwho.is/')
                 .then((r) => r.json())
                 .then((j) => {
-                  const city = j.city || 'Kota tidak diketahui'
-                  const country = j.country || ''
-                  const cc = j.country_code || ''
-                  const t = city + (country ? ', ' + country : '')
-                  geoChip.textContent = '📍 ' + t
-                  geo.textContent = t
-                  flag.textContent = toFlag(cc)
+                  const city = j.city || 'Kota tidak diketahui';
+                  const country = j.country || '';
+                  const cc = j.country_code || '';
+                  const t = city + (country ? ', ' + country : '');
+                  geoChip.textContent = '📍 ' + t;
+                  geo.textContent = t;
+                  flag.textContent = toFlag(cc);
                 })
                 .catch(() => {
-                  geoChip.textContent = '📍 Lokasi tidak tersedia'
-                  geo.textContent = 'Lokasi tidak tersedia'
-                  flag.textContent = '🏳️'
+                  geoChip.textContent = '📍 Lokasi tidak tersedia';
+                  geo.textContent = 'Lokasi tidak tersedia';
+                  flag.textContent = '🏳️';
                 }),
-            )
-        })()
+            );
+        })();
 
         // Share links
-        ;(function () {
-          const url = encodeURIComponent(location.href)
+        (function () {
+          const url = encodeURIComponent(location.href);
           const text = encodeURIComponent(
             'Kopdar Berbuka & Berbagi - Komunitas Bukalapak Balikpapan (2017)',
-          )
-          const wa = `https://wa.me/?text=${text}%20%7C%20${url}`
-          const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`
-          const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-          const tg = `https://t.me/share/url?url=${url}&text=${text}`
-          const ids = ['share-wa', 'share-x', 'share-fb', 'share-tele']
-          ;[wa, x, fb, tg].forEach((link, i) => {
-            const el = document.getElementById(ids[i])
+          );
+          const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
+          const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+          const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          const tg = `https://t.me/share/url?url=${url}&text=${text}`;
+          const ids = ['share-wa', 'share-x', 'share-fb', 'share-tele'];
+          [wa, x, fb, tg].forEach((link, i) => {
+            const el = document.getElementById(ids[i]);
             if (el) {
-              el.href = link
-              el.target = '_blank'
-              el.rel = 'noopener'
+              el.href = link;
+              el.target = '_blank';
+              el.rel = 'noopener';
             }
-          })
+          });
           // clone to other spots
-          const top = document.getElementById('share-top')
-          ;['share-bottom'].forEach((id) => {
-            const c = document.getElementById(id)
+          const top = document.getElementById('share-top');
+          ['share-bottom'].forEach((id) => {
+            const c = document.getElementById(id);
             if (c && top) {
-              c.innerHTML = top.innerHTML
+              c.innerHTML = top.innerHTML;
               c.querySelectorAll('a').forEach((a) => {
-                const label = a.textContent.trim()
-                if (label.includes('WhatsApp')) a.href = wa
-                if (label === 'X') a.href = x
-                if (label.includes('Facebook')) a.href = fb
-                if (label.includes('Telegram')) a.href = tg
-                a.target = '_blank'
-                a.rel = 'noopener'
-              })
+                const label = a.textContent.trim();
+                if (label.includes('WhatsApp')) a.href = wa;
+                if (label === 'X') a.href = x;
+                if (label.includes('Facebook')) a.href = fb;
+                if (label.includes('Telegram')) a.href = tg;
+                a.target = '_blank';
+                a.rel = 'noopener';
+              });
             }
-          })
-        })()
+          });
+        })();
 
         // Lazy load
-        ;(function () {
-          const imgs = document.querySelectorAll('img[data-src]')
+        (function () {
+          const imgs = document.querySelectorAll('img[data-src]');
           const io =
             'IntersectionObserver' in window
               ? new IntersectionObserver(
                   (ents, obs) => {
                     ents.forEach((e) => {
                       if (e.isIntersecting) {
-                        const img = e.target
-                        img.src = img.dataset.src
-                        img.removeAttribute('data-src')
-                        obs.unobserve(img)
+                        const img = e.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        obs.unobserve(img);
                       }
-                    })
+                    });
                   },
                   { rootMargin: '200px' },
                 )
-              : null
+              : null;
           imgs.forEach((img) => {
-            if (io) io.observe(img)
+            if (io) io.observe(img);
             else {
-              img.src = img.dataset.src
-              img.removeAttribute('data-src')
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
             }
-          })
-        })()
+          });
+        })();
 
         // Lightbox
-        ;(function () {
-          const lb = document.getElementById('lightbox')
-          const img = document.getElementById('lb-img')
-          const count = document.getElementById('lb-count')
-          const prev = document.getElementById('lb-prev')
-          const next = document.getElementById('lb-next')
-          const closeBtn = document.getElementById('lb-close')
+        (function () {
+          const lb = document.getElementById('lightbox');
+          const img = document.getElementById('lb-img');
+          const count = document.getElementById('lb-count');
+          const prev = document.getElementById('lb-prev');
+          const next = document.getElementById('lb-next');
+          const closeBtn = document.getElementById('lb-close');
           let groups = {},
             g = '',
-            i = 0
+            i = 0;
 
           document.querySelectorAll('.thumb').forEach((a) => {
-            const key = a.dataset.group || 'g'
-            ;(groups[key] ||= []).push(a)
+            const key = a.dataset.group || 'g';
+            (groups[key] ||= []).push(a);
             a.addEventListener('click', (ev) => {
-              ev.preventDefault()
-              open(key, groups[key].indexOf(a))
-            })
-          })
+              ev.preventDefault();
+              open(key, groups[key].indexOf(a));
+            });
+          });
 
           function open(group, idx) {
-            g = group
-            i = idx
-            update()
-            lb.classList.add('open')
-            lb.setAttribute('aria-hidden', 'false')
-            document.body.style.overflow = 'hidden'
+            g = group;
+            i = idx;
+            update();
+            lb.classList.add('open');
+            lb.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
           }
           function update() {
-            const arr = groups[g]
-            if (!arr) return
-            const el = arr[i]
-            img.src = el.dataset.src
-            img.alt = el.querySelector('img')?.alt || 'Foto'
-            count.textContent = i + 1 + ' / ' + arr.length
+            const arr = groups[g];
+            if (!arr) return;
+            const el = arr[i];
+            img.src = el.dataset.src;
+            img.alt = el.querySelector('img')?.alt || 'Foto';
+            count.textContent = i + 1 + ' / ' + arr.length;
           }
           function move(d) {
-            const arr = groups[g]
-            i = (i + d + arr.length) % arr.length
-            update()
+            const arr = groups[g];
+            i = (i + d + arr.length) % arr.length;
+            update();
           }
           function close() {
-            lb.classList.remove('open')
-            lb.setAttribute('aria-hidden', 'true')
-            document.body.style.overflow = ''
-            img.src = ''
+            lb.classList.remove('open');
+            lb.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            img.src = '';
           }
 
-          prev.addEventListener('click', () => move(-1))
-          next.addEventListener('click', () => move(1))
-          closeBtn.addEventListener('click', close)
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          closeBtn.addEventListener('click', close);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) close()
-          })
+            if (e.target === lb) close();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') close()
-            if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'ArrowRight') move(1)
-          })
-        })()
-      })
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') move(-1);
+            if (e.key === 'ArrowRight') move(1);
+          });
+        })();
+      });
     </script>
 
     <!-- Facebook SDK -->
@@ -1126,7 +1125,7 @@
     <script>
       document
         .querySelector('.fb-comments')
-        .setAttribute('data-href', location.href)
+        .setAttribute('data-href', location.href);
     </script>
     document.addEventListener(DOMContentLoaded, () => {
 
@@ -1134,8 +1133,8 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let s = (document.querySelector('main section img') || {}).src || ''
-          ;['og:image', 'twitter:image'].forEach((p, j) =>
+          let s = (document.querySelector('main section img') || {}).src || '';
+          ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
                 (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
@@ -1145,16 +1144,16 @@
                   content: s,
                 }),
             ),
-          )
+          );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
               }),
-          )
-        })
-      })
+          );
+        });
+      });
     </script>
 
     <!-- JSON-LD -->

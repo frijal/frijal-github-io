@@ -544,23 +544,23 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               // Set data-href FB Comments ke URL halaman ini
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {
                     /* ignore */
                   }
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
       </section>
@@ -598,117 +598,117 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           // Lightbox untuk galeri
-          const galleryImages = document.querySelectorAll('.gallery img')
-          const lightbox = document.createElement('div')
-          lightbox.id = 'lightbox'
-          document.body.appendChild(lightbox)
+          const galleryImages = document.querySelectorAll('.gallery img');
+          const lightbox = document.createElement('div');
+          lightbox.id = 'lightbox';
+          document.body.appendChild(lightbox);
 
           galleryImages.forEach((img) => {
             img.addEventListener('click', () => {
-              lightbox.classList.add('active')
-              const imgElement = document.createElement('img')
-              imgElement.src = img.src
-              imgElement.alt = img.alt
+              lightbox.classList.add('active');
+              const imgElement = document.createElement('img');
+              imgElement.src = img.src;
+              imgElement.alt = img.alt;
 
               while (lightbox.firstChild) {
-                lightbox.removeChild(lightbox.firstChild)
+                lightbox.removeChild(lightbox.firstChild);
               }
-              lightbox.appendChild(imgElement)
-            })
-          })
+              lightbox.appendChild(imgElement);
+            });
+          });
 
           lightbox.addEventListener('click', () => {
-            lightbox.classList.remove('active')
-          })
+            lightbox.classList.remove('active');
+          });
 
           // Get user info & IP
           function getBrowserAndOS() {
-            const userAgent = navigator.userAgent
-            let browser = 'Unknown Browser'
-            let os = 'Unknown OS'
+            const userAgent = navigator.userAgent;
+            let browser = 'Unknown Browser';
+            let os = 'Unknown OS';
 
             // OS detection
             if (userAgent.match(/Windows/i)) {
-              os = 'Windows'
+              os = 'Windows';
             } else if (userAgent.match(/Macintosh|Mac OS X/i)) {
-              os = 'macOS'
+              os = 'macOS';
             } else if (userAgent.match(/Linux/i)) {
-              os = 'Linux'
+              os = 'Linux';
             } else if (userAgent.match(/Android/i)) {
-              os = 'Android'
+              os = 'Android';
             } else if (userAgent.match(/iOS|iPhone|iPad/i)) {
-              os = 'iOS'
+              os = 'iOS';
             }
 
             // Browser detection
             if (userAgent.match(/Edge/i)) {
-              browser = 'Edge'
+              browser = 'Edge';
             } else if (userAgent.match(/Chrome/i)) {
-              browser = 'Chrome'
+              browser = 'Chrome';
             } else if (userAgent.match(/Safari/i)) {
-              browser = 'Safari'
+              browser = 'Safari';
             } else if (userAgent.match(/Firefox/i)) {
-              browser = 'Firefox'
+              browser = 'Firefox';
             }
 
             document.getElementById('browser-info').innerHTML =
-              `${browser} ${getBrowserIcon(browser)}`
+              `${browser} ${getBrowserIcon(browser)}`;
             document.getElementById('os-info').innerHTML =
-              `${os} ${getOSIcon(os)}`
+              `${os} ${getOSIcon(os)}`;
           }
 
           function getBrowserIcon(browser) {
             switch (browser) {
               case 'Chrome':
-                return '<i class="fab fa-chrome" style="color:#4285f4;"></i>'
+                return '<i class="fab fa-chrome" style="color:#4285f4;"></i>';
               case 'Firefox':
-                return '<i class="fab fa-firefox-browser" style="color:#e66000;"></i>'
+                return '<i class="fab fa-firefox-browser" style="color:#e66000;"></i>';
               case 'Safari':
-                return '<i class="fab fa-safari" style="color:#1d71b8;"></i>'
+                return '<i class="fab fa-safari" style="color:#1d71b8;"></i>';
               case 'Edge':
-                return '<i class="fab fa-edge" style="color:#0078d7;"></i>'
+                return '<i class="fab fa-edge" style="color:#0078d7;"></i>';
               default:
-                return ''
+                return '';
             }
           }
 
           function getOSIcon(os) {
             switch (os) {
               case 'Windows':
-                return '<i class="fab fa-windows" style="color:#0078d7;"></i>'
+                return '<i class="fab fa-windows" style="color:#0078d7;"></i>';
               case 'macOS':
-                return '<i class="fab fa-apple" style="color:#555;"></i>'
+                return '<i class="fab fa-apple" style="color:#555;"></i>';
               case 'Linux':
-                return '<i class="fab fa-linux" style="color:#333;"></i>'
+                return '<i class="fab fa-linux" style="color:#333;"></i>';
               case 'Android':
-                return '<i class="fab fa-android" style="color:#3ddc84;"></i>'
+                return '<i class="fab fa-android" style="color:#3ddc84;"></i>';
               case 'iOS':
-                return '<i class="fab fa-apple" style="color:#555;"></i>'
+                return '<i class="fab fa-apple" style="color:#555;"></i>';
               default:
-                return ''
+                return '';
             }
           }
 
-          getBrowserAndOS()
+          getBrowserAndOS();
 
           // Get IP and Location
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
-              const ipInfoElement = document.getElementById('ip-info')
+              const ipInfoElement = document.getElementById('ip-info');
               if (data.ip) {
-                ipInfoElement.innerHTML = `${data.ip} - ${data.city}, ${data.country_name} <img src="https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png" alt="${data.country_name} flag" style="vertical-align: middle;">`
+                ipInfoElement.innerHTML = `${data.ip} - ${data.city}, ${data.country_name} <img src="https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png" alt="${data.country_name} flag" style="vertical-align: middle;">`;
               } else {
-                ipInfoElement.textContent = 'IP tidak ditemukan.'
+                ipInfoElement.textContent = 'IP tidak ditemukan.';
               }
             })
             .catch((error) => {
-              console.error('Error fetching IP info:', error)
+              console.error('Error fetching IP info:', error);
               document.getElementById('ip-info').textContent =
-                'Gagal mengambil informasi IP.'
-            })
-        })
-      })
+                'Gagal mengambil informasi IP.';
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

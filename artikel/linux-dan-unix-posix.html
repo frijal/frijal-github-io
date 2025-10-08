@@ -387,8 +387,6 @@
   <body>
     <main class="wrap">
       <header class="hero">
-        
-
         <h1 class="title">Linux dan UNIX: Saudara Tiri yang Punya DNA Sama</h1>
         <div id="iposbrowser"></div>
         <p class="subtitle">
@@ -573,91 +571,93 @@
             try {
               await navigator.clipboard.writeText(
                 'https://frijal.github.io/artikel/linux-dan-unix-posix.html',
-              )
-              const btn = document.getElementById('copyLink')
-              btn.textContent = '✅ Tautan disalin'
-              setTimeout(() => (btn.textContent = '🔗 Salin tautan'), 1500)
+              );
+              const btn = document.getElementById('copyLink');
+              btn.textContent = '✅ Tautan disalin';
+              setTimeout(() => (btn.textContent = '🔗 Salin tautan'), 1500);
             } catch (e) {
-              alert('Gagal menyalin tautan')
+              alert('Gagal menyalin tautan');
             }
-          })
+          });
 
         // Lazy-load gallery via IntersectionObserver
-        const figures = Array.from(document.querySelectorAll('.gallery figure'))
+        const figures = Array.from(
+          document.querySelectorAll('.gallery figure'),
+        );
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                const fig = entry.target
-                const img = fig.querySelector('img')
-                const src = fig.getAttribute('data-src')
+                const fig = entry.target;
+                const img = fig.querySelector('img');
+                const src = fig.getAttribute('data-src');
                 if (src && !img.src) {
-                  img.src = src
+                  img.src = src;
                 }
-                io.unobserve(fig)
+                io.unobserve(fig);
               }
-            })
+            });
           },
           { rootMargin: '200px' },
-        )
-        figures.forEach((f) => io.observe(f))
+        );
+        figures.forEach((f) => io.observe(f));
 
         // Lightbox navigation
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lbImg')
-        const lbClose = document.getElementById('lbClose')
-        const lbPrev = document.getElementById('lbPrev')
-        const lbNext = document.getElementById('lbNext')
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbClose = document.getElementById('lbClose');
+        const lbPrev = document.getElementById('lbPrev');
+        const lbNext = document.getElementById('lbNext');
 
-        let currentIndex = 0
-        const images = figures.map((f) => f.getAttribute('data-src'))
+        let currentIndex = 0;
+        const images = figures.map((f) => f.getAttribute('data-src'));
 
         function openLightbox(index) {
-          currentIndex = index
-          lbImg.src = images[currentIndex]
-          lb.classList.add('open')
+          currentIndex = index;
+          lbImg.src = images[currentIndex];
+          lb.classList.add('open');
         }
         function closeLightbox() {
-          lb.classList.remove('open')
+          lb.classList.remove('open');
         }
         function prevImg() {
-          currentIndex = (currentIndex - 1 + images.length) % images.length
-          lbImg.src = images[currentIndex]
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          lbImg.src = images[currentIndex];
         }
         function nextImg() {
-          currentIndex = (currentIndex + 1) % images.length
-          lbImg.src = images[currentIndex]
+          currentIndex = (currentIndex + 1) % images.length;
+          lbImg.src = images[currentIndex];
         }
 
         figures.forEach((fig, idx) => {
-          fig.addEventListener('click', () => openLightbox(idx))
-          fig.style.cursor = 'zoom-in'
-        })
-        lbClose.addEventListener('click', closeLightbox)
-        lbPrev.addEventListener('click', prevImg)
-        lbNext.addEventListener('click', nextImg)
+          fig.addEventListener('click', () => openLightbox(idx));
+          fig.style.cursor = 'zoom-in';
+        });
+        lbClose.addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', prevImg);
+        lbNext.addEventListener('click', nextImg);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLightbox()
-        })
+          if (e.target === lb) closeLightbox();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') closeLightbox()
-          if (e.key === 'ArrowLeft') prevImg()
-          if (e.key === 'ArrowRight') nextImg()
-        })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') prevImg();
+          if (e.key === 'ArrowRight') nextImg();
+        });
 
         // Facebook SDK (dark mode friendly)
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

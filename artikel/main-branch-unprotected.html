@@ -399,7 +399,6 @@
       }
     </style>
 
-
     <meta name="date" content="2025-09-28" />
 
     <meta
@@ -641,130 +640,130 @@
         // Lightbox & gallery nav
         const galleryItems = Array.from(
           document.querySelectorAll('#gallery img'),
-        )
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lb-img')
-        const btnClose = document.getElementById('lb-close')
-        const btnPrev = document.getElementById('lb-prev')
-        const btnNext = document.getElementById('lb-next')
-        let currentIndex = 0
+        );
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const btnClose = document.getElementById('lb-close');
+        const btnPrev = document.getElementById('lb-prev');
+        const btnNext = document.getElementById('lb-next');
+        let currentIndex = 0;
 
         function openLightbox(index) {
-          currentIndex = index
+          currentIndex = index;
           const src =
-            galleryItems[index].dataset.full || galleryItems[index].src
-          lbImg.src = src
-          lb.classList.add('active')
-          lb.setAttribute('aria-hidden', 'false')
+            galleryItems[index].dataset.full || galleryItems[index].src;
+          lbImg.src = src;
+          lb.classList.add('active');
+          lb.setAttribute('aria-hidden', 'false');
         }
         function closeLightbox() {
-          lb.classList.remove('active')
-          lb.setAttribute('aria-hidden', 'true')
-          lbImg.src = ''
+          lb.classList.remove('active');
+          lb.setAttribute('aria-hidden', 'true');
+          lbImg.src = '';
         }
         function nav(delta) {
           currentIndex =
-            (currentIndex + delta + galleryItems.length) % galleryItems.length
-          openLightbox(currentIndex)
+            (currentIndex + delta + galleryItems.length) % galleryItems.length;
+          openLightbox(currentIndex);
         }
         galleryItems.forEach((img, i) => {
-          img.addEventListener('click', () => openLightbox(i))
-          img.style.cursor = 'zoom-in'
-        })
-        btnClose.addEventListener('click', closeLightbox)
-        btnPrev.addEventListener('click', () => nav(-1))
-        btnNext.addEventListener('click', () => nav(1))
+          img.addEventListener('click', () => openLightbox(i));
+          img.style.cursor = 'zoom-in';
+        });
+        btnClose.addEventListener('click', closeLightbox);
+        btnPrev.addEventListener('click', () => nav(-1));
+        btnNext.addEventListener('click', () => nav(1));
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLightbox()
-        })
+          if (e.target === lb) closeLightbox();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('active')) return
-          if (e.key === 'Escape') closeLightbox()
-          if (e.key === 'ArrowLeft') nav(-1)
-          if (e.key === 'ArrowRight') nav(1)
-        })
+          if (!lb.classList.contains('active')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') nav(-1);
+          if (e.key === 'ArrowRight') nav(1);
+        });
 
         // Share buttons
         const url =
-          document.querySelector('link[rel=canonical]')?.href || location.href
+          document.querySelector('link[rel=canonical]')?.href || location.href;
         document
           .getElementById('share-twitter')
           .addEventListener('click', () => {
-            const u = new URL('https://twitter.com/intent/tweet')
-            u.searchParams.set('url', url)
-            u.searchParams.set('text', document.title)
-            window.open(u.toString(), '_blank')
-          })
+            const u = new URL('https://twitter.com/intent/tweet');
+            u.searchParams.set('url', url);
+            u.searchParams.set('text', document.title);
+            window.open(u.toString(), '_blank');
+          });
         document.getElementById('share-fb').addEventListener('click', () => {
-          const u = new URL('https://www.facebook.com/sharer/sharer.php')
-          u.searchParams.set('u', url)
-          window.open(u.toString(), '_blank')
-        })
+          const u = new URL('https://www.facebook.com/sharer/sharer.php');
+          u.searchParams.set('u', url);
+          window.open(u.toString(), '_blank');
+        });
         document
           .getElementById('share-copy')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(url)
-              alert('Link disalin!')
+              await navigator.clipboard.writeText(url);
+              alert('Link disalin!');
             } catch {
-              prompt('Copy link secara manual:', url)
+              prompt('Copy link secara manual:', url);
             }
-          })
+          });
 
         // Info: Browser, OS, IP, Kota, Bendera
         function simpleOS(ua) {
-          ua = ua.toLowerCase()
-          if (ua.includes('windows')) return 'Windows'
-          if (ua.includes('mac os') || ua.includes('macintosh')) return 'macOS'
-          if (ua.includes('android')) return 'Android'
-          if (ua.includes('iphone') || ua.includes('ipad')) return 'iOS'
-          if (ua.includes('linux')) return 'Linux'
-          return 'Tidak diketahui'
+          ua = ua.toLowerCase();
+          if (ua.includes('windows')) return 'Windows';
+          if (ua.includes('mac os') || ua.includes('macintosh')) return 'macOS';
+          if (ua.includes('android')) return 'Android';
+          if (ua.includes('iphone') || ua.includes('ipad')) return 'iOS';
+          if (ua.includes('linux')) return 'Linux';
+          return 'Tidak diketahui';
         }
         function simpleBrowser() {
-          const ua = navigator.userAgent
-          if (/Edg\//.test(ua)) return 'Microsoft Edge'
+          const ua = navigator.userAgent;
+          if (/Edg\//.test(ua)) return 'Microsoft Edge';
           if (/Chrome\//.test(ua) && !/Chromium/.test(ua) && !/Edg\//.test(ua))
-            return 'Google Chrome'
-          if (/Firefox\//.test(ua)) return 'Mozilla Firefox'
-          if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari'
-          return 'Browser lain'
+            return 'Google Chrome';
+          if (/Firefox\//.test(ua)) return 'Mozilla Firefox';
+          if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) return 'Safari';
+          return 'Browser lain';
         }
         function flagFromCC(cc) {
-          if (!cc) return '🏳️'
-          const A = 127397
+          if (!cc) return '🏳️';
+          const A = 127397;
           return cc
             .toUpperCase()
-            .replace(/./g, (c) => String.fromCodePoint(c.charCodeAt(0) + A))
+            .replace(/./g, (c) => String.fromCodePoint(c.charCodeAt(0) + A));
         }
         document.getElementById('info-browser').textContent =
-          'Browser: ' + simpleBrowser()
+          'Browser: ' + simpleBrowser();
         document.getElementById('info-os').textContent =
-          'OS: ' + simpleOS(navigator.userAgent)
+          'OS: ' + simpleOS(navigator.userAgent);
 
         // Ambil IP & lokasi (pakai layanan publik sederhana)
-        ;(async () => {
+        (async () => {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            const data = await res.json()
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
             document.getElementById('info-ip').textContent =
-              'IP: ' + (data.ip || '–')
+              'IP: ' + (data.ip || '–');
             document.getElementById('info-city').textContent =
               'Kota: ' +
               [data.city, data.region, data.country_name]
                 .filter(Boolean)
-                .join(', ')
+                .join(', ');
             document.getElementById('info-flag').textContent =
-              'Bendera: ' + flagFromCC(data.country_code)
+              'Bendera: ' + flagFromCC(data.country_code);
           } catch (e) {
             document.getElementById('info-ip').textContent =
-              'IP: (gagal memuat)'
+              'IP: (gagal memuat)';
             document.getElementById('info-city').textContent =
-              'Kota: (gagal memuat)'
-            document.getElementById('info-flag').textContent = 'Bendera: 🏳️'
+              'Kota: (gagal memuat)';
+            document.getElementById('info-flag').textContent = 'Bendera: 🏳️';
           }
-        })()
-      })
+        })();
+      });
     </script>
 
     <!-- Facebook SDK -->
@@ -775,7 +774,6 @@
       });
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v20.0"
     ></script>
-
 
     });
     <div id="kategori-aktif"></div>

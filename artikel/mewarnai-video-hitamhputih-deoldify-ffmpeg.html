@@ -854,10 +854,10 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
     <!-- JS: share, lightbox, deteksi lingkungan, lokasi/flags -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(function () {
+        (function () {
           const CANON =
             document.querySelector('link[rel="canonical"]')?.href ||
-            location.href
+            location.href;
 
           // Share
           const shareMap = {
@@ -869,76 +869,76 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
               `https://wa.me/?text=${encodeURIComponent(document.title + ' ' + url)}`,
             linkedin: (url) =>
               `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-          }
+          };
           document.querySelectorAll('.btn-share').forEach((btn) => {
             btn.addEventListener('click', () => {
-              const t = btn.getAttribute('data-share')
-              const u = shareMap[t]?.(CANON)
-              if (u) window.open(u, '_blank', 'noopener,noreferrer')
-            })
-          })
+              const t = btn.getAttribute('data-share');
+              const u = shareMap[t]?.(CANON);
+              if (u) window.open(u, '_blank', 'noopener,noreferrer');
+            });
+          });
 
           // Lightbox
-          const gallery = [...document.querySelectorAll('#gallery .item')]
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          const lbCap = document.getElementById('lb-cap')
-          let idx = -1
+          const gallery = [...document.querySelectorAll('#gallery .item')];
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          const lbCap = document.getElementById('lb-cap');
+          let idx = -1;
           function openAt(i) {
-            idx = i
-            const el = gallery[idx]
-            lbImg.src = el.dataset.full
-            lbImg.alt = el.querySelector('img').alt || ''
-            lbCap.textContent = el.dataset.caption || ''
-            lb.classList.add('open')
+            idx = i;
+            const el = gallery[idx];
+            lbImg.src = el.dataset.full;
+            lbImg.alt = el.querySelector('img').alt || '';
+            lbCap.textContent = el.dataset.caption || '';
+            lb.classList.add('open');
           }
           function closeLb() {
-            lb.classList.remove('open')
-            lbImg.src = ''
-            lbCap.textContent = ''
-            idx = -1
+            lb.classList.remove('open');
+            lbImg.src = '';
+            lbCap.textContent = '';
+            idx = -1;
           }
           function prev() {
-            if (idx > 0) openAt(idx - 1)
+            if (idx > 0) openAt(idx - 1);
           }
           function next() {
-            if (idx < gallery.length - 1) openAt(idx + 1)
+            if (idx < gallery.length - 1) openAt(idx + 1);
           }
 
           gallery.forEach((el, i) =>
             el.addEventListener('click', () => openAt(i)),
-          )
-          document.getElementById('lb-close').addEventListener('click', closeLb)
-          document.getElementById('lb-prev').addEventListener('click', prev)
-          document.getElementById('lb-next').addEventListener('click', next)
+          );
+          document
+            .getElementById('lb-close')
+            .addEventListener('click', closeLb);
+          document.getElementById('lb-prev').addEventListener('click', prev);
+          document.getElementById('lb-next').addEventListener('click', next);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLb()
-          })
+            if (e.target === lb) closeLb();
+          });
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') closeLb()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
-
-          
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
 
           // Perf: fallback lazy-load untuk browser lama
           if (!('loading' in HTMLImageElement.prototype)) {
-            const lazyImgs = document.querySelectorAll('img[loading="lazy"]')
+            const lazyImgs = document.querySelectorAll('img[loading="lazy"]');
             lazyImgs.forEach((img) => {
-              const src = img.getAttribute('src')
+              const src = img.getAttribute('src');
               if (src) {
-                const i = new Image()
-                i.src = src
+                const i = new Image();
+                i.src = src;
                 i.onload = () => {
-                  img.src = src
-                }
+                  img.src = src;
+                };
               }
-            })
+            });
           }
-        })()
-      })
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

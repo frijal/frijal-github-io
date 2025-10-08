@@ -414,7 +414,6 @@
 
       <div id="user-info">
         <h3>Pelan Kiri:</h3>
-
       </div>
 
       <div class="social-share">
@@ -486,47 +485,47 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const lightbox = document.getElementById('lightbox')
+        const lightbox = document.getElementById('lightbox');
         function openLightbox() {
-          lightbox.style.display = 'flex'
+          lightbox.style.display = 'flex';
         }
         function closeLightbox() {
-          lightbox.style.display = 'none'
+          lightbox.style.display = 'none';
         }
 
         // Deteksi Info Pengguna
         document.addEventListener('DOMContentLoaded', function () {
           // Browser
-          const browserInfoEl = document.getElementById('browser-info')
-          const ua = navigator.userAgent
-          let browser = 'Browser tidak dikenal'
-          if (ua.includes('Firefox/')) browser = `Firefox 🔥`
-          else if (ua.includes('Chrome/')) browser = `Chrome 🚀`
-          else if (ua.includes('Safari/')) browser = `Safari 🧭`
-          browserInfoEl.textContent = `Browser: ${browser}`
+          const browserInfoEl = document.getElementById('browser-info');
+          const ua = navigator.userAgent;
+          let browser = 'Browser tidak dikenal';
+          if (ua.includes('Firefox/')) browser = `Firefox 🔥`;
+          else if (ua.includes('Chrome/')) browser = `Chrome 🚀`;
+          else if (ua.includes('Safari/')) browser = `Safari 🧭`;
+          browserInfoEl.textContent = `Browser: ${browser}`;
 
           // OS
-          const osInfoEl = document.getElementById('os-info')
-          let os = 'OS tidak dikenal'
-          if (navigator.platform.includes('Win')) os = 'Windows 💻'
-          else if (navigator.platform.includes('Mac')) os = 'macOS 🍎'
-          else if (navigator.platform.includes('Linux')) os = 'Linux 🐧'
-          osInfoEl.textContent = `Sistem Operasi: ${os}`
+          const osInfoEl = document.getElementById('os-info');
+          let os = 'OS tidak dikenal';
+          if (navigator.platform.includes('Win')) os = 'Windows 💻';
+          else if (navigator.platform.includes('Mac')) os = 'macOS 🍎';
+          else if (navigator.platform.includes('Linux')) os = 'Linux 🐧';
+          osInfoEl.textContent = `Sistem Operasi: ${os}`;
 
           // Lokasi via IP
-          const locationInfoEl = document.getElementById('location-info')
+          const locationInfoEl = document.getElementById('location-info');
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
-              const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`
-              locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle;">`
+              const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
+              locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle;">`;
             })
             .catch((error) => {
-              locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.'
-              console.error('Error fetching location:', error)
-            })
-        })
-      })
+              locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.';
+              console.error('Error fetching location:', error);
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

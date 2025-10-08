@@ -321,44 +321,45 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          const navigation = document.getElementById('navigation')
-          const contentDisplay = document.getElementById('content-display')
-          const navLinks = document.querySelectorAll('.nav-link')
+          const navigation = document.getElementById('navigation');
+          const contentDisplay = document.getElementById('content-display');
+          const navLinks = document.querySelectorAll('.nav-link');
 
           // Map hash to template IDs
-          const contentMap = { '#ffmpeg-convert': 'ffmpeg-convert-content' }
+          const contentMap = { '#ffmpeg-convert': 'ffmpeg-convert-content' };
 
           // Function to load content based on hash
           const loadContent = (hash) => {
             // Remove active class from all links
-            navLinks.forEach((link) => link.classList.remove('active-nav'))
-            contentDisplay.innerHTML = '' // Clear content
+            navLinks.forEach((link) => link.classList.remove('active-nav'));
+            contentDisplay.innerHTML = ''; // Clear content
 
-            const templateId = contentMap[hash]
+            const templateId = contentMap[hash];
 
             if (templateId) {
               // Load specific content template
-              const template = document.getElementById(templateId)
-              const clone = template.content.cloneNode(true)
-              contentDisplay.appendChild(clone)
+              const template = document.getElementById(templateId);
+              const clone = template.content.cloneNode(true);
+              contentDisplay.appendChild(clone);
 
               // Add active class to the current link
               document
                 .querySelector(`a[href="${hash}"]`)
-                .classList.add('active-nav')
+                .classList.add('active-nav');
             } else {
               // Load welcome content template
-              const welcomeTemplate = document.getElementById('welcome-content')
-              const clone = welcomeTemplate.content.cloneNode(true)
-              contentDisplay.appendChild(clone)
+              const welcomeTemplate =
+                document.getElementById('welcome-content');
+              const clone = welcomeTemplate.content.cloneNode(true);
+              contentDisplay.appendChild(clone);
             }
 
             // Update current URL display and Facebook comments data-href
             const currentCanonicalUrl =
-              'https://frijal.github.io/artikel/panduan-interaktif-ffmpeg.html'
-            const currentUrlEl = document.getElementById('current-url')
+              'https://frijal.github.io/artikel/panduan-interaktif-ffmpeg.html';
+            const currentUrlEl = document.getElementById('current-url');
             if (currentUrlEl)
-              currentUrlEl.textContent = currentCanonicalUrl + hash
+              currentUrlEl.textContent = currentCanonicalUrl + hash;
 
             // Attempt to parse FB comments for dynamic content
             if (
@@ -366,60 +367,60 @@
               FB.XFBML &&
               typeof FB.XFBML.parse === 'function'
             ) {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             }
-          }
+          };
 
           // 1. Navigation Click Handler (uses hash)
           navigation.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') {
-              const hash = e.target.hash
+              const hash = e.target.hash;
               if (hash) {
-                e.preventDefault()
-                window.location.hash = hash
+                e.preventDefault();
+                window.location.hash = hash;
               }
             }
-          })
+          });
 
           // 2. Hash Change Listener
           window.addEventListener('hashchange', () => {
-            loadContent(window.location.hash)
-          })
+            loadContent(window.location.hash);
+          });
 
           // 3. Copy Button Handler
           contentDisplay.addEventListener('click', (t) => {
             if (t.target.classList.contains('copy-btn')) {
               const codeElement =
-                t.target.nextElementSibling.querySelector('code')
+                t.target.nextElementSibling.querySelector('code');
               if (codeElement) {
                 const code = codeElement.innerText
                   .trim()
-                  .replace(/\n{2,}/g, '\n')
+                  .replace(/\n{2,}/g, '\n');
                 navigator.clipboard
                   .writeText(code)
                   .then(() => {
-                    let originalText = t.target.innerText
-                    t.target.innerText = 'Disalin!'
+                    let originalText = t.target.innerText;
+                    t.target.innerText = 'Disalin!';
                     setTimeout(() => {
-                      t.target.innerText = originalText
-                    }, 2000)
+                      t.target.innerText = originalText;
+                    }, 2000);
                   })
                   .catch((e) => {
-                    console.error('Gagal menyalin: ', e)
-                  })
+                    console.error('Gagal menyalin: ', e);
+                  });
               }
             }
-          })
+          });
 
           // 4. Initial Load Logic
           if (window.location.hash) {
-            loadContent(window.location.hash)
+            loadContent(window.location.hash);
           } else {
             // If no hash, try to set the first nav item's hash, then load welcome
             if (navLinks.length > 0) {
-              window.location.hash = navLinks[0].hash
+              window.location.hash = navLinks[0].hash;
             } else {
-              loadContent('#welcome') // Fallback to welcome page
+              loadContent('#welcome'); // Fallback to welcome page
             }
           }
 
@@ -427,12 +428,12 @@
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (t) {}
             }
-          }
-        })
-      })
+          };
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -475,7 +475,7 @@
                         "item": "https://frijal.github.io/artikel/saf-shalat.html"
                       }
                     ]
-        
+
             <meta name="date" content="2025-09-27">
 
                   }
@@ -723,8 +723,8 @@
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                let currentUrl = window.location.href
-                ;((document.getElementById('current-url').textContent =
+                let currentUrl = window.location.href;
+                ((document.getElementById('current-url').textContent =
                   currentUrl),
                   document
                     .getElementById('fb-comments')
@@ -732,10 +732,10 @@
                   (window.fbAsyncInit = function () {
                     if ('undefined' != typeof FB)
                       try {
-                        FB.XFBML.parse()
+                        FB.XFBML.parse();
                       } catch (t) {}
-                  }))
-              })
+                  }));
+              });
             </script>
           </div>
         </div>
@@ -803,10 +803,10 @@
               ios: '<svg viewBox="0 0 24 24"><path fill="#d1d5db" d="M16 12c2-1 3-3 3-5-2 0-4 1-5 3-1-2-3-3-5-3 0 2 1 4 3 5-2 1-3 3-3 5 2 0 4-1 5-3 1 2 3 3 5 3 0-2-1-4-3-5z"/></svg>',
             }[e] ||
             '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>'
-          )
+          );
         }
         function detect() {
-          var e = navigator.userAgent || ''
+          var e = navigator.userAgent || '';
           let t = 'Browser tidak dikenal',
             a = 'chrome',
             i =
@@ -823,8 +823,8 @@
                         : /MSIE|Trident/.test(e) &&
                           ((t = 'Internet Explorer'), (a = 'edge')),
               'OS tidak dikenal'),
-            n = 'linux'
-          ;/Windows/.test(e)
+            n = 'linux';
+          /Windows/.test(e)
             ? ((i = 'Windows'), (n = 'windows'))
             : /Macintosh|Mac OS X/.test(e)
               ? ((i = 'macOS'), (n = 'mac'))
@@ -832,7 +832,7 @@
                 ? ((i = 'Linux'), (n = 'linux'))
                 : /Android/.test(e)
                   ? ((i = 'Android'), (n = 'android'))
-                  : /iPhone|iPad|iPod/.test(e) && ((i = 'iOS'), (n = 'ios'))
+                  : /iPhone|iPad|iPod/.test(e) && ((i = 'iOS'), (n = 'ios'));
           var l =
               e.match(/(Edg|OPR|Chrome|Firefox)\/([\d\.]+)/) ||
               e.match(/Version\/([\d\.]+).*Safari/),
@@ -840,62 +840,62 @@
               e.match(/Windows NT [\d\.]+/) ||
               e.match(/Mac OS X [\d_]+/) ||
               e.match(/Android [\d\.]+/) ||
-              e.match(/CPU (?:iPhone )?OS [\d_]+/)
-          ;((document.getElementById('ico-browser').innerHTML = svg(a)),
+              e.match(/CPU (?:iPhone )?OS [\d_]+/);
+          ((document.getElementById('ico-browser').innerHTML = svg(a)),
             (document.getElementById('ico-os').innerHTML = svg(n)),
             (document.getElementById('browser-name').textContent =
               t + (l ? ` (${(l[2] || l[0]).replace('Version/', '')})` : '')),
             (document.getElementById('os-name').textContent =
-              i + (e ? ` (${e[0].replaceAll('_', '.')})` : '')))
+              i + (e ? ` (${e[0].replaceAll('_', '.')})` : '')));
         }
-        ;((document.getElementById('y').textContent = new Date().getFullYear()),
+        ((document.getElementById('y').textContent = new Date().getFullYear()),
           document.querySelectorAll('pre code').forEach((e) => {
             let t = e.parentElement.nextElementSibling?.classList.contains(
               'copy-btn',
             )
               ? e.parentElement.nextElementSibling
-              : null
+              : null;
             t &&
               t.addEventListener('click', async () => {
                 try {
-                  ;(await navigator.clipboard.writeText(e.textContent),
+                  (await navigator.clipboard.writeText(e.textContent),
                     (t.textContent = 'Tersalin ✓'),
-                    setTimeout(() => (t.textContent = 'Salin kode'), 1500))
+                    setTimeout(() => (t.textContent = 'Salin kode'), 1500));
                 } catch (e) {
-                  t.textContent = 'Gagal menyalin'
+                  t.textContent = 'Gagal menyalin';
                 }
-              })
+              });
           }),
           (() => {
             var e,
-              t = document.getElementById('share-links')
+              t = document.getElementById('share-links');
             navigator.share &&
               (((e = document.createElement('a')).href = '#'),
               (e.innerHTML = '<span>🔗</span><span>Bagikan Cepat</span>'),
               e.addEventListener('click', (e) => {
-                ;(e.preventDefault(),
+                (e.preventDefault(),
                   navigator
                     .share({
                       title: document.title,
                       text: 'Ringkas tapi lengkap: panduan merapikan saf shalat.',
                       url: location.href,
                     })
-                    .catch(() => {}))
+                    .catch(() => {}));
               }),
-              t.appendChild(e))
+              t.appendChild(e));
           })(),
           detect(),
           (async () => {
-            var e = document.getElementById('ip-loc')
+            var e = document.getElementById('ip-loc');
             try {
               var t = await (await fetch('https://ipapi.co/json/')).json(),
-                a = `https://flagsapi.com/${t.country_code || 'ID'}/flat/24.png`
-              e.innerHTML = `${t.ip || '-'} • ${t.city || '-'}, ${t.region || ''} ${t.country_name || ''} <img src="${a}" alt="${t.country_code || 'flag'}" style="vertical-align:-4px;margin-left:8px">`
+                a = `https://flagsapi.com/${t.country_code || 'ID'}/flat/24.png`;
+              e.innerHTML = `${t.ip || '-'} • ${t.city || '-'}, ${t.region || ''} ${t.country_name || ''} <img src="${a}" alt="${t.country_code || 'flag'}" style="vertical-align:-4px;margin-left:8px">`;
             } catch (t) {
-              e.textContent = 'Tidak dapat mengambil IP/lokasi.'
+              e.textContent = 'Tidak dapat mengambil IP/lokasi.';
             }
-          })())
-      })
+          })());
+      });
     </script>
 
     });

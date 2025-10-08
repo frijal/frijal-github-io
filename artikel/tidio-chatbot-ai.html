@@ -442,90 +442,90 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- GALERI & LIGHTBOX ---
-          const gallery = document.getElementById('photoGallery')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
+          const gallery = document.getElementById('photoGallery');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
           const galleryImages = Array.from(
             { length: 6 },
             (_, i) => `https://picsum.photos/id/${120 + i}/800/600`,
-          )
-          let currentIndex
+          );
+          let currentIndex;
 
           galleryImages.forEach((src) => {
-            const img = document.createElement('img')
-            img.setAttribute('data-src', src)
-            img.alt = `Contoh antarmuka Tidio Chatbot`
-            img.loading = 'lazy'
-            img.className = 'lazy-load'
-            gallery.appendChild(img)
-          })
+            const img = document.createElement('img');
+            img.setAttribute('data-src', src);
+            img.alt = `Contoh antarmuka Tidio Chatbot`;
+            img.loading = 'lazy';
+            img.className = 'lazy-load';
+            gallery.appendChild(img);
+          });
 
           const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                const img = entry.target
-                img.src = img.dataset.src
-                img.classList.remove('lazy-load')
-                obs.unobserve(img)
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy-load');
+                obs.unobserve(img);
               }
-            })
-          })
+            });
+          });
           document
             .querySelectorAll('img.lazy-load')
-            .forEach((img) => observer.observe(img))
+            .forEach((img) => observer.observe(img));
 
           const updateLightboxImage = (index) => {
-            const images = Array.from(gallery.children)
-            if (index < 0) index = images.length - 1
-            if (index >= images.length) index = 0
-            currentIndex = index
-            lightboxImg.src = images[currentIndex].src
-          }
+            const images = Array.from(gallery.children);
+            if (index < 0) index = images.length - 1;
+            if (index >= images.length) index = 0;
+            currentIndex = index;
+            lightboxImg.src = images[currentIndex].src;
+          };
 
           gallery.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
-              currentIndex = Array.from(gallery.children).indexOf(e.target)
-              updateLightboxImage(currentIndex)
-              lightbox.style.display = 'flex'
+              currentIndex = Array.from(gallery.children).indexOf(e.target);
+              updateLightboxImage(currentIndex);
+              lightbox.style.display = 'flex';
             }
-          })
+          });
 
           document.querySelector('.lightbox-close').onclick = () =>
-            (lightbox.style.display = 'none')
+            (lightbox.style.display = 'none');
           document.querySelector('.lightbox-prev').onclick = () =>
-            updateLightboxImage(currentIndex - 1)
+            updateLightboxImage(currentIndex - 1);
           document.querySelector('.lightbox-next').onclick = () =>
-            updateLightboxImage(currentIndex + 1)
+            updateLightboxImage(currentIndex + 1);
           lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none'
-          }
+            if (e.target === lightbox) lightbox.style.display = 'none';
+          };
           document.onkeydown = (e) => {
             if (lightbox.style.display === 'flex') {
-              if (e.key === 'ArrowLeft') updateLightboxImage(currentIndex - 1)
-              if (e.key === 'ArrowRight') updateLightboxImage(currentIndex + 1)
-              if (e.key === 'Escape') lightbox.style.display = 'none'
+              if (e.key === 'ArrowLeft') updateLightboxImage(currentIndex - 1);
+              if (e.key === 'ArrowRight') updateLightboxImage(currentIndex + 1);
+              if (e.key === 'Escape') lightbox.style.display = 'none';
             }
-          }
+          };
           // --- SOCIAL SHARING ---
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
           const shareLinks = {
             shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
             shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
             shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
-          }
+          };
           for (const id in shareLinks) {
-            const link = document.getElementById(id)
+            const link = document.getElementById(id);
             if (link) {
-              link.href = shareLinks[id]
+              link.href = shareLinks[id];
               link.addEventListener('click', function (e) {
-                e.preventDefault()
-                window.open(this.href, 'share-window', 'height=450,width=550')
-              })
+                e.preventDefault();
+                window.open(this.href, 'share-window', 'height=450,width=550');
+              });
             }
           }
-        })
-      })
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

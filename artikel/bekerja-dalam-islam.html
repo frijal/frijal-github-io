@@ -376,48 +376,48 @@ console.log(bekerjaHalal());
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode(btn) {
-          const code = btn.nextElementSibling.innerText
-          navigator.clipboard.writeText(code)
-          btn.textContent = 'Copied!'
-          setTimeout(() => (btn.textContent = 'Copy'), 2000)
+          const code = btn.nextElementSibling.innerText;
+          navigator.clipboard.writeText(code);
+          btn.textContent = 'Copied!';
+          setTimeout(() => (btn.textContent = 'Copy'), 2000);
         }
         // FB Comments fix
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {}
           }
-        }
+        };
         // Deteksi browser & OS
         function detectSystem() {
-          let ua = navigator.userAgent
+          let ua = navigator.userAgent;
           let browser = 'Unknown Browser',
-            os = 'Unknown OS'
-          if (ua.indexOf('Firefox') > -1) browser = 'Firefox'
-          else if (ua.indexOf('Chrome') > -1) browser = 'Chrome'
-          else if (ua.indexOf('Safari') > -1) browser = 'Safari'
-          if (ua.indexOf('Win') > -1) os = 'Windows'
-          else if (ua.indexOf('Linux') > -1) os = 'Linux'
-          else if (ua.indexOf('Mac') > -1) os = 'MacOS'
-          document.getElementById('browser').textContent = browser
-          document.getElementById('os').textContent = os
+            os = 'Unknown OS';
+          if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+          else if (ua.indexOf('Chrome') > -1) browser = 'Chrome';
+          else if (ua.indexOf('Safari') > -1) browser = 'Safari';
+          if (ua.indexOf('Win') > -1) os = 'Windows';
+          else if (ua.indexOf('Linux') > -1) os = 'Linux';
+          else if (ua.indexOf('Mac') > -1) os = 'MacOS';
+          document.getElementById('browser').textContent = browser;
+          document.getElementById('os').textContent = os;
         }
-        detectSystem()
+        detectSystem();
         // IP & Flag
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
-            document.getElementById('ip').textContent = data.ip
+            document.getElementById('ip').textContent = data.ip;
             document.getElementById('flag').innerHTML =
-              `<img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`
-          })
-      })
+              `<img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`;
+          });
+      });
     </script>
 
     <!-- JSON-LD -->

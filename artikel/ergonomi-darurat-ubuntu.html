@@ -356,25 +356,21 @@
         </div>
       </section>
 
-      
-
       <script>
         document.addEventListener(DOMContentLoaded, () => {
           // Tombol Share
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
 
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-wa').href =
-            `https://wa.me/?text=${pageTitle}%20${pageUrl}`
+            `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-tg').href =
-            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
-
-          
-        })
+            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+        });
       </script>
 
       <!-- Share -->

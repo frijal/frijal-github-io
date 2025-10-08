@@ -427,47 +427,47 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Skrip untuk mendeteksi OS, Browser, Lokasi IP, dan Share Button
         document.addEventListener('DOMContentLoaded', () => {
-          const osInfo = document.getElementById('os-info')
-          const browserInfo = document.getElementById('browser-info')
-          const ipInfo = document.getElementById('ip-info')
-          const userAgent = navigator.userAgent
-          const currentUrl = encodeURIComponent(window.location.href)
-          const currentTitle = encodeURIComponent(document.title)
+          const osInfo = document.getElementById('os-info');
+          const browserInfo = document.getElementById('browser-info');
+          const ipInfo = document.getElementById('ip-info');
+          const userAgent = navigator.userAgent;
+          const currentUrl = encodeURIComponent(window.location.href);
+          const currentTitle = encodeURIComponent(document.title);
 
           // 1. OS Detection
           if (userAgent.includes('Win')) {
-            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Windows'
+            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Windows';
           } else if (userAgent.includes('Mac')) {
-            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: macOS'
+            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: macOS';
           } else if (userAgent.includes('Linux')) {
-            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Linux'
+            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Linux';
           } else if (userAgent.includes('Android')) {
-            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Android'
+            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Android';
           } else {
-            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Lainnya'
+            osInfo.innerHTML = '<strong>Sistem Operasi</strong>: Lainnya';
           }
 
           // 2. Browser Detection
           if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) {
-            browserInfo.innerHTML = '<strong>Browser</strong>: Chrome'
+            browserInfo.innerHTML = '<strong>Browser</strong>: Chrome';
           } else if (userAgent.includes('Firefox')) {
-            browserInfo.innerHTML = '<strong>Browser</strong>: Firefox'
+            browserInfo.innerHTML = '<strong>Browser</strong>: Firefox';
           } else if (
             userAgent.includes('Safari') &&
             !userAgent.includes('Chrome')
           ) {
-            browserInfo.innerHTML = '<strong>Browser</strong>: Safari'
+            browserInfo.innerHTML = '<strong>Browser</strong>: Safari';
           } else if (userAgent.includes('Edg')) {
-            browserInfo.innerHTML = '<strong>Browser</strong>: Edge'
+            browserInfo.innerHTML = '<strong>Browser</strong>: Edge';
           } else {
-            browserInfo.innerHTML = '<strong>Browser</strong>: Lainnya'
+            browserInfo.innerHTML = '<strong>Browser</strong>: Lainnya';
           }
 
           // 3. IP and Location Info
           fetch('https://api.ipify.org?format=json')
             .then((res) => res.json())
             .then((data) => {
-              let ip = data.ip
+              let ip = data.ip;
               fetch(`https://ipapi.co/${ip}/json/`)
                 .then((res) => res.json())
                 .then((ipData) => {
@@ -476,67 +476,68 @@
                     ipData.country_name &&
                     ipData.country_code
                   ) {
-                    let countryCode = ipData.country_code.toLowerCase()
-                    ipInfo.innerHTML = `<strong>Lokasi IP</strong>: ${ipData.city}, ${ipData.country_name} <img src="https://flagcdn.com/16x12/${countryCode}.png" alt="${ipData.country_name} flag" class="inline-block ml-1">`
+                    let countryCode = ipData.country_code.toLowerCase();
+                    ipInfo.innerHTML = `<strong>Lokasi IP</strong>: ${ipData.city}, ${ipData.country_name} <img src="https://flagcdn.com/16x12/${countryCode}.png" alt="${ipData.country_name} flag" class="inline-block ml-1">`;
                   } else {
-                    ipInfo.innerHTML = `<strong>Lokasi IP</strong>: Alamat IP Anda adalah ${ip}`
+                    ipInfo.innerHTML = `<strong>Lokasi IP</strong>: Alamat IP Anda adalah ${ip}`;
                   }
                 })
                 .catch((e) => {
-                  console.error('Error fetching IP details:', e)
+                  console.error('Error fetching IP details:', e);
                   ipInfo.innerHTML =
-                    '<strong>Lokasi IP</strong>: Gagal mendapatkan info lokasi.'
-                })
+                    '<strong>Lokasi IP</strong>: Gagal mendapatkan info lokasi.';
+                });
             })
             .catch((e) => {
-              console.error('Error fetching IP:', e)
-              ipInfo.innerHTML = '<strong>Lokasi IP</strong>: Gagal mendeteksi.'
-            })
+              console.error('Error fetching IP:', e);
+              ipInfo.innerHTML =
+                '<strong>Lokasi IP</strong>: Gagal mendeteksi.';
+            });
 
           // 4. Social Share Links (Menggunakan currentUrl dan currentTitle)
           document.getElementById('share-facebook').href =
-            'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl
+            'https://www.facebook.com/sharer/sharer.php?u=' + currentUrl;
           document.getElementById('share-twitter').href =
             `https://twitter.com/intent/tweet?url=${currentUrl}&text=` +
-            currentTitle
+            currentTitle;
           document.getElementById('share-linkedin').href =
             `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=` +
-            currentTitle
+            currentTitle;
 
           // 5. Lazy Loading (Menggunakan IntersectionObserver untuk fallback/dukungan luas)
-          const lazyImages = document.querySelectorAll('img[loading="lazy"]')
+          const lazyImages = document.querySelectorAll('img[loading="lazy"]');
           let observer = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                const img = entry.target
+                const img = entry.target;
                 if (img.dataset.src) {
                   // Cek jika masih menggunakan data-src
-                  img.src = img.dataset.src
-                  img.removeAttribute('data-src')
+                  img.src = img.dataset.src;
+                  img.removeAttribute('data-src');
                 }
-                observer.unobserve(img)
+                observer.unobserve(img);
               }
-            })
-          })
+            });
+          });
 
           lazyImages.forEach((img) => {
             // Jika browser mendukung native lazy load, IntersectionObserver tidak perlu berjalan (namun ini adalah skrip fallback)
-            observer.observe(img)
-          })
-        })
+            observer.observe(img);
+          });
+        });
 
         // Facebook SDK loader (Menggunakan cara standar)
-        ;((d, s, id) => {
+        ((d, s, id) => {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     });

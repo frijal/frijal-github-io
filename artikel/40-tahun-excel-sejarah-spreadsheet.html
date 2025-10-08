@@ -457,75 +457,75 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- Lightbox ---
-          const galleryImage = document.querySelector('.gallery-item img')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightbox-img')
-          const closeBtn = document.querySelector('.close')
+          const galleryImage = document.querySelector('.gallery-item img');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const closeBtn = document.querySelector('.close');
 
           galleryImage.addEventListener('click', () => {
-            lightboxImg.src = galleryImage.src
-            lightbox.style.display = 'flex'
-          })
+            lightboxImg.src = galleryImage.src;
+            lightbox.style.display = 'flex';
+          });
 
-          const closeLightbox = () => (lightbox.style.display = 'none')
-          closeBtn.addEventListener('click', closeLightbox)
+          const closeLightbox = () => (lightbox.style.display = 'none');
+          closeBtn.addEventListener('click', closeLightbox);
           lightbox.addEventListener(
             'click',
             (e) => e.target === lightbox && closeLightbox(),
-          )
+          );
 
           // --- Social Sharing ---
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
 
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-tw').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-wa').href =
-            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
           document.getElementById('share-li').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
 
           // --- User Info ---
-          const userAgent = window.navigator.userAgent
+          const userAgent = window.navigator.userAgent;
 
           // OS
-          let os = 'Tidak Diketahui'
-          if (/Windows/.test(userAgent)) os = 'Windows'
-          if (/Macintosh/.test(userAgent)) os = 'macOS'
-          if (/Linux/.test(userAgent)) os = 'Linux'
-          if (/Android/.test(userAgent)) os = 'Android'
-          if (/iPhone|iPad|iPod/.test(userAgent)) os = 'iOS'
+          let os = 'Tidak Diketahui';
+          if (/Windows/.test(userAgent)) os = 'Windows';
+          if (/Macintosh/.test(userAgent)) os = 'macOS';
+          if (/Linux/.test(userAgent)) os = 'Linux';
+          if (/Android/.test(userAgent)) os = 'Android';
+          if (/iPhone|iPad|iPod/.test(userAgent)) os = 'iOS';
           document.getElementById('os-info').innerHTML =
-            `<i class="fas fa-laptop"></i> Sistem Operasi: ${os}`
+            `<i class="fas fa-laptop"></i> Sistem Operasi: ${os}`;
 
           // Browser
-          let browser = 'Tidak Diketahui'
-          if (/Firefox/.test(userAgent)) browser = 'Mozilla Firefox'
-          else if (/OPR|Opera/.test(userAgent)) browser = 'Opera'
-          else if (/Edg/.test(userAgent)) browser = 'Microsoft Edge'
+          let browser = 'Tidak Diketahui';
+          if (/Firefox/.test(userAgent)) browser = 'Mozilla Firefox';
+          else if (/OPR|Opera/.test(userAgent)) browser = 'Opera';
+          else if (/Edg/.test(userAgent)) browser = 'Microsoft Edge';
           else if (/Chrome/.test(userAgent) && !/Edg/.test(userAgent))
-            browser = 'Google Chrome'
+            browser = 'Google Chrome';
           else if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent))
-            browser = 'Apple Safari'
+            browser = 'Apple Safari';
           document.getElementById('browser-info').innerHTML =
-            `<i class="fas fa-globe"></i> Browser: ${browser}`
+            `<i class="fas fa-globe"></i> Browser: ${browser}`;
 
           // IP Info
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
             .then((data) => {
-              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`
+              const flag = `https://flagcdn.com/w20/${data.country_code.toLowerCase()}.png`;
               document.getElementById('ip-info').innerHTML =
-                `<i class="fas fa-map-marker-alt"></i> Alamat IP: ${data.ip} <img src="${flag}" alt="${data.country_name}">`
+                `<i class="fas fa-map-marker-alt"></i> Alamat IP: ${data.ip} <img src="${flag}" alt="${data.country_name}">`;
             })
             .catch(() => {
               document.getElementById('ip-info').innerHTML =
-                `<i class="fas fa-exclamation-triangle"></i> Alamat IP: Gagal memuat.`
-            })
-        })
-      })
+                `<i class="fas fa-exclamation-triangle"></i> Alamat IP: Gagal memuat.`;
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

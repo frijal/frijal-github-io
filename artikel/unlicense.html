@@ -642,133 +642,133 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Tahun dinamis
-        document.getElementById('year').textContent = new Date().getFullYear()
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         // Lightbox gallery
-        ;(function () {
-          const gallery = document.getElementById('gallery')
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          const lbClose = document.getElementById('lbClose')
-          const lbPrev = document.getElementById('lbPrev')
-          const lbNext = document.getElementById('lbNext')
+        (function () {
+          const gallery = document.getElementById('gallery');
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          const lbClose = document.getElementById('lbClose');
+          const lbPrev = document.getElementById('lbPrev');
+          const lbNext = document.getElementById('lbNext');
 
-          let images = []
-          let idx = 0
+          let images = [];
+          let idx = 0;
 
           function open(i) {
-            idx = i
-            lbImg.src = images[idx].dataset.full || images[idx].src
-            lb.classList.add('active')
-            lb.setAttribute('aria-hidden', 'false')
+            idx = i;
+            lbImg.src = images[idx].dataset.full || images[idx].src;
+            lb.classList.add('active');
+            lb.setAttribute('aria-hidden', 'false');
           }
           function close() {
-            lb.classList.remove('active')
-            lb.setAttribute('aria-hidden', 'true')
-            lbImg.src = ''
+            lb.classList.remove('active');
+            lb.setAttribute('aria-hidden', 'true');
+            lbImg.src = '';
           }
           function prev() {
-            open((idx - 1 + images.length) % images.length)
+            open((idx - 1 + images.length) % images.length);
           }
           function next() {
-            open((idx + 1) % images.length)
+            open((idx + 1) % images.length);
           }
 
           function init() {
-            images = Array.from(gallery.querySelectorAll('img'))
+            images = Array.from(gallery.querySelectorAll('img'));
             images.forEach((img, i) => {
-              img.addEventListener('click', () => open(i))
-            })
-            lbClose.addEventListener('click', close)
-            lbPrev.addEventListener('click', prev)
-            lbNext.addEventListener('click', next)
+              img.addEventListener('click', () => open(i));
+            });
+            lbClose.addEventListener('click', close);
+            lbPrev.addEventListener('click', prev);
+            lbNext.addEventListener('click', next);
             lb.addEventListener('click', (e) => {
-              if (e.target === lb) close()
-            })
+              if (e.target === lb) close();
+            });
             document.addEventListener('keydown', (e) => {
-              if (!lb.classList.contains('active')) return
-              if (e.key === 'Escape') close()
-              if (e.key === 'ArrowLeft') prev()
-              if (e.key === 'ArrowRight') next()
-            })
+              if (!lb.classList.contains('active')) return;
+              if (e.key === 'Escape') close();
+              if (e.key === 'ArrowLeft') prev();
+              if (e.key === 'ArrowRight') next();
+            });
           }
-          init()
-        })()
+          init();
+        })();
 
         // Share links
-        ;(function () {
+        (function () {
           const url = encodeURIComponent(
             document.querySelector('link[rel=canonical]')?.href ||
               location.href,
-          )
-          const title = encodeURIComponent(document.title)
+          );
+          const title = encodeURIComponent(document.title);
 
-          const x = document.getElementById('share-x')
-          const fb = document.getElementById('share-fb')
-          const li = document.getElementById('share-li')
-          const wa = document.getElementById('share-wa')
+          const x = document.getElementById('share-x');
+          const fb = document.getElementById('share-fb');
+          const li = document.getElementById('share-li');
+          const wa = document.getElementById('share-wa');
 
-          x.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
-          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-          li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
-          wa.href = `https://wa.me/?text=${title}%20${url}`
-        })()
+          x.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+          wa.href = `https://wa.me/?text=${title}%20${url}`;
+        })();
 
         // Deteksi browser dan OS (sederhana)
-        ;(function () {
-          const ua = navigator.userAgent.toLowerCase()
-          let browser = 'Lainnya'
-          if (ua.includes('edg/')) browser = 'Microsoft Edge 🟦'
+        (function () {
+          const ua = navigator.userAgent.toLowerCase();
+          let browser = 'Lainnya';
+          if (ua.includes('edg/')) browser = 'Microsoft Edge 🟦';
           else if (ua.includes('chrome') && !ua.includes('edg/'))
-            browser = 'Google Chrome 🔵'
-          else if (ua.includes('firefox')) browser = 'Mozilla Firefox 🟠'
+            browser = 'Google Chrome 🔵';
+          else if (ua.includes('firefox')) browser = 'Mozilla Firefox 🟠';
           else if (ua.includes('safari') && !ua.includes('chrome'))
-            browser = 'Safari ⚪'
+            browser = 'Safari ⚪';
           else if (ua.includes('opera') || ua.includes('opr/'))
-            browser = 'Opera 🔴'
+            browser = 'Opera 🔴';
 
-          let os = 'Lainnya'
-          if (ua.includes('windows')) os = 'Windows 🪟'
+          let os = 'Lainnya';
+          if (ua.includes('windows')) os = 'Windows 🪟';
           else if (ua.includes('mac os') || ua.includes('macintosh'))
-            os = 'macOS 🍎'
-          else if (ua.includes('linux')) os = 'Linux 🐧'
-          else if (ua.includes('android')) os = 'Android 🤖'
-          else if (ua.includes('iphone') || ua.includes('ipad')) os = 'iOS 📱'
+            os = 'macOS 🍎';
+          else if (ua.includes('linux')) os = 'Linux 🐧';
+          else if (ua.includes('android')) os = 'Android 🤖';
+          else if (ua.includes('iphone') || ua.includes('ipad')) os = 'iOS 📱';
 
           document.getElementById('det-browser').textContent =
-            `🧭 Browser: ${browser}`
-          document.getElementById('det-os').textContent = `💻 OS: ${os}`
-        })()
+            `🧭 Browser: ${browser}`;
+          document.getElementById('det-os').textContent = `💻 OS: ${os}`;
+        })();
 
         // Bendera negara berdasarkan IP kota (menggunakan layanan publik; fallback bila gagal)
-        ;(function () {
-          const el = document.getElementById('det-geo')
+        (function () {
+          const el = document.getElementById('det-geo');
 
           function flagEmoji(countryCode) {
             // Convert country code (e.g., "ID") to flag emoji
-            if (!countryCode || countryCode.length !== 2) return '🏳️'
-            const cc = countryCode.toUpperCase()
+            if (!countryCode || countryCode.length !== 2) return '🏳️';
+            const cc = countryCode.toUpperCase();
             const codePoints = [
               cc.charCodeAt(0) - 65 + 0x1f1e6,
               cc.charCodeAt(1) - 65 + 0x1f1e6,
-            ]
-            return String.fromCodePoint(...codePoints)
+            ];
+            return String.fromCodePoint(...codePoints);
           }
 
           fetch('https://ipapi.co/json/')
             .then((r) => r.json())
             .then((d) => {
-              const city = d.city || 'Kota tidak diketahui'
-              const country = d.country_name || 'Negara tidak diketahui'
-              const flag = flagEmoji(d.country_code)
-              el.textContent = `🚩 Lokasi: ${city}, ${country} ${flag}`
+              const city = d.city || 'Kota tidak diketahui';
+              const country = d.country_name || 'Negara tidak diketahui';
+              const flag = flagEmoji(d.country_code);
+              el.textContent = `🚩 Lokasi: ${city}, ${country} ${flag}`;
             })
             .catch(() => {
               // Fallback lokal Indonesia
-              el.textContent = `🚩 Lokasi: Balikpapan, Indonesia 🇮🇩`
-            })
-        })()
-      })
+              el.textContent = `🚩 Lokasi: Balikpapan, Indonesia 🇮🇩`;
+            });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

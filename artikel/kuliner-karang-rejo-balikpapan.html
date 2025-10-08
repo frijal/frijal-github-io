@@ -475,54 +475,54 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           // Rating System
-          const stars = document.querySelectorAll('.star')
-          const result = document.getElementById('rating-result')
+          const stars = document.querySelectorAll('.star');
+          const result = document.getElementById('rating-result');
           stars.forEach((star) => {
             star.addEventListener('click', () => {
-              stars.forEach((s) => s.classList.remove('selected'))
-              const val = star.dataset.value
+              stars.forEach((s) => s.classList.remove('selected'));
+              const val = star.dataset.value;
               for (let i = 0; i < val; i++) {
-                stars[i].classList.add('selected')
+                stars[i].classList.add('selected');
               }
-              result.textContent = `Anda memberi rating ${val} bintang. Terima kasih!`
-            })
-          })
+              result.textContent = `Anda memberi rating ${val} bintang. Terima kasih!`;
+            });
+          });
 
           // Lightbox for Gallery
-          const galleryImages = document.querySelectorAll('.gallery img')
-          const lightbox = document.getElementById('lightbox')
+          const galleryImages = document.querySelectorAll('.gallery img');
+          const lightbox = document.getElementById('lightbox');
           galleryImages.forEach((img) => {
             img.addEventListener('click', () => {
-              lightbox.classList.add('active')
-              const imgElement = document.createElement('img')
-              imgElement.src = img.src
-              imgElement.alt = img.alt
+              lightbox.classList.add('active');
+              const imgElement = document.createElement('img');
+              imgElement.src = img.src;
+              imgElement.alt = img.alt;
 
               while (lightbox.firstChild) {
-                lightbox.removeChild(lightbox.firstChild)
+                lightbox.removeChild(lightbox.firstChild);
               }
-              lightbox.appendChild(imgElement)
-            })
-          })
+              lightbox.appendChild(imgElement);
+            });
+          });
           lightbox.addEventListener('click', () => {
-            lightbox.classList.remove('active')
-          })
+            lightbox.classList.remove('active');
+          });
 
           // Facebook Comments
-          const currentUrl = window.location.href
-          document.getElementById('current-url').textContent = currentUrl
+          const currentUrl = window.location.href;
+          document.getElementById('current-url').textContent = currentUrl;
           document
             .getElementById('fb-comments')
-            .setAttribute('data-href', currentUrl)
+            .setAttribute('data-href', currentUrl);
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {}
             }
-          }
-        })
-      })
+          };
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

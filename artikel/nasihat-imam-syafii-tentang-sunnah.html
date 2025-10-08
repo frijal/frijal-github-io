@@ -353,8 +353,6 @@
 
         <hr />
 
-        
-
         <section class="social-share">
           <h3>Bagikan Pengingat Ini</h3>
           <div class="social-share-icons">
@@ -430,70 +428,70 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
-          const lightbox = document.getElementById('myLightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
-          const closeBtn = document.querySelector('.lightbox-close')
-          const galleryItems = document.querySelectorAll('.gallery-item')
-          let currentSlideIndex = 0
+          const lightbox = document.getElementById('myLightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          const closeBtn = document.querySelector('.lightbox-close');
+          const galleryItems = document.querySelectorAll('.gallery-item');
+          let currentSlideIndex = 0;
           galleryItems.forEach((item, index) => {
             item.addEventListener('click', () => {
-              lightbox.style.display = 'flex'
-              lightboxImg.src = item.dataset.src
-              currentSlideIndex = index
-              updateNavButtons()
-            })
-          })
+              lightbox.style.display = 'flex';
+              lightboxImg.src = item.dataset.src;
+              currentSlideIndex = index;
+              updateNavButtons();
+            });
+          });
           closeBtn.addEventListener('click', () => {
-            lightbox.style.display = 'none'
-          })
+            lightbox.style.display = 'none';
+          });
           window.changeSlide = (n) => {
-            currentSlideIndex += n
+            currentSlideIndex += n;
             if (currentSlideIndex >= galleryItems.length) {
-              currentSlideIndex = 0
+              currentSlideIndex = 0;
             }
             if (currentSlideIndex < 0) {
-              currentSlideIndex = galleryItems.length - 1
+              currentSlideIndex = galleryItems.length - 1;
             }
-            lightboxImg.src = galleryItems[currentSlideIndex].dataset.src
-          }
+            lightboxImg.src = galleryItems[currentSlideIndex].dataset.src;
+          };
           const updateNavButtons = () => {
-            const navVisible = galleryItems.length > 1 ? 'block' : 'none'
-            document.querySelector('.lightbox-prev').style.display = navVisible
-            document.querySelector('.lightbox-next').style.display = navVisible
-          }
-          updateNavButtons()
+            const navVisible = galleryItems.length > 1 ? 'block' : 'none';
+            document.querySelector('.lightbox-prev').style.display = navVisible;
+            document.querySelector('.lightbox-next').style.display = navVisible;
+          };
+          updateNavButtons();
 
           if ('IntersectionObserver' in window) {
             let lazyObserver = new IntersectionObserver((entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  let lazyImage = entry.target
-                  lazyImage.src = lazyImage.dataset.src
-                  lazyObserver.unobserve(lazyImage)
+                  let lazyImage = entry.target;
+                  lazyImage.src = lazyImage.dataset.src;
+                  lazyObserver.unobserve(lazyImage);
                 }
-              })
-            })
+              });
+            });
             document
               .querySelectorAll('img[loading="lazy"]')
-              .forEach((img) => lazyObserver.observe(img))
+              .forEach((img) => lazyObserver.observe(img));
           }
 
           const pageUrl = encodeURIComponent(
             'https://frijal.github.io/artikel/nasihat-imam-syafii-tentang-sunnah.html',
-          )
-          const pageTitle = encodeURIComponent(document.title)
+          );
+          const pageTitle = encodeURIComponent(document.title);
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-whatsapp').href =
-            `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`
+            `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`;
           document.getElementById('share-telegram').href =
-            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
+            `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
           document.getElementById('share-linkedin').href =
-            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
-        })
-      })
+            `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

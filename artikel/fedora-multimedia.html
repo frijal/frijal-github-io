@@ -338,69 +338,69 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Copy button
         function copyCode(btn) {
-          const code = btn.previousElementSibling.innerText
-          navigator.clipboard.writeText(code)
-          btn.innerText = 'Copied!'
-          setTimeout(() => (btn.innerText = 'Copy'), 2000)
+          const code = btn.previousElementSibling.innerText;
+          navigator.clipboard.writeText(code);
+          btn.innerText = 'Copied!';
+          setTimeout(() => (btn.innerText = 'Copy'), 2000);
         }
 
         // Facebook Comments current URL
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
 
         // Browser & OS detection
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Unknown',
           os = 'Unknown',
           bicon = '',
-          oicon = ''
+          oicon = '';
 
         if (/firefox/i.test(ua)) {
-          browser = 'Firefox'
-          bicon = '🔥'
+          browser = 'Firefox';
+          bicon = '🔥';
         } else if (/chrome|chromium/i.test(ua)) {
-          browser = 'Chrome'
-          bicon = '🌐'
+          browser = 'Chrome';
+          bicon = '🌐';
         } else if (/safari/i.test(ua)) {
-          browser = 'Safari'
-          bicon = '🧭'
+          browser = 'Safari';
+          bicon = '🧭';
         } else if (/edg/i.test(ua)) {
-          browser = 'Edge'
-          bicon = '📘'
+          browser = 'Edge';
+          bicon = '📘';
         }
 
         if (/linux/i.test(ua)) {
-          os = 'Linux'
-          oicon = '🐧'
+          os = 'Linux';
+          oicon = '🐧';
         } else if (/windows/i.test(ua)) {
-          os = 'Windows'
-          oicon = '🪟'
+          os = 'Windows';
+          oicon = '🪟';
         } else if (/mac/i.test(ua)) {
-          os = 'MacOS'
-          oicon = '🍎'
+          os = 'MacOS';
+          oicon = '🍎';
         }
 
-        document.getElementById('browser-info').textContent = browser
-        document.getElementById('os-info').textContent = os
-        document.getElementById('browser-icon').textContent = bicon
-        document.getElementById('os-icon').textContent = oicon
+        document.getElementById('browser-info').textContent = browser;
+        document.getElementById('os-info').textContent = os;
+        document.getElementById('browser-icon').textContent = bicon;
+        document.getElementById('os-icon').textContent = oicon;
 
         // IP + Country flag
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
-            document.getElementById('ip').textContent = data.ip
-            const flagUrl = `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`
+            document.getElementById('ip').textContent = data.ip;
+            const flagUrl = `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`;
             document.getElementById('flag').innerHTML =
-              `<img src="${flagUrl}" alt="${data.country_name}">`
+              `<img src="${flagUrl}" alt="${data.country_name}">`;
           })
           .catch(() => {
-            document.getElementById('ip').textContent = 'Tidak terdeteksi'
-          })
-      })
+            document.getElementById('ip').textContent = 'Tidak terdeteksi';
+          });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

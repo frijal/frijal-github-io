@@ -567,68 +567,68 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           // --- Lightbox Logic ---
-          const galleryImages = document.querySelectorAll('.gallery img')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightbox-img')
-          const prevBtn = document.getElementById('prev')
-          const nextBtn = document.getElementById('next')
-          let currentIndex = 0
+          const galleryImages = document.querySelectorAll('.gallery img');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const prevBtn = document.getElementById('prev');
+          const nextBtn = document.getElementById('next');
+          let currentIndex = 0;
 
           function showImage(index) {
-            currentIndex = index
-            lightboxImg.src = galleryImages[index].src
-            lightboxImg.alt = galleryImages[index].alt
-            lightbox.style.display = 'flex'
+            currentIndex = index;
+            lightboxImg.src = galleryImages[index].src;
+            lightboxImg.alt = galleryImages[index].alt;
+            lightbox.style.display = 'flex';
           }
 
           galleryImages.forEach((img, i) => {
-            img.addEventListener('click', () => showImage(i))
-          })
+            img.addEventListener('click', () => showImage(i));
+          });
 
           prevBtn.addEventListener('click', () => {
             const newIndex =
-              (currentIndex - 1 + galleryImages.length) % galleryImages.length
-            showImage(newIndex)
-          })
+              (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            showImage(newIndex);
+          });
 
           nextBtn.addEventListener('click', () => {
-            const newIndex = (currentIndex + 1) % galleryImages.length
-            showImage(newIndex)
-          })
+            const newIndex = (currentIndex + 1) % galleryImages.length;
+            showImage(newIndex);
+          });
 
           lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
-              lightbox.style.display = 'none'
+              lightbox.style.display = 'none';
             }
-          })
+          });
 
           document.addEventListener('keydown', (e) => {
             if (lightbox.style.display === 'flex') {
-              if (e.key === 'ArrowLeft') prevBtn.click()
-              if (e.key === 'ArrowRight') nextBtn.click()
-              if (e.key === 'Escape') lightbox.style.display = 'none'
+              if (e.key === 'ArrowLeft') prevBtn.click();
+              if (e.key === 'ArrowRight') nextBtn.click();
+              if (e.key === 'Escape') lightbox.style.display = 'none';
             }
-          })
+          });
 
           // --- Share Links Logic ---
-          const pageUrl = encodeURIComponent(location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(location.href);
+          const pageTitle = encodeURIComponent(document.title);
           const shareText = encodeURIComponent(
             'Cek artikel keren soal strategi branching Git ini, deh!',
-          )
+          );
 
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${shareText}`
+            `https://twitter.com/intent/tweet?url=${pageUrl}&text=${shareText}`;
           document.getElementById('share-fb').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+            `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           document.getElementById('share-ln').href =
-            `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`
+            `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
           document.getElementById('share-wa').href =
-            `https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}`
+            `https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}`;
           document.getElementById('share-tg').href =
-            `https://t.me/share/url?url=${pageUrl}&text=${shareText}`
-        })
-      })
+            `https://t.me/share/url?url=${pageUrl}&text=${shareText}`;
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

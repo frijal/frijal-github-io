@@ -230,9 +230,9 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Fungsi log
         function log(msg) {
-          const logBox = document.getElementById('log')
-          logBox.textContent += msg + '\n'
-          logBox.scrollTop = logBox.scrollHeight
+          const logBox = document.getElementById('log');
+          logBox.textContent += msg + '\n';
+          logBox.scrollTop = logBox.scrollHeight;
         }
 
         // Fungsi copy ke clipboard
@@ -242,11 +242,11 @@
             .then(() => {
               log(` ${text} 
     
-    ✅ kode logo sesuai format README.md sudah tersalin, silakan letakkan pada README.md pada github Anda, langsung di paste aja, ntar kembali lagi kesini, untuk copy logo lainnya...`)
+    ✅ kode logo sesuai format README.md sudah tersalin, silakan letakkan pada README.md pada github Anda, langsung di paste aja, ntar kembali lagi kesini, untuk copy logo lainnya...`);
             })
             .catch((e) => {
-              log(`❌ Failed to copy: ${text}`)
-            })
+              log(`❌ Failed to copy: ${text}`);
+            });
         }
 
         // Badge per kategori
@@ -379,35 +379,35 @@
               'https://img.shields.io/badge/Humor-Yes-yellow?style=for-the-badge',
               'https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge&animation=glow',
             ],
-        }
+        };
         // Generate badge grid
         for (const [category, urls] of Object.entries(badgeData)) {
-          const section = document.createElement('section')
+          const section = document.createElement('section');
 
-          const h2 = document.createElement('h2')
-          h2.textContent = category
-          section.appendChild(h2)
+          const h2 = document.createElement('h2');
+          h2.textContent = category;
+          section.appendChild(h2);
 
-          const container = document.createElement('div')
-          container.className = 'badge-container'
+          const container = document.createElement('div');
+          container.className = 'badge-container';
 
           urls.forEach((url) => {
-            const box = document.createElement('div')
-            box.className = 'badge-box'
+            const box = document.createElement('div');
+            box.className = 'badge-box';
 
-            const img = document.createElement('img')
-            img.src = url
-            img.alt = category
-            img.onclick = () => copyToClipboard(`![${category}](${url})`)
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = category;
+            img.onclick = () => copyToClipboard(`![${category}](${url})`);
 
-            box.appendChild(img)
-            container.appendChild(box)
-          })
+            box.appendChild(img);
+            container.appendChild(box);
+          });
 
-          section.appendChild(container)
-          document.body.appendChild(section)
+          section.appendChild(container);
+          document.body.appendChild(section);
         }
-      })
+      });
     </script>
 
     });

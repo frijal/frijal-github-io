@@ -449,8 +449,8 @@ fi</code></pre>
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              let currentUrl = window.location.href
-              ;((document.getElementById('current-url').textContent =
+              let currentUrl = window.location.href;
+              ((document.getElementById('current-url').textContent =
                 currentUrl),
                 document
                   .getElementById('fb-comments')
@@ -458,10 +458,10 @@ fi</code></pre>
                 (window.fbAsyncInit = function () {
                   if ('undefined' != typeof FB)
                     try {
-                      FB.XFBML.parse()
+                      FB.XFBML.parse();
                     } catch (t) {}
-                }))
-            })
+                }));
+            });
           </script>
         </div>
       </section>
@@ -477,28 +477,27 @@ fi</code></pre>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode(t) {
-          var e = t.parentElement.querySelector('code')
+          var e = t.parentElement.querySelector('code');
           e &&
             navigator.clipboard
               .writeText(e.innerText)
               .then(() => {
-                let e = t.textContent
-                ;((t.textContent = 'Copied!'),
-                  setTimeout(() => (t.textContent = e), 1400))
+                let e = t.textContent;
+                ((t.textContent = 'Copied!'),
+                  setTimeout(() => (t.textContent = e), 1400));
               })
               .catch(() => {
-                alert('Copy failed — please copy manually.')
-              })
+                alert('Copy failed — please copy manually.');
+              });
         }
-        let darkToggle = document.getElementById('darkToggle')
+        let darkToggle = document.getElementById('darkToggle');
         darkToggle.addEventListener('click', () => {
-          document.body.classList.toggle('dark')
-          var e = document.body.classList.contains('dark')
-          darkToggle.textContent = e ? '☀️ Light Mode' : '🌙 Dark Mode'
-        })
-      })
+          document.body.classList.toggle('dark');
+          var e = document.body.classList.contains('dark');
+          darkToggle.textContent = e ? '☀️ Light Mode' : '🌙 Dark Mode';
+        });
+      });
     </script>
-
 
     });
     <div id="kategori-aktif"></div>

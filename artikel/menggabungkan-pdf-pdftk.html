@@ -343,19 +343,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
     </main>
@@ -368,48 +368,50 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode(btn) {
-          const code = btn.parentElement.querySelector('code').innerText
+          const code = btn.parentElement.querySelector('code').innerText;
           navigator.clipboard.writeText(code).then(() => {
-            btn.textContent = 'Tersalin!'
-            setTimeout(() => (btn.textContent = 'Copy'), 1500)
-          })
+            btn.textContent = 'Tersalin!';
+            setTimeout(() => (btn.textContent = 'Copy'), 1500);
+          });
         }
         function share(platform) {
-          const url = encodeURIComponent(window.location.href)
-          const text = encodeURIComponent('Cara menggabungkan PDF dengan PDFtk')
-          let shareUrl = ''
+          const url = encodeURIComponent(window.location.href);
+          const text = encodeURIComponent(
+            'Cara menggabungkan PDF dengan PDFtk',
+          );
+          let shareUrl = '';
           if (platform === 'facebook')
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           if (platform === 'twitter')
-            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
           if (platform === 'whatsapp')
-            shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`
+            shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
           if (platform === 'telegram')
-            shareUrl = `https://t.me/share/url?url=${url}&text=${text}`
-          if (shareUrl) window.open(shareUrl, '_blank', 'noopener')
+            shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+          if (shareUrl) window.open(shareUrl, '_blank', 'noopener');
         }
         // Browser & OS detect
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Browser tidak diketahui',
-          os = 'OS tidak diketahui'
-        if (/firefox/i.test(ua)) browser = 'Mozilla Firefox'
-        else if (/chrome|chromium/i.test(ua)) browser = 'Google Chrome'
-        else if (/edg/i.test(ua)) browser = 'Microsoft Edge'
-        else if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = 'Safari'
-        if (/linux/i.test(ua)) os = 'Linux'
-        else if (/win/i.test(ua)) os = 'Windows'
-        else if (/mac/i.test(ua)) os = 'macOS'
+          os = 'OS tidak diketahui';
+        if (/firefox/i.test(ua)) browser = 'Mozilla Firefox';
+        else if (/chrome|chromium/i.test(ua)) browser = 'Google Chrome';
+        else if (/edg/i.test(ua)) browser = 'Microsoft Edge';
+        else if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = 'Safari';
+        if (/linux/i.test(ua)) os = 'Linux';
+        else if (/win/i.test(ua)) os = 'Windows';
+        else if (/mac/i.test(ua)) os = 'macOS';
         document.getElementById('client-info').textContent =
-          `${browser} • ${os}`
+          `${browser} • ${os}`;
         // IP & Flag
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((d) => {
-            const flag = `https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png`
+            const flag = `https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png`;
             document.getElementById('ip-flag').innerHTML =
-              `IP: ${d.ip} • Negara: ${d.country_name} <img src="${flag}" alt="flag" style="vertical-align:middle;margin-left:6px"/>`
-          })
-      })
+              `IP: ${d.ip} • Negara: ${d.country_name} <img src="${flag}" alt="flag" style="vertical-align:middle;margin-left:6px"/>`;
+          });
+      });
     </script>
 
     <style>

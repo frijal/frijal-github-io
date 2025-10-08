@@ -466,7 +466,6 @@
             stroke-linecap="round"
           />
         </svg>
-        
       </div>
     </div>
     <main>
@@ -742,8 +741,8 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;((() => {
-          var e = navigator.userAgent.toLowerCase()
+        ((() => {
+          var e = navigator.userAgent.toLowerCase();
           let t = 'Tidak diketahui',
             n =
               (e.includes('edg')
@@ -756,8 +755,8 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
                       ? (t = 'Mozilla Firefox')
                       : (e.includes('opera') || e.includes('opr')) &&
                         (t = 'Opera'),
-              'Tidak diketahui')
-          ;(e.includes('windows')
+              'Tidak diketahui');
+          (e.includes('windows')
             ? (n = 'Windows')
             : e.includes('mac os') || e.includes('macintosh')
               ? (n = 'macOS')
@@ -773,80 +772,80 @@ tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
               navigator.geolocation.getCurrentPosition(
                 function (e) {
                   var t = e.coords.latitude.toFixed(3),
-                    e = e.coords.longitude.toFixed(3)
+                    e = e.coords.longitude.toFixed(3);
                   document.querySelector('#chip-location span').textContent =
-                    `Lokasi: Koordinat ${t}, ${e} (🌏)`
+                    `Lokasi: Koordinat ${t}, ${e} (🌏)`;
                 },
                 function () {},
                 { timeout: 3e3 },
-              ))
+              ));
         })(),
           (() => {
-            Array.from(document.querySelectorAll('.gallery figure'))
+            Array.from(document.querySelectorAll('.gallery figure'));
             let n = Array.from(document.querySelectorAll('.gallery img')),
               o = document.getElementById('lightbox'),
-              r = document.getElementById('lb-img')
+              r = document.getElementById('lb-img');
             var e = document.getElementById('lb-prev'),
               t = document.getElementById('lb-next'),
-              i = document.getElementById('lb-close')
-            let c = 0
+              i = document.getElementById('lb-close');
+            let c = 0;
             function d(e) {
-              ;((c = (c + e + n.length) % n.length),
-                (r.src = n[c].dataset.full || n[c].src))
+              ((c = (c + e + n.length) % n.length),
+                (r.src = n[c].dataset.full || n[c].src));
             }
             function l() {
-              ;(o.classList.remove('open'), (r.src = ''))
+              (o.classList.remove('open'), (r.src = ''));
             }
-            ;(n.forEach((e, t) => {
-              ;((e.style.cursor = 'zoom-in'),
+            (n.forEach((e, t) => {
+              ((e.style.cursor = 'zoom-in'),
                 e.addEventListener('click', () => {
                   return (
                     (e = t),
                     (c = e),
                     (r.src = n[c].dataset.full || n[c].src),
                     void o.classList.add('open')
-                  )
-                  var e
-                }))
+                  );
+                  var e;
+                }));
             }),
               e.addEventListener('click', () => d(-1)),
               t.addEventListener('click', () => d(1)),
               i.addEventListener('click', l),
               o.addEventListener('click', (e) => {
-                e.target === o && l()
+                e.target === o && l();
               }),
               document.addEventListener('keydown', (e) => {
                 o.classList.contains('open') &&
                   ('Escape' === e.key && l(),
                   'ArrowLeft' === e.key && d(-1),
                   'ArrowRight' === e.key) &&
-                  d(1)
-              }))
+                  d(1);
+              }));
           })(),
           (() => {
             var e = encodeURIComponent(
                 document.querySelector('link[rel="canonical"]')?.href ||
                   location.href,
               ),
-              t = encodeURIComponent(document.title)
-            ;((document.getElementById('share-twitter').href =
+              t = encodeURIComponent(document.title);
+            ((document.getElementById('share-twitter').href =
               `https://twitter.com/intent/tweet?url=${e}&text=` + t),
               (document.getElementById('share-fb').href =
                 'https://www.facebook.com/sharer/sharer.php?u=' + e),
               (document.getElementById('share-whatsapp').href =
                 `https://wa.me/?text=${t}%20` + e),
               (document.getElementById('share-linkedin').href =
-                'https://www.linkedin.com/sharing/share-offsite/?url=' + e))
+                'https://www.linkedin.com/sharing/share-offsite/?url=' + e));
           })(),
           ((e, t, n) => {
-            var o = e.getElementsByTagName(t)[0]
+            var o = e.getElementsByTagName(t)[0];
             e.getElementById(n) ||
               (((e = e.createElement(t)).id = n),
               (e.src =
                 'https://connect.facebook.net/id_ID/sdk.js#xfml=1&version=v19.0'),
-              o.parentNode.insertBefore(e, o))
-          })(document, 'script', 'facebook-jssdk'))
-      })
+              o.parentNode.insertBefore(e, o));
+          })(document, 'script', 'facebook-jssdk'));
+      });
     </script>
     <div id="kategori-aktif"></div>
     <section id="related-marquee-section">

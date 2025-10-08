@@ -366,44 +366,45 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           const canonicalUrl =
-            'https://frijal.github.io/artikel/panduan-interaktif-imagemagick-crop.html'
-          const navigation = document.getElementById('navigation')
-          const contentDisplay = document.getElementById('content-display')
-          const navLinks = document.querySelectorAll('.nav-link')
+            'https://frijal.github.io/artikel/panduan-interaktif-imagemagick-crop.html';
+          const navigation = document.getElementById('navigation');
+          const contentDisplay = document.getElementById('content-display');
+          const navLinks = document.querySelectorAll('.nav-link');
 
           // Map hash to template IDs
           const contentMap = {
             '#imagemagick-crop-h': 'imagemagick-crop-h-content',
             '#imagemagick-crop-v': 'imagemagick-crop-v-content',
-          }
+          };
 
           // Function to load content based on hash
           const loadContent = (hash) => {
-            navLinks.forEach((link) => link.classList.remove('active-nav'))
-            contentDisplay.innerHTML = ''
+            navLinks.forEach((link) => link.classList.remove('active-nav'));
+            contentDisplay.innerHTML = '';
 
-            const templateId = contentMap[hash]
+            const templateId = contentMap[hash];
 
             if (templateId) {
-              const template = document.getElementById(templateId)
-              const clone = template.content.cloneNode(true)
-              contentDisplay.appendChild(clone)
+              const template = document.getElementById(templateId);
+              const clone = template.content.cloneNode(true);
+              contentDisplay.appendChild(clone);
 
               document
                 .querySelector(`a[href="${hash}"]`)
-                .classList.add('active-nav')
+                .classList.add('active-nav');
             } else {
-              const welcomeTemplate = document.getElementById('welcome-content')
+              const welcomeTemplate =
+                document.getElementById('welcome-content');
               if (welcomeTemplate) {
-                const clone = welcomeTemplate.content.cloneNode(true)
-                contentDisplay.appendChild(clone)
+                const clone = welcomeTemplate.content.cloneNode(true);
+                contentDisplay.appendChild(clone);
               }
             }
 
             // Update FB comments data-href
-            const fbComments = document.getElementById('fb-comments')
+            const fbComments = document.getElementById('fb-comments');
             if (fbComments)
-              fbComments.setAttribute('data-href', canonicalUrl + hash)
+              fbComments.setAttribute('data-href', canonicalUrl + hash);
 
             // Re-parse FB comments
             if (
@@ -411,70 +412,70 @@
               FB.XFBML &&
               typeof FB.XFBML.parse === 'function'
             ) {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             }
-          }
+          };
 
           // 1. Navigation Click Handler (uses hash)
           navigation.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') {
-              const hash = e.target.hash
+              const hash = e.target.hash;
               if (hash) {
-                e.preventDefault()
-                window.location.hash = hash
+                e.preventDefault();
+                window.location.hash = hash;
               }
             }
-          })
+          });
 
           // 2. Hash Change Listener
           window.addEventListener('hashchange', () => {
-            loadContent(window.location.hash)
-          })
+            loadContent(window.location.hash);
+          });
 
           // 3. Copy Button Handler
           contentDisplay.addEventListener('click', (t) => {
             if (t.target.classList.contains('copy-btn')) {
               const codeElement =
-                t.target.nextElementSibling.querySelector('code')
+                t.target.nextElementSibling.querySelector('code');
               if (codeElement) {
-                const code = codeElement.innerText.trim()
+                const code = codeElement.innerText.trim();
 
                 navigator.clipboard
                   .writeText(code)
                   .then(() => {
-                    let originalText = t.target.innerText
-                    t.target.innerText = 'Disalin!'
+                    let originalText = t.target.innerText;
+                    t.target.innerText = 'Disalin!';
                     setTimeout(() => {
-                      t.target.innerText = originalText
-                    }, 2000)
+                      t.target.innerText = originalText;
+                    }, 2000);
                   })
                   .catch((e) => {
-                    console.error('Gagal menyalin: ', e)
-                  })
+                    console.error('Gagal menyalin: ', e);
+                  });
               }
             }
-          })
+          });
 
           // 4. Initial Load Logic
           if (window.location.hash) {
-            loadContent(window.location.hash)
+            loadContent(window.location.hash);
           } else if (navLinks.length > 0) {
             // Set the first link's hash to URL and load content
-            window.location.hash = navLinks[0].hash
+            window.location.hash = navLinks[0].hash;
           } else {
-            loadContent('#welcome') // Fallback to welcome page
+            loadContent('#welcome'); // Fallback to welcome page
           }
 
           // 5. Facebook SDK manual parse (for initial load)
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (t) {}
             }
-          }
-        })
-      })
+          };
+        });
+      });
     </script>
     <div id="kategori-aktif"></div>
     <section id="related-marquee-section">

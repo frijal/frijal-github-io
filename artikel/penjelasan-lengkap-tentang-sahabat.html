@@ -46,8 +46,6 @@
     />
     <meta name="theme-color" content="#346bff" />
 
-
-
     <style>
       :root {
         --bg: #f6f8fb;
@@ -725,35 +723,35 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         const canonicalUrl =
-          'https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html'
+          'https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html';
 
         // 1. Logic untuk Tanggal dan Tahun
         const updateDateElements = () => {
-          const date = new Date()
+          const date = new Date();
           document.getElementById('updated-at').textContent =
             date.toLocaleString('id-ID', {
               dateStyle: 'long',
               timeStyle: 'short',
-            })
-          document.getElementById('year').textContent = date.getFullYear()
-        }
+            });
+          document.getElementById('year').textContent = date.getFullYear();
+        };
 
         // 2. Logic untuk Browser, OS, dan IP
         const getSystemInfo = () => {
-          const userAgent = navigator.userAgent
-          const browserInfo = document.getElementById('browser-info')
-          const osName = document.getElementById('os-name')
-          const osVersion = document.getElementById('os-version')
-          const ipAddress = document.getElementById('ip-address')
-          const country = document.getElementById('country')
+          const userAgent = navigator.userAgent;
+          const browserInfo = document.getElementById('browser-info');
+          const osName = document.getElementById('os-name');
+          const osVersion = document.getElementById('os-version');
+          const ipAddress = document.getElementById('ip-address');
+          const country = document.getElementById('country');
           const iconBrowser = document
             .getElementById('icon-browser')
-            .querySelector('circle')
+            .querySelector('circle');
 
           // Browser Detection
           const getBrowser = (e) => {
             let name = 'Unknown',
-              version = ''
+              version = '';
             const checks = [
               { name: 'Edge', re: /Edg\/(\d+\.?\d*)/, color: '#0EA5E9' },
               { name: 'Chrome', re: /Chrome\/(\d+\.?\d*)/, color: '#34C759' },
@@ -764,61 +762,61 @@
                 color: '#0EA5E9',
               },
               { name: 'Opera', re: /OPR\/(\d+\.?\d*)/, color: '#FF1C19' },
-            ]
+            ];
             for (const check of checks) {
-              const match = e.match(check.re)
+              const match = e.match(check.re);
               if (match)
                 return {
                   name: check.name,
                   version: match[1],
                   color: check.color,
-                }
+                };
             }
-            return { name: 'Unknown', version: '', color: '#666' }
-          }
+            return { name: 'Unknown', version: '', color: '#666' };
+          };
 
           // OS Detection
           const getOS = (e) => {
             if (/Windows NT 10/.test(e))
-              return { name: 'Windows', version: '10/11' }
+              return { name: 'Windows', version: '10/11' };
             if (/Android (\d[\d.]*)/.test(e))
               return {
                 name: 'Android',
                 version: e.match(/Android (\d[\d.]*)/)[1],
-              }
+              };
             if (/iPhone OS (\d[_\d]*)/.test(e))
               return {
                 name: 'iOS',
                 version: e.match(/iPhone OS (\d[_\d]*)/)[1].replace(/_/g, '.'),
-              }
+              };
             if (/Mac OS X (\d[_\d]*)/.test(e))
               return {
                 name: 'macOS',
                 version: e.match(/Mac OS X (\d[_\d]*)/)[1].replace(/_/g, '.'),
-              }
-            if (/Linux/.test(e)) return { name: 'Linux', version: '' }
-            return { name: 'Unknown', version: '' }
-          }
+              };
+            if (/Linux/.test(e)) return { name: 'Linux', version: '' };
+            return { name: 'Unknown', version: '' };
+          };
 
-          const browserData = getBrowser(userAgent)
-          const osData = getOS(userAgent)
+          const browserData = getBrowser(userAgent);
+          const osData = getOS(userAgent);
 
           browserInfo.textContent =
             browserData.name +
             ' ' +
             (browserData.version || '') +
             ' — ' +
-            (navigator.platform || 'Platform')
-          if (iconBrowser) iconBrowser.setAttribute('fill', browserData.color)
+            (navigator.platform || 'Platform');
+          if (iconBrowser) iconBrowser.setAttribute('fill', browserData.color);
 
-          osName.textContent = '' + osData.name
-          osVersion.textContent = 'Versi: ' + (osData.version || '—')
+          osName.textContent = '' + osData.name;
+          osVersion.textContent = 'Versi: ' + (osData.version || '—');
 
           // IP/Location Detection
           fetch('https://ipapi.co/json/')
             .then((e) => (e.ok ? e.json() : Promise.reject(e.status)))
             .then((e) => {
-              ipAddress.textContent = e.ip || '—'
+              ipAddress.textContent = e.ip || '—';
               const flagEmoji = (code) =>
                 code
                   ? code
@@ -826,23 +824,23 @@
                       .replace(/./g, (char) =>
                         String.fromCodePoint(127397 + char.charCodeAt(0)),
                       )
-                  : '—'
+                  : '—';
               country.innerHTML =
                 flagEmoji(e.country_code) +
                 ' ' +
-                (e.country_name || e.country || '—')
+                (e.country_name || e.country || '—');
             })
             .catch(() => {
-              ipAddress.textContent = 'Tidak tersedia'
-              country.textContent = '—'
-            })
-        }
+              ipAddress.textContent = 'Tidak tersedia';
+              country.textContent = '—';
+            });
+        };
 
         // 3. Logic Pembagian (Share)
         const setupShareButtons = () => {
-          const url = encodeURIComponent(canonicalUrl)
-          const title = encodeURIComponent(document.title)
-          const copyMsg = document.getElementById('copy-msg')
+          const url = encodeURIComponent(canonicalUrl);
+          const title = encodeURIComponent(document.title);
+          const copyMsg = document.getElementById('copy-msg');
 
           document
             .getElementById('share-fb')
@@ -852,7 +850,7 @@
                 '',
                 'noopener',
               ),
-            )
+            );
           document
             .getElementById('share-x')
             .addEventListener('click', () =>
@@ -861,7 +859,7 @@
                 '',
                 'noopener',
               ),
-            )
+            );
           document
             .getElementById('share-wa')
             .addEventListener('click', () =>
@@ -870,7 +868,7 @@
                 '',
                 'noopener',
               ),
-            )
+            );
           document
             .getElementById('share-tg')
             .addEventListener('click', () =>
@@ -879,50 +877,50 @@
                 '',
                 'noopener',
               ),
-            )
+            );
 
           document
             .getElementById('copy-link')
             .addEventListener('click', async () => {
               try {
-                await navigator.clipboard.writeText(canonicalUrl)
-                copyMsg.style.display = 'block'
-                setTimeout(() => (copyMsg.style.display = 'none'), 2500)
+                await navigator.clipboard.writeText(canonicalUrl);
+                copyMsg.style.display = 'block';
+                setTimeout(() => (copyMsg.style.display = 'none'), 2500);
               } catch (e) {
                 alert(
                   'Salin otomatis gagal. Silakan salin secara manual: ' +
                     canonicalUrl,
-                )
+                );
               }
-            })
+            });
           document
             .getElementById('open-in-new')
             .addEventListener('click', () =>
               window.open(canonicalUrl, '', 'noopener'),
-            )
+            );
 
           // Set URL display in sidebar
-          document.getElementById('current-url').textContent = canonicalUrl
-        }
+          document.getElementById('current-url').textContent = canonicalUrl;
+        };
 
         // Inisialisasi
         document.addEventListener('DOMContentLoaded', () => {
-          updateDateElements()
-          getSystemInfo()
-          setupShareButtons()
+          updateDateElements();
+          getSystemInfo();
+          setupShareButtons();
 
           // Re-parse FB comments for initial load after DCL
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {
                 /* ignore */
               }
             }
-          }
-        })
-      })
+          };
+        });
+      });
     </script>
 
     });

@@ -450,166 +450,166 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // --- GALERI & LIGHTBOX ---
-          const gallery = document.getElementById('photoGallery')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
+          const gallery = document.getElementById('photoGallery');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
           const galleryImages = Array.from(
             { length: 6 },
             (_, i) => `https://picsum.photos/id/${20 + i}/800/600`,
-          )
-          let currentIndex
+          );
+          let currentIndex;
 
           galleryImages.forEach((src) => {
-            const img = document.createElement('img')
-            img.setAttribute('data-src', src)
-            img.alt = `Inspirasi AI untuk bisnis`
-            img.loading = 'lazy'
-            img.className = 'lazy-load'
-            gallery.appendChild(img)
-          })
+            const img = document.createElement('img');
+            img.setAttribute('data-src', src);
+            img.alt = `Inspirasi AI untuk bisnis`;
+            img.loading = 'lazy';
+            img.className = 'lazy-load';
+            gallery.appendChild(img);
+          });
 
-          const lazyImages = document.querySelectorAll('img.lazy-load')
+          const lazyImages = document.querySelectorAll('img.lazy-load');
           const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                const img = entry.target
-                img.src = img.dataset.src
-                img.classList.remove('lazy-load')
-                observer.unobserve(img)
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy-load');
+                observer.unobserve(img);
               }
-            })
-          })
-          lazyImages.forEach((img) => observer.observe(img))
+            });
+          });
+          lazyImages.forEach((img) => observer.observe(img));
 
           gallery.addEventListener('click', (e) => {
-            const target = e.target
+            const target = e.target;
             if (target.tagName === 'IMG') {
-              currentIndex = Array.from(gallery.children).indexOf(target)
-              updateLightboxImage(currentIndex)
-              lightbox.style.display = 'flex'
+              currentIndex = Array.from(gallery.children).indexOf(target);
+              updateLightboxImage(currentIndex);
+              lightbox.style.display = 'flex';
             }
-          })
+          });
 
           const updateLightboxImage = (index) => {
-            const images = Array.from(gallery.children)
-            if (index < 0) index = images.length - 1
-            if (index >= images.length) index = 0
-            currentIndex = index
-            lightboxImg.src = images[currentIndex].src
-          }
+            const images = Array.from(gallery.children);
+            if (index < 0) index = images.length - 1;
+            if (index >= images.length) index = 0;
+            currentIndex = index;
+            lightboxImg.src = images[currentIndex].src;
+          };
 
           document.querySelector('.lightbox-close').onclick = () =>
-            (lightbox.style.display = 'none')
+            (lightbox.style.display = 'none');
           document.querySelector('.lightbox-prev').onclick = () =>
-            updateLightboxImage(currentIndex - 1)
+            updateLightboxImage(currentIndex - 1);
           document.querySelector('.lightbox-next').onclick = () =>
-            updateLightboxImage(currentIndex + 1)
+            updateLightboxImage(currentIndex + 1);
           lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none'
-          }
+            if (e.target === lightbox) lightbox.style.display = 'none';
+          };
 
           // --- DETEKSI INFO PENGUNJUNG ---
           const getBrowserInfo = () => {
-            const ua = navigator.userAgent
+            const ua = navigator.userAgent;
             if (ua.includes('Firefox'))
               return {
                 name: 'Firefox',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg',
-              }
+              };
             if (ua.includes('Edg'))
               return {
                 name: 'Edge',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg',
-              }
+              };
             if (ua.includes('Chrome'))
               return {
                 name: 'Chrome',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg',
-              }
+              };
             if (ua.includes('Safari'))
               return {
                 name: 'Safari',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg',
-              }
-            return { name: 'Unknown', icon: '' }
-          }
+              };
+            return { name: 'Unknown', icon: '' };
+          };
 
           const getOSInfo = () => {
-            const platform = navigator.platform.toLowerCase()
+            const platform = navigator.platform.toLowerCase();
             if (platform.includes('win'))
               return {
                 name: 'Windows',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_10_logo.svg',
-              }
+              };
             if (platform.includes('mac'))
               return {
                 name: 'macOS',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo_%282017%29.svg',
-              }
+              };
             if (platform.includes('linux'))
               return {
                 name: 'Linux',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg',
-              }
+              };
             if (/android/.test(navigator.userAgent.toLowerCase()))
               return {
                 name: 'Android',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg',
-              }
+              };
             if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()))
               return {
                 name: 'iOS',
                 icon: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
-              }
-            return { name: 'Unknown', icon: '' }
-          }
+              };
+            return { name: 'Unknown', icon: '' };
+          };
 
-          const browser = getBrowserInfo()
-          document.getElementById('browserIcon').src = browser.icon
+          const browser = getBrowserInfo();
+          document.getElementById('browserIcon').src = browser.icon;
           document.getElementById('browserText').textContent =
-            `Browser: ${browser.name}`
+            `Browser: ${browser.name}`;
 
-          const os = getOSInfo()
-          document.getElementById('osIcon').src = os.icon
-          document.getElementById('osText').textContent = `OS: ${os.name}`
+          const os = getOSInfo();
+          document.getElementById('osIcon').src = os.icon;
+          document.getElementById('osText').textContent = `OS: ${os.name}`;
 
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
             .then((data) => {
               document.getElementById('ipText').textContent =
-                `Lokasi: ${data.city}, ${data.country_name}`
+                `Lokasi: ${data.city}, ${data.country_name}`;
               document.getElementById('flagIcon').src =
-                `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`
+                `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
             })
             .catch(
               () =>
                 (document.getElementById('ipText').textContent =
                   'Lokasi: Gagal dimuat'),
-            )
+            );
 
           // --- SOCIAL SHARING ---
-          const pageUrl = encodeURIComponent(window.location.href)
-          const pageTitle = encodeURIComponent(document.title)
+          const pageUrl = encodeURIComponent(window.location.href);
+          const pageTitle = encodeURIComponent(document.title);
 
           const shareLinks = {
             shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
             shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
             shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
             shareTelegram: `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`,
-          }
+          };
 
           for (const id in shareLinks) {
-            const link = document.getElementById(id)
+            const link = document.getElementById(id);
             if (link) {
-              link.href = shareLinks[id]
+              link.href = shareLinks[id];
               link.addEventListener('click', function (e) {
-                e.preventDefault()
-                window.open(this.href, 'share-window', 'height=450,width=550')
-              })
+                e.preventDefault();
+                window.open(this.href, 'share-window', 'height=450,width=550');
+              });
             }
           }
-        })
-      })
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

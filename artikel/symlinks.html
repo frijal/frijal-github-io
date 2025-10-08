@@ -189,8 +189,6 @@
       menjadi lebih ringan. ;)
     </p>
 
-    
-
     <!-- Facebook Comments Plugin -->
     <div style="margin-top: 18px; color: var(--muted); font-size: 10px">
       <span id="current-url" class="small-muted"></span>
@@ -214,19 +212,19 @@
       ></div>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
-          const currentUrl = window.location.href
-          document.getElementById('current-url').textContent = currentUrl
+          const currentUrl = window.location.href;
+          document.getElementById('current-url').textContent = currentUrl;
           document
             .getElementById('fb-comments')
-            .setAttribute('data-href', currentUrl)
+            .setAttribute('data-href', currentUrl);
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {}
             }
-          }
-        })
+          };
+        });
       </script>
     </div>
 
@@ -245,60 +243,60 @@
         function copyCode(btn) {
           const code = btn.previousElementSibling
             ? btn.previousElementSibling.innerText
-            : btn.parentElement.innerText
+            : btn.parentElement.innerText;
           navigator.clipboard
             .writeText(code)
-            .then(() => alert('Command berhasil disalin!'))
+            .then(() => alert('Command berhasil disalin!'));
         }
 
         // Detect Browser & OS
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Unknown',
           os = 'Unknown',
           browserIcon = '',
-          osIcon = ''
+          osIcon = '';
         if (/Firefox/.test(ua)) {
-          browser = 'Firefox'
-          browserIcon = '🦊'
+          browser = 'Firefox';
+          browserIcon = '🦊';
         } else if (/Chrome/.test(ua)) {
-          browser = 'Chrome'
-          browserIcon = '🌐'
+          browser = 'Chrome';
+          browserIcon = '🌐';
         } else if (/Edg/.test(ua)) {
-          browser = 'Edge'
-          browserIcon = '🔵'
+          browser = 'Edge';
+          browserIcon = '🔵';
         } else if (/Safari/.test(ua)) {
-          browser = 'Safari'
-          browserIcon = '🍏'
+          browser = 'Safari';
+          browserIcon = '🍏';
         }
 
         if (/Win/.test(ua)) {
-          os = 'Windows'
-          osIcon = '🪟'
+          os = 'Windows';
+          osIcon = '🪟';
         } else if (/Mac/.test(ua)) {
-          os = 'macOS'
-          osIcon = '🍎'
+          os = 'macOS';
+          osIcon = '🍎';
         } else if (/Linux/.test(ua)) {
-          os = 'Linux'
-          osIcon = '🐧'
+          os = 'Linux';
+          osIcon = '🐧';
         }
 
-        document.getElementById('browser-name').innerText = browser
-        document.getElementById('browser-icon').innerText = browserIcon
-        document.getElementById('os-name').innerText = os
-        document.getElementById('os-icon').innerText = osIcon
+        document.getElementById('browser-name').innerText = browser;
+        document.getElementById('browser-icon').innerText = browserIcon;
+        document.getElementById('os-name').innerText = os;
+        document.getElementById('os-icon').innerText = osIcon;
 
         // Fetch IP & country
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
             document.getElementById('ip-info').innerText =
-              data.ip + ' (' + data.country_name + ')'
+              data.ip + ' (' + data.country_name + ')';
             document.getElementById('country-flag').src =
               'https://flagcdn.com/16x12/' +
               data.country_code.toLowerCase() +
-              '.png'
-          })
-      })
+              '.png';
+          });
+      });
     </script>
 
     <!-- JSON-LD -->

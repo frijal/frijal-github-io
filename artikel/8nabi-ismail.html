@@ -371,8 +371,6 @@
           <p class="sub">
             #RamadahanTales oleh: Saudari Sharifah Syazreen Al-Idrus
           </p>
-
-          
         </header>
 
         <section class="grid-1">
@@ -640,70 +638,69 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Utility: get current URL
         const CANONICAL =
-          document.querySelector('link[rel="canonical"]')?.href || location.href
-
-        
+          document.querySelector('link[rel="canonical"]')?.href ||
+          location.href;
 
         // Gallery lightbox
-        const gallery = Array.from(document.querySelectorAll('#gallery img'))
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lb-image')
-        const btnPrev = document.getElementById('lb-prev')
-        const btnNext = document.getElementById('lb-next')
-        const btnClose = document.getElementById('lb-close')
-        let index = 0
+        const gallery = Array.from(document.querySelectorAll('#gallery img'));
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-image');
+        const btnPrev = document.getElementById('lb-prev');
+        const btnNext = document.getElementById('lb-next');
+        const btnClose = document.getElementById('lb-close');
+        let index = 0;
 
         function openLB(i) {
-          index = i
-          const el = gallery[index]
-          lbImg.src = el.dataset.full || el.src
-          lb.classList.add('active')
+          index = i;
+          const el = gallery[index];
+          lbImg.src = el.dataset.full || el.src;
+          lb.classList.add('active');
         }
         function closeLB() {
-          lb.classList.remove('active')
-          lbImg.src = ''
+          lb.classList.remove('active');
+          lbImg.src = '';
         }
         function prev() {
-          openLB((index - 1 + gallery.length) % gallery.length)
+          openLB((index - 1 + gallery.length) % gallery.length);
         }
         function next() {
-          openLB((index + 1) % gallery.length)
+          openLB((index + 1) % gallery.length);
         }
 
         gallery.forEach((img, i) => {
-          img.style.cursor = 'zoom-in'
-          img.addEventListener('click', () => openLB(i))
-        })
-        btnPrev.addEventListener('click', prev)
-        btnNext.addEventListener('click', next)
-        btnClose.addEventListener('click', closeLB)
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', () => openLB(i));
+        });
+        btnPrev.addEventListener('click', prev);
+        btnNext.addEventListener('click', next);
+        btnClose.addEventListener('click', closeLB);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLB()
-        })
+          if (e.target === lb) closeLB();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('active')) return
-          if (e.key === 'Escape') closeLB()
-          if (e.key === 'ArrowLeft') prev()
-          if (e.key === 'ArrowRight') next()
-        })
+          if (!lb.classList.contains('active')) return;
+          if (e.key === 'Escape') closeLB();
+          if (e.key === 'ArrowLeft') prev();
+          if (e.key === 'ArrowRight') next();
+        });
 
         // Share links
         function enc(s) {
-          return encodeURIComponent(s)
+          return encodeURIComponent(s);
         }
-        const shareWhatsApp = document.getElementById('share-whatsapp')
-        const shareTelegram = document.getElementById('share-telegram')
-        const shareTwitter = document.getElementById('share-twitter')
-        const shareFacebook = document.getElementById('share-facebook')
-        const shareNative = document.getElementById('share-native')
-        const copyLinkBtn = document.getElementById('copy-link')
+        const shareWhatsApp = document.getElementById('share-whatsapp');
+        const shareTelegram = document.getElementById('share-telegram');
+        const shareTwitter = document.getElementById('share-twitter');
+        const shareFacebook = document.getElementById('share-facebook');
+        const shareNative = document.getElementById('share-native');
+        const copyLinkBtn = document.getElementById('copy-link');
 
         const shareText =
-          'Baca kisah hangat: Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales'
-        shareWhatsApp.href = `https://wa.me/?text=${enc(shareText + ' ' + CANONICAL)}`
-        shareTelegram.href = `https://t.me/share/url?url=${enc(CANONICAL)}&text=${enc(shareText)}`
-        shareTwitter.href = `https://twitter.com/intent/tweet?url=${enc(CANONICAL)}&text=${enc(shareText)}&via=Frijal`
-        shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(CANONICAL)}`
+          'Baca kisah hangat: Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales';
+        shareWhatsApp.href = `https://wa.me/?text=${enc(shareText + ' ' + CANONICAL)}`;
+        shareTelegram.href = `https://t.me/share/url?url=${enc(CANONICAL)}&text=${enc(shareText)}`;
+        shareTwitter.href = `https://twitter.com/intent/tweet?url=${enc(CANONICAL)}&text=${enc(shareText)}&via=Frijal`;
+        shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(CANONICAL)}`;
 
         shareNative.addEventListener('click', async () => {
           if (navigator.share) {
@@ -712,24 +709,24 @@
                 title: document.title,
                 text: shareText,
                 url: CANONICAL,
-              })
+              });
             } catch (e) {
               /* user cancelled */
             }
           } else {
-            alert('Fitur share native belum tersedia di browser ini.')
+            alert('Fitur share native belum tersedia di browser ini.');
           }
-        })
+        });
         copyLinkBtn.addEventListener('click', async () => {
           try {
-            await navigator.clipboard.writeText(CANONICAL)
-            copyLinkBtn.textContent = '✅ Tersalin'
-            setTimeout(() => (copyLinkBtn.textContent = '🔗 Salin Link'), 1500)
+            await navigator.clipboard.writeText(CANONICAL);
+            copyLinkBtn.textContent = '✅ Tersalin';
+            setTimeout(() => (copyLinkBtn.textContent = '🔗 Salin Link'), 1500);
           } catch (e) {
-            prompt('Salin URL secara manual:', CANONICAL)
+            prompt('Salin URL secara manual:', CANONICAL);
           }
-        })
-      })
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

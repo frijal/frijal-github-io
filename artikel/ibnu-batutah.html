@@ -610,7 +610,6 @@
         </div>
 
         <div class="info-bar">
-
           <div class="info-pill">
             ℹ️ Info: klik gambar untuk lightbox, gunakan panah untuk navigasi
           </div>
@@ -667,128 +666,129 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Facebook SDK (komentar)
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
 
         // Share buttons
         const canonical =
-          document.querySelector('link[rel="canonical"]')?.href || location.href
+          document.querySelector('link[rel="canonical"]')?.href ||
+          location.href;
         document
           .getElementById('share-twitter')
           .addEventListener('click', () => {
-            const u = new URL('https://twitter.com/intent/tweet')
+            const u = new URL('https://twitter.com/intent/tweet');
             u.searchParams.set(
               'text',
               'Kisah Ibnu Batutah: Rihlah 29 Tahun Mengelilingi Dunia Islam',
-            )
-            u.searchParams.set('url', canonical)
-            window.open(u.toString(), '_blank')
-          })
+            );
+            u.searchParams.set('url', canonical);
+            window.open(u.toString(), '_blank');
+          });
         document
           .getElementById('share-whatsapp')
           .addEventListener('click', () => {
-            const txt = `Kisah Ibnu Batutah — baca di: ${canonical}`
+            const txt = `Kisah Ibnu Batutah — baca di: ${canonical}`;
             const wa = /Android|iPhone|iPad/i.test(navigator.userAgent)
               ? `https://wa.me/?text=${encodeURIComponent(txt)}`
-              : `https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`
-            window.open(wa, '_blank')
-          })
+              : `https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`;
+            window.open(wa, '_blank');
+          });
         document
           .getElementById('share-facebook')
           .addEventListener('click', () => {
-            const u = new URL('https://www.facebook.com/sharer/sharer.php')
-            u.searchParams.set('u', canonical)
-            window.open(u.toString(), '_blank')
-          })
+            const u = new URL('https://www.facebook.com/sharer/sharer.php');
+            u.searchParams.set('u', canonical);
+            window.open(u.toString(), '_blank');
+          });
         document
           .getElementById('share-copy')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(canonical)
-              alert('Tautan disalin!')
+              await navigator.clipboard.writeText(canonical);
+              alert('Tautan disalin!');
             } catch (e) {
-              prompt('Salin tautan berikut:', canonical)
+              prompt('Salin tautan berikut:', canonical);
             }
-          })
+          });
 
         // Browser & OS detection (ringkas)
         function detectBrowser() {
-          const ua = navigator.userAgent
-          if (/Edg\//.test(ua)) return 'Microsoft Edge 🟦'
-          if (/OPR\//.test(ua) || /Opera/.test(ua)) return 'Opera 🔴'
+          const ua = navigator.userAgent;
+          if (/Edg\//.test(ua)) return 'Microsoft Edge 🟦';
+          if (/OPR\//.test(ua) || /Opera/.test(ua)) return 'Opera 🔴';
           if (/Chrome\//.test(ua) && !/Edg\//.test(ua))
-            return 'Google Chrome 🔵'
-          if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari 🟢'
-          if (/Firefox\//.test(ua)) return 'Firefox 🟠'
-          return 'Browser tidak dikenal 🧭'
+            return 'Google Chrome 🔵';
+          if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari 🟢';
+          if (/Firefox\//.test(ua)) return 'Firefox 🟠';
+          return 'Browser tidak dikenal 🧭';
         }
         function detectOS() {
-          const ua = navigator.userAgent
-          if (/Windows NT/.test(ua)) return 'Windows 🪟'
-          if (/Mac OS X/.test(ua)) return 'macOS 🍎'
-          if (/Android/.test(ua)) return 'Android 🤖'
-          if (/iPhone|iPad|iPod/.test(ua)) return 'iOS 📱'
-          if (/Linux/.test(ua)) return 'Linux 🐧'
-          return 'OS tidak dikenal 💻'
+          const ua = navigator.userAgent;
+          if (/Windows NT/.test(ua)) return 'Windows 🪟';
+          if (/Mac OS X/.test(ua)) return 'macOS 🍎';
+          if (/Android/.test(ua)) return 'Android 🤖';
+          if (/iPhone|iPad|iPod/.test(ua)) return 'iOS 📱';
+          if (/Linux/.test(ua)) return 'Linux 🐧';
+          return 'OS tidak dikenal 💻';
         }
         document.getElementById('browser-pill').textContent =
-          '🧭 Browser: ' + detectBrowser()
-        document.getElementById('os-pill').textContent = '💻 OS: ' + detectOS()
+          '🧭 Browser: ' + detectBrowser();
+        document.getElementById('os-pill').textContent = '💻 OS: ' + detectOS();
 
         // Lightbox with arrows & keyboard
-        const gallery = Array.from(document.querySelectorAll('#gallery .card'))
-        const lightbox = document.getElementById('lightbox')
-        const img = document.getElementById('lightbox-img')
-        const prev = document.getElementById('nav-prev')
-        const next = document.getElementById('nav-next')
-        const closeBtn = document.getElementById('nav-close')
-        let index = 0
+        const gallery = Array.from(document.querySelectorAll('#gallery .card'));
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        const prev = document.getElementById('nav-prev');
+        const next = document.getElementById('nav-next');
+        const closeBtn = document.getElementById('nav-close');
+        let index = 0;
 
         function openLightbox(i) {
-          index = i
+          index = i;
           const full =
             gallery[index].dataset.full ||
-            gallery[index].querySelector('img').src
-          img.src = full
-          lightbox.classList.add('open')
+            gallery[index].querySelector('img').src;
+          img.src = full;
+          lightbox.classList.add('open');
         }
         function closeLightbox() {
-          lightbox.classList.remove('open')
-          img.src = ''
+          lightbox.classList.remove('open');
+          img.src = '';
         }
         function nav(delta) {
-          const max = gallery.length
-          index = (index + delta + max) % max
+          const max = gallery.length;
+          index = (index + delta + max) % max;
           const full =
             gallery[index].dataset.full ||
-            gallery[index].querySelector('img').src
-          img.src = full
+            gallery[index].querySelector('img').src;
+          img.src = full;
         }
         gallery.forEach((card, i) => {
-          card.addEventListener('click', () => openLightbox(i))
-          card.style.cursor = 'zoom-in'
-        })
-        prev.addEventListener('click', () => nav(-1))
-        next.addEventListener('click', () => nav(1))
-        closeBtn.addEventListener('click', closeLightbox)
+          card.addEventListener('click', () => openLightbox(i));
+          card.style.cursor = 'zoom-in';
+        });
+        prev.addEventListener('click', () => nav(-1));
+        next.addEventListener('click', () => nav(1));
+        closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) closeLightbox()
-        })
+          if (e.target === lightbox) closeLightbox();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lightbox.classList.contains('open')) return
-          if (e.key === 'Escape') closeLightbox()
-          if (e.key === 'ArrowLeft') nav(-1)
-          if (e.key === 'ArrowRight') nav(1)
-        })
-      })
+          if (!lightbox.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') nav(-1);
+          if (e.key === 'ArrowRight') nav(1);
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

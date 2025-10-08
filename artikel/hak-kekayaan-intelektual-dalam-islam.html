@@ -283,19 +283,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
@@ -382,40 +382,40 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function detectBrowser() {
-          const ua = navigator.userAgent
-          if (ua.includes('Firefox')) return 'Mozilla Firefox'
+          const ua = navigator.userAgent;
+          if (ua.includes('Firefox')) return 'Mozilla Firefox';
           if (ua.includes('Chrome') && !ua.includes('Chromium'))
-            return 'Google Chrome'
+            return 'Google Chrome';
           if (ua.includes('Safari') && !ua.includes('Chrome'))
-            return 'Apple Safari'
-          if (ua.includes('Edg')) return 'Microsoft Edge'
-          return 'Browser Tidak Dikenal'
+            return 'Apple Safari';
+          if (ua.includes('Edg')) return 'Microsoft Edge';
+          return 'Browser Tidak Dikenal';
         }
         function detectOS() {
-          const ua = navigator.userAgent
-          if (ua.includes('Win')) return 'Windows'
-          if (ua.includes('Mac')) return 'MacOS'
-          if (ua.includes('Linux')) return 'Linux'
-          if (/Android/i.test(ua)) return 'Android'
-          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS'
-          return 'OS Tidak Dikenal'
+          const ua = navigator.userAgent;
+          if (ua.includes('Win')) return 'Windows';
+          if (ua.includes('Mac')) return 'MacOS';
+          if (ua.includes('Linux')) return 'Linux';
+          if (/Android/i.test(ua)) return 'Android';
+          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+          return 'OS Tidak Dikenal';
         }
         document.getElementById('browser-info').innerHTML =
           '<svg fill="currentColor"><circle cx="10" cy="10" r="10"/></svg>' +
-          detectBrowser()
+          detectBrowser();
         document.getElementById('os-info').innerHTML =
           '<svg fill="currentColor"><rect width="20" height="20"/></svg>' +
-          detectOS()
+          detectOS();
 
         // Fetch IP dan bendera
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
-            document.getElementById('ip-info').textContent = data.ip
+            document.getElementById('ip-info').textContent = data.ip;
             document.getElementById('flag-icon').innerHTML =
-              `<img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}"> ${data.country_name}`
-          })
-      })
+              `<img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" alt="Bendera ${data.country_name}"> ${data.country_name}`;
+          });
+      });
     </script>
 
     <style>

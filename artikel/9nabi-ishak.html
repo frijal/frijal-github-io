@@ -666,8 +666,6 @@
             </button>
           </div>
 
-          
-
           <h2>Jaga Data Pribadi Tetap Aman️</h2>
           <div id="fb-root"></div>
           <div
@@ -715,134 +713,138 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lazy-load gallery dengan IntersectionObserver
-        ;(function lazyLoadGallery() {
+        (function lazyLoadGallery() {
           const cards = Array.from(
             document.querySelectorAll('.gallery .card img'),
-          )
+          );
           const io = new IntersectionObserver(
             (entries, obs) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  const img = entry.target
-                  const src = img.getAttribute('data-src')
+                  const img = entry.target;
+                  const src = img.getAttribute('data-src');
                   if (src) {
-                    img.src = src
-                    img.removeAttribute('data-src')
+                    img.src = src;
+                    img.removeAttribute('data-src');
                   }
-                  obs.unobserve(img)
+                  obs.unobserve(img);
                 }
-              })
+              });
             },
             { rootMargin: '150px' },
-          )
-          cards.forEach((img) => io.observe(img))
-        })()
+          );
+          cards.forEach((img) => io.observe(img));
+        })();
 
         // Lightbox dengan navigasi panah & keyboard
-        ;(function lightbox() {
-          const gallery = document.getElementById('gallery')
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lb-img')
-          const lbCap = document.getElementById('lb-cap')
-          const prev = document.getElementById('lb-prev')
-          const next = document.getElementById('lb-next')
-          const close = document.getElementById('lb-close')
+        (function lightbox() {
+          const gallery = document.getElementById('gallery');
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lb-img');
+          const lbCap = document.getElementById('lb-cap');
+          const prev = document.getElementById('lb-prev');
+          const next = document.getElementById('lb-next');
+          const close = document.getElementById('lb-close');
 
-          const figs = Array.from(gallery.querySelectorAll('.card'))
-          let current = 0
+          const figs = Array.from(gallery.querySelectorAll('.card'));
+          let current = 0;
 
           function open(index) {
-            current = index
-            const fig = figs[current]
-            const img = fig.querySelector('img')
-            lbImg.src = img.src || img.getAttribute('data-src')
-            lbImg.alt = img.alt || ''
-            lbCap.textContent = fig.getAttribute('data-cap') || ''
-            lb.classList.add('open')
-            document.body.style.overflow = 'hidden'
+            current = index;
+            const fig = figs[current];
+            const img = fig.querySelector('img');
+            lbImg.src = img.src || img.getAttribute('data-src');
+            lbImg.alt = img.alt || '';
+            lbCap.textContent = fig.getAttribute('data-cap') || '';
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
           }
           function move(dir) {
-            current = (current + dir + figs.length) % figs.length
-            open(current)
+            current = (current + dir + figs.length) % figs.length;
+            open(current);
           }
           function closeLb() {
-            lb.classList.remove('open')
-            document.body.style.overflow = ''
-            lbImg.src = ''
-            lbCap.textContent = ''
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+            lbImg.src = '';
+            lbCap.textContent = '';
           }
 
           figs.forEach((fig) => {
             fig.addEventListener('click', () =>
               open(Number(fig.getAttribute('data-index'))),
-            )
-          })
-          prev.addEventListener('click', () => move(-1))
-          next.addEventListener('click', () => move(1))
-          close.addEventListener('click', closeLb)
+            );
+          });
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          close.addEventListener('click', closeLb);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLb()
-          })
+            if (e.target === lb) closeLb();
+          });
 
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') closeLb()
-            if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'ArrowRight') move(1)
-          })
-        })()
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft') move(-1);
+            if (e.key === 'ArrowRight') move(1);
+          });
+        })();
 
         // Share handlers
-        ;(function sharing() {
+        (function sharing() {
           const url =
             document.querySelector('link[rel="canonical"]')?.href ||
-            location.href
-          const title = document.title
-          const btns = document.querySelectorAll('.share .btn')
+            location.href;
+          const title = document.title;
+          const btns = document.querySelectorAll('.share .btn');
 
           function openWin(u) {
-            window.open(u, '_blank', 'noopener,noreferrer,width=680,height=540')
+            window.open(
+              u,
+              '_blank',
+              'noopener,noreferrer,width=680,height=540',
+            );
           }
           btns.forEach((btn) => {
             btn.addEventListener('click', () => {
-              const t = btn.getAttribute('data-share')
+              const t = btn.getAttribute('data-share');
               switch (t) {
                 case 'whatsapp':
                   openWin(
                     `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`,
-                  )
-                  break
+                  );
+                  break;
                 case 'twitter':
                   openWin(
                     `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
-                  )
-                  break
+                  );
+                  break;
                 case 'facebook':
                   openWin(
                     `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-                  )
-                  break
+                  );
+                  break;
                 case 'linkedin':
                   openWin(
                     `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-                  )
-                  break
+                  );
+                  break;
                 case 'telegram':
                   openWin(
                     `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
-                  )
-                  break
+                  );
+                  break;
                 case 'copy':
                   navigator.clipboard?.writeText(url).then(() => {
-                    btn.textContent = 'Tersalin ✓'
-                    setTimeout(() => (btn.textContent = 'Salin Link'), 1800)
-                  })
-                  break
+                    btn.textContent = 'Tersalin ✓';
+                    setTimeout(() => (btn.textContent = 'Salin Link'), 1800);
+                  });
+                  break;
               }
-            })
-          })
-        })()
-      })
+            });
+          });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

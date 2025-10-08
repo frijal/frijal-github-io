@@ -230,18 +230,18 @@ sudo reboot
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            let currentUrl = window.location.href
-            ;((document.getElementById('current-url').textContent = currentUrl),
+            let currentUrl = window.location.href;
+            ((document.getElementById('current-url').textContent = currentUrl),
               document
                 .getElementById('fb-comments')
                 .setAttribute('data-href', currentUrl),
               (window.fbAsyncInit = function () {
                 if ('undefined' != typeof FB)
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (t) {}
-              }))
-          })
+              }));
+          });
         </script>
         <div class="info-box" id="infoBox">
           <div class="info-item">
@@ -262,22 +262,22 @@ sudo reboot
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
-          hljs.highlightAll()
-        })
+          hljs.highlightAll();
+        });
       </script>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
-          let body = document.body
+          let body = document.body;
           function copyCode(o) {
-            ;((o = document.getElementById(o).textContent),
+            ((o = document.getElementById(o).textContent),
               navigator.clipboard.writeText(o),
-              alert('Syntax copied!'))
+              alert('Syntax copied!'));
           }
           function getBrowserInfo() {
             let o = navigator.userAgent,
               e = 'Unknown',
               i = '',
-              t = 'N/A'
+              t = 'N/A';
             return (
               -1 < o.indexOf('Brave')
                 ? ((e = 'Brave'),
@@ -313,15 +313,15 @@ sudo reboot
                             (i =
                               'https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg')),
               { name: e, version: t, icon: i }
-            )
+            );
           }
           function getOSInfo() {
             var o,
               e = navigator.platform.toLowerCase(),
-              i = navigator.userAgent.toLowerCase()
+              i = navigator.userAgent.toLowerCase();
             let t = 'Unknown OS',
               n = '',
-              a = ''
+              a = '';
             return (
               -1 !== e.indexOf('win')
                 ? ((t = 'Windows'),
@@ -348,37 +348,37 @@ sudo reboot
                         (a =
                           'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg')),
               { name: t, version: n, icon: a }
-            )
+            );
           }
-          ;(window.matchMedia('(prefers-color-scheme: dark)').matches &&
+          (window.matchMedia('(prefers-color-scheme: dark)').matches &&
             body.classList.add('dark'),
             document
               .getElementById('toggleDark')
               .addEventListener('click', () => {
-                body.classList.toggle('dark')
-              }))
+                body.classList.toggle('dark');
+              }));
           let browser = getBrowserInfo(),
             os =
               ((document.getElementById('browserIcon').src = browser.icon),
               (document.getElementById('browserText').textContent =
                 `Browser: ${browser.name} ` + browser.version),
-              getOSInfo())
-          ;((document.getElementById('osIcon').src = os.icon),
+              getOSInfo());
+          ((document.getElementById('osIcon').src = os.icon),
             (document.getElementById('osText').textContent =
               `OS: ${os.name} ` + os.version),
             fetch('https://ipapi.co/json/')
               .then((o) => o.json())
               .then((o) => {
-                ;((document.getElementById('ipText').textContent =
+                ((document.getElementById('ipText').textContent =
                   `IP: ${o.ip} (${o.country_name})`),
                   (document.getElementById('flagIcon').src =
-                    `https://flagcdn.com/48x36/${o.country_code.toLowerCase()}.png`))
+                    `https://flagcdn.com/48x36/${o.country_code.toLowerCase()}.png`));
               })
               .catch(() => {
                 document.getElementById('ipText').textContent =
-                  'IP: Tidak dapat diambil'
-              }))
-        })
+                  'IP: Tidak dapat diambil';
+              }));
+        });
       </script>
     </div>
     });

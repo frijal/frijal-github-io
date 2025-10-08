@@ -228,7 +228,6 @@
         Folder pip cache dan http-v2 bisa membengkak seiring waktu. Yuk kita
         bersihkan dengan cara yang aman dan santai!
       </p>
-      
     </header>
     <main>
       <div class="col">
@@ -357,8 +356,8 @@ rm -rf ~/.cache/pip/wheels
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(function () {
-          const CANON = document.querySelector('link[rel="canonical"]').href
+        (function () {
+          const CANON = document.querySelector('link[rel="canonical"]').href;
           const shareMap = {
             twitter: (u) =>
               `https://twitter.com/intent/tweet?url=${encodeURIComponent(u)}`,
@@ -367,78 +366,76 @@ rm -rf ~/.cache/pip/wheels
             whatsapp: (u) => `https://wa.me/?text=${encodeURIComponent(u)}`,
             linkedin: (u) =>
               `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(u)}`,
-          }
+          };
           document.querySelectorAll('.btn-share').forEach((b) => {
             b.onclick = () => {
-              window.open(shareMap[b.dataset.share](CANON), '_blank')
-            }
-          })
+              window.open(shareMap[b.dataset.share](CANON), '_blank');
+            };
+          });
 
-          const gallery = [...document.querySelectorAll('#gallery .item')]
-          const lb = document.createElement('div')
-          lb.className = 'lightbox'
+          const gallery = [...document.querySelectorAll('#gallery .item')];
+          const lb = document.createElement('div');
+          lb.className = 'lightbox';
           lb.innerHTML = `
       <img id="lightbox-img" alt="">
       <button class="lb-btn lb-prev">←</button>
       <button class="lb-btn lb-next">→</button>
       <button class="lb-btn lb-close">✕</button>
       <div id="lb-cap" style="color:#fff;margin-top:10px;text-align:center;"></div>
-    `
-          document.body.appendChild(lb)
-          const lbImg = lb.querySelector('img')
-          const lbCap = lb.querySelector('#lb-cap')
-          let idx = -1
+    `;
+          document.body.appendChild(lb);
+          const lbImg = lb.querySelector('img');
+          const lbCap = lb.querySelector('#lb-cap');
+          let idx = -1;
           function openAt(i) {
-            idx = i
-            const el = gallery[idx]
-            lbImg.src = el.dataset.full
-            lbCap.textContent = el.dataset.caption || ''
-            lb.classList.add('open')
+            idx = i;
+            const el = gallery[idx];
+            lbImg.src = el.dataset.full;
+            lbCap.textContent = el.dataset.caption || '';
+            lb.classList.add('open');
           }
           function closeLb() {
-            lb.classList.remove('open')
-            lbImg.src = ''
-            lbCap.textContent = ''
-            idx = -1
+            lb.classList.remove('open');
+            lbImg.src = '';
+            lbCap.textContent = '';
+            idx = -1;
           }
           function prev() {
-            if (idx > 0) openAt(idx - 1)
+            if (idx > 0) openAt(idx - 1);
           }
           function next() {
-            if (idx < gallery.length - 1) openAt(idx + 1)
+            if (idx < gallery.length - 1) openAt(idx + 1);
           }
           gallery.forEach((el, i) =>
             el.addEventListener('click', () => openAt(i)),
-          )
-          lb.querySelector('.lb-close').onclick = closeLb
-          lb.querySelector('.lb-prev').onclick = prev
-          lb.querySelector('.lb-next').onclick = next
+          );
+          lb.querySelector('.lb-close').onclick = closeLb;
+          lb.querySelector('.lb-prev').onclick = prev;
+          lb.querySelector('.lb-next').onclick = next;
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) closeLb()
-          })
+            if (e.target === lb) closeLb();
+          });
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') closeLb()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
-
-          
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
 
           if (!('loading' in HTMLImageElement.prototype)) {
             document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-              const src = img.getAttribute('src')
+              const src = img.getAttribute('src');
               if (src) {
-                const i = new Image()
-                i.src = src
+                const i = new Image();
+                i.src = src;
                 i.onload = () => {
-                  img.src = src
-                }
+                  img.src = src;
+                };
               }
-            })
+            });
           }
-        })()
-      })
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -479,19 +479,19 @@
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {}
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
       </article>
@@ -508,52 +508,52 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function detectBrowserOS() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let browser = 'Lainnya',
             os = 'Lainnya',
             iconBrowser = '',
-            iconOS = ''
+            iconOS = '';
 
           if (/firefox/i.test(ua)) {
-            browser = 'Firefox'
-            iconBrowser = '🦊'
+            browser = 'Firefox';
+            iconBrowser = '🦊';
           } else if (/chrome|chromium/i.test(ua)) {
-            browser = 'Chrome'
-            iconBrowser = '🌐'
+            browser = 'Chrome';
+            iconBrowser = '🌐';
           } else if (/safari/i.test(ua)) {
-            browser = 'Safari'
-            iconBrowser = '🧭'
+            browser = 'Safari';
+            iconBrowser = '🧭';
           } else if (/edg/i.test(ua)) {
-            browser = 'Edge'
-            iconBrowser = '🟦'
+            browser = 'Edge';
+            iconBrowser = '🟦';
           }
 
           if (/linux/i.test(ua)) {
-            os = 'Linux'
-            iconOS = '🐧'
+            os = 'Linux';
+            iconOS = '🐧';
           } else if (/windows/i.test(ua)) {
-            os = 'Windows'
-            iconOS = '🪟'
+            os = 'Windows';
+            iconOS = '🪟';
           } else if (/android/i.test(ua)) {
-            os = 'Android'
-            iconOS = '🤖'
+            os = 'Android';
+            iconOS = '🤖';
           } else if (/mac os/i.test(ua)) {
-            os = 'macOS'
-            iconOS = '🍎'
+            os = 'macOS';
+            iconOS = '🍎';
           }
 
           document.getElementById('sysinfo').innerHTML =
-            `<div>${iconBrowser} Browser: ${browser}</div><div>${iconOS} OS: ${os}</div>`
+            `<div>${iconBrowser} Browser: ${browser}</div><div>${iconOS} OS: ${os}</div>`;
         }
-        detectBrowserOS()
+        detectBrowserOS();
 
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
             document.getElementById('sysinfo').innerHTML +=
-              `<div>🌍 IP: ${data.ip} (${data.country_name}) <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"></div>`
-          })
-      })
+              `<div>🌍 IP: ${data.ip} (${data.country_name}) <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"></div>`;
+          });
+      });
     </script>
 
     });

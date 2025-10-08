@@ -114,11 +114,11 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function generateDesktop() {
-          const name = document.getElementById('name').value.trim()
-          const comment = document.getElementById('comment').value.trim()
-          const exec = document.getElementById('exec').value.trim()
-          const terminal = document.getElementById('terminal').value
-          const enabled = document.getElementById('enabled').value
+          const name = document.getElementById('name').value.trim();
+          const comment = document.getElementById('comment').value.trim();
+          const exec = document.getElementById('exec').value.trim();
+          const terminal = document.getElementById('terminal').value;
+          const enabled = document.getElementById('enabled').value;
 
           const output = `[Desktop Entry]
 Type=Application
@@ -128,11 +128,11 @@ Comment=${comment || 'Autostart via .desktop'}
 Exec=${exec || '/path/to/script.sh'}
 StartupNotify=false
 Terminal=${terminal}
-X-GNOME-Autostart-enabled=${enabled}`
+X-GNOME-Autostart-enabled=${enabled}`;
 
-          document.getElementById('output').textContent = output
+          document.getElementById('output').textContent = output;
         }
-      })
+      });
     </script>
     });
     <section id="related-marquee-section">

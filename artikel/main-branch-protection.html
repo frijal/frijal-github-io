@@ -600,46 +600,46 @@
         const images = [
           'https://frijal.github.io/assets/images/github-fork.jpg',
           'https://frijal.github.io/assets/images/github-pull-request.jpg',
-        ]
-        let currentIndex = 0
+        ];
+        let currentIndex = 0;
 
         function openLightbox(index) {
-          currentIndex = index
-          document.getElementById('lightbox-image').src = images[currentIndex]
-          document.getElementById('lightbox').style.display = 'flex'
+          currentIndex = index;
+          document.getElementById('lightbox-image').src = images[currentIndex];
+          document.getElementById('lightbox').style.display = 'flex';
         }
 
         function closeLightbox() {
-          document.getElementById('lightbox').style.display = 'none'
+          document.getElementById('lightbox').style.display = 'none';
         }
 
         function changeImage(direction) {
           currentIndex =
-            (currentIndex + direction + images.length) % images.length
-          document.getElementById('lightbox-image').src = images[currentIndex]
+            (currentIndex + direction + images.length) % images.length;
+          document.getElementById('lightbox-image').src = images[currentIndex];
         }
 
         // Lazy-load images
         document.addEventListener('DOMContentLoaded', function () {
-          const lazyImages = document.querySelectorAll("img[loading='lazy']")
+          const lazyImages = document.querySelectorAll("img[loading='lazy']");
           lazyImages.forEach((img) => {
-            img.src = img.dataset.src
-          })
-        })
+            img.src = img.dataset.src;
+          });
+        });
 
         // Info Box
         async function getIPInfo() {
           try {
-            const response = await fetch('https://ipapi.co/json/')
-            const data = await response.json()
-            const location = `${data.city}, ${data.region}, ${data.country_name} ${data.country_code}`
-            const flag = getFlagEmoji(data.country_code)
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            const location = `${data.city}, ${data.region}, ${data.country_name} ${data.country_code}`;
+            const flag = getFlagEmoji(data.country_code);
             document.getElementById('ip-info').innerHTML =
-              `${data.city} ${flag}`
+              `${data.city} ${flag}`;
           } catch (error) {
-            console.error('Gagal mendapatkan info IP:', error)
+            console.error('Gagal mendapatkan info IP:', error);
             document.getElementById('ip-info').textContent =
-              'Tidak dapat memuat lokasi.'
+              'Tidak dapat memuat lokasi.';
           }
         }
 
@@ -647,39 +647,39 @@
           const codePoints = countryCode
             .toUpperCase()
             .split('')
-            .map((char) => 127397 + char.charCodeAt())
-          return String.fromCodePoint(...codePoints)
+            .map((char) => 127397 + char.charCodeAt());
+          return String.fromCodePoint(...codePoints);
         }
 
         function getBrowserAndOS() {
-          const userAgent = navigator.userAgent
-          let browser = 'Unknown'
-          let os = 'Unknown'
+          const userAgent = navigator.userAgent;
+          let browser = 'Unknown';
+          let os = 'Unknown';
 
           // OS
-          if (userAgent.includes('Win')) os = 'Windows'
-          if (userAgent.includes('Mac')) os = 'macOS'
-          if (userAgent.includes('Linux')) os = 'Linux'
-          if (userAgent.includes('Android')) os = 'Android'
-          if (userAgent.includes('like Mac')) os = 'iOS'
+          if (userAgent.includes('Win')) os = 'Windows';
+          if (userAgent.includes('Mac')) os = 'macOS';
+          if (userAgent.includes('Linux')) os = 'Linux';
+          if (userAgent.includes('Android')) os = 'Android';
+          if (userAgent.includes('like Mac')) os = 'iOS';
 
           // Browser
           if (userAgent.includes('Chrome') && !userAgent.includes('Edg'))
-            browser = 'Chrome'
-          if (userAgent.includes('Firefox')) browser = 'Firefox'
+            browser = 'Chrome';
+          if (userAgent.includes('Firefox')) browser = 'Firefox';
           if (userAgent.includes('Safari') && !userAgent.includes('Chrome'))
-            browser = 'Safari'
-          if (userAgent.includes('Edg')) browser = 'Edge'
+            browser = 'Safari';
+          if (userAgent.includes('Edg')) browser = 'Edge';
           if (userAgent.includes('OPR') || userAgent.includes('Opera'))
-            browser = 'Opera'
+            browser = 'Opera';
 
-          document.getElementById('browser-info').textContent = browser
-          document.getElementById('os-info').textContent = os
+          document.getElementById('browser-info').textContent = browser;
+          document.getElementById('os-info').textContent = os;
         }
 
-        getBrowserAndOS()
-        getIPInfo()
-      })
+        getBrowserAndOS();
+        getIPInfo();
+      });
     </script>
 
     });

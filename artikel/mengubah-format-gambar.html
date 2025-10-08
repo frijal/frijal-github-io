@@ -260,19 +260,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
@@ -297,30 +297,30 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode() {
-          navigator.clipboard.writeText('mogrify -format jpg *.png')
-          alert('Perintah disalin!')
+          navigator.clipboard.writeText('mogrify -format jpg *.png');
+          alert('Perintah disalin!');
         }
-      })
+      });
     </script>
 
     <!-- Browser & OS Info -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Browser tidak dikenal',
-          os = 'OS tidak dikenal'
-        if (/Firefox/.test(ua)) browser = 'Mozilla Firefox'
-        else if (/Chrome/.test(ua)) browser = 'Google Chrome'
-        else if (/Safari/.test(ua)) browser = 'Safari'
-        else if (/Edg/.test(ua)) browser = 'Microsoft Edge'
+          os = 'OS tidak dikenal';
+        if (/Firefox/.test(ua)) browser = 'Mozilla Firefox';
+        else if (/Chrome/.test(ua)) browser = 'Google Chrome';
+        else if (/Safari/.test(ua)) browser = 'Safari';
+        else if (/Edg/.test(ua)) browser = 'Microsoft Edge';
 
-        if (/Linux/.test(ua)) os = 'Linux'
-        else if (/Windows/.test(ua)) os = 'Windows'
-        else if (/Mac/.test(ua)) os = 'MacOS'
+        if (/Linux/.test(ua)) os = 'Linux';
+        else if (/Windows/.test(ua)) os = 'Windows';
+        else if (/Mac/.test(ua)) os = 'MacOS';
 
         document.getElementById('info-box').innerHTML =
-          `<b>Browser:</b> ${browser}<br><b>OS:</b> ${os}`
-      })
+          `<b>Browser:</b> ${browser}<br><b>OS:</b> ${os}`;
+      });
     </script>
 
     <!-- IP & Country -->
@@ -330,9 +330,9 @@
           .then((res) => res.json())
           .then((data) => {
             document.getElementById('ip-box').innerHTML =
-              `<b>IP Anda:</b> ${data.ip}<br><b>Negara:</b> <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}`
-          })
-      })
+              `<b>IP Anda:</b> ${data.ip}<br><b>Negara:</b> <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png"> ${data.country_name}`;
+          });
+      });
     </script>
 
     <!-- JSON-LD Article + Breadcrumb + FAQ -->

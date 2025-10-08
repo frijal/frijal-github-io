@@ -441,38 +441,38 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const gallery = document.querySelectorAll('.gallery img')
-        const lightbox = document.getElementById('lightbox')
-        const lightImg = lightbox.querySelector('img')
-        let current = 0
+        const gallery = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightImg = lightbox.querySelector('img');
+        let current = 0;
         function showLightbox(i) {
-          current = i
-          lightImg.src = gallery[i].src
-          lightbox.style.display = 'flex'
+          current = i;
+          lightImg.src = gallery[i].src;
+          lightbox.style.display = 'flex';
         }
         gallery.forEach((img, i) =>
           img.addEventListener('click', () => showLightbox(i)),
-        )
+        );
         lightbox.querySelector('.prev').onclick = () =>
-          showLightbox((current - 1 + gallery.length) % gallery.length)
+          showLightbox((current - 1 + gallery.length) % gallery.length);
         lightbox.querySelector('.next').onclick = () =>
-          showLightbox((current + 1) % gallery.length)
+          showLightbox((current + 1) % gallery.length);
         lightbox.onclick = (e) => {
-          if (e.target === lightbox) lightbox.style.display = 'none'
-        }
+          if (e.target === lightbox) lightbox.style.display = 'none';
+        };
 
         // Info Browser, OS, Lokasi
         async function getInfo() {
-          const ua = navigator.userAgent
-          let res = await fetch('https://ipapi.co/json/')
-          let data = await res.json()
+          const ua = navigator.userAgent;
+          let res = await fetch('https://ipapi.co/json/');
+          let data = await res.json();
           document.getElementById('info').innerHTML =
             `<b>Browser:</b> ${navigator.appName} (${ua})<br>
          <b>OS:</b> ${navigator.platform}<br>
-         <b>Lokasi:</b> ${data.city}, ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`
+         <b>Lokasi:</b> ${data.city}, ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`;
         }
-        getInfo()
-      })
+        getInfo();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

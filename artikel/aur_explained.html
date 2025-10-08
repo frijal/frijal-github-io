@@ -373,17 +373,17 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Memuat Facebook SDK secara async
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     <header class="hero">
@@ -629,186 +629,186 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
           // URL API untuk deteksi IP
-          const IP_API_URL = 'https://api.ipify.org?format=json'
+          const IP_API_URL = 'https://api.ipify.org?format=json';
 
           // ===================================================
           // 1. DETEKSI IP, LOKASI, OS, dan BROWSER
           // ===================================================
 
-          const ipAddressElement = document.getElementById('ip-address')
-          const locationNameElement = document.getElementById('location-name')
-          const countryFlagElement = document.getElementById('country-flag')
-          const osNameElement = document.getElementById('os-name')
-          const osIconElement = document.getElementById('os-icon')
-          const browserNameElement = document.getElementById('browser-name')
-          const browserIconElement = document.getElementById('browser-icon')
+          const ipAddressElement = document.getElementById('ip-address');
+          const locationNameElement = document.getElementById('location-name');
+          const countryFlagElement = document.getElementById('country-flag');
+          const osNameElement = document.getElementById('os-name');
+          const osIconElement = document.getElementById('os-icon');
+          const browserNameElement = document.getElementById('browser-name');
+          const browserIconElement = document.getElementById('browser-icon');
 
           // Fungsi Deteksi OS dan Browser
           function detectSystemInfo() {
-            const userAgent = navigator.userAgent
-            let osName = 'Unknown OS'
-            let osIcon = '❓'
-            let browserName = 'Unknown Browser'
-            let browserIcon = '🌍'
+            const userAgent = navigator.userAgent;
+            let osName = 'Unknown OS';
+            let osIcon = '❓';
+            let browserName = 'Unknown Browser';
+            let browserIcon = '🌍';
 
             // Deteksi OS
             if (userAgent.match(/Win/i)) {
-              osName = 'Windows'
-              osIcon = '<i class="fab fa-windows"></i>'
+              osName = 'Windows';
+              osIcon = '<i class="fab fa-windows"></i>';
             } else if (userAgent.match(/Mac/i)) {
-              osName = 'macOS'
-              osIcon = '<i class="fab fa-apple"></i>'
+              osName = 'macOS';
+              osIcon = '<i class="fab fa-apple"></i>';
             } else if (userAgent.match(/Linux/i)) {
-              osName = 'Linux'
-              osIcon = '<i class="fab fa-linux"></i>'
+              osName = 'Linux';
+              osIcon = '<i class="fab fa-linux"></i>';
             } else if (userAgent.match(/Android/i)) {
-              osName = 'Android'
-              osIcon = '<i class="fab fa-android"></i>'
+              osName = 'Android';
+              osIcon = '<i class="fab fa-android"></i>';
             } else if (userAgent.match(/iPhone|iPad|iPod/i)) {
-              osName = 'iOS'
-              osIcon = '<i class="fab fa-apple"></i>'
+              osName = 'iOS';
+              osIcon = '<i class="fab fa-apple"></i>';
             }
 
             // Deteksi Browser
             if (userAgent.match(/CriOS|Chrome/i) && !userAgent.match(/Edg/i)) {
-              browserName = 'Chrome'
-              browserIcon = '<i class="fab fa-chrome"></i>'
+              browserName = 'Chrome';
+              browserIcon = '<i class="fab fa-chrome"></i>';
             } else if (userAgent.match(/Firefox/i)) {
-              browserName = 'Firefox'
-              browserIcon = '<i class="fab fa-firefox"></i>'
+              browserName = 'Firefox';
+              browserIcon = '<i class="fab fa-firefox"></i>';
             } else if (
               userAgent.match(/Safari/i) &&
               !userAgent.match(/Chrome/i)
             ) {
-              browserName = 'Safari'
-              browserIcon = '<i class="fab fa-safari"></i>'
+              browserName = 'Safari';
+              browserIcon = '<i class="fab fa-safari"></i>';
             } else if (userAgent.match(/Edg/i)) {
-              browserName = 'Edge'
-              browserIcon = '<i class="fab fa-edge"></i>'
+              browserName = 'Edge';
+              browserIcon = '<i class="fab fa-edge"></i>';
             } else if (userAgent.match(/OPR|Opera/i)) {
-              browserName = 'Opera'
-              browserIcon = '<i class="fab fa-opera"></i>'
+              browserName = 'Opera';
+              browserIcon = '<i class="fab fa-opera"></i>';
             }
 
-            osNameElement.textContent = osName
-            osIconElement.innerHTML = osIcon
-            browserNameElement.textContent = browserName
-            browserIconElement.innerHTML = browserIcon
+            osNameElement.textContent = osName;
+            osIconElement.innerHTML = osIcon;
+            browserNameElement.textContent = browserName;
+            browserIconElement.innerHTML = browserIcon;
           }
 
           // Fungsi Deteksi Lokasi via IP
           async function fetchLocation(ip) {
             try {
               // Menggunakan layanan ipapi.co karena ipify hanya memberikan IP
-              const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`)
-              const geoData = await geoResponse.json()
+              const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+              const geoData = await geoResponse.json();
 
               if (geoData.error) {
-                locationNameElement.textContent = 'Data lokasi tidak tersedia'
-                return
+                locationNameElement.textContent = 'Data lokasi tidak tersedia';
+                return;
               }
 
-              ipAddressElement.textContent = ip
-              locationNameElement.textContent = `${geoData.city || 'Kota Tidak Diketahui'}, ${geoData.country_name || 'Negara Tidak Diketahui'}`
+              ipAddressElement.textContent = ip;
+              locationNameElement.textContent = `${geoData.city || 'Kota Tidak Diketahui'}, ${geoData.country_name || 'Negara Tidak Diketahui'}`;
 
               // Mengambil ikon bendera (menggunakan country code)
               const countryCode = geoData.country_code
                 ? geoData.country_code.toLowerCase()
-                : null
+                : null;
               if (countryCode) {
-                countryFlagElement.innerHTML = `<img src="https://flagcdn.com/16x12/${countryCode}.png" alt="Bendera ${geoData.country_name}" title="${geoData.country_name}">`
+                countryFlagElement.innerHTML = `<img src="https://flagcdn.com/16x12/${countryCode}.png" alt="Bendera ${geoData.country_name}" title="${geoData.country_name}">`;
               }
             } catch (error) {
-              console.error('Error fetching location:', error)
-              locationNameElement.textContent = 'Lokasi gagal dimuat'
+              console.error('Error fetching location:', error);
+              locationNameElement.textContent = 'Lokasi gagal dimuat';
             }
           }
 
           // Eksekusi semua deteksi
           async function loadUserInfo() {
-            detectSystemInfo()
+            detectSystemInfo();
             try {
-              const ipResponse = await fetch(IP_API_URL)
-              const ipData = await ipResponse.json()
-              fetchLocation(ipData.ip)
+              const ipResponse = await fetch(IP_API_URL);
+              const ipData = await ipResponse.json();
+              fetchLocation(ipData.ip);
             } catch (error) {
-              console.error('Error fetching IP:', error)
-              ipAddressElement.textContent = 'IP gagal dimuat'
+              console.error('Error fetching IP:', error);
+              ipAddressElement.textContent = 'IP gagal dimuat';
             }
           }
 
-          loadUserInfo()
+          loadUserInfo();
 
           // ===================================================
           // 2. GALERI FOTO DAN LIGHTBOX
           // ===================================================
-          const galleryItems = document.querySelectorAll('.gallery-item')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightbox-img')
-          const closeBtn = document.querySelector('.lightbox-close')
-          const prevBtn = document.querySelector('.lightbox-prev')
-          const nextBtn = document.querySelector('.lightbox-next')
-          let currentIndex = 0
+          const galleryItems = document.querySelectorAll('.gallery-item');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const closeBtn = document.querySelector('.lightbox-close');
+          const prevBtn = document.querySelector('.lightbox-prev');
+          const nextBtn = document.querySelector('.lightbox-next');
+          let currentIndex = 0;
 
           // Event Listener untuk membuka Lightbox
           galleryItems.forEach((item, index) => {
             item.addEventListener('click', () => {
-              currentIndex = index
-              showImage(currentIndex)
-            })
-          })
+              currentIndex = index;
+              showImage(currentIndex);
+            });
+          });
 
           // Fungsi menampilkan gambar di Lightbox
           function showImage(index) {
-            lightbox.style.display = 'block'
+            lightbox.style.display = 'block';
             // Menggunakan src langsung karena sudah diganti dari data-src
-            lightboxImg.src = galleryItems[index].src
+            lightboxImg.src = galleryItems[index].src;
           }
 
           // Navigasi Lightbox
           function navigate(direction) {
-            currentIndex += direction
+            currentIndex += direction;
             if (currentIndex < 0) {
-              currentIndex = galleryItems.length - 1
+              currentIndex = galleryItems.length - 1;
             } else if (currentIndex >= galleryItems.length) {
-              currentIndex = 0
+              currentIndex = 0;
             }
-            showImage(currentIndex)
+            showImage(currentIndex);
           }
 
           // Event listener untuk tombol Lightbox
           closeBtn.addEventListener('click', () => {
-            lightbox.style.display = 'none'
-          })
+            lightbox.style.display = 'none';
+          });
           prevBtn.addEventListener('click', () => {
-            navigate(-1)
-          })
+            navigate(-1);
+          });
           nextBtn.addEventListener('click', () => {
-            navigate(1)
-          })
+            navigate(1);
+          });
 
           // Tutup lightbox jika mengklik area luar gambar
           lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
-              lightbox.style.display = 'none'
+              lightbox.style.display = 'none';
             }
-          })
+          });
 
           // ===================================================
           // 3. IKON SHARING MEDIA SOSIAL
           // ===================================================
-          const currentURL = encodeURIComponent(window.location.href)
-          const title = encodeURIComponent(document.title)
+          const currentURL = encodeURIComponent(window.location.href);
+          const title = encodeURIComponent(document.title);
 
           document.getElementById('share-facebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`
+            `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?url=${currentURL}&text=${title}`
+            `https://twitter.com/intent/tweet?url=${currentURL}&text=${title}`;
           // WhatsApp menggunakan currentURL karena text sudah di-embed di URL
           document.getElementById('share-whatsapp').href =
-            `https://api.whatsapp.com/send?text=${title} - ${currentURL}`
-        })
-      })
+            `https://api.whatsapp.com/send?text=${title} - ${currentURL}`;
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

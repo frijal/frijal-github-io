@@ -40,8 +40,6 @@
       content="Penjelasan tentang kesombongan menurut Rasulullah SAW, sumber-sumbernya, dampak dan solusi praktis untuk memperbaiki akhlak."
     />
 
-
-
     <style>
       :root {
         --bg: #f8fafc;
@@ -463,7 +461,7 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Ambil URL kanonis untuk script
         const canonicalUrl =
-          'https://frijal.github.io/artikel/janganlah-sombong.html'
+          'https://frijal.github.io/artikel/janganlah-sombong.html';
 
         // Set tanggal dan tahun
         document.getElementById('updated-time').textContent =
@@ -471,29 +469,29 @@
             year: 'numeric',
             month: 'long',
             day: 'numeric',
-          })
+          });
         document.getElementById('date-side').textContent =
-          new Date().toLocaleDateString('id-ID')
-        document.getElementById('year').textContent = new Date().getFullYear()
+          new Date().toLocaleDateString('id-ID');
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         // Set URL untuk elemen dinamis
-        document.getElementById('current-url').textContent = canonicalUrl
+        document.getElementById('current-url').textContent = canonicalUrl;
 
         // Set data-href FB Comments
-        const fbComments = document.getElementById('fb-comments')
-        if (fbComments) fbComments.setAttribute('data-href', canonicalUrl)
+        const fbComments = document.getElementById('fb-comments');
+        if (fbComments) fbComments.setAttribute('data-href', canonicalUrl);
 
         // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
         window.fbAsyncInit = function () {
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (e) {
               /* ignore */
             }
           }
-        }
-      })
+        };
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

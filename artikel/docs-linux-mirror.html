@@ -315,54 +315,54 @@ sudo systemctl restart nix-daemon</code></pre>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function togglePanel(btn) {
-          const panel = btn.nextElementSibling
+          const panel = btn.nextElementSibling;
           panel.style.display =
-            panel.style.display === 'block' ? 'none' : 'block'
+            panel.style.display === 'block' ? 'none' : 'block';
         }
         function toggleDark() {
-          document.body.classList.toggle('dark')
+          document.body.classList.toggle('dark');
         }
         function copyCode(btn) {
-          const code = btn.nextElementSibling.innerText
+          const code = btn.nextElementSibling.innerText;
           navigator.clipboard
             .writeText(code)
-            .then(() => alert('Kode berhasil dicopy!'))
+            .then(() => alert('Kode berhasil dicopy!'));
         }
         function downloadFile(filename, content) {
-          const blob = new Blob([content], { type: 'text/plain' })
-          const link = document.createElement('a')
-          link.href = URL.createObjectURL(blob)
-          link.download = filename
-          link.click()
+          const blob = new Blob([content], { type: 'text/plain' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
         }
 
         // Skrip isi per distro
         const debianScript = `#!/bin/bash
 sudo apt install -y netselect-apt
-sudo netselect-apt stable`
+sudo netselect-apt stable`;
 
         const archScript = `#!/bin/bash
 sudo pacman -S reflector --noconfirm
-sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist`
+sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist`;
 
         const fedoraScript = `#!/bin/bash
 sudo dnf install -y dnf-plugins-core
-echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf`
+echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf`;
 
         const opensuseScript = `#!/bin/bash
 sudo zypper mr -da
-sudo zypper ar -f https://download.opensuse.org/distribution/leap/15.5/repo/oss/ repo-oss`
+sudo zypper ar -f https://download.opensuse.org/distribution/leap/15.5/repo/oss/ repo-oss`;
 
         const slackwareScript = `#!/bin/bash
 sudo nano /etc/slackpkg/mirrors
 # Pilih mirror terdekat, lalu jalankan:
 sudo slackpkg update gpg
-sudo slackpkg update`
+sudo slackpkg update`;
 
         const nixosScript = `#!/bin/bash
 echo 'substituters = https://cache.nixos.org https://mirror.example.org' | sudo tee -a /etc/nix/nix.conf
-sudo systemctl restart nix-daemon`
-      })
+sudo systemctl restart nix-daemon`;
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

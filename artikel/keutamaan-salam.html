@@ -250,19 +250,19 @@
       ></div>
       <script>
         document.addEventListener(DOMContentLoaded, () => {
-          const currentUrl = window.location.href
-          document.getElementById('current-url').textContent = currentUrl
+          const currentUrl = window.location.href;
+          document.getElementById('current-url').textContent = currentUrl;
           document
             .getElementById('fb-comments')
-            .setAttribute('data-href', currentUrl)
+            .setAttribute('data-href', currentUrl);
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {}
             }
-          }
-        })
+          };
+        });
       </script>
     </div>
 
@@ -271,35 +271,35 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Info Browser & OS
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Unknown',
-          os = 'Unknown'
+          os = 'Unknown';
 
-        if (ua.indexOf('Firefox') > -1) browser = 'Firefox'
-        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome'
-        else if (ua.indexOf('Safari') > -1) browser = 'Safari'
-        else if (ua.indexOf('Edge') > -1) browser = 'Edge'
+        if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+        else if (ua.indexOf('Chrome') > -1) browser = 'Chrome';
+        else if (ua.indexOf('Safari') > -1) browser = 'Safari';
+        else if (ua.indexOf('Edge') > -1) browser = 'Edge';
 
-        if (ua.indexOf('Win') > -1) os = 'Windows'
-        else if (ua.indexOf('Mac') > -1) os = 'MacOS'
-        else if (ua.indexOf('Linux') > -1) os = 'Linux'
-        else if (ua.indexOf('Android') > -1) os = 'Android'
-        else if (ua.indexOf('like Mac') > -1) os = 'iOS'
+        if (ua.indexOf('Win') > -1) os = 'Windows';
+        else if (ua.indexOf('Mac') > -1) os = 'MacOS';
+        else if (ua.indexOf('Linux') > -1) os = 'Linux';
+        else if (ua.indexOf('Android') > -1) os = 'Android';
+        else if (ua.indexOf('like Mac') > -1) os = 'iOS';
 
-        const infoDiv = document.getElementById('info-browser')
+        const infoDiv = document.getElementById('info-browser');
         infoDiv.innerHTML = `
     <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg> Browser: ${browser}</div>
     <div><svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5"/></svg> OS: ${os}</div>
-  `
+  `;
 
         // Info IP dan bendera negara via API publik
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
           .then((data) => {
-            const countryFlag = `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`
-            infoDiv.innerHTML += `<div><img src="${countryFlag}" alt="${data.country_name}"> IP: ${data.ip} - Negara: ${data.country_name}</div>`
-          })
-      })
+            const countryFlag = `https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png`;
+            infoDiv.innerHTML += `<div><img src="${countryFlag}" alt="${data.country_name}"> IP: ${data.ip} - Negara: ${data.country_name}</div>`;
+          });
+      });
     </script>
 
     });

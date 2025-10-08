@@ -63,7 +63,6 @@
       content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghi3LKp9ZmhpERBVIZ8fm2DSTiMtJidGuCSFYwtvCS7XWY67CS1BxmhMmIbkWC_rGRbAa3sf06GrVnL5Y6zgs3agUb4BFVutVhohqpmkdEweJOjud9-uPXByGF6c8lFsTYT2qvBON2rsydlFWNzrOJaOimgCwsZHDIQmliIkwUCRPJMHNhC9kled4Y3yQ/s762/1SumurRumah.jpg"
     />
 
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
@@ -816,156 +815,155 @@
       <p>🄯 2025 frijal.github.io • Sejarah yang mengalir seperti air wakaf</p>
     </footer>
 
-
-
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // 1. Scroll Progress Bar
-        const progress = document.getElementById('progress')
+        const progress = document.getElementById('progress');
         const onScroll = () => {
-          const e = document.documentElement
+          const e = document.documentElement;
           const scrollPercent =
-            (e.scrollTop / (e.scrollHeight - e.clientHeight)) * 100
-          progress.style.width = scrollPercent + '%'
-        }
-        document.addEventListener('scroll', onScroll, { passive: true })
-        onScroll()
+            (e.scrollTop / (e.scrollHeight - e.clientHeight)) * 100;
+          progress.style.width = scrollPercent + '%';
+        };
+        document.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
         // 2. Share Buttons Logic
         document.querySelectorAll('.share-btn').forEach((l) => {
           l.addEventListener('click', (e) => {
-            e.preventDefault()
-            const net = l.dataset.net
-            const title = document.title
-            const url = location.href
-            let shareUrl = url
+            e.preventDefault();
+            const net = l.dataset.net;
+            const title = document.title;
+            const url = location.href;
+            let shareUrl = url;
 
             if (net === 'fb') {
-              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
             } else if (net === 'tw') {
-              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`
+              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
             } else if (net === 'wa') {
-              shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`
+              shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
             } else if (net === 'tg') {
-              shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+              shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
             } else if (net === 'cp') {
               navigator.clipboard?.writeText(url).then(() => {
                 l.innerHTML =
-                  '✔️ Tersalin <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>'
-                setTimeout(() => location.reload(), 1500) // Reload to reset text
-              })
-              return
+                  '✔️ Tersalin <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
+                setTimeout(() => location.reload(), 1500); // Reload to reset text
+              });
+              return;
             }
-            window.open(shareUrl, '', 'noopener,width=680,height=520')
-          })
-        })
+            window.open(shareUrl, '', 'noopener,width=680,height=520');
+          });
+        });
 
         // 3. User Agent (Browser/OS) Detection
-        ;(() => {
-          const e = document.getElementById('uaChip')
-          const t = navigator.userAgent
+        (() => {
+          const e = document.getElementById('uaChip');
+          const t = navigator.userAgent;
           const n =
-            navigator.userAgentData?.platform || navigator.platform || 'Unknown'
-          const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(t)
-          e.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h18v10H3V5zm0 12h18v2H3v-2z"/></svg>${isMobile ? 'Mobile' : 'Desktop'} • ${n}`
-        })()
+            navigator.userAgentData?.platform ||
+            navigator.platform ||
+            'Unknown';
+          const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(t);
+          e.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5h18v10H3V5zm0 12h18v2H3v-2z"/></svg>${isMobile ? 'Mobile' : 'Desktop'} • ${n}`;
+        })();
 
         // 4. IP and Location Fetch
-        ;(async () => {
-          const e = document.getElementById('locTxt')
-          const t = document.getElementById('flag')
+        (async () => {
+          const e = document.getElementById('locTxt');
+          const t = document.getElementById('flag');
           try {
-            const n = await (await fetch('https://ipapi.co/json/')).json()
-            const city = n.city || 'Kota'
-            const country = n.country_name || 'Negara'
-            const countryCode = (n.country_code || 'UN').toLowerCase()
-            t.src = `https://flagcdn.com/w20/${countryCode}.png`
-            t.alt = country
-            e.textContent = `${city}, ${country}`
+            const n = await (await fetch('https://ipapi.co/json/')).json();
+            const city = n.city || 'Kota';
+            const country = n.country_name || 'Negara';
+            const countryCode = (n.country_code || 'UN').toLowerCase();
+            t.src = `https://flagcdn.com/w20/${countryCode}.png`;
+            t.alt = country;
+            e.textContent = `${city}, ${country}`;
           } catch (n) {
-            t.src = ''
-            t.alt = ''
-            e.textContent = 'Lokasi tidak tersedia'
+            t.src = '';
+            t.alt = '';
+            e.textContent = 'Lokasi tidak tersedia';
           }
-        })()
+        })();
 
         // 5. Lightbox Functionality
-        const imgs = [...document.querySelectorAll('#gallery img')]
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightboxImg')
-        const btnPrev = lb.querySelector('.prev')
-        const btnNext = lb.querySelector('.next')
-        const btnClose = lb.querySelector('.close')
-        let idx = 0
+        const imgs = [...document.querySelectorAll('#gallery img')];
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
+        const btnPrev = lb.querySelector('.prev');
+        const btnNext = lb.querySelector('.next');
+        const btnClose = lb.querySelector('.close');
+        let idx = 0;
 
         function openLB(e) {
-          idx = e
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
-          lb.classList.add('open')
-          document.body.style.overflow = 'hidden'
+          idx = e;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
+          lb.classList.add('open');
+          document.body.style.overflow = 'hidden';
         }
 
         function closeLB() {
-          lb.classList.remove('open')
-          document.body.style.overflow = ''
+          lb.classList.remove('open');
+          document.body.style.overflow = '';
         }
 
         function next() {
-          idx = (idx + 1) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
+          idx = (idx + 1) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
         }
 
         function prev() {
-          idx = (idx - 1 + imgs.length) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
+          idx = (idx - 1 + imgs.length) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
         }
 
-        imgs.forEach((e, t) => e.addEventListener('click', () => openLB(t)))
-        btnClose.addEventListener('click', closeLB)
-        btnNext.addEventListener('click', next)
-        btnPrev.addEventListener('click', prev)
+        imgs.forEach((e, t) => e.addEventListener('click', () => openLB(t)));
+        btnClose.addEventListener('click', closeLB);
+        btnNext.addEventListener('click', next);
+        btnPrev.addEventListener('click', prev);
         lb.addEventListener('click', (e) => {
-          e.target === lb && closeLB()
-        })
+          e.target === lb && closeLB();
+        });
         document.addEventListener('keydown', (e) => {
           if (lb.classList.contains('open')) {
-            if (e.key === 'Escape') closeLB()
-            if (e.key === 'ArrowRight') next()
-            if (e.key === 'ArrowLeft') prev()
+            if (e.key === 'Escape') closeLB();
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
           }
-        })
+        });
 
         // 6. Facebook Comments Setup (Consolidated)
         document.addEventListener('DOMContentLoaded', () => {
           // Set data-href for FB comments
           document
             .querySelector('.fb-comments')
-            .setAttribute('data-href', location.href)
+            .setAttribute('data-href', location.href);
 
           // FB SDK Parse (if already loaded)
           if (typeof FB !== 'undefined') {
             try {
-              FB.XFBML.parse()
+              FB.XFBML.parse();
             } catch (t) {}
           }
-        })
+        });
 
         // 7. FB SDK Loader (Ensure one instance at end of body)
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
-          js.async = true
-          js.crossorigin = 'anonymous'
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
+          js.async = true;
+          js.crossorigin = 'anonymous';
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
-
 
     });
     <div id="kategori-aktif"></div>

@@ -134,22 +134,22 @@ echo "Semua gambar sudah diresize dan disimpan di $DEST_DIR"</code>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function copyCode() {
-          const code = document.querySelector('code.language-bash').innerText
+          const code = document.querySelector('code.language-bash').innerText;
           navigator.clipboard.writeText(code).then(() => {
-            alert('Kode berhasil dicopy!')
-          })
+            alert('Kode berhasil dicopy!');
+          });
         }
         function downloadScript() {
-          const code = document.querySelector('code.language-bash').innerText
-          const blob = new Blob([code], { type: 'text/x-sh' })
-          const url = URL.createObjectURL(blob)
-          const a = document.createElement('a')
-          a.href = url
-          a.download = 'resize-images.sh'
-          a.click()
-          URL.revokeObjectURL(url)
+          const code = document.querySelector('code.language-bash').innerText;
+          const blob = new Blob([code], { type: 'text/x-sh' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'resize-images.sh';
+          a.click();
+          URL.revokeObjectURL(url);
         }
-      })
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

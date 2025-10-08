@@ -106,7 +106,6 @@
       rel="stylesheet"
     />
 
-
     <style>
       /* ... (Gaya CSS Anda yang panjang di sini. Tidak diubah kecuali sangat diperlukan) ... */
       :root {
@@ -1048,145 +1047,147 @@
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const progress = document.getElementById('progress')
+        const progress = document.getElementById('progress');
         const onScroll = () => {
-          const doc = document.documentElement
+          const doc = document.documentElement;
           const scrollPercent =
-            (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100
-          progress.style.width = scrollPercent + '%'
-          progress.setAttribute('aria-valuenow', Math.round(scrollPercent))
-        }
-        document.addEventListener('scroll', onScroll, { passive: true })
-        onScroll() // Run once on load
+            (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+          progress.style.width = scrollPercent + '%';
+          progress.setAttribute('aria-valuenow', Math.round(scrollPercent));
+        };
+        document.addEventListener('scroll', onScroll, { passive: true });
+        onScroll(); // Run once on load
 
         // Share Buttons Logic
         document.querySelectorAll('.share-btn').forEach((l) => {
           l.addEventListener('click', (e) => {
-            e.preventDefault()
-            const net = l.dataset.net
-            const title = document.title
-            const url = location.href
-            let shareUrl = url
+            e.preventDefault();
+            const net = l.dataset.net;
+            const title = document.title;
+            const url = location.href;
+            let shareUrl = url;
 
             if (net === 'fb') {
               shareUrl =
                 'https://www.facebook.com/sharer/sharer.php?u=' +
-                encodeURIComponent(url)
+                encodeURIComponent(url);
             } else if (net === 'tw') {
-              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`
+              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
             } else if (net === 'wa') {
               shareUrl =
-                'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url)
+                'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
             } else if (net === 'tg') {
               shareUrl =
                 `https://t.me/share/url?url=${encodeURIComponent(url)}&text=` +
-                encodeURIComponent(title)
+                encodeURIComponent(title);
             }
 
             if (net === 'cp') {
               navigator.clipboard?.writeText(url).then(() => {
-                const originalText = l.textContent
-                l.innerHTML = '✔️ Tersalin'
+                const originalText = l.textContent;
+                l.innerHTML = '✔️ Tersalin';
                 setTimeout(() => {
-                  l.textContent = originalText.trim()
-                }, 1500) // Ganti dari location.reload() ke reset teks
-              })
+                  l.textContent = originalText.trim();
+                }, 1500); // Ganti dari location.reload() ke reset teks
+              });
             } else {
-              window.open(shareUrl, '', 'noopener,width=680,height=520')
+              window.open(shareUrl, '', 'noopener,width=680,height=520');
             }
-          })
-        })
+          });
+        });
 
         // User Agent / OS Detection
-        ;(() => {
-          const uaChip = document.getElementById('uaChip')
-          const userAgent = navigator.userAgent
+        (() => {
+          const uaChip = document.getElementById('uaChip');
+          const userAgent = navigator.userAgent;
           const platform =
-            navigator.userAgentData?.platform || navigator.platform || 'Unknown'
-          const isMobile = /Mobi|Android/i.test(userAgent)
+            navigator.userAgentData?.platform ||
+            navigator.platform ||
+            'Unknown';
+          const isMobile = /Mobi|Android/i.test(userAgent);
           uaChip.innerHTML =
             `<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3 5h18v10H3V5zm0 12h18v2H3v-2z"/></svg>${isMobile ? 'Mobile' : 'Desktop'} • ` +
-            platform
-        })()
+            platform;
+        })();
 
         // IP Location Detection
-        ;(async () => {
-          const locTxt = document.getElementById('locTxt')
-          const flag = document.getElementById('flag')
+        (async () => {
+          const locTxt = document.getElementById('locTxt');
+          const flag = document.getElementById('flag');
           try {
             // Menggunakan API pihak ketiga yang lebih stabil, jika ipapi.co bermasalah
-            const response = await fetch('https://ipapi.co/json/')
-            const data = await response.json()
-            const city = data.city || 'Kota'
-            const country = data.country_name || 'Negara'
-            const countryCode = (data.country_code || 'UN').toLowerCase()
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            const city = data.city || 'Kota';
+            const country = data.country_name || 'Negara';
+            const countryCode = (data.country_code || 'UN').toLowerCase();
 
-            flag.src = `https://flagcdn.com/w20/${countryCode}.png`
-            flag.alt = country
-            locTxt.textContent = city + ', ' + country
+            flag.src = `https://flagcdn.com/w20/${countryCode}.png`;
+            flag.alt = country;
+            locTxt.textContent = city + ', ' + country;
           } catch (error) {
-            flag.src = ''
-            flag.alt = ''
-            locTxt.textContent = 'Lokasi tidak tersedia'
+            flag.src = '';
+            flag.alt = '';
+            locTxt.textContent = 'Lokasi tidak tersedia';
           }
-        })()
+        })();
 
         // Lightbox Logic
-        const imgs = [...document.querySelectorAll('#gallery img')]
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightboxImg')
-        const btnPrev = lb.querySelector('.prev')
-        const btnNext = lb.querySelector('.next')
-        const btnClose = lb.querySelector('.close')
-        let idx = 0
+        const imgs = [...document.querySelectorAll('#gallery img')];
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
+        const btnPrev = lb.querySelector('.prev');
+        const btnNext = lb.querySelector('.next');
+        const btnClose = lb.querySelector('.close');
+        let idx = 0;
 
         function updateLightboxButtons() {
-          btnPrev.disabled = imgs.length <= 1
-          btnNext.disabled = imgs.length <= 1
+          btnPrev.disabled = imgs.length <= 1;
+          btnNext.disabled = imgs.length <= 1;
         }
 
         function openLB(e) {
-          idx = e
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
-          lb.classList.add('open')
-          lb.setAttribute('aria-hidden', 'false')
-          document.body.style.overflow = 'hidden'
-          updateLightboxButtons()
+          idx = e;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
+          lb.classList.add('open');
+          lb.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          updateLightboxButtons();
         }
 
         function closeLB() {
-          lb.classList.remove('open')
-          lb.setAttribute('aria-hidden', 'true')
-          document.body.style.overflow = ''
+          lb.classList.remove('open');
+          lb.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
         }
 
         function next() {
-          idx = (idx + 1) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
-          lbImg.alt = imgs[idx].alt // Update alt text
+          idx = (idx + 1) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
+          lbImg.alt = imgs[idx].alt; // Update alt text
         }
 
         function prev() {
-          idx = (idx - 1 + imgs.length) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
-          lbImg.alt = imgs[idx].alt // Update alt text
+          idx = (idx - 1 + imgs.length) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
+          lbImg.alt = imgs[idx].alt; // Update alt text
         }
 
-        imgs.forEach((e, t) => e.addEventListener('click', () => openLB(t)))
-        btnClose.addEventListener('click', closeLB)
-        btnNext.addEventListener('click', next)
-        btnPrev.addEventListener('click', prev)
+        imgs.forEach((e, t) => e.addEventListener('click', () => openLB(t)));
+        btnClose.addEventListener('click', closeLB);
+        btnNext.addEventListener('click', next);
+        btnPrev.addEventListener('click', prev);
         lb.addEventListener('click', (e) => {
-          e.target === lb && closeLB()
-        })
+          e.target === lb && closeLB();
+        });
         document.addEventListener('keydown', (e) => {
           if (lb.classList.contains('open')) {
-            if (e.key === 'Escape') closeLB()
-            if (e.key === 'ArrowRight') next()
-            if (e.key === 'ArrowLeft') prev()
+            if (e.key === 'Escape') closeLB();
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
           }
-        })
-      })
+        });
+      });
     </script>
 
     });

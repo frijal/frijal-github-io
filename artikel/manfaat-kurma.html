@@ -6,7 +6,6 @@
     <!-- prettier-ignore -->
     <title>Manfaat Memakan Kurma - Khasiat, Nutrisi, dan Cara Mengonsumsinya</title>
 
-
     <link
       rel="canonical"
       href="https://frijal.github.io/artikel/manfaat-kurma.html"
@@ -534,26 +533,26 @@
               <script>
                 document.addEventListener(DOMContentLoaded, () => {
                   // Ambil URL unik halaman saat ini
-                  const currentUrl = window.location.href
+                  const currentUrl = window.location.href;
                   // tampilkan (opsional)
-                  const displayEl = document.createElement('div')
-                  displayEl.className = 'small'
-                  displayEl.style.marginTop = '8px'
+                  const displayEl = document.createElement('div');
+                  displayEl.className = 'small';
+                  displayEl.style.marginTop = '8px';
                   displayEl.innerHTML =
-                    'URL halaman: <span id="current-url"></span>'
-                  document.querySelector('.section').appendChild(displayEl)
+                    'URL halaman: <span id="current-url"></span>';
+                  document.querySelector('.section').appendChild(displayEl);
 
                   document.getElementById('current-url').textContent =
-                    currentUrl
+                    currentUrl;
                   // Set data-href FB Comments ke URL halaman ini
                   document
                     .getElementById('fb-comments')
-                    .setAttribute('data-href', currentUrl)
+                    .setAttribute('data-href', currentUrl);
                   // Reload plugin FB agar data-href diperbarui
                   if (typeof FB !== 'undefined') {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   }
-                })
+                });
               </script>
               <div class="info-box" style="margin-top: 20px"></div>
             </div>
@@ -718,75 +717,76 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Utility: escape for query param
         function urlEncode(s) {
-          return encodeURIComponent(s)
+          return encodeURIComponent(s);
         }
 
         // Update canonical, OG url, meta mainEntityOfPage
-        ;(function setUrls() {
-          const url = window.location.href
-          document.getElementById('canonical-link').href = url
-          document.getElementById('og-url').setAttribute('content', url)
-          document.getElementById('meta-main-url').setAttribute('content', url)
+        (function setUrls() {
+          const url = window.location.href;
+          document.getElementById('canonical-link').href = url;
+          document.getElementById('og-url').setAttribute('content', url);
+          document.getElementById('meta-main-url').setAttribute('content', url);
           document
             .getElementById('meta-description')
             .setAttribute(
               'content',
               document.querySelector('meta[name="description"]').content,
-            )
-        })()
+            );
+        })();
 
         // Set publish date to today (ISO) and visible text
-        ;(function setDate() {
-          const d = new Date()
-          const iso = d.toISOString()
+        (function setDate() {
+          const d = new Date();
+          const iso = d.toISOString();
           document.getElementById('date-text').textContent =
             d.toLocaleDateString('id-ID', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
-            })
+            });
           // For structured data
-          window.__articleDate = iso
-        })()
+          window.__articleDate = iso;
+        })();
 
         // Sharing handlers
-        const title = document.title
-        const url = window.location.href
+        const title = document.title;
+        const url = window.location.href;
         document.getElementById('share-fb').addEventListener('click', () => {
-          const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlEncode(url)}`
-          window.open(shareUrl, '_blank', 'noopener')
-        })
+          const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlEncode(url)}`;
+          window.open(shareUrl, '_blank', 'noopener');
+        });
         document.getElementById('share-x').addEventListener('click', () => {
-          const shareUrl = `https://x.com/intent/tweet?url=${urlEncode(url)}&text=${urlEncode(title)}`
-          window.open(shareUrl, '_blank', 'noopener')
-        })
+          const shareUrl = `https://x.com/intent/tweet?url=${urlEncode(url)}&text=${urlEncode(title)}`;
+          window.open(shareUrl, '_blank', 'noopener');
+        });
         document.getElementById('share-wa').addEventListener('click', () => {
-          const shareUrl = `https://api.whatsapp.com/send?text=${urlEncode(title + ' \n' + url)}`
-          window.open(shareUrl, '_blank', 'noopener')
-        })
+          const shareUrl = `https://api.whatsapp.com/send?text=${urlEncode(title + ' \n' + url)}`;
+          window.open(shareUrl, '_blank', 'noopener');
+        });
         document.getElementById('share-tg').addEventListener('click', () => {
-          const shareUrl = `https://t.me/share/url?url=${urlEncode(url)}&text=${urlEncode(title)}`
-          window.open(shareUrl, '_blank', 'noopener')
-        })
+          const shareUrl = `https://t.me/share/url?url=${urlEncode(url)}&text=${urlEncode(title)}`;
+          window.open(shareUrl, '_blank', 'noopener');
+        });
 
         // Copy link
         document
           .getElementById('copy-link')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(url)
-              const btn = document.getElementById('copy-link')
-              btn.textContent = 'Tersalin ✓'
-              setTimeout(() => (btn.textContent = 'Salin Tautan'), 1800)
+              await navigator.clipboard.writeText(url);
+              const btn = document.getElementById('copy-link');
+              btn.textContent = 'Tersalin ✓';
+              setTimeout(() => (btn.textContent = 'Salin Tautan'), 1800);
             } catch (e) {
-              alert('Gagal menyalin tautan, silakan salin manual.')
+              alert('Gagal menyalin tautan, silakan salin manual.');
             }
-          })
+          });
 
         // Build JSON-LD (Article, BreadcrumbList, FAQ) dynamically
         function generateJsonLd() {
-          const url = window.location.href
-          const datePublished = window.__articleDate || new Date().toISOString()
+          const url = window.location.href;
+          const datePublished =
+            window.__articleDate || new Date().toISOString();
           const publisher = {
             '@type': 'Organization',
             name: 'SumberRingkas',
@@ -794,7 +794,7 @@
               '@type': 'ImageObject',
               url: document.querySelector('link[rel="icon"]').href,
             },
-          }
+          };
           const article = {
             '@context': 'https://schema.org',
             '@graph': [
@@ -847,12 +847,12 @@
                 ],
               },
             ],
-          }
+          };
           document.getElementById('ld-json').textContent = JSON.stringify(
             article,
             null,
             2,
-          )
+          );
         }
 
         // In case ip fetch was slow, ensure JSON-LD generated after short timeout
@@ -861,56 +861,56 @@
             !document.getElementById('ld-json').textContent ||
             document.getElementById('ld-json').textContent === '{}'
           )
-            generateJsonLd()
-        }, 1500)
-      })
+            generateJsonLd();
+        }, 1500);
+      });
     </script>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const gallery = Array.from(document.querySelectorAll('#gallery img'))
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightbox-img')
-        const lbCap = document.getElementById('lightbox-caption')
-        const btnPrev = document.getElementById('prev')
-        const btnNext = document.getElementById('next')
-        const btnClose = document.getElementById('close')
-        let idx = 0
+        const gallery = Array.from(document.querySelectorAll('#gallery img'));
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCap = document.getElementById('lightbox-caption');
+        const btnPrev = document.getElementById('prev');
+        const btnNext = document.getElementById('next');
+        const btnClose = document.getElementById('close');
+        let idx = 0;
 
         function open(i) {
-          idx = i
-          const el = gallery[idx]
-          lbImg.src = el.src
-          lbImg.alt = el.alt
-          lbCap.textContent = el.dataset.caption || ''
-          lb.classList.add('active')
+          idx = i;
+          const el = gallery[idx];
+          lbImg.src = el.src;
+          lbImg.alt = el.alt;
+          lbCap.textContent = el.dataset.caption || '';
+          lb.classList.add('active');
         }
         function close() {
-          lb.classList.remove('active')
+          lb.classList.remove('active');
         }
         function prev() {
-          open((idx - 1 + gallery.length) % gallery.length)
+          open((idx - 1 + gallery.length) % gallery.length);
         }
         function next() {
-          open((idx + 1) % gallery.length)
+          open((idx + 1) % gallery.length);
         }
 
         gallery.forEach((img, i) =>
           img.addEventListener('click', () => open(i)),
-        )
-        btnPrev.addEventListener('click', prev)
-        btnNext.addEventListener('click', next)
-        btnClose.addEventListener('click', close)
+        );
+        btnPrev.addEventListener('click', prev);
+        btnNext.addEventListener('click', next);
+        btnClose.addEventListener('click', close);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) close()
-        })
+          if (e.target === lb) close();
+        });
         document.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('active')) return
-          if (e.key === 'ArrowLeft') prev()
-          if (e.key === 'ArrowRight') next()
-          if (e.key === 'Escape') close()
-        })
-      })
+          if (!lb.classList.contains('active')) return;
+          if (e.key === 'ArrowLeft') prev();
+          if (e.key === 'ArrowRight') next();
+          if (e.key === 'Escape') close();
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

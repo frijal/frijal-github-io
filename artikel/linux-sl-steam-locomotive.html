@@ -309,18 +309,18 @@ You can install it by typing: sudo apt install sl</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         // Logika Copy Button
         function copyCode(e) {
-          const codeElement = document.getElementById(e)
+          const codeElement = document.getElementById(e);
           if (codeElement) {
-            const code = codeElement.innerText.trim()
+            const code = codeElement.innerText.trim();
             navigator.clipboard
               .writeText(code)
               .then(() => {
-                alert('Kode berhasil disalin!')
+                alert('Kode berhasil disalin!');
               })
               .catch((err) => {
-                console.error('Gagal menyalin kode:', err)
-                alert('Gagal menyalin kode.')
-              })
+                console.error('Gagal menyalin kode:', err);
+                alert('Gagal menyalin kode.');
+              });
           }
         }
 
@@ -328,22 +328,22 @@ You can install it by typing: sudo apt install sl</code></pre>
         function getBrowserOS() {
           let e = navigator.userAgent,
             t = 'Unknown',
-            n = 'Unknown'
+            n = 'Unknown';
 
           // Browser Detection
-          if (/firefox|fxios/i.test(e)) t = 'Firefox'
-          else if (/chrome|chromium|crios/i.test(e)) t = 'Chrome'
-          else if (/safari/i.test(e)) t = 'Safari'
-          else if (/edg/i.test(e)) t = 'Edge'
+          if (/firefox|fxios/i.test(e)) t = 'Firefox';
+          else if (/chrome|chromium|crios/i.test(e)) t = 'Chrome';
+          else if (/safari/i.test(e)) t = 'Safari';
+          else if (/edg/i.test(e)) t = 'Edge';
 
           // OS Detection
-          if (/windows/i.test(e)) n = 'Windows'
-          else if (/linux/i.test(e)) n = 'Linux'
-          else if (/android/i.test(e)) n = 'Android'
-          else if (/iphone|ipad|ipod/i.test(e)) n = 'iOS'
+          if (/windows/i.test(e)) n = 'Windows';
+          else if (/linux/i.test(e)) n = 'Linux';
+          else if (/android/i.test(e)) n = 'Android';
+          else if (/iphone|ipad|ipod/i.test(e)) n = 'iOS';
 
           document.getElementById('system-info').innerHTML =
-            `<span>Browser: ${t} | OS: ${n}</span>`
+            `<span>Browser: ${t} | OS: ${n}</span>`;
         }
 
         // Logika Deteksi IP & Lokasi
@@ -352,44 +352,44 @@ You can install it by typing: sudo apt install sl</code></pre>
             .then((e) => e.json())
             .then((e) => {
               // Pastikan elemen IP ada sebelum diisi
-              const ipInfo = document.getElementById('ip-info')
+              const ipInfo = document.getElementById('ip-info');
               if (ipInfo) {
                 // Perlu penanganan country code yang mungkin undefined
                 const countryCode = e.country_code
                   ? e.country_code.toLowerCase()
-                  : 'xx'
-                ipInfo.innerHTML = `<p>IP Anda: ${e.ip} <img src="https://flagcdn.com/24x18/${countryCode}.png" alt="${e.country_name}"> ${e.country_name}</p>`
+                  : 'xx';
+                ipInfo.innerHTML = `<p>IP Anda: ${e.ip} <img src="https://flagcdn.com/24x18/${countryCode}.png" alt="${e.country_name}"> ${e.country_name}</p>`;
               }
             })
             .catch((e) => {
-              const ipInfo = document.getElementById('ip-info')
+              const ipInfo = document.getElementById('ip-info');
               if (ipInfo)
-                ipInfo.innerHTML = `<p>IP Anda: Lokasi tidak dapat diambil.</p>`
-            })
+                ipInfo.innerHTML = `<p>IP Anda: Lokasi tidak dapat diambil.</p>`;
+            });
         }
 
         // Inisialisasi
         document.addEventListener('DOMContentLoaded', () => {
-          getBrowserOS()
-          getIpInfo()
+          getBrowserOS();
+          getIpInfo();
 
           // Set URL Display
           const canonicalUrl =
-            'https://frijal.github.io/artikel/linux-sl-steam-locomotive.html'
-          document.getElementById('current-url').textContent = canonicalUrl
+            'https://frijal.github.io/artikel/linux-sl-steam-locomotive.html';
+          document.getElementById('current-url').textContent = canonicalUrl;
 
           // Facebook Parse
           window.fbAsyncInit = function () {
             if (typeof FB !== 'undefined') {
               try {
-                FB.XFBML.parse()
+                FB.XFBML.parse();
               } catch (e) {
                 /* ignore */
               }
             }
-          }
-        })
-      })
+          };
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

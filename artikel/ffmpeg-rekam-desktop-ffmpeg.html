@@ -689,8 +689,6 @@ ffmpeg -f x11grab -s 1920x1080 -r 25 -i :0.0 -q:v 5 rekaman-desktop.mpg
           </div>
         </section>
 
-        
-
         <!-- Komentar -->
         <section class="card fb-wrap">
           <div class="pad">
@@ -763,25 +761,25 @@ ffmpeg -f x11grab -s 1920x1080 -r 25 -i :0.0 -q:v 5 rekaman-desktop.mpg
     <!-- Facebook SDK -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(function (d, s, id) {
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
+            fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {
-            return
+            return;
           }
-          js = d.createElement(s)
-          js.id = id
+          js = d.createElement(s);
+          js.id = id;
           js.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     <!-- Interaksi, lazy-load, share, env info -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        
+
         }
 
         // Copy buttons

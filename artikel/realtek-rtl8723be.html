@@ -99,8 +99,6 @@
       }
     </script>
 
-
-
     <style>
       /* Variabel CSS */
       :root {
@@ -488,7 +486,6 @@
             </div>
           </div>
           <div class="hero-card">
-            
             <div class="note" role="note">
               Tips: siapkan koneksi internet alternatif (tethering/ethernet)
               buat jaga‑jaga saat proses build driver.
@@ -761,7 +758,7 @@ sudo reboot</code></pre>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(() => {
+        (() => {
           const themes = [
             {
               brand: '#14b8a6',
@@ -781,22 +778,22 @@ sudo reboot</code></pre>
               accent: '#eab308',
               panel: '#0e2a1b',
             },
-          ]
-          let currentThemeIndex = 0
+          ];
+          let currentThemeIndex = 0;
           document
             .getElementById('cycleTheme')
             ?.addEventListener('click', () => {
-              currentThemeIndex = (currentThemeIndex + 1) % themes.length
-              const newTheme = themes[currentThemeIndex]
+              currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+              const newTheme = themes[currentThemeIndex];
               for (const prop in newTheme) {
                 document.documentElement.style.setProperty(
                   `--${prop}`,
                   newTheme[prop],
-                )
+                );
               }
-            })
-        })()
-      })
+            });
+        })();
+      });
     </script>
 
     <script>
@@ -806,7 +803,7 @@ sudo reboot</code></pre>
           const envInfo = getElement('#envInfo')
           const userAgent = navigator.userAgent
 
-          
+
             })
         })()
       })
@@ -814,12 +811,12 @@ sudo reboot</code></pre>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(() => {
-          const shareBar = document.getElementById('shareBar')
-          if (!shareBar) return
+        (() => {
+          const shareBar = document.getElementById('shareBar');
+          if (!shareBar) return;
 
-          const url = encodeURIComponent(location.href)
-          const title = encodeURIComponent(document.title)
+          const url = encodeURIComponent(location.href);
+          const title = encodeURIComponent(document.title);
 
           const links = {
             '.share-fb': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
@@ -827,83 +824,83 @@ sudo reboot</code></pre>
             '.share-wa': `https://api.whatsapp.com/send?text=${title}%20${url}`,
             '.share-tg': `https://t.me/share/url?url=${url}&text=${title}`,
             '.share-li': `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-          }
+          };
 
           for (const selector in links) {
             shareBar
               .querySelector(selector)
-              ?.setAttribute('href', links[selector])
+              ?.setAttribute('href', links[selector]);
           }
 
           shareBar
             .querySelector('.share-copy')
             ?.addEventListener('click', (e) => {
-              e.preventDefault()
+              e.preventDefault();
               navigator.clipboard
                 ?.writeText(location.href)
                 .then(() => alert('Tautan disalin!'))
-                .catch(() => prompt('Salin manual:', location.href))
-            })
-        })()
-      })
+                .catch(() => prompt('Salin manual:', location.href));
+            });
+        })();
+      });
     </script>
 
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(() => {
+        (() => {
           const galleryLinks = Array.from(
             document.querySelectorAll('#galeri a'),
-          )
-          const lightbox = document.getElementById('lightbox')
-          const img = lightbox.querySelector('img')
-          const prevBtn = document.getElementById('prevBtn')
-          const nextBtn = document.getElementById('nextBtn')
-          const closeBtn = lightbox.querySelector('.lb-close')
-          let currentIndex = 0
+          );
+          const lightbox = document.getElementById('lightbox');
+          const img = lightbox.querySelector('img');
+          const prevBtn = document.getElementById('prevBtn');
+          const nextBtn = document.getElementById('nextBtn');
+          const closeBtn = lightbox.querySelector('.lb-close');
+          let currentIndex = 0;
 
           function updateLightbox(index) {
-            currentIndex = (index + galleryLinks.length) % galleryLinks.length
+            currentIndex = (index + galleryLinks.length) % galleryLinks.length;
             img.src =
               galleryLinks[currentIndex].dataset.large ||
-              galleryLinks[currentIndex].href
+              galleryLinks[currentIndex].href;
           }
 
           galleryLinks.forEach((link, index) => {
             link.addEventListener('click', (e) => {
-              e.preventDefault()
-              updateLightbox(index)
-              lightbox.classList.add('open')
-              lightbox.setAttribute('aria-hidden', 'false')
-            })
-          })
+              e.preventDefault();
+              updateLightbox(index);
+              lightbox.classList.add('open');
+              lightbox.setAttribute('aria-hidden', 'false');
+            });
+          });
 
           prevBtn.addEventListener('click', () =>
             updateLightbox(currentIndex - 1),
-          )
+          );
           nextBtn.addEventListener('click', () =>
             updateLightbox(currentIndex + 1),
-          )
+          );
 
           const closeLightbox = () => {
-            lightbox.classList.remove('open')
-            lightbox.setAttribute('aria-hidden', 'true')
-            img.src = ''
-          }
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            img.src = '';
+          };
 
-          closeBtn.addEventListener('click', closeLightbox)
+          closeBtn.addEventListener('click', closeLightbox);
           lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox()
-          })
+            if (e.target === lightbox) closeLightbox();
+          });
 
           window.addEventListener('keydown', (e) => {
             if (lightbox.classList.contains('open')) {
-              if (e.key === 'Escape') closeLightbox()
-              else if (e.key === 'ArrowLeft') updateLightbox(currentIndex - 1)
-              else if (e.key === 'ArrowRight') updateLightbox(currentIndex + 1)
+              if (e.key === 'Escape') closeLightbox();
+              else if (e.key === 'ArrowLeft') updateLightbox(currentIndex - 1);
+              else if (e.key === 'ArrowRight') updateLightbox(currentIndex + 1);
             }
-          })
-        })()
-      })
+          });
+        })();
+      });
     </script>
 
     });
@@ -916,11 +913,11 @@ sudo reboot</code></pre>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          const currentUrl = location.href
+          const currentUrl = location.href;
           // Set data-href for Facebook comments
           document
             .querySelector('.fb-comments')
-            ?.setAttribute('data-href', currentUrl)
+            ?.setAttribute('data-href', currentUrl);
 
           // Fallback for Open Graph URL (already in <head> but kept defensive check for other dynamic needs)
           if (!document.querySelector('meta[property="og:url"]')) {
@@ -929,20 +926,20 @@ sudo reboot</code></pre>
                 property: 'og:url',
                 content: currentUrl,
               }),
-            )
+            );
           }
 
           // Fallback for image metas if not explicitly set (already in <head> but for robustness)
           const mainImageSrc =
             (document.querySelector('#galeri img') || {}).src ||
-            'https://frijal.github.io/logo.png'
+            'https://frijal.github.io/logo.png';
           if (!document.querySelector('meta[property="og:image"]')) {
             document.head.appendChild(
               Object.assign(document.createElement('meta'), {
                 property: 'og:image',
                 content: mainImageSrc,
               }),
-            )
+            );
           }
           if (!document.querySelector('meta[name="twitter:image"]')) {
             document.head.appendChild(
@@ -950,13 +947,11 @@ sudo reboot</code></pre>
                 name: 'twitter:image',
                 content: mainImageSrc,
               }),
-            )
+            );
           }
-        })
-      })
+        });
+      });
     </script>
-
-
 
     });
     <div id="kategori-aktif"></div>

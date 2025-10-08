@@ -579,8 +579,6 @@
             >
           </div>
 
-          
-
           <!-- Jaga Data Pribadi Tetap Aman Facebook -->
           <div
             class="fb-comments"
@@ -614,7 +612,7 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Canonical URL (harus sinkron dengan <link rel="canonical">)
         const CANON =
-          'https://frijal.github.io/artikel/shalahuddin-yerusalem.html'
+          'https://frijal.github.io/artikel/shalahuddin-yerusalem.html';
 
         // Share links
         function setShareLinks() {
@@ -622,74 +620,74 @@
             document.title +
               ' — ' +
               document.querySelector('meta[name="description"]').content,
-          )
-          const url = encodeURIComponent(CANON)
+          );
+          const url = encodeURIComponent(CANON);
           document.getElementById('share-whatsapp').href =
-            `https://wa.me/?text=${text}%20${url}`
+            `https://wa.me/?text=${text}%20${url}`;
           document.getElementById('share-twitter').href =
-            `https://twitter.com/intent/tweet?text=${text}&url=${url}`
+            `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
           document.getElementById('share-facebook').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           document.getElementById('share-telegram').href =
-            `https://t.me/share/url?url=${url}&text=${text}`
+            `https://t.me/share/url?url=${url}&text=${text}`;
           document
             .getElementById('share-copy')
             .addEventListener('click', (e) => {
-              e.preventDefault()
+              e.preventDefault();
               navigator.clipboard.writeText(CANON).then(() => {
-                const a = e.currentTarget
-                const prev = a.textContent
-                a.textContent = '✅ Tautan disalin'
-                setTimeout(() => (a.textContent = prev), 1800)
-              })
-            })
+                const a = e.currentTarget;
+                const prev = a.textContent;
+                a.textContent = '✅ Tautan disalin';
+                setTimeout(() => (a.textContent = prev), 1800);
+              });
+            });
         }
 
         // Gallery lightbox
-        const imgs = [...document.querySelectorAll('#gallery .card img')]
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lbImg')
-        const lbClose = document.getElementById('lbClose')
-        const lbPrev = document.getElementById('lbPrev')
-        const lbNext = document.getElementById('lbNext')
-        let current = 0
+        const imgs = [...document.querySelectorAll('#gallery .card img')];
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbClose = document.getElementById('lbClose');
+        const lbPrev = document.getElementById('lbPrev');
+        const lbNext = document.getElementById('lbNext');
+        let current = 0;
 
         function openLB(i) {
-          current = i
-          lbImg.src = imgs[current].src
-          lbImg.alt = imgs[current].alt || ''
-          lb.classList.add('open')
-          lb.setAttribute('aria-hidden', 'false')
+          current = i;
+          lbImg.src = imgs[current].src;
+          lbImg.alt = imgs[current].alt || '';
+          lb.classList.add('open');
+          lb.setAttribute('aria-hidden', 'false');
         }
         function closeLB() {
-          lb.classList.remove('open')
-          lb.setAttribute('aria-hidden', 'true')
-          lbImg.src = ''
+          lb.classList.remove('open');
+          lb.setAttribute('aria-hidden', 'true');
+          lbImg.src = '';
         }
         function prevLB() {
-          current = (current - 1 + imgs.length) % imgs.length
-          lbImg.src = imgs[current].src
+          current = (current - 1 + imgs.length) % imgs.length;
+          lbImg.src = imgs[current].src;
         }
         function nextLB() {
-          current = (current + 1) % imgs.length
-          lbImg.src = imgs[current].src
+          current = (current + 1) % imgs.length;
+          lbImg.src = imgs[current].src;
         }
 
         imgs.forEach((img, i) => {
-          img.parentElement.addEventListener('click', () => openLB(i))
-        })
-        lbClose.addEventListener('click', closeLB)
+          img.parentElement.addEventListener('click', () => openLB(i));
+        });
+        lbClose.addEventListener('click', closeLB);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLB()
-        })
-        lbPrev.addEventListener('click', prevLB)
-        lbNext.addEventListener('click', nextLB)
+          if (e.target === lb) closeLB();
+        });
+        lbPrev.addEventListener('click', prevLB);
+        lbNext.addEventListener('click', nextLB);
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') closeLB()
-          if (e.key === 'ArrowLeft') prevLB()
-          if (e.key === 'ArrowRight') nextLB()
-        })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLB();
+          if (e.key === 'ArrowLeft') prevLB();
+          if (e.key === 'ArrowRight') nextLB();
+        });
 
         // Lazy hint via IntersectionObserver (optional enhancement)
         if ('IntersectionObserver' in window) {
@@ -697,104 +695,104 @@
             (entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  const img = entry.target.querySelector('img')
+                  const img = entry.target.querySelector('img');
                   if (img && img.loading === 'lazy') {
                     // could preconnect or perform minor effects
                   }
-                  io.unobserve(entry.target)
+                  io.unobserve(entry.target);
                 }
-              })
+              });
             },
             { rootMargin: '200px' },
-          )
+          );
           document
             .querySelectorAll('.gallery .card')
-            .forEach((card) => io.observe(card))
+            .forEach((card) => io.observe(card));
         }
 
         // Browser & OS detection
         function detect() {
-          const ua = navigator.userAgent || ''
-          const plt = navigator.platform || ''
-          let browser = 'Tidak diketahui'
-          if (ua.includes('Edg/')) browser = 'Microsoft Edge'
+          const ua = navigator.userAgent || '';
+          const plt = navigator.platform || '';
+          let browser = 'Tidak diketahui';
+          if (ua.includes('Edg/')) browser = 'Microsoft Edge';
           else if (ua.includes('OPR/') || ua.includes('Opera'))
-            browser = 'Opera'
-          else if (ua.includes('Chrome/')) browser = 'Google Chrome'
-          else if (ua.includes('Firefox/')) browser = 'Mozilla Firefox'
-          else if (ua.includes('Safari/')) browser = 'Safari'
+            browser = 'Opera';
+          else if (ua.includes('Chrome/')) browser = 'Google Chrome';
+          else if (ua.includes('Firefox/')) browser = 'Mozilla Firefox';
+          else if (ua.includes('Safari/')) browser = 'Safari';
 
-          let os = 'Tidak diketahui'
-          if (ua.includes('Windows')) os = 'Windows'
-          else if (ua.includes('Mac OS X')) os = 'macOS'
-          else if (ua.includes('Android')) os = 'Android'
-          else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS'
-          else if (ua.includes('Linux')) os = 'Linux'
+          let os = 'Tidak diketahui';
+          if (ua.includes('Windows')) os = 'Windows';
+          else if (ua.includes('Mac OS X')) os = 'macOS';
+          else if (ua.includes('Android')) os = 'Android';
+          else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
+          else if (ua.includes('Linux')) os = 'Linux';
 
-          return { browser, os }
+          return { browser, os };
         }
 
         // Country flag from code (e.g., "ID" -> 🇮 🇩)
         function countryCodeToFlag(code) {
-          if (!code) return ''
-          const cc = code.toUpperCase()
-          const A = 127397
+          if (!code) return '';
+          const cc = code.toUpperCase();
+          const A = 127397;
           return cc
             .split('')
             .map((c) => String.fromCodePoint(c.charCodeAt(0) + A))
-            .join('')
+            .join('');
         }
 
         // Geolocation via public API (fallback chain)
         async function fetchGeo() {
           try {
             // ipapi.co first
-            const r1 = await fetch('https://ipapi.co/json/')
+            const r1 = await fetch('https://ipapi.co/json/');
             if (r1.ok) {
-              const j = await r1.json()
+              const j = await r1.json();
               return {
                 city: j.city,
                 region: j.region,
                 country: j.country_name,
                 cc: j.country,
-              }
+              };
             }
             // fallback ipinfo.io
-            const r2 = await fetch('https://ipinfo.io/json?token=')
+            const r2 = await fetch('https://ipinfo.io/json?token=');
             if (r2.ok) {
-              const j = await r2.json()
+              const j = await r2.json();
               return {
                 city: j.city,
                 region: j.region,
                 country: j.country,
                 cc: j.country,
-              }
+              };
             }
           } catch (e) {
             // ignore
           }
-          return null
+          return null;
         }
 
         async function renderSys() {
-          const el = document.getElementById('sys')
-          const { browser, os } = detect()
-          let geoText = 'Lokasi: tidak terdeteksi'
-          const geo = await fetchGeo()
+          const el = document.getElementById('sys');
+          const { browser, os } = detect();
+          let geoText = 'Lokasi: tidak terdeteksi';
+          const geo = await fetchGeo();
           if (geo) {
-            const flag = countryCodeToFlag(geo.cc)
-            const cn = geo.country?.length === 2 ? geo.country : geo.country
-            geoText = `Lokasi: ${geo.city || '-'}, ${geo.region || '-'} — ${cn || '-'} ${flag || ''}`
+            const flag = countryCodeToFlag(geo.cc);
+            const cn = geo.country?.length === 2 ? geo.country : geo.country;
+            geoText = `Lokasi: ${geo.city || '-'}, ${geo.region || '-'} — ${cn || '-'} ${flag || ''}`;
           }
           el.innerHTML = `
         <div><strong>Browser:</strong> ${browser}</div>
         <div><strong>OS:</strong> ${os}</div>
         <div><strong>${'IP kota'}</strong>: ${geoText}</div>
-      `
+      `;
         }
 
-        setShareLinks()
-        renderSys()
+        setShareLinks();
+        renderSys();
 
         // Facebook SDK (pastikan domain sudah terverifikasi jika memakai komentar)
         window.fbAsyncInit = function () {
@@ -803,18 +801,18 @@
             autoLogAppEvents: true,
             xfbml: true,
             version: 'v19.0',
-          })
-        }
-        ;(function (d, s, id) {
+          });
+        };
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
-          if (d.getElementById(id)) return
-          js = d.createElement(s)
-          js.id = id
-          js.src = 'https://connect.facebook.net/id_ID/sdk.js'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

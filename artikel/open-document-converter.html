@@ -296,61 +296,61 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // FB comments
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
 
         // Deteksi Browser & OS
         function detectBrowserOS() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let browser = 'Unknown',
             os = 'Unknown',
             iconB = '🌐',
-            iconO = '💻'
+            iconO = '💻';
           if (/chrome|crios/i.test(ua)) {
-            browser = 'Chrome'
-            iconB = '🟢'
+            browser = 'Chrome';
+            iconB = '🟢';
           } else if (/firefox|fxios/i.test(ua)) {
-            browser = 'Firefox'
-            iconB = '🦊'
+            browser = 'Firefox';
+            iconB = '🦊';
           } else if (/safari/i.test(ua)) {
-            browser = 'Safari'
-            iconB = '🟠'
+            browser = 'Safari';
+            iconB = '🟠';
           } else if (/edg/i.test(ua)) {
-            browser = 'Edge'
-            iconB = '🔵'
+            browser = 'Edge';
+            iconB = '🔵';
           }
           if (/linux/i.test(ua)) {
-            os = 'Linux'
-            iconO = '🐧'
+            os = 'Linux';
+            iconO = '🐧';
           } else if (/windows/i.test(ua)) {
-            os = 'Windows'
-            iconO = '🪟'
+            os = 'Windows';
+            iconO = '🪟';
           } else if (/mac/i.test(ua)) {
-            os = 'MacOS'
-            iconO = '🍎'
+            os = 'MacOS';
+            iconO = '🍎';
           } else if (/android/i.test(ua)) {
-            os = 'Android'
-            iconO = '🤖'
+            os = 'Android';
+            iconO = '🤖';
           } else if (/iphone|ipad/i.test(ua)) {
-            os = 'iOS'
-            iconO = '📱'
+            os = 'iOS';
+            iconO = '📱';
           }
           document.getElementById('browser-os').innerHTML =
-            `Browser: ${iconB} ${browser} | OS: ${iconO} ${os}`
+            `Browser: ${iconB} ${browser} | OS: ${iconO} ${os}`;
         }
-        detectBrowserOS()
+        detectBrowserOS();
 
         // IP & Bendera Negara
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((d) => {
             document.getElementById('ip-info').innerHTML =
-              `IP Anda: ${d.ip} <img src="https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png"> ${d.country_name}`
-          })
-      })
+              `IP Anda: ${d.ip} <img src="https://flagcdn.com/24x18/${d.country_code.toLowerCase()}.png"> ${d.country_name}`;
+          });
+      });
     </script>
 
     <!-- JSON-LD -->

@@ -700,29 +700,29 @@
               <script>
                 document.addEventListener(DOMContentLoaded, () => {
                   // Ambil URL unik halaman saat ini
-                  const currentUrl = window.location.href
+                  const currentUrl = window.location.href;
                   // Pastikan elemen current-url ada; jika tak ada, buat elemen hidden
-                  ;(function () {
+                  (function () {
                     // set visible current-url if exists
-                    const cu = document.getElementById('current-url')
+                    const cu = document.getElementById('current-url');
                     if (cu) {
-                      cu.textContent = currentUrl
+                      cu.textContent = currentUrl;
                     }
                     // Set data-href FB Comments ke URL halaman ini
-                    const fbDiv = document.getElementById('fb-comments')
+                    const fbDiv = document.getElementById('fb-comments');
                     if (fbDiv) {
-                      fbDiv.setAttribute('data-href', currentUrl)
+                      fbDiv.setAttribute('data-href', currentUrl);
                     }
                     // Reload plugin FB agar data-href diperbarui
                     if (typeof FB !== 'undefined') {
                       try {
-                        FB.XFBML.parse()
+                        FB.XFBML.parse();
                       } catch (e) {
                         /* ignore */
                       }
                     }
-                  })()
-                })
+                  })();
+                });
               </script>
             </section>
           </article>
@@ -827,102 +827,102 @@
           // Modern browsers may support navigator.userAgentData
           if (navigator.userAgentData && navigator.userAgentData.brands) {
             // pick the first brand as best-effort
-            const brands = navigator.userAgentData.brands
-            const brand = brands.length ? brands[0].brand : navigator.userAgent
+            const brands = navigator.userAgentData.brands;
+            const brand = brands.length ? brands[0].brand : navigator.userAgent;
             const version = navigator.userAgentData.brands.length
               ? brands[0].version
-              : ''
-            return brand + (version ? ' ' + version : '')
+              : '';
+            return brand + (version ? ' ' + version : '');
           }
           // Fallback: parse navigator.userAgent (best-effort)
-          const ua = navigator.userAgent || 'Unknown'
+          const ua = navigator.userAgent || 'Unknown';
           const browsers = [
             ['Edge', /Edg\/([0-9._]+)/],
             ['Chrome', /Chrome\/([0-9._]+)/],
             ['Firefox', /Firefox\/([0-9._]+)/],
             ['Safari', /Version\/([0-9._]+).*Safari/],
             ['Opera', /OPR\/([0-9._]+)/],
-          ]
+          ];
           for (const [name, regex] of browsers) {
-            const m = ua.match(regex)
-            if (m) return name + ' ' + m[1]
+            const m = ua.match(regex);
+            if (m) return name + ' ' + m[1];
           }
-          return ua
+          return ua;
         }
 
         function getOSInfo() {
-          const ua = navigator.userAgent || navigator.platform || 'Unknown'
+          const ua = navigator.userAgent || navigator.platform || 'Unknown';
           const osList = [
             ['Windows', /Windows NT ([0-9._]+)/],
             ['Android', /Android ([0-9._]+)/],
             ['iOS', /iPhone OS ([0-9_]+)/],
             ['macOS', /Mac OS X ([0-9_]+)/],
             ['Linux', /Linux/],
-          ]
+          ];
           for (const [name, regex] of osList) {
-            const m = ua.match(regex)
+            const m = ua.match(regex);
             if (m) {
-              const v = m[1] ? m[1].replace(/_/g, '.') : ''
-              return name + (v ? ' ' + v : '')
+              const v = m[1] ? m[1].replace(/_/g, '.') : '';
+              return name + (v ? ' ' + v : '');
             }
           }
           // fallback to platform
-          return navigator.platform || 'Unknown OS'
+          return navigator.platform || 'Unknown OS';
         }
 
-        document.getElementById('browser').textContent = getBrowserInfo()
-        document.getElementById('os').textContent = getOSInfo()
+        document.getElementById('browser').textContent = getBrowserInfo();
+        document.getElementById('os').textContent = getOSInfo();
 
         // ---------- Get public IP and country using a public API ----------
         // Note: This will call a third-party service. If privacy is a concern, remove or replace with your own backend.
-        ;(function fetchIpAndFlag() {
-          const ipEl = document.getElementById('ip')
-          const flagEl = document.getElementById('flag')
+        (function fetchIpAndFlag() {
+          const ipEl = document.getElementById('ip');
+          const flagEl = document.getElementById('flag');
           // Using ipapi.co as a light-weight public JSON API
           fetch('https://ipapi.co/json/')
             .then((res) => {
-              if (!res.ok) throw new Error('Gagal mengambil IP')
-              return res.json()
+              if (!res.ok) throw new Error('Gagal mengambil IP');
+              return res.json();
             })
             .then((data) => {
               // data.ip, data.country_code, data.country_name
-              const ip = data.ip || '—'
-              ipEl.textContent = ip
+              const ip = data.ip || '—';
+              ipEl.textContent = ip;
               // set flag if country code available
               if (data.country_code) {
                 // Use flagcdn; require lowercase country code for path
-                const cc = data.country_code.toLowerCase()
+                const cc = data.country_code.toLowerCase();
                 // Prefer SVG for clarity
-                const svg = 'https://flagcdn.com/' + cc + '.svg'
+                const svg = 'https://flagcdn.com/' + cc + '.svg';
                 // fallback PNG
                 const png =
-                  'https://countryflagsapi.com/png/' + data.country_code
+                  'https://countryflagsapi.com/png/' + data.country_code;
                 // Try to set SVG first
-                flagEl.src = svg
-                flagEl.style.display = 'inline-block'
-                flagEl.alt = data.country_name || data.country_code
+                flagEl.src = svg;
+                flagEl.style.display = 'inline-block';
+                flagEl.alt = data.country_name || data.country_code;
                 // Some browsers may block external SVG; add onerror fallback
                 flagEl.onerror = function () {
-                  flagEl.src = png
-                }
+                  flagEl.src = png;
+                };
               } else {
-                flagEl.style.display = 'none'
+                flagEl.style.display = 'none';
               }
             })
             .catch((err) => {
-              console.warn('IP lookup error:', err)
-              ipEl.textContent = 'Tidak dapat mengambil IP'
-            })
-        })()
+              console.warn('IP lookup error:', err);
+              ipEl.textContent = 'Tidak dapat mengambil IP';
+            });
+        })();
 
         // Accessibility: ensure current-url element populated even if FB script not run earlier
         document.addEventListener('DOMContentLoaded', function () {
-          const cu = document.getElementById('current-url')
+          const cu = document.getElementById('current-url');
           if (cu && (!cu.textContent || cu.textContent.trim() === '—')) {
-            cu.textContent = window.location.href
+            cu.textContent = window.location.href;
           }
-        })
-      })
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

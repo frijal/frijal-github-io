@@ -795,20 +795,20 @@ X-GNOME-Autostart-enabled=true
             appId: '1471267430691023',
             xfbml: true,
             version: 'v18.0',
-          })
-        }
-        ;(function (d, s, id) {
+          });
+        };
+        (function (d, s, id) {
           var js,
-            fjs = d.getElementsByTagName(s)[0]
+            fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {
-            return
+            return;
           }
-          js = d.createElement(s)
-          js.id = id
-          js.src = 'https://connect.facebook.net/id_ID/sdk.js'
-          fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
-      })
+          js = d.createElement(s);
+          js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
+      });
     </script>
 
     <!-- Helper SVG icons -->
@@ -828,72 +828,73 @@ X-GNOME-Autostart-enabled=true
       document.addEventListener(DOMContentLoaded, () => {
         // Share URLs
         const url =
-          'https://frijal.github.io/artikel/cara-autostart-skrip-di-ubuntu.html'
-        const title = 'Cara Autostart Skrip di Ubuntu'
+          'https://frijal.github.io/artikel/cara-autostart-skrip-di-ubuntu.html';
+        const title = 'Cara Autostart Skrip di Ubuntu';
         const desc =
-          'Panduan lengkap: jalankan skrip otomatis saat login di Ubuntu dengan .desktop. Contoh dan tips praktis.'
+          'Panduan lengkap: jalankan skrip otomatis saat login di Ubuntu dengan .desktop. Contoh dan tips praktis.';
         document.getElementById('share-twitter').href =
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
         document.getElementById('share-facebook').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         document.getElementById('share-linkedin').href =
-          `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(desc)}`
+          `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(desc)}`;
         document.getElementById('share-whatsapp').href =
-          `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
+          `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
 
         // Deteksi Browser & OS
         function detectBrowser() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           if (/Edg\//.test(ua))
-            return { name: 'Microsoft Edge', svg: icons.browser.edge }
+            return { name: 'Microsoft Edge', svg: icons.browser.edge };
           if (/Chrome\//.test(ua) && !/OPR\//.test(ua))
-            return { name: 'Google Chrome', svg: icons.browser.chrome }
+            return { name: 'Google Chrome', svg: icons.browser.chrome };
           if (/Firefox\//.test(ua))
-            return { name: 'Mozilla Firefox', svg: icons.browser.firefox }
+            return { name: 'Mozilla Firefox', svg: icons.browser.firefox };
           if (/Safari\//.test(ua) && !/Chrome\//.test(ua))
-            return { name: 'Apple Safari', svg: icons.browser.safari }
-          return { name: 'Browser tidak dikenal', svg: icons.browser.chrome }
+            return { name: 'Apple Safari', svg: icons.browser.safari };
+          return { name: 'Browser tidak dikenal', svg: icons.browser.chrome };
         }
         function detectOS() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           if (/Windows NT/.test(ua))
-            return { name: 'Windows', svg: icons.os.windows }
-          if (/Mac OS X/.test(ua)) return { name: 'macOS', svg: icons.os.macos }
+            return { name: 'Windows', svg: icons.os.windows };
+          if (/Mac OS X/.test(ua))
+            return { name: 'macOS', svg: icons.os.macos };
           if (/Android/.test(ua))
-            return { name: 'Android', svg: icons.os.android }
+            return { name: 'Android', svg: icons.os.android };
           if (/iPhone|iPad|iPod/.test(ua))
-            return { name: 'iOS', svg: icons.os.ios }
-          if (/Linux/.test(ua)) return { name: 'Linux', svg: icons.os.linux }
-          return { name: 'OS tidak dikenal', svg: icons.os.linux }
+            return { name: 'iOS', svg: icons.os.ios };
+          if (/Linux/.test(ua)) return { name: 'Linux', svg: icons.os.linux };
+          return { name: 'OS tidak dikenal', svg: icons.os.linux };
         }
         function setBadge(id, iconSvg, text) {
-          const el = document.getElementById(id)
-          el.querySelector('svg').outerHTML = iconSvg
-          el.querySelector('span').textContent = text
+          const el = document.getElementById(id);
+          el.querySelector('svg').outerHTML = iconSvg;
+          el.querySelector('span').textContent = text;
         }
-        const b = detectBrowser()
-        setBadge('deteksi-browser', b.svg, b.name)
-        const o = detectOS()
-        setBadge('deteksi-os', o.svg, o.name)
+        const b = detectBrowser();
+        setBadge('deteksi-browser', b.svg, b.name);
+        const o = detectOS();
+        setBadge('deteksi-os', o.svg, o.name);
 
         // IP + geolokasi
         async function detectIPAndLocation() {
           try {
-            const ipRes = await fetch('https://api.ipify.org?format=json&ipv4')
-            const ipData = await ipRes.json()
-            setBadge('deteksi-ip', icons.ip, ipData.ip || 'Tidak terdeteksi')
+            const ipRes = await fetch('https://api.ipify.org?format=json&ipv4');
+            const ipData = await ipRes.json();
+            setBadge('deteksi-ip', icons.ip, ipData.ip || 'Tidak terdeteksi');
 
-            const geoRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`)
-            const geo = await geoRes.json()
-            const city = geo.city || 'Kota tidak diketahui'
-            const region = geo.region || ''
-            const country = geo.country_name || 'Negara tidak diketahui'
-            const cc = geo.country || 'ID'
+            const geoRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+            const geo = await geoRes.json();
+            const city = geo.city || 'Kota tidak diketahui';
+            const region = geo.region || '';
+            const country = geo.country_name || 'Negara tidak diketahui';
+            const cc = geo.country || 'ID';
             setBadge(
               'deteksi-lokasi',
               icons.loc,
               `${city}${region ? ', ' + region : ''} • ${country}`,
-            )
+            );
 
             const flagEmoji =
               cc.length === 2
@@ -902,23 +903,23 @@ X-GNOME-Autostart-enabled=true
                     .replace(/./g, (c) =>
                       String.fromCodePoint(127397 + c.charCodeAt(0)),
                     )
-                : '🏳️'
-            setBadge('deteksi-flag', icons.flag, flagEmoji)
+                : '🏳️';
+            setBadge('deteksi-flag', icons.flag, flagEmoji);
           } catch (e) {
-            setBadge('deteksi-ip', icons.ip, 'Gagal mendeteksi')
-            setBadge('deteksi-lokasi', icons.loc, 'Lokasi tidak tersedia')
-            setBadge('deteksi-flag', icons.flag, '🏳️')
+            setBadge('deteksi-ip', icons.ip, 'Gagal mendeteksi');
+            setBadge('deteksi-lokasi', icons.loc, 'Lokasi tidak tersedia');
+            setBadge('deteksi-flag', icons.flag, '🏳️');
           }
         }
-        detectIPAndLocation()
+        detectIPAndLocation();
 
         // Generator .desktop
         function generateDesktop() {
-          const name = document.getElementById('gen-name').value.trim()
-          const comment = document.getElementById('gen-comment').value.trim()
-          const exec = document.getElementById('gen-exec').value.trim()
-          const terminal = document.getElementById('gen-terminal').value
-          const enabled = document.getElementById('gen-enabled').value
+          const name = document.getElementById('gen-name').value.trim();
+          const comment = document.getElementById('gen-comment').value.trim();
+          const exec = document.getElementById('gen-exec').value.trim();
+          const terminal = document.getElementById('gen-terminal').value;
+          const enabled = document.getElementById('gen-enabled').value;
 
           const output = `[Desktop Entry]
 Type=Application
@@ -928,62 +929,62 @@ Comment=${comment || 'Autostart via .desktop'}
 Exec=${exec || '/path/to/script.sh'}
 StartupNotify=false
 Terminal=${terminal}
-X-GNOME-Autostart-enabled=${enabled}`
+X-GNOME-Autostart-enabled=${enabled}`;
 
-          document.getElementById('gen-output').textContent = output
+          document.getElementById('gen-output').textContent = output;
         }
 
         // Galeri Lightbox
         const gallery = Array.from(
           document.querySelectorAll('#gallery figure img'),
-        )
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightbox-img')
-        const prevBtn = document.getElementById('prev')
-        const nextBtn = document.getElementById('next')
-        const closeBtn = document.querySelector('.lightbox .close')
-        let current = 0
+        );
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const closeBtn = document.querySelector('.lightbox .close');
+        let current = 0;
 
         function openLightbox(index) {
-          current = index
-          lbImg.src = gallery[current].src
-          lbImg.alt = gallery[current].alt
-          lb.classList.add('open')
+          current = index;
+          lbImg.src = gallery[current].src;
+          lbImg.alt = gallery[current].alt;
+          lb.classList.add('open');
         }
         function closeLightbox() {
-          lb.classList.remove('open')
+          lb.classList.remove('open');
         }
         function next() {
-          openLightbox((current + 1) % gallery.length)
+          openLightbox((current + 1) % gallery.length);
         }
         function prev() {
-          openLightbox((current - 1 + gallery.length) % gallery.length)
+          openLightbox((current - 1 + gallery.length) % gallery.length);
         }
 
         gallery.forEach((img, i) => {
-          img.style.cursor = 'zoom-in'
-          img.addEventListener('click', () => openLightbox(i))
-        })
-        nextBtn.addEventListener('click', next)
-        prevBtn.addEventListener('click', prev)
-        closeBtn.addEventListener('click', closeLightbox)
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', () => openLightbox(i));
+        });
+        nextBtn.addEventListener('click', next);
+        prevBtn.addEventListener('click', prev);
+        closeBtn.addEventListener('click', closeLightbox);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLightbox()
-        })
+          if (e.target === lb) closeLightbox();
+        });
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') closeLightbox()
-          if (e.key === 'ArrowRight') next()
-          if (e.key === 'ArrowLeft') prev()
-        })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') next();
+          if (e.key === 'ArrowLeft') prev();
+        });
 
         // Fullscreen toggle (double click anywhere)
         document.addEventListener('dblclick', () => {
           if (!document.fullscreenElement)
-            document.documentElement.requestFullscreen().catch(() => {})
-          else document.exitFullscreen().catch(() => {})
-        })
-      })
+            document.documentElement.requestFullscreen().catch(() => {});
+          else document.exitFullscreen().catch(() => {});
+        });
+      });
     </script>
     });
     <section id="related-marquee-section">

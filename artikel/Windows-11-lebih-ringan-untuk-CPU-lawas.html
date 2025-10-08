@@ -673,194 +673,195 @@ Set-Service "Diagsvc" -StartupType Disabled
       document.addEventListener(DOMContentLoaded, () => {
         // Copy script
         function copyCode() {
-          const code = document.getElementById('win11Code').textContent
+          const code = document.getElementById('win11Code').textContent;
           navigator.clipboard.writeText(code).then(() => {
-            alert('Script disalin!')
-          })
+            alert('Script disalin!');
+          });
         }
 
         // Browser detection (ikon resmi)
         function getBrowserInfo() {
-          const ua = navigator.userAgent
+          const ua = navigator.userAgent;
           let name = 'Unknown',
             icon = '',
-            version = ''
+            version = '';
 
           if (ua.includes('Brave')) {
-            name = 'Brave'
+            name = 'Brave';
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/3/3e/Brave_logo.svg';
           } else if (ua.includes('Firefox')) {
-            name = 'Firefox'
-            version = (ua.match(/Firefox\/([\d.]+)/) || [, ''])[1]
+            name = 'Firefox';
+            version = (ua.match(/Firefox\/([\d.]+)/) || [, ''])[1];
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg';
           } else if (ua.includes('Edg')) {
-            name = 'Edge'
-            version = (ua.match(/Edg\/([\d.]+)/) || [, ''])[1]
+            name = 'Edge';
+            version = (ua.match(/Edg\/([\d.]+)/) || [, ''])[1];
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/1/1f/Microsoft_Edge_logo_%282019%29.svg';
           } else if (ua.includes('OPR')) {
-            name = 'Opera'
-            version = (ua.match(/OPR\/([\d.]+)/) || [, ''])[1]
+            name = 'Opera';
+            version = (ua.match(/OPR\/([\d.]+)/) || [, ''])[1];
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/4/49/Opera_2015_icon.svg';
           } else if (ua.includes('Chrome')) {
-            name = 'Chrome'
-            version = (ua.match(/Chrome\/([\d.]+)/) || [, ''])[1]
+            name = 'Chrome';
+            version = (ua.match(/Chrome\/([\d.]+)/) || [, ''])[1];
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png'
+              'https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png';
           } else if (ua.includes('Safari')) {
-            name = 'Safari'
-            version = (ua.match(/Version\/([\d.]+)/) || [, ''])[1]
+            name = 'Safari';
+            version = (ua.match(/Version\/([\d.]+)/) || [, ''])[1];
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/5/52/Safari_browser_logo.svg';
           }
-          return { name, version, icon }
+          return { name, version, icon };
         }
 
         // OS detection (ikon resmi)
         function getOSInfo() {
-          const platform = navigator.platform.toLowerCase()
-          const ua = navigator.userAgent.toLowerCase()
+          const platform = navigator.platform.toLowerCase();
+          const ua = navigator.userAgent.toLowerCase();
           let name = 'Unknown OS',
             version = '',
-            icon = ''
+            icon = '';
           if (platform.includes('win')) {
-            name = 'Windows'
-            const m = ua.match(/windows nt ([0-9.]+)/)
-            version = m ? m[1] : ''
+            name = 'Windows';
+            const m = ua.match(/windows nt ([0-9.]+)/);
+            version = m ? m[1] : '';
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg';
           } else if (platform.includes('mac')) {
-            name = 'macOS'
-            const m = ua.match(/mac os x ([0-9_]+)/)
-            version = m ? m[1].replace(/_/g, '.') : ''
+            name = 'macOS';
+            const m = ua.match(/mac os x ([0-9_]+)/);
+            version = m ? m[1].replace(/_/g, '.') : '';
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';
           } else if (platform.includes('linux')) {
-            name = 'Linux'
-            icon = 'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png'
+            name = 'Linux';
+            icon =
+              'https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png';
           } else if (/android/.test(ua)) {
-            name = 'Android'
+            name = 'Android';
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg';
           } else if (/iphone|ipad|ipod/.test(ua)) {
-            name = 'iOS'
+            name = 'iOS';
             icon =
-              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg'
+              'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';
           }
-          return { name, version, icon }
+          return { name, version, icon };
         }
 
         // Render browser & OS
-        ;(function renderClientInfo() {
-          const b = getBrowserInfo()
-          document.getElementById('browserIcon').src = b.icon || ''
+        (function renderClientInfo() {
+          const b = getBrowserInfo();
+          document.getElementById('browserIcon').src = b.icon || '';
           document.getElementById('browserText').textContent =
-            `Browser: ${b.name}${b.version ? ' ' + b.version : ''}`
+            `Browser: ${b.name}${b.version ? ' ' + b.version : ''}`;
 
-          const os = getOSInfo()
-          document.getElementById('osIcon').src = os.icon || ''
+          const os = getOSInfo();
+          document.getElementById('osIcon').src = os.icon || '';
           document.getElementById('osText').textContent =
-            `OS: ${os.name}${os.version ? ' ' + os.version : ''}`
-        })()
+            `OS: ${os.name}${os.version ? ' ' + os.version : ''}`;
+        })();
 
         // IP via ipify -> geolokasi via ipapi.co -> bendera
-        ;(function fetchIPAndGeo() {
+        (function fetchIPAndGeo() {
           fetch('https://api.ipify.org?format=json&ipv4=true')
             .then((r) => r.json())
             .then(({ ip }) => {
               // Ambil detail lokasi dari ipapi.co
               return fetch(`https://ipapi.co/${ip}/json/`).then((res) =>
                 res.json(),
-              )
+              );
             })
             .then((data) => {
-              const ipEl = document.getElementById('ipText')
-              const flagEl = document.getElementById('flagIcon')
-              ipEl.textContent = `IP: ${data.ip} (${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'})`
+              const ipEl = document.getElementById('ipText');
+              const flagEl = document.getElementById('flagIcon');
+              ipEl.textContent = `IP: ${data.ip} (${data.city || 'Kota tidak diketahui'}, ${data.country_name || 'Negara tidak diketahui'})`;
               if (data.country_code) {
-                flagEl.src = `https://flagcdn.com/48x36/${String(data.country_code).toLowerCase()}.png`
+                flagEl.src = `https://flagcdn.com/48x36/${String(data.country_code).toLowerCase()}.png`;
               } else {
-                flagEl.alt = 'Bendera tidak tersedia'
+                flagEl.alt = 'Bendera tidak tersedia';
               }
             })
             .catch(() => {
               document.getElementById('ipText').textContent =
-                'IP: Tidak dapat diambil'
-            })
-        })()
+                'IP: Tidak dapat diambil';
+            });
+        })();
 
         // Lightbox galeri
-        ;(function initLightbox() {
-          const gallery = document.getElementById('gallery')
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightboxImg')
-          const btnClose = document.getElementById('lightboxClose')
-          const btnPrev = document.getElementById('lightboxPrev')
-          const btnNext = document.getElementById('lightboxNext')
+        (function initLightbox() {
+          const gallery = document.getElementById('gallery');
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          const btnClose = document.getElementById('lightboxClose');
+          const btnPrev = document.getElementById('lightboxPrev');
+          const btnNext = document.getElementById('lightboxNext');
 
-          const items = Array.from(gallery.querySelectorAll('img'))
-          let currentIndex = 0
+          const items = Array.from(gallery.querySelectorAll('img'));
+          let currentIndex = 0;
 
           function openLightbox(index) {
-            currentIndex = index
-            const img = items[currentIndex]
-            lightboxImg.src = img.src
-            lightboxImg.alt = img.alt
-            lightbox.classList.add('active')
-            lightbox.setAttribute('aria-hidden', 'false')
+            currentIndex = index;
+            const img = items[currentIndex];
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
           }
           function closeLightbox() {
-            lightbox.classList.remove('active')
-            lightbox.setAttribute('aria-hidden', 'true')
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'true');
           }
           function prev() {
-            currentIndex = (currentIndex - 1 + items.length) % items.length
-            openLightbox(currentIndex)
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            openLightbox(currentIndex);
           }
           function next() {
-            currentIndex = (currentIndex + 1) % items.length
-            openLightbox(currentIndex)
+            currentIndex = (currentIndex + 1) % items.length;
+            openLightbox(currentIndex);
           }
 
           items.forEach((img) => {
             img.addEventListener('click', () =>
               openLightbox(parseInt(img.dataset.index, 10)),
-            )
-          })
-          btnClose.addEventListener('click', closeLightbox)
+            );
+          });
+          btnClose.addEventListener('click', closeLightbox);
           btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation()
-            prev()
-          })
+            e.stopPropagation();
+            prev();
+          });
           btnNext.addEventListener('click', (e) => {
-            e.stopPropagation()
-            next()
-          })
+            e.stopPropagation();
+            next();
+          });
           lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox()
-          })
+            if (e.target === lightbox) closeLightbox();
+          });
           window.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return
-            if (e.key === 'Escape') closeLightbox()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
-        })()
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
+        })();
 
         // Facebook SDK untuk komentar
-        ;(function loadFBSDK() {
-          const script = document.createElement('script')
-          script.async = true
-          script.defer = true
-          script.crossOrigin = 'anonymous'
+        (function loadFBSDK() {
+          const script = document.createElement('script');
+          script.async = true;
+          script.defer = true;
+          script.crossOrigin = 'anonymous';
           script.src =
-            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0'
-          document.body.appendChild(script)
-        })()
-      })
+            'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0';
+          document.body.appendChild(script);
+        })();
+      });
     </script>
     });
     <section id="related-marquee-section">

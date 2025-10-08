@@ -683,95 +683,95 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', function () {
           // 1. Lazy Loading untuk Gambar Utama
-          const lazyImage = document.getElementById('main-image')
+          const lazyImage = document.getElementById('main-image');
           const lazyImageObserver = new IntersectionObserver(
             (entries, observer) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  const img = entry.target
-                  img.src = img.dataset.src
-                  img.removeAttribute('data-src')
-                  lazyImageObserver.unobserve(img)
+                  const img = entry.target;
+                  img.src = img.dataset.src;
+                  img.removeAttribute('data-src');
+                  lazyImageObserver.unobserve(img);
                 }
-              })
+              });
             },
-          )
-          lazyImageObserver.observe(lazyImage)
+          );
+          lazyImageObserver.observe(lazyImage);
 
           // 2. Fungsi Lightbox
-          const lightbox = document.getElementById('lightbox')
-          const lightboxImg = document.getElementById('lightbox-img')
-          const closeLightbox = document.querySelector('.close-lightbox')
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const closeLightbox = document.querySelector('.close-lightbox');
 
           lazyImage.addEventListener('click', () => {
-            lightbox.style.display = 'flex'
-            lightboxImg.src = lazyImage.src
-          })
+            lightbox.style.display = 'flex';
+            lightboxImg.src = lazyImage.src;
+          });
 
           closeLightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none'
-          })
+            lightbox.style.display = 'none';
+          });
 
           lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
-              lightbox.style.display = 'none'
+              lightbox.style.display = 'none';
             }
-          })
+          });
 
           // 3. Deteksi Info Pengguna (Browser, OS, IP Geolocation)
           const userInfoContainer = document.getElementById(
             'user-info-container',
-          )
+          );
 
           function getSystemInfo() {
-            const ua = navigator.userAgent
-            let browserIcon = 'fa-globe'
-            let osIcon = 'fa-desktop'
+            const ua = navigator.userAgent;
+            let browserIcon = 'fa-globe';
+            let osIcon = 'fa-desktop';
 
-            if (ua.includes('Firefox')) browserIcon = 'fa-firefox-browser'
-            else if (ua.includes('Edg')) browserIcon = 'fa-edge'
+            if (ua.includes('Firefox')) browserIcon = 'fa-firefox-browser';
+            else if (ua.includes('Edg')) browserIcon = 'fa-edge';
             else if (ua.includes('Chrome') && !ua.includes('Edg'))
-              browserIcon = 'fa-chrome'
+              browserIcon = 'fa-chrome';
             else if (ua.includes('Safari') && !ua.includes('Chrome'))
-              browserIcon = 'fa-safari'
+              browserIcon = 'fa-safari';
 
-            if (/Windows/.test(ua)) osIcon = 'fa-windows'
+            if (/Windows/.test(ua)) osIcon = 'fa-windows';
             else if (/Macintosh|MacIntel|MacPPC|Mac68K/.test(ua))
-              osIcon = 'fa-apple'
-            else if (/Android/.test(ua)) osIcon = 'fa-android'
-            else if (/iPhone|iPad|iPod/.test(ua)) osIcon = 'fa-apple'
-            else if (/Linux/.test(ua)) osIcon = 'fa-linux'
+              osIcon = 'fa-apple';
+            else if (/Android/.test(ua)) osIcon = 'fa-android';
+            else if (/iPhone|iPad|iPod/.test(ua)) osIcon = 'fa-apple';
+            else if (/Linux/.test(ua)) osIcon = 'fa-linux';
 
             return {
               browserIcon: `fab ${browserIcon}`,
               osIcon: `fab ${osIcon}`,
-            }
+            };
           }
 
           async function getLocationInfo() {
             try {
-              const response = await fetch('https://ipapi.co/json/')
-              if (!response.ok) throw new Error('Network response was not ok')
-              const data = await response.json()
+              const response = await fetch('https://ipapi.co/json/');
+              if (!response.ok) throw new Error('Network response was not ok');
+              const data = await response.json();
               return {
                 flagUrl: `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`,
                 city: data.city,
                 country: data.country_name,
-              }
+              };
             } catch (error) {
-              console.error('Failed to fetch location info:', error)
-              return null
+              console.error('Failed to fetch location info:', error);
+              return null;
             }
           }
 
           async function displayUserInfo() {
-            const systemInfo = getSystemInfo()
-            const locationInfo = await getLocationInfo()
+            const systemInfo = getSystemInfo();
+            const locationInfo = await getLocationInfo();
 
             let html = `
                     <span><i class="${systemInfo.browserIcon}"></i> Browser Anda</span>
                     <span><i class="${systemInfo.osIcon}"></i> Sistem Operasi</span>
-                `
+                `;
 
             if (locationInfo) {
               html += `
@@ -779,51 +779,51 @@
                             <img src="${locationInfo.flagUrl}" alt="Bendera ${locationInfo.country}" width="24" height="18" style="border-radius: 3px;">
                             ${locationInfo.city}
                         </span>
-                    `
+                    `;
             } else {
               html +=
-                '<span><i class="fa-solid fa-location-dot"></i> Lokasi tidak terdeteksi</span>'
+                '<span><i class="fa-solid fa-location-dot"></i> Lokasi tidak terdeteksi</span>';
             }
 
-            userInfoContainer.innerHTML = html
+            userInfoContainer.innerHTML = html;
           }
 
-          displayUserInfo()
+          displayUserInfo();
 
           // 4. Fungsi Tombol Berbagi
-          const pageUrl = 'https://frijal.github.io/artikel/google-veo-ai.html'
-          const pageTitle = encodeURIComponent(document.title)
-          const shareFb = document.getElementById('share-fb')
-          const shareTw = document.getElementById('share-tw')
-          const shareWa = document.getElementById('share-wa')
-          const shareTg = document.getElementById('share-tg')
-          const shareCopy = document.getElementById('share-copy')
+          const pageUrl = 'https://frijal.github.io/artikel/google-veo-ai.html';
+          const pageTitle = encodeURIComponent(document.title);
+          const shareFb = document.getElementById('share-fb');
+          const shareTw = document.getElementById('share-tw');
+          const shareWa = document.getElementById('share-wa');
+          const shareTg = document.getElementById('share-tg');
+          const shareCopy = document.getElementById('share-copy');
 
-          shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
-          shareTw.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
-          shareWa.href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`
-          shareTg.href = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
-          ;[shareFb, shareTw, shareWa, shareTg].forEach((btn) => {
+          shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+          shareTw.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+          shareWa.href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+          shareTg.href = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+          [shareFb, shareTw, shareWa, shareTg].forEach((btn) => {
             btn.addEventListener('click', function (e) {
-              e.preventDefault()
-              window.open(this.href, 'Share', 'width=600,height=400')
-            })
-          })
+              e.preventDefault();
+              window.open(this.href, 'Share', 'width=600,height=400');
+            });
+          });
 
           shareCopy.addEventListener('click', function (e) {
-            e.preventDefault()
+            e.preventDefault();
             navigator.clipboard
               .writeText(pageUrl)
               .then(() => {
-                alert('Tautan berhasil disalin!')
+                alert('Tautan berhasil disalin!');
               })
               .catch((err) => {
-                console.error('Gagal menyalin tautan:', err)
-                alert('Gagal menyalin tautan.')
-              })
-          })
-        })
-      })
+                console.error('Gagal menyalin tautan:', err);
+                alert('Gagal menyalin tautan.');
+              });
+          });
+        });
+      });
     </script>
 
     });

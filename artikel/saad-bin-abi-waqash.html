@@ -583,8 +583,6 @@
             data-numposts="5"
             data-colorscheme="dark"
           ></div>
-
-          
         </article>
       </main>
     </div>
@@ -632,141 +630,141 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Lazy-load images with IntersectionObserver
         document.addEventListener('DOMContentLoaded', function () {
-          const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy'))
+          const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy'));
           if ('IntersectionObserver' in window) {
             let obs = new IntersectionObserver(
               (entries, observer) => {
                 entries.forEach((entry) => {
                   if (entry.isIntersecting) {
-                    const img = entry.target
-                    img.src = img.dataset.src
-                    img.classList.remove('lazy')
-                    observer.unobserve(img)
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
                   }
-                })
+                });
               },
               { rootMargin: '120px' },
-            )
-            lazyImgs.forEach((i) => obs.observe(i))
+            );
+            lazyImgs.forEach((i) => obs.observe(i));
           } else {
             // fallback: load all
-            lazyImgs.forEach((i) => (i.src = i.dataset.src))
+            lazyImgs.forEach((i) => (i.src = i.dataset.src));
           }
-        })
+        });
 
         // Lightbox with arrow navigation and keyboard controls
-        ;(function () {
+        (function () {
           const figures = Array.from(
             document.querySelectorAll('.gallery figure'),
-          )
-          const lightbox = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          const btnLeft = document.querySelector('.lb-arrow.left')
-          const btnRight = document.querySelector('.lb-arrow.right')
-          const btnClose = document.querySelector('.lb-close')
-          let current = -1
+          );
+          const lightbox = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          const btnLeft = document.querySelector('.lb-arrow.left');
+          const btnRight = document.querySelector('.lb-arrow.right');
+          const btnClose = document.querySelector('.lb-close');
+          let current = -1;
 
           function open(idx) {
-            const fig = figures[idx]
-            if (!fig) return
+            const fig = figures[idx];
+            if (!fig) return;
             const src =
               fig.dataset.full ||
-              (fig.querySelector('img') && fig.querySelector('img').src)
-            lbImg.src = src
-            lightbox.style.display = 'flex'
-            lightbox.setAttribute('aria-hidden', 'false')
-            current = idx
-            updateArrows()
-            document.body.style.overflow = 'hidden'
+              (fig.querySelector('img') && fig.querySelector('img').src);
+            lbImg.src = src;
+            lightbox.style.display = 'flex';
+            lightbox.setAttribute('aria-hidden', 'false');
+            current = idx;
+            updateArrows();
+            document.body.style.overflow = 'hidden';
           }
           function close() {
-            lightbox.style.display = 'none'
-            lightbox.setAttribute('aria-hidden', 'true')
-            lbImg.src = ''
-            current = -1
-            document.body.style.overflow = ''
+            lightbox.style.display = 'none';
+            lightbox.setAttribute('aria-hidden', 'true');
+            lbImg.src = '';
+            current = -1;
+            document.body.style.overflow = '';
           }
           function updateArrows() {
-            btnLeft.style.display = current > 0 ? '' : 'none'
-            btnRight.style.display = current < figures.length - 1 ? '' : 'none'
+            btnLeft.style.display = current > 0 ? '' : 'none';
+            btnRight.style.display = current < figures.length - 1 ? '' : 'none';
           }
 
           figures.forEach((fig, i) => {
-            fig.addEventListener('click', () => open(i))
+            fig.addEventListener('click', () => open(i));
             fig.addEventListener('keydown', (e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                open(i)
+                e.preventDefault();
+                open(i);
               }
-            })
-          })
+            });
+          });
 
           btnLeft.addEventListener('click', (e) => {
-            e.stopPropagation()
-            if (current > 0) open(current - 1)
-          })
+            e.stopPropagation();
+            if (current > 0) open(current - 1);
+          });
           btnRight.addEventListener('click', (e) => {
-            e.stopPropagation()
-            if (current < figures.length - 1) open(current + 1)
-          })
-          btnClose.addEventListener('click', close)
+            e.stopPropagation();
+            if (current < figures.length - 1) open(current + 1);
+          });
+          btnClose.addEventListener('click', close);
 
           lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) close()
-          })
+            if (e.target === lightbox) close();
+          });
 
           document.addEventListener('keydown', (e) => {
             if (lightbox.style.display === 'flex') {
-              if (e.key === 'ArrowLeft' && current > 0) open(current - 1)
+              if (e.key === 'ArrowLeft' && current > 0) open(current - 1);
               if (e.key === 'ArrowRight' && current < figures.length - 1)
-                open(current + 1)
-              if (e.key === 'Escape') close()
+                open(current + 1);
+              if (e.key === 'Escape') close();
             }
-          })
-        })()
+          });
+        })();
 
         // Browser, OS, IP & City info with flag
-        ;(function () {
-          const info = document.getElementById('browser-info')
+        (function () {
+          const info = document.getElementById('browser-info');
 
           function detectOS() {
-            const ua = navigator.userAgent
-            if (/Windows NT/.test(ua)) return 'Windows'
-            if (/Android/.test(ua)) return 'Android'
-            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
-            if (/Mac OS X/.test(ua)) return 'Mac OS'
-            if (/Linux/.test(ua)) return 'Linux'
-            return 'Lainnya'
+            const ua = navigator.userAgent;
+            if (/Windows NT/.test(ua)) return 'Windows';
+            if (/Android/.test(ua)) return 'Android';
+            if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+            if (/Mac OS X/.test(ua)) return 'Mac OS';
+            if (/Linux/.test(ua)) return 'Linux';
+            return 'Lainnya';
           }
           function detectBrowser() {
-            const ua = navigator.userAgent
-            if (/OPR|Opera/.test(ua)) return 'Opera'
-            if (/Edg/.test(ua)) return 'Edge'
-            if (/Chrome/.test(ua) && !/Edg/.test(ua)) return 'Chrome'
-            if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari'
-            if (/Firefox/.test(ua)) return 'Firefox'
-            return 'Lainnya'
+            const ua = navigator.userAgent;
+            if (/OPR|Opera/.test(ua)) return 'Opera';
+            if (/Edg/.test(ua)) return 'Edge';
+            if (/Chrome/.test(ua) && !/Edg/.test(ua)) return 'Chrome';
+            if (/Safari/.test(ua) && !/Chrome/.test(ua)) return 'Safari';
+            if (/Firefox/.test(ua)) return 'Firefox';
+            return 'Lainnya';
           }
 
-          const browser = detectBrowser()
-          const os = detectOS()
+          const browser = detectBrowser();
+          const os = detectOS();
 
           // Fetch IP and city using ipapi.co
           fetch('https://ipapi.co/json/')
             .then((res) => res.json())
             .then((data) => {
-              const city = data.city || 'Kota tidak diketahui'
-              const countryCode = (data.country || '').toLowerCase()
+              const city = data.city || 'Kota tidak diketahui';
+              const countryCode = (data.country || '').toLowerCase();
               const flagUrl = countryCode
                 ? 'https://flagcdn.com/24x18/' + countryCode + '.png'
-                : ''
-              info.innerHTML = `<strong>Info Anda:</strong> ${browser} • ${os} • ${city} ${flagUrl ? '<img src="' + flagUrl + '" alt="' + (data.country_name || '') + '" width="24" height="18">' : ''}`
+                : '';
+              info.innerHTML = `<strong>Info Anda:</strong> ${browser} • ${os} • ${city} ${flagUrl ? '<img src="' + flagUrl + '" alt="' + (data.country_name || '') + '" width="24" height="18">' : ''}`;
             })
             .catch(() => {
-              info.innerHTML = `<strong>Info Anda:</strong> ${browser} • ${os} • Lokasi tidak tersedia`
-            })
-        })()
-      })
+              info.innerHTML = `<strong>Info Anda:</strong> ${browser} • ${os} • Lokasi tidak tersedia`;
+            });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -424,18 +424,18 @@ sudo update-grub</code></pre>
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            let currentUrl = window.location.href
-            ;((document.getElementById('current-url').textContent = currentUrl),
+            let currentUrl = window.location.href;
+            ((document.getElementById('current-url').textContent = currentUrl),
               document
                 .getElementById('fb-comments')
                 .setAttribute('data-href', currentUrl),
               (window.fbAsyncInit = function () {
                 if ('undefined' != typeof FB)
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (t) {}
-              }))
-          })
+              }));
+          });
         </script>
       </div>
     </main>
@@ -452,30 +452,29 @@ sudo update-grub</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         document.querySelectorAll('.copy-btn').forEach((n) => {
           n.addEventListener('click', async () => {
-            var e = n.nextElementSibling
+            var e = n.nextElementSibling;
             if (e) {
-              e = e.innerText
+              e = e.innerText;
               try {
-                await navigator.clipboard.writeText(e)
-                let t = n.textContent
-                ;((n.textContent = 'Copied!'),
-                  setTimeout(() => (n.textContent = t), 1400))
+                await navigator.clipboard.writeText(e);
+                let t = n.textContent;
+                ((n.textContent = 'Copied!'),
+                  setTimeout(() => (n.textContent = t), 1400));
               } catch (t) {
-                ;((n.textContent = 'Failed'),
-                  setTimeout(() => (n.textContent = 'Copy'), 1400))
+                ((n.textContent = 'Failed'),
+                  setTimeout(() => (n.textContent = 'Copy'), 1400));
               }
             }
-          })
-        })
-        let themeBtn = document.getElementById('themeBtn')
+          });
+        });
+        let themeBtn = document.getElementById('themeBtn');
         themeBtn.addEventListener('click', () => {
-          document.body.classList.toggle('dark')
-          var t = document.body.classList.contains('dark')
-          themeBtn.textContent = t ? '☀️' : '🌙'
-        })
-      })
+          document.body.classList.toggle('dark');
+          var t = document.body.classList.contains('dark');
+          themeBtn.textContent = t ? '☀️' : '🌙';
+        });
+      });
     </script>
-
 
     });
     <div id="kategori-aktif"></div>

@@ -474,8 +474,6 @@
       </header>
 
       <main id="konten">
-        
-
         <details class="toc">
           <summary>Daftar Isi</summary>
           <ul>
@@ -975,84 +973,84 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Reading progress
-        const progressBar = document.getElementById('readProgress')
+        const progressBar = document.getElementById('readProgress');
         document.addEventListener('scroll', () => {
-          const h = document.documentElement
-          const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight)
-          progressBar.style.width = Math.min(100, scrolled * 100) + '%'
-        })
+          const h = document.documentElement;
+          const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+          progressBar.style.width = Math.min(100, scrolled * 100) + '%';
+        });
 
         // Theme toggle (default dark)
-        const toggleTheme = document.getElementById('toggleTheme')
-        const html = document.documentElement
-        const savedTheme = localStorage.getItem('theme')
-        if (savedTheme) html.setAttribute('data-theme', savedTheme)
+        const toggleTheme = document.getElementById('toggleTheme');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) html.setAttribute('data-theme', savedTheme);
         toggleTheme.textContent =
-          html.getAttribute('data-theme') === 'dark' ? '🌙 Dark' : '☀️ Light'
+          html.getAttribute('data-theme') === 'dark' ? '🌙 Dark' : '☀️ Light';
         toggleTheme.addEventListener('click', () => {
-          const cur = html.getAttribute('data-theme')
-          const next = cur === 'dark' ? 'light' : 'dark'
-          html.setAttribute('data-theme', next)
-          localStorage.setItem('theme', next)
-          toggleTheme.textContent = next === 'dark' ? '🌙 Dark' : '☀️ Light'
-        })
+          const cur = html.getAttribute('data-theme');
+          const next = cur === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          toggleTheme.textContent = next === 'dark' ? '🌙 Dark' : '☀️ Light';
+        });
 
         // Lazy-load gallery images + Lightbox
         const galleryItems = Array.from(
           document.querySelectorAll('.gallery-item'),
-        )
-        const imgs = []
+        );
+        const imgs = [];
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
               if (e.isIntersecting) {
-                const box = e.target
-                const img = box.querySelector('img')
-                const src = box.getAttribute('data-src')
+                const box = e.target;
+                const img = box.querySelector('img');
+                const src = box.getAttribute('data-src');
                 if (src && !img.getAttribute('src')) {
-                  img.src = src
+                  img.src = src;
                 }
-                io.unobserve(box)
+                io.unobserve(box);
               }
-            })
+            });
           },
           { rootMargin: '150px' },
-        )
-        galleryItems.forEach((box) => io.observe(box))
+        );
+        galleryItems.forEach((box) => io.observe(box));
 
-        let currentIndex = 0
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightboxImg')
+        let currentIndex = 0;
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
         galleryItems.forEach((box, idx) => {
           box.addEventListener('click', () => {
-            currentIndex = idx
-            lbImg.src = box.getAttribute('data-src')
-            lb.classList.add('open')
-          })
-          imgs.push(box.getAttribute('data-src'))
-        })
+            currentIndex = idx;
+            lbImg.src = box.getAttribute('data-src');
+            lb.classList.add('open');
+          });
+          imgs.push(box.getAttribute('data-src'));
+        });
         function showIndex(i) {
-          currentIndex = (i + imgs.length) % imgs.length
-          lbImg.src = imgs[currentIndex]
+          currentIndex = (i + imgs.length) % imgs.length;
+          lbImg.src = imgs[currentIndex];
         }
         document
           .getElementById('prev')
-          .addEventListener('click', () => showIndex(currentIndex - 1))
+          .addEventListener('click', () => showIndex(currentIndex - 1));
         document
           .getElementById('next')
-          .addEventListener('click', () => showIndex(currentIndex + 1))
+          .addEventListener('click', () => showIndex(currentIndex + 1));
         document
           .getElementById('close')
-          .addEventListener('click', () => lb.classList.remove('open'))
+          .addEventListener('click', () => lb.classList.remove('open'));
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) lb.classList.remove('open')
-        })
+          if (e.target === lb) lb.classList.remove('open');
+        });
         document.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') lb.classList.remove('open')
-          if (e.key === 'ArrowLeft') showIndex(currentIndex - 1)
-          if (e.key === 'ArrowRight') showIndex(currentIndex + 1)
-        })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') lb.classList.remove('open');
+          if (e.key === 'ArrowLeft') showIndex(currentIndex - 1);
+          if (e.key === 'ArrowRight') showIndex(currentIndex + 1);
+        });
 
         // Share handlers
         const shareData = {
@@ -1061,70 +1059,70 @@
           url:
             document.querySelector('link[rel="canonical"]')?.href ||
             location.href,
-        }
+        };
         document.querySelectorAll('.share .btn[data-share]').forEach((btn) => {
           btn.addEventListener('click', async () => {
-            const t = btn.getAttribute('data-share')
-            const url = encodeURIComponent(shareData.url)
-            const text = encodeURIComponent(shareData.text)
-            let shareUrl = ''
+            const t = btn.getAttribute('data-share');
+            const url = encodeURIComponent(shareData.url);
+            const text = encodeURIComponent(shareData.text);
+            let shareUrl = '';
             if (navigator.share) {
               try {
-                await navigator.share(shareData)
-                return
+                await navigator.share(shareData);
+                return;
               } catch (e) {}
             }
             switch (t) {
               case 'whatsapp':
-                shareUrl = `https://wa.me/?text=${text}%20${url}`
-                break
+                shareUrl = `https://wa.me/?text=${text}%20${url}`;
+                break;
               case 'twitter':
-                shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`
-                break
+                shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                break;
               case 'facebook':
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-                break
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                break;
               case 'telegram':
-                shareUrl = `https://t.me/share/url?url=${url}&text=${text}`
-                break
+                shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+                break;
               case 'linkedin':
-                shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${encodeURIComponent(shareData.title)}&summary=${text}`
-                break
+                shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${encodeURIComponent(shareData.title)}&summary=${text}`;
+                break;
             }
             if (shareUrl)
               window.open(
                 shareUrl,
                 '_blank',
                 'noopener,noreferrer,width=740,height=560',
-              )
-          })
-        })
+              );
+          });
+        });
         document
           .getElementById('copyLink')
           .addEventListener('click', async () => {
             try {
-              await navigator.clipboard.writeText(shareData.url)
-              const c = document.getElementById('copyLink')
-              c.textContent = '✅ Tautan disalin'
-              setTimeout(() => (c.textContent = '🔗 Salin tautan'), 1600)
+              await navigator.clipboard.writeText(shareData.url);
+              const c = document.getElementById('copyLink');
+              c.textContent = '✅ Tautan disalin';
+              setTimeout(() => (c.textContent = '🔗 Salin tautan'), 1600);
             } catch (e) {
-              alert('Gagal menyalin tautan')
+              alert('Gagal menyalin tautan');
             }
-          })
+          });
 
         // Smooth anchor scroll
         document.querySelectorAll('a[href^="#"]').forEach((a) => {
           a.addEventListener('click', (e) => {
-            const id = a.getAttribute('href').slice(1)
-            const el = document.getElementById(id)
+            const id = a.getAttribute('href').slice(1);
+            const el = document.getElementById(id);
             if (el) {
-              e.preventDefault()
-              el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              history.replaceState(null, '', '#' + id)
+              e.preventDefault();
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              history.replaceState(null, '', '#' + id);
             }
-          })
-        })
-      })
+          });
+        });
+      });
     </script>
 
     <!-- Facebook SDK (dark compatible) -->

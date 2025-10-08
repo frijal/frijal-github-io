@@ -89,7 +89,7 @@
                       }
                     },
                     "description": "APT Debian menambahkan perintah history bawaan untuk mengurai log secara native: apt history-list dan apt history-info memudahkan peninjauan transaksi paket."
-        
+
             <meta name="date" content="2025-09-27">
 
                   }
@@ -648,11 +648,11 @@ sudo apt history-list | grep curl</code></pre>
     </style>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;((() => {
+        ((() => {
           var t = document.body.innerText.trim().split(/\s+/).length,
             t = Math.max(3, Math.round(t / 250)),
-            e = document.getElementById('read-time')
-          e && (e.textContent = `≈ ${t} menit baca`)
+            e = document.getElementById('read-time');
+          e && (e.textContent = `≈ ${t} menit baca`);
         })(),
           document
             .getElementById('copy-link')
@@ -660,13 +660,13 @@ sudo apt history-list | grep curl</code></pre>
               try {
                 await navigator.clipboard.writeText(
                   'https://frijal.github.io/artikel/apt-debian-history.html',
-                )
+                );
                 let t = document.getElementById('copy-link'),
-                  e = t.textContent
-                ;((t.textContent = 'Tersalin ✓'),
-                  setTimeout(() => (t.textContent = e), 1600))
+                  e = t.textContent;
+                ((t.textContent = 'Tersalin ✓'),
+                  setTimeout(() => (t.textContent = e), 1600));
               } catch (t) {
-                alert('Gagal menyalin link')
+                alert('Gagal menyalin link');
               }
             }),
           (() => {
@@ -685,24 +685,24 @@ sudo apt history-list | grep curl</code></pre>
                   t.closest('figure')?.querySelector('figcaption')
                     ?.textContent || '',
               })),
-              d = 0
+              d = 0;
             function i(t) {
-              ;((d = t),
+              ((d = t),
                 (n.src = c[d].src),
                 (n.alt = c[d].alt),
                 (a.textContent = c[d].cap),
-                e.setAttribute('aria-hidden', 'false'))
+                e.setAttribute('aria-hidden', 'false'));
             }
             function l() {
-              ;(e.setAttribute('aria-hidden', 'true'),
+              (e.setAttribute('aria-hidden', 'true'),
                 (n.src = ''),
-                (a.textContent = ''))
+                (a.textContent = ''));
             }
             function s(t) {
-              i((d = (d + t + c.length) % c.length))
+              i((d = (d + t + c.length) % c.length));
             }
-            ;(document.addEventListener('click', (t) => {
-              let e = t.target
+            (document.addEventListener('click', (t) => {
+              let e = t.target;
               e instanceof HTMLImageElement &&
                 'true' === e.dataset.lb &&
                 i(
@@ -710,21 +710,21 @@ sudo apt history-list | grep curl</code></pre>
                     (t = c.findIndex((t) => t.src === (e.currentSrc || e.src)))
                     ? t
                     : 0,
-                )
+                );
             }),
               t.addEventListener('click', l),
               r.addEventListener('click', () => s(-1)),
               o.addEventListener('click', () => s(1)),
               e.addEventListener('click', (t) => {
-                t.target === e && l()
+                t.target === e && l();
               }),
               document.addEventListener('keydown', (t) => {
                 'false' === e.getAttribute('aria-hidden') &&
                   ('Escape' === t.key && l(),
                   'ArrowLeft' === t.key && s(-1),
                   'ArrowRight' === t.key) &&
-                  s(1)
-              }))
+                  s(1);
+              }));
           })(),
           (() => {
             var t = navigator.userAgent,
@@ -732,22 +732,22 @@ sudo apt history-list | grep curl</code></pre>
               n =
                 navigator.language ||
                 (navigator.languages && navigator.languages[0]) ||
-                'id'
-            ;((document.getElementById('ua').textContent = 'Browser: ' + t),
+                'id';
+            ((document.getElementById('ua').textContent = 'Browser: ' + t),
               (document.getElementById('os').textContent = 'OS: ' + e),
-              (document.getElementById('lang').textContent = 'Bahasa: ' + n))
+              (document.getElementById('lang').textContent = 'Bahasa: ' + n));
           })(),
           (async () => {
             try {
-              var t = await fetch('https://ipapi.co/json/')
-              if (!t.ok) throw new Error('ipapi error')
+              var t = await fetch('https://ipapi.co/json/');
+              if (!t.ok) throw new Error('ipapi error');
               var e,
                 n = await t.json(),
                 a = n.ip || '—',
                 r = n.city || '—',
                 o = n.country_name || '—',
-                c = (n.country_code || '').toLowerCase()
-              ;((document.getElementById('ip').textContent = 'IP: ' + a),
+                c = (n.country_code || '').toLowerCase();
+              ((document.getElementById('ip').textContent = 'IP: ' + a),
                 (document.getElementById('city').textContent = 'Kota: ' + r),
                 (document.getElementById('country').textContent =
                   'Negara: ' + o),
@@ -759,30 +759,30 @@ sudo apt history-list | grep curl</code></pre>
                   (e.height = 36),
                   (e.style.border = '1px solid rgba(255,255,255,.12)'),
                   (e.style.borderRadius = '6px'),
-                  document.getElementById('flag-wrap').appendChild(e)))
+                  document.getElementById('flag-wrap').appendChild(e)));
             } catch (t) {
-              ;((document.getElementById('city').textContent =
+              ((document.getElementById('city').textContent =
                 'Kota: tidak terdeteksi'),
                 (document.getElementById('country').textContent =
-                  'Negara: tidak terdeteksi'))
+                  'Negara: tidak terdeteksi'));
             }
           })(),
           ((t, e, n) => {
-            var a = t.getElementsByTagName(e)[0]
+            var a = t.getElementsByTagName(e)[0];
             t.getElementById(n) ||
               (((t = t.createElement(e)).id = n),
               (t.src =
                 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v17.0'),
-              a.parentNode.insertBefore(t, a))
+              a.parentNode.insertBefore(t, a));
           })(document, 'script', 'facebook-jssdk'),
           document
             .getElementById('related-posts-toggle')
             .addEventListener('click', () => {
               document
                 .getElementById('related-posts-container')
-                .classList.toggle('open')
-            }))
-      })
+                .classList.toggle('open');
+            }));
+      });
     </script>
 
     });

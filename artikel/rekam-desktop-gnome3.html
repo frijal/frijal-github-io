@@ -571,8 +571,6 @@
 
       <hr style="border-top: 1px solid #e0e0e0; margin: 4rem 0" />
 
-      
-
       <div class="social-share">
         <h3>Jaga Data Pribadi Tetap Aman!</h3>
         <a
@@ -638,54 +636,54 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const lightbox = document.getElementById('lightbox')
-        const lightboxImg = document.getElementById('lightbox-img')
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
         function openLightbox(imgSrc) {
-          lightboxImg.src = imgSrc
-          lightbox.style.display = 'flex'
+          lightboxImg.src = imgSrc;
+          lightbox.style.display = 'flex';
         }
         function closeLightbox() {
-          lightbox.style.display = 'none'
+          lightbox.style.display = 'none';
         }
 
         // Deteksi Info Pengguna
         document.addEventListener('DOMContentLoaded', function () {
           // Browser & OS
-          const ua = navigator.userAgent
-          const platform = navigator.platform
-          let browser = 'Browser tidak dikenal'
-          if (ua.includes('Firefox/')) browser = `Firefox 🔥`
-          else if (ua.includes('Chrome/')) browser = `Chrome 🚀`
-          else if (ua.includes('Safari/')) browser = `Safari 🧭`
-          else if (ua.includes('Edge/')) browser = `Edge 🌐`
+          const ua = navigator.userAgent;
+          const platform = navigator.platform;
+          let browser = 'Browser tidak dikenal';
+          if (ua.includes('Firefox/')) browser = `Firefox 🔥`;
+          else if (ua.includes('Chrome/')) browser = `Chrome 🚀`;
+          else if (ua.includes('Safari/')) browser = `Safari 🧭`;
+          else if (ua.includes('Edge/')) browser = `Edge 🌐`;
           else if (ua.includes('Opera') || ua.includes('OPR'))
-            browser = `Opera ✨`
+            browser = `Opera ✨`;
           document.getElementById('browser-info').textContent =
-            `Browser: ${browser}`
+            `Browser: ${browser}`;
 
-          let os = 'OS tidak dikenal'
-          if (platform.includes('Win')) os = 'Windows 💻'
-          else if (platform.includes('Mac')) os = 'macOS 🍎'
-          else if (platform.includes('Linux')) os = 'Linux 🐧'
-          else if (ua.includes('Android')) os = 'Android 🤖'
-          else if (ua.includes('iOS')) os = 'iOS 📱'
+          let os = 'OS tidak dikenal';
+          if (platform.includes('Win')) os = 'Windows 💻';
+          else if (platform.includes('Mac')) os = 'macOS 🍎';
+          else if (platform.includes('Linux')) os = 'Linux 🐧';
+          else if (ua.includes('Android')) os = 'Android 🤖';
+          else if (ua.includes('iOS')) os = 'iOS 📱';
           document.getElementById('os-info').textContent =
-            `Sistem Operasi: ${os}`
+            `Sistem Operasi: ${os}`;
 
           // Lokasi via IP
-          const locationInfoEl = document.getElementById('location-info')
+          const locationInfoEl = document.getElementById('location-info');
           fetch('https://ipapi.co/json/')
             .then((response) => response.json())
             .then((data) => {
-              const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`
-              locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle; margin-left: 5px;">`
+              const flag = `https://flagcdn.com/w40/${data.country_code.toLowerCase()}.png`;
+              locationInfoEl.innerHTML = `Lokasi: ${data.city}, ${data.country_name} <img src="${flag}" alt="${data.country_name} flag" style="width: 20px; vertical-align: middle; margin-left: 5px;">`;
             })
             .catch((error) => {
-              locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.'
-              console.error('Error fetching location:', error)
-            })
-        })
-      })
+              locationInfoEl.textContent = '📍 Lokasi tidak dapat dideteksi.';
+              console.error('Error fetching location:', error);
+            });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

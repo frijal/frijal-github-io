@@ -1034,22 +1034,22 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
             // Set data-href FB Comments ke URL halaman ini
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             // DOM for fb-comments will be updated after SDK loaded
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {
                   /* ignore */
                 }
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
     </main>
@@ -1087,50 +1087,48 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         // Robust copy function: find nearest code block in the same pre
         function copyCode(btn) {
-          const pre = btn.closest('pre')
-          if (!pre) return
-          const code = pre.querySelector('code')
-          if (!code) return
-          const text = code.innerText
+          const pre = btn.closest('pre');
+          if (!pre) return;
+          const code = pre.querySelector('code');
+          if (!code) return;
+          const text = code.innerText;
           navigator.clipboard
             .writeText(text)
             .then(() => {
-              const original = btn.textContent
-              btn.textContent = 'Tersalin!'
-              setTimeout(() => (btn.textContent = original), 1500)
+              const original = btn.textContent;
+              btn.textContent = 'Tersalin!';
+              setTimeout(() => (btn.textContent = original), 1500);
             })
             .catch(() => {
-              btn.textContent = 'Gagal'
-              setTimeout(() => (btn.textContent = 'Copy'), 1500)
-            })
+              btn.textContent = 'Gagal';
+              setTimeout(() => (btn.textContent = 'Copy'), 1500);
+            });
         }
 
         // Share builder (dynamic current URL)
         function share(platform) {
-          const url = encodeURIComponent(window.location.href)
+          const url = encodeURIComponent(window.location.href);
           const text = encodeURIComponent(
             'Panduan Command Line Linux — 17 halaman',
-          )
-          let shareUrl = ''
+          );
+          let shareUrl = '';
           if (platform === 'facebook')
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           if (platform === 'twitter')
-            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
           if (platform === 'whatsapp')
-            shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`
+            shareUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
           if (platform === 'telegram')
-            shareUrl = `https://t.me/share/url?url=${url}&text=${text}`
-          if (!shareUrl) return
-          window.open(shareUrl, '_blank', 'noopener')
+            shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+          if (!shareUrl) return;
+          window.open(shareUrl, '_blank', 'noopener');
         }
-
-        
 
         // set FB comments data-href (already done above) and highlight Prism
         document.addEventListener('DOMContentLoaded', () => {
           // Prism already loaded; nothing extra required
-        })
-      })
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

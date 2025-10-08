@@ -322,28 +322,28 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox
-        const lightbox = document.getElementById('lightbox')
-        const lbImg = lightbox.querySelector('img')
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = lightbox.querySelector('img');
         document.querySelectorAll('.article-images img').forEach((img) => {
           img.addEventListener('click', () => {
-            lbImg.src = img.dataset.full || img.src
-            lightbox.classList.add('show')
-          })
-        })
+            lbImg.src = img.dataset.full || img.src;
+            lightbox.classList.add('show');
+          });
+        });
         document
           .querySelector('.lb-close')
-          .addEventListener('click', () => lightbox.classList.remove('show'))
+          .addEventListener('click', () => lightbox.classList.remove('show'));
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) lightbox.classList.remove('show')
-        })
+          if (e.target === lightbox) lightbox.classList.remove('show');
+        });
 
         // Copy Link
         document.getElementById('copyLink').addEventListener('click', () => {
           navigator.clipboard
             .writeText(window.location.href)
-            .then(() => alert('Link artikel disalin!'))
-        })
-      })
+            .then(() => alert('Link artikel disalin!'));
+        });
+      });
     </script>
 
     });

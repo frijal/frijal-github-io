@@ -451,8 +451,6 @@
         <div class="meta" aria-label="Tanggal dan info halaman">
           <span>Artikel</span> • <span>Dipublikasikan 25 Sep 2025</span>
         </div>
-
-        
       </header>
 
       <article class="card" role="article">
@@ -659,36 +657,37 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Browser & OS detection (order matters)
         function detectSystemInfo() {
-          const ua = navigator.userAgent
-          let browser = 'Unknown'
-          if (ua.includes('Edg')) browser = 'Edge'
-          else if (ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera'
-          else if (ua.includes('Chrome')) browser = 'Chrome'
-          else if (ua.includes('Firefox')) browser = 'Firefox'
-          else if (ua.includes('Safari')) browser = 'Safari'
-          document.getElementById('browser-info').textContent = browser
+          const ua = navigator.userAgent;
+          let browser = 'Unknown';
+          if (ua.includes('Edg')) browser = 'Edge';
+          else if (ua.includes('OPR') || ua.includes('Opera'))
+            browser = 'Opera';
+          else if (ua.includes('Chrome')) browser = 'Chrome';
+          else if (ua.includes('Firefox')) browser = 'Firefox';
+          else if (ua.includes('Safari')) browser = 'Safari';
+          document.getElementById('browser-info').textContent = browser;
 
-          let os = 'Unknown'
-          if (/Windows/i.test(ua)) os = 'Windows'
-          else if (/Macintosh|Mac OS X/i.test(ua)) os = 'macOS'
-          else if (/Linux/i.test(ua)) os = 'Linux'
-          else if (/Android/i.test(ua)) os = 'Android'
-          else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS'
-          document.getElementById('os-info').textContent = os
+          let os = 'Unknown';
+          if (/Windows/i.test(ua)) os = 'Windows';
+          else if (/Macintosh|Mac OS X/i.test(ua)) os = 'macOS';
+          else if (/Linux/i.test(ua)) os = 'Linux';
+          else if (/Android/i.test(ua)) os = 'Android';
+          else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS';
+          document.getElementById('os-info').textContent = os;
 
-          getLocationInfo()
+          getLocationInfo();
         }
 
         async function getLocationInfo() {
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            const data = await res.json()
-            const flag = getCountryFlag(data.country_code)
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            const flag = getCountryFlag(data.country_code);
             document.getElementById('location-info').textContent =
-              `${flag} ${data.city}, ${data.country_name}`
+              `${flag} ${data.city}, ${data.country_name}`;
           } catch (e) {
             document.getElementById('location-info').textContent =
-              '🇮🇩 Indonesia'
+              '🇮🇩 Indonesia';
           }
         }
 
@@ -710,96 +709,96 @@
             MA: '🇲🇦',
             PT: '🇵🇹',
             IT: '🇮🇹',
-          }
-          return map[code] || '🌍'
+          };
+          return map[code] || '🌍';
         }
 
         // Gallery lazy-load (data-src swap) + IntersectionObserver
         function initLazyGallery() {
-          const items = document.querySelectorAll('.g-item')
-          const ioSupported = 'IntersectionObserver' in window
+          const items = document.querySelectorAll('.g-item');
+          const ioSupported = 'IntersectionObserver' in window;
 
           function loadImg(img, item) {
-            const src = img.getAttribute('data-src')
+            const src = img.getAttribute('data-src');
             if (src) {
-              img.src = src
+              img.src = src;
               img.addEventListener('load', () => item.classList.add('loaded'), {
                 once: true,
-              })
+              });
             } else {
-              item.classList.add('loaded')
+              item.classList.add('loaded');
             }
           }
 
           if (!ioSupported) {
             items.forEach((item) => {
-              const img = item.querySelector('img')
-              loadImg(img, item)
-            })
-            return
+              const img = item.querySelector('img');
+              loadImg(img, item);
+            });
+            return;
           }
           const observer = new IntersectionObserver(
             (entries, obs) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  const item = entry.target
-                  const img = item.querySelector('img')
-                  loadImg(img, item)
-                  obs.unobserve(item)
+                  const item = entry.target;
+                  const img = item.querySelector('img');
+                  loadImg(img, item);
+                  obs.unobserve(item);
                 }
-              })
+              });
             },
             { rootMargin: '120px' },
-          )
+          );
 
-          items.forEach((item) => observer.observe(item))
+          items.forEach((item) => observer.observe(item));
         }
 
         // Lightbox
         function openLightbox(el) {
-          const img = el.querySelector('img')
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lightbox-img')
-          lbImg.src = img.currentSrc || img.src || img.getAttribute('data-src')
-          lbImg.alt = img.alt || 'Gambar'
-          lb.classList.add('active')
+          const img = el.querySelector('img');
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightbox-img');
+          lbImg.src = img.currentSrc || img.src || img.getAttribute('data-src');
+          lbImg.alt = img.alt || 'Gambar';
+          lb.classList.add('active');
         }
         function closeLightbox() {
-          document.getElementById('lightbox').classList.remove('active')
+          document.getElementById('lightbox').classList.remove('active');
         }
 
         // Share
         function shareToFacebook() {
-          const url = encodeURIComponent(window.location.href)
+          const url = encodeURIComponent(window.location.href);
           window.open(
             `https://www.facebook.com/sharer/sharer.php?u=${url}`,
             '_blank',
             'width=700,height=480',
-          )
+          );
         }
         function shareToTwitter() {
-          const url = encodeURIComponent(window.location.href)
-          const text = encodeURIComponent('Qordoba: Kilau Peradaban Andalusia')
+          const url = encodeURIComponent(window.location.href);
+          const text = encodeURIComponent('Qordoba: Kilau Peradaban Andalusia');
           window.open(
             `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
             '_blank',
             'width=700,height=480',
-          )
+          );
         }
         function shareToWhatsApp() {
-          const url = encodeURIComponent(window.location.href)
+          const url = encodeURIComponent(window.location.href);
           const text = encodeURIComponent(
             'Baca: Qordoba, kilau peradaban Andalusia → ',
-          )
-          window.open(`https://wa.me/?text=${text}${url}`, '_blank')
+          );
+          window.open(`https://wa.me/?text=${text}${url}`, '_blank');
         }
 
         // Init
         window.addEventListener('DOMContentLoaded', () => {
-          detectSystemInfo()
-          initLazyGallery()
-        })
-      })
+          detectSystemInfo();
+          initLazyGallery();
+        });
+      });
     </script>
 
     <noscript>

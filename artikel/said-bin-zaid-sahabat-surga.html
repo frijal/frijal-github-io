@@ -582,92 +582,95 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Lightbox Gallery Dengan Navigasi Panah
-        const figures = Array.from(document.querySelectorAll('.gallery figure'))
-        let currentIdx = 0
+        const figures = Array.from(
+          document.querySelectorAll('.gallery figure'),
+        );
+        let currentIdx = 0;
         function showLightbox(idx) {
-          currentIdx = idx
-          const fullImg = figures[idx].dataset.full
-          document.getElementById('lightbox-img').src = fullImg
-          document.getElementById('lightbox').style.display = 'flex'
+          currentIdx = idx;
+          const fullImg = figures[idx].dataset.full;
+          document.getElementById('lightbox-img').src = fullImg;
+          document.getElementById('lightbox').style.display = 'flex';
           document.getElementById('arrow-left').style.display =
-            idx > 0 ? '' : 'none'
+            idx > 0 ? '' : 'none';
           document.getElementById('arrow-right').style.display =
-            idx < figures.length - 1 ? '' : 'none'
+            idx < figures.length - 1 ? '' : 'none';
         }
         figures.forEach((fig, i) => {
-          fig.addEventListener('click', () => showLightbox(i))
+          fig.addEventListener('click', () => showLightbox(i));
           fig.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') showLightbox(i)
-          })
-        })
+            if (e.key === 'Enter' || e.key === ' ') showLightbox(i);
+          });
+        });
         document.getElementById('lightbox-close').onclick = function () {
-          document.getElementById('lightbox').style.display = 'none'
-          document.getElementById('lightbox-img').src = ''
-        }
+          document.getElementById('lightbox').style.display = 'none';
+          document.getElementById('lightbox-img').src = '';
+        };
         document.getElementById('lightbox').onclick = function (e) {
           if (e.target === this) {
-            this.style.display = 'none'
-            document.getElementById('lightbox-img').src = ''
+            this.style.display = 'none';
+            document.getElementById('lightbox-img').src = '';
           }
-        }
+        };
         document.getElementById('arrow-left').onclick = function (e) {
-          e.stopPropagation()
-          if (currentIdx > 0) showLightbox(currentIdx - 1)
-        }
+          e.stopPropagation();
+          if (currentIdx > 0) showLightbox(currentIdx - 1);
+        };
         document.getElementById('arrow-right').onclick = function (e) {
-          e.stopPropagation()
-          if (currentIdx < figures.length - 1) showLightbox(currentIdx + 1)
-        }
+          e.stopPropagation();
+          if (currentIdx < figures.length - 1) showLightbox(currentIdx + 1);
+        };
         document.addEventListener('keydown', function (e) {
           if (document.getElementById('lightbox').style.display === 'flex') {
             if (e.key === 'ArrowLeft' && currentIdx > 0)
-              showLightbox(currentIdx - 1)
+              showLightbox(currentIdx - 1);
             if (e.key === 'ArrowRight' && currentIdx < figures.length - 1)
-              showLightbox(currentIdx + 1)
+              showLightbox(currentIdx + 1);
             if (e.key === 'Escape') {
-              document.getElementById('lightbox').style.display = 'none'
-              document.getElementById('lightbox-img').src = ''
+              document.getElementById('lightbox').style.display = 'none';
+              document.getElementById('lightbox-img').src = '';
             }
           }
-        })
+        });
 
         // Browser, OS, IP info
         function getOS() {
-          let ua = navigator.userAgent
-          if (/Windows NT/.test(ua)) return 'Windows'
-          if (/Android/.test(ua)) return 'Android'
-          if (/iPhone|iPad|iPod/.test(ua)) return 'iOS'
-          if (/Mac OS X/.test(ua)) return 'Mac OS'
-          if (/Linux/.test(ua)) return 'Linux'
-          return 'Lainnya'
+          let ua = navigator.userAgent;
+          if (/Windows NT/.test(ua)) return 'Windows';
+          if (/Android/.test(ua)) return 'Android';
+          if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+          if (/Mac OS X/.test(ua)) return 'Mac OS';
+          if (/Linux/.test(ua)) return 'Linux';
+          return 'Lainnya';
         }
         function getBrowser() {
-          let ua = navigator.userAgent
+          let ua = navigator.userAgent;
           if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1)
-            return 'Chrome'
-          if (ua.indexOf('Firefox') > -1) return 'Firefox'
+            return 'Chrome';
+          if (ua.indexOf('Firefox') > -1) return 'Firefox';
           if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1)
-            return 'Safari'
-          if (ua.indexOf('Edg') > -1) return 'Edge'
-          if (ua.indexOf('Opera') > -1 || ua.indexOf('OPR') > -1) return 'Opera'
-          return 'Lainnya'
+            return 'Safari';
+          if (ua.indexOf('Edg') > -1) return 'Edge';
+          if (ua.indexOf('Opera') > -1 || ua.indexOf('OPR') > -1)
+            return 'Opera';
+          return 'Lainnya';
         }
-        document.getElementById('user-agent').textContent = getBrowser()
-        document.getElementById('user-os').textContent = getOS()
+        document.getElementById('user-agent').textContent = getBrowser();
+        document.getElementById('user-os').textContent = getOS();
         // IP & City + Country Flag
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((data) => {
             let flag = data.country
               ? `<img src="https://flagcdn.com/16x12/${data.country.toLowerCase()}.png" alt="${data.country}" style="vertical-align:middle">`
-              : ''
+              : '';
             document.getElementById('user-ip').innerHTML =
-              `${data.city || 'Kota tidak diketahui'} ${flag}`
+              `${data.city || 'Kota tidak diketahui'} ${flag}`;
           })
           .catch(() => {
-            document.getElementById('user-ip').textContent = ''
-          })
-      })
+            document.getElementById('user-ip').textContent = '';
+          });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

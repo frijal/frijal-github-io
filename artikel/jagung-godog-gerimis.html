@@ -537,28 +537,28 @@
             (document
               .getElementById('gallery')
               ?.addEventListener('click', function (e) {
-                var t = e.target.closest('a[data-lightbox]')
+                var t = e.target.closest('a[data-lightbox]');
                 t &&
                   (e.preventDefault(),
                   (lightboxImg.src = t.getAttribute('href')),
                   lightbox.classList.remove('hidden'),
-                  lightbox.classList.add('flex'))
+                  lightbox.classList.add('flex'));
               }),
             lightbox?.addEventListener('click', function () {
-              ;(this.classList.remove('flex'), this.classList.add('hidden'))
+              (this.classList.remove('flex'), this.classList.add('hidden'));
             }),
-            document.getElementById('fb-comments'))
+            document.getElementById('fb-comments'));
         if (fbComments) {
-          let e = window.location.href
-          ;(fbComments.setAttribute('data-href', e),
+          let e = window.location.href;
+          (fbComments.setAttribute('data-href', e),
             (window.fbAsyncInit = function () {
               if ('undefined' != typeof FB)
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
-            }))
+            }));
         }
-        document.getElementById('url-page').textContent = window.location.href
+        document.getElementById('url-page').textContent = window.location.href;
         let fmt = new Intl.DateTimeFormat('id-ID', {
             dateStyle: 'full',
             timeStyle: 'medium',
@@ -579,13 +579,13 @@
             '.x': `https://x.com/intent/post?url=${shareUrl}&text=` + shareText,
             '.wa': `https://wa.me/?text=${shareText}%20` + shareUrl,
             '.tg': `https://t.me/share/url?url=${shareUrl}&text=` + shareText,
-          }
+          };
         for (let t in shareLinks) {
-          let e = document.querySelector('#share ' + t)
-          e && e.setAttribute('href', shareLinks[t])
+          let e = document.querySelector('#share ' + t);
+          e && e.setAttribute('href', shareLinks[t]);
         }
-        ;((() => {
-          var e = navigator.userAgent
+        ((() => {
+          var e = navigator.userAgent;
           let t = 'Browser',
             n = '',
             o = 'Blink/WebKit',
@@ -611,8 +611,8 @@
               (navigator.userAgentData &&
                 navigator.userAgentData.architecture) ||
               navigator.platform ||
-              ''
-          ;(/Windows NT/.test(e)
+              '';
+          (/Windows NT/.test(e)
             ? ((i = 'Windows'),
               (r = e.match(/Windows NT ([\d.]+)/)) &&
                 (d =
@@ -633,7 +633,7 @@
             (document.getElementById('br-eng').textContent = o),
             (document.getElementById('os-name').textContent = i),
             (document.getElementById('os-ver').textContent = d ? 'v' + d : ''),
-            (document.getElementById('os-arch').textContent = s || '-'))
+            (document.getElementById('os-arch').textContent = s || '-'));
           var r =
               {
                 'Google Chrome':
@@ -661,32 +661,32 @@
                 Linux:
                   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
               }[i] ||
-                'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/devicon/devicon-original.svg')
-          document.getElementById('os-ico').src = e
+                'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/devicon/devicon-original.svg');
+          document.getElementById('os-ico').src = e;
         })(),
           fetch('https://ipapi.co/json/')
             .then((e) => e.json())
             .then((e) => {
-              ;((document.getElementById('ip').textContent = e.ip || '-'),
-                (document.getElementById('city').textContent = e.city || '-'))
-              var t = e.country_name || e.country || '-'
-              ;((document.getElementById('country').textContent = t),
+              ((document.getElementById('ip').textContent = e.ip || '-'),
+                (document.getElementById('city').textContent = e.city || '-'));
+              var t = e.country_name || e.country || '-';
+              ((document.getElementById('country').textContent = t),
                 e.country_code &&
                   ((e = e.country_code.toLowerCase()),
                   (document.getElementById('flag').src =
                     `https://flagcdn.com/24x18/${e}.png`),
-                  (document.getElementById('flag').alt = 'Bendera ' + t)))
+                  (document.getElementById('flag').alt = 'Bendera ' + t)));
             })
             .catch(() => {
-              document.getElementById('ip').textContent = '(gagal memuat)'
-            }))
-      })
+              document.getElementById('ip').textContent = '(gagal memuat)';
+            }));
+      });
     </script>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let n = (document.querySelector('main section img') || {}).src || ''
-          ;(['og:image', 'twitter:image'].forEach((e, t) =>
+          let n = (document.querySelector('main section img') || {}).src || '';
+          (['og:image', 'twitter:image'].forEach((e, t) =>
             document.head.appendChild(
               document.querySelector(
                 (t ? 'meta[name=' : 'meta[property=') + `"${e}"]`,
@@ -703,9 +703,9 @@
                   property: 'og:url',
                   content: location.href,
                 }),
-            ))
-        })
-      })
+            ));
+        });
+      });
     </script>
 
     });

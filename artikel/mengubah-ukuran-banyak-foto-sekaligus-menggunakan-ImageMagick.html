@@ -426,29 +426,29 @@ magick mogrify -path ../resized -resize 800x -strip -quality 85 *.jpg</code></pr
         // Copy buttons
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', async () => {
-            const codeEl = btn.nextElementSibling
-            if (!codeEl) return
-            const text = codeEl.innerText
+            const codeEl = btn.nextElementSibling;
+            if (!codeEl) return;
+            const text = codeEl.innerText;
             try {
-              await navigator.clipboard.writeText(text)
-              const old = btn.innerText
-              btn.innerText = 'Copied!'
-              setTimeout(() => (btn.innerText = old), 1500)
+              await navigator.clipboard.writeText(text);
+              const old = btn.innerText;
+              btn.innerText = 'Copied!';
+              setTimeout(() => (btn.innerText = old), 1500);
             } catch (e) {
-              btn.innerText = 'Failed'
-              setTimeout(() => (btn.innerText = 'Copy'), 1500)
+              btn.innerText = 'Failed';
+              setTimeout(() => (btn.innerText = 'Copy'), 1500);
             }
-          })
-        })
+          });
+        });
 
         // Dark mode toggle (session only)
-        const themeBtn = document.getElementById('themeBtn')
+        const themeBtn = document.getElementById('themeBtn');
         themeBtn.addEventListener('click', () => {
-          document.body.classList.toggle('dark')
-          const isDark = document.body.classList.contains('dark')
-          themeBtn.textContent = isDark ? '☀️' : '🌙'
-        })
-      })
+          document.body.classList.toggle('dark');
+          const isDark = document.body.classList.contains('dark');
+          themeBtn.textContent = isDark ? '☀️' : '🌙';
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

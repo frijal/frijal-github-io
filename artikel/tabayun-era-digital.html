@@ -698,61 +698,61 @@
     <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), fallbacks -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;(function () {
+        (function () {
           const safe = (f) => {
             try {
-              f()
+              f();
             } catch (e) {
               /* tetap lanjut */
             }
-          }
+          };
 
           // Canonical & OG/Twitter url/image meta auto + fallback artikel/*.jpg
           safe(() => {
-            const url = new URL(window.location.href)
-            const canonical = document.querySelector('#canonical-link')
-            const ogUrl = document.querySelector('#og-url')
-            const ogImg = document.querySelector('#og-image')
-            const twImg = document.querySelector('#twitter-image')
+            const url = new URL(window.location.href);
+            const canonical = document.querySelector('#canonical-link');
+            const ogUrl = document.querySelector('#og-url');
+            const ogImg = document.querySelector('#og-image');
+            const twImg = document.querySelector('#twitter-image');
 
-            if (canonical) canonical.href = url.href
-            if (ogUrl) ogUrl.content = url.href
+            if (canonical) canonical.href = url.href;
+            if (ogUrl) ogUrl.content = url.href;
 
-            const path = url.pathname // e.g., /artikel/tabayun-era-digital.html
+            const path = url.pathname; // e.g., /artikel/tabayun-era-digital.html
             const jpgFallback = path.endsWith('.html')
               ? url.origin + path.replace('.html', '.jpg')
-              : url.origin + '/artikel/fallback.jpg'
+              : url.origin + '/artikel/fallback.jpg';
 
-            const firstImg = document.querySelector('img')
+            const firstImg = document.querySelector('img');
             const finalImg =
-              firstImg && firstImg.src ? firstImg.src : jpgFallback
+              firstImg && firstImg.src ? firstImg.src : jpgFallback;
 
-            if (ogImg) ogImg.content = finalImg
-            if (twImg) twImg.content = finalImg
+            if (ogImg) ogImg.content = finalImg;
+            if (twImg) twImg.content = finalImg;
 
             // Update LD+JSON image juga
-            const ld = document.querySelector('#ld-json')
+            const ld = document.querySelector('#ld-json');
             if (ld) {
-              const data = JSON.parse(ld.textContent)
-              data.image = finalImg
-              ld.textContent = JSON.stringify(data)
+              const data = JSON.parse(ld.textContent);
+              data.image = finalImg;
+              ld.textContent = JSON.stringify(data);
             }
-          })
+          });
 
           // Estimasi waktu baca ~200 kata/menit
           safe(() => {
-            const text = document.body.innerText || ''
-            const words = text.trim().split(/\s+/).length
-            const min = Math.max(3, Math.round(words / 200))
-            const el = document.querySelector('#read-time span')
-            if (el) el.textContent = `Waktu baca: ~${min} menit`
-          })
+            const text = document.body.innerText || '';
+            const words = text.trim().split(/\s+/).length;
+            const min = Math.max(3, Math.round(words / 200));
+            const el = document.querySelector('#read-time span');
+            if (el) el.textContent = `Waktu baca: ~${min} menit`;
+          });
 
           // Info chips: browser & OS
           safe(() => {
-            const ua = navigator.userAgent
-            const browserEl = document.querySelector('[data-browser]')
-            const osEl = document.querySelector('[data-os]')
+            const ua = navigator.userAgent;
+            const browserEl = document.querySelector('[data-browser]');
+            const osEl = document.querySelector('[data-os]');
 
             const browser = /Edg\//.test(ua)
               ? 'Microsoft Edge'
@@ -764,7 +764,7 @@
                     ? 'Firefox'
                     : /OPR\//.test(ua)
                       ? 'Opera'
-                      : 'Browser'
+                      : 'Browser';
 
             const os = /Windows NT/.test(ua)
               ? 'Windows'
@@ -776,155 +776,155 @@
                     ? 'iOS'
                     : /Linux/.test(ua)
                       ? 'Linux'
-                      : 'OS'
+                      : 'OS';
 
-            if (browserEl) browserEl.textContent = browser
-            if (osEl) osEl.textContent = os
-          })
+            if (browserEl) browserEl.textContent = browser;
+            if (osEl) osEl.textContent = os;
+          });
 
           // IP + Country flag (graceful fallback; timeout 2500ms)
           safe(() => {
-            const ipEl = document.querySelector('[data-ip]')
-            const flagEl = document.querySelector('[data-flag]')
+            const ipEl = document.querySelector('[data-ip]');
+            const flagEl = document.querySelector('[data-flag]');
             const timeout = (ms) =>
               new Promise((_, rej) =>
                 setTimeout(() => rej(new Error('timeout')), ms),
-              )
+              );
             const ccToFlagEmoji = (code) =>
               code.replace(/./g, (c) =>
                 String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1f1e6),
-              )
+              );
 
             const fetchIPInfo = async () => {
               try {
                 const res = await Promise.race([
                   fetch('https://ipapi.co/json/', { cache: 'no-store' }),
                   timeout(2500),
-                ])
-                if (!res || !res.ok) throw new Error('ipapi unavailable')
-                const j = await res.json()
-                if (ipEl) ipEl.textContent = j.ip || ', '
-                const cc = (j.country || j.country_name || '').toString()
-                const code = (j.country_code || '').toUpperCase()
-                const flag = code ? ccToFlagEmoji(code) : '🏳️'
-                if (flagEl) flagEl.textContent = flag + (cc ? ` ${cc}` : '')
+                ]);
+                if (!res || !res.ok) throw new Error('ipapi unavailable');
+                const j = await res.json();
+                if (ipEl) ipEl.textContent = j.ip || ', ';
+                const cc = (j.country || j.country_name || '').toString();
+                const code = (j.country_code || '').toUpperCase();
+                const flag = code ? ccToFlagEmoji(code) : '🏳️';
+                if (flagEl) flagEl.textContent = flag + (cc ? ` ${cc}` : '');
               } catch (e) {
-                if (ipEl) ipEl.textContent = ', '
-                if (flagEl) flagEl.textContent = '🏳️'
+                if (ipEl) ipEl.textContent = ', ';
+                if (flagEl) flagEl.textContent = '🏳️';
               }
-            }
-            fetchIPInfo()
-          })
+            };
+            fetchIPInfo();
+          });
 
           // Share buttons
           safe(() => {
-            const current = window.location.href
-            const title = document.title
-            const strip = document.querySelector('.share-strip')
-            const ok = document.querySelector('.copy-ok')
+            const current = window.location.href;
+            const title = document.title;
+            const strip = document.querySelector('.share-strip');
+            const ok = document.querySelector('.copy-ok');
 
-            const open = (u) => window.open(u, '_blank', 'noopener,noreferrer')
+            const open = (u) => window.open(u, '_blank', 'noopener,noreferrer');
 
             strip?.addEventListener('click', (e) => {
-              const btn = e.target.closest('.share-btn')
-              if (!btn) return
-              const type = btn.dataset.share
+              const btn = e.target.closest('.share-btn');
+              if (!btn) return;
+              const type = btn.dataset.share;
               if (type === 'copy') {
                 navigator.clipboard?.writeText(current).then(() => {
                   if (ok) {
-                    ok.hidden = false
-                    setTimeout(() => (ok.hidden = true), 1500)
+                    ok.hidden = false;
+                    setTimeout(() => (ok.hidden = true), 1500);
                   }
-                })
-                return
+                });
+                return;
               }
               if (
                 navigator.share &&
                 (type === 'facebook' || type === 'twitter')
               ) {
-                navigator.share({ title, url: current }).catch(() => {})
-                return
+                navigator.share({ title, url: current }).catch(() => {});
+                return;
               }
               if (type === 'facebook')
                 open(
                   `https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`,
-                )
+                );
               if (type === 'twitter')
                 open(
                   `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`,
-                )
+                );
               if (type === 'whatsapp')
                 open(
                   `https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`,
-                )
+                );
               if (type === 'telegram')
                 open(
                   `https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`,
-                )
-            })
-          })
+                );
+            });
+          });
 
           // Lightbox gallery with arrow keys
           safe(() => {
-            const lb = document.getElementById('lightbox')
-            const lbImg = document.getElementById('lb-image')
-            const lbIndex = document.getElementById('lb-index')
-            const prev = lb.querySelector('.lb-prev')
-            const next = lb.querySelector('.lb-next')
-            const close = lb.querySelector('.lb-close')
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lb-image');
+            const lbIndex = document.getElementById('lb-index');
+            const prev = lb.querySelector('.lb-prev');
+            const next = lb.querySelector('.lb-next');
+            const close = lb.querySelector('.lb-close');
             const items = Array.from(
               document.querySelectorAll('.gallery img, #hero-image'),
-            )
-            let idx = 0
+            );
+            let idx = 0;
 
             const openAt = (i) => {
-              idx = i
-              lbImg.src = items[idx].src
-              lb.classList.add('open')
-              lbIndex.textContent = `${idx + 1} / ${items.length}`
-              document.body.style.overflow = 'hidden'
-            }
+              idx = i;
+              lbImg.src = items[idx].src;
+              lb.classList.add('open');
+              lbIndex.textContent = `${idx + 1} / ${items.length}`;
+              document.body.style.overflow = 'hidden';
+            };
             const closeLb = () => {
-              lb.classList.remove('open')
-              lbImg.src = ''
-              document.body.style.overflow = ''
-            }
+              lb.classList.remove('open');
+              lbImg.src = '';
+              document.body.style.overflow = '';
+            };
             const step = (d) => {
-              idx = (idx + d + items.length) % items.length
-              lbImg.src = items[idx].src
-              lbIndex.textContent = `${idx + 1} / ${items.length}`
-            }
+              idx = (idx + d + items.length) % items.length;
+              lbImg.src = items[idx].src;
+              lbIndex.textContent = `${idx + 1} / ${items.length}`;
+            };
 
             document.querySelectorAll('.zoomable').forEach((fig, i) => {
-              fig.addEventListener('click', () => openAt(i))
-            })
-            prev.addEventListener('click', () => step(-1))
-            next.addEventListener('click', () => step(+1))
-            close.addEventListener('click', closeLb)
+              fig.addEventListener('click', () => openAt(i));
+            });
+            prev.addEventListener('click', () => step(-1));
+            next.addEventListener('click', () => step(+1));
+            close.addEventListener('click', closeLb);
             lb.addEventListener('click', (e) => {
-              if (e.target === lb) closeLb()
-            })
+              if (e.target === lb) closeLb();
+            });
             window.addEventListener('keydown', (e) => {
-              if (!lb.classList.contains('open')) return
-              if (e.key === 'Escape') closeLb()
-              if (e.key === 'ArrowLeft') step(-1)
-              if (e.key === 'ArrowRight') step(+1)
-            })
-          })
+              if (!lb.classList.contains('open')) return;
+              if (e.key === 'Escape') closeLb();
+              if (e.key === 'ArrowLeft') step(-1);
+              if (e.key === 'ArrowRight') step(+1);
+            });
+          });
 
           // Fallback hero image ke /artikel/*.jpg bila gagal
           safe(() => {
-            const img = document.getElementById('hero-image')
-            if (!img) return
+            const img = document.getElementById('hero-image');
+            if (!img) return;
             img.addEventListener('error', () => {
-              const url = new URL(window.location.href)
+              const url = new URL(window.location.href);
               const fallback =
-                url.origin + url.pathname.replace('.html', '.jpg')
-              if (img.src !== fallback) img.src = fallback
-            })
-          })
-        })()
-      })
+                url.origin + url.pathname.replace('.html', '.jpg');
+              if (img.src !== fallback) img.src = fallback;
+            });
+          });
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

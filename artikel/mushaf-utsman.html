@@ -832,168 +832,168 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Helper: safe query
-        const $ = (sel, ctx = document) => ctx.querySelector(sel)
+        const $ = (sel, ctx = document) => ctx.querySelector(sel);
         const $$ = (sel, ctx = document) =>
-          Array.from(ctx.querySelectorAll(sel))
+          Array.from(ctx.querySelectorAll(sel));
 
         // Year
-        $('#year').textContent = new Date().getFullYear()
+        $('#year').textContent = new Date().getFullYear();
 
         // Share links
-        const pageUrl = encodeURIComponent(location.href)
-        const pageTitle = encodeURIComponent(document.title)
+        const pageUrl = encodeURIComponent(location.href);
+        const pageTitle = encodeURIComponent(document.title);
         $('#share-whatsapp').href =
-          `https://wa.me/?text=${pageTitle}%20${pageUrl}`
+          `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
         $('#share-telegram').href =
-          `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
+          `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
         $('#share-twitter').href =
-          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`
+          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
         $('#share-facebook').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
+          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
         $('#share-linkedin').href =
-          `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`
+          `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
         $('#share-copy').addEventListener('click', (e) => {
-          e.preventDefault()
+          e.preventDefault();
           navigator.clipboard?.writeText(location.href).then(() => {
-            alert('Tautan disalin. Silakan tempel di mana pun!')
-          })
-        })
+            alert('Tautan disalin. Silakan tempel di mana pun!');
+          });
+        });
 
         // UA parsing (sederhana)
-        ;(function () {
-          const ua = navigator.userAgent
-          const plat = navigator.platform || ''
-          const kvBrowser = $('#kv-browser')
-          const kvOS = $('#kv-os')
-          const kvRes = $('#kv-res')
+        (function () {
+          const ua = navigator.userAgent;
+          const plat = navigator.platform || '';
+          const kvBrowser = $('#kv-browser');
+          const kvOS = $('#kv-os');
+          const kvRes = $('#kv-res');
 
           function detectBrowser() {
-            if (/edg/i.test(ua)) return 'Microsoft Edge'
-            if (/chrome|crios/i.test(ua)) return 'Chrome'
-            if (/firefox|fxios/i.test(ua)) return 'Firefox'
+            if (/edg/i.test(ua)) return 'Microsoft Edge';
+            if (/chrome|crios/i.test(ua)) return 'Chrome';
+            if (/firefox|fxios/i.test(ua)) return 'Firefox';
             if (/safari/i.test(ua) && !/chrome|crios|edg/i.test(ua))
-              return 'Safari'
-            if (/opr\//i.test(ua)) return 'Opera'
-            return 'Browser tidak dikenal'
+              return 'Safari';
+            if (/opr\//i.test(ua)) return 'Opera';
+            return 'Browser tidak dikenal';
           }
           function detectOS() {
-            if (/windows nt/i.test(ua)) return 'Windows'
-            if (/mac os x/i.test(ua)) return 'macOS'
-            if (/android/i.test(ua)) return 'Android'
-            if (/iphone|ipad|ipod/i.test(ua)) return 'iOS'
-            if (/linux/i.test(ua)) return 'Linux'
-            if (plat.includes('Win')) return 'Windows'
-            if (plat.includes('Mac')) return 'macOS'
-            if (plat.includes('Linux')) return 'Linux'
-            return 'OS tidak dikenal'
+            if (/windows nt/i.test(ua)) return 'Windows';
+            if (/mac os x/i.test(ua)) return 'macOS';
+            if (/android/i.test(ua)) return 'Android';
+            if (/iphone|ipad|ipod/i.test(ua)) return 'iOS';
+            if (/linux/i.test(ua)) return 'Linux';
+            if (plat.includes('Win')) return 'Windows';
+            if (plat.includes('Mac')) return 'macOS';
+            if (plat.includes('Linux')) return 'Linux';
+            return 'OS tidak dikenal';
           }
-          kvBrowser.textContent = detectBrowser()
-          kvOS.textContent = detectOS()
-          kvRes.textContent = `${window.screen.width}×${window.screen.height}`
+          kvBrowser.textContent = detectBrowser();
+          kvOS.textContent = detectOS();
+          kvRes.textContent = `${window.screen.width}×${window.screen.height}`;
           window.addEventListener(
             'resize',
             () =>
               (kvRes.textContent = `${window.screen.width}×${window.screen.height}`),
-          )
-        })()
+          );
+        })();
 
         // IP + Geo (graceful)
-        ;(function () {
-          const ipEl = $('#kv-ip')
-          const ccEl = $('#kv-cc')
+        (function () {
+          const ipEl = $('#kv-ip');
+          const ccEl = $('#kv-cc');
 
           function ccToEmoji(cc) {
-            if (!cc || cc.length !== 2) return '🏳️'
+            if (!cc || cc.length !== 2) return '🏳️';
             const codePoints = [...cc.toUpperCase()].map(
               (c) => 127397 + c.charCodeAt(),
-            )
-            return String.fromCodePoint(...codePoints)
+            );
+            return String.fromCodePoint(...codePoints);
           }
 
           // Try ipapi.co first
           fetch('https://ipapi.co/json/')
             .then((r) => (r.ok ? r.json() : Promise.reject()))
             .then((d) => {
-              const flag = ccToEmoji(d.country)
-              ipEl.textContent = `${d.ip || '—'} / ${d.city || '—'}`
-              ccEl.innerHTML = `<span class="flag">${flag}</span> ${d.country_name || d.country || '—'}`
+              const flag = ccToEmoji(d.country);
+              ipEl.textContent = `${d.ip || '—'} / ${d.city || '—'}`;
+              ccEl.innerHTML = `<span class="flag">${flag}</span> ${d.country_name || d.country || '—'}`;
             })
             .catch(() => {
               // Fallback: ipinfo.io
               fetch('https://ipinfo.io/json?token=')
                 .then((r) => (r.ok ? r.json() : Promise.reject()))
                 .then((d) => {
-                  const cc = (d.country || '').toUpperCase()
-                  const flag = ccToEmoji(cc)
-                  ipEl.textContent = `${d.ip || '—'} / ${d.city || '—'}`
-                  ccEl.innerHTML = `<span class="flag">${flag}</span> ${cc || '—'}`
+                  const cc = (d.country || '').toUpperCase();
+                  const flag = ccToEmoji(cc);
+                  ipEl.textContent = `${d.ip || '—'} / ${d.city || '—'}`;
+                  ccEl.innerHTML = `<span class="flag">${flag}</span> ${cc || '—'}`;
                 })
                 .catch(() => {
-                  ipEl.textContent = 'Tidak tersedia'
-                  ccEl.innerHTML = `<span class="flag">🏳️</span> —`
-                })
-            })
-        })()
+                  ipEl.textContent = 'Tidak tersedia';
+                  ccEl.innerHTML = `<span class="flag">🏳️</span> —`;
+                });
+            });
+        })();
 
         // Lightbox
-        ;(function () {
+        (function () {
           const items = $$('.gallery .thumb img').map((img, idx) => ({
             thumb: img.src,
             full: img.dataset.full || img.src,
             alt: img.alt || `Gambar ${idx + 1}`,
-          }))
-          const lb = $('.lightbox')
-          const imgEl = $('#lb-image')
-          const counter = $('#lb-counter')
-          const btnPrev = $('#lb-prev')
-          const btnNext = $('#lb-next')
-          const btnClose = $('.lb-close')
-          let i = 0
+          }));
+          const lb = $('.lightbox');
+          const imgEl = $('#lb-image');
+          const counter = $('#lb-counter');
+          const btnPrev = $('#lb-prev');
+          const btnNext = $('#lb-next');
+          const btnClose = $('.lb-close');
+          let i = 0;
 
           function render() {
-            if (!items.length) return
-            imgEl.src = items[i].full
-            imgEl.alt = items[i].alt
-            counter.textContent = `${i + 1} / ${items.length}`
-            btnPrev.disabled = items.length <= 1
-            btnNext.disabled = items.length <= 1
+            if (!items.length) return;
+            imgEl.src = items[i].full;
+            imgEl.alt = items[i].alt;
+            counter.textContent = `${i + 1} / ${items.length}`;
+            btnPrev.disabled = items.length <= 1;
+            btnNext.disabled = items.length <= 1;
           }
           function openAt(idx) {
-            i = idx
-            render()
-            lb.classList.add('open')
-            document.body.style.overflow = 'hidden'
+            i = idx;
+            render();
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
           }
           function close() {
-            lb.classList.remove('open')
-            document.body.style.overflow = ''
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
           }
           function prev() {
-            i = (i - 1 + items.length) % items.length
-            render()
+            i = (i - 1 + items.length) % items.length;
+            render();
           }
           function next() {
-            i = (i + 1) % items.length
-            render()
+            i = (i + 1) % items.length;
+            render();
           }
 
           $$('.gallery .thumb img').forEach((img, idx) => {
-            img.addEventListener('click', () => openAt(idx))
-          })
-          btnClose.addEventListener('click', close)
+            img.addEventListener('click', () => openAt(idx));
+          });
+          btnClose.addEventListener('click', close);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) close()
-          })
-          btnPrev.addEventListener('click', prev)
-          btnNext.addEventListener('click', next)
+            if (e.target === lb) close();
+          });
+          btnPrev.addEventListener('click', prev);
+          btnNext.addEventListener('click', next);
           window.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') close()
-            if (e.key === 'ArrowLeft') prev()
-            if (e.key === 'ArrowRight') next()
-          })
-        })()
-      })
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+          });
+        })();
+      });
     </script>
 
     <!-- Set FB comments href ke current URL -->
@@ -1001,7 +1001,7 @@
     <script>
       document
         .querySelector('.fb-comments')
-        .setAttribute('data-href', location.href)
+        .setAttribute('data-href', location.href);
     </script>
     document.addEventListener(DOMContentLoaded, () => {
 
@@ -1009,8 +1009,8 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let s = (document.querySelector('main section img') || {}).src || ''
-          ;['og:image', 'twitter:image'].forEach((p, j) =>
+          let s = (document.querySelector('main section img') || {}).src || '';
+          ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
                 (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
@@ -1020,16 +1020,16 @@
                   content: s,
                 }),
             ),
-          )
+          );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
               }),
-          )
-        })
-      })
+          );
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

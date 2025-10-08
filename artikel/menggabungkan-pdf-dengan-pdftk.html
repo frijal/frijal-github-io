@@ -338,19 +338,19 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
@@ -372,39 +372,40 @@
       document.addEventListener(DOMContentLoaded, () => {
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            const code = btn.previousElementSibling.innerText
-            navigator.clipboard.writeText(code)
-            btn.textContent = 'Copied!'
-            setTimeout(() => (btn.textContent = 'Copy'), 1500)
-          })
-        })
-      })
+            const code = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => (btn.textContent = 'Copy'), 1500);
+          });
+        });
+      });
     </script>
 
     <!-- Browser & OS Info + IP & Flag -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         function detectOS() {
-          const ua = navigator.userAgent
-          if (ua.includes('Win')) return 'Windows'
-          if (ua.includes('Mac')) return 'MacOS'
-          if (ua.includes('Linux')) return 'Linux'
-          if (/Android/i.test(ua)) return 'Android'
-          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS'
-          return 'Unknown OS'
+          const ua = navigator.userAgent;
+          if (ua.includes('Win')) return 'Windows';
+          if (ua.includes('Mac')) return 'MacOS';
+          if (ua.includes('Linux')) return 'Linux';
+          if (/Android/i.test(ua)) return 'Android';
+          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+          return 'Unknown OS';
         }
         function detectBrowser() {
-          const ua = navigator.userAgent
-          if (ua.includes('Firefox/')) return 'Mozilla Firefox'
-          if (ua.includes('Chrome/')) return 'Google Chrome'
-          if (ua.includes('Safari/') && !ua.includes('Chrome/')) return 'Safari'
-          if (ua.includes('Edg/')) return 'Microsoft Edge'
-          return 'Unknown Browser'
+          const ua = navigator.userAgent;
+          if (ua.includes('Firefox/')) return 'Mozilla Firefox';
+          if (ua.includes('Chrome/')) return 'Google Chrome';
+          if (ua.includes('Safari/') && !ua.includes('Chrome/'))
+            return 'Safari';
+          if (ua.includes('Edg/')) return 'Microsoft Edge';
+          return 'Unknown Browser';
         }
         document.getElementById('browser-info').innerHTML =
-          '🌐 Browser: ' + detectBrowser()
+          '🌐 Browser: ' + detectBrowser();
         document.getElementById('os-info').innerHTML =
-          '💻 Sistem Operasi: ' + detectOS()
+          '💻 Sistem Operasi: ' + detectOS();
 
         fetch('https://ipapi.co/json/')
           .then((res) => res.json())
@@ -416,13 +417,13 @@
               data.country_name +
               " <img src='https://flagcdn.com/24x18/" +
               data.country_code.toLowerCase() +
-              ".png'>"
+              ".png'>";
           })
           .catch(() => {
             document.getElementById('ip-info').textContent =
-              'Tidak dapat memuat IP'
-          })
-      })
+              'Tidak dapat memuat IP';
+          });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

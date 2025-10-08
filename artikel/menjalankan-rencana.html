@@ -577,21 +577,21 @@ N. Kirim ke editor (1 hari)</code></pre>
           ></div>
           <script>
             document.addEventListener(DOMContentLoaded, () => {
-              const currentUrl = window.location.href
-              document.getElementById('current-url').textContent = currentUrl
+              const currentUrl = window.location.href;
+              document.getElementById('current-url').textContent = currentUrl;
               document
                 .getElementById('fb-comments')
-                .setAttribute('data-href', currentUrl)
+                .setAttribute('data-href', currentUrl);
               window.fbAsyncInit = function () {
                 if (typeof FB !== 'undefined') {
                   try {
-                    FB.XFBML.parse()
+                    FB.XFBML.parse();
                   } catch (e) {
                     /* ignore */
                   }
                 }
-              }
-            })
+              };
+            });
           </script>
         </div>
       </div>
@@ -608,101 +608,101 @@ N. Kirim ke editor (1 hari)</code></pre>
       document.addEventListener(DOMContentLoaded, () => {
         // Syntax highlighting (Prism.js)
         document.addEventListener('DOMContentLoaded', (event) => {
-          Prism.highlightAll()
-        })
+          Prism.highlightAll();
+        });
 
         // Copy to clipboard
         function copyCode(button) {
-          const codeBlock = button.previousElementSibling
-          const code = codeBlock.innerText
+          const codeBlock = button.previousElementSibling;
+          const code = codeBlock.innerText;
           navigator.clipboard
             .writeText(code)
             .then(() => {
-              button.textContent = 'Berhasil Disalin!'
+              button.textContent = 'Berhasil Disalin!';
               setTimeout(() => {
-                button.textContent = 'Salin Kode'
-              }, 2000)
+                button.textContent = 'Salin Kode';
+              }, 2000);
             })
             .catch((err) => {
-              console.error('Gagal menyalin kode: ', err)
-            })
+              console.error('Gagal menyalin kode: ', err);
+            });
         }
 
         // Social Sharing Functions
         function shareTo(platform) {
-          const url = encodeURIComponent(window.location.href)
-          const title = encodeURIComponent(document.title)
-          let shareUrl = ''
+          const url = encodeURIComponent(window.location.href);
+          const title = encodeURIComponent(document.title);
+          let shareUrl = '';
 
           switch (platform) {
             case 'facebook':
-              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
-              break
+              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+              break;
             case 'twitter':
-              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
-              break
+              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+              break;
             case 'x': // Alias for Twitter
-              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
-              break
+              shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+              break;
             case 'whatsapp':
-              shareUrl = `https://api.whatsapp.com/send?text=${title}%20-%20${url}`
-              break
+              shareUrl = `https://api.whatsapp.com/send?text=${title}%20-%20${url}`;
+              break;
             case 'telegram':
-              shareUrl = `https://t.me/share/url?url=${url}&text=${title}`
-              break
+              shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+              break;
             default:
-              return
+              return;
           }
-          window.open(shareUrl, '_blank', 'width=600,height=400')
+          window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
         // Get Browser and OS Info
-        const userAgent = navigator.userAgent
-        let browserName = 'Tidak Diketahui'
-        let osName = 'Tidak Diketahui'
-        let browserIcon = ''
-        let osIcon = ''
-        let browserVersion = ''
-        let osVersion = ''
+        const userAgent = navigator.userAgent;
+        let browserName = 'Tidak Diketahui';
+        let osName = 'Tidak Diketahui';
+        let browserIcon = '';
+        let osIcon = '';
+        let browserVersion = '';
+        let osVersion = '';
 
         // Detect Browser
         if (userAgent.match(/chrome|chromium|crios/i)) {
-          browserName = 'Google Chrome'
-          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" fill="#4285F4"/><path d="M21.1 12H15a3 3 0 00-3-3V2.9c.9.2 1.8.5 2.6.9 2.5 1.5 4.3 3.8 5.5 6.4.4.8.7 1.7.9 2.6zM2.9 12h6a3 3 0 013 3v6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6zM12 2.9V9a3 3 0 013 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#EA4335"/><path d="M12 2.9V9a3 3 0 01-3 3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9v-6.1a3 3 0 013-3h6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6z" fill="#34A853"/><path d="M12 21.1V15a3 3 0 00-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#FBBC04"/></svg>`
+          browserName = 'Google Chrome';
+          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" fill="#4285F4"/><path d="M21.1 12H15a3 3 0 00-3-3V2.9c.9.2 1.8.5 2.6.9 2.5 1.5 4.3 3.8 5.5 6.4.4.8.7 1.7.9 2.6zM2.9 12h6a3 3 0 013 3v6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6zM12 2.9V9a3 3 0 013 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#EA4335"/><path d="M12 2.9V9a3 3 0 01-3 3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9v-6.1a3 3 0 013-3h6.1c-.9-.2-1.8-.5-2.6-.9-2.5-1.5-4.3-3.8-5.5-6.4-.4-.8-.7-1.7-.9-2.6z" fill="#34A853"/><path d="M12 21.1V15a3 3 0 00-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#FBBC04"/></svg>`;
           const match = userAgent.match(
             /(?:chrome|chromium|crios)\/(\d+(\.\d+)*)/i,
-          )
-          if (match) browserVersion = match[1]
+          );
+          if (match) browserVersion = match[1];
         } else if (userAgent.match(/firefox|fxios/i)) {
-          browserName = 'Mozilla Firefox'
-          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z" fill="#FF5722"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="#FFC107"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" stroke="#FF5722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="#fff"/></svg>`
-          const match = userAgent.match(/(?:firefox|fxios)\/(\d+(\.\d+)*)/i)
-          if (match) browserVersion = match[1]
+          browserName = 'Mozilla Firefox';
+          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z" fill="#FF5722"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="#FFC107"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" stroke="#FF5722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18a6 6 0 100-12 6 6 0 000 12z" fill="#fff"/></svg>`;
+          const match = userAgent.match(/(?:firefox|fxios)\/(\d+(\.\d+)*)/i);
+          if (match) browserVersion = match[1];
         } else if (
           userAgent.match(/safari/i) &&
           !userAgent.match(/chrome|crios/i)
         ) {
-          browserName = 'Apple Safari'
-          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 000 20c-5.523 0-10-4.477-10-10 0-3.313 1.672-6.257 4.22-8.087l5.78 3.853V18c0 2.21-1.79 4-4 4s-4-1.79-4-4V6c0-2.21 1.79-4 4-4h6.087c1.83 2.548 3.853 5.78 3.853 5.78z" fill="#1DA1F2"/><path d="M12 2a10 10 0 000 20c5.523 0 10-4.477 10-10 0-3.313-1.672-6.257-4.22-8.087L12 8.087V2.999c0-2.21 1.79-4 4-4s4 1.79 4 4v6.087c-1.83 2.548-3.853 5.78-3.853 5.78z" fill="#FFC107"/></svg>`
-          const match = userAgent.match(/version\/(\d+(\.\d+)*).*safari/i)
-          if (match) browserVersion = match[1]
+          browserName = 'Apple Safari';
+          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 000 20c-5.523 0-10-4.477-10-10 0-3.313 1.672-6.257 4.22-8.087l5.78 3.853V18c0 2.21-1.79 4-4 4s-4-1.79-4-4V6c0-2.21 1.79-4 4-4h6.087c1.83 2.548 3.853 5.78 3.853 5.78z" fill="#1DA1F2"/><path d="M12 2a10 10 0 000 20c5.523 0 10-4.477 10-10 0-3.313-1.672-6.257-4.22-8.087L12 8.087V2.999c0-2.21 1.79-4 4-4s4 1.79 4 4v6.087c-1.83 2.548-3.853 5.78-3.853 5.78z" fill="#FFC107"/></svg>`;
+          const match = userAgent.match(/version\/(\d+(\.\d+)*).*safari/i);
+          if (match) browserVersion = match[1];
         } else if (userAgent.match(/opera|opr/i)) {
-          browserName = 'Opera'
-          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#FF1B1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#FF1B1C"/></svg>`
-          const match = userAgent.match(/(?:opera|opr)\/(\d+(\.\d+)*)/i)
-          if (match) browserVersion = match[1]
+          browserName = 'Opera';
+          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#FF1B1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#FF1B1C"/></svg>`;
+          const match = userAgent.match(/(?:opera|opr)\/(\d+(\.\d+)*)/i);
+          if (match) browserVersion = match[1];
         } else if (userAgent.match(/edg|edge/i)) {
-          browserName = 'Microsoft Edge'
-          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#0078D7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#0078D7"/></svg>`
-          const match = userAgent.match(/(?:edg|edge)\/(\d+(\.\d+)*)/i)
-          if (match) browserVersion = match[1]
+          browserName = 'Microsoft Edge';
+          browserIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#0078D7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#0078D7"/></svg>`;
+          const match = userAgent.match(/(?:edg|edge)\/(\d+(\.\d+)*)/i);
+          if (match) browserVersion = match[1];
         }
 
         // Detect OS and version
         if (userAgent.match(/windows/i)) {
-          osName = 'Windows'
-          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.333 3.999L3 5.087v7.545l7.333 1.088V3.999z" fill="#00A4EF"/><path d="M10.333 14.72l-7.333 1.089v3.085l7.333 1.088V14.72z" fill="#00A4EF"/><path d="M11.667 3.999v10.72l10.333 1.528V2.471l-10.333 1.528z" fill="#00A4EF"/><path d="M11.667 14.72v6.232l10.333 1.528V16.248l-10.333-1.528z" fill="#00A4EF"/></svg>`
-          const match = userAgent.match(/windows nt (\d+(\.\d+)*)/i)
+          osName = 'Windows';
+          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.333 3.999L3 5.087v7.545l7.333 1.088V3.999z" fill="#00A4EF"/><path d="M10.333 14.72l-7.333 1.089v3.085l7.333 1.088V14.72z" fill="#00A4EF"/><path d="M11.667 3.999v10.72l10.333 1.528V2.471l-10.333 1.528z" fill="#00A4EF"/><path d="M11.667 14.72v6.232l10.333 1.528V16.248l-10.333-1.528z" fill="#00A4EF"/></svg>`;
+          const match = userAgent.match(/windows nt (\d+(\.\d+)*)/i);
           if (match) {
             const versionMap = {
               '10.0': '10',
@@ -711,41 +711,41 @@ N. Kirim ke editor (1 hari)</code></pre>
               6.1: '7',
               '6.0': 'Vista',
               5.1: 'XP',
-            }
-            osVersion = versionMap[match[1]] || match[1]
+            };
+            osVersion = versionMap[match[1]] || match[1];
           }
         } else if (userAgent.match(/macintosh|mac os x/i)) {
-          osName = 'macOS'
-          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.582 2 4 5.582 4 10s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm-5.697 9.876a3.298 3.298 0 011.091-2.45c.87-.697 1.95-.918 2.946-.628.917.266 1.705.86 2.302 1.637.368.47.66 1.002.858 1.57.172.502.26 1.026.26 1.554 0 .584-.108 1.15-.316 1.678-.29.72-.738 1.34-1.312 1.83-.984.83-2.195 1.168-3.414.945-1.127-.202-2.18-.75-3.05-1.578-.85-.828-1.52-1.84-2.006-2.95-.465-1.07-.723-2.22-.723-3.398 0-1.222.258-2.395.723-3.465.465-1.07.973-1.996 1.57-2.735.6-.74 1.258-1.3 1.95-1.688 1.25-.668 2.65-.96 4.02-.857 1.37.103 2.68.528 3.82 1.246.685.42 1.298.92 1.84 1.488.542.568.99 1.18 1.34 1.82.35 0 .62.13.81.39.19.26.29.56.29.93 0 .37-.1.71-.29 1.05-.19.34-.48.64-.81.84-.33.2-.69.31-1.09.31-.4 0-.76-.11-1.09-.32-.33-.21-.62-.5-.87-.84-.25-.34-.46-.7-.62-1.08-.16-.38-.26-.79-.3-1.21-.04-.42-.01-.84.09-1.26.1-.42.24-.84.42-1.25.18-.41.4-.8.66-1.15.26-.35.55-.65.87-.9.32-.25.66-.45 1.02-.6.36-.15.73-.24 1.11-.26.38-.02.77-.01 1.15.03.38.04.76.11 1.13.22.37.11.73.26 1.08.45.35.19.69.41 1.02.66.33.25.64.55.93.89.29.34.54.71.75 1.1.21.39.38.79.5 1.21.12.42.19.85.19 1.28z" fill="#000"/></svg>`
-          const match = userAgent.match(/mac os x (\d+_\d+(?:_\d+)?)/i)
-          if (match) osVersion = match[1].replace(/_/g, '.')
+          osName = 'macOS';
+          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.582 2 4 5.582 4 10s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm-5.697 9.876a3.298 3.298 0 011.091-2.45c.87-.697 1.95-.918 2.946-.628.917.266 1.705.86 2.302 1.637.368.47.66 1.002.858 1.57.172.502.26 1.026.26 1.554 0 .584-.108 1.15-.316 1.678-.29.72-.738 1.34-1.312 1.83-.984.83-2.195 1.168-3.414.945-1.127-.202-2.18-.75-3.05-1.578-.85-.828-1.52-1.84-2.006-2.95-.465-1.07-.723-2.22-.723-3.398 0-1.222.258-2.395.723-3.465.465-1.07.973-1.996 1.57-2.735.6-.74 1.258-1.3 1.95-1.688 1.25-.668 2.65-.96 4.02-.857 1.37.103 2.68.528 3.82 1.246.685.42 1.298.92 1.84 1.488.542.568.99 1.18 1.34 1.82.35 0 .62.13.81.39.19.26.29.56.29.93 0 .37-.1.71-.29 1.05-.19.34-.48.64-.81.84-.33.2-.69.31-1.09.31-.4 0-.76-.11-1.09-.32-.33-.21-.62-.5-.87-.84-.25-.34-.46-.7-.62-1.08-.16-.38-.26-.79-.3-1.21-.04-.42-.01-.84.09-1.26.1-.42.24-.84.42-1.25.18-.41.4-.8.66-1.15.26-.35.55-.65.87-.9.32-.25.66-.45 1.02-.6.36-.15.73-.24 1.11-.26.38-.02.77-.01 1.15.03.38.04.76.11 1.13.22.37.11.73.26 1.08.45.35.19.69.41 1.02.66.33.25.64.55.93.89.29.34.54.71.75 1.1.21.39.38.79.5 1.21.12.42.19.85.19 1.28z" fill="#000"/></svg>`;
+          const match = userAgent.match(/mac os x (\d+_\d+(?:_\d+)?)/i);
+          if (match) osVersion = match[1].replace(/_/g, '.');
         } else if (userAgent.match(/linux/i)) {
-          osName = 'Linux'
-          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#FBBC04"/><path d="M12 21.1V15a3 3 0 00-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#4285F4"/><path d="M12 21.1V15a3 3 0 01-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#34A853"/><path d="M12 2.9V9a3 3 0 013 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#EA4335"/><path d="M12 2.9V9a3 3 0 003 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#34A853"/></svg>`
-          osVersion = 'Distro Linux' // Specific version often hard to parse reliably from UA
+          osName = 'Linux';
+          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#FBBC04"/><path d="M12 21.1V15a3 3 0 00-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#4285F4"/><path d="M12 21.1V15a3 3 0 01-3-3H2.9c.2.9.5 1.8.9 2.6 1.5 2.5 3.8 4.3 6.4 5.5.8.4 1.7.7 2.6.9z" fill="#34A853"/><path d="M12 2.9V9a3 3 0 013 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#EA4335"/><path d="M12 2.9V9a3 3 0 003 3h6.1c-.2-.9-.5-1.8-.9-2.6-1.5-2.5-3.8-4.3-6.4-5.5-.8-.4-1.7-.7-2.6-.9z" fill="#34A853"/></svg>`;
+          osVersion = 'Distro Linux'; // Specific version often hard to parse reliably from UA
         } else if (userAgent.match(/android/i)) {
-          osName = 'Android'
-          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 13.914l3.5-3.5L12 17.5l6-6L21.5 14l-9.5 9.5L2.5 14z" fill="#3DDC84"/><path d="M2.5 13.914l3.5-3.5L12 17.5l6-6L21.5 14l-9.5 9.5L2.5 14z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 10.414L12 4.914l-5.5 5.5" fill="#3DDC84"/><path d="M17.5 10.414L12 4.914l-5.5 5.5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
-          const match = userAgent.match(/android (\d+(\.\d+)*)/i)
-          if (match) osVersion = match[1]
+          osName = 'Android';
+          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 13.914l3.5-3.5L12 17.5l6-6L21.5 14l-9.5 9.5L2.5 14z" fill="#3DDC84"/><path d="M2.5 13.914l3.5-3.5L12 17.5l6-6L21.5 14l-9.5 9.5L2.5 14z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 10.414L12 4.914l-5.5 5.5" fill="#3DDC84"/><path d="M17.5 10.414L12 4.914l-5.5 5.5" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+          const match = userAgent.match(/android (\d+(\.\d+)*)/i);
+          if (match) osVersion = match[1];
         } else if (userAgent.match(/iphone|ipad|ipod/i)) {
-          osName = 'iOS'
-          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#A2AAAD"/></svg>`
-          const match = userAgent.match(/os (\d+_\d+(?:_\d+)?)/i)
-          if (match) osVersion = match[1].replace(/_/g, '.')
+          osName = 'iOS';
+          osIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a10 10 0 00-6.9 16.963 8 8 0 1113.842-13.842A10 10 0 0012 2z" fill="#A2AAAD"/></svg>`;
+          const match = userAgent.match(/os (\d+_\d+(?:_\d+)?)/i);
+          if (match) osVersion = match[1].replace(/_/g, '.');
         }
 
         // Get IP and Country
         async function getIpAndCountry() {
           try {
-            const response = await fetch('https://ipapi.co/json/')
-            const data = await response.json()
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
 
-            const ip = data.ip
-            const country = data.country_name
-            const countryCode = data.country_code.toLowerCase()
+            const ip = data.ip;
+            const country = data.country_name;
+            const countryCode = data.country_code.toLowerCase();
 
-            const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`
+            const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
 
             document.getElementById('tech-info').innerHTML = `
                     <div class="info-item">
@@ -760,17 +760,17 @@ N. Kirim ke editor (1 hari)</code></pre>
                         <img src="${flagUrl}" alt="Bendera ${country}" style="width: 20px; height: auto; border: 1px solid #ccc;">
                         <strong>Alamat IP:</strong> ${ip} (${country})
                     </div>
-                `
+                `;
           } catch (error) {
             document.getElementById('tech-info').innerHTML =
-              `<p>Gagal memuat informasi teknis.</p>`
-            console.error('Failed to fetch IP/country info:', error)
+              `<p>Gagal memuat informasi teknis.</p>`;
+            console.error('Failed to fetch IP/country info:', error);
           }
         }
 
         // Run the functions
-        getIpAndCountry()
-      })
+        getIpAndCountry();
+      });
     </script>
 
     });

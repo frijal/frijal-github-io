@@ -314,46 +314,46 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Tambahkan URL saat ini ke FB comments
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
 
         // Deteksi browser & OS sederhana
         function getBrowserInfo() {
-          const ua = navigator.userAgent
-          let browser = 'Browser tidak diketahui'
-          if (ua.includes('Firefox')) browser = 'Mozilla Firefox'
-          else if (ua.includes('Chrome')) browser = 'Google Chrome'
+          const ua = navigator.userAgent;
+          let browser = 'Browser tidak diketahui';
+          if (ua.includes('Firefox')) browser = 'Mozilla Firefox';
+          else if (ua.includes('Chrome')) browser = 'Google Chrome';
           else if (ua.includes('Safari') && !ua.includes('Chrome'))
-            browser = 'Safari'
-          else if (ua.includes('Edg')) browser = 'Microsoft Edge'
+            browser = 'Safari';
+          else if (ua.includes('Edg')) browser = 'Microsoft Edge';
 
-          let os = 'OS tidak diketahui'
-          if (ua.includes('Win')) os = 'Windows'
-          else if (ua.includes('Mac')) os = 'MacOS'
-          else if (ua.includes('Linux')) os = 'Linux'
-          else if (/Android/i.test(ua)) os = 'Android'
-          else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS'
+          let os = 'OS tidak diketahui';
+          if (ua.includes('Win')) os = 'Windows';
+          else if (ua.includes('Mac')) os = 'MacOS';
+          else if (ua.includes('Linux')) os = 'Linux';
+          else if (/Android/i.test(ua)) os = 'Android';
+          else if (/iPhone|iPad|iPod/i.test(ua)) os = 'iOS';
 
           document.getElementById('browser-info').innerHTML =
-            `Browser: ${browser} | Sistem Operasi: ${os}`
+            `Browser: ${browser} | Sistem Operasi: ${os}`;
         }
-        getBrowserInfo()
+        getBrowserInfo();
 
         // Ambil IP dan country flag
         fetch('https://ipapi.co/json/')
           .then((response) => response.json())
           .then((data) => {
             document.getElementById('ip-info').innerHTML =
-              `IP Anda: ${data.ip} | Negara: ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" class="flag">`
+              `IP Anda: ${data.ip} | Negara: ${data.country_name} <img src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png" class="flag">`;
           })
           .catch(() => {
             document.getElementById('ip-info').innerText =
-              'Gagal memuat info IP'
-          })
-      })
+              'Gagal memuat info IP';
+          });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

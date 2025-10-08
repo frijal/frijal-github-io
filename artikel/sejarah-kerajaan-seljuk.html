@@ -468,8 +468,6 @@
         </div>
       </header>
 
-
-
       <!-- Article body -->
       <article class="article" role="article">
         <h2>Awal berdirinya Kerajaan Seljuk</h2>
@@ -730,95 +728,96 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Detect basic browser and OS
-        ;(function detect() {
-          const ua = navigator.userAgent.toLowerCase()
+        (function detect() {
+          const ua = navigator.userAgent.toLowerCase();
           let browser = 'Tidak diketahui',
-            os = 'Tidak diketahui'
-          if (ua.includes('edg')) browser = 'Microsoft Edge'
-          else if (ua.includes('chrome')) browser = 'Google Chrome'
-          else if (ua.includes('safari')) browser = 'Safari'
-          else if (ua.includes('firefox')) browser = 'Mozilla Firefox'
+            os = 'Tidak diketahui';
+          if (ua.includes('edg')) browser = 'Microsoft Edge';
+          else if (ua.includes('chrome')) browser = 'Google Chrome';
+          else if (ua.includes('safari')) browser = 'Safari';
+          else if (ua.includes('firefox')) browser = 'Mozilla Firefox';
 
-          if (ua.includes('windows')) os = 'Windows'
+          if (ua.includes('windows')) os = 'Windows';
           else if (ua.includes('mac os') || ua.includes('macintosh'))
-            os = 'macOS'
-          else if (ua.includes('android')) os = 'Android'
-          else if (ua.includes('iphone') || ua.includes('ipad')) os = 'iOS'
-          else if (ua.includes('linux')) os = 'Linux'
+            os = 'macOS';
+          else if (ua.includes('android')) os = 'Android';
+          else if (ua.includes('iphone') || ua.includes('ipad')) os = 'iOS';
+          else if (ua.includes('linux')) os = 'Linux';
 
-          document.getElementById('browser').textContent = 'Browser: ' + browser
-          document.getElementById('os').textContent = 'OS: ' + os
-        })()
+          document.getElementById('browser').textContent =
+            'Browser: ' + browser;
+          document.getElementById('os').textContent = 'OS: ' + os;
+        })();
 
         // Lightbox gallery
-        ;(function gallery() {
+        (function gallery() {
           const thumbs = Array.from(
             document.querySelectorAll('.gallery .thumb'),
-          )
-          const lb = document.getElementById('lightbox')
-          const lbImg = document.getElementById('lb-img')
-          const prev = document.querySelector('.lb-prev')
-          const next = document.querySelector('.lb-next')
-          const close = document.querySelector('.lb-close')
-          let idx = 0
+          );
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lb-img');
+          const prev = document.querySelector('.lb-prev');
+          const next = document.querySelector('.lb-next');
+          const close = document.querySelector('.lb-close');
+          let idx = 0;
 
           function open(i) {
-            idx = i
-            lbImg.src = thumbs[idx].dataset.full
-            lb.classList.add('open')
+            idx = i;
+            lbImg.src = thumbs[idx].dataset.full;
+            lb.classList.add('open');
           }
           function step(dir) {
-            idx = (idx + dir + thumbs.length) % thumbs.length
-            lbImg.src = thumbs[idx].dataset.full
+            idx = (idx + dir + thumbs.length) % thumbs.length;
+            lbImg.src = thumbs[idx].dataset.full;
           }
           function hide() {
-            lb.classList.remove('open')
+            lb.classList.remove('open');
           }
 
-          thumbs.forEach((t, i) => t.addEventListener('click', () => open(i)))
-          prev.addEventListener('click', () => step(-1))
-          next.addEventListener('click', () => step(1))
-          close.addEventListener('click', hide)
+          thumbs.forEach((t, i) => t.addEventListener('click', () => open(i)));
+          prev.addEventListener('click', () => step(-1));
+          next.addEventListener('click', () => step(1));
+          close.addEventListener('click', hide);
           lb.addEventListener('click', (e) => {
-            if (e.target === lb) hide()
-          })
+            if (e.target === lb) hide();
+          });
           document.addEventListener('keydown', (e) => {
-            if (!lb.classList.contains('open')) return
-            if (e.key === 'Escape') hide()
-            if (e.key === 'ArrowLeft') step(-1)
-            if (e.key === 'ArrowRight') step(1)
-          })
-        })()
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') hide();
+            if (e.key === 'ArrowLeft') step(-1);
+            if (e.key === 'ArrowRight') step(1);
+          });
+        })();
 
         // Share links
-        ;(function share() {
+        (function share() {
           const url = encodeURIComponent(
             'https://frijal.github.io/artikel/sejarah-kerajaan-seljuk.html',
-          )
+          );
           const title = encodeURIComponent(
             'Sejarah Kerajaan Seljuk – Dari Suku Nomaden ke Kekaisaran',
-          )
+          );
 
           document
             .getElementById('copyLink')
             .addEventListener('click', async () => {
               try {
-                await navigator.clipboard.writeText(decodeURIComponent(url))
-                alert('Tautan disalin!')
+                await navigator.clipboard.writeText(decodeURIComponent(url));
+                alert('Tautan disalin!');
               } catch {
-                prompt('Salin tautan secara manual:', decodeURIComponent(url))
+                prompt('Salin tautan secara manual:', decodeURIComponent(url));
               }
-            })
+            });
           document.getElementById('waShare').href =
-            `https://wa.me/?text=${title}%20${url}`
+            `https://wa.me/?text=${title}%20${url}`;
           document.getElementById('fbShare').href =
-            `https://www.facebook.com/sharer/sharer.php?u=${url}`
+            `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           document.getElementById('xShare').href =
-            `https://twitter.com/intent/tweet?text=${title}&url=${url}`
+            `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
           document.getElementById('tgShare').href =
-            `https://t.me/share/url?url=${url}&text=${title}`
-        })()
-      })
+            `https://t.me/share/url?url=${url}&text=${title}`;
+        })();
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -941,112 +941,116 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         // Scroll progress
-        const progress = document.getElementById('progress')
+        const progress = document.getElementById('progress');
         const onScroll = () => {
-          const h = document.documentElement
-          const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100
-          progress.style.width = p + '%'
-        }
-        document.addEventListener('scroll', onScroll, { passive: true })
-        onScroll()
+          const h = document.documentElement;
+          const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+          progress.style.width = p + '%';
+        };
+        document.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
         // Share buttons
         document.querySelectorAll('.share-btn').forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            e.preventDefault()
+            e.preventDefault();
             const net = btn.dataset.net,
               title = document.title,
-              url = location.href
-            let shareUrl = url
+              url = location.href;
+            let shareUrl = url;
             if (net === 'fb')
-              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+              shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
             if (net === 'tw')
-              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`
+              shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
             if (net === 'wa')
-              shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`
+              shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
             if (net === 'tg')
-              shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+              shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
             if (net === 'cp') {
               navigator.clipboard?.writeText(url).then(() => {
-                btn.innerHTML = '✔️ Tersalin'
-                setTimeout(() => location.reload(), 1000)
-              })
-              return
+                btn.innerHTML = '✔️ Tersalin';
+                setTimeout(() => location.reload(), 1000);
+              });
+              return;
             }
-            window.open(shareUrl, '_blank', 'noopener,width=680,height=520')
-          })
-        })
+            window.open(shareUrl, '_blank', 'noopener,width=680,height=520');
+          });
+        });
 
         // User Agent info
-        ;(function () {
-          const chip = document.getElementById('uaChip')
-          const ua = navigator.userAgent
+        (function () {
+          const chip = document.getElementById('uaChip');
+          const ua = navigator.userAgent;
           const plt =
-            navigator.userAgentData?.platform || navigator.platform || 'Unknown'
-          const isMobile = /Mobi|Android/i.test(ua)
-          chip.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3 5h18v10H3V5zm0 12h18v2H3v-2z"/></svg>${isMobile ? 'Mobile' : 'Desktop'} • ${plt}`
-        })()
+            navigator.userAgentData?.platform ||
+            navigator.platform ||
+            'Unknown';
+          const isMobile = /Mobi|Android/i.test(ua);
+          chip.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3 5h18v10H3V5zm0 12h18v2H3v-2z"/></svg>${isMobile ? 'Mobile' : 'Desktop'} • ${plt}`;
+        })();
 
         // IP Geolocation (flag + city)
-        ;(async function () {
-          const locTxt = document.getElementById('locTxt')
-          const flag = document.getElementById('flag')
+        (async function () {
+          const locTxt = document.getElementById('locTxt');
+          const flag = document.getElementById('flag');
           try {
-            const res = await fetch('https://ipapi.co/json/')
-            const data = await res.json()
-            const city = data.city || 'Kota'
-            const country = data.country_name || 'Negara'
-            const cc = (data.country_code || 'UN').toLowerCase()
-            flag.src = `https://flagcdn.com/w20/${cc}.png`
-            flag.alt = country
-            locTxt.textContent = `${city}, ${country}`
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            const city = data.city || 'Kota';
+            const country = data.country_name || 'Negara';
+            const cc = (data.country_code || 'UN').toLowerCase();
+            flag.src = `https://flagcdn.com/w20/${cc}.png`;
+            flag.alt = country;
+            locTxt.textContent = `${city}, ${country}`;
           } catch (e) {
-            flag.src = ''
-            flag.alt = ''
-            locTxt.textContent = 'Lokasi tidak tersedia'
+            flag.src = '';
+            flag.alt = '';
+            locTxt.textContent = 'Lokasi tidak tersedia';
           }
-        })()
+        })();
 
         // Gallery Lightbox
-        const imgs = [...document.querySelectorAll('#gallery img')]
+        const imgs = [...document.querySelectorAll('#gallery img')];
         const lb = document.getElementById('lightbox'),
-          lbImg = document.getElementById('lightboxImg')
+          lbImg = document.getElementById('lightboxImg');
         const btnPrev = lb.querySelector('.prev'),
           btnNext = lb.querySelector('.next'),
-          btnClose = lb.querySelector('.close')
-        let idx = 0
+          btnClose = lb.querySelector('.close');
+        let idx = 0;
         function openLB(i) {
-          idx = i
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
-          lb.classList.add('open')
-          document.body.style.overflow = 'hidden'
+          idx = i;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
+          lb.classList.add('open');
+          document.body.style.overflow = 'hidden';
         }
         function closeLB() {
-          lb.classList.remove('open')
-          document.body.style.overflow = ''
+          lb.classList.remove('open');
+          document.body.style.overflow = '';
         }
         function next() {
-          idx = (idx + 1) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
+          idx = (idx + 1) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
         }
         function prev() {
-          idx = (idx - 1 + imgs.length) % imgs.length
-          lbImg.src = imgs[idx].dataset.full || imgs[idx].src
+          idx = (idx - 1 + imgs.length) % imgs.length;
+          lbImg.src = imgs[idx].dataset.full || imgs[idx].src;
         }
-        imgs.forEach((img, i) => img.addEventListener('click', () => openLB(i)))
-        btnClose.addEventListener('click', closeLB)
-        btnNext.addEventListener('click', next)
-        btnPrev.addEventListener('click', prev)
+        imgs.forEach((img, i) =>
+          img.addEventListener('click', () => openLB(i)),
+        );
+        btnClose.addEventListener('click', closeLB);
+        btnNext.addEventListener('click', next);
+        btnPrev.addEventListener('click', prev);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLB()
-        })
+          if (e.target === lb) closeLB();
+        });
         document.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') closeLB()
-          if (e.key === 'ArrowRight') next()
-          if (e.key === 'ArrowLeft') prev()
-        })
-      })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLB();
+          if (e.key === 'ArrowRight') next();
+          if (e.key === 'ArrowLeft') prev();
+        });
+      });
     </script>
 
     <!-- Facebook SDK dan auto data-href -->
@@ -1061,7 +1065,7 @@
     <script>
       document
         .querySelector('.fb-comments')
-        .setAttribute('data-href', location.href)
+        .setAttribute('data-href', location.href);
     </script>
     document.addEventListener(DOMContentLoaded, () => {
 
@@ -1069,8 +1073,8 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let s = (document.querySelector('main section img') || {}).src || ''
-          ;['og:image', 'twitter:image'].forEach((p, j) =>
+          let s = (document.querySelector('main section img') || {}).src || '';
+          ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
                 (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
@@ -1080,16 +1084,16 @@
                   content: s,
                 }),
             ),
-          )
+          );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
               }),
-          )
-        })
-      })
+          );
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

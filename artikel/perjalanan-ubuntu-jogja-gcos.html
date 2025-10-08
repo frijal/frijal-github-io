@@ -401,25 +401,23 @@
         ></div>
         <script>
           document.addEventListener(DOMContentLoaded, () => {
-            const currentUrl = window.location.href
-            document.getElementById('current-url').textContent = currentUrl
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
             document
               .getElementById('fb-comments')
-              .setAttribute('data-href', currentUrl)
+              .setAttribute('data-href', currentUrl);
             window.fbAsyncInit = function () {
               if (typeof FB !== 'undefined') {
                 try {
-                  FB.XFBML.parse()
+                  FB.XFBML.parse();
                 } catch (e) {}
               }
-            }
-          })
+            };
+          });
         </script>
       </div>
 
-      <footer>
-        
-      </footer>
+      <footer></footer>
 
       <!-- JSON-LD Article & Breadcrumb -->
       });
@@ -477,29 +475,28 @@
     <!-- Platform + IP -->
     });
     <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js"></script>
-    
 
     <!-- Lightbox Script -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        const images = document.querySelectorAll('.image-grid img')
-        const lightboxImg = document.getElementById('lightbox-img')
-        const lightbox = document.getElementById('lightbox')
+        const images = document.querySelectorAll('.image-grid img');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightbox = document.getElementById('lightbox');
 
         images.forEach((img) => {
           img.addEventListener('click', () => {
-            lightboxImg.src = img.src
-            lightbox.style.display = 'flex'
-          })
-        })
+            lightboxImg.src = img.src;
+            lightbox.style.display = 'flex';
+          });
+        });
         function closeLightbox() {
-          lightbox.style.display = 'none'
-          lightboxImg.src = ''
+          lightbox.style.display = 'none';
+          lightboxImg.src = '';
         }
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) closeLightbox()
-        })
-      })
+          if (e.target === lightbox) closeLightbox();
+        });
+      });
     </script>
 
     });

@@ -418,13 +418,13 @@
               'Membicarakan orang yang terang-terangan berbuat dosa di muka umum.',
               'Mengenalkan seseorang dengan sebutan yang sudah dikenal luas (misal gelar fisik), jika tidak ada cara lain.',
             ],
-          }
+          };
 
-          const storiesContainer = document.getElementById('stories-container')
+          const storiesContainer = document.getElementById('stories-container');
           data.stories.forEach((story) => {
-            const card = document.createElement('div')
+            const card = document.createElement('div');
             card.className =
-              'story-card bg-bg-card rounded-lg shadow-md cursor-pointer'
+              'story-card bg-bg-card rounded-lg shadow-md cursor-pointer';
             card.innerHTML = `
                     <div class="header flex justify-between items-center p-4">
                         <h3 class="text-lg font-semibold">${story.title}</h3>
@@ -433,103 +433,103 @@
                     <div class="content px-4 text-text-secondary">
                         <p>${story.content}</p>
                     </div>
-                `
-            storiesContainer.appendChild(card)
-          })
+                `;
+            storiesContainer.appendChild(card);
+          });
 
           storiesContainer.addEventListener('click', function (e) {
-            const card = e.target.closest('.story-card')
+            const card = e.target.closest('.story-card');
             if (card) {
-              card.classList.toggle('open')
-              const icon = card.querySelector('.header span')
-              icon.textContent = card.classList.contains('open') ? '−' : '＋'
+              card.classList.toggle('open');
+              const icon = card.querySelector('.header span');
+              icon.textContent = card.classList.contains('open') ? '−' : '＋';
               icon.style.transform = card.classList.contains('open')
                 ? 'rotate(180deg)'
-                : 'rotate(0deg)'
+                : 'rotate(0deg)';
             }
-          })
+          });
 
-          const dalilContainer = document.getElementById('dalil-container')
+          const dalilContainer = document.getElementById('dalil-container');
           data.dalil.forEach((d) => {
-            const card = document.createElement('div')
-            card.className = `dalil-card bg-bg-card p-6 rounded-lg shadow-md border border-border-color ${d.type}`
+            const card = document.createElement('div');
+            card.className = `dalil-card bg-bg-card p-6 rounded-lg shadow-md border border-border-color ${d.type}`;
             card.innerHTML = `
                     <blockquote class="text-text-secondary italic">“${d.text}”</blockquote>
                     <cite class="block text-right mt-4 not-italic font-semibold text-accent-secondary">${d.source}</cite>
-                `
-            dalilContainer.appendChild(card)
-          })
+                `;
+            dalilContainer.appendChild(card);
+          });
 
-          const filterButtons = document.querySelectorAll('.dalil-filter-btn')
+          const filterButtons = document.querySelectorAll('.dalil-filter-btn');
           function filterDalil(filter) {
             document
               .querySelectorAll('.dalil-card')
-              .forEach((card) => card.classList.remove('active'))
+              .forEach((card) => card.classList.remove('active'));
             document
               .querySelectorAll(`.dalil-card.${filter}`)
-              .forEach((card) => card.classList.add('active'))
-            filterButtons.forEach((btn) => btn.classList.remove('active'))
+              .forEach((card) => card.classList.add('active'));
+            filterButtons.forEach((btn) => btn.classList.remove('active'));
             document
               .querySelector(`.dalil-filter-btn[data-filter="${filter}"]`)
-              .classList.add('active')
+              .classList.add('active');
           }
           filterButtons.forEach((button) => {
             button.addEventListener('click', () =>
               filterDalil(button.dataset.filter),
-            )
-          })
-          filterDalil('quran')
+            );
+          });
+          filterDalil('quran');
 
           document.getElementById('causes-card').querySelector('ul').innerHTML =
-            data.causes.map((c) => `<li>${c}</li>`).join('')
+            data.causes.map((c) => `<li>${c}</li>`).join('');
           document
             .getElementById('solutions-card')
             .querySelector('ul').innerHTML = data.solutions
             .map((s) => `<li>${s}</li>`)
-            .join('')
+            .join('');
 
           const exceptionsContainer = document.getElementById(
             'exceptions-container',
-          )
-          const exceptionsList = document.createElement('ol')
+          );
+          const exceptionsList = document.createElement('ol');
           exceptionsList.className =
-            'space-y-4 list-decimal list-outside pl-5 text-text-secondary'
+            'space-y-4 list-decimal list-outside pl-5 text-text-secondary';
           exceptionsList.innerHTML = data.exceptions
             .map(
               (ex) =>
                 `<li><strong class="text-text-primary">Kondisi ${exceptionsList.children.length + 1}:</strong> ${ex}</li>`,
             )
-            .join('')
-          exceptionsContainer.appendChild(exceptionsList)
+            .join('');
+          exceptionsContainer.appendChild(exceptionsList);
 
-          const navLinks = document.querySelectorAll('.nav-link')
-          const sections = document.querySelectorAll('main section')
+          const navLinks = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('main section');
           window.addEventListener('scroll', () => {
-            let current = ''
+            let current = '';
             sections.forEach((section) => {
-              const sectionTop = section.offsetTop
+              const sectionTop = section.offsetTop;
               if (pageYOffset >= sectionTop - 65) {
-                current = section.getAttribute('id')
+                current = section.getAttribute('id');
               }
-            })
+            });
             navLinks.forEach((link) => {
-              link.classList.remove('active')
+              link.classList.remove('active');
               if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active')
+                link.classList.add('active');
               }
-            })
-          })
+            });
+          });
 
-          const menuBtn = document.getElementById('menu-btn')
-          const mobileMenu = document.getElementById('mobile-menu')
+          const menuBtn = document.getElementById('menu-btn');
+          const mobileMenu = document.getElementById('mobile-menu');
           menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden')
-          })
+            mobileMenu.classList.toggle('hidden');
+          });
           mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden')
-          })
-        })
-      })
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

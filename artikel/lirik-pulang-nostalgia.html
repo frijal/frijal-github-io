@@ -510,7 +510,6 @@
       </div>
       <div class="chips">
         <span class="chip">🎧 Baca sambil dengar</span>
-        
       </div>
     </header>
 
@@ -754,7 +753,7 @@
     <!-- Scripts -->
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        
+
                 }),
             )
         })()
@@ -885,7 +884,7 @@
     <script>
       document
         .querySelector('.fb-comments')
-        .setAttribute('data-href', location.href)
+        .setAttribute('data-href', location.href);
     </script>
     document.addEventListener(DOMContentLoaded, () => {
 
@@ -893,8 +892,8 @@
     <script>
       document.addEventListener(DOMContentLoaded, () => {
         document.addEventListener('DOMContentLoaded', () => {
-          let s = (document.querySelector('main section img') || {}).src || ''
-          ;['og:image', 'twitter:image'].forEach((p, j) =>
+          let s = (document.querySelector('main section img') || {}).src || '';
+          ['og:image', 'twitter:image'].forEach((p, j) =>
             document.head.appendChild(
               document.querySelector(
                 (j ? 'meta[name=' : 'meta[property=') + `"${p}"]`,
@@ -904,16 +903,16 @@
                   content: s,
                 }),
             ),
-          )
+          );
           document.head.appendChild(
             document.querySelector('meta[property="og:url"]') ||
               Object.assign(document.createElement('meta'), {
                 property: 'og:url',
                 content: location.href,
               }),
-          )
-        })
-      })
+          );
+        });
+      });
     </script>
     });
     <div id="kategori-aktif"></div>

@@ -302,45 +302,45 @@
         // Copy button
         document.querySelectorAll('.copy-btn').forEach((btn) => {
           btn.addEventListener('click', () => {
-            const code = btn.previousElementSibling.innerText
-            navigator.clipboard.writeText(code)
-            btn.innerText = 'Copied!'
-            setTimeout(() => (btn.innerText = 'Copy'), 2000)
-          })
-        })
+            const code = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code);
+            btn.innerText = 'Copied!';
+            setTimeout(() => (btn.innerText = 'Copy'), 2000);
+          });
+        });
 
         // FB Comments URL
-        const currentUrl = window.location.href
-        document.getElementById('current-url').textContent = currentUrl
+        const currentUrl = window.location.href;
+        document.getElementById('current-url').textContent = currentUrl;
         document
           .getElementById('fb-comments')
-          .setAttribute('data-href', currentUrl)
+          .setAttribute('data-href', currentUrl);
 
         // Browser & OS info + icons
-        const ua = navigator.userAgent
+        const ua = navigator.userAgent;
         let browser = 'Unknown',
-          os = 'Unknown'
-        if (ua.includes('Firefox')) browser = 'Mozilla Firefox 🦊'
-        else if (ua.includes('Chrome')) browser = 'Google Chrome 🌐'
-        else if (ua.includes('Safari')) browser = 'Safari 🍏'
-        else if (ua.includes('Edg')) browser = 'Microsoft Edge 🪟'
-        if (ua.includes('Win')) os = 'Windows 💻'
-        else if (ua.includes('Linux')) os = 'Linux 🐧'
-        else if (ua.includes('Mac')) os = 'MacOS 🍎'
+          os = 'Unknown';
+        if (ua.includes('Firefox')) browser = 'Mozilla Firefox 🦊';
+        else if (ua.includes('Chrome')) browser = 'Google Chrome 🌐';
+        else if (ua.includes('Safari')) browser = 'Safari 🍏';
+        else if (ua.includes('Edg')) browser = 'Microsoft Edge 🪟';
+        if (ua.includes('Win')) os = 'Windows 💻';
+        else if (ua.includes('Linux')) os = 'Linux 🐧';
+        else if (ua.includes('Mac')) os = 'MacOS 🍎';
         document.getElementById('browser-info').textContent =
-          'Browser: ' + browser
-        document.getElementById('os-info').textContent = 'OS: ' + os
+          'Browser: ' + browser;
+        document.getElementById('os-info').textContent = 'OS: ' + os;
 
         // IP & Country flag
         fetch('https://ipapi.co/json/')
           .then((r) => r.json())
           .then((data) => {
             document.getElementById('ip-info').textContent =
-              'IP Anda: ' + data.ip + ' (' + data.country_name + ')'
+              'IP Anda: ' + data.ip + ' (' + data.country_name + ')';
             document.getElementById('flag').innerHTML =
-              `<img src="https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png">`
-          })
-      })
+              `<img src="https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png">`;
+          });
+      });
     </script>
 
     <!-- JSON-LD Article + Breadcrumb + FAQ -->

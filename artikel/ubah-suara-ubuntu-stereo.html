@@ -110,7 +110,7 @@
                         "name": "Ubah Suara Ubuntu — Folder stereo"
                       }
                     ]
-        
+
             <meta name="date" content="2025-09-27">
 
                   }
@@ -800,8 +800,8 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
             ></div>
             <script>
               document.addEventListener(DOMContentLoaded, () => {
-                let currentUrl = window.location.href
-                ;((document.getElementById('current-url').textContent =
+                let currentUrl = window.location.href;
+                ((document.getElementById('current-url').textContent =
                   currentUrl),
                   document
                     .getElementById('fb-comments')
@@ -809,10 +809,10 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
                   (window.fbAsyncInit = function () {
                     if ('undefined' != typeof FB)
                       try {
-                        FB.XFBML.parse()
+                        FB.XFBML.parse();
                       } catch (t) {}
-                  }))
-              })
+                  }));
+              });
             </script>
           </div>
         </div>
@@ -824,34 +824,30 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
       </button>
       <img id="lightbox-img" alt="Pratinjau gambar" />
     </div>
-    <footer class="info">
-      
-    </footer>
+    <footer class="info"></footer>
     <script>
       document.addEventListener(DOMContentLoaded, () => {
-        ;((() => {
+        ((() => {
           let i = document.getElementById('lightbox'),
             n = document.getElementById('lightbox-img'),
-            e = document.getElementById('lightbox-close')
+            e = document.getElementById('lightbox-close');
           function t() {
-            ;(i.classList.remove('open'), (n.src = ''))
+            (i.classList.remove('open'), (n.src = ''));
           }
-          ;(document
-            .querySelectorAll('[data-lightbox="image"]')
-            .forEach((t) => {
-              t.addEventListener('click', (e) => {
-                ;(e.preventDefault(),
-                  (n.src = t.getAttribute('href')),
-                  i.classList.add('open'))
-              })
-            }),
+          (document.querySelectorAll('[data-lightbox="image"]').forEach((t) => {
+            t.addEventListener('click', (e) => {
+              (e.preventDefault(),
+                (n.src = t.getAttribute('href')),
+                i.classList.add('open'));
+            });
+          }),
             i.addEventListener('click', (e) => {
-              e.target === i && t()
+              e.target === i && t();
             }),
             e.addEventListener('click', t),
             document.addEventListener('keydown', (e) => {
-              'Escape' === e.key && t()
-            }))
+              'Escape' === e.key && t();
+            }));
         })(),
           (document.getElementById('page-url').textContent =
             window.location.href),
@@ -860,8 +856,8 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
                 'https://frijal.github.io/artikel/ubah-suara-ubuntu-stereo.html',
               t = encodeURIComponent(
                 'Panduan mengubah suara Ubuntu dari folder stereo.',
-              )
-            ;((document.getElementById('share-fb').href =
+              );
+            ((document.getElementById('share-fb').href =
               'https://www.facebook.com/sharer/sharer.php?u=' +
               encodeURIComponent(e)),
               (document.getElementById('share-twitter').href =
@@ -877,7 +873,7 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
                 t),
               (document.getElementById('share-ig').href = e),
               (document.getElementById('share-threads').href = e),
-              (document.getElementById('share-tiktok').href = e))
+              (document.getElementById('share-tiktok').href = e));
           })(),
           (() => {
             var e = navigator.userAgent || navigator.userAgentData || '',
@@ -970,11 +966,11 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
                   '<svg width="22" height="22" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" fill="#FF1B2D"/><ellipse cx="12" cy="12" rx="4" ry="7" fill="#fff"/></svg>',
                 'Browser Lain':
                   '<svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#999"/></svg>',
-              }
-            ;((document.getElementById('device-os-icons').innerHTML =
+              };
+            ((document.getElementById('device-os-icons').innerHTML =
               r[o] || r.Linux),
               (document.getElementById('device-browser-icons').innerHTML =
-                n[i] || n['Browser Lain']))
+                n[i] || n['Browser Lain']));
           })(),
           fetch('https://ipapi.co/json/')
             .then((e) => (e.ok ? e.json() : Promise.reject()))
@@ -982,18 +978,18 @@ silakan arahkan navigasi ke folder &lt;code&gt;&lt;b&gt;stereo&lt;/b&gt;&lt;/cod
               var t = e.ip || '—',
                 i = e.city || '—',
                 n = e.country_name || '—',
-                e = (e.country_code || '').toLowerCase()
-              ;((document.getElementById('ip-info').textContent = 'IP: ' + t),
+                e = (e.country_code || '').toLowerCase();
+              ((document.getElementById('ip-info').textContent = 'IP: ' + t),
                 (document.getElementById('city-info').textContent =
                   'Kota: ' + i),
                 (document.getElementById('country-info').textContent =
                   'Negara: ' + n),
                 e &&
                   (document.getElementById('flag-wrap').innerHTML =
-                    `<img src="https://flagcdn.com/w40/${e}.png" alt="Bendera ${n}" width="40" height="30" style="border-radius:4px;border:1px solid rgba(255,255,255,.2)" />`))
+                    `<img src="https://flagcdn.com/w40/${e}.png" alt="Bendera ${n}" width="40" height="30" style="border-radius:4px;border:1px solid rgba(255,255,255,.2)" />`));
             })
-            .catch(() => {}))
-      })
+            .catch(() => {}));
+      });
     </script>
 
     });

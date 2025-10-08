@@ -741,131 +741,132 @@
       document.addEventListener(DOMContentLoaded, () => {
         // Canonical
         const CANON =
-          document.querySelector('link[rel="canonical"]')?.href || location.href
+          document.querySelector('link[rel="canonical"]')?.href ||
+          location.href;
 
         // Share links
         const title =
           document.querySelector('meta[property="og:title"]')?.content ||
-          document.title
-        const tw = document.getElementById('share-twitter')
-        const fb = document.getElementById('share-facebook')
-        const wa = document.getElementById('share-wa')
-        const tl = document.getElementById('share-tele')
+          document.title;
+        const tw = document.getElementById('share-twitter');
+        const fb = document.getElementById('share-facebook');
+        const wa = document.getElementById('share-wa');
+        const tl = document.getElementById('share-tele');
         if (tw)
-          tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(title)}`
+          tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(title)}`;
         if (fb)
-          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CANON)}`
+          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CANON)}`;
         if (wa)
-          wa.href = `https://wa.me/?text=${encodeURIComponent(title + ' ' + CANON)}`
+          wa.href = `https://wa.me/?text=${encodeURIComponent(title + ' ' + CANON)}`;
         if (tl)
-          tl.href = `https://t.me/share/url?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(title)}`
+          tl.href = `https://t.me/share/url?url=${encodeURIComponent(CANON)}&text=${encodeURIComponent(title)}`;
 
         // Copy buttons
         document.querySelectorAll('.cmd').forEach((block) => {
-          const btn = block.querySelector('.copy')
+          const btn = block.querySelector('.copy');
           const codeStr =
-            block.getAttribute('data-code') || block.textContent.trim()
+            block.getAttribute('data-code') || block.textContent.trim();
           if (btn) {
             btn.addEventListener('click', async () => {
               try {
-                await navigator.clipboard.writeText(codeStr)
-                btn.textContent = 'Copied!'
-                setTimeout(() => (btn.textContent = 'Copy'), 1200)
+                await navigator.clipboard.writeText(codeStr);
+                btn.textContent = 'Copied!';
+                setTimeout(() => (btn.textContent = 'Copy'), 1200);
               } catch {
-                btn.textContent = 'Gagal'
-                setTimeout(() => (btn.textContent = 'Copy'), 1200)
+                btn.textContent = 'Gagal';
+                setTimeout(() => (btn.textContent = 'Copy'), 1200);
               }
-            })
+            });
           }
-        })
+        });
 
         // Gallery lightbox
-        const images = Array.from(document.querySelectorAll('.gallery img'))
-        const lb = document.getElementById('lightbox')
-        const lbImg = document.getElementById('lightbox-img')
-        const lbClose = document.getElementById('lbClose')
-        const lbPrev = document.getElementById('lbPrev')
-        const lbNext = document.getElementById('lbNext')
-        let currentIndex = 0
+        const images = Array.from(document.querySelectorAll('.gallery img'));
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbClose = document.getElementById('lbClose');
+        const lbPrev = document.getElementById('lbPrev');
+        const lbNext = document.getElementById('lbNext');
+        let currentIndex = 0;
 
         function openLB(index) {
-          currentIndex = index
-          const el = images[currentIndex]
-          lbImg.src = el.dataset.full || el.src
-          lb.classList.add('open')
+          currentIndex = index;
+          const el = images[currentIndex];
+          lbImg.src = el.dataset.full || el.src;
+          lb.classList.add('open');
         }
         function closeLB() {
-          lb.classList.remove('open')
+          lb.classList.remove('open');
         }
         function prevLB() {
-          if (!images.length) return
-          openLB((currentIndex - 1 + images.length) % images.length)
+          if (!images.length) return;
+          openLB((currentIndex - 1 + images.length) % images.length);
         }
         function nextLB() {
-          if (!images.length) return
-          openLB((currentIndex + 1) % images.length)
+          if (!images.length) return;
+          openLB((currentIndex + 1) % images.length);
         }
 
         images.forEach((img, i) =>
           img.addEventListener('click', () => openLB(i)),
-        )
-        lbClose.addEventListener('click', closeLB)
+        );
+        lbClose.addEventListener('click', closeLB);
         lb.addEventListener('click', (e) => {
-          if (e.target === lb) closeLB()
-        })
-        lbPrev.addEventListener('click', prevLB)
-        lbNext.addEventListener('click', nextLB)
+          if (e.target === lb) closeLB();
+        });
+        lbPrev.addEventListener('click', prevLB);
+        lbNext.addEventListener('click', nextLB);
         window.addEventListener('keydown', (e) => {
-          if (!lb.classList.contains('open')) return
-          if (e.key === 'Escape') closeLB()
-          if (e.key === 'ArrowLeft') prevLB()
-          if (e.key === 'ArrowRight') nextLB()
-        })
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'Escape') closeLB();
+          if (e.key === 'ArrowLeft') prevLB();
+          if (e.key === 'ArrowRight') nextLB();
+        });
 
         // System info
         function detectOS(ua = navigator.userAgent) {
-          if (/Windows NT/i.test(ua)) return 'Windows'
-          if (/Android/i.test(ua)) return 'Android'
-          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS'
-          if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS'
-          if (/Linux/i.test(ua)) return 'Linux'
-          return 'Unknown'
+          if (/Windows NT/i.test(ua)) return 'Windows';
+          if (/Android/i.test(ua)) return 'Android';
+          if (/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+          if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
+          if (/Linux/i.test(ua)) return 'Linux';
+          return 'Unknown';
         }
-        document.getElementById('ua').textContent = navigator.userAgent
-        document.getElementById('os').textContent = detectOS()
+        document.getElementById('ua').textContent = navigator.userAgent;
+        document.getElementById('os').textContent = detectOS();
 
         function flagEmoji(cc) {
-          if (!cc || cc.length !== 2) return '🏳️'
-          const base = 127397
+          if (!cc || cc.length !== 2) return '🏳️';
+          const base = 127397;
           return cc
             .toUpperCase()
             .split('')
             .map((c) => String.fromCodePoint(c.charCodeAt(0) + base))
-            .join('')
+            .join('');
         }
 
-        ;(async () => {
+        (async () => {
           try {
-            const r = await fetch('https://ipapi.co/json/')
-            const j = await r.json()
-            document.getElementById('ip').textContent = j.ip || 'N/A'
+            const r = await fetch('https://ipapi.co/json/');
+            const j = await r.json();
+            document.getElementById('ip').textContent = j.ip || 'N/A';
             document.getElementById('city').textContent = [
               j.city,
               j.region,
               j.country_name,
             ]
               .filter(Boolean)
-              .join(', ')
+              .join(', ');
             document.getElementById('flag').textContent = flagEmoji(
               j.country || 'ID',
-            )
+            );
           } catch {
-            document.getElementById('ip').textContent = 'Tidak tersedia'
-            document.getElementById('city').textContent = '—'
-            document.getElementById('flag').textContent = '🏳️'
+            document.getElementById('ip').textContent = 'Tidak tersedia';
+            document.getElementById('city').textContent = '—';
+            document.getElementById('flag').textContent = '🏳️';
           }
-        })()
-      })
+        })();
+      });
     </script>
 
     <!-- Facebook SDK -->
