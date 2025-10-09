@@ -106,10 +106,12 @@
       font-size: 14px;
     }
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
   </head>
 <body>
 <header>
   <h1>Gunakan Perangkat Lunak Bebas Terbuka di Sekolahan</h1>
+<div id="iposbrowser"></div>
 </header>
 <main>
   <article class="content">
@@ -210,5 +212,7 @@
   <p>🄯 2025 Open Source ID</p>
 </footer>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
