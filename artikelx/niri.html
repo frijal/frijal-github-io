@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Niri – Window Manager Wayland Dinamis &amp; Stabil</title>
+    <meta name="description" content="Niri adalah window manager Wayland modern dengan tiling dinamis, workspace vertikal, dan efek animasi yang halus — ringan, cepat, dan stabil." />
+    <meta name="author" content="frijal.github.io" />
+    <meta name="theme-color" content="#0a0a0a" />
+    
+    <link rel="canonical" href="https://frijal.github.io/artikel/niri.html" />
+    
+    <meta property="og:title" content="Niri – Window Manager Wayland Dinamis &amp; Stabil" />
+    <meta property="og:description" content="Niri adalah window manager Wayland modern dengan tiling dinamis, workspace vertikal, dan efek animasi yang halus — ringan, cepat, dan stabil." />
+    <meta property="og:url" content="https://frijal.github.io/artikel/niri.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="frijal.github.io" />
+    <meta property="og:image" content="https://frijal.github.io/artikel/niri.jpg" />
+    <meta property="og:image:alt" content="Niri – Window Manager Wayland Dinamis &amp; Stabil" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Niri – Window Manager Wayland Dinamis &amp; Stabil" />
+    <meta name="twitter:description" content="Window manager modern untuk Wayland, dengan workspace vertikal, efek halus, dan performa cepat." />
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/niri.jpg" />
+    
+    <link rel="icon" href="https://frijal.github.io/artikel/niri.jpg" type="image/png" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --text-light: #e0e0e0;
+            --accent: #00b7ff;
+            --accent-hover: #33ccff;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--accent);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            animation: fadeIn 1.2s ease;
+        }
+        h2, h3 {
+            color: var(--accent);
+            margin-top: 1.5rem;
+        }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            color: var(--accent-hover);
+        }
+        iframe {
+            width: 100%;
+            height: 480px;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 2px solid var(--accent);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 1rem 0 2rem;
+        }
+        .share-buttons a {
+            background: var(--accent);
+            color: #000;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .share-buttons a:hover {
+            background: var(--accent-hover);
+        }
+        .cta-download {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: #000;
+            border-radius: 4px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        .cta-download:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+            border-top: 1px solid #222;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Mobile */
+        @media (max-width: 600px) {
+            iframe {
+                height: 240px;
+            }
+            header {
+                padding: 0.8rem 1rem;
+            }
+        }
+        /* Class added for JS use */
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="fb-root"></div>
+    
+    <header>
+        <h1>✨ Niri — Window Manager Dinamis untuk Wayland</h1>
+    </header>
+    
+    <main>
+        <section id="intro">
+            <p>
+                <strong>Niri</strong> adalah window manager modern untuk Wayland, dirancang sepenuhnya dengan konsep <em>scrollable tiling</em>. Tidak seperti tiling WM lain, setiap jendela di Niri tersusun dalam kolom pada strip tak terbatas ke arah kanan. Membuka jendela baru tidak akan membuat jendela lain mengecil atau berpindah — semua terasa halus dan stabil.
+            </p>
+            <iframe
+                src="https://www.youtube.com/embed/7hfUjQ2T1MQ"
+                title="Video tentang Niri"
+                allowfullscreen
+            ></iframe>
+            <p>
+                Niri dibangun dari nol untuk memberikan pengalaman kerja yang cepat, dinamis, dan estetis. Setiap monitor memiliki strip jendelanya sendiri, dan workspace diatur secara vertikal yang bisa kamu gulir dengan mudah. Setiap monitor juga punya set workspace independen — selalu ada satu workspace kosong di bagian bawah, siap digunakan kapan saja.
+            </p>
+            <p>
+                Ketika kamu mencabut atau menambah monitor, Niri dengan pintar mengatur ulang workspace agar tetap sesuai. Bahkan jika monitor dilepas, semua workspace-nya akan sementara berpindah ke monitor lain, dan otomatis kembali ke posisi semula saat monitor disambungkan kembali. ✨
+            </p>
+        </section>
+        
+        <section id="features">
+            <h2>🌟 Fitur Utama Niri</h2>
+            <ul>
+                <li>
+                    Desain <strong>Scrollable Tiling</strong> — buka jendela tanpa mengubah ukuran jendela lain.
+                </li>
+                <li>
+                    <strong>Workspace Dinamis</strong> seperti di GNOME, bisa digulir vertikal dengan mulus.
+                </li>
+                <li>
+                    <strong>Overview Mode</strong> yang memperlihatkan semua workspace dan jendela dalam satu pandangan.
+                </li>
+                <li>
+                    UI <strong>screenshot dan screencast</strong> bawaan melalui <code>xdg-desktop-portal-gnome</code>.
+                </li>
+                <li>Bisa memblokir jendela sensitif saat merekam layar.</li>
+                <li>
+                    <strong>Touchpad &amp; Mouse Gestures</strong> untuk navigasi cepat.
+                </li>
+                <li>
+                    <strong>Tab Grouping</strong> — gabungkan jendela jadi tab, cocok buat multitasking.
+                </li>
+                <li>
+                    <strong>Layout fleksibel</strong>: atur jarak, border, ukuran, dan warna gradasi Oklab/Oklch.
+                </li>
+                <li>
+                    <strong>Animasi lembut</strong> dengan dukungan shader kustom dan <em>live-reloading config</em>.
+                </li>
+                <li>
+                    <strong>Aksesibilitas</strong> penuh — kompatibel dengan pembaca layar.
+                </li>
+            </ul>
+        </section>
+        
+        <section id="stability">
+            <h2>💻 Stabil untuk Pemakaian Harian</h2>
+            <p>
+                Niri sudah stabil untuk digunakan sehari-hari. Banyak pengguna yang sudah <em>daily driving</em> Niri dan aktif berbagi pengalaman di kanal Matrix komunitas. Kamu bisa menggunakannya tanpa khawatir — performanya cepat, hemat sumber daya, dan tidak memaksa jendela berpindah seperti tiling WM tradisional.
+            </p>
+            <p>
+                Fitur multi-monitor juga menjadi bagian inti desain Niri sejak awal. Dukungan DPI campuran dan scaling fraksional bekerja sempurna, dengan tampilan yang selalu tajam dan <strong>pixel-perfect</strong>.
+            </p>
+        </section>
+        
+        <section id="compatibility">
+            <h2>⚙️ Kompatibilitas &amp; Dukungan</h2>
+            <ul>
+                <li>
+                    <strong>NVIDIA:</strong> bekerja dengan baik di sebagian besar setup.
+                </li>
+                <li>
+                    <strong>Floating windows:</strong> tersedia mulai versi Niri 25.01.
+                </li>
+                <li>
+                    <strong>Perangkat input:</strong> mendukung tablet, touchpad, dan layar sentuh (gesture layar sentuh masih dikembangkan).
+                </li>
+                <li>
+                    <strong>Protokol WLR:</strong> mendukung layer-shell, gamma-control, screencopy, dan lainnya.
+                </li>
+                <li>
+                    <strong>XWayland:</strong> terintegrasi via <code>xwayland-satellite</code> sejak Niri 25.08.
+                </li>
+            </ul>
+        </section>
+        
+        <section id="performance">
+            <h2>🚀 Performa dan Efisiensi</h2>
+            <p>
+                Meskipun Niri dibuat untuk mesin modern, performanya tetap efisien bahkan di perangkat lama. Beberapa pengguna bahkan berhasil menjalankannya di <strong>Eee PC 900 dari 2008</strong> — membuktikan betapa ringan dan optimalnya Niri.
+            </p>
+            <p>
+                Pengembang Niri juga sadar akan efisiensi; setiap fitur dan animasi dirancang agar tetap halus tanpa membebani sistem.
+            </p>
+        </section>
+        
+        <section id="cta">
+            <h2>🧭 Siap Coba Niri?</h2>
+            <p>
+                Beri kesempatan pada Niri untuk jadi jendela baru dalam cara kamu bekerja di desktop Linux. Ikuti panduan di halaman
+                <a href="https://yalter.github.io/niri/Getting-Started.html" target="_blank">Getting Started</a>
+                dan pastikan kamu sudah menyiapkan Waybar dan Fuzzel!
+            </p>
+            <a href="https://yalter.github.io/niri/" class="cta-download" target="_blank">⬇️ Download Niri Sekarang</a>
+            
+            <div class="share-buttons">
+                <a href="https://twitter.com/intent/tweet?text=Niri%20Window%20Manager%20Wayland%20dinamis%20dan%20stabil!&amp;url=https://frijal.github.io/artikel/niri.html" target="_blank">Twitter</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/niri.html" target="_blank">Facebook</a>
+                <a href="https://t.me/share/url?url=https://frijal.github.io/artikel/niri.html&amp;text=Niri%20WM%20Dinamis" target="_blank">Telegram</a>
+                <a href="https://www.reddit.com/submit?url=https://frijal.github.io/artikel/niri.html&amp;title=Niri%20WM" target="_blank">Reddit</a>
+            </div>
+        </section>
+        
+        <section id="comments">
+            <h2>💬 Diskusi &amp; Komentar</h2>
+            <div
+                class="fb-comments"
+                data-href="https://frijal.github.io/artikel/niri.html"
+                data-width="100%"
+                data-numposts="5"
+                data-colorscheme="dark"
+            ></div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&#169; 2025 frijal.github.io — Artikel ini dibuat dengan ❤️ oleh ChatGPT.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 🌐 Smooth Scroll untuk semua anchor link
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth',
+                    });
+                });
+            });
+            
+            // 🌫️ Animasi Fade-In saat scroll (Logic disederhanakan di JS)
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            // Cuma tambahkan class untuk memastikan efek terjadi sekali (walau CSS keyframes sudah handle)
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+            sections.forEach((sec) => observer.observe(sec));
+            
+            // 💬 Facebook Comments SDK
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
+        });
+    </script>
+</body>
+</html>

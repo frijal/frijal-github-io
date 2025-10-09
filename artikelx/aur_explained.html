@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apa Itu AUR? Penjelasan Arch User Repository</title>
+    <meta name="description" content="Penjelasan santai, mudah dipahami, dan lengkap tentang Arch User Repository (AUR), gudang paket komunitas untuk Arch Linux. Pahami cara kerjanya, risiko, dan keuntungannya!" />
+    <meta name="keywords" content="cURL, command line, Linux, API testing, web scraping, terminal, developer tools, perintah dasar linux" />
+    <link rel="canonical" href="https://frijal.github.io/artikel/aur_explained.html" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Apa Itu AUR? Penjelasan Santai Arch User Repository (AUR)" />
+    <meta property="og:description" content="Penjelasan santai, mudah dipahami, dan lengkap tentang Arch User Repository (AUR), gudang paket komunitas untuk Arch Linux." />
+    <meta property="og:url" content="https://frijal.github.io/artikel/aur_explained.html" />
+    <meta property="og:image" content="https://frijal.github.io/artikel/aur_explained.jpg" />
+    <meta property="og:image:alt" content="Apa Itu AUR? Penjelasan Arch User Repository" />
+    <meta property="og:site_name" content="Frijal's Page" />
+    <meta property="article:published_time" content="2025-10-06T06:06:53.211+00:00" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Apa Itu AUR? Penjelasan Santai Arch User Repository (AUR)" />
+    <meta name="twitter:description" content="Pahami AUR, PKGBUILD, dan AUR Helper (yay/paru) dalam bahasa santai." />
+    <meta name="twitter:image" content="https://frijal.github.io/artikel/aur_explained.jpg" />
+    <meta name="twitter:site" content="@frijal" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <style>
+        /* RESET DAN VARIABEL */
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #bbbbbb;
+            --accent-color: #00bcd4; /* Warna biru muda Arch */
+            --warning-color: #ff9800;
+            --max-width: 1200px;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        /* TATA LETAK UTAMA */
+        .container {
+            width: 95%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .content-area {
+            padding-top: 40px;
+            padding-bottom: 80px;
+        }
+        /* DESAIN WIDESCREEN & 1 KOLOM */
+        .main-article {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        /* TYPOGRAPHY */
+        h1, h2, h3 {
+            color: var(--accent-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        p, ul, ol, .warning-text {
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+        code {
+            background-color: #2c2c2c;
+            color: var(--text-primary);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        /* HERO SECTION */
+        .hero {
+            background-color: #000;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        .hero h1 {
+            color: #fff;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+        /* ICON POINT (Untuk poin penjelasan) */
+        .icon-point {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            background-color: #2c2c2c;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .icon-point i {
+            font-size: 1.8em;
+            color: var(--accent-color);
+            flex-shrink: 0;
+            padding-top: 5px;
+        }
+        /* INFO BOX (Deteksi pengguna dihapus, kelas dipertahankan untuk styling) */
+        .info-box {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+        .info-box b {
+            color: var(--accent-color);
+        }
+        /* RISK POINTS */
+        .risk-points {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .risk-item {
+            flex: 1 1 45%;
+            background-color: #301f1f;
+            border: 1px solid #c0392b;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .risk-item i {
+            font-size: 2em;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        .risk-item h4 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
+        .warning-text {
+            color: var(--warning-color);
+            background-color: #332a1e;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid var(--warning-color);
+        }
+        /* GALERI FOTO */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+        .gallery-item {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background-color: #333;
+            min-height: 150px;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 900px;
+        }
+        .lightbox-close, .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 15px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .lightbox-close { right: 35px; }
+        .lightbox-prev { left: 35px; }
+        .lightbox-next { right: 80px; }
+        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { color: #bbb; }
+        /* SOCIAL SHARE */
+        .social-share {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .social-share a {
+            color: #fff;
+            font-size: 2em;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .social-share a:nth-child(1) { background-color: #3b5998; } /* Facebook */
+        .social-share a:nth-child(2) { background-color: #00acee; } /* Twitter */
+        .social-share a:nth-child(3) { background-color: #25d366; } /* WhatsApp */
+        /* FOOTER */
+        .footer {
+            background-color: #000;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9em;
+        }
+        /* MEDIA QUERY untuk Responsif */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 0 15px;
+            }
+            .main-article {
+                padding: 20px;
+                border-radius: 0;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .risk-item {
+                flex: 1 1 100%;
+            }
+            .lightbox-content {
+                width: 95%;
+            }
+            .lightbox-prev, .lightbox-next {
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 30px;
+            }
+            .lightbox-next { right: 15px; }
+            .lightbox-prev { left: 15px; }
+            .lightbox-close { right: 15px; top: 10px; }
+        }
+        /* MEDIA QUERY untuk Widescreen */
+        @media screen and (min-width: 1400px) {
+            .main-article {
+                padding: 50px;
+            }
+            .content-area {
+                padding-top: 60px;
+                padding-bottom: 100px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div id="fb-root"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Memuat Facebook SDK secara async
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
+            
+            // Set data-href for FB comments
+            document.querySelector('.fb-comments').setAttribute('data-href', window.location.href);
+
+        });
+    </script>
+    
+    <header class="hero">
+        <div class="container">
+            <h1>Apa Sih AUR Itu? Penjelasan Santai Arch User Repository</h1>
+            <p>Dibongkar tuntas: Kenapa AUR jadi 'senjata rahasia' pengguna Arch Linux.</p>
+        </div>
+    </header>
+    
+    <main class="container content-area">
+        <article class="main-article">
+            <p>
+                Waduh, maaf kalau bahasanya terlalu teknis! "AUR" itu kependekan dari <b>Arch User Repository</b>. Ini adalah salah satu fitur paling keren (dan paling unik) dari <b>Arch Linux</b> dan distro turunannya (seperti Manjaro).
+            </p>
+            <p>
+                Singkatnya, <b>AUR adalah repositori atau gudang paket yang dikelola oleh komunitas pengguna Arch Linux.</b>
+            </p>
+            <hr />
+            
+            <h2>🧐 Penjelasan AUR: Gudang Resep Komunitas</h2>
+            <p>Bayangkan seperti ini:</p>
+            
+            <h3>1. Repositori Resmi (Resmi Arch)</h3>
+            <div class="icon-point official">
+                <i class="fas fa-certificate"></i>
+                <p>
+                    Arch Linux punya gudang aplikasi resminya sendiri yang dikelola oleh tim Arch. Isinya adalah paket-paket yang sudah diuji stabilitasnya (seperti Firefox, Kernel Linux, utilitas dasar, dll.). Anda menginstalnya menggunakan perintah <code>pacman -S nama-paket</code>.
+                </p>
+            </div>
+            
+            <h3>2. Arch User Repository (AUR)</h3>
+            <div class="icon-point community">
+                <i class="fas fa-users-cog"></i>
+                <p>
+                    Ini adalah gudang <b>tidak resmi</b> yang dibuat dan diisi oleh pengguna Arch itu sendiri.
+                </p>
+                <ul>
+                    <li>
+                        <b>Apa Isinya?</b> AUR tidak menyimpan program yang sudah jadi (file biner). AUR hanya menyimpan <b>PKGBUILD</b>.
+                    </li>
+                    <li>
+                        <b>Apa itu PKGBUILD?</b> PKGBUILD adalah <code>script</code> atau resep yang berisi instruksi langkah demi langkah:
+                        <ol>
+                            <li>Di mana mendownload kode sumber (<code>source code</code>) dari aplikasi tersebut.</li>
+                            <li>Bagaimana cara mengkompilasi kode sumber itu di komputer Anda.</li>
+                            <li>Bagaimana cara mengemasnya agar bisa diinstal dengan <code>pacman</code>.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>Kenapa Dibutuhkan?</b>
+                        <p>AUR adalah tempat paket-paket yang tidak mendapat jatah di repositori resmi berkumpul. Ini termasuk:</p>
+                        <ul>
+                            <li>Program yang <b>sangat baru</b> (terkadang versi <code>beta</code>).</li>
+                            <li>Program yang <b>kurang populer</b> atau spesifik.</li>
+                            <li>Program <b>eksklusif</b> yang biasanya tidak ada di distro Linux lain (misalnya, driver atau <code>patch</code> tertentu).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>3. Proses Instalasi (Kompilasi)</h3>
+            <div class="icon-point compile">
+                <i class="fas fa-cogs"></i>
+                <p>
+                    Karena AUR hanya berisi resep (<code>PKGBUILD</code>), Anda tidak bisa langsung menginstalnya dengan <code>pacman</code>. Anda harus:
+                </p>
+                <ol>
+                    <li>Mengunduh file PKGBUILD.</li>
+                    <li>Menjalankan perintah <b><code>makepkg</code></b> untuk menjalankan resep tersebut. (Ini akan mendownload kode sumber dan mengkompilasinya di komputer Anda).</li>
+                    <li>Setelah selesai, Anda mendapatkan paket biner yang kemudian bisa diinstal dengan <code>pacman</code>.</li>
+                </ol>
+                <p class="warning-text">
+                    ⚠️ <b>CATATAN PENTING:</b> Proses ini membutuhkan <b>waktu</b> karena komputer Anda harus mengkompilasi program dari awal.
+                </p>
+            </div>
+            <hr />
+            
+            <h2>⚠️ Keamanan dan Risiko</h2>
+            <p>
+                Karena AUR dikelola oleh komunitas (siapa pun bisa mengunggah PKGBUILD), ada risiko tertentu yang wajib Anda tahu:
+            </p>
+            <div class="risk-points">
+                <div class="risk-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Kepercayaan (Trust)</h4>
+                    <p>
+                        Anda harus <b>memeriksa PKGBUILD</b> sebelum mengkompilasi. Anda menjalankan <code>script</code> dari pengguna lain. Walaupun komunitas AUR terkenal ketat, selalu waspada adalah kuncinya.
+                    </p>
+                </div>
+                <div class="risk-item">
+                    <i class="fas fa-bomb"></i>
+                    <h4>Potensi Kerusakan Paket</h4>
+                    <p>
+                        Paket di AUR mungkin <b>rusak</b>, <b>kadaluarsa</b>, atau memiliki ketergantungan (<code>dependency</code>) yang bentrok dengan sistem Anda. Repositori resmi menjamin stabilitas, AUR tidak!
+                    </p>
+                </div>
+            </div>
+            <hr />
+            
+            <h2>🚀 Senjata Rahasia: AUR Helper</h2>
+            <div class="icon-point helper">
+                <i class="fas fa-magic"></i>
+                <p>
+                    Untuk mempermudah proses yang manual dan panjang itu, sebagian besar pengguna Arch menggunakan <b>AUR Helper</b> (seperti <b><code>yay</code></b> atau <b><code>paru</code></b>).
+                </p>
+                <p>
+                    Helper ini secara otomatis menangani semua langkah (mengunduh PKGBUILD, menangani <code>dependency</code>, menjalankan <code>makepkg</code>, dan menginstalnya) hanya dengan satu perintah. Ini adalah alasan utama mengapa menggunakan AUR terasa begitu mudah!
+                </p>
+            </div>
+            <hr />
+            
+            <h2>Galeri Ilustrasi AUR</h2>
+            <div id="image-gallery" class="gallery">
+                <img src="https://frijal.github.io/artikel/aur_explained.jpg" alt="Ilustrasi skema Arch Linux dan AUR" class="gallery-item">
+            </div>
+            <hr />
+            
+            <h2>Jaga Data Pribadi Tetap Aman</h2>
+            <div class="social-share">
+                <a href="#" id="share-facebook" target="_blank" title="Share di Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" id="share-twitter" target="_blank" title="Share di X/Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="share-whatsapp" target="_blank" title="Share via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <hr />
+            
+            <h2>Pelan Kiri</h2>
+            <div class="fb-comments" data-href="https://frijal.github.io/artikel/aur_explained.html" data-width="100%" data-numposts="5"></div>
+        </article>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&#169; 2025 Frijal Article. | Desain oleh Gemini AI.</p>
+        </div>
+    </footer>
+    
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Gambar penuh AUR" />
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+    </div>
+    
+    <div id="fb-root"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Memuat Facebook SDK secara async
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
+            
+            // Set data-href for FB comments
+            document.querySelector('.fb-comments').setAttribute('data-href', window.location.href);
+
+            // Lightbox logic (simplified for single image, but capable of handling multiple)
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.querySelector('.lightbox-close');
+            
+            galleryItems.forEach((item) => {
+                item.addEventListener('click', () => {
+                    lightbox.style.display = 'block';
+                    lightboxImg.src = item.src;
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+            });
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+            
+            // Social Sharing Links Setup
+            const currentURL = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            
+            document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+            document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${currentURL}&text=${title}`;
+            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${title}%20${currentURL}`;
+            
+            // Ensure links open in new tab and have noreferrer rel
+            document.querySelectorAll('.social-share a').forEach(a => {
+                a.setAttribute('target', '_blank');
+                a.setAttribute('rel', 'noopener noreferrer');
+            });
+        });
+    </script>
+</body>
+</html>
