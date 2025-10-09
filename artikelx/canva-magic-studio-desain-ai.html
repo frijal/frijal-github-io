@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canva Magic Studio: Desain Keren Tanpa Ribet Pakai AI</title>
-
     <meta
       name="description"
       content="Nggak bisa desain? Tenang, ada Canva Magic Studio! Pelajari bagaimana AI di Canva bisa bantu UMKM bikin poster, konten media sosial, dan menjaga branding tetap konsisten."
@@ -24,7 +23,6 @@
       type="image/svg+xml"
     />
     <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png" />
-
     <meta
       property="og:title"
       content="Canva Magic Studio: Desain Keren Tanpa Ribet Pakai AI"
@@ -47,7 +45,6 @@
       content="Ilustrasi seorang desainer menggunakan Canva Magic Studio dengan bantuan AI"
     />
     <meta property="fb:app_id" content="1471267430691023" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@frijal" />
     <meta name="twitter:creator" content="@frijal" />
@@ -63,7 +60,6 @@
       name="twitter:image"
       content="https://frijal.github.io/artikel/canva-magic-studio-desain-ai.jpg"
     />
-
     <style>
       :root {
         --bg-color: #1a1a2e;
@@ -137,7 +133,6 @@
       .highlight-box p {
         margin: 0;
       }
-
       /* Galeri Foto */
       .gallery {
         display: grid;
@@ -218,7 +213,6 @@
       .lightbox-next {
         right: 15px;
       }
-
       /* Sharing & Info Box */
       .action-section {
         text-align: center;
@@ -248,7 +242,6 @@
         width: 40px;
         height: 40px;
       }
-
       .info-box {
         margin: 50px 0;
         padding: 25px;
@@ -271,7 +264,6 @@
         height: 32px;
         object-fit: contain;
       }
-
       footer {
         text-align: center;
         padding: 25px;
@@ -279,7 +271,6 @@
         font-size: 1rem;
         color: var(--text-muted);
       }
-
       @media (max-width: 768px) {
         body {
           font-size: 1rem;
@@ -299,7 +290,6 @@
       itemprop="image"
       content="https://frijal.github.io/artikel/canva-magic-studio-desain-ai.jpg"
     />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
     <meta
       property="article:published_time"
       content="2025-10-04T15:37:18.082+00:00"
@@ -307,7 +297,6 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    });
     <script
       async
       defer
@@ -315,16 +304,13 @@
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1"
       nonce="DEF456"
     ></script>
-
     <div class="container">
       <header>
         <h1>Canva Magic Studio: Bikin Desain Sat-Set Pakai AI</h1>
-        <div id="iposbrowser"></div>
         <p class="subtitle">
           Saatnya UMKM Punya Desain Profesional Tanpa Pusing
         </p>
       </header>
-
       <main>
         <article>
           <h2>Nggak Punya Desainer? Nggak Masalah!</h2>
@@ -342,7 +328,6 @@
             postingan media sosial, bahkan video pendek yang kelihatan
             profesional.
           </p>
-
           <div class="highlight-box">
             <p>
               Yang paling keren, Canva juga membantu UMKM menjaga
@@ -352,10 +337,8 @@
               pelanggan secara online.
             </p>
           </div>
-
           <h2>Contoh Desain yang Bisa Dibuat dengan AI Canva</h2>
           <div class="gallery" id="photoGallery"></div>
-
           <div class="action-section">
             <h3>Pelan Kiri Keren Ini!</h3>
             <div class="share-icons-container">
@@ -397,7 +380,6 @@
               </a>
             </div>
           </div>
-
           <h2>Punya Pengalaman Pakai Canva? Ceritain, dong!</h2>
           <div
             class="fb-comments"
@@ -408,124 +390,113 @@
           ></div>
         </article>
       </main>
-
       <footer>
         <p>🄯 2025 Frijal. Dibuat dengan AI untuk menginspirasi.</p>
       </footer>
     </div>
-
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close">&times;</span>
       <a class="lightbox-prev">&#10094;</a>
       <a class="lightbox-next">&#10095;</a>
       <img class="lightbox-content" id="lightboxImg" />
     </div>
-
     <script>
-      document.addEventListener(DOMContentLoaded, () => {
-        document.addEventListener('DOMContentLoaded', function () {
-          // --- GALERI & LIGHTBOX ---
-          const gallery = document.getElementById('photoGallery');
-          const lightbox = document.getElementById('lightbox');
-          const lightboxImg = document.getElementById('lightboxImg');
-          const galleryImages = Array.from(
-            { length: 6 },
-            (_, i) => `https://picsum.photos/id/${50 + i}/800/600`
-          );
-          let currentIndex;
+      document.addEventListener('DOMContentLoaded', function () {
+        // --- GALERI & LIGHTBOX ---
+        const gallery = document.getElementById('photoGallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        
+        // Menggunakan sumber gambar yang lebih umum dan stabil
+        const galleryImages = Array.from(
+          { length: 6 },
+          (_, i) => `https://picsum.photos/seed/canva${i}/800/600`
+        ); 
+        let currentIndex;
 
-          galleryImages.forEach((src) => {
-            const img = document.createElement('img');
-            img.setAttribute('data-src', src);
-            img.alt = `Contoh desain dibuat dengan Canva AI`;
-            img.loading = 'lazy';
-            img.className = 'lazy-load';
-            gallery.appendChild(img);
-          });
+        // Inisialisasi gambar dengan lazy loading
+        galleryImages.forEach((src, index) => {
+          const img = document.createElement('img');
+          img.setAttribute('data-src', src);
+          img.alt = `Contoh desain dibuat dengan Canva AI ${index + 1}`;
+          img.loading = 'lazy';
+          img.className = 'lazy-load';
+          gallery.appendChild(img);
+        });
 
-          const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
+        // Intersection Observer untuk Lazy Loading
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              if (img.dataset.src) { 
                 img.src = img.dataset.src;
                 img.classList.remove('lazy-load');
                 obs.unobserve(img);
               }
-            });
-          });
-          document
-            .querySelectorAll('img.lazy-load')
-            .forEach((img) => observer.observe(img));
-
-          const updateLightboxImage = (index) => {
-            const images = Array.from(gallery.children);
-            if (index < 0) index = images.length - 1;
-            if (index >= images.length) index = 0;
-            currentIndex = index;
-            lightboxImg.src = images[currentIndex].src;
-          };
-
-          gallery.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-              currentIndex = Array.from(gallery.children).indexOf(e.target);
-              updateLightboxImage(currentIndex);
-              lightbox.style.display = 'flex';
             }
           });
+        });
+        document
+          .querySelectorAll('img.lazy-load')
+          .forEach((img) => observer.observe(img));
 
-          document.querySelector('.lightbox-close').onclick = () =>
-            (lightbox.style.display = 'none');
-          document.querySelector('.lightbox-prev').onclick = () =>
-            updateLightboxImage(currentIndex - 1);
-          document.querySelector('.lightbox-next').onclick = () =>
-            updateLightboxImage(currentIndex + 1);
-          lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none';
-          };
-          document.onkeydown = (e) => {
-            if (lightbox.style.display === 'flex') {
-              if (e.key === 'ArrowLeft') updateLightboxImage(currentIndex - 1);
-              if (e.key === 'ArrowRight') updateLightboxImage(currentIndex + 1);
-              if (e.key === 'Escape') lightbox.style.display = 'none';
-            }
-          };
-          // --- SOCIAL SHARING ---
-          const pageUrl = encodeURIComponent(window.location.href);
-          const pageTitle = encodeURIComponent(document.title);
-          const shareLinks = {
-            shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
-            shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
-            shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
-          };
-          for (const id in shareLinks) {
-            const link = document.getElementById(id);
-            if (link) {
-              link.href = shareLinks[id];
-              link.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(this.href, 'share-window', 'height=450,width=550');
-              });
-            }
+        // Fungsi update Lightbox
+        const updateLightboxImage = (index) => {
+          const images = Array.from(gallery.children);
+          if (index < 0) index = images.length - 1;
+          if (index >= images.length) index = 0;
+          currentIndex = index;
+          lightboxImg.src = images[currentIndex].src;
+        };
+
+        // Event listener Galeri
+        gallery.addEventListener('click', (e) => {
+          if (e.target.tagName === 'IMG') {
+            currentIndex = Array.from(gallery.children).indexOf(e.target);
+            if (!e.target.src) e.target.src = e.target.dataset.src; 
+            updateLightboxImage(currentIndex);
+            lightbox.style.display = 'flex';
           }
         });
+
+        // Event listener Lightbox
+        document.querySelector('.lightbox-close').onclick = () =>
+          (lightbox.style.display = 'none');
+        document.querySelector('.lightbox-prev').onclick = () =>
+          updateLightboxImage(currentIndex - 1);
+        document.querySelector('.lightbox-next').onclick = () =>
+          updateLightboxImage(currentIndex + 1);
+        lightbox.onclick = (e) => {
+          if (e.target === lightbox) lightbox.style.display = 'none';
+        };
+        document.onkeydown = (e) => {
+          if (lightbox.style.display === 'flex') {
+            if (e.key === 'ArrowLeft') updateLightboxImage(currentIndex - 1);
+            if (e.key === 'ArrowRight') updateLightboxImage(currentIndex + 1);
+            if (e.key === 'Escape') lightbox.style.display = 'none';
+          }
+        };
+
+        // --- SOCIAL SHARING ---
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+        const shareLinks = {
+          shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+          shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
+          shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
+        };
+        for (const id in shareLinks) {
+          const link = document.getElementById(id);
+          if (link) {
+            link.href = shareLinks[id];
+            link.addEventListener('click', function (e) {
+              e.preventDefault();
+              window.open(this.href, 'share-window', 'height=450,width=550');
+            });
+          }
+        }
       });
     </script>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    });
-    <script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>
