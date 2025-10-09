@@ -114,10 +114,16 @@ code[class*="language-"], pre[class*="language-"] {
   margin-top: 2rem;
 }
 </style>
+<meta property="og:image" content="https://frijal.github.io/artikel/cleanup-auto.jpg">
+  <meta property="og:image:alt" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/cleanup-auto.jpg">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/cleanup-auto.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <main>
   <h1>🧹 Pembersihan Otomatis Dependencies (Non-Interaktif)</h1>
+<div id="iposbrowser"></div>
 
   <p>
     Kadang kita ingin proyek Node.js di GitHub Pages tetap bersih tanpa perlu konfirmasi manual saat melakukan pembersihan <em>dependencies</em> yang tidak terpakai.  
@@ -237,6 +243,8 @@ jobs:
   src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023">
 </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
