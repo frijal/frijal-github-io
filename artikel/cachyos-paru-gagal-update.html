@@ -243,16 +243,7 @@
     </header>
 
     <div class="container">
-        
-        <div id="user-info">
-            <h2><i class="fas fa-info-circle"></i> Hai! Ini Info Kunjungan Kamu</h2>
-            <p><i class="fas fa-globe-asia"></i> IP Address: <span id="user-ip">...</span></p>
-            <p><span id="user-geo"><i class="fas fa-map-marker-alt"></i> Lokasi: Sedang dideteksi...</span></p>
-            <p><span id="user-os"><i class="fas fa-desktop"></i> Sistem Operasi: ...</span></p>
-            <p><span id="user-browser"><i class="fas fa-chrome"></i> Browser: ...</span></p>
-        </div>
-
-        <article>
+                    <article>
             <p>
                 Santai saja, Sobat! Kalau proses update dan upgrade menggunakan <b>paru<b> di CachyOS tiba-tiba mandek atau gagal, itu hal yang lumrah. Kegagalan ini biasanya disebabkan oleh tiga hal utama: <b>kunci PGP yang kedaluwarsa<b>, <b>paket yang korup<b>, atau <b>repositori yang tidak sinkron<b>.
             </p>
@@ -365,155 +356,9 @@ sudo pacman -Sc
     <footer>
         <p>🄯 2024 Artikel Frijal. Semoga CachyOS Anda selalu lancar!</p>
     </footer>
-
-    <script>
-document.addEventListener(DOMContentLoaded, () => {
-        // --- 1. LIGHTBOX GALLERY & NAVIGATION ---
-        const galleryImages = document.querySelectorAll('.gallery img');
-        const lightboxModal = document.getElementById('lightbox-modal');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.close-btn');
-        let currentIndex = 0;
-
-        galleryImages.forEach((img, index) => {
-            img.addEventListener('click', () => {
-                lightboxModal.style.display = "grid"; 
-                lightboxImg.src = img.src;
-                currentIndex = index;
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightboxModal.style.display = "none";
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (lightboxModal.style.display === "grid") {
-                if (e.key === 'ArrowLeft') changeImage(-1);
-                if (e.key === 'ArrowRight') changeImage(1);
-                if (e.key === 'Escape') lightboxModal.style.display = "none";
-            }
-        });
-
-        window.onclick = function(event) {
-            if (event.target == lightboxModal) {
-                lightboxModal.style.display = "none";
-            }
-        }
-
-        window.changeImage = function(n) {
-            currentIndex += n;
-            if (currentIndex < 0) {
-                currentIndex = galleryImages.length - 1;
-            } else if (currentIndex >= galleryImages.length) {
-                currentIndex = 0;
-            }
-            // Update the lightbox image src based on the new index
-            lightboxImg.src = galleryImages[currentIndex].src;
-        }
-
-        // --- 2. FACEBOOK COMMENTS SDK ---
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '1471267430691023', // App ID Anda
-                xfbml: true,
-                version: 'v19.0'
-            });
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/id_ID/sdk.js"; // Bahasa Indonesia
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        // --- 3. DETEKSI INFO PENGGUNA (IP, OS, Browser, Lokasi) ---
-
-        function getOSIcon(os) {
-            if (os.includes('Windows')) return `<i class="fab fa-windows"></i> ${os}`;
-            if (os.includes('Mac')) return `<i class="fab fa-apple"></i> ${os}`;
-            if (os.includes('Linux')) return `<i class="fab fa-linux"></i> ${os}`;
-            if (os.includes('Android')) return `<i class="fab fa-android"></i> ${os}`;
-            if (os.includes('iOS')) return `<i class="fab fa-apple"></i> ${os}`;
-            return `<i class="fas fa-desktop"></i> ${os}`;
-        }
-
-        function getBrowserIcon(browser) {
-            if (browser.includes('Chrome')) return `<i class="fab fa-chrome"></i> ${browser}`;
-            if (browser.includes('Firefox')) return `<i class="fab fa-firefox"></i> ${browser}`;
-            if (browser.includes('Safari')) return `<i class="fab fa-safari"></i> ${browser}`;
-            if (browser.includes('Edge')) return `<i class="fab fa-edge"></i> ${browser}`;
-            if (browser.includes('Opera')) return `<i class="fab fa-opera"></i> ${browser}`;
-            return `<i class="fas fa-globe"></i> ${browser}`;
-        }
-
-        function detectUserInfo() {
-            const userAgent = navigator.userAgent;
-            
-            // Deteksi OS
-            let os = "Lainnya";
-            if (userAgent.match(/Win/)) os = "Windows";
-            else if (userAgent.match(/Mac/)) os = "macOS";
-            else if (userAgent.match(/Linux/)) os = "Linux";
-            else if (userAgent.match(/Android/)) os = "Android";
-            else if (userAgent.match(/iPhone|iPad|iPod/)) os = "iOS";
-
-            // Deteksi Browser
-            let browser = "Lainnya";
-            if (userAgent.includes('Chrome') && !userAgent.includes('Edg')) browser = "Chrome";
-            else if (userAgent.includes('Firefox')) browser = "Firefox";
-            else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) browser = "Safari";
-            else if (userAgent.includes('Edg')) browser = "Edge";
-            else if (userAgent.includes('Opera')) browser = "Opera";
-            
-            document.getElementById('user-os').innerHTML = getOSIcon(os);
-            document.getElementById('user-browser').innerHTML = getBrowserIcon(browser);
-        }
-
-        async function getGeoLocation() {
-            const ipSpan = document.getElementById('user-ip');
-            const geoSpan = document.getElementById('user-geo');
-            
-            try {
-                // Step 1: Dapatkan IP dari ipify
-                const ipResponse = await fetch('https://api.ipify.org?format=json&ipv4');
-                const ipData = await ipResponse.json();
-                const userIP = ipData.ip;
-                ipSpan.textContent = userIP;
-
-                // Step 2: Gunakan IP untuk Geolocation (Menggunakan API pihak ketiga - ip-api.com)
-                const geoResponse = await fetch(`http://ip-api.com/json/${userIP}?fields=status,country,countryCode,city`);
-                const geoData = await geoResponse.json();
-
-                if (geoData.status === 'success') {
-                    // Konversi kode negara 2 huruf ke emoji bendera (Unicode Regional Indicator Symbols)
-                    const countryCode = geoData.countryCode.toUpperCase();
-                    const flagEmoji = countryCode.replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                    
-                    geoSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i> Lokasi: ${geoData.city}, ${geoData.country} ${flagEmoji}`;
-                } else {
-                    geoSpan.innerHTML = '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi GeoIP.';
-                }
-
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-                ipSpan.textContent = 'Gagal Mendeteksi.';
-                geoSpan.innerHTML = '<i class="fas fa-map-marker-alt"></i> Lokasi: Gagal Mendeteksi.';
-            }
-        }
-
-        // Panggil fungsi setelah DOM siap
-        document.addEventListener('DOMContentLoaded', () => {
-            detectUserInfo();
-            getGeoLocation();
-        });
-});
-    </script>
-});
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script><div id="kategori-aktif"></div>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-});
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
+
