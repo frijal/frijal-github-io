@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const osHTML = `<div class="info-item">${osIcons[os]}</span></div>`
 
   let geoHTML =
-    '<div class="info-item"><span>Lokasi tidak diketahui</span></div>'
+    '<div class="info-item"><span></span></div>'
   if (geo) {
     const flag = geo.code
       ? `<img class="geo-flag" src="https://flagcdn.com/24x18/${geo.code.toLowerCase()}.png" alt="${geo.country}" />`
