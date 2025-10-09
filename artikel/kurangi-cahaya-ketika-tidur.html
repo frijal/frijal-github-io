@@ -42,6 +42,7 @@ ul,ol{margin-left:20px}
 footer{padding:18px 0;background:transparent;text-align:center}
 .small{font-size:13px;color:var(--muted)}
 </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <div class="wrap">
@@ -51,6 +52,7 @@ footer{padding:18px 0;background:transparent;text-align:center}
 <div class="logo">IDN</div>
 <div>
 <h1>Kurangi Cahaya Ketika Tidur</h1>
+<div id="iposbrowser"></div>
 <div class="lede">Menelusuri penelitian modern tentang cahaya malam dan tidur, serta korelasinya dengan pesan Nabi ﷺ tentang memadamkan lampu.</div>
 </div>
 </div>
@@ -148,5 +150,7 @@ try { FB.XFBML.parse(); } catch(e) {}
 }
 }
 </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
