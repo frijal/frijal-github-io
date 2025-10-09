@@ -138,11 +138,6 @@
 <link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-30T11:00:00+08:00"></head>
 <body>
-  <!-- Floating navigation buttons -->
-  <div class="fixed-links">
-    <a class="btn sitemap" href="https://frijal.github.io/sitemap.html" aria-label="Lihat Sitemap">🗺️ Sitemap</a>
-    <a class="btn home" href="https://frijal.github.io" aria-label="Kembali ke Home">🏠 Home</a>
-  </div>
 
   <div id="top" class="wrap">
     <main class="container" role="main">
@@ -150,14 +145,7 @@
         <h1>Nabi Ismail ‘Alaihissalam</h1>
 <div id="iposbrowser"></div>
         <p class="sub">#RamadahanTales oleh: Saudari Sharifah Syazreen Al-Idrus</p>
-
-        <!-- Info chips: Browser, OS, IP, Negara -->
-        <div class="meta-chips" id="info-chips" aria-label="Info perangkat">
-          <span class="chip"><strong>Browser:</strong> <span id="chip-browser">-</span></span>
-          <span class="chip"><strong>OS:</strong> <span id="chip-os">-</span></span>
-          <span class="chip"><strong>IP:</strong> <span id="chip-ip">-</span></span>
-          <span class="chip"><span class="flag" id="chip-flag">🏳️</span> <strong>Negara:</strong> <span id="chip-country">-</span></span>
-        </div>
+       
       </header>
 
       <section class="grid-1">
@@ -277,10 +265,6 @@
     // Utility: get current URL
     const CANONICAL = document.querySelector('link[rel="canonical"]')?.href || location.href;
 
-    
-
-    
-
     // Gallery lightbox
     const gallery = Array.from(document.querySelectorAll('#gallery img'));
     const lb = document.getElementById('lightbox');
@@ -352,8 +336,7 @@
       }
     });
   </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
