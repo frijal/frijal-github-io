@@ -1,10 +1,8 @@
 <!doctype html>
 <html lang="id">
   <head>
-    <!-- Basic SEO -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <!-- prettier-ignore -->
     <title>Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg</title>
     <meta
       name="description"
@@ -15,8 +13,6 @@
       rel="canonical"
       href="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.html"
     />
-
-    <!-- Favicon -->
     <link
       rel="icon"
       href="https://frijal.github.io/assets/favicon.ico"
@@ -29,8 +25,6 @@
     />
     <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png" />
     <meta name="theme-color" content="#121212" />
-
-    <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta
       property="og:title"
@@ -59,8 +53,6 @@
       property="article:modified_time"
       content="2025-10-03T00:00:00+08:00"
     />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -74,9 +66,6 @@
       name="twitter:image"
       content="https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg"
     />
-
-    <!-- Structured Data (JSON-LD) -->
-    });
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -108,14 +97,10 @@
         "dateModified": "2025-10-03T00:00:00+08:00"
       }
     </script>
-
-    <!-- Prism.js CSS (syntax highlight untuk kode) -->
     <link
       href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css"
       rel="stylesheet"
     />
-
-    <!-- Styles: 1 kolom, wide, fullscreen, mobile-friendly -->
     <style>
       :root {
         --bg: #0f0f12;
@@ -157,7 +142,6 @@
         height: auto;
         border-radius: 8px;
       }
-
       /* Layout */
       .wrap {
         min-height: 100%;
@@ -178,14 +162,7 @@
         width: 28px;
         height: 28px;
       }
-      .meta-top {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 14px;
-      }
+      /* Menghapus .meta-top karena tidak ada lagi elemen badge */
       main {
         width: 100%;
         display: flex;
@@ -217,7 +194,6 @@
         font-size: 14px;
         margin-bottom: 16px;
       }
-
       /* Share + badges */
       .share-bar {
         display: flex;
@@ -254,7 +230,6 @@
         width: 18px;
         height: 18px;
       }
-
       /* Content */
       .content :is(h2, h3) {
         margin-top: 26px;
@@ -275,13 +250,11 @@
       .content figure {
         margin: 16px 0;
       }
-
       /* Code block styling */
       pre[class*='language-'] {
         border-radius: 10px;
         box-shadow: var(--shadow);
       }
-
       /* Gallery */
       .gallery {
         display: grid;
@@ -311,7 +284,6 @@
         font-size: 12px;
         backdrop-filter: blur(2px);
       }
-
       /* Lightbox */
       .lightbox {
         position: fixed;
@@ -377,43 +349,14 @@
         border-radius: 999px;
         font-size: 13px;
       }
-
-      /* Fixed sitemap/home buttons */
-      .btn-float {
-        position: fixed;
-        z-index: 8888;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: #14161a;
-        border: 1px solid var(--border);
-        color: var(--fg);
-        box-shadow: var(--shadow);
-      }
-      .btn-sitemap {
-        left: 16px;
-        top: 30%;
-      }
-      .btn-home {
-        right: 16px;
-        bottom: 20%;
-      }
-
       /* Footer + comments */
       footer.site {
         padding: 20px;
         color: var(--muted);
         border-top: 1px solid var(--border);
       }
-
       /* Responsive tweaks */
       @media (max-width: 640px) {
-        .btn-sitemap,
-        .btn-home {
-          padding: 8px 10px;
-        }
         .lb-btn {
           width: 40px;
           height: 40px;
@@ -428,14 +371,11 @@
       itemprop="image"
       content="https://frijal.github.io/artikel/mewarnai-video-hitamhputih-deoldify-ffmpeg.jpg"
     />
-
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
   </head>
   <body>
     <div class="wrap">
       <header class="site" role="banner">
         <div class="brand" aria-label="Identitas situs">
-          <!-- Ikon brand minimalis (SVG) -->
           <svg viewBox="0 0 32 32" aria-hidden="true">
             <defs>
               <linearGradient id="g" x1="0" x2="1">
@@ -454,26 +394,13 @@
           </svg>
           <strong>frijal.github.io</strong>
         </div>
-        <div class="meta-top" id="env-badges">
-          <span class="badge" id="badge-browser" aria-label="Browser"
-            >🧭 Browser: –</span
-          >
-          <span class="badge" id="badge-os" aria-label="Sistem operasi"
-            >💻 OS: –</span
-          >
-          <span class="badge" id="badge-loc" aria-label="Lokasi negara"
-            >🏳️ Lokasi: –</span
-          >
-        </div>
       </header>
-
       <main role="main">
         <div class="col">
           <article itemscope itemtype="https://schema.org/Article">
             <h1 itemprop="headline">
               Mewarnai video hitam putih dengan AI (DeOldify) + ffmpeg
             </h1>
-            <div id="iposbrowser"></div>
             <p class="lead" itemprop="description">
               Secara teknis, video hitam putih bisa diwarnai ulang
               (colorization). AI memprediksi warna alami dari objek: langit,
@@ -487,8 +414,6 @@
                 >03 Okt 2025</time
               >
             </div>
-
-            <!-- Bar sharing + badges -->
             <div class="share-bar" aria-label="Jaga Data Pribadi Tetap Aman">
               <button
                 class="btn-share"
@@ -543,8 +468,6 @@
                 <span>LinkedIn</span>
               </button>
             </div>
-
-            <!-- Konten artikel -->
             <div class="content" itemprop="articleBody">
               <h2>Bagaimana proses pewarnaan video hitam putih bekerja</h2>
               <ul>
@@ -562,7 +485,7 @@
                   petunjuk warna (mask/region), sisanya diisi otomatis.
                 </li>
               </ul>
-
+              ---
               <h2>Alat yang bisa dipakai</h2>
               <ul>
                 <li>
@@ -586,7 +509,7 @@
                   terbatas resolusi/durasi.
                 </li>
               </ul>
-
+              ---
               <h2>Catatan hasil</h2>
               <ul>
                 <li>
@@ -602,7 +525,7 @@
                   semakin enak diwarnai.
                 </li>
               </ul>
-
+              ---
               <h2>Workflow praktis dengan ffmpeg + DeOldify</h2>
               <p>
                 Berikut alur sederhana yang bisa kamu jalankan di
@@ -610,35 +533,10 @@
                 ekstrak frame, warnai dengan DeOldify, lalu gabungkan kembali
                 dan re-attach audio.
               </p>
-
               <h3>1) Siapkan lingkungan</h3>
-              <pre><code class="language-bash"># Pastikan ffmpeg terpasang
-# macOS (Homebrew)
-brew install ffmpeg
-# Ubuntu/Debian
-sudo apt-get update && sudo apt-get install -y ffmpeg
-# Windows: install ffmpeg dari situs resmi, lalu tambahkan ke PATH
-
-# Buat environment Python (opsional, dianjurkan)
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# Install dependensi DeOldify (versi minimal)
-pip install torch torchvision
-pip install fastai==1.0.60
-pip install deoldify==0.6.0  # jika tersedia; alternatif: pakai repo source</code></pre>
-
+              <pre><code class="language-bash"># Pastikan ffmpeg terpasang# macOS (Homebrew)brew install ffmpeg# Ubuntu/Debiansudo apt-get update && sudo apt-get install -y ffmpeg# Windows: install ffmpeg dari situs resmi, lalu tambahkan ke PATH# Buat environment Python (opsional, dianjurkan)python -m venv venvsource venv/bin/activate  # Windows: venv\Scripts\activate# Install dependensi DeOldify (versi minimal)pip install torch torchvisionpip install fastai==1.0.60pip install deoldify==0.6.0  # jika tersedia; alternatif: pakai repo source</code></pre>
               <h3>2) Ekstrak frame dari video</h3>
-              <pre><code class="language-bash"># Struktur folder
-mkdir -p work/frames work/colorized
-
-# Ekstrak frame (simpan sebagai PNG untuk kualitas)
-# Ganti input.mp4 dengan video hitam putih kamu
-ffmpeg -i input.mp4 -qscale:v 1 work/frames/frame_%05d.png
-
-# Ekstrak audio (jika ada)
-ffmpeg -i input.mp4 -vn -acodec copy work/audio.aac</code></pre>
-
+              <pre><code class="language-bash"># Struktur foldermkdir -p work/frames work/colorized# Ekstrak frame (simpan sebagai PNG untuk kualitas)# Ganti input.mp4 dengan video hitam putih kamuffmpeg -i input.mp4 -qscale:v 1 work/frames/frame_%05d.png# Ekstrak audio (jika ada)ffmpeg -i input.mp4 -vn -acodec copy work/audio.aac</code></pre>
               <h3>3) Warnai frame dengan DeOldify (Python)</h3>
               <p>
                 Kita gunakan DeOldify “artistic” untuk warna yang menarik; bisa
@@ -646,58 +544,10 @@ ffmpeg -i input.mp4 -vn -acodec copy work/audio.aac</code></pre>
                 di bawah ini membaca semua frame dan menyimpan versi berwarna ke
                 folder <code>work/colorized</code>.
               </p>
-              <pre><code class="language-python"># colorize_frames.py
-import os
-from pathlib import Path
-from PIL import Image
-import torch
-
-# DeOldify imports (pastikan deoldify tersedia)
-from deoldify import device
-from deoldify.device import DeviceId
-from deoldify.visualize import get_artistic_image_colorizer, get_stable_image_colorizer
-
-# Pakai GPU jika tersedia, kalau tidak otomatis CPU
-device.set(DeviceId.GPU if torch.cuda.is_available() else DeviceId.CPU)
-
-# Pilih model: artistic atau stable
-colorizer = get_artistic_image_colorizer()  # alternatif: get_stable_image_colorizer()
-
-frames_dir = Path("work/frames")
-out_dir = Path("work/colorized")
-out_dir.mkdir(parents=True, exist_ok=True)
-
-# Parameter render: bisa di-tuning
-render_factor = 35  # naikkan untuk detail, turunkan untuk speed/warna lembut
-
-frames = sorted(frames_dir.glob("frame_*.png"))
-print(f"Memproses {len(frames)} frame...")
-
-for i, frame_path in enumerate(frames, 1):
-    try:
-        result = colorizer.get_transformed_image(
-            str(frame_path),
-            render_factor=render_factor,
-            post_process=True
-        )
-        # Simpan
-        out_path = out_dir / frame_path.name
-        result.save(str(out_path))
-        if i % 50 == 0:
-            print(f"  >> {i}/{len(frames)} frame diwarnai...")
-    except Exception as e:
-        print(f"  !! Gagal memproses {frame_path.name}: {e}")
-
-print("Selesai mewarnai semua frame.")</code></pre>
-
+              <pre><code class="language-python"># colorize_frames.pyimport osfrom pathlib import Pathfrom PIL import Imageimport torch# DeOldify imports (pastikan deoldify tersedia)from deoldify import devicefrom deoldify.device import DeviceIdfrom deoldify.visualize import get_artistic_image_colorizer, get_stable_image_colorizer# Pakai GPU jika tersedia, kalau tidak otomatis CPUdevice.set(DeviceId.GPU if torch.cuda.is_available() else DeviceId.CPU)# Pilih model: artistic atau stablecolorizer = get_artistic_image_colorizer()  # alternatif: get_stable_image_colorizer()frames_dir = Path("work/frames")out_dir = Path("work/colorized")out_dir.mkdir(parents=True, exist_ok=True)# Parameter render: bisa di-tuningrender_factor = 35  # naikkan untuk detail, turunkan untuk speed/warna lembutframes = sorted(frames_dir.glob("frame_*.png"))print(f"Memproses {len(frames)} frame...")for i, frame_path in enumerate(frames, 1):    try:        result = colorizer.get_transformed_image(            str(frame_path),            render_factor=render_factor,            post_process=True        )        # Simpan        out_path = out_dir / frame_path.name        result.save(str(out_path))        if i % 50 == 0:            print(f"  >> {i}/{len(frames)} frame diwarnai...")    except Exception as e:        print(f"  !! Gagal memproses {frame_path.name}: {e}")print("Selesai mewarnai semua frame.")</code></pre>
               <h3>4) Gabungkan kembali frame menjadi video berwarna</h3>
-              <pre><code class="language-bash"># Gabungkan frame berwarna jadi video (sesuaikan framerate)
-# Untuk framerate yang sama dengan input, bisa baca dari ffmpeg -i input.mp4
-ffmpeg -framerate 25 -i work/colorized/frame_%05d.png -c:v libx264 -pix_fmt yuv420p work/colorized_noaudio.mp4
-
-# Tempelkan audio asli (jika diekstrak)
-ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 192k -shortest output_colorized.mp4</code></pre>
-
+              <pre><code class="language-bash"># Gabungkan frame berwarna jadi video (sesuaikan framerate)# Untuk framerate yang sama dengan input, bisa baca dari ffmpeg -i input.mp4ffmpeg -framerate 25 -i work/colorized/frame_%05d.png -c:v libx264 -pix_fmt yuv420p work/colorized_noaudio.mp4# Tempelkan audio asli (jika diekstrak)ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 192k -shortest output_colorized.mp4</code></pre>
+              ---
               <h2>Tips hasil lebih bagus</h2>
               <ul>
                 <li>
@@ -724,13 +574,11 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
                   per bab) untuk menghindari kehabisan RAM/VRAM.
                 </li>
               </ul>
-
               <blockquote>
                 Intinya: ekstrak frame → colorize dengan DeOldify → gabungkan
                 dengan ffmpeg → re-attach audio → lakukan color grading akhir.
                 Simpel, modular, dan bisa diulang untuk proyek lain.
               </blockquote>
-
               <figure>
                 <img
                   src="https://frijal.github.io/assets/preview/deoldify-colorize-video.jpg"
@@ -742,8 +590,6 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
                   optimal.
                 </figcaption>
               </figure>
-
-              <!-- Galeri foto lazy-load -->
               <div class="gallery" id="gallery">
                 <div
                   class="item"
@@ -783,8 +629,6 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
                 </div>
               </div>
             </div>
-
-            <!-- Lightbox overlay -->
             <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
               <img id="lightbox-img" alt="" />
               <div class="lb-controls">
@@ -812,8 +656,6 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
                 <div class="lb-caption" id="lb-cap">—</div>
               </div>
             </div>
-
-            <!-- Jaga Data Pribadi Tetap Aman️ -->
             <div id="fb-root"></div>
             <div
               class="fb-comments"
@@ -825,7 +667,6 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
           </article>
         </div>
       </main>
-
       <footer class="site" role="contentinfo">
         <small
           >🄯 2025 frijal.github.io · Artikel disajikan santai, akurat, dan
@@ -833,33 +674,24 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
         >
       </footer>
     </div>
-
-    <!-- Facebook SDK (gantikan appId sesuai kebutuhan) -->
     <script
       async
       defer
       crossorigin="anonymous"
-      });
       src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1"
     ></script>
-
-    <!-- Prism.js JS -->
-    });
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-    });
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
-    });
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-
-    <!-- JS: share, lightbox, deteksi lingkungan, lokasi/flags -->
     <script>
-      document.addEventListener(DOMContentLoaded, () => {
+      document.addEventListener('DOMContentLoaded', () => {
         (function () {
+          // Hilangkan 'document.addEventListener(DOMContentLoaded, () => {' ganda dari kode asli.
+          
           const CANON =
             document.querySelector('link[rel="canonical"]')?.href ||
             location.href;
-
-          // Share
+          // --- Share ---
           const shareMap = {
             twitter: (url) =>
               `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
@@ -877,8 +709,7 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
               if (u) window.open(u, '_blank', 'noopener,noreferrer');
             });
           });
-
-          // Lightbox
+          // --- Lightbox ---
           const gallery = [...document.querySelectorAll('#gallery .item')];
           const lb = document.getElementById('lightbox');
           const lbImg = document.getElementById('lightbox-img');
@@ -900,11 +731,12 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
           }
           function prev() {
             if (idx > 0) openAt(idx - 1);
+            else if (idx === 0) openAt(gallery.length - 1); // loop
           }
           function next() {
             if (idx < gallery.length - 1) openAt(idx + 1);
+            else if (idx === gallery.length - 1) openAt(0); // loop
           }
-
           gallery.forEach((el, i) =>
             el.addEventListener('click', () => openAt(i))
           );
@@ -922,7 +754,6 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
             if (e.key === 'ArrowLeft') prev();
             if (e.key === 'ArrowRight') next();
           });
-
           // Perf: fallback lazy-load untuk browser lama
           if (!('loading' in HTMLImageElement.prototype)) {
             const lazyImgs = document.querySelectorAll('img[loading="lazy"]');
@@ -940,21 +771,5 @@ ffmpeg -i work/colorized_noaudio.mp4 -i work/audio.aac -c:v copy -c:a aac -b:a 1
         })();
       });
     </script>
-    });
-    <div id="kategori-aktif"></div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <script src="/ext/marquee-url.js"></script>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      /><span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-    <script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>
