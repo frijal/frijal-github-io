@@ -17,26 +17,7 @@
   <meta  name="twitter:description"  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."/>
   <meta  name="twitter:image"  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"/>
   
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Pembaruan Otomatis Fedora: Perlukah?",
-      "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"],
-      "author": { "@type": "Person", "name": "Frijal" },
-      "publisher": {
-        "@type": "Organization",
-        "name": "frijal.github.io",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://frijal.github.io/favicon.ico"
-        }
-      },
-      "datePublished": "2025-09-21",
-      "dateModified": "2025-09-21",
-      "mainEntityOfPage": "https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
-    }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Pembaruan Otomatis Fedora: Perlukah?","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"],"author":{"@type":"Person","name":"Frijal","image":"https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg"},"publisher":{"@type":"Organization","name":"frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.ico","image":"https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg"},"image":"https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg"},"datePublished":"2025-09-21","dateModified":"2025-09-21","mainEntityOfPage":"https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"}</script>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -145,12 +126,14 @@
   
   <meta property="og:image:alt" content="Pembaruan Otomatis Fedora: Perlukah? - Interaktif">
   <meta itemprop="image" content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded opacity-0 transition-all z-50"></div>
   
   <header>
     <h1 class="text-3xl font-bold">Pembaruan Otomatis Fedora: Perlukah?</h1>
+<div id="iposbrowser"></div>
     <small>(berdasarkan artikel dari Fedora Project)</small>
   </header>
   
@@ -283,5 +266,7 @@ systemctl status dnf-automatic.timer</code></pre>
         }
     });
   </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
