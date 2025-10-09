@@ -125,12 +125,6 @@
 
     .fb-comments{margin-top:26px;border-top:1px dashed var(--border);padding-top:20px}
 
-    /* Floating Controls */
-    .btn-float{position:fixed;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#0d1318;border:1px solid var(--border);color:#e8edf3;z-index:1100}
-    .btn-float:hover{filter:brightness(1.08)}
-    .btn-sitemap{left:16px;top:30%;transform:translateY(-50%)}
-    .btn-home{right:16px;bottom:20%;transform:translateY(50%)}
-
     footer{margin-top:26px;padding:20px;color:var(--muted);font-size:13px;text-align:center}
 
     @media (min-width:1120px){.wrap{max-width:1120px}}
@@ -352,8 +346,7 @@
       initGallery();
     });
   </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

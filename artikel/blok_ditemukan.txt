@@ -1,16 +1,38 @@
 ========================================================
-Ditemukan di: sungai-terpanjang-indonesia.html
+Ditemukan di: maulid-nabi.html
 ========================================================
-/* Fixed quick nav per request */
-.nav-float{
-  position:fixed;z-index:1100;
+/* Home buttons (completed styles) */
+#btn-home-left, #btn-home-right {
+  position: fixed;
+  display: inline-flex;
+  align-items: center;
+  background-color: #0ea5e9;
+  color: #071026;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 10px 22px rgba(14,165,233,.35);
+  transition: background 0.3s ease, transform 0.2s ease;
+  z-index: 9999;
 }
-.nav-float.sitemap{left:10px;top:30%}
-.nav-float.home{right:10px;bottom:20%}
-.nav-float a{
-  display:inline-flex;align-items:center;gap:.6rem;
-  background:var(--accent);color:#fff;text-decoration:none;
-  padding:.6rem 1rem;border-radius:10px;font-weight:800;box-shadow:var(--shadow)
+#btn-home-left:hover, #btn-home-right:hover {
+  background-color: #38bdf8;
+  transform: scale(1.05);
 }
-.nav-float a svg{width:18px;height:18px;fill:#fff}
+#btn-home-left {
+  left: 10px;
+  top: 30%;
+  transform: translateY(-50%);
+}
+#btn-home-right {
+  right: 10px;
+  bottom: 20%;
+  transform: translateY(50%);
+}
+#btn-home-left svg, #btn-home-right svg {
+  width: 18px; height: 18px; fill: currentColor;
+}
 
