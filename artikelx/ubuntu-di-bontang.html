@@ -92,29 +92,6 @@ pre{border-radius:14px; border:1px solid rgba(255,255,255,.12); background:#0b10
 footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(6,18,26,.6); backdrop-filter: blur(8px)}
 .sys{display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:18px 0}
 @media (max-width: 700px){ .sys{grid-template-columns:1fr} }
-.sys-item{display:flex; align-items:center; gap:12px; padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05)}
-.flag{height:16px; width:auto; border-radius:3px; box-shadow:0 0 0 1px rgba(255,255,255,.25)}
-.os-ico,.br-ico{width:24px; height:24px}
-/* Tombol Home kiri/kanan (Dihapus) */
-#btn-home-left, #btn-home-right {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  background: linear-gradient(135deg,#0ea5e9,#84cc16);
-  color: #08131e;
-  padding: 10px 14px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 900;
-  box-shadow: var(--shadow);
-  transition: transform .2s ease, filter .2s ease;
-  z-index: 9999;}
-#btn-home-left:hover, #btn-home-right:hover { transform: translateY(-2px) scale(1.03); filter:brightness(1.05) }
-#btn-home-left { left: 10px; top: 30%; transform: translateY(-50%) }
-#btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%) }
-#btn-home-left svg, #btn-home-right svg { width: 18px; height: 18px; fill: currentColor; margin-right:6px }
   </style>
 <meta name="date" content="2025-09-28">
   <meta property="og:image" content="https://frijal.github.io/artikel/ubuntu-di-bontang.jpg">
@@ -129,9 +106,6 @@ footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: 
     <div class="wrap hero">
       <div class="brand">
         <span class="logo" aria-hidden="true"></span>Ubuntu di Bontang • Catatan Lapangan
-      </div>
-      <div class="cta">
-        <a href="#konten" aria-label="Mulai baca">Mulai baca</a>
       </div>
     </div>
   </header>
@@ -260,7 +234,5 @@ footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: 
     })();
     // Dihapus: semua script deteksi user/IP di footer
   </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

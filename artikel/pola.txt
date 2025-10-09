@@ -1,35 +1,12 @@
-  // system info (ikon seperti aslinya)
-        const ua = navigator.userAgent
-        document.getElementById('browser').textContent = ua.includes('Firefox')
-          ? 'Firefox'
-          : ua.includes('Chrome')
-            ? 'Chrome'
-            : ua.includes('Safari')
-              ? 'Safari'
-              : 'Browser'
-        document.getElementById('os').textContent = /Windows/.test(ua)
-          ? 'Windows'
-          : /Mac/.test(ua)
-            ? 'macOS'
-            : /Linux/.test(ua)
-              ? 'Linux'
-              : /Android/.test(ua)
-                ? 'Android'
-                : /iPhone|iPad/.test(ua)
-                  ? 'iOS'
-                  : 'OS'
-
-        fetch('https://ipapi.co/json/')
-          .then((r) => r.json())
-          .then((d) => {
-            const flags = { ID: '🇮🇩', US: '🇺🇸', GB: '🇬🇧', JP: '🇯🇵', CN: '🇨🇳' }
-            document.getElementById('loc').textContent =
-              (flags[d.country_code] || '🌍') +
-              ' ' +
-              (d.city || d.region) +
-              ', ' +
-              d.country_name
-          })
-          .catch(() => {
-            document.getElementById('loc').textContent = '🌍 Tidak diketahui'
-          })
+/* Fixed quick nav per request */
+.nav-float{
+  position:fixed;z-index:1100;
+}
+.nav-float.sitemap{left:10px;top:30%}
+.nav-float.home{right:10px;bottom:20%}
+.nav-float a{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--accent);color:#fff;text-decoration:none;
+  padding:.6rem 1rem;border-radius:10px;font-weight:800;box-shadow:var(--shadow)
+}
+.nav-float a svg{width:18px;height:18px;fill:#fff}
