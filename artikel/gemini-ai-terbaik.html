@@ -323,11 +323,13 @@
       itemprop="image"
       content="https://frijal.github.io/artikel/gemini-ai-terbaik.jpg"
     />
+<link rel="stylesheet" href="/ext/marquee-url.css">
   </head>
   <body>
     <main class="container">
       <article>
         <h1>Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi</h1>
+<div id="iposbrowser"></div>
         <p>
           Sejak diluncurkannya <strong>Gemini 1.5 Pro</strong>, Google berhasil
           bikin gebrakan baru dengan memperkenalkan <strong>context window</strong> sebesar
@@ -514,5 +516,7 @@
           `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
       });
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>
