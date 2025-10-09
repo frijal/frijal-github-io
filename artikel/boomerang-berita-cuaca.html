@@ -81,10 +81,12 @@ main{ max-width:var(--max); margin-inline:auto; padding: 0 clamp(10px,3vw,20px) 
   </style>
   <meta property="og:image:alt" content="Boomerang — Berita Cuaca (Lirik & Video)">
   <meta itemprop="image" content="https://frijal.github.io/artikel/boomerang-berita-cuaca.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <header>
         <h1>Boomerang — Berita Cuaca</h1>
+<div id="iposbrowser"></div>
         <div class="subtitle">Nyanyian rindu alam lestari, doa agar bukit kembali hijau. Putar videonya, resapi liriknya, dan semogakan hal yang sama.</div>
         <div class="chips">
             <span class="chip">🎧 Video + Lirik</span>
@@ -222,5 +224,7 @@ Kapan Lagi....</p>
         ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));
         document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))});
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
