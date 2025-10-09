@@ -6,6 +6,7 @@
     <title>Sahabat: Arti, Ciri, dan Cara Menjaga Persahabatan | Panduan Ringkas</title>
     <meta name="description" content="Penjelasan lengkap tentang apa itu sahabat, ciri-ciri sahabat sejati, cara membangun dan menjaga persahabatan yang sehat — ditulis dalam bahasa Indonesia yang mudah dimengerti." />
     <link rel="canonical" href="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html" />
+    <meta name="date" content="2025-09-27" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Sahabat: Arti, Ciri, dan Cara Menjaga Persahabatan | Panduan Ringkas" />
     <meta property="og:description" content="Penjelasan lengkap tentang apa itu sahabat, ciri-ciri sahabat sejati, cara membangun dan menjaga persahabatan yang sehat." />
@@ -21,7 +22,7 @@
             --card: #ffffff;
             --accent: #346bff;
             --muted: #6b7280;
-            --maxw: 900px; /* Diperkecil agar fokus ke satu kolom */
+            --maxw: 1200px;
             --radius: 12px;
             --glass: rgba(255, 255, 255, 0.6);
         }
@@ -38,7 +39,7 @@
         body {
             margin: 0;
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: linear-gradient(180deg, var(--bg), #fff);
+            background: linear-gradient(180deg, #f6f8fb 0, #fff 100%);
             color: #111827
         }
 
@@ -72,21 +73,24 @@
             font-size: 14px
         }
 
-        /* Menghapus layout grid, konten utama menjadi satu kolom */
         .layout {
-            display: block; 
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px
         }
 
         .main {
             background: var(--card);
             border-radius: var(--radius);
             padding: 28px;
-            box-shadow: 0 6px 24px rgba(15, 23, 42, .06);
-            /* Memastikan main mengambil lebar penuh container */
-            width: 100%;
+            box-shadow: 0 6px 24px rgba(15, 23, 42, .06)
         }
 
-        /* Aside dihapus / tidak ditampilkan */
+        .aside {
+            position: sticky;
+            top: 28px;
+            height: fit-content
+        }
 
         h1 {
             font-size: 28px;
@@ -139,8 +143,8 @@
 
         .btn {
             display: inline-flex;
-            gap: 8px;
             align-items: center;
+            gap: 8px;
             padding: 10px 12px;
             border-radius: 10px;
             border: 1px solid rgba(15, 23, 42, .06);
@@ -155,12 +159,19 @@
             border: none
         }
 
+        pre.code {
+            background: #0f1724;
+            color: #e6eef8;
+            padding: 12px;
+            border-radius: 8px;
+            overflow: auto
+        }
+
         .meta-block {
             background: #fbfdff;
             border: 1px solid #eef6ff;
             padding: 12px;
-            border-radius: 10px;
-            margin-top: 20px; /* Tambahkan margin setelah article utama */
+            border-radius: 10px
         }
 
         .muted {
@@ -177,6 +188,14 @@
         }
 
         @media (max-width:920px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .aside {
+                position: static
+            }
+
             .container {
                 margin: 18px;
                 padding: 18px
@@ -186,11 +205,18 @@
                 font-size: 22px
             }
         }
+
+        /* Styling Tombol Floating (Dihapus) */
+        #btn-sitemap-left,
+        #btn-home-right {
+            display: none; /* Hanya untuk memastikan elemen di body tidak muncul */
+        }
     </style>
     <meta property="og:image" content="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg">
     <meta property="og:image:alt" content="Sahabat: Arti, Ciri, dan Cara Menjaga Persahabatan | Panduan Ringkas">
     <meta name="twitter:image" content="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg">
     <meta itemprop="image" content="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="container">
@@ -221,14 +247,13 @@
         <div class="layout">
             <main class="main" id="main-article">
                 <h1>Sahabat: Arti, Ciri, dan Cara Menjaga Persahabatan</h1>
-                
+<div id="iposbrowser"></div>
                 <div class="meta">
                     <span class="badge">Panduan</span>
                     <span class="muted">Ditulis oleh <strong>Tim Konten</strong></span>
                     <span class="muted">•</span>
                     <span class="muted" id="read-time">Estimasi 4 menit</span>
                 </div>
-
                 <article>
                     <p><strong>Sahabat</strong> adalah seseorang yang memiliki hubungan persahabatan yang erat dengan Anda — orang yang dapat dipercaya, mendukung, dan menerima Anda apa adanya. Persahabatan yang sehat memberi rasa aman, dukungan emosional, dan berbagi pengalaman hidup.</p>
                     
@@ -263,7 +288,6 @@
                     <h2>Penutup singkat</h2>
                     <p>Persahabatan adalah salah satu aset emosional terbesar dalam hidup. Menjaga kepercayaan, komunikasi yang baik, dan rasa saling menghormati membantu persahabatan bertahan lama.</p>
                     <hr>
-                    
                     <section>
                         <h3>Tanya Jawab (FAQ singkat)</h3>
                         <div>
@@ -274,7 +298,16 @@
                         </div>
                     </section>
                     
-                    <div class="meta-block">
+                    <div style="margin-top:18px">
+                        <div id="fb-root"></div>
+                        <div class="fb-comments" id="fb-comments" data-href="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </article>
+            </main>
+
+            <aside class="aside">
+                                   
+                    <div>
                         <div class="muted">Bagikan artikel</div>
                         <div class="share-row">
                             <button class="btn" id="share-fb">Facebook</button>
@@ -289,13 +322,12 @@
                         <div style="margin-top:8px;font-size:13px;color:green;display:none" id="copy-msg">Link berhasil disalin.</div>
                         <div style="margin-top:8px;font-size:12px;color:var(--muted)">URL: <span id="current-url">-</span></div>
                     </div>
-
-                    <div style="margin-top:18px">
-                        <div id="fb-root"></div>
-                        <div class="fb-comments" id="fb-comments" data-href="https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html" data-width="100%" data-numposts="5"></div>
-                    </div>
-                </article>
-            </main>
+                </div>
+                <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+                    <strong>Catatan:</strong>
+                    <div>Halaman ini menggunakan data dari perangkat Anda (browser/OS) dan layanan publik untuk menampilkan IP & negara. Data diproses di sisi klien.</div>
+                </div>
+            </aside>
         </div>
         
         <footer>
@@ -306,6 +338,7 @@
         </footer>
     </div>
     
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"headline":"Sahabat: Arti, Ciri, dan Cara Menjaga Persahabatan","description":"Penjelasan lengkap tentang apa itu sahabat, ciri-ciri sahabat sejati, cara membangun dan menjaga persahabatan yang sehat.","image":{"@type":"ImageObject","url":"https://placehold.co/1200x630/346bff/ffffff?text=SAHABAT+SEJATI","width":1200,"height":630,"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"author":{"@type":"Person","name":"Tim Konten","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"publisher":{"@type":"Organization","name":"Panduan Sahabat","logo":{"@type":"ImageObject","url":"https://placehold.co/60x60/346bff/ffffff?text=S","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"datePublished":"22025-09-14T00:00:00+07:00","dateModified":"2025-09-27T11:27:00+07:00"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/home.html","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},{"@type":"ListItem","position":3,"name":"Sahabat","item":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.html","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"}],"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apakah sahabat harus selalu setuju dengan kita?","acceptedAnswer":{"@type":"Answer","text":"Tidak harus. Perbedaan pendapat normal; yang penting adalah saling menghormati dan mampu berdiskusi tanpa merendahkan.","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},{"@type":"Question","name":"Berapa banyak sahabat yang ideal?","acceptedAnswer":{"@type":"Answer","text":"Tidak ada angka pasti. Kualitas lebih penting daripada kuantitas.","image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"},"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"}],"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"}],"image":"https://frijal.github.io/artikel/penjelasan-lengkap-tentang-sahabat.jpg"}</script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0"></script>
     
     <script>
@@ -314,6 +347,7 @@
         // 1. Logic untuk Tanggal dan Tahun
         const updateDateElements = () => {
             const date = new Date();
+            // Menghapus penggunaan element browser/os/ip yang tidak ada
             document.getElementById("updated-at").textContent = date.toLocaleString("id-ID", {dateStyle:"long",timeStyle:"short"});
             document.getElementById("year").textContent = date.getFullYear();
         };
@@ -358,5 +392,7 @@
             }
         });
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
