@@ -2144,6 +2144,48 @@
       "Kumpulan daftar mirror repository untuk berbagai distribusi Linux seperti Debian, Ubuntu, CentOS, dan lainnya dari server lokal Indonesia. Percepat unduhan dan pembaruan sistem Anda dengan mirror terdekat."
     ],
       [
+      "Panduan Memilih Repository Linux Tercepat",
+      "linux-repo-guide.html",
+      "https://frijal.github.io/artikel/linux-repo-guide.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Panduan dasar untuk pemula mengenai repositori (repo) di Linux. Pelajari apa itu repositori, mengapa itu penting, dan bagaimana cara kerja manajer paket seperti APT atau DNF dalam mengelola perangkat lunak."
+    ],
+      [
+      "Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan Terminal 🚂",
+      "linux-sl-steam-locomotive.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif",
+      "2025-09-16T03:00:00.000+00:00",
+      "Artikel tentang paket SL di Linux. Awalnya karena salah ketik perintah LS menjadi SL, ternyata menghadirkan animasi kereta api di terminal."
+    ],
+      [
+      "Cara Mengatasi Partisi NTFS Tidak Bisa Dibuka di Linux (Caja File Manager)",
+      "mount-ntfs-caja.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHW66Sk-w9HABHJCUM_xSFo75QnZDtg1Yj876dgbzpd07Dn5GZt2HFzqrOemsuGsgUi5jHz5fAWb6QsmgxCAbhYsODqhF9ab7QXx8Nyu5ZhiF54PTHxMvvw8R6iTNuCJJChUrzWLM8xXK9/s1600/Jendela+tidak+berjudul_003.png",
+      "2025-09-16T03:00:00.000+00:00",
+      "Panduan lengkap mengatasi partisi NTFS yang tidak bisa dibuka di Linux menggunakan Caja File Manager. Termasuk cara edit policy udisks2 agar partisi bisa di-mount."
+    ],
+      [
+      "nixos-mirror.sh — Mirror Tercepat untuk NixOS",
+      "nixos-mirror.html",
+      "https://frijal.github.io/artikel/nixos-mirror.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Pelajari cara mempercepat unduhan paket di NixOS dengan mengganti server mirror bawaan ke mirror lokal Indonesia. Panduan ini menunjukkan cara mengedit file configuration.nix untuk mendapatkan kecepatan maksimal."
+    ],
+      [
+      "Open Source vs Gratis: Peluang, Lisensi, dan Praktik Baik di Indonesia",
+      "open-source-indonesia.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgeAwhu8yPzBNy3XsSIosZELBrNyaCZQ_jdm5hr6wcJbBUWBgcg46WEDyaqb3rd19ANTZi0yp5CaO4pxJRM0jTuUbs4QsIEoo-XqeZ7JNkrzYBj300dEDtgTFbatUbAxNcy9OYpJGMRpJjC/s1600/wpid-open_source_windows.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Bahas tuntas open source vs aplikasi gratis, jenis lisensi (GPL, Apache, MIT, LGPL), peluang komersial yang etis, dan praktik kepatuhan lisensi. Halaman interaktif, responsif, dengan gambar lazy-load dan komentar Facebook."
+    ],
+      [
+      "Open Source: Kisah Sukses Sumber Terbuka",
+      "open-source.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxGvXVJWqpx5GW1BHJRIMbCmL_wTQhSgAd7Vk22nxqZZ7723da2UdwpHOIax9xRnPWiAZRLs_r2hi_StDPI7D1HpHSBCE6uu4wSe0PoC9CULJyp4tzL-_CU_Lvi95UX67s2Tfzf81KUlV3jFY_x_3iX1UXXPP_rgC0SVBtFmimlCI5p6kSekMsk4Fub-o/s1600/Frame_599.png",
+      "2025-09-16T03:00:00.000+00:00",
+      "Open Source: Kisah sukses Sumber Terbuka dari Wikipedia, WordPress, Ubuntu, MySQL, Android. Pelajari filosofi Bebas Terbuka."
+    ],
+      [
       "opensuse-mirror.sh — Mirror Tercepat untuk openSUSE",
       "opensuse-mirror.html",
       "https://frijal.github.io/artikel/opensuse-mirror.jpg",
@@ -2151,11 +2193,46 @@
       "Kumpulan repository mirror openSUSE Tumbleweed dan Leap untuk server Indonesia. Dapatkan daftar alamat URL Zypper terdekat untuk mempercepat proses unduh dan pembaruan paket sistem Anda."
     ],
       [
+      "Perjalanan Komunitas Ubuntu Jogja ke GCOS Jakarta",
+      "perjalanan-ubuntu-jogja-gcos.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhB_2Lo7l8GxQOg7vWjozbH2wo4WMFXd6fZudBp2bBwnQU80WCRxWJmYD_RSmrTNBpE-Qi3znMvXZfn05vV8yh_45venwb9Tjv6TiTJJNgVXKVwggOa6IRsC3l8SpBIC6sdS47VmU6VTnQ/s16000/DSCN2857.JPG",
+      "2025-09-16T03:00:00.000+00:00",
+      "Perjalanan Komunitas Ubuntu Jogja menuju GCOS Jakarta, menerima penghargaan Komunitas FOSS terbaik. Lengkap dengan dokumentasi foto, cerita perjalanan, dan interaksi sosial."
+    ],
+      [
+      "YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas",
+      "presto-yum.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Buat update di distro YUM jadi lebih hemat bandwidth dengan YUM Presto (delta RPM). Panduan mudah: apa itu Presto, cara pasang, tips, dan contoh perintah. Disertai ilustrasi, komentar Facebook, dan tombol berbagi."
+    ],
+      [
       "Sejarah dan Keuntungan Menggunakan Rsync",
       "sejarah-rsync.html",
       "https://frijal.github.io/artikel/sejarah-rsync.jpg",
       "2025-09-16T03:00:00.000+00:00",
       "Mengenal sejarah rsync, utilitas sinkronisasi file yang efisien. Pelajari tentang asal-usulnya, pengembang di baliknya, dan bagaimana algoritma delta-transfer menjadikannya alat yang powerful."
+    ],
+      [
+      "Tips Cooling Laptop AMD",
+      "tips-cooling-laptop-amd.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVBY-3DKVAoxkQ6cErt9ZqKUaX0cr5rof0CJwaivsuFICz6U8Mb-N2TpZJJOVhxNLfT6iY9J4aDt7_jCCaS87SEmvzDCtnoA_Pf2xlnGgATw2fnHHZS_yhSLsPBS5aHiyseLhuJF7e4Vul/s800/kipas2.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Panduan menjaga laptop AMD tetap dingin dengan metode sederhana menggunakan kipas box dan tips perawatan. Cocok untuk pengguna yang aktif menggunakan laptop berjam-jam."
+    ],
+      [
+      "Mengatasi Ubuntu Sering Not Responding dengan Menghapus Driver VGA",
+      "ubuntu-not-responding.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT4bXdx_j8zHalnxm0otIg5SxZiPJTDsU6pV4fuJ-G-XBocJ7ldYJ8B9XVs8FWchyphenhyphenr-fxEKQ7_DuZqdYrePjlCObBLHnnCLPyVF27s3rLCMV1dHX0RfxzmvAkwxidIYhESZgD_UrvpjU-P/s1600/ubuntu_rr.png",
+      "2025-09-16T03:00:00.000+00:00",
+      "Panduan lengkap cara mengatasi Ubuntu yang sering Not Responding dengan menghapus driver VGA yang tidak digunakan. Disertai langkah aman agar sistem tetap stabil."
+    ],
+      [
+      "Panduan ZSync untuk ISO BlankOn Rote - Hemat Kuota & Efisien",
+      "zsync-blankon.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVXS43YhLnzVvA88sZ9XNfnaEI-pHUAoqCeA9LMtt_qXIoIW1pI9jT9Hgdh1L0ViqVhj6LfWc_Nfa2nLUa-7AuaE1WromsnafLK44Wvl36G1aWB6C1AuO1QKqq6_VtLiB5MJ7Cp9qg7vxjcIW_K-R8MfqEFXPeLMySqItvjopEmQZ0YGqdiRch4J2zOKQ/s1600/slide_14.jpg",
+      "2025-09-16T03:00:00.000+00:00",
+      "Panduan lengkap menggunakan ZSync untuk mengunduh ISO BlankOn Rote dengan efisien, hemat kuota, dan interaktif."
     ],
       [
       "Hidup Bahagia dengan Teknologi Terbuka",
