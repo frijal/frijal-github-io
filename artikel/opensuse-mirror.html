@@ -156,7 +156,6 @@ sudo zypper ref
 echo "[DONE] Repo openSUSE sekarang menggunakan mirror tercepat!"</code>
 </pre>
 
-<a href="data:text/plain;charset=utf-8,#!/bin/bash%0A#%20opensuse-mirror.sh%20(gunakan%20mirror%20list%20openSUSE%20otomatis)%0A%0Aset%20-e%0A%0Aecho%20%22[INFO]%20Backup%20repo%20lama...%22%0Asudo%20mkdir%20-p%20/etc/zypp/repos.d/backup%0Asudo%20cp%20/etc/zypp/repos.d/*.repo%20/etc/zypp/repos.d/backup/%202%3E/dev/null%20%7C%7C%20true%0A%0Aecho%20%22[INFO]%20Mengatur%20repo%20menggunakan%20mirrorlist...%22%0AOS_VERSION=$(grep%20VERSION_ID%20/etc/os-release%20%7C%20cut%20-d%20'%22'%20-f2)%0Asudo%20zypper%20rr%20-a%0A%0A#%20Tambahkan%20repo%20utama%20(OSS%20dan%20Non-OSS)%20dengan%20mirrorlist%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/oss%22%20%5C%0A%20%20%22openSUSE-OSS%22%0A%0Asudo%20zypper%20ar%20-f%20%5C%0A%20%20%22http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/non-oss%22%20%5C%0A%20%20%22openSUSE-Non-OSS%22%0A%0Aecho%20%22[INFO]%20Refresh%20repo...%22%0Asudo%20zypper%20ref%0A%0Aecho%20%22[DONE]%20Repo%20openSUSE%20sekarang%20menggunakan%20mirror%20tercepat!%22" download="opensuse-mirror.sh" class="download-btn">⬇️ Download opensuse-mirror.sh</a>
   </main>
 
   <footer>
@@ -179,9 +178,8 @@ function toggleDarkMode() {
   btn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
 }
   </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
