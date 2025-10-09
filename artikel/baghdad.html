@@ -57,9 +57,8 @@
     <main class="container">
         <header>
             <h1>Baghdad: Kota Seribu Malam</h1>
-        </header>
         <div id="iposbrowser"></div>
-
+</header>
         <article>
             <p>Pada masa Dinasti Abbasiyah, Baghdad bukan hanya ibu kota kekuasaan, melainkan jantung ilmu pengetahuan, perdagangan, dan kebudayaan. Didirikan oleh Khalifah al-Manshur pada tahun 762 M, Baghdad dijuluki <em>Madinat al-Salam</em> – Kota Damai.</p>
             
@@ -101,7 +100,6 @@
         <a class="lightbox-next">&#10095;</a>
     </div>
 
-    <script src="/ext/iposbrowser.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const galleryImages = document.querySelectorAll(".gallery img");
@@ -149,5 +147,7 @@
             }
         });
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
