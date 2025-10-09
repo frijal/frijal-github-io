@@ -1393,13 +1393,6 @@
       "Tutorial cara mengubah ukuran (resize) banyak foto sekaligus secara massal menggunakan perintah ImageMagick. Pelajari penggunaan command"
     ],
       [
-      "Cara Merekam Sebagian Layar Desktop dengan FFmpeg",
-      "rekam-layar-ffmpeg.html",
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTdv_O1APqjhPX7TatZxFEWTY844H4edW8S67Pc9j-v_fEtzm2QDfqtH5-U-i63qOp0-Hfsnx21TUYBXKoD3f6uozGBCm4aGlgJHu1Hk3y8cpEXlFTrZn_gJMirsp22DAenr1N93cvHiT0/s1600/ffmpeg-logo.png",
-      "2025-09-16T03:00:00.000+00:00",
-      "Tutorial lengkap cara merekam sebagian area layar desktop di Linux menggunakan perintah FFmpeg. Pelajari cara menentukan area tangkapan dengan presisi."
-    ],
-      [
       "Memutar Berkas Multimedia di Fedora Linux",
       "fedora-multimedia.html",
       "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg",
@@ -1428,13 +1421,6 @@
       "Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis."
     ],
       [
-      "Menggabungkan Berkas PDF dengan PDFtk: Solusi Cepat dan Efisien",
-      "menggabungkan-pdf-pdftk.html",
-      "https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg",
-      "2025-09-15T03:00:00.000+00:00",
-      "Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk di Linux/Windows. Disertai contoh perintah, tips, dan keunggulan penggunaan."
-    ],
-      [
       "Mengubah Format Gambar Massal dengan ImageMagick",
       "mengubah-format-gambar.html",
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4plrIZN7XWwHE-H8sc81qshP12EzBLwgat2ZWKHBoBr3DnYGwBeUjAlBkFfK_H1ImgnfI0STp4cgiFTsEKoDg3ye8NGElqV6GJJIKltBrx1iJm5xXTOug8bp1-QzUlRXI9kMEvkjJXH2q/s1600/Logo_Imagemagick.png",
@@ -1461,27 +1447,6 @@
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZfd7lBezHxJd1AZq0NAtIDxU1yLmHgZMPDEB6_Z_d9CbQXDilSGRra1cNlZ_RnZSJV6GReo4oIlqaHa-mbQrO9BGSXtSM6aK9Z9QRK-0LenuEmQ9CSQMjER-8CaFJ49gFTFr4Oqe3Kgf_/s1600/Logo_Imagemagick.png",
       "2025-09-15T03:00:00.000+00:00",
       "Panduan lengkap cara memberi watermark pada gambar menggunakan ImageMagick di Linux. Dilengkapi script bash otomatis, tutorial, dan contoh interaktif."
-    ],
-      [
-      "FFmpeg: Memotong Durasi Video",
-      "FFMpeg-memotong-durasi-video.html",
-      "https://frijal.github.io/artikel/FFMpeg-memotong-durasi-video.jpg",
-      "2025-09-14T03:00:00.000+00:00",
-      "Pelajari cara memotong video berdasarkan durasi waktu yang spesifik menggunakan FFmpeg. Panduan ini menjelaskan penggunaan opsi -ss (waktu mulai) dan -t atau -to (durasi/waktu selesai) untuk mengambil bagian video yang Anda inginkan."
-    ],
-      [
-      "Batch Convert Audio dengan FFmpeg",
-      "FFmpeg-batch-convert-audio.html",
-      "https://frijal.github.io/artikel/FFmpeg-batch-convert-audio.jpg",
-      "2025-09-14T03:00:00.000+00:00",
-      "Cara convert semua file audio dalam sebuah folder ke format lain (misalnya FLAC ke MP3) secara massal menggunakan skrip bash dan FFmpeg. Otomatiskan proses konversi audio Anda dengan mudah."
-    ],
-      [
-      "Panduan Interaktif FFmpeg: Manipulasi Audio dan Video Command Line",
-      "ffmpeg-ubah-mp3-ke-ogg-audio.html",
-      "https://frijal.github.io/artikel/ffmpeg-ubah-mp3-ke-ogg-audio.jpg",
-      "2025-09-14T03:00:00.000+00:00",
-      "Panduan interaktif FFmpeg untuk pemula. Pelajari cara konversi, trim, dan manipulasi file audio/video menggunakan perintah command line yang mudah disalin."
     ],
       [
       "Resize Semua Foto dengan ImageMagick (Shell Script)",
@@ -1633,11 +1598,60 @@
       "Penjelasan santai tentang proses PARU di CachyOS untuk update dan upgrade sistem secara reguler. Disertai video screencast dan galeri foto keren."
     ],
       [
-      "Skrip Otomatis Chroot: Setup & Cleanup Shell",
-      "Skrip-Otomatis-ChRoot.html",
-      "https://frijal.github.io/artikel/Skrip-Otomatis-ChRoot.jpg",
-      "2025-10-04T15:37:18.042+00:00",
-      "Skrip bash untuk mengotomatiskan proses chroot ke dalam sistem Linux yang rusak. Permudah perbaikan sistem, instalasi GRUB, atau tugas recovery lainnya dengan skrip praktis ini."
+      "Mempercepat Upgrade PARU di CachyOS dengan Mirror Terdekat",
+      "cachyos-paru-upgrade-cepat.html",
+      "https://frijal.github.io/artikel/cachyos-paru-upgrade-cepat.jpg",
+      "2025-10-06T06:06:53.230+00:00",
+      "Panduan lengkap dan santai cara mempercepat proses update dan upgrade PARU/Pacman di CachyOS dengan memilih mirror tercepat menggunakan reflector dan optimasi konfigurasi."
+    ],
+      [
+      "Belajar Perintah cURL: Cheat Sheet Lengkap untuk Pemula",
+      "belajar-perintah-curl.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-NJHsjiZ8ARDSEOUdSXZ2Wyxf6xh8YfTAD6S4jzM6enz0Z4U_kXFlDeBBtslX5SpZ80GkbLI5A4HqA-rMwilslrCIoREe5jyC70s-mdimAKdnKmknt9yquRHX4wJ6Rsh1dJ1zB-l0KKjpzlsTpNKIKqp0vwea8AgnKOsGuUJ4aBAHCmxQJzNcaa-RUEI/s1600/curl.jpg",
+      "2025-10-06T06:06:53.219+00:00",
+      "Kumpulan contoh perintah cURL lengkap untuk berbagai kebutuhan: GET, POST, download file, dan lainnya. Cheat sheet ini cocok untuk developer, tester, dan siapa saja yang ingin belajar cURL."
+    ],
+      [
+      "Apa Itu AUR? Penjelasan Arch User Repository",
+      "aur_explained.html",
+      "https://frijal.github.io/artikel/aur_explained.jpg",
+      "2025-10-06T06:06:53.211+00:00",
+      "Penjelasan santai, mudah dipahami, dan lengkap tentang Arch User Repository (AUR), gudang paket komunitas untuk Arch Linux. Pahami cara kerjanya, risiko, dan keuntungannya!"
+    ],
+      [
+      "Cara Menjalankan Armoury Crate di Linux & Distro Terbaik untuk ROG",
+      "armoury-crate-linux-alternatif.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizIRZUkEJVJUd-VX2_uH_C2X3G5-x_mbR6_IRrA17S4yGCYKoL4rdlcwKePJZ3h1pjvInQWmSbBtila4PAniQM_0VfO2A23eJc8l2gbtpfFy-9Iqc3kxkswBmyllh2Wyye3lIf8eCCZAGJmjW5Z2RoRzJ8ejU8nGPLSPb62O6Nh3mkRDxLNLKOwN98ZM8/s1600/armory.png",
+      "2025-10-06T06:06:53.206+00:00",
+      "Armoury Crate tidak bisa jalan di Linux, tapi ada alternatifnya yang lebih keren seperti asusctl. Temukan juga rekomendasi distro Linux terbaik untuk laptop gaming ASUS ROG."
+    ],
+      [
+      "Apa Itu PKGBUILD? Memahami File Resep Rahasia di Arch Linux dan AUR",
+      "apa-itu-pkgbuild.html",
+      "https://frijal.github.io/artikel/apa-itu-pkgbuild.jpg",
+      "2025-10-06T06:06:53.202+00:00",
+      "Penjelasan santai dan mendalam tentang PKGBUILD, file script yang berisi resep untuk membuat paket software di Arch Linux, CachyOS, dan AUR."
+    ],
+      [
+      "Ubuntu 25.10 Menghapus Startup Applications: Cara Autostart Sekarang",
+      "ubuntu-25-10-startup-applications.html",
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHbiPnd5HxRovWtbvFEviirmRGFZ263-qATuBD_rR49BmKw2c7rdTxZSWnph26A8bLnW8jquoMc0oecqhE0UNpJPC6NHI5zxUBg7fwq_F0UBG0NaWS6ptW05lq-0nDia4jGd-lximCW0q6rK7QUJVRzn7ylOWn14CyrQ6JiwuuJcSpNDZDSy4QhEDOZCY/s1600/trash.jpg",
+      "2025-10-05T18:35:00.000+00:00",
+      "Ubuntu 25.10 menghapus GUI Startup Applications. Autostart masih bisa via Settings → Applications dan file .desktop di ~/.config/autostart. Panduan lengkap, perbandingan, contoh, plus galeri, berbagi, dan komentar."
+    ],
+      [
+      "Cara Autostart Skrip di Ubuntu",
+      "cara-autostart-skrip-di-ubuntu.html",
+      "https://frijal.github.io/assets/images/cara-autostart/cover-dark.png",
+      "2025-10-05T23:28:00.000+08:00",
+      "Panduan lengkap dan santai: cara menjalankan skrip otomatis saat login di Ubuntu. Gunakan .desktop di ~/.config/autostart, contoh lengkap, tips delay, environment, dan troubleshooting."
+    ],
+      [
+      "Niri – Window Manager Wayland Dinamis & Stabil",
+      "niri.html",
+      "https://frijal.github.io/artikel/niri.jpg",
+      "2025-10-04T21:14:23.768+00:00",
+      "Niri adalah window manager Wayland modern dengan tiling dinamis, workspace vertikal, dan efek animasi yang halus — ringan, cepat, dan stabil."
     ],
       [
       "Rating distro Linux: makna, metrik, dan cara memilih bijak",
@@ -2655,27 +2669,6 @@
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjR17eLccx3eRqm0xttxHSpr0_j_UpeNAiSqTjFHAOzhhEvK70mWa1uWT7IQ8iXx7rokPpOu9lc-qUcZQFAcVQpx5eoxZ1nWaWKowdtFiGpYoW9vUH2t9fiZRl5o6gF2116RYebCk6_KqbzG0TEh5ZcjvVdXfGqWONjbeLjecK1b7MQd6RvJZI_hrLZdQs/s1600/githubbadges.jpg",
       "2025-09-20T03:00:00.000+00:00",
       "Halaman berisi 200+ GitHub badges dengan format Markdown siap copy. Badge dikelompokkan per kategori, log interaktif, dan mobile-friendly."
-    ],
-      [
-      "Kisah Migrasi Software Legal di Kutai Kartanegara",
-      "kisah-migrasi-oss-kutai.html",
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1UyeLmW3xXbYWK52wxfAaWeToDtM6BVqNXGyDjNQ2LMtvfVSHZVOk5D3t29vj5NncO6vnF7fZzwBXwtl-mqwcXGBuiuEOBuO2ZEVWS8MfQbMo5uBD-jVHeVjZgWK3b4get9paJmAQAxRU_w4CneNqCnIj-wtGfS0RnEd2Ni11bhgcYKMP0QU-owOo914/s1600/Gemini_Generated_Image_rar5ysrar5ysrar5.png",
-      "2025-09-19T03:00:00.000+00:00",
-      "Cerita seru tentang sosialisasi dan migrasi ke software legal berbasis Open Source Software (OSS) di lingkungan Pemda Kabupaten Kutai Kartanegara pada tahun 2010."
-    ],
-      [
-      "Hapus OS Ilegal dengan Aman, Cepat, dan Tanpa Live USB",
-      "hapus-os-ilegal-aman.html",
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUSC__bnf7_KiML5IdEz2U5LdGH2bD5NsZfO6QvdUIMkONoP4NPKxn6XPuxtwvw_vmJVsdWdaAD98vhSYN5OJNuyAFu3b-rvIfCZBwyvE3rKbA8TlVZWRhNjiPI5Axt2iHYm0g7PnuxVaB/s1600/aboutgparted007.jpg",
-      "2025-09-19T03:00:00.000+00:00",
-      "Panduan santai dan aman menghapus sistem operasi ilegal dari komputer, langsung dari Linux tanpa LiveCD/USB: backup data, partisi dengan GParted, hapus Windows, susun ulang GRUB, dan nikmati sistem legal yang rapi."
-    ],
-      [
-      "Sosialisasi Open Source Software di Kutai Kartanegara | Kementerian Riset dan Teknologi",
-      "sosialisasi-oss-kutai-kartanegara.html",
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1UyeLmW3xXbYWK52wxfAaWeToDtM6BVqNXGyDjNQ2LMtvfVSHZVOk5D3t29vj5NncO6vnF7fZzwBXwtl-mqwcXGBuiuEOBuO2ZEVWS8MfQbMo5uBD-jVHeVjZgWK3b4get9paJmAQAxRU_w4CneNqCnIj-wtGfS0RnEd2Ni11bhgcYKMP0QU-owOo914/s1600/Gemini_Generated_Image_rar5ysrar5ysrar5.png",
-      "2025-09-19T03:00:00.000+00:00",
-      "Kegiatan sosialisasi dan migrasi pemanfaatan perangkat lunak legal berbasis Open Source Software di Kabupaten Kutai Kartanegara, Kalimantan Timur pada Oktober 2010."
     ],
       [
       "Implementasi Open Source Software di Hulu Sungai Tengah",
