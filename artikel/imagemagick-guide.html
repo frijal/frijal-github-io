@@ -32,7 +32,7 @@
 <meta name="twitter:title" content="Panduan ImageMagick Interaktif: Manipulasi Gambar CLI" />
 <meta name="twitter:description" content="Panduan interaktif ImageMagick lengkap dengan contoh perintah manipulasi gambar: resize, convert, rotate, watermark, batch, dan efek." />
 <meta name="twitter:image" content="https://frijal.github.io/imagemagick-guide.jpg" />
-<meta name="twitter:site" content="@username_twitter" /> <meta property="fb:app_id" content="1471267430691023" />
+<meta name="twitter:site" content="@frijal" /> <meta property="fb:app_id" content="1471267430691023" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -45,12 +45,15 @@ body { font-family: Inter, sans-serif; }
 .diagram-step { text-align: center; font-family: monospace; font-size: 0.875rem; margin: 0.5rem; }
 .diagram-arrow { font-size: 2rem; color: #3b82f6; margin: 0 1rem; }
 </style>
+<meta itemprop="image" content="https://frijal.github.io/artikel/imagemagick-guide.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 <div class="flex flex-col md:flex-row min-h-screen">
   <aside class="w-full md:w-1/4 lg:w-1/5 bg-white border-r border-gray-200 p-4 md:p-6 md:fixed md:h-full">
     <h1 class="text-xl font-bold text-gray-900 mb-6">Panduan ImageMagick</h1>
+<div id="iposbrowser"></div>
     <nav id="navigation" class="space-y-4">
       <div>
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Dasar</h2>
@@ -264,6 +267,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   else loadContent("");
 });
 </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
