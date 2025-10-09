@@ -107,12 +107,15 @@
       .share-icons a { color: var(--text-muted); margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
       .share-icons a:hover { color: var(--primary-color); }
     </style>
-  </head>
+  <meta itemprop="image" content="https://frijal.github.io/artikel/zsync-blankon.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
   <body>
     <div class="container">
       <header>
         <img src="https://frijal.github.io/assets/blankon-rote-logo.png" alt="Logo BlankOn Rote" />
         <h1>Panduan ZSync untuk ISO BlankOn Rote</h1>
+<div id="iposbrowser"></div>
         <p>Hemat Kuota & Efisien dalam Mengunduh ISO BlankOn Terbaru</p>
       </header>
 
@@ -190,5 +193,7 @@
       </footer>
     </div>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>

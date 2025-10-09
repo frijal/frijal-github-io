@@ -140,6 +140,7 @@ footer {margin-top:40px; padding:20px; background-color:var(--card-color); borde
 
 <header>
   <h1>Perjalanan Komunitas Ubuntu Jogja ke GCOS Jakarta</h1>
+<div id="iposbrowser"></div>
 
   <p>Menerima penghargaan Komunitas FOSS terbaik</p>
 </header>
@@ -221,6 +222,8 @@ function closeLightbox(){ lightbox.style.display='none'; lightboxImg.src=''; }
 lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) closeLightbox(); });
 </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

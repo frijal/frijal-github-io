@@ -183,12 +183,14 @@
             height: 30px;
         }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
     
     <header>
         <h1>⚡ Panduan Memilih Repository Linux Tercepat</h1>
+<div id="iposbrowser"></div>
     </header>
 
     <div class="container">
@@ -310,5 +312,7 @@ sudo nano /etc/slackpkg/mirrors</code></pre>
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
