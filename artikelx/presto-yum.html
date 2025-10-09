@@ -157,29 +157,7 @@ footer{ margin:30px 0 40px; display:flex; flex-direction:column; gap:14px; align
 .env{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center }
 .badge{ display:inline-flex; gap:8px; align-items:center; border:var(--border); padding:8px 10px; border-radius:999px; background:#ffffff; box-shadow:0 6px 16px rgba(10,20,70,.06) }
 .ipbox{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-
-/* Floating Home Buttons (LIGHT) */
-#btn-home-left, #btn-home-right {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  background: linear-gradient(90deg, var(--accent-2), var(--accent));
-  color: #ffffff;
-  padding: 10px 14px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-family: Inter,system-ui,Segoe UI,Arial,Helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: 0 10px 24px rgba(10,20,70,.18);
-  transition: background 0.3s ease, transform 0.2s ease;
-  z-index: 9999;
-}
-#btn-home-left:hover, #btn-home-right:hover { background: linear-gradient(90deg, #9e81ff, #00b4ff); transform: scale(1.05); }
-#btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
-#btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
-#btn-home-left svg, #btn-home-right svg { width: 18px; height: 18px; fill: currentColor; margin-right:6px; }
-  </style>
+ </style>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"YUM Presto: Hemat Bandwidth Saat Update — Panduan Ringkas","description":"Panduan mudah memahami YUM Presto (delta RPM) untuk menghemat kuota saat update. Cara pasang & tips.","inLanguage":"id-ID","author":{"@type":"Person","name":"Pelan Kiri","image":"https://frijal.github.io/artikel/presto-yum.jpg"},"publisher":{"@type":"Organization","name":"BAK","logo":{"@type":"ImageObject","url":"https://frijal.github.io/favicon.png","image":"https://frijal.github.io/artikel/presto-yum.jpg"},"image":"https://frijal.github.io/artikel/presto-yum.jpg"},"datePublished":"2025-09-18","dateModified":"2025-09-18","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/presto-yum.html","image":"https://frijal.github.io/artikel/presto-yum.jpg"},"image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.github.io/","image":"https://frijal.github.io/artikel/presto-yum.jpg"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/","image":"https://frijal.github.io/artikel/presto-yum.jpg"},{"@type":"ListItem","position":3,"name":"YUM Presto","item":"https://frijal.github.io/artikel/presto-yum.html","image":"https://frijal.github.io/artikel/presto-yum.jpg"}],"image":"https://frijal.github.io/artikel/presto-yum.jpg"}</script>
@@ -191,26 +169,10 @@ footer{ margin:30px 0 40px; display:flex; flex-direction:column; gap:14px; align
 <link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
 <body>
-
-  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-left" title="Kembali ke Home">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"/>
-</svg>
-Home
-  </a>
-
-  <a href="https://frijal.github.io/" rel="noreferrer" id="btn-home-right" title="Kembali ke Home">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M12 3.172 2.293 12.88a1 1 0 0 0 1.414 1.414L5 13v7a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7l1.293 1.293a1 1 0 1 0 1.414-1.414L12 3.172z"/>
-</svg>
-Home
-  </a>
-
   <main>
 <header class="hero">
   <div class="wrap">
 <h1 id="top">YUM Presto: Hemat Bandwidth Saat Update</h1>
-<div id="iposbrowser"></div>
 <p class="sub">Panduan singkat &amp; mudah untuk pengguna distro Linux berbasis YUM yang ingin update lebih cepat dengan menghemat kuota internet.</p>
 <div class="share" id="hero-share">
   </div>
@@ -220,7 +182,7 @@ Home
 <div class="grid wrap">
   <article class="card">
 <div class="note">
-  <strong>Inti sumber (diringkas):</strong> Banyak orang mengira Linux butuh usaha besar. Nyatanya, ada cara sederhana untuk mempermudah, salah satunya memakai <em>YUM Presto</em> agar update lebih cepat/hemat bandwidth. Contoh: paket 57 MB bisa jadi ~8,5 MB setelah kompresi/delta — cocok untuk koneksi terbatas.
+  <strong>Inti sumber:</strong> Banyak orang mengira Linux butuh usaha besar. Nyatanya, ada cara sederhana untuk mempermudah, salah satunya memakai <em>YUM Presto</em> agar update lebih cepat/hemat bandwidth. Contoh: paket 57 MB bisa jadi ~8,5 MB setelah kompresi/delta — cocok untuk koneksi terbatas.
 </div>
 
 <h2>Apa itu YUM Presto?</h2>
@@ -258,35 +220,6 @@ sudo yum update -y</code></pre>
   <li><strong>Performa CPU vs hemat kuota</strong>: Rekonstruksi paket dari delta butuh CPU untuk “menyusun ulang”. Di mesin lama, proses mungkin sedikit lebih lama—tapi unduhannya tetap hemat.</li>
   <li><strong>Tambahkan plugin terkait</strong>: Misal <code>yum-plugin-fastestmirror</code> agar otomatis memilih mirror tercepat.</li>
 </ul>
-
-<h2>Galeri Ilustrasi (Klik untuk memperbesar)</h2>
-<div class="gallery">
-  <figure class="figure">
-<img class="lightboxable"
- src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s800/Untitled.jpg"
- alt="Tangkapan layar ilustrasi YUM Presto bekerja (sumber Blogger)"
- loading="lazy" decoding="async" fetchpriority="low"
- data-caption="Ilustrasi cara kerja YUM Presto dengan Delta RPM.">
-<figcaption>Ilustrasi cara kerja YUM Presto</figcaption>
-  </figure>
-  <figure class="figure">
-<img class="lightboxable"
- src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1200&auto=format&fit=crop"
- alt="Desktop Linux modern yang ramah pengguna"
- loading="lazy" decoding="async" fetchpriority="low"
- data-caption="Desktop Linux yang modern.">
-<figcaption>Desktop Linux yang modern dan ramah pengguna.</figcaption>
-  </figure>
-  <figure class="figure">
-<img class="lightboxable"
- src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9k1O_CcjJoJiJvVLjvGbWXFc3hyphenhyphenTJ9WVdqn6x2m2Q3gTpdSpWdcSkXe71erX-rG_CJfikVJMLjnAf4R56_A_4_o0UA3FvleB0vUyXjwgN9sTh53oAIwu7YymKxBZjNip6w3_58c80-1MT9RVDxIHYWErwAmMWVU7eJdo4jzFVOb81H1YL5NRbM21mSQQ/s1600/498-wallpaper.png"
- alt="Sistem operasi Linux"
- loading="lazy" decoding="async" fetchpriority="low"
- data-caption="Contoh antarmuka desktop Linux.">
-<figcaption>Sistem operasi Linux</figcaption>
-  </figure>
-</div>
-
 <h2>Contoh Output & Tambahan Perintah</h2>
 <p class="small-muted">Contoh berikut memperlihatkan pola umum. Output asli bisa berbeda tergantung distro & repositori.</p>
 <div class="codecard">
@@ -382,16 +315,6 @@ sudo yum install yum-presto</code></pre>
 </div>
 
 <div class="box">
-  <h3 style="margin:6px 0 8px">Info Perangkat</h3>
-  <div class="kv">
-<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-6l2 3H9l2-3H5a2 2 0 0 1-2-2z"/></svg>
-<span id="ua-str" class="small-muted">Mendeteksi...</span>
-  </div>
-  <div class="kv"><span id="browser-icon"></span> <span id="browser-ver" class="small-muted"></span></div>
-  <div class="kv"><span id="os-icon"></span> <span id="os-ver" class="small-muted"></span></div>
-</div>
-
-<div class="box">
   <h3 style="margin:6px 0 8px">Checklist Hemat Kuota</h3>
   <ul style="margin:0; padding-left:16px; color:var(--muted)">
 <li>Pilih mirror lokal/terdekat.</li>
@@ -406,14 +329,6 @@ sudo yum install yum-presto</code></pre>
   </main>
 
   <footer class="wrap">
-<div class="env">
-  <div class="badge"><span id="browser-badge-icon"></span> <span id="browser-badge">Browser: -</span></div>
-  <div class="badge"><span id="os-badge-icon"></span> <span id="os-badge">OS: -</span></div>
-</div>
-<div class="ipbox">
-  <img id="flag-icon" alt="Bendera" width="26" height="18" style="border-radius:3px;border:var(--border)" />
-  <span id="ip-info">Mendeteksi IP &amp; lokasi...</span>
-</div>
 <div class="small-muted">🄯 2025 BAK — Halaman interaktif wide fullscreen, responsive, tema terang.</div>
   </footer>
 
@@ -486,84 +401,5 @@ btn.addEventListener('click', ()=>{
   });
 })();
 
-// ====== UA Parsing: Browser & OS + Ikon ======
-(function(){
-  const ua = navigator.userAgent || '';
-  const elUA = document.getElementById('ua-str');
-  if (elUA) elUA.textContent = ua.slice(0, 190) + (ua.length>190?'…':'');
-
-  function iconSVG(path){ return `<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${path}"/></svg>`; }
-  const icons = {
-chrome:'M12 2a10 10 0 1 1-8.66 5l7.66 0a4 4 0 1 1 0 8 4 4 0 0 1-3.46-2H2.54A10 10 0 0 1 12 2z',
-edge:'M12 2c5.52 0 10 4.48 10 10 0 6.4-7.5 10.64-13.63 7.76 5.33.3 7.71-4.1 7.44-6.22-.2-1.66-1.47-2.72-2.79-2.72-1.63 0-2.9 1.44-2.78 3.27.1 1.37.98 2.12 1.86 2.38-3.23.1-5.58-2.58-5.58-5.5C6.52 6.5 8.9 4 12 4c3.18 0 5.48 2.53 5.48 4.9 0 .46-.09.9-.25 1.32C16.69 7.93 14.86 6 12 6c-3.14 0-5.39 2.6-5.39 5.55C6.61 14.83 9.08 18 13.81 18 18.98 18 22 14.2 22 11.09 22 6.48 17.52 2 12 2z',
-firefox:'M12 2c4.43 0 8 3.57 8 8 0 5.5-5.07 8.94-10.2 8C7.6 17.47 6 14.9 6 13c0-2.4 1.56-4.6 4.07-5.22-.73 1.58.67 3.68 2.84 3.68 1.7 0 3.09-1.43 3.09-3.2 0-.96-.46-1.8-1.16-2.35.8-.17 1.25-.27 2.16-.27-.67-1.92-2.28-3.64-3.91-4.4C13.24 2.08 12.62 2 12 2z',
-safari:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.24 5.76-3.5 7.48-7.48 3.5 3.5-7.48 7.48-3.5z',
-android:'M7 19a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zm12 0a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0v10zM6 7h12v9H6V7zm9.5-3.5 1.5-1.5 1 1-1.5 1.5-1-1zM7 2l1.5 1.5-1 1L6 3l1-1z',
-windows:'M3 5l8-1v8H3V5zm9-1 9-1v9h-9V4zM3 13h8v8l-8-1v-7zm9 0h9v9l-9-1v-8z',
-mac:'M16.4 2c-.86.5-1.6 1.3-2.1 2.3-.47.93-.77 2.07-.63 3.2 1.2.09 2.45-.62 3.27-1.55.78-.9 1.33-2.15 1.15-3.32-.98-.05-2.05.5-3.69-.63zM12 6c-1.64 0-3.06.95-3.87.95-.84 0-2-.93-3.3-.9C3.12 6.1 1.5 7.1.62 8.6c-1.77 3.06-.46 7.6 1.25 10.1.83 1.2 1.8 2.52 3.1 2.48 1.2-.05 1.7-.8 3.2-.8 1.47 0 1.95.8 3.3.77 1.37-.02 2.24-1.2 3.08-2.4.97-1.43 1.37-2.82 1.38-2.89-.03-.01-2.65-1.02-2.68-4.02 0-2.52 2.05-3.72 2.15-3.77-1.18-1.73-3-2-3.38-2.02z',
-linux:'M12 2c1.76 0 3.36.67 4.58 1.77C16.1 5.5 15.1 7.7 13.5 9c-1.5 1.3-2.36 1.2-3.9 0C8 7.7 7 5.5 6.42 3.77A7.97 7.97 0 0 1 12 2zm-4.5 12.5c-.62 1.55.22 3.5 1.77 4.12s3.5-.22 4.12-1.77c.63-1.55-.22-3.5-1.77-4.12-1.55-.63-3.5.22-4.12 1.77z'
-  };
-
-  let browser='Unknown', version=''; let os='Unknown', osver='';
-  if(/Edg\//.test(ua)) { browser='Microsoft Edge'; version=(ua.match(/Edg\/([\d.]+)/)||[])[1]||''; }
-  else if(/Chrome\//.test(ua) && !/OPR\//.test(ua)) { browser='Google Chrome'; version=(ua.match(/Chrome\/([\d.]+)/)||[])[1]||''; }
-  else if(/Firefox\//.test(ua)) { browser='Mozilla Firefox'; version=(ua.match(/Firefox\/([\d.]+)/)||[])[1]||''; }
-  else if(/Safari\//.test(ua) && !/Chrome\//.test(ua)) { browser='Apple Safari'; version=(ua.match(/Version\/([\d.]+)/)||[])[1]||''; }
-
-  if(/Windows NT/.test(ua)){ os='Windows'; osver=(ua.match(/Windows NT ([\d.]+)/)||[])[1]||''; }
-  else if(/Android/.test(ua)){ os='Android'; osver=(ua.match(/Android ([\d.]+)/)||[])[1]||''; }
-  else if(/Mac OS X/.test(ua)){ os='macOS'; osver=((ua.match(/Mac OS X ([\d_]+)/)||[])[1]||'').replace(/_/g,'.'); }
-  else if(/Linux/.test(ua)){ os='Linux'; osver=''; }
-  else if(/iPhone|iPad|iPod/.test(ua)){ os='iOS'; osver=(ua.match(/OS ([\d_]+)/)||[])[1]?.replace(/_/g,'.')||''; }
-
-  const BICON = document.getElementById('browser-icon');
-  const OICON = document.getElementById('os-icon');
-  const pickBrowser = (browser.includes('Chrome')?icons.chrome:
-   browser.includes('Edge')?icons.edge:
-   browser.includes('Firefox')?icons.firefox:
-   browser.includes('Safari')?icons.safari:'');
-  const pickOS = (os==='Windows'?icons.windows:
-  os==='macOS'?icons.mac:
-  os==='Android'?icons.android:
-  os==='Linux'?icons.linux:
-  os==='iOS'?icons.mac:'');
-  if (BICON && pickBrowser) BICON.innerHTML = iconSVG(pickBrowser);
-  if (OICON && pickOS) OICON.innerHTML = iconSVG(pickOS);
-
-  const bv = document.getElementById('browser-ver'); const ov = document.getElementById('os-ver');
-  if (bv) bv.textContent = `${browser} ${version}`.trim();
-  if (ov) ov.textContent = `${os} ${osver}`.trim();
-
-  const bb = document.getElementById('browser-badge'); const ob = document.getElementById('os-badge');
-  if (bb) bb.textContent = `Browser: ${browser} ${version}`.trim();
-  if (ob) ob.textContent = `OS: ${os} ${osver}`.trim();
-
-  const bbI = document.getElementById('browser-badge-icon');
-  const obI = document.getElementById('os-badge-icon');
-  if (bbI && BICON) bbI.innerHTML = BICON.innerHTML;
-  if (obI && OICON) obI.innerHTML = OICON.innerHTML;
-})();
-
-// ====== IP, Kota, Bendera (API Publik) ======
-(function(){
-  const el = document.getElementById('ip-info');
-  const flag = document.getElementById('flag-icon');
-  fetch('https://ipapi.co/json/')
-.then(r=>r.json())
-.then(d=>{
-  const ip = d.ip || '-';
-  const city = d.city || '-';
-  const country = d.country_name || '-';
-  const cc = (d.country_code || '').toLowerCase();
-  if (el) el.textContent = `IP Anda: ${ip} · Kota: ${city} · Negara: ${country}`;
-  if (cc && flag){ flag.src = `https://flagcdn.com/${cc}.svg`; flag.alt=`Bendera ${country}`; }
-})
-.catch(()=>{ if (el) el.textContent='Gagal memuat IP & lokasi.'; });
-})();
-  </script>
-
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
 </body>
 </html>
