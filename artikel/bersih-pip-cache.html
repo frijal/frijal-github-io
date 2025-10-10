@@ -6,7 +6,7 @@
     <title>Skrip Shell Bersih Cache pip di Linux</title>
     <meta name="description" content="Panduan membuat skrip shell sederhana untuk membersihkan cache pip secara otomatis di Linux. Bisa dijalankan manual atau dijadwalkan via cron." />
     <link rel="canonical" href="https://frijal.github.io/artikel/bersih-pip-cache.html" />
-    <link rel="icon" href="https://frijal.github.io/assets/favicon.ico" sizes="any" />
+    <link rel="icon" href="https://frijal.github.io/ext/icons/favicon.ico" sizes="any" />
     <meta name="theme-color" content="#121212" />
     
     <meta property="og:type" content="article" />
@@ -75,10 +75,12 @@
         padding-left: 20px;
       }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <main>
         <h1>🐧 Skrip Shell untuk Membersihkan Cache pip di Linux</h1>
+<div id="iposbrowser"></div>
         <p>
             Cache pip bisa membengkak seiring waktu. Supaya lebih praktis, kita bisa
             bikin skrip shell sederhana untuk membersihkannya secara otomatis.
@@ -133,5 +135,8 @@ pip cache info
         </ul>
     </main>
     <footer>🄯 2025 frijal.github.io · Tutorial Linux oleh Pelan Kiri</footer>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
