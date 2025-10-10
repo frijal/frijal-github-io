@@ -533,3 +533,17 @@ body.dark-mode #feed-link svg {
   width: 16px;
   height: 16px;
 }
+
+#home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary);
+  transition: color 0.2s;
+}
+#home-link:hover {
+  color: var(--primary-dark);
+}
+
