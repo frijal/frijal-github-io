@@ -44,6 +44,7 @@ jobs:
           REPORT="${{ steps.vars.outputs.report_path }}"
           DATE="${{ steps.vars.outputs.date }}"
           TARGET="${{ steps.vars.outputs.target }}"
+          PREFIX="https://frijal.github.io/${TARGET}/"
           mkdir -p "$(dirname "$REPORT")"
           {
             echo "LAPORAN: $TARGET ($DATE)"
@@ -56,6 +57,11 @@ jobs:
               | sort \
               | uniq -c \
               | sort -nr
+            echo ""
+            echo "URL File HTML:"
+            find "$TARGET" -maxdepth 1 -type f -iname "*.html" \
+              | sed "s|^$TARGET/|$PREFIX|g" \
+              | sort
           } > "$REPORT"
           cat "$REPORT"
 
