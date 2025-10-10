@@ -546,3 +546,14 @@ body.dark-mode #feed-link svg {
 #home-link:hover {
   color: var(--primary-dark);
 }
+ /* Pastikan transform 3D dikenali di elemen SVG */
+  #home-link .door {
+    transform-origin: 10px 17px;
+    transform-box: fill-box;
+    transition: transform 0.5s ease;
+  }
+
+  /* Saat ikon di-hover, pintu berputar membuka */
+  #home-link:hover .door {
+    transform: rotateY(-75deg);
+  }

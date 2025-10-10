@@ -59,20 +59,47 @@
   id="home-link"
   title="Home"
   aria-label="Home"
+  style="perspective: 300px;"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    fill="currentColor"
-    stroke="none"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   >
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-    <path d="M9 22V12h6v10"/>
+    <!-- Atap -->
+    <path d="M3 11L12 2l9 9" />
+
+    <!-- Dinding -->
+    <path d="M5 11v10h14V11" />
+
+    <!-- Grup pintu untuk animasi -->
+    <g class="door">
+      <rect
+        x="10"
+        y="13"
+        width="4"
+        height="8"
+        rx="0.5"
+        ry="0.5"
+        fill="currentColor"
+        stroke="none"
+      />
+      <circle
+        cx="12.5"
+        cy="17.5"
+        r="0.5"
+        fill="#fff"
+        stroke="none"
+      />
+    </g>
   </svg>
 </a>
-
   
     <a
     href="https://frijal.github.io/feed"
