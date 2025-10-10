@@ -108,7 +108,7 @@ jobs:
             if grep -q 'related-marquee-section' "$file"; then
               echo "ℹ️ related-marquee-section sudah ada di $file"
             else
-              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script>' "$file"
+              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>' "$file"
               echo "✅ related-marquee-section & marquee-url.js ditambahkan di $file"
             fi
           done
