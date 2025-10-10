@@ -131,11 +131,12 @@ style.textContent = `
   :root { --ipos-text-color: #222; }
   @media (prefers-color-scheme: dark) { :root { --ipos-text-color: #eee; } }
   body.dark-mode { --ipos-text-color: #e6e6e6; }
+
   #ipos-browser-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px; /* Jarak antar blok utama (browser, os, geo) */
     font-size: 0.9rem;
     color: var(--ipos-text-color); /* fallback */
     text-shadow:
@@ -147,22 +148,38 @@ style.textContent = `
     margin: 0 auto;
     transition: color 0.3s ease-in-out;
   }
+
+  /* --- SISIPAN DIMULAI --- */
+  /* Gaya untuk membuat ikon dan teks sejajar di tengah */
+  #ipos-browser-info .browser-block,
+  #ipos-browser-info .os-block,
+  #ipos-browser-info .geo-block {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Jarak antara ikon dan teksnya */
+  }
+  /* --- SISIPAN SELESAI --- */
+
   #ipos-browser-info .icon svg {
     width: 24px;
     height: 24px;
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
+    display: block; /* Mencegah spasi ekstra di bawah SVG */
   }
+
   #ipos-browser-info .icon svg:hover {
     transform: scale(1.15) rotate(8deg);
     filter: drop-shadow(0 0 6px rgba(88,166,255,0.45));
     animation: pulse 0.6s ease-in-out;
   }
+
   @keyframes pulse {
     0%   { transform: scale(1) rotate(0deg); }
     50%  { transform: scale(1.2) rotate(8deg); }
     100% { transform: scale(1.15) rotate(8deg); }
   }
+
   @media (max-width: 600px) {
     #ipos-browser-info { display: none !important; }
   }
