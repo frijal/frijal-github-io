@@ -65,7 +65,7 @@ jobs:
             echo "✅ Ditambahkan prettier-ignore di $file"
           done
 
-            # 4.1 Sisipkan CSS marquee-url.css
+      # 4.1 Sisipkan CSS marquee-url.css
       - name: 4.1 Sisipkan CSS marquee-url.css
         run: |
           for file in artikelx/*.html; do
