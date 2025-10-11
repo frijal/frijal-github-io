@@ -26,30 +26,32 @@
             --bg-color: #1a202c; --surface-color: #2d3748; --primary-color: #60a5fa;
             --text-color: #e2e8f0; --muted-color: #a0aec0; --border-color: #4a5568;
         }
-        body { margin: 0; background: var(--bg-color); color: var(--text-color); font: 16px/1.8 sans-serif; }
+        body { margin: 0; background: var(--bg-color); color: var(--text-color); font: 16px/1.8 'Segoe UI', system-ui, sans-serif; }
         .container { max-width: 800px; margin: auto; padding: 20px; }
         header { text-align: center; padding: 2rem 1rem; }
-        h1 { font-size: 2.8rem; line-height: 1.2; }
+        h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.2; }
         .subtitle { color: var(--muted-color); font-size: 1.2rem; margin-top: 10px; }
         main { background: var(--surface-color); padding: 2rem; border-radius: 12px; margin-top: 2rem; }
         h2 { font-size: 2rem; color: var(--primary-color); margin-top: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
         .gallery { margin: 2rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-        .gallery img { width: 100%; border-radius: 8px; cursor: zoom-in; }
-        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .gallery img { width: 100%; border-radius: 8px; cursor: zoom-in; display: block; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.3s; }
         .lightbox.open { display: flex; }
-        .lightbox img { max-width: 90vw; max-height: 85vh; }
-        .lightbox-nav { position: absolute; color: white; font-size: 2.5rem; cursor: pointer; top: 50%; transform: translateY(-50%); }
-        #prev { left: 1rem; } #next { right: 1rem; } #close { top: 1rem; right: 1.5rem; font-size: 3rem; }
+        .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; }
+        .lightbox-nav { position: absolute; color: white; font-size: 2.5rem; cursor: pointer; top: 50%; transform: translateY(-50%); user-select: none; }
+        #prev { left: 1rem; }
+        #next { right: 1rem; }
+        #close { top: 1rem; right: 1.5rem; font-size: 3rem; }
         .share, .comments { margin-top: 2rem; padding: 1.5rem; text-align: center; background: #1a202c; border-radius: 12px; }
         .share a { margin: 0 10px; color: var(--muted-color); text-decoration: none; font-size: 1.5rem; }
         footer { text-align: center; padding: 2rem; color: var(--muted-color); font-size: 0.9rem; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Zaid bin Tsabit: Pena yang Menjaga Al-Qur'an</h1>
-            <div id="iposbrowser"></div>
             <p class="subtitle">Dari remaja Madinah jadi penulis wahyu dan pengumpul mushaf Qur’an.</p>
         </header>
         <main>
@@ -71,8 +73,8 @@
             <h2>Era Utsman: Mushaf Standar untuk Dunia</h2>
             <p>Di zaman Utsman, Islam makin luas dan muncul perbedaan cara baca (qira'at). Lagi-lagi Zaid dipercaya menjadi ketua tim kodifikasi mushaf standar. Salinan mushaf inilah yang dikirim ke berbagai negeri Islam, menyatukan bacaan kaum Muslimin di seluruh dunia.</p>
             <div class="share">
-                <a id="share-twitter" href="#" rel="noopener noreferrer" target="_blank">Twitter</a>
-                <a id="share-facebook" href="#" rel="noopener noreferrer" target="_blank">Facebook</a>
+                <a id="share-twitter" href="#" rel="noopener noreferrer" target="_blank" aria-label="Bagikan ke Twitter">Twitter</a>
+                <a id="share-facebook" href="#" rel="noopener noreferrer" target="_blank" aria-label="Bagikan ke Facebook">Facebook</a>
             </div>
             <div class="comments">
                 <h3>Komentar</h3>
@@ -82,18 +84,22 @@
         </main>
         <footer><p>Kecerdasan adalah amanah jika dipakai untuk kebaikan umat.</p></footer>
     </div>
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-nav" id="close">&times;</span>
-        <span class="lightbox-nav" id="prev">&#10094;</span>
-        <span class="lightbox-nav" id="next">&#10095;</span>
+    
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <span class="lightbox-nav" id="close" aria-label="Tutup">&times;</span>
+        <span class="lightbox-nav" id="prev" aria-label="Sebelumnya">&#10094;</span>
+        <span class="lightbox-nav" id="next" aria-label="Berikutnya">&#10095;</span>
         <img id="lightbox-img" alt="Gambar diperbesar">
     </div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023"></script>
+    
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Lightbox functionality
             const imgs = Array.from(document.querySelectorAll('.gallery img'));
-            const overlay = document.getElementById('lightbox');
-            if(imgs.length && overlay) {
+            const lightbox = document.getElementById('lightbox');
+            if (imgs.length && lightbox) {
                 const imgEl = document.getElementById('lightbox-img');
                 const prevBtn = document.getElementById('prev');
                 const nextBtn = document.getElementById('next');
@@ -103,9 +109,15 @@
                 function openLightbox(index) {
                     currentIndex = index;
                     imgEl.src = imgs[currentIndex].src;
-                    overlay.classList.add('open');
+                    lightbox.classList.add('open');
+                    document.body.style.overflow = 'hidden';
                 }
-                function closeLightbox() { overlay.classList.remove('open'); }
+
+                function closeLightbox() {
+                    lightbox.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+
                 function move(delta) {
                     currentIndex = (currentIndex + delta + imgs.length) % imgs.length;
                     imgEl.src = imgs[currentIndex].src;
@@ -115,9 +127,17 @@
                 prevBtn.addEventListener('click', () => move(-1));
                 nextBtn.addEventListener('click', () => move(1));
                 closeBtn.addEventListener('click', closeLightbox);
-                overlay.addEventListener('click', (e) => (e.target === overlay) && closeLightbox());
+                lightbox.addEventListener('click', (e) => (e.target === lightbox) && closeLightbox());
+                
+                window.addEventListener('keydown', (e) => {
+                    if (!lightbox.classList.contains('open')) return;
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') move(-1);
+                    if (e.key === 'ArrowRight') move(1);
+                });
             }
-            
+
+            // Share functionality
             (() => {
                 const url = encodeURIComponent(document.querySelector("link[rel='canonical']")?.href || location.href);
                 const title = encodeURIComponent(document.title);
@@ -126,7 +146,5 @@
             })();
         });
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
