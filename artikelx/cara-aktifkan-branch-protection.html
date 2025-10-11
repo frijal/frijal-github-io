@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Mengaktifkan Branch Protection di GitHub</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html">
+    <meta name="description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib lewat Pull Request.">
+    <meta property="og:title" content="Cara Mengaktifkan Branch Protection di GitHub">
+    <meta property="og:description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib lewat Pull Request.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cara Mengaktifkan Branch Protection di GitHub">
+    <meta name="twitter:description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib lewat Pull Request.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cara Mengaktifkan Branch Protection di GitHub","author":{"@type":"Person","name":"Fakhrul Rijal"},"publisher":{"@type":"Organization","name":"frijal.github.io"},"url":"https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg","datePublished":"2025-09-24T00:00:00+07:00","dateModified":"2025-09-24T00:00:00+07:00"}</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.css">
+    <style>
+        :root {
+            --bg-dark: #1a202c; --surface: #2d3748; --primary: #60a5fa;
+            --text-light: #e2e8f0; --text-muted: #a0aec0; --border: #4a5568;
+        }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.7; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 1rem; }
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2.5rem; color: var(--primary); margin: 0; }
+        header p { color: var(--text-muted); font-size: 1.1rem; }
+        main { background: var(--surface); border-radius: 12px; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-top: 2rem; color: var(--primary); }
+        p, ul { margin-bottom: 1rem; }
+        strong { color: var(--primary); }
+        .gallery { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .gallery a { display: block; }
+        .gallery img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s ease; }
+        .gallery img:hover { transform: scale(1.03); }
+        .fb-comments { margin-top: 2rem; }
+        footer { text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cara Mengaktifkan Branch Protection di GitHub</h1>
+            <p>oleh Fakhrul Rijal</p>
+        </header>
+        <main>
+            <article>
+                <p>Panduan ini akan menunjukkan cara mengaktifkan <strong>branch protection</strong> di GitHub agar semua perubahan wajib melalui <strong>Pull Request (PR)</strong> dan tidak ada yang bisa melakukan <b>push</b> langsung ke branch `main`.</p>
+                
+                <section>
+                    <h2>1. Masuk ke Pengaturan Repository</h2>
+                    <p>Buka repository Anda di GitHub, lalu klik tab <strong>Settings</strong>.</p>
+                                   </section>
+
+                <section>
+                    <h2>2. Pilih Menu Branches</h2>
+                    <p>Di menu navigasi sebelah kiri, pilih <strong>Branches</strong>. Kemudian, pada bagian "Branch protection rules", klik tombol <strong>Add rule</strong>.</p>
+                                  </section>
+
+                <section>
+                    <h2>3. Tentukan Branch yang Ingin Dilindungi</h2>
+                    <p>Pada kolom <code>Branch name pattern</code>, ketik nama branch utama Anda, yaitu <strong><code>main</code></strong>. Anda juga bisa menggunakan <b>wildcard</b> jika ingin melindungi beberapa branch sekaligus, misalnya <code>release/*</code>.</p>
+                </section>
+
+                <section>
+                    <h2>4. Aktifkan Aturan Proteksi Kunci</h2>
+                    <p>Centang beberapa opsi penting berikut untuk memperkuat keamanan branch Anda:</p>
+                    <ul>
+                        <li><strong>Require a pull request before merging</strong>: Ini adalah aturan paling fundamental. Semua perubahan <b>wajib</b> diajukan melalui Pull Request.</li>
+                        <li><strong>Require status checks to pass before merging</strong>: Jika Anda menggunakan workflow CI/CD (seperti GitHub Actions), aturan ini memastikan PR hanya bisa di-<b>merge</b> jika semua tes berhasil.</li>
+                        <li><strong>Include administrators</strong>: Aturan ini sangat direkomendasikan. Dengan mencentangnya, bahkan admin atau pemilik repository pun harus mengikuti aturan yang sama (tidak bisa <b>push</b> langsung).</li>
+                    </ul>
+                                   </section>
+
+                <section>
+                    <h2>5. Simpan Aturan</h2>
+                    <p>Setelah selesai, gulir ke bawah dan klik tombol <strong>Create</strong> atau <strong>Save changes</strong> untuk menyimpan aturan proteksi Anda.</p>
+                    <div class="gallery">
+                         <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg" alt="Hasil branch protection" loading="lazy"/>
+                         </a>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>Hasil Akhir</h2>
+                    <p>Setelah aturan aktif, Anda akan melihat hasilnya secara langsung:</p>
+                    <ul>
+                        <li>Setiap upaya untuk melakukan <em>push</em> langsung ke branch <code>main</code> akan diblokir oleh GitHub.</li>
+                        <li>Semua perubahan, sekecil apa pun, harus diajukan melalui Pull Request dan akan tunduk pada aturan yang telah Anda tetapkan (misalnya, memerlukan <b>review</b> atau status <b>check</b>).</li>
+                    </ul>
+                </section>
+
+                <div id="fb-comments-container" class="fb-comments" data-href="https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html" data-width="100%" data-numposts="5"></div>
+            </article>
+        </main>
+        <footer>
+            <p>&copy; 2025 Frijal Rijal. Semua hak cipta dilindungi.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.1/simple-lightbox.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new SimpleLightbox('.gallery a', { /* Opsi tambahan jika diperlukan */ });
+        });
+    </script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
+</body>
+</html>
