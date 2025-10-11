@@ -528,49 +528,80 @@ body.dark-mode .label-new {
   transform: rotateY(-75deg);
 }
 
+/* Styling & Animasi Ikon RSS */
 #feed-link {
-  color: var(--feed-color); /* Menggunakan variabel theme-aware */
+  color: var(--feed-color); /* Mengambil warna dari tema */
   transition: color 0.2s;
 }
-#feed-link:hover {
-  /* Efek hover tidak perlu mengubah warna lagi, cukup transform */
-  color: var(--feed-color);
-}
+
 #feed-link svg {
   width: 24px;
   height: 24px;
   overflow: visible;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
+
 #feed-link:hover svg {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Sedikit membesar saat disentuh mouse */
 }
+
+/* Bagian-bagian ikon */
+#feed-link .rss-dot,
+#feed-link .rss-base {
+  fill: currentColor; /* Warna isian mengikuti warna teks (color) */
+}
+
+#feed-link .rss-arc {
+  fill: none;
+  stroke: currentColor; /* Warna garis mengikuti warna teks */
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Atur titik pusat animasi untuk gelombang */
+/* Untuk Opsi 1 */
+#feed-link .rss-arc {
+  transform-origin: 6px 18px; 
+}
+/* Untuk Opsi 2, gunakan yang ini sebagai gantinya */
+/* #feed-link .rss-arc {
+  transform-origin: 4px 16px; 
+} */
+
+
+/* Animasi gelombang saat hover */
+#feed-link:hover .rss-arc.small {
+  transform: scale(1.05) rotate(2deg);
+}
+
+#feed-link:hover .rss-arc.large {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* Animasi Radar Pulse (sama seperti sebelumnya) */
 #feed-link .pulse {
   fill: none;
-  stroke: var(--feed-color); /* Menggunakan variabel theme-aware */
+  stroke: currentColor;
   stroke-width: 2;
-  stroke-opacity: 0.6;
-  transform-origin: 7px 17px;
-  transform-box: fill-box;
+  stroke-opacity: 0.8;
+  transform-origin: inherit; /* Ikut origin dari SVG */
   animation: radar 2s infinite ease-out;
 }
+
 #feed-link .pulse2 {
   animation-delay: 1s;
 }
-#feed-link .rss-dot {
-  fill: var(--feed-color); /* Menggunakan variabel theme-aware */
-  transition: fill 0.3s ease;
-}
-#feed-link .rss-arc {
-  stroke: var(--feed-color); /* Menggunakan variabel theme-aware */
-  transform-origin: 7px 17px;
-  transition: transform 0.3s ease, stroke 0.3s ease;
-}
-#feed-link:hover .rss-arc.small {
-  transform: rotate(-4deg) scale(1.05);
-}
-#feed-link:hover .rss-arc.large {
-  transform: rotate(4deg) scale(1.05);
+
+@keyframes radar {
+  0% {
+    transform: scale(0.5);
+    stroke-opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    stroke-opacity: 0;
+  }
 }
 
 @keyframes radar {
