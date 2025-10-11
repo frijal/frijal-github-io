@@ -1,15 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baghdad: Kota Seribu Satu Malam dan Cahaya Ilmu</title>
-
     <meta name="description" content="Sejarah dan kisah Baghdad di masa Dinasti Abbasiyah. Dari al-Manshur, Harun al-Rasyid hingga al-Ma'mun, Baghdad menjadi pusat ilmu, perdagangan, dan kebudayaan dunia.">
     <meta name="keywords" content="sejarah baghdad, dinasti abbasiyah, harun al-rasyid, bayt al-hikmah, zaman keemasan islam, al-khwarizmi, kota seribu satu malam">
     <meta name="author" content="Fakhrul Rijal">
     <meta name="date" content="2025-09-27">
-
     <link rel="canonical" href="https://frijal.github.io/artikel/baghdad.html">
     <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
 
@@ -57,8 +55,7 @@
     <main class="container">
         <header>
             <h1>Baghdad: Kota Seribu Malam</h1>
-        <div id="iposbrowser"></div>
-</header>
+        </header>
         <article>
             <p>Pada masa Dinasti Abbasiyah, Baghdad bukan hanya ibu kota kekuasaan, melainkan jantung ilmu pengetahuan, perdagangan, dan kebudayaan. Didirikan oleh Khalifah al-Manshur pada tahun 762 M, Baghdad dijuluki <em>Madinat al-Salam</em> – Kota Damai.</p>
             
@@ -74,12 +71,10 @@
                 <p>Kisah Khalifah <strong>Harun al-Rasyid</strong>, yang terukir abadi dalam cerita <em>Seribu Satu Malam</em>, menandai puncak kejayaan Baghdad. Namun, kejayaan sejati Baghdad terletak pada ilmunya. Di sinilah berdiri <strong>Bayt al-Hikmah</strong> (Rumah Kebijaksanaan), sebuah perpustakaan dan pusat penerjemahan raksasa yang menampung ribuan manuskrip dari Yunani, Persia, dan India.</p>
                 <p>Pada masa Khalifah <strong>al-Ma’mun</strong>, Bayt al-Hikmah mencapai masa keemasan. Ilmuwan seperti al-Khwarizmi (bapak aljabar), al-Kindi (filsuf Arab pertama), dan Hunayn ibn Ishaq (penerjemah karya kedokteran) lahir dan berkarya di sini. Mereka tidak hanya menerjemahkan, tetapi juga mengembangkan pengetahuan baru yang menyinari dunia Islam dan Eropa selama berabad-abad.</p>
             </section>
-
             <section>
                 <h2>Warisan yang Abadi</h2>
                 <p>Meskipun kejayaan Baghdad memudar setelah serangan Mongol pada 1258 M, warisannya tidak pernah benar-benar hilang. Ilmu yang telah ditulis dan diajarkan menyebar jauh ke Andalusia, Mesir, hingga menjadi fondasi bagi kebangkitan Eropa (Renaissance) dan sains modern. Baghdad dikenang sebagai kota yang pernah menjadi jantung peradaban dunia.</p>
             </section>
-
             <section class="social-sharing">
                 <h2>Bagikan Kisah Ini</h2>
                 <div class="social-buttons">
@@ -96,10 +91,10 @@
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img" />
-        <a class="lightbox-prev">&#10094;</a>
-        <a class="lightbox-next">&#10095;</a>
+        <a class="lightbox-nav prev">&#10094;</a>
+        <a class="lightbox-nav next">&#10095;</a>
     </div>
-
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const galleryImages = document.querySelectorAll(".gallery img");
@@ -139,6 +134,7 @@
                 closeBtn.addEventListener("click", closeLightbox);
                 prevBtn.addEventListener("click", () => changeImage(-1));
                 nextBtn.addEventListener("click", () => changeImage(1));
+                
                 lightbox.addEventListener("click", (e) => {
                     if (e.target === lightbox) {
                         closeLightbox();
@@ -147,7 +143,5 @@
             }
         });
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
