@@ -481,19 +481,6 @@ body.dark-mode .label-new {
   border-radius: 3px;
 }
 
-#feed-link svg {
-  width: 22px;
-  height: 22px;
-  color: var(--text-muted-light);
-  transition: color 0.2s ease-in-out;
-}
-body.dark-mode #feed-link svg {
-  color: var(--text-muted-dark);
-}
-#feed-link:hover svg {
-  color: #ee802f;
-}
-
 @media (max-width: 768px) {
   body {
     padding-top: 120px;
@@ -557,3 +544,44 @@ body.dark-mode #feed-link svg {
   #home-link:hover .door {
     transform: rotateY(-75deg);
   }
+    
+  /* Ukuran dan transisi konsisten untuk SVG */
+#feed-link svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+/* Animasi garis gelombang */
+#feed-link .rss-arc {
+  transform-origin: 6px 18px;
+  transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+/* Animasi dot */
+#feed-link .rss-dot {
+  transition: fill 0.3s ease;
+}
+
+/* Hover state: ikon sedikit berdenyut dan warnanya menguat */
+#feed-link:hover svg {
+  transform: scale(1.1);
+}
+
+#feed-link:hover .rss-arc.small {
+  transform: rotate(-4deg) scale(1.05);
+}
+
+#feed-link:hover .rss-arc.large {
+  transform: rotate(4deg) scale(1.05);
+}
+
+#feed-link:hover .rss-dot {
+  fill: currentColor;
+}
+
+/* Warna stroke dan fill pada hover */
+#feed-link:hover {
+  color: var(--primary-dark);
+}
+
