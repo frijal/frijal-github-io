@@ -102,16 +102,7 @@ jobs:
           echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
           echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
           echo "🔗 rss.xml     : https://frijal.github.io/rss.xml"
-          echo ""
-
           echo "📊 Jumlah total artikel saat ini:"
           # === Cara menghitung file kembali ke 'artikel/' ===
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
           echo "➡️  $COUNT artikel di folder artikel/"
-
-      - name: '9. Copy artikel.json to artikel/ folder'
-        if: always()
-        run: |
-          echo "📄 Menyalin artikel.json ke folder artikel/..."
-          cp -f artikel.json artikel/ || echo "❌ Gagal menyalin artikel.json"
-          echo "✅ Selesai menyalin artikel.json"
