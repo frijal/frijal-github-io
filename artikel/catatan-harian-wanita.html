@@ -163,12 +163,14 @@
         }
     </style>
     <meta itemprop="image" content="https://frijal.github.io/artikel/catatan-harian-wanita.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <header class="hero">
         <div class="kembang" aria-hidden="true"></div>
         <div class="wrap">
             <h1>Catatan harian seorang wanita</h1>
+<div id="iposbrowser"></div>
             <p class="subtitle">Versi santai, ceria, dan fullscreen - untuk ketawa kecil, mikir sebentar, lalu lanjut hidup dengan hati lega.</p>
             <div class="meta">
                 <span class="tag">Humor</span>
@@ -363,5 +365,8 @@
         // Facebook comments data-href setting
         document.querySelector('.fb-comments').setAttribute('data-href',location.href);
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
