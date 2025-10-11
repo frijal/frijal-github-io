@@ -1,4 +1,5 @@
 :root {
+  /* Variabel Light Mode */
   --bg-light: #ffffff;
   --surface-light: #f6f8fa;
   --text-light: #24292e;
@@ -6,6 +7,7 @@
   --border-light: #e1e4e8;
   --hover-light: #f3f4f6;
 
+  /* Variabel Dark Mode */
   --bg-dark: #0d1117;
   --surface-dark: #161b22;
   --text-dark: #e6edf3;
@@ -13,9 +15,17 @@
   --border-dark: #30363d;
   --hover-dark: rgba(139, 148, 158, 0.1);
 
+  /* Variabel Aksen & Lainnya */
   --accent-color: #58a6ff;
   --highlight-bg: #ffe066;
   --highlight-text: #333;
+
+  /* Variabel untuk ikon */
+  --primary: #58a6ff;
+  --primary-dark: #388bfd;
+  
+  /* PERBAIKAN: Menetapkan --feed-color default untuk light mode */
+  --feed-color: var(--primary);
 }
 
 * {
@@ -29,23 +39,24 @@ html {
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   background-color: var(--bg-light);
   color: var(--text-light);
   line-height: 1.6;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
   padding-top: 80px;
 }
 
 body.dark-mode {
   background-color: var(--bg-dark);
   color: var(--text-dark);
+  
+  /* PERBAIKAN: Mengganti nilai --feed-color khusus untuk dark mode */
+  --feed-color: #fff;
 }
 
+/* Bagian Header & Kontrol Atas */
 .sticky-controls {
   position: sticky;
   top: 0;
@@ -59,6 +70,7 @@ body.dark-mode .sticky-controls {
   background-color: var(--bg-dark);
   border-bottom-color: var(--border-dark);
 }
+
 .sticky-controls-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -71,6 +83,7 @@ body.dark-mode .sticky-controls {
   gap: 1.5rem;
   margin-bottom: 1rem;
 }
+
 .title-block h1 {
   font-size: 1.8rem;
   font-weight: 600;
@@ -90,7 +103,6 @@ body.dark-mode .sticky-controls {
 body.dark-mode #totalCount {
   color: var(--text-muted-dark);
 }
-
 #totalCount strong {
   color: var(--text-light);
   font-weight: 600;
@@ -105,6 +117,7 @@ body.dark-mode #totalCount strong {
 body.dark-mode .separator {
   color: var(--border-dark);
 }
+
 .read-stat,
 .unread-stat {
   display: inline-flex;
@@ -118,11 +131,50 @@ body.dark-mode .separator {
   position: relative;
 }
 
+#search {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background-color: var(--surface-light);
+  color: var(--text-light);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+body.dark-mode #search {
+  border-color: var(--border-dark);
+  background-color: var(--surface-dark);
+  color: var(--text-dark);
+}
+#search:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+}
+
+#clearSearch {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  line-height: 1;
+}
+body.dark-mode #clearSearch {
+  color: var(--text-muted-dark);
+}
+
 .controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .action-buttons {
   display: flex;
   align-items: center;
@@ -136,9 +188,7 @@ body.dark-mode .separator {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  transition:
-    background-color 0.2s,
-    border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 body.dark-mode #tocToggle {
   background-color: var(--surface-dark);
@@ -152,6 +202,7 @@ body.dark-mode #tocToggle:hover {
   background-color: var(--hover-dark);
 }
 
+/* Toggle Switch Dark Mode */
 .switch {
   position: relative;
   display: inline-block;
@@ -199,64 +250,36 @@ body.dark-mode .switch-label {
   color: var(--text-muted-dark);
 }
 
-#search {
-  width: 100%;
-  padding: 10px 40px 10px 15px;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--border-light);
-  background-color: var(--surface-light);
-  color: var(--text-light);
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
-body.dark-mode #search {
-  border-color: var(--border-dark);
-  background-color: var(--surface-dark);
-  color: var(--text-dark);
-}
-#search:focus {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-}
-#clearSearch {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: var(--text-muted-light);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: none;
-  line-height: 1;
-}
-body.dark-mode #clearSearch {
-  color: var(--text-muted-dark);
-}
-
-/* TAMBAHKAN: Gaya untuk #footerInfo */
 #footerInfo {
+  display: none; /* Disembunyikan oleh default, JS yang akan menampilkan */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   flex-grow: 1;
-  justify-content: center; /* Membuat item di dalamnya center */
-  font-size: 0.8rem;
+  font-size: 0.9em;
   color: var(--text-muted-light);
-  display: none; /* Disembunyikan dulu, JS akan menampilkannya */
   overflow: hidden;
+  font-family: sans-serif;
 }
 body.dark-mode #footerInfo {
   color: var(--text-muted-dark);
 }
-#footerInfo .info-item {
-  margin: 2px 8px; /* Atur jarak antar item */
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
-#footerInfo .info-item span {
-  white-space: nowrap; /* Mencegah teks terpotong */
+.info-item svg {
+  width: 16px;
+  height: 16px;
+}
+.info-item span {
+  white-space: nowrap;
 }
 
+/* Bagian Konten Utama */
 #marquee,
 #toc {
   max-width: 1200px;
@@ -265,32 +288,30 @@ body.dark-mode #footerInfo {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
+
 #marquee {
   width: 100%;
   overflow: hidden;
   background-color: var(--surface-light);
   border: 1px solid var(--border-light);
   border-radius: 8px;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 0.75rem 0;
+  margin: 1.5rem 0;
   white-space: nowrap;
 }
 body.dark-mode #marquee {
   background-color: var(--surface-dark);
   border-color: var(--border-dark);
 }
+
 #marquee-content {
   display: inline-block;
   padding-left: 100%;
   animation: marquee 1200s linear infinite;
 }
-
 #marquee:hover #marquee-content {
   animation-play-state: paused;
 }
-
 #marquee-content a {
   color: var(--text-muted-light);
   text-decoration: none;
@@ -340,6 +361,7 @@ body:not(.dark-mode) #category-tooltip {
   padding-left: 1rem;
 }
 
+/* Daftar Isi (TOC) */
 #toc {
   display: flex;
   flex-direction: column;
@@ -396,6 +418,7 @@ body.dark-mode .category-header:hover {
   padding: 0.5rem 0;
   display: none;
 }
+
 .toc-item {
   display: flex;
   padding: 0.75rem 1.25rem;
@@ -437,6 +460,7 @@ body.dark-mode .toc-title a {
 body.dark-mode .toc-title a.visited {
   color: var(--text-muted-dark);
 }
+
 .toc-date {
   font-size: 0.8rem;
   color: var(--text-muted-light);
@@ -447,6 +471,7 @@ body.dark-mode .toc-date {
   color: var(--text-muted-dark);
 }
 
+/* Label Status */
 .label-visited,
 .label-new {
   font-size: 0.75rem;
@@ -481,46 +506,7 @@ body.dark-mode .label-new {
   border-radius: 3px;
 }
 
-@media (max-width: 768px) {
-  body {
-    padding-top: 120px;
-  }
-  .title-and-search {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
-  }
-  .title-block h1 {
-    font-size: 1.5rem;
-  }
-  /* Sembunyikan footer info di layar kecil agar tidak penuh */
-  #footerInfo {
-    display: none !important;
-  }
-}
-
-/* CSS opsional untuk menata tampilan info IP */
-#footerInfo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  /*   background-color: #f1f1f1; */
-  /*   border-top: 1px solid #ddd; */
-  font-family: sans-serif;
-  font-size: 0.9em;
-}
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.info-item svg {
-  width: 16px;
-  height: 16px;
-}
-
+/* Animasi Ikon Home & Feed */
 #home-link {
   display: inline-flex;
   align-items: center;
@@ -533,55 +519,82 @@ body.dark-mode .label-new {
 #home-link:hover {
   color: var(--primary-dark);
 }
- /* Pastikan transform 3D dikenali di elemen SVG */
-  #home-link .door {
-    transform-origin: 10px 17px;
-    transform-box: fill-box;
-    transition: transform 0.5s ease;
-  }
+#home-link .door {
+  transform-origin: 10px 17px;
+  transform-box: fill-box;
+  transition: transform 0.5s ease;
+}
+#home-link:hover .door {
+  transform: rotateY(-75deg);
+}
 
-  /* Saat ikon di-hover, pintu berputar membuka */
-  #home-link:hover .door {
-    transform: rotateY(-75deg);
-  }
-    
-  /* Ukuran dan transisi konsisten untuk SVG */
+#feed-link {
+  color: var(--feed-color); /* Menggunakan variabel theme-aware */
+  transition: color 0.2s;
+}
+#feed-link:hover {
+  /* Efek hover tidak perlu mengubah warna lagi, cukup transform */
+  color: var(--feed-color);
+}
 #feed-link svg {
   width: 24px;
   height: 24px;
+  overflow: visible;
   transition: transform 0.2s ease;
 }
-
-/* Animasi garis gelombang */
-#feed-link .rss-arc {
-  transform-origin: 6px 18px;
-  transition: transform 0.3s ease, stroke 0.3s ease;
-}
-
-/* Animasi dot */
-#feed-link .rss-dot {
-  transition: fill 0.3s ease;
-}
-
-/* Hover state: ikon sedikit berdenyut dan warnanya menguat */
 #feed-link:hover svg {
   transform: scale(1.1);
 }
-
+#feed-link .pulse {
+  fill: none;
+  stroke: var(--feed-color); /* Menggunakan variabel theme-aware */
+  stroke-width: 2;
+  stroke-opacity: 0.6;
+  transform-origin: 7px 17px;
+  transform-box: fill-box;
+  animation: radar 2s infinite ease-out;
+}
+#feed-link .pulse2 {
+  animation-delay: 1s;
+}
+#feed-link .rss-dot {
+  fill: var(--feed-color); /* Menggunakan variabel theme-aware */
+  transition: fill 0.3s ease;
+}
+#feed-link .rss-arc {
+  stroke: var(--feed-color); /* Menggunakan variabel theme-aware */
+  transform-origin: 7px 17px;
+  transition: transform 0.3s ease, stroke 0.3s ease;
+}
 #feed-link:hover .rss-arc.small {
   transform: rotate(-4deg) scale(1.05);
 }
-
 #feed-link:hover .rss-arc.large {
   transform: rotate(4deg) scale(1.05);
 }
 
-#feed-link:hover .rss-dot {
-  fill: currentColor;
+@keyframes radar {
+  0% {
+    transform: scale(1);
+    stroke-opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    stroke-opacity: 0;
+  }
 }
 
-/* Warna stroke dan fill pada hover */
-#feed-link:hover {
-  color: var(--primary-dark);
+/* Media Query untuk Responsivitas */
+@media (max-width: 768px) {
+  body {
+    padding-top: 120px;
+  }
+  .title-and-search {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .title-block h1 {
+    font-size: 1.5rem;
+  }
 }
-
