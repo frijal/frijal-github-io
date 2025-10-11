@@ -47,6 +47,8 @@
         .lightbox-prev { left: 15px; }
         .lightbox-next { right: 15px; }
     </style>
+<meta itemprop="image" content="https://frijal.github.io/artikel/baghdad.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div id="fb-root"></div>
@@ -55,6 +57,7 @@
     <main class="container">
         <header>
             <h1>Baghdad: Kota Seribu Malam</h1>
+<div id="iposbrowser"></div>
         </header>
         <article>
             <p>Pada masa Dinasti Abbasiyah, Baghdad bukan hanya ibu kota kekuasaan, melainkan jantung ilmu pengetahuan, perdagangan, dan kebudayaan. Didirikan oleh Khalifah al-Manshur pada tahun 762 M, Baghdad dijuluki <em>Madinat al-Salam</em> – Kota Damai.</p>
@@ -143,5 +146,8 @@
             }
         });
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
