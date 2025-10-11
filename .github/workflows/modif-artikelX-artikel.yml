@@ -35,6 +35,7 @@ jobs:
             perl -pi -w -e 's#https://frijal.github.io/assets/favicon/apple-touch-icon.png#https://frijal.github.io/ext/icons/apple-touch-icon.png#g' "$file"
             perl -pi -w -e 's#YOUR_APP_ID#1471267430691023#g' "$file"
             perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID#1471267430691023#g' "$file"
+            perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID_HERE#1471267430691023#g' "$file"
             perl -pi -w -e 's#https://frijal.github.io/assets/favicon.svg#https://frijal.github.io/favicon.svg#g' "$file"
             perl -pi -w -e 's#https://frijal.github.io/assets/favicon/favicon.ico#https://frijal.github.io/favicon.ico#g' "$file"
             perl -pi -w -e 's#https://frijal.github.io/assets/favicon/favicon.svg#https://frijal.github.io/favicon.svg#g' "$file"
