@@ -24,7 +24,6 @@
   --primary: #58a6ff;
   --primary-dark: #388bfd;
   
-  /* PERBAIKAN: Menetapkan --feed-color default untuk light mode */
   --feed-color: var(--primary);
 }
 
@@ -51,8 +50,6 @@ body {
 body.dark-mode {
   background-color: var(--bg-dark);
   color: var(--text-dark);
-  
-  /* PERBAIKAN: Mengganti nilai --feed-color khusus untuk dark mode */
   --feed-color: #fff;
 }
 
@@ -251,7 +248,7 @@ body.dark-mode .switch-label {
 }
 
 #footerInfo {
-  display: flex; /* Disembunyikan oleh default, JS yang akan menampilkan */
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -280,25 +277,33 @@ body.dark-mode #footerInfo {
 }
 
 /* Bagian Konten Utama */
-#marquee,
+/* PERBAIKAN: Kontainer #toc tidak perlu padding, karena sudah diatur oleh .sticky-controls-content */
 #toc {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
+/* ==== PERUBAHAN MARQUEE DI SINI ==== */
 #marquee {
-  width: 100%;
+  /* Membuat marquee lebih sempit dan memposisikannya di tengah */
+  max-width: 95%; /* Anda bisa sesuaikan nilainya, misal 1100px atau 90% */
+  margin: 1.5rem auto; /* Mengatur margin atas/bawah dan membuatnya rata tengah */
+  
+  /* Properti yang sudah ada */
   overflow: hidden;
   background-color: var(--surface-light);
   border: 1px solid var(--border-light);
   border-radius: 8px;
   padding: 0.75rem 0;
-  margin: 1.5rem 0;
   white-space: nowrap;
+  
+  /* Tambahan untuk membuat konten vertikal rata tengah */
+  display: flex;
+  align-items: center;
 }
+/* ==================================== */
+
 body.dark-mode #marquee {
   background-color: var(--surface-dark);
   border-color: var(--border-dark);
@@ -530,7 +535,7 @@ body.dark-mode .label-new {
 
 /* Styling & Animasi Ikon RSS */
 #feed-link {
-  color: var(--feed-color); /* Mengambil warna dari tema */
+  color: var(--feed-color);
   transition: color 0.2s;
 }
 
@@ -542,35 +547,26 @@ body.dark-mode .label-new {
 }
 
 #feed-link:hover svg {
-  transform: scale(1.1); /* Sedikit membesar saat disentuh mouse */
+  transform: scale(1.1);
 }
 
-/* Bagian-bagian ikon */
 #feed-link .rss-dot,
 #feed-link .rss-base {
-  fill: currentColor; /* Warna isian mengikuti warna teks (color) */
+  fill: currentColor;
 }
 
 #feed-link .rss-arc {
   fill: none;
-  stroke: currentColor; /* Warna garis mengikuti warna teks */
+  stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Atur titik pusat animasi untuk gelombang */
-/* Untuk Opsi 1 */
 #feed-link .rss-arc {
-  transform-origin: 6px 18px; 
+  transform-origin: 6px 18px;
 }
-/* Untuk Opsi 2, gunakan yang ini sebagai gantinya */
-/* #feed-link .rss-arc {
-  transform-origin: 4px 16px; 
-} */
 
-
-/* Animasi gelombang saat hover */
 #feed-link:hover .rss-arc.small {
   transform: scale(1.05) rotate(2deg);
 }
@@ -579,13 +575,12 @@ body.dark-mode .label-new {
   transform: scale(1.08) rotate(-2deg);
 }
 
-/* Animasi Radar Pulse (sama seperti sebelumnya) */
 #feed-link .pulse {
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
   stroke-opacity: 0.8;
-  transform-origin: inherit; /* Ikut origin dari SVG */
+  transform-origin: inherit;
   animation: radar 2s infinite ease-out;
 }
 
@@ -593,21 +588,11 @@ body.dark-mode .label-new {
   animation-delay: 1s;
 }
 
+/* PERBAIKAN: Menghapus @keyframes radar yang duplikat */
 @keyframes radar {
   0% {
     transform: scale(0.5);
     stroke-opacity: 0.8;
-  }
-  100% {
-    transform: scale(2.5);
-    stroke-opacity: 0;
-  }
-}
-
-@keyframes radar {
-  0% {
-    transform: scale(1);
-    stroke-opacity: 0.6;
   }
   100% {
     transform: scale(2.5);
