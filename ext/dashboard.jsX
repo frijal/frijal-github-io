@@ -1,4 +1,4 @@
-// ext/dashboard.js (Final + Undo + Search + Highlight + Kategori Terupdate)
+// ext/dashboard.js (Final + Undo + Search + Highlight)
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('categories')
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load JSON
   let data
   try {
-    const res = await fetch('/artikel/artikel.json')
+    const res = await fetch('/artikel.json')
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
     data = await res.json()
   } catch (err) {
@@ -53,21 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return
   }
 
-  // === PERUBAHAN DIMULAI ===
-  // Urutkan kategori berdasarkan tanggal 'lastmod' dari artikel terbaru di dalamnya
   const categories = Object.keys(data)
-    .map((cat) => {
-      // Cari tanggal paling baru di setiap kategori
-      const latestDate = data[cat].reduce((latest, article) => {
-        const articleDate = new Date(article[3]) // article[3] adalah lastmod
-        return articleDate > latest ? articleDate : latest
-      }, new Date(0)) // Mulai dengan tanggal paling awal
-      return { name: cat, latestDate: latestDate }
-    })
-    .sort((a, b) => b.latestDate - a.latestDate) // Urutkan dari terbaru ke terlama
-    .map((c) => c.name) // Ambil kembali hanya nama kategorinya
-  // === PERUBAHAN SELESAI ===
-
   const columnCount = 3
   const columns = Array.from({ length: columnCount }, () => {
     const col = document.createElement('div')
@@ -157,7 +143,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       return col
     })
 
-    // Gunakan 'categories' yang sudah diurutkan
     categories.forEach((cat, index) => {
       const col = cols[index % columnCount]
       const catDiv = document.createElement('div')
