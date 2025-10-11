@@ -251,7 +251,7 @@ body.dark-mode .switch-label {
 }
 
 #footerInfo {
-  display: none; /* Disembunyikan oleh default, JS yang akan menampilkan */
+  display: flex; /* Disembunyikan oleh default, JS yang akan menampilkan */
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
