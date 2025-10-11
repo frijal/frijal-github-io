@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load JSON
   let data
   try {
-    const res = await fetch('/artikel/artikel.json')
+    const res = await fetch('/artikel.json')
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
     data = await res.json()
   } catch (err) {
