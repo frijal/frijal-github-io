@@ -20,7 +20,6 @@
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhluMB0COG88VNMI1BrkubcDOcc_zV0Vw4eP1vsMcx9V0nYTlIZGwbWRwTiCvi2vBIEVddmfxo1Pp9ziJHDt6uuzJSedZuvYp81bxg84LO-EEHq4wWKqWZnnMfcYm99KZTSyl8zAFs3mZnpOWMAQpC5KwaZdvF6rKKeNdryITWxW6880wgxK8MhBDKsjiw/s16000/IMG_20170923_160248.jpg">
     <meta property="og:site_name" content="frijal.github.io">
     <meta property="og:image:alt" content="Catatan Harian Seorang Wanita - Versi Santai, Ceria">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Catatan Harian Seorang Wanita - Versi Santai, Ceria">
     <meta name="twitter:description" content="Humor dan renungan ringan tentang hubungan. Tema ceria, responsif, interaktif.">
@@ -34,18 +33,25 @@
     
     <style>
         :root{
-            --bg: #fffdf7;  --text: #24303f;  --muted: #5b708a;  --brand1: #ff7ab6;  --brand2: #6ee7ff;  --brand3: #ffd166;  --accent: #7c3aed;  --good: #22c55e;  --bad: #ef4444;  --card: #ffffff;  --shadow: 0 10px 30px rgba(36,48,63,0.12);  --radius: 18px;  --maxw: 1200px;
+            --bg: #fffdf7;  --text: #24303f;  --muted: #5b708a;  --brand1: #ff7ab6;  --brand2: #6ee7ff;  --brand3: #ffd166;  --accent: #7c3aed;  --good: #22c55e;  --bad: #ef4444;  --card: #ffffff;  --shadow: 0 10px 30px rgba(36,48,63,0.12);  --radius: 18px;  --maxw: 800px;
         }
         html,body{height:100%}
         body{
             margin:0;  font-family: Nunito, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  color: var(--text);
             background:radial-gradient(1200px 600px at -10% 10%, rgba(255,122,182,0.15), transparent 60%),radial-gradient(1000px 500px at 110% -10%, rgba(110,231,255,0.15), transparent 60%),radial-gradient(900px 500px at 80% 120%, rgba(255,209,102,0.18), transparent 60%),var(--bg);
         }
+        /* === PERUBAHAN UKURAN HEADER DI SINI === */
         header.hero{
-            position:relative;  min-height: 60vh;  display:grid;  place-items:center;  text-align:center;  overflow:hidden;
+            position:relative;  
+            min-height: 10vh; /* DIKECILKAN dari 60vh */
+            display:grid;  
+            place-items:center;  
+            text-align:center;  
+            overflow:hidden;
         }
         .hero .wrap{
-            max-width: var(--maxw);  padding: 6rem 1.5rem 3rem;
+            max-width: var(--maxw);  
+            padding: 4rem 1.5rem 2rem; /* DIKECILKAN dari 6rem & 3rem */
         }
         .kembang{
             position:absolute; inset:0; pointer-events:none;
@@ -68,13 +74,16 @@
             max-width: var(--maxw);  margin: 0 auto;  padding: 2rem 1rem 4rem;
         }
         .layout{
-            display:grid;  grid-template-columns: 1fr minmax(280px, 350px);  gap: 2rem;
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 2rem;
         }
-        @media (max-width: 980px){
-            .layout{ grid-template-columns: 1fr; }
+        article.card, .widget {
+            background: var(--card);  border-radius: var(--radius);  box-shadow: var(--shadow);
+            overflow: hidden;
         }
-        article.card{
-            background: var(--card);  border-radius: var(--radius);  box-shadow: var(--shadow);  overflow: hidden;
+        .widget {
+             padding: 1rem 1rem 1.25rem;
         }
         .card .content{
             padding: 1.25rem 1.25rem 1.5rem;
@@ -125,9 +134,6 @@
         aside.sidebar{
             display:flex; flex-direction:column; gap:1rem;
         }
-        .widget{
-            background: var(--card);  border-radius: var(--radius);  box-shadow: var(--shadow);  padding: 1rem 1rem 1.25rem;
-        }
         .widget h3{
             margin: 0 0 .5rem;  font-size: 1.1rem;
         }
@@ -150,22 +156,19 @@
         .tw{ background:#1DA1F2; }
         .fb{ background:#1877F2; }
         .ln{ background:#0A66C2; }
-        /* Floating navigation buttons styles removed */
         /* Footer */
         footer{
             max-width: var(--maxw); margin: 0 auto; padding: 1rem;
             color: var(--muted); text-align:center;
         }
     </style>
-<meta itemprop="image" content="https://frijal.github.io/artikel/catatan-harian-wanita.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
+    <meta itemprop="image" content="https://frijal.github.io/artikel/catatan-harian-wanita.jpg">
 </head>
 <body>
     <header class="hero">
         <div class="kembang" aria-hidden="true"></div>
         <div class="wrap">
             <h1>Catatan harian seorang wanita</h1>
-<div id="iposbrowser"></div>
             <p class="subtitle">Versi santai, ceria, dan fullscreen - untuk ketawa kecil, mikir sebentar, lalu lanjut hidup dengan hati lega.</p>
             <div class="meta">
                 <span class="tag">Humor</span>
@@ -267,7 +270,7 @@
     
     <div class="lightbox" id="lightbox" aria-hidden="true">
         <div class="frame">
-            <img id="lightboxImg" alt="Pratinjau gambar">
+            <img id="lightboxImg" alt="Pratinau gambar">
             <div class="nav">
                 <button class="btn icon" id="prev" aria-label="Sebelumnya">&#9664;</button>
                 <button class="btn icon" id="next" aria-label="Berikutnya">&#9654;</button>
@@ -282,8 +285,7 @@
             var url = encodeURIComponent("https://frijal.github.io/artikel/catatan-harian-wanita.html");
             var title = encodeURIComponent("Catatan Harian Seorang Wanita - Versi Santai, Ceria");
             var share = document.getElementById('share');
-            if (!share) return; // Exit if share buttons not found
-
+            if (!share) return;
             var links = share.querySelectorAll('a');
             links.forEach(function(a){
                 if(a.classList.contains('wa')) a.href = "https://wa.me/?text=" + title + "%20" + url;
@@ -292,7 +294,6 @@
                 if(a.classList.contains('ln')) a.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
             });
         })();
-
         // Lightbox interactions
         (function(){
             var gallery = Array.from(document.querySelectorAll('.gallery figure img'));
@@ -315,19 +316,18 @@
             }
             
             function prev(){ 
-                idx = (idx - 1 + gallery.length) % gallery.length; 
-                lbImg.src = gallery[idx].src; 
-            }
+                 idx = (idx - 1 + gallery.length) % gallery.length; 
+                 lbImg.src = gallery[idx].src; 
+             }
             
             function next(){ 
-                idx = (idx + 1) % gallery.length; 
-                lbImg.src = gallery[idx].src; 
-            }
+                 idx = (idx + 1) % gallery.length; 
+                 lbImg.src = gallery[idx].src; 
+             }
             
             var closeBtn = document.getElementById('close');
             var prevBtn = document.getElementById('prev');
             var nextBtn = document.getElementById('next');
-
             if (closeBtn) closeBtn.addEventListener('click', close);
             if (prevBtn) prevBtn.addEventListener('click', prev);
             if (nextBtn) nextBtn.addEventListener('click', next);
@@ -345,27 +345,23 @@
                 if(e.key === 'ArrowRight') next();
             });
         })();
-
         // Simple lazy-load enhancement (IntersectionObserver as progressive)
         (function(){
-            if('loading' in HTMLImageElement.prototype) return; // native supported
+            if('loading' in HTMLImageElement.prototype) return;
             var imgs = document.querySelectorAll('img[loading="lazy"]');
             var io = new IntersectionObserver(function(entries, obs){
                 entries.forEach(function(entry){
                     if(entry.isIntersecting){
                         var img = entry.target;
-                        img.src = img.getAttribute('src'); // already set; kept for pattern
+                        img.src = img.getAttribute('src');
                         obs.unobserve(img);
                     }
                 });
             });
             imgs.forEach(function(img){ io.observe(img); });
         })();
-
         // Facebook comments data-href setting
         document.querySelector('.fb-comments').setAttribute('data-href',location.href);
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
