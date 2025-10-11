@@ -1,0 +1,52 @@
+# Nama workflow yang jelas untuk tugas spesifiknya
+name: copy artikel.json to folder artikel
+
+on:
+  # Memicu workflow hanya saat ada push ke branch 'main'
+  push:
+    branches:
+      - 'main'
+    # Dan HANYA jika file 'artikel.json' yang berubah
+    paths:
+      - 'artikel.json'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    # Membutuhkan izin untuk menulis (commit & push) ke repositori
+    permissions:
+      contents: write
+
+    steps:
+      # Langkah 1: Checkout kode dari repositori
+      - name: '1. Checkout Repository'
+        uses: actions/checkout@v4
+
+      # Langkah 2: Salin file artikel.json ke folder artikel/
+      - name: '2. Copy artikel.json to artikel/ folder'
+        run: |
+          echo "📄 Menyalin artikel.json ke folder artikel/..."
+          # Opsi -f (force) akan menimpa file jika sudah ada
+          cp -f artikel.json artikel/
+          echo "✅ Selesai menyalin."
+
+      # Langkah 3: Commit dan push file yang baru disalin
+      - name: '3. Commit and Push Copied File'
+        run: |
+          # Konfigurasi identitas git untuk bot actions
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Cek apakah ada perubahan yang perlu di-commit
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "👍 Tidak ada perubahan untuk di-commit. File sudah sinkron."
+            exit 0
+          fi
+          
+          echo "💾 Perubahan terdeteksi. Menambahkan dan melakukan commit..."
+          # Tambahkan hanya file spesifik yang kita ubah
+          git add artikel/artikel.json
+          git commit -m "chore: 🔄 Sync artikel.json to artikel/ folder (auto)"
+          
+          echo "🚀 Mendorong perubahan ke remote repository..."
+          git push
