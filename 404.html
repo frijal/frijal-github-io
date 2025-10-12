@@ -713,7 +713,6 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
       function getBrowserIconKey(name) {
         if (name.includes('Firefox')) return 'Firefox'
         if (name.includes('Chrome')) return 'Chrome'
-        if (name.includes('Brave')) return 'Brave'
         if (name.includes('Safari')) return 'Safari'
         if (name.includes('Edge')) return 'Edge'
         if (name.includes('Opera')) return 'Opera'
@@ -749,11 +748,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
         } else if (ua.indexOf('Edg') > -1) {
           name = 'Edge'
           version = ua.match(/Edg\/([0-9\.]+)/)?.[1] || 'N/A'
-        } else if (ua.indexOf('OPR') > -1) {
-          name = 'Opera'
-          version = ua.match(/OPR\/([0-9\.]+)/)?.[1] || 'N/A'
-        }
-
+        } 
         return { name, version, iconKey: getBrowserIconKey(name) }
       }
 
