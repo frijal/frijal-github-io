@@ -104,7 +104,7 @@
   }
 
   button {
-    background: #ffff00;
+    background: #55a630;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -237,7 +237,7 @@ function tambahBaris(data = {}) {
     <td><input type="number" class="harga" value="${data.harga || ''}" placeholder="Harga (Rp)" required></td>
     <td class="kolom-diskon"><input type="number" class="diskon" value="${data.diskon || ''}" placeholder="Diskon (%)"></td>
     <td>Rp <output class="subtotal">${data.subtotal || '0'}</output></td>
-    <td><button onclick="hapusBaris(this)">🗑️</button></td>`;
+    <td><button onclick="hapusBaris(this)">❌</button></td>`;
   tbody.appendChild(tr);
   tambahEventListener();
   toggleKolomDiskon();
