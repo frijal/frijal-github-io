@@ -1,0 +1,159 @@
+Baik, berikut saya buatkan versi **formal** dari penjelasan tentang *Linux Package Manager* dalam bentuk halaman **HTML5** dengan gaya satu kolom, responsif, widescreen, fullscreen, mobile-friendly, lengkap dengan metadata SEO, Open Graph, Twitter Card, favicon, dan kolom komentar Facebook. Kali ini narasi dibuat **formal dan netral** (tanpa humor), sehingga cocok untuk dokumentasi atau artikel teknis.  
+
+---
+
+```html
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Linux Package Manager: Definisi dan Fungsi</title>
+  <link rel="canonical" href="https://frijal.github.io/artikel/linux-package-manager-formal.html">
+  <meta name="description" content="Penjelasan formal mengenai Linux Package Manager: definisi, fungsi utama, contoh implementasi (APT, DNF, Pacman), serta manfaat dalam manajemen perangkat lunak.">
+  <meta name="keywords" content="Linux, package manager, APT, DNF, YUM, Pacman, repositori, manajemen perangkat lunak, instalasi, pembaruan, penghapusan">
+  <meta name="author" content="Fakhrul">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Linux Package Manager: Definisi dan Fungsi">
+  <meta property="og:description" content="Penjelasan formal mengenai Linux Package Manager: definisi, fungsi utama, contoh implementasi, serta manfaat dalam manajemen perangkat lunak.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/linux-package-manager-formal.html">
+  <meta property="og:site_name" content="frijal.github.io">
+  <meta property="og:image" content="https://frijal.github.io/artikel/linux-package-manager-formal.jpg">
+  <meta property="og:image:alt" content="Ilustrasi Linux Package Manager">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linux Package Manager: Definisi dan Fungsi">
+  <meta name="twitter:description" content="Penjelasan formal mengenai Linux Package Manager: definisi, fungsi utama, contoh implementasi, serta manfaat dalam manajemen perangkat lunak.">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/linux-package-manager-formal.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/favicon.svg">
+  <link rel="apple-touch-icon" href="https://frijal.github.io/apple-touch-icon.jpg">
+
+  <meta name="theme-color" content="#0f172a">
+
+  <style>
+    body {
+      margin:0;
+      font-family: system-ui, sans-serif;
+      line-height:1.6;
+      background:#f9fafb;
+      color:#1f2937;
+    }
+    header, footer {
+      background:#111827;
+      color:#f9fafb;
+      padding:1rem;
+      text-align:center;
+    }
+    main {
+      max-width: 70ch;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      color:#111827;
+    }
+    pre {
+      background:#f3f4f6;
+      padding:.75rem;
+      border-radius:6px;
+      overflow:auto;
+    }
+    .meta {
+      font-size:.9rem;
+      color:#6b7280;
+      margin-bottom:1rem;
+    }
+    .share, .comments {
+      margin-top:2rem;
+      padding-top:1rem;
+      border-top:1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Linux Package Manager</h1>
+    <p>Definisi, Fungsi, dan Contoh Implementasi</p>
+  </header>
+
+  <main>
+    <div class="meta">Ditulis oleh Fakhrul • 11 Oktober 2025</div>
+
+    <h2>Definisi</h2>
+    <p>
+      <strong>Linux Package Manager</strong> adalah perangkat lunak yang berfungsi untuk mengelola instalasi, pembaruan, dan penghapusan paket perangkat lunak dalam sistem operasi Linux. 
+      Paket perangkat lunak biasanya mencakup program utama beserta dependensi yang diperlukan agar program dapat berjalan dengan baik.
+    </p>
+
+    <h2>Fungsi Utama</h2>
+    <ul>
+      <li><strong>Instalasi:</strong> Memasang perangkat lunak dari repositori resmi atau sumber yang telah ditentukan.</li>
+      <li><strong>Pembaruan:</strong> Memperbarui perangkat lunak yang sudah terpasang ke versi terbaru secara terpusat.</li>
+      <li><strong>Penghapusan:</strong> Menghapus perangkat lunak beserta dependensi yang tidak lagi digunakan.</li>
+      <li><strong>Manajemen Dependensi:</strong> Menjamin bahwa semua pustaka dan komponen yang dibutuhkan tersedia.</li>
+    </ul>
+
+    <h2>Contoh Implementasi</h2>
+    <ul>
+      <li><strong>APT (Advanced Package Tool):</strong> Digunakan pada distribusi berbasis Debian/Ubuntu. Contoh perintah: 
+        <pre><code>sudo apt update && sudo apt install nama-paket</code></pre>
+      </li>
+      <li><strong>DNF (Dandified YUM):</strong> Digunakan pada Fedora, RHEL, dan CentOS. Contoh perintah: 
+        <pre><code>sudo dnf install nama-paket</code></pre>
+      </li>
+      <li><strong>Pacman:</strong> Digunakan pada Arch Linux dan turunannya. Contoh perintah: 
+        <pre><code>sudo pacman -S nama-paket</code></pre>
+      </li>
+    </ul>
+
+    <h2>Manfaat</h2>
+    <p>
+      Dengan adanya package manager, pengguna tidak perlu mengunduh dan mengompilasi perangkat lunak secara manual. 
+      Proses instalasi menjadi lebih cepat, konsisten, dan aman karena paket biasanya diverifikasi melalui repositori resmi.
+    </p>
+
+    <div class="share">
+      <h3>Bagikan Artikel</h3>
+      <p>
+        <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/linux-package-manager-formal.html&text=Linux%20Package%20Manager%3A%20Definisi%20dan%20Fungsi" target="_blank">Twitter</a> | 
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/linux-package-manager-formal.html" target="_blank">Facebook</a> | 
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.github.io/artikel/linux-package-manager-formal.html" target="_blank">LinkedIn</a>
+      </p>
+    </div>
+
+    <div class="comments">
+      <h3>Komentar</h3>
+      <div id="fb-root"></div>
+      <div class="fb-comments" 
+           data-href="https://frijal.github.io/artikel/linux-package-manager-formal.html" 
+           data-width="100%" 
+           data-numposts="5"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 frijal.github.io</p>
+  </footer>
+
+  <!-- Facebook SDK -->
+  <script async defer crossorigin="anonymous" 
+    src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1">
+  </script>
+</body>
+</html>
+```
+
+---
+
+👉 Versi ini lebih **formal, ringkas, dan teknis**. Cocok untuk dokumentasi, artikel teknis, atau presentasi.  
+Mau saya buatkan juga **versi bilingual** (Indonesia + Inggris) agar bisa dipakai untuk audiens internasional?

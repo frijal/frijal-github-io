@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <!-- Charset & Viewport -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Canonical & Basic SEO -->
+  <title>Apa itu Linux Package Manager?</title>
+  <link rel="canonical" href="https://frijal.github.io/artikel/linux-package-manager.html">
+  <meta name="description" content="Penjelasan santai dan lucu tentang Linux package manager—si kepala pelayan ajaib yang memasang, memperbarui, dan membersihkan dependensi. Contoh apt, yum/dnf, dan pacman, plus tips praktis.">
+  <meta name="keywords" content="Linux, package manager, apt, yum, dnf, pacman, repositori, install, update, hapus, dependensi, Arch, Ubuntu, Fedora">
+  <meta name="author" content="Fakhrul">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Apa itu Linux Package Manager?">
+  <meta property="og:description" content="Penjelasan santai dan lucu tentang Linux package manager—si kepala pelayan ajaib yang memasang, memperbarui, dan membersihkan dependensi. Contoh apt, yum/dnf, dan pacman, plus tips praktis.">
+  <meta property="og:url" content="https://frijal.github.io/artikel/linux-package-manager.html">
+  <meta property="og:site_name" content="frijal.github.io">
+  <meta property="og:image" content="https://frijal.github.io/artikel/linux-package-manager.jpg">
+  <meta property="og:image:alt" content="Ilustrasi lucu tentang Linux package manager sebagai kepala pelayan">
+  <meta property="article:author" content="https://frijal.github.io/">
+  <meta property="article:section" content="Teknologi">
+  <meta property="article:tag" content="Linux">
+  <meta property="article:tag" content="Package Manager">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apa itu Linux Package Manager?">
+  <meta name="twitter:description" content="Penjelasan santai dan lucu tentang Linux package manager—si kepala pelayan ajaib yang memasang, memperbarui, dan membersihkan dependensi.">
+  <meta name="twitter:image" content="https://frijal.github.io/artikel/linux-package-manager.jpg">
+  <meta name="twitter:site" content="@frijal">
+  <meta name="twitter:creator" content="@frijal">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/favicon.svg">
+  <link rel="apple-touch-icon" href="https://frijal.github.io/apple-touch-icon.jpg">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://frijal.github.io/artikel/linux-package-manager.html"
+    },
+    "headline": "Apa itu Linux Package Manager?",
+    "description": "Penjelasan santai dan lucu tentang Linux package manager—si kepala pelayan ajaib yang memasang, memperbarui, dan membersihkan dependensi.",
+    "image": "https://frijal.github.io/artikel/linux-package-manager.jpg",
+    "datePublished": "2025-10-11",
+    "dateModified": "2025-10-11",
+    "author": {
+      "@type": "Person",
+      "name": "Fakhrul"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "frijal.github.io",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://frijal.github.io/favicon.svg"
+      }
+    }
+  }
+  </script>
+
+  <!-- Base Styles -->
+  <style>
+    :root{
+      --bg: #0b1020;
+      --bg-soft: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9aa3b2;
+      --accent: #22d3ee;
+      --accent-2: #60a5fa;
+      --code-bg: #111827;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 14px;
+      --maxw: 72ch;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #ffffff;
+        --bg-soft: #f8fafc;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #0ea5e9;
+        --accent-2: #2563eb;
+        --code-bg: #f1f5f9;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% 0%, var(--bg-soft), var(--bg));
+      color:var(--text);
+      font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .page{
+      min-height: 100svh;
+      display:flex;
+      flex-direction:column;
+    }
+    header{
+      position: sticky;
+      top:0;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg-soft) 60%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--muted) 30%, transparent);
+      z-index: 20;
+    }
+    .bar{
+      max-width: calc(var(--maxw) + 4rem);
+      margin: 0 auto;
+      padding: .75rem 1rem;
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.5rem;
+      text-decoration:none; color:var(--text);
+    }
+    .brand svg{width:28px;height:28px}
+    .brand span{font-weight:700; letter-spacing:.2px}
+    .spacer{flex:1}
+    .actions{
+      display:flex; gap:.5rem; align-items:center;
+    }
+    .btn{
+      color:var(--text);
+      background: color-mix(in oklab, var(--bg-soft) 70%, transparent);
+      border: 1px solid color-mix(in oklab, var(--muted) 35%, transparent);
+      padding:.5rem .75rem;
+      border-radius: 999px;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:.5rem;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: color-mix(in oklab, var(--bg-soft) 90%, transparent); }
+    .btn svg{width:18px;height:18px}
+    main{
+      flex:1;
+      display:flex;
+      align-items:stretch;
+    }
+    .wrap{
+      width:100%;
+      max-width: calc(var(--maxw) + 4rem);
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+    .article{
+      margin: 0 auto;
+      max-width: var(--maxw);
+      background: color-mix(in oklab, var(--bg-soft) 92%, transparent);
+      border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+    .hero{
+      padding: 2rem 1.25rem 1rem;
+      display:grid; gap:.75rem;
+    }
+    .title{
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      line-height: 1.15;
+      letter-spacing: .2px;
+      margin:0;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size: 1rem;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:.75rem;
+      margin-top:.5rem;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .content{
+      padding: 1rem 1.25rem 1.5rem;
+      display:grid; gap:1rem;
+    }
+    .content h2, .content h3{
+      margin:1.25rem 0 .5rem;
+      font-size: 1.25rem;
+    }
+    .content p{margin:.5rem 0}
+    .callout{
+      border-left: 4px solid var(--accent);
+      background: color-mix(in oklab, var(--accent) 8%, var(--bg-soft));
+      padding:.75rem .9rem;
+      border-radius: .5rem;
+      color: var(--text);
+    }
+    code, pre{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    pre{
+      margin:.5rem 0;
+      padding:.75rem 1rem;
+      background: var(--code-bg);
+      border-radius: .6rem;
+      overflow:auto;
+    }
+    .share{
+      display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+      padding: 0 1.25rem 1rem;
+      border-top: 1px dashed color-mix(in oklab, var(--muted) 30%, transparent);
+    }
+    .share .label{color:var(--muted); margin-right:.25rem}
+    .share .btn{background: color-mix(in oklab, var(--bg-soft) 80%, transparent)}
+    .footer{
+      padding: .75rem 1.25rem 1rem;
+      display:flex; justify-content:space-between; align-items:center; gap:.75rem;
+      border-top: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+      color:var(--muted);
+    }
+    .comment-anchor{
+      padding: .75rem 1.25rem;
+      border-top: 1px solid color-mix(in oklab, var(--muted) 25%, transparent);
+      background: color-mix(in oklab, var(--bg-soft) 95%, transparent);
+    }
+    /* Lightbox (for future images) */
+    .lightbox{
+      position: fixed; inset:0; display:none; place-items:center;
+      background: rgba(0,0,0,.65); z-index: 40;
+    }
+    .lightbox.open{display:grid}
+    .lightbox img{max-width:92vw; max-height:92vh; border-radius:.5rem; box-shadow: var(--shadow)}
+    .lb-controls{
+      position: fixed; inset: 0 0 auto 0;
+      display:flex; justify-content:space-between; align-items:center;
+      padding: .75rem 1rem;
+    }
+    .lb-btn{
+      background: rgba(255,255,255,.12);
+      color: #fff; border:1px solid rgba(255,255,255,.25);
+      border-radius: 999px; padding:.5rem .75rem; display:flex; align-items:center; gap:.5rem;
+      cursor:pointer
+    }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+    @media (min-width: 1200px){
+      .wrap{padding: 3rem 1rem 6rem}
+      .hero{padding: 2.5rem 2rem 1rem}
+      .content{padding: 1rem 2rem 1.5rem}
+      .footer, .share{padding: 1rem 2rem}
+      .comment-anchor{padding: 1rem 2rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header role="banner">
+      <div class="bar">
+        <a class="brand" href="https://frijal.github.io/" aria-label="Beranda frijal.github.io">
+          <!-- Brand SVG -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/>
+            <path d="M6 12l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>frijal.github.io</span>
+        </a>
+        <div class="spacer"></div>
+        <nav class="actions" aria-label="Aksi cepat">
+          <a class="btn" href="#bagikan">
+            <!-- Share icon -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Bagikan</span>
+          </a>
+          <a class="btn" href="#komentar">
+            <!-- Comment icon -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 15a4 4 0 01-4 4H7l-4 4V5a4 4 0 014-4h10a4 4 0 014 4v10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Komentar</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="konten" role="main">
+      <div class="wrap">
+        <article class="article" itemscope itemtype="https://schema.org/Article">
+          <section class="hero">
+            <h1 class="title" itemprop="headline">Apa itu Linux Package Manager?</h1>
+            <p class="subtitle" itemprop="description">Penjelasan bergaya cerita—tetap lucu, tetap jujur, tetap berguna buat kamu yang baru mendarat di Linux Land.</p>
+            <div class="meta">
+              <span>Ditulis oleh <strong itemprop="author">Fakhrul</strong></span>
+              <span aria-hidden="true">•</span>
+              <time itemprop="datePublished" datetime="2025-10-11">11 Okt 2025</time>
+              <span aria-hidden="true">•</span>
+              <span>Waktu baca ± 4 menit</span>
+            </div>
+          </section>
+
+          <section class="content" itemprop="articleBody">
+            <h2>Pembuka: Linux Land, negeri bata kode</h2>
+            <p>
+              Bayangkan kamu baru saja pindah ke <strong>Linux Land</strong>, sebuah negeri di mana semua orang membangun rumah mereka sendiri dari bata kode, dan tak seorang pun bisa sepakat tentang apa pun.
+              Ada yang pakai <strong>apt</strong>, ada yang teriak-teriak soal <strong>yum</strong>, dan ada juga yang di pojokan berbisik tentang <strong>“pacman”</strong> seolah itu sekaligus permainan dan gaya hidup.
+            </p>
+
+            <p>
+              Di kerajaan yang kacau ini, <strong>Linux package manager</strong> pada dasarnya adalah kepala pelayan ajaib—tapi agak pemarah—yang tahu di mana semua barang berada, bagaimana cara memasangnya, dan—yang paling penting—bagaimana membersihkan kekacauanmu ketika kamu (pasti) merusak sesuatu.
+            </p>
+
+            <div class="callout" role="note" aria-label="Dialog singkat">
+              <p><strong>Kamu:</strong> “Hei pelayan, bisa ambilkan Firefox?”</p>
+              <p><strong>Pelayan (apt):</strong> <em>Menghela napas dramatis</em> “Baiklah, aku akan pergi ke repositori kerajaan, mengambil browser-mu, memasangnya rapi di sistemmu, dan sekalian memperbarui 47 hal lain karena jelas kamu belum menyentuh tempat ini sejak Ubuntu 18.04.”</p>
+              <p><strong>Kamu:</strong> “Oh, bisa copot aplikasi lama ini?”</p>
+              <p><strong>Pelayan:</strong> <em>Mata berkedut</em> “Aku baru saja membersihkan ruangan itu, tapi baiklah, biar aku hapus aplikasi itu beserta 37 dependensi tak terpakai yang tidak pernah kamu undang kembali.”</p>
+            </div>
+
+            <p>
+              Sementara itu, <strong>pacman</strong> dari Arch Linux menerobos dinding seperti <strong>Kool-Aid Man</strong> sambil berteriak:
+            </p>
+
+            <pre><code>sudo pacman -Syu!!!</code></pre>
+
+            <p>
+              …dan langsung merusak seluruh setup-mu hanya untuk bersenang-senang—tapi kemudian membangunnya kembali dari nol, karena memang <strong>kekacauan adalah intinya</strong>.
+            </p>
+
+            <h2>Singkatnya</h2>
+            <p>
+              <strong>Linux package manager</strong> adalah <strong>petugas kebersihan digital / personal shopper / koordinator kekacauan</strong> yang bertugas memasang, memperbarui, dan menghapus perangkat lunak
+              sehingga kamu tidak perlu mengais-ngais gang gelap GitHub mencari <em>tarball</em> seperti rakun pencari software. 🦝💻
+            </p>
+
+            <h2>Tambahan yang bikin makin nyambung</h2>
+            <p>
+              Biar makin kebayang, ini beberapa pemain utama dan kebiasaan mereka:
+            </p>
+            <ul>
+              <li><strong>apt (Debian/Ubuntu):</strong> Rapi, relatif aman, suka “sekalian update tetangga sebelah”. Perintah umum: <code>sudo apt update && sudo apt install &lt;paket&gt;</code>.</li>
+              <li><strong>yum/dnf (Fedora/RHEL):</strong> Suksesor modern dengan manajemen dependensi oke. Perintah umum: <code>sudo dnf install &lt;paket&gt;</code>.</li>
+              <li><strong>pacman (Arch):</strong> Cepat dan blak-blakan, “rolling release” vibes. Perintah umum: <code>sudo pacman -S &lt;paket&gt;</code>, dan update sistem: <code>sudo pacman -Syu</code>.</li>
+            </ul>
+            <p>
+              Istilah yang sering muncul: <strong>repositori</strong> (toko resmi paket), <strong>dependensi</strong> (teman-teman yang dibutuhkan aplikasi biar jalan),
+              dan <strong>cache</strong> (gudang sementara). Semua diurusin sama si “kepala pelayan” agar kamu fokus berkarya, bukan bongkar pasang manual.
+            </p>
+
+            <h3>Kenapa hidup lebih tenang dengan package manager?</h3>
+            <ul>
+              <li><strong>Instalasi cepat:</strong> Tinggal ketik perintah, paket berikut dependensinya diurus otomatis.</li>
+              <li><strong>Pembaruan terpusat:</strong> Sekali jalan, semua aplikasi relevan ikut dibenahi.</li>
+              <li><strong>Pencopotan bersih:</strong> Aplikasi lama plus dependensi yang tak dipakai dibereskan.</li>
+              <li><strong>Keamanan:</strong> Repositori resmi biasanya diverifikasi dan ditandatangani.</li>
+            </ul>
+
+            <h3>Tips santai biar minim drama</h3>
+            <ul>
+              <li><strong>Backup dulu:</strong> Sebelum update massal, simpan hal penting. Nyaman dulu, baru eksperimen.</li>
+              <li><strong>Baca log:</strong> Kalau ada yang rusak, pesan kesalahan biasanya cukup jujur dan membantu.</li>
+              <li><strong>Jangan campur aduk:</strong> Hindari install manual sembarangan berbarengan dengan paket repo, biar dependensi nggak cemburu.</li>
+            </ul>
+
+            <p class="callout">
+              Mau versi formal tanpa humor untuk dokumentasi? Tinggal bilang. Kita bungkus rapi ala “manual”—tetap jelas, tetap gampang dicerna.
+            </p>
+          </section>
+
+          <section id="bagikan" class="share" aria-label="Bagikan artikel">
+            <span class="label">Bagikan:</span>
+            <!-- Twitter -->
+            <a class="btn" id="share-twitter" href="#" rel="noopener" aria-label="Bagikan ke Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.633 7.997c.013.178.013.355.013.533 0 5.422-4.127 11.674-11.674 11.674-2.319 0-4.48-.678-6.294-1.848.324.038.636.051.972.051 1.923 0 3.69-.654 5.097-1.758a4.12 4.12 0 01-3.847-2.85c.254.038.508.064.775.064.369 0 .736-.051 1.079-.14a4.115 4.115 0 01-3.296-4.037v-.051c.546.305 1.177.49 1.848.508a4.108 4.108 0 01-1.833-3.421c0-.762.203-1.463.559-2.076a11.68 11.68 0 008.466 4.3 4.642 4.642 0 01-.102-.942 4.113 4.113 0 017.116-2.81 8.1 8.1 0 002.612-.995 4.132 4.132 0 01-1.807 2.27 8.232 8.232 0 002.364-.635 8.86 8.86 0 01-2.058 2.136z" fill="currentColor"/></svg>
+              <span>Twitter</span>
+            </a>
+            <!-- Facebook -->
+            <a class="btn" id="share-facebook" href="#" rel="noopener" aria-label="Bagikan ke Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.01 3.66 9.16 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.19 2.23.19v2.46h-1.25c-1.23 0-1.61.76-1.61 1.54v1.85h2.74l-.44 2.91h-2.3v7.03C18.34 21.22 22 17.07 22 12.06z" fill="currentColor"/></svg>
+              <span>Facebook</span>
+            </a>
+            <!-- LinkedIn -->
+            <a class="btn" id="share-linkedin" href="#" rel="noopener" aria-label="Bagikan ke LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 7.5A2.44 2.44 0 116.93 2.6a2.44 2.44 0 01.01 4.9zM3.9 21h6.1V9.4H3.9V21zm7.93 0h6.1v-6.39c0-3.41-1.82-4.99-4.25-4.99-1.95 0-2.82 1.07-3.29 1.82v-1.54H11.83V21z" fill="currentColor"/></svg>
+              <span>LinkedIn</span>
+            </a>
+            <!-- WhatsApp -->
+            <a class="btn" id="share-whatsapp" href="#" rel="noopener" aria-label="Bagikan ke WhatsApp">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A10.51 10.51 0 003.48 20.52L2 22l1.63-.43A10.51 10.51 0 0020.52 3.48zm-8.49 15.68a8.19 8.19 0 01-4.17-1.14l-.3-.18-2.47.65.66-2.41-.2-.31a8.22 8.22 0 01-1.25-4.39c0-4.53 3.7-8.22 8.23-8.22a8.19 8.19 0 017.73 11.14 8.18 8.18 0 01-7.03 4.86zm4.72-4.6c-.26-.13-1.53-.75-1.77-.84s-.41-.13-.59.13-.68.84-.83 1.02-.31.19-.57.06a6.67 6.67 0 01-1.95-1.2 7.3 7.3 0 01-1.35-1.66c-.14-.25 0-.39.12-.52.12-.13.26-.34.39-.51.13-.17.18-.31.26-.52.09-.22.05-.39-.02-.54-.07-.13-.59-1.41-.81-1.92-.21-.51-.43-.44-.59-.44h-.5c-.17 0-.45.06-.69.31s-.9.88-.9 2.14 1.07 2.48 1.22 2.65c.15.17 2.1 3.21 5.1 4.38.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.43.25-.7.25-1.3.17-1.43-.07-.13-.24-.2-.5-.33z" fill="currentColor"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <!-- Copy link -->
+            <button class="btn" id="copy-link" type="button" aria-label="Salin tautan">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h8a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V9a2 2 0 012-2zm10-3H6a2 2 0 00-2 2v2m12-4a2 2 0 012 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Salin tautan</span>
+            </button>
+          </section>
+
+          <section id="komentar" class="comment-anchor" aria-label="Kolom komentar Facebook">
+            <div id="fb-root"></div>
+            <div class="fb-comments"
+                 data-href="https://frijal.github.io/artikel/linux-package-manager.html"
+                 data-width="100%"
+                 data-numposts="6"
+                 data-order-by="reverse_time"></div>
+          </section>
+
+          <section class="footer" aria-label="Info artikel">
+            <span>© 2025 frijal.github.io • Artikel: Linux Package Manager</span>
+            <a class="btn" href="#konten" aria-label="Kembali ke atas">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Ke atas</span>
+            </a>
+          </section>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightbox (optional for future images) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau gambar">
+    <div class="lb-controls">
+      <button class="lb-btn" id="lb-prev" type="button" aria-label="Gambar sebelumnya">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 19l-7-7 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="sr-only">Sebelumnya</span>
+      </button>
+      <button class="lb-btn" id="lb-next" type="button" aria-label="Gambar berikutnya">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="sr-only">Berikutnya</span>
+      </button>
+      <button class="lb-btn" id="lb-close" type="button" aria-label="Tutup">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="sr-only">Tutup</span>
+      </button>
+    </div>
+    <img id="lb-image" src="" alt="">
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Facebook Comments SDK
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Helper: current URL (canonical if present)
+    function getCanonicalUrl(){
+      const link = document.querySelector('link[rel="canonical"]');
+      return link ? link.href : location.href;
+    }
+
+    // Share handlers
+    const url = encodeURIComponent(getCanonicalUrl());
+    const title = encodeURIComponent(document.querySelector('meta[property="og:title"]')?.content || document.title);
+    const desc = encodeURIComponent(document.querySelector('meta[name="description"]')?.content || '');
+
+    const tw = document.getElementById('share-twitter');
+    const fb = document.getElementById('share-facebook');
+    const li = document.getElementById('share-linkedin');
+    const wa = document.getElementById('share-whatsapp');
+    const cp = document.getElementById('copy-link');
+
+    tw?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const u = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+      window.open(u, '_blank', 'noopener,width=600,height=480');
+    });
+
+    fb?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const u = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      window.open(u, '_blank', 'noopener,width=600,height=480');
+    });
+
+    li?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const u = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+      window.open(u, '_blank', 'noopener,width=600,height=480');
+    });
+
+    wa?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const text = `${decodeURIComponent(title)} — ${decodeURIComponent(desc)}\n${decodeURIComponent(url)}`;
+      const u = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(u, '_blank', 'noopener');
+    });
+
+    cp?.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(decodeURIComponent(url));
+        cp.classList.add('ok');
+        cp.querySelector('span').textContent = 'Tautan disalin!';
+        setTimeout(()=>{
+          cp.classList.remove('ok');
+          cp.querySelector('span').textContent = 'Salin tautan';
+        }, 1800);
+      }catch(err){
+        alert('Gagal menyalin tautan, coba manual ya.');
+      }
+    });
+
+    // Lightbox (generic, works if images with [data-lightbox] exist)
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-image');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+    const lbClose = document.getElementById('lb-close');
+
+    let gallery = [];
+    let current = 0;
+
+    function openLightbox(index){
+      current = index;
+      lbImg.src = gallery[current].src;
+      lbImg.alt = gallery[current].alt || '';
+      lightbox.classList.add('open');
+    }
+    function closeLightbox(){ lightbox.classList.remove('open'); lbImg.src = ''; }
+    function prev(){ if(!gallery.length) return; current = (current - 1 + gallery.length) % gallery.length; lbImg.src = gallery[current].src; }
+    function next(){ if(!gallery.length) return; current = (current + 1) % gallery.length; lbImg.src = gallery[current].src; }
+
+    // Build gallery from any image with data-lightbox attribute (lazy-ready)
+    function initGallery(){
+      gallery = Array.from(document.querySelectorAll('img[data-lightbox]')).map(img => ({
+        src: img.dataset.src || img.src,
+        alt: img.alt || ''
+      }));
+      // lazy-load: swap data-src to src when in view
+      const lazyImgs = document.querySelectorAll('img[loading="lazy"][data-src]');
+      if('IntersectionObserver' in window){
+        const io = new IntersectionObserver(entries=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){
+              const img = e.target;
+              img.src = img.dataset.src;
+              io.unobserve(img);
+            }
+          });
+        });
+        lazyImgs.forEach(img=>io.observe(img));
+      }else{
+        // fallback: eager load
+        lazyImgs.forEach(img=>{ img.src = img.dataset.src; });
+      }
+      // click to open
+      document.body.addEventListener('click', (ev)=>{
+        const t = ev.target;
+        if(t instanceof HTMLElement && t.tagName === 'IMG' && t.hasAttribute('data-lightbox')){
+          const idx = gallery.findIndex(g => (g.src === (t.dataset.src || t.getAttribute('src'))));
+          if(idx >= 0) openLightbox(idx);
+        }
+      });
+    }
+
+    lbPrev.addEventListener('click', prev);
+    lbNext.addEventListener('click', next);
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+    window.addEventListener('keydown', (e)=>{
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+
+    // Initialize after DOM ready
+    document.addEventListener('DOMContentLoaded', initGallery);
+  </script>
+</body>
+</html>
