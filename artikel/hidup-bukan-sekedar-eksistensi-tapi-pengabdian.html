@@ -130,11 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log("Artikel dimuat: Hidup Bukan Sekedar Eksistensi, Tapi Pengabdian");
 });
 </script>
+<meta property="og:image:alt" content="Hidup Bukan Sekedar Eksistensi, Tapi Pengabdian">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/hidup-bukan-sekedar-eksistensi-tapi-pengabdian.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 
 <body>
 <header>
   <h1>🌿 HIDUP BUKAN SEKEDAR EKSISTENSI, TAPI PENGABDIAN 🌿</h1>
+<div id="iposbrowser"></div>
   <p><em>Renungan Islami — frijal.github.io</em></p>
 </header>
 
@@ -177,12 +181,15 @@ document.addEventListener('DOMContentLoaded', () => {
 </main>
 
 <footer>
-  © 2025 <a href="https://frijal.github.io" style="color:inherit;text-decoration:none;">frijal.github.io</a> — Artikel Islami
+  🄯 2025 <a href="https://frijal.github.io" style="color:inherit;text-decoration:none;">frijal.github.io</a> — Artikel Islami
 </footer>
 
 <!-- Facebook SDK -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023&autoLogAppEvents=1"></script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
