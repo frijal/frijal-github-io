@@ -102,12 +102,16 @@ footer {
   margin-top: 2rem;
 }
 </style>
+<meta property="og:image:alt" content="Memperbaiki Error “Key Expired” atau “Invalid Signature” di Arch Linux">
+  <meta itemprop="image" content="https://frijal.github.io/artikel/fix-key-expired-archlinux.jpg">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 
 <body>
 <header>
   <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Arch_Linux_%22Crystal%22_icon.svg" alt="Arch Linux Logo">
   <h1>🔑 Memperbaiki Error “Key Expired” atau “Invalid Signature”</h1>
+<div id="iposbrowser"></div>
   <p>Panduan santai untuk memperbaiki masalah tanda tangan digital (PGP) yang sering muncul saat update paket di Arch Linux dan turunannya.</p>
 </header>
 
@@ -181,7 +185,7 @@ sudo pacman-key --refresh-keys --keyserver hkps://pgp.mit.edu</code></pre>
 </main>
 
 <footer>
-  © 2025 frijal.github.io — Seri “Masalah Umum Arch Linux” · dibuat dengan ❤
+  🄯 2025 frijal.github.io — Seri “Masalah Umum Arch Linux” · dibuat dengan ❤
 </footer>
 
 <!-- Facebook SDK -->
@@ -193,6 +197,9 @@ sudo pacman-key --refresh-keys --keyserver hkps://pgp.mit.edu</code></pre>
 <script>
 window.onload = () => window.scrollTo({ top: 0, behavior: "smooth" });
 </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
