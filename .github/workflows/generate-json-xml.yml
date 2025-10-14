@@ -52,7 +52,7 @@ jobs:
           # === Loop sekarang mencari file di folder 'artikel/' ===
           find artikel -name "*.html" | while read -r HTML_FILE; do
             BASE_NAME=$(basename "$HTML_FILE" .html)
-            FINAL_PATH="artikel/${BASE_NAME}.jpg"
+            FINAL_PATH="img/${BASE_NAME}.jpg"
             TEMP_OUTPUT="temp_screenshot.jpg"
             
             if [ -f "$FINAL_PATH" ]; then
@@ -99,9 +99,9 @@ jobs:
         if: always()
         run: |
           echo "✅ File yang di-generate (seharusnya):"
-          echo "🔗 artikel.json: https://frijal.github.io/artikel.json"
-          echo "🔗 sitemap.xml : https://frijal.github.io/sitemap.xml"
-          echo "🔗 rss.xml     : https://frijal.github.io/rss.xml"
+          echo "🔗 artikel.json: https://frijal.pages.dev/artikel.json"
+          echo "🔗 sitemap.xml : https://frijal.pages.dev/sitemap.xml"
+          echo "🔗 rss.xml     : https://frijal.pages.dev/rss.xml"
           echo "📊 Jumlah total artikel saat ini:"
           # === Cara menghitung file kembali ke 'artikel/' ===
           COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)

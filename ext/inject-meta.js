@@ -27,7 +27,7 @@ const processFiles = async () => {
       let html = await fs.readFile(filePath, 'utf8')
 
       const baseName = path.basename(f, '.html')
-      const img = `https://frijal.pages.dev/artikel/${baseName}.jpg`
+      const img = `https://frijal.pages.dev/img/${baseName}.jpg`
 
       // Ambil <title> sebagai fallback alt
       const titleMatch = html.match(/<title>(.*?)<\/title>/i)
