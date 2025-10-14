@@ -1,4 +1,4 @@
-name: Preview Ganti Artikel ke Image
+name: Ganti URL Artikel ke Image dan Buat PR
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
         default: '.'
 
 jobs:
-  preview-perubahan:
+  ubah-url-dan-pr:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,22 +21,30 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-      - name: Buat branch sementara untuk preview
+      - name: Buat branch baru
         run: |
-          BRANCH_NAME=preview-artikel-ke-image-$(date +%s)
+          BRANCH_NAME=ubah-url-artikel-ke-img-$(date +%s)
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
-      - name: Jalankan penggantian "artikel" → "img" di baris .jpg
+      - name: Ganti URL artikel → image untuk .jpg
         run: |
-          find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" -exec sed -i '/\.jpg/ s/artikel/img/g' {} +
+          find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" \
+            -exec sed -i 's|https://frijal\.pages\.dev/artikel/\([^"]*\.jpg\)|https://frijal.pages.dev/img/\1|g' {} +
 
-      - name: Tampilkan preview perubahan (git diff)
+      - name: Commit perubahan
         run: |
-          echo "Berikut adalah preview perubahan:"
-          git --no-pager diff
+          git add .
+          git commit -m "Ganti URL artikel → img untuk .jpg"
+          git push origin ${{ env.BRANCH_NAME }}
 
-      - name: Simpan perubahan tanpa commit
-        run: |
-          echo "Perubahan sudah diterapkan di branch ${{ env.BRANCH_NAME }}, tapi belum dikomit."
-          echo "Silakan review hasilnya dan buat PR secara manual jika sudah sesuai."
+      - name: Buat Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.BRANCH_NAME }}
+          title: "Ganti URL artikel → image untuk .jpg"
+          body: |
+            Perubahan otomatis:
+            - Mengganti URL `https://frijal.pages.dev/artikel/*.jpg` menjadi `https://frijal.pages.dev/img/*.jpg`
+            - Folder yang diproses: `${{ github.event.inputs.target_folder }}`
