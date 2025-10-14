@@ -74,18 +74,7 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "🤖 Auto-build update"
           git push || echo "No changes to push"
-
-      - name: '10. Install Wrangler CLI'
-        if: steps.filter.outputs.src == 'true'
-        run: npm install -g wrangler
-
-      - name: '11. Deploy to Cloudflare Pages'
-        if: steps.filter.outputs.src == 'true'
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-        run: |
-          wrangler pages deploy . --project-name=frijal --branch=main
-          
+              
       - name: '12. Show Skip Message'
         # Pesan ini hanya muncul jika TIDAK ada perubahan di 'src'
         if: steps.filter.outputs.src == 'false'
