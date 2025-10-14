@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Panduan lengkap dan santai untuk upgrade Linux Mint 22.1 Xia ke 22.2 Zara: backup Timeshift, Update Manager, wizard upgrade, dan tips aman.">
   <meta name="keywords" content="Linux Mint 22.1, Linux Mint 22.2, upgrade, Zara, Xia, Timeshift, Update Manager, Cinnamon 6.4.8">
-  <link rel="icon" href="https://frijal.github.io/ext/icons/favicon.png">
-  <link rel="canonical" href="https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.html">
+  <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.png">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.html">
   <meta name="theme-color" content="#2ECC71">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Upgrade Linux Mint 22.1 ke 22.2 Zara (Step by step)">
   <meta property="og:description" content="Backup dulu, update paket, jalankan wizard upgrade, reboot, dan nikmati Mint 22.2. Disertai galeri dan tips.">
-  <meta property="og:url" content="https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.html">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.html">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO2O6PQXqpTWlnhicl0WDoGI5C935HfN11H15PYB1Kob_ObcGMYFH0bzAp4a0ZswS86MYHnb5Ihc22m2bmj6UKAt-1Q0klWxtk-oXaIUj8da3FvlvKcjjcswR2_bkIi8AUxYhFt0r18AgQrH6ryUinV2jk-2TvZzCip_h4KxYe3Reb4LnQ8v-Zi3MExgU/s1600/linuxmint-upgrade-221-222.jpg">
   <meta property="article:author" content="Fakhrul">
   <meta property="article:section" content="Linux & Distro Guides">
@@ -31,11 +31,11 @@
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO2O6PQXqpTWlnhicl0WDoGI5C935HfN11H15PYB1Kob_ObcGMYFH0bzAp4a0ZswS86MYHnb5Ihc22m2bmj6UKAt-1Q0klWxtk-oXaIUj8da3FvlvKcjjcswR2_bkIi8AUxYhFt0r18AgQrH6ryUinV2jk-2TvZzCip_h4KxYe3Reb4LnQ8v-Zi3MExgU/s1600/linuxmint-upgrade-221-222.jpg">
 
   <!-- JSON-LD Schema.org Article -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.html","image":"https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.jpg"},"headline":"Upgrade Linux Mint 22.1 ke 22.2 (Step by Step)","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO2O6PQXqpTWlnhicl0WDoGI5C935HfN11H15PYB1Kob_ObcGMYFH0bzAp4a0ZswS86MYHnb5Ihc22m2bmj6UKAt-1Q0klWxtk-oXaIUj8da3FvlvKcjjcswR2_bkIi8AUxYhFt0r18AgQrH6ryUinV2jk-2TvZzCip_h4KxYe3Reb4LnQ8v-Zi3MExgU/s1600/linuxmint-upgrade-221-222.jpg","datePublished":"2025-09-25","dateModified":"2025-09-25","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.jpg"},"publisher":{"@type":"Organization","name":"frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/logo.png","image":"https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.jpg"},"image":"https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.jpg"},"description":"Panduan langkah demi langkah upgrade Linux Mint 22.1 Xia ke Linux Mint 22.2 Zara dengan backup Timeshift dan Update Manager."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.html","image":"https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.jpg"},"headline":"Upgrade Linux Mint 22.1 ke 22.2 (Step by Step)","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO2O6PQXqpTWlnhicl0WDoGI5C935HfN11H15PYB1Kob_ObcGMYFH0bzAp4a0ZswS86MYHnb5Ihc22m2bmj6UKAt-1Q0klWxtk-oXaIUj8da3FvlvKcjjcswR2_bkIi8AUxYhFt0r18AgQrH6ryUinV2jk-2TvZzCip_h4KxYe3Reb4LnQ8v-Zi3MExgU/s1600/linuxmint-upgrade-221-222.jpg","datePublished":"2025-09-25","dateModified":"2025-09-25","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.jpg"},"publisher":{"@type":"Organization","name":"frijal.pages.dev","logo":{"@type":"ImageObject","url":"https://frijal.pages.dev/logo.png","image":"https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.jpg"},"image":"https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.jpg"},"description":"Panduan langkah demi langkah upgrade Linux Mint 22.1 Xia ke Linux Mint 22.2 Zara dengan backup Timeshift dan Update Manager."}</script>
 <meta name="date" content="2025-09-28">
 
   <meta property="og:image:alt" content="Panduan Upgrade Linux Mint 22.1 ke 22.2 Zara (Langkah demi langkah)">
-  <meta itemprop="image" content="https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.jpg">
+  <meta itemprop="image" content="https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.jpg">
 <link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-25T11:00:00+08:00"></head>
 <body>
@@ -202,10 +202,10 @@
   <section class="share">
 <h2>Bagikan artikel</h2>
 <div class="share-row">
-  <a class="share-btn twitter" rel="noreferrer" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Flinux-mint-22-2-upgrade-step.html&text=Panduan%20Upgrade%20Linux%20Mint%2022.1%20%E2%86%92%2022.2%20Zara">Twitter</a>
-  <a class="share-btn facebook" rel="noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Flinux-mint-22-2-upgrade-step.html">Facebook</a>
-  <a class="share-btn whatsapp" rel="noreferrer" href="https://wa.me/?text=Upgrade%20Linux%20Mint%2022.1%20ke%2022.2%20Zara%20%2D%20https%3A%2F%2Ffrijal.github.io%2Fartikel%2Flinux-mint-22-2-upgrade-step.html">WhatsApp</a>
-  <a class="share-btn telegram" rel="noreferrer" href="https://t.me/share/url?url=https%3A%2F%2Ffrijal.github.io%2Fartikel%2Flinux-mint-22-2-upgrade-step.html&text=Panduan%20Upgrade%20Mint%2022.2">Telegram</a>
+  <a class="share-btn twitter" rel="noreferrer" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ffrijal.pages.dev%2Fartikel%2Flinux-mint-22-2-upgrade-step.html&text=Panduan%20Upgrade%20Linux%20Mint%2022.1%20%E2%86%92%2022.2%20Zara">Twitter</a>
+  <a class="share-btn facebook" rel="noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffrijal.pages.dev%2Fartikel%2Flinux-mint-22-2-upgrade-step.html">Facebook</a>
+  <a class="share-btn whatsapp" rel="noreferrer" href="https://wa.me/?text=Upgrade%20Linux%20Mint%2022.1%20ke%2022.2%20Zara%20%2D%20https%3A%2F%2Ffrijal.pages.dev%2Fartikel%2Flinux-mint-22-2-upgrade-step.html">WhatsApp</a>
+  <a class="share-btn telegram" rel="noreferrer" href="https://t.me/share/url?url=https%3A%2F%2Ffrijal.pages.dev%2Fartikel%2Flinux-mint-22-2-upgrade-step.html&text=Panduan%20Upgrade%20Mint%2022.2">Telegram</a>
   <button class="share-btn copy" id="copy-link">Salin Link</button>
 </div>
   </section>
@@ -216,7 +216,7 @@
   <section class="comments">
 <h2>Komentar</h2>
 <div id="fb-root"></div>
-<div class="fb-comments" data-href="https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.html" data-width="100%" data-numposts="6"></div>
+<div class="fb-comments" data-href="https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.html" data-width="100%" data-numposts="6"></div>
   </section>
 
 </article>
@@ -233,7 +233,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-<p>🄯 2025 frijal.github.io • Artikel: Upgrade Linux Mint 22.2</p>
+<p>🄯 2025 frijal.pages.dev • Artikel: Upgrade Linux Mint 22.2</p>
   </footer>
 
   <!-- Styles (Minty fresh — CSS3, responsive, wide fullscreen, single column) -->
@@ -368,7 +368,7 @@ h1{margin:0 0 .6rem;font-size:clamp(1.8rem,3.6vw,3rem);letter-spacing:.4px}
 // Copy link
 document.getElementById('copy-link')?.addEventListener('click', async () => {
   try {
-await navigator.clipboard.writeText('https://frijal.github.io/artikel/linux-mint-22-2-upgrade-step.html');
+await navigator.clipboard.writeText('https://frijal.pages.dev/artikel/linux-mint-22-2-upgrade-step.html');
 const btn = document.getElementById('copy-link');
 const old = btn.textContent;
 btn.textContent = 'Tersalin ✓';
