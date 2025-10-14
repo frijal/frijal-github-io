@@ -1,11 +1,12 @@
 # .github/workflows/count-report-badge-artikel.yml
 
-name: Hitung & Lapor File Artikel Non-Recursive
+name: Hitung & Lapor File Artikel dan Gambar
 
 on:
   schedule:
     # Setiap hari pukul 05:00 WITA (UTC+8) → 21:00 UTC hari sebelumnya
     - cron: '0 21 * * *'
+  workflow_dispatch: # Ditambahkan agar bisa dijalankan manual
 
 jobs:
   count_and_report:
@@ -18,23 +19,30 @@ jobs:
       - name: Setup Variables
         id: vars
         run: |
-          TARGET="artikel"
+          # === MODIFIKASI: Target sekarang adalah dua folder ===
+          TARGETS="artikel img"
           DATE=$(date +'%m-%d')
-          SANITIZED=$(echo "$TARGET" | sed 's/[^[:alnum:]]/_/g')
-          REPORT="mini/${DATE}-laporan_${SANITIZED}.txt"
+          # Laporan akan diberi nama generik karena targetnya > 1
+          REPORT="mini/${DATE}-laporan_konten.txt"
+          
           echo "report_path=$REPORT" >> $GITHUB_OUTPUT
-          echo "target=$TARGET"     >> $GITHUB_OUTPUT
-          echo "date=$DATE"         >> $GITHUB_OUTPUT
+          echo "targets=$TARGETS"      >> $GITHUB_OUTPUT
+          echo "date=$DATE"          >> $GITHUB_OUTPUT
 
       - name: Count Files by Extension
         id: counts
         run: |
-          TARGET="${{ steps.vars.outputs.target }}"
+          TARGETS="${{ steps.vars.outputs.targets }}"
           declare -A counts
+          
+          # Loop untuk menghitung ekstensi spesifik di kedua folder
           for ext in html jpg png; do
-            counts[$ext]=$(find "$TARGET" -maxdepth 1 -type f -iname "*.$ext" | wc -l)
+            counts[$ext]=$(find $TARGETS -maxdepth 1 -type f -iname "*.$ext" | wc -l)
           done
-          counts[all]=$(find "$TARGET" -maxdepth 1 -type f | wc -l)
+          
+          # Hitung total semua file di kedua folder
+          counts[all]=$(find $TARGETS -maxdepth 1 -type f | wc -l)
+          
           for key in "${!counts[@]}"; do
             echo "$key=${counts[$key]}" >> $GITHUB_OUTPUT
           done
@@ -43,26 +51,32 @@ jobs:
         run: |
           REPORT="${{ steps.vars.outputs.report_path }}"
           DATE="${{ steps.vars.outputs.date }}"
-          TARGET="${{ steps.vars.outputs.target }}"
-          PREFIX="https://frijal.github.io/${TARGET}/"
+          TARGETS="${{ steps.vars.outputs.targets }}"
+          
+          # Prefix khusus untuk folder artikel
+          PREFIX_ARTIKEL="https://frijal.pages.dev/artikel/"
+          
           mkdir -p "$(dirname "$REPORT")"
           {
-            echo "LAPORAN: $TARGET ($DATE)"
+            echo "LAPORAN KONTEN: artikel & img ($DATE)"
+            echo "================================="
             echo "Total File: ${{ steps.counts.outputs.all }}"
             echo "HTML=${{ steps.counts.outputs.html }}, JPG=${{ steps.counts.outputs.jpg }}, PNG=${{ steps.counts.outputs.png }}"
             echo ""
-            echo "Ringkasan per ekstensi:"
-            find "$TARGET" -maxdepth 1 -type f -print \
+            echo "Ringkasan per ekstensi (di semua folder):"
+            find $TARGETS -maxdepth 1 -type f -print \
               | sed 's/.*\.//' \
               | sort \
               | uniq -c \
               | sort -nr
             echo ""
-            echo "URL File HTML:"
-            find "$TARGET" -maxdepth 1 -type f -iname "*.html" \
-              | sed "s|^$TARGET/|$PREFIX|g" \
+            echo "URL File HTML (dari folder 'artikel'):"
+            find "artikel" -maxdepth 1 -type f -iname "*.html" \
+              | sed "s|^artikel/|$PREFIX_ARTIKEL|g" \
               | sort
           } > "$REPORT"
+          
+          echo "Laporan berhasil dibuat:"
           cat "$REPORT"
 
       - name: Install jq
@@ -71,11 +85,12 @@ jobs:
           sudo apt-get install -y jq
 
       - name: Buat Badge JSON
+        # Tidak perlu modifikasi di sini, karena sudah menggunakan output dari langkah 'counts'
         run: |
           mkdir -p ext
           html=${{ steps.counts.outputs.html }}
           jpg=${{ steps.counts.outputs.jpg }}
-          color=$(if (( html > jpg )); then echo green; elif (( html < jpg )); then echo red; else echo blue; fi)
+          color=$(if (( html > jpg )); then echo red; elif (( html < jpg )); then echo green; else echo blue; fi)
 
           jq -n --arg m "$html" \
             '{schemaVersion:1, label:"artikel", message:$m, color:"blue"}' \
@@ -90,6 +105,7 @@ jobs:
             > ext/html_jpg_badge.json
 
       - name: Rotate Reports
+        # Tidak perlu modifikasi, logika pembersihan tetap sama
         run: |
           mkdir -p mini
           mapfile -t files < <(ls -1t mini/*-laporan_*.txt 2>/dev/null)
@@ -101,7 +117,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: >
-            chore: update laporan & badge untuk artikel
+            chore: update laporan & badge untuk artikel dan img
           branch: ${{ github.ref_name }}
           file_pattern: |
             mini/*
