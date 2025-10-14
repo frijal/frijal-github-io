@@ -12,7 +12,7 @@ OUTPUT_FILE = 'mini/kategori-otomatis.txt'
 EXISTING_CATEGORIES_FILE = 'mini/kategori-exist.txt'
 
 NUM_TOPICS = 6
-NUM_KEYWORDS_PER_TOPIC = 15
+NUM_KEYWORDS_PER_TOPIC = 30
 MATCH_THRESHOLD = 2 
 # --------------------
 
