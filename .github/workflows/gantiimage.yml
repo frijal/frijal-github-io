@@ -1,4 +1,4 @@
-name: Ganti URL Artikel ke Image dan Buat PR
+name: Ganti URL Artikel ke IMG dan Buat PR
 
 on:
   workflow_dispatch:
@@ -21,13 +21,13 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-      - name: Buat branch baru
+      - name: Buat branch baru dari main
         run: |
-          BRANCH_NAME=ubah-url-artikel-ke-img-$(date +%s)
-          git checkout -b $BRANCH_NAME
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          git fetch origin main
+          git checkout -b ubah-url-artikel-ke-image-$(date +%s) origin/main
+          echo "BRANCH_NAME=$(git branch --show-current)" >> $GITHUB_ENV
 
-      - name: Ganti URL artikel → image untuk .jpg
+      - name: Ganti URL artikel → img untuk .jpg
         run: |
           find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" \
             -exec sed -i 's|https://frijal\.pages\.dev/artikel/\([^"]*\.jpg\)|https://frijal.pages.dev/img/\1|g' {} +
@@ -43,7 +43,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.BRANCH_NAME }}
-          title: "Ganti URL artikel → image untuk .jpg"
+          base: main
+          title: "Ganti URL artikel → img untuk .jpg"
           body: |
             Perubahan otomatis:
             - Mengganti URL `https://frijal.pages.dev/artikel/*.jpg` menjadi `https://frijal.pages.dev/img/*.jpg`
