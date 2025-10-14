@@ -1,4 +1,4 @@
-name: Proses ArtikelX lalu Pindahkan ke Artikel
+name: 🧩 Proses ArtikelX lalu Pindahkan ke Artikel
 
 on:
   push:
@@ -11,137 +11,62 @@ permissions:
   contents: write
 
 jobs:
-  # Hanya ada satu pekerjaan yang berjalan secara berurutan
   process_and_move_articles:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: 🧩 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ===================================================================
-      # SEMUA PROSES MODIFIKASI DILAKUKAN DI FOLDER artikelx/ DI BAWAH INI
-      # ===================================================================
-
-      - name: 1. Jalankan Perl find-and-replace
+      # ====================== MODIFIKASI FILE DI artikelx/ ======================
+      - name: 1️⃣ Jalankan Perl find-and-replace
         run: |
           for file in artikelx/*.html; do
             echo "Memproses find-and-replace pada $file"
             perl -pi -w -e 's#https://frijal.pages.dev/assets/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/favicon/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
             perl -pi -w -e 's#YOUR_APP_ID#1471267430691023#g' "$file"
             perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID#1471267430691023#g' "$file"
-            perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID_HERE#1471267430691023#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/favicon.svg#https://frijal.pages.dev/favicon.svg#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/favicon/favicon.ico#https://frijal.pages.dev/favicon.ico#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/favicon/favicon.svg#https://frijal.pages.dev/favicon.svg#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/safari-pinned-tab.svg#https://frijal.pages.dev/favicon.svg#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/favicon#https://frijal.pages.dev/ext/icons/favicon#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/manifest.webmanifest#https://frijal.pages.dev/site.webmanifest#g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/assets/logo.png#https://frijal.pages.dev/logo.png#g' "$file"
             perl -pi -w -e 's#nama_twitter_anda#frijal#g' "$file"
-            perl -pi -w -e 's#username_twitter#frijal#g' "$file"
-            perl -pi -w -e 's/&copy;/🄯/g' "$file"
             perl -pi -w -e 's/©/🄯/g' "$file"
-            perl -pi -w -e 's#https://frijal.pages.dev/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
-            perl -pi -w -e 's#yourtwitterhandle#frijal#g' "$file"
             perl -pi -w -e 's#href="https://frijal.pages.dev/artikel/"#href="https://frijal.pages.dev/artikel.html"#g' "$file"
           done
 
-      - name: 2. Jalankan inject-meta.js
-        run: node ext/inject-meta.js
+      - name: 2️⃣ Jalankan inject-meta.js
+        run: node ext/inject-meta.js || true
 
-      - name: 3. Sisipkan sebelum <title>
+      - name: 3️⃣ Tambahkan elemen HTML tambahan
         run: |
           for file in artikelx/*.html; do
-            if grep -q "" "$file"; then
-              echo "ℹ️ Sudah ada prettier-ignore di $file"
-              continue
-            fi
-            perl -0777 -i -pe 's|<title>(.*?)</title>|\n<title>\1</title>|is' "$file"
-            echo "✅ Ditambahkan prettier-ignore di $file"
+            sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
+            sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
+            sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
+            sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>' "$file"
+            sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
           done
 
-      # 4.1 Sisipkan CSS marquee-url.css
-      - name: 4.1 Sisipkan CSS marquee-url.css
-        run: |
-          for file in artikelx/*.html; do
-            if grep -q '/ext/marquee-url.css' "$file"; then
-              echo "ℹ️ CSS sudah ada di $file"
-            else
-              sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
-              echo "✅ CSS ditambahkan di $file"
-            fi
-          done
+      # =================== PINDAHKAN DAN COMMIT ===================
+      - name: 4️⃣ Pindahkan hasil ke artikel/
+        run: mv -f artikelx/*.html artikel/ || true
 
-      # 4.2 Sisipkan div #iposbrowser
-      - name: 4.2 Sisipkan div #iposbrowser
+      - name: 5️⃣ Commit & Push hasil
+        id: commit_step
         run: |
-          for file in artikelx/*.html; do
-            if grep -q 'id="iposbrowser"' "$file"; then
-              echo "ℹ️ div #iposbrowser sudah ada di $file"
-            else
-              sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
-              echo "✅ div #iposbrowser ditambahkan di $file"
-            fi
-          done
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-      # 4.3 Sisipkan kolom pencarian mengambang
-      - name: 4.3 Sisipkan search-floating-container
-        run: |
-          for file in artikelx/*.html; do
-            if grep -q 'search-floating-container' "$file"; then
-              echo "ℹ️ kolom pencarian sudah ada di $file"
-            else
-              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
-              echo "✅ kolom pencarian ditambahkan di $file"
-            fi
-          done
-
-      # 4.4 Sisipkan section related & marquee-url.js
-      - name: 4.4 Sisipkan related-marquee-section & marquee-url.js
-        run: |
-          for file in artikelx/*.html; do
-            if grep -q 'related-marquee-section' "$file"; then
-              echo "ℹ️ related-marquee-section sudah ada di $file"
-            else
-              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>' "$file"
-              echo "✅ related-marquee-section & marquee-url.js ditambahkan di $file"
-            fi
-          done
-
-      # 4.5 Sisipkan skrip defer iposbrowser.js
-      - name: 4.5 Sisipkan skrip defer iposbrowser.js
-        run: |
-          for file in artikelx/*.html; do
-            if grep -q 'iposbrowser.js' "$file"; then
-              echo "ℹ️ iposbrowser.js sudah ada di $file"
-            else
-              sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
-              echo "✅ iposbrowser.js ditambahkan di $file"
-            fi
-          done
-
-      # ===================================================================
-      # SETELAH SEMUA MODIFIKASI SELESAI, PINDAHKAN FILE
-      # ===================================================================
-
-      - name: 5. Pindahkan file HTML yang sudah bersih ke folder artikel/
-        run: |
-          mv -f artikelx/*.html artikel/ || true
-
-      - name: 6. Commit & Push semua perubahan
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          if git diff --quiet; then
+          moved_files=$(ls artikelx/*.html 2>/dev/null || true)
+          if git diff --quiet && [ -z "$moved_files" ]; then
+            echo "skip_commit=true" >> $GITHUB_OUTPUT
             echo "Tidak ada perubahan baru, skip commit."
           else
-            git add artikelx artikel
-            git commit -m "Workflow: Proses & pindahkan artikel dari artikelx/"
+            git add artikel artikelx
+            git commit -m "✨ Artikel baru dipindahkan dari artikelx → artikel [skip ci]"
             git push
+            echo "skip_commit=false" >> $GITHUB_OUTPUT
           fi
+

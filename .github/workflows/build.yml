@@ -1,56 +1,65 @@
-name: 🔧 Build static site (Cloudflare Pages source)
+name: 🔧 Build static site (Smart Trigger)
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'artikel/**/*.html'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: 🧩 Setup Node.js (for build scripts)
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: ⚙️ Install dependencies (if any)
+      - name: Install dependencies
         run: |
-          if [ -f package.json ]; then
-            npm ci
+          [ -f package.json ] && npm ci || echo "No package.json found — skipping install."
+
+      - name: Check if HTML changed
+        id: check_changes
+        run: |
+          git fetch origin main
+          CHANGED_FILES=$(git diff --name-only origin/main HEAD -- 'artikel/**/*.html' || true)
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "skip_build=true" >> $GITHUB_ENV
           else
-            echo "No package.json found — skipping install."
+            echo "skip_build=false" >> $GITHUB_ENV
           fi
 
-      - name: 🔍 Replace domain for Cloudflare
+      - name: Exit if no changes
+        if: env.skip_build == 'true'
+        run: exit 0
+
+      - name: Replace domain for Cloudflare
+        run: find artikel/ -type f -name "*.html" -exec perl -pi -e 's/frijal\.github\.io/frijal\.pages\.dev/g' {} +
+
+      - name: Generate screenshots
         run: |
-          echo "Replacing frijal.github.io → frijal.pages.dev ..."
-          find . -type f -name "*.html" \
-            -exec perl -pi -e 's/frijal\.github\.io/frijal\.pages\.dev/g' {} +
+          npm install puppeteer --no-save
+          node ext/screenshot-puppeteer.js
 
-      - name: 🧠 Generate metadata, sitemap, and index
+      - name: Generate metadata, sitemap, index
         run: |
-          if [ -f ext/inject-meta.js ]; then
-            node ext/inject-meta.js || true
-          fi
-          if [ -f ext/rss.js ]; then
-            node ext/rss.js || true
-          fi
-          if [ -f ext/sitemap.js ]; then
-            node ext/sitemap.js || true
-          fi
-          if [ -f ext/generate_indexnow.py ]; then
-            python3 ext/generate_indexnow.py || true
-          fi
+          node ext/inject-meta.js || true
+          node ext/rss.js || true
+          node ext/sitemap.js || true
+          python3 ext/generate_indexnow.py || true
 
-      - name: 🧹 Cleanup temporary files
-        run: |
-          rm -rf tmp/ __pycache__/
+      - name: Cleanup temporary files
+        run: rm -rf tmp/ __pycache__/
 
-      - name: 💾 Commit updated generated files
+      - name: Commit updated generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

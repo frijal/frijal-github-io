@@ -1,0 +1,65 @@
+name: 🔄 Proses ArtikelX
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'artikelx/*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  process_and_move_articles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ================== PROSES ARTIKEL ==================
+      - name: Jalankan find-and-replace
+        run: |
+          for file in artikelx/*.html; do
+            echo "Memproses $file"
+            # Masukkan semua perl replace seperti sebelumnya
+            perl -pi -w -e 's#https://frijal.pages.dev/assets/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
+            # … tambahkan sisa find-and-replace
+          done
+
+      - name: Inject meta & script
+        run: |
+          node ext/inject-meta.js || true
+          # Tambahkan step lain jika perlu
+
+      - name: Tambahkan CSS/JS & div tambahan
+        run: |
+          for file in artikelx/*.html; do
+            # tambahkan semua step sisipkan CSS/JS/div/search
+            sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
+            sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
+            sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>' "$file"
+            sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>' "$file"
+            sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
+          done
+
+      # ================== PINDAHKAN KE artikel ==================
+      - name: Pindahkan ke folder artikel/
+        run: mv -f artikelx/*.html artikel/ || true
+
+      - name: Commit & Push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          if git diff --quiet; then
+            echo "Tidak ada perubahan, skip commit."
+          else
+            git add artikelx artikel
+            git commit -m "Workflow: Proses & pindahkan artikel dari artikelx/"
+            git push
+          fi
