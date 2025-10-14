@@ -1,10 +1,16 @@
-name: 🔧 Build static site (Smart Trigger)
+name: 🔧 Build & Deploy Static Site (Smart Trigger)
 
 on:
   push:
     branches: ["main"]
     paths:
-      - 'artikel/**/*.html'
+      - 'artikel/**'
+      - 'ext/**'
+      - 'img/**'
+      - '*.html'
+      - '*.js'
+      - '*.jpg'      
+      - '*.css'
   workflow_dispatch:
 
 permissions:
@@ -26,28 +32,28 @@ jobs:
         run: |
           [ -f package.json ] && npm ci || echo "No package.json found — skipping install."
 
-      - name: Check if HTML changed
+      - name: Check if relevant files changed
         id: check_changes
         run: |
           git fetch origin main
-          CHANGED_FILES=$(git diff --name-only origin/main HEAD -- 'artikel/**/*.html' || true)
+          CHANGED_FILES=$(git diff --name-only origin/main HEAD -- 'artikel/**' 'ext/**' '*.html' '*.js' '*.css' || true)
           if [ -z "$CHANGED_FILES" ]; then
             echo "skip_build=true" >> $GITHUB_ENV
           else
             echo "skip_build=false" >> $GITHUB_ENV
-          fi
 
       - name: Exit if no changes
         if: env.skip_build == 'true'
-        run: exit 0
+        run: |
+          echo "No relevant changes detected. Skipping build & deploy."
+          exit 0
 
       - name: Replace domain for Cloudflare
         run: find artikel/ -type f -name "*.html" -exec perl -pi -e 's/frijal\.github\.io/frijal\.pages\.dev/g' {} +
 
-      - name: Generate metadata, sitemap, index
+      - name: Generate metadata, sitemap, RSS, index
         run: |
-          node ext/inject-meta.js || true
-          node ext/sitemap.js || true
+          node ext/generator.js || true
           node ext/rss.js || true
           python3 ext/generate_indexnow.py || true
           
@@ -65,4 +71,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git diff --cached --quiet || git commit -m "🤖 Auto-build update"
-          git push
+          git push || echo "No changes to push"
+
+      - name: Install Wrangler CLI
+        run: npm install -g wrangler
+
+      - name: Deploy to Cloudflare Pages
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          wrangler pages deploy . --project-name=frijal --branch=main
+
