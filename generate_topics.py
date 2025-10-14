@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import Nmf
+from sklearn.decomposition import NMF # <-- PERBAIKAN DI SINI
 
 # --- KONFIGURASI ---
 # Direktori tempat artikel HTML Anda disimpan.
@@ -79,7 +79,8 @@ def main():
 
     # Menjalankan model NMF untuk menemukan topik
     print(f"🧠 Menganalisis dan menemukan {NUM_TOPICS} topik (NMF)...")
-    nmf_model = Nmf(n_components=NUM_TOPICS, random_state=1, max_iter=1000)
+    # v-- PERBAIKAN DI SINI
+    nmf_model = NMF(n_components=NUM_TOPICS, random_state=1, max_iter=1000)
     nmf_model.fit(tfidf_matrix)
 
     # Menyiapkan dan menyimpan hasil
