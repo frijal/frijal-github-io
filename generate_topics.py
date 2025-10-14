@@ -18,10 +18,12 @@ def download_nltk_data():
     try:
         nltk.data.find('tokenizers/punkt')
         nltk.data.find('corpora/stopwords')
-    except LookupError: # <-- PERBAIKAN DI SINI
-        print("📥 Mengunduh data NLTK (punkt, stopwords) untuk bahasa Indonesia...")
+    except LookupError:
+        print("📥 Mengunduh data NLTK (punkt, stopwords, punkt_tab)...")
         nltk.downloader.download('punkt', quiet=True)
         nltk.downloader.download('stopwords', quiet=True)
+        # Menambahkan unduhan untuk paket yang diminta di log error
+        nltk.downloader.download('punkt_tab', quiet=True)
         print("✅ Data NLTK siap.")
 
 def extract_text_from_html(html_content):
