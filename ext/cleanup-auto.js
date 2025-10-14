@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ===============================================================
- *  CLEANUP SCRIPT v3 (Non-Interactive) – frijal.github.io
+ *  CLEANUP SCRIPT v3 (Non-Interactive) – frijal.pages.dev
  *  Versi otomatis penuh untuk GitHub Actions / CI workflow
  * ===============================================================
  *

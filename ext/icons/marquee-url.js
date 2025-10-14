@@ -176,7 +176,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         </svg>
       </a>
       <!-- Ikon RSS (RESTORED) -->
-      <a href="https://frijal.github.io/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
+      <a href="https://frijal.pages.dev/rss.html" title="Update harian berisi 30 judul artikel terbaru dari berbagai topik populer. Ringkas, informatif, dan siap dibaca.">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#FF6F00"/><stop offset="100%" stop-color="#FFA726"/>
@@ -188,7 +188,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         </svg>
       </a>
       <!-- Ikon Home -->
-      <a href="https://frijal.github.io" title="Home">
+      <a href="https://frijal.pages.dev" title="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#388E3C"/><stop offset="100%" stop-color="#66BB6A"/>
@@ -198,7 +198,7 @@ function initNavIcons(allArticlesData, currentFilename) {
         </svg>
       </a>
       <!-- Ikon Sitemap -->
-      <a href="https://frijal.github.io/sitemap.html" title="Daftar Isi">
+      <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
           <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#1976D2"/><stop offset="100%" stop-color="#64B5F6"/>

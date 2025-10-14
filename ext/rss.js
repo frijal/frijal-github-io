@@ -92,7 +92,7 @@ const generateRSS = async () => {
           allItems.push({
             title: arr[IDX_TITLE],
             file: fileName,
-            loc: `https://frijal.github.io/artikel/${fileName}`,
+            loc: `https://frijal.pages.dev/artikel/${fileName}`,
             pubDate: new Date(sitemapInfo.lastmod).toUTCString(),
             desc: arr[IDX_DESCRIPTION] || sanitizeTitle(arr[IDX_TITLE]),
             category: category,
@@ -131,10 +131,10 @@ ${enclosure}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title><![CDATA[Frijal Artikel]]></title>
-    <link><![CDATA[https://frijal.github.io/]]></link>
+    <link><![CDATA[https://frijal.pages.dev/]]></link>
     <description><![CDATA[Feed artikel terbaru]]></description>
     <language>id-ID</language>
-    <atom:link href="https://frijal.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://frijal.pages.dev/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>

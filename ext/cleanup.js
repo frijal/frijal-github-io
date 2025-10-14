@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * ===============================================================
- *  CLEANUP SCRIPT v2 – frijal.github.io
+ *  CLEANUP SCRIPT v2 – frijal.pages.dev
  *  Membersihkan dependensi tidak terpakai + reset instalasi npm
  * ===============================================================
  *

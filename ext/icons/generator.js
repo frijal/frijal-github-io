@@ -75,18 +75,18 @@ function extractImage(content, file) {
     if (img && img[1]) {
       src = img[1].trim()
       if (!/^https?:\/\//i.test(src)) {
-        src = `https://frijal.github.io/artikel/${src.replace(/^\/+/, '')}`
+        src = `https://frijal.pages.dev/artikel/${src.replace(/^\/+/, '')}`
       }
     }
   }
   if (!src) {
     const baseName = file.replace(/\.html?$/i, '')
-    src = `https://frijal.github.io/artikel/${baseName}.jpg`
+    src = `https://frijal.pages.dev/artikel/${baseName}.jpg`
   }
 
   const validExt = /\.(jpe?g|png|gif|webp|avif|svg)$/i
   if (!src || !validExt.test(src.split('?')[0])) {
-    return 'https://frijal.github.io/thumbnail.jpg'
+    return 'https://frijal.pages.dev/thumbnail.jpg'
   }
   return src
 }
@@ -169,7 +169,7 @@ const generate = async () => {
 
     xmlUrls.push(
       `<url>
-  <loc>https://frijal.github.io/artikel/${file}</loc>
+  <loc>https://frijal.pages.dev/artikel/${file}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>0.6</priority>
   <changefreq>monthly</changefreq>

@@ -15,8 +15,8 @@ const CONFIG = {
   masterJson: path.join(__dirname, '..', 'artikel', 'artikel.json'),
   jsonOut: path.join(__dirname, '..', 'artikel.json'),
   xmlOut: path.join(__dirname, '..', 'sitemap.xml'),
-  baseUrl: 'https://frijal.github.io',
-  defaultThumbnail: 'https://frijal.github.io/thumbnail.jpg',
+  baseUrl: 'https://frijal.pages.dev',
+  defaultThumbnail: 'https://frijal.pages.dev/thumbnail.jpg',
   xmlPriority: '0.6',
   xmlChangeFreq: 'monthly',
 }
