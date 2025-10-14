@@ -1,8 +1,7 @@
 /**
  * ===================================================================
- * SKRIP GABUNGAN v8.1: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
+ * SKRIP GABUNGAN v8: MARQUEE, PENCARIAN & IKON NAVIGASI KATEGORI
  * ===================================================================
- * - Kompatibel dengan Cloudflare Pages (Pretty URLs).
  * - Fetch data hanya satu kali untuk semua fitur.
  * - Navigasi ikon (Next/Prev) berputar di dalam kategori yang sama.
  * - Tooltip judul artikel yang lebih deskriptif.
@@ -195,7 +194,7 @@ function initNavIcons(allArticlesData, currentFilename) {
     const noEmoji = name.replace(/^[^\w\s]*/, '').trim()
     const slug = noEmoji
       .toLowerCase()
-      .replace(/ & /g, '-and-')
+      .replace(/ \& /g, '-and-')
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
@@ -243,24 +242,10 @@ async function initializeApp() {
     if (!response.ok) throw new Error(`Gagal memuat artikel.json`)
     const allArticlesData = await response.json()
 
-    // === PERUBAHAN DI SINI ===
-    const currentPath = window.location.pathname;
-    let currentFilename;
-
-    if (currentPath.endsWith('.html')) {
-      // Kasus 1: URL adalah path file langsung (misal: saat development lokal)
-      // Contoh: /artikel/judul-artikel.html -> "judul-artikel.html"
-      currentFilename = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-    } else {
-      // Kasus 2: Pretty URL (Cloudflare Pages)
-      // Hapus trailing slash jika ada, contoh: /artikel/judul-artikel/ -> /artikel/judul-artikel
-      const cleanPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
-      // Ambil bagian terakhir dari path, contoh: /artikel/judul-artikel -> "judul-artikel"
-      const slug = cleanPath.substring(cleanPath.lastIndexOf('/') + 1);
-      // Tambahkan kembali ekstensi .html agar cocok dengan data di artikel.json
-      currentFilename = `${slug}.html`;
-    }
-    // === AKHIR PERUBAHAN ===
+    const currentURL = window.location.pathname
+    const currentFilename = currentURL.substring(
+      currentURL.lastIndexOf('/') + 1,
+    )
 
     const clearButton = document.getElementById('floatingSearchClear')
     if (clearButton) {
