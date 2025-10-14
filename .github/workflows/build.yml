@@ -44,17 +44,17 @@ jobs:
       - name: Replace domain for Cloudflare
         run: find artikel/ -type f -name "*.html" -exec perl -pi -e 's/frijal\.github\.io/frijal\.pages\.dev/g' {} +
 
+      - name: Generate metadata, sitemap, index
+        run: |
+          node ext/inject-meta.js || true
+          node ext/sitemap.js || true
+          node ext/rss.js || true
+          python3 ext/generate_indexnow.py || true
+          
       - name: Generate screenshots
         run: |
           npm install puppeteer --no-save
           node ext/screenshot-puppeteer.js
-
-      - name: Generate metadata, sitemap, index
-        run: |
-          node ext/inject-meta.js || true
-          node ext/rss.js || true
-          node ext/sitemap.js || true
-          python3 ext/generate_indexnow.py || true
 
       - name: Cleanup temporary files
         run: rm -rf tmp/ __pycache__/
