@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '..')
 const rssPath = path.join(projectRoot, 'rss.xml')
 const templatePath = path.join(projectRoot, 'ext', 'template.html')
-const outputPath = path.join(projectRoot, 'rss.html')
+const outputPath = path.join(projectRoot, 'feed.html')
 
 async function buildPage() {
   console.log('Mulai membuat halaman artikel terbaru...')
