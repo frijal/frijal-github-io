@@ -1,6 +1,5 @@
 import os
 import re
-import json # Diperlukan untuk parsing
 from bs4 import BeautifulSoup
 import nltk
 from nltk.corpus import stopwords
@@ -10,12 +9,13 @@ from sklearn.decomposition import NMF
 # --- KONFIGURASI ---
 ARTICLES_DIR = 'artikel'
 OUTPUT_FILE = 'mini/kategori-otomatis.txt'
-# Path ke file JavaScript yang berisi kategori existing
-EXISTING_CATEGORIES_JS = 'ext/titleToCategory.js'
+# ==> DIUBAH: Path sekarang menunjuk ke file .txt
+EXISTING_CATEGORIES_FILE = 'mini/kategori-exist.txt'
 
-NUM_TOPICS = 5
+# Pengaturan untuk model AI
+NUM_TOPICS = 6 # Anda bisa sesuaikan jumlah topik yang ingin ditemukan
 NUM_KEYWORDS_PER_TOPIC = 15
-# Minimal jumlah kata kunci yang harus cocok untuk menggunakan nama kategori existing
+# Minimal jumlah kata kunci dari kategori yang ada harus cocok untuk digunakan namanya
 MATCH_THRESHOLD = 2 
 # --------------------
 
@@ -30,61 +30,64 @@ def download_nltk_data():
         nltk.downloader.download('stopwords', quiet=True)
         print("✅ Data NLTK siap.")
 
-# ==> FUNGSI BARU: Membaca dan mem-parsing file JavaScript <==
-def load_existing_categories(js_file_path):
+# ==> FUNGSI DITULIS ULANG: Untuk membaca format .txt <==
+def load_existing_categories_from_txt(txt_file_path):
     """
-    Membaca file titleToCategory.js dan mengekstrak struktur kategorinya
-    menjadi dictionary Python.
+    Membaca file kategori dari format .txt yang sederhana.
+    Format yang diharapkan:
+    ## Nama Kategori 1
+    keyword1
+    keyword2
+    ...
+    (baris kosong)
+    ## Nama Kategori 2
+    ...
     """
-    print(f"📖 Membaca kategori existing dari '{js_file_path}'...")
+    print(f"📖 Membaca kategori yang ada dari '{txt_file_path}'...")
+    category_map = {}
+    current_category = None
     try:
-        with open(js_file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        # Gunakan regex untuk mengekstrak array 'categories' secara aman
-        match = re.search(r'const categories\s*=\s*(\[[\s\S]*?\]);', content)
-        if not match:
-            print("❌ Tidak dapat menemukan 'const categories = [...]' di dalam file.")
-            return {}
-
-        js_array_string = match.group(1)
+        with open(txt_file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    current_category = None # Reset jika ada baris kosong
+                    continue
+                
+                if line.startswith('## '):
+                    # Ini adalah baris nama kategori baru
+                    current_category = line[3:] # Ambil teks setelah '## '
+                    category_map[current_category] = []
+                elif current_category:
+                    # Ini adalah baris keyword, tambahkan ke kategori saat ini
+                    category_map[current_category].append(line.lower())
         
-        # Konversi string array JavaScript menjadi string JSON yang valid
-        # 1. Tambahkan kutip ganda pada keys (name, priority, keywords)
-        json_string = re.sub(r'(\w+):', r'"\1":', js_array_string)
-        # 2. Ganti kutip tunggal dengan kutip ganda untuk string
-        json_string = json_string.replace("'", '"')
-        # 3. Hapus trailing comma (,) sebelum '}' atau ']'
-        json_string = re.sub(r',\s*([}\]])', r'\1', json_string)
-        
-        # Parse string JSON menjadi objek Python
-        parsed_data = json.loads(json_string)
-
-        # Ubah formatnya menjadi { 'Nama Kategori': ['keyword1', 'keyword2'] }
-        category_map = {item['name']: item['keywords'] for item in parsed_data}
-        print(f"✅ Berhasil memuat {len(category_map)} kategori existing.")
+        print(f"✅ Berhasil memuat {len(category_map)} kategori yang sudah ada.")
         return category_map
-
+    except FileNotFoundError:
+        print(f"⚠️ Peringatan: File '{txt_file_path}' tidak ditemukan. Penamaan topik akan menggunakan fallback.")
+        return {}
     except Exception as e:
-        print(f"❌ Gagal membaca atau mem-parsing '{js_file_path}': {e}")
+        print(f"❌ Gagal membaca atau mem-parsing '{txt_file_path}': {e}")
         return {}
 
 def extract_text_from_html(html_content):
+    """Mengambil teks bersih dari konten HTML."""
     soup = BeautifulSoup(html_content, 'lxml')
     for element in soup(['script', 'style', 'nav', 'footer', 'header', 'aside', 'form']):
         element.decompose()
     return ' '.join(soup.stripped_strings)
 
 def preprocess_text(text, stop_words):
+    """Membersihkan teks: lowercase, hapus non-alfabet, hapus stopwords."""
     text = text.lower()
     text = re.sub(r'[^a-z\s]', '', text)
     tokens = nltk.word_tokenize(text)
     filtered_tokens = [word for word in tokens if word not in stop_words and len(word) > 2]
     return " ".join(filtered_tokens)
 
-# ==> FUNGSI DIMODIFIKASI: Menerima category_map sebagai argumen <==
 def get_smart_topic_name(top_keywords, category_map):
-    """Menentukan nama topik berdasarkan kategori existing atau fallback."""
+    """Menentukan nama topik yang bagus berdasarkan pemetaan atau fallback."""
     if not category_map:
         return ' & '.join(kw.capitalize() for kw in top_keywords[:2])
 
@@ -100,11 +103,12 @@ def get_smart_topic_name(top_keywords, category_map):
     return ' & '.join(kw.capitalize() for kw in top_keywords[:2])
 
 def main():
+    """Fungsi utama untuk menjalankan seluruh proses."""
     print("🚀 Memulai proses penemuan topik otomatis...")
     download_nltk_data()
     
-    # ==> LANGKAH BARU: Muat kategori dari file JS di awal <==
-    existing_category_map = load_existing_categories(EXISTING_CATEGORIES_JS)
+    # ==> LANGKAH BARU: Muat kategori dari file TXT di awal
+    existing_category_map = load_existing_categories_from_txt(EXISTING_CATEGORIES_FILE)
 
     if not os.path.isdir(ARTICLES_DIR):
         print(f"❌ Error: Folder '{ARTICLES_DIR}' tidak ditemukan.")
@@ -112,7 +116,6 @@ def main():
 
     corpus = []
     print("📖 Membaca dan membersihkan semua artikel...")
-    # ... (sisa kode pembacaan corpus tetap sama)
     for filename in os.listdir(ARTICLES_DIR):
         if filename.endswith('.html'):
             file_path = os.path.join(ARTICLES_DIR, filename)
@@ -141,7 +144,6 @@ def main():
         for topic_idx, topic in enumerate(nmf_model.components_):
             top_keywords = [feature_names[i] for i in topic.argsort()[:-NUM_KEYWORDS_PER_TOPIC - 1:-1]]
             
-            # ==> PANGGILAN FUNGSI DIMODIFIKASI <==
             topic_name = get_smart_topic_name(top_keywords, existing_category_map)
 
             f_out.write(f"## Kategori Disarankan: {topic_name}\n")
