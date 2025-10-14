@@ -28,7 +28,7 @@ jobs:
           pip install beautifulsoup4 lxml nltk scikit-learn
 
       - name: '4. Jalankan Skrip Penemu Topik'
-        run: python generate_topics.py
+        run: python ext/generate_topics.py
 
       - name: '5. Commit dan Push Laporan Baru'
         uses: stefanzweifel/git-auto-commit-action@v5

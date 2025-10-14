@@ -22,11 +22,9 @@ def download_nltk_data():
         nltk.data.find('tokenizers/punkt')
         nltk.data.find('corpora/stopwords')
     except LookupError:
-        print("📥 Mengunduh data NLTK (punkt, stopwords, punkt_tab)...")
+        print("📥 Mengunduh data NLTK (punkt, stopwords)...")
         nltk.downloader.download('punkt', quiet=True)
         nltk.downloader.download('stopwords', quiet=True)
-        # Menambahkan unduhan untuk paket yang diminta di log error
-        nltk.downloader.download('punkt_tab', quiet=True)
         print("✅ Data NLTK siap.")
 
 def load_existing_categories_from_txt(txt_file_path):
@@ -100,14 +98,19 @@ def main():
         return
 
     corpus = []
+    filenames = [] # ==> BARU: Simpan urutan nama file
     print("📖 Membaca dan membersihkan semua artikel...")
-    for filename in os.listdir(ARTICLES_DIR):
+    for filename in sorted(os.listdir(ARTICLES_DIR)): # 'sorted' untuk konsistensi
         if filename.endswith('.html'):
             file_path = os.path.join(ARTICLES_DIR, filename)
             with open(file_path, 'r', encoding='utf-8') as f:
                 html_content = f.read()
             raw_text = extract_text_from_html(html_content)
-            corpus.append(raw_text)
+            
+            # Hanya proses file yang punya cukup konten
+            if len(raw_text.split()) > 20:
+                corpus.append(raw_text)
+                filenames.append(filename)
 
     stop_words = set(stopwords.words('indonesian'))
     processed_corpus = [preprocess_text(doc, stop_words) for doc in corpus]
@@ -117,9 +120,19 @@ def main():
     tfidf_matrix = vectorizer.fit_transform(processed_corpus)
 
     print(f"🧠 Menganalisis dan menemukan {NUM_TOPICS} topik (NMF)...")
-    nmf_model = NMF(n_components=NUM_TOPICS, random_state=1, max_iter=1000)
-    nmf_model.fit(tfidf_matrix)
+    nmf_model = NMF(n_components=NUM_TOPICS, random_state=1, max_iter=1000, init='nndsvda')
+    # ==> MODIFIKASI: `fit_transform` untuk mendapatkan matriks W (dokumen-topik)
+    W = nmf_model.fit_transform(tfidf_matrix)
+    
+    # ==> BARU: Menentukan topik utama untuk setiap file
+    # `row.argmax()` menemukan indeks (topik) dengan skor tertinggi untuk setiap baris (file)
+    topic_for_each_file = [row.argmax() for row in W]
 
+    # ==> BARU: Mengelompokkan nama file berdasarkan topik yang ditemukan
+    files_by_topic = {i: [] for i in range(NUM_TOPICS)}
+    for file_index, topic_index in enumerate(topic_for_each_file):
+        files_by_topic[topic_index].append(filenames[file_index])
+    
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f_out:
         f_out.write(f"Hasil Analisis Topik Otomatis ({NUM_TOPICS} Topik Ditemukan)\n")
@@ -128,11 +141,20 @@ def main():
         feature_names = vectorizer.get_feature_names_out()
         for topic_idx, topic in enumerate(nmf_model.components_):
             top_keywords = [feature_names[i] for i in topic.argsort()[:-NUM_KEYWORDS_PER_TOPIC - 1:-1]]
-            
             topic_name = get_smart_topic_name(top_keywords, existing_category_map)
 
             f_out.write(f"## Kategori Disarankan: {topic_name}\n")
-            f_out.write(f"   Kata Kunci ({len(top_keywords)}): {', '.join(top_keywords)}\n\n")
+            f_out.write(f"   Kata Kunci ({len(top_keywords)}): {', '.join(top_keywords)}\n")
+            
+            # ==> BARU: Menulis daftar file yang relevan
+            assigned_files = files_by_topic.get(topic_idx, [])
+            f_out.write(f"   Artikel Terkait ({len(assigned_files)} file):\n")
+            if assigned_files:
+                for file_name in sorted(assigned_files):
+                    f_out.write(f"     - {file_name}\n")
+            else:
+                f_out.write("     - (Tidak ada artikel yang dominan untuk topik ini)\n")
+            f_out.write("\n") # Baris kosong untuk pemisah
             
     print(f"✨ Proses selesai! Hasil analisis disimpan di '{OUTPUT_FILE}'.")
 
