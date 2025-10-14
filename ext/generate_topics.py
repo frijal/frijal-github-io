@@ -22,9 +22,11 @@ def download_nltk_data():
         nltk.data.find('tokenizers/punkt')
         nltk.data.find('corpora/stopwords')
     except LookupError:
-        print("📥 Mengunduh data NLTK (punkt, stopwords)...")
+        print("📥 Mengunduh data NLTK (punkt, stopwords, punkt_tab)...")
         nltk.downloader.download('punkt', quiet=True)
         nltk.downloader.download('stopwords', quiet=True)
+        # Menambahkan unduhan untuk paket yang diminta di log error
+        nltk.downloader.download('punkt_tab', quiet=True)
         print("✅ Data NLTK siap.")
 
 def load_existing_categories_from_txt(txt_file_path):
@@ -98,16 +100,15 @@ def main():
         return
 
     corpus = []
-    filenames = [] # ==> BARU: Simpan urutan nama file
+    filenames = []
     print("📖 Membaca dan membersihkan semua artikel...")
-    for filename in sorted(os.listdir(ARTICLES_DIR)): # 'sorted' untuk konsistensi
+    for filename in sorted(os.listdir(ARTICLES_DIR)):
         if filename.endswith('.html'):
             file_path = os.path.join(ARTICLES_DIR, filename)
             with open(file_path, 'r', encoding='utf-8') as f:
                 html_content = f.read()
             raw_text = extract_text_from_html(html_content)
             
-            # Hanya proses file yang punya cukup konten
             if len(raw_text.split()) > 20:
                 corpus.append(raw_text)
                 filenames.append(filename)
@@ -121,14 +122,10 @@ def main():
 
     print(f"🧠 Menganalisis dan menemukan {NUM_TOPICS} topik (NMF)...")
     nmf_model = NMF(n_components=NUM_TOPICS, random_state=1, max_iter=1000, init='nndsvda')
-    # ==> MODIFIKASI: `fit_transform` untuk mendapatkan matriks W (dokumen-topik)
     W = nmf_model.fit_transform(tfidf_matrix)
     
-    # ==> BARU: Menentukan topik utama untuk setiap file
-    # `row.argmax()` menemukan indeks (topik) dengan skor tertinggi untuk setiap baris (file)
     topic_for_each_file = [row.argmax() for row in W]
 
-    # ==> BARU: Mengelompokkan nama file berdasarkan topik yang ditemukan
     files_by_topic = {i: [] for i in range(NUM_TOPICS)}
     for file_index, topic_index in enumerate(topic_for_each_file):
         files_by_topic[topic_index].append(filenames[file_index])
@@ -146,7 +143,6 @@ def main():
             f_out.write(f"## Kategori Disarankan: {topic_name}\n")
             f_out.write(f"   Kata Kunci ({len(top_keywords)}): {', '.join(top_keywords)}\n")
             
-            # ==> BARU: Menulis daftar file yang relevan
             assigned_files = files_by_topic.get(topic_idx, [])
             f_out.write(f"   Artikel Terkait ({len(assigned_files)} file):\n")
             if assigned_files:
@@ -154,7 +150,7 @@ def main():
                     f_out.write(f"     - {file_name}\n")
             else:
                 f_out.write("     - (Tidak ada artikel yang dominan untuk topik ini)\n")
-            f_out.write("\n") # Baris kosong untuk pemisah
+            f_out.write("\n")
             
     print(f"✨ Proses selesai! Hasil analisis disimpan di '{OUTPUT_FILE}'.")
 
