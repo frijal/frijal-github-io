@@ -1,0 +1,42 @@
+name: Preview Ganti Artikel ke Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_folder:
+        description: 'Folder yang ingin diproses (misalnya: docs/html)'
+        required: true
+        default: '.'
+
+jobs:
+  preview-perubahan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Git user
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Buat branch sementara untuk preview
+        run: |
+          BRANCH_NAME=preview-artikel-ke-image-$(date +%s)
+          git checkout -b $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Jalankan penggantian "artikel" → "img" di baris .jpg
+        run: |
+          find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" -exec sed -i '/\.jpg/ s/artikel/img/g' {} +
+
+      - name: Tampilkan preview perubahan (git diff)
+        run: |
+          echo "Berikut adalah preview perubahan:"
+          git --no-pager diff
+
+      - name: Simpan perubahan tanpa commit
+        run: |
+          echo "Perubahan sudah diterapkan di branch ${{ env.BRANCH_NAME }}, tapi belum dikomit."
+          echo "Silakan review hasilnya dan buat PR secara manual jika sudah sesuai."
