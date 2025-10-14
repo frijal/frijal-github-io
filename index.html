@@ -316,7 +316,7 @@
           ? formatDate(item[IDX_DATE])
           : 'Tanggal tidak diketahui'
         const description = item[IDX_DESCRIPTION] || title
-        const articleUrl = `artikel/${fileName}`
+        const articleUrl = `img/${fileName}`
 
         let thumbnailUrl = jsonImage
         if (
@@ -326,7 +326,7 @@
           thumbnailUrl = DEFAULT_THUMBNAIL
         }
         if (!/^https?:\/\//i.test(thumbnailUrl)) {
-          thumbnailUrl = `artikel/${thumbnailUrl}`
+          thumbnailUrl = `img/${thumbnailUrl}`
         }
 
         const link = document.createElement('a')
