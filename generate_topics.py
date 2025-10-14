@@ -9,13 +9,10 @@ from sklearn.decomposition import NMF
 # --- KONFIGURASI ---
 ARTICLES_DIR = 'artikel'
 OUTPUT_FILE = 'mini/kategori-otomatis.txt'
-# ==> DIUBAH: Path sekarang menunjuk ke file .txt
 EXISTING_CATEGORIES_FILE = 'mini/kategori-exist.txt'
 
-# Pengaturan untuk model AI
-NUM_TOPICS = 6 # Anda bisa sesuaikan jumlah topik yang ingin ditemukan
+NUM_TOPICS = 6
 NUM_KEYWORDS_PER_TOPIC = 15
-# Minimal jumlah kata kunci dari kategori yang ada harus cocok untuk digunakan namanya
 MATCH_THRESHOLD = 2 
 # --------------------
 
@@ -25,24 +22,15 @@ def download_nltk_data():
         nltk.data.find('tokenizers/punkt')
         nltk.data.find('corpora/stopwords')
     except LookupError:
-        print("📥 Mengunduh data NLTK (punkt, stopwords)...")
+        print("📥 Mengunduh data NLTK (punkt, stopwords, punkt_tab)...")
         nltk.downloader.download('punkt', quiet=True)
         nltk.downloader.download('stopwords', quiet=True)
+        # Menambahkan unduhan untuk paket yang diminta di log error
+        nltk.downloader.download('punkt_tab', quiet=True)
         print("✅ Data NLTK siap.")
 
-# ==> FUNGSI DITULIS ULANG: Untuk membaca format .txt <==
 def load_existing_categories_from_txt(txt_file_path):
-    """
-    Membaca file kategori dari format .txt yang sederhana.
-    Format yang diharapkan:
-    ## Nama Kategori 1
-    keyword1
-    keyword2
-    ...
-    (baris kosong)
-    ## Nama Kategori 2
-    ...
-    """
+    """Membaca file kategori dari format .txt yang sederhana."""
     print(f"📖 Membaca kategori yang ada dari '{txt_file_path}'...")
     category_map = {}
     current_category = None
@@ -51,15 +39,13 @@ def load_existing_categories_from_txt(txt_file_path):
             for line in f:
                 line = line.strip()
                 if not line:
-                    current_category = None # Reset jika ada baris kosong
+                    current_category = None
                     continue
                 
                 if line.startswith('## '):
-                    # Ini adalah baris nama kategori baru
-                    current_category = line[3:] # Ambil teks setelah '## '
+                    current_category = line[3:]
                     category_map[current_category] = []
                 elif current_category:
-                    # Ini adalah baris keyword, tambahkan ke kategori saat ini
                     category_map[current_category].append(line.lower())
         
         print(f"✅ Berhasil memuat {len(category_map)} kategori yang sudah ada.")
@@ -107,7 +93,6 @@ def main():
     print("🚀 Memulai proses penemuan topik otomatis...")
     download_nltk_data()
     
-    # ==> LANGKAH BARU: Muat kategori dari file TXT di awal
     existing_category_map = load_existing_categories_from_txt(EXISTING_CATEGORIES_FILE)
 
     if not os.path.isdir(ARTICLES_DIR):
