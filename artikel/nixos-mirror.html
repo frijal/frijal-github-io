@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Skrip nixos-mirror.sh: Atur Mirror Tercepat untuk NixOS</title>
     <meta name="description" content="Skrip untuk mengatur substituter (mirror) tercepat di NixOS guna mempercepat proses build dan update. Otomatis backup konfigurasi lama.">
-    <link rel="canonical" href="https://frijal.github.io/artikel/nixos-mirror-script.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/nixos-mirror-script.html">
 
-    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#1e2a38">
 
     <meta property="og:title" content="⚡ Skrip nixos-mirror.sh: Atur Mirror Tercepat untuk NixOS">
     <meta property="og:description" content="Skrip untuk mengatur substituter (mirror) tercepat di NixOS guna mempercepat proses build dan update.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/nixos-mirror-script.html">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/nixos-mirror-script.html">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="⚡ Skrip nixos-mirror.sh: Atur Mirror Tercepat untuk NixOS">
@@ -75,6 +75,7 @@
         .copy-btn:hover { background: var(--accent); }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -86,6 +87,7 @@
             <div class="col">
                 <article>
                     <h1>Skrip <code>nixos-mirror.sh</code>: Atur Mirror Tercepat untuk NixOS</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">NixOS menggunakan file <code>nix.conf</code> untuk mengatur substituter (mirror repositori). Dengan menambahkan mirror yang lebih cepat, kita bisa mempercepat proses seperti <code>nix-env</code> dan <code>nixos-rebuild</code>. Skrip ini akan mengotomatiskan proses tersebut.</p>
 
                     <div class="share-bar">
@@ -138,7 +140,7 @@ echo "[DONE] Substituter NixOS berhasil ditambahkan. Silakan verifikasi file $CO
         </main>
 
         <footer class="site">
-            <small>© 2025 frijal.github.io · Pastikan kunci publik substituter benar agar paket bisa diverifikasi.</small>
+            <small>🄯 2025 frijal.github.io · Pastikan kunci publik substituter benar agar paket bisa diverifikasi.</small>
         </footer>
     </div>
     
@@ -181,5 +183,8 @@ echo "[DONE] Substituter NixOS berhasil ditambahkan. Silakan verifikasi file $CO
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

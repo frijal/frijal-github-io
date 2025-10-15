@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Eksperimen Desktop BlankOn: Compiz, Gnome-Do, dan XFishtank</title>
     <meta name="description" content="Eksperimen tampilan desktop BlankOn dengan Compiz, Gnome-Do, xfishtank, dua browser (Epiphany & Shiretoko), Nautilus, serta perekaman layar via GTK-RecordMyDesktop.">
-    <link rel="canonical" href="https://frijal.github.io/artikel/desktop-blankon-compiz.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/desktop-blankon-compiz.html">
 
     <!-- Favicon & Theme -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🕹️%3C/text%3E%3C/svg%3E">
@@ -28,7 +28,7 @@
       "@type": "Article",
       "headline": "Eksperimen Desktop BlankOn + Compiz, Gnome-Do, xfishtank, Epiphany & Shiretoko",
       "author": { "@type": "Person", "name": "Fakhrul Rijal" },
-      "image": "https://frijal.github.io/assets/og/desktop-blankon-compiz.jpg",
+      "image": "https://frijal.pages.dev/assets/og/desktop-blankon-compiz.jpg",
       "datePublished": "2013-04-03",
       "publisher": { "@type": "Organization", "name": "frijal.github.io" }
     }
@@ -87,6 +87,7 @@
         .copy-btn:hover { background: var(--accent-2); }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -98,6 +99,7 @@
             <div class="col">
                 <article>
                     <h1>Eksperimen Desktop BlankOn: Compiz, Gnome-Do, dan XFishtank</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">Sebuah catatan santai tentang mengisi waktu luang dengan mengoprek desktop BlankOn. Eksperimen ini menggabungkan efek visual Compiz, peluncur aplikasi Gnome-Do, dan hiasan "akuarium" xfishtank.</p>
 
                     <div class="share-bar">
@@ -136,7 +138,7 @@ sudo apt install compiz compiz-plugins-extra gnome-do xfishtank recordmydesktop<
         </main>
 
         <footer class="site">
-            <small>© 2024 frijal.github.io · Eksperimen desktop untuk mengisi waktu luang.</small>
+            <small>🄯 2024 frijal.github.io · Eksperimen desktop untuk mengisi waktu luang.</small>
         </footer>
     </div>
     
@@ -204,6 +206,9 @@ sudo apt install compiz compiz-plugins-extra gnome-do xfishtank recordmydesktop<
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

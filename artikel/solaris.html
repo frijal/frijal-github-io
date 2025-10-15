@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones</title>
   <meta name="description" content="Solaris adalah OS Unix enterprise yang stabil, aman, dan scalable. Artikel santai dengan narasi penuh, galeri, tombol berbagi, dan fungsionalitas modern." />
-  <link rel="canonical" href="https://frijal.github.io/artikel/solaris.html" />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/solaris.html" />
 
   <!-- Favicon -->
-  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="https://frijal.github.io/assets/apple-touch-icon.png" />
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png" />
   <meta name="theme-color" content="#b388ff" />
 
   <!-- Twitter Card -->
@@ -32,12 +32,12 @@
     "publisher": {
       "@type": "Organization",
       "name": "Fakhrul",
-      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/assets/favicon.svg" }
+      "logo": { "@type": "ImageObject", "url": "https://frijal.pages.dev/assets/favicon.svg" }
     },
     "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhayZKoNVRTzcrMz6hVKBQ59QPUw2PBTSGMX8Fb-zjC6wXmNORsvkjWyGMEL2Zg8LYPGtBN30sPcZx9suLHlEhNuQOM152-Jf2qPSKVmSB_gAel-SbOyJYve0Bi420PT4tf_XplSt6vNWlL-9o1MbyrRyqcJzL5-CGXeww6eeDNVQfandsfxM1baCkUsMU/s1600/Solaris.jpg"],
     "datePublished": "2025-10-15",
     "dateModified": "2025-10-15",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.github.io/artikel/solaris.html" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/solaris.html" }
   }
   </script>
 
@@ -47,9 +47,9 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/"},
-      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/"},
-      {"@type":"ListItem","position":3,"name":"Solaris OS","item":"https://frijal.github.io/artikel/solaris.html"}
+      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.pages.dev/"},
+      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/artikel/"},
+      {"@type":"ListItem","position":3,"name":"Solaris OS","item":"https://frijal.pages.dev/artikel/solaris.html"}
     ]
   }
   </script>
@@ -132,6 +132,7 @@
     .share .fb{background:#1877F2; color:#fff}
     footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(11,11,20,.6); backdrop-filter: blur(8px)}
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -153,6 +154,7 @@
       <!-- Konten utama -->
       <article class="card" id="konten" role="main">
         <h1>Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones</h1>
+<div id="iposbrowser"></div>
         <p class="lead">
           Solaris adalah sebuah sistem operasi berbasis <em>Unix</em> yang awalnya diciptakan oleh <strong>Sun Microsystems</strong>. Sistem ini merupakan evolusi dari SunOS dan kemudian mengadopsi standar <strong>System V Release 4 (SVR4)</strong>. Setelah Oracle mengakuisisi Sun pada tahun 2010, produk ini secara resmi dikenal sebagai <strong>Oracle Solaris</strong>.
         </p>
@@ -212,7 +214,7 @@
 
   <footer>
     <div class="wrap">
-      <p class="muted">© 2025 frijal.github.io • Artikel ini adalah ringkasan teknis tentang Solaris OS.</p>
+      <p class="muted">🄯 2025 frijal.github.io • Artikel ini adalah ringkasan teknis tentang Solaris OS.</p>
     </div>
   </footer>
 
@@ -231,7 +233,7 @@
     document.getElementById('lightbox')?.addEventListener('click', function(){ this.style.display='none' });
 
     // Link share
-    const shareUrl = 'https://frijal.github.io/artikel/solaris.html';
+    const shareUrl = 'https://frijal.pages.dev/artikel/solaris.html';
     const shareText = encodeURIComponent('Solaris: OS Enterprise Tangguh dengan ZFS, DTrace, dan Zones');
     const shareContainer = document.getElementById('share');
     const setHref = (sel, url) => shareContainer.querySelector(sel)?.setAttribute('href', url);
@@ -242,6 +244,9 @@
     setHref('.wa', `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`);
     setHref('.tg', `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
   </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
