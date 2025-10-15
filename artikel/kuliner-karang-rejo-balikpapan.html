@@ -85,8 +85,8 @@ footer{text-align:center;font-size:.9em;padding:2em;background:#f8f9fa;color:#6c
 
 <section>
 <h2>Komentar</h2>
-<div id="fb-root"></div>
-<div class="fb-comments" data-href="https://frijal.pages.dev/artikel/kuliner-karang-rejo-balikpapan.html" data-width="100%" data-numposts="5" data-order-by="social"></div>
+
+
 </section>
 
 </main>
@@ -101,71 +101,6 @@ footer{text-align:center;font-size:.9em;padding:2em;background:#f8f9fa;color:#6c
 </footer>
 
 <!-- Lazy-load scripts -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Lazy-load images
-  const lazyImages = document.querySelectorAll('.gallery img');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const img = entry.target;
-        img.src = img.dataset.src;
-        observer.unobserve(img);
-      }
-    });
-  },{rootMargin:'200px'});
-  lazyImages.forEach(img => observer.observe(img));
-
-  // Rating
-  const stars = document.querySelectorAll('.star');
-  const result = document.getElementById('rating-result');
-  stars.forEach(star => star.addEventListener('click',()=>{
-    stars.forEach(s=>s.classList.remove('selected'));
-    const val = star.dataset.value;
-    for(let i=0;i<val;i++) stars[i].classList.add('selected');
-    result.textContent = `Anda memberi rating ${val} bintang. Terima kasih!`;
-  }));
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  let currentIndex = 0;
-  const galleryImagesArr = Array.from(lazyImages);
-  
-  function showLightbox(index){
-    currentIndex = index;
-    const img = document.createElement('img');
-    img.src = galleryImagesArr[index].dataset.src || galleryImagesArr[index].src;
-    img.alt = galleryImagesArr[index].alt;
-    lightbox.querySelectorAll('img').forEach(i=>i.remove());
-    lightbox.insertBefore(img, lightbox.querySelector('.prev'));
-    lightbox.classList.add('active');
-  }
-
-  galleryImagesArr.forEach((img,i)=>img.addEventListener('click',()=>showLightbox(i)));
-
-  lightbox.querySelector('.prev').addEventListener('click',e=>{
-    e.stopPropagation();
-    currentIndex = (currentIndex-1+galleryImagesArr.length)%galleryImagesArr.length;
-    showLightbox(currentIndex);
-  });
-  lightbox.querySelector('.next').addEventListener('click',e=>{
-    e.stopPropagation();
-    currentIndex = (currentIndex+1)%galleryImagesArr.length;
-    showLightbox(currentIndex);
-  });
-
-  lightbox.addEventListener('click',()=>lightbox.classList.remove('active'));
-
-  // Lazy-load Facebook SDK
-  if(!window.FB){
-    const fbScript=document.createElement('script');
-    fbScript.src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v23.0";
-    fbScript.async=true; fbScript.defer=true;
-    document.body.appendChild(fbScript);
-  }
-});
-</script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>

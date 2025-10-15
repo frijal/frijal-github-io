@@ -543,8 +543,8 @@ Telegram
 <section class="section">
   <div class="panel col-12" style="grid-column:span 12">
 <h2 style="margin:0 0 10px;color:#bfe1ff">Obrolin di kolom komentar</h2>
-<div id="fb-root"></div>
-<div class="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+
+
   </div>
 </section>
   </main>
@@ -574,123 +574,6 @@ Tutup
 </div>
   </div>
 
-  <script>
-// Social share links
-(function(){
-  const url = encodeURIComponent(location.href);
-  const text = encodeURIComponent('Hotel Tour Grand Tjokro Balikpapan — Kopdar Blogger & Influencer (2017)');
-  const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
-  const x = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-  const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  const tele = `https://t.me/share/url?url=${url}&text=${text}`;
-  const ids = ['share-wa','share-x','share-fb','share-tele'];
-  ids.forEach((id,i)=>{
-const el=document.getElementById(id);
-if(!el) return;
-el.href = [wa,x,fb,tele][i];
-  });
-  // Clone top buttons to other share containers
-  const top = document.getElementById('share-top');
-  ['share-bottom','share-final'].forEach(cid=>{
-const c = document.getElementById(cid);
-if(c && top){ c.innerHTML = top.innerHTML; 
-  // rewire cloned anchors
-  c.querySelectorAll('a').forEach(a=>{
-const lbl = a.textContent.trim();
-if(lbl.includes('WhatsApp')) a.href = wa;
-if(lbl === 'X') a.href = x;
-if(lbl.includes('Facebook')) a.href = fb;
-if(lbl.includes('Telegram')) a.href = tele;
-a.target = '_blank'; a.rel='noopener';
-  });
-}
-  });
-})();
-
-// Lazy-load images with IntersectionObserver
-(function(){
-  const imgs = document.querySelectorAll('img[data-src]');
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries,obs)=>{
-entries.forEach(e=>{
-  if(e.isIntersecting){
-const img = e.target;
-img.src = img.dataset.src;
-img.removeAttribute('data-src');
-obs.unobserve(img);
-  }
-})
-  }, {rootMargin:'200px'}) : null;
-  imgs.forEach(img=>{
-if(io) io.observe(img); else { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-  });
-})();
-
-// Simple lightbox with next/prev per group
-(function(){
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lb-img');
-  const lbCount = document.getElementById('lb-count');
-  const prev = document.getElementById('lb-prev');
-  const next = document.getElementById('lb-next');
-  const closeBtn = document.getElementById('lb-close');
-
-  let groups = {};
-  let currentGroup = '';
-  let currentIndex = 0;
-
-  // collect groups
-  document.querySelectorAll('.thumb').forEach((a,idx)=>{
-const g = a.dataset.group || 'default';
-(groups[g] ||= []).push(a);
-a.addEventListener('click', (ev)=>{
-  ev.preventDefault();
-  open(g, groups[g].indexOf(a));
-});
-  });
-
-  function open(group, index){
-currentGroup = group;
-currentIndex = index;
-update();
-lightbox.classList.add('open');
-lightbox.setAttribute('aria-hidden','false');
-document.body.style.overflow='hidden';
-  }
-  function update(){
-const arr = groups[currentGroup]; if(!arr) return;
-const el = arr[currentIndex];
-const src = el.dataset.src;
-lbImg.src = src;
-lbImg.alt = el.querySelector('img')?.alt || 'Foto';
-lbCount.textContent = (currentIndex+1) + ' / ' + arr.length;
-  }
-  function move(delta){
-const arr = groups[currentGroup]; if(!arr) return;
-currentIndex = (currentIndex + delta + arr.length) % arr.length;
-update();
-  }
-  function close(){
-lightbox.classList.remove('open');
-lightbox.setAttribute('aria-hidden','true');
-document.body.style.overflow='';
-lbImg.src = '';
-  }
-
-  prev.addEventListener('click', ()=>move(-1));
-  next.addEventListener('click', ()=>move(1));
-  closeBtn.addEventListener('click', close);
-  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) close(); });
-  document.addEventListener('keydown', (e)=>{
-if(!lightbox.classList.contains('open')) return;
-if(e.key === 'Escape') close();
-if(e.key === 'ArrowLeft') move(-1);
-if(e.key === 'ArrowRight') move(1);
-  });
-})();
-  </script>
-
-  <!-- Facebook SDK -->
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
 
   <!-- Auto-set OG image, Twitter image, and og:url based on first main image -->

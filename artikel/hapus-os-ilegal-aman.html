@@ -30,103 +30,6 @@
     <meta name="twitter:description" content="Panduan rapi hapus OS ilegal dan rapikan bootloader GRUB — langsung dari Linux." />
     <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUSC__bnf7_KiML5IdEz2U5LdGH2bD5NsZfO6QvdUIMkONoP4NPKxn6XPuxtwvw_vmJVsdWdaAD98vhSYN5OJNuyAFu3b-rvIfCZBwyvE3rKbA8TlVZWRhNjiPI5Axt2iHYm0g7PnuxVaB/s1600/aboutgparted007.jpg" />
     
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.pages.dev/artikel/hapus-os-ilegal-aman.html","image":"https://frijal.pages.dev/img/hapus-os-ilegal-aman.jpg"},"headline":"Hapus OS Ilegal dengan Aman, Cepat, dan Tanpa Live USB","description":"Panduan aman menghapus sistem operasi ilegal langsung dari Linux tanpa LiveCD/USB, meliputi backup data, pengelolaan partisi via GParted, dan pemasangan ulang GRUB.","image":["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUSC__bnf7_KiML5IdEz2U5LdGH2bD5NsZfO6QvdUIMkONoP4NPKxn6XPuxtwvw_vmJVsdWdaAD98vhSYN5OJNuyAFu3b-rvIfCZBwyvE3rKbA8TlVZWRhNjiPI5Axt2iHYm0g7PnuxVaB/s1600/aboutgparted007.jpg"],"author":{"@type":"Organization","name":"Kontributor Komunitas Linux","image":"https://frijal.pages.dev/img/hapus-os-ilegal-aman.jpg"},"publisher":{"@type":"Organization","name":"Frijal","logo":{"@type":"ImageObject","url":"https://frijal.pages.dev/assets/logo-512.png","image":"https://frijal.pages.dev/img/hapus-os-ilegal-aman.jpg"},"image":"https://frijal.pages.dev/img/hapus-os-ilegal-aman.jpg"},"datePublished":"2014-02-10T09:00:00+07:00","dateModified":"2014-02-10T12:00:00+07:00"}</script>
-    
-    <style>
-        :root{--bg:#fffaf5;--paper:#ffffff;--text:#101826;--muted:#5e6678;--brand:#F97316;--brand-2:#22D3EE;--accent:#84CC16;--shadow:0 14px 40px rgba(16,24,38,.08);--radius:18px;--max:1200px;}
-        *{box-sizing:border-box}
-        html,body{height:100%}
-        body{
-            margin:0;font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";color:var(--text);
-            background:radial-gradient(1100px 600px at -10% -10%, rgba(249,115,22,.14), transparent 60%),radial-gradient(900px 500px at 110% 10%, rgba(34,211,238,.14), transparent 60%),radial-gradient(700px 500px at 50% 120%, rgba(132,204,22,.14), transparent 60%),var(--bg);
-        }
-        a{color:var(--brand);text-decoration:none}
-        a:hover{text-decoration:underline}
-        .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-        header.hero{
-            position:relative;min-height:62vh;padding:56px 24px;display:grid;gap:24px;
-            grid-template-columns:1.15fr .85fr;align-items:center
-        }
-        .title{
-            background:linear-gradient(90deg,var(--brand),var(--brand-2));
-            -webkit-background-clip:text;background-clip:text;color:transparent;
-            font-weight:900;letter-spacing:.2px;font-size:clamp(28px,3.6vw,54px);line-height:1.08;margin:0 0 8px
-        }
-        .sub{color:var(--muted);font-size:clamp(16px,1.8vw,20px);margin:0 0 16px}
-        .chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 0}
-        .chip{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#fff,#fff6ef);
-            border:1px solid #ffe3cd;border-radius:999px;padding:8px 12px;box-shadow:var(--shadow)
-        }
-        .panel{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-        .panel img{width:100%;height:100%;object-fit:cover;display:block}
-        main{margin-top:-40px}
-        .section{
-            background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);
-            padding:24px;margin:24px 0
-        }
-        h2{margin:0 0 12px;font-size:24px}
-        .meta{display:flex;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px;margin-bottom:8px}
-        .grid-2{display:grid;grid-template-columns:2fr 1fr;gap:18px}
-        .lead{font-size:18px;color:#233145}
-        .note{
-            background:linear-gradient(180deg,#f1fff8,#e8fff4);
-            border:1px solid #d6f5e7;border-radius:12px;padding:12px 14px;color:#1e4d38
-        }
-        .warn{
-            background:linear-gradient(180deg,#fff5f5,#ffe9e9);
-            border:1px solid #ffd0d0;border-radius:12px;padding:12px 14px;color:#7a0a0a;margin-top:12px
-        }
-        code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-        pre{
-            background:#0f172a; color:#e5e7eb; padding:14px; border-radius:12px; overflow:auto;
-            box-shadow:0 6px 20px rgba(0,0,0,.15)
-        }
-        /* Info Teknis removed */
-        /* Galeri */
-        .gallery{display:grid;grid-template-columns:repeat(12, 1fr);gap:10px}
-        .gallery a{position:relative;display:block;border-radius:14px;overflow:hidden;border:1px solid #eef1f6;background:#f8fafc}
-        .gallery a::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.25), transparent 40%);opacity:0;transition:.25s}
-        .gallery a:hover::after{opacity:1}
-        .gallery img{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(1.05)}
-        .col-6{grid-column:span 6}
-        .col-4{grid-column:span 4}
-        .col-8{grid-column:span 8}
-        /* Lightbox */
-        .lightbox{position:fixed;inset:0;background:rgba(10,14,22,.7);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px}
-        .lightbox.open{display:flex}
-        .lightbox img{max-width:96vw;max-height:86vh;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
-        .lightbox .close{position:absolute;top:14px;right:14px;background:#fff;border:none;border-radius:999px;width:42px;height:42px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow)}
-        /* Share */
-        .share{display:flex;flex-wrap:wrap;gap:10px}
-        .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;padding:10px 14px;border-radius:999px;color:#fff;font-weight:700;letter-spacing:.2px}
-        .btn svg{width:18px;height:18px}
-        .wa{background:#25D366}.tw{background:#111}.fb{background:#1877F2}.li{background:#0A66C2}.tg{background:#229ED9}
-        /* FB Comments */
-        .comments{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:16px}
-        /* Sticky Nav Home styles removed */
-        footer{text-align:center;color:var(--muted);padding:40px 16px}
-        /* Responsive */
-        @media (max-width: 960px){
-            header.hero{grid-template-columns:1fr;min-height:auto}
-            .grid-2{grid-template-columns:1fr}
-            .gallery{grid-template-columns:repeat(6,1fr)}
-            .col-8{grid-column:span 6}
-            .col-6{grid-column:span 6}
-            .col-4{grid-column:span 3}
-        }
-        @media (max-width:600px){
-            .wrap{padding:16px}
-            .section{padding:18px}
-        }
-    </style>
-    <meta property="article:published_time" content="2025-09-19T11:00:00+08:00">
-<meta itemprop="image" content="https://frijal.pages.dev/img/hapus-os-ilegal-aman.jpg">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&amp;version=v20.0" nonce="hapusos"></script>
-    
     <header class="hero wrap">
         <div>
             <div class="chips">
@@ -246,7 +149,7 @@ sudo update-initramfs -u</code></pre>
         
         <section class="section comments">
             <h2>Komentar</h2>
-            <div class="fb-comments" data-href="https://frijal.pages.dev/artikel/hapus-os-ilegal-aman.html" data-width="100%" data-numposts="5"></div>
+            
         </section>
     </main>
     

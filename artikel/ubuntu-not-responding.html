@@ -35,63 +35,7 @@
   </style>
   
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
   
-  <meta name="date" content="2025-09-28">
-  <meta property="og:image:alt" content="Mengatasi Ubuntu Sering Not Responding dengan Menghapus Driver VGA">
-  <meta itemprop="image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT4bXdx_j8zHalnxm0otIg5SxZiPJTDsU6pV4fuJ-G-XBocJ7ldYJ8B9XVs8FWchr-fxEKQ7_DuZqdYrePjlCObBLHnnCLPyVF27s3rLCMV1dHX0RfxzmvAkwxidIYhESZgD_UrvpjU-P/s1600/ubuntu_rr.png">
-  
-  <meta property="article:published_time" content="2025-09-16T11:00:00+08:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-<header>
-  <h1>Ubuntu Sering Not Responding? Begini Cara Mengatasinya</h1>
-<div id="iposbrowser"></div>
-  </header>
-<main>
-  <p>Beberapa pengguna <b>Ubuntu</b> mengalami masalah ketika sistem sering <i>Not Responding</i> atau terasa lambat. Salah satu penyebabnya adalah **driver VGA yang tidak sesuai** atau driver lama yang masih menempel di kernel image.</p>
-  
-  <h2>Langkah Mengatasi</h2>
-  <p>Solusinya adalah dengan membuang driver VGA yang tidak digunakan. Ubuntu menyimpan driver ini dengan nama paket <code>xserver-xorg-video-*</code>. Berikut cara menemukannya:</p>
-  
-  <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">apt list --installed | grep xserver-xorg-video-</code></pre>
-  
-  <p>Setelah itu, hapus driver yang tidak sesuai dengan hardware Anda. Misalnya jika Anda tidak menggunakan kartu grafis tertentu:</p>
-  
-  <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">sudo apt remove xserver-xorg-video-nouveau</code></pre>
-  
-  <figure>
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT4bXdx_j8zHalnxm0otIg5SxZiPJTDsU6pV4fuJ-G-XBocJ7ldYJ8B9XVs8FWchr-fxEKQ7_DuZqdYrePjlCObBLHnnCLPyVF27s3rLCMV1dHX0RfxzmvAkwxidIYhESZgD_UrvpjU-P/s1600/ubuntu_rr.png" alt="Ubuntu Not Responding" loading="lazy">
-    <figcaption>Contoh tampilan Ubuntu yang sering mengalami freeze</figcaption>
-  </figure>
-  
-  <figure>
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBdvJV53PzuFnKOuVW47LNEF6JL9vkAUAhDX_29CUDQn-V2TxjbU95J7XIUq276Jt_HR93nfI_ZHz9WJU2nqgI05q9aZtmuqgHvCjKx9jmrB9jb4YtV2Ldp_8r9FWJoRFfr04OIS1-6pyF/s1600/Screenshot+from+2013-05-24+18%253A46%253A56.png" alt="Daftar driver VGA di Ubuntu" loading="lazy">
-    <figcaption>Daftar driver VGA di sistem yang bisa dihapus bila tidak dipakai</figcaption>
-  </figure>
-  
-  <div style="text-align:center;margin:1rem 0;color:#e74c3c;font-weight:bold;">⚠️ Hati-hati! Jangan menghapus driver VGA yang sedang digunakan. Jika salah, tampilan grafis bisa bermasalah. </div>
-  
-  <h2>Bagikan Artikel</h2>
-  <div class="social-share">
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/ubuntu-not-responding.html" target="_blank" rel="noopener noreferrer">Facebook</a> |
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/ubuntu-not-responding.html&text=Tips+Ubuntu+Not+Responding" target="_blank" rel="noopener noreferrer">Twitter/X</a> |
-    <a href="https://wa.me/?text=Tips+Ubuntu+Not+Responding:+https://frijal.pages.dev/artikel/ubuntu-not-responding.html" target="_blank" rel="noopener noreferrer">WhatsApp</a> |
-    <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/ubuntu-not-responding.html&text=Tips+Ubuntu+Not+Responding" target="_blank" rel="noopener noreferrer">Telegram</a> |
-    <a href="https://www.instagram.com/share/?url=https://frijal.pages.dev/artikel/ubuntu-not-responding.html" target="_blank" rel="noopener noreferrer">Instagram</a> |
-    <a href="https://www.threads.net/intent/post?text=Tips+Ubuntu+Not+Responding:+https://frijal.pages.dev/artikel/ubuntu-not-responding.html" target="_blank" rel="noopener noreferrer">Threads</a> |
-    <a href="https://www.tiktok.com/share/video/?referrer=https://frijal.pages.dev/artikel/ubuntu-not-responding.html" target="_blank" rel="noopener noreferrer">TikTok</a>
-  </div>
-  
-  <div style="margin-top:18px;color:#666;font-size:10px">
-    <span id="current-url" class="small-muted"></span>
-  </div>
-  <div style="margin-top:18px">
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v20.0"></script>
-    <div class="fb-comments" id="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
     <script>
       const currentUrl = window.location.href;
       document.getElementById("current-url").textContent = currentUrl;

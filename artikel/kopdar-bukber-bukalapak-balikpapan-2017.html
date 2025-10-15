@@ -529,8 +529,8 @@
             <section class="section">
                 <div class="card panel">
                     <h2 style="margin:0 0 10px">Cerita kamu gimana waktu bagi takjil?</h2>
-                    <div id="fb-root"></div>
-                    <div class="fb-comments" data-href="https://frijal.pages.dev/artikel/kopdar-bukber-bukalapak-balikpapan-2017.html" data-width="100%" data-numposts="5"></div>
+                    
+                    
                 </div>
             </section>
         </main>
@@ -558,96 +558,6 @@
             </div>
         </div>
 
-        <script>
-            // Share links
-            (function(){
-                const url = encodeURIComponent(location.href);
-                const text = encodeURIComponent('Kopdar Berbuka & Berbagi - Komunitas Bukalapak Balikpapan (2017)');
-                const wa = `https://wa.me/?text=${text}%20%7C%20${url}`;
-                const x  = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-                const fb = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                const tg = `https://t.me/share/url?url=${url}&text=${text}`;
-                const ids = ['share-wa','share-x','share-fb','share-tele'];
-
-                // Handle share button creation and cloning
-                const top = document.getElementById('share-top');
-                const bottom = document.getElementById('share-bottom');
-                
-                const createShareButton = (id, link, iconPath, label) => {
-                    const btn = document.createElement('a');
-                    btn.id = id;
-                    btn.rel = 'noreferrer';
-                    btn.target = '_blank';
-                    btn.href = link;
-                    btn.classList.add('share-a');
-                    btn.innerHTML = `<svg viewBox="0 0 24 24"><path fill="currentColor" d="${iconPath}"/></svg><span>${label}</span>`;
-                    return btn;
-                };
-
-                const buttons = [
-                    createShareButton('share-wa-top', wa, 'M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m.01 1.67c4.56 0 8.25 3.69 8.25 8.25 0 4.56-3.69 8.25-8.25 8.25-1.53 0-3-.42-4.29-1.19l-.3-.18-3.18.83.85-3.1-.2-.31c-.82-1.31-1.28-2.82-1.28-4.4s3.69-8.25 8.25-8.25m4.52 9.15c-.24-.12-1.43-.7-1.65-.78-.23-.08-.39-.12-.56.12-.17.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.71-.63-1.19-1.4-1.33-1.64-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.3.23.24-.88 1.03-.88 2.5s.9 2.9 1.02 3.1c.12.2.82 1.83 3.6 3.16.65.31 1.16.5 1.56.64.4.14.77.12 1.06.07.32-.05.99-.4 1.13-.78.14-.38.14-.71.1-.78c-.04-.07-.16-.11-.4-.23Z', 'WhatsApp'),
-                    createShareButton('share-x-top', x, 'M18.9 2H22l-7.1 8.1L23 22h-6.9l-5.4-7-6.2 7H2l7.6-8.6L1.3 2H8l5 6.5L18.9 2zM17.8 20h1.9L8.3 4H6.3l11.5 16z', 'X'),
-                    createShareButton('share-fb-top', fb, 'M22 12.06C22 6.48 17.52 2 11.94 2S2 6.48 2 12.06C2 17.05 5.66 21.13 10.44 22v-7.02H7.9v-2.92h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.62.77-1.62 1.57v1.89h2.76l-.44 2.92h-2.32V22C18.34 21.13 22 17.05 22 12.06z', 'Facebook'),
-                    createShareButton('share-tele-top', tg, 'M9.03 15.45l-.38 5.32c.54 0 .78-.23 1.07-.51l2.57-2.46 5.32 3.9c.98.54 1.68.26 1.95-.91l3.54-16.6v-.01c.31-1.44-.52-2-1.48-1.64L1.2 10.35c-1.41.55-1.39 1.33-.24 1.68l5.37 1.67L19.2 6.24c.6-.37 1.16-.17.71.2', 'Telegram')
-                ];
-                
-                // Append top buttons
-                buttons.forEach(btn => top.appendChild(btn));
-
-                // Clone buttons to bottom section
-                if (bottom) {
-                    buttons.forEach(btn => {
-                        const clone = btn.cloneNode(true);
-                        clone.id = btn.id.replace('-top', '-bottom');
-                        clone.href = btn.href;
-                        bottom.appendChild(clone);
-                    });
-                }
-            })();
-
-            // Lazy load
-            (function(){
-                const imgs = document.querySelectorAll('img[data-src]');
-                const io = 'IntersectionObserver' in window ? new IntersectionObserver((ents,obs)=>{
-                    ents.forEach(e=>{
-                        if(e.isIntersecting){
-                            const img=e.target; img.src=img.dataset.src; img.removeAttribute('data-src'); obs.unobserve(img);
-                        }
-                    });
-                }, {rootMargin:'200px'}) : null;
-                imgs.forEach(img=>{ if(io) io.observe(img); else { img.src=img.dataset.src; img.removeAttribute('data-src'); } });
-            })();
-
-            // Lightbox
-            (function(){
-                const lb = document.getElementById('lightbox');
-                const img = document.getElementById('lb-img');
-                const count = document.getElementById('lb-count');
-                const prev = document.getElementById('lb-prev');
-                const next = document.getElementById('lb-next');
-                const closeBtn = document.getElementById('lb-close');
-                let groups={}, g='', i=0;
-
-                document.querySelectorAll('.thumb').forEach(a=>{
-                    const key=a.dataset.group||'g';
-                    (groups[key] ||= []).push(a);
-                    a.addEventListener('click',ev=>{ ev.preventDefault(); open(key, groups[key].indexOf(a)); });
-                });
-
-                function open(group, idx){ g=group; i=idx; update(); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-                function update(){ const arr=groups[g]; if(!arr) return; const el=arr[i]; img.src=el.querySelector('img')?.dataset.src || el.querySelector('img')?.src || ''; img.alt=el.querySelector('img')?.alt||'Foto'; count.textContent=(i+1)+' / '+arr.length; }
-                function move(d){ const arr=groups[g]; i=(i+d+arr.length)%arr.length; update(); }
-                function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; img.src=''; }
-
-                prev.addEventListener('click',()=>move(-1));
-                next.addEventListener('click',()=>move(1));
-                closeBtn.addEventListener('click',close);
-                lb.addEventListener('click',e=>{ if(e.target===lb) close(); });
-                document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') move(-1); if(e.key==='ArrowRight') move(1); });
-            })();
-        </script>
-
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0"></script>
         <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
 
         <script>
