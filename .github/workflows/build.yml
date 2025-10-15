@@ -20,19 +20,16 @@ jobs:
         uses: dorny/paths-filter@v3
         id: filter
         with:
-          # Tentukan file mana yang dianggap sebagai 'source' yang memicu build
+          # Tentukan folder mana yang dianggap sebagai 'source' yang memicu build
           filters: |
             src:
               - 'artikel/**'
               - 'ext/**'
               - 'img/**'
-              - '*.html'
-              - '*.js'
-              - '*.css'
-              - '*.xml'
-              - '*.json'
-              - '*.py'
-
+              - 'index.html'
+              - 'sitemap.html'
+              - 'feed.html'
+              
       # Langkah instalasi tetap berjalan agar lingkungan siap
       - name: '3. Setup Node.js'
         uses: actions/setup-node@v4
@@ -43,30 +40,24 @@ jobs:
         run: |
           [ -f package.json ] && npm ci || echo "No package.json found — skipping install."
 
-      # ==> MODIFIKASI: Semua langkah build & deploy sekarang kondisional <==
-      - name: '5. Replace domain for Cloudflare'
-        # Hanya berjalan jika ada perubahan di file 'src'
-        if: steps.filter.outputs.src == 'true'
-        run: find artikel/ -type f -name "*.html" -exec perl -pi -e 's/frijal\.github\.io/frijal\.pages\.dev/g' {} +
-
-      - name: '6. Generate metadata, sitemap, RSS, index'
+      - name: '5. Generate metadata, sitemap, RSS, index'
         if: steps.filter.outputs.src == 'true'
         run: |
           node ext/generator.js || true
           node ext/rss.js || true
           python3 ext/generate_indexnow.py || true
           
-      - name: '7. Generate screenshots'
+      - name: '6. Generate screenshots'
         if: steps.filter.outputs.src == 'true'
         run: |
           npm install puppeteer --no-save
           node ext/screenshot-puppeteer.js
 
-      - name: '8. Cleanup temporary files'
+      - name: '7. Cleanup temporary files'
         if: steps.filter.outputs.src == 'true'
         run: rm -rf tmp/ __pycache__/
 
-      - name: '9. Commit updated generated files'
+      - name: '8. Commit updated generated files'
         if: steps.filter.outputs.src == 'true'
         run: |
           git config user.name "github-actions[bot]"
@@ -75,7 +66,7 @@ jobs:
           git diff --cached --quiet || git commit -m "🤖 Auto-build update"
           git push || echo "No changes to push"
               
-      - name: '12. Show Skip Message'
+      - name: '9. Show Skip Message'
         # Pesan ini hanya muncul jika TIDAK ada perubahan di 'src'
         if: steps.filter.outputs.src == 'false'
         run: echo "✅ No changes in 'src' files detected. Build and deploy steps were skipped."
