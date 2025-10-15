@@ -14,8 +14,9 @@ jobs:
     steps:
       - name: '1. Checkout Repository'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # <-- PERBAIKAN DITERAPKAN DI SINI
 
-      # ==> LANGKAH BARU: Filter perubahan file <==
       - name: '2. Check for Relevant File Changes'
         uses: dorny/paths-filter@v3
         id: filter
@@ -30,7 +31,6 @@ jobs:
               - 'sitemap.html'
               - 'feed.html'
               
-      # Langkah instalasi tetap berjalan agar lingkungan siap
       - name: '3. Setup Node.js'
         uses: actions/setup-node@v4
         with:
@@ -45,7 +45,6 @@ jobs:
         run: |
           node ext/generator.js || true
           node ext/rss.js || true
-          python3 ext/generate_indexnow.py || true
           
       - name: '6. Generate screenshots'
         if: steps.filter.outputs.src == 'true'
@@ -65,7 +64,7 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "🤖 Auto-build update"
           git push || echo "No changes to push"
-              
+                  
       - name: '9. Show Skip Message'
         # Pesan ini hanya muncul jika TIDAK ada perubahan di 'src'
         if: steps.filter.outputs.src == 'false'
