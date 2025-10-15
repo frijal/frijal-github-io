@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Rekam Desktop di Gnome 3: Fitur Bawaan Tanpa Aplikasi Tambahan</title>
   <meta name="description" content="Gnome 3 memiliki fitur perekam layar tersembunyi yang dapat diaktifkan dengan shortcut Ctrl+Shift+Alt+R, tanpa perlu aplikasi tambahan." />
-  <link rel="canonical" href="https://frijal.github.io/artikel/rekam-desktop-gnome3.html" />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/rekam-desktop-gnome3.html" />
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎥</text></svg>" />
@@ -30,12 +30,12 @@
     "publisher": {
       "@type": "Organization",
       "name": "Frijal's Blog",
-      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/assets/favicon.svg" }
+      "logo": { "@type": "ImageObject", "url": "https://frijal.pages.dev/assets/favicon.svg" }
     },
     "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjW8aXZOTDFpV4DNYyLNH0nVo_U-WWCNOJTdhnkeQ5YwbvDyzzfMLcaUqkRRxFsn2Ew4DymXOYWV8U4ImYcmi8gKzTSvCqAlyJUB2TZqWyzdo8S-MzPDFEDGlbmUE8sVMoTMRVIdbJYmOq/s1600/Screenshot-at-2011-11-05-104143.png"],
     "datePublished": "2011-11-05",
     "dateModified": "2025-10-15",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.github.io/artikel/rekam-desktop-gnome3.html" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/rekam-desktop-gnome3.html" }
   }
   </script>
 
@@ -45,9 +45,9 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/"},
-      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/"},
-      {"@type":"ListItem","position":3,"name":"Rekam Desktop Gnome 3","item":"https://frijal.github.io/artikel/rekam-desktop-gnome3.html"}
+      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.pages.dev/"},
+      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/artikel/"},
+      {"@type":"ListItem","position":3,"name":"Rekam Desktop Gnome 3","item":"https://frijal.pages.dev/artikel/rekam-desktop-gnome3.html"}
     ]
   }
   </script>
@@ -134,6 +134,7 @@
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(11,11,20,.6); backdrop-filter: blur(8px)}
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -154,6 +155,7 @@
     <!-- Semua konten sekarang ada di dalam satu card -->
     <article class="card" id="konten" role="main">
       <h1>Rahasia Rekam Desktop di Gnome 3: Tanpa Aplikasi Tambahan!</h1>
+<div id="iposbrowser"></div>
       <p class="lead">
         Seringkali kita perlu merekam aktivitas di desktop untuk membuat tutorial atau demo. Bagi pengguna Gnome 3, ada kabar gembira: desktop ini sudah memiliki fitur perekam layar <strong>bawaan</strong> yang siap pakai, tanpa perlu instalasi aplikasi pihak ketiga.
       </p>
@@ -206,7 +208,7 @@
 
   <footer>
     <div class="wrap">
-      <p class="muted">© 2025 frijal.github.io • Trik cepat rekam layar di Gnome 3.</p>
+      <p class="muted">🄯 2025 frijal.github.io • Trik cepat rekam layar di Gnome 3.</p>
     </div>
   </footer>
 
@@ -225,7 +227,7 @@
     document.getElementById('lightbox')?.addEventListener('click', function(){ this.style.display='none' });
 
     // Link share
-    const shareUrl = 'https://frijal.github.io/artikel/rekam-desktop-gnome3.html';
+    const shareUrl = 'https://frijal.pages.dev/artikel/rekam-desktop-gnome3.html';
     const shareText = encodeURIComponent('Rekam Desktop di Gnome 3: Fitur Bawaan Tanpa Aplikasi Tambahan');
     const shareContainer = document.getElementById('share');
     const setHref = (sel, url) => shareContainer.querySelector(sel)?.setAttribute('href', url);
@@ -236,6 +238,9 @@
     setHref('.wa', `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`);
     setHref('.tg', `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
   </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

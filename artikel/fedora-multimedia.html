@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Memutar Berkas Multimedia di Fedora Linux | bak.xo.je</title>
     <meta name="description" content="Panduan lengkap memasang codec multimedia di Fedora Linux menggunakan gstreamer dan xine-lib-extras-freeworld agar bisa memutar berbagai format audio dan video.">
-    <link rel="canonical" href="https://bak.xo.je/artikel/fedora-multimedia.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/fedora-multimedia.html">
 
     <!-- Favicon & Theme -->
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" type="image/svg+xml">
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Memutar Berkas Multimedia di Fedora Linux">
     <meta property="og:description" content="Panduan memasang codec multimedia di Fedora Linux dengan gstreamer & xine agar bisa memutar video dan audio.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://bak.xo.je/artikel/fedora-multimedia.html">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/fedora-multimedia.html">
     <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg">
 
     <!-- Twitter Card -->
@@ -89,6 +89,7 @@
         .copy-btn:hover { background: var(--accent); }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -100,6 +101,7 @@
             <div class="col">
                 <article>
                     <h1>Memutar Berkas Multimedia di Fedora Linux</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">Secara default, Fedora tidak menyertakan beberapa codec multimedia karena alasan lisensi. Namun, Anda dapat dengan mudah menambahkan dukungan untuk berbagai format audio dan video dengan beberapa langkah sederhana.</p>
 
                     <div class="share-bar">
@@ -133,7 +135,7 @@ sudo dnf group upgrade --with-optional Multimedia</code><button class="copy-btn"
         </main>
 
         <footer class="site">
-            <small>© 2025 Linux Guide · Artikel Fedora Multimedia</small>
+            <small>🄯 2025 Linux Guide · Artikel Fedora Multimedia</small>
         </footer>
     </div>
     
@@ -194,6 +196,9 @@ sudo dnf group upgrade --with-optional Multimedia</code><button class="copy-btn"
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

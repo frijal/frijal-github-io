@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Ubuntu Sampai Bontang: Antara Bangga dan Luruskan Informasi</title>
   <meta name="description" content="Menemukan tulisan 'UBUNTU' di angkot dan spanduk kios di Bontang. Catatan singkat, klarifikasi ramah tentang Ubuntu, galeri foto (lazy-load + lightbox), dan tombol berbagi." />
-  <link rel="canonical" href="https://frijal.github.io/artikel/ubuntu-di-bontang.html" />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/ubuntu-di-bontang.html" />
 
   <!-- Favicon -->
-  <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="https://frijal.github.io/assets/apple-touch-icon.png" />
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png" />
   <meta name="theme-color" content="#0ea5e9" />
 
   <!-- Twitter Card (Open Graph dihapus sesuai permintaan) -->
@@ -32,12 +32,12 @@
     "publisher": {
       "@type": "Organization",
       "name": "Fakhrul",
-      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/assets/favicon.svg" }
+      "logo": { "@type": "ImageObject", "url": "https://frijal.pages.dev/assets/favicon.svg" }
     },
     "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDmqZIXUzjQWX0OrmoLNakYGMmsAt8g8MoVST2gtJSFui2Bli8kasho7PlFd4W2G4amOU1a6wcCqxuPSSmIRxT5IEqegKhn6f9IV-2lWumuJk1ugZo0SpjWzZ31BxvamDi7-nTzm4YY1KO/s800/angkotubuntu.jpg"],
     "datePublished": "2025-09-18",
     "dateModified": "2025-09-18",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.github.io/artikel/ubuntu-di-bontang.html" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/ubuntu-di-bontang.html" }
   }
   </script>
 
@@ -47,9 +47,9 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.github.io/"},
-      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.github.io/artikel/"},
-      {"@type":"ListItem","position":3,"name":"Ubuntu di Bontang","item":"https://frijal.github.io/artikel/ubuntu-di-bontang.html"}
+      {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.pages.dev/"},
+      {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/artikel/"},
+      {"@type":"ListItem","position":3,"name":"Ubuntu di Bontang","item":"https://frijal.pages.dev/artikel/ubuntu-di-bontang.html"}
     ]
   }
   </script>
@@ -144,6 +144,7 @@
     pre{border-radius:14px; border:1px solid rgba(255,255,255,.12); background:#0b1021 !important}
     footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(6,18,26,.6); backdrop-filter: blur(8px)}
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -165,6 +166,7 @@
       <!-- Konten utama -->
       <article class="card" id="konten" role="main">
         <h1>“UBUNTU” di angkot dan kios: senang lihatnya, tapi ada yang perlu diluruskan</h1>
+<div id="iposbrowser"></div>
         <p class="lead">
           Menemukan tulisan “UBUNTU” di samping angkot dan di spanduk kios di Bontang itu rasanya campur—bangga karena nama Ubuntu terdengar makin akrab, tapi juga gemas saat disandingkan dengan “anti virus” atau klaim “tak perlu update”. Di sini kita rapikan informasinya secara ramah.
         </p>
@@ -291,7 +293,7 @@
     });
 
     // Link share
-    const shareUrl = 'https://frijal.github.io/artikel/ubuntu-di-bontang.html';
+    const shareUrl = 'https://frijal.pages.dev/artikel/ubuntu-di-bontang.html';
     const shareText = encodeURIComponent('Ubuntu Sampai Bontang: Antara Bangga dan Luruskan Informasi');
     const share = document.getElementById('share');
     const setHref = (sel, url) => share.querySelector(sel)?.setAttribute('href', url);
@@ -303,6 +305,9 @@
     setHref('.threads', `https://www.threads.net/`);
     setHref('.tt', `https://www.tiktok.com/`);
   </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
