@@ -48,6 +48,7 @@ jobs:
             perl -pi -w -e 's/©/🄯/g' "$file"
             perl -pi -w -e 's#href="https://frijal.pages.dev/artikel/"#href="https://frijal.pages.dev/sitemap.html"#g' "$file"
             perl -pi -w -e 's#Komentar#Jaga Data Pribadi Tetap Aman.#g' "$file"
+            perl -pi -w -e 's#Bak Xo Je#Jaga Data Pribadi Tetap Aman.#g' "$file"
           done
 
       - name: Inject meta & script
