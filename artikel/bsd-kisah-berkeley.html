@@ -1,170 +1,175 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- Charset & Viewport -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital</title>
+    <meta name="description" content="Sejarah santai BSD (Berkeley Software Distribution): dari modifikasi UNIX di Berkeley, Perang UNIX, lahirnya 4.4BSD-Lite, hingga warisan ke FreeBSD, NetBSD, OpenBSD, dan pondasi macOS/iOS." />
+    <link rel="canonical" href="https://frijal.github.io/artikel/bsd-kisah-berkeley.html" />
 
-  <!-- Title & Description -->
-  <!-- prettier-ignore -->
-<title>BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital</title>
-  <meta name="description" content="Sejarah santai BSD (Berkeley Software Distribution): dari modifikasi UNIX di Berkeley, Perang UNIX, lahirnya 4.4BSD-Lite, hingga warisan ke FreeBSD, NetBSD, OpenBSD, DragonFly BSD, dan pondasi macOS/iOS." />
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" sizes="any" />
+    <meta name="theme-color" content="#0b1220" />
 
-  <!-- Canonical & Robots -->
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/bsd-kisah-berkeley.html" />
-  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital" />
+    <meta property="og:description" content="Perjalanan BSD: modifikasi UNIX, Perang UNIX, 4.4BSD-Lite, dan pengaruhnya ke sistem modern." />
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
-  <link rel="apple-touch-icon" href="https://frijal.pages.dev/favicon.ico" />
-  <meta name="theme-color" content="#0b1220" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital" />
+    <meta name="twitter:description" content="Dari modifikasi UNIX ke 4.4BSD-Lite dan warisan besar BSD pada sistem modern." />
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Frijal" />
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/bsd-kisah-berkeley.html" />
-  <meta property="og:title" content="BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital" />
-  <meta property="og:description" content="Perjalanan BSD: modifikasi UNIX, Perang UNIX, 4.4BSD-Lite, dan pengaruhnya ke sistem modern." />
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg" />
-  <meta property="article:section" content="Teknologi" />
-  <meta property="article:published_time" content="2025-09-28T16:58:00+08:00" />
-  <meta property="article:modified_time" content="2025-09-28T16:58:00+08:00" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg",
+      "author": { "@type": "Person", "name": "Frijal" },
+      "publisher": { "@type": "Organization", "name": "Frijal" },
+      "datePublished": "2025-09-28"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg: #0b1220;
+            --fg: #e6efff;
+            --muted: #b9c7e6;
+            --accent: #77b3ff;
+            --accent-2: #7ff3cf;
+            --card: #122447;
+            --border: #1a2e57;
+            --shadow: 0 16px 50px rgba(0,0,0,.45);
+            --maxw: 900px;
+        }
+        html, body {
+            background: var(--bg); color: var(--fg);
+            font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0; scroll-behavior: smooth;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wrap { min-height: 100vh; display: flex; flex-direction: column; }
+        header.site {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+            background: rgba(11, 18, 32, 0.7); backdrop-filter: blur(8px);
+            position: sticky; top: 0; z-index: 10;
+        }
+        .brand { font-weight: bold; font-size: 1.2rem; }
+        main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
+        .col { width: 100%; max-width: var(--maxw); }
+        article { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 2rem; }
+        article h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; margin: 0 0 10px; }
+        article h2 { font-size: 1.5rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .lead { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .share-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1.5rem 0; }
+        .btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: #1a2e57; color: var(--fg); cursor: pointer; text-decoration: none; }
+        .btn-share:hover { background: #2a4c82; }
+        blockquote { margin: 1.5rem 0; padding: 1rem; border-left: 4px solid var(--accent-2); background: rgba(127, 243, 207, 0.05); border-radius: 8px; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { cursor: zoom-in; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
+        footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="site">
+            <div class="brand">👹 Frijal • Artikel</div>
+        </header>
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital" />
-  <meta name="twitter:description" content="Dari modifikasi UNIX ke 4.4BSD-Lite dan warisan besar BSD pada sistem modern—disajikan santai, responsif, interaktif." />
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg" />
-  <meta name="twitter:site" content="@frijal" />
+        <main>
+            <div class="col">
+                <article>
+                    <h1>BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital</h1>
+                    <p class="lead">Kisah BSD (Berkeley Software Distribution) dimulai dari modifikasi UNIX di Berkeley, berlanjut ke "Perang UNIX", hingga melahirkan 4.4BSD-Lite yang warisannya masih hidup di sistem operasi modern.</p>
 
-  <!-- Schema.org Article -->
-  <!-- Hero -->
-  <header class="hero" role="banner">
-<div class="title">
-  <h1>BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital Kita</h1>
-<div id="iposbrowser"></div>
-  <p class="kicker">Dari patch UNIX di Berkeley, ke Perang UNIX, lahirnya 4.4BSD‑Lite, dan warisan besar yang masih hidup di sistem modern.</p>
-</div>
-  </header>
+                    <div class="share-bar">
+                        <button class="btn-share" data-share="twitter">Twitter</button>
+                        <button class="btn-share" data-share="facebook">Facebook</button>
+                        <button class="btn-share" data-share="whatsapp">WhatsApp</button>
+                        <button class="btn-share" id="copyLink">Salin Tautan</button>
+                    </div>
 
+                    <figure>
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg" alt="Ilustrasi Sejarah BSD">
+                        <figcaption style="font-size: 0.9em; color: var(--muted); margin-top: 0.5rem;">BSD di Berkeley: dari patch menjadi sistem, dari konflik menjadi kelahiran kembali.</figcaption>
+                    </figure>
 
+                    <h2>Awal Mula: Ketika Mahasiswa Mengubah Kode AT&T</h2>
+                    <p>Kisah BSD dimulai pada akhir 1970-an. Saat itu, sistem operasi <strong>UNIX</strong> milik AT&T menjadi raja di dunia komputasi akademik. Universitas, termasuk Berkeley, memiliki lisensi untuk menggunakan dan memodifikasi kode sumber UNIX.</p>
+                    <p>Para peneliti di Berkeley, yang awalnya hanya ingin memperbaiki hal-hal kecil, mulai menambahkan fitur besar seperti <strong>TCP/IP</strong> (fondasi internet). Kontribusi mereka tumbuh begitu besar hingga BSD berevolusi menjadi sistem operasi <em>Unix-like</em> yang berdiri sendiri.</p>
+                    
+                    <h2>Era Perang UNIX dan Kelahiran Kembali</h2>
+                    <p>Popularitas BSD yang meledak memicu konflik kepemilikan kode dengan AT&T, yang dikenal sebagai "Perang UNIX" pada awal 1990-an. Kasus ini selesai pada tahun 1994, di mana BSD setuju untuk menghapus semua sisa kode milik AT&T.</p>
+                    <blockquote>Ironisnya, momen ini menjadi titik balik heroik. Dari abu perseteruan itu, lahirlah <strong>4.4BSD-Lite</strong>, sebuah versi BSD yang sepenuhnya bersih dari kode proprietari.</blockquote>
 
-  <!-- Article -->
-  <article class="article" role="article">
-<p>Sejarah dan makna BSD (Berkeley Software Distribution) ini menjadi lebih panjang, luas maknanya, dengan gaya bahasa yang santai.</p>
-<hr />
-<h2>Awal mula: ketika mahasiswa mengubah kode AT&amp;T</h2>
-<p>Kisah BSD dimulai pada akhir 1970‑an. Saat itu, sistem operasi <b>UNIX milik AT&amp;T</b> menjadi raja di dunia komputasi akademik. Universitas—termasuk Berkeley—memiliki lisensi untuk menggunakan dan memodifikasi source code UNIX (terutama V6 dan V7).</p>
-<p>Para jenius di Berkeley, yang awalnya hanya ingin memperbaiki hal kecil, mulai menambahkan fitur besar: <b>TCP/IP</b> (fondasi internet) dan editor teks canggih.</p>
-<p><b>BSD lahir dari semangat modifikasi.</b> Berawal dari kumpulan patch dan program tambahan untuk UNIX, kontribusi Berkeley tumbuh begitu besar hingga BSD berevolusi menjadi sistem operasi <i>Unix‑like</i> yang berdiri sendiri.</p>
+                    <h2>Warisan BSD di Dunia Modern</h2>
+                    <p>Dengan fondasi yang sepenuhnya open source dan legal, BSD tumbuh menjadi keluarga sistem operasi yang kokoh dan unik, yang turunannya masih sangat relevan hingga hari ini:</p>
+                    <ul>
+                        <li><strong>FreeBSD:</strong> Dikenal karena kinerja dan stabilitas tinggi, menjadi favorit untuk server dan hosting.</li>
+                        <li><strong>NetBSD:</strong> Memiliki slogan "Of course it runs NetBSD," karena portabilitasnya yang luar biasa lintas arsitektur.</li>
+                        <li><strong>OpenBSD:</strong> Sangat fokus pada keamanan dan kebersihan kode, pilihan utama untuk firewall dan sistem kritis.</li>
+                        <li><strong>DragonFly BSD:</strong> Turunan FreeBSD yang berfokus pada multiprocessing canggih.</li>
+                    </ul>
+                    <p>Lebih jauh lagi, filosofi dan sebagian kode BSD menjadi fondasi bagi sistem operasi populer lainnya. <strong>macOS dan iOS</strong> dari Apple, misalnya, berdiri di atas lapisan kernel yang berasal dari BSD.</p>
+                    <p>Pada intinya, BSD adalah perwujudan bahwa kebebasan dan keterbukaan dalam kode adalah kunci kemajuan teknologi yang berkelanjutan.</p>
+                </article>
+            </div>
+        </main>
 
-<hr />
-<h2>Era Perang UNIX: ketika kode sumber berakhir di meja hijau</h2>
-<p>Masuk 1980‑an, popularitas BSD meledak di riset dan industri, bahkan menyalip UNIX AT&amp;T di banyak sisi. Lalu datang masalah: <b>kepemilikan kode</b>.</p>
-<p>Walau banyak kode AT&amp;T diganti dengan karya baru, tersisa potongan kode lama yang bercampur. Ini memicu <b>“Perang UNIX”</b> di awal 1990‑an.</p>
-<h3>Puncak konflik dan kelahiran kembali (1992–1994)</h3>
-<p>1992, Unix System Laboratories (USL, bagian dari AT&amp;T) menggugat University of California atas dugaan pelanggaran hak cipta—masa genting bagi BSD.</p>
-<p>Kasus selesai 1994: BSD <b>menghapus total</b> file yang terbukti berasal dari kode AT&amp;T. Ironisnya, ini menjadi <b>titik balik heroik</b>.</p>
+        <footer class="site">
+            <small>© 2025 Frijal · Pemberontakan kampus yang mengubah dunia digital.</small>
+        </footer>
+    </div>
+    
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="Gambar diperbesar">
+    </div>
+    <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #1a2e57; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
 
-<hr />
-<h2>BSD murni: warisan yang anti‑rugi</h2>
-<p>Dari abu perseteruan itu lahirlah <b>4.4BSD‑Lite</b>—“Lite” artinya <b>bersih dari kode AT&amp;T</b>. Momen ini memerdekakan BSD secara legal dan teknis.</p>
-<p>Dengan pondasi yang sepenuhnya <i>open source</i> dan legal, BSD tumbuh menjadi keluarga sistem operasi yang kokoh dan unik.</p>
+    <script>
+    (function(){
+        const toast = document.getElementById('toast');
+        function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
 
-<h3>Dampak BSD dalam dunia modern</h3>
-<ol class="list">
-  <li><b>FreeBSD:</b> Kinerja dan stabilitas tinggi—favorit server dan hosting.</li>
-  <li><b>NetBSD:</b> “Runs on everything”—portabilitas lintas arsitektur.</li>
-  <li><b>OpenBSD:</b> Fokus keamanan dan kebersihan kode—pilihan untuk firewall dan sistem kritis.</li>
-  <li><b>DragonFly BSD:</b> Turunan FreeBSD, fokus multiprocessing canggih.</li>
-</ol>
-<p>Lebih jauh, filosofi dan sebagian kode BSD masuk ke OS populer: <b>macOS dan iOS</b> berdiri di atas lapisan yang berasal dari BSD.</p>
+        const shareMap = {
+            twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+            facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + location.href)}`
+        };
+        document.querySelectorAll('.btn-share').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const shareType = btn.dataset.share;
+                if (!shareType) return;
+                const url = shareMap[shareType]?.(location.href);
+                if (url) window.open(url, '_blank', 'noopener,noreferrer');
+            });
+        });
+        
+        document.getElementById('copyLink')?.addEventListener('click', () => {
+            navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
+        });
 
-<!-- Gallery -->
-<section class="gallery" aria-label="Galeri BSD">
-  <div class="thumb" data-full="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s1536/bsd.jpg">
-<img loading="lazy" alt="BSD: akar open source modern dari kampus Berkeley" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRa5i6zllcWW9LmI0ik04QJ8Qk4rmlD_LjYYYoI1OSCm_hN3ew2o4FCqijYOgmi37GKh0MJUDdtG8Ufa3FfVdw8Yt-vW7tqsrT4ZlvUk-8GUfQNcV61v1lNbvIt0Aa28-vCBIMxTSFioP4BlRtW3fTvtnyu9V2Qs5G6mowY_wi0bWtRYiWsQ8NO3mkVvM/s16000/bsd.jpg">
-<div class="caption">BSD di Berkeley: patch jadi sistem, konflik jadi kelahiran kembali.</div>
-  </div>
-</section>
-
-<p>Ketika Anda menggunakan internet, mengelola server, atau memakai produk Apple, Anda menikmati hasil kerja keras mahasiswa Berkeley yang berani menantang raksasa industri untuk membebaskan kode sumber. BSD membuktikan <i>open source</i> bisa bertahan melewati badai tuntutan hukum.</p>
-<p><b>Intinya:</b> BSD adalah perwujudan bahwa <b>kebebasan dan keterbukaan dalam kode</b> adalah kunci kemajuan teknologi berkelanjutan.</p>
-  </article>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
-<img id="lb-img" alt="Gambar galeri ukuran penuh" />
-<div class="lb-controls">
-  <button class="lb-btn lb-prev" aria-label="Sebelumnya">◀</button>
-  <button class="lb-btn lb-next" aria-label="Berikutnya">▶</button>
-  <button class="lb-btn lb-close" aria-label="Tutup">✕</button>
-</div>
-  </div>
-
-  <!-- Share -->
-  <div class="share" aria-label="Bagikan artikel">
-<button class="btn" id="copyLink"><span class="sicon">🔗</span><span>Salin tautan</span></button>
-<a class="btn" id="waShare" href="#" rel="noreferrer"><span class="sicon">🟢</span><span>WhatsApp</span></a>
-<a class="btn" id="fbShare" href="#" rel="noreferrer"><span class="sicon">🔵</span><span>Facebook</span></a>
-<a class="btn" id="xShare" href="#" rel="noreferrer"><span class="sicon">⚫</span><span>X (Twitter)</span></a>
-<a class="btn" id="tgShare" href="#" rel="noreferrer"><span class="sicon">🔷</span><span>Telegram</span></a>
-  </div>
-
-  <!-- Facebook Comments -->
-  <section class="comments" aria-label="Komentar Facebook">
-<h2 style="margin-top:0">Kolom komentar</h2>
-
-  </section>
-
-  <footer>
-🄯 2025 Frijal • Teknologi: BSD—pemberontakan kampus yang mengubah dunia digital.
-  </footer>
-
-  <!-- Scripts: detect Browser/OS, lightbox, share links -->
-  <script>
-
-
-// Lightbox gallery
-(function(){
-  const thumbs=[...document.querySelectorAll('.gallery .thumb')];
-  const lb=document.getElementById('lightbox');
-  const img=document.getElementById('lb-img');
-  const prev=document.querySelector('.lb-prev');
-  const next=document.querySelector('.lb-next');
-  const close=document.querySelector('.lb-close');
-  let i=0;
-  function open(n){ i=n; img.src=thumbs[i].dataset.full; lb.classList.add('open'); }
-  function step(d){ i=(i+d+thumbs.length)%thumbs.length; img.src=thumbs[i].dataset.full; }
-  function hide(){ lb.classList.remove('open'); }
-  thumbs.forEach((t,idx)=> t.addEventListener('click',()=>open(idx)));
-  prev.addEventListener('click',()=>step(-1));
-  next.addEventListener('click',()=>step(1));
-  close.addEventListener('click',hide);
-  lb.addEventListener('click',e=>{ if(e.target===lb) hide(); });
-  document.addEventListener('keydown',e=>{
-if(!lb.classList.contains('open')) return;
-if(e.key==='Escape') hide();
-if(e.key==='ArrowLeft') step(-1);
-if(e.key==='ArrowRight') step(1);
-  });
-})();
-
-// Share links
-(function(){
-  const url = encodeURIComponent('https://frijal.pages.dev/artikel/bsd-kisah-berkeley.html');
-  const title = encodeURIComponent('BSD: Kisah Pemberontakan di Kampus yang Melahirkan Dunia Digital');
-  document.getElementById('copyLink').addEventListener('click', async ()=>{
-try{ await navigator.clipboard.writeText(decodeURIComponent(url)); alert('Tautan disalin!'); }
-catch{ prompt('Salin tautan secara manual:', decodeURIComponent(url)); }
-  });
-  document.getElementById('waShare').href = `https://wa.me/?text=${title}%20${url}`;
-  document.getElementById('fbShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  document.getElementById('xShare').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
-  document.getElementById('tgShare').href = `https://t.me/share/url?url=${url}&text=${title}`;
-})();
-  </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('figure img').forEach(el => {
+            el.addEventListener('click', () => {
+                lbImg.src = el.src;
+                lb.classList.add('open');
+            });
+        });
+        function closeLb(){ lb.classList.remove('open'); }
+        lb.addEventListener('click', closeLb);
+        window.addEventListener('keydown', (e) => {
+            if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
+        });
+    })();
+    </script>
 </body>
 </html>

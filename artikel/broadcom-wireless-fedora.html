@@ -1,156 +1,177 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solusi Broadcom Wireless di Fedora: Perbaikan Setelah Update Kernel ✅</title>
-    <meta name="description" content="Panduan profesional dan mudah diikuti untuk memperbaiki Broadcom Wireless (bcm43xx) di Fedora, terutama setelah update kernel, dengan menonaktifkan modul bcma.">
-    <meta name="keywords" content="Broadcom Wireless Fedora, Fix Broadcom Linux, bcma blacklist, Update Kernel Fedora, Driver Broadcom, bcm43xx">
-    <link rel="canonical" href="http://frijal.pages.dev/artikel/broadcom-wireless-fedora.html">
-    <link rel="icon" type="image/gif" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif">
-    
+    <!-- Basic SEO -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solusi Broadcom Wireless di Fedora | bak.xo.je</title>
+    <meta name="description" content="Panduan memperbaiki Broadcom Wireless di Fedora setelah update kernel. Tutorial lengkap dengan snippet perintah, mudah diikuti oleh pemula.">
+    <link rel="canonical" href="http://bak.xo.je/artikel/broadcom-wireless-fedora.html">
+
+    <!-- Favicon & Theme -->
+    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif">
+    <meta name="theme-color" content="#294172">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Solusi Broadcom Wireless di Fedora">
-    <meta property="og:description" content="Panduan memperbaiki Broadcom Wireless di Fedora setelah update kernel.">
+    <meta property="og:description" content="Panduan memperbaiki Broadcom Wireless di Fedora setelah update kernel. Tutorial lengkap, mudah diikuti dengan snippet perintah dan tips.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://frijal.pages.dev/artikel/broadcom-wireless-fedora.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif">
-    
-    <meta name="twitter:card" content="summary">
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Solusi Broadcom Wireless di Fedora">
+    <meta name="twitter:description" content="Panduan memperbaiki Broadcom Wireless di Fedora setelah update kernel.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Solusi Broadcom Wireless di Fedora",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif",
+      "author":{"@type":"Person","name":"Fakhrul Rijal"},
+      "publisher":{"@type":"Organization","name":"Pelan Kiri"},
+      "datePublished":"2025-09-16"
+    }
+    </script>
+
+    <!-- Styles: 1 kolom, dark theme, Fedora-inspired -->
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #acb6e5);
-            color: #222;
+        :root {
+            --bg: #1e2a38;
+            --fg: #e0e6ec;
+            --muted: #a8b0bb;
+            --accent: #5FABFF; /* Fedora Blue */
+            --accent-2: #82c0ff;
+            --card: #2a3847;
+            --border: #3a4857;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --maxw: 900px;
         }
-
-        .container {
-            max-width: 900px; /* Disesuaikan untuk 1 kolom */
-            margin: auto;
-            padding: 2em;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        html, body {
+            background: var(--bg); color: var(--fg);
+            font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0; scroll-behavior: smooth;
         }
-
-        h1 {
-            text-align: center;
-            color: #111;
-            margin-bottom: 1.5em;
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wrap { min-height: 100vh; display: flex; flex-direction: column; }
+        header.site {
+            padding: 24px 20px 8px; border-bottom: 1px solid var(--border);
+            background: #1a2430;
         }
-
-        h2 {
-            color: #0e76a8;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 2em;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 1.5em auto;
-            display: block;
-        }
-
-        code[class*=language-], pre[class*=language-] {
-            border-radius: 8px;
-            font-size: 0.95em;
-            padding: 1em;
-            margin: 1em 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 2em 0;
-            border-top: 1px dashed #ccc;
-            padding-top: 1.5em;
-        }
-
-        .social-buttons a {
-            padding: .7em 1.2em;
-            background: #0e76a8;
-            color: #fff;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: .3s;
-            text-align: center;
-        }
-
-        .social-buttons a:hover {
-            background: #1a4d6e;
-            transform: scale(1.03);
-        }
-
-        .step {
-            margin-bottom: 1.5em;
-        }
-
-        .step h3 {
-            color: #e56a00;
-            margin-bottom: 0.5em;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 10px;
-            margin: 1em 0;
-            border-radius: 4px;
-        }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: bold; font-size: 1.2rem; }
+        main { display: flex; justify-content: center; padding: 28px 16px 60px; }
+        .col { width: 100%; max-width: var(--maxw); }
+        article { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 24px; }
+        article h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.2; margin: 0 0 10px; color: var(--accent); }
+        article h2 { font-size: clamp(22px, 3vw, 28px); margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .lead { color: var(--muted); margin-bottom: 18px; font-size: 1.1rem; }
+        .share-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 24px 0; }
+        .btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: #334155; color: var(--fg); cursor: pointer; text-decoration: none; }
+        .btn-share:hover { background: #475569; }
+        ul { margin: 10px 0 10px 18px; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { cursor: zoom-in; max-width: 200px; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
+        pre { position: relative; background-color: #1a2430; padding: 1.25rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); margin-top: 1rem; }
+        code { font-family: 'Fira Code', 'Consolas', monospace; }
+        .copy-btn { position: absolute; top: 12px; right: 12px; background: #475569; border: none; color: var(--fg); padding: 5px 10px; border-radius: 5px; font-size: 12px; cursor: pointer; }
+        .copy-btn:hover { background: var(--accent); }
+        footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
     </style>
-    
-    
-        </div>
-    </main>
+</head>
+<body>
+    <div class="wrap">
+        <header class="site">
+            <div class="brand">🐧 bak.xo.je</div>
+        </header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/toolbar/prism-toolbar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+        <main>
+            <div class="col">
+                <article>
+                    <h1>Solusi Broadcom Wireless di Fedora</h1>
+                    <p class="lead">Setelah melakukan pembaruan kernel di Fedora, beberapa perangkat wireless Broadcom mungkin berhenti berfungsi. Hal ini biasanya terjadi karena konflik antara modul kernel `bcma` bawaan dengan driver Broadcom yang sebenarnya dibutuhkan.</p>
+
+                    <div class="share-bar">
+                        <button class="btn-share" data-share="twitter">Twitter</button>
+                        <button class="btn-share" data-share="facebook">Facebook</button>
+                        <button class="btn-share" data-share="whatsapp">WhatsApp</button>
+                    </div>
+
+                    <p>Untungnya, solusinya sangat mudah dan hanya memerlukan satu baris perintah di terminal.</p>
+                    
+                    <figure>
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_2V202CIKxIMvkPVWaUWTje6nvsynBctApvHIPFRRGcozz25Y2SwLnu8DwgVZ3w255aEJPi27xzg43WbMDA7TxKRNqHF0s0oQo3RAWGm2R5ek8nY24JqPyP2Yom0yEKjhxiUPF_8C2kW-/s320/broadcom.gif" alt="Logo Broadcom Wireless">
+                    </figure>
+
+                    <h2>Langkah Perbaikan</h2>
+                    <p>Buka terminal, lalu masuk sebagai <strong>root</strong> (misalnya dengan perintah <code>sudo -i</code>). Setelah itu, salin dan jalankan perintah di bawah ini untuk memasukkan modul `bcma` ke dalam daftar hitam (blacklist), sehingga tidak akan dimuat saat boot.</p>
+                    
+                    <pre><code id="code1">echo "blacklist bcma" >> /etc/modprobe.d/broadcom-wl-blacklist.conf</code><button class="copy-btn" data-target="code1">Salin</button></pre>
+                    
+                    <p>Setelah menjalankan perintah tersebut, <strong>reboot</strong> komputer Anda. Perangkat wireless Broadcom Anda seharusnya sudah dapat berfungsi kembali dengan normal.</p>
+                </article>
+            </div>
+        </main>
+
+        <footer class="site">
+            <small>© 2025 Pelan Kiri · Solusi cepat untuk masalah umum di Linux.</small>
+        </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="Gambar diperbesar">
+    </div>
+    <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #3a4857; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentUrl = document.querySelector('link[rel="canonical"]').href || window.location.href.split('#')[0];
-            const articleTitle = encodeURIComponent(document.title);
-            const shareUrl = encodeURIComponent(currentUrl);
+    (function(){
+        const toast = document.getElementById('toast');
+        function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
 
-            // 1. Setup URLs & FB Comments
-            document.getElementById("current-url").textContent = currentUrl;
-            document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-            document.getElementById("share-fb").href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
-            document.getElementById("share-tw").href = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${articleTitle}`;
-            document.getElementById("share-wa").href = `https://wa.me/?text=${articleTitle}%20${shareUrl}`;
-            document.getElementById("share-tg").href = `https://t.me/share/url?url=${shareUrl}&text=${articleTitle}`;
+        const shareMap = {
+            twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+            facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + location.href)}`
+        };
+        document.querySelectorAll('.btn-share').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const url = shareMap[btn.dataset.share]?.(location.href);
+                if (url) window.open(url, '_blank', 'noopener,noreferrer');
+            });
+        });
 
-            // 2. Load FB Comments
-            window.fbAsyncInit = function() {
-                if(typeof FB !== 'undefined') {
-                    try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
-                }
-            };
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('figure img').forEach(el => {
+            el.addEventListener('click', () => {
+                lbImg.src = el.src;
+                lb.classList.add('open');
+            });
+        });
+        function closeLb(){ lb.classList.remove('open'); }
+        lb.addEventListener('click', closeLb);
+        window.addEventListener('keydown', (e) => {
+            if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
+        });
 
-            // 3. Copy Button Logic
-            document.querySelectorAll('pre').forEach(pre => {
-                const copyBtn = pre.querySelector('.copy-to-clipboard-button');
-                if (copyBtn) {
-                    copyBtn.addEventListener('click', () => {
-                        const originalText = copyBtn.textContent;
-                        copyBtn.textContent = 'Copied!';
-                        setTimeout(() => { copyBtn.textContent = originalText; }, 1500);
-                    });
+        document.querySelectorAll('.copy-btn').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const targetId = btn.getAttribute('data-target');
+                const codeEl = document.getElementById(targetId);
+                if (codeEl) {
+                    navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
             });
         });
+    })();
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
+
