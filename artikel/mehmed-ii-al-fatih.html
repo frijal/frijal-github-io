@@ -39,7 +39,7 @@
 
   const path = location.pathname;
   const baseName = path.split('/').pop()?.replace(/\.html?$/i,'') || 'artikel';
-  const fallbackImg = `https://frijal.pages.dev/img/${baseName}.jpg`;
+  const fallbackImg = `https://frijal.pages.dev/img/${baseName}.webp`;
 
   const heroImg = document.getElementById('hero-img');
   const setOG = (src) => {
