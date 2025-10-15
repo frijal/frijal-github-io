@@ -6,7 +6,7 @@ import puppeteer from "puppeteer";
 const BASE_URL = "https://frijal.pages.dev/artikel/";
 const ARTIKEL_DIR = "artikel";
 const IMG_DIR = "img";
-const EXT = "jpg"; // bisa ganti ke 'webp' bila ingin kompresi lebih kecil
+const EXT = "webp"; // bisa ganti ke 'webp' bila ingin kompresi lebih kecil
 
 async function takeScreenshot(url, outputPath) {
   const browser = await puppeteer.launch({
