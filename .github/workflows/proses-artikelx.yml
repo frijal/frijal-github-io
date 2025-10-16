@@ -41,15 +41,46 @@ jobs:
           node ext/inject-meta.js || true
           # Tambahkan step lain jika perlu
 
-      - name: Tambahkan CSS/JS & div tambahan
+            - name: Tambahkan CSS/JS & div tambahan
         run: |
-          for file in artikelx/*.html; do
-            # tambahkan semua step sisipkan CSS/JS/div/search
-            sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
-            sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
-            sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>' "$file"
-            sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>' "$file"
-            sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
+          echo "🧩 Menambahkan elemen tambahan ke file HTML (dengan pengecekan duplikat)..."
+          for file in $TARGET_FOLDER/*.html; do
+            echo "🔧 Memproses: $file"
+
+            # 1️⃣ Tambahkan CSS jika belum ada
+            if ! grep -q '<link rel="stylesheet" href="/ext/marquee-url.css">' "$file"; then
+              sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
+            else
+              echo "⏭️  CSS marquee-url.css sudah ada, lewati."
+            fi
+
+            # 2️⃣ Tambahkan div iposbrowser setelah </h1> jika belum ada
+            if ! grep -q '<div id="iposbrowser"></div>' "$file"; then
+              sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
+            else
+              echo "⏭️  div#iposbrowser sudah ada, lewati."
+            fi
+
+            # 3️⃣ Tambahkan floating search container sebelum </body> jika belum ada
+            if ! grep -q 'class="search-floating-container"' "$file"; then
+              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
+            else
+              echo "⏭️  search-floating-container sudah ada, lewati."
+            fi
+
+            # 4️⃣ Tambahkan marquee section + JS jika belum ada
+            if ! grep -q 'id="related-marquee-section"' "$file"; then
+              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>' "$file"
+            else
+              echo "⏭️  related-marquee-section sudah ada, lewati."
+            fi
+
+            # 5️⃣ Tambahkan iposbrowser.js jika belum ada
+            if ! grep -q '/ext/iposbrowser.js' "$file"; then
+              sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
+            else
+              echo "⏭️  iposbrowser.js sudah ada, lewati."
+            fi
           done
 
       # ================== PINDAHKAN KE artikel ==================
