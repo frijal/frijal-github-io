@@ -59,6 +59,10 @@ jobs:
         run: |
           echo "🧩 Menambahkan elemen tambahan ke file HTML (dengan pengecekan duplikat)..."
           for file in $TARGET_FOLDER/*.html; do
+            if [[ "$(basename "$file")" == "Kalkulator-Laundry-Berkah.html" ]]; then
+              echo "⏭️ Lewati $file"
+              continue
+            fi
             echo "🔧 Memproses: $file"
 
             # 1️⃣ Tambahkan CSS jika belum ada
