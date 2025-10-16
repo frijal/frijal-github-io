@@ -39,17 +39,7 @@ jobs:
         env:
           RSS_LIMIT: 30
 
-      - name: '6. Generate screenshots'
-        if: steps.filter.outputs.src == 'true'
-        run: |
-          npm install puppeteer --no-save
-          node ext/screenshot-puppeteer.js
-
-      - name: '7. Cleanup temporary files'
-        if: steps.filter.outputs.src == 'true'
-        run: rm -rf tmp/ __pycache__/
-
-      - name: '8. Commit and Push All Generated Files'
+      - name: '6. Commit and Push All Generated Files'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -71,7 +61,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: '8. Show Published Links & Summary'
+      - name: '7. Generate screenshots'
+        if: steps.filter.outputs.src == 'true'
+        run: |
+          npm install puppeteer --no-save
+          node ext/screenshot-puppeteer.js
+
+      - name: '8. Cleanup temporary files'
+        run: rm -rf tmp/ __pycache__/
+
+      - name: '9. Show Published Links & Summary'
         if: always()
         run: |
           echo "✅ File yang di-generate (seharusnya):"
