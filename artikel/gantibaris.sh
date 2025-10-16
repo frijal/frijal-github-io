@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
-# 🧭 Deskripsi:
-# Jalankan skrip ini di dalam folder 'artikel/'
-# untuk mengganti string penting dan menambahkan elemen CSS/JS baru,
-# serta mencatat laporan ke log-ganti.txt jika ada perubahan.
+export LC_ALL=C
 
 FILE_PATTERN="*.html"
 LOG_FILE="./log-ganti.txt"
@@ -18,15 +14,13 @@ CHANGED_COUNT=0
 echo "🔧 Memulai proses penggantian string dan penambahan elemen..."
 echo "🕒 $DATE_NOW - Mulai proses"
 
-# Bersihkan log lama sementara
 TMP_LOG="$TMP_DIR/log.tmp"
 > "$TMP_LOG"
 
-find . -type f -name "$FILE_PATTERN" | while read -r file; do
+while read -r file; do
   cp "$file" "$TMP_DIR/original.tmp"
 
-  # 🔁 Ganti teks menggunakan Perl
-  perl -pi -w -e 's#frijal.github.io/#frijal.pages.dev/#g' "$file"
+  perl -pi -w -e 's#frijal.github.io#frijal.pages.dev#g' "$file"
   perl -pi -w -e 's#bak.xo.je#frijal.pages.dev#g' "$file"
   perl -pi -w -e 's#https://frijal.pages.dev/assets/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
   perl -pi -w -e 's#YOUR_APP_ID#1471267430691023#g' "$file"
@@ -35,8 +29,10 @@ find . -type f -name "$FILE_PATTERN" | while read -r file; do
   perl -pi -w -e 's/©/🄯/g' "$file"
   perl -pi -w -e 's#Komentar#Jaga Data Pribadi Tetap Aman.#g' "$file"
   perl -pi -w -e 's#Bak Xo Je#Jaga Data Pribadi Tetap Aman.#g' "$file"
+  perl -pi -w -e 's#Punya Pengalaman Serupa\? Yuk Diskusi!#Jaga Data Pribadi Tetap Aman.#g' "$file"
+  perl -pi -w -e 's#Ada Pertanyaan\? Diskusi di Sini!#Jaga Data Pribadi Tetap Aman.#g' "$file"
+  perl -pi -w -e 's#Diskusi di Sini Yuk!#Jaga Data Pribadi Tetap Aman.#g' "$file"
 
-  # 🎨 Tambahkan CSS & elemen baru
   if ! grep -q '<link rel="stylesheet" href="/ext/marquee-url.css">' "$file"; then
     sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
   fi
@@ -57,12 +53,11 @@ find . -type f -name "$FILE_PATTERN" | while read -r file; do
     sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
   fi
 
-  # 🧩 Deteksi perubahan
   if ! diff -q "$TMP_DIR/original.tmp" "$file" > /dev/null; then
     ((CHANGED_COUNT++))
     echo "[$(date '+%H:%M:%S')] ✅ Berubah: $file" >> "$TMP_LOG"
   fi
-done
+done < <(find . -type f -name "$FILE_PATTERN")
 
 END_TIME=$(date +%s)
 DURATION=$((END_TIME - START_TIME))
@@ -77,7 +72,6 @@ if (( CHANGED_COUNT > 0 )); then
     echo "⏱️  Durasi proses     : ${DURATION}s"
     echo "🕒 Selesai pada       : $(date '+%Y-%m-%d %H:%M:%S')"
   } > "$LOG_FILE"
-
   echo "✅ Selesai! $CHANGED_COUNT file berubah."
   echo "📄 Log tersimpan di: $LOG_FILE"
 else

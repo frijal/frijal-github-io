@@ -4,28 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Windows & Teknologi Umum</title>
+    <title>Multimedia & Editing</title>
     <meta
       name="description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Windows & Teknologi Umum."
+      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
     />
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/windows-and-teknologi-umum.html" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/multimedia-and-editing.html" />
     <link
       rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📽</text></svg>"
     />
 
-    <meta property="og:title" content="Windows & Teknologi Umum" />
+    <meta property="og:title" content="Multimedia & Editing" />
     <meta
       property="og:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Windows & Teknologi Umum."
+      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
     />
     <meta
       property="og:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
+      content="https://frijal.github.io/thumbnail.jpg"
     />
-    <meta property="og:image:alt" content="Windows & Teknologi Umum" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/windows-and-teknologi-umum.html" />
+    <meta property="og:image:alt" content="Multimedia & Editing" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/multimedia-and-editing.html" />
     <meta property="og:type" content="website" />
     <meta
       property="og:site_name"
@@ -33,14 +33,14 @@
     />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Windows & Teknologi Umum" />
+    <meta name="twitter:title" content="Multimedia & Editing" />
     <meta
       name="twitter:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Windows & Teknologi Umum."
+      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
     />
     <meta
       name="twitter:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
+      content="https://frijal.github.io/thumbnail.jpg"
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -199,7 +199,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const TARGET_CATEGORY = '💻 Windows & Teknologi Umum';
+        const TARGET_CATEGORY = '📽️ Multimedia & Editing';
         const DATA_URL = '../../artikel.json';
         const articleGrid = document.getElementById('article-grid');
         const loadingIndicator = document.getElementById('loading');
