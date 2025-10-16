@@ -236,23 +236,7 @@ fi
 
 <!-- Facebook SDK (lazy load) -->
 
-<script>
-  window.addEventListener("scroll", function fbLoader() {
-    if (window.scrollY > 500 && !window.fbAsyncInit) {
-      window.fbAsyncInit = function() {
-        FB.init({appId: '1471267430691023', xfbml: true, version: 'v20.0'});
-      };
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/id_ID/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-      window.removeEventListener("scroll", fbLoader);
-    }
-  });
-</script>
+
 
 
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
