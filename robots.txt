@@ -1,2 +1,41 @@
+# robots.txt untuk frijal.pages.dev
+# =======================================
+# IZINKAN hanya bagian publik:
+# - Halaman utama (/)
+# - artikel/  (artikel utama)
+# - ext/      (ekstensi publik)
+# - img/      (gambar publik)
+# =======================================
+
 User-agent: *
-Disallow: /
+Allow: /
+Allow: /artikel/
+Allow: /ext/
+Allow: /img/
+
+# 🚫 BLOKIR semua folder non-publik, sistem, dan sementara
+Disallow: /artikelx/
+Disallow: /mini/
+Disallow: /sementara/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.vscode/
+Disallow: /.wranglerignore
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /README.md
+Disallow: /LICENSE
+Disallow: /.nojekyll
+Disallow: /wrangler.toml
+
+# 🚫 Folder kategori otomatis (-) tidak perlu diindeks
+Disallow: /artikel/-/
+
+# ✅ IZINKAN halaman sitemap dan feed
+Allow: /sitemap.xml
+Allow: /rss.xml
+Allow: /feed.html
+
+# ✅ Tautan ke peta situs
+Sitemap: https://frijal.pages.dev/sitemap.xml
