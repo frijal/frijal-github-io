@@ -1,195 +1,219 @@
-
-                                    <h2>${title}</h2>
-                                    <img src="${image}" alt="${title}" loading="lazy">
-                                    <p>${(description || '...').substring(0, 100)}...</p>
-                                    <span class="card-meta">${formattedDate}</span>
-                                </div>
-                                <div class="card-content">
-                                <div class="card-thumbnail">
-                            </a>
-                            <a href="../${url}" class="article-card">
-                        `;
-                dateStyle: 'long',
-              `${DATA_URL}?v=${new Date().getTime()}`
-              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
-              articlesHTML += `
-              const [title, url, image, pubDate, description] = article;
-              const formattedDate = new Intl.DateTimeFormat('id-ID', {
-              return;
-              }).format(new Date(pubDate));
-            );
-            articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`;
-            articleGrid.innerHTML = articlesHTML;
-            articles.forEach((article) => {
-            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
-            console.error('Terjadi kesalahan:', error);
-            const allData = await response.json();
-            const articles = allData[TARGET_CATEGORY];
-            const response = await fetch(
-            if (!articles || articles.length === 0) {
-            if (!response.ok) throw new Error(`Status ${response.status}`);
-            let articlesHTML = '';
-            loadingIndicator.style.display = 'none';
-            }
-            });
-          --accent-color: #007bff;
-          --bg-color: #f4f4f9;
-          --border-color: #e0e0e0;
-          --primary-text-color: #212121;
-          --secondary-text-color: #666666;
-          --shadow-color: rgba(0, 123, 255, 0.15);
-          --surface-color: #ffffff;
-          background-color 0.3s,
-          box-shadow 0.3s ease;
-          color 0.3s;
-          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-columns: repeat(4, 1fr);
-          pageTitle.textContent = titleText;
-          transform 0.3s ease,
-          try {
-          }
-          } catch (error) {
-          } finally {
-        #article-grid {
-        --accent-color: #3da9fc; /* Aksen Biru */
-        --bg-color: #121212;
-        --border-color: #2c2c2c;
-        --primary-text-color: #e0e0e0;
-        --secondary-text-color: #b3b3b3;
-        --shadow-color: rgba(61, 169, 252, 0.1);
-        --surface-color: #1e1e1e;
-        :root {
-        aspect-ratio: 16 / 9;
-        autocomplete="off"
-        background-color: #333;
-        background-color: var(--bg-color);
-        background-color: var(--surface-color);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 8px 25px var(--shadow-color);
-        box-sizing: border-box;
-        color: var(--accent-color);
-        color: var(--primary-text-color);
-        color: var(--secondary-text-color);
-        const DATA_URL = '../../artikel.json';
-        const TARGET_CATEGORY = '📚 Islam & Kehidupan';
-        const articleGrid = document.getElementById('article-grid');
-        const fetchAndDisplayCategory = async () => {
-        const loadingIndicator = document.getElementById('loading');
-        const pageTitle = document.getElementById('page-title');
-        display: flex;
-        display: grid;
-        fetchAndDisplayCategory();
-        flex-direction: column;
-        flex-grow: 1;
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.8rem;
-        font-size: 0.9rem;
-        font-size: 1.25rem;
-        font-size: 2.5rem;
-        font-style: italic;
-        gap: 1.5rem;
-        grid-template-columns: 1fr;
-        height: 100%;
-        id="floatingSearchInput"
-        line-height: 1.7;
-        margin-bottom: 0.5rem;
-        margin-bottom: 1rem;
-        margin-bottom: 2.5rem;
-        margin-top: 3rem;
-        margin-top: auto;
-        margin: 0 auto;
-        margin: 0;
-        max-width: 1200px;
-        object-fit: cover;
-        overflow: hidden;
-        padding: 0;
-        padding: 1.5rem;
-        padding: 2rem 1.5rem;
-        placeholder="cari artikel..."
-        text-align: center;
-        text-decoration: none;
-        transform: translateY(-5px);
-        transition:
-        type="text"
-        width: 100%;
-        }
-        };
-      #article-grid {
-      #loading,
-      * {
-      .article-card {
-      .article-card:hover {
-      .card-content h2 {
-      .card-content p {
-      .card-content {
-      .card-meta {
-      .card-thumbnail img {
-      .card-thumbnail {
-      .container {
-      .message {
-      />
-      :root {
-      <div id="article-grid"></div>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-      <div id="loading"></div>
-      <div id="related-marquee-container"></div>
-      <h1 id="page-title">Memuat Artikel...</h1>
-      <input
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      @media (min-width: 1024px) {
-      @media (min-width: 600px) {
-      @media (prefers-color-scheme: light) {
-      body {
-      content="Jaga Data Pribadi Supaya Tetap Aman"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Islam & Kehidupan."
-      content="https://frijal.pages.dev/thumbnail.jpg"
-      document.addEventListener('DOMContentLoaded', () => {
-      h1 {
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      name="description"
-      name="twitter:description"
-      name="twitter:image"
-      property="og:description"
-      property="og:image"
-      property="og:site_name"
-      rel="icon"
-      rel="stylesheet"
-      }
-      });
-    />
-    </div>
-    </script>
-    </section>
-    </style>
-    <div class="container">
-    <div class="search-floating-container">
-    <link
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/islam-and-kehidupan.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
+<!DOCTYPE html>
+<html lang="id">
+  <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Islam & Kehidupan." />
+    <meta property="og:title" content="Islam & Kehidupan" />
+    <meta property="og:description" content="Jaga Data Pribadi Supaya Tetap Aman" />
+    <meta property="og:image" content="https://frijal.pages.dev/thumbnail.jpg" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/islam-and-kehidupan.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Frijal Pages" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Islam & Kehidupan" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:image:alt" content="Islam & Kehidupan" />
-    <meta property="og:title" content="Islam & Kehidupan" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/islam-and-kehidupan.html" />
-    <script src="/ext/marquee-url.js"></script>
-    <script>
-    <section id="related-marquee-section">
-    <style>
+    <meta name="twitter:description" content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Islam & Kehidupan." />
+    <meta name="twitter:image" content="https://frijal.pages.dev/thumbnail.jpg" />
+
     <title>Islam & Kehidupan</title>
-  </body>
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/islam-and-kehidupan.html" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+
+    <style>
+      :root {
+        --accent-color: #007bff;
+        --bg-color: #f4f4f9;
+        --border-color: #e0e0e0;
+        --primary-text-color: #212121;
+        --secondary-text-color: #666666;
+        --shadow-color: rgba(0, 123, 255, 0.15);
+        --surface-color: #ffffff;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --accent-color: #3da9fc;
+          --bg-color: #121212;
+          --border-color: #2c2c2c;
+          --primary-text-color: #e0e0e0;
+          --secondary-text-color: #b3b3b3;
+          --shadow-color: rgba(61, 169, 252, 0.1);
+          --surface-color: #1e1e1e;
+        }
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--primary-text-color);
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-top: 3rem;
+        margin-bottom: 2.5rem;
+      }
+
+      #article-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 600px) {
+        #article-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        #article-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .article-card {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: 0 8px 25px var(--shadow-color);
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .article-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-thumbnail img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+      }
+
+      .card-content h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-content p {
+        font-size: 0.9rem;
+        color: var(--secondary-text-color);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .card-meta {
+        font-size: 0.8rem;
+        color: var(--accent-color);
+      }
+
+      .message {
+        text-align: center;
+        color: var(--secondary-text-color);
+      }
+    </style>
   </head>
+
   <body>
-  <head>
-<!doctype html>
+    <div class="container">
+      <h1 id="page-title">Memuat Artikel...</h1>
+      <div id="article-grid"></div>
+      <div id="loading"></div>
+    </div>
+
+    <section id="related-marquee-section">
+      <div id="related-marquee-container"></div>
+    </section>
+
+    <div class="search-floating-container">
+      <input
+        type="text"
+        id="floatingSearchInput"
+        placeholder="cari artikel..."
+        autocomplete="off"
+      />
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+    </div>
+
+    <script src="/ext/marquee-url.js" defer></script>
+    <script src="/ext/iposbrowser.js" defer></script>
+
+    <script>
+      const DATA_URL = '../../artikel.json';
+      const TARGET_CATEGORY = '📚 Islam & Kehidupan';
+      const articleGrid = document.getElementById('article-grid');
+      const loadingIndicator = document.getElementById('loading');
+      const pageTitle = document.getElementById('page-title');
+
+      const fetchAndDisplayCategory = async () => {
+        try {
+          const response = await fetch(`${DATA_URL}?v=${new Date().getTime()}`);
+          if (!response.ok) throw new Error(`Status ${response.status}`);
+          const allData = await response.json();
+          const articles = allData[TARGET_CATEGORY];
+          if (!articles || articles.length === 0) {
+            articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
+            return;
+          }
+
+          articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
+          let articlesHTML = '';
+
+          articles.forEach((article) => {
+            const [title, url, image, pubDate, description] = article;
+            const formattedDate = new Intl.DateTimeFormat('id-ID', { dateStyle: 'long' }).format(new Date(pubDate));
+            articlesHTML += `
+              <a href="../${url}" class="article-card">
+                <div class="card-thumbnail">
+                  <img src="${image}" alt="${title}" loading="lazy">
+                </div>
+                <div class="card-content">
+                  <h2>${title}</h2>
+                  <p>${(description || '...').substring(0, 100)}...</p>
+                  <span class="card-meta">${formattedDate}</span>
+                </div>
+              </a>`;
+          });
+
+          articleGrid.innerHTML = articlesHTML;
+        } catch (error) {
+          console.error('Terjadi kesalahan:', error);
+          articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`;
+        } finally {
+          loadingIndicator.style.display = 'none';
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
+        pageTitle.textContent = titleText;
+        fetchAndDisplayCategory();
+      });
+    </script>
+  </body>
 </html>
+
