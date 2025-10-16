@@ -1,0 +1,70 @@
+name: ✂️ Hapus Isi Setelah </html>
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_folder:
+        description: "Folder target (misalnya: artikel)"
+        required: true
+        default: "artikel"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  clean-after-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout kode
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ✂️ Hapus semua isi setelah </html>
+        run: |
+          echo "🧹 Memproses file HTML di folder ${{ github.event.inputs.target_folder }}/..."
+          find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" | while read -r file; do
+            echo "🔧 Membersihkan: $file"
+
+            # Ambil semua baris hingga termasuk </html>
+            awk '{
+              print
+              if (tolower($0) ~ /<\/html>/) {
+                exit
+              }
+            }' "$file" > "$file.tmp"
+
+            # Bandingkan hasil
+            if ! cmp -s "$file" "$file.tmp"; then
+              mv "$file.tmp" "$file"
+              echo "✅ Diperbarui: konten setelah </html> dihapus."
+            else
+              rm "$file.tmp"
+              echo "⏭️  Tidak ada perubahan."
+            fi
+          done
+
+      - name: 🧾 Cek apakah ada perubahan
+        run: |
+          if git diff --quiet; then
+            echo "✅ Tidak ada perubahan ditemukan."
+            echo "NO_CHANGES=true" >> $GITHUB_ENV
+          else
+            echo "📝 Ada file yang diperbarui."
+            echo "NO_CHANGES=false" >> $GITHUB_ENV
+          fi
+
+      - name: 🧩 Commit & buat PR otomatis
+        if: env.NO_CHANGES != 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "✂️ Hapus semua isi setelah </html>"
+          title: "✂️ Bersihkan sisa konten setelah </html>"
+          body: |
+            Workflow otomatis ini menghapus semua baris atau konten yang muncul **setelah tag penutup </html>**
+            di semua file **${{ github.event.inputs.target_folder }}/*.html**.
+
+            🔧 Berguna untuk memastikan file HTML tetap valid dan tidak memiliki trailing code/error di luar struktur.
+          base: main
