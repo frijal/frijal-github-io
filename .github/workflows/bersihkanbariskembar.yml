@@ -75,12 +75,14 @@ jobs:
 
       - name: 💾 Commit perubahan jika ada
         run: |
+          set +e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if [[ -n "$(git status --porcelain)" ]]; then
+          git add ${{ github.event.inputs.target_folder }}/**/*.html || true
+          git diff --cached --quiet
+          if [[ $? -ne 0 ]]; then
             echo "🔄 Menyimpan perubahan..."
-            git add ${{ github.event.inputs.target_folder }}/**/*.html || true
             git commit -m "🧹 Hapus duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
             git push
             echo "NO_CHANGES=false" >> $GITHUB_ENV
@@ -88,6 +90,7 @@ jobs:
             echo "✅ Tidak ada perubahan ditemukan."
             echo "NO_CHANGES=true" >> $GITHUB_ENV
           fi
+          set -e
 
       - name: 🚀 Buat Pull Request otomatis
         if: env.NO_CHANGES != 'true'
