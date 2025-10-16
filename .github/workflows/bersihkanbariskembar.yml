@@ -12,39 +12,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout kode
+      - name: 📥 Checkout kode
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Hapus baris duplikat (panjang > 12 karakter)
+      - name: 🧹 Hapus baris duplikat (panjang > 12 karakter)
         run: |
-          echo "🔍 Memproses file HTML di folder artikel/"
-          find artikel -type f -name "*.html" | while read -r file; do
+          echo "🔍 Memproses semua file HTML di folder artikel/"
+          FILES=$(find artikel -type f -name "*.html" 2>/dev/null || true)
+
+          if [ -z "$FILES" ]; then
+            echo "⚠️ Tidak ditemukan file HTML di folder artikel/, skip proses."
+            echo "NO_CHANGES=true" >> $GITHUB_ENV
+            exit 0
+          fi
+
+          for file in $FILES; do
             echo "🧹 Membersihkan: $file"
-            # Hapus duplikat hanya jika panjang baris > 12 karakter
-            awk 'length($0) > 12 { 
-                    if (!seen[$0]++) print 
-                 } 
-                 length($0) <= 12 {
-                    print
-                 }' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+            awk '{
+              if (length($0) > 12) {
+                if (!seen[$0]++) print
+              } else {
+                print
+              }
+            }' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
           done
 
-      - name: Commit perubahan jika ada
+      - name: 💾 Commit perubahan jika ada
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           if [[ -n "$(git status --porcelain)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            echo "🔄 Menyimpan perubahan..."
             git add artikel/**/*.html
             git commit -m "🧹 Bersihkan baris duplikat (panjang > 12 karakter)"
             git push
+            echo "NO_CHANGES=false" >> $GITHUB_ENV
           else
             echo "✅ Tidak ada perubahan ditemukan."
             echo "NO_CHANGES=true" >> $GITHUB_ENV
           fi
 
-      - name: Buat Pull Request otomatis
+      - name: 🚀 Buat Pull Request otomatis
         if: env.NO_CHANGES != 'true'
         uses: peter-evans/create-pull-request@v6
         with:
@@ -55,5 +66,6 @@ jobs:
             PR ini dibuat otomatis oleh workflow manual untuk menghapus
             baris duplikat **yang panjangnya lebih dari 12 karakter**
             di semua file **artikel/*.html**.
-            - Baris duplikat pendek (≤12 karakter) tetap dibiarkan.
-            - PR ini dibuat dari branch aktif yang sama.
+            
+            🔧 Baris duplikat pendek (≤12 karakter) tetap dibiarkan.
+            ⚙️ PR ini dibuat di branch aktif yang sama (tanpa membuat branch baru).
