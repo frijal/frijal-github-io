@@ -25,6 +25,8 @@ jobs:
       # ================== PROSES ARTIKEL ==================
       - name: Jalankan find-and-replace
         run: |
+          TARGET_FOLDER="artikelx"
+          shopt -s nullglob
           for file in $TARGET_FOLDER/*.html; do
             echo "🪄 Memproses $file"
             perl -pi -w -e 's#frijal.github.io/#frijal.pages.dev/#g' "$file"
@@ -37,15 +39,19 @@ jobs:
             perl -pi -w -e 's#Komentar#Jaga Data Pribadi Tetap Aman.#g' "$file"
             perl -pi -w -e 's#Bak Xo Je#Jaga Data Pribadi Tetap Aman.#g' "$file"
           done
+          shopt -u nullglob
 
       - name: Inject meta & script
         run: |
           node ext/inject-meta.js || true
-          # Tambahkan step lain jika perlu
 
+      # ================== TAMBAH ELEMEN TAMBAHAN ==================
       - name: Tambahkan CSS/JS & div tambahan
         run: |
           echo "🧩 Menambahkan elemen tambahan ke file HTML (dengan pengecekan duplikat)..."
+          TARGET_FOLDER="artikelx"
+          shopt -s nullglob
+
           for file in $TARGET_FOLDER/*.html; do
             echo "🔧 Memproses: $file"
 
@@ -84,17 +90,21 @@ jobs:
               echo "⏭️  iposbrowser.js sudah ada, lewati."
             fi
           done
+          shopt -u nullglob
 
       # ================== PINDAHKAN KE artikel ==================
       - name: Pindahkan ke folder artikel/
-        run: mv -f artikelx/*.html artikel/ || true
+        run: |
+          mkdir -p artikel
+          mv -f artikelx/*.html artikel/ || true
 
       - name: Commit & Push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+
           if git diff --quiet; then
-            echo "Tidak ada perubahan, skip commit."
+            echo "✅ Tidak ada perubahan, skip commit."
           else
             git add artikelx artikel
             git commit -m "Workflow: Proses & pindahkan artikel dari artikelx/"
