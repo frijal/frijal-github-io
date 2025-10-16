@@ -1,18 +1,100 @@
+# ==========================
+# 🌐 Cloudflare Deployment Ignore List
+# ==========================
+# Hanya kirimkan file penting situs:
+# - index.html, sitemap.xml, rss.xml, robots.txt, favicon, dll.
+# - Folder publik: artikel/, img/, ext/
+# Semua yang lain akan diabaikan.
+
+# --- Sistem Git & Workflow ---
 .git
-node_modules
-.github
-README.md
-LICENSE
-*.yml
-.github/**
-README.md
-LICENSE
+.github/
 .gitignore
-mini/**
+.gitattributes
+.vscode/
+.idea/
+
+# --- Build tools dan dependency ---
+node_modules/
+package.json
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+Dockerfile
+docker-compose.yml
+
+# --- File CI/CD dan konfigurasi eksternal ---
+*.yml
+*.yaml
+vercel.json
+netlify.toml
+.env
+.env.*
+.nojekyll
+
+# --- Dokumentasi & lisensi ---
+README.md
+LICENSE
+
+# --- Folder sementara / pengembangan ---
+tmp/
+temp/
+sementara/
+mini/
+artikelx/
+drafts/
+_drafts/
+_temp/
+backup/
+old/
+__pycache__/
+scripts/
+tests/
+test/
+data/
+logs/
+cache/
+_build/
+_deploy/
+dist/
+output/
+preview/
+notes/
+trash/
+
+# --- File konfigurasi editor/linter ---
+.editorconfig
+.eslintrc
+.eslintrc.*
+.prettierrc
+.prettierrc.*
+.stylelintrc
+.stylelintrc.*
+tsconfig.json
+jsconfig.json
+
+# --- File hasil build internal atau sampah lokal ---
+*.log
+*.bak
+*.tmp
+*.swp
+*.orig
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- File khusus proyek yang tidak dipublikasikan ---
+robots-old.txt
+robots-test.txt
 artikelx/**
 sementara/**
-.nojekyll
-package-lock.json
-package.json
-node_modules/**
-robots.txt
+mini/**
+drafts/**
+backup/**
+old/**
+
+# ==========================
+# ✅ Hanya yang berikut ini akan dikirim ke Cloudflare:
+# index.html, rss.xml, sitemap.xml, robots.txt, favicon.*
+# folder artikel/, img/, ext/
+# ==========================
