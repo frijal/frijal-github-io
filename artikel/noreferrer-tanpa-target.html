@@ -1,275 +1,153 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- prettier-ignore -->
-<title>Apa Dampaknya rel=noreferrer Tanpa target=_blank</title>
-  
-  <!-- Metadata SEO -->
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/noreferrer-tanpa-target.html">
-  <meta name="description" content="Penjelasan lengkap dan santai tentang dampak penggunaan rel='noreferrer' tanpa target='_blank' pada link HTML. Apa saja efek privasi, keamanan, dan praktik terbaiknya.">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Apa Dampaknya rel='noreferrer' Tanpa target='_blank'">
-  <meta property="og:description" content="Penjelasan lengkap tentang efek privasi dan keamanan jika menggunakan rel='noreferrer' tanpa target='_blank'.">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/noreferrer-tanpa-target.html">
-  <meta property="og:type" content="article">
+    <!-- Basic SEO -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Apa Dampaknya rel="noreferrer" Tanpa target="_blank"</title>
+    <meta name="description" content="Penjelasan lengkap dan santai tentang dampak penggunaan rel='noreferrer' tanpa target='_blank' pada link HTML. Apa saja efek privasi, keamanan, dan praktik terbaiknya.">
+    <link rel="canonical" href="https://frijal.github.io/artikel/noreferrer-tanpa-target.html">
 
+    <!-- Favicon & Theme -->
+    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#1e293b">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Apa Dampaknya rel='noreferrer' Tanpa target='_blank'">
-  <meta name="twitter:description" content="Penjelasan lengkap tentang efek rel='noreferrer' tanpa target='_blank' di HTML.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Apa Dampaknya rel='noreferrer' Tanpa target='_blank'">
+    <meta property="og:description" content="Penjelasan lengkap tentang efek privasi dan keamanan jika menggunakan rel='noreferrer' tanpa target='_blank'.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.github.io/artikel/noreferrer-tanpa-target.html">
+    <meta property="og:image" content="https://frijal.github.io/assets/og/noreferrer-cover.jpg">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apa Dampaknya rel='noreferrer' Tanpa target='_blank'">
+    <meta name="twitter:description" content="Penjelasan lengkap tentang efek rel='noreferrer' tanpa target='_blank' di HTML.">
+    <meta name="twitter:image" content="https://frijal.github.io/assets/og/noreferrer-cover.jpg">
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
-
-  <!-- CSS -->
-  <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.7;
-  background: #fafafa;
-  color: #222;
-}
-header {
-  background: #0078d7;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h1, h2, h3 {
-  margin-top: 30px;
-}
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-.gallery img {
-  width: calc(33.33% - 10px);
-  cursor: pointer;
-  border-radius: 8px;
-}
-@media (max-width: 768px) {
-  .gallery img {
-width: 100%;
-  }
-}
-/* Tombol */
-.btn-sitemap, .btn-home {
-  position: fixed;
-  z-index: 999;
-  background: #0078d7;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 14px;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-.btn-sitemap { left: 10px; top: 30%; }
-.btn-home { right: 10px; bottom: 20%; }
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding: 20px;
-  background: rgba(0,0,0,0.8);
-  top: 0; left: 0; right: 0; bottom: 0;
-  justify-content: center;
-  align-items: center;
-}
-.lightbox img {
-  max-width: 90%;
-  max-height: 80%;
-}
-.lightbox .nav {
-  position: absolute;
-  top: 50%;
-  font-size: 2em;
-  color: white;
-  cursor: pointer;
-  user-select: none;
-}
-.lightbox .prev { left: 30px; }
-.lightbox .next { right: 30px; }
-/* Share icons */
-.share {
-  margin: 20px 0;
-}
-.share a {
-  margin-right: 10px;
-  text-decoration: none;
-  font-size: 20px;
-}
-footer {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 14px;
-  padding: 20px;
-  background: #f1f1f1;
-}
-.env-info {
-  margin-top: 20px;
-  padding: 10px;
-  background: #eef;
-  border-radius: 6px;
-  font-size: 14px;
-}
-  </style>
-  <meta property="og:image" content="https://frijal.pages.dev/img/noreferrer-tanpa-target.webp">
-  <meta property="og:image:alt" content="Apa Dampaknya rel=noreferrer Tanpa target=_blank">
-  <meta name="twitter:image" content="https://frijal.pages.dev/img/noreferrer-tanpa-target.webp">
-  <meta itemprop="image" content="https://frijal.pages.dev/img/noreferrer-tanpa-target.webp">
-
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-10-02T11:00:00+08:00"></head>
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Apa Dampaknya rel='noreferrer' Tanpa target='_blank'",
+      "author": { "@type": "Person", "name": "Frijal" },
+      "datePublished": "2025-10-16",
+      "publisher": { "@type": "Organization", "name": "Frijal Blog" }
+    }
+    </script>
+    
+    <!-- Styles: 1 kolom, dark theme -->
+    <style>
+        :root {
+            --bg: #1e293b;
+            --fg: #f1f5f9;
+            --muted: #94a3b8;
+            --accent: #3b82f6; /* Blue */
+            --accent-2: #60a5fa;
+            --card: #334155;
+            --border: #475569;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --maxw: 900px;
+        }
+        html, body {
+            background: var(--bg); color: var(--fg);
+            font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0; scroll-behavior: smooth;
+        }
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wrap { min-height: 100vh; display: flex; flex-direction: column; }
+        header.site {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px);
+            position: sticky; top: 0; z-index: 10;
+        }
+        .brand { font-weight: bold; font-size: 1.2rem; }
+        main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
+        .col { width: 100%; max-width: var(--maxw); }
+        article { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 2rem; }
+        article h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; margin: 0 0 10px; color: var(--accent-2); }
+        article h2 { font-size: 1.5rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .lead { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .share-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1.5rem 0; }
+        .btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: #475569; color: var(--fg); cursor: pointer; text-decoration: none; }
+        .btn-share:hover { background: #64748b; }
+        code { background-color:rgba(255,255,255,0.1); padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+        footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
+    </style>
+</head>
 <body>
-  <header>
-<h1>Apa Dampaknya rel="noreferrer" Tanpa target="_blank"</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<p>Panduan santai tapi lengkap untuk memahami privasi & keamanan link di HTML</p>
-  </header>
+    <div class="wrap">
+        <header class="site">
+            <div class="brand">🚀 Frijal Blog</div>
+        </header>
 
-  <a href="https://frijal.pages.dev/sitemap.html" class="btn-sitemap">🗺</a>
-  <a href="https://frijal.pages.dev" class="btn-home">🏠</a>
+        <main>
+            <div class="col">
+                <article>
+                    <h1>Dampak <code>rel="noreferrer"</code> Tanpa <code>target="_blank"</code></h1>
+                    <p class="lead">Panduan santai ini akan menjelaskan tentang dampak privasi dan keamanan saat menggunakan atribut <code>rel="noreferrer"</code> pada link HTML tanpa <code>target="_blank"</code>.</p>
 
-  <main>
-<h2>🔹 Dampak yang tetap ada</h2>
-<p>
-  Kalau kamu pakai <code>rel="noreferrer"</code> tapi <b>tidak ada</b> <code>target="_blank"</code>,
-  tetap saja ada efek privasi. Artinya:
-</p>
-<ul>
-  <li><b>Referer disembunyikan</b> → situs tujuan tidak tahu halaman asal link.</li>
-  <li>Link bisa dibuka di tab/jendela yang sama tanpa masalah.</li>
-</ul>
+                    <div class="share-bar">
+                        <button class="btn-share" data-share="twitter">Twitter</button>
+                        <button class="btn-share" data-share="facebook">Facebook</button>
+                        <button class="btn-share" data-share="whatsapp">WhatsApp</button>
+                        <button class="btn-share" id="copyLink">Salin Tautan</button>
+                    </div>
 
-<h2>🔹 Dampak yang tidak terjadi</h2>
-<ul>
-  <li>Tidak ada proteksi <code>window.opener</code> → tapi ini memang tidak dibutuhkan, karena tidak membuka tab baru.</li>
-  <li>Perilaku link biasa, hanya saja privasi lebih terjaga.</li>
-</ul>
+                    <h2>Dampak yang Tetap Ada (Privasi)</h2>
+                    <p>Jika Anda menggunakan <code>rel="noreferrer"</code> tetapi <strong>tidak</strong> menyertakan <code>target="_blank"</code>, efek privasi tetap berlaku. Artinya:</p>
+                    <ul>
+                        <li><strong>Referrer Disembunyikan:</strong> Saat pengguna mengklik link, situs tujuan tidak akan mengetahui dari halaman mana pengguna tersebut berasal. Informasi <code>Referer</code> pada HTTP header akan dihilangkan.</li>
+                        <li><strong>Link Membuka di Tab yang Sama:</strong> Karena tidak ada <code>target="_blank"</code>, link akan terbuka di tab atau jendela yang sedang aktif, menggantikan halaman saat ini.</li>
+                    </ul>
 
-<h2>🔑 Kesimpulan</h2>
-<p>
-  Jadi, <code>rel="noreferrer"</code> <b>tetap berguna</b> walau tanpa <code>target="_blank"</code>.  
-  Bedanya, efeknya fokus ke <b>privasi</b> (menyembunyikan sumber traffic), 
-  bukan ke keamanan tab baru.
-</p>
+                    <h2>Dampak yang Tidak Terjadi (Keamanan)</h2>
+                    <ul>
+                        <li><strong>Tidak Ada Proteksi <code>window.opener</code>:</strong> Atribut <code>rel="noopener"</code> (yang sering dipasangkan dengan <code>noreferrer</code>) berfungsi untuk mencegah halaman baru mendapatkan akses ke objek <code>window</code> dari halaman asal. Namun, karena link ini tidak membuka tab baru, ancaman keamanan terkait <code>window.opener</code> tidak relevan.</li>
+                        <li><strong>Perilaku Link Normal:</strong> Selain menyembunyikan referrer, link akan berfungsi seperti link biasa.</li>
+                    </ul>
+                    
+                    <h2>Kesimpulan</h2>
+                    <p>Jadi, <code>rel="noreferrer"</code> <strong>tetap berguna</strong> meskipun tanpa <code>target="_blank"</code>. Bedanya, dalam kasus ini, efeknya murni berfokus pada <strong>privasi</strong> (menyembunyikan sumber traffic), bukan pada keamanan yang terkait dengan pembukaan tab baru.</p>
+                </article>
+            </div>
+        </main>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <span class="nav prev" onclick="changeImg(-1)">&#10094;</span>
-  <img id="lightbox-img" src="">
-  <span class="nav next" onclick="changeImg(1)">&#10095;</span>
-</div>
+        <footer class="site">
+            <small>© 2025 Frijal Blog · Artikel edukasi HTML</small>
+        </footer>
+    </div>
+    
+    <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #334155; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
 
-<h2>🔗 Bagikan Artikel Ini</h2>
-<div class="share">
-  <a href="https://facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/noreferrer-tanpa-target.html" target="_blank">📘 Facebook</a>
-  <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/noreferrer-tanpa-target.html" target="_blank">🐦 Twitter</a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.pages.dev/artikel/noreferrer-tanpa-target.html" target="_blank">💼 LinkedIn</a>
-</div>
+    <script>
+    (function(){
+        const toast = document.getElementById('toast');
+        function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
 
-<h2>💬 Jaga Data Pribadi Tetap Aman.</h2>
-
-
-<h2>🔍 Deteksi Lingkungan</h2>
-<div class="env-info" id="env-info">
-  Memuat info browser, OS, dan lokasi...
-</div>
-  </main>
-
-  <footer>
-🄯 2025 Frijal Blog • Artikel edukasi HTML
-  </footer>
-
-  <!-- Facebook SDK -->
-  
-  <!-- JS untuk lightbox -->
-  <script>
-const gallery = document.querySelectorAll('.gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-let currentIndex = 0;
-
-gallery.forEach((img, i) => {
-  img.addEventListener('click', () => {
-lightbox.style.display = 'flex';
-lightboxImg.src = img.src;
-currentIndex = i;
-  });
-});
-
-function changeImg(step) {
-  currentIndex = (currentIndex + step + gallery.length) % gallery.length;
-  lightboxImg.src = gallery[currentIndex].src;
-}
-
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) lightbox.style.display = 'none';
-});
-  </script>
-
-  <!-- JS untuk deteksi browser, OS, dan lokasi -->
-  <script>
-function getBrowserInfo() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Firefox")) return "🦊 Firefox";
-  if (ua.includes("Chrome")) return "🌐 Chrome";
-  if (ua.includes("Safari") && !ua.includes("Chrome")) return "🍎 Safari";
-  if (ua.includes("Edg")) return "🔵 Edge";
-  return "❓ Browser lain";
-}
-function getOSInfo() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Win")) return "🖥 Windows";
-  if (ua.includes("Mac")) return "🍏 macOS";
-  if (ua.includes("Linux")) return "🐧 Linux";
-  if (/Android/i.test(ua)) return "🤖 Android";
-  if (/iPhone|iPad|iPod/i.test(ua)) return "📱 iOS";
-  return "❓ OS lain";
-}
-async function getLocation() {
-  try {
-const res = await fetch("https://ipapi.co/json/");
-const data = await res.json();
-return `📍 ${data.city}, ${data.country_name} (${data.country_code})`;
-  } catch {
-return "Lokasi tidak bisa dideteksi";
-  }
-}
-async function showEnv() {
-  const info = document.getElementById("env-info");
-  const browser = getBrowserInfo();
-  const os = getOSInfo();
-  const loc = await getLocation();
-  info.textContent = `${browser} • ${os} • ${loc}`;
-}
-showEnv();
-  </script>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+        const shareMap = {
+            twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+            facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + location.href)}`
+        };
+        document.querySelectorAll('.btn-share').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const shareType = btn.dataset.share;
+                if (!shareType) return;
+                const url = shareMap[shareType]?.(location.href);
+                if (url) window.open(url, '_blank', 'noopener,noreferrer');
+            });
+        });
+        
+        document.getElementById('copyLink')?.addEventListener('click', () => {
+            navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
+        });
+    })();
+    </script>
 </body>
 </html>
+
 
