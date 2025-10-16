@@ -1,4 +1,3 @@
-// ext/screenshot-puppeteer.js
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
@@ -6,7 +5,7 @@ import puppeteer from "puppeteer";
 const BASE_URL = "https://frijal.pages.dev/artikel/";
 const ARTIKEL_DIR = "artikel";
 const IMG_DIR = "img";
-const EXT = "webp"; // bisa ganti ke 'webp' bila ingin kompresi lebih kecil
+const EXT = "webp"; // bisa ganti ke 'jpeg' jika mau
 
 async function takeScreenshot(url, outputPath) {
   const browser = await puppeteer.launch({
@@ -42,7 +41,9 @@ async function main() {
     console.error(`[FATAL] Folder '${ARTIKEL_DIR}/' tidak ditemukan.`);
     process.exit(1);
   }
-  if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR);
+
+  // Membuat folder img jika belum ada (recursive aman)
+  if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
 
   const files = fs.readdirSync(ARTIKEL_DIR).filter(f => f.endsWith(".html"));
   console.log(`🧭 Menemukan ${files.length} artikel...`);
@@ -58,7 +59,9 @@ async function main() {
 
     const url = `${BASE_URL}${base}.html`;
     await takeScreenshot(url, output);
-    await new Promise(r => setTimeout(r, 1000)); // jeda 1 detik antar screenshot
+
+    // Delay 1 detik antar screenshot untuk mengurangi beban
+    await new Promise(r => setTimeout(r, 1000));
   }
 
   console.log("🎉 Semua screenshot selesai diproses!");
