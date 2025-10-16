@@ -1,9 +1,10 @@
 # .github/workflows/cleanup-orphan-images.yml
+
 name: Pembersihan Gambar Orphan
 
 on:
   schedule:
-    # Setiap hari pukul 06:00 WITA (22:00 UTC hari sebelumnya)
+    # Setiap hari pukul 06:00 WITA (UTC+8) → 22:00 UTC hari sebelumnya
     - cron: '0 22 * * *'
   workflow_dispatch: # Bisa dijalankan manual
 
@@ -25,30 +26,40 @@ jobs:
           echo "🧹 Memulai proses pembersihan gambar Orphan..."
           DELETED_COUNT=0
 
-          # Loop semua file .webp di img/
-          for webp_file in img/*.webp; do
-            [ -e "$webp_file" ] || continue
+          # Pastikan folder img ada
+          mkdir -p img
 
+          # Loop semua .webp di folder img/
+          shopt -s nullglob
+          for webp_file in img/*.webp; do
+            # Ambil nama dasar file
             base_name=$(basename "$webp_file" .webp)
+
+            # Path artikel yang seharusnya ada
             html_file="artikel/${base_name}.html"
 
+            # Jika artikel tidak ada → hapus dari git
             if [ ! -f "$html_file" ]; then
-              echo "-> Orphan: '$webp_file' tidak memiliki artikel '$html_file'. Menghapus..."
-              git rm "$webp_file"
+              echo "-> Orphan: '$webp_file' tidak memiliki artikel '$html_file'. Menghapus dari repo..."
+              git rm -f "$webp_file"
               DELETED_COUNT=$((DELETED_COUNT + 1))
             fi
           done
+          shopt -u nullglob
 
-          echo "✅ Proses selesai. Total file yang dihapus: $DELETED_COUNT."
+          echo "🧹 Proses selesai. Total gambar orphan dihapus: $DELETED_COUNT"
           echo "deleted_count=$DELETED_COUNT" >> $GITHUB_OUTPUT
 
-      - name: Commit Hasil Pembersihan
+      - name: Commit & Push Hasil Pembersihan
         if: steps.cleanup.outputs.deleted_count != '0'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: |
-            chore(cleanup): Hapus ${{ steps.cleanup.outputs.deleted_count }} gambar orphan
-            Membersihkan file .webp di folder /img yang tidak lagi memiliki
-            file .html yang sesuai di folder /artikel.
-          branch: ${{ github.ref_name }}
-          file_pattern: img/*.webp
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -u img/
+          git commit -m "chore(cleanup): Hapus ${{ steps.cleanup.outputs.deleted_count }} gambar orphan .webp"
+          git push origin main
+
+      - name: No Orphan Found
+        if: steps.cleanup.outputs.deleted_count == '0'
+        run: echo "✅ Tidak ada gambar orphan ditemukan. Tidak ada file yang dihapus."
