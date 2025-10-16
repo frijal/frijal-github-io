@@ -132,7 +132,7 @@ In jurisdictions that recognize copyright laws, the author(s) dedicate <strong>a
 </tr>
 <tr style="background: linear-gradient(90deg, #28a745, #85e085); color:white;" title="Bebas Hak Cipta 🎉">
 <td style="padding: 8px;">🟢 Bebas Hak Cipta</td>
-<td style="padding: 8px;">Gratis, tanpa hak cipta 🎉</td>
+<td style="padding: 8px;">Gratis, tanpa hak cipta. 🎉</td>
 </tr>
 <tr style="background: linear-gradient(90deg, #007BFF, #00d4ff); color:white;" title="Digunakan Siapa Saja 🤝">
 <td style="padding: 8px;">🌍 Digunakan Siapa Saja</td>
