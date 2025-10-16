@@ -45,7 +45,6 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.7;
-            padding: 0;
         }
         /* HEADER & FOOTER */
         header, footer {
@@ -57,7 +56,6 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: var(--padding-base);
         }
         /* TYPOGRAPHY & TEXT STYLES */
         h1 {
@@ -74,7 +72,6 @@
             font-size: 2em;
         }
         h3 {
-            color: var(--color-primary);
             margin-top: 20px;
             font-size: 1.4em;
         }
@@ -97,7 +94,6 @@
         }
         pre code {
             display: block;
-            padding: 0;
             background: none;
             color: #fff;
         }
@@ -107,20 +103,16 @@
         }
         /* SHARING ICONS */
         .social-share {
-            text-align: center;
             margin: 30px 0;
-            padding: 15px;
             border-top: 1px solid var(--color-secondary);
             border-bottom: 1px solid var(--color-secondary);
         }
         .social-share a {
-            color: var(--color-text);
             font-size: 28px;
             margin: 0 12px;
             transition: color 0.3s;
         }
         .social-share a:hover {
-            color: var(--color-primary);
         }
         /* GALLERY & LIGHTBOX STYLES */
         .gallery {
@@ -149,7 +141,6 @@
             z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%;
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.95);
@@ -157,7 +148,6 @@
         }
         .lightbox-content {
             margin: auto;
-            display: block;
             width: 90%;
             max-width: 1100px;
             max-height: 90vh;
@@ -170,17 +160,13 @@
             font-size: 45px;
             font-weight: bold;
             transition: 0.3s;
-            cursor: pointer;
         }
         .prev, .next {
-            cursor: pointer;
-            position: absolute;
             top: 50%;
             width: auto;
             padding: 18px;
             margin-top: -50px;
             color: white;
-            font-weight: bold;
             font-size: 24px;
             transition: 0.6s ease;
             user-select: none;
@@ -201,16 +187,12 @@
 <meta itemprop="image" content="https://frijal.pages.dev/img/apa-itu-pkgbuild.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
     <meta property="article:published_time" content="2025-10-14T18:15:06.380+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     
         
     <header>
         <h1><i class="fas fa-file-code"></i> PKGBUILD: Resep Rahasia Software Arch dan AUR</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
     </header>
     
@@ -228,7 +210,6 @@
                     <br>
                     Ini adalah file <b>script shell</b> (biasanya ditulis dalam Bash) yang berisi semua instruksi yang dibutuhkan oleh program bernama <b>makepkg</b> untuk membuat sebuah paket <b>software</b> yang siap diinstal di sistem Anda.
                 </p>
-                <p>
                     Resep ini tidak berisi <b>software</b>-nya secara langsung, tetapi berisi langkah-langkah detail tentang:
                     <ol>
                         <li><i class="fas fa-shopping-basket"></i> Bahan-bahan apa saja yang dibutuhkan (<b>dependencies</b>).</li>
@@ -236,16 +217,12 @@
                         <li><i class="fas fa-utensils"></i> Bagaimana cara mengolah atau memasaknya (<b>build process</b> atau <b>kompilasi</b>).</li>
                         <li><i class="fas fa-box-open"></i> Bagaimana mengemas produk akhir agar siap dijual/dipasang (membuat paket <code>.pkg.tar.zst</code>).</li>
                     </ol>
-                </p>
             </section>
             
             <hr>
             
-            <section>
                 <h2><i class="fas fa-code"></i> Elemen-Elemen Kunci dalam PKGBUILD</h2>
-                <p>
                     Setiap file PKGBUILD, terutama yang ada di AUR, wajib memiliki baris-baris ini untuk memberitahu <code>makepkg</code> apa yang harus dilakukan:
-                </p>
                 <table>
                     <thead>
                         <tr>
@@ -255,64 +232,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
                             <td><b>pkgname</b></td>
                             <td>Nama paket hasil instalasi.</td>
                             <td><code>pkgname=spotify</code></td>
-                        </tr>
-                        <tr>
                             <td><b>pkgver</b></td>
                             <td>Nomor versi <b>software</b> yang diunduh.</td>
                             <td><code>pkgver=1.2.3.456</code></td>
-                        </tr>
-                        <tr>
                             <td><b>depends</b></td>
                             <td>Daftar paket lain yang harus terinstal lebih dulu (bahan baku).</td>
                             <td><code>depends=('glibc' 'git')</code></td>
-                        </tr>
-                        <tr>
                             <td><b>source</b></td>
                             <td>URL tempat kode sumber program asli berada.</td>
                             <td><code>source=("https://.../program.tar.gz")</code></td>
-                        </tr>
-                        <tr>
                             <td><b>build()</b></td>
                             <td>Fungsi yang menjalankan perintah kompilasi (misalnya <code>./configure; make</code>).</td>
                             <td>(Langkah pembuatannya)</td>
-                        </tr>
                     </tbody>
                 </table>
-            </section>
             
-            <hr>
             
-            <section>
                 <h2><i class="fas fa-link"></i> Kaitan PKGBUILD dan Paru</h2>
-                <p>
                     Anda mungkin bertanya, apa hubungannya dengan <b>Paru</b>? Di sinilah Paru berperan sebagai <b>juru masak otomatis</b> Anda:
-                </p>
                 <ol>
                     <li><i class="fas fa-search-location"></i> Anda meminta Paru menginstal paket AUR.</li>
                     <li><i class="fas fa-download"></i> Paru secara otomatis mengunduh file <b>PKGBUILD</b> dari AUR.</li>
                     <li><i class="fas fa-check"></i> Paru menawarkan untuk <B>meninjau</B> (membaca) isi PKGBUILD tersebut kepada Anda (Inilah fitur keamanan utamanya!).</li>
                     <li><i class="fas fa-play"></i> Jika Anda setuju, Paru menjalankan <code>makepkg</code>, yang kemudian membaca resep di PKGBUILD dan mengikuti semua langkahnya hingga paket siap diinstal.</li>
                 </ol>
-                <p>
                     Karena <b>software</b> dari AUR adalah komunitas, <b>meninjau PKGBUILD</b> sebelum kompilasi sangat penting. Paru memudahkan Anda melihat resep tersebut agar Anda yakin tidak ada bahan atau langkah yang mencurigakan (risiko keamanan).
-                </p>
-            </section>
             
             <section class="social-share">
                 <p>Bagikan ilmu tentang resep <b>software</b> ini:</p>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/apa-itu-pkgbuild.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
                 <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/apa-itu-pkgbuild.html&amp;text=PKGBUILD%3A%20Resep%20Software%20di%20Arch%20Linux%20dan%20AUR!" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="https://wa.me/?text=Penting!%20Cari%20tahu%20apa%20itu%20PKGBUILD%20dan%20fungsinya%20di%20Arch%20Linux%3A%20https://frijal.pages.dev/artikel/apa-itu-pkgbuild.html" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            </section>
             
             <section id="fb-comments-container">
                 <h2><i class="far fa-comment-dots"></i> Pelan Kiri</h2>
                 
-            </section>
         </article>
     </div>
     
@@ -350,20 +307,17 @@
             
             if (closeBtn) closeBtn.addEventListener('click', () => {
                 if (lightboxModal) lightboxModal.style.display = "none";
-            });
             
             if (lightboxModal) {
                 window.onclick = function(event) {
                     if (event.target === lightboxModal) {
                         lightboxModal.style.display = "none";
-                    }
                 }
             }
             
             // Dummy changeImage function (as only one image is in the article content now)
             window.changeImage = function(n) {
                  // Navigation logic intentionally disabled for a single image layout
-            }
 
             // FACEBOOK COMMENTS SDK (Loader remains in HTML)
             window.fbAsyncInit = function() {
@@ -373,15 +327,11 @@
                         xfbml: true,
                         version: 'v19.0'
                     });
-                }
             };
         });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

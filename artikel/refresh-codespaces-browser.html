@@ -125,25 +125,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                     <td><strong>Restart</strong></td>
                                     <td>Memulai ulang kontainer yang sudah ada. Cepat.</td>
                                     <td>Untuk masalah minor atau aplikasi yang hang.</td>
-                                </tr>
-                                <tr>
                                     <td><strong>Rebuild</strong></td>
                                     <td>Membangun ulang kontainer, tetapi menggunakan cache dari image sebelumnya.</td>
                                     <td>Saat ada perubahan kecil pada file konfigurasi `devcontainer.json`.</td>
-                                </tr>
-                                <tr>
                                     <td><strong>Full Rebuild</strong></td>
                                     <td>Menghapus semua cache dan membangun ulang kontainer dari nol. Paling lama.</td>
                                     <td>Saat terjadi error aneh, dependensi rusak, atau ada perubahan besar pada konfigurasi.</td>
-                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                    
                     <figure>
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyiGg7d3w67OPfBLHy8OHsY09rMvaxzU1NelbOIshAoMVBNNYyTkHe6qfOJPCQM3bm6jg3EEOAIC980ckSoxFLwCLw3Xm-g6FHekjLS6DbwkwCwCMfhCOIrNX0tfHhyvCjbTx9vV_5rxBMtYvTcbiqPFYtszeXM_XqYAw9qQw95-cK8LJkivmpFEx853c/s1600/Screenshot%20From%202025-10-06%2020-48-01.png" alt="Diagram alur kapan pilih Restart, Rebuild, atau Full Rebuild">
                         <figcaption style="font-size: 0.9em; color: var(--muted); margin-top: 0.5rem;">Diagram alur untuk memilih metode refresh yang tepat.</figcaption>
@@ -206,7 +198,6 @@
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
         });
     })();
-    </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

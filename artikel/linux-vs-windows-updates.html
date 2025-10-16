@@ -87,8 +87,6 @@ header.topbar {
 }
 .chip svg { width: 16px; height: 16px }
 main {
-  max-width: var(--maxw);
-  margin: 0 auto;
   padding: 24px clamp(16px, 4vw, 32px) 80px;
 }
 .hero {
@@ -114,11 +112,7 @@ main {
   margin-top: 18px;
 }
 .block {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 18px;
   padding: clamp(16px, 3vw, 24px);
-  box-shadow: 0 15px 40px rgba(28,43,58,0.06);
 }
 .block h2 {
   font-size: clamp(20px, 3.6vw, 28px);
@@ -145,7 +139,6 @@ main {
   position: relative;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid var(--line);
   background: #f6fbff;
 }
 .gallery figcaption {
@@ -195,7 +188,6 @@ main {
   margin-top: 8px;
 }
 .share-btn {
-  display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-radius: 999px;
   background: #eef6fd; border: 1px solid var(--line); color: var(--ink);
   cursor: pointer; font-size: 14px;
@@ -205,8 +197,6 @@ main {
 /* Floating controls */
 .float-btn {
   position: fixed; z-index: 40;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
   background: #0b1726; color: #ffffff; border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
@@ -277,7 +267,6 @@ if (ld) {
   });
 
   // Estimasi waktu baca ~200 kata/menit
-  safe(() => {
 const text = document.body.innerText || "";
 const words = text.trim().split(/\s+/).length;
 const min = Math.max(3, Math.round(words / 200));
@@ -286,7 +275,6 @@ if (el) el.textContent = `Waktu baca: ~${min} menit`;
   });
 
   // Info chips: browser & OS
-  safe(() => {
 const ua = navigator.userAgent;
 const browserEl = document.querySelector('[data-browser]');
 const osEl = document.querySelector('[data-os]');
@@ -310,7 +298,6 @@ if (osEl) osEl.textContent = os;
   });
 
   // IP + Country flag (graceful fallback; timeout 2500ms)
-  safe(() => {
 const ipEl = document.querySelector('[data-ip]');
 const flagEl = document.querySelector('[data-flag]');
 const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
@@ -339,7 +326,6 @@ fetchIPInfo();
   });
 
   // Share buttons
-  safe(() => {
 const current = window.location.href;
 const title = document.title;
 const strip = document.querySelector('.share-strip');
@@ -369,7 +355,6 @@ return;
   });
 
   // Lightbox gallery with arrow keys
-  safe(() => {
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-image');
 const lbIndex = document.getElementById('lb-index');
@@ -393,8 +378,6 @@ const closeLb = () => {
 };
 const step = (d) => {
   idx = (idx + d + items.length) % items.length;
-  lbImg.src = items[idx].src;
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
 };
 
 document.querySelectorAll('.zoomable').forEach((fig, i) => {
@@ -413,7 +396,6 @@ window.addEventListener('keydown', (e) => {
   });
 
   // Fallback hero image ke /artikel/*.jpg bila gagal
-  safe(() => {
 const img = document.getElementById('hero-image');
 if (!img) return;
 img.addEventListener('error', () => {
@@ -426,9 +408,6 @@ img.addEventListener('error', () => {
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

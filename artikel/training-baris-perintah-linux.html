@@ -64,15 +64,12 @@
       gap:12px;
     }
     .logo {
-      display:flex;
-      align-items:center;
       gap:10px;
     }
     .logo img { width:40px; height:40px; }
     .title { font-weight:700; font-size:1rem; color:var(--accent); }
     nav.toc {
       margin-left:auto;
-      display:flex;
       gap:8px;
       flex-wrap:wrap;
     }
@@ -87,7 +84,6 @@
 
     /* main content */
     main {
-      max-width:1100px;
       margin:24px auto;
       padding:0 20px 60px;
     }
@@ -96,9 +92,7 @@
       border-radius:12px;
       padding:28px;
       box-shadow:0 6px 18px rgba(16,24,40,0.06);
-      display:flex;
       gap:24px;
-      align-items:center;
     }
     .hero-left { flex:1; }
     .hero-right { width:220px; text-align:center; }
@@ -108,8 +102,6 @@
     /* sections */
     section.card {
       margin-top:18px;
-      background:var(--card);
-      border-radius:12px;
       padding:22px;
       box-shadow:0 6px 18px rgba(16,24,40,0.04);
       scroll-margin-top:96px; /* for anchor offset */
@@ -121,7 +113,6 @@
       background:#0b1220;
       color:#e6edf3;
       padding:14px;
-      border-radius:8px;
       overflow:auto;
       position:relative;
     }
@@ -157,16 +148,11 @@
     .kbd { background:#111827; color:#fff; padding:4px 7px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size:0.95rem; }
 
     .share {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
       margin-top:14px;
     }
     .share button { background:#111827; color:#fff; border:none; padding:8px 10px; border-radius:8px; cursor:pointer; }
 
     footer {
-      max-width:1100px;
-      margin:24px auto;
       padding:16px 20px;
       color:var(--muted);
       font-size:0.95rem;
@@ -192,9 +178,7 @@
   }
   </script>
 
-  <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
       {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.pages.dev/"},
@@ -253,7 +237,6 @@
           <button onclick="share('twitter')">Twitter/X</button>
           <button onclick="share('whatsapp')">WhatsApp</button>
           <button onclick="share('telegram')">Telegram</button>
-        </div>
       </div>
 
       <div class="hero-right">
@@ -271,17 +254,13 @@
         Menguasainya memberi Anda kontrol cepat, kemampuan scripting, dan opsi otomatisasi yang tidak mudah dicapai via GUI.
       </p>
       <div class="grid-2">
-        <div>
           <p><strong>Manfaat utama:</strong></p>
           <ul>
             <li>Efisiensi: tugas berulang dapat diotomasi.</li>
             <li>Power user: akses fitur lanjutan, konfigurasi, dan debugging.</li>
             <li>Resource-light: dapat dijalankan di sistem minimal.</li>
           </ul>
-        </div>
-        <div>
           <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglX4i-lQ03mcJVvH0hziERuGy5Gx_FYiK0jfr4dMCb3FNPrqN-pdbhuTY39Rdjlq8w26qYn_z33Zmz8nAygJgpGC3FtWROll3q8xoGIIxBsEEYSVdNfd1noVAHicaZYS04kADxzSpyO5FDBkqcFAolZ2gh6HObpSOhQuPfEs2Afu-WX4hEq20Jb_f93oE/s1600/xterm.png" alt="Terminal illustration" />
-        </div>
       </div>
     </section>
 
@@ -294,7 +273,6 @@
         Contohnya: membuka terminal dan mengetik perintah seperti <span class="kbd">ls</span>, <span class="kbd">cd</span>, atau menjalankan skrip.
       </p>
       <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAQbWOq5VHxgr0KU8ZPzjUZqVjBsQJS9wDnuo1m2dAHf67zF0WVlwhQNhyphenhyphen8Ng5aR673fYhmOXpqWrKE5GpK6WdcXXXZI192uNSXHqBQJbVw9gjan7yQRiF8zei8ZR_7yfROTblKTNzsxwGV8_FzNtDQ5TNNSKgcKHFL4P9Y-KCzISnNWcBFD0Ev8JZrEY/s1600/mlterm.png" alt="Ilustrasi command line" />
-    </section>
 
     <!-- Page 3: man -->
     <section id="page-3" class="card" aria-labelledby="h3">
@@ -326,7 +304,6 @@ man -k copy   # cari topik (apropos)</code></pre>
         <li>Gunakan <code>man -k subject</code> (apropos) untuk mencari perintah terkait.</li>
         <li>Jika manpage tidak ada, coba <code>--help</code> pada perintah.</li>
       </ul>
-    </section>
 
     <!-- Page 4: cd -->
     <section id="page-4" class="card" aria-labelledby="h4">
@@ -350,14 +327,12 @@ man -k copy   # cari topik (apropos)</code></pre>
 cd ..       # naik satu tingkat
 cd -        # kembali ke direktori sebelumnya</code></pre>
 
-      <p><strong>Tips</strong></p>
       <ul>
         <li>Gunakan tab-completion (tekan <kbd>Tab</kbd>) untuk menyelesaikan nama direktori dengan cepat.</li>
         <li>Untuk navigasi di skrip, gunakan <code>pushd</code>/<code>popd</code> untuk stack direktori.</li>
       </ul>
 
       <img class="illustration" src="https://i.ytimg.com/vi/00sDqK1K2xA/maxresdefault.jpg" alt="Contoh cd" />
-    </section>
 
     <!-- Page 5: ls -->
     <section id="page-5" class="card" aria-labelledby="h5">
@@ -388,7 +363,6 @@ ls -Rt</code></pre>
       </ul>
 
       <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfHxlGH_E5HjnRwECpQtBehSUKIYjsuZp3dX1V9H48OREAuxN8M9FcufmdR4QS_sIBQAAvRW_DIoZcuq_BAH-kuIT2lD6GLbIglFmwGGTJG8gX5NoHGXQfcjx8TnNVnMvD3PgG5hoYpiYvAvbV976ULxilNlxMTPMtJ3e5L0sLFdMfXi-IrnR6FkwH5pI/s1600/LS-LH-Command-Image.png" alt="Output ls -l" />
-    </section>
 
     <!-- Page 6: mkdir -->
     <section id="page-6" class="card" aria-labelledby="h6">
@@ -405,12 +379,10 @@ ls -Rt</code></pre>
       <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">mkdir proyek_baru
 mkdir -p ~/projects/2025/aplikasi</code></pre>
 
-      <p><strong>Tips</strong></p>
       <ul>
         <li>Gunakan <code>-p</code> saat membuat subfolder nested agar tidak error.</li>
         <li>Permission dipengaruhi oleh <code>umask</code>.</li>
       </ul>
-    </section>
 
     <!-- Page 7: ln -->
     <section id="page-7" class="card" aria-labelledby="h7">
@@ -434,7 +406,6 @@ ln -s /path/to/asli.txt symlink.txt</code></pre>
         <li>Tidak semua filesystem mengizinkan hard link ke direktori (untuk keamanan).</li>
         <li>Symlink berguna untuk versi konfigurasi atau pengalihan path (contoh: /usr/bin/python -> /usr/bin/python3).</li>
       </ul>
-    </section>
 
     <!-- Page 8: pwd -->
     <section id="page-8" class="card" aria-labelledby="h8">
@@ -448,7 +419,6 @@ ln -s /path/to/asli.txt symlink.txt</code></pre>
 
       <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">pwd
 pwd -P   # physical (follow symlinks)</code></pre>
-    </section>
 
     <!-- Page 9: cp -->
     <section id="page-9" class="card" aria-labelledby="h9">
@@ -473,7 +443,6 @@ cp -a /etc/skel /backup/skel</code></pre>
         <li>Untuk sinkronisasi antar folder besar, <code>rsync -av</code> biasanya lebih efisien daripada <code>cp</code>.</li>
         <li>Perhatikan ownership saat menyalin ke lokasi root — gunakan <code>sudo</code> bila perlu.</li>
       </ul>
-    </section>
 
     <!-- Page 10: rm -->
     <section id="page-10" class="card" aria-labelledby="h10">
@@ -498,7 +467,6 @@ rm -i penting.txt</code></pre>
         <li>Jangan sembarangan <code>rm -rf /</code> (!). Selalu cek path.</li>
         <li>Untuk pemulihan yang lebih aman, gunakan <code>trash-cli</code> agar file masuk recycle bin, bukan langsung terhapus.</li>
       </ul>
-    </section>
 
     <!-- Page 11: more -->
     <section id="page-11" class="card" aria-labelledby="h11">
@@ -512,9 +480,7 @@ rm -i penting.txt</code></pre>
 
       <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">more /var/log/syslog</code></pre>
 
-      <p><strong>Catatan</strong></p>
       <p><code>less</code> umumnya lebih baik (lebih fleksibel), tapi <code>more</code> masih ada di beberapa sistem minimal.</p>
-    </section>
 
     <!-- Page 12: less -->
     <section id="page-12" class="card" aria-labelledby="h12">
@@ -532,12 +498,10 @@ rm -i penting.txt</code></pre>
       <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">less /var/log/syslog
 command | less</code></pre>
 
-      <p><strong>Tips</strong></p>
       <ul>
         <li>Gunakan <code>less -N</code> untuk menampilkan nomor baris.</li>
         <li>Anda dapat membuka hasil perintah langsung: <code>ps aux | less</code>.</li>
       </ul>
-    </section>
 
     <!-- Page 13: touch -->
     <section id="page-13" class="card" aria-labelledby="h13">
@@ -549,23 +513,19 @@ command | less</code></pre>
 touch -c file.txt           # tidak membuat jika tidak ada
 touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
 
-      <p><strong>Catatan</strong></p>
       <ul>
         <li>Sering digunakan dalam skrip build untuk memanipulasi timestamp atau sebagai trigger rebuild.</li>
       </ul>
-    </section>
 
     <!-- Page 14-15: mv -->
     <section id="page-14" class="card" aria-labelledby="h14">
       <h2 id="h14">14 — Perintah <code>mv</code> (Rename)</h2>
       <p class="meta">Fungsi: mengganti nama file/direktori.</p>
       <pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">mv lama.txt baru.txt    # rename file</code></pre>
-      <p><strong>Catatan</strong></p>
       <ul>
         <li>Jika sumber & tujuan berada pada filesystem yang sama, <code>mv</code> melakukan rename (efisien).</li>
         <li>Gunakan <code>-i</code> untuk mencegah overwrite tanpa konfirmasi.</li>
     </ul>
-    </section>
 
     <section id="page-15" class="card" aria-labelledby="h15">
       <h2 id="h15">15 — Perintah <code>mv</code> (Move)</h2>
@@ -577,7 +537,6 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
         <li>Use <code>mv -v</code> untuk mode verbose.</li>
       </ul>
       <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhxowrADPqsSz0383Brvlf-wp1LXowc5_3C6JNdN_lEdfF4sNTdNpwHxxaG2sBtTUbx-EuwDT6GNC8hJv9dXQJmb7ZNHrRCGLkbUzyTXbBEs656RNuN2kyxAR1EO0amWrez2ILZk3PhaVNoB0uVCfHJL9-LALrDyR5Ysbj-Dji-oB6TvnrUUObMLyIL4lI/s1600/moving-files-in-linux.png" alt="mv example" />
-    </section>
 
     <!-- Page 16: shortcuts with images -->
     <section id="page-16" class="card" aria-labelledby="h16">
@@ -594,29 +553,19 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
       </ul>
 
       <div class="grid-2" style="margin-top:12px">
-        <div>
           <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimCdk2O3QQcUnGYXybp3mOgoMsbAqx4bupo71mkyg4NciiWiB0XSqvkHF5eP_elScu9aVozoLYw478DyyQRkZiOPDxWwM0IiMbhE0O-UWhwAssrcIMOjgRZgHr_Qg-zMiQNrHS0-cW1tfOh6FwCluao67fag_bAzg6RK0e42HNeiVpKwTiOimMZvoFu3M/s1600/ctrlc.png" alt="Ctrl+C terminate" />
           <p style="color:var(--muted);font-size:0.9rem;text-align:center">Contoh Ctrl+C: menghentikan proses berjalan</p>
-        </div>
-        <div>
           <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfIL6Gt2N2pJ8yEd23wPnMhk-NE73n-oU84i-GniugkLF2YPuLBD0SOQKhb4JvlnOGSMhdAG9xn7jh9XyEd1OrTk_bIeP2IucOyVPcfdlTAzKtF6s66RLXuFI6fSH89Ld68r_Q5WF61viRDIfWNpm-R8gDAlNf3bJ7V-W8-2IyqPN8CbB27csAr5VdYbE/s1600/ctrlz.png" alt="Ctrl+Z suspend" />
           <p style="color:var(--muted);font-size:0.9rem;text-align:center">Contoh Ctrl+Z: proses disuspend</p>
-        </div>
       </div>
 
-      <div class="grid-2" style="margin-top:12px">
-        <div>
           <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfuHXmcgQc4Sw6y0E6PwqzHkdKgXj4ZvB1-KhihbInoQ877Xr0fF8eqZ5fi4OtNYRZ7fj0Q0hxXQZ28hzDtHByMuX1Ykzssvbzdx3-QVEx5KJIr72DGmM661TtlUTbmrPAixFQsHBXl7OLpzdPYUYqp7YDYM9Rj-NxzNkNEc3bYdO42jbSQMHgUq-Ffqo/s1600/ctrll.gif" alt="Ctrl+L clear" />
           <p style="color:var(--muted);font-size:0.9rem;text-align:center">Ctrl+L membersihkan layar (clear)</p>
-        </div>
-        <div>
           <img class="illustration" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwAnM1FQU3xJ0eMUNcVOCsKS11NC430nWiw2H883Ob6dP_Q-Y6Az0Bp5t1kqWjfro9LCB136V_EtghvcaRJcJEZcyQfXPJLZThAWRhsGN9EZOueG1SHxPnqDb9Q8DS43bmy4-YnznJeNuymMmqSkgunFKquX0UuX-TiWwDKmsJGBfXjeu1YABLlX_2N7s/s1600/ctrlu.gif" alt="Ctrl+U clear line" />
           <p style="color:var(--muted);font-size:0.9rem;text-align:center">Ctrl+U menghapus teks sebelum kursor</p>
-        </div>
       </div>
 
       <p style="margin-top:12px"><strong>Praktik</strong>: Latihan menggunakan kombinasi ini saat menjalankan proses interaktif (mis. <code>tail -f</code>, build tool) akan mempercepat troubleshooting dan kontrol sesi.</p>
-    </section>
 
     <!-- Page 17: penutup -->
     <section id="page-17" class="card" aria-labelledby="h17">
@@ -628,7 +577,6 @@ touch -t 202509150830 file.txt  # set waktu modifikasi</code></pre>
       </p>
 
       <p>Jika Anda ingin saya sertakan versi PDF, atau versi yang dapat diunduh (file .html siap pakai), beri tahu saya — saya akan siapkan file untuk diunduh.</p>
-    </section>
 
      </main>
 

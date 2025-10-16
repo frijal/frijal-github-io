@@ -121,7 +121,6 @@ setTimeout(()=>btnCopy.textContent='Salin Link', 1400);
 if (navigator.share) {
 const x = document.getElementById('share-x');
 x?.addEventListener('click', async (e)=>{
-e.preventDefault();
 try { await navigator.share({ title: PAGE_TITLE, text: SHARE_TEXT, url: CANONICAL_URL }); } catch(_){}
 });
 }
@@ -180,9 +179,6 @@ document.getElementById("current-url").textContent = CANONICAL_URL;
 </script>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

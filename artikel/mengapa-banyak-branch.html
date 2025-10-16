@@ -41,11 +41,9 @@
     <meta name="twitter:title" content="Mengapa Banyak Branch di Repo GitHub?" />
     <meta
       name="twitter:description"
-      content="Jawaban santai dan lengkap tentang alasan banyak branch di repo GitHub kamu."
     />
     <meta
       name="twitter:image"
-      content="https://frijal.pages.dev/img/mengapa-banyak-branch.webp"
     />
 
     <link rel="icon" href="https://frijal.pages.dev/favicon.ico" />
@@ -74,7 +72,6 @@
       main {
         max-width: 860px;
         margin: auto;
-        padding: 1rem;
       }
       h1,
       h2,
@@ -82,7 +79,6 @@
         color: #58a6ff;
       }
       a {
-        color: #58a6ff;
         text-decoration: none;
       }
       a:hover {
@@ -115,12 +111,10 @@
       .lightbox img {
         max-width: 90%;
         max-height: 80%;
-        border-radius: 8px;
       }
       .lightbox nav {
         position: absolute;
         top: 50%;
-        width: 100%;
         display: flex;
         justify-content: space-between;
         padding: 0 1rem;
@@ -131,40 +125,28 @@
         border: none;
         color: #fff;
         font-size: 2rem;
-        cursor: pointer;
       }
       .share {
-        margin: 1rem 0;
-        display: flex;
-        gap: 10px;
         flex-wrap: wrap;
       }
       .share a {
         padding: 0.5rem 1rem;
         border: 1px solid #30363d;
         border-radius: 6px;
-        text-decoration: none;
-        color: #e6edf3;
       }
       .share a:hover {
         background-color: #30363d;
-        text-decoration: none;
       }
       .env {
         margin-top: 2rem;
-        padding: 1rem;
-        border: 1px solid #30363d;
-        border-radius: 8px;
       }
     </style>
   <meta itemprop="image" content="https://frijal.pages.dev/img/mengapa-banyak-branch.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 <link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
   <body>
     <header>
       <h1>🤔 Kenapa Banyak Branch di Repo GitHub?</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
       <div id="iposbrowser"></div>
     </header>
@@ -182,30 +164,20 @@
             <strong>Kolaborasi tim:</strong> setiap orang bikin branch sendiri
             buat fitur/bugfix biar nggak ganggu <code>main</code>.
           </li>
-          <li>
             <strong>Eksperimen:</strong> kadang ada branch khusus buat
             coba-coba ide baru.
-          </li>
-          <li>
             <strong>Workflow tertentu:</strong> misalnya Git Flow, yang memang
             butuh banyak branch (develop, release, hotfix, dll).
-          </li>
-          <li>
             <strong>Branch lama belum dihapus:</strong> setelah merge, branch
             kadang lupa dihapus, jadi numpuk.
-          </li>
         </ul>
         <h2>🔹 Apa yang Bisa Dilakukan?</h2>
         <p>Kalau repo kamu penuh branch, coba:</p>
         <ol>
           <li>Hapus branch yang sudah di-merge dan nggak dipakai lagi.</li>
-          <li>
             Pakai <em>branch protection</em> biar branch utama tetap aman.
-          </li>
-          <li>
             Gunakan penamaan branch yang jelas, misalnya
             <code>feature/login</code> atau <code>bugfix/issue-123</code>.
-          </li>
         </ol>
         <h2>📸 Galeri Ilustrasi</h2>
         <div class="gallery">
@@ -215,10 +187,8 @@
             loading="lazy"
             data-index="0"
           />
-          <img
             src="https://frijal.pages.dev/assets/gallery/many-branches-2.jpg"
             alt="Branch lama menumpuk"
-            loading="lazy"
             data-index="1"
           />
         </div>
@@ -228,12 +198,10 @@
             <button id="prev">⟨</button>
             <button id="next">⟩</button>
           </nav>
-        </div>
         <div class="share">
           <a id="share-twitter" target="_blank" rel="noopener noreferrer">Bagikan ke Twitter</a>
           <a id="share-fb" target="_blank" rel="noopener noreferrer">Bagikan ke Facebook</a>
           <a id="share-ln" target="_blank" rel="noopener noreferrer">Bagikan ke LinkedIn</a>
-        </div>
 
         
         <div
@@ -276,7 +244,6 @@
 
         document.getElementById('next').onclick = () => {
           const newIndex = (currentIndex + 1) % galleryImages.length;
-          showImage(newIndex);
         };
 
         lightbox.onclick = (e) => {
@@ -298,9 +265,6 @@
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

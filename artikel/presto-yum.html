@@ -84,7 +84,6 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -96,7 +95,6 @@
             <div class="col">
                 <article>
                     <h1>YUM Presto: Hemat Bandwidth Saat Update</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Bagi pengguna distro Linux berbasis YUM, ada cara mudah untuk menghemat kuota internet saat melakukan pembaruan sistem, yaitu dengan menggunakan plugin YUM Presto.</p>
 
@@ -110,20 +108,16 @@
                     <figure>
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNzKz5Gj7d8z-8VXjuRT9arEpa3TbPfhOySjcoRIaMzv2HjQdaZ9SBdIw4Ur52ioqJVy2r27WjeKu9_t9Mrw9o4VMK_ujeaD_2xdEY0k6DMmTlSVwD3HW_mJ8ScRwmwQ2LinZYessDnG5I/s1600/Untitled.jpg" alt="Ilustrasi cara kerja YUM Presto dengan Delta RPM">
                     </figure>
-                    
                     <h2>Apa itu YUM Presto?</h2>
                     <p><strong>YUM Presto</strong> adalah plugin untuk manajer paket YUM yang mengaktifkan fitur <em>Delta RPM</em>. Alih-alih mengunduh seluruh paket baru setiap kali ada pembaruan, sistem hanya akan mengunduh bagian yang berubah (delta) dari versi lama ke versi baru. Hasilnya, ukuran unduhan bisa jauh lebih kecil, sehingga menghemat waktu dan kuota internet.</p>
 
                     <div class="note">
                         <strong>Info Modern:</strong> Pada distro-distro baru yang menggunakan DNF (penerus YUM), fitur delta RPM umumnya sudah terintegrasi secara bawaan. Namun, jika Anda masih menggunakan sistem lama berbasis YUM, plugin ini tetap sangat berguna.
-                    </div>
-                    
                     <h2>Cara Pasang dan Aktifkan</h2>
                     <p>Buka terminal Anda, lalu jalankan perintah berikut untuk memasang plugin YUM Presto.</p>
                     <pre class="language-bash"><code id="code1">sudo yum install yum-presto</code><button class="copy-btn" data-target="code1">Salin</button></pre>
                     <p>Setelah terpasang, Anda bisa melanjutkan proses pembaruan seperti biasa. YUM akan secara otomatis mencoba menggunakan delta RPM jika tersedia di repositori.</p>
                     <pre class="language-bash"><code id="code2">sudo yum update -y</code><button class="copy-btn" data-target="code2">Salin</button></pre>
-                    
                     <h2>Tips Praktis</h2>
                     <ul>
                         <li><strong>Dukungan Repositori:</strong> Tidak semua mirror menyediakan delta RPM. Jika ukuran unduhan tidak berkurang, coba ganti mirror repositori Anda.</li>
@@ -175,7 +169,6 @@
             el.addEventListener('click', () => {
                 lbImg.src = el.src.replace('/s800/', '/s1600/');
                 lb.classList.add('open');
-            });
         });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
@@ -190,13 +183,8 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

@@ -36,7 +36,6 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta
   name="twitter:title"
-  content="E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan"
 />
 <meta
   name="twitter:description"
@@ -95,7 +94,6 @@ background:
 rgba(96, 165, 250, 0.18),
 transparent 60%
   ),
-  radial-gradient(
 900px 600px at 110% 10%,
 rgba(110, 231, 183, 0.12),
 transparent 50%
@@ -110,10 +108,8 @@ place-items: center;
 text-align: center;
 padding: 36px 16px;
 background:
-  radial-gradient(
 800px 400px at 50% 0,
 rgba(96, 165, 250, 0.08),
-transparent 60%
   ),
   linear-gradient(180deg, rgba(96, 165, 250, 0.08), transparent 60%);
 border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -161,12 +157,10 @@ font-size: 14px;
 opacity: 0.9;
   }
   .container {
-max-width: var(--maxw);
 margin: 0 auto;
 padding: 28px 16px 70px;
   }
   .grid {
-display: grid;
 gap: 18px;
 grid-template-columns: 1.2fr 0.8fr;
   }
@@ -190,12 +184,9 @@ overflow: hidden;
 padding: 18px 18px 22px;
   }
   .card h2 {
-margin: 8px 0 10px;
 font-size: clamp(20px, 2.2vw, 26px);
-letter-spacing: 0.2px;
   }
   .card p {
-color: #cfe3ff;
 margin: 8px 0 12px;
   }
   .card ul {
@@ -207,18 +198,12 @@ color: #d7e8ff;
 margin: 8px 0;
   }
   .badge {
-display: inline-flex;
-align-items: center;
 gap: 8px;
 font-size: 12px;
 color: #cbe7ff;
-background: rgba(96, 165, 250, 0.12);
 padding: 6px 10px;
-border-radius: 999px;
-border: 1px solid rgba(96, 165, 250, 0.28);
   }
   .gallery {
-display: grid;
 gap: 12px;
 grid-template-columns: repeat(3, 1fr);
 padding: 12px;
@@ -230,21 +215,17 @@ padding: 12px;
   }
   @media (max-width: 480px) {
 .gallery {
-  grid-template-columns: 1fr;
 }
   }
   .img-wrap {
 position: relative;
-overflow: hidden;
 border-radius: 12px;
 aspect-ratio: 16/9;
 background: #0b1220;
-border: 1px solid rgba(255, 255, 255, 0.06);
 cursor: zoom-in;
   }
   .img-wrap img {
 width: 100%;
-height: 100%;
 object-fit: cover;
 display: block;
 transform: scale(1.02);
@@ -256,7 +237,6 @@ transform: scale(1.06);
   .img-cap {
 position: absolute;
 inset: auto 8px 8px 8px;
-background: linear-gradient(
   180deg,
   rgba(0, 0, 0, 0) 0,
   rgba(2, 6, 23, 0.85) 40%,
@@ -264,23 +244,16 @@ background: linear-gradient(
 );
 border-radius: 10px;
 padding: 8px 10px;
-font-size: 12px;
-color: #cfe3ff;
   }
   .pill {
-display: inline-flex;
 gap: 10px;
-align-items: center;
-flex-wrap: wrap;
   }
   .pill a {
 text-decoration: none;
 color: #07121f;
 font-weight: 700;
 background: linear-gradient(90deg, #60a5fa, #34d399);
-border-radius: 999px;
 padding: 10px 14px;
-font-size: 14px;
 box-shadow: 0 8px 20px rgba(52, 211, 153, 0.25);
 transition:
   transform 0.15s ease,
@@ -291,19 +264,16 @@ transform: translateY(-1px);
 box-shadow: 0 12px 24px rgba(52, 211, 153, 0.32);
   }
   .two-col {
-display: grid;
 gap: 18px;
 grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 920px) {
 .two-col {
-  grid-template-columns: 1fr;
 }
   }
   pre {
 background: #0b1328 !important;
 border-radius: 12px !important;
-border: 1px solid rgba(255, 255, 255, 0.06);
 padding: 14px !important;
 overflow: auto;
   }
@@ -312,25 +282,19 @@ margin-top: 8px;
 background: #0ea5e9;
 color: #fff;
 border: 0;
-border-radius: 10px;
 padding: 8px 12px;
 cursor: pointer;
-font-weight: 700;
 box-shadow: 0 8px 18px rgba(14, 165, 233, 0.35);
   }
   .copy-btn:hover {
 filter: brightness(1.05);
   }
   .rating {
-display: flex;
-align-items: center;
 gap: 8px;
-flex-wrap: wrap;
   }
   .star {
 font-size: 28px;
 color: #64748b;
-cursor: pointer;
 transition: transform 0.1s ease;
   }
   .star.active {
@@ -340,93 +304,59 @@ color: #f59e0b;
 transform: scale(1.08);
   }
   .rating-result {
-color: #cfe3ff;
 margin-left: 6px;
   }
   .share {
-display: flex;
-flex-wrap: wrap;
 gap: 10px;
   }
   .share a {
-display: inline-flex;
-align-items: center;
 gap: 8px;
 color: #06121e;
-text-decoration: none;
-font-weight: 700;
-border-radius: 12px;
 padding: 10px 12px;
 background: linear-gradient(90deg, #a78bfa, #f472b6);
 border: 1px solid rgba(255, 255, 255, 0.14);
 box-shadow: 0 10px 22px rgba(164, 120, 253, 0.25);
   }
   .share a:hover {
-filter: brightness(1.05);
   }
   .meta-sys {
-display: grid;
 gap: 12px;
-grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 720px) {
 .meta-sys {
-  grid-template-columns: 1fr;
 }
   }
   .kvs {
-display: flex;
-align-items: center;
 gap: 12px;
-padding: 10px 12px;
 background: rgba(255, 255, 255, 0.03);
-border: 1px solid rgba(255, 255, 255, 0.06);
-border-radius: 12px;
   }
   .kvs .ico {
 width: 28px;
 height: 28px;
-display: grid;
-place-items: center;
   }
   .kvs .kv {
-font-size: 14px;
-color: #cfe3ff;
   }
   .kvs .kv small {
-display: block;
-color: var(--muted);
   }
   footer {
 border-top: 1px solid rgba(255, 255, 255, 0.06);
-background: linear-gradient(
   180deg,
   rgba(255, 255, 255, 0.02),
-  rgba(255, 255, 255, 0.01)
 );
 padding: 26px 16px 90px;
-color: #cfe3ff;
-text-align: center;
   }
   #btn-home-left,
   #btn-home-right {
 position: fixed;
-display: inline-flex;
-align-items: center;
 gap: 8px;
 background-color: #0ea5e9;
 color: #001524;
-padding: 10px 12px;
-border-radius: 999px;
-text-decoration: none;
 font-family: inherit;
-font-size: 14px;
 font-weight: 800;
 box-shadow: 0 14px 28px rgba(14, 165, 233, 0.35);
 transition:
   background 0.3s ease,
   transform 0.2s ease,
-  box-shadow 0.2s ease;
 z-index: 9999;
   }
   #btn-home-left:hover,
@@ -440,7 +370,6 @@ left: 10px;
 top: 30%;
 transform: translateY(-50%);
   }
-  #btn-home-right {
 right: 10px;
 bottom: 20%;
 transform: translateY(50%);
@@ -452,47 +381,35 @@ height: 20px;
 fill: #001524;
   }
   .small-muted {
-color: var(--muted);
   }
   .card h2::after {
 content: "";
-display: block;
 width: 68px;
 height: 3px;
-margin-top: 8px;
-background: linear-gradient(
   90deg,
   var(--brand-2),
   var(--brand),
   var(--accent)
 );
-border-radius: 999px;
 opacity: 0.8;
   }
   #lightbox {
-position: fixed;
 top: 0;
 left: 0;
 width: 100%;
-height: 100%;
 background-color: rgba(0, 0, 0, 0.95);
 display: none;
-justify-content: center;
-align-items: center;
 z-index: 10000;
 cursor: zoom-out;
 opacity: 0;
 transition: opacity 0.3s ease;
   }
   #lightbox.active {
-display: flex;
 opacity: 1;
   }
   #lightbox img {
 max-width: 90%;
 max-height: 90%;
-border-radius: var(--radius);
-box-shadow: var(--shadow);
   }
 </style>
 <div
@@ -532,8 +449,6 @@ berbagi
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
   integrity="sha512-LmNld8Fj0RzTeqkQ5w0tXGx4r4K9H8w6f8tV5bJzS0XH5Cw6g9tFQfF3r2d9z+H2Q1K1tH5yH1vTn7m1eTn0Sg=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
 ></script>
 <script>
   ((document.getElementById("y").textContent = new Date().getFullYear()),
@@ -605,9 +520,6 @@ a.addEventListener("click", () => {
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

@@ -114,7 +114,6 @@
 
                     <div class="warning-box">
                         <strong>Peringatan:</strong> Metode pertama melibatkan pengeditan Registry Windows. Lakukan dengan hati-hati dan pastikan Anda tahu apa yang Anda lakukan.
-                    </div>
 
                     <h2>1. Mengubah Pengaturan Registry</h2>
                     <p>Metode ini mengurangi waktu tunggu Windows sebelum menutup paksa aplikasi yang tidak merespons saat shutdown.</p>
@@ -132,10 +131,8 @@
 
                     <h2>2. Membuat Shortcut Shutdown Cepat</h2>
                     <p>Anda bisa membuat shortcut di desktop untuk mematikan komputer secara instan tanpa menunggu.</p>
-                    <ol>
                         <li>Klik kanan di desktop, pilih <strong>New &rarr; Shortcut</strong>.</li>
                         <li>Pada kolom lokasi, masukkan perintah berikut:</li>
-                    </ol>
                     <pre><code id="code1">shutdown.exe -s -t 00 -f</code><button class="copy-btn" data-target="code1">Salin</button></pre>
                     <p>Klik "Next", beri nama shortcut, lalu "Finish". Sekarang Anda bisa mematikan komputer dengan cepat hanya dengan mengklik shortcut ini.</p>
 
@@ -215,10 +212,8 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

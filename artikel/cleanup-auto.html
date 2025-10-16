@@ -45,7 +45,6 @@ a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 pre {
-  border-radius: 10px;
   overflow-x: auto;
   padding: 1rem;
 }
@@ -67,7 +66,6 @@ pre {
 }
 
 /* ===== Tema Night Owl untuk Prism (gelap) ===== */
-@media (prefers-color-scheme: dark) {
 code[class*="language-"], pre[class*="language-"] {
   color: #d6deeb;
   background: #011627;
@@ -111,7 +109,6 @@ code[class*="language-"], pre[class*="language-"] {
 
 /* ===== Facebook comments ===== */
 .fb-comments {
-  margin-top: 2rem;
 }
 </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
@@ -146,7 +143,6 @@ code[class*="language-"], pre[class*="language-"] {
  * CLEANUP AUTO v1.0
  * Hapus paket tidak terpakai dan reinstall otomatis (non-interaktif)
  * Cocok untuk workflow GitHub Actions
- * ===================================================================
  */
 import { execSync } from 'node:child_process';
 import depcheck from 'depcheck';

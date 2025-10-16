@@ -52,7 +52,6 @@
             });
         })();
         // Lightbox interactions
-        (function(){
             var gallery = Array.from(document.querySelectorAll('.gallery figure img'));
             var lb = document.getElementById('lightbox');
             var lbImg = document.getElementById('lightboxImg');
@@ -70,7 +69,6 @@
                 lb.classList.remove('open');
                 lb.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
-            }
             
             function prev(){ 
                  idx = (idx - 1 + gallery.length) % gallery.length; 
@@ -79,8 +77,6 @@
             
             function next(){ 
                  idx = (idx + 1) % gallery.length; 
-                 lbImg.src = gallery[idx].src; 
-             }
             
             var closeBtn = document.getElementById('close');
             var prevBtn = document.getElementById('prev');
@@ -93,17 +89,13 @@
             
             gallery.forEach(function(img, i){
                 img.addEventListener('click', function(){ open(i); });
-            });
             
             document.addEventListener('keydown', function(e){
                 if(!lb.classList.contains('open')) return;
                 if(e.key === 'Escape') close();
                 if(e.key === 'ArrowLeft') prev();
                 if(e.key === 'ArrowRight') next();
-            });
-        })();
         // Simple lazy-load enhancement (IntersectionObserver as progressive)
-        (function(){
             if('loading' in HTMLImageElement.prototype) return;
             var imgs = document.querySelectorAll('img[loading="lazy"]');
             var io = new IntersectionObserver(function(entries, obs){
@@ -114,9 +106,7 @@
                         obs.unobserve(img);
                     }
                 });
-            });
             imgs.forEach(function(img){ io.observe(img); });
-        })();
         // Facebook comments data-href setting
         document.querySelector('.fb-comments').setAttribute('data-href',location.href);
     </script>
@@ -125,9 +115,5 @@
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

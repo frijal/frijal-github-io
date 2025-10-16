@@ -23,7 +23,6 @@
       sizes="32x32"
     />
     <link
-      rel="icon"
       href="https://frijal.pages.dev/ext/icons/favicon-16.png"
       sizes="16x16"
     />
@@ -65,7 +64,6 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Jangan taruh semua telur di satu keranjang"
     />
     <meta
       name="twitter:description"
@@ -73,7 +71,6 @@
     />
     <meta
       name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixJG3kWuEgLqPIqZrOvcR6PC-i-wa19ViIdqtvpJJQGjSG6ponPSX0OZZzwbcfe-gAKrLj1-Qhx9HvLYicgdaPfDnrEl_Ucg5e1xaASkpa97UdGHhILbQDH0OmUErWdM3t2yle54RKDfEpYV4PWpzqthG16F4cwAmYExI71BDMJJsyb6EDfkJUGU6NgQw/s1600/chtgpt.png"
     />
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -87,7 +84,6 @@
         })();
 
         // Lightbox for gallery
-        (() => {
           const imgs = Array.from(document.querySelectorAll('figure.gallery img'));
           const overlay = document.getElementById('lightbox');
           if (!imgs.length || !overlay) return;
@@ -114,8 +110,6 @@
 
           function move(delta) {
             currentIndex = (currentIndex + delta + imgs.length) % imgs.length;
-            imgEl.src = imgs[currentIndex].src;
-            imgEl.alt = imgs[currentIndex].alt || 'Gambar diperbesar';
           }
 
           imgs.forEach((img, i) => {
@@ -127,22 +121,16 @@
           closeBtn.addEventListener('click', closeLightbox);
           overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeLightbox();
-          });
 
           document.addEventListener('keydown', (e) => {
             if (!overlay.classList.contains('open')) return;
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') prevBtn.click();
             if (e.key === 'ArrowRight') nextBtn.click();
-          });
-        })();
       });
     </script>
     <script src="/ext/marquee-url.js" defer></script>
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

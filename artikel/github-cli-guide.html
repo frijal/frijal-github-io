@@ -63,11 +63,9 @@ body { font-family: Inter, sans-serif; }
       </div>
       <div>
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Lanjutan</h2>
-        <ul class="space-y-1">
           <li><a href="#pr" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Pull Request</a></li>
           <li><a href="#branch" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Branch</a></li>
           <li><a href="#issue" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Issue</a></li>
-        </ul>
       </div>
     </nav>
   </aside>
@@ -85,13 +83,11 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="login-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Login ke GitHub</h2>
 <div class="diagram-box">
 <div class="diagram-step">gh auth login</div>
 <div class="diagram-arrow">→</div>
 <div class="diagram-step">Pilih akun & metode (HTTPS/SSH)</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Login berhasil</div>
 </div>
 <div class="code-block">
@@ -103,15 +99,10 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="clone-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Clone Repository</h2>
-<div class="diagram-box">
 <div class="diagram-step">gh repo clone username/repo</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Folder lokal terbuat</div>
 </div>
-<div class="code-block">
-<button class="copy-btn">Salin</button>
 <pre><code>gh repo clone username/repo</code></pre>
 </div>
 <p class="text-gray-600 text-sm">Mengunduh repository dari GitHub ke lokal.</p>
@@ -119,17 +110,11 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="commit-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Commit & Push</h2>
-<div class="diagram-box">
 <div class="diagram-step">git add .</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">git commit -m "Pesan commit"</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">git push</div>
 </div>
-<div class="code-block">
-<button class="copy-btn">Salin</button>
 <pre><code>git add .
 git commit -m "Pesan commit"
 git push</code></pre>
@@ -139,15 +124,10 @@ git push</code></pre>
 </template>
 
 <template id="pr-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Pull Request</h2>
-<div class="diagram-box">
 <div class="diagram-step">gh pr create --title "Judul" --body "Deskripsi"</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">PR dibuat di repo GitHub</div>
 </div>
-<div class="code-block">
-<button class="copy-btn">Salin</button>
 <pre><code>gh pr create --title "Judul" --body "Deskripsi"</code></pre>
 </div>
 <p class="text-gray-600 text-sm">Buat pull request langsung dari CLI.</p>
@@ -155,15 +135,10 @@ git push</code></pre>
 </template>
 
 <template id="branch-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Branch</h2>
-<div class="diagram-box">
 <div class="diagram-step">git checkout -b feature</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Bekerja di branch baru</div>
 </div>
-<div class="code-block">
-<button class="copy-btn">Salin</button>
 <pre><code>git checkout -b feature</code></pre>
 </div>
 <p class="text-gray-600 text-sm">Membuat dan berpindah ke branch baru.</p>
@@ -171,15 +146,10 @@ git push</code></pre>
 </template>
 
 <template id="issue-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold text-gray-900 mb-2">Issue</h2>
-<div class="diagram-box">
 <div class="diagram-step">gh issue create --title "Bug" --body "Deskripsi"</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Issue dibuat di repo GitHub</div>
 </div>
-<div class="code-block">
-<button class="copy-btn">Salin</button>
 <pre><code>gh issue create --title "Bug" --body "Deskripsi"</code></pre>
 </div>
 <p class="text-gray-600 text-sm">Buat issue baru melalui CLI.</p>

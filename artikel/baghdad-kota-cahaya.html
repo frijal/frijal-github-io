@@ -76,13 +76,11 @@ color: var(--primary-color);
 border-bottom: 4px solid var(--secondary-color);
 padding-bottom: 12px;
 margin-top: 50px;
-font-family: var(--font-sans);
 font-size: 2.5em;
 }
 
 h3 {
 color: var(--secondary-color);
-font-family: var(--font-sans);
 font-size: 1.8em;
 margin-top: 30px;
 }
@@ -128,7 +126,6 @@ opacity: 0.85;
 position: fixed;
 padding: 12px 18px;
 background-color: var(--secondary-color);
-color: white;
 text-decoration: none;
 border-radius: 8px;
 z-index: 1000;
@@ -156,8 +153,6 @@ bottom: 20%; /* 20% dari bawah */
 .info-bar {
 background-color: #f2f2f2;
 padding: 15px;
-margin-bottom: 30px;
-border-radius: 8px;
 display: flex;
 justify-content: space-around;
 flex-wrap: wrap;
@@ -168,13 +163,10 @@ border: 1px solid #ddd;
 }
 
 .info-bar span {
-display: flex;
-align-items: center;
 }
 
 .info-bar i {
 margin-right: 8px;
-color: var(--primary-color);
 font-size: 1.2em;
 }
 
@@ -185,30 +177,25 @@ font-size: 1.5em;
 
 /* Social Share Icons */
 .social-share {
-text-align: center;
 padding: 20px 0;
 border-top: 1px dashed #ccc;
 border-bottom: 1px dashed #ccc;
-margin: 40px 0;
 }
 
 .social-share a {
 display: inline-block;
 margin: 0 15px;
 font-size: 2.2em;
-color: var(--primary-color);
 transition: color 0.3s, transform 0.3s;
 }
 
 .social-share a:hover {
-color: var(--secondary-color);
 transform: translateY(-5px);
 }
 
 /* Responsiveness (Mobile-Friendly) */
 @media (max-width: 768px) {
 h1 {
-font-size: 2.5em;
 }
 h2 {
 font-size: 2em;
@@ -224,7 +211,6 @@ align-items: flex-start;
 padding: 10px 15px;
 font-size: 0.9em;
 }
-#sitemap-btn {
 left: 10px;
 top: 20%;
 }
@@ -240,8 +226,6 @@ bottom: 10%;
   <meta property="og:image:alt" content="Baghdad: Kota Kedamaian, Cahaya Peradaban Dunia Islam">
   <meta itemprop="image" content="https://frijal.pages.dev/img/baghdad-kota-cahaya.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-27T11:00:00+08:00"></head>
 <body>
 
@@ -249,8 +233,6 @@ bottom: 10%;
 
 <header>
 <h1>Dinasti Abbasiyah: Baghdad, Kota Kedamaian & Cahaya Dunia 🕌</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
 <p>Menyelami kisah kota yang menjadi jantung peradaban Islam, dari pasir Tigris hingga puncak ilmu pengetahuan.</p>
 </header>
@@ -300,7 +282,6 @@ bottom: 10%;
 
 <blockquote>
 “Selama Baghdad berdiri, cahaya Islam takkan padam.” - Harun al-Rasyid
-</blockquote>
 </section>
 
 <hr>
@@ -326,7 +307,6 @@ bottom: 10%;
 
 <blockquote>
 “Kekuasaan bisa hancur oleh pedang, tapi ilmu akan hidup selama ada akal manusia. Selama Baghdad berdiri, cahaya ini tak akan padam.” - Al-Ma’mun
-</blockquote>
 
 <p>Dari Bayt al-Hikmah inilah, cahaya ilmu mengalir, tidak hanya ke seluruh dunia Islam, tetapi kelak juga ke Eropa, membangkitkan dunia dari tidurnya.</p>
 </section>
@@ -417,7 +397,6 @@ window.open(shareUrl, '_blank', 'width=600,height=400');
 
 // 5. COPY LINK BUTTON
 document.getElementById('copy-link-btn').addEventListener('click', (e) => {
-e.preventDefault();
 navigator.clipboard.writeText(window.location.href).then(() => {
 alert("Link artikel berhasil disalin ke clipboard!");
 }).catch(err => {
@@ -428,9 +407,6 @@ alert("Gagal menyalin link. Silakan salin secara manual.");
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

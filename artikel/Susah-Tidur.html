@@ -133,16 +133,13 @@
                 <button class="btn ghost" id="share-threads" title="Threads (buka profil atau share)">Threads</button>
                 <button class="btn ghost" id="share-instagram" title="Instagram (link)">Instagram</button>
                 <button class="btn ghost" id="share-tiktok" title="TikTok (link)">TikTok</button>
-            </div>
             
-            <div class="sep"></div>
             
             <div class="meta">Sumber singkat</div>
             <div class="small">
                 <ul>
                     <li>Pedoman tidur & tips dari Sleep Foundation, NHS, Mayo Clinic, CDC.</li>
                 </ul>
-            </div>
         </aside>
         
         <footer class="site-footer">
@@ -190,14 +187,12 @@
             const fbComments = document.getElementById('fb-comments');
             if(fbComments){
                 fbComments.setAttribute('data-href', currentUrl);
-            }
             
             // Share buttons behavior (dipertahankan karena ini adalah interaksi pengguna)
             function openCentered(url, title, w=900, h=600){
                 const left = (screen.width/2)-(w/2);
                 const top = (screen.height/2)-(h/2);
                 window.open(url, title, `toolbar=0,status=0,width=${w},height=${h},top=${top},left=${left}`);
-            }
             
             const pageTitle = document.title;
             const encodedUrl = encodeURIComponent(currentUrl);
@@ -209,16 +204,13 @@
             
             document.getElementById('share-x').addEventListener('click', () => {
                 openCentered(`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`, 'Share X');
-            });
             
             document.getElementById('share-whatsapp').addEventListener('click', () => {
                 const wurl = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
                 window.open(wurl, '_blank');
-            });
             
             document.getElementById('share-telegram').addEventListener('click', () => {
                 window.open(`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`, '_blank');
-            });
             
             document.getElementById('share-copy').addEventListener('click', async () => {
                 try {
@@ -227,19 +219,15 @@
                 } catch(e){
                     prompt('Salin link berikut:', currentUrl);
                 }
-            });
             
             document.getElementById('share-threads').addEventListener('click', () => {
                 window.open('https://www.threads.net/', '_blank');
-            });
             
             document.getElementById('share-instagram').addEventListener('click', () => {
                 window.open('https://www.instagram.com/', '_blank');
-            });
             
             document.getElementById('share-tiktok').addEventListener('click', () => {
                 window.open('https://www.tiktok.com/', '_blank');
-            });
             
             // Cleanup: Removed all IP/OS/Browser detection logic (fetchIP, getBrowserInfo, getOSInfo and their assignments)
             
@@ -247,8 +235,6 @@
             function tryParseFB(){
                 if(window.FB && window.FB.XFBML && typeof window.FB.XFBML.parse === 'function'){
                     window.FB.XFBML.parse();
-                }
-            }
             
             // attempt a few times
             setTimeout(tryParseFB, 1000);
@@ -268,9 +254,6 @@
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

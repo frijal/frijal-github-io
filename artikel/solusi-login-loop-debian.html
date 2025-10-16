@@ -46,7 +46,6 @@
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="Solusi Gagal Login (Login Loop) di Debian Setelah Install"
     />
     <meta
       name="twitter:description"
@@ -54,7 +53,6 @@
     />
     <meta
       name="twitter:image"
-      content="https://frijal.pages.dev/img/solusi-login-loop-debian.webp"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -63,7 +61,6 @@
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous"
@@ -136,12 +133,10 @@
         padding-left: 1.5rem;
       }
       a {
-        color: var(--link-color);
         text-decoration: none;
         transition: color 0.3s;
       }
       a:hover {
-        color: var(--accent-color);
       }
       pre {
         background-color: var(--code-bg);
@@ -153,7 +148,6 @@
       }
       code {
         font-family: 'Fira Code', monospace;
-        color: var(--primary-text-color);
         white-space: pre;
       }
       kbd {
@@ -161,8 +155,6 @@
         color: #f1f1f1;
         padding: 3px 6px;
         border-radius: 4px;
-        border: 1px solid var(--border-color);
-        font-family: 'Fira Code', monospace;
       }
       hr {
         border: 0;
@@ -175,30 +167,22 @@
         background-color: var(--surface-color);
         padding: 1.5rem;
         border-radius: 12px;
-        margin-top: 2rem;
-        border: 1px solid var(--border-color);
       }
       .social-share h3,
       .comments-section h2 {
-        color: var(--primary-text-color);
         margin: 0 0 1rem 0;
-        padding: 0;
         border: none;
       }
       .social-share-icons a {
         font-size: 2rem;
         margin-right: 1.5rem;
-        color: var(--secondary-text-color);
         transition: color 0.3s, transform 0.3s;
       }
       .social-share-icons a:hover {
         transform: scale(1.2);
-        color: var(--accent-color);
       }
       .fb-comments {
         background: white;
-        border-radius: 12px;
-        padding: 1rem;
       }
       @media screen and (max-width: 768px) {
         h1 {
@@ -213,13 +197,11 @@
       }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
   </head>
   <body>
     <main class="container">
       <article>
         <h1>Solusi Gagal Login (Login Loop) di Debian Setelah Install</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
         <div id="iposbrowser"></div>
         <p>
@@ -275,7 +257,6 @@ sudo apt install nvidia-driver</code></pre>
         <p>
           Biasanya sudah aman, tapi coba lakukan update penuh untuk jaga-jaga:
         </p>
-        <pre><code>sudo apt update
 sudo apt full-upgrade
 sudo reboot</code></pre>
         <h3>2. Perbaiki Hak Akses (Permission) di Home Directory</h3>
@@ -308,7 +289,6 @@ sudo chown $(whoami):$(whoami) ~/.Xauthority</code></pre>
           <pre><code>sudo apt install --reinstall xfce4 lightdm</code></pre>
         </ul>
         <p>Pilih sesuai desktop yang kamu install, lalu `sudo reboot`.</p>
-        <hr />
         <section class="social-share">
           <h3>Bagikan Artikel Ini</h3>
           <div class="social-share-icons">
@@ -319,7 +299,6 @@ sudo chown $(whoami):$(whoami) ~/.Xauthority</code></pre>
             <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" title="Bagikan ke LinkedIn"><i class="fab fa-linkedin"></i></a>
           </div>
         </section>
-        <hr />
         <section class="comments-section">
           <h2>Beri Jaga Data Pribadi Tetap Aman.</h2>
           <div
@@ -328,7 +307,6 @@ sudo chown $(whoami):$(whoami) ~/.Xauthority</code></pre>
             data-width="100%"
             data-numposts="5"
           ></div>
-        </section>
       </article>
     </main>
 
@@ -361,9 +339,6 @@ sudo chown $(whoami):$(whoami) ~/.Xauthority</code></pre>
     </script>
     <script src="/ext/marquee-url.js" defer></script>
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

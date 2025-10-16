@@ -58,7 +58,6 @@
         header .subtitle { font-size: 1.1rem; color: var(--accent-color); }
         h2 {
             font-size: 1.75rem;
-            color: var(--heading-color);
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
             margin-top: 3rem;
@@ -83,7 +82,6 @@
         }
         pre code { padding: 0; background: none; }
         .callout {
-            background-color: var(--card-color);
             border-left: 4px solid var(--accent-color);
             padding: 1em 1.5em;
             margin: 1.5rem 0;
@@ -113,15 +111,11 @@
         footer { text-align: center; padding: 2rem; color: #6b7380; font-size: 0.9em; margin-top: 2rem; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>⚙️ Panduan Lengkap: Skrip Otomatis Perbaikan HTML</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
             <p class="subtitle">Sebuah rangkuman perjalanan dari error hingga solusi final dengan Python & BeautifulSoup.</p>
         </header>
@@ -142,19 +136,16 @@ python3 -m venv venv
 
 # 2. Aktifkan lingkungan tersebut
 source venv/bin/activate</code></pre>
-                <hr>
                 <h2>Tahap 2: Error Shell yang Tidak Kompatibel 🐟</h2>
                 <p>Setelah membuat `venv`, beberapa pengguna (terutama pengguna `fish` shell) akan menemukan error baru saat mencoba mengaktifkannya:</p>
                 <pre><code>source venv/bin/activate
 venv/bin/activate: 'case' builtin not inside of switch block</code></pre>
-                <h3>Kenapa Error Ini Muncul?</h3>
                 <p>Skrip `activate` standar ditulis untuk shell `bash`. Shell lain seperti `fish` memiliki sintaks yang berbeda dan tidak bisa menjalankannya. Untungnya, `venv` sudah menyediakan solusinya.</p>
                 <h3>Solusi: Gunakan Skrip Aktivasi yang Tepat</h3>
                 <p>Cukup gunakan file aktivasi yang berakhiran `.fish`.</p>
                 <pre><code># Perintah aktivasi yang benar untuk fish shell
 source venv/bin/activate.fish</code></pre>
                 <p>Setelah perintah ini, terminal Anda akan menampilkan `(venv)` di depannya, menandakan Anda sudah berada di lingkungan virtual dan siap untuk melanjutkan instalasi.</p>
-                <hr>
                 <h2>Tahap 3: Skrip Final Perbaikan HTML 🐍</h2>
                 <p>Setelah berhasil mengatasi masalah lingkungan, inilah skrip final `fix_html.py` yang kita kembangkan. Skrip ini tidak hanya memperbaiki error struktural, tetapi juga membersihkan spasi berlebih dan membuat file log yang rapi.</p>
                 <div class="callout">
@@ -199,7 +190,6 @@ def fix_html_file(file_path):
         end_marker = '&lt;/html&gt;'
         if end_marker in content and content[content.rfind(end_marker) + len(end_marker):].strip():
             log_messages.append("  - Menemukan konten setelah &lt;/html&gt; yang akan dipindahkan.")
-            has_changes = True
 
         soup = BeautifulSoup(content, 'lxml')
         if not soup.body: return log_messages
@@ -216,7 +206,6 @@ def fix_html_file(file_path):
         
         if json_cleaned_count > 0:
             log_messages.append(f"  - Membersihkan {json_cleaned_count} blok skrip JSON-LD.")
-            has_changes = True
 
         empty_divs_removed = 0
         for div in soup.find_all('div'):
@@ -226,7 +215,6 @@ def fix_html_file(file_path):
         
         if empty_divs_removed > 0:
             log_messages.append(f"  - Menghapus {empty_divs_removed} tag &lt;div&gt; kosong.")
-            has_changes = True
         
         strip_whitespace_in_tags(soup)
         log_messages.append("  - Membersihkan spasi berlebih di dalam tag HTML.")
@@ -279,7 +267,6 @@ def main():
 if __name__ == "__main__":
     main()
 </code></pre>
-                <hr>
                 <h2>Tahap 4: Cara Penggunaan & Hasil 🚀</h2>
                 <h3>Langkah-langkah Eksekusi</h3>
                 <ol>
@@ -295,7 +282,6 @@ if __name__ == "__main__":
                     <li>File `*_fixed.html` untuk setiap file yang diperbaiki.</li>
                     <li>Satu file log `perbaikan_log.txt` yang berisi ringkasan dan detail semua perbaikan.</li>
                 </ul>
-                <div class="callout">
                     <strong>Contoh Log:</strong><br>
                     <pre><code>================ SUMMARY ================
 Total file yang diproses dan dibersihkan: 1
@@ -305,8 +291,6 @@ Log untuk file: contoh.html
   - Menemukan konten setelah &lt;/html&gt; yang akan dipindahkan.
   - Membersihkan spasi berlebih di dalam tag HTML.
 ----------------------------------------</code></pre>
-                </div>
-                <hr>
                 <h2>Semoga Berhasil.</h2>
                 <div class="gallery"></div>
                 <div class="lightbox" id="lightbox">
@@ -316,12 +300,10 @@ Log untuk file: contoh.html
                         <button class="lb-next" id="lb-next" aria-label="Gambar Berikutnya">&#10095;</button>
                         <button class="lb-close" id="lb-close" aria-label="Tutup">&times;</button>
                     </figure>
-                </div>
             </article>
             <hr>
             <section id="fb-comments-container" class="user-info">
                 <h3>Jaga Data Pribadi Tetap Aman</h3>
-                
                 
             </section>
         </main>
@@ -359,7 +341,6 @@ Log untuk file: contoh.html
                         lbImg.src = imgLink.href;
                         lbImg.alt = imgLink.dataset.caption || '';
                         currentIndex = index;
-                    }
                 }
 
                 gallery.addEventListener('click', e => {
@@ -369,8 +350,6 @@ Log untuk file: contoh.html
                         const index = images.indexOf(link);
                         lightbox.classList.add('open');
                         showImage(index);
-                    }
-                });
 
                 document.getElementById('lb-close').addEventListener('click', () => lightbox.classList.remove('open'));
                 document.getElementById('lb-prev').addEventListener('click', () => showImage((currentIndex - 1 + images.length) % images.length));
@@ -382,8 +361,6 @@ Log untuk file: contoh.html
                         if (e.key === 'Escape') lightbox.classList.remove('open');
                         if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
                         if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
-                    }
-                });
             }
 
             // --- Social Sharing ---
@@ -406,7 +383,6 @@ Log untuk file: contoh.html
                         'Telegram': 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.69 6.54l-1.63 7.63c-.15.7-.58.87-1.14.54l-2.43-1.78-1.17 1.12c-.13.13-.24.24-.48.24l.17-2.48 4.46-4.04c.19-.17-.03-.27-.27-.1l-5.5 3.44-2.37-.74c-.69-.22-.7-.73.14-1.07l9.42-3.61c.58-.22 1.04.14.87.8z'
                     };
                     return icons[name] || '';
-                }
 
                 for (const [name, link] of Object.entries(platforms)) {
                     const a = document.createElement('a');
@@ -416,8 +392,6 @@ Log untuk file: contoh.html
                     a.title = `Bagikan ke ${name}`;
                     a.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">${getIconPath(name)}</svg>`;
                     shareContainer.appendChild(a);
-                }
-            }
         });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
@@ -425,8 +399,4 @@ Log untuk file: contoh.html
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body></html>

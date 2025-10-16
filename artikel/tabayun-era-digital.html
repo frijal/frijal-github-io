@@ -73,7 +73,6 @@ main {
   padding: clamp(18px, 3vw, 28px);
   border: 1px solid var(--line);
   border-radius: 20px;
-  background:
 linear-gradient(180deg, rgba(124,58,237,0.08), rgba(124,58,237,0.0)),
 var(--paper);
   box-shadow: 0 20px 50px rgba(124,58,237,0.08);
@@ -107,7 +106,6 @@ var(--paper);
 /* Content blocks */
 .block {
   margin-top: 18px;
-  border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--paper);
   padding: clamp(16px, 3vw, 24px);
@@ -136,10 +134,8 @@ var(--paper);
 }
 .gallery figure {
   margin: 0;
-  position: relative;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid var(--line);
   background: #f7f9fd;
 }
 .gallery figcaption {
@@ -147,7 +143,6 @@ var(--paper);
   padding: 10px 12px;
   background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5));
   color: #f8fafc;
-  font-size: 13px;
 }
 .zoomable { cursor: zoom-in }
 
@@ -186,11 +181,8 @@ var(--paper);
 
 /* Share strip */
 .share-strip {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-top: 8px;
 }
 .share-btn {
-  display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-radius: 999px;
   background: #f5f3ff; border: 1px solid #e9ddff; color: #2e1065;
   cursor: pointer; font-size: 14px;
@@ -201,8 +193,6 @@ var(--paper);
 /* Floating controls */
 .float-btn {
   position: fixed; z-index: 40;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
   background: #1f1440; color: #ffffff; border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
@@ -273,7 +263,6 @@ if (ld) {
   });
 
   // Estimasi waktu baca ~200 kata/menit
-  safe(() => {
 const text = document.body.innerText || "";
 const words = text.trim().split(/\s+/).length;
 const min = Math.max(3, Math.round(words / 200));
@@ -282,7 +271,6 @@ if (el) el.textContent = `Waktu baca: ~${min} menit`;
   });
 
   // Info chips: browser & OS
-  safe(() => {
 const ua = navigator.userAgent;
 const browserEl = document.querySelector('[data-browser]');
 const osEl = document.querySelector('[data-os]');
@@ -306,7 +294,6 @@ if (osEl) osEl.textContent = os;
   });
 
   // IP + Country flag (graceful fallback; timeout 2500ms)
-  safe(() => {
 const ipEl = document.querySelector('[data-ip]');
 const flagEl = document.querySelector('[data-flag]');
 const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
@@ -335,7 +322,6 @@ fetchIPInfo();
   });
 
   // Share buttons
-  safe(() => {
 const current = window.location.href;
 const title = document.title;
 const strip = document.querySelector('.share-strip');
@@ -365,7 +351,6 @@ return;
   });
 
   // Lightbox gallery with arrow keys
-  safe(() => {
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-image');
 const lbIndex = document.getElementById('lb-index');
@@ -389,8 +374,6 @@ const closeLb = () => {
 };
 const step = (d) => {
   idx = (idx + d + items.length) % items.length;
-  lbImg.src = items[idx].src;
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
 };
 
 document.querySelectorAll('.zoomable').forEach((fig, i) => {
@@ -409,7 +392,6 @@ window.addEventListener('keydown', (e) => {
   });
 
   // Fallback hero image ke /artikel/*.jpg bila gagal
-  safe(() => {
 const img = document.getElementById('hero-image');
 if (!img) return;
 img.addEventListener('error', () => {
@@ -422,9 +404,6 @@ img.addEventListener('error', () => {
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

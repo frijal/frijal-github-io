@@ -138,7 +138,6 @@ p{line-height: 1.8; color: var(--text);}
 .nav-prev{left:14px;} .nav-next{right:14px;}
 .nav-close{
   position:absolute; top:10px; right:10px; width:38px; height:38px;
-  background: rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28);
   border-radius: 999px; display:flex; align-items:center; justify-content:center; cursor:pointer;
 }
 .floating-sitemap{
@@ -174,8 +173,6 @@ footer{
   <meta property="og:image:alt" content="Kisah Ibnu Batutah: Rihlah 29 Tahun Mengelilingi Dunia Islam">
   <meta itemprop="image" content="https://frijal.pages.dev/img/ibnu-batutah.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-28T11:00:00+08:00"></head>
 <body>
   <header>
@@ -183,8 +180,6 @@ footer{
   <div class="title">
 <span class="badge">📜 Rihlah</span>
 <h1>Kisah Ibnu Batutah: Rihlah 29 Tahun Mengelilingi Dunia Islam</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
   </div>
   <div class="meta">
@@ -253,7 +248,6 @@ Ia menuju Damaskus—kebun, air, dan Masjid Jami’ Umayyah memikat hatinya. Ia 
   <p>
 Tiba di Makkah setelah setahun lebih perjalanan, air matanya jatuh melihat Ka’bah:
   </p>
-  <div class="blockquote">
 “Jiwaku tenang, lelah hilang. Hatiku syukur pada Allah atas karunia sampai ke rumah-Nya.”
   </div>
   <p>
@@ -290,7 +284,6 @@ Ia tiba di Quanzhou (Fujian), menyaksikan perdagangan global, masjid pedagang Mu
 Ia kembali melalui rute laut—darat, singgah di Nusantara, India, Persia, Mesir, lalu Tangier. “Aku pulang dengan ilmu dan pemahaman luas tentang dunia.” Perjalanannya dibukukan menjadi Rihlah oleh Ibn Juzayy atas permintaan Sultan Maroko—warisan yang merekam budaya, perdagangan, hukum, dan spiritualitas dunia Islam abad ke-14.
   </p>
 
-  <div class="sep"></div>
 
   <h2>Galeri foto</h2>
   <div class="gallery" id="gallery">
@@ -301,7 +294,6 @@ Ia kembali melalui rute laut—darat, singgah di Nusantara, India, Persia, Mesir
 <!-- Tambahkan item galeri lain di sini bila tersedia -->
   </div>
 
-  <div class="sep"></div>
 
   <h2>Bagikan artikel</h2>
   <div class="share">
@@ -317,7 +309,6 @@ Ia kembali melalui rute laut—darat, singgah di Nusantara, India, Persia, Mesir
 <div class="info-pill">ℹ️ Info: klik gambar untuk lightbox, gunakan panah untuk navigasi</div>
   </div>
 
-  <div class="sep"></div>
 
   <h2>Jaga Data Pribadi Tetap Aman.</h2>
   
@@ -368,7 +359,6 @@ document.getElementById('share-whatsapp').addEventListener('click', () => {
 document.getElementById('share-facebook').addEventListener('click', () => {
   const u = new URL('https://www.facebook.com/sharer/sharer.php');
   u.searchParams.set('u', canonical);
-  window.open(u.toString(), '_blank');
 });
 document.getElementById('share-copy').addEventListener('click', async () => {
   try {
@@ -401,8 +391,6 @@ function closeLightbox(){
 function nav(delta){
   const max = gallery.length;
   index = (index + delta + max) % max;
-  const full = gallery[index].dataset.full || gallery[index].querySelector('img').src;
-  img.src = full;
 }
 gallery.forEach((card, i)=>{
   card.addEventListener('click', ()=> openLightbox(i));
@@ -423,9 +411,6 @@ window.addEventListener('keydown', (e)=>{
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

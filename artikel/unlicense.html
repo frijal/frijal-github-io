@@ -23,7 +23,6 @@
     />
     <meta
       property="og:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
     />
     <meta property="og:type" content="article" />
     <meta
@@ -38,15 +37,12 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
     />
     <meta
       name="twitter:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
     />
     <meta
       name="twitter:image"
-      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
     />
     <script>
       // Menggunakan DOMContentLoaded tunggal untuk inisialisasi yang benar
@@ -104,7 +100,6 @@
             // Menutup lightbox saat klik di luar gambar
             lb.addEventListener('click', (e) => {
               if (e.target === lb) close();
-            });
 
             // Navigasi keyboard
             document.addEventListener('keydown', (e) => {
@@ -112,7 +107,6 @@
               if (e.key === 'Escape') close();
               if (e.key === 'ArrowLeft') prev();
               if (e.key === 'ArrowRight') next();
-            });
 
             // Implementasi Lazy Load (memastikan gambar dimuat)
             const lazyObserver = new IntersectionObserver((entries, obs) => {
@@ -126,7 +120,6 @@
                   obs.unobserve(img);
                 }
               });
-            });
             images.forEach(img => lazyObserver.observe(img));
           }
 
@@ -134,7 +127,6 @@
         })();
 
         // Share links
-        (function () {
           const url = encodeURIComponent(
             document.querySelector('link[rel=canonical]')?.href || location.href
           );
@@ -148,14 +140,10 @@
           fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
           li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
           wa.href = `https://wa.me/?text=${title}%20${url}`;
-        })();
       });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

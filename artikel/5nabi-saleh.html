@@ -72,7 +72,6 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: 24px;
-      background:
         linear-gradient(180deg, rgba(255,253,247,0.96), rgba(255,253,247,0.92)),
         var(--paper);
       box-shadow: 0 18px 46px rgba(43,42,39,0.08);
@@ -81,7 +80,6 @@
     .title::before, .title::after {
       content: "";
       position: absolute; left: 0; right: 0; height: 18px;
-      background:
         radial-gradient(12px 12px at 12px 9px, rgba(0,0,0,0.12) 0%, transparent 60%) no-repeat left center,
         radial-gradient(12px 12px at calc(100% - 12px) 9px, rgba(0,0,0,0.12) 0%, transparent 60%) no-repeat right center;
       opacity: 0.08;
@@ -117,7 +115,6 @@
     /* Blocks */
     .block {
       margin-top: 18px;
-      border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--paper);
       padding: clamp(16px, 3vw, 24px);
@@ -145,19 +142,14 @@
       gap: 14px;
     }
     .gallery figure {
-      position: relative;
-      overflow: hidden;
       border-radius: 14px;
-      border: 1px solid var(--line);
       background: #fffaf2;
-      margin: 0;
     }
     .gallery figcaption {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 10px 12px;
       background: linear-gradient(180deg, transparent, rgba(0,0,0,0.48));
       color: #f9fafb;
-      font-size: 13px;
     }
     .zoomable { cursor: zoom-in }
 
@@ -196,11 +188,9 @@
 
     /* Share strip */
     .share-strip {
-      display: flex; flex-wrap: wrap; gap: 10px;
       margin-top: 8px;
     }
     .share-btn {
-      display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 12px; border-radius: 999px;
       background: #fff3e6; border: 1px solid #f1dfcb; color: #5a3a20;
       cursor: pointer; font-size: 14px;
@@ -211,8 +201,6 @@
     /* Floating controls */
     .float-btn {
       position: fixed; z-index: 40;
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 12px; border-radius: 999px;
       background: #5a3a20; color: #ffffff; border: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
@@ -222,7 +210,6 @@
 
     /* Comments */
     .comments {
-      margin-top: 10px;
       background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px;
     }
 
@@ -283,7 +270,6 @@
       });
 
       // Estimasi waktu baca ~200 kata/menit
-      safe(() => {
         const text = document.body.innerText || "";
         const words = text.trim().split(/\s+/).length;
         const min = Math.max(3, Math.round(words / 200));
@@ -294,7 +280,6 @@
 
 
       // Share buttons
-      safe(() => {
         const current = window.location.href;
         const title = document.title;
         const strip = document.querySelector('.share-strip');
@@ -314,7 +299,6 @@
           }
           if (navigator.share && (type === 'facebook' || type === 'twitter')) {
             navigator.share({ title, url: current }).catch(() => {});
-            return;
           }
           if (type === 'facebook') open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`);
           if (type === 'twitter') open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`);
@@ -324,7 +308,6 @@
       });
 
       // Lightbox gallery with arrow keys (include hero image + gallery)
-      safe(() => {
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lb-image');
         theIndex = document.getElementById('lb-index'); // minor scoping trick
@@ -349,8 +332,6 @@
         };
         const step = (d) => {
           idx = (idx + d + items.length) % items.length;
-          lbImg.src = items[idx].src;
-          lbIndex.textContent = `${idx+1} / ${items.length}`;
         };
 
         document.querySelectorAll('.zoomable').forEach((fig, i) => {
@@ -369,7 +350,6 @@
       });
 
       // Fallback hero image ke /artikel/*.jpg bila gagal
-      safe(() => {
         const img = document.getElementById('hero-image');
         if (!img) return;
         img.addEventListener('error', () => {
@@ -382,9 +362,6 @@
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

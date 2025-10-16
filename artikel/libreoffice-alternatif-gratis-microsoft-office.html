@@ -92,7 +92,6 @@ height: auto;
 max-height: 450px;
 object-fit: cover;
 border-radius: 12px;
-margin-bottom: 3rem;
 cursor: pointer;
 transition: transform 0.3s;
 }
@@ -110,7 +109,6 @@ padding-bottom: 0.5rem;
 border-bottom: 2px solid var(--accent-color);
 }
 article p, article li {
-margin-bottom: 1.5rem;
 text-align: justify;
 }
 article ul {
@@ -123,7 +121,6 @@ position: relative;
 }
 article li::before {
 content: '✔';
-color: var(--accent-color);
 position: absolute;
 left: 0;
 font-weight: bold;
@@ -139,7 +136,6 @@ margin-top: 2rem;
 
 .pros h3, .cons h3 {
 font-size: 1.5rem;
-margin-bottom: 1rem;
 display: flex;
 align-items: center;
 }
@@ -158,7 +154,6 @@ left: 0; top: 0;
 width: 100%; height: 100%;
 background-color: rgba(0, 0, 0, 0.9);
 justify-content: center;
-align-items: center;
 }
 
 .lightbox-content {
@@ -167,12 +162,10 @@ max-height: 80%;
 }
 
 .lightbox-nav {
-position: absolute;
 top: 50%;
 transform: translateY(-50%);
 color: white;
 font-size: 3rem;
-cursor: pointer;
 user-select: none;
 padding: 1rem;
 }
@@ -180,10 +173,7 @@ padding: 1rem;
 
 /* Social Sharing */
 .social-share {
-text-align: center;
 margin: 3rem 0;
-padding: 2rem;
-background-color: var(--primary-bg);
 border-radius: 8px;
 }
 
@@ -198,29 +188,18 @@ transition: color 0.3s, transform 0.3s;
 
 .social-share-icons a:hover {
 transform: translateY(-5px);
-color: var(--accent-color);
 }
 /* User Info & Comments */
 #user-info, #fb-comments-container {
-background-color: var(--primary-bg);
 padding: 1.5rem;
-margin-top: 2rem;
-border-radius: 8px;
-text-align: center;
 }
 #user-info p { margin: 0.5rem 0; color: #555; }
 
 /* Fixed Buttons */
 .fixed-btn {
-position: fixed;
 width: 50px; height: 50px;
 background-color: var(--accent-color);
-color: white;
 border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 1.5rem;
 text-decoration: none;
 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 transition: all 0.3s ease;
@@ -249,8 +228,6 @@ article h2 { font-size: 1.8rem; }
 <meta name="date" content="2025-10-01">
 
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-10-01T11:00:00+08:00"></head>
 <body>
 
@@ -261,8 +238,6 @@ article h2 { font-size: 1.8rem; }
 <article>
 <header class="article-header">
 <h1><i class="fas fa-file-alt" style="color: var(--accent-color);"></i> LibreOffice: Jawara Produktivitas Gratis di Komputermu</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
 <p class="meta">Lisensi: Mozilla Public License v2.0 (MPLv2)</p>
 </header>
@@ -360,9 +335,6 @@ document.getElementById('share-li').href = `https://www.linkedin.com/shareArticl
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

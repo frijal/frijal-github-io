@@ -56,8 +56,6 @@ observer.unobserve(img);
 lazyImages.forEach((img) => observer.observe(img));
 } else {
 lazyImages.forEach((img) => {
-img.src = img.getAttribute("data-src");
-img.removeAttribute("data-src");
 });
 }
 
@@ -111,7 +109,6 @@ prompt("Gagal menyalin. Salin manual:", CANONICAL_URL);
 // Web Share API fallback (for X button, if available)
 if (navigator.share) {
 document.getElementById('share-x')?.addEventListener("click", async (e) => {
-e.preventDefault();
 try {
 await navigator.share({ title: PAGE_TITLE, text: SHARE_TEXT, url: CANONICAL_URL });
 } catch (err) {
@@ -177,7 +174,6 @@ flagEl.style.display = "none";
 })
 .catch(e => {
 ipEl.textContent = cityEl.textContent = countryEl.textContent = "Tidak tersedia";
-flagEl.style.display = "none";
 });
 };
 
@@ -197,15 +193,6 @@ document.getElementById("current-url").textContent = CANONICAL_URL;
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

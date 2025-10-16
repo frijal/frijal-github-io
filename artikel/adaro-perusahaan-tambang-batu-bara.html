@@ -98,15 +98,11 @@
         }
 
         article {
-            background: #fff;
             padding: 24px;
-            border-radius: 12px;
             box-shadow: 0 6px 22px rgba(11, 18, 32, .04);
-            margin-bottom: 20px;
         }
 
         .card {
-            background: #fff;
             padding: 18px;
             border-radius: 10px;
             margin-bottom: 16px;
@@ -123,19 +119,14 @@
         }
 
         .share {
-            display: flex;
             gap: 8px;
             flex-wrap: wrap
         }
 
         .btn {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
             padding: 8px 12px;
-            border-radius: 8px;
             border: 1px solid #e6eef3;
-            background: #fff;
             cursor: pointer;
             font-size: 14px
         }
@@ -147,7 +138,6 @@
 
         footer {
             margin-top: 28px;
-            text-align: center;
             font-size: 13px;
             color: var(--muted)
         }
@@ -193,7 +183,6 @@
                 const json = JSON.parse(schemaArticle.text);
                 json.dateModified = new Date().toISOString().split('T')[0];
                 schemaArticle.text = JSON.stringify(json);
-            }
             
             // 4. Build FAQPage JSON-LD (Hanya menginjeksikan FAQPage)
             const faqs = [];
@@ -209,14 +198,10 @@
                 script.type = 'application/ld+json';
                 script.text = JSON.stringify(jsonldFAQ);
                 document.head.appendChild(script);
-            }
         });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

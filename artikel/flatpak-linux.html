@@ -68,14 +68,10 @@
 <meta property="og:image:alt" content="Panduan Lengkap: Cara Instal dan Menggunakan Flatpak di Linux 📦">
   <meta itemprop="image" content="https://frijal.pages.dev/img/flatpak-linux.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <header>
         <h1>📦 Cara Instal dan Menggunakan Flatpak di Linux</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
     </header>
     <main class="container">
@@ -93,7 +89,6 @@
             <div class="gallery-thumbs" id="gallery-thumbs"></div>
             <div class="gallery-caption" id="gallery-caption"></div>
         </div>
-        <section>
             <h2>⚙️ Instalasi Flatpak dan Konfigurasi Flathub</h2>
             <h3>1. Cek Instalasi Flatpak</h3>
             <p>Coba cek apakah Flatpak sudah terpasang di sistemmu:</p>
@@ -111,8 +106,6 @@
             <pre><code>flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</code></pre>
             <p>Kamu bisa memverifikasi daftar repositori yang aktif:</p>
             <pre><code>flatpak remotes</code></pre>
-        </section>
-        <section>
             <h2>📥 Perintah Dasar Penggunaan Aplikasi Flatpak</h2>
             <h3>1. Mencari Aplikasi</h3>
             <p>Gunakan perintah <code>remote-ls</code> untuk melihat aplikasi yang tersedia di Flathub:</p>
@@ -127,34 +120,25 @@
             <pre><code>flatpak run [aplikasi_id]</code></pre>
             <p>Contoh:</p>
             <pre><code>flatpak run party.supertux.supertuxparty</code></pre>
-        </section>
-        <section>
             <h2>📋 Manajemen Aplikasi Flatpak</h2>
-            <ul>
                 <li><strong>Daftar aplikasi terinstal:</strong><pre><code>flatpak list</code></pre></li>
                 <li><strong>Update semua aplikasi:</strong><pre><code>flatpak update</code></pre></li>
                 <li><strong>Uninstall aplikasi:</strong><pre><code>flatpak uninstall [aplikasi_id]</code></pre></li>
                 <li><strong>Menghapus sisa-sisa:</strong><pre><code>flatpak uninstall --unused</code></pre></li>
                 <li><strong>Perbaikan (jika ada masalah):</strong><pre><code>flatpak repair</code></pre></li>
-            </ul>
             <h3>Mengatur Izin Aplikasi dengan Flatseal (GUI)</h3>
             <p>Flatseal adalah aplikasi GUI untuk mengatur izin keamanan Flatpak. Instal dengan:</p>
             <pre><code>flatpak install flathub com.github.tchx84.Flatseal</code></pre>
-        </section>
-        <section>
             <h2>🎯 Kesimpulan</h2>
             <p>Flatpak bikin instalasi aplikasi di Linux makin praktis dan universal. Dengan <strong>Flathub</strong>, kamu bisa dapat ribuan aplikasi yang selalu <em>up-to-date</em>. Ditambah lagi, kehadiran <strong>Flatseal</strong> membuat pengaturan izin keamanan menjadi semudah klik-klik saja.</p>
-        </section>
         <div class="share-bar">
             <a href="#" id="share-wa" title="Bagikan ke WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
             <a href="#" id="share-tw" title="Bagikan ke Twitter/X" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
             <a href="#" id="share-fb" title="Bagikan ke Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
             <a href="#" id="share-tg" title="Bagikan ke Telegram" rel="noopener noreferrer"><i class="fab fa-telegram-plane"></i></a>
-        </div>
         <div id="fb-comments-container">
             
             
-        </div>
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -191,11 +175,9 @@
                     thumb.alt = data.caption;
                     thumb.addEventListener("click", () => showGallery(index));
                     thumbsContainer.appendChild(thumb);
-                });
                 showGallery(0);
                 document.querySelector(".gallery-prev").onclick = () => showGallery(currentIdx - 1);
                 document.querySelector(".gallery-next").onclick = () => showGallery(currentIdx + 1);
-            }
             
             setupGallery();
 
@@ -210,15 +192,8 @@
             for (const id in shareLinks) {
                 const elem = document.getElementById(id);
                 if(elem) elem.href = shareLinks[id];
-            }
         });
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

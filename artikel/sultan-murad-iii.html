@@ -83,7 +83,6 @@ header.hero h1 {
   flex-wrap: wrap;
   gap: 12px 18px;
   align-items: center;
-  color: var(--muted);
   font-size: 14px;
 }
 .chip {
@@ -126,7 +125,6 @@ header.hero h1 {
 }
 .gallery figure {
   margin: 0;
-  position: relative;
   overflow: hidden;
   border-radius: 14px;
   border: 1px solid #22344f;
@@ -179,7 +177,6 @@ header.hero h1 {
   margin-top: 8px;
 }
 .share-btn {
-  display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-radius: 999px;
   background: #102035; border: 1px solid #223650; color: #eaf1f7;
   cursor: pointer; font-size: 14px;
@@ -189,8 +186,6 @@ header.hero h1 {
 /* Floating controls */
 .float-btn {
   position: fixed; z-index: 40;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
   background: #0f1a2b; color: #dfe7f0; border: 1px solid #284364;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
@@ -253,7 +248,6 @@ if (ld) {
   });
 
   // Estimate read time from text length (rough, Bahasa-friendly)
-  safe(() => {
 const text = document.body.innerText || "";
 const words = text.trim().split(/\s+/).length;
 const min = Math.max(3, Math.round(words / 200)); // ~200 kata/menit
@@ -262,7 +256,6 @@ if (el) el.textContent = `Waktu baca: ~${min} menit`;
   });
 
   // Info chips: browser & OS
-  safe(() => {
 const ua = navigator.userAgent;
 const browserEl = document.querySelector('[data-browser]');
 const osEl = document.querySelector('[data-os]');
@@ -286,7 +279,6 @@ if (osEl) osEl.textContent = os;
   });
 
   // IP + Country flag (graceful fallback; timeout 2500ms)
-  safe(() => {
 const ipEl = document.querySelector('[data-ip]');
 const flagEl = document.querySelector('[data-flag]');
 const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
@@ -316,7 +308,6 @@ fetchIPInfo();
   });
 
   // Share buttons
-  safe(() => {
 const current = window.location.href;
 const title = document.title;
 const strip = document.querySelector('.share-strip');
@@ -346,7 +337,6 @@ return;
   });
 
   // Lightbox gallery with arrow keys
-  safe(() => {
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-image');
 const lbIndex = document.getElementById('lb-index');
@@ -370,8 +360,6 @@ const closeLb = () => {
 };
 const step = (d) => {
   idx = (idx + d + items.length) % items.length;
-  lbImg.src = items[idx].src;
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
 };
 
 document.querySelectorAll('.zoomable').forEach((fig, i) => {
@@ -390,7 +378,6 @@ window.addEventListener('keydown', (e) => {
   });
 
   // If main image fails, fall back to /artikel/*.jpg
-  safe(() => {
 const img = document.getElementById('hero-image');
 if (!img) return;
 img.addEventListener('error', () => {
@@ -406,15 +393,6 @@ img.addEventListener('error', () => {
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -75,13 +75,11 @@
     }
 
     function shareToTwitter() {
-      const url = encodeURIComponent(window.location.href);
       const text = encodeURIComponent('Qordoba: Kilau Peradaban Andalusia');
       window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=700,height=480');
     }
 
     function shareToWhatsApp() {
-      const url = encodeURIComponent(window.location.href);
       const text = encodeURIComponent('Baca: Qordoba, kilau peradaban Andalusia → ');
       window.open(`https://wa.me/?text=${text}${url}`, '_blank');
     }
@@ -101,9 +99,5 @@
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -32,7 +32,6 @@ header h1 {
   max-width: 1100px;
   min-width: 1000px;
   margin: 20px auto;
-  padding: 20px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -51,14 +50,12 @@ body.dark .container {
   margin-bottom: 8px;
   cursor: pointer;
   background: #e0f7fa;
-  transition: background 0.3s;
 }
 .accordion button:hover {
   background: #b2ebf2;
 }
 body.dark .accordion button {
   background: #333;
-  color: #eee;
 }
 .panel {
   display: none;
@@ -78,12 +75,8 @@ pre {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #005f73;
-  color: #fff;
-  border: none;
   padding: 5px 10px;
   border-radius: 4px;
-  cursor: pointer;
   font-size: 0.8em;
 }
 .download-btn {
@@ -94,41 +87,28 @@ pre {
   position: fixed;
   top: 30%;
   right: 15px;
-  background: #00796b;
-  color: #fff;
   padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 .note {
   background: #e8f5e9;
   border-left: 4px solid #388e3c;
   padding: 10px;
   margin-top: 10px;
-  border-radius: 6px;
 }
 body.dark .note {
   background: #2e7d32;
-  color: #fff;
 }
 /* Tabel ringkasan */
 table {
-  width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 th, td {
   border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
 }
 th {
-  background: #005f73;
-  color: #fff;
 }
 body.dark th {
-  background: #333;
 }
 body.dark td {
   border-color: #555;
@@ -143,14 +123,10 @@ body.dark td {
   <meta name="twitter:image" content="https://frijal.pages.dev/img/docs-linux-mirror.webp">
   <meta itemprop="image" content="https://frijal.pages.dev/img/docs-linux-mirror.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 <meta property="article:published_time" content="2025-09-14T11:00:00+08:00"></head>
 <body>
   <header>
 <h1>🌐 Panduan Mirror Linux Lintas Distro</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
 <p>Cari mirror tercepat dan terbaik untuk berbagai distro Linux</p>
   </header>
@@ -215,57 +191,47 @@ sudo netselect-apt stable</code></pre>
 
   <!-- Arch -->
   <button onclick="togglePanel(this)">🟦 Arch Linux</button>
-  <div class="panel">
 <pre><button class="download-btn" onclick="downloadFile('arch-mirror.sh', archScript)">⬇ Download</button><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">#!/bin/bash
 sudo pacman -S reflector --noconfirm
 sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist</code></pre>
-<div class="note">
   💡 <b>Petunjuk:</b> Setelah update mirrorlist, jalankan <code>sudo pacman -Syy</code>. Tidak perlu reboot.
 </div>
   </div>
 
   <!-- Fedora -->
   <button onclick="togglePanel(this)">🟠 Fedora</button>
-  <div class="panel">
 <pre><button class="download-btn" onclick="downloadFile('fedora-mirror.sh', fedoraScript)">⬇ Download</button><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">#!/bin/bash
 sudo dnf install -y dnf-plugins-core
 echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf</code></pre>
-<div class="note">
   💡 <b>Petunjuk:</b> Mirror tercepat otomatis digunakan setiap kali jalankan <code>dnf</code>. Tidak perlu reboot.
 </div>
   </div>
 
   <!-- openSUSE -->
   <button onclick="togglePanel(this)">🟢 openSUSE</button>
-  <div class="panel">
 <pre><button class="download-btn" onclick="downloadFile('opensuse-mirror.sh', opensuseScript)">⬇ Download</button><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">#!/bin/bash
 sudo zypper mr -da
 sudo zypper ar -f https://download.opensuse.org/distribution/leap/15.5/repo/oss/ repo-oss</code></pre>
-<div class="note">
   💡 <b>Petunjuk:</b> Gunakan <code>zypper ref</code> untuk refresh setelah mengganti mirror. Tidak perlu reboot.
 </div>
   </div>
 
   <!-- Slackware -->
   <button onclick="togglePanel(this)">🔵 Slackware</button>
-  <div class="panel">
 <pre><button class="download-btn" onclick="downloadFile('slackware-mirror.sh', slackwareScript)">⬇ Download</button><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">#!/bin/bash
 sudo nano /etc/slackpkg/mirrors
 # Pilih mirror terdekat, lalu jalankan:
 sudo slackpkg update gpg
 sudo slackpkg update</code></pre>
-<div class="note">
   💡 <b>Petunjuk:</b> Mirror dipilih manual. Setelah itu jalankan <code>slackpkg update</code>. Reboot tidak diperlukan.
 </div>
   </div>
 
   <!-- NixOS -->
   <button onclick="togglePanel(this)">❄️ NixOS</button>
-  <div class="panel">
 <pre><button class="download-btn" onclick="downloadFile('nixos-mirror.sh', nixosScript)">⬇ Download</button><button class="copy-btn" onclick="copyCode(this)">Copy</button><code class="language-bash">#!/bin/bash
 echo 'substituters = https://cache.nixos.org https://mirror.example.org' | sudo tee -a /etc/nix/nix.conf
 sudo systemctl restart nix-daemon</code></pre>
-<div class="note">
   💡 <b>Petunjuk:</b> Setelah menambahkan substituter baru, jalankan ulang daemon Nix. Reboot tidak wajib.
 </div>
   </div>
@@ -296,29 +262,21 @@ function downloadFile(filename, content) {
 
 // Skrip isi per distro
 const debianScript = `#!/bin/bash
-sudo apt install -y netselect-apt
 sudo netselect-apt stable`;
 
 const archScript = `#!/bin/bash
-sudo pacman -S reflector --noconfirm
 sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist`;
 
 const fedoraScript = `#!/bin/bash
-sudo dnf install -y dnf-plugins-core
 echo "fastestmirror=True" | sudo tee -a /etc/dnf/dnf.conf`;
 
 const opensuseScript = `#!/bin/bash
-sudo zypper mr -da
 sudo zypper ar -f https://download.opensuse.org/distribution/leap/15.5/repo/oss/ repo-oss`;
 
 const slackwareScript = `#!/bin/bash
-sudo nano /etc/slackpkg/mirrors
-# Pilih mirror terdekat, lalu jalankan:
-sudo slackpkg update gpg
 sudo slackpkg update`;
 
 const nixosScript = `#!/bin/bash
-echo 'substituters = https://cache.nixos.org https://mirror.example.org' | sudo tee -a /etc/nix/nix.conf
 sudo systemctl restart nix-daemon`;
   </script>
 
@@ -326,15 +284,6 @@ sudo systemctl restart nix-daemon`;
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -62,7 +62,6 @@
       header h1 {
         font-size: 3rem;
         color: var(--primary-color);
-        margin: 0;
         line-height: 1.2;
       }
       header .subtitle {
@@ -78,7 +77,6 @@
       }
       h2 {
         font-size: 2.2rem;
-        color: var(--primary-color);
         margin-top: 40px;
         border-bottom: 3px solid #e9ecef;
         padding-bottom: 10px;
@@ -93,13 +91,11 @@
         font-style: italic;
       }
       .highlight-box p {
-        margin: 0;
       }
       .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 15px;
-        margin: 30px 0;
       }
       .gallery img {
         width: 100%;
@@ -120,7 +116,6 @@
         position: fixed;
         z-index: 9999;
         inset: 0;
-        width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.9);
         justify-content: center;
@@ -146,7 +141,6 @@
         color: white;
         font-size: 40px;
         font-weight: bold;
-        cursor: pointer;
         user-select: none;
         transition: opacity 0.3s;
       }
@@ -159,8 +153,6 @@
         top: 15px;
         right: 30px;
       }
-      .lightbox-prev,
-      .lightbox-next {
         top: 50%;
         transform: translateY(-50%);
         padding: 10px;
@@ -168,13 +160,10 @@
       .lightbox-prev {
         left: 15px;
       }
-      .lightbox-next {
         right: 15px;
       }
       .action-section {
-        text-align: center;
         margin: 40px 0;
-        padding: 25px;
         background: #e9ecef;
         border-radius: 12px;
       }
@@ -187,7 +176,6 @@
         margin: 0 12px;
         font-size: 36px;
         color: #555;
-        transition:
           transform 0.2s,
           color 0.2s;
         text-decoration: none;
@@ -208,9 +196,6 @@
         color: #2aabee;
       }
       footer {
-        text-align: center;
-        padding: 25px;
-        margin-top: 40px;
         font-size: 1rem;
         color: #888;
       }
@@ -233,16 +218,12 @@
       }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     
     <div class="container">
       <header>
         <h1>AI: Senjata Rahasia UMKM Buat Nyaingin Raksasa</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
         <p class="subtitle">
           Saat Teknologi Bukan Lagi Milik yang Bermodal Besar
@@ -296,7 +277,6 @@
           <a href="#" class="share-icon share-tw" id="shareTwitter" title="Bagikan ke Twitter">TW</a>
           <a href="#" class="share-icon share-wa" id="shareWhatsApp" title="Bagikan ke WhatsApp">WA</a>
           <a href="#" class="share-icon share-tg" id="shareTelegram" title="Bagikan ke Telegram">TG</a>
-        </div>
         <h2>Yuk, Ngobrol di Kolom Jaga Data Pribadi Tetap Aman.!</h2>
         
       </article>
@@ -343,7 +323,6 @@
                 observer.unobserve(img);
               }
             });
-          });
           lazyImages.forEach((img) => observer.observe(img));
 
           const updateLightboxImage = (index) => {
@@ -353,7 +332,6 @@
             }
             if (index >= images.length) {
                 index = 0;
-            }
             currentIndex = index;
             lightboxImg.src = images[currentIndex].src;
           };
@@ -364,8 +342,6 @@
               currentIndex = Array.from(gallery.children).indexOf(target);
               updateLightboxImage(currentIndex);
               lightbox.style.display = 'flex';
-            }
-          });
 
           document.querySelector('.lightbox-close').onclick = () => (lightbox.style.display = 'none');
           document.querySelector('.lightbox-prev').onclick = () => updateLightboxImage(currentIndex - 1);
@@ -374,7 +350,6 @@
           lightbox.onclick = (e) => {
             if (e.target === lightbox) {
                 lightbox.style.display = 'none';
-            }
           };
 
           // --- SOCIAL SHARING ---
@@ -395,7 +370,6 @@
                 e.preventDefault();
                 window.open(this.href, 'share-window', 'height=450,width=550');
               });
-            }
           }
       });
     </script>
@@ -404,9 +378,5 @@
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -87,7 +87,6 @@
         footer.site { padding: 20px; color: var(--muted); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -99,7 +98,6 @@
             <div class="col">
                 <article>
                     <h1>Panduan Memilih Desktop Environment untuk Linux</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Desktop Environment (DE) adalah antarmuka grafis yang memungkinkan Anda berinteraksi dengan Linux secara visual. Berikut panduan santai untuk memilih DE yang paling pas untuk kebutuhan Anda.</p>
                     
@@ -124,22 +122,18 @@
                     <h2>Enlightenment</h2>
                     <p>Menawarkan kombinasi unik antara efisiensi sumber daya dan keindahan visual dengan animasi yang halus.</p>
                     <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEiiyRbtU3fuyQvswdofLyTBKDntQ9vz2Qk8IKzBHi6uK0Pxk7YEdnDgJ9KQQWGhKUfDtKtvV1YhU_qC7s3FZMaiR2QWBLzpjn0X3nwT60p6SQ6kVdo3bht9fVqIE1FaqXf72R05gduh0LWo1gVH_IsKxcyNF4wuQBOwhwRNqu9wGHHWdYJBv8RPgtMlqWE" alt="Enlightenment Desktop"></figure>
-                    <h3>Instalasi (Ubuntu):</h3>
                     <pre><code id="enlightenment-ubuntu">sudo apt install enlightenment</code><button class="copy-btn" data-target="enlightenment-ubuntu">Salin</button></pre>
 
                     <h2>LXDE & LXQt</h2>
                     <p>LXDE sangat ringan, ideal untuk komputer lama. LXQt adalah versi modernnya yang berbasis Qt, menawarkan performa lebih cepat sambil tetap efisien.</p>
                     <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi3oAQdCOxTa9s8k4REcLDpLdWVcEJ7Go2z-Nf49-2mnlLiwnVu6BR1ZZVyD2MJ4VdgrTTNgFcmqvJoqxNZurdC-0M-0qHBFdXe473rfkbNOMBLHw_T4RAJIusDN70mG9ksIgMLMTc_l5JchRJgrMi6L1gJeNrGTEQC_Lx1qEm89SJuB6BIbc2u-EO-KgY" alt="LXDE Desktop"></figure>
-                    <h3>Instalasi (Ubuntu):</h3>
                     <pre><code id="lxde-ubuntu">sudo apt install lxde</code><button class="copy-btn" data-target="lxde-ubuntu">Salin</button></pre>
                     <pre><code id="lxqt-ubuntu">sudo apt install lxqt</code><button class="copy-btn" data-target="lxqt-ubuntu">Salin</button></pre>
 
                     <h2>MATE</h2>
                     <p>Merupakan kelanjutan dari GNOME 2, MATE dikenal stabil, sederhana, dan tidak memakan banyak sumber daya.</p>
                     <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEgYkkB6Dp0bLwFd4qo9TaOPoj1_tT1Pzm2aLL7VEQmNtO_Q6IL6im0EQtnuCCG3Pn1TLxIY_xWdOdaI0yGZYxGtwKcOiuMo-y890mxAIoRiRVopFPPDoNrOciAn4kwMmwXkXqNvu4_clREBUaeRm3vdHCdp627Q0hHOgyLEFpeR09Ps-GXsDKRmdg5Jj3c" alt="MATE Desktop"></figure>
-                    <h3>Instalasi (Ubuntu):</h3>
                     <pre><code id="mate-ubuntu">sudo apt install ubuntu-mate-desktop</code><button class="copy-btn" data-target="mate-ubuntu">Salin</button></pre>
-                    
                     <h2>Kesimpulan</h2>
                     <p>Linux memberikan kebebasan untuk memilih. Dengan banyaknya pilihan Desktop Environment, Anda bisa membangun pengalaman komputasi yang paling sesuai dengan selera dan kebutuhan perangkat keras Anda.</p>
                 </article>
@@ -179,7 +173,6 @@
             el.addEventListener('click', () => {
                 lbImg.src = el.src;
                 lb.classList.add('open');
-            });
         });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
@@ -194,13 +187,8 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

@@ -121,36 +121,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                     <td><strong>Git Flow</strong></td>
                                     <td>Paling terstruktur dengan banyak jenis branch (main, develop, feature, release, hotfix).</td>
                                     <td>Proyek besar dengan jadwal rilis yang jelas (misal, versi 1.0, 2.0).</td>
                                     <td>Alur kerja sangat jelas, memisahkan kode stabil dari yang masih dalam pengembangan.</td>
                                     <td>Agak rumit dan lambat karena banyak proses merge.</td>
-                                </tr>
-                                <tr>
                                     <td><strong>Trunk Based Dev</strong></td>
                                     <td>Semua developer commit langsung ke branch utama (trunk/main). Feature branch hanya berumur sangat pendek.</td>
                                     <td>Tim yang membutuhkan integrasi dan deployment super cepat (CI/CD).</td>
                                     <td>Kode selalu up-to-date, konflik merge minim, dan proses rilis cepat.</td>
                                     <td>Butuh disiplin tinggi dan automated testing yang solid.</td>
-                                </tr>
-                                <tr>
                                     <td><strong>GitHub Flow</strong></td>
                                     <td>Versi simpel dari Git Flow. Hanya ada branch `main`. Semua pengembangan dibuat di branch baru lalu di-merge via Pull Request (PR).</td>
                                     <td>Kebanyakan proyek di GitHub yang butuh deploy cepat dan sering.</td>
                                     <td>Sederhana dan mudah dimengerti. Alur PR mendorong adanya code review.</td>
                                     <td>Kurang pas untuk proyek yang perlu mengelola beberapa versi rilis sekaligus.</td>
-                                </tr>
                             </tbody>
                         </table>
-                    </div>
                     
                     <div class="gallery">
                         <figure><img src="https://frijal.pages.dev/assets/gallery/gitflow.jpg" alt="Diagram alur kerja Git Flow"></figure>
                         <figure><img src="https://frijal.pages.dev/assets/gallery/trunkbased.jpg" alt="Diagram alur kerja Trunk Based Development"></figure>
                         <figure><img src="https://frijal.pages.dev/assets/gallery/githubflow.jpg" alt="Diagram alur kerja GitHub Flow"></figure>
-                    </div>
                 </article>
             </div>
         </main>
@@ -209,7 +201,6 @@
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
         });
     })();
-    </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

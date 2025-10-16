@@ -70,7 +70,6 @@
         document.getElementById('page-url').textContent = window.location.href;
 
         // Share links (canonical/share URL)
-        (function(){
             const shareUrl = 'https://frijal.pages.dev/artikel/ubuntu-raring-ringtail-screenshot.html';
             const text = encodeURIComponent('Screenshot Ubuntu 13.04 Raring Ringtail beserta komponen penyusunnya.');
             
@@ -82,13 +81,9 @@
             document.getElementById('share-ig').href = shareUrl;
             document.getElementById('share-threads').href = shareUrl;
             document.getElementById('share-tiktok').href = shareUrl;
-        })();
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

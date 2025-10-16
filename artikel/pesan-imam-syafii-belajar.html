@@ -122,18 +122,13 @@
 
       /* HERO (dibuat 1 kolom vertikal) */
       .hero {
-        position: relative;
         border-radius: var(--r);
         overflow: hidden;
         background: var(--card);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-        display: flex;
         flex-direction: column;
       }
 
       .hero .media {
-        position: relative;
         min-height: 360px;
         width: 100%;
         background: #0a1015
@@ -142,14 +137,12 @@
       .hero .media img {
         position: absolute;
         inset: 0;
-        width: 100%;
         height: 100%;
         object-fit: cover
       }
 
       .hero .content {
         padding: clamp(16px, 3vw, 28px);
-        display: grid;
         gap: 12px;
         align-content: center
       }
@@ -160,31 +153,19 @@
         color: #d6fff7;
         border: 1px solid #0ab191;
         padding: .32rem .6rem;
-        border-radius: 999px;
         font-size: 12px;
         font-weight: 700;
       }
 
       .share {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        align-items: center;
         margin-top: 6px
       }
 
       .share a {
         text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: .5rem;
         padding: .5rem .7rem;
         border-radius: 12px;
-        border: 1px solid var(--line);
-        font-weight: 700;
-        background: #fff;
         color: #0f172a;
-        box-shadow: var(--shadow);
         transition: transform .15s ease;
       }
 
@@ -204,34 +185,23 @@
       }
 
       .card {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: var(--r);
-        box-shadow: var(--shadow);
-        overflow: hidden;
         margin-bottom: 22px;
       }
 
       .prose {
         padding: clamp(14px, 2.4vw, 22px);
-        display: grid;
-        gap: 12px;
-        width: 100%;
       }
 
       .prose h2 {
-        margin: 0;
         font-size: clamp(18px, 2.2vw, 22px)
       }
 
       .prose p {
-        margin: 0;
         color: #1f2937;
         line-height: 1.8
       }
 
       blockquote {
-        margin: 0;
         padding: 12px 14px;
         border-left: 4px solid var(--accent);
         background: #f0fffa;
@@ -243,27 +213,19 @@
       /* Gallery (tetap 2 kolom di dalam card) */
       .gallery {
         padding: clamp(10px, 2vw, 18px);
-        display: grid;
         gap: var(--gap);
         grid-template-columns: repeat(2, 1fr);
-        width: 100%;
       }
 
       .thumb {
-        position: relative;
         aspect-ratio: 1/1;
         border-radius: 14px;
-        overflow: hidden;
         background: #f8fafc;
-        border: 1px solid var(--line);
         cursor: zoom-in;
       }
 
       .thumb img {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
-        display: block;
         transition: transform .35s ease
       }
 
@@ -272,19 +234,16 @@
       }
 
       .thumb .tag {
-        position: absolute;
         bottom: 8px;
         left: 8px;
         background: #111827;
         color: #fff;
         font-size: 11px;
         padding: .24rem .5rem;
-        border-radius: 999px;
         opacity: .9
       }
 
       footer {
-        max-width: var(--max);
         margin: 28px auto;
         padding: 0 clamp(10px, 3vw, 20px) 30px;
         color: #334155
@@ -293,7 +252,6 @@
       /* Lightbox - CSS dipertahankan */
       .lightbox {
         position: fixed;
-        inset: 0;
         background: #0009;
         display: none;
         place-items: center;
@@ -306,42 +264,28 @@
       }
 
       .frame {
-        position: relative;
         width: min(96vw, 1200px);
         height: min(86vh, 820px);
         background: #000;
         border-radius: 16px;
-        overflow: hidden;
         border: 1px solid #ffffff22
       }
 
       .frame img {
-        width: 100%;
-        height: 100%;
         object-fit: contain;
         background: #000
       }
 
       .btn {
-        position: absolute;
         pointer-events: all;
         border: none;
         cursor: pointer;
-        display: inline-flex;
-        align-items: center;
         justify-content: center;
-        gap: .5rem;
         padding: .6rem .8rem;
-        border-radius: 999px;
         color: #0b1220;
-        background: #fff;
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-        transition: transform .15s ease;
       }
 
       .btn:hover {
-        transform: translateY(-1px)
       }
 
       .btn svg {
@@ -362,18 +306,12 @@
 
       .btn-next {
         right: 10px;
-        top: 50%;
-        transform: translateY(-50%)
       }
 
       .count {
-        position: absolute;
         left: 50%;
         bottom: 10px;
         transform: translateX(-50%);
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 999px;
         padding: .2rem .6rem;
         font-size: 12px
       }
@@ -387,21 +325,16 @@
 
       @media (max-width:640px) {
         .gallery {
-          grid-template-columns: 1fr
         }
       }
     </style>
     <meta property="og:image:alt" content="Belajar kapanpun, dimanapun - pesan Imam Syafi’i">
     <meta itemprop="image" content="https://frijal.pages.dev/img/pesan-imam-syafii-belajar.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <header>
         <h1>Belajar kapanpun, dimanapun</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
         <div class="subtitle">“Jika kau tak sanggup menahan lelah karena belajar, maka kau harus sanggup menderita karena kebodohan.” - Imam Syafi’i</div>
         <div class="chips">
@@ -420,7 +353,6 @@
                 <p>Belajar itu maraton, bukan sprint. Sedikit demi sedikit, tapi konsisten itu yang menumbuhkanmu.</p>
                 <div class="share" id="share-top">
                     </div>
-            </div>
         </section>
 
         <section class="grid">
@@ -439,24 +371,18 @@
                 <a class="thumb" data-group="g1" data-src="https://source.unsplash.com/1600x1600/?study,desk">
                     <span class="tag">Fokus</span>
                     <img loading="lazy" alt="Meja belajar" data-src="https://source.unsplash.com/800x800/?study,desk">
-                </a>
             </aside>
-        </section>
 
         <section class="grid" style="margin-top: clamp(18px,4vw,26px)">
             <div class="card" style="width:100%; padding:clamp(14px,2.4vw,22px)">
                 <h2 style="margin:0 0 10px;font-size: clamp(18px, 2.2vw, 22px)">Apa kebiasaan belajarmu yang paling ampuh?</h2>
                 
-                
-            </div>
-        </section>
     </main>
 
     <footer>
         <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
             <div>🄯 2014–2025 Fakhrul • Artikel: Belajar kapanpun, dimanapun - pesan Imam Syafi’i</div>
             <div>Terakhir diperbarui: 22 Sep 2025</div>
-        </div>
     </footer>
 
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
@@ -467,19 +393,13 @@
             </button>
             <button class="btn btn-prev" id="lb-prev" aria-label="Sebelumnya">
                 <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </button>
             <button class="btn btn-next" id="lb-next" aria-label="Berikutnya">
                 <svg viewBox="0 0 24 24"><path fill="currentColor" d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-            </button>
             <div class="count" id="lb-count">1 / 1</div>
-        </div>
     </div>
 
     <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

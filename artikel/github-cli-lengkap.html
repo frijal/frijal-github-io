@@ -54,7 +54,6 @@ body { font-family: Inter, sans-serif; }
 </div>
 <div>
 <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Lanjutan</h2>
-<ul class="space-y-1">
 <li><a href="#pr" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Pull Request</a></li>
 <li><a href="#branch" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Branch</a></li>
 <li><a href="#issue" class="nav-link block px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">Issue</a></li>
@@ -80,13 +79,11 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="login-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold mb-2">Login ke GitHub</h2>
 <div class="diagram-box">
 <div class="diagram-step">gh auth login</div>
 <div class="diagram-arrow">→</div>
 <div class="diagram-step">Pilih akun & metode</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Login berhasil</div>
 </div>
 <div class="code-block"><button class="copy-btn">Salin</button><pre><code>gh auth login</code></pre></div>
@@ -95,11 +92,8 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="clone-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold mb-2">Clone Repository</h2>
-<div class="diagram-box">
 <div class="diagram-step">gh repo clone username/repo</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">Folder lokal dibuat</div>
 </div>
 <div class="code-block"><button class="copy-btn">Salin</button><pre><code>gh repo clone username/repo</code></pre></div>
@@ -108,13 +102,9 @@ body { font-family: Inter, sans-serif; }
 </template>
 
 <template id="commit-content">
-<div class="bg-white p-8 rounded-lg shadow-sm">
 <h2 class="text-2xl font-bold mb-2">Commit & Push</h2>
-<div class="diagram-box">
 <div class="diagram-step">git add .</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">git commit -m "Pesan"</div>
-<div class="diagram-arrow">→</div>
 <div class="diagram-step">git push</div>
 </div>
 <div class="code-block"><button class="copy-btn">Salin</button><pre><code>git add .

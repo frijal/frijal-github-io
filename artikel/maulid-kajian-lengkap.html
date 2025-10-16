@@ -60,19 +60,16 @@
                 r.textContent = figure.querySelector('figcaption')?.textContent || '';
                 n.classList.add("open");
                 document.body.style.overflow="hidden";
-            }
             
             function move(delta){
                 currentIdx = (currentIdx + delta + gallery.length) % gallery.length;
                 open(currentIdx);
-            }
 
             function closeLB(){
                 n.classList.remove("open");
                 o.src="";
                 r.textContent="";
                 document.body.style.overflow="";
-            }
             
             gallery.forEach((fig, idx)=>{
                 fig.addEventListener("click", e=>{
@@ -113,8 +110,6 @@
             }).forEach(([t,e])=>{
                 const a=n.querySelector(t);
                 if(a) a.href=e;
-            });
-        })();
         
         // Load PrismJS scripts
         (()=>{
@@ -123,20 +118,15 @@
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js");
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js");
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js");
-        })();
         
         // Ensure FB XFBML.parse runs after SDK loads
         window.fbAsyncInit = function() {
             if (typeof FB !== 'undefined') {
                 try {FB.XFBML.parse();} catch (t) {}
-            }
         };
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

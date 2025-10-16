@@ -86,7 +86,6 @@
         footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -98,7 +97,6 @@
             <div class="col">
                 <article>
                     <h1>Solusi Broadcom Wireless di Fedora</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Setelah melakukan pembaruan kernel di Fedora, beberapa perangkat wireless Broadcom mungkin berhenti berfungsi. Hal ini biasanya terjadi karena konflik antara modul kernel `bcma` bawaan dengan driver Broadcom yang sebenarnya dibutuhkan.</p>
 
@@ -116,9 +114,7 @@
 
                     <h2>Langkah Perbaikan</h2>
                     <p>Buka terminal, lalu masuk sebagai <strong>root</strong> (misalnya dengan perintah <code>sudo -i</code>). Setelah itu, salin dan jalankan perintah di bawah ini untuk memasukkan modul `bcma` ke dalam daftar hitam (blacklist), sehingga tidak akan dimuat saat boot.</p>
-                    
                     <pre><code id="code1">echo "blacklist bcma" >> /etc/modprobe.d/broadcom-wl-blacklist.conf</code><button class="copy-btn" data-target="code1">Salin</button></pre>
-                    
                     <p>Setelah menjalankan perintah tersebut, <strong>reboot</strong> komputer Anda. Perangkat wireless Broadcom Anda seharusnya sudah dapat berfungsi kembali dengan normal.</p>
                 </article>
             </div>
@@ -157,7 +153,6 @@
             el.addEventListener('click', () => {
                 lbImg.src = el.src;
                 lb.classList.add('open');
-            });
         });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
@@ -172,13 +167,8 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

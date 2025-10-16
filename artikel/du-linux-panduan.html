@@ -91,7 +91,6 @@
         footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -103,7 +102,6 @@
             <div class="col">
                 <article>
                     <h1>Panduan Perintah <code>du</code> di Linux: Cek Pemakaian Ruang Disk</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Di Linux, untuk mengetahui berapa banyak ruang yang dipakai file atau folder, kita tidak bisa sekadar klik kanan. Untungnya ada <code>du</code> (disk usage), tool ajaib untuk memeriksa ukuran file/direktori lewat command line.</p>
 
@@ -127,12 +125,10 @@
 
                     <h3>Cek Ukuran Setiap Folder di Dalamnya</h3>
                     <pre class="language-bash"><code id="code2">du -sh *</code><button class="copy-btn" data-target="code2">Salin</button></pre>
-                    
                     <figure>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux Tux Mascot">
                         <figcaption style="font-size: 0.9em; color: var(--muted); margin-top: 0.5rem;">Tux, teman setia pengguna terminal!</figcaption>
                     </figure>
-                    
                     <h2>Keterbatasan: Masalah Hard Link</h2>
                     <p>Perintah <code>du</code> standar dapat memberikan hasil yang kurang akurat jika sistem file Anda mengandung <strong>hard link</strong>. Hard link memungkinkan satu file untuk muncul di banyak lokasi tanpa memakan ruang ekstra. Akibatnya, <code>du</code> bisa menghitung ukuran file yang sama berulang kali.</p>
 
@@ -160,7 +156,6 @@ foreach my $fn (@todo) {
 }
 print "$total_blocks blocks\n";
 print int($total_blocks / 2 + .5), "K\n";</code><button class="copy-btn" data-target="code3">Salin</button></pre>
-                    
                     <p>Simpan skrip di atas sebagai file (misalnya `du_accurate.pl`), berikan izin eksekusi (`chmod +x du_accurate.pl`), lalu jalankan di direktori target. Hasilnya akan jauh lebih akurat.</p>
                 </article>
             </div>
@@ -203,7 +198,6 @@ print int($total_blocks / 2 + .5), "K\n";</code><button class="copy-btn" data-ta
             el.addEventListener('click', () => {
                 lbImg.src = el.src;
                 lb.classList.add('open');
-            });
         });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
@@ -218,13 +212,8 @@ print int($total_blocks / 2 + .5), "K\n";</code><button class="copy-btn" data-ta
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

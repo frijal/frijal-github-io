@@ -63,7 +63,6 @@
             letter-spacing:-1px;
         }
         article h2{
-            font-family:'Roboto Mono', monospace;
             font-size:1.8rem;
             color:var(--primary-color);
             border-bottom:1px solid var(--border-color);
@@ -90,7 +89,6 @@
             background-color:var(--code-bg);
             border:1px solid var(--border-color);
             border-radius:8px;
-            margin:2rem 0;
             position:relative;
         }
         .code-block-header {
@@ -115,10 +113,7 @@
             position:fixed;
             width:48px;
             height:48px;
-            background-color:var(--code-bg);
-            color:var(--text-color);
             border: 1px solid var(--border-color);
-            border-radius:8px;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -202,7 +197,6 @@
                 <pre><code class="language-bash">User-agent: *
 Disallow:
 Sitemap: https://www.domainbloganda.com/sitemap.xml</code></pre>
-            </div>
             <ul>
                 <li><strong>User-agent: *</strong> Tanda bintang `(*)` berarti aturan ini berlaku untuk SEMUA robot (Google, Bing, Yahoo, dll).</li>
                 <li><strong>Disallow:</strong> Dengan membiarkannya **kosong**, kamu bilang, "Tidak ada yang dilarang, silakan jelajahi semuanya!"</li>
@@ -213,25 +207,15 @@ Sitemap: https://www.domainbloganda.com/sitemap.xml</code></pre>
             <h2>Contoh untuk Pengguna Tingkat Lanjut 🚀</h2>
             <p>Seiring waktu, mungkin kamu ingin memblokir area tertentu. Misalnya, jika kamu menggunakan WordPress, kamu tidak mau halaman admin muncul di Google.</p>
             <h3>Versi dengan Pengecualian (Contoh WordPress)</h3>
-            <div class="code-block">
-                <div class="code-block-header">robots.txt</div>
-                <button class="copy-btn">Copy</button>
-                <pre><code class="language-bash">User-agent: *
 Disallow: /wp-admin/
 Disallow: /wp-login.php
 
-Sitemap: https://www.domainbloganda.com/sitemap.xml</code></pre>
-            </div>
             <p>Di sini, kita secara spesifik melarang robot masuk ke folder `/wp-admin/` dan file `/wp-login.php`, yang merupakan praktik keamanan dan SEO yang baik.</p>
             
             <h2>Kesalahan Fatal yang Harus Dihindari! ❌</h2>
             <p>Jangan pernah, dalam kondisi apapun, menggunakan konfigurasi ini kecuali kamu benar-benar ingin menghilang dari peredaran internet.</p>
-            <div class="code-block">
                  <div class="code-block-header">robots.txt (JANGAN DITIRU)</div>
-                <button class="copy-btn">Copy</button>
-                <pre><code class="language-bash">User-agent: *
 Disallow: /</code></pre>
-            </div>
             <blockquote>Perintah `Disallow: /` artinya: "Larang akses ke seluruh situs". Ini sama saja dengan memasang papan "TUTUP SELAMANYA" di gerbang websitemu.</blockquote>
                   </article>
                 <section class="interaction-section">
@@ -241,7 +225,6 @@ Disallow: /</code></pre>
                 <a href="#" id="share-facebook" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Facebook">👍</a>
                 <a href="#" id="share-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke WhatsApp">💬</a>
                 <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke LinkedIn">🔗</a>
-            </div>
         </section>
     </main>
 

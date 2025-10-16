@@ -59,7 +59,6 @@ document.getElementById('arrow-left').onclick = function(e) {
   if(currentIdx > 0) showLightbox(currentIdx-1);
 };
 document.getElementById('arrow-right').onclick = function(e) {
-  e.stopPropagation();
   if(currentIdx < figures.length-1) showLightbox(currentIdx+1);
 };
 document.addEventListener('keydown', function(e) {
@@ -67,8 +66,6 @@ document.addEventListener('keydown', function(e) {
 if(e.key === "ArrowLeft" && currentIdx > 0) showLightbox(currentIdx-1);
 if(e.key === "ArrowRight" && currentIdx < figures.length-1) showLightbox(currentIdx+1);
 if(e.key === "Escape") {
-  document.getElementById('lightbox').style.display = 'none';
-  document.getElementById('lightbox-img').src = '';
 }
   }
 });
@@ -84,13 +81,11 @@ function getOS() {
   return "Lainnya";
 }
 function getBrowser() {
-  let ua = navigator.userAgent;
   if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") === -1) return "Chrome";
   if (ua.indexOf("Firefox") > -1) return "Firefox";
   if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
   if (ua.indexOf("Edg") > -1) return "Edge";
   if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) return "Opera";
-  return "Lainnya";
 }
 document.getElementById('user-agent').textContent = getBrowser();
 document.getElementById('user-os').textContent = getOS();
@@ -105,9 +100,6 @@ document.getElementById('user-ip').innerHTML = `${data.city || 'Kota tidak diket
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

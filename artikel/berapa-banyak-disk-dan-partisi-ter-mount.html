@@ -81,7 +81,6 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -93,7 +92,6 @@
             <div class="col">
                 <article>
                     <h1>Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Terkadang kita hanya perlu jawaban cepat: berapa banyak disk dan partisi yang sedang aktif di sistem Linux? Cukup gunakan dua perintah andalan: <code>df</code> dan <code>mount</code>. Berikut panduannya.</p>
 
@@ -119,7 +117,6 @@ tmpfs           7.8G     0  7.8G   0% /dev/shm
                     <figure>
                         <img src="https://devconnected.com/wp-content/uploads/2019/08/hard-soft-links.png" alt="Ilustrasi hard link vs soft link di Linux">
                     </figure>
-                    
                     <h2>Filesystem Khusus: <code>tmpfs</code> & <code>devtmpfs</code></h2>
                     <p>Jangan kaget jika Anda melihat entri yang bukan partisi fisik. <code>tmpfs</code> adalah filesystem sementara yang disimpan di RAM. Ini normal dan digunakan oleh sistem untuk efisiensi.</p>
 
@@ -127,7 +124,6 @@ tmpfs           7.8G     0  7.8G   0% /dev/shm
                     <p>Jika Anda ingin melihat daftar filesystem yang aktif beserta tipe dan opsinya (seperti read-write atau read-only), gunakan perintah <code>mount</code>.</p>
                     <pre class="language-bash"><code id="code3">mount | column -t</code><button class="copy-btn" data-target="code3">Salin</button></pre>
                     <p>Perintah ini akan menampilkan daftar lengkap, termasuk tipe filesystem (misalnya `ext4`, `xfs`, `btrfs`) dan opsi mount-nya.</p>
-                    
                     <h2>Kesimpulan: <code>df</code> vs <code>mount</code></h2>
                     <ul>
                         <li>Gunakan <code>df -h</code> untuk fokus pada <strong>kapasitas dan penggunaan ruang disk</strong>.</li>
@@ -180,7 +176,6 @@ tmpfs           7.8G     0  7.8G   0% /dev/shm
             el.addEventListener('click', () => {
                 lbImg.src = el.src;
                 lb.classList.add('open');
-            });
         });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
@@ -195,13 +190,8 @@ tmpfs           7.8G     0  7.8G   0% /dev/shm
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
         });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
