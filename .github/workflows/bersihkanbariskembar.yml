@@ -1,10 +1,10 @@
-name: 🧹 Hapus Duplikat Elemen HTML (Smart + Manual PR)
+name: 🧹 Hapus Duplikat Elemen HTML (Preserve Order + Count)
 
 on:
   workflow_dispatch:
     inputs:
       target_folder:
-        description: "Folder target berisi file .html yang ingin dibersihkan"
+        description: "Folder target (misalnya: artikel)"
         required: true
         default: "artikel"
 
@@ -17,110 +17,96 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: 📦 Checkout kode
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🧽 Bersihkan elemen duplikat (toleran spasi & format)
+      - name: 🔍 Cek duplikat manual
         run: |
-          set -euo pipefail
-          TARGET_FOLDER="${{ github.event.inputs.target_folder }}"
-          echo "🧹 Membersihkan elemen duplikat di folder: $TARGET_FOLDER"
-
-          ELEMENTS=(
-            '<link rel="stylesheet" href="/ext/marquee-url.css">'
-            '<div id="iposbrowser"></div>'
-            '<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>'
-            '<section id="related-marquee-section"><div id="related-marquee-container"></div></section>'
-            '<script defer src="/ext/marquee-url.js"></script>'
-            '<script defer src="/ext/iposbrowser.js"></script>'
-          )
-
-          if [[ ! -d "$TARGET_FOLDER" ]]; then
-            echo "❌ Folder '$TARGET_FOLDER' tidak ditemukan."
-            exit 1
-          fi
-
-          find "$TARGET_FOLDER" -type f -name "*.html" | while read -r file; do
-            echo "🔧 Memproses: $file"
-            TMP_FILE="${file}.tmp"
-            cp "$file" "$TMP_FILE"
-            dos2unix "$TMP_FILE" 2>/dev/null || true
-
-            for element in "${ELEMENTS[@]}"; do
-              # Hilangkan spasi berlebih & normalisasi
-              pattern=$(echo "$element" | tr -d '\n' | sed 's/[[:space:]]\+/ /g')
-              COUNT=$(grep -E -o "$(echo "$pattern" | sed 's/[\"\/]/\\&/g')" "$TMP_FILE" | wc -l || true)
-              if (( COUNT > 1 )); then
-                echo "⚠️  Ditemukan $COUNT duplikat untuk elemen:"
-                echo "    $element"
-
-                # Hapus semua kemunculan lalu tambahkan 1 kembali
-                sed -i "/$(echo "$pattern" | sed 's/[\"\/]/\\&/g')/d" "$TMP_FILE"
-                echo "$element" >> "$TMP_FILE"
+          find ${{ github.event.inputs.target_folder }} -type f -name "*.html" | while read -r file; do
+            echo "🔍 Memeriksa: $file"
+            for pattern in \
+              '<link rel="stylesheet" href="/ext/marquee-url.css">' \
+              '<div id="iposbrowser"></div>' \
+              '<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>' \
+              '<section id="related-marquee-section"><div id="related-marquee-container"></div></section>' \
+              '<script defer src="/ext/marquee-url.js"></script>' \
+              '<script defer src="/ext/iposbrowser.js"></script>'
+            do
+              count=$(grep -F "$pattern" "$file" | wc -l)
+              if [ "$count" -gt 1 ]; then
+                echo "⚠️  Duplikat ditemukan ($count×): $pattern"
               fi
             done
-
-            # Rapikan file hasil
-            sort -u "$TMP_FILE" | uniq > "${TMP_FILE}.clean"
-            if ! cmp -s "$file" "${TMP_FILE}.clean"; then
-              mv "${TMP_FILE}.clean" "$file"
-              echo "✅ Perubahan diterapkan pada $file"
-            else
-              rm -f "$TMP_FILE" "${TMP_FILE}.clean"
-              echo "✅ Tidak ada duplikat pada $file"
-            fi
-            echo "----------------------------------"
           done
 
-      - name: 🔎 Cek duplikat manual
+      - name: 🧹 Hapus duplikat tapi pertahankan urutan pertama
         run: |
-          TARGET="${{ github.event.inputs.target_folder }}"
-          echo "🔍 Menampilkan jumlah elemen duplikat tersisa di folder: $TARGET"
-          find "$TARGET" -type f -name "*.html" | while read -r file; do
-            echo "📄 $file"
-            echo -n "   <div id=\"iposbrowser\"></div> : "
-            grep -F '<div id="iposbrowser"></div>' "$file" | wc -l
-            echo -n "   <script defer src=\"/ext/iposbrowser.js\"></script> : "
-            grep -F '<script defer src="/ext/iposbrowser.js"></script>' "$file" | wc -l
+          total_removed=0
+          find ${{ github.event.inputs.target_folder }} -type f -name "*.html" | while read -r file; do
+            tmpfile=$(mktemp)
+            echo "🧽 Membersihkan $file"
+            removed=0
+            awk '
+              BEGIN {
+                patterns[1] = "<link rel=\"stylesheet\" href=\"/ext/marquee-url.css\">"
+                patterns[2] = "<div id=\"iposbrowser\"></div>"
+                patterns[3] = "<div class=\"search-floating-container\"><input type=\"text\" id=\"floatingSearchInput\"></div>"
+                patterns[4] = "<section id=\"related-marquee-section\"><div id=\"related-marquee-container\"></div></section>"
+                patterns[5] = "<script defer src=\"/ext/marquee-url.js\"></script>"
+                patterns[6] = "<script defer src=\"/ext/iposbrowser.js\"></script>"
+              }
+              {
+                keep=1
+                for (i in patterns) {
+                  if (index($0, patterns[i]) > 0) {
+                    if (seen[i] == 1) {
+                      keep=0
+                      removed[i]++
+                      break
+                    } else {
+                      seen[i]=1
+                    }
+                  }
+                }
+                if (keep==1) print $0
+              }
+              END {
+                total=0
+                for (i in removed) total += removed[i]
+                if (total > 0)
+                  printf("🗑️  %d duplikat dihapus dari file ini.\n", total)
+              }
+            ' "$file" > "$tmpfile" && mv "$tmpfile" "$file"
           done
 
-      - name: 💾 Commit perubahan jika ada
+      - name: 🧾 Cek apakah ada perubahan
         run: |
-          set +e
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add ${{ github.event.inputs.target_folder }}/**/*.html || true
-          git diff --cached --quiet
-          if [[ $? -ne 0 ]]; then
-            echo "🔄 Menyimpan perubahan..."
-            git commit -m "🧹 Bersihkan duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
-            git push
-            echo "NO_CHANGES=false" >> $GITHUB_ENV
-          else
-            echo "✅ Tidak ada perubahan ditemukan."
+          if git diff --quiet; then
+            echo "✅ Tidak ada duplikat yang dihapus."
             echo "NO_CHANGES=true" >> $GITHUB_ENV
+          else
+            echo "✅ Perubahan terdeteksi, siap untuk commit."
+            echo "NO_CHANGES=false" >> $GITHUB_ENV
           fi
-          set -e
 
-      - name: 🚀 Buat Pull Request otomatis
+      - name: 🧩 Commit dan buat PR otomatis
         if: env.NO_CHANGES != 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          title: "🧹 Bersihkan Duplikat Elemen HTML di folder ${{ github.event.inputs.target_folder }}"
+          commit-message: "🧹 Hapus duplikat elemen HTML (preserve order + count)"
+          title: "🧹 Bersihkan duplikat elemen HTML (Preserve Order + Count)"
           body: |
-            Workflow ini otomatis membersihkan file **${{ github.event.inputs.target_folder }}/*.html**
-            dari elemen-elemen duplikat berikut (toleran format & spasi):
+            Workflow otomatis ini menghapus duplikat elemen HTML namun mempertahankan posisi asli elemen pertama.
 
+            Elemen yang dicek:
             - `<link rel="stylesheet" href="/ext/marquee-url.css">`
             - `<div id="iposbrowser"></div>`
-            - `<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>`
-            - `<section id="related-marquee-section"><div id="related-marquee-container"></div></section>`
+            - `<div class="search-floating-container">…</div>`
+            - `<section id="related-marquee-section">…</section>`
             - `<script defer src="/ext/marquee-url.js"></script>`
             - `<script defer src="/ext/iposbrowser.js"></script>`
 
-            PR ini dibuat otomatis tanpa branch baru.
+            Setiap file yang dibersihkan akan menampilkan jumlah duplikat yang dihapus di log workflow.
+          base: main
