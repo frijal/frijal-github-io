@@ -6,7 +6,7 @@
 <title>Panduan FFmpeg Lengkap: Audio & Video Interaktif</title>
 <meta name="description" content="Panduan FFmpeg lengkap dengan contoh perintah audio/video, batch convert, trim, resize, extract, merge, overlay, watermark, compress, tips, diagram visual interaktif, dan tombol salin kode." />
     <meta name="keywords" content="FFmpeg, audio, video, command line, tutorial, mp3, ogg, konversi, trim, CLI, resize, normalize" />
-    <link rel="canonical" href="https://frijal.github.io/artikel/ffmpeg-panduan-interaktif.html" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.html" />
     <meta name="date" content="2025-09-27" />
     <meta name="robots" content="index, follow" />
     
@@ -15,15 +15,15 @@
     <meta property="og:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
     <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://frijal.github.io/artikel/ffmpeg-panduan-interaktif.html" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.html" />
     <meta property="og:site_name" content="Frijal Command Line Guides" />
-    <meta property="og:image" content="https://frijal.github.io/artikel/ffmpeg-panduan-interaktif.jpg" />
+    <meta property="og:image" content="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.jpg" />
     <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
     
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
     <meta name="twitter:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi dan penjelasan parameter." />
-    <meta name="twitter:image" content="https://frijal.github.io/artikel/ffmpeg-panduan-interaktif.jpg" />
+    <meta name="twitter:image" content="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.jpg" />
     <meta name="twitter:site" content="@frijal" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <script src="https://cdn.tailwindcss.com"></script>
@@ -37,12 +37,14 @@ body { font-family: Inter, sans-serif; }
 .diagram-step { text-align: center; font-family: monospace; font-size: 0.875rem; margin: 0.5rem; }
 .diagram-arrow { font-size: 2rem; color: #3b82f6; margin: 0 1rem; }
 </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 
 <body class="bg-gray-50 text-gray-800">
 <div class="flex flex-col md:flex-row min-h-screen">
   <aside class="w-full md:w-1/4 lg:w-1/5 bg-white border-r border-gray-200 p-4 md:p-6 md:fixed md:h-full">
     <h1 class="text-xl font-bold text-gray-900 mb-6">Panduan FFmpeg</h1>
+<div id="iposbrowser"></div>
     <nav id="navigation" class="space-y-4">
       <div>
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Audio</h2>
@@ -436,6 +438,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   else loadContent("");
 });
 </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

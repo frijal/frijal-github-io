@@ -7,14 +7,14 @@
 
   <!-- SEO dasar -->
   <meta name="description" content="Apakah main branch yang tidak protected berarti semua orang bisa mengubah atau menghapus isi repo? Jawaban singkat: tidak. Penjelasan lengkap tentang hak akses, branch protection, dan best practice.">
-  <link rel="canonical" href="https://frijal.github.io/artikel/main-branch-unprotected.html">
-  <link rel="icon" href="https://frijal.github.io/favicon.png" type="image/png">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/main-branch-unprotected.html">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Apakah main branch yang tidak protected itu berbahaya?">
   <meta property="og:description" content="Jawaban ringkas: tidak. Pelajari siapa yang bisa push, apa arti branch protection, dan cara mengamankan alur kerja.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://frijal.github.io/artikel/main-branch-unprotected.html">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/main-branch-unprotected.html">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
   <meta property="og:site_name" content="Frijal Articles">
   <meta property="article:section" content="Git & GitHub">
@@ -38,12 +38,12 @@
     "publisher": {
       "@type": "Organization",
       "name": "Frijal",
-      "logo": { "@type": "ImageObject", "url": "https://frijal.github.io/logo.png" }
+      "logo": { "@type": "ImageObject", "url": "https://frijal.pages.dev/logo.png" }
     },
     "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg",
     "datePublished": "2025-09-24T14:11:00+08:00",
     "dateModified": "2025-09-24T14:11:00+08:00",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.github.io/artikel/main-branch-unprotected.html" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/main-branch-unprotected.html" }
   }
   </script>
 
@@ -115,11 +115,13 @@
   </style>
 
   <link rel="stylesheet" href="/ext/related.css">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
    <div class="wrap">
     <header class="hero">
       <h1>Apakah “main branch isn’t protected” itu berbahaya?</h1>
+<div id="iposbrowser"></div>
       <p>Jawaban santai tapi lengkap tentang keamanan repo dan branch protection.</p>
       <div class="meta">
         <span>Topik: Git & GitHub</span>
@@ -220,7 +222,7 @@
     </main>
 
     <footer>
-      © 2025 Frijal — Artikel: Branch protection GitHub • Terakhir diperbarui hari ini.
+      🄯 2025 Frijal — Artikel: Branch protection GitHub • Terakhir diperbarui hari ini.
     </footer>
   </div>
 
@@ -294,5 +296,8 @@
       catch{ prompt('Copy link secara manual:', url); }
     });
    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
