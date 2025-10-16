@@ -81,6 +81,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -92,6 +93,7 @@
             <div class="col">
                 <article>
                     <h1>Melihat Berapa Banyak Disk dan Partisi yang Ter-mount di Linux</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Terkadang kita hanya perlu jawaban cepat: berapa banyak disk dan partisi yang sedang aktif di sistem Linux? Cukup gunakan dua perintah andalan: <code>df</code> dan <code>mount</code>. Berikut panduannya.</p>
 
@@ -198,5 +200,8 @@ tmpfs           7.8G     0  7.8G   0% /dev/shm
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

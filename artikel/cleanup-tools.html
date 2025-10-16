@@ -90,11 +90,13 @@
   }
 </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
 <main>
   <h1>🪄 Petunjuk Penggunaan Cleanup Tools</h1>
+<div id="iposbrowser"></div>
 
 
   <p>Halaman ini menjelaskan cara otomatis membersihkan <strong>paket Node.js</strong> yang sudah tidak terpakai di repositori GitHub Pages kamu. Tools ini cocok digunakan baik secara lokal maupun di GitHub Actions (non-interaktif penuh).</p>
@@ -179,5 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

@@ -119,11 +119,13 @@ a:hover {text-decoration: underline;}
 
 
 <meta itemprop="image" content="https://frijal.pages.dev/img/xsolve-WiFi-Realtek-di-Linux-yang-sinyal-lemah.webp">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
 <div class="container">
   <h1>Fix WiFi Realtek di Linux (Sinyal Lemah)</h1>
+<div id="iposbrowser"></div>
 
 
   <p>Jika kamu menggunakan adapter WiFi Realtek di Linux dan mengalami sinyal lemah, beberapa perintah <strong>iw</strong> dan <strong>modprobe</strong> dapat membantu memperbaikinya. Pastikan kamu menjalankan perintah ini dengan hak akses <code>sudo</code>.</p>
@@ -166,5 +168,8 @@ sudo iwlist wlan0 scan</code>
 </div>
 
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

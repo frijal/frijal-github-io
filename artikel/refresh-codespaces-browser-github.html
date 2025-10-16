@@ -60,10 +60,12 @@
     th{background:#111}
   </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <main>
     <h1>Refresh GitHub Codespaces dari browser</h1>
+<div id="iposbrowser"></div>
 
     <p>Rebuild, full rebuild, restart, atau stop-start—kapan pakai yang mana. Artikel ini menjelaskan langkah-langkah di VS Code web, plus diagram alur singkat biar gampang diingat.</p>
 
@@ -117,5 +119,8 @@
     lb.addEventListener('click',()=>lb.classList.remove('open'));
   </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

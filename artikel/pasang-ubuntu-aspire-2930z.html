@@ -131,6 +131,7 @@
     footer.site{margin-top:40px; border-top: 1px solid #fce7f3; background: #fffafc;}
   </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <header class="site">
@@ -148,6 +149,7 @@
   <main class="wrap">
     <article class="card" id="konten" role="main">
       <h1>Dari Live Session sampai Install: Ubuntu 9.10 di Acer Aspire 2930Z</h1>
+<div id="iposbrowser"></div>
 
       <p class="lead">
         Sebuah cerita dari tahun 2010. Tetangga membawa laptop Acer Aspire 2930Z dan meminta dipasangi Ubuntu. Momen ini menjadi kesempatan untuk "test drive" Kubuntu vs Ubuntu, membersihkan OS bajakan, dan membagikan sisa stok CD Ship-It yang legendaris.
@@ -234,5 +236,8 @@
     setHref('.li', `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`);
   </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

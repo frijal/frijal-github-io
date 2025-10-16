@@ -86,6 +86,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -97,6 +98,7 @@
             <div class="col">
                 <article>
                     <h1>Ngoprek Conky: Konfigurasi Bahasa Indonesia & Autostart</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Conky adalah system monitor ringan untuk desktop Linux yang menampilkan berbagai statistik langsung di layar Anda. Panduan ini akan memandu Anda mulai dari instalasi, membuat skrip awal, hingga mengatur autostart dengan konfigurasi berbahasa Indonesia.</p>
 
@@ -254,5 +256,8 @@ IP Lokal: ${addr wlan0}
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

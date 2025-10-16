@@ -68,6 +68,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -79,6 +80,7 @@
             <div class="col">
                 <article>
                     <h1>Apa Itu AUR? Penjelasan Santai Arch User Repository</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">AUR (Arch User Repository) adalah salah satu fitur paling keren dan unik dari Arch Linux. Singkatnya, AUR adalah repositori atau gudang paket yang dikelola oleh komunitas pengguna.</p>
 
@@ -172,5 +174,8 @@ yay -S nama-paket-dari-aur</code><button class="copy-btn" data-target="code1">Sa
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

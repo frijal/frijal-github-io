@@ -82,6 +82,7 @@
         footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -93,6 +94,7 @@
             <div class="col">
                 <article>
                     <h1>Fedora: Pasang Codec Tambahan Agar Bisa Bernyanyi</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Secara bawaan, Fedora hanya mendukung format media bebas paten seperti OGG. Agar bisa memutar MP3, MP4, MKV, dan lainnya, Anda perlu memasang paket codec tambahan.</p>
 
@@ -183,5 +185,8 @@ sudo dnf groupupdate sound-and-video</code><button class="copy-btn" data-target=
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

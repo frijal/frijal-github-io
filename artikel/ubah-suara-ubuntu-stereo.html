@@ -83,6 +83,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -94,6 +95,7 @@
             <div class="col">
                 <article>
                     <h1>Ubah Suara Sistem Ubuntu dengan Audio Buatan Sendiri</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Bosan dengan suara notifikasi bawaan Ubuntu? Anda bisa menggantinya dengan file audio Anda sendiri. Prosesnya mudah dan hanya memerlukan beberapa langkah di terminal.</p>
 
@@ -201,5 +203,8 @@ sudo cp /usr/share/sounds/Yaru/stereo/*.oga ~/backup-sounds/stereo/</code><butto
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

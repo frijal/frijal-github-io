@@ -78,6 +78,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -89,6 +90,7 @@
             <div class="col">
                 <article>
                     <h1>Ubuntu 25.10 Beta Dirilis dengan Kernel 6.17 dan GNOME 49</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Canonical telah merilis Ubuntu 25.10 "Questing Quokka" Beta. Edisi ini menandai langkah berani dengan menjadikan Wayland sebagai satu-satunya sesi desktop, memodernisasi aplikasi bawaan, dan memperkuat lapisan keamanan dengan enkripsi berbasis TPM.</p>
 
@@ -176,5 +178,8 @@
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

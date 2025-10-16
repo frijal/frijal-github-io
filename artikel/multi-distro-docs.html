@@ -91,6 +91,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -102,6 +103,7 @@
             <div class="col">
                 <article>
                     <h1>Manajemen Dokumen di Lingkungan Multi-Distro</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Bagi Anda yang hobi memasang banyak distro Linux dalam satu komputer (multi-boot), seringkali muncul masalah duplikasi dokumen. Solusinya adalah dengan membuat partisi data terpusat dan menggunakan symbolic link.</p>
 
@@ -207,5 +209,8 @@ ln -s /media/data/Documents ~/Documents</code><button class="copy-btn" data-targ
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

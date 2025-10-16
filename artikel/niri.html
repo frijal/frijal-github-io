@@ -123,6 +123,7 @@
         }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <header class="site">
@@ -134,6 +135,7 @@
     <main class="wrap">
         <article class="card" id="konten">
             <h1>Window Manager Wayland Dinamis & Stabil</h1>
+<div id="iposbrowser"></div>
 
             <p class="lead">
                 <strong>Niri</strong> adalah window manager modern untuk Wayland, dirancang sepenuhnya dengan konsep <em>scrollable tiling</em>. Tidak seperti tiling WM lain, setiap jendela di Niri tersusun dalam kolom pada strip tak terbatas ke arah kanan.
@@ -197,5 +199,8 @@
         setHref('.tg', `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

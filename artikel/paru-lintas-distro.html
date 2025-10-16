@@ -251,11 +251,13 @@
     </style>
   <meta itemprop="image" content="https://frijal.pages.dev/img/paru-lintas-distro.webp">
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
   <body>
     
     <header>
       <h1><i class="fas fa-satellite-dish"></i> Paru Bisa Dipakai di Mana Saja? Tentu Saja!</h1>
+<div id="iposbrowser"></div>
 
     </header>
     <div class="container">
@@ -405,5 +407,8 @@
       });
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
   </body>
 </html>

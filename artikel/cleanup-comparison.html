@@ -116,11 +116,13 @@ img.lazy.loaded { filter: blur(0); }
   <meta itemprop="image" content="https://frijal.pages.dev/img/cleanup-comparison.webp">
 
     <meta property="article:published_time" content="2025-10-09T00:31:25.605+00:00">
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
 <article>
 <h1>🧩 Perbandingan cleanup.js vs cleanup-auto.js</h1>
+<div id="iposbrowser"></div>
 
 
 <p>Dalam proyek <strong>Node.js</strong> di GitHub Pages, menjaga dependensi tetap bersih sangat penting. 
@@ -248,5 +250,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 </script>
 
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

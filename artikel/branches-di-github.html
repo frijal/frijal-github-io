@@ -89,6 +89,7 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -100,6 +101,7 @@
             <div class="col">
                 <article>
                     <h1>Branches di GitHub: Penjelasan Santai, Lengkap, dan Praktis</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead"><strong>Branch</strong> (cabang) adalah jalur pengembangan terpisah di dalam sebuah repositori Git. Ibaratnya, Anda punya pohon kode: batang utamanya adalah branch `main`, dan Anda bisa membuat cabang baru untuk mengerjakan fitur atau memperbaiki bug tanpa mengganggu batang utama.</p>
 
@@ -209,5 +211,8 @@
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

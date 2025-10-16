@@ -141,10 +141,12 @@
     }
   </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <header>
   <h1>Apa Itu <code>rel="noreferrer"</code> dalam HTML?</h1>
+<div id="iposbrowser"></div>
 
   <p>Penjelasan detail tentang arti, fungsi, perbedaan dengan <code>noopener</code>, kapan dipakai, dan dampaknya.</p>
 </header>
@@ -272,5 +274,8 @@ lightbox.onclick=(e)=>{if(e.target===lightbox)lightbox.style.display='none';};
 
 </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

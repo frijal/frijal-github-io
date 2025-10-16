@@ -88,6 +88,7 @@
         footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -102,6 +103,7 @@
             <div class="col">
                 <article>
                     <h1>Memilih Distribusi Linux yang Tepat</h1>
+<div id="iposbrowser"></div>
 
                     <p class="lead">Kernel Linux bersifat bebas, sehingga banyak komunitas dan perusahaan menciptakan "distro" versi mereka sendiri. Setiap distro memiliki tujuan dan ciri khas, mulai dari untuk server, desktop harian, hingga perangkat ringan seperti router.</p>
 
@@ -193,5 +195,8 @@
     })();
     </script>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

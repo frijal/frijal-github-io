@@ -87,10 +87,12 @@ ul { margin: 1rem 0; padding-left: 1.5rem; }
 footer { text-align: center; margin-top: 3rem; font-size: 0.9rem; opacity: 0.7; }
 </style>
 
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <main>
   <h1>🧹 Cleanup Interaktif Paket Node.js untuk GitHub Pages</h1>
+<div id="iposbrowser"></div>
 
 
   <p>
@@ -232,5 +234,8 @@ import fs from "node:fs";
 </main>
 
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
