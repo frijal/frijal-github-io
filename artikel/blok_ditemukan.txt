@@ -1,3 +1,6 @@
+========================================================
+Ditemukan di: sabar-menghadapi-ghibah.html
+========================================================
 // IP & Location Info
 fetch('https://ipapi.co/json/')
 .then(response => response.json())
@@ -83,3 +86,4 @@ document.getElementById('os-info').textContent = `${osName} ${osVersion}`;
 document.getElementById('os-icon').innerHTML = osIconSvg;
 document.getElementById('browser-info').textContent = `${browserName} ${browserVersion}`;
 document.getElementById('browser-icon').innerHTML = browserIconSvg;
+
