@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pembersihan Otomatis Dependencies (Non-Interaktif)</title>
 <meta name="description" content="Panduan lengkap menjalankan pembersihan otomatis dependencies dan reinstall Node.js package secara non-interaktif di proyek GitHub Pages menggunakan workflow atau terminal.">
-<link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
-<link rel="canonical" href="https://frijal.github.io/artikel/cleanup-auto.html">
+<link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+<link rel="canonical" href="https://frijal.pages.dev/artikel/cleanup-auto.html">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
 <meta property="og:description" content="Cara otomatis membersihkan dependencies yang tidak digunakan dan melakukan reinstall di proyek GitHub Pages.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://frijal.github.io/artikel/cleanup-auto.html">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/cleanup-auto.html">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -114,10 +114,12 @@ code[class*="language-"], pre[class*="language-"] {
   margin-top: 2rem;
 }
 </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <main>
   <h1>🧹 Pembersihan Otomatis Dependencies (Non-Interaktif)</h1>
+<div id="iposbrowser"></div>
 
   <p>
     Kadang kita ingin proyek Node.js di GitHub Pages tetap bersih tanpa perlu konfirmasi manual saat melakukan pembersihan <em>dependencies</em> yang tidak terpakai.  
@@ -217,16 +219,19 @@ jobs:
   </p>
 
   <div class="share">
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/cleanup-auto.html&amp;text=Pembersihan%20Otomatis%20Dependencies%20Node.js%20di%20GitHub%20Pages" target="_blank">
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cleanup-auto.html&amp;text=Pembersihan%20Otomatis%20Dependencies%20Node.js%20di%20GitHub%20Pages" target="_blank">
       <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter">
     </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/cleanup-auto.html" target="_blank">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
       <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
     </a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://frijal.github.io/artikel/cleanup-auto.html" target="_blank">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
       <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
     </a>
   </div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

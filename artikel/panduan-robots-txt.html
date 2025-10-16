@@ -9,14 +9,14 @@
     <meta name="description" content="Bingung cara membuat file robots.txt yang benar agar blog dikenali Google? Pelajari contoh, sintaks, dan kesalahan umum dalam panduan santai dan lengkap ini.">
     <meta name="keywords" content="robots.txt, seo, googlebot, sitemap, panduan seo, tutorial blog, frijal, pemula">
     <meta name="author" content="Frijal">
-    <link rel="canonical" href="https://frijal.github.io/artikel/panduan-robots-txt.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/panduan-robots-txt.html">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
 
     <!-- Open Graph Metadata -->
     <meta property="og:title" content="Panduan Lengkap robots.txt untuk SEO: Dari Pemula hingga Mahir">
     <meta property="og:description" content="Pelajari cara membuat file robots.txt yang benar agar blog dikenali Google. Lengkap dengan contoh, penjelasan, dan tips untuk pemula.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/panduan-robots-txt.html">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/panduan-robots-txt.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQHqOUt1g5wam4v8EVGW93C7Hr_XDCp305phr2WUKomkd5KQsr8GN9VaGZa-mPXmeWWntAyBcFAp3z9DIKJa4L_sJZS6HYn8Yx4yKx-2bMLmBlRkdRxoIzH8jvnz8aDwUiOstE-dGiU8S_Ay5AtkG1WJLkpaAZgIKesTHnm0JtsRCPy8dCaNFclvQCICk/s1600/robotstxtx.png"> <!-- Ganti dengan URL gambar cover Anda -->
     <meta property="og:site_name" content="Frijal's Blog">
 
@@ -166,6 +166,7 @@
             .floating-btn{width:44px;height:44px;right:15px}
         }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 
@@ -175,6 +176,7 @@
     <main class="container">
         <header>
             <h1>Panduan robots.txt untuk SEO</h1>
+<div id="iposbrowser"></div>
             <div class="meta-info">
                 <span>Ditulis oleh Frijal</span> | <span>Diperbarui: 3 Oktober 2025</span>
             </div>
@@ -265,6 +267,9 @@ Disallow: /</code></pre>
         const pageUrl=encodeURIComponent(window.location.href),pageTitle=encodeURIComponent(document.title);document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;document.getElementById('share-facebook').href=`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;document.getElementById('share-whatsapp').href=`https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;document.getElementById('share-linkedin').href=`https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
           });
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

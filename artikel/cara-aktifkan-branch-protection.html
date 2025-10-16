@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Cara Mengaktifkan Branch Protection di GitHub</title>
     <meta name="description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar semua perubahan wajib melalui Pull Request (PR) dan tidak bisa langsung di-push ke branch utama.">
-    <link rel="canonical" href="https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/cara-aktifkan-branch-protection.html">
 
     <!-- Favicon & Theme -->
-    <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#1e293b">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Cara Mengaktifkan Branch Protection di GitHub">
     <meta property="og:description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib melalui Pull Request.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://frijal.github.io/artikel/cara-aktifkan-branch-protection.html">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/cara-aktifkan-branch-protection.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
 
     <!-- Twitter Card -->
@@ -82,6 +82,7 @@
         .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -93,6 +94,7 @@
             <div class="col">
                 <article>
                     <h1>Cara Mengaktifkan Branch Protection di GitHub</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">Panduan ini akan menunjukkan cara mengaktifkan <strong>branch protection</strong> di GitHub. Fitur ini sangat penting untuk memastikan semua perubahan pada branch utama (seperti <code>main</code> atau <code>master</code>) melalui proses review via <strong>Pull Request (PR)</strong>.</p>
 
                     <div class="share-bar">
@@ -104,11 +106,11 @@
                     
                     <h2>1. Masuk ke Pengaturan Repositori</h2>
                     <p>Buka repositori Anda di GitHub, lalu klik tab <strong>Settings</strong>.</p>
-                    <figure><img src="https://frijal.github.io/artikel/repo-settings-tab.png" alt="Akses Settings"></figure>
+                    <figure><img src="https://frijal.pages.dev/artikel/repo-settings-tab.png" alt="Akses Settings"></figure>
                     
                     <h2>2. Pilih Menu Branches</h2>
                     <p>Di menu navigasi sebelah kiri, pilih <strong>Branches</strong>. Kemudian, klik tombol <strong>Add branch protection rule</strong>.</p>
-                    <figure><img src="https://frijal.github.io/artikel/repo-settings-branches.png" alt="Menu Branches"></figure>
+                    <figure><img src="https://frijal.pages.dev/artikel/repo-settings-branches.png" alt="Menu Branches"></figure>
                     
                     <h2>3. Tentukan Branch yang Akan Dilindungi</h2>
                     <p>Pada kolom <code>Branch name pattern</code>, ketik nama branch yang ingin Anda lindungi, misalnya <code>main</code>. Anda juga bisa menggunakan wildcard seperti <code>release/*</code> untuk melindungi semua branch yang diawali dengan "release/".</p>
@@ -120,7 +122,7 @@
                         <li><strong>Require status checks to pass before merging:</strong> Berguna jika Anda memiliki workflow CI/CD. PR tidak bisa di-merge jika ada tes yang gagal.</li>
                         <li><strong>Include administrators:</strong> Menerapkan aturan ini bahkan untuk admin repositori.</li>
                     </ul>
-                    <figure><img src="https://frijal.github.io/artikel/repo-settings-branches-pr-rule.png" alt="Aktifkan aturan Pull Request"></figure>
+                    <figure><img src="https://frijal.pages.dev/artikel/repo-settings-branches-pr-rule.png" alt="Aktifkan aturan Pull Request"></figure>
 
                     <h2>5. Simpan Aturan</h2>
                     <p>Klik tombol <strong>Create</strong> atau <strong>Save changes</strong> di bagian bawah halaman. Setelah ini, setiap upaya untuk melakukan `push` langsung ke branch `main` akan diblokir, dan semua perubahan harus diajukan melalui Pull Request.</p>
@@ -129,7 +131,7 @@
         </main>
 
         <footer class="site">
-            <small>© 2025 Frijal · Menjaga kualitas kode bersama.</small>
+            <small>🄯 2025 Frijal · Menjaga kualitas kode bersama.</small>
         </footer>
     </div>
     
@@ -183,6 +185,9 @@
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

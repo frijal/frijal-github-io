@@ -6,7 +6,7 @@
   <title>Apa Itu rel=noreferrer dalam HTML?</title>
   
   <!-- SEO Metadata -->
-  <link rel="canonical" href="https://frijal.github.io/artikel/noreferrer.html">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/noreferrer.html">
   <meta name="description" content="Penjelasan lengkap rel=noreferrer dalam HTML: arti, fungsi, perbedaan dengan noopener, kapan digunakan, dampaknya tanpa target=_blank, tabel keputusan cepat, dan contoh flowchart.">
   <meta name="keywords" content="HTML, rel, noreferrer, noopener, referer, keamanan, privasi, web development">
   <meta name="author" content="Fakhrul Rijal">
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Apa Itu rel='noreferrer' dalam HTML?">
   <meta property="og:description" content="Panduan lengkap rel=noreferrer: arti, fungsi, privasi, keamanan, perbedaan dengan noopener, kapan dipakai, dan dampaknya.">
-  <meta property="og:url" content="https://frijal.github.io/artikel/noreferrer.html">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/noreferrer.html">
   <meta property="og:type" content="article">
 
 
@@ -25,7 +25,7 @@
 
 
   <!-- Favicon -->
-  <link rel="icon" href="https://frijal.github.io/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
 
   <style>
     body {
@@ -140,10 +140,12 @@
       color: #555;
     }
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <header>
   <h1>Apa Itu <code>rel="noreferrer"</code> dalam HTML?</h1>
+<div id="iposbrowser"></div>
   <p>Penjelasan detail tentang arti, fungsi, perbedaan dengan <code>noopener</code>, kapan dipakai, dan dampaknya.</p>
 </header>
 
@@ -241,9 +243,9 @@
 
   <h2>8. Bagikan Artikel Ini</h2>
   <div class="share">
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/noreferrer.html" target="_blank">Facebook</a>
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/noreferrer.html" target="_blank">Twitter</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.github.io/artikel/noreferrer.html" target="_blank">LinkedIn</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/noreferrer.html" target="_blank">Facebook</a>
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/noreferrer.html" target="_blank">Twitter</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.pages.dev/artikel/noreferrer.html" target="_blank">LinkedIn</a>
   </div>
 
 </main>
@@ -269,6 +271,9 @@ document.querySelector('.next').onclick=()=>showLightbox((current+1)%gallery.len
 lightbox.onclick=(e)=>{if(e.target===lightbox)lightbox.style.display='none';};
 
 </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

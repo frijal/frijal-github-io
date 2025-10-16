@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cleanup Interaktif Paket Node.js untuk GitHub Pages</title>
 <meta name="description" content="Panduan lengkap untuk membersihkan paket Node.js yang tidak terpakai di proyek GitHub Pages menggunakan skrip interaktif berbasis depcheck dan inquirer.">
-<link rel="icon" href="https://frijal.github.io/favicon.ico">
-<link rel="canonical" href="https://frijal.github.io/artikel/cleanup.html">
+<link rel="icon" href="https://frijal.pages.dev/favicon.ico">
+<link rel="canonical" href="https://frijal.pages.dev/artikel/cleanup.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cleanup Interaktif Paket Node.js untuk GitHub Pages">
 <meta property="og:description" content="Skrip interaktif Node.js untuk membersihkan dependensi tak terpakai di GitHub Pages dengan pilihan paket dan reinstall otomatis.">
-<meta property="og:url" content="https://frijal.github.io/artikel/cleanup.html">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/cleanup.html">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -86,10 +86,12 @@ ul { margin: 1rem 0; padding-left: 1.5rem; }
 .share a { margin: 0 0.5rem; font-size: 1.6rem; text-decoration: none; }
 footer { text-align: center; margin-top: 3rem; font-size: 0.9rem; opacity: 0.7; }
 </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
 <main>
   <h1>🧹 Cleanup Interaktif Paket Node.js untuk GitHub Pages</h1>
+<div id="iposbrowser"></div>
 
   <p>
     Seiring waktu, proyek berbasis <strong>GitHub Pages</strong> yang menggunakan <code>Node.js</code>
@@ -219,16 +221,19 @@ import fs from "node:fs";
   </p>
 
   <div class="share">
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.github.io/artikel/cleanup.html" target="_blank" aria-label="Facebook">📘</a>
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.github.io/artikel/cleanup.html&text=Cleanup%20Interaktif%20Node.js" target="_blank" aria-label="Twitter">🐦</a>
-    <a href="https://api.whatsapp.com/send?text=Cleanup%20Interaktif%20Node.js%20https://frijal.github.io/artikel/cleanup.html" target="_blank" aria-label="WhatsApp">💬</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.github.io/artikel/cleanup.html" target="_blank" aria-label="LinkedIn">💼</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cleanup.html" target="_blank" aria-label="Facebook">📘</a>
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cleanup.html&text=Cleanup%20Interaktif%20Node.js" target="_blank" aria-label="Twitter">🐦</a>
+    <a href="https://api.whatsapp.com/send?text=Cleanup%20Interaktif%20Node.js%20https://frijal.pages.dev/artikel/cleanup.html" target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.pages.dev/artikel/cleanup.html" target="_blank" aria-label="LinkedIn">💼</a>
   </div>
 
 
-  <footer>© 2025 frijal.github.io · Cleanup Interaktif Node.js</footer>
+  <footer>🄯 2025 frijal.github.io · Cleanup Interaktif Node.js</footer>
 </main>
 
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 

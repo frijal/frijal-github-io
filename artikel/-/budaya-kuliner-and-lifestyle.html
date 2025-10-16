@@ -1,261 +1,196 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Budaya, Kuliner & Lifestyle</title>
-    <meta
-      name="description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Budaya, Kuliner & Lifestyle."
-    />
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/budaya-kuliner-and-lifestyle.html" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏞</text></svg>"
-    />
-
-    <meta property="og:title" content="Budaya, Kuliner & Lifestyle" />
-    <meta
-      property="og:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Budaya, Kuliner & Lifestyle."
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
-    />
-    <meta property="og:image:alt" content="Budaya, Kuliner & Lifestyle" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/budaya-kuliner-and-lifestyle.html" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:site_name"
-      content="Jaga Data Pribadi Supaya Tetap Aman"
-    />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Budaya, Kuliner & Lifestyle" />
-    <meta
-      name="twitter:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Budaya, Kuliner & Lifestyle."
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-
-    <style>
-      :root {
-        --bg-color: #121212;
-        --surface-color: #1e1e1e;
-        --primary-text-color: #e0e0e0;
-        --secondary-text-color: #b3b3b3;
-        --accent-color: #3da9fc; /* Aksen Biru */
-        --border-color: #2c2c2c;
-        --shadow-color: rgba(61, 169, 252, 0.1);
-      }
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg-color: #f4f4f9;
-          --surface-color: #ffffff;
-          --primary-text-color: #212121;
-          --secondary-text-color: #666666;
-          --accent-color: #007bff;
-          --border-color: #e0e0e0;
-          --shadow-color: rgba(0, 123, 255, 0.15);
-        }
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        line-height: 1.7;
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-      }
-      h1 {
-        text-align: center;
-        color: var(--accent-color);
-        margin-bottom: 2.5rem;
-        font-size: 2.5rem;
-      }
-      #article-grid {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr;
-      }
-      @media (min-width: 600px) {
-        #article-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (min-width: 1024px) {
-        #article-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      .article-card {
-        background-color: var(--surface-color);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-        text-decoration: none;
-      }
-      .article-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px var(--shadow-color);
-      }
-      .card-thumbnail {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        background-color: #333;
-        overflow: hidden;
-      }
-      .card-thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .card-content {
-        padding: 1.5rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-      }
-      .card-content h2 {
-        color: var(--primary-text-color);
-        margin-bottom: 0.5rem;
-        font-size: 1.25rem;
-      }
-      .card-content p {
-        color: var(--secondary-text-color);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
-      .card-meta {
-        margin-top: auto;
-        font-size: 0.8rem;
-        color: var(--secondary-text-color);
-      }
-      #loading,
-      .message {
-        text-align: center;
-        margin-top: 3rem;
-        font-style: italic;
-        color: var(--secondary-text-color);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 id="page-title">Memuat Artikel...</h1>
-      <div id="loading"></div>
-      <div id="article-grid"></div>
-    </div>
-
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      />
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-
-    <script src="/ext/marquee-url.js"></script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const TARGET_CATEGORY = '🏞️ Budaya, Kuliner & Lifestyle';
-        const DATA_URL = '../../artikel.json';
-        const articleGrid = document.getElementById('article-grid');
-        const loadingIndicator = document.getElementById('loading');
-        const pageTitle = document.getElementById('page-title');
-
-        const fetchAndDisplayCategory = async () => {
-          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
-          pageTitle.textContent = titleText;
-
-          try {
-            const response = await fetch(
-              `${DATA_URL}?v=${new Date().getTime()}`
-            );
-            if (!response.ok) throw new Error(`Status ${response.status}`);
-
-            const allData = await response.json();
-            const articles = allData[TARGET_CATEGORY];
-
-            if (!articles || articles.length === 0) {
-              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
-              return;
-            }
-
-            let articlesHTML = '';
-            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
-
-            articles.forEach((article) => {
-              const [title, url, image, pubDate, description] = article;
-              const formattedDate = new Intl.DateTimeFormat('id-ID', {
-                dateStyle: 'long',
-              }).format(new Date(pubDate));
-
-              articlesHTML += `
-                            <a href="../${url}" class="article-card">
-                                <div class="card-thumbnail">
-                                    <img src="${image}" alt="${title}" loading="lazy">
-                                </div>
-                                <div class="card-content">
                                     <h2>${title}</h2>
+                                    <img src="${image}" alt="${title}" loading="lazy">
                                     <p>${(description || '...').substring(0, 100)}...</p>
                                     <span class="card-meta">${formattedDate}</span>
                                 </div>
+                                <div class="card-content">
+                                <div class="card-thumbnail">
                             </a>
+                            <a href="../${url}" class="article-card">
                         `;
-            });
-
-            articleGrid.innerHTML = articlesHTML;
-          } catch (error) {
-            console.error('Terjadi kesalahan:', error);
+                dateStyle: 'long',
+              `${DATA_URL}?v=${new Date().getTime()}`
+              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
+              articlesHTML += `
+              const [title, url, image, pubDate, description] = article;
+              const formattedDate = new Intl.DateTimeFormat('id-ID', {
+              return;
+              }).format(new Date(pubDate));
+            );
             articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`;
-          } finally {
+            articleGrid.innerHTML = articlesHTML;
+            articles.forEach((article) => {
+            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
+            console.error('Terjadi kesalahan:', error);
+            const allData = await response.json();
+            const articles = allData[TARGET_CATEGORY];
+            const response = await fetch(
+            if (!articles || articles.length === 0) {
+            if (!response.ok) throw new Error(`Status ${response.status}`);
+            let articlesHTML = '';
             loadingIndicator.style.display = 'none';
+            }
+            });
+          --accent-color: #007bff;
+          --bg-color: #f4f4f9;
+          --border-color: #e0e0e0;
+          --primary-text-color: #212121;
+          --secondary-text-color: #666666;
+          --shadow-color: rgba(0, 123, 255, 0.15);
+          --surface-color: #ffffff;
+          background-color 0.3s,
+          box-shadow 0.3s ease;
+          color 0.3s;
+          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
+          pageTitle.textContent = titleText;
+          transform 0.3s ease,
+          try {
           }
-        };
+          } catch (error) {
+          } finally {
+        #article-grid {
+        --accent-color: #3da9fc; /* Aksen Biru */
+        --bg-color: #121212;
+        --border-color: #2c2c2c;
+        --primary-text-color: #e0e0e0;
+        --secondary-text-color: #b3b3b3;
+        --shadow-color: rgba(61, 169, 252, 0.1);
+        --surface-color: #1e1e1e;
+        :root {
+        aspect-ratio: 16 / 9;
+        autocomplete="off"
+        background-color: #333;
+        background-color: var(--bg-color);
+        background-color: var(--surface-color);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 25px var(--shadow-color);
+        box-sizing: border-box;
+        color: var(--accent-color);
+        color: var(--primary-text-color);
+        color: var(--secondary-text-color);
+        const DATA_URL = '../../artikel.json';
+        const TARGET_CATEGORY = '🏞️ Budaya, Kuliner & Lifestyle';
+        const articleGrid = document.getElementById('article-grid');
+        const fetchAndDisplayCategory = async () => {
+        const loadingIndicator = document.getElementById('loading');
+        const pageTitle = document.getElementById('page-title');
+        display: flex;
+        display: grid;
         fetchAndDisplayCategory();
+        flex-direction: column;
+        flex-grow: 1;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.8rem;
+        font-size: 0.9rem;
+        font-size: 1.25rem;
+        font-size: 2.5rem;
+        font-style: italic;
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        height: 100%;
+        id="floatingSearchInput"
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        margin-bottom: 2.5rem;
+        margin-top: 3rem;
+        margin-top: auto;
+        margin: 0 auto;
+        margin: 0;
+        max-width: 1200px;
+        object-fit: cover;
+        overflow: hidden;
+        padding: 0;
+        padding: 1.5rem;
+        padding: 2rem 1.5rem;
+        placeholder="cari artikel..."
+        text-align: center;
+        text-decoration: none;
+        transform: translateY(-5px);
+        transition:
+        type="text"
+        width: 100%;
+        }
+        };
+      #article-grid {
+      #loading,
+      * {
+      .article-card {
+      .article-card:hover {
+      .card-content h2 {
+      .card-content p {
+      .card-content {
+      .card-meta {
+      .card-thumbnail img {
+      .card-thumbnail {
+      .container {
+      .message {
+      />
+      :root {
+      <div id="article-grid"></div>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+      <div id="loading"></div>
+      <div id="related-marquee-container"></div>
+      <h1 id="page-title">Memuat Artikel...</h1>
+      <input
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      @media (min-width: 1024px) {
+      @media (min-width: 600px) {
+      @media (prefers-color-scheme: light) {
+      body {
+      content="Jaga Data Pribadi Supaya Tetap Aman"
+      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Budaya, Kuliner & Lifestyle."
+      content="https://frijal.pages.dev/thumbnail.jpg"
+      document.addEventListener('DOMContentLoaded', () => {
+      h1 {
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏞</text></svg>"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      name="description"
+      name="twitter:description"
+      name="twitter:image"
+      property="og:description"
+      property="og:image"
+      property="og:site_name"
+      rel="icon"
+      rel="stylesheet"
+      }
       });
+    />
+    </div>
     </script>
+    </section>
+    </style>
+    <div class="container">
+    <div class="search-floating-container">
+    <link
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/budaya-kuliner-and-lifestyle.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+    <meta charset="UTF-8" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Budaya, Kuliner & Lifestyle" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image:alt" content="Budaya, Kuliner & Lifestyle" />
+    <meta property="og:title" content="Budaya, Kuliner & Lifestyle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/budaya-kuliner-and-lifestyle.html" />
+    <script src="/ext/marquee-url.js"></script>
+    <script>
+    <section id="related-marquee-section">
+    <style>
+    <title>Budaya, Kuliner & Lifestyle</title>
   </body>
+  </head>
+  <body>
+  <head>
+<!doctype html>
 </html>
+<html lang="id">

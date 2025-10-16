@@ -1,0 +1,126 @@
+name: 🧹 Hapus Duplikat Elemen HTML (Smart + Manual PR)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_folder:
+        description: "Folder target berisi file .html yang ingin dibersihkan"
+        required: true
+        default: "artikel"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  clean-duplicates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🧽 Bersihkan elemen duplikat (toleran spasi & format)
+        run: |
+          set -euo pipefail
+          TARGET_FOLDER="${{ github.event.inputs.target_folder }}"
+          echo "🧹 Membersihkan elemen duplikat di folder: $TARGET_FOLDER"
+
+          ELEMENTS=(
+            '<link rel="stylesheet" href="/ext/marquee-url.css">'
+            '<div id="iposbrowser"></div>'
+            '<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>'
+            '<section id="related-marquee-section"><div id="related-marquee-container"></div></section>'
+            '<script defer src="/ext/marquee-url.js"></script>'
+            '<script defer src="/ext/iposbrowser.js"></script>'
+          )
+
+          if [[ ! -d "$TARGET_FOLDER" ]]; then
+            echo "❌ Folder '$TARGET_FOLDER' tidak ditemukan."
+            exit 1
+          fi
+
+          find "$TARGET_FOLDER" -type f -name "*.html" | while read -r file; do
+            echo "🔧 Memproses: $file"
+            TMP_FILE="${file}.tmp"
+            cp "$file" "$TMP_FILE"
+            dos2unix "$TMP_FILE" 2>/dev/null || true
+
+            for element in "${ELEMENTS[@]}"; do
+              # Hilangkan spasi berlebih & normalisasi
+              pattern=$(echo "$element" | tr -d '\n' | sed 's/[[:space:]]\+/ /g')
+              COUNT=$(grep -E -o "$(echo "$pattern" | sed 's/[\"\/]/\\&/g')" "$TMP_FILE" | wc -l || true)
+              if (( COUNT > 1 )); then
+                echo "⚠️  Ditemukan $COUNT duplikat untuk elemen:"
+                echo "    $element"
+
+                # Hapus semua kemunculan lalu tambahkan 1 kembali
+                sed -i "/$(echo "$pattern" | sed 's/[\"\/]/\\&/g')/d" "$TMP_FILE"
+                echo "$element" >> "$TMP_FILE"
+              fi
+            done
+
+            # Rapikan file hasil
+            sort -u "$TMP_FILE" | uniq > "${TMP_FILE}.clean"
+            if ! cmp -s "$file" "${TMP_FILE}.clean"; then
+              mv "${TMP_FILE}.clean" "$file"
+              echo "✅ Perubahan diterapkan pada $file"
+            else
+              rm -f "$TMP_FILE" "${TMP_FILE}.clean"
+              echo "✅ Tidak ada duplikat pada $file"
+            fi
+            echo "----------------------------------"
+          done
+
+      - name: 🔎 Cek duplikat manual
+        run: |
+          TARGET="${{ github.event.inputs.target_folder }}"
+          echo "🔍 Menampilkan jumlah elemen duplikat tersisa di folder: $TARGET"
+          find "$TARGET" -type f -name "*.html" | while read -r file; do
+            echo "📄 $file"
+            echo -n "   <div id=\"iposbrowser\"></div> : "
+            grep -F '<div id="iposbrowser"></div>' "$file" | wc -l
+            echo -n "   <script defer src=\"/ext/iposbrowser.js\"></script> : "
+            grep -F '<script defer src="/ext/iposbrowser.js"></script>' "$file" | wc -l
+          done
+
+      - name: 💾 Commit perubahan jika ada
+        run: |
+          set +e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add ${{ github.event.inputs.target_folder }}/**/*.html || true
+          git diff --cached --quiet
+          if [[ $? -ne 0 ]]; then
+            echo "🔄 Menyimpan perubahan..."
+            git commit -m "🧹 Bersihkan duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
+            git push
+            echo "NO_CHANGES=false" >> $GITHUB_ENV
+          else
+            echo "✅ Tidak ada perubahan ditemukan."
+            echo "NO_CHANGES=true" >> $GITHUB_ENV
+          fi
+          set -e
+
+      - name: 🚀 Buat Pull Request otomatis
+        if: env.NO_CHANGES != 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          title: "🧹 Bersihkan Duplikat Elemen HTML di folder ${{ github.event.inputs.target_folder }}"
+          body: |
+            Workflow ini otomatis membersihkan file **${{ github.event.inputs.target_folder }}/*.html**
+            dari elemen-elemen duplikat berikut (toleran format & spasi):
+
+            - `<link rel="stylesheet" href="/ext/marquee-url.css">`
+            - `<div id="iposbrowser"></div>`
+            - `<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>`
+            - `<section id="related-marquee-section"><div id="related-marquee-container"></div></section>`
+            - `<script defer src="/ext/marquee-url.js"></script>`
+            - `<script defer src="/ext/iposbrowser.js"></script>`
+
+            PR ini dibuat otomatis tanpa branch baru.
