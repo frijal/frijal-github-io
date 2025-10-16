@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Kajian Lengkap Maulid Nabi: Fatwa, Perbandingan Ulama, dan Sejarah</title>
+    <meta name="description" content="Satu halaman ringkas dan lengkap tentang Maulid Nabi: ringkasan fatwa, perbandingan pandangan ulama (melarang vs membolehkan), dan sejarah perkembangan. Dilengkapi galeri, lightbox, komentar Facebook, dan fitur interaktif.">
+    <meta name="date" content="2025-09-27">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/maulid-kajian-lengkap.html">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
+    <meta name="theme-color" content="#06b6d4">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Frijal Articles">
+    <meta property="og:title" content="Kajian Lengkap Maulid Nabi: Fatwa, Perbandingan, dan Sejarah">
+    <meta property="og:description" content="Ringkasan fatwa, perbandingan ulama, dan sejarah Maulid Nabi dalam satu halaman interaktif.">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/maulid-kajian-lengkap.html">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:image" content="https://frijal.pages.dev/img/maulid-kajian-lengkap.webp">
+    <meta property="og:image:alt" content="Kajian Lengkap Maulid Nabi: Fatwa, Perbandingan Ulama, dan Sejarah">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kajian Lengkap Maulid Nabi: Fatwa, Perbandingan, dan Sejarah">
+    <meta name="twitter:description" content="Fatwa, spektrum pendapat ulama, dan perkembangan sejarah Maulid Nabi—dibahas padat, jernih, dan berimbang.">
+    <meta name="twitter:site" content="@frijal">
+    <meta name="twitter:image" content="https://frijal.pages.dev/img/maulid-kajian-lengkap.webp">
+
+    <script>
+        // Skrip Copy Button
+        document.addEventListener("click",e=>{
+            var t;
+            if(e.target.matches(".copy-btn")){
+                t=(t=e.target.closest(".codewrap").querySelector("pre"))?t.innerText:"";
+                if(navigator.clipboard && t){
+                    navigator.clipboard.writeText(t).then(()=>{
+                        let t=e.target.textContent;
+                        e.target.textContent="Copied!";
+                        setTimeout(()=>e.target.textContent=t,1200);
+                    });
+                }
+            }
+        });
+
+        // Skrip Lightbox
+        (function lightbox(){
+            let n=document.getElementById("lightbox"),
+                o=document.getElementById("lb-img"),
+                r=document.getElementById("lb-cap"),
+                t=document.getElementById("lb-close"),
+                gallery=document.querySelectorAll('.gallery figure'),
+                currentIdx=0;
+
+            function open(idx){
+                currentIdx = idx;
+                const figure = gallery[idx];
+                const link = figure.querySelector('a') || figure;
+
+                o.src = link.getAttribute('href') || link.querySelector('img').src;
+                r.textContent = figure.querySelector('figcaption')?.textContent || '';
+                n.classList.add("open");
+                document.body.style.overflow="hidden";
+            }
+            
+            function move(delta){
+                currentIdx = (currentIdx + delta + gallery.length) % gallery.length;
+                open(currentIdx);
+            }
+
+            function closeLB(){
+                n.classList.remove("open");
+                o.src="";
+                r.textContent="";
+                document.body.style.overflow="";
+            }
+            
+            gallery.forEach((fig, idx)=>{
+                fig.addEventListener("click", e=>{
+                    e.preventDefault();
+                    open(idx);
+                });
+            });
+
+            if(t) t.addEventListener("click", closeLB);
+            document.getElementById('lb-prev')?.addEventListener('click', ()=>move(-1));
+            document.getElementById('lb-next')?.addEventListener('click', ()=>move(1));
+
+            n.addEventListener("click",t=>{t.target===n&&closeLB()});
+            document.addEventListener("keydown",t=>{"Escape"===t.key&&closeLB()});
+        })();
+
+        // Skrip Share URL & FB Comments Data
+        (function shareAndFB(){
+            let url=encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || window.location.href),
+                title=encodeURIComponent("Kajian Lengkap Maulid Nabi"),
+                n=document.getElementById("share");
+
+            // Set current URL display and FB data-href
+            const currentHref = decodeURIComponent(url);
+            document.getElementById("current-url").textContent = currentHref;
+            document.getElementById("fb-comments").setAttribute("data-href", currentHref);
+
+            // Set share links
+            Object.entries({
+                ".fb":`https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                ".tw":`https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+                ".x":`https://x.com/intent/post?url=${url}&text=${title}`,
+                ".wa":`https://wa.me/?text=${title}%20${url}`,
+                ".tg":`https://t.me/share/url?url=${url}&text=${title}`,
+                ".ig":"https://www.instagram.com/",
+                ".th":"https://www.threads.net/",
+                ".tt":"https://www.tiktok.com/"
+            }).forEach(([t,e])=>{
+                const a=n.querySelector(t);
+                if(a) a.href=e;
+            });
+        })();
+        
+        // Load PrismJS scripts
+        (()=>{
+            var t=t=>{var e=document.createElement("script");e.src=t,document.head.appendChild(e)};
+            t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js");
+            t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js");
+            t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js");
+            t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js");
+        })();
+        
+        // Ensure FB XFBML.parse runs after SDK loads
+        window.fbAsyncInit = function() {
+            if (typeof FB !== 'undefined') {
+                try {FB.XFBML.parse();} catch (t) {}
+            }
+        };
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

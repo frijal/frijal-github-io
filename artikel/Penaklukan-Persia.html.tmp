@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<!-- prettier-ignore -->
+<title>Sejarah Islam Penaklukan Persia</title>
+<meta name="description" content="Kisah penaklukan Persia: dari ekspedisi awal hingga runtuhnya Sassanid, pertempuran besar, dan warisan budaya yang membentuk peradaban Islam.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="date" content="2025-09-27">
+<link rel="icon" href="/favicon.ico">
+<link id="canonical-link" rel="canonical" href="https://frijal.pages.dev/artikel/Penaklukan-Persia.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Penaklukan Persia">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/Penaklukan-Persia.html">
+<meta property="og:site_name" content="Frijal">
+<meta property="og:description" content="Kisah penaklukan Persia: dari ekspedisi awal hingga runtuhnya Sassanid, pertempuran besar, dan warisan budaya yang membentuk peradaban Islam.">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvleuZqlPcC_KsQCuhIpLX9b5-3Zz-jCEwEBMfDoyQhwyusyuCzhEhH21Y6RtmrSFRbpk7EXs549RJ8rqJ513Una9cPLwFHuVEAyrLRBdtvcG5yg1IB4vNWB1LTflX76Ie9vkkL4YE_t3QIZX0Pb_1cTGbgHlS5F4hDPxhCj_WSlP6nCuyf4QqYMG7xQs/s1600/persia.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Penaklukan Persia">
+<meta name="twitter:description" content="Kisah penaklukan Persia: dari ekspedisi awal hingga runtuhnya Sassanid, pertempuran besar, dan warisan budaya yang membentuk peradaban Islam.">
+<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvleuZqlPcC_KsQCuhIpLX9b5-3Zz-jCEwEBMfDoyQhwyusyuCzhEhH21Y6RtmrSFRbpk7EXs549RJ8rqJ513Una9cPLwFHuVEAyrLRBdtvcG5yg1IB4vNWB1LTflX76Ie9vkkL4YE_t3QIZX0Pb_1cTGbgHlS5F4hDPxhCj_WSlP6nCuyf4QqYMG7xQs/s1600/persia.jpg">
+<script>
+let map=L.map("map").setView([32,45],5),battles=(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"🄯 OpenStreetMap contributors"}).addTo(map),[{name:"Pertempuran Dzat as-Salasil (633 M)",coords:[31.9,47.1],desc:"Kemenangan awal Khalid bin al-Walid di Irak."},{name:"Pertempuran Qadisiyyah (636 M)",coords:[32,44.9],desc:"Sa’d bin Abi Waqqash mengalahkan Rustum."},{name:"Jatuhnya Mada’in (637 M)",coords:[33.1,44.6],desc:"Ibu kota Persia jatuh ke tangan Muslim."},{name:"Pertempuran Nahawand (642 M)",coords:[34.2,48.4],desc:"Dikenal sebagai Fath al-Futuh (Kemenangan Besar)."}]);battles.forEach(a=>{L.marker(a.coords).addTo(map).bindPopup(`<strong>${a.name}</strong><br>`+a.desc)})
+</script>
+<script>
+let routeCoords=battles.map(o=>o.coords),routeLine=L.polyline(routeCoords,{color:"#6dd3ff",weight:4,opacity:.7,dashArray:"10, 10"}).addTo(map),progress=0;function animateRoute(){var o;(progress+=1)>50*routeCoords.length||(o=Math.floor(progress/50),1<(o=routeCoords.slice(0,o+1)).length&&routeLine.setLatLngs(o),requestAnimationFrame(animateRoute))}animateRoute()
+</script>
+
+</div>
+
+
+
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

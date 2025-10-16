@@ -1,201 +1,171 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <!-- Basic SEO -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML</title>
-    <meta name="description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/head-vs-header.html" />
 
-    <!-- Favicon & Theme -->
-    <link rel="icon" href="https://frijal.pages.dev/assets/favicon.ico" sizes="any" />
-    <meta name="theme-color" content="#121212" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML" />
-    <meta property="og:description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/head-vs-header.html" />
-    <meta property="og:image" content="https://frijal.pages.dev/assets/html-head-header.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML" />
-    <meta name="twitter:description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
-    <meta name="twitter:image" content="https://frijal.pages.dev/assets/html-head-header.png" />
-
-    <!-- Prism.js for Syntax Highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
-
-    <style>
-        :root {
-            --bg: #0f0f12;
-            --fg: #eaeef3;
-            --muted: #a8b0bb;
-            --accent: #3aa0ff;
-            --card: #17181d;
-            --border: #262831;
-            --shadow: 0 10px 30px rgba(0,0,0,.35);
-            --maxw: 900px;
-            --lh: 1.7;
-        }
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font: 16px/var(--lh) system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        }
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        header.site {
-            padding: 24px 20px 8px;
-            border-bottom: 1px solid var(--border);
-            background: #121316;
-        }
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 28px 16px 60px;
-        }
-        .col {
-            max-width: var(--maxw);
-            width: 100%;
-        }
-        article {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            box-shadow: var(--shadow);
-            padding: 24px;
-        }
-        h1 {
-            font-size: clamp(26px, 4vw, 38px);
-            margin: 0 0 10px;
-        }
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-        .lead {
-            color: var(--muted);
-            margin-bottom: 18px;
-        }
-        pre[class*="language-"] {
-            position: relative;
-            padding: 1.25rem;
-            margin-top: 1rem;
-            border-radius: 8px;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #3a3c41;
-            border: none;
-            color: var(--fg);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        .copy-btn:hover {
-            background: var(--accent);
-        }
-        code {
-            font-family: 'Fira Code', 'Consolas', monospace;
-        }
-        footer.site {
-            padding: 20px;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-    </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-    <header class="site">
-        <h1>📘 Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML</h1>
-<div id="iposbrowser"></div>
-        <p class="lead">Sering bingung bedain <code>&lt;head&gt;</code> sama <code>&lt;header&gt;</code>? Yuk kita bahas dengan gaya santai, lengkap dengan contoh dan diagram.</p>
-    </header>
-
-    <main>
-        <div class="col">
-            <article>
-                <h2>🧩 Apa itu &lt;head&gt;?</h2>
-                <p><code>&lt;head&gt;</code> adalah bagian dokumen HTML yang berisi metadata: judul halaman, deskripsi, link CSS, favicon, script, dan lain-lain. Bagian ini tidak terlihat langsung oleh pengguna, tapi penting untuk SEO dan browser.</p>
-
-                <h2>🧩 Apa itu &lt;header&gt;?</h2>
-                <p><code>&lt;header&gt;</code> adalah bagian atas halaman (di dalam <code>&lt;body&gt;</code>) yang terlihat oleh pengguna. Biasanya berisi logo, judul, menu navigasi, atau tagline.</p>
-
-                <h2>✨ Analogi Gampang</h2>
-                <ul>
-                    <li><strong>&lt;head&gt;</strong> = "Otak" dokumen → berisi metadata, tidak terlihat.</li>
-                    <li><strong>&lt;header&gt;</strong> = "Kepala" halaman → bagian atas yang dilihat oleh pengguna.</li>
-                </ul>
-
-                <h2>📐 Diagram Struktur</h2>
-                <pre class="language-html"><code id="code-block">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;!-- Metadata seperti judul dan link CSS ada di sini --&gt;
-    &lt;title&gt;Judul Halaman&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;header&gt;
-      &lt;!-- Konten visual bagian atas seperti logo dan menu --&gt;
-      &lt;h1&gt;Selamat Datang di Situs Saya&lt;/h1&gt;
-    &lt;/header&gt;
-    &lt;main&gt;
-      &lt;!-- Isi utama halaman ada di sini --&gt;
-    &lt;/main&gt;
-    &lt;footer&gt;
-      &lt;!-- Konten bagian bawah halaman --&gt;
-    &lt;/footer&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code><button class="copy-btn">Salin</button></pre>
-            </article>
-        </div>
-    </main>
-
-    <footer class="site">
-        <small>🄯 2025 frijal.github.io · Artikel edukasi HTML5 oleh Fakhrul</small>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const copyButton = document.querySelector('.copy-btn');
-            const codeBlock = document.getElementById('code-block');
-
-            if (copyButton && codeBlock) {
-                copyButton.addEventListener('click', () => {
-                    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                            copyButton.textContent = 'Salin';
+                        console.error('Gagal menyalin teks: ', err);
                         copyButton.textContent = 'Tersalin!';
                         setTimeout(() => {
-                            copyButton.textContent = 'Salin';
                         }, 2000);
+                    <li><strong>&lt;head&gt;</strong> = "Otak" dokumen → berisi metadata, tidak terlihat.</li>
+                    <li><strong>&lt;header&gt;</strong> = "Kepala" halaman → bagian atas yang dilihat oleh pengguna.</li>
+                    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
                     }).catch(err => {
-                        console.error('Gagal menyalin teks: ', err);
                     });
+                </ul>
+                <h2>✨ Analogi Gampang</h2>
+                <h2>📐 Diagram Struktur</h2>
+                <h2>🧩 Apa itu &lt;head&gt;?</h2>
+                <h2>🧩 Apa itu &lt;header&gt;?</h2>
+                <p><code>&lt;head&gt;</code> adalah bagian dokumen HTML yang berisi metadata: judul halaman, deskripsi, link CSS, favicon, script, dan lain-lain. Bagian ini tidak terlihat langsung oleh pengguna, tapi penting untuk SEO dan browser.</p>
+                <p><code>&lt;header&gt;</code> adalah bagian atas halaman (di dalam <code>&lt;body&gt;</code>) yang terlihat oleh pengguna. Biasanya berisi logo, judul, menu navigasi, atau tagline.</p>
+                <pre class="language-html"><code id="code-block">&lt;!DOCTYPE html&gt;
+                <ul>
+                copyButton.addEventListener('click', () => {
                 });
+            --accent: #3aa0ff;
+            --bg: #0f0f12;
+            --border: #262831;
+            --card: #17181d;
+            --fg: #eaeef3;
+            --lh: 1.7;
+            --maxw: 900px;
+            --muted: #a8b0bb;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            </article>
+            <article>
+            background: #121316;
+            background: #3a3c41;
+            background: var(--accent);
+            background: var(--bg);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            border-radius: 14px;
+            border-radius: 5px;
+            border-radius: 8px;
+            border-top: 1px solid var(--border);
+            border: 1px solid var(--border);
+            border: none;
+            box-shadow: var(--shadow);
+            color: var(--accent);
+            color: var(--fg);
+            color: var(--muted);
+            const codeBlock = document.getElementById('code-block');
+            const copyButton = document.querySelector('.copy-btn');
+            cursor: pointer;
+            display: flex;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 1.5rem;
+            font-size: 12px;
+            font-size: clamp(26px, 4vw, 38px);
+            font: 16px/var(--lh) system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            if (copyButton && codeBlock) {
+            justify-content: center;
+            margin-bottom: 18px;
+            margin-top: 1rem;
+            margin-top: 2.5rem;
+            margin: 0 0 10px;
+            margin: 0;
+            max-width: var(--maxw);
+            padding-bottom: 0.5rem;
+            padding: 1.25rem;
+            padding: 20px;
+            padding: 24px 20px 8px;
+            padding: 24px;
+            padding: 28px 16px 60px;
+            padding: 5px 10px;
+            position: absolute;
+            position: relative;
+            right: 12px;
+            text-align: center;
+            text-decoration: none;
+            text-decoration: underline;
+            top: 12px;
+            width: 100%;
             }
+        .col {
+        .copy-btn {
+        .copy-btn:hover {
+        .lead {
+        :root {
+        </div>
+        <div class="col">
+        <h1>📘 Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML</h1>
+        <p class="lead">Sering bingung bedain <code>&lt;head&gt;</code> sama <code>&lt;header&gt;</code>? Yuk kita bahas dengan gaya santai, lengkap dengan contoh dan diagram.</p>
+        <small>🄯 2025 frijal.github.io · Artikel edukasi HTML5 oleh Fakhrul</small>
+        a {
+        a:hover {
+        article {
+        body {
+        code {
+        document.addEventListener('DOMContentLoaded', () => {
+        footer.site {
+        h1 {
+        h2 {
+        header.site {
+        main {
+        pre[class*="language-"] {
+        }
         });
+      &lt;!-- Isi utama halaman ada di sini --&gt;
+      &lt;!-- Konten bagian bawah halaman --&gt;
+      &lt;!-- Konten visual bagian atas seperti logo dan menu --&gt;
+      &lt;h1&gt;Selamat Datang di Situs Saya&lt;/h1&gt;
+    &lt;!-- Metadata seperti judul dan link CSS ada di sini --&gt;
+    &lt;/footer&gt;
+    &lt;/header&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+    &lt;header&gt;
+    &lt;main&gt;
+    &lt;title&gt;Judul Halaman&lt;/title&gt;
+    <!-- Basic SEO -->
+    <!-- Favicon & Theme -->
+    <!-- Open Graph -->
+    <!-- Prism.js for Syntax Highlighting -->
+    <!-- Scripts -->
+    <!-- Twitter Card -->
+    </footer>
+    </header>
+    </main>
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <footer class="site">
+    <header class="site">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/head-vs-header.html" />
+    <link rel="icon" href="https://frijal.pages.dev/assets/favicon.ico" sizes="any" />
+    <main>
+    <meta charset="utf-8" />
+    <meta name="description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
+    <meta name="theme-color" content="#121212" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
+    <meta name="twitter:image" content="https://frijal.pages.dev/assets/html-head-header.png" />
+    <meta name="twitter:title" content="Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:description" content="Penjelasan santai tentang perbedaan head dan header dalam HTML5, lengkap dengan contoh dan diagram." />
+    <meta property="og:image" content="https://frijal.pages.dev/assets/html-head-header.png" />
+    <meta property="og:title" content="Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/head-vs-header.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+    <style>
+    <title>Perbedaan &lt;head&gt; vs &lt;header&gt; dalam HTML</title>
+  &lt;/body&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;head&gt;
+&lt;/html&gt;</code><button class="copy-btn">Salin</button></pre>
+&lt;html&gt;
+<!DOCTYPE html>
 </body>
+</head>
 </html>
-
+<body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<head>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>

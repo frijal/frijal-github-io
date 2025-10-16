@@ -1,135 +1,108 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  #btn-home-left svg, #btn-home-right svg {
+  #btn-home-left {
+  #btn-home-left, #btn-home-right {
+  #btn-home-left:hover, #btn-home-right:hover {
+  #btn-home-right {
+  /* Style umum tombol */
+  /* Tombol kanan */
+  /* Tombol kiri */
+  // Ambil IP & Negara
+  <!-- Open Graph -->
+  <!-- Prism.js for Syntax Highlighting -->
+  <!-- Twitter Card -->
   <!-- prettier-ignore -->
-<title>Mengambil Semua Gambar dari File PDF dengan pdfimages</title>
-  <meta name="description" content="Panduan lengkap cara mengambil semua gambar dari file PDF menggunakan perintah pdfimages dengan paket poppler-utils.">
+  </article>
+  </script>
+  <div id="browser-info" class="browser-os"></div>
+  <div id="ip-info" class="browser-os"></div>
+  <div id="os-info" class="browser-os"></div>
+  <h3>Informasi Sistem Anda</h3>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
   <link rel="canonical" href="https://frijal.pages.dev/artikel/mengambil-gambar-dari-pdf.html">
   <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/337/337946.png">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Mengambil Semua Gambar dari File PDF dengan pdfimages">
-  <meta property="og:description" content="Cara mudah mengambil semua gambar dari PDF menggunakan pdfimages dan poppler-utils.">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPC5-T4Z4pAHpJgByhF62tTY6cdxdgYPrX9cGRumIFwoJmXckYNwWTXWCVBA_TxqI3Ru_fGfe-n_hE_gOWEso8xBrRnHYdkuRZKL6sT6ZfmnRFBDWwphIggyXkQd-Um4Wv4SDD8wCcdx98/s320/pdf.png">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/mengambil-gambar-dari-pdf.html">
-  <meta property="og:type" content="article">
-
-  <!-- Twitter Card -->
+  <meta charset="UTF-8">
+  <meta name="description" content="Panduan lengkap cara mengambil semua gambar dari file PDF menggunakan perintah pdfimages dengan paket poppler-utils.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mengambil Semua Gambar dari File PDF dengan pdfimages">
   <meta name="twitter:description" content="Panduan cara extract gambar dari file PDF dengan pdfimages di Linux.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPC5-T4Z4pAHpJgByhF62tTY6cdxdgYPrX9cGRumIFwoJmXckYNwWTXWCVBA_TxqI3Ru_fGfe-n_hE_gOWEso8xBrRnHYdkuRZKL6sT6ZfmnRFBDWwphIggyXkQd-Um4Wv4SDD8wCcdx98/s320/pdf.png">
-
-  <!-- Prism.js for Syntax Highlighting -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  
-  <script>
-const currentUrl = window.location.href;
-document.getElementById("current-url").textContent = currentUrl;
-document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-window.fbAsyncInit = function() {
-  if (typeof FB !== 'undefined') {
-try { FB.XFBML.parse(); } catch(e) {}
-  }
-}
-  </script>
-</div>
-
-<div class="system-info" id="system-info">
-  <h3>Informasi Sistem Anda</h3>
-  <div id="browser-info" class="browser-os"></div>
-  <div id="os-info" class="browser-os"></div>
-  <div id="ip-info" class="browser-os"></div>
-</div>
-  </article>
-</main>
-
-<footer>
+  <meta name="twitter:title" content="Mengambil Semua Gambar dari File PDF dengan pdfimages">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:description" content="Cara mudah mengambil semua gambar dari PDF menggunakan pdfimages dan poppler-utils.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPC5-T4Z4pAHpJgByhF62tTY6cdxdgYPrX9cGRumIFwoJmXckYNwWTXWCVBA_TxqI3Ru_fGfe-n_hE_gOWEso8xBrRnHYdkuRZKL6sT6ZfmnRFBDWwphIggyXkQd-Um4Wv4SDD8wCcdx98/s320/pdf.png">
+  <meta property="og:title" content="Mengambil Semua Gambar dari File PDF dengan pdfimages">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/mengambil-gambar-dari-pdf.html">
   <p>🄯 2025 Media Linux - Semua hak cipta dilindungi.</p>
-</footer>
-
-<script>
-  function detectBrowser() {
-let userAgent = navigator.userAgent;
-if (userAgent.includes("Firefox")) return {name:"Firefox", svg:`<svg viewBox="0 0 48 48"><circle fill="#FF7139" cx="24" cy="24" r="24"/></svg>`};
-if (userAgent.includes("Chrome")) return {name:"Chrome", svg:`<svg viewBox="0 0 48 48"><circle fill="#4285F4" cx="24" cy="24" r="24"/></svg>`};
-if (userAgent.includes("Safari")) return {name:"Safari", svg:`<svg viewBox="0 0 48 48"><circle fill="#00ADEF" cx="24" cy="24" r="24"/></svg>`};
-return {name:"Browser Tidak Dikenal", svg:`<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`};
-  }
-  function detectOS() {
-let platform = navigator.userAgent;
-if (platform.includes("Win")) return {name:"Windows", svg:`<svg viewBox="0 0 48 48"><rect fill="#00ADEF" width="48" height="48"/></svg>`};
-if (platform.includes("Linux")) return {name:"Linux", svg:`<svg viewBox="0 0 48 48"><circle fill="#FCC624" cx="24" cy="24" r="24"/></svg>`};
-if (platform.includes("Mac")) return {name:"macOS", svg:`<svg viewBox="0 0 48 48"><circle fill="#999" cx="24" cy="24" r="24"/></svg>`};
-return {name:"OS Tidak Dikenal", svg:`<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`};
-  }
+  <script>
   const browser = detectBrowser();
   const os = detectOS();
   document.getElementById("browser-info").innerHTML = browser.svg + " Browser: " + browser.name;
   document.getElementById("os-info").innerHTML = os.svg + " Sistem Operasi: " + os.name;
-
-  // Ambil IP & Negara
   fetch("https://ipapi.co/json/").then(r=>r.json()).then(data=>{
-const flag = `<img class="flag-icon" src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`;
-document.getElementById("ip-info").innerHTML = flag + " IP: " + data.ip + " - " + data.country_name;
+  function detectBrowser() {
+  function detectOS() {
+  if (typeof FB !== 'undefined') {
+  }
   });
+<!DOCTYPE html>
+</body>
+</div>
+</footer>
+</html>
+</main>
 </script>
-
-
-
+</style>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div class="system-info" id="system-info">
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<footer>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
 <style>
-  /* Style umum tombol */
-  #btn-home-left, #btn-home-right {
-position: fixed;
-display: flex;
+<title>Mengambil Semua Gambar dari File PDF dengan pdfimages</title>
 align-items: center;
+background-color: #0056b3;
 background-color: #007bff;
-color: #fff;
-padding: 12px 18px;
 border-radius: 8px;
-text-decoration: none;
+bottom: 20%;
+box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+color: #fff;
+const currentUrl = window.location.href;
+const flag = `<img class="flag-icon" src="https://flagcdn.com/24x18/${data.country_code.toLowerCase()}.png">`;
+display: flex;
+document.getElementById("current-url").textContent = currentUrl;
+document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+document.getElementById("ip-info").innerHTML = flag + " IP: " + data.ip + " - " + data.country_name;
+flex-shrink: 0;
 font-family: Arial, sans-serif;
 font-size: 14px;
 font-weight: bold;
-box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-transition: background 0.3s ease, transform 0.2s ease;
-z-index: 9999;
-  }
-
-  #btn-home-left:hover, #btn-home-right:hover {
-background-color: #0056b3;
-transform: scale(1.05);
-  }
-
-  /* Tombol kiri */
-  #btn-home-left {
+if (platform.includes("Linux")) return {name:"Linux", svg:`<svg viewBox="0 0 48 48"><circle fill="#FCC624" cx="24" cy="24" r="24"/></svg>`};
+if (platform.includes("Mac")) return {name:"macOS", svg:`<svg viewBox="0 0 48 48"><circle fill="#999" cx="24" cy="24" r="24"/></svg>`};
+if (platform.includes("Win")) return {name:"Windows", svg:`<svg viewBox="0 0 48 48"><rect fill="#00ADEF" width="48" height="48"/></svg>`};
+if (userAgent.includes("Chrome")) return {name:"Chrome", svg:`<svg viewBox="0 0 48 48"><circle fill="#4285F4" cx="24" cy="24" r="24"/></svg>`};
+if (userAgent.includes("Firefox")) return {name:"Firefox", svg:`<svg viewBox="0 0 48 48"><circle fill="#FF7139" cx="24" cy="24" r="24"/></svg>`};
+if (userAgent.includes("Safari")) return {name:"Safari", svg:`<svg viewBox="0 0 48 48"><circle fill="#00ADEF" cx="24" cy="24" r="24"/></svg>`};
 left: 10px;
-top: 30%;
-transform: translateY(-50%);
-  }
-
-  /* Tombol kanan */
-  #btn-home-right {
+let platform = navigator.userAgent;
+let userAgent = navigator.userAgent;
+padding: 12px 18px;
+position: fixed;
+return {name:"Browser Tidak Dikenal", svg:`<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`};
+return {name:"OS Tidak Dikenal", svg:`<svg viewBox="0 0 48 48"><circle fill="#666" cx="24" cy="24" r="24"/></svg>`};
 right: 10px;
-bottom: 20%;
+text-decoration: none;
+top: 30%;
+transform: scale(1.05);
+transform: translateY(-50%);
 transform: translateY(50%);
-  }
-
-  #btn-home-left svg, #btn-home-right svg {
-flex-shrink: 0;
-  }
-</style>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
-
+transition: background 0.3s ease, transform 0.2s ease;
+try { FB.XFBML.parse(); } catch(e) {}
+window.fbAsyncInit = function() {
+z-index: 9999;
+}

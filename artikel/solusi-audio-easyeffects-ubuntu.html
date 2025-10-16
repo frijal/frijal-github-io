@@ -1,436 +1,306 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O</title>
-    <meta
-      name="description"
-      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen. Solusi masalah EasyEffects yang sering berhenti dan cara optimalkannya."
-    />
-    <meta
-      name="keywords"
-      content="EasyEffects, Ubuntu, Linux, Bang & Olufsen, HP Elitebook, audio flat, speaker ngebass, PipeWire, Flatpak, troubleshooting audio"
-    />
-    <meta name="author" content="Frijal" />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/solusi-audio-easyeffects-ubuntu.html"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>"
-    />
-    <meta
-      property="og:title"
-      content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
-    />
-    <meta
-      property="og:description"
-      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen. Solusi masalah EasyEffects yang sering berhenti dan cara optimalkannya."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/solusi-audio-easyeffects-ubuntu.html"
-    />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Frijal's Page" />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg169gbWlw-wwW_FZ57pmqzw8iN6XH__YjdoaVRbm8Ovj6NecI0T6ABjPI_xBnYEiV44MxCteqXQIfp3wiCRahP_yw4AKvlnN3eHZpYbP44s_8qt5zSf9Za4zo_AcNCyCNZwOaGrfi4YYNMnLwC2RohEnpHInOJ0-e7DPMtDwoffRUqU6xTyD0EgCuJi9s/s1600/hpbo.png"
-    />
-    <meta
-      property="og:image:alt"
-      content="Ilustrasi audio laptop HP Bang & Olufsen"
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg169gbWlw-wwW_FZ57pmqzw8iN6XH__YjdoaVRbm8Ovj6NecI0T6ABjPI_xBnYEiV44MxCteqXQIfp3wiCRahP_yw4AKvlnN3eHZpYbP44s_8qt5zSf9Za4zo_AcNCyCNZwOaGrfi4YYNMnLwC2RohEnpHInOJ0-e7DPMtDwoffRUqU6xTyD0EgCuJi9s/s1600/hpbo.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
-    />
-    <meta
-      name="twitter:description"
-      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <style>
-      :root {
-        --bg-color: #121212;
-        --primary-text-color: #e0e0e0;
-        --secondary-text-color: #b3b3b3;
-        --accent-color: #bb86fc;
-        --surface-color: #1e1e1e;
-        --border-color: #2c2c2c;
-        --code-bg: #282c34;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        line-height: 1.8;
-        font-size: 16px;
-      }
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-      }
-      h1,
-      h2,
-      h3 {
-        color: var(--accent-color);
-        font-weight: 700;
-        margin-bottom: 1rem;
-      }
-      h1 {
-        font-size: 2.5rem;
-        text-align: center;
-        border-bottom: 2px solid var(--border-color);
-        padding-bottom: 1rem;
-        margin-bottom: 2rem;
-      }
-      h2 {
-        font-size: 2rem;
-        margin-top: 2.5rem;
-      }
-      h3 {
-        font-size: 1.5rem;
-        margin-top: 2rem;
-        color: #90caf9;
-        border-left: 3px solid var(--accent-color);
-        padding-left: 1rem;
-      }
-      p,
-      li {
-        margin-bottom: 1rem;
-        color: var(--secondary-text-color);
-      }
-      ul,
-      ol {
-        padding-left: 1.5rem;
-      }
-      a {
-        color: var(--accent-color);
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-      a:hover {
-        color: #f3e5f5;
-      }
-      pre {
-        background-color: var(--code-bg);
-        border-radius: 8px;
-        padding: 1rem;
-        margin: 1.5rem 0;
-        border: 1px solid var(--border-color);
-        overflow-x: auto;
-      }
-      code {
-        font-family: 'Fira Code', monospace;
-        color: var(--primary-text-color);
-        white-space: pre; /* Menggunakan 'pre' agar tidak wrap di dalam <pre> */
-      }
-      strong {
-        color: var(--primary-text-color);
-        font-weight: 600;
-      }
-      blockquote {
-        border-left: 4px solid var(--accent-color);
-        padding-left: 1rem;
-        margin: 1.5rem 0;
-        font-style: italic;
-        color: var(--secondary-text-color);
-      }
-      hr {
-        border: 0;
-        height: 1px;
-        background: var(--border-color);
-        margin: 2.5rem 0;
-      }
-      .social-share,
-      .comments-section {
-        background-color: var(--surface-color);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-top: 2rem;
-        border: 1px solid var(--border-color);
-      }
-      .social-share h3,
-      .comments-section h2 {
-        color: var(--primary-text-color);
-        margin: 0 0 1rem 0;
-        padding: 0;
-        border: none;
-      }
-      .social-share-icons a {
-        font-size: 2rem;
-        margin-right: 1.5rem;
-        color: var(--secondary-text-color);
-        transition: color 0.3s, transform 0.3s;
-      }
-      .social-share-icons a:hover {
-        transform: scale(1.2);
-        color: var(--accent-color);
-      }
-      .fb-comments {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem;
-      }
-      @media screen and (max-width: 768px) {
-        h1 {
-          font-size: 2rem;
-        }
-        h2 {
-          font-size: 1.5rem;
-        }
-        h3 {
-          font-size: 1.25rem;
-        }
-        .container {
-          padding: 1.5rem 1rem;
-        }
-      }
-    </style>
-    <meta itemprop="image" content="https://frijal.pages.dev/img/solusi-audio-easyeffects-ubuntu.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-10-14T18:15:06.423+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-  <body>
-    
 
-    <main class="container">
-      <article>
-        <h1>
-          Mengatasi Audio "Cempreng" di Ubuntu pada Laptop HP Bang & Olufsen
-        </h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-        <div id="iposbrowser"></div>
-        <p>
-          Selamat datang di dunia Linux! Pindah dari Windows ke Ubuntu memang
-          menyenangkan, tapi kadang ada hal-hal kecil yang bikin "kangen", salah
-          satunya kualitas audio. Pengalaman ini sangat umum, terutama bagi
-          pengguna laptop dengan audio premium seperti HP EliteBook 830 G6 yang
-          berlogo Bang & Olufsen.
-        </p>
-        <blockquote>
-          Di Windows, driver audio khusus dari Bang & Olufsen (B&O) bukan
-          sekadar driver biasa, tapi juga software <em>Digital Signal Processing</em>
-          (DSP) yang sudah di-tuning khusus untuk speaker laptopmu. Hal ini yang
-          membuat suara terdengar lebih ngebass dan bertenaga. Sayangnya, driver
-          ini tidak tersedia untuk Linux, sehingga suara bawaan terdengar "flat"
-          dan loyo.
-        </blockquote>
-        <p>
-          Kabar baiknya, masalah ini bisa diatasi! Aplikasi seperti
-          <strong>EasyEffects</strong> adalah solusi paling populer untuk mengembalikan
-          "warna" audio di Linux. Namun, kadang aplikasi ini suka berhenti
-          sendiri saat berjalan di latar belakang, misalnya saat ganti video
-          YouTube. Mari kita bahas kenapa ini terjadi dan solusinya.
-        </p>
-        <hr />
-        <h2>🔧 Kenapa EasyEffects Sering Berhenti Sendiri?</h2>
-        <p>
-          Aplikasi ini bekerja di atas server audio Linux (PipeWire). Ada
-          beberapa alasan mengapa koneksinya bisa terputus:
-        </p>
-        <ul>
-          <li>
-            <strong>Instalasi Flatpak:</strong> Aplikasi Flatpak berjalan di
-            lingkungan terisolasi (<em>sandbox</em>). Kadang, koneksinya ke server
-            audio tidak menyambung ulang secara otomatis saat ada stream audio
-            baru (seperti saat video YouTube berikutnya diputar).
-          </li>
-          <li>
-            <strong>Konflik Audio Server:</strong> EasyEffects modern
-            membutuhkan PipeWire. Jika sistem Anda masih menggunakan PulseAudio,
-            atau ada tumpang tindih antara keduanya, koneksi bisa putus.
-          </li>
-          <li>
-            <strong>Tidak Berjalan sebagai Service:</strong> Jika tidak diatur
-            untuk berjalan di latar belakang, aplikasi akan mati saat jendelanya
-            ditutup atau saat ada perubahan audio yang signifikan.
-          </li>
-        </ul>
-        <hr />
-        <h2>✅ Solusi Paling Praktis dan Stabil</h2>
-        <p>
-          Berikut adalah langkah-langkah yang direkomendasikan untuk membuat
-          EasyEffects berjalan stabil, diurutkan dari yang paling penting.
-        </p>
-        <h3>1. Hapus Versi Flatpak dan Install dari Repository Resmi</h3>
-        <p>
-          Ini adalah langkah paling krusial. Versi aplikasi dari repository
-          Ubuntu (APT) biasanya lebih menyatu dengan sistem dibanding versi
-          Flatpak.
-        </p>
-        <ol>
-          <li>Jika Anda menginstall dari Flatpak, hapus dulu.</li>
-          <li>
-            Buka terminal dan install EasyEffects dari repository PPA yang
-            stabil atau repo resmi Ubuntu (jika tersedia):
-          </li>
-        </ol>
-        <pre><code>sudo add-apt-repository ppa:mikhailnov/pulseeffects -y
-sudo apt update
-sudo apt install easyeffects</code></pre>
-        <h3>2. Jalankan EasyEffects sebagai Service Latar Belakang</h3>
-        <p>
-          Agar EasyEffects tidak mati saat jendelanya ditutup atau saat stream
-          audio berganti, jalankan sebagai <em>daemon</em> (layanan latar belakang).
-        </p>
-        <pre><code>systemctl --user enable --now easyeffects</code></pre>
-        <p>
-          Dengan perintah ini, EasyEffects akan otomatis aktif saat Anda login
-          dan terus berjalan di latar belakang.
-        </p>
-        <h3>3. Pastikan Tidak Ada Opsi "Quit on Window Close"</h3>
-        <p>
-          Walaupun sudah berjalan sebagai service, tidak ada salahnya memastikan
-          pengaturan ini. Ini adalah penyebab umum aplikasi berhenti.
-        </p>
-        <ol>
-          <li>Buka aplikasi EasyEffects.</li>
-          <li>Klik menu hamburger (tiga garis) dan pilih <strong>Preferences</strong>.</li>
-          <li>Pastikan opsi <strong>"Quit on Window Close"</strong> tidak dicentang.</li>
-        </ol>
-        <h3>4. Restart Layanan Audio Jika Perlu</h3>
-        <p>
-          Jika suatu saat audio kembali bermasalah, Anda bisa me-restart server
-          PipeWire tanpa harus reboot laptop.
-        </p>
-        <pre><code>systemctl --user restart pipewire.service
-systemctl --user restart pipewire-pulse.service</code></pre>
-        <hr />
-        <h2>🎶 Tips Tambahan untuk Kualitas Suara Maksimal</h2>
-        <p>
-          Meskipun sudah stabil, Anda masih bisa meningkatkan kualitas suaranya
-          agar lebih mendekati pengalaman di Windows.
-        </p>
-        <ul>
-          <li>
-            <strong>Gunakan Preset Komunitas:</strong> Daripada mengatur dari
-            nol, cari dan impor preset buatan komunitas. Gunakan kata kunci
-            "EasyEffects community presets" di Google atau GitHub. Preset ini
-            biasanya berupa file `.json` yang bisa diimpor ke EasyEffects.
-          </li>
-          <li>
-            <strong>Mulai dengan Efek Minimal:</strong> Jangan langsung
-            mengaktifkan banyak efek. Kombinasi <strong>Bass Enhancer</strong> dan
-            <strong>Limiter</strong> biasanya sudah cukup untuk memberi "power" pada suara
-            tanpa membuatnya pecah.
-          </li>
-          <li>
-            <strong>Contoh Setting Cepat:</strong>
-            <ul>
-              <li>
-                <strong>Bass Enhancer:</strong> atur 'amount' ke 0.6 - 0.8 dan
+    
                 'floor' ke 80 Hz.
-              </li>
-              <li>
-                <strong>Equalizer:</strong> Naikkan sedikit frekuensi rendah
                 (32-125 Hz) untuk bass dan frekuensi tinggi (8-16 kHz) untuk
-                kejernihan (<em>sparkle</em>).
-              </li>
-              <li>
+                <strong>Bass Enhancer:</strong> atur 'amount' ke 0.6 - 0.8 dan
+                <strong>Equalizer:</strong> Naikkan sedikit frekuensi rendah
                 <strong>Limiter:</strong> Atur limit di -1dB agar suara tidak
+                kejernihan (<em>sparkle</em>).
                 pecah saat volume tinggi.
               </li>
-            </ul>
-          </li>
-        </ul>
-        <p>
-          Dengan mengikuti langkah-langkah di atas, terutama dengan mengganti
-          versi Flatpak ke versi repository dan menjalankannya sebagai service,
-          seharusnya masalah EasyEffects yang sering berhenti sendiri bisa
-          teratasi. Selamat menikmati kualitas audio yang lebih baik di Ubuntu!
-        </p>
-        <hr />
-        <section class="social-share">
-          <h3>Bagikan Artikel Ini</h3>
-          <div class="social-share-icons">
-            <a href="#" id="share-fb" target="_blank" title="Bagikan ke Facebook">
               <i class="fab fa-facebook"></i>
-            </a>
-            <a href="#" id="share-twitter" target="_blank" title="Bagikan ke Twitter">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" id="share-whatsapp" target="_blank" title="Bagikan ke WhatsApp">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="#" id="share-telegram" target="_blank" title="Bagikan ke Telegram">
-              <i class="fab fa-telegram"></i>
-            </a>
-            <a href="#" id="share-linkedin" target="_blank" title="Bagikan ke LinkedIn">
               <i class="fab fa-linkedin"></i>
+              <i class="fab fa-telegram"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-whatsapp"></i>
+              <li>
+            "EasyEffects community presets" di Google atau GitHub. Preset ini
             </a>
-          </div>
-        </section>
-        <hr />
-        <section class="comments-section">
-          <h2>Beri Jaga Data Pribadi Tetap Aman.</h2>
-          <div
+            </ul>
+            <a href="#" id="share-fb" target="_blank" title="Bagikan ke Facebook">
+            <a href="#" id="share-linkedin" target="_blank" title="Bagikan ke LinkedIn">
+            <a href="#" id="share-telegram" target="_blank" title="Bagikan ke Telegram">
+            <a href="#" id="share-twitter" target="_blank" title="Bagikan ke Twitter">
+            <a href="#" id="share-whatsapp" target="_blank" title="Bagikan ke WhatsApp">
+            <strong>Contoh Setting Cepat:</strong>
+            <strong>Gunakan Preset Komunitas:</strong> Daripada mengatur dari
+            <strong>Instalasi Flatpak:</strong> Aplikasi Flatpak berjalan di
+            <strong>Konflik Audio Server:</strong> EasyEffects modern
+            <strong>Limiter</strong> biasanya sudah cukup untuk memberi "power" pada suara
+            <strong>Mulai dengan Efek Minimal:</strong> Jangan langsung
+            <strong>Tidak Berjalan sebagai Service:</strong> Jika tidak diatur
+            <ul>
+            Buka terminal dan install EasyEffects dari repository PPA yang
+            atau ada tumpang tindih antara keduanya, koneksi bisa putus.
+            audio tidak menyambung ulang secara otomatis saat ada stream audio
+            baru (seperti saat video YouTube berikutnya diputar).
+            biasanya berupa file `.json` yang bisa diimpor ke EasyEffects.
             class="fb-comments"
             data-href="https://frijal.pages.dev/artikel/solusi-audio-easyeffects-ubuntu.html"
-            data-width="100%"
             data-numposts="5"
+            data-width="100%"
+            ditutup atau saat ada perubahan audio yang signifikan.
+            lingkungan terisolasi (<em>sandbox</em>). Kadang, koneksinya ke server
+            membutuhkan PipeWire. Jika sistem Anda masih menggunakan PulseAudio,
+            mengaktifkan banyak efek. Kombinasi <strong>Bass Enhancer</strong> dan
+            nol, cari dan impor preset buatan komunitas. Gunakan kata kunci
+            stabil atau repo resmi Ubuntu (jika tersedia):
+            tanpa membuatnya pecah.
+            untuk berjalan di latar belakang, aplikasi akan mati saat jendelanya
+          "warna" audio di Linux. Namun, kadang aplikasi ini suka berhenti
+          (DSP) yang sudah di-tuning khusus untuk speaker laptopmu. Hal ini yang
+          </div>
+          </li>
+          <div
+          <div class="social-share-icons">
+          <h2>Beri Jaga Data Pribadi Tetap Aman.</h2>
+          <h3>Bagikan Artikel Ini</h3>
+          <li>
+          <li>Buka aplikasi EasyEffects.</li>
+          <li>Jika Anda menginstall dari Flatpak, hapus dulu.</li>
+          <li>Klik menu hamburger (tiga garis) dan pilih <strong>Preferences</strong>.</li>
+          <li>Pastikan opsi <strong>"Quit on Window Close"</strong> tidak dicentang.</li>
+          <strong>EasyEffects</strong> adalah solusi paling populer untuk mengembalikan
           ></div>
-        </section>
-      </article>
-    </main>
-
-      <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Logika untuk tombol share
-        const canonicalUrl = document.querySelector("link[rel='canonical']");
-        const pageUrl = encodeURIComponent(
-          canonicalUrl ? canonicalUrl.href : window.location.href
-        );
-        const pageTitle = encodeURIComponent(document.title);
-        document.getElementById('share-fb').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-        document.getElementById('share-twitter').href =
-          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
-        document.getElementById('share-whatsapp').href =
+          Agar EasyEffects tidak mati saat jendelanya ditutup atau saat stream
+          Aplikasi ini bekerja di atas server audio Linux (PipeWire). Ada
+          Berikut adalah langkah-langkah yang direkomendasikan untuk membuat
+          Dengan mengikuti langkah-langkah di atas, terutama dengan mengganti
+          Dengan perintah ini, EasyEffects akan otomatis aktif saat Anda login
+          Di Windows, driver audio khusus dari Bang & Olufsen (B&O) bukan
+          EasyEffects berjalan stabil, diurutkan dari yang paling penting.
+          Flatpak.
+          Ini adalah langkah paling krusial. Versi aplikasi dari repository
+          Jika suatu saat audio kembali bermasalah, Anda bisa me-restart server
+          Kabar baiknya, masalah ini bisa diatasi! Aplikasi seperti
+          Mengatasi Audio "Cempreng" di Ubuntu pada Laptop HP Bang & Olufsen
+          Meskipun sudah stabil, Anda masih bisa meningkatkan kualitas suaranya
+          PipeWire tanpa harus reboot laptop.
+          Selamat datang di dunia Linux! Pindah dari Windows ke Ubuntu memang
+          Ubuntu (APT) biasanya lebih menyatu dengan sistem dibanding versi
+          Walaupun sudah berjalan sebagai service, tidak ada salahnya memastikan
+          YouTube. Mari kita bahas kenapa ini terjadi dan solusinya.
           `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
-        document.getElementById('share-telegram').href =
           `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
-        document.getElementById('share-linkedin').href =
+          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+          agar lebih mendekati pengalaman di Windows.
+          audio berganti, jalankan sebagai <em>daemon</em> (layanan latar belakang).
+          beberapa alasan mengapa koneksinya bisa terputus:
+          berlogo Bang & Olufsen.
+          canonicalUrl ? canonicalUrl.href : window.location.href
+          dan loyo.
+          dan terus berjalan di latar belakang.
+          font-size: 1.25rem;
+          font-size: 1.5rem;
+          font-size: 2rem;
+          ini tidak tersedia untuk Linux, sehingga suara bawaan terdengar "flat"
+          membuat suara terdengar lebih ngebass dan bertenaga. Sayangnya, driver
+          menyenangkan, tapi kadang ada hal-hal kecil yang bikin "kangen", salah
+          padding: 1.5rem 1rem;
+          pengaturan ini. Ini adalah penyebab umum aplikasi berhenti.
+          pengguna laptop dengan audio premium seperti HP EliteBook 830 G6 yang
+          satunya kualitas audio. Pengalaman ini sangat umum, terutama bagi
+          seharusnya masalah EasyEffects yang sering berhenti sendiri bisa
+          sekadar driver biasa, tapi juga software <em>Digital Signal Processing</em>
+          sendiri saat berjalan di latar belakang, misalnya saat ganti video
+          teratasi. Selamat menikmati kualitas audio yang lebih baik di Ubuntu!
+          versi Flatpak ke versi repository dan menjalankannya sebagai service,
+        );
+        --accent-color: #bb86fc;
+        --bg-color: #121212;
+        --border-color: #2c2c2c;
+        --code-bg: #282c34;
+        --primary-text-color: #e0e0e0;
+        --secondary-text-color: #b3b3b3;
+        --surface-color: #1e1e1e;
+        .container {
+        // Logika untuk tombol share
+        </blockquote>
+        </h1>
+        </ol>
+        </p>
+        </section>
+        </ul>
+        <blockquote>
+        <h1>
+        <h2>✅ Solusi Paling Praktis dan Stabil</h2>
+        <h2>🎶 Tips Tambahan untuk Kualitas Suara Maksimal</h2>
+        <h2>🔧 Kenapa EasyEffects Sering Berhenti Sendiri?</h2>
+        <h3>1. Hapus Versi Flatpak dan Install dari Repository Resmi</h3>
+        <h3>2. Jalankan EasyEffects sebagai Service Latar Belakang</h3>
+        <h3>3. Pastikan Tidak Ada Opsi "Quit on Window Close"</h3>
+        <h3>4. Restart Layanan Audio Jika Perlu</h3>
+        <hr />
+        <ol>
+        <p>
+        <pre><code>sudo add-apt-repository ppa:mikhailnov/pulseeffects -y
+        <pre><code>systemctl --user enable --now easyeffects</code></pre>
+        <pre><code>systemctl --user restart pipewire.service
+        <section class="comments-section">
+        <section class="social-share">
+        <ul>
+        background-color: var(--bg-color);
+        background-color: var(--code-bg);
+        background-color: var(--surface-color);
+        background: var(--border-color);
+        background: white;
+        border-bottom: 2px solid var(--border-color);
+        border-left: 3px solid var(--accent-color);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 12px;
+        border-radius: 8px;
+        border: 0;
+        border: 1px solid var(--border-color);
+        border: none;
+        box-sizing: border-box;
+        color: #90caf9;
+        color: #f3e5f5;
+        color: var(--accent-color);
+        color: var(--primary-text-color);
+        color: var(--secondary-text-color);
+        const canonicalUrl = document.querySelector("link[rel='canonical']");
+        const pageTitle = encodeURIComponent(document.title);
+        const pageUrl = encodeURIComponent(
+        document.getElementById('share-fb').href =
+        document.getElementById('share-linkedin').href =
+        document.getElementById('share-telegram').href =
+        document.getElementById('share-twitter').href =
+        document.getElementById('share-whatsapp').href =
+        font-family: 'Fira Code', monospace;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-size: 16px;
+        font-size: 2.5rem;
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: 600;
+        font-weight: 700;
+        h1 {
+        h2 {
+        h3 {
+        height: 1px;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        margin-right: 1.5rem;
+        margin-top: 2.5rem;
+        margin-top: 2rem;
+        margin: 0 0 1rem 0;
+        margin: 0 auto;
+        margin: 0;
+        margin: 1.5rem 0;
+        margin: 2.5rem 0;
+        max-width: 900px;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-left: 1rem;
+        padding: 0;
+        padding: 1.5rem;
+        padding: 1rem;
+        padding: 2rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        transform: scale(1.2);
+        transition: color 0.3s, transform 0.3s;
+        transition: color 0.3s;
+        white-space: pre; /* Menggunakan 'pre' agar tidak wrap di dalam <pre> */
+        }
+      * {
+      .comments-section h2 {
+      .comments-section {
+      .container {
+      .fb-comments {
+      .social-share h3,
+      .social-share,
+      .social-share-icons a {
+      .social-share-icons a:hover {
+      :root {
+      </article>
+      <article>
+      <script>
+      @media screen and (max-width: 768px) {
+      a {
+      a:hover {
+      blockquote {
+      body {
+      code {
+      content="EasyEffects, Ubuntu, Linux, Bang & Olufsen, HP Elitebook, audio flat, speaker ngebass, PipeWire, Flatpak, troubleshooting audio"
+      content="Ilustrasi audio laptop HP Bang & Olufsen"
+      content="Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O"
+      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen. Solusi masalah EasyEffects yang sering berhenti dan cara optimalkannya."
+      content="Panduan lengkap mengatasi suara speaker yang 'flat' di Ubuntu pada laptop audio premium seperti HP Bang & Olufsen."
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg169gbWlw-wwW_FZ57pmqzw8iN6XH__YjdoaVRbm8Ovj6NecI0T6ABjPI_xBnYEiV44MxCteqXQIfp3wiCRahP_yw4AKvlnN3eHZpYbP44s_8qt5zSf9Za4zo_AcNCyCNZwOaGrfi4YYNMnLwC2RohEnpHInOJ0-e7DPMtDwoffRUqU6xTyD0EgCuJi9s/s1600/hpbo.png"
+      content="https://frijal.pages.dev/artikel/solusi-audio-easyeffects-ubuntu.html"
+      crossorigin="anonymous"
+      document.addEventListener('DOMContentLoaded', () => {
+      h1 {
+      h1,
+      h2 {
+      h2,
+      h3 {
+      hr {
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fira+Code&display=swap"
+      href="https://frijal.pages.dev/artikel/solusi-audio-easyeffects-ubuntu.html"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      li {
+      name="description"
+      name="keywords"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      ol {
+      p,
+      pre {
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      referrerpolicy="no-referrer"
+      rel="canonical"
+      rel="icon"
+      rel="stylesheet"
+      strong {
+      ul,
+      }
       });
+    />
+    </main>
     </script>
-    <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <link
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <main class="container">
+    <meta
+    <meta charset="UTF-8" />
+    <meta itemprop="image" content="https://frijal.pages.dev/img/solusi-audio-easyeffects-ubuntu.webp">
+    <meta name="author" content="Frijal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="article:published_time" content="2025-10-14T18:15:06.423+00:00">
+    <meta property="og:site_name" content="Frijal's Page" />
+    <meta property="og:type" content="article" />
+    <style>
+    <title>Mengatasi Masalah Audio & EasyEffects di Ubuntu untuk Laptop HP B&O</title>
   </body>
+  <body>
+  <head>
+<!doctype html>
+</head>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+sudo apt install easyeffects</code></pre>
+sudo apt update
+systemctl --user restart pipewire-pulse.service</code></pre>

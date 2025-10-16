@@ -1,146 +1,121 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Gerimis & Jagung Godog: Hangatnya Camilan Sederhana | Catatan Kuliner</title>
-    <meta name="description" content="Ketika gerimis mengundang, nikmatnya jagung godog terasa berlipat. Cerita singkat, galeri foto, tips penyajian, dan fitur interaktif."/>
+
+    
+        
+            
+                e.preventDefault();
+                if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+                if (e.key === "ArrowRight") showImage(currentIndex + 1);
+                if (e.key === "Escape") lightbox.classList.remove("flex");
+                lightbox.classList.remove("flex");
+                showImage(index);
+              </div>
+              <span id="url-page"></span>
+            // Ambil URL resolusi tinggi dari atribut href
+            </div>
+            <div class="font-bold text-sm">Waktu lokal: <span id="time-local"></span></div>
+            <div class="text-xs text-slate-500">
+            const highResUrl = galleryLinks[currentIndex].getAttribute("href");
+            currentIndex = index;
+            element.setAttribute("href", shareLinks[selector]);
+            if (e.target === lightbox) {
+            if (index < 0) index = galleryLinks.length - 1;
+            if (index >= galleryLinks.length) index = 0;
+            if (lightbox.classList.contains("flex")) {
+            lightbox.classList.add("flex");
+            lightbox.classList.remove("hidden");
+            lightboxImg.src = highResUrl;
+            link.addEventListener("click", function (e) {
+            try { FB.XFBML.parse(); } catch (e) {}
+            }
+            });
+          "#shareFacebook": "https://www.facebook.com/sharer/sharer.php?u=" + shareUrl,
+          "#shareTelegram": `https://t.me/share/url?url=${shareUrl}&text=` + shareText,
+          "#shareTwitter": `https://twitter.com/intent/tweet?url=${shareUrl}&text=` + shareText,
+          "#shareWhatsApp": `https://wa.me/?text=${shareText}%20` + shareUrl,
+          "#shareX": `https://x.com/intent/post?url=${shareUrl}&text=` + shareText,
+          </div>
+          <div class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          if (element) {
+          if (typeof FB !== 'undefined') {
+          let element = document.querySelector(selector);
+          }
+        // --- Dynamic Content & Time ---
+        // --- Facebook Comments Setup ---
+        // --- Lightbox Logic ---
+        // --- Social Sharing Logic ---
+        // Event listener untuk klik pada gambar galeri
+        // Function untuk menampilkan gambar di lightbox
+        // Keyboard navigation
+        // Navigasi
+        // Tutup lightbox saat klik background
+        </article>
+        </div>
+        <div class="grid grid-cols-1 gap-4 pb-6">
+        const canonicalUrl = document.querySelector('link[rel="canonical"]').href;
+        const galleryLinks = Array.from(document.querySelectorAll("#gallery a"));
+        const lbClose = document.getElementById("lb-close");
+        const lbNext = document.getElementById("lb-next");
+        const lbPrev = document.getElementById("lb-prev");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const shareLinks = {
+        const showImage = (index) => {
+        document.addEventListener("keydown", (e) => {
+        document.getElementById("fb-comments").setAttribute("data-href", canonicalUrl);
+        document.getElementById("time-local").textContent = fmt.format(new Date());
+        document.getElementById("url-page").textContent = canonicalUrl;
+        for (let selector in shareLinks) {
+        galleryLinks.forEach((link, index) => {
+        lbClose.addEventListener("click", () => lightbox.classList.remove("flex"));
+        lbNext.addEventListener("click", () => showImage(currentIndex + 1));
+        lbPrev.addEventListener("click", () => showImage(currentIndex - 1));
+        let currentIndex = 0;
+        let fmt = new Intl.DateTimeFormat("id-ID", { dateStyle: "full", timeStyle: "medium" });
+        let shareText = encodeURIComponent(document.title);
+        let shareUrl = encodeURIComponent(canonicalUrl);
+        lightbox.addEventListener("click", function (e) {
+        window.fbAsyncInit = function () {
+        }
+        });
+        };
+      </div>
+      <a id="lb-close" class="absolute top-4 right-8 text-white text-3xl cursor-pointer" aria-label="Tutup">&times;</a>
+      <a id="lb-next" class="absolute top-1/2 right-4 text-white text-3xl cursor-pointer" aria-label="Berikutnya">&#10095;</a>
+      <a id="lb-prev" class="absolute top-1/2 left-4 text-white text-3xl cursor-pointer" aria-label="Sebelumnya">&#10094;</a>
+      <div class="container mx-auto px-4 py-4">
+      <img id="lightbox-img" alt="Preview" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl border border-white/20"/>
+      document.addEventListener("DOMContentLoaded", function() {
+      });
+    </div>
+    </footer>
+    </main>
+    </script>
+    <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 hidden">
+    <footer class="mt-10 pt-4 border-t border-gray-200 bg-white/85 backdrop-blur-md">
+    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
     <link rel="canonical" href="https://frijal.pages.dev/artikel/jagung-godog-gerimis.html"/>
     <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/favicon.svg"/>
-    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
+    <meta charset="utf-8" />
+    <meta name="description" content="Ketika gerimis mengundang, nikmatnya jagung godog terasa berlipat. Cerita singkat, galeri foto, tips penyajian, dan fitur interaktif."/>
     <meta name="theme-color" content="#f59e0b" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Gerimis & Jagung Godog: Hangatnya Camilan Sederhana"/>
-    <meta property="og:description" content="Cerita singkat, galeri foto, dan tips menikmati jagung godog saat gerimis. Interaktif, responsif, dan mobile-friendly."/>
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/jagung-godog-gerimis.html"/>
-    <meta property="og:locale" content="id_ID" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Gerimis & Jagung Godog: Hangatnya Camilan Sederhana"/>
     <meta name="twitter:description" content="Cerita singkat, galeri foto, dan tips menikmati jagung godog saat gerimis. Interaktif, responsif, dan mobile-friendly."/>
-    
-    
-          </div>
-        </article>
-        
-      </div>
-    </main>
-    
-    <div id="lightbox" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 hidden">
-      <img id="lightbox-img" alt="Preview" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl border border-white/20"/>
-      <a id="lb-prev" class="absolute top-1/2 left-4 text-white text-3xl cursor-pointer" aria-label="Sebelumnya">&#10094;</a>
-      <a id="lb-next" class="absolute top-1/2 right-4 text-white text-3xl cursor-pointer" aria-label="Berikutnya">&#10095;</a>
-      <a id="lb-close" class="absolute top-4 right-8 text-white text-3xl cursor-pointer" aria-label="Tutup">&times;</a>
-    </div>
-    
-    <footer class="mt-10 pt-4 border-t border-gray-200 bg-white/85 backdrop-blur-md">
-      <div class="container mx-auto px-4 py-4">
-        <div class="grid grid-cols-1 gap-4 pb-6">
-          <div class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
-            <div class="font-bold text-sm">Waktu lokal: <span id="time-local"></span></div>
-            <div class="text-xs text-slate-500">
-              <span id="url-page"></span>
-            </div>
-          </div>
-        </div>
-              </div>
-    </footer>
-    
+    <meta name="twitter:title" content="Gerimis & Jagung Godog: Hangatnya Camilan Sederhana"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta property="og:description" content="Cerita singkat, galeri foto, dan tips menikmati jagung godog saat gerimis. Interaktif, responsif, dan mobile-friendly."/>
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:title" content="Gerimis & Jagung Godog: Hangatnya Camilan Sederhana"/>
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/jagung-godog-gerimis.html"/>
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        
-        // --- Dynamic Content & Time ---
-        const canonicalUrl = document.querySelector('link[rel="canonical"]').href;
-        let fmt = new Intl.DateTimeFormat("id-ID", { dateStyle: "full", timeStyle: "medium" });
-        document.getElementById("time-local").textContent = fmt.format(new Date());
-        document.getElementById("url-page").textContent = canonicalUrl;
-        
-        // --- Lightbox Logic ---
-        const galleryLinks = Array.from(document.querySelectorAll("#gallery a"));
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-img");
-        const lbClose = document.getElementById("lb-close");
-        const lbPrev = document.getElementById("lb-prev");
-        const lbNext = document.getElementById("lb-next");
-        let currentIndex = 0;
-        
-        // Function untuk menampilkan gambar di lightbox
-        const showImage = (index) => {
-            if (index < 0) index = galleryLinks.length - 1;
-            if (index >= galleryLinks.length) index = 0;
-            currentIndex = index;
-            
-            // Ambil URL resolusi tinggi dari atribut href
-            const highResUrl = galleryLinks[currentIndex].getAttribute("href");
-            lightboxImg.src = highResUrl;
-            lightbox.classList.remove("hidden");
-            lightbox.classList.add("flex");
-        };
-
-        // Event listener untuk klik pada gambar galeri
-        galleryLinks.forEach((link, index) => {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-                showImage(index);
-            });
-        });
-
-        // Navigasi
-        lbPrev.addEventListener("click", () => showImage(currentIndex - 1));
-        lbNext.addEventListener("click", () => showImage(currentIndex + 1));
-        lbClose.addEventListener("click", () => lightbox.classList.remove("flex"));
-
-        // Tutup lightbox saat klik background
-        lightbox.addEventListener("click", function (e) {
-            if (e.target === lightbox) {
-                lightbox.classList.remove("flex");
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener("keydown", (e) => {
-            if (lightbox.classList.contains("flex")) {
-                if (e.key === "Escape") lightbox.classList.remove("flex");
-                if (e.key === "ArrowLeft") showImage(currentIndex - 1);
-                if (e.key === "ArrowRight") showImage(currentIndex + 1);
-            }
-        });
-        
-        // --- Social Sharing Logic ---
-        let shareUrl = encodeURIComponent(canonicalUrl);
-        let shareText = encodeURIComponent(document.title);
-        
-        const shareLinks = {
-          "#shareFacebook": "https://www.facebook.com/sharer/sharer.php?u=" + shareUrl,
-          "#shareTwitter": `https://twitter.com/intent/tweet?url=${shareUrl}&text=` + shareText,
-          "#shareX": `https://x.com/intent/post?url=${shareUrl}&text=` + shareText,
-          "#shareWhatsApp": `https://wa.me/?text=${shareText}%20` + shareUrl,
-          "#shareTelegram": `https://t.me/share/url?url=${shareUrl}&text=` + shareText,
-        };
-        
-        for (let selector in shareLinks) {
-          let element = document.querySelector(selector);
-          if (element) {
-            element.setAttribute("href", shareLinks[selector]);
-          }
-        }
-        
-        // --- Facebook Comments Setup ---
-        document.getElementById("fb-comments").setAttribute("data-href", canonicalUrl);
-        window.fbAsyncInit = function () {
-          if (typeof FB !== 'undefined') {
-            try { FB.XFBML.parse(); } catch (e) {}
-          }
-        };
-      });
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    <title>Gerimis & Jagung Godog: Hangatnya Camilan Sederhana | Catatan Kuliner</title>
   </body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

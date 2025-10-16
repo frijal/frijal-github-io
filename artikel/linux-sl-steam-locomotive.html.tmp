@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Basic SEO -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan Terminal 🚂</title>
+    <meta name="description" content="Artikel tentang paket SL di Linux. Awalnya karena salah ketik perintah LS menjadi SL, ternyata menghadirkan animasi kereta api di terminal.">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/linux-sl-steam-locomotive.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/69/69939.png" type="image/png">
+    <meta name="theme-color" content="#004080">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan Terminal 🚂">
+    <meta property="og:description" content="Awalnya salah ketik perintah LS jadi SL, ternyata memunculkan animasi kereta api di terminal Linux.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/linux-sl-steam-locomotive.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan Terminal 🚂">
+    <meta name="twitter:description" content="Awalnya salah ketik perintah LS jadi SL, ternyata memunculkan animasi kereta api di terminal Linux.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif">
+    
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
+
+    <!-- Styles: 1 kolom, dark theme -->
+    <style>
+        :root {
+            --bg: #1e1e1e;
+            --fg: #d4d4d4;
+            --muted: #a8b0bb;
+            --accent: #007acc; /* VS Code Blue */
+            --accent-2: #4fc1ff;
+            --card: #252526;
+            --border: #3c3c3c;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --maxw: 900px;
+            --lh: 1.7;
+        }
+        html, body {
+            background: var(--bg); color: var(--fg);
+            font: 16px/var(--lh) system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; scroll-behavior: smooth;
+        }
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wrap { display: flex; flex-direction: column; min-height: 100vh; }
+        header.site {
+            padding: 24px 20px 8px; border-bottom: 1px solid var(--border);
+            background: #1e1e1e;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: bold; font-size: 1.2rem; }
+        main { display: flex; justify-content: center; padding: 28px 16px 60px; }
+        .col { width: 100%; max-width: var(--maxw); }
+        article { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 24px; }
+        article h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.2; margin: 0 0 10px; color: var(--accent-2); }
+        article h2 { font-size: clamp(22px, 3vw, 28px); margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        article .lead { color: var(--muted); margin-bottom: 18px; font-size: 1.1rem; }
+        .share-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 24px 0; }
+        .btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: #333333; color: var(--fg); cursor: pointer; text-decoration: none; }
+        .btn-share:hover { background: #444444; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { cursor: zoom-in; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
+        pre[class*="language-"] { position: relative; padding: 1.25rem 1rem; border-radius: 8px; margin-top: 1rem; }
+        code { font-family: 'Courier New', Courier, monospace; }
+        .copy-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: var(--muted); padding: 4px 8px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); color: var(--fg); }
+        footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="site">
+            <div class="brand">🚂 frijal.github.io</div>
+        </header>
+
+        <main>
+            <div class="col">
+                <article>
+                    <h1>Mengenal Paket SL di Linux: Salah Ketik jadi Hiburan Terminal</h1>
+                    <p class="lead">Siapa sangka, salah ketik perintah di terminal Linux bisa menjadi hiburan tersendiri. Ini adalah cerita tentang bagaimana kesalahan ketik <code>ls</code> menjadi <code>sl</code> justru menghadirkan kejutan tak terduga.</p>
+
+                    <div class="share-bar">
+                        <a class="btn-share" data-share="twitter">Twitter</a>
+                        <a class="btn-share" data-share="facebook">Facebook</a>
+                        <a class="btn-share" data-share="whatsapp">WhatsApp</a>
+                    </div>
+
+                    <p>Saat bermaksud mengetik <code>ls</code> untuk melihat isi direktori, jari bisa saja terpeleset menjadi <code>sl</code>. Biasanya, terminal akan memberikan pesan bahwa perintah tersebut tidak ditemukan, sekaligus menyarankan cara instalasinya:</p>
+                    <pre class="language-bash"><code id="code1">The program 'sl' is currently not installed.
+You can install it by typing: sudo apt install sl</code><button class="copy-btn" data-target="code1">Salin</button></pre>
+
+                    <p>Karena penasaran, mari kita ikuti saran tersebut. Paket **SL** adalah singkatan dari **Steam Locomotive** (Kereta Uap!).</p>
+                    <pre class="language-bash"><code id="code2">sudo apt install sl</code><button class="copy-btn" data-target="code2">Salin</button></pre>
+
+                    <p>Setelah terpasang, coba jalankan kembali perintah <code>sl</code>:</p>
+                    <pre class="language-bash"><code id="code3">sl</code><button class="copy-btn" data-target="code3">Salin</button></pre>
+
+                    <p>Hasilnya? Terminal Anda akan menampilkan animasi kereta api uap yang sedang melintas! Sebuah "hukuman" yang menghibur bagi jari yang salah ketik.</p>
+                    <figure>
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGZbA0kod-u1RbKj1qnRoLL-5fxRo_pP8HV-oUiHJ7wOAOXKMpha5_dvIbLQgDG023nfPcKVzhqzW0JLi658am_pkq_CJlikqnJs5xfJicpQDsOVhsOr6nk5_ENfkrNHY0MWZYE0xuNGamDKNN416ZQfIGvYWkDB-LEB357dNToSA6bXw6FxjwdTQD_SM/s16000/sl-linux.gif" alt="Animasi kereta SL di Linux">
+                    </figure>
+
+                    <p>Anda bisa mencoba beberapa opsi lain yang tidak kalah seru, seperti <code>sl -a</code> untuk melihat "kecelakaan" kecil, atau <code>sl -F</code> untuk kereta yang terbang. Selamat mencoba! 😉</p>
+                </article>
+            </div>
+        </main>
+
+        <footer class="site">
+            <small>🄯 2025 frijal.github.io · Dari salah ketik menjadi hiburan.</small>
+        </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="Gambar diperbesar">
+    </div>
+    <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #333; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
+    
+    <!-- Prism.js Core for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+    (function(){
+        const toast = document.getElementById('toast');
+        function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
+
+        const shareMap = {
+            twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+            facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + location.href)}`
+        };
+        document.querySelectorAll('.btn-share').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const url = shareMap[btn.getAttribute('data-share')]?.(location.href);
+                if (url) window.open(url, '_blank', 'noopener,noreferrer');
+            });
+        });
+
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('figure img').forEach(el => {
+            el.addEventListener('click', () => {
+                lbImg.src = el.src;
+                lb.classList.add('open');
+            });
+        });
+        function closeLb(){ lb.classList.remove('open'); }
+        lb.addEventListener('click', closeLb);
+        window.addEventListener('keydown', (e) => {
+            if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
+        });
+
+        document.querySelectorAll('.copy-btn').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const targetId = btn.getAttribute('data-target');
+                const codeEl = document.getElementById(targetId);
+                if (codeEl) {
+                    navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
+
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<div id="iposbrowser"></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

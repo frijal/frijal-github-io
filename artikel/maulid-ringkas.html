@@ -1,247 +1,220 @@
-<!doctype html>
-<html lang="id" dir="ltr" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu</title>
-    <meta name="description" content="Versi super ringkas untuk presentasi: kontra Maulid (bid’ah), pro Maulid (wasilah dzikir & sirah), dan kesimpulan yang menekankan adab dan cinta Rasulullah. Disertai galeri, lightbox, komentar Facebook, serta info perangkat & jaringan.">
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/maulid-ringkas.html">
-    <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
-    <meta name="theme-color" content="#14b8a6">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
-    <meta property="og:description" content="Poin-poin cepat: kontra Maulid, pro Maulid, dan kesimpulan adab. Cocok untuk slide dan diskusi.">
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/maulid-ringkas.html">
-    <meta property="og:locale" content="id_ID">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
-    <meta name="twitter:description" content="Ringkasan super singkat untuk presentasi: pro-kontra Maulid dan adab perbedaan.">
-    <meta name="twitter:site" content="@frijal">
-    <style>
-      :root{
-        --bg:#070a0f;
-        --grad1: rgba(20,184,166,.22);  /* teal */
-        --grad2: rgba(217,70,239,.20);  /* fuchsia */
-        --panel: rgba(255,255,255,.06);
-        --ink:#eef7ff;
-        --muted:#c9d6e5;
-        --brand:#14b8a6;
-        --brand2:#d946ef;
-        --accent:#f59e0b;
-        --ok:#22c55e; --bad:#ef4444;
-        --border: rgba(255,255,255,.16);
-        --radius: 18px;
-        --shadow: 0 16px 48px rgba(0,0,0,.45);
-        --maxw: 1280px;
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      body{
-        margin:0; color:var(--ink);
-        background:radial-gradient(1100px 540px at -10% 0%, var(--grad1), transparent 60%),radial-gradient(1100px 540px at 110% -10%, var(--grad2), transparent 60%),linear-gradient(180deg, #06090e 0%, #0a0f18 100%);
-        font:16px/1.7 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      }
-      .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px 80px }
-      header.hero{
-        text-align:center; padding: min(14vh,140px) 20px 28px; position:relative;
-      }
-      .title{
-        margin:0 0 10px; font-weight:900; letter-spacing:-.02em; font-size: clamp(28px, 5vw, 60px);
-        background: linear-gradient(90deg, #ffffff, #b6fff8 40%, #f7c6ff 80%);
-        -webkit-background-clip:text; background-clip:text; color:transparent;
-        text-shadow: 0 12px 36px rgba(20,184,166,.28);
-      }
-      .subtitle{ margin:0 auto; max-width:980px; color:var(--muted); font-size: clamp(14px,1.6vw,18px) }
-      .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px }
-      .chip{ padding:6px 12px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,.06) }
-      /* Cards & grid */
-      .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:24px }
-      @media (max-width: 980px){ .grid{ grid-template-columns: 1fr } }
-      .card{ background: var(--panel); border:1px solid var(--border); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow) }
-      .card .head{
-        padding:14px 18px; border-bottom:1px solid var(--border);
-        background: linear-gradient(90deg, rgba(20,184,166,.14), rgba(217,70,239,.14));
-      }
-      .card .head h2{ margin:0; font-size:20px; letter-spacing:-.2px }
-      .card .body{ padding:18px }
-      .call{  padding:12px 14px; border-radius:12px; border:1px dashed var(--border);  background: linear-gradient(90deg, rgba(20,184,166,.12), rgba(217,70,239,.12));}
-      .list-bullet{ margin:0; padding-left:20px }
-      .list-bullet li{ margin:8px 0 }
-      /* Tags */
-      .tag{ display:inline-block; padding:2px 8px; border-radius:8px; border:1px solid var(--border); font-size:12px; background: rgba(255,255,255,.06) }
-      .tag.ok{ background: rgba(34,197,94,.15) } .tag.bad{ background: rgba(239,68,68,.15) } .tag.note{ background: rgba(245,158,11,.15) }
-      /* Gallery + Lightbox */
-      .gallery{ display:grid; gap:12px; grid-template-columns: repeat(3,1fr) }
-      @media (max-width:780px){ .gallery{ grid-template-columns: repeat(2,1fr) } }
-      @media (max-width:520px){ .gallery{ grid-template-columns: 1fr } }
-      .gallery figure{ margin:0; border-radius:14px; overflow:hidden; border:1px solid var(--border); aspect-ratio: 16/10; background:#0b1220; position:relative }
-      .gallery img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s ease }
-      .gallery figure:hover img{ transform: scale(1.04) }
-      .gallery figcaption{
-        position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-size:13px; color:#e6f7ff;
-        background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
-      }
-      .lightbox{
-        position:fixed; inset:0; display:none; place-items:center; padding:24px; z-index:9998;
-        background: rgba(4,6,10,.75); backdrop-filter: blur(6px);
-      }
-      .lightbox.open{ display:grid }
-      .lightbox figure{ margin:0; max-width:96vw; max-height:88vh; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#000; box-shadow: var(--shadow) }
-      .lightbox img{ display:block; max-width:100%; max-height:88vh; object-fit:contain }
-      .lightbox .close{ position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
-        font-weight:800; background:linear-gradient(90deg, var(--brand), var(--brand2)); color:#0b0b0b }
-      /* share bar */
-      .share{ display:flex; gap:10px; flex-wrap:wrap }
-      .share a{ display:inline-flex; gap:8px; align-items:center; text-decoration:none; color:#fff; font-weight:800; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.16); transition: transform .15s ease }
-      .share a:hover{ transform: translateY(-2px) }
-      .fb{ background:#1877F2 } .tw{ background:#1DA1F2 } .x{ background:#0F1419 }.wa{ background:#25D366 } .tg{ background:#229ED9 } .ig{ background:#E1306C }
-      .th{ background:#000 } .tt{ background:#010101 }
-      /* code highlight + copy */
-      pre code{ display:block; border-radius:14px }
-      .codewrap{ position:relative }
-      .copy-btn{
-        position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
-        background: linear-gradient(90deg, var(--brand), var(--brand2)); color:#0a0a0a; font-weight:800; box-shadow: var(--shadow)
-      }
-      /* Footer info Dihapus dari CSS */
-      /* Tombol Home Dihapus dari CSS */
-      
-      /* Penghapusan style floating buttons yang tidak digunakan */
-      #btn-home-left, #btn-home-right{ display:none; }
-    </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark-dimmed.min.css">
-    
-            <script>
-              const currentUrl = document.querySelector('link[rel="canonical"]').href || window.location.href;
-              document.getElementById("current-url").textContent = currentUrl;
-              // Set data-href FB Comments ke URL halaman ini
-              document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-              // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
-              window.fbAsyncInit = function() {
-                if (typeof FB !== 'undefined') {
-                  try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
-                }
-              }
-            </script>
-          </div>
-        </div>
-      </section>
-      
-    </main>
-    
-    <footer>
-    </footer>
-    
-    <div class="lightbox" id="lightbox">
-      <figure>
-        <button class="close" id="lb-close" aria-label="Tutup">Tutup ✕</button>
-        <img id="lb-img" alt="">
-        <figcaption id="lb-cap" style="color:#e5e7eb; padding:10px 12px"></figcaption>
-      </figure>
-    </div>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Lightbox gallery
-        (function () {
-          const gallery = document.querySelector('.gallery'); // Ganti dengan class .gallery jika tidak ada ID
-          const lb = document.getElementById('lightbox');
-          const lbImg = document.getElementById('lb-img');
-          const lbCap = document.getElementById('lb-cap');
-          const lbClose = document.getElementById('lb-close');
-          let images = [];
-          let idx = 0;
-          
-          if (gallery) { // Pastikan elemen gallery ada
-            // Ambil semua elemen img di dalam gallery
-            images = Array.from(gallery.querySelectorAll('img'));
-          }
 
-          function open(i) {
-            if (images.length === 0) return;
-            idx = i;
-            // Mengambil data-full (resolusi tinggi)
-            lbImg.src = images[idx].dataset.full || images[idx].src;
-            // Mengambil caption dari elemen figcaption yang terkait
-            const figure = images[idx].closest('figure');
-            lbCap.textContent = figure ? figure.querySelector('.caption')?.textContent || images[idx].alt : images[idx].alt;
-            lb.classList.add('open');
-            document.body.style.overflow='hidden';
-          }
-          
-          function close() {
-            lb.classList.remove('open'); 
-            document.body.style.overflow='';
-          }
-          
-          function init() {
-            // Tambahkan event listener ke setiap gambar
-            images.forEach((img, i) => {
-              img.addEventListener('click', () => open(i));
-            });
-            
-            lbClose.addEventListener('click', close);
-            lb.addEventListener('click', e=>{ if(e.target===lb) close(); });
-            document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
-            
-            // Logika sederhana untuk navigasi (jika ada tombol prev/next) - tidak ada di HTML ini
-          }
-          
-          init();
-        })();
+    
+      
         
-        // Share links (gunakan canonical)
-        (function(){
-          const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
-          const title = encodeURIComponent(document.title);
-          const s = document.getElementById('share');
-          const map = {
-            '.fb': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-            '.tw': `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
-            '.x' : `https://x.com/intent/post?url=${url}&text=${title}`,
-            '.wa': `https://wa.me/?text=${title}%20${url}`,
-            '.tg': `https://t.me/share/url?url=${url}&text=${title}`,
-            '.ig': `https://www.instagram.com/`,
-            '.th': `https://www.threads.net/`,
-            '.tt': `https://www.tiktok.com/`,
-          };
-          Object.entries(map).forEach(([sel,href])=>{
-            const a = s.querySelector(sel);
-            if (a) {
-              a.href = href;
-              // Memastikan link share menggunakan window.open
-              a.addEventListener('click', (e) => {
+          
+            
                   e.preventDefault();
+                  try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
                   window.open(a.href, '_blank', 'height=450,width=550,resizable=yes,noopener,noreferrer');
-              });
-            }
-          });
-        })();
-        
-        // Copy button (untuk snippet)
-        document.addEventListener('click', (e)=>{
-          if (e.target.matches('.copy-btn')) {
-            const pre = e.target.closest('.codewrap').querySelector('pre');
-            const text = pre ? pre.innerText : '';
-            if (navigator.clipboard && text) {
-              navigator.clipboard.writeText(text).then(()=>{
                 const old = e.target.textContent;
                 e.target.textContent = 'Copied!';
+                if (typeof FB !== 'undefined') {
                 setTimeout(()=> e.target.textContent = old, 1200);
+                }
+              // Memastikan link share menggunakan window.open
+              // Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+              // Set data-href FB Comments ke URL halaman ini
+              a.addEventListener('click', (e) => {
+              a.href = href;
+              const currentUrl = document.querySelector('link[rel="canonical"]').href || window.location.href;
+              document.getElementById("current-url").textContent = currentUrl;
+              document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+              img.addEventListener('click', () => open(i));
+              navigator.clipboard.writeText(text).then(()=>{
+              window.fbAsyncInit = function() {
+              }
               });
+            '.fb': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+            '.ig': `https://www.instagram.com/`,
+            '.tg': `https://t.me/share/url?url=${url}&text=${title}`,
+            '.th': `https://www.threads.net/`,
+            '.tt': `https://www.tiktok.com/`,
+            '.tw': `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+            '.wa': `https://wa.me/?text=${title}%20${url}`,
+            '.x' : `https://x.com/intent/post?url=${url}&text=${title}`,
+            // Ambil semua elemen img di dalam gallery
+            // Logika sederhana untuk navigasi (jika ada tombol prev/next) - tidak ada di HTML ini
+            // Mengambil caption dari elemen figcaption yang terkait
+            // Mengambil data-full (resolusi tinggi)
+            // Tambahkan event listener ke setiap gambar
+            </script>
+            <script>
+            const a = s.querySelector(sel);
+            const figure = images[idx].closest('figure');
+            const pre = e.target.closest('.codewrap').querySelector('pre');
+            const text = pre ? pre.innerText : '';
+            document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+            document.body.style.overflow='';
+            document.body.style.overflow='hidden';
+            idx = i;
+            if (a) {
+            if (images.length === 0) return;
+            if (navigator.clipboard && text) {
+            images = Array.from(gallery.querySelectorAll('img'));
+            images.forEach((img, i) => {
+            lb.addEventListener('click', e=>{ if(e.target===lb) close(); });
+            lb.classList.add('open');
+            lb.classList.remove('open'); 
+            lbCap.textContent = figure ? figure.querySelector('.caption')?.textContent || images[idx].alt : images[idx].alt;
+            lbClose.addEventListener('click', close);
+            lbImg.src = images[idx].dataset.full || images[idx].src;
             }
+            });
+          </div>
+          Object.entries(map).forEach(([sel,href])=>{
+          const gallery = document.querySelector('.gallery'); // Ganti dengan class .gallery jika tidak ada ID
+          const lb = document.getElementById('lightbox');
+          const lbCap = document.getElementById('lb-cap');
+          const lbClose = document.getElementById('lb-close');
+          const lbImg = document.getElementById('lb-img');
+          const map = {
+          const s = document.getElementById('share');
+          const title = encodeURIComponent(document.title);
+          const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
+          function close() {
+          function init() {
+          function open(i) {
+          if (e.target.matches('.copy-btn')) {
+          if (gallery) { // Pastikan elemen gallery ada
+          init();
+          let idx = 0;
+          let images = [];
           }
+          });
+          };
+        (function () {
+        (function(){
+        --accent:#f59e0b;
+        --bg:#070a0f;
+        --border: rgba(255,255,255,.16);
+        --brand2:#d946ef;
+        --brand:#14b8a6;
+        --grad1: rgba(20,184,166,.22);  /* teal */
+        --grad2: rgba(217,70,239,.20);  /* fuchsia */
+        --ink:#eef7ff;
+        --maxw: 1280px;
+        --muted:#c9d6e5;
+        --ok:#22c55e; --bad:#ef4444;
+        --panel: rgba(255,255,255,.06);
+        --radius: 18px;
+        --shadow: 0 16px 48px rgba(0,0,0,.45);
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+        // Copy button (untuk snippet)
+        // Lightbox gallery
+        // Share links (gunakan canonical)
+        </div>
+        <button class="close" id="lb-close" aria-label="Tutup">Tutup ✕</button>
+        <figcaption id="lb-cap" style="color:#e5e7eb; padding:10px 12px"></figcaption>
+        <img id="lb-img" alt="">
+        background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+        background: linear-gradient(90deg, #ffffff, #b6fff8 40%, #f7c6ff 80%);
+        background: linear-gradient(90deg, rgba(20,184,166,.14), rgba(217,70,239,.14));
+        background: linear-gradient(90deg, var(--brand), var(--brand2)); color:#0a0a0a; font-weight:800; box-shadow: var(--shadow)
+        background: rgba(4,6,10,.75); backdrop-filter: blur(6px);
+        background:radial-gradient(1100px 540px at -10% 0%, var(--grad1), transparent 60%),radial-gradient(1100px 540px at 110% -10%, var(--grad2), transparent 60%),linear-gradient(180deg, #06090e 0%, #0a0f18 100%);
+        document.addEventListener('click', (e)=>{
+        font-weight:800; background:linear-gradient(90deg, var(--brand), var(--brand2)); color:#0b0b0b }
+        font:16px/1.7 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        margin:0 0 10px; font-weight:900; letter-spacing:-.02em; font-size: clamp(28px, 5vw, 60px);
+        margin:0; color:var(--ink);
+        padding:14px 18px; border-bottom:1px solid var(--border);
+        position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-size:13px; color:#e6f7ff;
+        position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
+        position:fixed; inset:0; display:none; place-items:center; padding:24px; z-index:9998;
+        text-align:center; padding: min(14vh,140px) 20px 28px; position:relative;
+        text-shadow: 0 12px 36px rgba(20,184,166,.28);
+        })();
         });
+      #btn-home-left, #btn-home-right{ display:none; }
+      *{box-sizing:border-box}
+      .call{  padding:12px 14px; border-radius:12px; border:1px dashed var(--border);  background: linear-gradient(90deg, rgba(20,184,166,.12), rgba(217,70,239,.12));}
+      .card .body{ padding:18px }
+      .card .head h2{ margin:0; font-size:20px; letter-spacing:-.2px }
+      .card .head{
+      .card{ background: var(--panel); border:1px solid var(--border); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow) }
+      .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px }
+      .chip{ padding:6px 12px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,.06) }
+      .codewrap{ position:relative }
+      .copy-btn{
+      .fb{ background:#1877F2 } .tw{ background:#1DA1F2 } .x{ background:#0F1419 }.wa{ background:#25D366 } .tg{ background:#229ED9 } .ig{ background:#E1306C }
+      .gallery figcaption{
+      .gallery figure:hover img{ transform: scale(1.04) }
+      .gallery figure{ margin:0; border-radius:14px; overflow:hidden; border:1px solid var(--border); aspect-ratio: 16/10; background:#0b1220; position:relative }
+      .gallery img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s ease }
+      .gallery{ display:grid; gap:12px; grid-template-columns: repeat(3,1fr) }
+      .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:24px }
+      .lightbox .close{ position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
+      .lightbox figure{ margin:0; max-width:96vw; max-height:88vh; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#000; box-shadow: var(--shadow) }
+      .lightbox img{ display:block; max-width:100%; max-height:88vh; object-fit:contain }
+      .lightbox.open{ display:grid }
+      .lightbox{
+      .list-bullet li{ margin:8px 0 }
+      .list-bullet{ margin:0; padding-left:20px }
+      .share a:hover{ transform: translateY(-2px) }
+      .share a{ display:inline-flex; gap:8px; align-items:center; text-decoration:none; color:#fff; font-weight:800; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.16); transition: transform .15s ease }
+      .share{ display:flex; gap:10px; flex-wrap:wrap }
+      .subtitle{ margin:0 auto; max-width:980px; color:var(--muted); font-size: clamp(14px,1.6vw,18px) }
+      .tag.ok{ background: rgba(34,197,94,.15) } .tag.bad{ background: rgba(239,68,68,.15) } .tag.note{ background: rgba(245,158,11,.15) }
+      .tag{ display:inline-block; padding:2px 8px; border-radius:8px; border:1px solid var(--border); font-size:12px; background: rgba(255,255,255,.06) }
+      .th{ background:#000 } .tt{ background:#010101 }
+      .title{
+      .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px 80px }
+      /* Cards & grid */
+      /* Footer info Dihapus dari CSS */
+      /* Gallery + Lightbox */
+      /* Penghapusan style floating buttons yang tidak digunakan */
+      /* Tags */
+      /* Tombol Home Dihapus dari CSS */
+      /* code highlight + copy */
+      /* share bar */
+      :root{
+      </figure>
+      </section>
+      <figure>
+      @media (max-width: 980px){ .grid{ grid-template-columns: 1fr } }
+      @media (max-width:520px){ .gallery{ grid-template-columns: 1fr } }
+      @media (max-width:780px){ .gallery{ grid-template-columns: repeat(2,1fr) } }
+      body{
+      document.addEventListener('DOMContentLoaded', () => {
+      header.hero{
+      html,body{height:100%}
+      pre code{ display:block; border-radius:14px }
+      }
       });
+    </div>
+    </footer>
+    </main>
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <div class="lightbox" id="lightbox">
+    <footer>
+    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/maulid-ringkas.html">
+    <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark-dimmed.min.css">
+    <meta charset="utf-8">
+    <meta name="description" content="Versi super ringkas untuk presentasi: kontra Maulid (bid’ah), pro Maulid (wasilah dzikir & sirah), dan kesimpulan yang menekankan adab dan cinta Rasulullah. Disertai galeri, lightbox, komentar Facebook, serta info perangkat & jaringan.">
+    <meta name="theme-color" content="#14b8a6">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Ringkasan super singkat untuk presentasi: pro-kontra Maulid dan adab perbedaan.">
+    <meta name="twitter:site" content="@frijal">
+    <meta name="twitter:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta property="og:description" content="Poin-poin cepat: kontra Maulid, pro Maulid, dan kesimpulan adab. Cocok untuk slide dan diskusi.">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/maulid-ringkas.html">
+    <script>
+    <style>
+    <title>Ringkas Maulid Nabi: Pro, Kontra, dan Titik Temu</title>
   </body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<html lang="id" dir="ltr" prefix="og: http://ogp.me/ns#">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

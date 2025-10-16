@@ -1,261 +1,222 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <!-- Meta dasar -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Solusi LibreOffice Lambat di Jaringan</title>
-  <meta name="description" content="Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed." />
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png" />
-  <meta name="theme-color" content="#0288d1" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Solusi LibreOffice Lambat di Jaringan" />
-  <meta name="twitter:description" content="Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed." />
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" />
-
-  <!-- JSON-LD: Article -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Solusi LibreOffice Lambat di Jaringan",
-    "description": "Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed.",
-    "inLanguage": "id-ID",
-    "author": { "@type": "Person", "name": "Fakhrul Rijal" },
-    "publisher": {
+  
+    
+        
+              linear-gradient(180deg, #0b0b14 0%, #0a1622 100%);
+              radial-gradient(1000px 600px at 110% 0%, rgba(179,229,252,.15), transparent 60%),
+            <img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" alt="Tampilan file LibreOffice di jaringan" />
+          </a>
+          <a class="fb" href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+          <a class="tg" href="#" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
+          <a class="tw" href="#" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+          <a class="wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+          <a class="x" href="#" target="_blank" rel="noopener" aria-label="X">X</a>
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" data-lightbox="galeri" aria-label="Tampilan file LibreOffice di jaringan">
+          <li><strong>Hasil:</strong> LibreOffice akan menggunakan GVFS-Fuse yang lebih cepat.</li>
+          <li><strong>Langkah 1:</strong> Instal <code>gvfs-fuse</code>.</li>
+          <li><strong>Langkah 2:</strong> Nonaktifkan GIO dengan perintah <code>sed</code>.</li>
+          <li>LibreOffice lambat saat membuka file dari folder jaringan (SMB/NFS).</li>
+          <li>Penyebabnya adalah fitur GIO yang kurang efisien untuk beberapa koneksi.</li>
+          Pernah mengalami saat membuka dokumen LibreOffice dari folder jaringan, prosesnya sangat lambat? Masalah ini cukup umum, terutama bagi pengguna Linux. Ternyata, solusinya cukup sederhana.
+          ✨ Trik ini sangat berguna di lingkungan kantor atau sekolah yang banyak menggunakan <em>shared folder</em>.
+        </div>
+        </p>
+        </ul>
+        <a href="#konten" aria-label="Mulai baca">Mulai baca</a>
+        <div class="gallery" id="gallery">
+        <div class="note">
+        <div class="share" id="share">
+        <h1>Mengatasi LibreOffice yang Lambat di Jaringan</h1>
+        <h2>Akar Masalah: GIO vs GVFS-Fuse</h2>
+        <h2>Bagikan Solusi Ini</h2>
+        <h2>Inti Masalah</h2>
+        <h2>Langkah-langkah Perbaikan</h2>
+        <h3>1. Pastikan <code>gvfs-fuse</code> Sudah Terpasang</h3>
+        <h3>2. Nonaktifkan GIO untuk LibreOffice</h3>
+        <h3>Inti Solusi</h3>
+        <p class="lead">
+        <p class="muted">Setelah menjalankan kedua perintah tersebut, coba buka kembali dokumen Anda dari jaringan. Seharusnya, LibreOffice akan merespons jauh lebih cepat.</p>
+        <p>Buka terminal dan jalankan perintah berikut untuk memastikan paket yang diperlukan sudah ada di sistem Anda.</p>
+        <p>Kelambatan ini sering terjadi karena fitur <strong>GIO</strong> (Glib Input/Output) yang terlalu "cerewet" saat mengakses file di jaringan. Solusinya adalah menonaktifkan fitur tersebut dan memaksa LibreOffice untuk langsung menggunakan <strong>GVFS-Fuse</strong>, yang umumnya lebih cepat untuk kasus ini.</p>
+        <p>Selanjutnya, jalankan perintah <code>sed</code> ini di terminal untuk mengedit file konfigurasi LibreOffice secara otomatis. Perintah ini akan memberi komentar pada baris yang mengaktifkan GIO.</p>
+        <pre><code>sudo apt-get install gvfs-fuse</code></pre>
+        <pre><code>sudo sed -i 's/X-GIO-NoFuse=true/#X-GIO-NoFuse=true/' /usr/share/applications/libreoffice*</code></pre>
+        <span class="logo" aria-hidden="true"></span>
+        <ul class="list">
+        Solusi LibreOffice Lambat
+        const img = document.getElementById('lightbox-img');
+        const lb = document.getElementById('lightbox');
+        e.preventDefault();
+        img.src = a.getAttribute('href');
+        lb.style.display='flex';
       "@type": "Organization",
-      "name": "Fakhrul",
       "logo": { "@type": "ImageObject", "url": "https://frijal.pages.dev/assets/favicon.svg" }
-    },
-    "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png"],
-    "datePublished": "2025-09-21",
-    "dateModified": "2025-09-21",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html" }
-  }
-  </script>
-
-  <!-- JSON-LD: Breadcrumb -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
+      "name": "Fakhrul",
+      --accent:#0288d1; --accent2:#81d4fa;
+      --bg: #0b0b14;
+      --border: 1px solid rgba(255,255,255,.12);
+      --card: rgba(255,255,255,.06);
+      --grad: radial-gradient(1200px 700px at -10% -10%, rgba(2,136,209,.15), transparent 55%),
+      --ink:#e8ecf8;
+      --muted:#a4b1c9;
+      --radius:18px;
+      --shadow: 0 22px 60px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.04) inset;
+      --w: min(1200px, 94vw);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      <!-- Konten utama -->
+      <!-- Samping: Inti Masalah & Solusi -->
+      </article>
+      </aside>
+      </div>
+      <article class="card" id="konten" role="main">
+      <aside class="card">
+      <div class="brand">
+      <div class="cta">
+      <p class="muted">🄯 2025 frijal.github.io • Panduan ini diuji pada Ubuntu dan turunannya.</p>
+      background: conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent));
+      background: linear-gradient(135deg, rgba(2,136,209,.1), rgba(129,212,250,.1));
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background: linear-gradient(90deg,#fff,#e0f7fa 40%,#b3e5fc);
+      background: rgba(11,11,20,.6); backdrop-filter: blur(10px) saturate(140%);
+      background: var(--grad); background-attachment: fixed;
+      border-bottom: var(--border);
+      border:1px dashed rgba(255,255,255,.22); color:#f1fbff
+      box-shadow: var(--shadow);
+      color:#08131e; padding:10px 14px; border-radius:999px; box-shadow: var(--shadow)
+      const a = e.target.closest('a[data-lightbox]');
+      display:flex; align-items:center; gap:12px; font-weight:900; letter-spacing:.2px;
+      display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:900;
+      font-size: clamp(22px,3.1vw,36px);
+      font:16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      if(a){
+      margin:0; color:var(--ink);
+      padding:12px 14px; border-radius:14px; margin:10px 0;
+      position:sticky; top:0; z-index:1000;
+      width:36px; height:36px; border-radius:10px;
       {"@type":"ListItem","position":1,"name":"Beranda","item":"https://frijal.pages.dev/"},
       {"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/artikel/"},
       {"@type":"ListItem","position":3,"name":"Solusi LibreOffice Lambat","item":"https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html"}
-    ]
-  }
-  </script>
-  
-  <!-- CSS: Menggunakan gaya dari templat -->
-  <style>
-    :root{
-      --bg: #0b0b14;
-      --grad: radial-gradient(1200px 700px at -10% -10%, rgba(2,136,209,.15), transparent 55%),
-              radial-gradient(1000px 600px at 110% 0%, rgba(179,229,252,.15), transparent 60%),
-              linear-gradient(180deg, #0b0b14 0%, #0a1622 100%);
-      --ink:#e8ecf8;
-      --muted:#a4b1c9;
-      --card: rgba(255,255,255,.06);
-      --border: 1px solid rgba(255,255,255,.12);
-      --shadow: 0 22px 60px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.04) inset;
-      --accent:#0288d1; --accent2:#81d4fa;
-      --radius:18px;
-      --w: min(1200px, 94vw);
-    }
+      }
+    "@context": "https://schema.org",
+    "@context":"https://schema.org",
+    "@type": "Article",
+    "@type":"BreadcrumbList",
+    "author": { "@type": "Person", "name": "Fakhrul Rijal" },
+    "dateModified": "2025-09-21",
+    "datePublished": "2025-09-21",
+    "description": "Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed.",
+    "headline": "Solusi LibreOffice Lambat di Jaringan",
+    "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png"],
+    "inLanguage": "id-ID",
+    "itemListElement":[
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html" }
+    "publisher": {
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--ink);
-      font:16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: var(--grad); background-attachment: fixed;
-    }
-    a{color:#81d4fa}
-    header{
-      position:sticky; top:0; z-index:1000;
-      background: rgba(11,11,20,.6); backdrop-filter: blur(10px) saturate(140%);
-      border-bottom: var(--border);
-    }
-    .wrap{width:var(--w); margin:0 auto; padding:18px}
-    .hero{display:flex; align-items:center; justify-content:space-between; gap:18px; padding:8px 0}
-    .brand{
-      display:flex; align-items:center; gap:12px; font-weight:900; letter-spacing:.2px;
-      background: linear-gradient(90deg,#fff,#e0f7fa 40%,#b3e5fc);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      font-size: clamp(22px,3.1vw,36px);
-    }
     .brand .logo{
-      width:36px; height:36px; border-radius:10px;
-      background: conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent));
-      box-shadow: var(--shadow);
-    }
-    .cta a{
-      display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:900;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#08131e; padding:10px 14px; border-radius:999px; box-shadow: var(--shadow)
-    }
-    main{padding:26px 0 64px}
-    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:22px}
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+    .brand{
     .card{background: var(--card); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding:22px}
+    .cta a{
+    .gallery a:hover img{ transform: scale(1.03) }
+    .gallery a{display:block; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.12)}
+    .gallery img{width:100%; height:auto; object-fit:cover; display:block; transition: transform .35s ease; filter:saturate(1.04) contrast(1.03)}
+    .gallery{display:grid; grid-template-columns: 1fr; gap:12px; margin-top:10px}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:22px}
+    .hero{display:flex; align-items:center; justify-content:space-between; gap:18px; padding:8px 0}
+    .lead{font-size:18px; color:#eaf7ff}
+    .list li{list-style:none; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05)}
+    .list{display:grid; gap:10px; margin:10px 0; padding-left: 0;}
+    .muted{color:var(--muted)}
+    .note{
+    .share .fb{background:#1877F2; color:#fff}
+    .share .tg{background:#0088cc; color:#fff}
+    .share .tw{background:#1DA1F2; color:#fff}
+    .share .wa{background:#25D366}
+    .share .x{background:#0f1419; color:#fff}
+    .share a{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; text-decoration:none; color:#08131e; font-weight:800}
+    .share{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .wrap{width:var(--w); margin:0 auto; padding:18px}
+    // Lightbox sederhana
+    // Link share
+    :root{
+    </div>
+    <div class="grid">
+    <div class="wrap hero">
+    <div class="wrap">
+    <img id="lightbox-img" alt="Preview" style="max-width:92vw; max-height:92vh; border-radius:16px; box-shadow:0 24px 80px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.3)" />
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+    ]
+    a{color:#81d4fa}
+    body{
+    code{background-color:rgba(255,255,255,0.1); padding: 2px 5px; border-radius: 4px; font-family: monospace;}
+    const setHref = (sel, url) => shareContainer.querySelector(sel)?.setAttribute('href', url);
+    const shareContainer = document.getElementById('share');
+    const shareText = encodeURIComponent('Solusi LibreOffice Lambat di Jaringan');
+    const shareUrl = 'https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html';
+    document.addEventListener('click', function(e){
+    document.getElementById('lightbox')?.addEventListener('click', function(){ this.style.display='none' });
+    footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(11,11,20,.6); backdrop-filter: blur(8px)}
     h1,h2,h3{margin:0 0 12px}
     h1{font:900 clamp(22px, 2.6vw, 34px)/1.2 Poppins, Inter, Arial}
     h2{font:800 clamp(20px, 2.2vw, 28px)/1.25 Poppins, Inter, Arial; color:var(--accent2)}
     h3{font:700 clamp(18px, 1.9vw, 22px)/1.3 Poppins, Inter, Arial; color:#e6f6ff}
-    p{margin:0 0 12px}
-    .lead{font-size:18px; color:#eaf7ff}
-    .muted{color:var(--muted)}
-    .note{
-      padding:12px 14px; border-radius:14px; margin:10px 0;
-      background: linear-gradient(135deg, rgba(2,136,209,.1), rgba(129,212,250,.1));
-      border:1px dashed rgba(255,255,255,.22); color:#f1fbff
-    }
-    .list{display:grid; gap:10px; margin:10px 0; padding-left: 0;}
-    .list li{list-style:none; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05)}
-    .gallery{display:grid; grid-template-columns: 1fr; gap:12px; margin-top:10px}
-    .gallery a{display:block; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.12)}
-    .gallery img{width:100%; height:auto; object-fit:cover; display:block; transition: transform .35s ease; filter:saturate(1.04) contrast(1.03)}
-    .gallery a:hover img{ transform: scale(1.03) }
-    .share{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-    .share a{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; text-decoration:none; color:#08131e; font-weight:800}
-    .share .tw{background:#1DA1F2; color:#fff}
-    .share .x{background:#0f1419; color:#fff}
-    .share .wa{background:#25D366}
-    .share .tg{background:#0088cc; color:#fff}
-    .share .fb{background:#1877F2; color:#fff}
+    header{
+    html,body{height:100%}
+    main{padding:26px 0 64px}
     pre{background-color: #0d1117; color: #c9d1d9; padding: 1.25rem; border-radius: 0.75rem; overflow-x: auto; border: var(--border);}
-    code{background-color:rgba(255,255,255,0.1); padding: 2px 5px; border-radius: 4px; font-family: monospace;}
-    footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(11,11,20,.6); backdrop-filter: blur(8px)}
-  </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-
-  <!-- Header -->
-  <header>
-    <div class="wrap hero">
-      <div class="brand">
-        <span class="logo" aria-hidden="true"></span>
-        Solusi LibreOffice Lambat
-      </div>
-      <div class="cta">
-        <a href="#konten" aria-label="Mulai baca">Mulai baca</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <div class="grid">
-      <!-- Konten utama -->
-      <article class="card" id="konten" role="main">
-        <h1>Mengatasi LibreOffice yang Lambat di Jaringan</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-        <p class="lead">
-          Pernah mengalami saat membuka dokumen LibreOffice dari folder jaringan, prosesnya sangat lambat? Masalah ini cukup umum, terutama bagi pengguna Linux. Ternyata, solusinya cukup sederhana.
-        </p>
-        
-        <div class="gallery" id="gallery">
-          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" data-lightbox="galeri" aria-label="Tampilan file LibreOffice di jaringan">
-            <img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" alt="Tampilan file LibreOffice di jaringan" />
-          </a>
-        </div>
-
-        <h2>Akar Masalah: GIO vs GVFS-Fuse</h2>
-        <p>Kelambatan ini sering terjadi karena fitur <strong>GIO</strong> (Glib Input/Output) yang terlalu "cerewet" saat mengakses file di jaringan. Solusinya adalah menonaktifkan fitur tersebut dan memaksa LibreOffice untuk langsung menggunakan <strong>GVFS-Fuse</strong>, yang umumnya lebih cepat untuk kasus ini.</p>
-        
-        <h2>Langkah-langkah Perbaikan</h2>
-        <h3>1. Pastikan <code>gvfs-fuse</code> Sudah Terpasang</h3>
-        <p>Buka terminal dan jalankan perintah berikut untuk memastikan paket yang diperlukan sudah ada di sistem Anda.</p>
-        <pre><code>sudo apt-get install gvfs-fuse</code></pre>
-
-        <h3>2. Nonaktifkan GIO untuk LibreOffice</h3>
-        <p>Selanjutnya, jalankan perintah <code>sed</code> ini di terminal untuk mengedit file konfigurasi LibreOffice secara otomatis. Perintah ini akan memberi komentar pada baris yang mengaktifkan GIO.</p>
-        <pre><code>sudo sed -i 's/X-GIO-NoFuse=true/#X-GIO-NoFuse=true/' /usr/share/applications/libreoffice*</code></pre>
-        <p class="muted">Setelah menjalankan kedua perintah tersebut, coba buka kembali dokumen Anda dari jaringan. Seharusnya, LibreOffice akan merespons jauh lebih cepat.</p>
-
-        <h2>Bagikan Solusi Ini</h2>
-        <div class="share" id="share">
-          <a class="fb" href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-          <a class="tw" href="#" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
-          <a class="x" href="#" target="_blank" rel="noopener" aria-label="X">X</a>
-          <a class="wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
-          <a class="tg" href="#" target="_blank" rel="noopener" aria-label="Telegram">Telegram</a>
-        </div>
-      </article>
-
-      <!-- Samping: Inti Masalah & Solusi -->
-      <aside class="card">
-        <h2>Inti Masalah</h2>
-        <ul class="list">
-          <li>LibreOffice lambat saat membuka file dari folder jaringan (SMB/NFS).</li>
-          <li>Penyebabnya adalah fitur GIO yang kurang efisien untuk beberapa koneksi.</li>
-        </ul>
-
-        <h3>Inti Solusi</h3>
-        <ul class="list">
-          <li><strong>Langkah 1:</strong> Instal <code>gvfs-fuse</code>.</li>
-          <li><strong>Langkah 2:</strong> Nonaktifkan GIO dengan perintah <code>sed</code>.</li>
-          <li><strong>Hasil:</strong> LibreOffice akan menggunakan GVFS-Fuse yang lebih cepat.</li>
-        </ul>
-        
-        <div class="note">
-          ✨ Trik ini sangat berguna di lingkungan kantor atau sekolah yang banyak menggunakan <em>shared folder</em>.
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <!-- Lightbox sederhana -->
-  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.84); align-items:center; justify-content:center; z-index:9990;">
-    <img id="lightbox-img" alt="Preview" style="max-width:92vw; max-height:92vh; border-radius:16px; box-shadow:0 24px 80px rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.3)" />
-  </div>
-
-  <footer>
-    <div class="wrap">
-      <p class="muted">🄯 2025 frijal.github.io • Panduan ini diuji pada Ubuntu dan turunannya.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Lightbox sederhana
-    document.addEventListener('click', function(e){
-      const a = e.target.closest('a[data-lightbox]');
-      if(a){
-        e.preventDefault();
-        const lb = document.getElementById('lightbox');
-        const img = document.getElementById('lightbox-img');
-        img.src = a.getAttribute('href');
-        lb.style.display='flex';
-      }
-    });
-    document.getElementById('lightbox')?.addEventListener('click', function(){ this.style.display='none' });
-
-    // Link share
-    const shareUrl = 'https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html';
-    const shareText = encodeURIComponent('Solusi LibreOffice Lambat di Jaringan');
-    const shareContainer = document.getElementById('share');
-    const setHref = (sel, url) => shareContainer.querySelector(sel)?.setAttribute('href', url);
-    
+    p{margin:0 0 12px}
     setHref('.fb', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`);
-    setHref('.tw', `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
-    setHref('.x',  `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
-    setHref('.wa', `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`);
     setHref('.tg', `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
+    setHref('.tw', `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
+    setHref('.wa', `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`);
+    setHref('.x',  `https://x.com/intent/post?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
+    }
+    });
+    },
+  <!-- CSS: Menggunakan gaya dari templat -->
+  <!-- Favicon -->
+  <!-- Header -->
+  <!-- JSON-LD: Article -->
+  <!-- JSON-LD: Breadcrumb -->
+  <!-- Lightbox sederhana -->
+  <!-- Meta dasar -->
+  <!-- Twitter Card -->
+  </div>
+  </footer>
+  </header>
+  </main>
   </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  </style>
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.84); align-items:center; justify-content:center; z-index:9990;">
+  <footer>
+  <header>
+  <link rel="apple-touch-icon" href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png" />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/solusi-libreoffice-lambat-jaringan.html" />
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/assets/favicon.svg" />
+  <main class="wrap">
+  <meta charset="utf-8" />
+  <meta name="description" content="Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed." />
+  <meta name="theme-color" content="#0288d1" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="Mengatasi masalah LibreOffice yang lambat saat membuka dokumen dari jaringan di Ubuntu. Panduan mudah dengan gvfs-fuse dan perintah sed." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMfNNalvSWH-Ret2DTnNkICgYpcjvrp6opvu4URXBOyzpmLqyLN7N755pUmcQqhsnLt330ABNqCavTFU5GsG4XW7eWz-jgEcB70SmLzM90I6vcQazWX16TExlQaSIWnbVos0gLhhAR7fZd/s1600/LO-4-3.png" />
+  <meta name="twitter:title" content="Solusi LibreOffice Lambat di Jaringan" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <script type="application/ld+json">
+  <script>
+  <style>
+  <title>Solusi LibreOffice Lambat di Jaringan</title>
+  {
+  }
+<!DOCTYPE html>
 </body>
+</head>
 </html>
+<body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<head>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

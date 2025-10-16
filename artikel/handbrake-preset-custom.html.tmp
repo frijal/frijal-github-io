@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<!-- SEO Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- prettier-ignore -->
+<title>🎬 Membuat Preset Kustom di HandBrake untuk Encoding Video Lebih Baik</title>
+<meta name="description" content="Panduan lengkap, santai, dan interaktif untuk membuat preset kustom di HandBrake! Gali tips hardware encoding, dimensi video, codec, audio, subtitle, dan simpan preset sesuai kebutuhan. Desain responsif fullscreen, fitur galeri, sharing, komentar Facebook, dan info browser, OS, lokasi!">
+<meta name="keywords" content="HandBrake, preset kustom, encoding video, hardware encoding, tutorial, video encoding, linux, indonesia">
+<meta name="author" content="frijal">
+<meta name="robots" content="index, follow">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://frijal.pages.dev/artikel/handbrake-preset-custom.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="🎬 Membuat Preset Kustom di HandBrake untuk Encoding Video Lebih Baik">
+<meta property="og:description" content="Panduan lengkap, santai, dan interaktif membuat preset kustom di HandBrake. Ada tips hardware encoding, dimensi video, codec, audio, subtitle, dan fitur interaktif galeri, sharing, info browser & lokasi!">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/handbrake-preset-custom.html">
+<meta property="og:site_name" content="frijal.pages.dev">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🎬 Membuat Preset Kustom di HandBrake untuk Encoding Video Lebih Baik">
+<meta name="twitter:description" content="Panduan lengkap, santai, dan interaktif membuat preset kustom di HandBrake. Plus tips hardware encoding, codec, audio, subtitle, fitur interaktif & galeri!">
+
+<!-- JSON-LD Microdata -->
+<!-- JS: Gallery, Info, Share, Lightbox, LazyLoad -->
+<script>
+// --- Gallery Lazy Load, Lightbox, Arrow navigation
+const galleryImgs = Array.from(document.querySelectorAll('.gallery img'));
+let lightboxIdx = null;
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+function showLightbox(idx) {
+lightboxIdx = idx;
+lightboxImg.src = galleryImgs[idx].getAttribute('data-src');
+lightboxImg.alt = galleryImgs[idx].alt;
+lightbox.classList.add('active');
+}
+function hideLightbox() {
+lightbox.classList.remove('active');
+setTimeout(()=>{lightboxImg.src='';},180);
+}
+function nextLightbox(n) {
+if (lightboxIdx == null) return;
+lightboxIdx = (lightboxIdx + n + galleryImgs.length) % galleryImgs.length;
+showLightbox(lightboxIdx);
+}
+galleryImgs.forEach((img, idx) => {
+img.addEventListener('click', () => showLightbox(idx));
+});
+document.getElementById('lightbox-next').onclick = ()=>nextLightbox(1);
+document.getElementById('lightbox-prev').onclick = ()=>nextLightbox(-1);
+document.getElementById('lightbox-close').onclick = hideLightbox;
+lightbox.addEventListener('click', e => { if (e.target === lightbox) hideLightbox(); });
+// Lazy load for gallery
+if ('IntersectionObserver' in window) {
+const io = new IntersectionObserver((entries, obs) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+let img = entry.target;
+img.src = img.dataset.src;
+io.unobserve(img);
+}
+});
+});
+galleryImgs.forEach(img => io.observe(img));
+} else {
+// fallback: load all
+galleryImgs.forEach(img => img.src = img.dataset.src);
+}
+// --- Share Button
+function share(network) {
+let url = encodeURIComponent(location.href);
+let title = encodeURIComponent(document.title);
+let shareUrl = '';
+switch(network) {
+case 'facebook':
+shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+break;
+case 'twitter':
+shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+break;
+case 'whatsapp':
+shareUrl = `https://wa.me/?text=${title}%20${url}`;
+break;
+}
+window.open(shareUrl, '_blank', 'width=600,height=500');
+}
+
+</script>
+
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

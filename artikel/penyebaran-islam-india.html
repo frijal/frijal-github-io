@@ -1,89 +1,71 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.5">
-  <title>Penyebaran Islam ke India: Sindh, Ghaznawi, Delhi, Mughal</title>
-  <meta name="description" content="Kisah seru penyebaran Islam ke India, dari penaklukan Sindh sampai Dinasti Mughal. Narasi sejarah, galeri foto, dan info unik dikemas santai & lengkap.">
-  <meta name="keywords" content="Islam India, Muhammad bin Qasim, Mahmud Ghaznawi, Kesultanan Delhi, Mughal, sejarah Islam, Sindh, panipat, Taj Mahal, Multan, Qutb Minar">
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/penyebaran-islam-india.html">
-  <link rel="icon" type="image/png" href="https://frijal.pages.dev/favicon.png">
-  
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Penyebaran Islam ke India: Dari Sindh hingga Dinasti Mughal">
-  <meta property="og:description" content="Kisah seru penyebaran Islam ke India, dari penaklukan Sindh sampai Dinasti Mughal. Narasi sejarah, galeri foto, info unik & interaktif.">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/penyebaran-islam-india.html">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSFDdPAQd32paPqudpKWFweGz7ZYFJgaLUuSmQ0Gfz1dNlU1Guf31uV6qrsCLAEweXiVCYq8uN-ao8w2zW5KrxjMitz5LwUJ2uj_YtAUoA-b6JCFI2RuEmFxL_nlsUxyYI4lBSV6GklXHfFCN-24GATfOVnFwXgU5d7z6QD1ZSzXXa9bRGZF4y6qg1gDw/s1920/india.jpg">
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Penyebaran Islam ke India: Dari Sindh hingga Dinasti Mughal">
-  <meta name="twitter:description" content="Narasi seru sejarah Islam di India dari Sindh hingga Mughal, foto dan info unik.">
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSFDdPAQd32paPqudpKWFweGz7ZYFJgaLUuSmQ0Gfz1dNlU1Guf31uV6qrsCLAEweXiVCYq8uN-ao8w2zW5KrxjMitz5LwUJ2uj_YtAUoA-b6JCFI2RuEmFxL_nlsUxyYI4lBSV6GklXHfFCN-24GATfOVnFwXgU5d7z6QD1ZSzXXa9bRGZF4y6qg1gDw/s1920/india.jpg">
-  
-  <script>
-    // Lightbox galeri foto
-    const galleryImgs = document.querySelectorAll('.gallery img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCap = document.getElementById('lightbox-caption');
-    let imgList = [], imgIndex = 0;
 
-    // Mengumpulkan semua gambar dari semua galeri
-    document.querySelectorAll('.gallery').forEach(gal => {
-      gal.querySelectorAll('img').forEach(img => imgList.push(img));
-    });
-
-    function showLightbox(idx) {
-      imgIndex = idx;
-      let src = imgList[idx].src;
-      if (src.includes('/s1600/')) src = src.replace('/s1600/', '/s1920/');
-      if (src.includes('/s800/')) src = src.replace('/s800/', '/s1920/');
+  
       
-      lightboxImg.src = src;
-      lightboxImg.alt = imgList[idx].alt;
-      lightboxCap.textContent = imgList[idx].dataset.caption || imgList[idx].alt;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    galleryImgs.forEach((img, idx) => {
-      img.addEventListener('click', () => showLightbox(idx));
-    });
-
-    document.querySelector('.lightbox .close').onclick = () => {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-
-    document.querySelector('.lightbox .nav.prev').onclick = () => {
-      showLightbox((imgIndex - 1 + imgList.length) % imgList.length);
-    };
-
-    document.querySelector('.lightbox .nav.next').onclick = () => {
-      showLightbox((imgIndex + 1) % imgList.length);
-    };
-
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('active');
         document.body.style.overflow = '';
-      }
-    });
-
-    document.addEventListener('keydown', e => {
+        lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+      document.body.style.overflow = 'hidden';
+      gal.querySelectorAll('img').forEach(img => imgList.push(img));
       if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') lightbox.classList.remove('active'), document.body.style.overflow = '';
       if (e.key === 'ArrowLeft') document.querySelector('.lightbox .nav.prev').click();
       if (e.key === 'ArrowRight') document.querySelector('.lightbox .nav.next').click();
+      if (e.key === 'Escape') lightbox.classList.remove('active'), document.body.style.overflow = '';
+      if (e.target === lightbox) {
+      if (src.includes('/s1600/')) src = src.replace('/s1600/', '/s1920/');
+      if (src.includes('/s800/')) src = src.replace('/s800/', '/s1920/');
+      img.addEventListener('click', () => showLightbox(idx));
+      imgIndex = idx;
+      let src = imgList[idx].src;
+      lightbox.classList.add('active');
+      lightbox.classList.remove('active');
+      lightboxCap.textContent = imgList[idx].dataset.caption || imgList[idx].alt;
+      lightboxImg.alt = imgList[idx].alt;
+      lightboxImg.src = src;
+      showLightbox((imgIndex + 1) % imgList.length);
+      showLightbox((imgIndex - 1 + imgList.length) % imgList.length);
+      }
+    // Lightbox galeri foto
+    // Mengumpulkan semua gambar dari semua galeri
+    const galleryImgs = document.querySelectorAll('.gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxCap = document.getElementById('lightbox-caption');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.addEventListener('keydown', e => {
+    document.querySelector('.lightbox .close').onclick = () => {
+    document.querySelector('.lightbox .nav.next').onclick = () => {
+    document.querySelector('.lightbox .nav.prev').onclick = () => {
+    document.querySelectorAll('.gallery').forEach(gal => {
+    function showLightbox(idx) {
+    galleryImgs.forEach((img, idx) => {
+    let imgList = [], imgIndex = 0;
+    lightbox.addEventListener('click', e => {
+    }
     });
+    };
   </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/penyebaran-islam-india.html">
+  <link rel="icon" type="image/png" href="https://frijal.pages.dev/favicon.png">
+  <meta charset="UTF-8">
+  <meta name="description" content="Kisah seru penyebaran Islam ke India, dari penaklukan Sindh sampai Dinasti Mughal. Narasi sejarah, galeri foto, dan info unik dikemas santai & lengkap.">
+  <meta name="keywords" content="Islam India, Muhammad bin Qasim, Mahmud Ghaznawi, Kesultanan Delhi, Mughal, sejarah Islam, Sindh, panipat, Taj Mahal, Multan, Qutb Minar">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="Narasi seru sejarah Islam di India dari Sindh hingga Mughal, foto dan info unik.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSFDdPAQd32paPqudpKWFweGz7ZYFJgaLUuSmQ0Gfz1dNlU1Guf31uV6qrsCLAEweXiVCYq8uN-ao8w2zW5KrxjMitz5LwUJ2uj_YtAUoA-b6JCFI2RuEmFxL_nlsUxyYI4lBSV6GklXHfFCN-24GATfOVnFwXgU5d7z6QD1ZSzXXa9bRGZF4y6qg1gDw/s1920/india.jpg">
+  <meta name="twitter:title" content="Penyebaran Islam ke India: Dari Sindh hingga Dinasti Mughal">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.5">
+  <meta property="og:description" content="Kisah seru penyebaran Islam ke India, dari penaklukan Sindh sampai Dinasti Mughal. Narasi sejarah, galeri foto, info unik & interaktif.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSFDdPAQd32paPqudpKWFweGz7ZYFJgaLUuSmQ0Gfz1dNlU1Guf31uV6qrsCLAEweXiVCYq8uN-ao8w2zW5KrxjMitz5LwUJ2uj_YtAUoA-b6JCFI2RuEmFxL_nlsUxyYI4lBSV6GklXHfFCN-24GATfOVnFwXgU5d7z6QD1ZSzXXa9bRGZF4y6qg1gDw/s1920/india.jpg">
+  <meta property="og:title" content="Penyebaran Islam ke India: Dari Sindh hingga Dinasti Mughal">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/penyebaran-islam-india.html">
+  <script>
+  <title>Penyebaran Islam ke India: Sindh, Ghaznawi, Delhi, Mughal</title>
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

@@ -1,224 +1,165 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PT Adaro Indonesia — Profil Perusahaan & Fakta Penting</title>
-    <link rel="canonical" href="https://frijal.pages.dev/adaro-perusahaan-tambang-batu-bara.html">
-    <meta name="description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia — sejarah, lini usaha, dan fakta penting.">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="Adaro, PT Adaro Energy, Tambang Batu Bara, Energi Indonesia">
-    <meta name="date" content="2025-09-27">
-    <meta property="og:locale" content="id_ID">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Adaro — Profil & Fakta Penting">
-    <meta property="og:description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia — sejarah, lini usaha, dan fakta penting.">
-    <meta property="og:url" content="https://frijal.pages.dev/adaro-perusahaan-tambang-batu-bara.html">
-    <meta property="og:image" content="https://frijal.pages.dev/img/adaro-perusahaan-tambang-batu-bara.webp">
-    <meta property="og:image:alt" content="Logo dan fasilitas PT Adaro Indonesia">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Adaro — Profil & Fakta Penting">
-    <meta name="twitter:description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia">
-    <meta name="twitter:image" content="https://frijal.pages.dev/img/adaro-perusahaan-tambang-batu-bara.webp">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23007acc'/%3E%3Ctext x='50' y='58' font-size='50' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
-    <style>
-        :root {
+
+        
+            
+                alert('Link disalin ke clipboard!')
+                await navigator.clipboard.writeText(currentUrl);
+                const a = d.querySelector('p')?.innerText || '';
+                const json = JSON.parse(schemaArticle.text);
+                const jsonldFAQ = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs };
+                const q = d.querySelector('summary')?.innerText || '';
+                const script = document.createElement('script');
+                document.head.appendChild(script);
+                if (q && a) faqs.push({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } });
+                json.dateModified = new Date().toISOString().split('T')[0];
+                prompt('Salin link ini:', currentUrl)
+                schemaArticle.text = JSON.stringify(json);
+                script.text = JSON.stringify(jsonldFAQ);
+                script.type = 'application/ld+json';
+             border-top: 1px dashed #e0e0e0;
+             margin-top: 20px;
+             padding-top: 20px;
+            --accent: #0ea5a4
             --bg: #0f1724;
             --card: #0b1220;
             --muted: #9aa4b2;
-            --accent: #0ea5a4
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        body {
-            margin: 0;
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: linear-gradient(180deg, #f7fafc 0, #fff 100%);
-            color: #0b1220
-        }
-
-        .container {
-            max-width: 900px; /* Disesuaikan untuk 1 kolom */
-            margin: 24px auto;
-            padding: 28px;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        header {
-            display: flex;
-            flex-direction: column; /* Ubah ke kolom tunggal */
-            gap: 24px;
+            // 4. Build FAQPage JSON-LD (Hanya menginjeksikan FAQPage)
             align-items: center;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        
-        .hero-thumb {
-            width: 100%; /* Ambil lebar penuh */
-            max-width: 320px; /* Batasi ukuran thumbnail di tengah */
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(2, 6, 23, .06);
             background: #e6eef3;
-        }
-
-        .hero-thumb img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            display: block
-        }
-
-        h1 {
-            font-size: 28px;
-            margin: 0 0 8px
-        }
-
-        .meta {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 14px
-        }
-
-        .summary {
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: #24303a;
-            margin-bottom: 20px;
-        }
-
-        main {
-            display: block; /* Menghapus grid */
-        }
-
-        article {
             background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 6px 22px rgba(11, 18, 32, .04);
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background: #fff;
-            padding: 18px;
+            background: linear-gradient(180deg, #f7fafc 0, #fff 100%);
             border-radius: 10px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 18px rgba(11, 18, 32, .04);
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-top: 4px
-        }
-
-        ul {
-            padding-left: 18px
-        }
-
-        .share {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
+            border-radius: 12px;
             border-radius: 8px;
             border: 1px solid #e6eef3;
-            background: #fff;
-            cursor: pointer;
-            font-size: 14px
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px
-        }
-
-        footer {
-            margin-top: 28px;
-            text-align: center;
-            font-size: 13px;
+            box-shadow: 0 4px 18px rgba(11, 18, 32, .04);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 22px rgba(11, 18, 32, .04);
+            box-shadow: 0 8px 30px rgba(2, 6, 23, .06);
+            box-sizing: border-box
+            color: #0b1220
+            color: #24303a;
             color: var(--muted)
-        }
-        
+            color: var(--muted);
+            const faqs = [];
+            const schemaArticle = document.getElementById('schema-article');
+            cursor: pointer;
+            display: block
+            display: block; /* Menghapus grid */
+            display: flex;
+            display: inline-flex;
+            document.querySelectorAll('#faq-list details').forEach((d) => {
+            flex-direction: column; /* Ubah ke kolom tunggal */
+            flex-wrap: wrap
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            font-size: 1.1em;
+            font-size: 13px;
+            font-size: 14px
+            font-size: 14px;
+            font-size: 20px;
+            font-size: 28px;
+            gap: 24px;
+            gap: 8px;
+            height: 18px
+            height: auto;
+            if (faqs.length > 0) {
+            if (schemaArticle) {
+            line-height: 1.7;
+            margin-bottom: 14px
+            margin-bottom: 16px;
+            margin-bottom: 20px;
+            margin-bottom: 24px;
+            margin-top: 28px;
+            margin-top: 4px
+            margin: 0 0 8px
+            margin: 0;
+            margin: 24px auto;
+            max-width: 320px; /* Batasi ukuran thumbnail di tengah */
+            max-width: 900px; /* Disesuaikan untuk 1 kolom */
+            object-fit: cover;
+            overflow: hidden;
+            padding-left: 18px
+            padding: 18px;
+            padding: 24px;
+            padding: 28px;
+            padding: 8px 12px;
+            text-align: center;
+            try {
+            width: 100%;
+            width: 100%; /* Ambil lebar penuh */
+            width: 18px;
+            }
+            } catch (e) {
+            });
+        * {
+        .btn svg {
+        .btn {
+        .card {
         .comments-wrap {
-             margin-top: 20px;
-             padding-top: 20px;
-             border-top: 1px dashed #e0e0e0;
-        }
-    </style>
-    <script>
+        .container {
+        .hero-thumb img {
+        .hero-thumb {
+        .meta {
+        .share {
+        .summary {
+        // 1. Update elemen Halaman dan Meta Tags
+        // 2. Share buttons
+        // 3. Update dateModified di JSON-LD
         // Ambil URL unik halaman saat ini
+        // Tambahkan rel="noopener" untuk keamanan pada window.open
+        // Update data-href untuk Facebook Comments
+        // document.getElementById("current-url-display").textContent = currentUrl; // Dihapus karena elemennya dihapus
+        :root {
+        article {
+        body {
         const currentUrl = document.querySelector('link[rel="canonical"]').href || window.location.href;
         const encodedTitle = encodeURIComponent(document.title);
         const encodedUrl = encodeURIComponent(currentUrl);
-
-        // 1. Update elemen Halaman dan Meta Tags
-        // document.getElementById("current-url-display").textContent = currentUrl; // Dihapus karena elemennya dihapus
-        
-        // Update data-href untuk Facebook Comments
-        document.getElementById('fb-comments').setAttribute('data-href', currentUrl);
-        
-        // 2. Share buttons
-        // Tambahkan rel="noopener" untuk keamanan pada window.open
-        document.getElementById('share-fb').addEventListener('click', () => {window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
-        document.getElementById('share-x').addEventListener('click', () => {window.open(`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
-        document.getElementById('share-wa').addEventListener('click', () => {window.open(`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`, '_blank', 'noopener');});
-        document.getElementById('share-tg').addEventListener('click', () => {window.open(`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`, '_blank', 'noopener');});
-        
-        document.getElementById('copy-link').addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(currentUrl);
-                alert('Link disalin ke clipboard!')
-            } catch (e) {
-                prompt('Salin link ini:', currentUrl)
-            }
-        });
-        
-        // 3. Update dateModified di JSON-LD
         document.addEventListener('DOMContentLoaded', () => {
-            const schemaArticle = document.getElementById('schema-article');
-            if (schemaArticle) {
-                const json = JSON.parse(schemaArticle.text);
-                json.dateModified = new Date().toISOString().split('T')[0];
-                schemaArticle.text = JSON.stringify(json);
-            }
-            
-            // 4. Build FAQPage JSON-LD (Hanya menginjeksikan FAQPage)
-            const faqs = [];
-            document.querySelectorAll('#faq-list details').forEach((d) => {
-                const q = d.querySelector('summary')?.innerText || '';
-                const a = d.querySelector('p')?.innerText || '';
-                if (q && a) faqs.push({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } });
-            });
-
-            if (faqs.length > 0) {
-                const jsonldFAQ = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs };
-                const script = document.createElement('script');
-                script.type = 'application/ld+json';
-                script.text = JSON.stringify(jsonldFAQ);
-                document.head.appendChild(script);
-            }
+        document.getElementById('copy-link').addEventListener('click', async () => {
+        document.getElementById('fb-comments').setAttribute('data-href', currentUrl);
+        document.getElementById('share-fb').addEventListener('click', () => {window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
+        document.getElementById('share-tg').addEventListener('click', () => {window.open(`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`, '_blank', 'noopener');});
+        document.getElementById('share-wa').addEventListener('click', () => {window.open(`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`, '_blank', 'noopener');});
+        document.getElementById('share-x').addEventListener('click', () => {window.open(`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
+        footer {
+        h1 {
+        h2 {
+        header {
+        main {
+        ul {
+        }
         });
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <link rel="canonical" href="https://frijal.pages.dev/adaro-perusahaan-tambang-batu-bara.html">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23007acc'/%3E%3Ctext x='50' y='58' font-size='50' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="date" content="2025-09-27">
+    <meta name="description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia — sejarah, lini usaha, dan fakta penting.">
+    <meta name="keywords" content="Adaro, PT Adaro Energy, Tambang Batu Bara, Energi Indonesia">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia">
+    <meta name="twitter:image" content="https://frijal.pages.dev/img/adaro-perusahaan-tambang-batu-bara.webp">
+    <meta name="twitter:title" content="Adaro — Profil & Fakta Penting">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:description" content="Profil singkat Adaro: perusahaan tambang batu bara terkemuka di Indonesia — sejarah, lini usaha, dan fakta penting.">
+    <meta property="og:image" content="https://frijal.pages.dev/img/adaro-perusahaan-tambang-batu-bara.webp">
+    <meta property="og:image:alt" content="Logo dan fasilitas PT Adaro Indonesia">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="Adaro — Profil & Fakta Penting">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.pages.dev/adaro-perusahaan-tambang-batu-bara.html">
+    <script>
+    <style>
+    <title>PT Adaro Indonesia — Profil Perusahaan & Fakta Penting</title>
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

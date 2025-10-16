@@ -1,492 +1,353 @@
-<!doctype html>
-<html lang="id" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>Preset Lightroom (.xmp) – NatGeo, Monokrom, Sepia</title>
-    <meta
-      name="description"
-      content="Cara membuat preset Lightroom (.xmp) paket lengkap: NatGeo Style, Monokrom Dokumenter, dan Sepia Arsip. Panduan santai, teknis, siap pakai, lengkap dengan contoh dan galeri."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Pelan Kiri" />
-    <meta name="theme-color" content="#0f172a" />
-    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
-    <link
-      rel="apple-touch-icon"
-      href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png"
-    />
-    <link rel="manifest" href="https://frijal.pages.dev/site.webmanifest" />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Frijal Artikel" />
-    <meta
-      property="og:title"
-      content="Preset Lightroom (.xmp) – NatGeo, Monokrom, Sepia"
-    />
-    <meta
-      property="og:description"
-      content="Cara membuat preset Lightroom (.xmp) paket lengkap: NatGeo Style, Monokrom Dokumenter, dan Sepia Arsip. Panduan santai, teknis, siap pakai."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html"
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.pages.dev/img/preset-lightroom-xmp-natgeo-monokrom-sepia.webp"
-    />
-    <meta
-      property="og:image:alt"
-      content="Ilustrasi preset Lightroom gaya dokumenter"
-    />
-    <meta
-      property="article:published_time"
-      content="2025-10-05T16:30:00+08:00"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Preset Lightroom (.xmp) – NatGeo, Monokrom, Sepia"
-    />
-    <meta
-      name="twitter:description"
-      content="Paket preset Lightroom (.xmp): NatGeo, Monokrom, Sepia. Panduan lengkap, santai, dan siap pakai."
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.pages.dev/img/preset-lightroom-xmp-natgeo-monokrom-sepia.webp"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <style>
-      :root {
-        --bg: #0f172a;
-        --text: #e5e7eb;
-        --muted: #94a3b8;
-        --accent: #3b82f6;
-        --accent-2: #f97316;
-        --card: #0b1220;
-        --border: #1f2937;
-        --link: #60a5fa;
-        --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-        --radius: 14px;
-        --radius-sm: 10px;
-        --container: 900px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-      }
-      a {
-        color: var(--link);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      .wrapper {
-        display: grid;
-        grid-template-columns: 1fr;
-        align-content: start;
-        min-height: 100vh;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        backdrop-filter: saturate(120%) blur(6px);
-        background: rgba(11, 18, 32, 0.8);
-        border-bottom: 1px solid var(--border);
-      }
-      .header-inner {
-        max-width: var(--container);
-        margin: 0 auto;
-        padding: 16px 20px;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .site-title {
-        font-weight: 700;
-        color: var(--accent);
-        font-size: 1.05rem;
-      }
-      .share-row {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-      .share-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 9px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        cursor: pointer;
-        transition: transform 0.15s ease;
-      }
-      .share-btn:hover {
-        transform: translateY(-2px);
-      }
-      .share-btn img {
-        width: 18px;
-        height: 18px;
-      }
-      main {
-        max-width: var(--container);
-        margin: 0 auto;
-        padding: 28px 20px 40px;
-      }
-      .hero {
-        background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 60%), var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 22px;
-      }
-      .hero h1 {
-        margin: 0 0 8px;
-        font-size: clamp(1.5rem, 2.4vw, 2rem);
-        color: var(--accent);
-      }
-      .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 18px;
-        color: var(--muted);
-        font-size: 0.95rem;
-        margin-top: 6px;
-      }
-      .content {
-        margin-top: 22px;
-        display: grid;
-        gap: 18px;
-      }
-      .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        padding: 18px;
-      }
-      .card h2 {
-        margin: 0 0 10px;
-        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-        color: var(--accent);
-      }
-      .card h3 {
-        margin: 10px 0 6px;
-        font-size: 1.05rem;
-        color: var(--accent-2);
-      }
-      .card ul {
-        margin: 6px 0;
-        padding-left: 1.2rem;
-      }
-      .gallery {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .gallery img {
-        width: 100%;
-        height: auto;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        cursor: zoom-in;
-      }
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.88);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 50;
-      }
-      .lightbox.active {
-        display: flex;
-      }
-      .lightbox-content {
-        position: relative;
-      }
-      .lightbox-img {
-        max-width: 92vw;
-        max-height: 92vh;
-        border-radius: 10px;
-      }
-      .lightbox-close,
-      .lightbox-prev,
-      .lightbox-next {
-        position: absolute;
-        background: rgba(17, 24, 39, 0.85);
-        color: #fff;
-        border: 1px solid #233249;
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-      }
-      .lightbox-close { top: -56px; right: 0; }
-      .lightbox-prev { top: 50%; left: -56px; transform: translateY(-50%); }
-      .lightbox-next { top: 50%; right: -56px; transform: translateY(-50%); }
-      .comments {
-        margin-top: 8px;
-        padding: 12px;
-        background: #0c1424;
-        border: 1px solid #13203a;
-        border-radius: 10px;
-      }
-      footer {
-        max-width: var(--container);
-        margin: 10px auto 40px;
-        padding: 0 20px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        text-align: center;
-      }
-      @media (min-width: 960px) {
-        .gallery {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-    </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="header-inner">
-          <div class="site-title">
-            Preset Lightroom (.xmp) • NatGeo • Monokrom • Sepia
-          </div>
-          <div class="share-row" aria-label="Bagikan Artikel">
-            <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke Facebook">
+
+    
+          
+            
+              
+                <li><strong>Basic</strong>: Contrast +20, Highlights -10, Shadows +15.</li>
+                <li><strong>Color Grading</strong>: Highlights (Hue 40, Sat 25); Shadows (Hue 30, Sat 15).</li>
+                <li><strong>Treatment</strong>: Black & White → lalu Color Grading.</li>
+                lightboxImg.alt = img.alt;
+                lightboxImg.src = img.src;
               <img alt="Facebook" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"/>
-            </a>
-            <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html&text=Preset%20Lightroom%20(.xmp)%20%E2%80%93%20NatGeo%2C%20Monokrom%2C%20Sepia" target="_blank" rel="noopener noreferrer" title="Bagikan ke X/Twitter">
-              <img alt="X/Twitter" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"/>
-            </a>
-            <a class="share-btn" href="https://wa.me/?text=Preset%20Lightroom%20(.xmp)%20%E2%80%93%20NatGeo%2C%20Monokrom%2C%20Sepia%20-%20https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke WhatsApp">
               <img alt="WhatsApp" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
-            </a>
-          </div>
-        </div>
-      </header>
-      <main>
-        <section class="hero">
-          <h1>Preset Lightroom (.xmp) – Paket Lengkap</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-          <div id="iposbrowser"></div>
-          <div class="meta">
-            <span>Dipublikasikan: 05 Okt 2025</span>
-            <span>Format: Panduan preset siap pakai</span>
-          </div>
-          <p style="margin-top: 10px">
-            Di artikel ini, kita akan membuat preset Lightroom (.xmp) yang
-            praktis dan konsisten: <strong>NatGeo Style</strong>,
-            <strong>Monokrom Dokumenter</strong>, dan
-            <strong>Sepia Arsip</strong>.
-          </p>
-        </section>
-        <section class="content">
-          <article class="card">
-            <h2>Cara Membuat Preset (.xmp) di Lightroom</h2>
-            <p>
-              Langkahnya sederhana: terapkan pengaturan pada satu foto contoh,
-              lalu simpan sebagai preset. Setelah itu, Anda bisa ekspor file
-              preset (.xmp) untuk dibagikan atau dipakai di perangkat lain.
-            </p>
-          </article>
-          <article class="card">
-            <h2>Preset 1: NatGeo Style – Warna Natural Dramatis</h2>
-            <p>
-              Warna tetap hidup, kontras lembut, fokus ke ekspresi. Cocok untuk
-              gaya dokumenter modern dengan detail tajam tapi tidak berlebihan.
-            </p>
-            <ul>
+              <img alt="X/Twitter" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"/>
+              <li><strong>Basic</strong>: Contrast +25, Highlights -15, Shadows +20, Blacks -20.</li>
               <li><strong>Basic</strong>: Exposure +0.30, Contrast +15, Highlights -20, Shadows +25.</li>
               <li><strong>Color</strong>: Temp +200K, Vibrance +20, Saturation +10.</li>
               <li><strong>Detail</strong>: Sharpen 70, Masking 50, Noise Reduction 25.</li>
-            </ul>
-          </article>
-          <article class="card">
-            <h2>Preset 2: Monokrom Dokumenter – Hitam Putih Tegas</h2>
-            <p>
-              Kontras kuat, tekstur klasik, dan dramatis. Pas untuk menekankan
-              sisi sejarah dan emosi tanpa distraksi warna.
-            </p>
-            <ul>
-              <li><strong>Treatment</strong>: Black & White.</li>
-              <li><strong>Basic</strong>: Contrast +25, Highlights -15, Shadows +20, Blacks -20.</li>
               <li><strong>Effects</strong>: Vignette -20, Grain +15.</li>
+              <li><strong>Treatment</strong>: Black & White.</li>
+              Bagikan pengalaman Anda membuat preset atau hasil editan Anda.
+              Kontras kuat, tekstur klasik, dan dramatis. Pas untuk menekankan
+              Langkahnya sederhana: terapkan pengaturan pada satu foto contoh,
+              Nuansa arsip tua ala koran/majalah tahun 70-80an. Hangat,
+              Tips kecil yang Anda temukan bisa membantu banyak orang.
+              Warna tetap hidup, kontras lembut, fokus ke ekspresi. Cocok untuk
+              gaya dokumenter modern dengan detail tajam tapi tidak berlebihan.
+              historis, tapi tetap jelas.
+              lalu simpan sebagai preset. Setelah itu, Anda bisa ekspor file
+              preset (.xmp) untuk dibagikan atau dipakai di perangkat lain.
+              sisi sejarah dan emosi tanpa distraksi warna.
+            // Memberi data-index jika belum ada
+            </a>
+            </div>
+            </p>
             </ul>
-          </article>
-          <article class="card">
+            <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html&text=Preset%20Lightroom%20(.xmp)%20%E2%80%93%20NatGeo%2C%20Monokrom%2C%20Sepia" target="_blank" rel="noopener noreferrer" title="Bagikan ke X/Twitter">
+            <a class="share-btn" href="https://wa.me/?text=Preset%20Lightroom%20(.xmp)%20%E2%80%93%20NatGeo%2C%20Monokrom%2C%20Sepia%20-%20https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke WhatsApp">
+            <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke Facebook">
+            <div class="comments">
+            <h2>Cara Membuat Preset (.xmp) di Lightroom</h2>
+            <h2>Diskusi & Jaga Data Pribadi Tetap Aman.</h2>
+            <h2>Preset 1: NatGeo Style – Warna Natural Dramatis</h2>
+            <h2>Preset 2: Monokrom Dokumenter – Hitam Putih Tegas</h2>
             <h2>Preset 3: Sepia Arsip – Coklat Hangat Nostalgia</h2>
             <p>
-              Nuansa arsip tua ala koran/majalah tahun 70-80an. Hangat,
-              historis, tapi tetap jelas.
-            </p>
+            <span>Dipublikasikan: 05 Okt 2025</span>
+            <span>Format: Panduan preset siap pakai</span>
+            <strong>Monokrom Dokumenter</strong>, dan
+            <strong>Sepia Arsip</strong>.
             <ul>
-                <li><strong>Treatment</strong>: Black & White → lalu Color Grading.</li>
-                <li><strong>Basic</strong>: Contrast +20, Highlights -10, Shadows +15.</li>
-                <li><strong>Color Grading</strong>: Highlights (Hue 40, Sat 25); Shadows (Hue 30, Sat 15).</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Diskusi & Jaga Data Pribadi Tetap Aman.</h2>
-            <p>
-              Bagikan pengalaman Anda membuat preset atau hasil editan Anda.
-              Tips kecil yang Anda temukan bisa membantu banyak orang.
-            </p>
-            
-            <div class="comments">
-              
-            </div>
-          </article>
-        </section>
-      </main>
-      <footer>
-        <div>
-          🄯 2025 • Frijal Artikel • Preset Lightroom (.xmp) – NatGeo • Monokrom
-          • Sepia
-        </div>
-        <div>
-          Desain 1 kolom dark‑mode, responsif untuk widescreen, fullscreen, dan
-          mobile.
-        </div>
-      </footer>
-    </div>
-    
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-      <div class="lightbox-content">
-        <img class="lightbox-img" id="lightboxImg" alt="Foto fullscreen" />
-        <button class="lightbox-close" id="lightboxClose" title="Tutup" aria-label="Tutup">✕</button>
-        <button class="lightbox-prev" id="lightboxPrev" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
-        <button class="lightbox-next" id="lightboxNext" title="Berikutnya" aria-label="Berikutnya">▶</button>
-      </div>
-    </div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <div id="kategori-aktif"></div>
-    <div class="search-floating-container">
-      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- Skrip deteksi pengguna DIHAPUS sesuai instruksi ---
-
-        // --- Lightbox Galeri ---
-        (() => {
-          const gallery = document.getElementById('gallery');
-          const lightbox = document.getElementById('lightbox');
-          // Periksa jika elemen galeri & lightbox tidak ada
-          if (!gallery || !lightbox) return;
-
-          const lightboxImg = document.getElementById('lightboxImg');
-          const btnClose = document.getElementById('lightboxClose');
-          const btnPrev = document.getElementById('lightboxPrev');
-          const btnNext = document.getElementById('lightboxNext');
-          const items = Array.from(gallery.querySelectorAll('img'));
-          let currentIndex = 0;
-          
-          if (items.length === 0) return; // Keluar jika tidak ada gambar
-
-          function showImage(index) {
+            Di artikel ini, kita akan membuat preset Lightroom (.xmp) yang
+            Preset Lightroom (.xmp) • NatGeo • Monokrom • Sepia
             const img = items[index];
-            if (img) {
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
-            }
-          }
-
-          function openLightbox(index) {
-            currentIndex = index;
-            showImage(currentIndex);
-            lightbox.classList.add('active');
-            lightbox.setAttribute('aria-hidden', 'false');
-          }
-
-          function closeLightbox() {
-            lightbox.classList.remove('active');
-            lightbox.setAttribute('aria-hidden', 'true');
-          }
-
-          function prevImage() {
-            currentIndex = (currentIndex - 1 + items.length) % items.length;
-            showImage(currentIndex);
-          }
-
-          function nextImage() {
             currentIndex = (currentIndex + 1) % items.length;
-            showImage(currentIndex);
-          }
-
-          items.forEach((img, index) => {
-            // Memberi data-index jika belum ada
-            if(!img.dataset.index) img.dataset.index = index;
-            img.addEventListener('click', () => openLightbox(index));
-          });
-          
-          btnClose.addEventListener('click', closeLightbox);
-          btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
-          btnNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
-          lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-          });
-
-          window.addEventListener('keydown', (e) => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            currentIndex = index;
             if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') prevImage();
             if (e.key === 'ArrowRight') nextImage();
-          });
-        })();
-
-        // --- Facebook SDK ---
-        (() => {
-          const script = document.createElement('script');
-          script.async = true;
-          script.defer = true;
-          script.crossOrigin = "anonymous";
-          script.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023";
+            if (e.key === 'Escape') closeLightbox();
+            if (e.target === lightbox) closeLightbox();
+            if (img) {
+            if(!img.dataset.index) img.dataset.index = index;
+            img.addEventListener('click', () => openLightbox(index));
+            lightbox.classList.add('active');
+            lightbox.classList.remove('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            lightbox.setAttribute('aria-hidden', 'true');
+            praktis dan konsisten: <strong>NatGeo Style</strong>,
+            showImage(currentIndex);
+            }
           // Nonce bisa ditambahkan di sini jika diperlukan
+          // Periksa jika elemen galeri & lightbox tidak ada
+          </article>
+          </div>
+          </p>
+          <article class="card">
+          <div class="meta">
+          <div class="share-row" aria-label="Bagikan Artikel">
+          <div class="site-title">
+          <h1>Preset Lightroom (.xmp) – Paket Lengkap</h1>
+          <p style="margin-top: 10px">
+          Desain 1 kolom dark‑mode, responsif untuk widescreen, fullscreen, dan
+          btnClose.addEventListener('click', closeLightbox);
+          btnNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+          btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+          const btnClose = document.getElementById('lightboxClose');
+          const btnNext = document.getElementById('lightboxNext');
+          const btnPrev = document.getElementById('lightboxPrev');
+          const gallery = document.getElementById('gallery');
+          const items = Array.from(gallery.querySelectorAll('img'));
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          const script = document.createElement('script');
           document.body.appendChild(script);
+          function closeLightbox() {
+          function nextImage() {
+          function openLightbox(index) {
+          function prevImage() {
+          function showImage(index) {
+          grid-template-columns: 1fr 1fr;
+          if (!gallery || !lightbox) return;
+          if (items.length === 0) return; // Keluar jika tidak ada gambar
+          items.forEach((img, index) => {
+          let currentIndex = 0;
+          lightbox.addEventListener('click', (e) => {
+          mobile.
+          sans-serif;
+          script.async = true;
+          script.crossOrigin = "anonymous";
+          script.defer = true;
+          script.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0&appId=1471267430691023";
+          window.addEventListener('keydown', (e) => {
+          }
+          });
+          • Sepia
+          🄯 2025 • Frijal Artikel • Preset Lightroom (.xmp) – NatGeo • Monokrom
+        (() => {
+        --accent-2: #f97316;
+        --accent: #3b82f6;
+        --bg: #0f172a;
+        --border: #1f2937;
+        --card: #0b1220;
+        --container: 900px;
+        --link: #60a5fa;
+        --muted: #94a3b8;
+        --radius-sm: 10px;
+        --radius: 14px;
+        --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+        --text: #e5e7eb;
+        .gallery {
+        // --- Facebook SDK ---
+        // --- Lightbox Galeri ---
+        // --- Skrip deteksi pengguna DIHAPUS sesuai instruksi ---
+        </div>
+        </section>
+        <button class="lightbox-close" id="lightboxClose" title="Tutup" aria-label="Tutup">✕</button>
+        <button class="lightbox-next" id="lightboxNext" title="Berikutnya" aria-label="Berikutnya">▶</button>
+        <button class="lightbox-prev" id="lightboxPrev" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
+        <div class="header-inner">
+        <div>
+        <img class="lightbox-img" id="lightboxImg" alt="Foto fullscreen" />
+        <section class="content">
+        <section class="hero">
+        align-content: start;
+        align-items: center;
+        backdrop-filter: saturate(120%) blur(6px);
+        background: #0c1424;
+        background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 60%), var(--card);
+        background: rgba(0, 0, 0, 0.88);
+        background: rgba(11, 18, 32, 0.8);
+        background: rgba(17, 24, 39, 0.85);
+        background: var(--bg);
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        border-radius: 10px;
+        border-radius: 12px;
+        border-radius: 9px;
+        border-radius: var(--radius);
+        border-radius: var(--radius-sm);
+        border: 1px solid #13203a;
+        border: 1px solid #233249;
+        border: 1px solid var(--border);
+        box-sizing: border-box;
+        color: #fff;
+        color: var(--accent);
+        color: var(--accent-2);
+        color: var(--link);
+        color: var(--muted);
+        color: var(--text);
+        cursor: pointer;
+        cursor: zoom-in;
+        display: flex;
+        display: grid;
+        display: inline-flex;
+        display: none;
+        flex-wrap: wrap;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+        font-size: 0.92rem;
+        font-size: 0.95rem;
+        font-size: 1.05rem;
+        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+        font-size: clamp(1.5rem, 2.4vw, 2rem);
+        font-weight: 700;
+        gap: 10px 18px;
+        gap: 10px;
+        gap: 12px;
+        gap: 16px;
+        gap: 18px;
+        grid-template-columns: 1fr;
+        height: 18px;
+        height: 36px;
+        height: 44px;
+        height: auto;
+        inset: 0;
+        justify-content: center;
+        justify-content: space-between;
+        line-height: 1.8;
+        margin-top: 22px;
+        margin-top: 6px;
+        margin-top: 8px;
+        margin: 0 0 10px;
+        margin: 0 0 8px;
+        margin: 0 auto;
+        margin: 0;
+        margin: 10px 0 6px;
+        margin: 10px auto 40px;
+        margin: 6px 0;
+        max-height: 92vh;
+        max-width: 92vw;
+        max-width: var(--container);
+        min-height: 100vh;
+        padding-left: 1.2rem;
+        padding: 0 20px;
+        padding: 12px;
+        padding: 16px 20px;
+        padding: 18px;
+        padding: 22px;
+        padding: 28px 20px 40px;
+        place-items: center;
+        position: absolute;
+        position: fixed;
+        position: relative;
+        position: sticky;
+        text-align: center;
+        text-decoration: none;
+        text-decoration: underline;
+        top: 0;
+        transform: translateY(-2px);
+        transition: transform 0.15s ease;
+        width: 100%;
+        width: 18px;
+        width: 36px;
+        width: 44px;
+        z-index: 10;
+        z-index: 50;
+        }
         })();
+      * {
+      .card h2 {
+      .card h3 {
+      .card ul {
+      .card {
+      .comments {
+      .content {
+      .gallery img {
+      .gallery {
+      .header-inner {
+      .hero h1 {
+      .hero {
+      .lightbox {
+      .lightbox-close { top: -56px; right: 0; }
+      .lightbox-close,
+      .lightbox-content {
+      .lightbox-img {
+      .lightbox-next {
+      .lightbox-next { top: 50%; right: -56px; transform: translateY(-50%); }
+      .lightbox-prev { top: 50%; left: -56px; transform: translateY(-50%); }
+      .lightbox-prev,
+      .lightbox.active {
+      .meta {
+      .share-btn img {
+      .share-btn {
+      .share-btn:hover {
+      .share-row {
+      .site-title {
+      .wrapper {
+      :root {
+      </div>
+      </footer>
+      </header>
+      </main>
+      <div class="lightbox-content">
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+      <div id="related-marquee-container"></div>
+      <footer>
+      <header>
+      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
+      <main>
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      @media (min-width: 960px) {
+      a {
+      a:hover {
+      body {
+      content="2025-10-05T16:30:00+08:00"
+      content="Cara membuat preset Lightroom (.xmp) paket lengkap: NatGeo Style, Monokrom Dokumenter, dan Sepia Arsip. Panduan santai, teknis, siap pakai, lengkap dengan contoh dan galeri."
+      content="Cara membuat preset Lightroom (.xmp) paket lengkap: NatGeo Style, Monokrom Dokumenter, dan Sepia Arsip. Panduan santai, teknis, siap pakai."
+      content="Ilustrasi preset Lightroom gaya dokumenter"
+      content="Paket preset Lightroom (.xmp): NatGeo, Monokrom, Sepia. Panduan lengkap, santai, dan siap pakai."
+      content="Preset Lightroom (.xmp) – NatGeo, Monokrom, Sepia"
+      content="https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html"
+      content="https://frijal.pages.dev/img/preset-lightroom-xmp-natgeo-monokrom-sepia.webp"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+      document.addEventListener('DOMContentLoaded', () => {
+      footer {
+      header {
+      href="https://frijal.pages.dev/artikel/preset-lightroom-xmp-natgeo-monokrom-sepia.html"
+      href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png"
+      main {
+      name="description"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      name="viewport"
+      property="article:published_time"
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      rel="apple-touch-icon"
+      rel="canonical"
+      }
       });
+    />
+    </div>
     </script>
-    <script src="/ext/marquee-url.js" defer></script>
+    </section>
+    </style>
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="search-floating-container">
+    <div class="wrapper">
+    <div id="kategori-aktif"></div>
+    <link
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
+    <link rel="manifest" href="https://frijal.pages.dev/site.webmanifest" />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+    <meta charset="utf-8" />
+    <meta name="author" content="Pelan Kiri" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="Frijal Artikel" />
+    <meta property="og:type" content="article" />
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script>
+    <section id="related-marquee-section">
+    <style>
+    <title>Preset Lightroom (.xmp) – NatGeo, Monokrom, Sepia</title>
   </body>
+  </head>
+  <body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id" prefix="og: http://ogp.me/ns#">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

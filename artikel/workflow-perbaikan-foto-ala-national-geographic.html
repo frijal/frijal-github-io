@@ -1,439 +1,315 @@
-<!doctype html>
-<html lang="id" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>Workflow Perbaikan Foto ala National Geographic</title>
-    <meta
-      name="description"
-      content="Panduan teknis step-by-step memperbaiki foto agar jelas, tajam, dan bernuansa dokumenter ala National Geographic: dari basic adjustments, color grading, selective editing, hingga finishing dan export."
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Pelan Kiri" />
-    <meta name="theme-color" content="#0f172a" />
-    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
-    <link
-      rel="apple-touch-icon"
-      href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png"
-    />
-    <link rel="manifest" href="https://frijal.pages.dev/site.webmanifest" />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Frijal Artikel" />
-    <meta
-      property="og:title"
-      content="Workflow Perbaikan Foto ala National Geographic"
-    />
-    <meta
-      property="og:description"
-      content="Panduan teknis step-by-step memperbaiki foto agar jelas, tajam, dan bernuansa dokumenter ala National Geographic."
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html"
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.pages.dev/img/workflow-perbaikan-foto-ala-national-geographic.webp"
-    />
-    <meta
-      property="og:image:alt"
-      content="Ilustrasi workflow perbaikan foto gaya National Geographic"
-    />
-    <meta
-      property="article:published_time"
-      content="2025-10-05T16:20:00+08:00"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Workflow Perbaikan Foto ala National Geographic"
-    />
-    <meta
-      name="twitter:description"
-      content="Langkah teknis perbaikan foto: exposure, contrast, HSL, sharpening, selective editing, finishing, export — santai, jelas, dan praktis."
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.pages.dev/img/workflow-perbaikan-foto-ala-national-geographic.webp"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <style>
-      :root {
-        --bg: #0f172a;
-        --text: #e5e7eb;
-        --muted: #94a3b8;
-        --accent: #3b82f6;
-        --accent-2: #f97316;
-        --card: #0b1220;
-        --border: #1f2937;
-        --link: #60a5fa;
-        --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-        --radius: 14px;
-        --radius-sm: 10px;
-        --container: 900px;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.8;
-      }
-      a { color: var(--link); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      .wrapper {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
-        min-height: 100vh;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        backdrop-filter: saturate(120%) blur(6px);
-        background: rgba(11, 18, 32, 0.8);
-        border-bottom: 1px solid var(--border);
-      }
-      .header-inner {
-        max-width: var(--container);
-        margin: 0 auto;
-        padding: 16px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .site-title {
-        font-weight: 700;
-        color: var(--accent);
-        font-size: 1.05rem;
-      }
-      .share-row { display: flex; gap: 10px; }
-      .share-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 9px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        cursor: pointer;
-        transition: transform 0.15s ease;
-      }
-      .share-btn:hover { transform: translateY(-2px); }
-      .share-btn img { width: 18px; height: 18px; }
-      main {
-        max-width: var(--container);
-        margin: 0 auto;
-        padding: 28px 20px 40px;
-      }
-      .hero {
-        background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 60%), var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 22px;
-      }
-      .hero h1 {
-        margin: 0 0 8px;
-        font-size: clamp(1.5rem, 2.4vw, 2rem);
-        color: var(--accent);
-      }
-      .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 18px;
-        color: var(--muted);
-        font-size: 0.95rem;
-        margin-top: 6px;
-      }
-      .content { margin-top: 22px; display: grid; gap: 18px; }
-      .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        padding: 18px;
-      }
-      .card h2 {
-        margin: 0 0 10px;
-        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-        color: var(--accent);
-      }
-      .card h3 { margin: 10px 0 6px; font-size: 1.05rem; color: var(--accent-2); }
-      .card ul { margin: 6px 0; padding-left: 1.2rem; }
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.88);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 50;
-      }
-      .lightbox.active { display: flex; }
-      .lightbox-content { position: relative; }
-      .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 10px; }
-      .lightbox-close,
-      .lightbox-prev,
-      .lightbox-next {
-        position: absolute;
-        background: rgba(17, 24, 39, 0.85);
-        color: #fff;
-        border: 1px solid #233249;
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-      }
-      .lightbox-close { top: -56px; right: 0; }
-      .lightbox-prev { top: 50%; left: -56px; transform: translateY(-50%); }
-      .lightbox-next { top: 50%; right: -56px; transform: translateY(-50%); }
-      .comments { margin-top: 8px; padding: 12px; background: #0c1424; border: 1px solid #13203a; border-radius: 10px; }
-      footer {
-        max-width: var(--container);
-        margin: 10px auto 40px;
-        padding: 0 20px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        text-align: center;
-      }
-    </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="header-inner">
-          <div class="site-title">
-            Workflow Perbaikan Foto • Gaya National Geographic
-          </div>
-          <div class="share-row" aria-label="Bagikan Artikel">
-            <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke Facebook">
-              <img alt="Facebook" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"/>
-            </a>
-            <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html&text=Workflow%20Perbaikan%20Foto%20ala%20National%20Geographic" target="_blank" rel="noopener noreferrer" title="Bagikan ke X/Twitter">
-              <img alt="X/Twitter" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"/>
-            </a>
-            <a class="share-btn" href="https://wa.me/?text=Workflow%20Perbaikan%20Foto%20ala%20National%20Geographic%20-%20https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke WhatsApp">
-              <img alt="WhatsApp" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
-            </a>
-          </div>
-        </div>
-      </header>
-      <main>
-        <section class="hero">
-          <h1>Workflow Perbaikan Foto ala National Geographic</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-          <div id="iposbrowser"></div>
-          <div class="meta">
-            <span>Dipublikasikan: 05 Okt 2025</span>
-            <span>Format: Panduan teknis & artistik</span>
-          </div>
-          <p style="margin-top: 10px">
-            Ini adalah panduan teknis *step-by-step* untuk memperbaiki foto
-            agar hasilnya lebih jelas, tajam, dan punya nuansa dokumenter ala
-            *National Geographic*.
-          </p>
-        </section>
-        <section class="content">
-          <article class="card">
-            <h2>🖼 Workflow Perbaikan Foto</h2>
-            <h3>1. Persiapan File</h3>
-            <ul>
-              <li>
-                Scan atau foto ulang dengan resolusi minimal
+
+          
+            
+              
+                (Temp +200K).
+                <em>Clarity</em> +10 dan <em>Texture</em> +15.
                 <strong>300 dpi</strong>.
-              </li>
-              <li>
-                Simpan dalam format <strong>TIFF</strong> atau
-                <strong>RAW</strong> (jika ada) untuk menjaga detail.
-              </li>
-            </ul>
-            <h3>2. Basic Adjustments (Lightroom / Camera Raw)</h3>
-            <ul>
-              <li>
                 <strong>Exposure</strong>: +0.2 s.d. +0.4 (angkat sedikit agar
+                <strong>Grain</strong>: +5 (memberi kesan film dokumenter
+                <strong>Highlights</strong>: -20 (agar bagian putih hijab tidak
+                <strong>Latar Belakang</strong>: turunkan <em>Exposure</em> -0.3
+                <strong>Noise Reduction</strong>: Luminance 20–30 (menghaluskan
+                <strong>RAW</strong> (jika ada) untuk menjaga detail.
+                <strong>Shadows</strong>: +25 (memunculkan detail di area
+                <strong>Sharpening</strong>: Amount 70, Radius 1.0, Detail 25.
+                <strong>Vibrance & Saturation</strong>: +20 Vibrance, +10 Saturation (menonjolkan warna tanpa berlebihan).
+                <strong>Wajah & Hijab</strong>: tambahkan sedikit
+                <strong>White Balance</strong>: geser sedikit ke arah hangat
+                Scan atau foto ulang dengan resolusi minimal
+                Simpan dalam format <strong>TIFF</strong> atau
+                agar subjek lebih menonjol.
+                gelap).
+                klasik).
+                noise tapi detail tetap ada).
+                terlalu terang).
                 wajah lebih terlihat).
               </li>
+              <img alt="Facebook" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"/>
+              <img alt="WhatsApp" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"/>
+              <img alt="X/Twitter" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"/>
+              <li>
               <li><strong>Contrast</strong>: +15 (memberi kedalaman).</li>
-              <li>
-                <strong>Highlights</strong>: -20 (agar bagian putih hijab tidak
-                terlalu terang).
-              </li>
-              <li>
-                <strong>Shadows</strong>: +25 (memunculkan detail di area
-                gelap).
-              </li>
-            </ul>
-            <h3>3. Color Grading</h3>
-            <ul>
-              <li>
-                <strong>White Balance</strong>: geser sedikit ke arah hangat
-                (Temp +200K).
-              </li>
-              <li>
-                <strong>Vibrance & Saturation</strong>: +20 Vibrance, +10 Saturation (menonjolkan warna tanpa berlebihan).
-              </li>
-            </ul>
-            <h3>4. Detail Enhancement</h3>
-            <ul>
-              <li>
-                <strong>Sharpening</strong>: Amount 70, Radius 1.0, Detail 25.
-              </li>
-              <li>
-                <strong>Noise Reduction</strong>: Luminance 20–30 (menghaluskan
-                noise tapi detail tetap ada).
-              </li>
-            </ul>
-            <h3>5. Selective Editing (Brush/Mask)</h3>
-            <ul>
-              <li>
-                <strong>Wajah & Hijab</strong>: tambahkan sedikit
-                <em>Clarity</em> +10 dan <em>Texture</em> +15.
-              </li>
-              <li>
-                <strong>Latar Belakang</strong>: turunkan <em>Exposure</em> -0.3
-                agar subjek lebih menonjol.
-              </li>
-            </ul>
-            <h3>6. Finishing Touch</h3>
-            <ul>
               <li><strong>Vignette</strong>: -15 (fokus ke tengah).</li>
-              <li>
-                <strong>Grain</strong>: +5 (memberi kesan film dokumenter
-                klasik).
-              </li>
-            </ul>
-          </article>
-          <article class="card">
-            <h2>Diskusi & Jaga Data Pribadi Tetap Aman.</h2>
-            <p>
-              Bagikan pengalaman Anda memperbaiki foto lama. Trik kecil yang
               Anda temukan bisa sangat membantu orang lain.
-            </p>
-            
-            <div class="comments">
-              
-            </div>
-          </article>
-        </section>
-      </main>
-      <footer>
-        <div>
-          🄯 2025 • Frijal Artikel • Workflow Perbaikan Foto ala National
-          Geographic
-        </div>
-      </footer>
-    </div>
-
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-      <div class="lightbox-content">
-        <img class="lightbox-img" id="lightboxImg" alt="Foto fullscreen" />
-        <button class="lightbox-close" id="lightboxClose" title="Tutup" aria-label="Tutup">✕</button>
-        <button class="lightbox-prev" id="lightboxPrev" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
-        <button class="lightbox-next" id="lightboxNext" title="Berikutnya" aria-label="Berikutnya">▶</button>
-      </div>
-    </div>
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <div id="kategori-aktif"></div>
-    <div class="search-floating-container">
-      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- Skrip deteksi pengguna DIHAPUS sesuai instruksi ---
-
-        // Lightbox galeri
-        (() => {
-          const gallery = document.querySelector('.gallery'); // Menyesuaikan selector jika ada galeri
-          const lightbox = document.getElementById('lightbox');
-          if (!gallery || !lightbox) return; // Keluar jika tidak ada galeri atau lightbox
-
-          const lightboxImg = document.getElementById('lightboxImg');
-          const btnClose = document.getElementById('lightboxClose');
-          const btnPrev = document.getElementById('lightboxPrev');
-          const btnNext = document.getElementById('lightboxNext');
-          const items = Array.from(gallery.querySelectorAll('img'));
-          let currentIndex = 0;
-
-          if (items.length === 0) return; // Keluar jika galeri kosong
-
-          function showImage(index) {
-            const img = items[index];
-            if(img) {
-              lightboxImg.src = img.src;
+              Bagikan pengalaman Anda memperbaiki foto lama. Trik kecil yang
               lightboxImg.alt = img.alt;
-            }
-          }
-
-          function openLightbox(index) {
-            currentIndex = index;
-            showImage(currentIndex);
-            lightbox.classList.add('active');
-          }
-
-          function closeLightbox() {
-            lightbox.classList.remove('active');
-          }
-          
-          items.forEach((img, index) => {
-            if(!img.dataset.index) img.dataset.index = index;
-            img.addEventListener('click', () => openLightbox(index));
-          });
-          
-          btnClose.addEventListener('click', closeLightbox);
-          btnPrev.addEventListener('click', (e) => { 
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + items.length) % items.length;
-            showImage(currentIndex);
-          });
-          btnNext.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % items.length;
-            showImage(currentIndex);
-          });
-
-          lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-          });
-        })();
-
-        // Facebook SDK untuk komentar
-        (() => {
-          if (document.querySelector('.fb-comments')) {
+              lightboxImg.src = img.src;
+            *National Geographic*.
+            </a>
+            </div>
+            </p>
+            </ul>
+            <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html&text=Workflow%20Perbaikan%20Foto%20ala%20National%20Geographic" target="_blank" rel="noopener noreferrer" title="Bagikan ke X/Twitter">
+            <a class="share-btn" href="https://wa.me/?text=Workflow%20Perbaikan%20Foto%20ala%20National%20Geographic%20-%20https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke WhatsApp">
+            <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html" target="_blank" rel="noopener noreferrer" title="Bagikan ke Facebook">
+            <div class="comments">
+            <h2>Diskusi & Jaga Data Pribadi Tetap Aman.</h2>
+            <h2>🖼 Workflow Perbaikan Foto</h2>
+            <h3>1. Persiapan File</h3>
+            <h3>2. Basic Adjustments (Lightroom / Camera Raw)</h3>
+            <h3>3. Color Grading</h3>
+            <h3>4. Detail Enhancement</h3>
+            <h3>5. Selective Editing (Brush/Mask)</h3>
+            <h3>6. Finishing Touch</h3>
+            <p>
+            <span>Dipublikasikan: 05 Okt 2025</span>
+            <span>Format: Panduan teknis & artistik</span>
+            <ul>
+            Ini adalah panduan teknis *step-by-step* untuk memperbaiki foto
+            Workflow Perbaikan Foto • Gaya National Geographic
+            agar hasilnya lebih jelas, tajam, dan punya nuansa dokumenter ala
+            const img = items[index];
             const script = document.createElement('script');
-            script.async = true;
-            script.defer = true;
-            script.crossOrigin = 'anonymous';
-            script.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0";
+            currentIndex = (currentIndex + 1) % items.length;
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            currentIndex = index;
             document.body.appendChild(script);
+            e.stopPropagation();
+            if (e.target === lightbox) closeLightbox();
+            if(!img.dataset.index) img.dataset.index = index;
+            if(img) {
+            img.addEventListener('click', () => openLightbox(index));
+            lightbox.classList.add('active');
+            lightbox.classList.remove('active');
+            script.async = true;
+            script.crossOrigin = 'anonymous';
+            script.defer = true;
+            script.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v18.0";
+            showImage(currentIndex);
+            }
+          </article>
+          </div>
+          </p>
+          <article class="card">
+          <div class="meta">
+          <div class="share-row" aria-label="Bagikan Artikel">
+          <div class="site-title">
+          <h1>Workflow Perbaikan Foto ala National Geographic</h1>
+          <p style="margin-top: 10px">
+          Geographic
+          btnClose.addEventListener('click', closeLightbox);
+          btnNext.addEventListener('click', (e) => {
+          btnPrev.addEventListener('click', (e) => { 
+          const btnClose = document.getElementById('lightboxClose');
+          const btnNext = document.getElementById('lightboxNext');
+          const btnPrev = document.getElementById('lightboxPrev');
+          const gallery = document.querySelector('.gallery'); // Menyesuaikan selector jika ada galeri
+          const items = Array.from(gallery.querySelectorAll('img'));
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightboxImg');
+          function closeLightbox() {
+          function openLightbox(index) {
+          function showImage(index) {
+          if (!gallery || !lightbox) return; // Keluar jika tidak ada galeri atau lightbox
+          if (document.querySelector('.fb-comments')) {
+          if (items.length === 0) return; // Keluar jika galeri kosong
+          items.forEach((img, index) => {
+          let currentIndex = 0;
+          lightbox.addEventListener('click', (e) => {
           }
+          });
+          🄯 2025 • Frijal Artikel • Workflow Perbaikan Foto ala National
+        (() => {
+        --accent-2: #f97316;
+        --accent: #3b82f6;
+        --bg: #0f172a;
+        --border: #1f2937;
+        --card: #0b1220;
+        --container: 900px;
+        --link: #60a5fa;
+        --muted: #94a3b8;
+        --radius-sm: 10px;
+        --radius: 14px;
+        --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+        --text: #e5e7eb;
+        // --- Skrip deteksi pengguna DIHAPUS sesuai instruksi ---
+        // Facebook SDK untuk komentar
+        // Lightbox galeri
+        </div>
+        </section>
+        <button class="lightbox-close" id="lightboxClose" title="Tutup" aria-label="Tutup">✕</button>
+        <button class="lightbox-next" id="lightboxNext" title="Berikutnya" aria-label="Berikutnya">▶</button>
+        <button class="lightbox-prev" id="lightboxPrev" title="Sebelumnya" aria-label="Sebelumnya">◀</button>
+        <div class="header-inner">
+        <div>
+        <img class="lightbox-img" id="lightboxImg" alt="Foto fullscreen" />
+        <section class="content">
+        <section class="hero">
+        align-items: center;
+        backdrop-filter: saturate(120%) blur(6px);
+        background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 60%), var(--card);
+        background: rgba(0, 0, 0, 0.88);
+        background: rgba(11, 18, 32, 0.8);
+        background: rgba(17, 24, 39, 0.85);
+        background: var(--bg);
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        border-radius: 10px;
+        border-radius: 9px;
+        border-radius: var(--radius);
+        border-radius: var(--radius-sm);
+        border: 1px solid #233249;
+        border: 1px solid var(--border);
+        color: #fff;
+        color: var(--accent);
+        color: var(--muted);
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        display: grid;
+        display: inline-flex;
+        display: none;
+        flex-wrap: wrap;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-size: 0.92rem;
+        font-size: 0.95rem;
+        font-size: 1.05rem;
+        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+        font-size: clamp(1.5rem, 2.4vw, 2rem);
+        font-weight: 700;
+        gap: 10px 18px;
+        grid-template-rows: auto 1fr auto;
+        height: 36px;
+        height: 44px;
+        inset: 0;
+        justify-content: center;
+        justify-content: space-between;
+        line-height: 1.8;
+        margin-top: 6px;
+        margin: 0 0 10px;
+        margin: 0 0 8px;
+        margin: 0 auto;
+        margin: 0;
+        margin: 10px auto 40px;
+        max-width: var(--container);
+        min-height: 100vh;
+        padding: 0 20px;
+        padding: 16px 20px;
+        padding: 18px;
+        padding: 22px;
+        padding: 28px 20px 40px;
+        place-items: center;
+        position: absolute;
+        position: fixed;
+        position: sticky;
+        text-align: center;
+        top: 0;
+        transition: transform 0.15s ease;
+        width: 36px;
+        width: 44px;
+        z-index: 10;
+        z-index: 50;
         })();
+      * { box-sizing: border-box; }
+      .card h2 {
+      .card h3 { margin: 10px 0 6px; font-size: 1.05rem; color: var(--accent-2); }
+      .card ul { margin: 6px 0; padding-left: 1.2rem; }
+      .card {
+      .comments { margin-top: 8px; padding: 12px; background: #0c1424; border: 1px solid #13203a; border-radius: 10px; }
+      .content { margin-top: 22px; display: grid; gap: 18px; }
+      .header-inner {
+      .hero h1 {
+      .hero {
+      .lightbox {
+      .lightbox-close { top: -56px; right: 0; }
+      .lightbox-close,
+      .lightbox-content { position: relative; }
+      .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 10px; }
+      .lightbox-next {
+      .lightbox-next { top: 50%; right: -56px; transform: translateY(-50%); }
+      .lightbox-prev { top: 50%; left: -56px; transform: translateY(-50%); }
+      .lightbox-prev,
+      .lightbox.active { display: flex; }
+      .meta {
+      .share-btn img { width: 18px; height: 18px; }
+      .share-btn {
+      .share-btn:hover { transform: translateY(-2px); }
+      .share-row { display: flex; gap: 10px; }
+      .site-title {
+      .wrapper {
+      :root {
+      </div>
+      </footer>
+      </header>
+      </main>
+      <div class="lightbox-content">
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+      <div id="related-marquee-container"></div>
+      <footer>
+      <header>
+      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
+      <main>
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      body {
+      content="2025-10-05T16:20:00+08:00"
+      content="Ilustrasi workflow perbaikan foto gaya National Geographic"
+      content="Langkah teknis perbaikan foto: exposure, contrast, HSL, sharpening, selective editing, finishing, export — santai, jelas, dan praktis."
+      content="Panduan teknis step-by-step memperbaiki foto agar jelas, tajam, dan bernuansa dokumenter ala National Geographic."
+      content="Panduan teknis step-by-step memperbaiki foto agar jelas, tajam, dan bernuansa dokumenter ala National Geographic: dari basic adjustments, color grading, selective editing, hingga finishing dan export."
+      content="Workflow Perbaikan Foto ala National Geographic"
+      content="https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html"
+      content="https://frijal.pages.dev/img/workflow-perbaikan-foto-ala-national-geographic.webp"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+      document.addEventListener('DOMContentLoaded', () => {
+      footer {
+      header {
+      href="https://frijal.pages.dev/artikel/workflow-perbaikan-foto-ala-national-geographic.html"
+      href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png"
+      main {
+      name="description"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      name="viewport"
+      property="article:published_time"
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      rel="apple-touch-icon"
+      rel="canonical"
+      }
       });
+    />
+    </div>
     </script>
-    <script src="/ext/marquee-url.js" defer></script>
+    </section>
+    </style>
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="search-floating-container">
+    <div class="wrapper">
+    <div id="kategori-aktif"></div>
+    <link
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
+    <link rel="manifest" href="https://frijal.pages.dev/site.webmanifest" />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+    <meta charset="utf-8" />
+    <meta name="author" content="Pelan Kiri" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="Frijal Artikel" />
+    <meta property="og:type" content="article" />
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script>
+    <section id="related-marquee-section">
+    <style>
+    <title>Workflow Perbaikan Foto ala National Geographic</title>
   </body>
+  </head>
+  <body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id" prefix="og: http://ogp.me/ns#">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

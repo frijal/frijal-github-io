@@ -1,161 +1,126 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <!-- prettier-ignore -->
-<title>Kisah Mehmed II Al-Fatih — Penakluk Konstantinopel</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" />
 
   <!-- Canonical (diisi dinamis oleh JS) -->
-  <link rel="canonical" id="canonical-link" href="https://frijal.pages.dev/artikel/mehmed-ii-al-fatih.html" />
-
+  <!-- Favicon -->
+  <!-- JSON-LD Article -->
   <!-- Meta SEO -->
+  <!-- Open Graph -->
+  <!-- Twitter Card -->
+  <!-- prettier-ignore -->
+  </script>
+  <link rel="canonical" id="canonical-link" href="https://frijal.pages.dev/artikel/mehmed-ii-al-fatih.html" />
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" />
+  <meta charset="utf-8" />
   <meta name="description" content="Kisah lengkap Mehmed II Al-Fatih: masa kecil, didikan ulama, latihan militer, penaklukan Konstantinopel, kebijakan adil, warisan peradaban, hingga Bayezid II sang pewaris." />
   <meta name="theme-color" content="#0c0e10" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Mehmed II Al-Fatih — Penakluk Konstantinopel" />
-  <meta property="og:description" content="Kisah lengkap Mehmed II Al-Fatih: masa kecil, didikan ulama, latihan militer, penaklukan Konstantinopel, kebijakan adil, warisan peradaban, hingga Bayezid II sang pewaris." />
-  <meta property="og:url" id="og-url" content="https://frijal.pages.dev/artikel/mehmed-ii-al-fatih.html" />
-  <meta property="og:image" id="og-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgX3909CuBrQHJyDtsL_9GQTVS31hXscWvkllFyobWMw1rdxshYL334isvpuMIBiszY96BjAqN1u4dhDRgJC5WI1KglrnF1xMciSgw_5jIUUji_0xEcaMYhfxU7CoA4lmSlC4fb79Hwkv58V9XsxdLqJ0vlGDqgZs8VI1h4c7Jti67l5s2U-AUeF7WWHc/s1600/Mehmed.jpg" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mehmed II Al-Fatih — Penakluk Konstantinopel" />
   <meta name="twitter:description" content="Kisah lengkap Mehmed II Al-Fatih: masa kecil, didikan ulama, latihan militer, penaklukan Konstantinopel, kebijakan adil, warisan peradaban, hingga Bayezid II sang pewaris." />
   <meta name="twitter:image" id="twitter-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgX3909CuBrQHJyDtsL_9GQTVS31hXscWvkllFyobWMw1rdxshYL334isvpuMIBiszY96BjAqN1u4dhDRgJC5WI1KglrnF1xMciSgw_5jIUUji_0xEcaMYhfxU7CoA4lmSlC4fb79Hwkv58V9XsxdLqJ0vlGDqgZs8VI1h4c7Jti67l5s2U-AUeF7WWHc/s1600/Mehmed.jpg" />
-
-  <!-- JSON-LD Article -->
+  <meta name="twitter:title" content="Mehmed II Al-Fatih — Penakluk Konstantinopel" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta property="og:description" content="Kisah lengkap Mehmed II Al-Fatih: masa kecil, didikan ulama, latihan militer, penaklukan Konstantinopel, kebijakan adil, warisan peradaban, hingga Bayezid II sang pewaris." />
+  <meta property="og:image" id="og-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgX3909CuBrQHJyDtsL_9GQTVS31hXscWvkllFyobWMw1rdxshYL334isvpuMIBiszY96BjAqN1u4dhDRgJC5WI1KglrnF1xMciSgw_5jIUUji_0xEcaMYhfxU7CoA4lmSlC4fb79Hwkv58V9XsxdLqJ0vlGDqgZs8VI1h4c7Jti67l5s2U-AUeF7WWHc/s1600/Mehmed.jpg" />
+  <meta property="og:title" content="Mehmed II Al-Fatih — Penakluk Konstantinopel" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" id="og-url" content="https://frijal.pages.dev/artikel/mehmed-ii-al-fatih.html" />
   <script>
-// Canonical & OG URL from current location + og:image fallback ke artikel/*.jpg
-(function setMeta(){
+  ];
+  close.addEventListener('click',shut);
+  const baseName = path.split('/').pop()?.replace(/\.html?$/i,'') || 'artikel';
+  const browsers = [
+  const cc = d.country || '';
+  const close = document.getElementById('close');
+  const cn = d.country_name || 'Tidak diketahui';
+  const detect=(list,def='Tidak diketahui')=>{
+  const fallbackImg = `https://frijal.pages.dev/img/${baseName}.webp`;
+  const figures = Array.from(document.querySelectorAll('.gallery figure'));
+  const flagEmoji = (cc)=>{
+  const heroImg = document.getElementById('hero-img');
+  const infoBrowser = document.getElementById('info-browser');
+  const infoIP = document.getElementById('info-ip');
+  const infoOS = document.getElementById('info-os');
+  const ip = d.ip;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const move = (d)=>{ index=(index+d+figures.length)%figures.length; lbImg.src=figures[index].dataset.src; };
+  const next = document.getElementById('next');
+  const open = (i)=>{ index=i; lbImg.src=figures[index].dataset.src; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); };
+  const path = location.pathname;
+  const prev = document.getElementById('prev');
+  const setOG = (src) => {
+  const shut = ()=>{ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; };
+  const systems = [
+  const title = encodeURIComponent(document.title);
+  const ua = navigator.userAgent;
+  const url = encodeURIComponent(location.href);
   const url = location.href.split('#')[0];
   document.getElementById('canonical-link').setAttribute('href', url);
   document.getElementById('og-url').setAttribute('content', url);
-
-  const path = location.pathname;
-  const baseName = path.split('/').pop()?.replace(/\.html?$/i,'') || 'artikel';
-  const fallbackImg = `https://frijal.pages.dev/img/${baseName}.webp`;
-
-  const heroImg = document.getElementById('hero-img');
-  const setOG = (src) => {
-document.getElementById('og-image').setAttribute('content', src);
-document.getElementById('twitter-image').setAttribute('content', src);
-  };
-  let done = false;
-  heroImg.addEventListener('load', ()=>{ setOG(heroImg.currentSrc || heroImg.src); done=true; });
-  heroImg.addEventListener('error', ()=>{ heroImg.src=fallbackImg; setOG(fallbackImg); done=true; });
-  setTimeout(()=>{ if(!done) setOG(heroImg.currentSrc || heroImg.src || fallbackImg); }, 1200);
-})();
-
-// Gallery lightbox with arrows
-(function lightbox(){
-  const figures = Array.from(document.querySelectorAll('.gallery figure'));
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  const close = document.getElementById('close');
-  let index = 0;
-
-  const open = (i)=>{ index=i; lbImg.src=figures[index].dataset.src; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); };
-  const move = (d)=>{ index=(index+d+figures.length)%figures.length; lbImg.src=figures[index].dataset.src; };
-  const shut = ()=>{ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; };
-
-  figures.forEach((f,i)=>f.addEventListener('click',()=>open(i)));
-  prev.addEventListener('click',()=>move(-1));
-  next.addEventListener('click',()=>move(1));
-  close.addEventListener('click',shut);
-  lb.addEventListener('click',(e)=>{ if(e.target===lb) shut(); });
-  window.addEventListener('keydown',(e)=>{
-if(!lb.classList.contains('open')) return;
-if(e.key==='Escape') shut();
-if(e.key==='ArrowLeft') move(-1);
-if(e.key==='ArrowRight') move(1);
-  });
-})();
-
-// Share handlers
-(function share(){
-  const url = encodeURIComponent(location.href);
-  const title = encodeURIComponent(document.title);
-  document.getElementById('share-twitter').addEventListener('click',()=>{
-window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`,'_blank','noopener,noreferrer');
-  });
   document.getElementById('share-fb').addEventListener('click',()=>{
-window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`,'_blank','noopener,noreferrer');
-  });
+  document.getElementById('share-twitter').addEventListener('click',()=>{
   document.getElementById('share-wa').addEventListener('click',()=>{
-window.open(`https://wa.me/?text=${title}%0A${url}`,'_blank','noopener,noreferrer');
-  });
-})();
-
-// Browser, OS, IP + flag
-(function env(){
-  const ua = navigator.userAgent;
-  const infoBrowser = document.getElementById('info-browser');
-  const infoOS = document.getElementById('info-os');
-  const infoIP = document.getElementById('info-ip');
-
-  const browsers = [
-[/Edg\//,'Microsoft Edge'],
-[/Chrome\//,'Google Chrome'],
-[/Safari\//,'Safari'],
-[/Firefox\//,'Mozilla Firefox'],
-[/OPR\//,'Opera'],
-[/MSIE|Trident/,'Internet Explorer'],
-  ];
-  const systems = [
-[/Windows NT/,'Windows'],
-[/Mac OS X/,'macOS'],
-[/Android/,'Android'],
-[/iPhone|iPad|iPod/,'iOS'],
-[/Linux/,'Linux'],
-  ];
-  const detect=(list,def='Tidak diketahui')=>{
-for(const [re,name] of list) if(re.test(ua)) return name;
-return def;
-  };
-  infoBrowser.textContent = detect(browsers);
-  infoOS.textContent = detect(systems);
-
-  const flagEmoji = (cc)=>{
-if(!cc || cc.length!==2) return '🏳️';
-const A = 0x1F1E6;
-const up = cc.toUpperCase();
-return String.fromCodePoint(A + (up.charCodeAt(0)-65), A + (up.charCodeAt(1)-65));
-  };
-
   fetch('https://ipapi.co/json/')
-.then(r=>r.ok?r.json():Promise.reject())
-.then(d=>{
-  const ip = d.ip;
-  const cc = d.country || '';
-  const cn = d.country_name || 'Tidak diketahui';
+  figures.forEach((f,i)=>f.addEventListener('click',()=>open(i)));
+  heroImg.addEventListener('error', ()=>{ heroImg.src=fallbackImg; setOG(fallbackImg); done=true; });
+  heroImg.addEventListener('load', ()=>{ setOG(heroImg.currentSrc || heroImg.src); done=true; });
+  infoBrowser.textContent = detect(browsers);
   infoIP.textContent = `${flagEmoji(cc)} ${ip} • ${cn}`;
-})
+  infoOS.textContent = detect(systems);
+  lb.addEventListener('click',(e)=>{ if(e.target===lb) shut(); });
+  let done = false;
+  let index = 0;
+  next.addEventListener('click',()=>move(1));
+  prev.addEventListener('click',()=>move(-1));
+  setTimeout(()=>{ if(!done) setOG(heroImg.currentSrc || heroImg.src || fallbackImg); }, 1200);
+  window.addEventListener('keydown',(e)=>{
+  });
+  };
+(function env(){
+(function lightbox(){
+(function setMeta(){
+(function share(){
 .catch(()=>{ infoIP.textContent = '⚠️ Tidak dapat memuat IP/Negara'; });
-})();
-  </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+.then(d=>{
+.then(r=>r.ok?r.json():Promise.reject())
+// Browser, OS, IP + flag
+// Canonical & OG URL from current location + og:image fallback ke artikel/*.jpg
+// Gallery lightbox with arrows
+// Share handlers
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Kisah Mehmed II Al-Fatih — Penakluk Konstantinopel</title>
+[/Android/,'Android'],
+[/Chrome\//,'Google Chrome'],
+[/Edg\//,'Microsoft Edge'],
+[/Firefox\//,'Mozilla Firefox'],
+[/Linux/,'Linux'],
+[/MSIE|Trident/,'Internet Explorer'],
+[/Mac OS X/,'macOS'],
+[/OPR\//,'Opera'],
+[/Safari\//,'Safari'],
+[/Windows NT/,'Windows'],
+[/iPhone|iPad|iPod/,'iOS'],
 ```
+const A = 0x1F1E6;
+const up = cc.toUpperCase();
+document.getElementById('og-image').setAttribute('content', src);
+document.getElementById('twitter-image').setAttribute('content', src);
+for(const [re,name] of list) if(re.test(ua)) return name;
+if(!cc || cc.length!==2) return '🏳️';
+if(!lb.classList.contains('open')) return;
+if(e.key==='ArrowLeft') move(-1);
+if(e.key==='ArrowRight') move(1);
+if(e.key==='Escape') shut();
+return String.fromCodePoint(A + (up.charCodeAt(0)-65), A + (up.charCodeAt(1)-65));
+return def;
+window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`,'_blank','noopener,noreferrer');
+window.open(`https://wa.me/?text=${title}%0A${url}`,'_blank','noopener,noreferrer');
+window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`,'_blank','noopener,noreferrer');
+})
+})();

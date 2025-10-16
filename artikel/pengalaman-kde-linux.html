@@ -1,450 +1,352 @@
-<!doctype html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Pengalaman Sehari-hari Menggunakan KDE Linux</title>
-    <meta name="description" content="Terjemahan artikel Hackaday oleh Jenny List tentang pengalamannya menggunakan KDE Plasma di Linux sebagai sistem operasi utama, dari instalasi hingga kustomisasi." />
-    <meta name="keywords" content="kde, linux, plasma desktop, review kde, pengalaman linux, distro linux, frijal" />
-    <meta name="author" content="Frijal (Terjemahan dari Hackaday)" />
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/pengalaman-kde-linux.html" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>" />
-    
-    <meta property="og:title" content="Pengalaman Sehari-hari Menggunakan KDE Linux - Terjemahan Hackaday" />
-    <meta property="og:description" content="Ikuti cerita Jenny List dari Hackaday tentang bagaimana ia menjadikan KDE Plasma sebagai lingkungan kerja utamanya, lengkap dengan suka dan dukanya." />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/pengalaman-kde-linux.html" />
-    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg" />
-    <meta property="og:site_name" content="Frijal's Blog" />
-    
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@frijal" />
-    <meta name="twitter:creator" content="@frijal" />
-    <meta name="twitter:title" content="Pengalaman Sehari-hari Menggunakan KDE Linux - Terjemahan Hackaday" />
-    <meta name="twitter:description" content="Ikuti cerita Jenny List dari Hackaday tentang bagaimana ia menjadikan KDE Plasma sebagai lingkungan kerja utamanya, lengkap dengan suka dan dukanya." />
-    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg" />
-    
-    <meta property="article:published_time" content="2025-10-03T11:14:59.073+00:00" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet" />
     
-    <style>
-      :root {
-        --bg-color: #1a1a1a;
-        --text-color: #e0e0e0;
-        --primary-color: #4d90fe;
-        --card-bg: #2c2c2c;
-        --border-color: #444;
-        --code-bg: #222;
-      }
-      *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.8;
-        font-size: 17px;
-      }
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 40px 20px;
-        width: 100%;
-      }
-      header h1 {
-        font-size: 3rem;
-        text-align: center;
-        margin-bottom: 20px;
-        color: #fff;
-        text-shadow: 0 0 10px rgba(77, 144, 254, 0.5);
-      }
-      header .meta-info {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #aaa;
-        margin-bottom: 40px;
-      }
-      article h2 {
-        font-size: 2rem;
-        color: var(--primary-color);
-        border-bottom: 2px solid var(--border-color);
-        padding-bottom: 10px;
-        margin-top: 50px;
-        margin-bottom: 25px;
-      }
-      article p, article ul {
-        margin-bottom: 20px;
-      }
-      article li {
-        margin-left: 20px;
-        padding-left: 10px;
-      }
-      blockquote {
-        border-left: 4px solid var(--primary-color);
-        padding-left: 20px;
-        margin: 25px 0;
-        font-style: italic;
-        color: #ccc;
-      }
-      pre {
-        background-color: var(--code-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 20px;
-        overflow-x: auto;
-        position: relative;
-        margin: 20px 0;
-      }
-      code {
-        font-family: 'Fira Code', monospace;
-        font-size: 0.95em;
-        color: #c5c8c6;
-      }
-      .copy-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #444;
-        color: #eee;
-        border: 1px solid #666;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        font-family: 'Poppins', sans-serif;
-        transition: background-color 0.2s;
-      }
-      .copy-btn:hover { background-color: #555; }
-      .copy-btn.copied { background-color: #28a745; color: white; }
-      .main-image {
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 2rem;
-        border: 1px solid var(--border-color);
-      }
-      .gallery {
-        margin-top: 50px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 15px;
-      }
-      .gallery img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: opacity 0.3s;
-      }
-      .gallery img:hover { opacity: 0.8; }
-      .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-      }
-      .lightbox-content { max-width: 90%; max-height: 80%; }
-      .lightbox-close, .lightbox-prev, .lightbox-next {
-        position: absolute;
-        color: white;
-        font-size: 40px;
-        cursor: pointer;
-        user-select: none;
-      }
-      .lightbox-close { top: 20px; right: 35px; }
-      .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); }
-      .lightbox-prev { left: 20px; }
-      .lightbox-next { right: 20px; }
-      .interaction-section {
-        margin-top: 50px;
-        padding-top: 30px;
-        border-top: 1px solid var(--border-color);
-      }
-      .social-share a {
-        font-size: 2rem;
-        color: #ccc;
-        margin: 0 10px;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-      .social-share a:hover { color: var(--primary-color); }
-      .social-share { text-align: center; margin-bottom: 40px; }
-      footer {
-        margin-top: 50px;
-        padding: 20px;
-        text-align: center;
-        font-size: 0.8rem;
-        color: #888;
-        background-color: var(--card-bg);
-        border-top: 1px solid var(--border-color);
-      }
-      @media (max-width: 768px) {
-        body { font-size: 16px; }
-        header h1 { font-size: 2.2rem; }
-        article h2 { font-size: 1.8rem; }
-      }
-    </style>
-<meta property="og:image:alt" content="Pengalaman Sehari-hari Menggunakan KDE Linux">
-  <meta itemprop="image" content="https://frijal.pages.dev/img/pengalaman-kde-linux.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-    
-    <main class="container">
-      <header>
-        <h1>Pengalaman Sehari-hari Menggunakan KDE Linux</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-        <div class="meta-info">
-          <span>Diterjemahkan oleh Frijal dari artikel Hackaday</span> |
+        
+          
+                              button.classList.remove('copied');
+                              button.textContent = originalText;
+                          button.classList.add('copied');
+                          button.textContent = 'Disalin!';
+                          const originalText = button.textContent;
+                          setTimeout(() => {
+                          }, 2000);
+                      .catch((err) => console.error('Gagal menyalin teks: ', err));
+                      .then(() => {
+                      e.preventDefault();
+                      if (e.key === 'ArrowLeft') prevBtn.click();
+                      if (e.key === 'ArrowRight') nextBtn.click();
+                      if (e.key === 'Escape') closeBtn.click();
+                      lightbox.style.display = 'flex';
+                      lightbox.style.display = 'none';
+                      showImage(index);
+                      })
+                  const code = button.nextElementSibling.textContent;
+                  currentIndex = index;
+                  if (e.target === lightbox) {
+                  if (index < 0) index = images.length - 1;
+                  if (index >= images.length) index = 0;
+                  if (lightbox.style.display === 'flex') {
+                  item.addEventListener('click', (e) => {
+                  lightboxImg.src = images[index];
+                  link.href = shareLinks[id];
+                  navigator.clipboard.writeText(code)
+                  }
+                  });
+              'share-facebook': `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+              'share-linkedin': `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
+              'share-twitter': `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
+              'share-whatsapp': `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
+              alt="Logo KDE"
+              alt="Screenshot desktop KDE Plasma yang dikustomisasi"
+              alt="Spesifikasi sistem yang menjalankan KDE Plasma"
+              button.addEventListener('click', () => {
+              closeBtn.addEventListener('click', () => (lightbox.style.display = 'none'));
+              const images = Array.from(galleryItems).map((item) => item.href);
+              const link = document.getElementById(id);
+              document.addEventListener('keydown', (e) => {
+              function showImage(index) {
+              galleryItems.forEach((item, index) => {
+              if (link) {
+              lightbox.addEventListener('click', (e) => {
+              loading="lazy"
+              nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+              prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCH-OkzksugzhFkesjH5xg-HfcwMLeBgE9Hipd77Iv3t73dQ-81jCqozVc8aCPdITwczMFFPVMDlQsDdvlKsTNXN9OA4ugRoQnlT6jbj-UU1j1b2wEv_mdsS-o5PK4gtOqNzEvWoRmI-pT_QcpcUq1bWzERPTxiKzVB3gG69jRkFIQ3UJe0-zumr3mNF8/s1600/kde-logo-white-blue-rounded-800x800-1.png"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiIhf9MxyXgmR9cUu5XiiTmshBoBfHrxho_iODE9buimZFL2FBzq6K6MZhLiMc1cJbKDnZ-cTfv4Tx069VW0dXH3R5_3VSS3tBBFs37Kl6d2AELr051bkhHFebgZODgPuv7OBJFyxCvBpkVyaw3ipRePkruoPlm-bgIpHkcszjl3rC2mMyuYRJSx48iWY/s1600/kde-linux-screenshot.jpg"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXedFtMK4LeSE6kK5o2GeNqyMO-cPbpYYYw0hw79AYZQWuV8mbIok5AzyUdgIy5ylZAE2pI3N-afS-oyDgOHFOEVFTTjd7jEBfWKfceSCK5oEAKYMB898ixjeSlSj60ecMCnrhQk315IOZJVlGWq-STLFBfFXJ91O3ytPbgb87Ok6nWuCYIrLDwkq_4SY/s1600/kde-linux-specs.jpg"
+              }
+              });
+            (membagi jendela menjadi dua panel) dan terminal yang terintegrasi
+            (mirip Exposé di macOS) sangat membantu saat saya membuka banyak
+            <strong>Dolphin File Manager:</strong> Menurut saya, ini adalah
+            <strong>KRunner:</strong> Peluncur aplikasi ini sangat cepat dan
+            <strong>Manajemen Jendela:</strong> Fitur seperti "Present Windows"
+            ><img
+            aplikasi, dan langsung jalankan. Ia juga bisa melakukan perhitungan
+            cerdas. Cukup tekan `Alt+Space`, ketik beberapa huruf dari nama
+            class="gallery-item"
+            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCH-OkzksugzhFkesjH5xg-HfcwMLeBgE9Hipd77Iv3t73dQ-81jCqozVc8aCPdITwczMFFPVMDlQsDdvlKsTNXN9OA4ugRoQnlT6jbj-UU1j1b2wEv_mdsS-o5PK4gtOqNzEvWoRmI-pT_QcpcUq1bWzERPTxiKzVB3gG69jRkFIQ3UJe0-zumr3mNF8/s1600/kde-logo-white-blue-rounded-800x800-1.png"
+            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiIhf9MxyXgmR9cUu5XiiTmshBoBfHrxho_iODE9buimZFL2FBzq6K6MZhLiMc1cJbKDnZ-cTfv4Tx069VW0dXH3R5_3VSS3tBBFs37Kl6d2AELr051bkhHFebgZODgPuv7OBJFyxCvBpkVyaw3ipRePkruoPlm-bgIpHkcszjl3rC2mMyuYRJSx48iWY/s1600/kde-linux-screenshot.jpg"
+            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXedFtMK4LeSE6kK5o2GeNqyMO-cPbpYYYw0hw79AYZQWuV8mbIok5AzyUdgIy5ylZAE2pI3N-afS-oyDgOHFOEVFTTjd7jEBfWKfceSCK5oEAKYMB898ixjeSlSj60ecMCnrhQk315IOZJVlGWq-STLFBfFXJ91O3ytPbgb87Ok6nWuCYIrLDwkq_4SY/s1600/kde-linux-specs.jpg"
+            jendela sekaligus.
+            matematika cepat atau konversi unit.
+            salah satu manajer file terbaik di Linux. Fitur *split view*
+            sangat mempercepat alur kerja saya.
+          "KDE Plasma bukan lagi KDE yang berat dan lambat seperti yang mungkin
+          // --- Copy Button Logic ---
+          // --- Lightbox Logic ---
+          // --- Social Share Logic ---
+          /></a>
+          </li>
+          <a
+          <a href="#" id="share-facebook" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Facebook">👍</a>
+          <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke LinkedIn">🔗</a>
+          <a href="#" id="share-twitter" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Twitter">🐦</a>
+          <a href="#" id="share-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke WhatsApp">💬</a>
+          <h3>Bagikan Artikel Ini:</h3>
+          <li>
           <span>3 Oktober 2025</span>
-        </div>
-      </header>
-      <article>
-        <img
-          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg"
-          alt="Tampilan desktop KDE Plasma di laptop Thinkpad"
-          class="main-image"
-        />
-        <p>
+          <span>Diterjemahkan oleh Frijal dari artikel Hackaday</span> |
+          Awalnya ini terasa luar biasa, saya bisa menghabiskan berjam-jam hanya
           Di antara para penulis di Hackaday, saya mungkin yang paling dikenal
-          sebagai pengguna Linux. Saya sudah menggunakannya sejak pertengahan
-          tahun 90-an, dimulai dengan Slackware di komputer 486. Selama
-          bertahun-tahun, saya sudah mencoba berbagai macam *desktop
-          environment*, dan favorit saya selalu yang ringan seperti XFCE.
-        </p>
-        <p>
-          Namun, belakangan ini saya mulai merasa ada yang kurang. Saya
-          menggunakan laptop Thinkpad T430 yang sudah di-upgrade, sebuah mesin
-          yang cukup bertenaga. Saya merasa, mungkin sudah saatnya mencoba
-          sesuatu yang lebih modern dan kaya fitur. Setelah melihat beberapa
-          ulasan, pilihan saya jatuh pada KDE Plasma. Saya memutuskan untuk
-          memasang Kubuntu 22.04, sebuah rilis LTS (Long Term Support) yang
-          menawarkan KDE di atas fondasi Ubuntu yang solid.
-        </p>
-        <h2>Kesan Pertama: Dunia yang Berbeda</h2>
-        <p>
+          Efek transisi, transparansi jendela, dan tema default-nya benar-benar
           Instalasinya berjalan mulus, dan saat pertama kali masuk ke desktop
           KDE Plasma, saya langsung terkesan. Tampilannya sangat modern, bersih,
-          dan jujur saja, sangat indah. Berbeda dengan XFCE yang fungsional tapi
-          terkesan 'tua', KDE terasa seperti sistem operasi dari masa depan.
-          Efek transisi, transparansi jendela, dan tema default-nya benar-benar
-          memanjakan mata.
-        </p>
-        <blockquote>
-          "KDE Plasma bukan lagi KDE yang berat dan lambat seperti yang mungkin
-          diingat oleh para pengguna Linux veteran. Sekarang ia terasa sangat
-          responsif, bahkan di laptop saya yang sudah berumur."
-        </blockquote>
-        <h2>Kustomisasi Tanpa Batas (Sampai Pusing!)</h2>
-        <p>
-          Salah satu kekuatan terbesar KDE adalah kemampuannya untuk
-          dikustomisasi. Hampir semua aspek dari desktop bisa diubah. Mulai dari
-          tema global, gaya jendela, ikon, hingga perilaku setiap sudut layar.
-          Awalnya ini terasa luar biasa, saya bisa menghabiskan berjam-jam hanya
-          untuk mencoba berbagai *widget* dan mengatur panel.
-        </p>
-        <p>
-          Namun, ini juga menjadi sedikit bumerang. Saking banyaknya pilihan,
-          kadang saya merasa sedikit tersesat. Mau mengubah satu hal kecil saja,
-          saya harus menavigasi melalui beberapa lapis menu pengaturan. Ini
-          berbeda dengan XFCE di mana pengaturannya lebih sederhana dan langsung
-          ke intinya.
-        </p>
-        <h2>Produktivitas Sehari-hari</h2>
-        <p>
-          Setelah melewati fase "bulan madu" kustomisasi, saya mulai
-          menggunakannya untuk pekerjaan sehari-hari. Menulis artikel, mengedit
-          gambar dengan GIMP, *coding* sederhana, dan tentu saja, *browsing*. Di
-          sinilah KDE benar-benar bersinar.
-        </p>
-        <ul>
-          <li>
-            <strong>Dolphin File Manager:</strong> Menurut saya, ini adalah
-            salah satu manajer file terbaik di Linux. Fitur *split view*
-            (membagi jendela menjadi dua panel) dan terminal yang terintegrasi
-            sangat mempercepat alur kerja saya.
-          </li>
-          <li>
-            <strong>KRunner:</strong> Peluncur aplikasi ini sangat cepat dan
-            cerdas. Cukup tekan `Alt+Space`, ketik beberapa huruf dari nama
-            aplikasi, dan langsung jalankan. Ia juga bisa melakukan perhitungan
-            matematika cepat atau konversi unit.
-          </li>
-          <li>
-            <strong>Manajemen Jendela:</strong> Fitur seperti "Present Windows"
-            (mirip Exposé di macOS) sangat membantu saat saya membuka banyak
-            jendela sekaligus.
-          </li>
-        </ul>
-        <section class="gallery">
-          <a
-            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiIhf9MxyXgmR9cUu5XiiTmshBoBfHrxho_iODE9buimZFL2FBzq6K6MZhLiMc1cJbKDnZ-cTfv4Tx069VW0dXH3R5_3VSS3tBBFs37Kl6d2AELr051bkhHFebgZODgPuv7OBJFyxCvBpkVyaw3ipRePkruoPlm-bgIpHkcszjl3rC2mMyuYRJSx48iWY/s1600/kde-linux-screenshot.jpg"
-            class="gallery-item"
-            ><img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiIhf9MxyXgmR9cUu5XiiTmshBoBfHrxho_iODE9buimZFL2FBzq6K6MZhLiMc1cJbKDnZ-cTfv4Tx069VW0dXH3R5_3VSS3tBBFs37Kl6d2AELr051bkhHFebgZODgPuv7OBJFyxCvBpkVyaw3ipRePkruoPlm-bgIpHkcszjl3rC2mMyuYRJSx48iWY/s1600/kde-linux-screenshot.jpg"
-              alt="Screenshot desktop KDE Plasma yang dikustomisasi"
-              loading="lazy"
-          /></a>
-          <a
-            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXedFtMK4LeSE6kK5o2GeNqyMO-cPbpYYYw0hw79AYZQWuV8mbIok5AzyUdgIy5ylZAE2pI3N-afS-oyDgOHFOEVFTTjd7jEBfWKfceSCK5oEAKYMB898ixjeSlSj60ecMCnrhQk315IOZJVlGWq-STLFBfFXJ91O3ytPbgb87Ok6nWuCYIrLDwkq_4SY/s1600/kde-linux-specs.jpg"
-            class="gallery-item"
-            ><img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXedFtMK4LeSE6kK5o2GeNqyMO-cPbpYYYw0hw79AYZQWuV8mbIok5AzyUdgIy5ylZAE2pI3N-afS-oyDgOHFOEVFTTjd7jEBfWKfceSCK5oEAKYMB898ixjeSlSj60ecMCnrhQk315IOZJVlGWq-STLFBfFXJ91O3ytPbgb87Ok6nWuCYIrLDwkq_4SY/s1600/kde-linux-specs.jpg"
-              alt="Spesifikasi sistem yang menjalankan KDE Plasma"
-              loading="lazy"
-          /></a>
-          <a
-            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCH-OkzksugzhFkesjH5xg-HfcwMLeBgE9Hipd77Iv3t73dQ-81jCqozVc8aCPdITwczMFFPVMDlQsDdvlKsTNXN9OA4ugRoQnlT6jbj-UU1j1b2wEv_mdsS-o5PK4gtOqNzEvWoRmI-pT_QcpcUq1bWzERPTxiKzVB3gG69jRkFIQ3UJe0-zumr3mNF8/s1600/kde-logo-white-blue-rounded-800x800-1.png"
-            class="gallery-item"
-            ><img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCH-OkzksugzhFkesjH5xg-HfcwMLeBgE9Hipd77Iv3t73dQ-81jCqozVc8aCPdITwczMFFPVMDlQsDdvlKsTNXN9OA4ugRoQnlT6jbj-UU1j1b2wEv_mdsS-o5PK4gtOqNzEvWoRmI-pT_QcpcUq1bWzERPTxiKzVB3gG69jRkFIQ3UJe0-zumr3mNF8/s1600/kde-logo-white-blue-rounded-800x800-1.png"
-              alt="Logo KDE"
-              loading="lazy"
-          /></a>
-        </section>
-        <h2>Kesimpulan: Apakah Saya Akan Terus Menggunakannya?</h2>
-        <p>
-          Setelah beberapa minggu, saya bisa bilang bahwa saya sangat menikmati
-          pengalaman menggunakan KDE Plasma. Meskipun kadang saya merindukan
-          kesederhanaan XFCE, fitur-fitur modern dan tampilan yang indah dari
           KDE membuat pekerjaan sehari-hari menjadi lebih menyenangkan. Bagi
-          siapa pun yang memiliki perangkat keras yang mumpuni dan ingin mencoba
-          pengalaman desktop Linux yang modern, kaya fitur, dan bisa diatur
-          sesuka hati, saya sangat merekomendasikan untuk mencoba KDE Plasma.
-        </p>
-      </article>
-      <section class="interaction-section">
-        <div class="social-share">
-          <h3>Bagikan Artikel Ini:</h3>
-          <a href="#" id="share-twitter" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Twitter">🐦</a>
-          <a href="#" id="share-facebook" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke Facebook">👍</a>
-          <a href="#" id="share-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke WhatsApp">💬</a>
-          <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Bagikan ke LinkedIn">🔗</a>
-        </div>
-        
-      </section>
-    </main>
-    <footer>
-      <p>🄯 2025 Frijal. Dibuat dengan penuh ☕ di Balikpapan.</p>
-    </footer>
-
-    <div id="lightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <img class="lightbox-content" id="lightbox-img" />
-      <a class="lightbox-prev">&#10094;</a>
-      <a class="lightbox-next">&#10095;</a>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          // --- Lightbox Logic ---
+          Namun, belakangan ini saya mulai merasa ada yang kurang. Saya
+          Namun, ini juga menjadi sedikit bumerang. Saking banyaknya pilihan,
+          Object.keys(shareLinks).forEach(id => {
+          Salah satu kekuatan terbesar KDE adalah kemampuannya untuk
+          Setelah beberapa minggu, saya bisa bilang bahwa saya sangat menikmati
+          Setelah melewati fase "bulan madu" kustomisasi, saya mulai
+          alt="Tampilan desktop KDE Plasma di laptop Thinkpad"
+          berbeda dengan XFCE di mana pengaturannya lebih sederhana dan langsung
+          bertahun-tahun, saya sudah mencoba berbagai macam *desktop
+          class="main-image"
+          const closeBtn = document.querySelector('.lightbox-close');
+          const copyButtons = document.querySelectorAll('.copy-btn');
           const galleryItems = document.querySelectorAll('.gallery-item');
           const lightbox = document.getElementById('lightbox');
           const lightboxImg = document.getElementById('lightbox-img');
-          const closeBtn = document.querySelector('.lightbox-close');
-          const prevBtn = document.querySelector('.lightbox-prev');
           const nextBtn = document.querySelector('.lightbox-next');
-          let currentIndex;
-
-          if (galleryItems.length > 0 && lightbox) {
-              const images = Array.from(galleryItems).map((item) => item.href);
-
-              function showImage(index) {
-                  if (index < 0) index = images.length - 1;
-                  if (index >= images.length) index = 0;
-                  lightboxImg.src = images[index];
-                  currentIndex = index;
-              }
-
-              galleryItems.forEach((item, index) => {
-                  item.addEventListener('click', (e) => {
-                      e.preventDefault();
-                      lightbox.style.display = 'flex';
-                      showImage(index);
-                  });
-              });
-
-              closeBtn.addEventListener('click', () => (lightbox.style.display = 'none'));
-              prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-              nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-
-              lightbox.addEventListener('click', (e) => {
-                  if (e.target === lightbox) {
-                      lightbox.style.display = 'none';
-                  }
-              });
-
-              document.addEventListener('keydown', (e) => {
-                  if (lightbox.style.display === 'flex') {
-                      if (e.key === 'Escape') closeBtn.click();
-                      if (e.key === 'ArrowLeft') prevBtn.click();
-                      if (e.key === 'ArrowRight') nextBtn.click();
-                  }
-              });
-          }
-
-          // --- Copy Button Logic ---
-          const copyButtons = document.querySelectorAll('.copy-btn');
-          copyButtons.forEach((button) => {
-              button.addEventListener('click', () => {
-                  const code = button.nextElementSibling.textContent;
-                  navigator.clipboard.writeText(code)
-                      .then(() => {
-                          const originalText = button.textContent;
-                          button.textContent = 'Disalin!';
-                          button.classList.add('copied');
-                          setTimeout(() => {
-                              button.textContent = originalText;
-                              button.classList.remove('copied');
-                          }, 2000);
-                      })
-                      .catch((err) => console.error('Gagal menyalin teks: ', err));
-              });
-          });
-
-          // --- Social Share Logic ---
-          const pageUrl = encodeURIComponent(window.location.href);
           const pageTitle = encodeURIComponent(document.title);
-          
+          const pageUrl = encodeURIComponent(window.location.href);
+          const prevBtn = document.querySelector('.lightbox-prev');
           const shareLinks = {
-              'share-twitter': `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
-              'share-facebook': `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
-              'share-whatsapp': `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
-              'share-linkedin': `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`
-          };
-
-          Object.keys(shareLinks).forEach(id => {
-              const link = document.getElementById(id);
-              if (link) {
-                  link.href = shareLinks[id];
-              }
+          copyButtons.forEach((button) => {
+          dan jujur saja, sangat indah. Berbeda dengan XFCE yang fungsional tapi
+          diingat oleh para pengguna Linux veteran. Sekarang ia terasa sangat
+          dikustomisasi. Hampir semua aspek dari desktop bisa diubah. Mulai dari
+          environment*, dan favorit saya selalu yang ringan seperti XFCE.
+          gambar dengan GIMP, *coding* sederhana, dan tentu saja, *browsing*. Di
+          if (galleryItems.length > 0 && lightbox) {
+          kadang saya merasa sedikit tersesat. Mau mengubah satu hal kecil saja,
+          ke intinya.
+          kesederhanaan XFCE, fitur-fitur modern dan tampilan yang indah dari
+          let currentIndex;
+          memanjakan mata.
+          memasang Kubuntu 22.04, sebuah rilis LTS (Long Term Support) yang
+          menawarkan KDE di atas fondasi Ubuntu yang solid.
+          menggunakan laptop Thinkpad T430 yang sudah di-upgrade, sebuah mesin
+          menggunakannya untuk pekerjaan sehari-hari. Menulis artikel, mengedit
+          pengalaman desktop Linux yang modern, kaya fitur, dan bisa diatur
+          pengalaman menggunakan KDE Plasma. Meskipun kadang saya merindukan
+          responsif, bahkan di laptop saya yang sudah berumur."
+          saya harus menavigasi melalui beberapa lapis menu pengaturan. Ini
+          sebagai pengguna Linux. Saya sudah menggunakannya sejak pertengahan
+          sesuatu yang lebih modern dan kaya fitur. Setelah melihat beberapa
+          sesuka hati, saya sangat merekomendasikan untuk mencoba KDE Plasma.
+          siapa pun yang memiliki perangkat keras yang mumpuni dan ingin mencoba
+          sinilah KDE benar-benar bersinar.
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg"
+          tahun 90-an, dimulai dengan Slackware di komputer 486. Selama
+          tema global, gaya jendela, ikon, hingga perilaku setiap sudut layar.
+          terkesan 'tua', KDE terasa seperti sistem operasi dari masa depan.
+          ulasan, pilihan saya jatuh pada KDE Plasma. Saya memutuskan untuk
+          untuk mencoba berbagai *widget* dan mengatur panel.
+          yang cukup bertenaga. Saya merasa, mungkin sudah saatnya mencoba
+          }
           });
+          };
+        --bg-color: #1a1a1a;
+        --border-color: #444;
+        --card-bg: #2c2c2c;
+        --code-bg: #222;
+        --primary-color: #4d90fe;
+        --text-color: #e0e0e0;
+        />
+        </blockquote>
+        </div>
+        </p>
+        </section>
+        </ul>
+        <blockquote>
+        <div class="meta-info">
+        <div class="social-share">
+        <h1>Pengalaman Sehari-hari Menggunakan KDE Linux</h1>
+        <h2>Kesan Pertama: Dunia yang Berbeda</h2>
+        <h2>Kesimpulan: Apakah Saya Akan Terus Menggunakannya?</h2>
+        <h2>Kustomisasi Tanpa Batas (Sampai Pusing!)</h2>
+        <h2>Produktivitas Sehari-hari</h2>
+        <img
+        <p>
+        <section class="gallery">
+        <ul>
+        align-items: center;
+        article h2 { font-size: 1.8rem; }
+        background-color: #444;
+        background-color: rgba(0, 0, 0, 0.9);
+        background-color: var(--bg-color);
+        background-color: var(--card-bg);
+        background-color: var(--code-bg);
+        body { font-size: 16px; }
+        border-bottom: 2px solid var(--border-color);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 12px;
+        border-radius: 5px;
+        border-radius: 8px;
+        border-top: 1px solid var(--border-color);
+        border: 1px solid #666;
+        border: 1px solid var(--border-color);
+        box-sizing: border-box;
+        color: #888;
+        color: #aaa;
+        color: #c5c8c6;
+        color: #ccc;
+        color: #eee;
+        color: #fff;
+        color: var(--primary-color);
+        color: var(--text-color);
+        color: white;
+        cursor: pointer;
+        display: grid;
+        display: none;
+        font-family: 'Fira Code', monospace;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.8rem;
+        font-size: 0.95em;
+        font-size: 0.9rem;
+        font-size: 17px;
+        font-size: 2rem;
+        font-size: 3rem;
+        font-size: 40px;
+        font-style: italic;
+        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        header h1 { font-size: 2.2rem; }
+        height: auto;
+        justify-content: center;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        margin-bottom: 25px;
+        margin-bottom: 2rem;
+        margin-bottom: 40px;
+        margin-left: 20px;
+        margin-top: 50px;
+        margin: 0 10px;
+        margin: 0 auto;
+        margin: 0;
+        margin: 20px 0;
+        margin: 25px 0;
+        max-width: 900px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-left: 20px;
+        padding-top: 30px;
+        padding: 0;
+        padding: 20px;
+        padding: 40px 20px;
+        padding: 5px 10px;
+        position: absolute;
+        position: fixed;
+        position: relative;
+        right: 10px;
+        scroll-behavior: smooth;
+        text-align: center;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(77, 144, 254, 0.5);
+        top: 0; left: 0;
+        top: 10px;
+        transition: background-color 0.2s;
+        transition: color 0.3s;
+        transition: opacity 0.3s;
+        user-select: none;
+        width: 100%;
+        width: 100%; height: 100%;
+        z-index: 1000;
+      *, *::before, *::after {
+      .container {
+      .copy-btn {
+      .copy-btn.copied { background-color: #28a745; color: white; }
+      .copy-btn:hover { background-color: #555; }
+      .gallery img {
+      .gallery img:hover { opacity: 0.8; }
+      .gallery {
+      .interaction-section {
+      .lightbox {
+      .lightbox-close { top: 20px; right: 35px; }
+      .lightbox-close, .lightbox-prev, .lightbox-next {
+      .lightbox-content { max-width: 90%; max-height: 80%; }
+      .lightbox-next { right: 20px; }
+      .lightbox-prev { left: 20px; }
+      .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); }
+      .main-image {
+      .social-share a {
+      .social-share a:hover { color: var(--primary-color); }
+      .social-share { text-align: center; margin-bottom: 40px; }
+      :root {
+      </article>
+      </header>
+      </section>
+      <a class="lightbox-next">&#10095;</a>
+      <a class="lightbox-prev">&#10094;</a>
+      <article>
+      <header>
+      <img class="lightbox-content" id="lightbox-img" />
+      <p>🄯 2025 Frijal. Dibuat dengan penuh ☕ di Balikpapan.</p>
+      <section class="interaction-section">
+      <span class="lightbox-close">&times;</span>
+      @media (max-width: 768px) {
+      article h2 {
+      article li {
+      article p, article ul {
+      blockquote {
+      body {
+      code {
+      document.addEventListener('DOMContentLoaded', function () {
+      footer {
+      header .meta-info {
+      header h1 {
+      html {
+      pre {
+      }
       });
+    </div>
+    </footer>
+    </main>
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <div id="lightbox" class="lightbox">
+    <footer>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@500&display=swap" rel="stylesheet" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/pengalaman-kde-linux.html" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <main class="container">
+    <meta charset="UTF-8" />
+    <meta name="author" content="Frijal (Terjemahan dari Hackaday)" />
+    <meta name="description" content="Terjemahan artikel Hackaday oleh Jenny List tentang pengalamannya menggunakan KDE Plasma di Linux sebagai sistem operasi utama, dari instalasi hingga kustomisasi." />
+    <meta name="keywords" content="kde, linux, plasma desktop, review kde, pengalaman linux, distro linux, frijal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@frijal" />
+    <meta name="twitter:description" content="Ikuti cerita Jenny List dari Hackaday tentang bagaimana ia menjadikan KDE Plasma sebagai lingkungan kerja utamanya, lengkap dengan suka dan dukanya." />
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg" />
+    <meta name="twitter:site" content="@frijal" />
+    <meta name="twitter:title" content="Pengalaman Sehari-hari Menggunakan KDE Linux - Terjemahan Hackaday" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="article:published_time" content="2025-10-03T11:14:59.073+00:00" />
+    <meta property="og:description" content="Ikuti cerita Jenny List dari Hackaday tentang bagaimana ia menjadikan KDE Plasma sebagai lingkungan kerja utamanya, lengkap dengan suka dan dukanya." />
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNyAbPcmcie61ijYs3p4Alpspv-B2blnjlwN_Mx1mAEx5cMjB9L_UO5Ilxfkn3DcSYcs_zy9podzcWww6tycU1DYPNNYikfHYqQUpQKFUVOD12ZD-dWHICO03jisawvP24_ylF72KDDauoxRfNi0kVFGsxQjqhsbsTg77qcR_hxKt7tZqndsRasboQY0I/s1600/JennysDriver.jpg" />
+    <meta property="og:site_name" content="Frijal's Blog" />
+    <meta property="og:title" content="Pengalaman Sehari-hari Menggunakan KDE Linux - Terjemahan Hackaday" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/pengalaman-kde-linux.html" />
+    <script>
+    <style>
+    <title>Pengalaman Sehari-hari Menggunakan KDE Linux</title>
+  <meta itemprop="image" content="https://frijal.pages.dev/img/pengalaman-kde-linux.webp">
+<!doctype html>
 </body>
+</head>
 </html>
+<body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<head>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta property="og:image:alt" content="Pengalaman Sehari-hari Menggunakan KDE Linux">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

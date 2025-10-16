@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Menyambut Tahun Baru Hijriyah - tenang, santai, dan tetap berpegang</title>
+    <meta name="description" content="Refleksi santai jelang Muharram: apa yang diajarkan ulama tentang amalan awal tahun hijriyah, mana yang keliru, dan bagaimana menyambutnya dengan tenang. Dilengkapi galeri, bagikan, dan komentar.">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/menyambut-tahun-baru-hijriyah.html">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#3ddc97">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Frijal Articles">
+    <meta property="og:title" content="Menyambut Tahun Baru Hijriyah - tenang, santai, dan tetap berpegang">
+    <meta property="og:description" content="Refleksi jelang Muharram: tuntunan ulama, amalan yang keliru, dan cara menyambut dengan bijak.">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/menyambut-tahun-baru-hijriyah.html">
+    <meta property="og:image" content="https://frijal.pages.dev/img/menyambut-tahun-baru-hijriyah.webp">
+    <meta property="og:image:alt" content="Menyambut Tahun Baru Hijriyah - tenang, santai, dan tetap berpegang">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Menyambut Tahun Baru Hijriyah - tenang, santai, dan tetap berpegang">
+    <meta name="twitter:description" content="Refleksi jelang Muharram: tuntunan ulama, amalan yang keliru, dan cara menyambut dengan bijak.">
+    <meta name="twitter:image" content="https://frijal.pages.dev/img/menyambut-tahun-baru-hijriyah.webp">
+    
+    <script>
+        // Share links
+        (function share(){
+            const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
+            const title = encodeURIComponent(document.title);
+            const text = encodeURIComponent('Menyambut Tahun Baru Hijriyah - ringkas, santai, dan tetap berpegang:');
+            
+            const pairs = [
+                ['btn-copy', null],
+                ['share-wa','https://wa.me/?text='+text+'%20'+url],
+                ['share-wa-2','https://wa.me/?text='+text+'%20'+url],
+                ['share-x','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+                ['share-x-2','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+                ['share-fb','https://www.facebook.com/sharer/sharer.php?u='+url],
+                ['share-fb-2','https://www.facebook.com/sharer/sharer.php?u='+url],
+                ['share-ln','https://www.linkedin.com/sharing/share-offsite/?url='+url],
+                ['share-ln-2','https://www.linkedin.com/sharing/share-offsite/?url='+url]
+            ];
+            
+            pairs.forEach(([id,href])=>{ 
+                const a=document.getElementById(id); 
+                if(a){
+                    if(href) a.href=href;
+                    if(a.tagName === 'A' && !a.target) a.target = '_blank';
+                }
+            });
+            
+            const btnCopy = document.getElementById('btn-copy');
+            if(btnCopy){
+                btnCopy.addEventListener('click', async ()=>{
+                    try{
+                        await navigator.clipboard.writeText(decodeURIComponent(url));
+                        btnCopy.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg><span>Tautan disalin</span>';
+                        setTimeout(() => btnCopy.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12a5 5 0 015-5h3v2h-3a3 3 0 000 6h3v2h-3a5 5 0 01-5-5zm7-3h3a5 5 0 010 10h-3v-2h3a3 3 0 100-6h-3V9zm-1 3h6v2H9v-2z"/></svg><span>Salin</span>', 2000);
+                    }catch{ 
+                        alert('Gagal menyalin tautan.'); 
+                    }
+                });
+            }
+        })();
+
+        // Lightbox
+        (function lightbox(){
+            const gallery = [...document.querySelectorAll('#gallery a')];
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lb-img');
+            const close = document.getElementById('lb-close');
+            const prev = document.getElementById('lb-prev');
+            const next = document.getElementById('lb-next');
+            let idx = 0;
+            
+            if(gallery.length === 0 || !lb) return;
+
+            function open(i){
+                idx = i;
+                const href = gallery[idx].getAttribute('href');
+                const alt = gallery[idx].querySelector('img')?.getAttribute('alt') || '';
+                img.src = href; img.alt = alt;
+                lb.classList.add('open');
+            }
+            
+            function move(delta){
+                idx = (idx + delta + gallery.length) % gallery.length;
+                open(idx);
+            }
+            
+            function closeLB(){
+                lb.classList.remove('open'); img.src=''; img.alt='';
+            }
+            
+            gallery.forEach((a,i)=>a.addEventListener('click', e=>{ e.preventDefault(); open(i); }));
+            
+            if(close) close.addEventListener('click', closeLB);
+            if(prev) prev.addEventListener('click', ()=>move(-1));
+            if(next) next.addEventListener('click', ()=>move(1));
+            
+            lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+            
+            document.addEventListener('keydown', e=>{
+                if(!lb.classList.contains('open')) return;
+                if(e.key==='Escape') closeLB();
+                if(e.key==='ArrowLeft') move(-1);
+                if(e.key==='ArrowRight') move(1);
+            });
+        })();
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

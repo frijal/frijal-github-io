@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pembaruan Otomatis Fedora: Perlukah? - Interaktif</title>
+  <link  rel="icon"  href="https://frijal.pages.dev/favicon.ico"  type="image/x-icon"/>
+  <meta  name="description"  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."/>
+  <link  rel="canonical"  href="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+  <meta  property="og:description"  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."/>
+  <meta  property="og:url"  content="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html"/>
+  <meta  property="og:image"  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"/>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+  <meta  name="twitter:description"  content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya."/>
+  <meta  name="twitter:image"  content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"/>
+  
+  <script>
+    let toast = document.getElementById("toast");
+    
+    function showToast(t) {
+      ((toast.textContent = t),
+      toast.classList.add("opacity-100"),
+      setTimeout(() => toast.classList.remove("opacity-100"), 1500));
+    }
+    
+    function openLightbox(t) {
+      ((document.getElementById("lightbox-img").src = t),
+      (document.getElementById("lightbox").style.display = "flex"));
+    }
+    
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+    
+    document.querySelectorAll(".accordion-button").forEach((e) => {
+      e.addEventListener("click", () => {
+        var t = e.nextElementSibling;
+        t.style.display = "block" === t.style.display ? "none" : "block";
+      });
+    });
+    
+    function copyCode(targetId) {
+      var t = document.getElementById(targetId);
+      if (t) {
+        navigator.clipboard.writeText(t.innerText).then(() => showToast("Kode disalin!"));
+      }
+    }
+    
+    // Dihapus: Logic fetch IP/Browser
+    
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('lightbox').style.display === 'flex' && e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+  </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

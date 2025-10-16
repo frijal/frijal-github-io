@@ -1,135 +1,111 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <!-- Meta dasar -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-  <!-- prettier-ignore -->
-<title>Nabi Muhammad SAW | Kisah Penuh Hikmah</title>
-  <meta name="description" content="Kisah Nabi Muhammad SAW dari kelahiran hingga masa muda: Tahun Gajah, Halimah as-Sa‘diyah, Khadijah, Hajar al-Aswad, dan Gua Hira. Disajikan santai, interaktif, dan ramah mobile.">
-  <meta name="keywords" content="Nabi Muhammad, Tahun Gajah, Halimah, Khadijah, Hajar al-Aswad, Gua Hira, RamadahanTales, Makkah">
-  <meta name="author" content="Saudari Sharifah Syazreen Al-Idrus">
-  <meta name="robots" content="index,follow">
-  <meta name="theme-color" content="#0b0f14">
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/25nabi-muhammad.html">
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Frijal Articles">
-  <meta property="og:title" content="Nabi Muhammad SAW | Kisah Penuh Hikmah">
-  <meta property="og:description" content="Kisah Nabi Muhammad SAW dari kelahiran hingga masa muda, dengan tampilan dark-mode interaktif.">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/25nabi-muhammad.html">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmqa2HJAT2ZoNDiVraOryoJPhDKm52fbnNpvBT9F4hUF1HUR_YBx8WUpaLEhwZwKR0PR25YZ5FulrLy7b7OZj8zfwm3OQY81MpZE9fKuVJOD-dl3LlO3r2tZOMrx0z1zD2jM6V6_1esyKyneZPmUGxU0F9ls0ic8i_55fUiY43ie56cs3dr8t84psczRM/s1600/Muhammad.jpg">
-  <meta property="article:author" content="Saudari Sharifah Syazreen Al-Idrus">
-  <meta property="article:section" content="RamadahanTales">
-  <meta property="article:tag" content="Kisah Nabi">
-  <meta property="article:published_time" content="2025-09-30T19:09:00+08:00">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nabi Muhammad SAW | Kisah Penuh Hikmah">
-  <meta name="twitter:description" content="Dari Tahun Gajah hingga Gua Hira. Versi santai, interaktif, dan ramah mobile.">
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmqa2HJAT2ZoNDiVraOryoJPhDKm52fbnNpvBT9F4hUF1HUR_YBx8WUpaLEhwZwKR0PR25YZ5FulrLy7b7OZj8zfwm3OQY81MpZE9fKuVJOD-dl3LlO3r2tZOMrx0z1zD2jM6V6_1esyKyneZPmUGxU0F9ls0ic8i_55fUiY43ie56cs3dr8t84psczRM/s1600/Muhammad.jpg">
-  <meta name="twitter:site" content="@frijal">
-
-  <!-- JSON-LD -->
-  <script>
     
-
-    // Share links
-    function initShare(){
-      const url = document.querySelector('link[rel="canonical"]')?.href || location.href;
-      const title = document.title;
-
-      const tw = document.getElementById('share-twitter');
-      const fb = document.getElementById('share-fb');
-      const wa = document.getElementById('share-wa');
-      const cp = document.getElementById('copy-link');
-
-      tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
-      fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-      const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-      wa.href = isMobile
-        ? `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
-        : `https://web.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
-
-      cp.addEventListener('click', async ()=>{
-        try{
+          alert('Gagal menyalin link. Salin manual: ' + url);
           await navigator.clipboard.writeText(url);
           cp.textContent = 'Tersalin!';
           setTimeout(()=>{cp.textContent='Salin Link'},1500);
-        }catch(e){
-          alert('Gagal menyalin link. Salin manual: ' + url);
-        }
-      });
-    }
-
-    // Gallery & Lightbox
-    function initGallery(){
-      const gallery = document.getElementById('gallery');
-      const items = Array.from(gallery.querySelectorAll('figure'));
-      const lb = document.getElementById('lightbox');
-      const img = document.getElementById('lightbox-img');
-      const prev = lb.querySelector('.prev');
-      const next = lb.querySelector('.next');
-      const close = lb.querySelector('.close');
-
-      let current = 0;
-
-      function open(index){
-        current = index;
+        : `https://web.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
+        ? `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`
         const el = items[current].querySelector('img');
-        img.src = el.src;
-        img.alt = el.alt || 'Pratinjau gambar';
-        lb.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      function move(dir){
         current = (current + dir + items.length) % items.length;
-        const el = items[current].querySelector('img');
-        img.src = el.src;
-        img.alt = el.alt || 'Pratinjau gambar';
-      }
-      function closeBox(){
-        lb.classList.remove('active');
+        current = index;
         document.body.style.overflow = '';
-      }
-
-      items.forEach((fig, idx)=>{
+        document.body.style.overflow = 'hidden';
         fig.addEventListener('click', ()=>open(idx));
         fig.addEventListener('keypress', (e)=>{ if(e.key==='Enter') open(idx) });
-        fig.setAttribute('tabindex','0');
-        fig.setAttribute('role','button');
         fig.setAttribute('aria-label','Buka gambar');
-      });
-
-      prev.addEventListener('click', ()=>move(-1));
-      next.addEventListener('click', ()=>move(1));
-      close.addEventListener('click', closeBox);
-      lb.addEventListener('click', (e)=>{ if(e.target===lb) closeBox() });
-      window.addEventListener('keydown',(e)=>{
+        fig.setAttribute('role','button');
+        fig.setAttribute('tabindex','0');
         if(!lb.classList.contains('active')) return;
-        if(e.key==='Escape') closeBox();
         if(e.key==='ArrowLeft') move(-1);
         if(e.key==='ArrowRight') move(1);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      renderInfo();
-      initShare();
+        if(e.key==='Escape') closeBox();
+        img.alt = el.alt || 'Pratinjau gambar';
+        img.src = el.src;
+        lb.classList.add('active');
+        lb.classList.remove('active');
+        try{
+        }
+        }catch(e){
+      close.addEventListener('click', closeBox);
+      const close = lb.querySelector('.close');
+      const cp = document.getElementById('copy-link');
+      const fb = document.getElementById('share-fb');
+      const gallery = document.getElementById('gallery');
+      const img = document.getElementById('lightbox-img');
+      const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+      const items = Array.from(gallery.querySelectorAll('figure'));
+      const lb = document.getElementById('lightbox');
+      const next = lb.querySelector('.next');
+      const prev = lb.querySelector('.prev');
+      const title = document.title;
+      const tw = document.getElementById('share-twitter');
+      const url = document.querySelector('link[rel="canonical"]')?.href || location.href;
+      const wa = document.getElementById('share-wa');
+      cp.addEventListener('click', async ()=>{
+      fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      function closeBox(){
+      function move(dir){
+      function open(index){
       initGallery();
+      initShare();
+      items.forEach((fig, idx)=>{
+      lb.addEventListener('click', (e)=>{ if(e.target===lb) closeBox() });
+      let current = 0;
+      next.addEventListener('click', ()=>move(1));
+      prev.addEventListener('click', ()=>move(-1));
+      renderInfo();
+      tw.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}&via=frijal`;
+      wa.href = isMobile
+      window.addEventListener('keydown',(e)=>{
+      }
+      });
+    // Gallery & Lightbox
+    // Share links
+    document.addEventListener('DOMContentLoaded', ()=>{
+    function initGallery(){
+    function initShare(){
+    }
     });
+  <!-- JSON-LD -->
+  <!-- Meta dasar -->
+  <!-- Open Graph -->
+  <!-- Twitter Card -->
+  <!-- prettier-ignore -->
   </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/25nabi-muhammad.html">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="Saudari Sharifah Syazreen Al-Idrus">
+  <meta name="description" content="Kisah Nabi Muhammad SAW dari kelahiran hingga masa muda: Tahun Gajah, Halimah as-Sa‘diyah, Khadijah, Hajar al-Aswad, dan Gua Hira. Disajikan santai, interaktif, dan ramah mobile.">
+  <meta name="keywords" content="Nabi Muhammad, Tahun Gajah, Halimah, Khadijah, Hajar al-Aswad, Gua Hira, RamadahanTales, Makkah">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="Dari Tahun Gajah hingga Gua Hira. Versi santai, interaktif, dan ramah mobile.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmqa2HJAT2ZoNDiVraOryoJPhDKm52fbnNpvBT9F4hUF1HUR_YBx8WUpaLEhwZwKR0PR25YZ5FulrLy7b7OZj8zfwm3OQY81MpZE9fKuVJOD-dl3LlO3r2tZOMrx0z1zD2jM6V6_1esyKyneZPmUGxU0F9ls0ic8i_55fUiY43ie56cs3dr8t84psczRM/s1600/Muhammad.jpg">
+  <meta name="twitter:site" content="@frijal">
+  <meta name="twitter:title" content="Nabi Muhammad SAW | Kisah Penuh Hikmah">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta property="article:author" content="Saudari Sharifah Syazreen Al-Idrus">
+  <meta property="article:published_time" content="2025-09-30T19:09:00+08:00">
+  <meta property="article:section" content="RamadahanTales">
+  <meta property="article:tag" content="Kisah Nabi">
+  <meta property="og:description" content="Kisah Nabi Muhammad SAW dari kelahiran hingga masa muda, dengan tampilan dark-mode interaktif.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmqa2HJAT2ZoNDiVraOryoJPhDKm52fbnNpvBT9F4hUF1HUR_YBx8WUpaLEhwZwKR0PR25YZ5FulrLy7b7OZj8zfwm3OQY81MpZE9fKuVJOD-dl3LlO3r2tZOMrx0z1zD2jM6V6_1esyKyneZPmUGxU0F9ls0ic8i_55fUiY43ie56cs3dr8t84psczRM/s1600/Muhammad.jpg">
+  <meta property="og:site_name" content="Frijal Articles">
+  <meta property="og:title" content="Nabi Muhammad SAW | Kisah Penuh Hikmah">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/25nabi-muhammad.html">
+  <script>
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Nabi Muhammad SAW | Kisah Penuh Hikmah</title>

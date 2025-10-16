@@ -1,271 +1,202 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perbaiki “cannot run ssh” di Git — Slackware Linux</title>
-<meta name="description" content="Panduan memperbaiki error Git 'cannot run ssh: No such file or directory' di Slackware Linux.">
-<link rel="canonical" href="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html">
-<link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
 
-<!-- Open Graph -->
-<meta property="og:type" content="article">
-<meta property="og:title" content="Perbaiki Git SSH Error di Slackware Linux">
-<meta property="og:description" content="Solusi Git SSH di Slackware menggunakan pkgtool, slackpkg, dan verifikasi manual OpenSSH.">
-<meta property="og:url" content="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html">
-<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1A2m4pT7_dZ2ZdpJYtrOuZl_ik-6jEIA8XbOMyiTzZTgZ7e0h2TStO0Zdy7yUqZPbiReWRcSzqM5n59SoEQzkX_jKklLL0xSRZQzKpKfGxsoY26W9K9c8CTCwqETc0G8o3MW7QbXPhmVbM_o4I8o_L7epf1DDo4ItzRCM2hFjWQZwQJk5ZQ/s1600/git-ssh-error-banner.png">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Perbaiki Git SSH Error di Slackware Linux">
-<meta name="twitter:description" content="Langkah mudah memperbaiki Git SSH error di Slackware menggunakan pkgtool dan slackpkg.">
-<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1A2m4pT7_dZ2ZdpJYtrOuZl_ik-6jEIA8XbOMyiTzZTgZ7e0h2TStO0Zdy7yUqZPbiReWRcSzqM5n59SoEQzkX_jKklLL0xSRZQzKpKfGxsoY26W9K9c8CTCwqETc0G8o3MW7QbXPhmVbM_o4I8o_L7epf1DDo4ItzRCM2hFjWQZwQJk5ZQ/s1600/git-ssh-error-banner.png">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      background: #121212;
-      color: #eee;
-      line-height: 1.7;
-    }
-    header {
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      background: linear-gradient(90deg, #1f1f1f, #2a2a2a);
-      border-bottom: 2px solid #333;
-    }
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-      cursor: zoom-in;
-    }
-    img:hover {
-      transform: scale(1.02);
-    }
-    pre {
-      background: #1b1b1b;
-      color: #8ef08e;
-      padding: 1em;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
-    code {
-      color: #c3f3ff;
-      font-family: "Fira Code", monospace;
-    }
-    .separator {
-      text-align: center;
-      margin: 2em 0;
-    }
-    .share {
-      margin-top: 3rem;
-      text-align: center;
-    }
-    .share a {
-      margin: 0 10px;
-      color: #ccc;
-      font-size: 1.6em;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #aaa;
-      border-top: 1px solid #333;
-      font-size: 0.9em;
-    }
-    @media (max-width: 700px) {
-      body { font-size: 16px; }
-      main { padding: 1.5rem 1rem; }
-    }
-
-    /* Lightbox effect */
-    #lightbox {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    #lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-    }
-    #lightbox:target { display: flex; }
-  </style>
-<meta property="og:image:alt" content="Perbaiki “cannot run ssh” di Git — Slackware Linux">
-  <meta itemprop="image" content="https://frijal.pages.dev/img/fix-git-ssh-slackware.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-10-12T04:53:51.214+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-
-<header>
-  <h1>🐧 Panduan Perbaikan Git SSH Error di Slackware</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-  <p>Solusi untuk pesan: <code>error: cannot run ssh: No such file or directory</code></p>
-</header>
-
-<main>
-
-<section id="penjelasan">
-<h2>🧩 Kenapa Error Ini Terjadi</h2>
-<p>
-Git tidak bisa menemukan executable <code>ssh</code> di sistem kamu.  
-Biasanya disebabkan karena <b>OpenSSH</b> belum diinstal atau PATH belum mengarah ke <code>/usr/bin</code>.
-</p>
-</section>
-
-<section id="langkah">
-<h2>⚙️ Langkah-Langkah Perbaikan</h2>
-
-<h3>1️⃣ Cek apakah OpenSSH sudah ada</h3>
-<pre><code>ls /var/log/packages | grep openssh</code></pre>
-<p>
-Jika tidak ada hasil, berarti paket <b>openssh</b> belum terinstal.
-</p>
-
-<h3>2️⃣ Instal OpenSSH</h3>
-<p>
-Gunakan <code>slackpkg</code> (jika sudah dikonfigurasi):</p>
-<pre><code>sudo slackpkg install openssh</code></pre>
-
-<p>Atau jika kamu menggunakan image ISO / DVD Slackware, instal manual dengan:</p>
-<pre><code>sudo installpkg /mnt/cdrom/slackware/n/openssh-*.txz</code></pre>
-
-<h3>3️⃣ Cek keberadaan biner SSH</h3>
-<pre><code>which ssh</code></pre>
-<p>Hasil yang benar:</p>
-<pre><code>/usr/bin/ssh</code></pre>
-
-<h3>4️⃣ Tes versi SSH</h3>
-<pre><code>ssh -V</code></pre>
-<p>
-Harus menampilkan seperti:  
-<code>OpenSSH_9.8p1, OpenSSL 3.3.1 ...</code>
-</p>
-
-<h3>5️⃣ Tes koneksi Git SSH (opsional)</h3>
-<pre><code>ssh -T git@github.com</code></pre>
-<p>
-Kalau muncul prompt atau pesan autentikasi, artinya SSH sudah berfungsi normal.
-</p>
-
-</section>
-
-<section id="script">
-<h2>💻 Script Otomatis (opsional)</h2>
-<p>
-Kamu bisa buat script kecil seperti ini untuk mengecek dan memperbaiki otomatis:
-</p>
-
-<pre><code>#!/bin/bash
-echo "🔍 Memeriksa OpenSSH di Slackware..."
-if ! ls /var/log/packages | grep -q openssh; then
-  echo "❌ OpenSSH belum terinstal, menginstal..."
-  sudo slackpkg install openssh
-else
-  echo "✅ OpenSSH sudah terinstal."
-fi
-
-if ! command -v ssh >/dev/null; then
-  echo "⚠️  ssh tidak ditemukan di PATH. Pastikan /usr/bin ada di PATH kamu."
-else
-  echo "✅ ssh ditemukan di $(which ssh)"
-  ssh -V
-fi
-</code></pre>
-</section>
-
-<section id="catatan">
-<h2>💡 Catatan Tambahan</h2>
-<ul>
-  <li>Pastikan file <code>/etc/ssh/ssh_config</code> tidak rusak atau kosong.</li>
-  <li>Jika menggunakan Slackware minimal, tambahkan PATH:  
-    <code>export PATH=/usr/bin:$PATH</code></li>
-  <li>Gunakan <code>su -</code> daripada hanya <code>su</code> agar environment login dimuat penuh.</li>
-</ul>
-</section>
  
-  <!-- Lightbox -->
-  <div id="lightbox">
-    <img id="lightbox-img" src="" alt="">
-  </div>
-
-  <script>
-    document.querySelectorAll('.separator a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const src = link.querySelector('img').src;
+        FB.init({appId: '1471267430691023', xfbml: true, version: 'v20.0'});
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
-        lbImg.src = src;
-        lb.style.display = 'flex';
-        lb.addEventListener('click', () => lb.style.display = 'none');
-      });
-    });
-  </script>
-
-  <div class="share">
-    <h3>Bagikan Artikel Ini 🔗</h3>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Facebook">📘</a>
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html&text=Solusi%20Error%20Git%20'cannot%20run%20ssh'%20di%20Fedora%20RHEL%20CentOS" target="_blank" title="Tweet">🐦</a>
-    <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Telegram">💬</a>
-    <a href="https://www.reddit.com/submit?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Reddit">👽</a>
-  </div>
-
-  <div id="fb-comments" class="fb-comments" data-href="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" data-width="100%" data-numposts="5"></div>
-
-</main>
-
-<footer>
-  <p>🄯 2025 Frijal — Artikel Linux & DevOps</p>
-</footer>
-
-<!-- Facebook SDK (lazy load) -->
-
-<script>
-  window.addEventListener("scroll", function fbLoader() {
-    if (window.scrollY > 500 && !window.fbAsyncInit) {
-      window.fbAsyncInit = function() {
-        FB.init({appId: '1471267430691023', xfbml: true, version: 'v20.0'});
-      };
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
+        const src = link.querySelector('img').src;
+        e.preventDefault();
+        fjs.parentNode.insertBefore(js, fjs);
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
         js.src = "https://connect.facebook.net/id_ID/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        lb.addEventListener('click', () => lb.style.display = 'none');
+        lb.style.display = 'flex';
+        lbImg.src = src;
+        var js, fjs = d.getElementsByTagName(s)[0];
+      (function(d, s, id){
+      align-items: center;
+      background: #121212;
+      background: #1b1b1b;
+      background: linear-gradient(90deg, #1f1f1f, #2a2a2a);
+      background: rgba(0, 0, 0, 0.9);
+      body { font-size: 16px; }
+      border-bottom: 2px solid #333;
+      border-radius: 10px;
+      border-radius: 8px;
+      border-top: 1px solid #333;
+      color: #8ef08e;
+      color: #aaa;
+      color: #c3f3ff;
+      color: #ccc;
+      color: #eee;
+      cursor: zoom-in;
+      display: none;
+      font-family: "Fira Code", monospace;
+      font-family: "Inter", sans-serif;
+      font-size: 0.9em;
+      font-size: 1.6em;
+      height: auto;
+      justify-content: center;
+      line-height: 1.7;
+      link.addEventListener('click', e => {
+      main { padding: 1.5rem 1rem; }
+      margin-top: 3rem;
+      margin: 0 10px;
+      margin: 0;
+      margin: 2em 0;
+      margin: auto;
+      max-height: 90%;
+      max-width: 100%;
+      max-width: 90%;
+      max-width: 900px;
+      overflow-x: auto;
+      padding: 1em;
+      padding: 2rem 1rem 1rem;
+      padding: 2rem 1rem;
+      padding: 2rem;
+      position: fixed;
+      text-align: center;
+      text-decoration: none;
+      top: 0; left: 0; right: 0; bottom: 0;
+      transform: scale(1.02);
+      transition: transform 0.3s ease;
+      window.fbAsyncInit = function() {
       window.removeEventListener("scroll", fbLoader);
+      z-index: 999;
+      }(document, 'script', 'facebook-jssdk'));
+      });
+      };
+    #lightbox img {
+    #lightbox {
+    #lightbox:target { display: flex; }
+    .separator {
+    .share a {
+    .share {
+    /* Lightbox effect */
+    <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Telegram">💬</a>
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html&text=Solusi%20Error%20Git%20'cannot%20run%20ssh'%20di%20Fedora%20RHEL%20CentOS" target="_blank" title="Tweet">🐦</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Facebook">📘</a>
+    <a href="https://www.reddit.com/submit?url=https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" target="_blank" title="Bagikan di Reddit">👽</a>
+    <code>export PATH=/usr/bin:$PATH</code></li>
+    <h3>Bagikan Artikel Ini 🔗</h3>
+    <img id="lightbox-img" src="" alt="">
+    <meta property="article:published_time" content="2025-10-12T04:53:51.214+00:00">
+    @media (max-width: 700px) {
+    body {
+    code {
+    document.querySelectorAll('.separator a').forEach(link => {
+    footer {
+    header {
+    if (window.scrollY > 500 && !window.fbAsyncInit) {
+    img {
+    img:hover {
+    main {
+    pre {
     }
+    });
+  <!-- Lightbox -->
+  </div>
+  </script>
+  </style>
+  <div class="share">
+  <div id="fb-comments" class="fb-comments" data-href="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html" data-width="100%" data-numposts="5"></div>
+  <div id="lightbox">
+  <h1>🐧 Panduan Perbaikan Git SSH Error di Slackware</h1>
+  <li>Gunakan <code>su -</code> daripada hanya <code>su</code> agar environment login dimuat penuh.</li>
+  <li>Jika menggunakan Slackware minimal, tambahkan PATH:  
+  <li>Pastikan file <code>/etc/ssh/ssh_config</code> tidak rusak atau kosong.</li>
+  <meta charset="UTF-8">
+  <meta itemprop="image" content="https://frijal.pages.dev/img/fix-git-ssh-slackware.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <p>Solusi untuk pesan: <code>error: cannot run ssh: No such file or directory</code></p>
+  <p>🄯 2025 Frijal — Artikel Linux & DevOps</p>
+  <script>
+  <style>
+  echo "⚠️  ssh tidak ditemukan di PATH. Pastikan /usr/bin ada di PATH kamu."
+  echo "✅ OpenSSH sudah terinstal."
+  echo "✅ ssh ditemukan di $(which ssh)"
+  echo "❌ OpenSSH belum terinstal, menginstal..."
+  ssh -V
+  sudo slackpkg install openssh
+  window.addEventListener("scroll", function fbLoader() {
   });
-</script>
-
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+<!-- Facebook SDK (lazy load) -->
+<!-- Open Graph -->
+<!-- Twitter -->
+<!DOCTYPE html>
 </body>
+</code></pre>
+</footer>
+</head>
+</header>
 </html>
-
-
+</main>
+</p>
+</script>
+</section>
+</ul>
+<body>
+<code>OpenSSH_9.8p1, OpenSSL 3.3.1 ...</code>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<footer>
+<h2>⚙️ Langkah-Langkah Perbaikan</h2>
+<h2>💡 Catatan Tambahan</h2>
+<h2>💻 Script Otomatis (opsional)</h2>
+<h2>🧩 Kenapa Error Ini Terjadi</h2>
+<h3>1️⃣ Cek apakah OpenSSH sudah ada</h3>
+<h3>2️⃣ Instal OpenSSH</h3>
+<h3>3️⃣ Cek keberadaan biner SSH</h3>
+<h3>4️⃣ Tes versi SSH</h3>
+<h3>5️⃣ Tes koneksi Git SSH (opsional)</h3>
+<head>
+<header>
+<html lang="id">
+<link rel="canonical" href="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html">
+<link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<main>
+<meta name="description" content="Panduan memperbaiki error Git 'cannot run ssh: No such file or directory' di Slackware Linux.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Langkah mudah memperbaiki Git SSH error di Slackware menggunakan pkgtool dan slackpkg.">
+<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1A2m4pT7_dZ2ZdpJYtrOuZl_ik-6jEIA8XbOMyiTzZTgZ7e0h2TStO0Zdy7yUqZPbiReWRcSzqM5n59SoEQzkX_jKklLL0xSRZQzKpKfGxsoY26W9K9c8CTCwqETc0G8o3MW7QbXPhmVbM_o4I8o_L7epf1DDo4ItzRCM2hFjWQZwQJk5ZQ/s1600/git-ssh-error-banner.png">
+<meta name="twitter:title" content="Perbaiki Git SSH Error di Slackware Linux">
+<meta property="og:description" content="Solusi Git SSH di Slackware menggunakan pkgtool, slackpkg, dan verifikasi manual OpenSSH.">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1A2m4pT7_dZ2ZdpJYtrOuZl_ik-6jEIA8XbOMyiTzZTgZ7e0h2TStO0Zdy7yUqZPbiReWRcSzqM5n59SoEQzkX_jKklLL0xSRZQzKpKfGxsoY26W9K9c8CTCwqETc0G8o3MW7QbXPhmVbM_o4I8o_L7epf1DDo4ItzRCM2hFjWQZwQJk5ZQ/s1600/git-ssh-error-banner.png">
+<meta property="og:image:alt" content="Perbaiki “cannot run ssh” di Git — Slackware Linux">
+<meta property="og:title" content="Perbaiki Git SSH Error di Slackware Linux">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/fix-git-ssh-slackware.html">
+<p>
+<p>Atau jika kamu menggunakan image ISO / DVD Slackware, instal manual dengan:</p>
+<p>Hasil yang benar:</p>
+<pre><code>#!/bin/bash
+<pre><code>/usr/bin/ssh</code></pre>
+<pre><code>ls /var/log/packages | grep openssh</code></pre>
+<pre><code>ssh -T git@github.com</code></pre>
+<pre><code>ssh -V</code></pre>
+<pre><code>sudo installpkg /mnt/cdrom/slackware/n/openssh-*.txz</code></pre>
+<pre><code>sudo slackpkg install openssh</code></pre>
+<pre><code>which ssh</code></pre>
+<script defer src="/ext/iposbrowser.js"></script>
+<script>
+<section id="catatan">
+<section id="langkah">
+<section id="penjelasan">
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<section id="script">
+<title>Perbaiki “cannot run ssh” di Git — Slackware Linux</title>
+<ul>
+Biasanya disebabkan karena <b>OpenSSH</b> belum diinstal atau PATH belum mengarah ke <code>/usr/bin</code>.
+Git tidak bisa menemukan executable <code>ssh</code> di sistem kamu.  
+Gunakan <code>slackpkg</code> (jika sudah dikonfigurasi):</p>
+Harus menampilkan seperti:  
+Jika tidak ada hasil, berarti paket <b>openssh</b> belum terinstal.
+Kalau muncul prompt atau pesan autentikasi, artinya SSH sudah berfungsi normal.
+Kamu bisa buat script kecil seperti ini untuk mengecek dan memperbaiki otomatis:
+echo "🔍 Memeriksa OpenSSH di Slackware..."
+else
+fi
+if ! command -v ssh >/dev/null; then
+if ! ls /var/log/packages | grep -q openssh; then

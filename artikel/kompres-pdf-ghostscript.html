@@ -1,263 +1,218 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+
+  
+  --accent: #f472b6;
+  --bg-soft: #0f172a;
+  --bg: #0b1020;
+  --brand-2: #60a5fa;
+  --brand: #34d399;
+  --card: #0c1428;
+  --danger: #ef4444;
+  --maxw: 1200px;
+  --muted: #9db0c6;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --success: #22c55e;
+  --text: #e8f0ff;
+  --warning: #f59e0b;
   <!-- Basic -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- JSON-LD: Article -->
+  <!-- Lightbox -->
+  <!-- Open Graph -->
+  <!-- Prism (syntax highlight) -->
+  <!-- Scripts -->
+  <!-- Styles -->
+  <!-- Twitter Card -->
   <!-- prettier-ignore -->
-<title>Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif</title>
-  <meta name="description" content="Cara mengecilkan ukuran PDF hasil scan dari puluhan MB menjadi hanya beberapa MB menggunakan Ghostscript di GNU/Linux. Lengkap dengan contoh perintah, opsi kualitas, tips, dan solusi error." />
+  </div>
+  </footer>
+  </main>
+  </script>
+  </style>
+  <div class="lightbox-backdrop" id="lightbox">
+  <footer>
+  <img alt="preview" id="lightbox-img" />
   <link rel="canonical" href="https://frijal.pages.dev/artikel/kompres-pdf-ghostscript.html" />
   <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif" />
-  <meta property="og:description" content="Panduan singkat mengecilkan ukuran PDF hasil scan dengan Ghostscript. Pilih kualitas sesuai kebutuhan, kirim email lebih ringan." />
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/kompres-pdf-ghostscript.html" />
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHzahydQn3VjRRz_RA6o7-ebiPiZr0VvcwxOplhpq6KcPwAQ0XvBq19SoIapkr0Jx0TTBa79YuG7XcjEeVlAMMY2o5Q1xF0O8U2kaClVMjL_c8HFbA_P_1jiWh4aR8xCPAQ39hOYCPUu-35G01-Y67AJJ6GDKSQiGdqmTbs0T9G0sVBEmR3T5nAJgBepE/s1600/photo-1510936111840-65e151ad71bb.jpg" />
-  <meta property="og:locale" content="id_ID" />
-
-  <!-- Twitter Card -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-Mq9P6YjYsm2JMV8Q+r5e5s6NY68zJ0R3z4dv5/1w5z/3H6wRM9mC4u4Gz0V7XvO6ilH2h1eQ8q5Q8gW2+oE5ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="description" content="Cara mengecilkan ukuran PDF hasil scan dari puluhan MB menjadi hanya beberapa MB menggunakan Ghostscript di GNU/Linux. Lengkap dengan contoh perintah, opsi kualitas, tips, dan solusi error." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif" />
   <meta name="twitter:description" content="Panduan singkat mengecilkan ukuran PDF hasil scan dengan Ghostscript. Pilih kualitas sesuai kebutuhan, kirim email lebih ringan." />
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHzahydQn3VjRRz_RA6o7-ebiPiZr0VvcwxOplhpq6KcPwAQ0XvBq19SoIapkr0Jx0TTBa79YuG7XcjEeVlAMMY2o5Q1xF0O8U2kaClVMjL_c8HFbA_P_1jiWh4aR8xCPAQ39hOYCPUu-35G01-Y67AJJ6GDKSQiGdqmTbs0T9G0sVBEmR3T5nAJgBepE/s1600/photo-1510936111840-65e151ad71bb.jpg" />
-
-  <!-- Prism (syntax highlight) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-Mq9P6YjYsm2JMV8Q+r5e5s6NY68zJ0R3z4dv5/1w5z/3H6wRM9mC4u4Gz0V7XvO6ilH2h1eQ8q5Q8gW2+oE5ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Styles -->
-  <style>
-:root{
-  --bg: #0b1020;
-  --bg-soft: #0f172a;
-  --card: #0c1428;
-  --muted: #9db0c6;
-  --text: #e8f0ff;
-  --brand: #34d399;
-  --brand-2: #60a5fa;
-  --accent: #f472b6;
-  --warning: #f59e0b;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --radius: 14px;
-  --maxw: 1200px;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
-  color: var(--text);
-  background:
-radial-gradient(1100px 600px at 10% -10%, rgba(96,165,250,.18), transparent 60%),
-radial-gradient(800px 500px at 110% 10%, rgba(110,231,183,.12), transparent 50%),
-linear-gradient(160deg, #070b16 0%, #0b1020 45%, #0e1530 100%);
-}
-header.hero{
-  width:100%; min-height: 46vh; display:grid; place-items:center; text-align:center; padding:36px 16px;
-  background: radial-gradient(800px 400px at 50% 0%, rgba(96,165,250,.08), transparent 60%);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.hero-inner{max-width: var(--maxw); width:100%}
-.eyebrow{
-  display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
-  background: rgba(96,165,250,.12); color: #cfe3ff; font-weight:600; border:1px solid rgba(96,165,250,.28)
-}
-.hero h1{
-  font-size: clamp(26px, 4vw, 44px); margin: 10px 0 8px; line-height:1.18;
-  background: linear-gradient(90deg, #dbeafe, #bbf7d0, #fbcfe8); -webkit-background-clip:text; background-clip:text; color: transparent;
-  text-shadow: 0 0 24px rgba(96,165,250,.18);
-}
-.hero p{font-size: clamp(15px, 1.6vw, 18px); color: var(--muted); margin: 0 auto 16px; max-width: 860px;}
-.meta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; color:#c6d5e6; font-size:14px; opacity:.9}
-
-.container{max-width: var(--maxw); margin: 0 auto; padding: 28px 16px 110px}
-.grid{display:grid; gap: 18px; grid-template-columns: 1.1fr .9fr;}
-@media (max-width: 980px){ .grid{grid-template-columns: 1fr} }
-
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012));
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow:hidden;
-}
-.card .inner{padding: 18px 18px 22px}
-.card h2{margin: 8px 0 10px; font-size: clamp(20px, 2.1vw, 26px); letter-spacing:.2px}
-.card h2::after{content:""; display:block; width: 68px; height: 3px; margin-top:8px; background: linear-gradient(90deg, var(--brand-2), var(--brand), var(--accent)); border-radius: 999px; opacity:.8}
-.card p{color:#cfe3ff; margin:8px 0 12px}
-.card ul{margin:10px 0 0 0; padding:0 0 0 18px; color:#d7e8ff}
-.card li{margin:8px 0}
-.badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#cbe7ff; background: rgba(96,165,250,.12); padding:6px 10px; border-radius:999px; border:1px solid rgba(96,165,250,.28)}
-
-.gallery{display:grid; gap:12px; grid-template-columns: 1fr;}
-.img-wrap{position:relative; overflow:hidden; border-radius:12px; aspect-ratio: 16 / 9; background: #0b1220; border: 1px solid rgba(255,255,255,.06)}
-.img-wrap img{width:100%; height:100%; object-fit:cover; display:block; transition: transform .3s ease}
-.img-wrap:hover img{transform: scale(1.03)}
-.img-cap{position:absolute; inset:auto 8px 8px 8px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(2,6,23,.85) 40%, rgba(2,6,23,.98) 100%); border-radius: 10px; padding: 8px 10px; font-size: 12px; color: #cfe3ff}
-
-.two-col{display:grid; gap:18px; grid-template-columns: 1fr 1fr;}
-@media (max-width: 920px){ .two-col{grid-template-columns: 1fr} }
-
-pre{background: #0b1328 !important; border-radius: 12px !important; border: 1px solid rgba(255,255,255,.06); padding: 14px !important; overflow:auto;}
-.copy-btn{margin-top: 8px; background: #0ea5e9; color:white; border:0; border-radius: 10px; padding:8px 12px; cursor:pointer; font-weight:700; box-shadow: 0 8px 18px rgba(14,165,233,.35);}
-.copy-btn:hover{ filter: brightness(1.05) }
-
-.tip{display:flex; gap:10px; align-items:flex-start; background: rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.35); color:#d6ffe6; padding:10px 12px; border-radius:12px}
-.warn{display:flex; gap:10px; align-items:flex-start; background: rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.35); color:#fff3d6; padding:10px 12px; border-radius:12px}
-
-.share{display:flex; flex-wrap:wrap; gap:10px;}
-.share a{display:inline-flex; align-items:center; gap:8px; color:#06121e; text-decoration:none; font-weight:700; border-radius: 12px; padding:10px 12px; background: linear-gradient(90deg, #a78bfa, #f472b6); border: 1px solid rgba(255,255,255,.14); box-shadow: 0 10px 22px rgba(164,120,253,.25);}
-.share a:hover{ filter: brightness(1.05) }
-
-/* System info */
-.meta-sys{display:grid; gap:12px; grid-template-columns: 1fr 1fr;}
-@media (max-width: 720px){ .meta-sys{grid-template-columns: 1fr} }
-.kvs{display:flex; align-items:center; gap:12px; padding:10px 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 12px;}
-.kvs .ico{width:28px; height:28px; display:grid; place-items:center}
-.kvs .kv{font-size:14px; color:#cfe3ff}
-.kvs .kv small{display:block; color:var(--muted)}
-
-footer{border-top:1px solid rgba(255,255,255,.06); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); padding: 26px 16px 120px; color:#cfe3ff; text-align:center;}
-
-/* Floating Home Buttons (completed) */
-#btn-home-left, #btn-home-right {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  gap:8px;
-  background-color: #0ea5e9;
-  color: #001524;
-  padding: 10px 12px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: 0 14px 28px rgba(14,165,233,.35);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow .2s ease;
-  z-index: 9999;
-}
-#btn-home-left:hover, #btn-home-right:hover {
-  background-color: #22d3ee;
-  transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 16px 34px rgba(34,211,238,.34);
-}
-#btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
-#btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
-#btn-home-left svg, #btn-home-right svg { width:20px; height:20px; fill: #001524 }
-
-.small-muted{ color: var(--muted) }
-
-/* Lightbox */
-.lightbox-backdrop{
-  position: fixed; inset:0; background: rgba(0,0,0,.75);
-  display:none; align-items:center; justify-content:center; z-index: 9998;
-}
-.lightbox-backdrop.active{ display:flex }
-.lightbox-figure{max-width: 92vw; max-height: 90vh}
-.lightbox-figure img{max-width:100%; max-height:100%; display:block; border-radius: 12px}
-.lightbox-close{
-  position: absolute; top: 16px; right: 16px; background: #0ea5e9; color:#001524; border:0; border-radius:999px; padding:8px 10px; font-weight:800; cursor:pointer;
-  box-shadow: 0 14px 28px rgba(14,165,233,.35);
-}
-  </style>
-
-  <!-- JSON-LD: Article -->
-  
-  <script>
-const currentUrl = window.location.href;
-document.getElementById("current-url").textContent = currentUrl;
-// Set data-href FB Comments ke URL halaman ini
-document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-// Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
-window.fbAsyncInit = function() {
-  if (typeof FB !== 'undefined') {
-try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
-  }
-}
-  </script>
-</div>
-  </div>
-</section>
-
-  </main>
-  <!-- Lightbox -->
-  <div class="lightbox-backdrop" id="lightbox">
-<figure class="lightbox-figure">
-  <img alt="preview" id="lightbox-img" />
-</figure>
-<button class="lightbox-close" id="lightbox-close" aria-label="Tutup">Tutup ✕</button>
-  </div>
-
-  <footer>
-<div>🄯 <span id="y"></span> • Kompres PDF Ghostscript • Hemat ukuran, hemat waktu</div>
-  </footer>
-
-  <!-- Scripts -->
+  <meta name="twitter:title" content="Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:description" content="Panduan singkat mengecilkan ukuran PDF hasil scan dengan Ghostscript. Pilih kualitas sesuai kebutuhan, kirim email lebih ringan." />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHzahydQn3VjRRz_RA6o7-ebiPiZr0VvcwxOplhpq6KcPwAQ0XvBq19SoIapkr0Jx0TTBa79YuG7XcjEeVlAMMY2o5Q1xF0O8U2kaClVMjL_c8HFbA_P_1jiWh4aR8xCPAQ39hOYCPUu-35G01-Y67AJJ6GDKSQiGdqmTbs0T9G0sVBEmR3T5nAJgBepE/s1600/photo-1510936111840-65e151ad71bb.jpg" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:title" content="Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/kompres-pdf-ghostscript.html" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-LmNld8Fj0RzTeqkQ5w0tXGx4r4K9H8w6f8tV5bJzS0XH5Cw6g9tFQfF3r2d9z+H2Q1K1tH5yH1vTn7m1eTn0Sg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-// Tahun footer
-document.getElementById('y').textContent = new Date().getFullYear();
-
-// Tombol "Salin perintah" untuk semua <pre><code> (berurutan)
-document.querySelectorAll('pre + .copy-btn').forEach((btn) => {
-  const code = btn.previousElementSibling.querySelector('code');
-  btn.addEventListener('click', async () => {
-try {
+  <style>
+  a.addEventListener('click', e=>{
+  align-items: center;
   await navigator.clipboard.writeText(code.textContent);
+  background-color: #0ea5e9;
+  background-color: #22d3ee;
+  background:
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.012));
+  background: linear-gradient(90deg, #dbeafe, #bbf7d0, #fbcfe8); -webkit-background-clip:text; background-clip:text; color: transparent;
+  background: radial-gradient(800px 400px at 50% 0%, rgba(96,165,250,.08), transparent 60%);
+  background: rgba(96,165,250,.12); color: #cfe3ff; font-weight:600; border:1px solid rgba(96,165,250,.28)
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-radius: 999px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 14px 28px rgba(14,165,233,.35);
+  box-shadow: 0 16px 34px rgba(34,211,238,.34);
+  box-shadow: var(--shadow);
+  btn.addEventListener('click', async () => {
   btn.textContent = 'Tersalin ✓';
-  setTimeout(()=>btn.textContent='Salin perintah', 1500);
-} catch(e) { btn.textContent = 'Gagal menyalin'; }
-  });
-});
-
-// Web Share API (opsional)
-(function(){
+  color: #001524;
+  color: var(--text);
+  const code = btn.previousElementSibling.querySelector('code');
   const share = document.getElementById('share-links');
+  display: inline-flex;
+  display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
+  display:none; align-items:center; justify-content:center; z-index: 9998;
+  e.preventDefault();
+  font-family: inherit;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial;
+  font-size: 14px;
+  font-size: clamp(26px, 4vw, 44px); margin: 10px 0 8px; line-height:1.18;
+  font-weight: 800;
+  gap:8px;
   if (navigator.share) {
-const btn = document.createElement('a');
+  if (typeof FB !== 'undefined') {
+  margin:0;
+  navigator.share({
+  overflow:hidden;
+  padding: 10px 12px;
+  position: absolute; top: 16px; right: 16px; background: #0ea5e9; color:#001524; border:0; border-radius:999px; padding:8px 10px; font-weight:800; cursor:pointer;
+  position: fixed;
+  position: fixed; inset:0; background: rgba(0,0,0,.75);
+  setTimeout(()=>btn.textContent='Salin perintah', 1500);
+  text-decoration: none;
+  text-shadow: 0 0 24px rgba(96,165,250,.18);
+  transform: translateY(-1px) scale(1.03);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow .2s ease;
+  width:100%; min-height: 46vh; display:grid; place-items:center; text-align:center; padding:36px 16px;
+  z-index: 9999;
+  }
+  }).catch(()=>{});
+  });
+#btn-home-left svg, #btn-home-right svg { width:20px; height:20px; fill: #001524 }
+#btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
+#btn-home-left, #btn-home-right {
+#btn-home-left:hover, #btn-home-right:hover {
+#btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
+();
+(function(){
+*{box-sizing:border-box}
+.badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; color:#cbe7ff; background: rgba(96,165,250,.12); padding:6px 10px; border-radius:999px; border:1px solid rgba(96,165,250,.28)}
+.card .inner{padding: 18px 18px 22px}
+.card h2::after{content:""; display:block; width: 68px; height: 3px; margin-top:8px; background: linear-gradient(90deg, var(--brand-2), var(--brand), var(--accent)); border-radius: 999px; opacity:.8}
+.card h2{margin: 8px 0 10px; font-size: clamp(20px, 2.1vw, 26px); letter-spacing:.2px}
+.card li{margin:8px 0}
+.card p{color:#cfe3ff; margin:8px 0 12px}
+.card ul{margin:10px 0 0 0; padding:0 0 0 18px; color:#d7e8ff}
+.card{
+.container{max-width: var(--maxw); margin: 0 auto; padding: 28px 16px 110px}
+.copy-btn:hover{ filter: brightness(1.05) }
+.copy-btn{margin-top: 8px; background: #0ea5e9; color:white; border:0; border-radius: 10px; padding:8px 12px; cursor:pointer; font-weight:700; box-shadow: 0 8px 18px rgba(14,165,233,.35);}
+.eyebrow{
+.gallery{display:grid; gap:12px; grid-template-columns: 1fr;}
+.grid{display:grid; gap: 18px; grid-template-columns: 1.1fr .9fr;}
+.hero h1{
+.hero p{font-size: clamp(15px, 1.6vw, 18px); color: var(--muted); margin: 0 auto 16px; max-width: 860px;}
+.hero-inner{max-width: var(--maxw); width:100%}
+.img-cap{position:absolute; inset:auto 8px 8px 8px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(2,6,23,.85) 40%, rgba(2,6,23,.98) 100%); border-radius: 10px; padding: 8px 10px; font-size: 12px; color: #cfe3ff}
+.img-wrap img{width:100%; height:100%; object-fit:cover; display:block; transition: transform .3s ease}
+.img-wrap:hover img{transform: scale(1.03)}
+.img-wrap{position:relative; overflow:hidden; border-radius:12px; aspect-ratio: 16 / 9; background: #0b1220; border: 1px solid rgba(255,255,255,.06)}
+.kvs .ico{width:28px; height:28px; display:grid; place-items:center}
+.kvs .kv small{display:block; color:var(--muted)}
+.kvs .kv{font-size:14px; color:#cfe3ff}
+.kvs{display:flex; align-items:center; gap:12px; padding:10px 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 12px;}
+.lightbox-backdrop.active{ display:flex }
+.lightbox-backdrop{
+.lightbox-close{
+.lightbox-figure img{max-width:100%; max-height:100%; display:block; border-radius: 12px}
+.lightbox-figure{max-width: 92vw; max-height: 90vh}
+.meta-sys{display:grid; gap:12px; grid-template-columns: 1fr 1fr;}
+.meta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; color:#c6d5e6; font-size:14px; opacity:.9}
+.share a:hover{ filter: brightness(1.05) }
+.share a{display:inline-flex; align-items:center; gap:8px; color:#06121e; text-decoration:none; font-weight:700; border-radius: 12px; padding:10px 12px; background: linear-gradient(90deg, #a78bfa, #f472b6); border: 1px solid rgba(255,255,255,.14); box-shadow: 0 10px 22px rgba(164,120,253,.25);}
+.share{display:flex; flex-wrap:wrap; gap:10px;}
+.small-muted{ color: var(--muted) }
+.tip{display:flex; gap:10px; align-items:flex-start; background: rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.35); color:#d6ffe6; padding:10px 12px; border-radius:12px}
+.two-col{display:grid; gap:18px; grid-template-columns: 1fr 1fr;}
+.warn{display:flex; gap:10px; align-items:flex-start; background: rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.35); color:#fff3d6; padding:10px 12px; border-radius:12px}
+/* Floating Home Buttons (completed) */
+/* Lightbox */
+/* System info */
+// Deteksi Browser & OS + ikon SVG sederhana
+// Lightbox sederhana
+// Reload plugin FB agar data-href diperbarui (jika SDK sudah siap)
+// Set data-href FB Comments ke URL halaman ini
+// Tahun footer
+// Tombol "Salin perintah" untuk semua <pre><code> (berurutan)
+// Web Share API (opsional)
+:root{
+<!DOCTYPE html>
+</body>
+</div>
+</figure>
+</html>
+</section>
+<button class="lightbox-close" id="lightbox-close" aria-label="Tutup">Tutup ✕</button>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div>🄯 <span id="y"></span> • Kompres PDF Ghostscript • Hemat ukuran, hemat waktu</div>
+<figure class="lightbox-figure">
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Kompres PDF Hasil Scan dengan Ghostscript di Linux: Cepat, Mudah, Efektif</title>
+@media (max-width: 720px){ .meta-sys{grid-template-columns: 1fr} }
+@media (max-width: 920px){ .two-col{grid-template-columns: 1fr} }
+@media (max-width: 980px){ .grid{grid-template-columns: 1fr} }
+body{
+btn.addEventListener('click', (e)=>{
 btn.href = '#';
 btn.innerHTML = '<span>🔗</span><span>Bagikan Cepat</span>';
-btn.addEventListener('click', (e)=>{
-  e.preventDefault();
-  navigator.share({
-title: document.title,
-text: 'Compress PDF scan super cepat dengan Ghostscript.',
-url: location.href
-  }).catch(()=>{});
-});
-share.appendChild(btn);
-  }
-})();
-
-// Lightbox sederhana
+const btn = document.createElement('a');
+const currentUrl = window.location.href;
 const lb = document.getElementById('lightbox');
-const lbImg = document.getElementById('lightbox-img');
 const lbClose = document.getElementById('lightbox-close');
+const lbImg = document.getElementById('lightbox-img');
+document.getElementById("current-url").textContent = currentUrl;
+document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+document.getElementById('y').textContent = new Date().getFullYear();
 document.querySelectorAll('a.lightbox').forEach(a=>{
-  a.addEventListener('click', e=>{
+document.querySelectorAll('pre + .copy-btn').forEach((btn) => {
 e.preventDefault();
-lbImg.src = a.getAttribute('href');
-lb.classList.add('active');
-  });
-});
-lbClose.addEventListener('click', ()=> lb.classList.remove('active'));
+footer{border-top:1px solid rgba(255,255,255,.06); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); padding: 26px 16px 120px; color:#cfe3ff; text-align:center;}
+header.hero{
+html,body{height:100%}
 lb.addEventListener('click', (e)=> { if (e.target === lb) lb.classList.remove('active'); });
-
-// Deteksi Browser & OS + ikon SVG sederhana
-();
-  </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
+lb.classList.add('active');
+lbClose.addEventListener('click', ()=> lb.classList.remove('active'));
+lbImg.src = a.getAttribute('href');
+linear-gradient(160deg, #070b16 0%, #0b1020 45%, #0e1530 100%);
+pre{background: #0b1328 !important; border-radius: 12px !important; border: 1px solid rgba(255,255,255,.06); padding: 14px !important; overflow:auto;}
+radial-gradient(1100px 600px at 10% -10%, rgba(96,165,250,.18), transparent 60%),
+radial-gradient(800px 500px at 110% 10%, rgba(110,231,183,.12), transparent 50%),
+share.appendChild(btn);
+text: 'Compress PDF scan super cepat dengan Ghostscript.',
+title: document.title,
+try {
+try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
+url: location.href
+window.fbAsyncInit = function() {
+}
+} catch(e) { btn.textContent = 'Gagal menyalin'; }
+})();
+});

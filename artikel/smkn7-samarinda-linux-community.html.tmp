@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- prettier-ignore -->
+<title>Semangat Open Source: Menghidupkan Kembali Komunitas Linux di SMKN 7 Samarinda</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐧</text></svg>">
+
+<meta name="description" content="Catatan kegiatan dalam upaya menghidupkan kembali komunitas GNU/Linux di SMKN 7 Samarinda. Momen kebersamaan dan semangat untuk memajukan penggunaan Open Source di kalangan pelajar.">
+<link rel="canonical" href="https://frijal.pages.dev/artikel/smkn7-samarinda-linux-community.html">
+
+<meta property="og:title" content="Semangat Open Source: Menghidupkan Kembali Komunitas Linux di SMKN 7 Samarinda">
+<meta property="og:description" content="Sebuah inisiatif untuk mengaktifkan kembali komunitas GNU/Linux di SMKN 7 Samarinda, mendorong adopsi teknologi sumber terbuka di dunia pendidikan.">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMGU6qnArrsCEF_V1VP3RbLIlQChjf1oflie22AvMBfrZV3Nx0gkmce7FouMa-kN4szTlNk_pUf0EsIW-QVTZ1npXzEh83qzGzb_IRbSjfOoHPyfQJQ7yuewKcCrQK4pIcpMfzxMSuHClu/s1600/6.resized.JPG">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/smkn7-samarinda-linux-community.html">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Semangat Open Source: Menghidupkan Kembali Komunitas Linux di SMKN 7 Samarinda">
+<meta name="twitter:description" content="Sebuah inisiatif untuk mengaktifkan kembali komunitas GNU/Linux di SMKN 7 Samarinda, mendorong adopsi teknologi sumber terbuka di dunia pendidikan.">
+<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMGU6qnArrsCEF_V1VP3RbLIlQChjf1oflie22AvMBfrZV3Nx0gkmce7FouMa-kN4szTlNk_pUf0EsIW-QVTZ1npXzEh83qzGzb_IRbSjfOoHPyfQJQ7yuewKcCrQK4pIcpMfzxMSuHClu/s1600/6.resized.JPG">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css">
+
+<style>
+:root {
+--primary-color: #4a90e2;
+--secondary-color: #50e3c2;
+--dark-bg: #1a1a2e;
+--light-bg: #16213e;
+--text-color: #e0e0e0;
+--header-color: #ffffff;
+--muted-color: #a0a0b0;
+--border-radius: 12px;
+--box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+margin: 0;
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(135deg, var(--dark-bg), #0f3460);
+color: var(--text-color);
+line-height: 1.8;
+font-size: 16px;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem;
+}
+
+header {
+text-align: center;
+padding: 4rem 2rem;
+margin-bottom: 2rem;
+background: rgba(22, 33, 62, 0.5);
+border-radius: var(--border-radius);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+font-size: 3rem;
+font-weight: 700;
+color: var(--header-color);
+margin: 0;
+text-shadow: 0 0 15px rgba(80, 227, 194, 0.5);
+}
+
+header p {
+font-size: 1.2rem;
+color: var(--secondary-color);
+margin-top: 0.5rem;
+}
+main {
+background-color: var(--light-bg);
+padding: 2rem;
+border-radius: var(--border-radius);
+box-shadow: var(--box-shadow);
+}
+article h2 {
+font-size: 2rem;
+color: var(--secondary-color);
+border-left: 4px solid var(--primary-color);
+padding-left: 1rem;
+margin-top: 2.5rem;
+margin-bottom: 1.5rem;
+}
+article p {
+text-align: justify;
+margin-bottom: 1rem;
+}
+
+strong {
+color: var(--secondary-color);
+}
+
+/* Galeri Foto: 3 Kolom */
+.photo-gallery {
+display: grid;
+grid-template-columns: repeat(3, 1fr); /* 3 foto per baris */
+gap: 1rem;
+margin-top: 2rem;
+}
+
+.photo-gallery a {
+display: block;
+border-radius: var(--border-radius);
+overflow: hidden;
+position: relative;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+cursor: pointer;
+}
+
+.photo-gallery a:hover {
+transform: scale(1.05);
+box-shadow: 0 8px 25px rgba(80, 227, 194, 0.3);
+}
+.photo-gallery img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+transition: filter 0.3s ease;
+}
+
+.photo-gallery a:hover img {
+filter: brightness(1.1);
+}
+/* Lightbox styling */
+.basicLightbox__placeholder img {
+max-width: 90vw;
+max-height: 90vh;
+}
+
+/* Social Share */
+.social-share {
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+text-align: center;
+}
+
+.social-share h3 {
+margin-bottom: 1.5rem;
+color: var(--header-color);
+}
+.share-buttons {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.share-btn {
+display: inline-flex;
+align-items: center;
+padding: 10px 20px;
+border-radius: 8px;
+text-decoration: none;
+color: #fff;
+font-weight: 600;
+transition: transform 0.2s ease, opacity 0.2s ease;
+gap: 8px;
+}
+
+.share-btn:hover {
+transform: translateY(-3px);
+opacity: 0.9;
+}
+
+.share-btn svg {
+width: 20px;
+height: 20px;
+fill: currentColor;
+}
+
+.facebook { background-color: #1877F2; }
+.twitter-x { background-color: #000000; }
+.whatsapp { background-color: #25D366; }
+.telegram { background-color: #2AABEE; }
+.instagram { background: #d6249f; background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
+.threads { background-color: #000000; }
+.tiktok { background-color: #000000; }
+
+
+/* Footer Info Section */
+.user-info-footer {
+margin-top: 3rem;
+padding: 2rem;
+background-color: var(--dark-bg);
+border-radius: var(--border-radius);
+text-align: center;
+font-size: 0.9rem;
+}
+.info-grid {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 2rem;
+}
+
+.info-item {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+background: var(--light-bg);
+padding: 0.8rem 1.2rem;
+border-radius: 8px;
+}
+.info-item svg {
+width: 24px;
+height: 24px;
+color: var(--secondary-color);
+}
+#country-flag {
+width: 28px;
+border-radius: 4px;
+}
+
+/* Tombol Home Kiri & Kanan */
+#btn-home-left, #btn-home-right {
+position: fixed;
+display: flex;
+align-items: center;
+background-color: var(--primary-color);
+color: white;
+padding: 10px 15px;
+border-radius: 50px;
+text-decoration: none;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+font-weight: 600;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+transition: background-color 0.3s ease, transform 0.2s ease;
+z-index: 9999;
+}
+#btn-home-left:hover, #btn-home-right:hover {
+background-color: var(--secondary-color);
+color: var(--dark-bg);
+transform: scale(1.05);
+}
+#btn-home-left {
+left: 20px;
+top: 50%;
+transform: translateY(-50%);
+}
+#btn-home-right {
+right: 20px;
+bottom: 20px;
+}
+#btn-home-left svg, #btn-home-right svg {
+width: 20px;
+height: 20px;
+fill: currentColor;
+margin-right: 6px;
+}
+/* Facebook Comments Styling */
+.fb-comments {
+background: #fff;
+border-radius: var(--border-radius);
+padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+.photo-gallery {
+grid-template-columns: repeat(2, 1fr); /* 2 kolom untuk tablet */
+}
+}
+
+@media (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+header {
+padding: 2rem 1rem;
+}
+header h1 {
+font-size: 2.2rem;
+}
+.photo-gallery {
+grid-template-columns: 1fr; /* 1 kolom untuk mobile */
+}
+#btn-home-left, #btn-home-right {
+padding: 8px 12px;
+font-size: 12px;
+}
+#btn-home-left svg, #btn-home-right svg {
+margin-right: 4px;
+}
+#btn-home-left {
+left: 10px;
+}
+#btn-home-right {
+right: 10px;
+bottom: 10px;
+}
+}
+</style>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

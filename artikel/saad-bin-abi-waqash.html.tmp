@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sa’ad bin Abi Waqqash — Sejarah yang Lembut Hati</title>
+  <meta name="description" content="Kisah Sa’ad bin Abi Waqqash: sahabat Rasulullah ﷺ yang terkenal sebagai pemanah andal, panglima Qadisiyah, dan termasuk sepuluh sahabat yang dijamin surga. Cerita hidup, perjuangan, dan warisan spiritualnya.">
+  <meta name="keywords" content="Saad bin Abi Waqqash, Sahabat Nabi, Qadisiyah, Pemanah, Sejarah Islam, Sahabat Rasulullah">
+  <meta name="author" content="frijal">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/saad-bin-abi-waqqash.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sa’ad bin Abi Waqqash — Si Singa Allah yang Lembut Hati">
+  <meta property="og:description" content="Kisah Sa’ad bin Abi Waqqash: pemanah andal, panglima Qadisiyah, dan teladan rendah hati. Baca kisah lengkapnya.">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/saad-bin-abi-waqqash.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXs06fosc5DykvYrHl11IvZzfpslk1xfPMTVaGAHkkzMNDx7wMc9BpywW8Tho6zhdaT3wW3QtcWhYnAbdmRykvfP9AsiKVIAcnAPw706WnXd0aS8EeYX0VorzOm1OmkoTXZz68aOgcupFLttDWtIQYBiP2GVN0hedTBZivV4256dvs7i1PKwbKFmy56LA/s1600/SaadbinAbiWaqqash.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sa’ad bin Abi Waqqash — Si Singa Allah yang Lembut Hati">
+  <meta name="twitter:description" content="Kisah Sa’ad bin Abi Waqqash: pemanah andal, panglima Qadisiyah, dan teladan rendah hati.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXs06fosc5DykvYrHl11IvZzfpslk1xfPMTVaGAHkkzMNDx7wMc9BpywW8Tho6zhdaT3wW3QtcWhYnAbdmRykvfP9AsiKVIAcnAPw706WnXd0aS8EeYX0VorzOm1OmkoTXZz68aOgcupFLttDWtIQYBiP2GVN0hedTBZivV4256dvs7i1PKwbKFmy56LA/s1600/SaadbinAbiWaqqash.jpg">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Lazy-load images with IntersectionObserver
+      const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy'));
+      if ('IntersectionObserver' in window) {
+        let obs = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              observer.unobserve(img);
+            }
+          });
+        }, { rootMargin: "120px" });
+        lazyImgs.forEach(i => obs.observe(i));
+      } else {
+        lazyImgs.forEach(i => i.src = i.dataset.src);
+      }
+
+      // Lightbox with arrow navigation and keyboard controls
+      const figures = Array.from(document.querySelectorAll('.gallery figure'));
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const btnLeft = document.querySelector('.lb-arrow.left');
+      const btnRight = document.querySelector('.lb-arrow.right');
+      const btnClose = document.querySelector('.lb-close');
+      let current = -1;
+
+      function open(idx) {
+        const fig = figures[idx];
+        if (!fig) return;
+        const src = fig.dataset.full || (fig.querySelector('img') && fig.querySelector('img').src);
+        lbImg.src = src;
+        lightbox.style.display = 'flex';
+        lightbox.setAttribute('aria-hidden', 'false');
+        current = idx;
+        updateArrows();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        lightbox.style.display = 'none';
+        lightbox.setAttribute('aria-hidden', 'true');
+        lbImg.src = '';
+        current = -1;
+        document.body.style.overflow = '';
+      }
+
+      function updateArrows() {
+        btnLeft.style.display = (current > 0) ? 'flex' : 'none';
+        btnRight.style.display = (current < figures.length - 1) ? 'flex' : 'none';
+      }
+
+      figures.forEach((fig, i) => {
+        fig.addEventListener('click', () => open(i));
+        fig.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(i);
+          }
+        });
+      });
+
+      btnLeft.addEventListener('click', (e) => { e.stopPropagation(); if (current > 0) open(current - 1); });
+      btnRight.addEventListener('click', (e) => { e.stopPropagation(); if (current < figures.length - 1) open(current + 1); });
+      btnClose.addEventListener('click', close);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === 'ArrowLeft' && current > 0) open(current - 1);
+          if (e.key === 'ArrowRight' && current < figures.length - 1) open(current + 1);
+          if (e.key === 'Escape') close();
+        }
+      });
+    });
+  </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

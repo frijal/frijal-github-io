@@ -1,420 +1,331 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+  --accent: #ffd166;
+  --bg: #0d0f13;
+  --brand: #56c4ff;
+  --danger: #ff6b6b;
+  --lh: 1.65;
+  --maxw: 860px;
+  --muted: #b6c0cc;
+  --panel: #141822;
+  --ring: rgba(86,196,255,0.4);
+  --text: #e8ecf1;
+  // Canonical & OG/Twitter url/image meta auto from current location
+  // Estimate read time from text length (rough, Bahasa-friendly)
+  // IP + Country flag (graceful fallback; timeout 2500ms)
+  // If main image fails, fall back to /artikel/*.jpg
+  // Info chips: browser & OS
+  // Lightbox gallery with arrow keys
+  // Share buttons
+  : 'Browser';
+  : /Chrome\//.test(ua) ? 'Google Chrome'
+  : /Firefox\//.test(ua) ? 'Firefox'
+  : /OPR\//.test(ua) ? 'Opera'
+  : /Safari\//.test(ua) && !/Chrome\//.test(ua) ? 'Safari'
+  : url.origin + '/artikel/fallback.jpg';
+  :root { --maxw: 980px }
   <!-- Basic -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <!-- CSS: Single-column wide fullscreen, responsive, interactive -->
+  <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), accessibility, fallbacks -->
+  <!-- Open Graph -->
+  <!-- Structured data: Article (will be hydrated safely in JS) -->
+  <!-- Twitter Card -->
   <!-- prettier-ignore -->
-<title>Kisah Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan</title>
-  <meta name="description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
-  <meta name="robots" content="index,follow">
-  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  </script>
+  </style>
   <link rel="apple-touch-icon" href="https://frijal.pages.dev/favicon.ico">
   <link rel="canonical" id="canonical-link" href="https://frijal.pages.dev/artikel/sultan-murad-iii.html">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan">
-  <meta property="og:description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Frijal Artikel">
-  <meta property="og:url" id="og-url" content="https://frijal.pages.dev/artikel/sultan-murad-iii.html">
-  <meta property="og:image" id="og-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3IgbPpZosJndNo77Bxa3hNF-GYnNkiQHS9l6hLnDCvTCXeZxRC7aVmwCpvD27kqntqSQ4pqprU_1PO_T_qmyJLP9exTW7QgSQGFHKSFH-QdSQ9DgXEGeba-oDL36nf25Tnr6ZStlculh0qyUlTVt6IF4nyvrMGDHonSwr3fnt2fYbpcQhXZxuk5jPPQ0/s1600/Murad.jpg">
-  <meta property="og:image:alt" content="Sultan Murad III">
-  <meta property="article:section" content="Sejarah">
-  <meta property="article:tag" content="Utsmani, Murad III, Topkapi, Zaman Wanita Istana, Taqi al-Din, Observatorium Istanbul">
-
-  <!-- Twitter Card -->
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
+  <meta name="robots" content="index,follow">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan">
   <meta name="twitter:description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
   <meta name="twitter:image" id="twitter-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3IgbPpZosJndNo77Bxa3hNF-GYnNkiQHS9l6hLnDCvTCXeZxRC7aVmwCpvD27kqntqSQ4pqprU_1PO_T_qmyJLP9exTW7QgSQGFHKSFH-QdSQ9DgXEGeba-oDL36nf25Tnr6ZStlculh0qyUlTVt6IF4nyvrMGDHonSwr3fnt2fYbpcQhXZxuk5jPPQ0/s1600/Murad.jpg">
   <meta name="twitter:site" content="@frijal">
-
-  <!-- CSS: Single-column wide fullscreen, responsive, interactive -->
-  <style>
-:root {
-  --bg: #0d0f13;
-  --panel: #141822;
-  --text: #e8ecf1;
-  --muted: #b6c0cc;
-  --brand: #56c4ff;
-  --accent: #ffd166;
-  --danger: #ff6b6b;
-  --ring: rgba(86,196,255,0.4);
-  --maxw: 860px;
-  --lh: 1.65;
-}
-* { box-sizing: border-box }
-html, body { height: 100% }
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  background: radial-gradient(1200px 600px at 10% 0%, #0f141f 0%, #0d0f13 60%, #0b0d12 100%);
-  color: var(--text);
-  line-height: var(--lh);
-}
-a { color: var(--brand); text-decoration: none }
-a:hover { text-decoration: underline }
-img { max-width: 100%; height: auto; border-radius: 12px }
-main {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 24px clamp(16px, 4vw, 32px) 80px;
-}
-header.hero {
-  position: relative;
-  padding: 32px 0 16px;
-  border-bottom: 1px solid #243041;
-}
-header.hero h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 4.6vw, 44px);
-  letter-spacing: 0.2px;
-  line-height: 1.22;
-}
-.dek {
-  color: var(--muted);
-  font-size: clamp(15px, 2.6vw, 18px);
-  margin: 8px 0 16px;
-}
-.meta-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 18px;
-  align-items: center;
-  color: var(--muted);
-  font-size: 14px;
-}
-.chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 12px; border-radius: 999px;
-  background: #0f1624; border: 1px solid #203046;
-}
-.chip svg { width: 18px; height: 18px }
-.content {
-  margin-top: 24px;
-  display: grid; gap: 20px;
-}
-.block {
-  background: linear-gradient(180deg,#141b27,#101622);
-  border: 1px solid #213048;
-  border-radius: 16px;
-  padding: clamp(16px, 3vw, 24px);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
-}
-.block h2 {
-  font-size: clamp(20px, 3.6vw, 28px);
-  margin: 0 0 10px;
-  border-left: 4px solid var(--brand);
-  padding-left: 10px;
-}
-.separator { margin: 12px 0 }
-.quote {
-  padding: 12px 14px;
-  border-left: 4px solid var(--accent);
-  background: #121a26;
-  color: #f6f7fb;
-  border-radius: 8px;
-  font-style: italic;
-}
-/* Gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-.gallery figure {
-  margin: 0;
-  position: relative;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid #22344f;
-  background: #0f1522;
-}
-.gallery figcaption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 10px 12px;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
-  color: #eef2f7;
-  font-size: 13px;
-}
-.zoomable { cursor: zoom-in }
-/* Lightbox */
-.lightbox {
-  position: fixed; inset: 0; z-index: 50;
-  display: none; align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(2px);
-}
-.lightbox.open { display: flex }
-.lightbox img { max-width: min(92vw, 1300px); max-height: 86vh; border-radius: 12px }
-.lb-nav {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px;
-}
-.lb-btn {
-  width: 44px; height: 44px;
-  display: grid; place-items: center;
-  border-radius: 999px; background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff; cursor: pointer;
-}
-.lb-close {
-  position: absolute; top: 18px; right: 18px;
-  width: 40px; height: 40px;
-}
-.lb-index {
-  position: absolute; bottom: 18px; left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.55);
-  color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 12px;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-/* Share strip */
-.share-strip {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-top: 8px;
-}
-.share-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
-  background: #102035; border: 1px solid #223650; color: #eaf1f7;
-  cursor: pointer; font-size: 14px;
-}
-.share-btn svg { width: 18px; height: 18px }
-.copy-ok { color: #9ae6b4 }
-/* Floating controls */
-.float-btn {
-  position: fixed; z-index: 40;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
-  background: #0f1a2b; color: #dfe7f0; border: 1px solid #284364;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
-.btn-sitemap { left: 16px; top: 30% }
-.btn-home { right: 16px; bottom: 20% }
-.float-btn svg { width: 18px; height: 18px }
-/* Facebook comments block */
-.comments {
-  margin-top: 10px;
-  background: #101827; border: 1px solid #243654; border-radius: 14px; padding: 12px;
-}
-/* Focus & motion pref */
-:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px }
-@media (min-width: 1200px) {
-  :root { --maxw: 980px }
-}
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; scroll-behavior: auto !important }
-}
-  </style>
-
-  <!-- Structured data: Article (will be hydrated safely in JS) -->
-  <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), accessibility, fallbacks -->
+  <meta name="twitter:title" content="Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta property="article:section" content="Sejarah">
+  <meta property="article:tag" content="Utsmani, Murad III, Topkapi, Zaman Wanita Istana, Taqi al-Din, Observatorium Istanbul">
+  <meta property="og:description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
+  <meta property="og:image" id="og-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3IgbPpZosJndNo77Bxa3hNF-GYnNkiQHS9l6hLnDCvTCXeZxRC7aVmwCpvD27kqntqSQ4pqprU_1PO_T_qmyJLP9exTW7QgSQGFHKSFH-QdSQ9DgXEGeba-oDL36nf25Tnr6ZStlculh0qyUlTVt6IF4nyvrMGDHonSwr3fnt2fYbpcQhXZxuk5jPPQ0/s1600/Murad.jpg">
+  <meta property="og:image:alt" content="Sultan Murad III">
+  <meta property="og:site_name" content="Frijal Artikel">
+  <meta property="og:title" content="Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan">
+  <meta property="og:type" content="article">
+  <meta property="og:url" id="og-url" content="https://frijal.pages.dev/artikel/sultan-murad-iii.html">
   <script>
-(function() {
-  const safe = (f) => { try { f(); } catch (e) { /* diam, tetap jalan */ } };
-
-  // Canonical & OG/Twitter url/image meta auto from current location
-  safe(() => {
-const url = new URL(window.location.href);
-const canonical = document.querySelector('#canonical-link');
-const ogUrl = document.querySelector('#og-url');
-const ogImg = document.querySelector('#og-image');
-const twImg = document.querySelector('#twitter-image');
-
-if (canonical) canonical.href = url.href;
-if (ogUrl) ogUrl.content = url.href;
-
-// Fallback image if none found in article: use artikel/*.jpg derived from path
-const path = url.pathname; // e.g., /artikel/sultan-murad-iii.html
-const jpgFallback = path.endsWith('.html')
+  <style>
   ? url.origin + path.replace('.html', '.jpg')
-  : url.origin + '/artikel/fallback.jpg';
-
-// Detect first content image
-const articleImg = document.querySelector('#hero-image');
-const hasHero = !!(articleImg && articleImg.src);
-
-const finalImg = hasHero ? articleImg.src : jpgFallback;
-if (ogImg) ogImg.content = finalImg;
-if (twImg) twImg.content = finalImg;
-
-// Update LD+JSON image too
-const ld = document.querySelector('#ld-json');
-if (ld) {
-  const data = JSON.parse(ld.textContent);
-  data.image = finalImg;
-  ld.textContent = JSON.stringify(data);
-}
-  });
-
-  // Estimate read time from text length (rough, Bahasa-friendly)
-  safe(() => {
-const text = document.body.innerText || "";
-const words = text.trim().split(/\s+/).length;
-const min = Math.max(3, Math.round(words / 200)); // ~200 kata/menit
-const el = document.querySelector('#read-time span');
-if (el) el.textContent = `Waktu baca: ~${min} menit`;
-  });
-
-  // Info chips: browser & OS
-  safe(() => {
-const ua = navigator.userAgent;
-const browserEl = document.querySelector('[data-browser]');
-const osEl = document.querySelector('[data-os]');
-
-const browser = /Edg\//.test(ua) ? 'Microsoft Edge'
-  : /Chrome\//.test(ua) ? 'Google Chrome'
-  : /Safari\//.test(ua) && !/Chrome\//.test(ua) ? 'Safari'
-  : /Firefox\//.test(ua) ? 'Firefox'
-  : /OPR\//.test(ua) ? 'Opera'
-  : 'Browser';
-
-const os = /Windows NT/.test(ua) ? 'Windows'
- : /Mac OS X/.test(ua) ? 'macOS'
- : /Android/.test(ua) ? 'Android'
- : /iPhone|iPad|iPod/.test(ua) ? 'iOS'
- : /Linux/.test(ua) ? 'Linux'
- : 'OS';
-
-if (browserEl) browserEl.textContent = browser;
-if (osEl) osEl.textContent = os;
-  });
-
-  // IP + Country flag (graceful fallback; timeout 2500ms)
-  safe(() => {
-const ipEl = document.querySelector('[data-ip]');
-const flagEl = document.querySelector('[data-flag]');
-const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
-const fetchIPInfo = async () => {
-  try {
-// Coba ipapi.co (tanpa API key, rate-limited)
-const res = await Promise.race([
-  fetch('https://ipapi.co/json/', { cache: 'no-store' }),
-  timeout(2500)
-]);
-if (!res || !res.ok) throw new Error('ipapi unavailable');
-const j = await res.json();
-if (ipEl) ipEl.textContent = j.ip || '—';
-const cc = (j.country || j.country_name || '').toString();
-const code = (j.country_code || '').toUpperCase();
-const flag = code ? ccToFlagEmoji(code) : '🏳️';
-if (flagEl) flagEl.textContent = flag + (cc ? ` ${cc}` : '');
-  } catch (e) {
-// fallback: hanya tampilkan strip
-if (ipEl) ipEl.textContent = '—';
-if (flagEl) flagEl.textContent = '🏳️';
-  }
-};
-const ccToFlagEmoji = (code) =>
+  align-items: center;
+  backdrop-filter: blur(2px);
+  background: #0f1522;
+  background: #0f1624; border: 1px solid #203046;
+  background: #0f1a2b; color: #dfe7f0; border: 1px solid #284364;
+  background: #101827; border: 1px solid #243654; border-radius: 14px; padding: 12px;
+  background: #102035; border: 1px solid #223650; color: #eaf1f7;
+  background: #121a26;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
+  background: linear-gradient(180deg,#141b27,#101622);
+  background: radial-gradient(1200px 600px at 10% 0%, #0f141f 0%, #0d0f13 60%, #0b0d12 100%);
+  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.85);
+  border-bottom: 1px solid #243041;
+  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--brand);
+  border-radius: 14px;
+  border-radius: 16px;
+  border-radius: 8px;
+  border-radius: 999px; background: rgba(255,255,255,0.08);
+  border: 1px solid #213048;
+  border: 1px solid #22344f;
+  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.2);
+  bottom: 0; left: 0; right: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
   code.replace(/./g, c => String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1F1E6));
-fetchIPInfo();
-  });
-
-  // Share buttons
-  safe(() => {
-const current = window.location.href;
-const title = document.title;
-const strip = document.querySelector('.share-strip');
-const ok = document.querySelector('.copy-ok');
-
-const open = (u) => window.open(u, '_blank', 'noopener,noreferrer');
-
-strip?.addEventListener('click', (e) => {
+  color: #eef2f7;
+  color: #f6f7fb;
+  color: #fff; cursor: pointer;
+  color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 12px;
+  color: var(--muted);
+  color: var(--text);
   const btn = e.target.closest('.share-btn');
-  if (!btn) return;
+  const data = JSON.parse(ld.textContent);
+  const fallback = url.origin + url.pathname.replace('.html', '.jpg');
+  const safe = (f) => { try { f(); } catch (e) { /* diam, tetap jalan */ } };
   const type = btn.dataset.share;
-  if (type === 'copy') {
-navigator.clipboard?.writeText(current).then(() => {
-  if (ok) { ok.hidden = false; setTimeout(() => ok.hidden = true, 1500); }
-});
-return;
-  }
+  const url = new URL(window.location.href);
+  cursor: pointer; font-size: 14px;
+  data.image = finalImg;
+  display: flex;
+  display: flex; align-items: center; justify-content: space-between;
+  display: flex; flex-wrap: wrap; gap: 10px;
+  display: grid;
+  display: grid; gap: 20px;
+  display: grid; place-items: center;
+  display: inline-flex; align-items: center; gap: 8px;
+  display: none; align-items: center; justify-content: center;
+  document.body.style.overflow = '';
+  document.body.style.overflow = 'hidden';
+  fetch('https://ipapi.co/json/', { cache: 'no-store' }),
+  fig.addEventListener('click', () => openAt(i));
+  flex-wrap: wrap;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-size: 13px;
+  font-size: 14px;
+  font-size: clamp(15px, 2.6vw, 18px);
+  font-size: clamp(20px, 3.6vw, 28px);
+  font-size: clamp(28px, 4.6vw, 44px);
+  font-style: italic;
+  gap: 12px 18px;
+  gap: 14px;
+  grid-template-columns: 1fr;
+  idx = (idx + d + items.length) % items.length;
+  idx = i;
+  if (!btn) return;
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(+1);
+  if (e.key === 'Escape') closeLb();
+  if (img.src !== fallback) img.src = fallback;
   if (navigator.share && (type === 'facebook' || type === 'twitter')) {
-navigator.share({ title, url: current }).catch(() => {});
-return;
-  }
+  if (ok) { ok.hidden = false; setTimeout(() => ok.hidden = true, 1500); }
+  if (type === 'copy') {
   if (type === 'facebook') open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`);
+  if (type === 'telegram') open(`https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`);
   if (type === 'twitter') open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`);
   if (type === 'whatsapp') open(`https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`);
-  if (type === 'telegram') open(`https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`);
-});
-  });
-
-  // Lightbox gallery with arrow keys
+  lb.classList.add('open');
+  lb.classList.remove('open');
+  lbImg.src = '';
+  lbImg.src = items[idx].src;
+  lbIndex.textContent = `${idx+1} / ${items.length}`;
+  ld.textContent = JSON.stringify(data);
+  letter-spacing: 0.2px;
+  line-height: 1.22;
+  line-height: var(--lh);
+  margin-top: 10px;
+  margin-top: 24px;
+  margin-top: 8px;
+  margin: 0 0 10px;
+  margin: 0 0 8px;
+  margin: 0 auto;
+  margin: 0;
+  margin: 8px 0 16px;
+  max-width: var(--maxw);
+  overflow: hidden;
+  padding-left: 10px;
+  padding: 0 24px;
+  padding: 10px 12px;
+  padding: 10px 12px; border-radius: 999px;
+  padding: 12px 14px;
+  padding: 24px clamp(16px, 4vw, 32px) 80px;
+  padding: 32px 0 16px;
+  padding: 8px 12px; border-radius: 999px;
+  padding: clamp(16px, 3vw, 24px);
+  position: absolute;
+  position: absolute; bottom: 18px; left: 50%;
+  position: absolute; inset: 0;
+  position: absolute; top: 18px; right: 18px;
+  position: fixed; inset: 0; z-index: 50;
+  position: fixed; z-index: 40;
+  position: relative;
   safe(() => {
+  timeout(2500)
+  transform: translateX(-50%);
+  try {
+  width: 40px; height: 40px;
+  width: 44px; height: 44px;
+  }
+  } catch (e) {
+  });
+ : 'OS';
+ : /Android/.test(ua) ? 'Android'
+ : /Linux/.test(ua) ? 'Linux'
+ : /Mac OS X/.test(ua) ? 'macOS'
+ : /iPhone|iPad|iPod/.test(ua) ? 'iOS'
+(function() {
+* { box-sizing: border-box }
+.block h2 {
+.block {
+.btn-home { right: 16px; bottom: 20% }
+.btn-sitemap { left: 16px; top: 30% }
+.chip svg { width: 18px; height: 18px }
+.chip {
+.comments {
+.content {
+.copy-ok { color: #9ae6b4 }
+.dek {
+.float-btn svg { width: 18px; height: 18px }
+.float-btn {
+.gallery figcaption {
+.gallery figure {
+.gallery {
+.lb-btn {
+.lb-close {
+.lb-index {
+.lb-nav {
+.lightbox img { max-width: min(92vw, 1300px); max-height: 86vh; border-radius: 12px }
+.lightbox {
+.lightbox.open { display: flex }
+.meta-line {
+.quote {
+.separator { margin: 12px 0 }
+.share-btn svg { width: 18px; height: 18px }
+.share-btn {
+.share-strip {
+.zoomable { cursor: zoom-in }
+/* Facebook comments block */
+/* Floating controls */
+/* Focus & motion pref */
+/* Gallery */
+/* Lightbox */
+/* Share strip */
+// Coba ipapi.co (tanpa API key, rate-limited)
+// Detect first content image
+// Fallback image if none found in article: use artikel/*.jpg derived from path
+// Update LD+JSON image too
+// fallback: hanya tampilkan strip
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px }
+:root {
+<!DOCTYPE html>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Kisah Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan</title>
+@media (min-width: 1200px) {
+@media (prefers-reduced-motion: reduce) {
+]);
+a { color: var(--brand); text-decoration: none }
+a:hover { text-decoration: underline }
+body {
+close.addEventListener('click', closeLb);
+const articleImg = document.querySelector('#hero-image');
+const browser = /Edg\//.test(ua) ? 'Microsoft Edge'
+const browserEl = document.querySelector('[data-browser]');
+const canonical = document.querySelector('#canonical-link');
+const cc = (j.country || j.country_name || '').toString();
+const ccToFlagEmoji = (code) =>
+const close = lb.querySelector('.lb-close');
+const closeLb = () => {
+const code = (j.country_code || '').toUpperCase();
+const current = window.location.href;
+const el = document.querySelector('#read-time span');
+const fetchIPInfo = async () => {
+const finalImg = hasHero ? articleImg.src : jpgFallback;
+const flag = code ? ccToFlagEmoji(code) : '🏳️';
+const flagEl = document.querySelector('[data-flag]');
+const hasHero = !!(articleImg && articleImg.src);
+const img = document.getElementById('hero-image');
+const ipEl = document.querySelector('[data-ip]');
+const items = Array.from(document.querySelectorAll('.gallery img, #hero-image'));
+const j = await res.json();
+const jpgFallback = path.endsWith('.html')
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-image');
 const lbIndex = document.getElementById('lb-index');
-const prev = lb.querySelector('.lb-prev');
+const ld = document.querySelector('#ld-json');
+const min = Math.max(3, Math.round(words / 200)); // ~200 kata/menit
 const next = lb.querySelector('.lb-next');
-const close = lb.querySelector('.lb-close');
-const items = Array.from(document.querySelectorAll('.gallery img, #hero-image'));
-let idx = 0;
-
+const ogImg = document.querySelector('#og-image');
+const ogUrl = document.querySelector('#og-url');
+const ok = document.querySelector('.copy-ok');
+const open = (u) => window.open(u, '_blank', 'noopener,noreferrer');
 const openAt = (i) => {
-  idx = i;
-  lbImg.src = items[idx].src;
-  lb.classList.add('open');
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
-  document.body.style.overflow = 'hidden';
-};
-const closeLb = () => {
-  lb.classList.remove('open');
-  lbImg.src = '';
-  document.body.style.overflow = '';
-};
+const os = /Windows NT/.test(ua) ? 'Windows'
+const osEl = document.querySelector('[data-os]');
+const path = url.pathname; // e.g., /artikel/sultan-murad-iii.html
+const prev = lb.querySelector('.lb-prev');
+const res = await Promise.race([
 const step = (d) => {
-  idx = (idx + d + items.length) % items.length;
-  lbImg.src = items[idx].src;
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
-};
-
+const strip = document.querySelector('.share-strip');
+const text = document.body.innerText || "";
+const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
+const title = document.title;
+const twImg = document.querySelector('#twitter-image');
+const ua = navigator.userAgent;
+const url = new URL(window.location.href);
+const words = text.trim().split(/\s+/).length;
 document.querySelectorAll('.zoomable').forEach((fig, i) => {
-  fig.addEventListener('click', () => openAt(i));
-});
-prev.addEventListener('click', () => step(-1));
-next.addEventListener('click', () => step(+1));
-close.addEventListener('click', closeLb);
-lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
-window.addEventListener('keydown', (e) => {
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLb();
-  if (e.key === 'ArrowLeft') step(-1);
-  if (e.key === 'ArrowRight') step(+1);
-});
-  });
-
-  // If main image fails, fall back to /artikel/*.jpg
-  safe(() => {
-const img = document.getElementById('hero-image');
+fetchIPInfo();
+header.hero h1 {
+header.hero {
+html, body { height: 100% }
 if (!img) return;
+if (!res || !res.ok) throw new Error('ipapi unavailable');
+if (browserEl) browserEl.textContent = browser;
+if (canonical) canonical.href = url.href;
+if (el) el.textContent = `Waktu baca: ~${min} menit`;
+if (flagEl) flagEl.textContent = '🏳️';
+if (flagEl) flagEl.textContent = flag + (cc ? ` ${cc}` : '');
+if (ipEl) ipEl.textContent = '—';
+if (ipEl) ipEl.textContent = j.ip || '—';
+if (ld) {
+if (ogImg) ogImg.content = finalImg;
+if (ogUrl) ogUrl.content = url.href;
+if (osEl) osEl.textContent = os;
+if (twImg) twImg.content = finalImg;
+img { max-width: 100%; height: auto; border-radius: 12px }
 img.addEventListener('error', () => {
-  const url = new URL(window.location.href);
-  const fallback = url.origin + url.pathname.replace('.html', '.jpg');
-  if (img.src !== fallback) img.src = fallback;
-});
-  });
+lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+let idx = 0;
+main {
+navigator.clipboard?.writeText(current).then(() => {
+navigator.share({ title, url: current }).catch(() => {});
+next.addEventListener('click', () => step(+1));
+prev.addEventListener('click', () => step(-1));
+return;
+strip?.addEventListener('click', (e) => {
+window.addEventListener('keydown', (e) => {
+}
 })();
-  </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
+});
+};

@@ -1,381 +1,304 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pictory.ai: Ubah Tulisan Jadi Video Marketing Profesional</title>
-    <meta
-      name="description"
-      content="Konten video lagi ngetren! Pelajari cara Pictory.ai mengubah artikel blog jadi video keren dengan subtitle otomatis, cocok untuk UMKM yang mau hemat biaya."
-    />
-    <meta
-      name="keywords"
-      content="Pictory.ai, video marketing, text to video, AI video generator, konten video, UMKM, social media video"
-    />
-    <meta name="author" content="Frijal" />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/pictory-ai-video-marketing.html"
-    />
-    <link
-      rel="icon"
-      href="https://frijal.pages.dev/favicon.svg"
-      type="image/svg+xml"
-    />
-    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
-    <meta
-      property="og:title"
-      content="Pictory.ai: Ubah Tulisan Jadi Video Marketing Profesional"
-    />
-    <meta
-      property="og:description"
-      content="Konten video lagi ngetren! Pelajari cara Pictory.ai mengubah artikel blog jadi video keren dengan subtitle otomatis, cocok untuk UMKM."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/pictory-ai-video-marketing.html"
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.pages.dev/img/pictory-ai-video-marketing.webp"
-    />
-    <meta
-      property="og:image:alt"
-      content="Ilustrasi Teks Artikel yang diubah menjadi Video oleh AI"
-    />
-    <meta property="fb:app_id" content="1471267430691023" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@frijal" />
-    <meta name="twitter:creator" content="@frijal" />
-    <meta
-      name="twitter:title"
-      content="Pictory.ai: Ubah Tulisan Jadi Video Marketing Profesional"
-    />
-    <meta
-      name="twitter:description"
-      content="Konten video lagi ngetren! Pelajari cara Pictory.ai mengubah artikel blog jadi video keren dengan subtitle otomatis, cocok untuk UMKM."
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.pages.dev/img/pictory-ai-video-marketing.webp"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
-    <meta
-      property="article:published_time"
-      content="2025-10-04T15:37:18.231+00:00"
-    />
-    <style>
-      :root {
-        --bg-color: #0a0f18;
-        --surface-color: #151c2c;
-        --primary-color: #ff007f;
-        --secondary-color: #00f6ff;
-        --text-color: #e6e6e6;
-        --text-muted: #8a95b3;
-        --border-color: #2a3447;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      }
-      html { scroll-behavior: smooth; }
-      body {
-        font-family: var(--font-main);
-        margin: 0;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.8;
-        font-size: 1.1rem;
-      }
-      .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-      header {
-        text-align: center;
-        padding: 60px 20px;
-        background: linear-gradient(145deg, rgba(255, 0, 127, 0.1), rgba(0, 246, 255, 0.1));
-        border-bottom: 1px solid var(--border-color);
-      }
-      header h1 {
-        font-size: 3rem;
-        color: var(--primary-color);
-        margin: 0;
-        font-weight: 800;
-        text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
-      }
-      header .subtitle { font-size: 1.3rem; color: var(--text-muted); margin-top: 15px; }
-      article {
-        background: var(--surface-color);
-        border-radius: 15px;
-        padding: 30px 40px;
-        margin-top: 30px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border-color);
-      }
-      h2 {
-        font-size: 2.2rem;
-        color: var(--primary-color);
-        margin-top: 40px;
-        border-bottom: 2px solid var(--border-color);
-        padding-bottom: 10px;
-        font-weight: 700;
-      }
-      .highlight-box {
-        background-color: rgba(0, 246, 255, 0.05);
-        border-left: 5px solid var(--secondary-color);
-        border-radius: 8px;
-        padding: 25px;
-        margin: 30px 0;
-        font-size: 1.15rem;
-      }
-      .feature-list { list-style: none; padding-left: 0; }
-      .feature-list li {
-        padding: 10px 0;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        align-items: center;
-      }
-      .feature-list li::before {
-        content: '►';
-        color: var(--secondary-color);
-        font-size: 1.2rem;
-        margin-right: 15px;
-        animation: pulse 1.5s infinite;
-      }
-      @keyframes pulse { 50% { color: var(--primary-color); } }
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 15px;
-        margin: 30px 0;
-      }
-      .gallery img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.3s, filter 0.3s;
-      }
-      .gallery img:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px var(--primary-color)); }
-      .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-      }
-      .lightbox-content { max-width: 90%; max-height: 85%; animation: fadeIn 0.4s ease; }
-      @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-      .lightbox-close, .lightbox-prev, .lightbox-next {
-        position: absolute;
-        color: white;
-        font-size: 40px;
-        cursor: pointer;
-        user-select: none;
-        transition: opacity 0.3s;
-      }
-      .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.7; }
-      .lightbox-close { top: 15px; right: 30px; }
-      .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); padding: 10px; }
-      .lightbox-prev { left: 15px; }
-      .lightbox-next { right: 15px; }
-      .action-section {
-        text-align: center;
-        margin: 40px 0;
-        padding: 25px;
-        background: var(--bg-color);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-      }
-      .action-section h3 { margin-top: 0; font-size: 1.5rem; color: var(--primary-color); }
-      .share-icons-container { display: flex; justify-content: center; gap: 20px; }
-      .share-icon { display: inline-block; transition: transform 0.2s ease; }
-      .share-icon:hover { transform: scale(1.15); }
-      .share-icon svg { width: 40px; height: 40px; }
-      footer { text-align: center; padding: 25px; margin-top: 40px; font-size: 1rem; color: var(--text-muted); }
-      @media (max-width: 768px) {
-        body { font-size: 1rem; }
-        header h1 { font-size: 2.5rem; }
-        article { padding: 20px; }
-        h2 { font-size: 1.8rem; }
-      }
-    </style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-  </head>
-  <body>
+
     
-    <div class="container">
-      <header>
-        <h1>Pictory.ai: Ubah Tulisan Jadi Emas Pemasaran</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-        <div id="iposbrowser"></div>
-        <p class="subtitle">
-          Saatnya Sulap Artikel Jadi Video Keren Tanpa Skill Editing
-        </p>
-      </header>
-      <main>
-        <article>
-          <h2>Konten Video Itu Raja, Jangan Ketinggalan!</h2>
-          <p>
-            Bagi Anda yang sering bermain media sosial, pasti sadar kalau
-            konten video sedang merajai dunia digital. Algoritma suka, penonton
-            juga betah. Tapi, membuat video itu kan rumit? Eits, kata siapa!
-            Kenalkan <strong>Pictory.ai</strong>, sihir AI yang siap membantu
-            Anda membuat video keren, bahkan tanpa pengalaman *editing* sama
-            sekali!
-          </p>
-          <div class="highlight-box">
-            <p>
-              Cukup berikan Pictory artikel blog atau skrip tulisan Anda, dan
-              dalam hitungan menit, ia akan menyulapnya menjadi video yang
-              menarik. AI-nya pintar, bisa otomatis memilih klip video yang
-              relevan, menambahkan musik latar yang pas, dan memberikan
-              *subtitle* otomatis.
-            </p>
-          </div>
-          <h2>Bayangkan Kemudahannya...</h2>
-          <p>
-            Coba bayangkan, UMKM seperti toko online kecil Anda sekarang bisa
-            membuat video promosi produk yang terlihat profesional tanpa perlu
-            keluar biaya untuk menyewa video editor mahal. Tampilan bisnis
-            Anda jadi lebih keren, lebih dipercaya, dan pastinya bisa menarik
-            lebih banyak pelanggan.
-          </p>
-          <h2>Kelebihan Utama Pictory.ai:</h2>
-          <ul class="feature-list">
-            <li>Konversi teks ke video secara otomatis, hemat waktu.</li>
-            <li>
-              *Subtitle* otomatis untuk menjangkau penonton yang lebih luas.
-            </li>
-            <li>
-              Banyak pilihan *template* profesional yang siap pakai.
-            </li>
-            <li>Koleksi jutaan klip video dan musik bebas royalti.</li>
-          </ul>
-          <div class="gallery" id="photoGallery">
-            </div>
-          <div class="action-section">
-            <h3>Bagikan Alat Ajaib Ini!</h3>
-            <div class="share-icons-container">
-              <a href="#" class="share-icon" id="shareFacebook" title="Bagikan ke Facebook" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" fill="#1877F2">
+        
+          
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.82l-1.36 4.95 5.07-1.33c1.38.71 2.92 1.12 4.55 1.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM17.47 14.38c-.2-.1-.97-.48-1.12-.53-.15-.05-.26-.08-.37.08-.11.16-.42.53-.52.64-.1.1-.19.12-.35.04-.16-.08-.68-.25-1.3-.8-.48-.43-.81-.95-.9-1.11-.1-.16-.01-.25.07-.32.08-.07.16-.19.25-.28.08-.1.11-.16.16-.26s.03-.2-.01-.28c-.05-.08-.37-.88-.51-1.21-.13-.32-.27-.28-.37-.28h-.19c-.1 0-.26.03-.4.16-.14.12-.54.53-.54 1.29s.55 1.5.63 1.61c.08.1.97 1.48 2.37 2.08.34.15.54.2.8.31.53.22.97.19 1.31.11.39-.08 1.12-.46 1.28-.9s.16-.81.11-.88c-.05-.07-.16-.11-.35-.21z"/>
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-                </svg>
-              </a>
-              <a href="#" class="share-icon" id="shareTwitter" title="Bagikan ke Twitter" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" fill="#1DA1F2">
                   <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.55v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.35 0-.69-.02-1.03-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
                 </svg>
-              </a>
-              <a href="#" class="share-icon" id="shareWhatsApp" title="Bagikan ke WhatsApp" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="#1877F2">
+                <svg viewBox="0 0 24 24" fill="#1DA1F2">
                 <svg viewBox="0 0 24 24" fill="#25D366">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.38 1.25 4.82l-1.36 4.95 5.07-1.33c1.38.71 2.92 1.12 4.55 1.12h.01c5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zM17.47 14.38c-.2-.1-.97-.48-1.12-.53-.15-.05-.26-.08-.37.08-.11.16-.42.53-.52.64-.1.1-.19.12-.35.04-.16-.08-.68-.25-1.3-.8-.48-.43-.81-.95-.9-1.11-.1-.16-.01-.25.07-.32.08-.07.16-.19.25-.28.08-.1.11-.16.16-.26s.03-.2-.01-.28c-.05-.08-.37-.88-.51-1.21-.13-.32-.27-.28-.37-.28h-.19c-.1 0-.26.03-.4.16-.14.12-.54.53-.54 1.29s.55 1.5.63 1.61c.08.1.97 1.48 2.37 2.08.34.15.54.2.8.31.53.22.97.19 1.31.11.39-.08 1.12-.46 1.28-.9s.16-.81.11-.88c-.05-.07-.16-.11-.35-.21z"/>
-                </svg>
+                e.preventDefault();
+                window.open(this.href, 'share-window', 'height=450,width=550');
+              *Subtitle* otomatis untuk menjangkau penonton yang lebih luas.
+              *subtitle* otomatis.
               </a>
+              <a href="#" class="share-icon" id="shareFacebook" title="Bagikan ke Facebook" rel="noopener noreferrer">
+              <a href="#" class="share-icon" id="shareTwitter" title="Bagikan ke Twitter" rel="noopener noreferrer">
+              <a href="#" class="share-icon" id="shareWhatsApp" title="Bagikan ke WhatsApp" rel="noopener noreferrer">
+              Banyak pilihan *template* profesional yang siap pakai.
+              Cukup berikan Pictory artikel blog atau skrip tulisan Anda, dan
+              const clickedIndex = imagesInGallery.indexOf(e.target);
+              dalam hitungan menit, ia akan menyulapnya menjadi video yang
+              lightbox.style.display = 'flex';
+              link.addEventListener('click', function (e) {
+              link.href = shareLinks[id];
+              menarik. AI-nya pintar, bisa otomatis memilih klip video yang
+              relevan, menambahkan musik latar yang pas, dan memberikan
+              showImage(clickedIndex);
+              });
             </div>
-          </div>
-          <h2>Tertarik Membuat Video Otomatis?</h2>
-          
-        </article>
-      </main>
-      <footer>
-        <p>🄯 2025 Frijal. Dari tulisan jadi tontonan.</p>
-      </footer>
-    </div>
-    <div id="lightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <a class="lightbox-prev">&#10094;</a>
-      <a class="lightbox-next">&#10095;</a>
-      <img class="lightbox-content" id="lightboxImg" alt="Gambar diperbesar" />
-    </div>
-
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <div id="kategori-aktif"></div>
-    <div class="search-floating-container">
-      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- GALERI & LIGHTBOX ---
-        const gallery = document.getElementById('photoGallery');
-        const lightbox = document.getElementById('lightbox');
-        if (gallery && lightbox) {
-          const lightboxImg = document.getElementById('lightboxImg');
-          const closeBtn = document.querySelector('.lightbox-close');
-          const prevBtn = document.querySelector('.lightbox-prev');
-          const nextBtn = document.querySelector('.lightbox-next');
-          let currentIndex;
-
-          const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/id/${90 + i}/800/600`);
-          images.forEach((src, index) => {
+            </li>
+            </p>
+            <div class="share-icons-container">
+            <h3>Bagikan Alat Ajaib Ini!</h3>
+            <li>
+            <li>Koleksi jutaan klip video dan musik bebas royalti.</li>
+            <li>Konversi teks ke video secara otomatis, hemat waktu.</li>
+            <p>
+            Anda jadi lebih keren, lebih dipercaya, dan pastinya bisa menarik
+            Anda membuat video keren, bahkan tanpa pengalaman *editing* sama
+            Bagi Anda yang sering bermain media sosial, pasti sadar kalau
+            Coba bayangkan, UMKM seperti toko online kecil Anda sekarang bisa
+            Kenalkan <strong>Pictory.ai</strong>, sihir AI yang siap membantu
             const img = document.createElement('img');
-            img.src = src;
+            const link = document.getElementById(id);
+            else currentIndex = index;
+            else if (index < 0) currentIndex = imagesInGallery.length - 1;
+            gallery.appendChild(img);
+            if (e.target === lightbox) lightbox.style.display = 'none';
+            if (e.target.tagName === 'IMG') {
+            if (index >= imagesInGallery.length) currentIndex = 0;
+            if (link) {
             img.alt = `Contoh video yang dihasilkan Pictory.ai ${index + 1}`;
             img.loading = 'lazy';
-            gallery.appendChild(img);
-          });
-          
-          const imagesInGallery = Array.from(gallery.children);
-
-          function showImage(index) {
-            if (index >= imagesInGallery.length) currentIndex = 0;
-            else if (index < 0) currentIndex = imagesInGallery.length - 1;
-            else currentIndex = index;
+            img.src = src;
+            juga betah. Tapi, membuat video itu kan rumit? Eits, kata siapa!
+            keluar biaya untuk menyewa video editor mahal. Tampilan bisnis
+            konten video sedang merajai dunia digital. Algoritma suka, penonton
+            lebih banyak pelanggan.
             lightboxImg.src = imagesInGallery[currentIndex].src;
-          }
-
-          gallery.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-              const clickedIndex = imagesInGallery.indexOf(e.target);
-              lightbox.style.display = 'flex';
-              showImage(clickedIndex);
-            }
-          });
-
-          closeBtn.addEventListener('click', () => (lightbox.style.display = 'none'));
-          prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-          nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-          lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) lightbox.style.display = 'none';
-          });
-        }
-        
-        // --- SOCIAL SHARING ---
-        (() => {
-          const pageUrl = encodeURIComponent(document.querySelector("link[rel='canonical']")?.href || location.href);
-          const pageTitle = encodeURIComponent(document.title);
-          const shareLinks = {
+            membuat video promosi produk yang terlihat profesional tanpa perlu
+            sekali!
             shareFacebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
             shareTwitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
             shareWhatsApp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
-          };
-          for (const id in shareLinks) {
-            const link = document.getElementById(id);
-            if (link) {
-              link.href = shareLinks[id];
-              link.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.open(this.href, 'share-window', 'height=450,width=550');
-              });
             }
+          </div>
+          </p>
+          </ul>
+          <div class="action-section">
+          <div class="gallery" id="photoGallery">
+          <div class="highlight-box">
+          <h2>Bayangkan Kemudahannya...</h2>
+          <h2>Kelebihan Utama Pictory.ai:</h2>
+          <h2>Konten Video Itu Raja, Jangan Ketinggalan!</h2>
+          <h2>Tertarik Membuat Video Otomatis?</h2>
+          <p>
+          <ul class="feature-list">
+          Saatnya Sulap Artikel Jadi Video Keren Tanpa Skill Editing
+          closeBtn.addEventListener('click', () => (lightbox.style.display = 'none'));
+          const closeBtn = document.querySelector('.lightbox-close');
+          const images = Array.from({ length: 6 }, (_, i) => `https://picsum.photos/id/${90 + i}/800/600`);
+          const imagesInGallery = Array.from(gallery.children);
+          const lightboxImg = document.getElementById('lightboxImg');
+          const nextBtn = document.querySelector('.lightbox-next');
+          const pageTitle = encodeURIComponent(document.title);
+          const pageUrl = encodeURIComponent(document.querySelector("link[rel='canonical']")?.href || location.href);
+          const prevBtn = document.querySelector('.lightbox-prev');
+          const shareLinks = {
+          for (const id in shareLinks) {
+          function showImage(index) {
+          gallery.addEventListener('click', (e) => {
+          images.forEach((src, index) => {
+          let currentIndex;
+          lightbox.addEventListener('click', (e) => {
+          nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+          prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
           }
+          });
+          };
+        (() => {
+        --bg-color: #0a0f18;
+        --border-color: #2a3447;
+        --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        --primary-color: #ff007f;
+        --secondary-color: #00f6ff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --surface-color: #151c2c;
+        --text-color: #e6e6e6;
+        --text-muted: #8a95b3;
+        // --- GALERI & LIGHTBOX ---
+        // --- SOCIAL SHARING ---
+        </article>
+        </p>
+        <article>
+        <h1>Pictory.ai: Ubah Tulisan Jadi Emas Pemasaran</h1>
+        <p class="subtitle">
+        <p>🄯 2025 Frijal. Dari tulisan jadi tontonan.</p>
+        align-items: center;
+        animation: pulse 1.5s infinite;
+        article { padding: 20px; }
+        background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(0, 246, 255, 0.05);
+        background-color: var(--bg-color);
+        background: linear-gradient(145deg, rgba(255, 0, 127, 0.1), rgba(0, 246, 255, 0.1));
+        background: var(--bg-color);
+        background: var(--surface-color);
+        body { font-size: 1rem; }
+        border-bottom: 1px solid var(--border-color);
+        border-bottom: 2px solid var(--border-color);
+        border-left: 5px solid var(--secondary-color);
+        border-radius: 10px;
+        border-radius: 12px;
+        border-radius: 15px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow);
+        color: var(--primary-color);
+        color: var(--secondary-color);
+        color: var(--text-color);
+        color: white;
+        const gallery = document.getElementById('photoGallery');
+        const lightbox = document.getElementById('lightbox');
+        content: '►';
+        cursor: pointer;
+        display: flex;
+        display: grid;
+        display: none;
+        font-family: var(--font-main);
+        font-size: 1.15rem;
+        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-size: 2.2rem;
+        font-size: 3rem;
+        font-size: 40px;
+        font-weight: 700;
+        font-weight: 800;
+        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        h2 { font-size: 1.8rem; }
+        header h1 { font-size: 2.5rem; }
+        height: 150px;
+        if (gallery && lightbox) {
+        inset: 0;
+        justify-content: center;
+        line-height: 1.8;
+        margin-right: 15px;
+        margin-top: 30px;
+        margin-top: 40px;
+        margin: 0;
+        margin: 30px 0;
+        margin: 40px 0;
+        object-fit: cover;
+        padding-bottom: 10px;
+        padding: 10px 0;
+        padding: 25px;
+        padding: 30px 40px;
+        padding: 60px 20px;
+        position: absolute;
+        position: fixed;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+        transition: opacity 0.3s;
+        transition: transform 0.3s, filter 0.3s;
+        user-select: none;
+        width: 100%;
+        z-index: 9999;
+        }
         })();
+      .action-section h3 { margin-top: 0; font-size: 1.5rem; color: var(--primary-color); }
+      .action-section {
+      .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+      .feature-list li {
+      .feature-list li::before {
+      .feature-list { list-style: none; padding-left: 0; }
+      .gallery img {
+      .gallery img:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px var(--primary-color)); }
+      .gallery {
+      .highlight-box {
+      .lightbox {
+      .lightbox-close { top: 15px; right: 30px; }
+      .lightbox-close, .lightbox-prev, .lightbox-next {
+      .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.7; }
+      .lightbox-content { max-width: 90%; max-height: 85%; animation: fadeIn 0.4s ease; }
+      .lightbox-next { right: 15px; }
+      .lightbox-prev { left: 15px; }
+      .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); padding: 10px; }
+      .share-icon svg { width: 40px; height: 40px; }
+      .share-icon { display: inline-block; transition: transform 0.2s ease; }
+      .share-icon:hover { transform: scale(1.15); }
+      .share-icons-container { display: flex; justify-content: center; gap: 20px; }
+      :root {
+      </footer>
+      </header>
+      </main>
+      <a class="lightbox-next">&#10095;</a>
+      <a class="lightbox-prev">&#10094;</a>
+      <div id="floatingSearchResults" class="floating-results-container"></div>
+      <div id="related-marquee-container"></div>
+      <footer>
+      <header>
+      <img class="lightbox-content" id="lightboxImg" alt="Gambar diperbesar" />
+      <input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"/>
+      <main>
+      <span class="lightbox-close">&times;</span>
+      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+      @keyframes pulse { 50% { color: var(--primary-color); } }
+      @media (max-width: 768px) {
+      article {
+      body {
+      content="2025-10-04T15:37:18.231+00:00"
+      content="Ilustrasi Teks Artikel yang diubah menjadi Video oleh AI"
+      content="Konten video lagi ngetren! Pelajari cara Pictory.ai mengubah artikel blog jadi video keren dengan subtitle otomatis, cocok untuk UMKM yang mau hemat biaya."
+      content="Konten video lagi ngetren! Pelajari cara Pictory.ai mengubah artikel blog jadi video keren dengan subtitle otomatis, cocok untuk UMKM."
+      content="Pictory.ai, video marketing, text to video, AI video generator, konten video, UMKM, social media video"
+      content="Pictory.ai: Ubah Tulisan Jadi Video Marketing Profesional"
+      content="https://frijal.pages.dev/artikel/pictory-ai-video-marketing.html"
+      content="https://frijal.pages.dev/img/pictory-ai-video-marketing.webp"
+      document.addEventListener('DOMContentLoaded', () => {
+      footer { text-align: center; padding: 25px; margin-top: 40px; font-size: 1rem; color: var(--text-muted); }
+      h2 {
+      header .subtitle { font-size: 1.3rem; color: var(--text-muted); margin-top: 15px; }
+      header h1 {
+      header {
+      href="https://frijal.pages.dev/artikel/pictory-ai-video-marketing.html"
+      href="https://frijal.pages.dev/favicon.svg"
+      html { scroll-behavior: smooth; }
+      name="description"
+      name="keywords"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      property="article:published_time"
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      rel="canonical"
+      rel="icon"
+      type="image/svg+xml"
+      }
       });
+    />
+    </div>
     </script>
-    <script src="/ext/marquee-url.js" defer></script>
+    </section>
+    </style>
+    <div class="container">
+    <div class="search-floating-container">
+    <div id="kategori-aktif"></div>
+    <div id="lightbox" class="lightbox">
+    <link
+    <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
+    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <meta
+    <meta charset="UTF-8" />
+    <meta name="author" content="Frijal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@frijal" />
+    <meta name="twitter:site" content="@frijal" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="fb:app_id" content="1471267430691023" />
+    <meta property="og:type" content="article" />
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    <script src="/ext/marquee-url.js" defer></script>
+    <script>
+    <section id="related-marquee-section">
+    <style>
+    <title>Pictory.ai: Ubah Tulisan Jadi Video Marketing Profesional</title>
   </body>
+  </head>
+  <body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- prettier-ignore -->
+<title>Sa‘id bin Zaid: Sahabat yang Dijamin Surga & Doanya Mustajab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kisah Sa‘id bin Zaid r.a., sahabat Nabi ﷺ yang zuhud, pemberani, dan doanya mustajab. Salah satu dari 10 sahabat yang dijamin surga. Baca kisah inspiratifnya di sini!">
+  <meta name="keywords" content="Sa‘id bin Zaid, Sahabat Nabi, Sepuluh Sahabat Surga, Sejarah Islam, Kisah Sahabat, Inspirasi, Zuhud, Doa Mustajab">
+  <meta name="author" content="frijal">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/said-bin-zaid-sahabat-surga.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sa‘id bin Zaid: Sahabat yang Dijamin Surga & Doanya Mustajab">
+  <meta property="og:description" content="Kisah Sa‘id bin Zaid r.a., sahabat Nabi ﷺ yang zuhud, pemberani, dan doanya mustajab. Salah satu dari 10 sahabat yang dijamin surga.">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/said-bin-zaid-sahabat-surga.html">
+  <meta property="og:site_name" content="frijal.pages.dev">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimMXS0T7JHdHXR0sFOUzl_L6588Zn-KX6aJhYC-AONPn9JijzeIrJgST-V-wY7IxCYq__QoH42wyQqWX1KD7S3HMME54AIILuQ0fpD1gG8zKRvQOJST1Vzc0-gv1DSoPiy1BKS5w4tmHI3PTwEt2R4YJPIw4Lg_CRZoROKemM9fvubzrqvFwFgR5ZsNTU/s1600/said.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sa‘id bin Zaid: Sahabat yang Dijamin Surga & Doanya Mustajab">
+  <meta name="twitter:description" content="Kisah Sa‘id bin Zaid r.a., sahabat Nabi ﷺ yang zuhud, pemberani, dan doanya mustajab. Salah satu dari 10 sahabat yang dijamin surga.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimMXS0T7JHdHXR0sFOUzl_L6588Zn-KX6aJhYC-AONPn9JijzeIrJgST-V-wY7IxCYq__QoH42wyQqWX1KD7S3HMME54AIILuQ0fpD1gG8zKRvQOJST1Vzc0-gv1DSoPiy1BKS5w4tmHI3PTwEt2R4YJPIw4Lg_CRZoROKemM9fvubzrqvFwFgR5ZsNTU/s1600/said.jpg">
+
+  <!-- JSON-LD Schema.org -->
+  <script>
+// Lightbox Gallery Dengan Navigasi Panah
+const figures = Array.from(document.querySelectorAll('.gallery figure'));
+let currentIdx = 0;
+function showLightbox(idx) {
+  currentIdx = idx;
+  const fullImg = figures[idx].dataset.full;
+  document.getElementById('lightbox-img').src = fullImg;
+  document.getElementById('lightbox').style.display = 'flex';
+  document.getElementById('arrow-left').style.display = (idx > 0) ? '' : 'none';
+  document.getElementById('arrow-right').style.display = (idx < figures.length-1) ? '' : 'none';
+}
+figures.forEach((fig, i) => {
+  fig.addEventListener('click', ()=>showLightbox(i));
+  fig.addEventListener('keypress', function(e){
+if(e.key === "Enter" || e.key === " ") showLightbox(i);
+  });
+});
+document.getElementById('lightbox-close').onclick = function() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.getElementById('lightbox-img').src = '';
+};
+document.getElementById('lightbox').onclick = function(e) {
+  if (e.target === this) {
+this.style.display = 'none';
+document.getElementById('lightbox-img').src = '';
+  }
+};
+document.getElementById('arrow-left').onclick = function(e) {
+  e.stopPropagation();
+  if(currentIdx > 0) showLightbox(currentIdx-1);
+};
+document.getElementById('arrow-right').onclick = function(e) {
+  e.stopPropagation();
+  if(currentIdx < figures.length-1) showLightbox(currentIdx+1);
+};
+document.addEventListener('keydown', function(e) {
+  if(document.getElementById('lightbox').style.display === 'flex') {
+if(e.key === "ArrowLeft" && currentIdx > 0) showLightbox(currentIdx-1);
+if(e.key === "ArrowRight" && currentIdx < figures.length-1) showLightbox(currentIdx+1);
+if(e.key === "Escape") {
+  document.getElementById('lightbox').style.display = 'none';
+  document.getElementById('lightbox-img').src = '';
+}
+  }
+});
+
+// Browser, OS, IP info
+function getOS() {
+  let ua = navigator.userAgent;
+  if (/Windows NT/.test(ua)) return "Windows";
+  if (/Android/.test(ua)) return "Android";
+  if (/iPhone|iPad|iPod/.test(ua)) return "iOS";
+  if (/Mac OS X/.test(ua)) return "Mac OS";
+  if (/Linux/.test(ua)) return "Linux";
+  return "Lainnya";
+}
+function getBrowser() {
+  let ua = navigator.userAgent;
+  if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") === -1) return "Chrome";
+  if (ua.indexOf("Firefox") > -1) return "Firefox";
+  if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
+  if (ua.indexOf("Edg") > -1) return "Edge";
+  if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) return "Opera";
+  return "Lainnya";
+}
+document.getElementById('user-agent').textContent = getBrowser();
+document.getElementById('user-os').textContent = getOS();
+// IP & City + Country Flag
+fetch('https://ipapi.co/json/')
+  .then(r=>r.json())
+  .then(data=>{
+let flag = data.country ? `<img src="https://flagcdn.com/16x12/${data.country.toLowerCase()}.png" alt="${data.country}" style="vertical-align:middle">` : '';
+document.getElementById('user-ip').innerHTML = `${data.city || 'Kota tidak diketahui'} ${flag}`;
+  })
+  .catch(()=>{document.getElementById('user-ip').textContent='';});
+  </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

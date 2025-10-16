@@ -1,347 +1,232 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biskuit Linux: Camilan Unik dengan Nama OS Populer</title>
-    <meta name="description" content="Tahukah Anda ada camilan berupa biskuit dengan merek Linux? Simak ulasan unik dan menarik seputar biskuit ini beserta gambar-gambarnya.">
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/biskuit-linux.html">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #fff;
-            --text: #333;
+    
+        
             --accent: #0056b3;
+            --bg: #fff;
             --muted: #777;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-        }
-
-        header,
-        footer {
-            background: #222;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        main {
-            max-width: 800px;
-            margin: auto;
-            padding: 2rem;
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: var(--accent);
-        }
-
-        h2 {
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 2rem;
-        }
-
-        p,
-        ul,
-        ol {
-            margin-bottom: 1rem;
-        }
-
-        ul {
-            padding-left: 1.5em;
-        }
-
-        .fun-fact {
-            background: #e8f4ff;
-            border: 1px solid #bcdfff;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 40px auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
-        }
-
-        .fun-fact h2 {
-            margin-bottom: 15px;
-        }
-
-        .fun-fact li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 1.5em;
-        }
-
-        .fun-fact li::before {
-            content: "👉";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-            gap: 10px;
-        }
-
-        .share-buttons svg {
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        .share-buttons a[title=Facebook] svg {
-            fill: #1877f2;
-        }
-
-        .share-buttons a[title=Twitter] svg {
-            fill: #1da1f2;
-        }
-
-        .share-buttons a[title=WhatsApp] svg {
-            fill: #25d366;
-        }
-
-        .share-buttons a[title=Telegram] svg {
-            fill: #08c;
-        }
-
-        /* Gallery - Tampilan Thumbnail */
-        .gallery {
-            display: grid; /* Menggunakan grid untuk tata letak yang lebih baik */
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Kolom responsif untuk thumbnail */
-            gap: 12px;
-            margin: 2rem 0;
-        }
-
-        .gallery img {
-            width: 100px; /* Lebar thumbnail */
-            height: 100px; /* Tinggi thumbnail */
-            border-radius: 8px;
-            cursor: pointer;
-            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
-            transition: transform 0.2s ease-in-out; /* Efek hover kecil */
-        }
-
-        .gallery img:hover {
-            transform: scale(1.05); /* Sedikit membesar saat hover */
-        }
-
-
-        /* Lightbox */
-        #lightbox-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        #lightbox-overlay img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan pada gambar besar */
-        }
-
-        #lightbox-overlay .nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: #fff;
-            background: rgba(0, 0, 0, .5); /* Sedikit lebih gelap agar terlihat */
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.3s ease;
-        }
-        #lightbox-overlay .nav:hover {
-            background: rgba(0, 0, 0, .7);
-        }
-
-        #lightbox-overlay .prev {
-            left: 20px;
-        }
-
-        #lightbox-overlay .next {
-            right: 20px;
-        }
-    </style>
-<meta property="og:image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
-  <meta property="og:image:alt" content="Biskuit Linux: Camilan Unik dengan Nama OS Populer">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
-  <meta itemprop="image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-    <meta property="article:published_time" content="2025-10-14T18:15:06.383+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-
-<header>
-    <h1>Biskuit Linux: Camilan Unik dengan Nama OS Populer</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-</header>
-
-<main>
-    <section>
-        <p><strong>Linux</strong> biasanya identik dengan sistem operasi open source. Tapi siapa sangka ada juga <em>biskuit manis</em> yang menggunakan nama ini? Produk unik ini menjadi fenomena branding yang menarik perhatian, khususnya di kalangan penggemar teknologi.</p>
-        <p><strong>Biskuit Linux</strong> pertama kali muncul sebagai camilan ringan dengan kemasan sederhana namun mencolok karena nama "Linux" di depannya.</p>
-    </section>
-
-    <section>
-        <h2>Galeri: Wajah Biskuit Linux</h2>
-        <div class="gallery">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX20ra3ZQuA0qI_6yasFvH0AouwntIZU9TGQ6zBt1IPD6X7Ybn670WH6xRaFvKkLWb-LgFOxWM440iDNYFV4VGhIq-yWYFHJZTgny84B7g4HT_Lf5DHqgt4UVrzGIM_QvmCLxU8IPBq1CuovR-vR83f5pW8qXgleoAh38CSc83JxN_nRsFfPobAAyEQ7c/s1600/69885_464561687368_3279241_n.jpg" alt="Biskuit Linux kemasan merah-putih" loading="lazy">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvEnsFPUo28nZRJ_DaUyKHuJhKCM1aBpWE0uc2T5k6xEzz3ILtutdfB3vF1mnoN2yg6Q-FKnKHmaPe3XKgaA-wu91itVIV432fy4DOadZUC4MPV6jvDRGsS7gFByn7FccHnNV8oQwq5T0t/s800/4644903006_3b3fbd6f2f.jpg" alt="Biskuit Linux di kotak kardus" loading="lazy">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXdIA2I9dbJbOWnlXmpiWLx6W-m7F3Oy9qJ66Cy5M_mrqScXalTomIBMEor2Il78H6kHafvXqA2NkAHCzgoK0FXNHIQmrzul1PX3NGSP5BXzVF-edhH91ARu7kzcQVBRoPf7VbjhULsRCR/s800/4644286755_4e451594a7.jpg" alt="Biskuit Linux di rak toko" loading="lazy">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFbMKjHD7lUoOmgBXxy7wAOl69Xo2qhoiB6j8IZVMk-KeYSB27RKStPMromQWDIzvpGUKDMaM92aCo1YyETX6KYFfKO38atMSl6kMyf96N03g6sQVrMPyZ_FLi0ESFrCcolIGEStpOMtk6/s800/154695_481264707368_1695277_n.jpg" alt="Biskuit Linux harga tertera" loading="lazy">
-        </div>
-    </section>
-
-    <section>
-        <h2>Rasa, Kesan, dan Popularitas</h2>
-        <p>Biskuit ini unik karena nama "Linux" jelas terpampang di kemasan. Banyak orang membelinya sebagai koleksi atau sekadar ingin mencoba rasa penasaran.</p>
-        <ul>
-            <li>Nama Ikonik: Langsung terasosiasi dengan teknologi dan open source.</li>
-            <li>Viralitas: Sempat viral di komunitas dan media sosial.</li>
-            <li>Harga Terjangkau: Mudah dijangkau siapa saja.</li>
-        </ul>
-    </section>
-
-    <section class="fun-fact">
-        <h2>💡 Fakta Unik Seputar Dunia Teknologi dan Makanan</h2>
-        <ul>
-            <li>Nama Linux berasal dari Linus Torvalds + Unix.</li>
-            <li>Selain biskuit, komunitas open source membuat makanan bertema teknologi lain.</li>
-            <li>Di Jepang, restoran menamai menu mereka dengan istilah teknologi.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Bagikan Artikel Ini</h2>
-        <div class="share-buttons">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/biskuit-linux.html" title="Facebook" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.657 9.175 8.441 9.949V14.89h-2.186v-2.827h2.186v-2.13c0-2.176 1.328-3.359 3.324-3.359 0.948 0 1.766 0.071 2.001 0.103v2.336h-1.388c-1.085 0-1.298 0.515-1.298 1.278v1.652h2.574l-0.334 2.827h-2.24V21.95C18.343 21.175 22 17.016 22 12 22 6.477 17.523 2 12 2z"/></svg></a>
+            --text: #333;
+            // Load full-size image into lightbox from data-src
+            <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/biskuit-linux.html" title="Telegram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10C17.52 22 22 17.53 22 12S17.52 2 11.99 2zm4.07 7.37l-5.46 3.32-2.15-.68c-.73-.23-.97-.97-.56-1.55l7.17-5.32c.31-.23.69-.17.94.13.25.3.2.68-.11.91zM9.4 15.15c.17 0 .34-.05.49-.15l.65-.41 3.53 2.72c.48.37 1.14.07 1.31-.56l1.39-6.49c.14-.65-.46-1.15-1.07-.85l-10.27 4.97c-.6.3-.65 1.1-.14 1.48l2.2 1.6c.26.2.6.25.92.15l1.6-.45z"/></svg></a>
             <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/biskuit-linux.html" title="Twitter" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.34-1.6.56-2.46.68.88-.53 1.55-1.37 1.87-2.36-.83.5-1.75.87-2.73 1.07-1.7-.93-3.8-1.04-5.6-.29-1.8.74-2.92 2.53-2.6 4.45-3.83-.19-7.24-2.03-9.52-4.83-.4.68-.63 1.47-.63 2.29 0 1.58.8 2.97 2.02 3.79-.74-.03-1.44-.23-2.05-.56v.07c0 2.27 1.62 4.16 3.76 4.59-.39.1-.8.15-1.22.15-.3 0-.58-.03-.86-.09.6 1.86 2.34 3.2 4.4 3.23C7.45 19.16 4.7 20 2 20c-.4 0-.8-.03-1.2-.08 2.65 1.7 5.78 2.58 9.04 2.58 10.84 0 16.73-8.98 16.73-16.73 0-.25-.01-.5-.02-.75.95-.68 1.78-1.53 2.43-2.5z"/></svg></a>
             <a href="https://wa.me/?text=Biskuit Linux - https://frijal.pages.dev/artikel/biskuit-linux.html" title="WhatsApp" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M12.038 2.108c-5.228 0-9.48 4.252-9.48 9.48 0 1.954 0.58 3.822 1.666 5.432L2.5 22.5l5.503-1.45c1.572.86 3.398 1.348 5.035 1.348 5.228 0 9.48-4.252 9.48-9.48 0-5.228-4.252-9.48-9.48-9.48zM17.5 15.686c-.1.25-.6.3-1.2.22c-.6-.08-3.48-1.7-4.08-1.92s-.6-.3-.3-.88c.3-.58.95-1.7 1.25-2.3s.2-.5-.1-.7c-.3-.2-.68-.28-1.06-.28s-.7.1-1.05.5c-0.35.4-1.35 1.3-1.35 3.1s1.4 3.6 1.6 3.8c.2.2 2.7 4.2 6.5 5.5s3.9 1 4.6 1s2.2.1 2.5-.7c.3-.8.2-1.7.2-1.7-.1-.1-.35-.2-.75-.4z"/></svg></a>
-            <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/biskuit-linux.html" title="Telegram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.47 2 12s4.47 10 9.99 10C17.52 22 22 17.53 22 12S17.52 2 11.99 2zm4.07 7.37l-5.46 3.32-2.15-.68c-.73-.23-.97-.97-.56-1.55l7.17-5.32c.31-.23.69-.17.94.13.25.3.2.68-.11.91zM9.4 15.15c.17 0 .34-.05.49-.15l.65-.41 3.53 2.72c.48.37 1.14.07 1.31-.56l1.39-6.49c.14-.65-.46-1.15-1.07-.85l-10.27 4.97c-.6.3-.65 1.1-.14 1.48l2.2 1.6c.26.2.6.25.92.15l1.6-.45z"/></svg></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/biskuit-linux.html" title="Facebook" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.016 3.657 9.175 8.441 9.949V14.89h-2.186v-2.827h2.186v-2.13c0-2.176 1.328-3.359 3.324-3.359 0.948 0 1.766 0.071 2.001 0.103v2.336h-1.388c-1.085 0-1.298 0.515-1.298 1.278v1.652h2.574l-0.334 2.827h-2.24V21.95C18.343 21.175 22 17.016 22 12 22 6.477 17.523 2 12 2z"/></svg></a>
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXdIA2I9dbJbOWnlXmpiWLx6W-m7F3Oy9qJ66Cy5M_mrqScXalTomIBMEor2Il78H6kHafvXqA2NkAHCzgoK0FXNHIQmrzul1PX3NGSP5BXzVF-edhH91ARu7kzcQVBRoPf7VbjhULsRCR/s800/4644286755_4e451594a7.jpg" alt="Biskuit Linux di rak toko" loading="lazy">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFbMKjHD7lUoOmgBXxy7wAOl69Xo2qhoiB6j8IZVMk-KeYSB27RKStPMromQWDIzvpGUKDMaM92aCo1YyETX6KYFfKO38atMSl6kMyf96N03g6sQVrMPyZ_FLi0ESFrCcolIGEStpOMtk6/s800/154695_481264707368_1695277_n.jpg" alt="Biskuit Linux harga tertera" loading="lazy">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX20ra3ZQuA0qI_6yasFvH0AouwntIZU9TGQ6zBt1IPD6X7Ybn670WH6xRaFvKkLWb-LgFOxWM440iDNYFV4VGhIq-yWYFHJZTgny84B7g4HT_Lf5DHqgt4UVrzGIM_QvmCLxU8IPBq1CuovR-vR83f5pW8qXgleoAh38CSc83JxN_nRsFfPobAAyEQ7c/s1600/69885_464561687368_3279241_n.jpg" alt="Biskuit Linux kemasan merah-putih" loading="lazy">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvEnsFPUo28nZRJ_DaUyKHuJhKCM1aBpWE0uc2T5k6xEzz3ILtutdfB3vF1mnoN2yg6Q-FKnKHmaPe3XKgaA-wu91itVIV432fy4DOadZUC4MPV6jvDRGsS7gFByn7FccHnNV8oQwq5T0t/s800/4644903006_3b3fbd6f2f.jpg" alt="Biskuit Linux di kotak kardus" loading="lazy">
+            <li>Di Jepang, restoran menamai menu mereka dengan istilah teknologi.</li>
+            <li>Harga Terjangkau: Mudah dijangkau siapa saja.</li>
+            <li>Nama Ikonik: Langsung terasosiasi dengan teknologi dan open source.</li>
+            <li>Nama Linux berasal dari Linus Torvalds + Unix.</li>
+            <li>Selain biskuit, komunitas open source membuat makanan bertema teknologi lain.</li>
+            <li>Viralitas: Sempat viral di komunitas dan media sosial.</li>
+            align-items: center;
+            background: #222;
+            background: #e8f4ff;
+            background: rgba(0, 0, 0, .5); /* Sedikit lebih gelap agar terlihat */
+            background: rgba(0, 0, 0, .7);
+            background: rgba(0, 0, 0, .85);
+            background: var(--bg);
+            border-bottom: 2px solid #ccc;
+            border-radius: 12px;
+            border-radius: 50%;
+            border-radius: 8px;
+            border: 1px solid #bcdfff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan pada gambar besar */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+            box-sizing: border-box;
+            color: #fff;
+            color: var(--accent);
+            color: var(--text);
+            content: "👉";
+            currentIndex = index;
+            cursor: pointer;
+            display: flex;
+            display: grid; /* Menggunakan grid untuk tata letak yang lebih baik */
+            display: none;
+            fill: #08c;
+            fill: #1877f2;
+            fill: #1da1f2;
+            fill: #25d366;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 2rem;
+            gap: 10px;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Kolom responsif untuk thumbnail */
+            height: 100%;
+            height: 100px; /* Tinggi thumbnail */
+            height: 28px;
+            img.src = img.dataset.src;
+            justify-content: center;
+            lbImg.alt = img.alt; // Set alt text for accessibility
+            lbImg.src = img.dataset.src;
+            left: 0;
+            left: 20px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            margin-bottom: 15px;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            margin: 0;
+            margin: 2rem 0;
+            margin: 40px auto;
+            margin: auto;
+            max-height: 90%;
+            max-width: 800px;
+            max-width: 90%;
+            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+            overlay.style.display = "flex";
+            overlay.style.display = "none";
+            padding-bottom: 5px;
+            padding-left: 1.5em;
+            padding: 0;
+            padding: 1rem;
+            padding: 20px;
+            padding: 2rem;
+            padding: 6px 12px;
+            position: absolute;
+            position: fixed;
+            position: relative;
+            right: 20px;
+            text-align: center;
+            top: 0;
+            top: 50%;
+            transform: scale(1.05); /* Sedikit membesar saat hover */
+            transform: translateY(-50%);
+            transition: background 0.3s ease;
+            transition: transform 0.2s ease-in-out; /* Efek hover kecil */
+            user-select: none;
+            width: 100%;
+            width: 100px; /* Lebar thumbnail */
+            width: 28px;
+            z-index: 9999;
+        #lightbox-overlay .nav {
+        #lightbox-overlay .nav:hover {
+        #lightbox-overlay .next {
+        #lightbox-overlay .prev {
+        #lightbox-overlay img {
+        #lightbox-overlay {
+        * {
+        .fun-fact h2 {
+        .fun-fact li {
+        .fun-fact li::before {
+        .fun-fact {
+        .gallery img {
+        .gallery img:hover {
+        .gallery {
+        .share-buttons a[title=Facebook] svg {
+        .share-buttons a[title=Telegram] svg {
+        .share-buttons a[title=Twitter] svg {
+        .share-buttons a[title=WhatsApp] svg {
+        .share-buttons svg {
+        .share-buttons {
+        /* Gallery - Tampilan Thumbnail */
+        /* Lightbox */
+        :root {
         </div>
+        </ul>
+        <div class="gallery">
+        <div class="share-buttons">
         <div style="text-align:center;color:var(--muted);font-size:12px;margin-top:10px">URL: <span id="current-url"></span></div>
+        <h2>Bagikan Artikel Ini</h2>
+        <h2>Galeri: Wajah Biskuit Linux</h2>
+        <h2>Rasa, Kesan, dan Popularitas</h2>
+        <h2>💡 Fakta Unik Seputar Dunia Teknologi dan Makanan</h2>
+        <p><strong>Biskuit Linux</strong> pertama kali muncul sebagai camilan ringan dengan kemasan sederhana namun mencolok karena nama "Linux" di depannya.</p>
+        <p><strong>Linux</strong> biasanya identik dengan sistem operasi open source. Tapi siapa sangka ada juga <em>biskuit manis</em> yang menggunakan nama ini? Produk unik ini menjadi fenomena branding yang menarik perhatian, khususnya di kalangan penggemar teknologi.</p>
+        <p>Biskuit ini unik karena nama "Linux" jelas terpampang di kemasan. Banyak orang membelinya sebagai koleksi atau sekadar ingin mencoba rasa penasaran.</p>
+        <ul>
+        body {
+        currentIndex = (currentIndex + 1) % images.length;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        currentUrlSpan.textContent = currentUrl;
+        e.stopPropagation();
+        fbCommentsDiv.setAttribute("data-href", currentUrl);
+        footer {
+        h1,
+        h2 {
+        h2,
+        h3 {
+        header,
+        if (e.target === overlay) {
+        if (img.dataset.src) {
+        img.addEventListener("click", () => {
+        lbImg.alt = images[currentIndex].alt;
+        lbImg.src = images[currentIndex].dataset.src; // Get full-size from data-src
+        main {
+        ol {
+        p,
+        ul {
+        ul,
+        }
+        });
+    // Close on overlay click
+    // Lazy-load gallery images: Load from data-src to src for display as thumbnails
+    // Lightbox Logic
+    // Navigation for lightbox
+    // Set URL dan FB comments
     </section>
-
-    <section>
-        
-        
-    </section>
-
-</main>
-
-<footer>🄯 2025 frijal.pages.dev. Semua Hak Dilindungi.</footer>
-
-<div id="lightbox-overlay">
-    <span class="nav prev">&#10094;</span>
+    </style>
+    <h1>Biskuit Linux: Camilan Unik dengan Nama OS Populer</h1>
     <img src="" alt="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/biskuit-linux.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="description" content="Tahukah Anda ada camilan berupa biskuit dengan merek Linux? Simak ulasan unik dan menarik seputar biskuit ini beserta gambar-gambarnya.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="article:published_time" content="2025-10-14T18:15:06.383+00:00">
+    <section class="fun-fact">
+    <section>
     <span class="nav next">&#10095;</span>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+    <span class="nav prev">&#10094;</span>
+    <style>
+    <title>Biskuit Linux: Camilan Unik dengan Nama OS Populer</title>
     const currentUrl = window.location.href;
     const currentUrlSpan = document.getElementById("current-url");
     const fbCommentsDiv = document.querySelector(".fb-comments");
-    
-    // Set URL dan FB comments
-    if (currentUrlSpan) {
-        currentUrlSpan.textContent = currentUrl;
-    }
-    if (fbCommentsDiv) {
-        fbCommentsDiv.setAttribute("data-href", currentUrl);
-    }
-
-    // Lazy-load gallery images: Load from data-src to src for display as thumbnails
     const galleryImages = document.querySelectorAll(".gallery img");
-    galleryImages.forEach(img => {
-        if (img.dataset.src) {
-            img.src = img.dataset.src;
-        }
-    });
-
-    // Lightbox Logic
-    const overlay = document.getElementById("lightbox-overlay");
-    const lbImg = overlay.querySelector("img");
     const images = Array.from(galleryImages);
-    let currentIndex = 0;
-
+    const lbImg = overlay.querySelector("img");
+    const overlay = document.getElementById("lightbox-overlay");
+    galleryImages.forEach(img => {
+    if (currentUrlSpan) {
+    if (fbCommentsDiv) {
     images.forEach((img, index) => {
-        img.addEventListener("click", () => {
-            currentIndex = index;
-            // Load full-size image into lightbox from data-src
-            lbImg.src = img.dataset.src;
-            lbImg.alt = img.alt; // Set alt text for accessibility
-            overlay.style.display = "flex";
-        });
-    });
-
-    // Close on overlay click
+    let currentIndex = 0;
     overlay.addEventListener("click", e => {
-        if (e.target === overlay) {
-            overlay.style.display = "none";
-        }
-    });
-    
-    // Navigation for lightbox
-    overlay.querySelector(".prev").addEventListener("click", e => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        lbImg.src = images[currentIndex].dataset.src; // Get full-size from data-src
-        lbImg.alt = images[currentIndex].alt;
-    });
-    
     overlay.querySelector(".next").addEventListener("click", e => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % images.length;
-        lbImg.src = images[currentIndex].dataset.src; // Get full-size from data-src
-        lbImg.alt = images[currentIndex].alt;
+    overlay.querySelector(".prev").addEventListener("click", e => {
+    }
     });
-});
-</script>
-
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  <meta itemprop="image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
+  <meta property="og:image:alt" content="Biskuit Linux: Camilan Unik dengan Nama OS Populer">
+<!DOCTYPE html>
 </body>
+</div>
+</head>
+</header>
 </html>
+</main>
+</script>
+<body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<div id="lightbox-overlay">
+<footer>🄯 2025 frijal.pages.dev. Semua Hak Dilindungi.</footer>
+<head>
+<header>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<main>
+<meta property="og:image" content="https://frijal.pages.dev/img/biskuit-linux.webp">
+<script defer src="/ext/iposbrowser.js"></script>
+<script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+document.addEventListener('DOMContentLoaded', () => {
+});

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- prettier-ignore -->
+<title>Cara Konversi M4A ke OGG dengan FFmpeg + find</title>
+  <meta name="description" content="Panduan detail cara mengubah format audio M4A ke OGG menggunakan FFmpeg dan find di Linux/Unix. Disertai langkah-langkah praktis, perintah siap pakai, dan tips.">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/konversi-m4a-ke-ogg.html">
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/7/76/FFmpeg_icon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cara Konversi M4A ke OGG dengan FFmpeg + find">
+  <meta property="og:description" content="Panduan detail cara mengubah format audio M4A ke OGG menggunakan FFmpeg dan find di Linux/Unix.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/konversi-m4a-ke-ogg.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpMCTehPaa8ACy9Bzba_HWHZm3V0pVASvdYpNf_eLOhH0jnh0mJ1oa4mx-d0B9a3-NPAFcfhyahb-K4sQ6kASpSU7kng_7JPaTzNfYgEeyGZuQIw-cX3Jn_YDQyhSZI-wTT7Q7EDnaN5Af/s400/ffmpeg-logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cara Konversi M4A ke OGG dengan FFmpeg + find">
+  <meta name="twitter:description" content="Panduan detail cara mengubah format audio M4A ke OGG menggunakan FFmpeg dan find di Linux/Unix.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpMCTehPaa8ACy9Bzba_HWHZm3V0pVASvdYpNf_eLOhH0jnh0mJ1oa4mx-d0B9a3-NPAFcfhyahb-K4sQ6kASpSU7kng_7JPaTzNfYgEeyGZuQIw-cX3Jn_YDQyhSZI-wTT7Q7EDnaN5Af/s400/ffmpeg-logo.png">
+
+  <!-- CSS dasar -->
+  <style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
+}
+header {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+main {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+img {
+  max-width: 180px;
+  height: auto;
+  float: left;
+  margin: 0 1rem 1rem 0;
+}
+pre {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  position: relative;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+footer {
+  background: #222;
+  color: #ddd;
+  padding: 2rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+footer .info {
+  margin-bottom: 1rem;
+}
+.social-share a {
+  margin: 0 5px;
+  text-decoration: none;
+}
+  </style>
+
+  <!-- Prism.js -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  
+<script>
+  const currentUrl = window.location.href;
+  document.getElementById("current-url").textContent = currentUrl;
+  document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+  window.fbAsyncInit = function() {
+if (typeof FB !== 'undefined') {
+  try { FB.XFBML.parse(); } catch(e) {}
+}
+  }
+</script>
+  </div>
+</main>
+
+<footer>
+
+  <div>🄯 2025 Tutorial FFmpeg - frijal.pages.dev</div>
+</footer>
+
+<!-- Script copy code -->
+<script>
+function copyCode(btn) {
+  const code = btn.nextElementSibling.innerText;
+  navigator.clipboard.writeText(code).then(() => {
+btn.textContent = "Copied!";
+setTimeout(() => btn.textContent = "Copy", 2000);
+  });
+}
+</script>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cara Konversi M4A ke OGG dengan FFmpeg + find","author":{"@type":"Person","name":"Fakhrul Rijal","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"},"publisher":{"@type":"Organization","name":"frijal.pages.dev","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"},"datePublished":"2025-09-16","dateModified":"2025-09-16","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.pages.dev/artikel/konversi-m4a-ke-ogg.html","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"},"image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.pages.dev","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/sitemap.html","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"},{"@type":"ListItem","position":3,"name":"Konversi M4A ke OGG","item":"https://frijal.pages.dev/artikel/konversi-m4a-ke-ogg.html","image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"}],"image":"https://frijal.pages.dev/img/konversi-m4a-ke-ogg.webp"}</script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

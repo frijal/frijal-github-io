@@ -1,484 +1,336 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain</title>
-    <meta
-      name="description"
-      content="Langkah-langkah lengkap dan santai cara instalasi dan penggunaan AUR Helper Paru di luar CachyOS, termasuk Arch Linux murni, Manjaro, dan EndeavourOS."
-    />
-    <meta
-      name="keywords"
-      content="Paru, AUR Helper, Instalasi Paru, Arch Linux, Manjaro, EndeavourOS, Pacman, makepkg"
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
-    />
-    <meta
-      property="og:title"
-      content="Cara Instal dan Pakai Paru di Distro Arch Mana Pun!"
-    />
-    <meta
-      property="og:description"
-      content="Paru adalah AUR Helper terbaik. Pelajari cara menginstalnya di sistem berbasis Arch Anda."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.pages.dev/img/cara-instal-paru-arch.webp"
-    />
-    <meta
-      property="og:image:alt"
-      content="Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain"
-    />
-    <meta property="og:site_name" content="Frijal's Articles" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@frijal" />
-    <meta name="twitter:title" content="Instal Paru di Arch/Manjaro" />
-    <meta
-      name="twitter:description"
-      content="Panduan mudah instalasi Paru di luar CachyOS!"
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.pages.dev/img/cara-instal-paru-arch.webp"
-    />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <style>
-      :root {
-        --color-bg: #0d0d00;
-        /* Darker, slightly yellowish tint for code focus */
-        --color-text: #f0f0f0;
-        --color-primary: #ffff00;
-        /* Kuning Neon/Aura Code */
-        --color-secondary: #222200;
-        --color-card-bg: #1f1f0f;
-        --padding-base: 20px;
-        --max-width: 1000px;
-      }
 
-      /* RESET & BASE */
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: 'Consolas', monospace;
-        background-color: var(--color-bg);
-        color: var(--color-text);
-        line-height: 1.7;
-        padding: 0;
-      }
-
-      /* HEADER & FOOTER */
-      header,
-      footer {
-        text-align: center;
-        padding: var(--padding-base);
-        background-color: var(--color-secondary);
-      }
-
-      /* ONE-COLUMN LAYOUT */
-      .container {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: var(--padding-base);
-      }
-
-      /* TYPOGRAPHY & TEXT STYLES */
-      h1 {
-        color: var(--color-primary);
-        margin-bottom: 10px;
-        font-size: 2.8em;
-        text-shadow: 0 0 5px var(--color-primary);
-      }
-
-      h2 {
-        border-bottom: 2px solid var(--color-primary);
-        padding-bottom: 5px;
-        margin-top: 35px;
-        margin-bottom: 20px;
-        font-size: 2em;
-      }
-
-      h3 {
-        color: var(--color-primary);
-        margin-top: 20px;
-        font-size: 1.4em;
-      }
-
-      code {
-        background-color: #333;
-        color: var(--color-primary);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: 'Consolas', monospace;
-        display: inline-block;
-        margin: 2px 0;
-        white-space: pre-wrap;
-      }
-
-      strong {
-        color: var(--color-primary);
-      }
-
-      pre {
-        background-color: #111;
-        padding: 15px;
-        border-radius: 8px;
-        overflow-x: auto;
-        margin: 15px 0;
-      }
-
-      pre code {
-        display: block;
-        padding: 0;
-        background: none;
-        color: var(--color-primary);
-      }
-
-      ul {
-        margin-left: 25px;
-        margin-bottom: 15px;
-      }
-
-      .distro-list li {
-        font-size: 1.1em;
-        margin-bottom: 8px;
-      }
-
-      /* Dihapus: CSS untuk User Info Card */
-
-      /* SHARING ICONS */
-      .social-share {
-        text-align: center;
-        margin: 30px 0;
-        padding: 15px;
-        border-top: 1px solid var(--color-secondary);
-        border-bottom: 1px solid var(--color-secondary);
-      }
-
-      .social-share a {
-        color: var(--color-text);
-        font-size: 28px;
-        margin: 0 12px;
-        transition: color 0.3s;
-      }
-
-      .social-share a:hover {
-        color: var(--color-primary);
-      }
-
-      /* GALLERY & LIGHTBOX STYLES */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 15px;
-        margin: 20px 0;
-      }
-
-      .gallery img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-        border: 2px solid var(--color-secondary);
-      }
-
-      .gallery img:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
-      }
-
-      /* LIGHTBOX */
-      .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.95);
-        place-items: center;
-      }
-
-      .lightbox-content {
-        margin: auto;
-        display: block;
-        width: 90%;
-        max-width: 1100px;
-        max-height: 90vh;
-      }
-
-      .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 45px;
-        color: #fff;
-        font-size: 45px;
-        font-weight: bold;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-
-      .prev,
-      .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 18px;
-        font-size: 24px;
-        background-color: rgba(255, 255, 0, 0.7);
-        border-radius: 5px;
-      }
-
-      .next {
-        right: 15px;
-      }
-
-      .prev {
-        left: 15px;
-      }
-
-      .prev:hover,
-      .next:hover,
-      .close-btn:hover {
-        background-color: var(--color-primary);
-        color: #000;
-      }
-
-      /* MEDIA QUERIES (Mobile-Friendly) */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2em;
-        }
-
-        h2 {
-          font-size: 1.6em;
-        }
-
-        .container {
-          padding: 10px;
-        }
-
-        .gallery {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-    <meta
-      property="og:image:alt"
-      content="Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.pages.dev/img/cara-instal-paru-arch.webp"
-    />
-    <meta
-      property="article:published_time"
-      content="2025-10-06T06:06:53.232+00:00"
-    />
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-  </head>
-  <body>
     
-    <header>
-      <h1>
-        <i class="fas fa-terminal"></i> Paru Anti Ribet: Cara Instal dan Pakai
-        di Distro Arch Mana Saja
-      </h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-    </header>
-    <div class="container">
-      <article>
-        <p>
-          Betul sekali! <strong>Paru</strong> adalah **tool** yang sangat serbaguna. Meskipun
-          sering dibahas dalam konteks CachyOS, perlu dicatat bahwa Paru
-          <strong>tidak terikat hanya pada CachyOS</strong>.
-        </p>
-        <p>
-          Pada dasarnya, Paru adalah <strong>AUR Helper</strong> (Arch User Repository Helper)
-          yang berfungsi sebagai antarmuka canggih di atas <strong>Pacman</strong>. Jadi,
-          selama sistem operasi Anda menggunakan Pacman dan memiliki akses ke AUR,
-          Paru akan berfungsi dengan sempurna!
-        </p>
-        <section>
-          <h2><i class="fas fa-link"></i> Ketergantungan pada Ekosistem Arch</h2>
-          <p>Kunci penggunaan Paru terletak pada dua pilar utama ekosistem Arch:</p>
-          <ol>
-            <li>
-              <strong>Pacman:</strong> Paru mengandalkan Pacman sebagai manajer paket
-              dasar.
-            </li>
-            <li>
-              <strong>AUR (Arch User Repository):</strong> Paru mempermudah Anda
-              menginstal paket dari repositori komunitas ini.
-            </li>
-          </ol>
-          <p>
-            Karena kedua pilar ini hadir di semua distro berbasis Arch, Paru
-            otomatis kompatibel dengan semuanya.
-          </p>
-        </section>
-        <hr />
-        <section>
-          <h2><i class="fas fa-list-ul"></i> Distro Arch Mana Saja yang Bisa Pakai Paru?</h2>
-          <p>
-            Anda bisa menginstal dan menikmati kemudahan Paru di hampir semua
-            distribusi Linux berbasis Arch. Beberapa contoh populer:
-          </p>
-          <ul class="distro-list">
-            <li><i class="fas fa-archway"></i> <strong>Arch Linux Asli</strong></li>
-            <li><i class="fas fa-mountain"></i> <strong>Manjaro</strong></li>
-            <li><i class="fas fa-star"></i> <strong>EndeavourOS</strong></li>
-            <li><i class="fas fa-skull"></i> <strong>BlackArch</strong></li>
-            <li><i class="fas fa-desktop"></i> <strong>ArcoLinux</strong></li>
-            <li><i class="fas fa-infinity"></i> <strong>Semua Turunan Arch Lainnya</strong></li>
-          </ul>
-        </section>
-        <hr />
-        <section>
-          <h2><i class="fas fa-recycle"></i> Paru Tetap Konsisten Lintas Distro</h2>
-          <p>Meskipun Anda berganti distro Arch, cara kerja Paru tetap sama. Saat Anda mengetik <code>paru -Syu</code>:</p>
-          <ul>
-            <li>
-              <strong>Repositori Resmi:</strong> Paru memanggil Pacman untuk mengambil
-              paket dari *mirror* distro yang sedang Anda gunakan.
-            </li>
-            <li>
-              <strong>AUR:</strong> Paru akan mengambil skrip dari AUR dan
-              mengkompilasinya, karena AUR adalah sumber yang sama untuk semua
-              distro Arch.
-            </li>
-          </ul>
-          <p>
-            Jadi, jika Anda sudah nyaman menggunakan Paru, jangan ragu untuk
-            membawanya ke distro Arch favorit Anda yang lain!
-          </p>
-        </section>
-        <section class="social-share">
-          <p>Bantu teman Linux Anda beralih ke Paru:</p>
-          <a
-            href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Share on Facebook"
-            ><i class="fab fa-facebook"></i
-          ></a>
-          <a
-            href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cara-instal-paru-arch.html&text=Instal%20Paru%20di%20Arch%20Linux%20Murni!"
-            target="_blank"
-            title="Share on Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a
-            href="https://wa.me/?text=Panduan%20instalasi%20Paru%20di%20distro%20Arch%20lain%3A%20https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
-            target="_blank"
-            title="Share on WhatsApp"
-            ><i class="fab fa-whatsapp"></i
-          ></a>
-        </section>
-        <section id="fb-comments-container">
-          <h2><i class="far fa-comment-dots"></i> Pelan Kiri</h2>
-          <div
-            class="fb-comments"
-            data-href="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
-            data-width="100%"
-            data-numposts="5"
-          ></div>
-        </section>
-      </article>
-    </div>
-    <div id="lightbox-modal" class="lightbox">
-      <span class="close-btn">&times;</span>
-      <img class="lightbox-content" id="lightbox-img" alt="Gambar diperbesar" />
-      <a class="prev" onclick="changeImage(-1)"
-        ><i class="fas fa-chevron-left"></i
-      ></a>
-      <a class="next" onclick="changeImage(1)"
-        ><i class="fas fa-chevron-right"></i
-      ></a>
-    </div>
-    <footer>
-      <p>🄯 2024 Artikel Frijal. Happy Arching!</p>
-    </footer>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. LIGHTBOX GALLERY & NAVIGATION (Tidak ada gambar yang tersisa, namun fungsionalitas dasar dipertahankan) ---
-        const galleryImages = [];
-        const lightboxModal = document.getElementById('lightbox-modal');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = lightboxModal.querySelector('.close-btn');
-        const prevBtn = lightboxModal.querySelector('.prev');
-        const nextBtn = lightboxModal.querySelector('.next');
-        let currentIndex = 0;
-
-        function closeLightbox() {
-          lightboxModal.style.display = 'none';
-        }
-
-        if (galleryImages.length > 0) {
-            function changeImage(n) {
-                currentIndex = (currentIndex + n + galleryImages.length) % galleryImages.length;
-                lightboxImg.src = galleryImages[currentIndex].src;
-            }
+        
             
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', () => changeImage(-1));
-            nextBtn.addEventListener('click', () => changeImage(1));
-            lightboxModal.addEventListener('click', (e) => {
-                if (e.target === lightboxModal) closeLightbox();
-            });
-            document.addEventListener('keydown', (e) => {
-                if (lightboxModal.style.display === 'grid') {
                     if (e.key === 'ArrowLeft') changeImage(-1);
                     if (e.key === 'ArrowRight') changeImage(1);
                     if (e.key === 'Escape') closeLightbox();
+                currentIndex = (currentIndex + n + galleryImages.length) % galleryImages.length;
+                if (e.target === lightboxModal) closeLightbox();
+                if (lightboxModal.style.display === 'grid') {
+                lightboxImg.src = galleryImages[currentIndex].src;
                 }
-            });
-        } else {
+              <strong>AUR (Arch User Repository):</strong> Paru mempermudah Anda
+              <strong>AUR:</strong> Paru akan mengambil skrip dari AUR dan
+              <strong>Pacman:</strong> Paru mengandalkan Pacman sebagai manajer paket
+              <strong>Repositori Resmi:</strong> Paru memanggil Pacman untuk mengambil
+              dasar.
+              distro Arch.
+              menginstal paket dari repositori komunitas ini.
+              mengkompilasinya, karena AUR adalah sumber yang sama untuk semua
+              paket dari *mirror* distro yang sedang Anda gunakan.
             // Sembunyikan Lightbox controls jika tidak ada gambar
+            </li>
+            <li>
+            <li><i class="fas fa-archway"></i> <strong>Arch Linux Asli</strong></li>
+            <li><i class="fas fa-desktop"></i> <strong>ArcoLinux</strong></li>
+            <li><i class="fas fa-infinity"></i> <strong>Semua Turunan Arch Lainnya</strong></li>
+            <li><i class="fas fa-mountain"></i> <strong>Manjaro</strong></li>
+            <li><i class="fas fa-skull"></i> <strong>BlackArch</strong></li>
+            <li><i class="fas fa-star"></i> <strong>EndeavourOS</strong></li>
+            ><i class="fab fa-facebook"></i
+            ><i class="fab fa-twitter"></i
+            ><i class="fab fa-whatsapp"></i
+            Anda bisa menginstal dan menikmati kemudahan Paru di hampir semua
+            Jadi, jika Anda sudah nyaman menggunakan Paru, jangan ragu untuk
+            Karena kedua pilar ini hadir di semua distro berbasis Arch, Paru
+            class="fb-comments"
+            closeBtn.addEventListener('click', closeLightbox);
+            data-href="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
+            data-numposts="5"
+            data-width="100%"
+            distribusi Linux berbasis Arch. Beberapa contoh populer:
+            document.addEventListener('keydown', (e) => {
+            function changeImage(n) {
+            href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cara-instal-paru-arch.html&text=Instal%20Paru%20di%20Arch%20Linux%20Murni!"
+            href="https://wa.me/?text=Panduan%20instalasi%20Paru%20di%20distro%20Arch%20lain%3A%20https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
+            href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
             if (closeBtn) closeBtn.style.display = 'none';
-            if (prevBtn) prevBtn.style.display = 'none';
             if (nextBtn) nextBtn.style.display = 'none';
-        }
-
-        // --- Facebook SDK ---
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
+            if (prevBtn) prevBtn.style.display = 'none';
+            lightboxModal.addEventListener('click', (e) => {
+            membawanya ke distro Arch favorit Anda yang lain!
+            nextBtn.addEventListener('click', () => changeImage(1));
+            otomatis kompatibel dengan semuanya.
+            prevBtn.addEventListener('click', () => changeImage(-1));
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Share on Facebook"
+            title="Share on Twitter"
+            title="Share on WhatsApp"
+            }
+            });
+          </ol>
+          </p>
+          </ul>
+          <a
+          <div
+          <h2><i class="far fa-comment-dots"></i> Pelan Kiri</h2>
+          <h2><i class="fas fa-link"></i> Ketergantungan pada Ekosistem Arch</h2>
+          <h2><i class="fas fa-list-ul"></i> Distro Arch Mana Saja yang Bisa Pakai Paru?</h2>
+          <h2><i class="fas fa-recycle"></i> Paru Tetap Konsisten Lintas Distro</h2>
+          <ol>
+          <p>
+          <p>Bantu teman Linux Anda beralih ke Paru:</p>
+          <p>Kunci penggunaan Paru terletak pada dua pilar utama ekosistem Arch:</p>
+          <p>Meskipun Anda berganti distro Arch, cara kerja Paru tetap sama. Saat Anda mengetik <code>paru -Syu</code>:</p>
+          <strong>tidak terikat hanya pada CachyOS</strong>.
+          <ul class="distro-list">
+          <ul>
+          ></a>
+          ></div>
+          Betul sekali! <strong>Paru</strong> adalah **tool** yang sangat serbaguna. Meskipun
+          Pada dasarnya, Paru adalah <strong>AUR Helper</strong> (Arch User Repository Helper)
+          Paru akan berfungsi dengan sempurna!
+          fjs.parentNode.insertBefore(js, fjs);
+          font-size: 1.6em;
+          font-size: 2em;
+          grid-template-columns: 1fr;
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
           js.src = "https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0&appId=1471267430691023&autoLogAppEvents=1";
-          fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'facebook-jssdk');
-        
+          lightboxModal.style.display = 'none';
+          padding: 10px;
+          selama sistem operasi Anda menggunakan Pacman dan memiliki akses ke AUR,
+          sering dibahas dalam konteks CachyOS, perlu dicatat bahwa Paru
+          var js, fjs = d.getElementsByTagName(s)[0];
+          yang berfungsi sebagai antarmuka canggih di atas <strong>Pacman</strong>. Jadi,
+        (function(d, s, id) {
+        --color-bg: #0d0d00;
+        --color-card-bg: #1f1f0f;
+        --color-primary: #ffff00;
+        --color-secondary: #222200;
+        --color-text: #f0f0f0;
+        --max-width: 1000px;
+        --padding-base: 20px;
+        .container {
+        .gallery {
+        /* Darker, slightly yellowish tint for code focus */
+        /* Kuning Neon/Aura Code */
+        // --- 1. LIGHTBOX GALLERY & NAVIGATION (Tidak ada gambar yang tersisa, namun fungsionalitas dasar dipertahankan) ---
+        // --- Facebook SDK ---
         // Dihapus: Skrip deteksi User Info
+        </p>
+        </section>
+        <hr />
+        <i class="fas fa-terminal"></i> Paru Anti Ribet: Cara Instal dan Pakai
+        <p>
+        <section class="social-share">
+        <section id="fb-comments-container">
+        <section>
+        ><i class="fas fa-chevron-left"></i
+        ><i class="fas fa-chevron-right"></i
+        background-color: #111;
+        background-color: #333;
+        background-color: rgba(0, 0, 0, 0.95);
+        background-color: rgba(255, 255, 0, 0.7);
+        background-color: var(--color-bg);
+        background-color: var(--color-primary);
+        background-color: var(--color-secondary);
+        background: none;
+        border-bottom: 1px solid var(--color-secondary);
+        border-bottom: 2px solid var(--color-primary);
+        border-radius: 4px;
+        border-radius: 5px;
+        border-radius: 6px;
+        border-radius: 8px;
+        border-top: 1px solid var(--color-secondary);
+        border: 2px solid var(--color-secondary);
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+        box-sizing: border-box;
+        color: #000;
+        color: #fff;
+        color: var(--color-primary);
+        color: var(--color-text);
+        const closeBtn = lightboxModal.querySelector('.close-btn');
+        const galleryImages = [];
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const nextBtn = lightboxModal.querySelector('.next');
+        const prevBtn = lightboxModal.querySelector('.prev');
+        cursor: pointer;
+        di Distro Arch Mana Saja
+        display: block;
+        display: grid;
+        display: inline-block;
+        display: none;
+        font-family: 'Consolas', monospace;
+        font-size: 1.1em;
+        font-size: 1.4em;
+        font-size: 2.8em;
+        font-size: 24px;
+        font-size: 28px;
+        font-size: 2em;
+        font-size: 45px;
+        font-weight: bold;
+        function closeLightbox() {
+        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        h1 {
+        h2 {
+        height: 220px;
+        if (galleryImages.length > 0) {
+        inset: 0;
+        left: 15px;
+        let currentIndex = 0;
+        line-height: 1.7;
+        margin-bottom: 10px;
+        margin-bottom: 15px;
+        margin-bottom: 20px;
+        margin-bottom: 8px;
+        margin-left: 25px;
+        margin-top: 20px;
+        margin-top: 35px;
+        margin: 0 12px;
+        margin: 0 auto;
+        margin: 0;
+        margin: 15px 0;
+        margin: 20px 0;
+        margin: 2px 0;
+        margin: 30px 0;
+        margin: auto;
+        max-height: 90vh;
+        max-width: 1100px;
+        max-width: var(--max-width);
+        object-fit: cover;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        padding: 0;
+        padding: 15px;
+        padding: 18px;
+        padding: 2px 6px;
+        padding: var(--padding-base);
+        place-items: center;
+        position: absolute;
+        position: fixed;
+        right: 15px;
+        right: 45px;
+        text-align: center;
+        text-shadow: 0 0 5px var(--color-primary);
+        top: 20px;
+        top: 50%;
+        transform: scale(1.03);
+        transform: translateY(-50%);
+        transition: 0.3s;
+        transition: color 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
+        white-space: pre-wrap;
+        width: 100%;
+        width: 90%;
+        z-index: 1000;
+        }
+        } else {
+        })(document, 'script', 'facebook-jssdk');
+      * {
+      .close-btn {
+      .close-btn:hover {
+      .container {
+      .distro-list li {
+      .gallery img {
+      .gallery img:hover {
+      .gallery {
+      .lightbox {
+      .lightbox-content {
+      .next {
+      .next:hover,
+      .prev {
+      .prev,
+      .prev:hover,
+      .social-share a {
+      .social-share a:hover {
+      .social-share {
+      /* Dihapus: CSS untuk User Info Card */
+      /* GALLERY & LIGHTBOX STYLES */
+      /* HEADER & FOOTER */
+      /* LIGHTBOX */
+      /* MEDIA QUERIES (Mobile-Friendly) */
+      /* ONE-COLUMN LAYOUT */
+      /* RESET & BASE */
+      /* SHARING ICONS */
+      /* TYPOGRAPHY & TEXT STYLES */
+      :root {
+      </article>
+      </h1>
+      <a class="next" onclick="changeImage(1)"
+      <a class="prev" onclick="changeImage(-1)"
+      <article>
+      <h1>
+      <img class="lightbox-content" id="lightbox-img" alt="Gambar diperbesar" />
+      <p>🄯 2024 Artikel Frijal. Happy Arching!</p>
+      <span class="close-btn">&times;</span>
+      ></a>
+      @media (max-width: 768px) {
+      body {
+      code {
+      content="2025-10-06T06:06:53.232+00:00"
+      content="Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain"
+      content="Cara Instal dan Pakai Paru di Distro Arch Mana Pun!"
+      content="Langkah-langkah lengkap dan santai cara instalasi dan penggunaan AUR Helper Paru di luar CachyOS, termasuk Arch Linux murni, Manjaro, dan EndeavourOS."
+      content="Panduan mudah instalasi Paru di luar CachyOS!"
+      content="Paru adalah AUR Helper terbaik. Pelajari cara menginstalnya di sistem berbasis Arch Anda."
+      content="Paru, AUR Helper, Instalasi Paru, Arch Linux, Manjaro, EndeavourOS, Pacman, makepkg"
+      content="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
+      content="https://frijal.pages.dev/img/cara-instal-paru-arch.webp"
+      document.addEventListener('DOMContentLoaded', () => {
+      footer {
+      h1 {
+      h2 {
+      h3 {
+      header,
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      href="https://frijal.pages.dev/artikel/cara-instal-paru-arch.html"
+      itemprop="image"
+      name="description"
+      name="keywords"
+      name="twitter:description"
+      name="twitter:image"
+      pre code {
+      pre {
+      property="article:published_time"
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      rel="canonical"
+      rel="stylesheet"
+      strong {
+      ul {
+      }
       });
+    />
+    </div>
+    </footer>
+    </header>
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <div class="container">
+    <div id="lightbox-modal" class="lightbox">
+    <footer>
+    <header>
+    <link
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta
+    <meta charset="UTF-8" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@frijal" />
+    <meta name="twitter:title" content="Instal Paru di Arch/Manjaro" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta property="og:site_name" content="Frijal's Articles" />
+    <meta property="og:type" content="article" />
+    <script>
+    <style>
+    <title>Cara Instal dan Pakai Paru di Arch Linux, Manjaro, dan Distro Arch Lain</title>
   </body>
+  </head>
+  <body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

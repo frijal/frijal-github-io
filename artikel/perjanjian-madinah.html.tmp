@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- prettier-ignore -->
+<title>Kisah Perjanjian Madinah & Persiapan Perang Badar</title>
+  <meta name="description" content="Cerita Perjanjian Madinah & Persiapan Perang Badar: strategi, hikmah, dan pesan kepemimpinan Nabi ﷺ. Artikel interaktif, galeri, info browser & lokasi, serta fitur share dan komentar.">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/perjanjian-madinah.html">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Perjanjian Madinah & Persiapan Perang Badar">
+  <meta property="og:description" content="Cerita Perjanjian Madinah & Persiapan Perang Badar: strategi, hikmah, dan pesan kepemimpinan Nabi ﷺ. Artikel interaktif, galeri, info browser & lokasi, serta fitur share dan komentar.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/perjanjian-madinah.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq_LFY-Wuw5E1mxWJTil_lN04tITWx9OO8HkzkIqoirL1sEsVanoyyuQp1MSN9SP7Td6iDCY_4SPlb4iql_ULA-6OqRzLfoeFGBWaRtCg3SeO-NBK90MIDKE4IbEYe4c2HQRyo2w3bth9x5b9vHr6nrZxW7W2pGwmNVCaBkD9WI8Q6FvtPI7vuzCCYHV0/s1600/perjanjian-madinah.jpg">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Perjanjian Madinah & Persiapan Perang Badar">
+  <meta name="twitter:description" content="Cerita Perjanjian Madinah & Persiapan Perang Badar: strategi, hikmah, dan pesan kepemimpinan Nabi ﷺ. Artikel interaktif, galeri, info browser & lokasi, serta fitur share dan komentar.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq_LFY-Wuw5E1mxWJTil_lN04tITWx9OO8HkzkIqoirL1sEsVanoyyuQp1MSN9SP7Td6iDCY_4SPlb4iql_ULA-6OqRzLfoeFGBWaRtCg3SeO-NBK90MIDKE4IbEYe4c2HQRyo2w3bth9x5b9vHr6nrZxW7W2pGwmNVCaBkD9WI8Q6FvtPI7vuzCCYHV0/s1600/perjanjian-madinah.jpg">
+  <!-- JSON-LD -->
+  <script>
+// Lazy Load Gallery
+document.addEventListener("DOMContentLoaded", function() {
+  let lazyImages = [].slice.call(document.querySelectorAll(".galeri-item img"));
+  if ("IntersectionObserver" in window) {
+let lazyImageObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+if (entry.isIntersecting) {
+  let img = entry.target;
+  img.src = img.dataset.src;
+  lazyImageObserver.unobserve(img);
+}
+  });
+});
+lazyImages.forEach(function(img){lazyImageObserver.observe(img);});
+  } else {
+lazyImages.forEach(function(img){img.src = img.dataset.src;});
+  }
+});
+
+// Lightbox
+const galeriList = [
+  {
+src: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq_LFY-Wuw5E1mxWJTil_lN04tITWx9OO8HkzkIqoirL1sEsVanoyyuQp1MSN9SP7Td6iDCY_4SPlb4iql_ULA-6OqRzLfoeFGBWaRtCg3SeO-NBK90MIDKE4IbEYe4c2HQRyo2w3bth9x5b9vHr6nrZxW7W2pGwmNVCaBkD9WI8Q6FvtPI7vuzCCYHV0/s1600/perjanjian-madinah.jpg",
+alt: "Perjanjian Madinah"
+  },
+  {
+src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+alt: "Langit Madinah"
+  },
+  {
+src: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+alt: "Padang Badar"
+  },
+  {
+src: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80",
+alt: "Suasana pagi Madinah"
+  }
+];
+let lightboxIndex = 0;
+function showLightbox(idx){
+  lightboxIndex = idx;
+  document.getElementById("lightbox-img").src = galeriList[idx].src;
+  document.getElementById("lightbox-img").alt = galeriList[idx].alt;
+  document.getElementById("lightbox").classList.add("active");
+}
+function closeLightbox(){
+  document.getElementById("lightbox").classList.remove("active");
+  document.getElementById("lightbox-img").src = "";
+}
+function prevLightbox(){
+  lightboxIndex = (lightboxIndex+galeriList.length-1)%galeriList.length;
+  showLightbox(lightboxIndex);
+}
+function nextLightbox(){
+  lightboxIndex = (lightboxIndex+1)%galeriList.length;
+  showLightbox(lightboxIndex);
+}
+document.addEventListener('keydown', function(e){
+  if(document.getElementById("lightbox").classList.contains('active')){
+if(e.key==="Escape") closeLightbox();
+if(e.key==="ArrowLeft") prevLightbox();
+if(e.key==="ArrowRight") nextLightbox();
+  }
+});
+
+// Share
+function shareTo(platform) {
+  const url = encodeURIComponent(window.location.href);
+  const title = encodeURIComponent(document.title);
+  let shareUrl = "#";
+  switch(platform) {
+case 'wa': shareUrl = `https://wa.me/?text=${title}%20${url}`; break;
+case 'fb': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; break;
+case 'tw': shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`; break;
+case 'tg': shareUrl = `https://t.me/share/url?url=${url}&text=${title}`; break;
+case 'ln': shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`; break;
+  }
+  window.open(shareUrl, "", "noopener");
+}
+
+
+});
+  </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

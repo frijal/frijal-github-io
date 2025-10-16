@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Catatan Harian Seorang Wanita - Versi Santai, Ceria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/catatan-harian-wanita.html">
+    <meta name="description" content="Catatan harian seorang wanita: versi santai, ceria, fullscreen. Humor, renungan, dan obrolan hangat tentang dinamika hubungan.">
+    <meta name="keywords" content="catatan harian, wanita, humor, renungan, hubungan, cerita, Indonesia">
+    <meta name="author" content="Fakhrul">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Catatan Harian Seorang Wanita - Versi Santai, Ceria">
+    <meta property="og:description" content="Humor dan renungan ringan soal dinamika cinta dan hubungan, tersaji dengan desain ceria, responsif, dan interaktif.">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/catatan-harian-wanita.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhluMB0COG88VNMI1BrkubcDOcc_zV0Vw4eP1vsMcx9V0nYTlIZGwbWRwTiCvi2vBIEVddmfxo1Pp9ziJHDt6uuzJSedZuvYp81bxg84LO-EEHq4wWKqWZnnMfcYm99KZTSyl8zAFs3mZnpOWMAQpC5KwaZdvF6rKKeNdryITWxW6880wgxK8MhBDKsjiw/s16000/IMG_20170923_160248.jpg">
+    <meta property="og:site_name" content="frijal.pages.dev">
+    <meta property="og:image:alt" content="Catatan Harian Seorang Wanita - Versi Santai, Ceria">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Catatan Harian Seorang Wanita - Versi Santai, Ceria">
+    <meta name="twitter:description" content="Humor dan renungan ringan tentang hubungan. Tema ceria, responsif, interaktif.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhluMB0COG88VNMI1BrkubcDOcc_zV0Vw4eP1vsMcx9V0nYTlIZGwbWRwTiCvi2vBIEVddmfxo1Pp9ziJHDt6uuzJSedZuvYp81bxg84LO-EEHq4wWKqWZnnMfcYm99KZTSyl8zAFs3mZnpOWMAQpC5KwaZdvF6rKKeNdryITWxW6880wgxK8MhBDKsjiw/s16000/IMG_20170923_160248.jpg">
+    
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="frame">
+            <img id="lightboxImg" alt="Pratinau gambar">
+            <div class="nav">
+                <button class="btn icon" id="prev" aria-label="Sebelumnya">&#9664;</button>
+                <button class="btn icon" id="next" aria-label="Berikutnya">&#9654;</button>
+            </div>
+            <button class="btn close" id="close" aria-label="Tutup">Tutup &#10006;</button>
+        </div>
+    </div>
+    
+    <script>
+        // Share links builder
+        (function(){
+            var url = encodeURIComponent("https://frijal.pages.dev/artikel/catatan-harian-wanita.html");
+            var title = encodeURIComponent("Catatan Harian Seorang Wanita - Versi Santai, Ceria");
+            var share = document.getElementById('share');
+            if (!share) return;
+            var links = share.querySelectorAll('a');
+            links.forEach(function(a){
+                if(a.classList.contains('wa')) a.href = "https://wa.me/?text=" + title + "%20" + url;
+                if(a.classList.contains('tw')) a.href = "https://twitter.com/intent/tweet?text=" + title + "&url=" + url;
+                if(a.classList.contains('fb')) a.href = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+                if(a.classList.contains('ln')) a.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
+            });
+        })();
+        // Lightbox interactions
+        (function(){
+            var gallery = Array.from(document.querySelectorAll('.gallery figure img'));
+            var lb = document.getElementById('lightbox');
+            var lbImg = document.getElementById('lightboxImg');
+            var idx = 0;
+            
+            function open(i){
+                idx = i;
+                lbImg.src = gallery[idx].src;
+                lb.classList.add('open');
+                lb.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function close(){
+                lb.classList.remove('open');
+                lb.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            
+            function prev(){ 
+                 idx = (idx - 1 + gallery.length) % gallery.length; 
+                 lbImg.src = gallery[idx].src; 
+             }
+            
+            function next(){ 
+                 idx = (idx + 1) % gallery.length; 
+                 lbImg.src = gallery[idx].src; 
+             }
+            
+            var closeBtn = document.getElementById('close');
+            var prevBtn = document.getElementById('prev');
+            var nextBtn = document.getElementById('next');
+            if (closeBtn) closeBtn.addEventListener('click', close);
+            if (prevBtn) prevBtn.addEventListener('click', prev);
+            if (nextBtn) nextBtn.addEventListener('click', next);
+            
+            lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+            
+            gallery.forEach(function(img, i){
+                img.addEventListener('click', function(){ open(i); });
+            });
+            
+            document.addEventListener('keydown', function(e){
+                if(!lb.classList.contains('open')) return;
+                if(e.key === 'Escape') close();
+                if(e.key === 'ArrowLeft') prev();
+                if(e.key === 'ArrowRight') next();
+            });
+        })();
+        // Simple lazy-load enhancement (IntersectionObserver as progressive)
+        (function(){
+            if('loading' in HTMLImageElement.prototype) return;
+            var imgs = document.querySelectorAll('img[loading="lazy"]');
+            var io = new IntersectionObserver(function(entries, obs){
+                entries.forEach(function(entry){
+                    if(entry.isIntersecting){
+                        var img = entry.target;
+                        img.src = img.getAttribute('src');
+                        obs.unobserve(img);
+                    }
+                });
+            });
+            imgs.forEach(function(img){ io.observe(img); });
+        })();
+        // Facebook comments data-href setting
+        document.querySelector('.fb-comments').setAttribute('data-href',location.href);
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

@@ -1,94 +1,81 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Panduan FFmpeg Lengkap: Audio & Video Interaktif</title>
-<meta name="description" content="Panduan FFmpeg lengkap dengan contoh perintah audio/video, batch convert, trim, resize, extract, merge, overlay, watermark, compress, tips, diagram visual interaktif, dan tombol salin kode." />
-    <meta name="keywords" content="FFmpeg, audio, video, command line, tutorial, mp3, ogg, konversi, trim, CLI, resize, normalize" />
+
+    
+      .catch(err=>console.error("Gagal menyalin",err));
+      .then(()=>{const btn=t.target,orig=btn.innerText;btn.innerText="Disalin!";setTimeout(()=>btn.innerText=orig,2000);})
+      const codeEl=t.target.nextElementSibling.querySelector("code");
+      const template=document.getElementById(templateId);
+      const welcomeTemplate=document.getElementById("welcome-content");
+      contentDisplay.appendChild(template.content.cloneNode(true));
+      contentDisplay.appendChild(welcomeTemplate.content.cloneNode(true));
+      document.querySelector(`a[href="${hash}"]`)?.classList.add("active-nav");
+      if(codeEl) navigator.clipboard.writeText(codeEl.innerText.trim())
+    "#batch-audio":"batch-audio-content",
+    "#batch-video":"batch-video-content",
+    "#change-bitrate":"change-bitrate-content",
+    "#change-codec":"change-codec-content",
+    "#compress-video":"compress-video-content",
+    "#extract-audio":"extract-audio-content",
+    "#framerate":"framerate-content",
+    "#merge-videos":"merge-videos-content",
+    "#mp3-ogg":"mp3-ogg-content",
+    "#mp4-webm":"mp4-webm-content",
+    "#normalize-audio":"normalize-audio-content",
+    "#overlay-watermark":"overlay-watermark-content",
+    "#resize-video":"resize-video-content",
+    "#tips":"tips-content"
+    "#trim-video":"trim-video-content",
+    "#wav-mp3":"wav-mp3-content",
     <link rel="canonical" href="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.html" />
-    <meta name="date" content="2025-09-27" />
-    <meta name="robots" content="index, follow" />
-    
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%233b82f6' d='M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 15h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V8h4v2z'/></svg>" type="image/svg+xml" />
-    
-    <meta property="og:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
-    <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.html" />
-    <meta property="og:site_name" content="Frijal Command Line Guides" />
-    <meta property="og:image" content="https://frijal.pages.dev/img/ffmpeg-panduan-interaktif.webp" />
-    <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
-    
+    <meta charset="UTF-8" />
+    <meta name="date" content="2025-09-27" />
+    <meta name="keywords" content="FFmpeg, audio, video, command line, tutorial, mp3, ogg, konversi, trim, CLI, resize, normalize" />
+    <meta name="robots" content="index, follow" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
     <meta name="twitter:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi dan penjelasan parameter." />
     <meta name="twitter:image" content="https://frijal.pages.dev/img/ffmpeg-panduan-interaktif.webp" />
     <meta name="twitter:site" content="@frijal" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const navigation=document.getElementById("navigation");
-  const contentDisplay=document.getElementById("content-display");
-  const navLinks=document.querySelectorAll(".nav-link");
-
-  const contentMap={
-    "#mp3-ogg":"mp3-ogg-content",
-    "#batch-audio":"batch-audio-content",
-    "#wav-mp3":"wav-mp3-content",
-    "#normalize-audio":"normalize-audio-content",
-    "#change-bitrate":"change-bitrate-content",
-    "#trim-video":"trim-video-content",
-    "#resize-video":"resize-video-content",
-    "#extract-audio":"extract-audio-content",
-    "#mp4-webm":"mp4-webm-content",
-    "#batch-video":"batch-video-content",
-    "#merge-videos":"merge-videos-content",
-    "#overlay-watermark":"overlay-watermark-content",
-    "#change-codec":"change-codec-content",
-    "#compress-video":"compress-video-content",
-    "#framerate":"framerate-content",
-    "#tips":"tips-content"
-  };
-
-  const loadContent=(hash)=>{
-    navLinks.forEach(l=>l.classList.remove("active-nav"));
-    contentDisplay.innerHTML="";
+    <meta name="twitter:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
+    <meta property="og:image" content="https://frijal.pages.dev/img/ffmpeg-panduan-interaktif.webp" />
+    <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
+    <meta property="og:site_name" content="Frijal Command Line Guides" />
+    <meta property="og:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/ffmpeg-panduan-interaktif.html" />
     const templateId=contentMap[hash];
+    contentDisplay.innerHTML="";
+    if(t.target.classList.contains("copy-btn")){
     if(templateId){
-      const template=document.getElementById(templateId);
-      contentDisplay.appendChild(template.content.cloneNode(true));
-      document.querySelector(`a[href="${hash}"]`)?.classList.add("active-nav");
-    } else {
-      const welcomeTemplate=document.getElementById("welcome-content");
-      contentDisplay.appendChild(welcomeTemplate.content.cloneNode(true));
+    navLinks.forEach(l=>l.classList.remove("active-nav"));
     }
-  };
-
+    } else {
+  const contentDisplay=document.getElementById("content-display");
+  const contentMap={
+  const loadContent=(hash)=>{
+  const navLinks=document.querySelectorAll(".nav-link");
+  const navigation=document.getElementById("navigation");
+  contentDisplay.addEventListener("click",t=>{
+  else loadContent("");
+  if(window.location.hash) loadContent(window.location.hash);
   navigation.addEventListener("click",e=>{if(e.target.tagName==="A"){e.preventDefault();window.location.hash=e.target.hash;}});
   window.addEventListener("hashchange",()=>loadContent(window.location.hash));
-
-  contentDisplay.addEventListener("click",t=>{
-    if(t.target.classList.contains("copy-btn")){
-      const codeEl=t.target.nextElementSibling.querySelector("code");
-      if(codeEl) navigator.clipboard.writeText(codeEl.innerText.trim())
-      .then(()=>{const btn=t.target,orig=btn.innerText;btn.innerText="Disalin!";setTimeout(()=>btn.innerText=orig,2000);})
-      .catch(err=>console.error("Gagal menyalin",err));
-    }
   });
-
-  if(window.location.hash) loadContent(window.location.hash);
-  else loadContent("");
-});
-</script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  };
+<!DOCTYPE html>
 </body>
 </html>
-
+</script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<meta name="description" content="Panduan FFmpeg lengkap dengan contoh perintah audio/video, batch convert, trim, resize, extract, merge, overlay, watermark, compress, tips, diagram visual interaktif, dan tombol salin kode." />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<script defer src="/ext/iposbrowser.js"></script>
+<script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Panduan FFmpeg Lengkap: Audio & Video Interaktif</title>
+document.addEventListener("DOMContentLoaded",()=>{
+});

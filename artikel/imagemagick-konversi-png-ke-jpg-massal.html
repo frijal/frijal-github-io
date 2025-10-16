@@ -1,121 +1,103 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows</title>
-  <meta name="description" content="Panduan santai cara mengubah semua PNG menjadi JPG sekaligus dalam satu folder dengan ImageMagick—di Linux, macOS, dan Windows. Termasuk opsi kualitas, output folder, dan penanganan transparansi.">
-  <meta name="robots" content="index,follow">
+
+        
+            
+            const src = img.getAttribute('src');
+            const t = btn.getAttribute('data-share');
+            const u = shareMap[t]?.(CANON);
+            if (src) { const i = new Image(); i.src = src; i.onload = () => { img.src = src; }; }
+            if (u) window.open(u, '_blank', 'noopener,noreferrer');
+          // Tutup hanya jika mengklik background, bukan gambar atau kontrol
+          btn.addEventListener('click', ()=>{
+          const el = gallery[idx];
+          const lazyImgs = document.querySelectorAll('img[loading="lazy"]');
+          else if (idx === 0) openAt(gallery.length - 1); // loop
+          else if (idx === gallery.length - 1) openAt(0); // loop
+          facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+          idx = -1;
+          idx = i;
+          if (!lb.classList.contains('open')) return;
+          if (e.key === 'ArrowLeft') prev();
+          if (e.key === 'ArrowRight') next();
+          if (e.key === 'Escape') closeLb();
+          if (e.target === lb || e.target.closest('.lb-controls')) closeLb(); 
+          if (idx < gallery.length - 1) openAt(idx + 1); 
+          if (idx > 0) openAt(idx - 1); 
+          lazyImgs.forEach(img => {
+          lb.classList.add('open');
+          lb.classList.remove('open');
+          lbCap.textContent = '';
+          lbCap.textContent = el.dataset.caption || '';
+          lbImg.alt = el.querySelector('img').alt || '';
+          lbImg.src = '';
+          lbImg.src = el.dataset.full;
+          linkedin: url => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+          twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+          whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + url)}`,
+          });
+        // --- Fallback Lazy-load untuk browser lama ---
+        // --- Lightbox ---
+        // --- Share ---
+        const CANON = document.querySelector('link[rel="canonical"]')?.href || location.href;
+        const gallery = [...document.querySelectorAll('#gallery .item')];
+        const lb = document.getElementById('lightbox');
+        const lbCap = document.getElementById('lb-cap');
+        const lbImg = document.getElementById('lightbox-img');
+        const shareMap = {
+        document.getElementById('lb-close').addEventListener('click', closeLb);
+        document.getElementById('lb-next').addEventListener('click', next);
+        document.getElementById('lb-prev').addEventListener('click', prev);
+        document.querySelectorAll('.btn-share').forEach(btn=>{
+        function closeLb(){
+        function next(){ 
+        function openAt(i){
+        function prev(){ 
+        gallery.forEach((el, i)=> el.addEventListener('click', ()=> openAt(i)));
+        if (!('loading' in HTMLImageElement.prototype)) {
+        lb.addEventListener('click', (e)=> { 
+        let idx = -1;
+        window.addEventListener('keydown', (e)=>{
+        }
+        });
+        };
+      (function(){
+      })();
+    document.addEventListener('DOMContentLoaded', () => {
+    });
+  </script>
+  <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
   <link rel="canonical" href="https://frijal.pages.dev/artikel/imagemagick-konversi-png-ke-jpg-massal.html">
   <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/favicon.svg">
-  <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
+  <meta charset="utf-8">
+  <meta name="description" content="Panduan santai cara mengubah semua PNG menjadi JPG sekaligus dalam satu folder dengan ImageMagick—di Linux, macOS, dan Windows. Termasuk opsi kualitas, output folder, dan penanganan transparansi.">
+  <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#121212">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
-  <meta property="og:description" content="Ubah semua PNG jadi JPG sekaligus dengan ImageMagick. Perintah untuk Linux, macOS, dan Windows, plus tips kualitas dan transparansi.">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/imagemagick-konversi-png-ke-jpg-massal.html">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg">
-  <meta property="og:site_name" content="frijal.pages.dev">
-  <meta property="article:author" content="Pelan Kiri">
-  <meta property="article:section" content="Artikel">
-  <meta property="article:published_time" content="2025-10-03T00:00:00+08:00">
-  <meta property="article:modified_time" content="2025-10-03T00:00:00+08:00">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
   <meta name="twitter:description" content="Perintah singkat untuk konversi massal, plus opsi kualitas dan transparansi.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg">
-  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+  <meta name="twitter:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta property="article:author" content="Pelan Kiri">
+  <meta property="article:modified_time" content="2025-10-03T00:00:00+08:00">
+  <meta property="article:published_time" content="2025-10-03T00:00:00+08:00">
+  <meta property="article:section" content="Artikel">
+  <meta property="og:description" content="Ubah semua PNG jadi JPG sekaligus dengan ImageMagick. Perintah untuk Linux, macOS, dan Windows, plus tips kualitas dan transparansi.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKKxJRcihtnyH6nkOtfaP_YqyrpG3J9lUTiG5ZDjuQkMDR0Rbs3EjhUWKzLGT2R7sj9G9dh84gWmgLGhIMihPoIzAwbCdFkUgb2wxJ-kH2aBAGAfdBAJF-45f5OAuMond9foS4vvadprMfB8d05wTgyGtx8ejiJRBWgAv6T0ZjVUapufitMim5Ytg7JN8/s1600/imlinux.jpg">
+  <meta property="og:site_name" content="frijal.pages.dev">
+  <meta property="og:title" content="Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/imagemagick-konversi-png-ke-jpg-massal.html">
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powershell.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      (function(){
-        const CANON = document.querySelector('link[rel="canonical"]')?.href || location.href;
-        
-        // --- Share ---
-        const shareMap = {
-          twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
-          facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-          whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + url)}`,
-          linkedin: url => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
-        };
-        document.querySelectorAll('.btn-share').forEach(btn=>{
-          btn.addEventListener('click', ()=>{
-            const t = btn.getAttribute('data-share');
-            const u = shareMap[t]?.(CANON);
-            if (u) window.open(u, '_blank', 'noopener,noreferrer');
-          });
-        });
-
-        // --- Lightbox ---
-        const gallery = [...document.querySelectorAll('#gallery .item')];
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
-        const lbCap = document.getElementById('lb-cap');
-        let idx = -1;
-
-        function openAt(i){
-          idx = i;
-          const el = gallery[idx];
-          lbImg.src = el.dataset.full;
-          lbImg.alt = el.querySelector('img').alt || '';
-          lbCap.textContent = el.dataset.caption || '';
-          lb.classList.add('open');
-        }
-
-        function closeLb(){
-          lb.classList.remove('open');
-          lbImg.src = '';
-          lbCap.textContent = '';
-          idx = -1;
-        }
-
-        function prev(){ 
-          if (idx > 0) openAt(idx - 1); 
-          else if (idx === 0) openAt(gallery.length - 1); // loop
-        }
-
-        function next(){ 
-          if (idx < gallery.length - 1) openAt(idx + 1); 
-          else if (idx === gallery.length - 1) openAt(0); // loop
-        }
-
-        gallery.forEach((el, i)=> el.addEventListener('click', ()=> openAt(i)));
-        document.getElementById('lb-close').addEventListener('click', closeLb);
-        document.getElementById('lb-prev').addEventListener('click', prev);
-        document.getElementById('lb-next').addEventListener('click', next);
-        
-        lb.addEventListener('click', (e)=> { 
-          // Tutup hanya jika mengklik background, bukan gambar atau kontrol
-          if (e.target === lb || e.target.closest('.lb-controls')) closeLb(); 
-        });
-
-        window.addEventListener('keydown', (e)=>{
-          if (!lb.classList.contains('open')) return;
-          if (e.key === 'Escape') closeLb();
-          if (e.key === 'ArrowLeft') prev();
-          if (e.key === 'ArrowRight') next();
-        });
-            
-        // --- Fallback Lazy-load untuk browser lama ---
-        if (!('loading' in HTMLImageElement.prototype)) {
-          const lazyImgs = document.querySelectorAll('img[loading="lazy"]');
-          lazyImgs.forEach(img => {
-            const src = img.getAttribute('src');
-            if (src) { const i = new Image(); i.src = src; i.onload = () => { img.src = src; }; }
-          });
-        }
-      })();
-    });
-  </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  <title>Konversi massal PNG ke JPG dengan ImageMagick di Linux, macOS, dan Windows</title>
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

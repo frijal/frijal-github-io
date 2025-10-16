@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Panduan Interaktif FFmpeg Visual: Audio &amp; Video</title>
+
+    <meta name="description" content="Panduan FFmpeg visual interaktif: konversi, trim, batch convert, resize, extract audio, normalize menggunakan perintah command line yang mudah disalin." />
+    <meta name="keywords" content="FFmpeg, audio, video, command line, tutorial, mp3, ogg, konversi, trim, CLI, resize, normalize" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/panduan-interaktif-ffmpeg.html" />
+    <meta name="date" content="2025-09-27" />
+    <meta name="robots" content="index, follow" />
+    
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%233b82f6' d='M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 15h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V8h4v2z'/></svg>" type="image/svg+xml" />
+    
+    <meta property="og:title" content="Panduan Interaktif FFmpeg Visual: Audio &amp; Video" />
+    <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/panduan-interaktif-ffmpeg.html" />
+    <meta property="og:site_name" content="Frijal Command Line Guides" />
+    <meta property="og:image" content="https://frijal.pages.dev/img/panduan-interaktif-ffmpeg.webp" />
+    <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Panduan Interaktif FFmpeg Visual: Audio &amp; Video" />
+    <meta name="twitter:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi dan penjelasan parameter." />
+    <meta name="twitter:image" content="https://frijal.pages.dev/img/panduan-interaktif-ffmpeg.webp" />
+    <meta name="twitter:site" content="@frijal" />
+    
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const navigation = document.getElementById("navigation");
+    const contentDisplay = document.getElementById("content-display");
+    const navLinks = document.querySelectorAll(".nav-link");
+    
+    // Map hash to template IDs
+    const contentMap = {
+        "#ffmpeg-convert":"ffmpeg-convert-content",
+        "#ffmpeg-batch":"ffmpeg-batch-content",
+        "#ffmpeg-wav-mp3":"ffmpeg-wav-mp3-content",
+        "#ffmpeg-normalize":"ffmpeg-normalize-content",
+        "#ffmpeg-trim":"ffmpeg-trim-content",
+        "#ffmpeg-resize":"ffmpeg-resize-content",
+        "#ffmpeg-extract-audio":"ffmpeg-extract-audio-content",
+        "#ffmpeg-mp4-webm":"ffmpeg-mp4-webm-content",
+        "#ffmpeg-batch-video":"ffmpeg-batch-video-content"
+    };
+
+    function loadContent(hash){
+        contentDisplay.innerHTML = "";
+        navLinks.forEach(l => l.classList.remove("active-nav"));
+        let templateId = contentMap[hash] || "welcome-content";
+        let template = document.getElementById(templateId);
+        
+        if(template){
+            contentDisplay.appendChild(template.content.cloneNode(true));
+        }
+        
+        if(navLinks.length > 0 && contentMap[hash]){
+            const targetLink = document.querySelector(`a[href="${hash}"]`);
+            if (targetLink) targetLink.classList.add("active-nav");
+        }
+        
+        // Attempt to parse FB comments for dynamic content
+        if (typeof FB !== 'undefined' && FB.XFBML && typeof FB.XFBML.parse === 'function'){
+            FB.XFBML.parse();
+        }
+
+        // Update current URL display and Facebook comments data-href
+        const currentCanonicalUrl = "https://frijal.pages.dev/artikel/panduan-interaktif-ffmpeg.html";
+        const currentUrlEl = document.getElementById("current-url");
+        if (currentUrlEl) currentUrlEl.textContent = currentCanonicalUrl + hash;
+    }
+
+    // Hash change
+    window.addEventListener("hashchange", ()=>{ loadContent(window.location.hash); });
+
+    // Initial load
+    const initialHash = window.location.hash;
+    if (initialHash) {
+        loadContent(initialHash);
+    } else {
+        // Automatically load the first item's content or welcome page
+        if (navLinks.length > 0) { 
+            const firstHash = navLinks[0].hash;
+            loadContent(firstHash);
+            window.location.hash = firstHash; // Set hash for history
+        } else { 
+            loadContent("#welcome"); 
+        }
+    }
+    
+    // Copy button handler
+    contentDisplay.addEventListener("click", (e)=>{
+        if(e.target.classList.contains("copy-btn")){
+            const codeElement = e.target.nextElementSibling.querySelector("code");
+            if(codeElement){
+                // Clean multiple newlines for better clipboard copy
+                const code = codeElement.innerText.trim().replace(/\n{2,}/g, '\n');
+                navigator.clipboard.writeText(code)
+                .then(()=>{
+                    let originalText = e.target.innerText;
+                    e.target.innerText = "Disalin!";
+                    setTimeout(() => {
+                        e.target.innerText = originalText;
+                    }, 2000);
+                })
+                .catch((err) => {
+                    console.error("Gagal menyalin: ", err);
+                });
+            }
+        }
+    });
+
+    // Facebook SDK manual parse (for initial load)
+    window.fbAsyncInit = function () {
+        if (typeof FB !== 'undefined') {
+            try {FB.XFBML.parse();} catch (t) {}
+        }
+    };
+});
+</script>
+
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

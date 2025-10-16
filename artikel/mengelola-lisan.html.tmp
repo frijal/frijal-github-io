@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahaya Ghibah dan Fitnah: Menjaga Lisan dari Dosa Tak Terasa</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤫</text></svg>">
+    <meta name="description" content="Pahami bahaya ghibah (menggunjing), fitnah, dan prasangka buruk dalam Islam. Pelajari dalil dari Al-Qur'an dan Hadits, serta cara menjaga lisan agar selamat di dunia dan akhirat.">
+    <meta name="keywords" content="ghibah, fitnah, menggunjing, prasangka buruk, dosa lisan, Islam, Al-Qur'an, Hadits">
+    <meta name="author" content="Tim Kajian Islami">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/mengelola-lisan.html">
+    <meta property="og:title" content="Bahaya Ghibah dan Fitnah: Menjaga Lisan dari Dosa Tak Terasa">
+    <meta property="og:description" content="Kajian mendalam mengenai dosa ghibah dan fitnah yang sering dianggap remeh, padahal dampaknya sangat besar di dunia dan akhirat.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/mengelola-lisan.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfR0plTstURbqolhU3UpYwz5hF39_cdxDJK43VluTCwd56IcSIE5SC7jBQ_h5WsYjYIERe16lXzlenzTpSuWs0CbBKwW1N2dCoqv-u5HrnuR5IPgWCqSu0DVrHt20POAu9yhkZO0j5qMfd/s1600/negative_thinking.jpg">
+    <meta property="og:site_name" content="Kajian Islami">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bahaya Ghibah dan Fitnah: Menjaga Lisan dari Dosa Tak Terasa">
+    <meta name="twitter:description" content="Kajian mendalam mengenai dosa ghibah dan fitnah yang sering dianggap remeh, padahal dampaknya sangat besar di dunia dan akhirat.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfR0plTstURbqolhU3UpYwz5hF39_cdxDJK43VluTCwd56IcSIE5SC7jBQ_h5WsYjYIERe16lXzlenzTpSuWs0CbBKwW1N2dCoqv-u5HrnuR5IPgWCqSu0DVrHt20POAu9yhkZO0j5qMfd/s1600/negative_thinking.jpg">
+    
+                </div>
+            </div>
+            </main>
+    </div>
+
+    <script>
+        // Setup Facebook Comments
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUrl = document.querySelector('link[rel="canonical"]')?.href || window.location.href;
+            const currentUrlSpan = document.getElementById("current-url");
+            if(currentUrlSpan) currentUrlSpan.textContent = currentUrl;
+            const fbCommentsDiv = document.getElementById("fb-comments");
+            if(fbCommentsDiv) fbCommentsDiv.setAttribute("data-href", currentUrl);
+
+            // Reload FB plugin if SDK is already loaded
+            if (typeof FB !== 'undefined') {try { FB.XFBML.parse(); } catch(e) { /* ignore */ }}
+
+            // Social Sharing Button Generation (karena HTML asli tidak ada tombolnya, kita generate)
+            setupSocialSharing(currentUrl);
+        });
+
+        function setupSocialSharing(url) {
+            const shareContainer = document.getElementById('share-buttons');
+            if (!shareContainer) return;
+            const title = document.title;
+            const encodedUrl = encodeURIComponent(url);
+            const encodedTitle = encodeURIComponent(title);
+            
+            const platforms = {
+                facebook: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.81C10.44 7.31 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>`, class: 'share-fb', link: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+                twitter: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.49.76 2.81 1.91 3.58-.7-.02-1.37-.21-1.95-.5v.05c0 2.08 1.48 3.82 3.44 4.21-.36.1-.74.15-1.14.15-.28 0-.55-.03-.81-.08.55 1.7 2.14 2.94 4.03 2.97-1.47 1.15-3.32 1.83-5.33 1.83-.35 0-.69-.02-1.03-.06 1.9 1.22 4.16 1.93 6.58 1.93 7.89 0 12.21-6.54 12.21-12.21 0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.22Z"/></svg>`, class: 'share-tw', link: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}` },
+                x: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.931ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>`, class: 'share-x', link: `https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}` },
+                whatsapp: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m.01 1.67c4.56 0 8.25 3.69 8.25 8.25 0 4.56-3.69 8.25-8.25 8.25-1.53 0-3-.42-4.29-1.19l-.3-.18-3.18.83.85-3.1-.2-.31c-.82-1.31-1.28-2.82-1.28-4.4s3.69-8.25 8.25-8.25m4.52 9.15c-.24-.12-1.43-.7-1.65-.78-.23-.08-.39-.12-.56.12-.17.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.71-.63-1.19-1.4-1.33-1.64-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.3.23.24-.88 1.03-.88 2.5s.9 2.9 1.02 3.1c.12.2.82 1.83 3.6 3.16.65.31 1.16.5 1.56.64.4.14.77.12 1.06.07.32-.05.99-.4 1.13-.78.14-.38.14-.71.1-.78c-.04-.07-.16-.11-.4-.23Z"/></svg>`, class: 'share-wa', link: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}` },
+                telegram: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.69 8.54l-1.63 7.63c-.15.7-.58.87-1.14.54l-2.43-1.78l-1.17 1.12c-.13.13-.24.24-.48.24l.17-2.48l4.46-4.04c.19-.17-.03-.27-.27-.1l-5.5 3.44l-2.37-.74c-.69-.22-.7-.73.14-1.07l9.42-3.61c.58-.22 1.04.14.87.8z"/></svg>`, class: 'share-tg', link: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}` }
+                // Tambahkan platform lain di sini jika perlu
+            };
+
+            let buttonsHtml = '';
+            for (const key in platforms) {
+                buttonsHtml += `<a href="${platforms[key].link}" rel="noreferrer" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}" target="_blank">${platforms[key].icon}</a>`;
+            }
+            shareContainer.innerHTML = buttonsHtml;
+        }
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

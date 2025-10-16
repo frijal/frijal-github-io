@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!</title>
+    <meta name="description" content="Ringkasan video 10 sungai terpanjang di Indonesia: fakta singkat, peta konteks, momen seru, galeri foto, dan tombol bagikan." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/sungai-terpanjang-indonesia.html" />
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!" />
+    <meta property="og:description" content="Ringkasan video 10 sungai terpanjang di Indonesia. Tonton, baca, dan bagikan!" />
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/sungai-terpanjang-indonesia.html" />
+    <meta property="og:image" content="https://frijal.pages.dev/img/sungai-terpanjang-indonesia.webp" />
+    <meta property="og:image:alt" content="10 Sungai Terpanjang di Indonesia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!" />
+    <meta name="twitter:description" content="Ringkasan video 10 sungai terpanjang di Indonesia. Tonton, baca, dan bagikan!" />
+    <meta name="twitter:image" content="https://frijal.pages.dev/img/sungai-terpanjang-indonesia.webp" />
+    <meta itemprop="image" content="https://frijal.pages.dev/img/sungai-terpanjang-indonesia.webp" />
+    <meta name="date" content="2025-09-27" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
+    <script>
+      // 1) Reading progress bar
+      (function progress(){
+        const bar = document.getElementById("progress");
+        const onScroll = () => {
+          const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const percent = height ? (scrollTop/height)*100 : 0;
+          if (bar) bar.style.width = percent + "%";
+        };
+        window.addEventListener("scroll", onScroll, {passive:true});
+        onScroll();
+      })();
+      
+      // 2) Lightbox for gallery
+      (function lightbox(){
+        const images = Array.from(document.querySelectorAll(".gallery img"));
+        const lb = document.createElement("div");
+        lb.className = "lightbox";
+        lb.innerHTML = `<button class="btn lb-close" aria-label="Tutup">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg></button><img alt="Foto galeri" loading="lazy" /><div class="lb-nav">
+          <button class="btn lb-prev" aria-label="Sebelumnya"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="btn lb-next" aria-label="Berikutnya"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+          `;
+        document.body.appendChild(lb);
+        
+        const img = lb.querySelector("img");
+        const closeBtn = lb.querySelector(".lb-close");
+        const prevBtn = lb.querySelector(".lb-prev");
+        const nextBtn = lb.querySelector(".lb-next");
+        
+        let index = 0;
+        
+        const open = (i) => {
+          index = i;
+          img.src = images[index].src; // Menggunakan src yang sudah dimuat oleh Lazy Load
+          lb.classList.add("active");
+        };
+        
+        const close = () => lb.classList.remove("active");
+        
+        const prev = () => open((index - 1 + images.length) % images.length);
+        const next = () => open((index + 1) % images.length);
+        
+        images.forEach((el, i) => el.addEventListener("click", () => open(i)));
+        
+        closeBtn.addEventListener("click", close);
+        prevBtn.addEventListener("click", prev);
+        nextBtn.addEventListener("click", next);
+        
+        lb.addEventListener("click", (e) => { 
+          if (e.target === lb || e.target === closeBtn) close(); 
+        }); 
+        
+        document.addEventListener("keydown", (e) => {
+          if (!lb.classList.contains("active")) return;
+          if (e.key === "Escape") close();
+          if (e.key === "ArrowLeft") prev();
+          if (e.key === "ArrowRight") next();
+        });
+      })();
+      
+      // 3) Share handlers
+      (function share(){
+        const url = encodeURIComponent("https://frijal.pages.dev/artikel/sungai-terpanjang-indonesia.html");
+        const text = encodeURIComponent("10 Sungai Terpanjang di Indonesia — versi video, ringkas, dan seru!");
+        const w = document.getElementById("share-whatsapp");
+        const t = document.getElementById("share-twitter");
+        const f = document.getElementById("share-facebook");
+        const c = document.getElementById("share-copy");
+        
+        w.href = `https://wa.me/?text=${text}%20${url}`;
+        t.href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+        f.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        
+        c.addEventListener("click", (e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(decodeURIComponent(url)).then(()=>{
+            c.textContent = "Tersalin!"; 
+            setTimeout(()=>{ c.textContent = "Salin Link"; },1500);
+          }).catch(()=>{ 
+            // Fallback for older browsers
+            console.error("Gagal menyalin tautan");
+          });
+        });
+      })();
+      
+      // 4) Lazy Load Images - Digunakan untuk memuat gambar galeri
+      document.addEventListener('DOMContentLoaded', () => {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    // Memuat src dari data-src (digunakan di galeri)
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 50px 0px' // Muat 50px sebelum masuk viewport
+        });
+    
+        lazyImages.forEach(img => observer.observe(img));
+      });
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+  </body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

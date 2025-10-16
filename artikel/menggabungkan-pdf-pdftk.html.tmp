@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Menggabungkan Berkas PDF dengan PDFtk: Solusi Cepat dan Efisien</title>
+    <meta name="description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk di Linux/Windows. Disertai contoh perintah, tips, dan keunggulan penggunaan."/>
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/menggabungkan-pdf-pdftk.html"/>
+    
+    <meta property="og:title" content="Menggabungkan Berkas PDF dengan PDFtk"/>
+    <meta property="og:description" content="Belajar cara menggabungkan PDF dengan PDFtk: perintah, contoh, keunggulan, dan tips praktis."/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/menggabungkan-pdf-pdftk.html"/>
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg"/>
+    <meta property="og:image:alt" content="Menggabungkan Berkas PDF dengan PDFtk: Solusi Cepat dan Efisien">
+
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Menggabungkan Berkas PDF dengan PDFtk"/>
+    <meta name="twitter:description" content="Belajar cara menggabungkan PDF dengan PDFtk: perintah, contoh, keunggulan, dan tips praktis."/>
+    <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg"/>
+    
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" type="image/svg+xml"/>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    
+            <script>
+                const currentUrl = window.location.href;
+                document.getElementById("current-url").textContent = currentUrl;
+                document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+                window.fbAsyncInit = function() {
+                    if (typeof FB !== 'undefined') {
+                        try { FB.XFBML.parse(); } catch(e) {}
+                    }
+                }
+            </script>
+        </div>
+    </main>
+    
+    <footer>
+        <p>🄯 2025 Belajar Linux. Semua Hak Dilindungi.</p>
+    </footer>
+    
+    <script>
+        function copyCode(btn){
+            const code = btn.parentElement.querySelector("code").innerText;
+            navigator.clipboard.writeText(code).then(()=>{
+                btn.textContent="Tersalin!";
+                setTimeout(()=>btn.textContent="Copy",1500);
+            });
+        }
+        function share(platform){
+            const url=encodeURIComponent(window.location.href);
+            const text=encodeURIComponent("Cara menggabungkan PDF dengan PDFtk");
+            let shareUrl="";
+            if(platform==='facebook') shareUrl=`https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            if(platform==='twitter') shareUrl=`https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            if(platform==='whatsapp') shareUrl=`https://api.whatsapp.com/send?text=${text}%20${url}`;
+            if(platform==='telegram') shareUrl=`https://t.me/share/url?url=${url}&text=${text}`;
+            if(shareUrl) window.open(shareUrl,'_blank','noopener');
+        }
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

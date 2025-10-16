@@ -1,163 +1,116 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum</title>
-    <meta
-      name="description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <link
-      rel="icon"
-      href="https://frijal.pages.dev/favicon.ico"
-      type="image/x-icon"
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/unlicense.html"
-    />
-    <meta
-      property="og:title"
-      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
-    />
-    <meta
-      property="og:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/unlicense.html"
-    />
-    <meta
-      property="og:image"
-      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
-    />
-    <meta property="og:site_name" content="frijal.pages.dev" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
-    />
-    <meta
-      name="twitter:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <meta
-      name="twitter:image"
-      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
-    />
-    <script>
-      // Menggunakan DOMContentLoaded tunggal untuk inisialisasi yang benar
-      document.addEventListener('DOMContentLoaded', () => {
-        // Tahun dinamis
-        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Lightbox gallery
-        (function () {
-          const gallery = document.getElementById('gallery');
-          const lb = document.getElementById('lightbox');
-          const lbImg = document.getElementById('lightbox-img');
-          const lbClose = document.getElementById('lbClose');
-          const lbPrev = document.getElementById('lbPrev');
-          const lbNext = document.getElementById('lbNext');
-          let images = [];
-          let idx = 0;
-
-          // Function untuk membuka lightbox
-          function open(i) {
-            idx = i;
-            // Menggunakan data-full (resolusi tinggi) atau src (fallback)
-            lbImg.src = images[idx].dataset.full || images[idx].src;
-            lb.classList.add('active');
-            lb.setAttribute('aria-hidden', 'false');
-          }
-
-          function close() {
-            lb.classList.remove('active');
-            lb.setAttribute('aria-hidden', 'true');
-            lbImg.src = '';
-          }
-
-          function prev() {
-            open((idx - 1 + images.length) % images.length);
-          }
-
-          function next() {
-            open((idx + 1) % images.length);
-          }
-
-          function init() {
-            images = Array.from(gallery.querySelectorAll('img'));
-
-            // Inisialisasi event listener untuk setiap gambar galeri
-            images.forEach((img, i) => {
-              img.addEventListener('click', () => open(i));
-            });
-
-            // Event listeners navigasi lightbox
-            lbClose.addEventListener('click', close);
-            lbPrev.addEventListener('click', prev);
-            lbNext.addEventListener('click', next);
-
-            // Menutup lightbox saat klik di luar gambar
-            lb.addEventListener('click', (e) => {
-              if (e.target === lb) close();
-            });
-
-            // Navigasi keyboard
-            document.addEventListener('keydown', (e) => {
+                    // Dalam kasus ini, diasumsikan src sudah diisi dengan gambar kecil
+                  // Jika gambar memiliki data-full, muat gambar utama (src)
+                  const img = entry.target;
+                  if (img.dataset.full && !img.src.includes(img.dataset.full)) {
+                  obs.unobserve(img);
+                  }
+                if (entry.isIntersecting) {
+                }
+              entries.forEach(entry => {
               if (!lb.classList.contains('active')) return;
-              if (e.key === 'Escape') close();
               if (e.key === 'ArrowLeft') prev();
               if (e.key === 'ArrowRight') next();
-            });
-
-            // Implementasi Lazy Load (memastikan gambar dimuat)
-            const lazyObserver = new IntersectionObserver((entries, obs) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  const img = entry.target;
-                  // Jika gambar memiliki data-full, muat gambar utama (src)
-                  if (img.dataset.full && !img.src.includes(img.dataset.full)) {
-                    // Dalam kasus ini, diasumsikan src sudah diisi dengan gambar kecil
-                  }
-                  obs.unobserve(img);
-                }
+              if (e.key === 'Escape') close();
+              if (e.target === lb) close();
+              img.addEventListener('click', () => open(i));
               });
-            });
-            images.forEach(img => lazyObserver.observe(img));
-          }
-
-          init();
-        })();
-
-        // Share links
-        (function () {
-          const url = encodeURIComponent(
+            // Event listeners navigasi lightbox
+            // Implementasi Lazy Load (memastikan gambar dimuat)
+            // Inisialisasi event listener untuk setiap gambar galeri
+            // Menggunakan data-full (resolusi tinggi) atau src (fallback)
+            // Menutup lightbox saat klik di luar gambar
+            // Navigasi keyboard
+            const lazyObserver = new IntersectionObserver((entries, obs) => {
+            document.addEventListener('keydown', (e) => {
             document.querySelector('link[rel=canonical]')?.href || location.href
+            idx = i;
+            images = Array.from(gallery.querySelectorAll('img'));
+            images.forEach((img, i) => {
+            images.forEach(img => lazyObserver.observe(img));
+            lb.addEventListener('click', (e) => {
+            lb.classList.add('active');
+            lb.classList.remove('active');
+            lb.setAttribute('aria-hidden', 'false');
+            lb.setAttribute('aria-hidden', 'true');
+            lbClose.addEventListener('click', close);
+            lbImg.src = '';
+            lbImg.src = images[idx].dataset.full || images[idx].src;
+            lbNext.addEventListener('click', next);
+            lbPrev.addEventListener('click', prev);
+            open((idx + 1) % images.length);
+            open((idx - 1 + images.length) % images.length);
+            });
           );
-          const title = encodeURIComponent(document.title);
-          const x = document.getElementById('share-x');
+          // Function untuk membuka lightbox
           const fb = document.getElementById('share-fb');
+          const gallery = document.getElementById('gallery');
+          const lb = document.getElementById('lightbox');
+          const lbClose = document.getElementById('lbClose');
+          const lbImg = document.getElementById('lightbox-img');
+          const lbNext = document.getElementById('lbNext');
+          const lbPrev = document.getElementById('lbPrev');
           const li = document.getElementById('share-li');
+          const title = encodeURIComponent(document.title);
+          const url = encodeURIComponent(
           const wa = document.getElementById('share-wa');
-
-          x.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+          const x = document.getElementById('share-x');
           fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          function close() {
+          function init() {
+          function next() {
+          function open(i) {
+          function prev() {
+          init();
+          let idx = 0;
+          let images = [];
           li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
           wa.href = `https://wa.me/?text=${title}%20${url}`;
+          x.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+          }
+        (function () {
+        // Lightbox gallery
+        // Share links
+        // Tahun dinamis
+        document.getElementById('year').textContent = new Date().getFullYear();
         })();
+      // Menggunakan DOMContentLoaded tunggal untuk inisialisasi yang benar
+      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
+      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
+      content="https://frijal.pages.dev/artikel/unlicense.html"
+      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
+      document.addEventListener('DOMContentLoaded', () => {
+      href="https://frijal.pages.dev/artikel/unlicense.html"
+      href="https://frijal.pages.dev/favicon.ico"
+      name="description"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      property="og:description"
+      property="og:image"
+      property="og:title"
+      property="og:url"
+      rel="canonical"
+      rel="icon"
+      type="image/x-icon"
       });
+    />
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    <link
+    <meta
+    <meta charset="utf-8" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:site_name" content="frijal.pages.dev" />
+    <meta property="og:type" content="article" />
+    <script>
+    <title>UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum</title>
   </body>
+  <head>
+<!doctype html>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

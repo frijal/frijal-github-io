@@ -1,237 +1,177 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pembersihan Otomatis Dependencies (Non-Interaktif)</title>
-<meta name="description" content="Panduan lengkap menjalankan pembersihan otomatis dependencies dan reinstall Node.js package secara non-interaktif di proyek GitHub Pages menggunakan workflow atau terminal.">
-<link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
-<link rel="canonical" href="https://frijal.pages.dev/artikel/cleanup-auto.html">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
-<meta property="og:description" content="Cara otomatis membersihkan dependencies yang tidak digunakan dan melakukan reinstall di proyek GitHub Pages.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://frijal.pages.dev/artikel/cleanup-auto.html">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
-<meta name="twitter:description" content="Pembersihan dependencies otomatis tanpa prompt, cocok untuk GitHub Actions.">
-
-<!-- Prism.js CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.min.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@latest/prism.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@latest/plugins/autoloader/prism-autoloader.min.js" defer></script>
-
-<style>
-/* ===== Layout dasar responsif ===== */
-body {
-  margin: 0;
-  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--fg);
-  line-height: 1.7;
-  padding: 2rem;
-  max-width: 900px;
-  margin-inline: auto;
-}
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-pre {
-  border-radius: 10px;
-  overflow-x: auto;
-  padding: 1rem;
-}
-
-/* ===== Mode terang dan gelap otomatis ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
+          node-version: '20'
+        run: node ext/cleanup-auto.js
+        run: npm ci
+        uses: actions/checkout@v4
+        uses: actions/setup-node@v4
+        with:
+      - name: Checkout Repository
+      - name: Install Dependencies
+      - name: Jalankan Cleanup Otomatis
+      - name: Setup Node.js
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter">
+    - cron: '0 21 * * 0'  # Setiap Minggu jam 21:00 UTC
     --bg: #0b0e14;
-    --fg: #d6deeb;
-    --link: #82aaff;
-  }
-}
-@media (prefers-color-scheme: light) {
-  :root {
     --bg: #ffffff;
     --fg: #1e1e1e;
+    --fg: #d6deeb;
     --link: #007acc;
-  }
-}
-
-/* ===== Tema Night Owl untuk Prism (gelap) ===== */
-@media (prefers-color-scheme: dark) {
-code[class*="language-"], pre[class*="language-"] {
-  color: #d6deeb;
-  background: #011627;
-}
-.token.comment, .token.prolog, .token.doctype, .token.cdata {
-  color: #637777;
-}
-.token.punctuation { color: #c792ea; }
-.token.property, .token.tag, .token.constant, .token.symbol, .token.deleted {
-  color: #ff5370;
-}
-.token.boolean, .token.number { color: #f78c6c; }
-.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted {
-  color: #addb67;
-}
-.token.operator, .token.entity, .token.url, .token.variable {
-  color: #c792ea;
-}
-.token.atrule, .token.attr-value, .token.function, .token.class-name {
-  color: #82aaff;
-}
-.token.keyword { color: #c792ea; }
-}
-
-/* ===== Share icons ===== */
-.share {
-  display: flex;
-  gap: 10px;
-  margin-top: 2rem;
-}
-.share a img {
-  width: 32px;
-  height: 32px;
-  filter: brightness(0.9);
-  transition: 0.2s;
-}
-.share a img:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
-}
-
-/* ===== Facebook comments ===== */
-.fb-comments {
-  margin-top: 2rem;
-}
-</style>
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-<body>
-<main>
-  <h1>🧹 Pembersihan Otomatis Dependencies (Non-Interaktif)</h1>
-<div id="iposbrowser"></div>
-
-  <p>
-    Kadang kita ingin proyek Node.js di GitHub Pages tetap bersih tanpa perlu konfirmasi manual saat melakukan pembersihan <em>dependencies</em> yang tidak terpakai.  
-    Di sinilah mode otomatis berguna: skrip berjalan sepenuhnya tanpa prompt dan cocok diintegrasikan ke workflow GitHub Actions.
-  </p>
-
-  <h2>🎯 Tujuan</h2>
-  <p>
-    Dengan skrip <strong>cleanup-auto.js</strong>, kita bisa:
-  </p>
-  <ul>
+    --link: #82aaff;
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cleanup-auto.html&amp;text=Pembersihan%20Otomatis%20Dependencies%20Node.js%20di%20GitHub%20Pages" target="_blank">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
+    <li>Bisa dikombinasikan dengan workflow build agar repo tetap ramping.</li>
+    <li>Gunakan mode ini hanya di branch utama atau staging, agar tidak menghapus paket penting di branch pengembangan.</li>
     <li>Memeriksa dependencies yang tidak digunakan.</li>
-    <li>Menghapusnya secara otomatis tanpa input pengguna.</li>
     <li>Menghapus folder <code>node_modules</code> dan <code>package-lock.json</code> bila perlu.</li>
+    <li>Menghapusnya secara otomatis tanpa input pengguna.</li>
     <li>Menjalankan instalasi ulang bersih (<code>npm install</code>).</li>
+    <li>Tambahkan log hasil cleanup ke artifact untuk audit.</li>
+    Cocok dijalankan pada server CI/CD seperti GitHub Actions, terutama untuk proyek statis seperti GitHub Pages.
+    Dengan skrip <strong>cleanup-auto.js</strong>, kita bisa:
+    Di sinilah mode otomatis berguna: skrip berjalan sepenuhnya tanpa prompt dan cocok diintegrasikan ke workflow GitHub Actions.
+    Kadang kita ingin proyek Node.js di GitHub Pages tetap bersih tanpa perlu konfirmasi manual saat melakukan pembersihan <em>dependencies</em> yang tidak terpakai.  
+    Kita bisa menjadwalkan proses pembersihan otomatis ini langsung dari workflow YAML agar dijalankan misalnya setiap minggu.
+    Skrip <code>cleanup-auto.js</code> membantu menjaga proyek tetap ringan, bebas sisa dependensi, dan sepenuhnya otomatis tanpa konfirmasi manual.
+    console.log('✅ Tidak ada paket yang perlu dihapus.');
+    console.log('🧹 Menghapus paket:', unused.join(', '));
+    execSync(`npm uninstall ${unused.join(' ')}`, { stdio: 'inherit' });
+    runs-on: ubuntu-latest
+    steps:
+  :root {
+  </div>
+  </p>
   </ul>
-
+  <div class="share">
+  <h1>🧹 Pembersihan Otomatis Dependencies (Non-Interaktif)</h1>
+  <h2>⚙️ Integrasi ke Workflow GitHub Actions</h2>
+  <h2>✅ Kesimpulan</h2>
+  <h2>🎯 Tujuan</h2>
+  <h2>💡 Tips Tambahan</h2>
   <h2>🪄 Petunjuk Penggunaan</h2>
+  <p>
   <p>Simpan skrip berikut di <code>ext/cleanup-auto.js</code>:</p>
-
   <pre><code class="language-js">#!/usr/bin/env node
-/**
- * ===================================================================
- * CLEANUP AUTO v1.0
- * Hapus paket tidak terpakai dan reinstall otomatis (non-interaktif)
- * Cocok untuk workflow GitHub Actions
- * ===================================================================
- */
-import { execSync } from 'node:child_process';
-import depcheck from 'depcheck';
-import fs from 'node:fs';
-
-(async () =&gt; {
+  <pre><code class="language-yaml">name: Auto Cleanup Dependencies
+  <ul>
+  background: #011627;
+  background: var(--bg);
+  border-radius: 10px;
+  cleanup:
+  color: #637777;
+  color: #82aaff;
+  color: #addb67;
+  color: #c792ea;
+  color: #d6deeb;
+  color: #ff5370;
+  color: var(--fg);
+  console.log('✨ Cleanup selesai tanpa prompt!');
+  console.log('📦 Instal ulang paket...');
+  console.log('🗑️ Menghapus node_modules dan package-lock.json...');
   console.log('🚀 Memeriksa paket tidak terpakai...');
   const result = await depcheck(process.cwd());
   const unused = [...result.dependencies, ...result.devDependencies];
-
-  if (unused.length === 0) {
-    console.log('✅ Tidak ada paket yang perlu dihapus.');
-  } else {
-    console.log('🧹 Menghapus paket:', unused.join(', '));
-    execSync(`npm uninstall ${unused.join(' ')}`, { stdio: 'inherit' });
-  }
-
-  console.log('🗑️ Menghapus node_modules dan package-lock.json...');
+  display: flex;
+  execSync('npm install', { stdio: 'inherit' });
+  filter: brightness(0.9);
+  filter: brightness(1.2);
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   fs.rmSync('node_modules', { recursive: true, force: true });
   fs.rmSync('package-lock.json', { force: true });
-
-  console.log('📦 Instal ulang paket...');
-  execSync('npm install', { stdio: 'inherit' });
-
-  console.log('✨ Cleanup selesai tanpa prompt!');
-})();</code></pre>
-
-  <h2>⚙️ Integrasi ke Workflow GitHub Actions</h2>
-  <p>
-    Kita bisa menjadwalkan proses pembersihan otomatis ini langsung dari workflow YAML agar dijalankan misalnya setiap minggu.
-  </p>
-
-  <pre><code class="language-yaml">name: Auto Cleanup Dependencies
-
-on:
+  gap: 10px;
+  height: 32px;
+  height: auto;
+  if (unused.length === 0) {
+  line-height: 1.7;
+  margin-inline: auto;
+  margin-top: 2rem;
+  margin: 0;
+  max-width: 100%;
+  max-width: 900px;
+  overflow-x: auto;
+  padding: 1rem;
+  padding: 2rem;
   schedule:
-    - cron: '0 21 * * 0'  # Setiap Minggu jam 21:00 UTC
+  transform: scale(1.1);
+  transition: 0.2s;
+  width: 32px;
   workflow_dispatch:
-
-jobs:
-  cleanup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Jalankan Cleanup Otomatis
-        run: node ext/cleanup-auto.js
-</code></pre>
-
-  <h2>💡 Tips Tambahan</h2>
-  <ul>
-    <li>Gunakan mode ini hanya di branch utama atau staging, agar tidak menghapus paket penting di branch pengembangan.</li>
-    <li>Bisa dikombinasikan dengan workflow build agar repo tetap ramping.</li>
-    <li>Tambahkan log hasil cleanup ke artifact untuk audit.</li>
-  </ul>
-
-  <h2>✅ Kesimpulan</h2>
-  <p>
-    Skrip <code>cleanup-auto.js</code> membantu menjaga proyek tetap ringan, bebas sisa dependensi, dan sepenuhnya otomatis tanpa konfirmasi manual.
-    Cocok dijalankan pada server CI/CD seperti GitHub Actions, terutama untuk proyek statis seperti GitHub Pages.
-  </p>
-
-  <div class="share">
-    <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/cleanup-auto.html&amp;text=Pembersihan%20Otomatis%20Dependencies%20Node.js%20di%20GitHub%20Pages" target="_blank">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter">
-    </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
-    </a>
-    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://frijal.pages.dev/artikel/cleanup-auto.html" target="_blank">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
-    </a>
-  </div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  }
+  } else {
+ * ===================================================================
+ * CLEANUP AUTO v1.0
+ * Cocok untuk workflow GitHub Actions
+ * Hapus paket tidak terpakai dan reinstall otomatis (non-interaktif)
+ */
+(async () =&gt; {
+.fb-comments {
+.share a img {
+.share a img:hover {
+.share {
+.token.atrule, .token.attr-value, .token.function, .token.class-name {
+.token.boolean, .token.number { color: #f78c6c; }
+.token.comment, .token.prolog, .token.doctype, .token.cdata {
+.token.keyword { color: #c792ea; }
+.token.operator, .token.entity, .token.url, .token.variable {
+.token.property, .token.tag, .token.constant, .token.symbol, .token.deleted {
+.token.punctuation { color: #c792ea; }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted {
+/* ===== Facebook comments ===== */
+/* ===== Layout dasar responsif ===== */
+/* ===== Mode terang dan gelap otomatis ===== */
+/* ===== Share icons ===== */
+/* ===== Tema Night Owl untuk Prism (gelap) ===== */
+/**
+<!-- Open Graph -->
+<!-- Prism.js CDN -->
+<!-- Twitter Card -->
+<!doctype html>
 </body>
+</code></pre>
+</head>
 </html>
-
+</style>
+<body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<head>
+<html lang="id">
+<link rel="canonical" href="https://frijal.pages.dev/artikel/cleanup-auto.html">
+<link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.min.css">
+<main>
+<meta charset="utf-8">
+<meta name="description" content="Panduan lengkap menjalankan pembersihan otomatis dependencies dan reinstall Node.js package secara non-interaktif di proyek GitHub Pages menggunakan workflow atau terminal.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Pembersihan dependencies otomatis tanpa prompt, cocok untuk GitHub Actions.">
+<meta name="twitter:title" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:description" content="Cara otomatis membersihkan dependencies yang tidak digunakan dan melakukan reinstall di proyek GitHub Pages.">
+<meta property="og:title" content="Pembersihan Otomatis Dependencies (Non-Interaktif)">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/cleanup-auto.html">
+<script defer src="/ext/iposbrowser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@latest/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@latest/prism.min.js" defer></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<style>
+<title>Pembersihan Otomatis Dependencies (Non-Interaktif)</title>
+@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+body {
+code[class*="language-"], pre[class*="language-"] {
+img {
+import depcheck from 'depcheck';
+import fs from 'node:fs';
+import { execSync } from 'node:child_process';
+jobs:
+on:
+pre {
+}
+})();</code></pre>

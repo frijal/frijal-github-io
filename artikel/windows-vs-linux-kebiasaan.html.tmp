@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- prettier-ignore -->
+<title>Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)</title>
+<meta name="description" content="Ringan, lucu, tapi informatif: kebiasaan umum pengguna Windows dan Linux saat memasang aplikasi, menyiapkan sistem, dan menunggu proses. Disajikan seimbang, plus tips dan contoh perintah." />
+<link rel="canonical" href="https://frijal.pages.dev/artikel/windows-vs-linux-kebiasaan.html" />
+<meta name="date" content="2025-09-27">
+
+
+<meta property="og:locale" content="id_ID" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)" />
+<meta property="og:description" content="Obrolan santai tentang perbedaan kebiasaan pengguna Windows dan Linux—dengan contoh nyata, tips, dan humor yang sehat." />
+<meta property="og:url" content="https://frijal.pages.dev/artikel/windows-vs-linux-kebiasaan.html" />
+<meta property="og:site_name" content="frijal.pages.dev" />
+<meta property="og:image" content="https://frijal.pages.dev/img/windows-vs-linux-kebiasaan.webp" />
+<meta property="og:image:alt" content="Ilustrasi Windows dan Linux berdampingan" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)" />
+<meta name="twitter:description" content="Bahas perbedaan kebiasaan pengguna Windows & Linux secara santai, seimbang, dan bermanfaat." />
+<meta name="twitter:site" content="@frijal" />
+<meta name="twitter:image" content="https://frijal.pages.dev/img/windows-vs-linux-kebiasaan.webp">
+<meta itemprop="image" content="https://frijal.pages.dev/img/windows-vs-linux-kebiasaan.webp">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%232563eb" offset="0"/><stop stop-color="%23ff4b91" offset="1"/></linearGradient></defs><rect width="128" height="128" rx="28" fill="url(%23g)"/><g transform="translate(20,20)"><rect x="8" y="12" width="80" height="20" rx="10" fill="%23fff" opacity=".92"/><rect x="8" y="48" width="62" height="20" rx="10" fill="%23fff" opacity=".92"/><rect x="8" y="84" width="44" height="20" rx="10" fill="%23fff" opacity=".92"/></g></svg>' />
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const CANONICAL_URL = document.querySelector('link[rel="canonical"]').href;
+const PAGE_TITLE = document.title;
+const SHARE_TEXT = "Windows vs Linux: beda kebiasaan pengguna (tanpa nyinyir)";
+const escapeHtml = str => String(str).replace(/[&<>"']/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+
+// --- 1. Lazy Loading & Lightbox ---
+const setupLightbox = () => {
+const lazyImages = document.querySelectorAll("img[data-src]");
+if ("IntersectionObserver" in window) {
+let observer = new IntersectionObserver((entries, observer) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+let img = entry.target;
+img.src = img.getAttribute("data-src");
+img.removeAttribute("data-src");
+observer.unobserve(img);
+}
+});
+}, { rootMargin: "150px" });
+lazyImages.forEach((img) => observer.observe(img));
+} else {
+lazyImages.forEach((img) => {
+img.src = img.getAttribute("data-src");
+img.removeAttribute("data-src");
+});
+}
+
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbClose = document.getElementById("lb-close");
+
+document.getElementById("gallery").addEventListener("click", function(e) {
+const shot = e.target.closest('.shot');
+if (shot) {
+e.preventDefault();
+lbImg.src = shot.getAttribute("href");
+lbImg.alt = shot.getAttribute("data-caption") || "Gambar dari galeri diperbesar";
+lightbox.classList.add("open");
+lightbox.setAttribute('aria-hidden', 'false');
+}
+});
+
+const closeLB = () => { lightbox.classList.remove("open"); lightbox.setAttribute('aria-hidden', 'true'); };
+lbClose.addEventListener("click", closeLB);
+lightbox.addEventListener("click", (e) => { e.target === lightbox && closeLB(); });
+window.addEventListener("keydown", (e) => { "Escape" === e.key && lightbox.classList.contains('open') && closeLB(); });
+};
+// --- 2. Share Buttons & Copy Link ---
+const setupSharing = () => {
+const e = encodeURIComponent;
+const urlMap = {
+"share-fb": `https://www.facebook.com/sharer/sharer.php?u=${e(CANONICAL_URL)}`,
+"share-x": `https://twitter.com/intent/tweet?url=${e(CANONICAL_URL)}&text=${e(SHARE_TEXT)}`,
+"share-wa": `https://api.whatsapp.com/send?text=${e(SHARE_TEXT)}%20${e(CANONICAL_URL)}`,
+"share-tg": `https://t.me/share/url?url=${e(CANONICAL_URL)}&text=${e(SHARE_TEXT)}`,
+};
+Object.entries(urlMap).forEach(([id, href]) => {
+const el = document.getElementById(id);
+if (el) el.href = href;
+});
+// Copy Link
+const copyBtn = document.getElementById("share-copy");
+if (copyBtn) {
+copyBtn.addEventListener("click", async () => {
+try {
+await navigator.clipboard.writeText(CANONICAL_URL);
+copyBtn.textContent = "Tersalin!";
+setTimeout(() => (copyBtn.textContent = "Salin Link"), 1400);
+} catch (e) {
+prompt("Gagal menyalin. Salin manual:", CANONICAL_URL);
+}
+});
+}
+
+// Web Share API fallback (for X button, if available)
+if (navigator.share) {
+document.getElementById('share-x')?.addEventListener("click", async (e) => {
+e.preventDefault();
+try {
+await navigator.share({ title: PAGE_TITLE, text: SHARE_TEXT, url: CANONICAL_URL });
+} catch (err) {
+// Biarkan link href berjalan jika user membatalkan (opsional)
+window.open(document.getElementById('share-x').href, '_blank', 'noopener noreferrer');
+}
+});
+}
+};
+
+// --- 3. User Agent & IP Info ---
+const setupEnvInfo = () => {
+const ua = navigator.userAgent;
+const icoBrowser = document.getElementById("ico-browser");
+const icoOs = document.getElementById("ico-os");
+const uaBrowser = document.getElementById("ua-browser");
+const uaOs = document.getElementById("ua-os");
+const ipEl = document.getElementById("ip"), cityEl = document.getElementById("city"), countryEl = document.getElementById("country"), flagEl = document.getElementById("flag");
+
+// Icon data (menggunakan skema dasar dari kode asli)
+const icons = {
+'Chrome': '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#db4437"/><path d="M21.54 7H12l-3.46-6A10.01 10.01 0 0 1 21.54 7z" fill="#ffcd40"/><path d="M2.46 7 8.54 17h6.92A10 10 0 0 1 2.46 7z" fill="#0f9d58"/><circle cx="12" cy="12" r="5" fill="#4285f4"/></svg>',
+'Firefox': '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF9500"/><path fill="#fff" d="M7 16c1.5 1.8 3.8 2.3 6 1.5 2.2-.8 3.8-2.8 4-5-.7 1.3-2 2.2-3.5 2.5-1.6.3-3.2-.2-4.3-1.3C8 12.6 7.5 11.4 7.5 10c-.9 1-1.5 2.3-1.5 3.7 0 .9.3 1.7 1 2.3z"/></svg>',
+'Edge': '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0c59a4"/><path d="M5 16c2.5 4 9 5 13 1-2 1.5-6 1.5-8.5.5S6.5 16.5 5 16z" fill="#37c7f4"/></svg>',
+'Safari': '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0fb5ee"/><path d="M12 6l3 6-6 3 3-9z" fill="#fff"/></svg>',
+'Windows': '<svg class="ico" viewBox="0 0 24 24"><path fill="#00A4EF" d="M3 4l8-1v9H3M12 3l9-1v10h-9M3 13h8v9l-8-1M12 13h9v10l-9-1"/></svg>',
+'Linux': '<svg class="ico" viewBox="0 0 24 24"><path fill="#FCC624" d="M12 2c2.8 0 5 2.2 5 5v2c2.2.3 4 2.2 4 4.5 0 2.5-2 4.5-4.5 4.5H7.5C5 18 3 16 3 13.5 3 11.2 4.8 9.3 7 9V7c0-2.8 2.2-5 5-5z"/><circle cx="9.5" cy="7.5" r="1" fill="#000"/><circle cx="14.5" cy="7.5" r="1" fill="#000"/></svg>',
+'Unknown': '<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#94a3b8"/></svg>'
+};
+
+let browser = 'Unknown', os = 'Unknown', bIconKey = 'Unknown', oIconKey = 'Unknown';
+// Simplified Browser Detection
+if (/Edg/.test(ua)) { browser = 'Microsoft Edge'; bIconKey = 'Edge'; }
+else if (/Chrome/.test(ua) && !/Edg|OPR/.test(ua)) { browser = 'Google Chrome'; bIconKey = 'Chrome'; }
+else if (/Firefox/.test(ua)) { browser = 'Mozilla Firefox'; bIconKey = 'Firefox'; }
+else if (/Safari/.test(ua) && !/Chrome|Edg|OPR/.test(ua)) { browser = 'Safari'; bIconKey = 'Safari'; }
+// Simplified OS Detection
+if (/Win/.test(ua)) { os = 'Windows'; oIconKey = 'Windows'; }
+else if (/Mac/.test(ua)) { os = 'macOS'; oIconKey = 'macOS'; }
+else if (/Linux/.test(ua) && !/Android/.test(ua)) { os = 'Linux'; oIconKey = 'Linux'; }
+else if (/Android/.test(ua)) { os = 'Android'; oIconKey = 'Android'; }
+else if (/iPhone|iPad/.test(ua)) { os = 'iOS'; oIconKey = 'iOS'; }
+
+uaBrowser.textContent = browser;
+uaOs.textContent = os;
+icoBrowser.innerHTML = icons[bIconKey] || icons['Unknown'];
+icoOs.innerHTML = icons[oIconKey] || icons['Unknown'];
+
+// IP Geolocation
+fetch("https://ipapi.co/json/")
+.then(r => r.json())
+.then(data => {
+const countryCode = String(data.country_code || '').toLowerCase();
+ipEl.textContent = data.ip || "-";
+cityEl.textContent = data.city || "-";
+countryEl.textContent = (data.country_name || "-") + (data.country_code ? ` (${data.country_code})` : "");
+if (countryCode) {
+flagEl.src = `https://flagcdn.com/48x36/${countryCode}.png`;
+flagEl.alt = `Bendera ${data.country_name || countryCode.toUpperCase()}`;
+} else {
+flagEl.style.display = "none";
+}
+})
+.catch(e => {
+ipEl.textContent = cityEl.textContent = countryEl.textContent = "Tidak tersedia";
+flagEl.style.display = "none";
+});
+};
+
+// --- RUNTIME EXECUTION ---
+setupLightbox();
+setupSharing();
+setupEnvInfo();
+// Highlight.js: ensure highlight runs after DOM is ready
+document.querySelectorAll("pre code").forEach((e) => hljs.highlightElement(e));
+
+// Facebook: update URL display
+document.getElementById("current-url").textContent = CANONICAL_URL;
+});
+</script>
+
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

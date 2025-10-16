@@ -1,205 +1,157 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- prettier-ignore -->
-<title>Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap</title>
 
+  
+  " <img src='https://flagcdn.com/24x18/" + data.country_code.toLowerCase() + ".png'>";
+  "🔑 IP: " + data.ip + " | Negara: " + data.country_name +
+  --bg: #f9fafb;
+  --muted: #666;
+  --primary: #2563eb;
+  .catch(()=>{document.getElementById("ip-info").textContent="Tidak dapat memuat IP";});
+  .then(data=>{
+  .then(res=>res.json())
+  <!-- Browser & OS Info + IP & Flag -->
+  <!-- CSS -->
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-<text y='.9em' font-size='90'>📄</text>
-  </svg>" type="image/svg+xml">
-
-  <!-- SEO -->
-  <meta name="description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis.">
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
-
   <!-- Open Graph -->
-  <meta property="og:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
-  <meta property="og:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
-
+  <!-- Prism.js for syntax highlighting -->
+  <!-- SEO -->
+  <!-- Script Copy -->
   <!-- Twitter Card -->
+  <!-- prettier-ignore -->
+  </footer>
+  </main>
+  </script>
+  </style>
+  </svg>" type="image/svg+xml">
+  <div id="browser-info"></div>
+  <div id="ip-info"></div>
+  <div id="os-info"></div>
+  <footer>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
+  <link rel="icon" href="data:image/svg+xml;utf8,
+  <meta charset="UTF-8">
+  <meta name="description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
   <meta name="twitter:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
-
-  <!-- CSS -->
+  <meta name="twitter:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
+  <meta property="og:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
+  <p><strong>Info Lingkungan:</strong></p>
+  <script>
   <style>
-:root {
-  --primary: #2563eb;
-  --muted: #666;
-  --bg: #f9fafb;
-}
-body {
-  font-family: Arial, sans-serif;
-  margin: 0; padding: 0;
-  background: var(--bg);
-  color: #111;
-}
-header {
-  background: var(--primary);
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-main {
-  max-width: 960px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-}
-h1, h2 {
-  color: var(--primary);
-}
-pre {
-  position: relative;
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
   background: #2d2d2d;
-  color: #f8f8f2;
-  padding: 12px;
-  border-radius: 8px;
-  overflow-x: auto;
-}
-button.copy-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  background: #f1f5f9;
+  background: var(--bg);
   background: var(--primary);
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  cursor: pointer;
+  background: white;
   border-radius: 4px;
-  font-size: 12px;
-}
-.share-buttons {
-  margin-top: 20px;
+  border-radius: 6px;
+  border-radius: 8px;
+  border: none;
+  btn.addEventListener("click", () => {
+  color: #111;
+  color: #f8f8f2;
+  color: var(--muted);
+  color: var(--primary);
+  color: white;
+  const ua = navigator.userAgent;
+  cursor: pointer;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-}
-.share-buttons a {
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  background: var(--primary);
-  color: white;
-}
-footer {
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 14px;
-  text-align: center;
-  color: var(--muted);
-}
-.env-info {
-  margin-top: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
   font-size: 13px;
-  background: #f1f5f9;
-  padding: 10px;
-  border-radius: 6px;
-}
-.env-info svg {
-  width: 20px; height: 20px;
-  vertical-align: middle;
-  margin-right: 6px;
-}
-.article-image {
-  text-align: center;
-  margin: 20px 0;
-}
-.article-image img {
-  max-width: 100%;
+  font-size: 14px;
+  gap: 10px;
   height: auto;
-  border-radius: 8px;
-}
-  </style>
-
-  <!-- Prism.js for syntax highlighting -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
-  
-  <script>
-const currentUrl = window.location.href;
-document.getElementById("current-url").textContent = currentUrl;
-document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
-window.fbAsyncInit = function() {
-  if (typeof FB !== 'undefined') {
-try { FB.XFBML.parse(); } catch(e) {}
-  }
-}
-  </script>
-</div>
-
-<!-- Informasi Lingkungan -->
-<div class="env-info" id="env-info">
-  <p><strong>Info Lingkungan:</strong></p>
-  <div id="browser-info"></div>
-  <div id="os-info"></div>
-  <div id="ip-info"></div>
-</div>
-  </main>
-
-  <footer>
-<p>🄯 2025 Pelan Kiri. Semua Hak Dilindungi.</p>
-  </footer>
-
-  <!-- Script Copy -->
-  <script>
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-const code = btn.previousElementSibling.innerText;
-navigator.clipboard.writeText(code);
-btn.textContent = "Copied!";
-setTimeout(()=>btn.textContent="Copy", 1500);
-  });
-});
-  </script>
-
-  <!-- Browser & OS Info + IP & Flag -->
-  <script>
-function detectOS() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Win")) return "Windows";
-  if (ua.includes("Mac")) return "MacOS";
-  if (ua.includes("Linux")) return "Linux";
   if (/Android/i.test(ua)) return "Android";
   if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
-  return "Unknown OS";
-}
-function detectBrowser() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Firefox/")) return "Mozilla Firefox";
+  if (typeof FB !== 'undefined') {
   if (ua.includes("Chrome/")) return "Google Chrome";
-  if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari";
   if (ua.includes("Edg/")) return "Microsoft Edge";
+  if (ua.includes("Firefox/")) return "Mozilla Firefox";
+  if (ua.includes("Linux")) return "Linux";
+  if (ua.includes("Mac")) return "MacOS";
+  if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari";
+  if (ua.includes("Win")) return "Windows";
+  margin-right: 6px;
+  margin-top: 12px;
+  margin-top: 20px;
+  margin-top: 40px;
+  margin: 0; padding: 0;
+  margin: 20px 0;
+  margin: auto;
+  max-width: 100%;
+  max-width: 960px;
+  overflow-x: auto;
+  padding: 10px;
+  padding: 12px;
+  padding: 20px;
+  padding: 4px 8px;
+  padding: 8px 12px;
+  position: absolute;
+  position: relative;
   return "Unknown Browser";
-}
-document.getElementById("browser-info").innerHTML = "🌐 Browser: " + detectBrowser();
-document.getElementById("os-info").innerHTML = "💻 Sistem Operasi: " + detectOS();
-
-fetch("https://ipapi.co/json/")
-  .then(res=>res.json())
-  .then(data=>{
-document.getElementById("ip-info").innerHTML =
-  "🔑 IP: " + data.ip + " | Negara: " + data.country_name +
-  " <img src='https://flagcdn.com/24x18/" + data.country_code.toLowerCase() + ".png'>";
+  return "Unknown OS";
+  right: 8px;
+  text-align: center;
+  text-decoration: none;
+  top: 8px;
+  vertical-align: middle;
+  width: 20px; height: 20px;
+  }
   })
-  .catch(()=>{document.getElementById("ip-info").textContent="Tidak dapat memuat IP";});
-  </script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  });
+.article-image img {
+.article-image {
+.env-info svg {
+.env-info {
+.share-buttons a {
+.share-buttons {
+:root {
+<!-- Informasi Lingkungan -->
+<!DOCTYPE html>
 </body>
+</div>
 </html>
+<div class="env-info" id="env-info">
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<head>
+<html lang="id">
+<p>🄯 2025 Pelan Kiri. Semua Hak Dilindungi.</p>
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<text y='.9em' font-size='90'>📄</text>
+<title>Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap</title>
+body {
+btn.textContent = "Copied!";
+button.copy-btn {
+const code = btn.previousElementSibling.innerText;
+const currentUrl = window.location.href;
+document.getElementById("browser-info").innerHTML = "🌐 Browser: " + detectBrowser();
+document.getElementById("current-url").textContent = currentUrl;
+document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
+document.getElementById("ip-info").innerHTML =
+document.getElementById("os-info").innerHTML = "💻 Sistem Operasi: " + detectOS();
+document.querySelectorAll(".copy-btn").forEach(btn => {
+fetch("https://ipapi.co/json/")
+footer {
+function detectBrowser() {
+function detectOS() {
+h1, h2 {
+header {
+main {
+navigator.clipboard.writeText(code);
+pre {
+setTimeout(()=>btn.textContent="Copy", 1500);
+try { FB.XFBML.parse(); } catch(e) {}
+window.fbAsyncInit = function() {
+}
+});

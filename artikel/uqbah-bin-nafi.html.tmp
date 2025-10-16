@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <!-- prettier-ignore -->
+<title>Kisah Uqbah bin Nāfi‘ al-Fihrī Muslim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kisah Uqbah bin Nāfi‘: dari Mekah hingga Samudra Atlantik, pendiri Qairawān dan Fātiḥ Ifriqiyah yang menautkan futūhāt Islam di Afrika Utara.">
+  <meta name="keywords" content="Uqbah bin Nafi, Qairawan, Ifriqiyah, futuhat, sejarah Islam, Afrika Utara, Berber, Andalus">
+  <meta name="author" content="Fakhrul">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2A9D8F">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/uqbah-bin-nafi.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kisah Uqbah bin Nāfi‘ al-Fihrī Muslim">
+  <meta property="og:description" content="Dari Mekah hingga Samudra Atlantik, pendiri Qairawān dan Fātiḥ Ifriqiyah yang menautkan futūhāt Islam di Afrika Utara.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/uqbah-bin-nafi.html">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUrFqnMAD057iVpFN4aadb8uhQoQ9l305Itnmkf9qbGiNQzYIRr2YrvKJMXExuD0H9n-ebcHW0t1wu4T5KQwHuokdTzuBjoAde09gK-b6sH3QZlK_OvyP_zb7IlzjFuycqRlJcaj62LUmSX4frtYHTBKTYh8btUZ95P4N1R3xzYtWk5BcrMrbQZK2PpGU/s1600/Uqbah.jpg">
+  <meta property="og:site_name" content="Frijal">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kisah Uqbah bin Nāfi‘ al-Fihrī Muslim">
+  <meta name="twitter:description" content="Pendiri Qairawān dan Fātiḥ Ifriqiyah, futūhāt Islam di Afrika Utara, dari Mesir hingga tepi Atlantik.">
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUrFqnMAD057iVpFN4aadb8uhQoQ9l305Itnmkf9qbGiNQzYIRr2YrvKJMXExuD0H9n-ebcHW0t1wu4T5KQwHuokdTzuBjoAde09gK-b6sH3QZlK_OvyP_zb7IlzjFuycqRlJcaj62LUmSX4frtYHTBKTYh8btUZ95P4N1R3xzYtWk5BcrMrbQZK2PpGU/s1600/Uqbah.jpg">
+  <meta name="twitter:site" content="@frijal">
+
+  <!-- JSON-LD Article -->
+  <!-- Deteksi Browser/OS + Lokasi IP -->
+  <script>
+(function() {
+  const envText = document.getElementById('env-text');
+  const ipText = document.getElementById('ip-text');
+
+  function parseUA() {
+const ua = navigator.userAgent;
+let os = 'OS tidak diketahui';
+if (/Windows NT/.test(ua)) os = 'Windows';
+else if (/Mac OS X/.test(ua)) os = 'macOS';
+else if (/Android/.test(ua)) os = 'Android';
+else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+else if (/Linux/.test(ua)) os = 'Linux';
+
+let browser = 'Browser tidak diketahui';
+if (/Edg\//.test(ua)) browser = 'Microsoft Edge';
+else if (/Chrome\//.test(ua)) browser = 'Chrome';
+else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) browser = 'Safari';
+else if (/Firefox\//.test(ua)) browser = 'Firefox';
+
+envText.textContent = browser + ' di ' + os;
+  }
+
+  async function fetchIP() {
+try {
+  const r = await fetch('https://ipapi.co/json/');
+  if (!r.ok) throw new Error('fail');
+  const j = await r.json();
+  const city = j.city || 'Kota tidak diketahui';
+  const country = j.country_name || 'Negara';
+  const cc = (j.country_code || '').toLowerCase();
+  const flag = cc ? `https://flagcdn.com/24x18/${cc}.png` : '';
+  ipText.innerHTML = (flag ? `<img src="${flag}" alt="${country}" style="vertical-align:middle;margin-right:6px;border:1px solid #223;"/>` : '') +
+ `${city}, ${country}`;
+} catch(e) {
+  ipText.textContent = 'Lokasi IP tidak tersedia';
+}
+  }
+
+  parseUA();
+  fetchIP();
+})();
+  </script>
+
+  <!-- Lightbox & Share -->
+  <script>
+(function() {
+  const gallery = Array.from(document.querySelectorAll('#gallery img'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-caption');
+  const btnPrev = document.getElementById('prev');
+  const btnNext = document.getElementById('next');
+  const btnClose = document.getElementById('close');
+  let idx = 0;
+
+  function open(i) {
+idx = i;
+const el = gallery[idx];
+lbImg.src = el.src;
+lbImg.alt = el.alt || '';
+lbCap.textContent = el.dataset.caption || '';
+lb.classList.add('active');
+  }
+  function close() { lb.classList.remove('active'); }
+  function prev() { open((idx - 1 + gallery.length) % gallery.length); }
+  function next() { open((idx + 1) % gallery.length); }
+
+  gallery.forEach((img, i) => img.addEventListener('click', () => open(i)));
+  btnPrev.addEventListener('click', prev);
+  btnNext.addEventListener('click', next);
+  btnClose.addEventListener('click', close);
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+if (!lb.classList.contains('active')) return;
+if (e.key === 'ArrowLeft') prev();
+if (e.key === 'ArrowRight') next();
+if (e.key === 'Escape') close();
+  });
+
+  // Copy share link
+  const copyBtn = document.getElementById('copy-link');
+  copyBtn.addEventListener('click', async () => {
+try {
+  await navigator.clipboard.writeText(location.href);
+  copyBtn.textContent = '✅ Tersalin!';
+  setTimeout(() => copyBtn.textContent = '🔗 Salin Link', 1500);
+} catch(e) {
+  alert('Gagal menyalin link');
+}
+  });
+})();
+  </script>
+
+  <!-- Related posts (WAJIB tepat sebelum penutup body) -->
+  
+  
+
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

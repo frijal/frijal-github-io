@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- prettier-ignore -->
+<title>Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales</title>
+  <meta name="description" content="Kisah Nabi Ismail ‘Alaihissalam: dari lembah tandus, Zamzam, kaum Jurhum, ujian pengorbanan bersama Nabi Ibrahim, hingga membangun Ka'bah. Narasi hangat, galeri, dan pengajaran untuk hari ini." />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/8nabi-ismail.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.ico" sizes="any" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales" />
+  <meta property="og:description" content="Kisah Nabi Ismail: lembah tandus, Zamzam, Jurhum, ujian pengorbanan, dan membangun Ka'bah. Narasi hangat, galeri, dan pengajaran." />
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/8nabi-ismail.html" />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiptgUkd8FgYm2Ux09Wd3ZSFLFu6cvSx5zmeduMLhD9kk8fhalFd45AvCer9U9prPeboveiL_vqeeUusDFdkUO0QzF2fgkZVCe7Pp5yG8dvGWK_6Qmp9iK5p4bBXqRw8kGnaNrpT7e0507qLLRaURqMHhHUviPDN-SnBlammaQ3ZxbQCHdlGnox6DIKUIg/s1600/Ismail.jpg" />
+  <meta property="article:author" content="Saudari Sharifah Syazreen Al-Idrus" />
+  <meta property="article:section" content="Ramadahan Tales" />
+  <meta property="article:tag" content="Nabi Ismail, Nabi Ibrahim, Jurhum, Ka'bah, Zamzam" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales" />
+  <meta name="twitter:description" content="Kisah Nabi Ismail: lembah tandus, Zamzam, Jurhum, ujian pengorbanan, dan membangun Ka'bah." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiptgUkd8FgYm2Ux09Wd3ZSFLFu6cvSx5zmeduMLhD9kk8fhalFd45AvCer9U9prPeboveiL_vqeeUusDFdkUO0QzF2fgkZVCe7Pp5yG8dvGWK_6Qmp9iK5p4bBXqRw8kGnaNrpT7e0507qLLRaURqMHhHUviPDN-SnBlammaQ3ZxbQCHdlGnox6DIKUIg/s1600/Ismail.jpg" />
+
+  <!-- Schema.org JSON-LD -->
+  <script>
+    // Utility: get current URL
+    const CANONICAL = document.querySelector('link[rel="canonical"]')?.href || location.href;
+
+    // Gallery lightbox
+    const gallery = Array.from(document.querySelectorAll('#gallery img'));
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-image');
+    const btnPrev = document.getElementById('lb-prev');
+    const btnNext = document.getElementById('lb-next');
+    const btnClose = document.getElementById('lb-close');
+    let index = 0;
+
+    function openLB(i){
+      index = i;
+      const el = gallery[index];
+      lbImg.src = el.dataset.full || el.src;
+      lb.classList.add('active');
+    }
+    function closeLB(){
+      lb.classList.remove('active');
+      lbImg.src = '';
+    }
+    function prev(){ openLB((index - 1 + gallery.length) % gallery.length); }
+    function next(){ openLB((index + 1) % gallery.length); }
+
+    gallery.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLB(i));
+    });
+    btnPrev.addEventListener('click', prev);
+    btnNext.addEventListener('click', next);
+    btnClose.addEventListener('click', closeLB);
+    lb.addEventListener('click', (e) => { if(e.target === lb) closeLB(); });
+    window.addEventListener('keydown', (e) => {
+      if(!lb.classList.contains('active')) return;
+      if(e.key === 'Escape') closeLB();
+      if(e.key === 'ArrowLeft') prev();
+      if(e.key === 'ArrowRight') next();
+    });
+
+    // Share links
+    function enc(s){ return encodeURIComponent(s); }
+    const shareWhatsApp = document.getElementById('share-whatsapp');
+    const shareTelegram = document.getElementById('share-telegram');
+    const shareTwitter  = document.getElementById('share-twitter');
+    const shareFacebook = document.getElementById('share-facebook');
+    const shareNative   = document.getElementById('share-native');
+    const copyLinkBtn   = document.getElementById('copy-link');
+
+    const shareText = 'Baca kisah hangat: Nabi Ismail ‘Alaihissalam ,  Ramadahan Tales';
+    shareWhatsApp.href = `https://wa.me/?text=${enc(shareText + ' ' + CANONICAL)}`;
+    shareTelegram.href = `https://t.me/share/url?url=${enc(CANONICAL)}&text=${enc(shareText)}`;
+    shareTwitter.href  = `https://twitter.com/intent/tweet?url=${enc(CANONICAL)}&text=${enc(shareText)}&via=Frijal`;
+    shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(CANONICAL)}`;
+
+    shareNative.addEventListener('click', async () => {
+      if(navigator.share){
+        try{
+          await navigator.share({ title: document.title, text: shareText, url: CANONICAL });
+        }catch(e){ /* user cancelled */ }
+      }else{
+        alert('Fitur share native belum tersedia di browser ini.');
+      }
+    });
+    copyLinkBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(CANONICAL);
+        copyLinkBtn.textContent = '✅ Tersalin';
+        setTimeout(()=> copyLinkBtn.textContent = '🔗 Salin Link', 1500);
+      }catch(e){
+        prompt('Salin URL secara manual:', CANONICAL);
+      }
+    });
+  </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

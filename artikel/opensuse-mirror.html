@@ -1,195 +1,146 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  "http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/non-oss" \
+  "http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/oss" \
+  "openSUSE-Non-OSS"
+  "openSUSE-OSS"
   <!-- prettier-ignore -->
-<title>opensuse-mirror.sh — Mirror Tercepat untuk openSUSE</title>
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <style>
-body {
-  font-family: "Segoe UI", sans-serif;
-  background: #fdfdfd;
-  color: #222;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  transition: background 0.3s, color 0.3s;
-}
-header {
-  background: #1976d2;
-  color: #fff;
-  padding: 18px;
-  text-align: center;
-}
-header h1 {
-  margin: 0;
-  font-size: 1.3rem;
-}
-main {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-}
-h2 { color: #1976d2; }
-.note {
-  background: #e3f2fd;
-  padding: 10px;
-  border-left: 4px solid #1976d2;
-  border-radius: 6px;
-  margin-bottom: 16px;
-}
-pre {
-  position: relative;
-  background: #2d2d2d;
-  color: #f8f8f2;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 16px 0;
-}
-pre code {
-  display: block;
-  padding: 16px;
-}
-.copy-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #1976d2;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-.download-btn {
-  display: inline-block;
-  background: #2196f3;
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  margin-top: 10px;
-}
-.download-btn:hover { background: #1976d2; }
-footer {
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #666;
-}
-/* Dark mode */
-.dark-mode { background: #121212; color: #eaeaea; }
-.dark-mode header { background: #0d47a1; }
-.dark-mode h2 { color: #90caf9; }
-.dark-toggle {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #1976d2;
-  color: #fff;
-  font-size: 0.9rem;
-}
+  </footer>
+  </header>
+  </main>
+  </script>
   </style>
-<meta name="date" content="2025-09-28">
-
-
-  <meta property="og:image" content="https://frijal.pages.dev/img/opensuse-mirror.webp">
-  <meta property="og:image:alt" content="opensuse-mirror.sh — Mirror Tercepat untuk openSUSE">
+  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  <footer>
+  <header>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <main>
+  <meta charset="UTF-8">
+  <meta itemprop="image" content="https://frijal.pages.dev/img/opensuse-mirror.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://frijal.pages.dev/img/opensuse-mirror.webp">
-  <meta itemprop="image" content="https://frijal.pages.dev/img/opensuse-mirror.webp">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
-<body>
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  <header>
-<h1>⚡ Skrip opensuse-mirror.sh</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<p>Gunakan mirror list resmi openSUSE agar lebih cepat</p>
-  </header>
-
-  <main>
-<h2>Penjelasan</h2>
-<p>
-  openSUSE menggunakan <code>zypper</code> sebagai package manager.  
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta property="og:image" content="https://frijal.pages.dev/img/opensuse-mirror.webp">
+  <meta property="og:image:alt" content="opensuse-mirror.sh — Mirror Tercepat untuk openSUSE">
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script>
+  <style>
   Kita bisa memanfaatkan <strong>mirrorlist.opensuse.org</strong> untuk mendapatkan mirror tercepat otomatis.  
   Skrip ini akan membackup repo lama, menggantinya dengan mirror list, lalu merefresh database repo.
-</p>
-<div class="note">⚠️ Jalankan dengan <code>sudo</code> agar bisa mengubah file repo di <code>/etc/zypp/repos.d</code>.</div>
-
-<h2>Kode Skrip</h2>
-<pre>
-  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-<code class="language-bash">#!/bin/bash
-# opensuse-mirror.sh (gunakan mirror list openSUSE otomatis)
-
-set -e
-
-echo "[INFO] Backup repo lama..."
-sudo mkdir -p /etc/zypp/repos.d/backup
-sudo cp /etc/zypp/repos.d/*.repo /etc/zypp/repos.d/backup/ 2>/dev/null || true
-
-echo "[INFO] Mengatur repo menggunakan mirrorlist..."
-OS_VERSION=$(grep VERSION_ID /etc/os-release | cut -d '"' -f2)
-sudo zypper rr -a
-
-# Tambahkan repo utama (OSS dan Non-OSS) dengan mirrorlist
-sudo zypper ar -f \
-  "http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/oss" \
-  "openSUSE-OSS"
-
-sudo zypper ar -f \
-  "http://mirrorlist.opensuse.org/?repo=download.opensuse.org/distribution/leap/$OS_VERSION/repo/non-oss" \
-  "openSUSE-Non-OSS"
-
-echo "[INFO] Refresh repo..."
-sudo zypper ref
-
-echo "[DONE] Repo openSUSE sekarang menggunakan mirror tercepat!"</code>
-</pre>
-
-  </main>
-
-  <footer>
-🄯 2025 • opensuse-mirror.sh — gunakan dengan hati-hati, selalu backup repo sebelum mengubah.
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
-  <script>
-function copyCode(btn) {
-  const code = btn.nextElementSibling.innerText;
-  navigator.clipboard.writeText(code).then(() => {
-btn.textContent = "Copied!";
-setTimeout(() => { btn.textContent = "Copy"; }, 1500);
-  });
-}
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-  const btn = document.querySelector(".dark-toggle");
+  background: #1976d2;
+  background: #2196f3;
+  background: #2d2d2d;
+  background: #e3f2fd;
+  background: #fdfdfd;
+  border-left: 4px solid #1976d2;
+  border-radius: 5px;
+  border-radius: 6px;
+  border-radius: 8px;
+  border: none;
   btn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
-}
-  </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  color: #222;
+  color: #666;
+  color: #f8f8f2;
+  color: #fff;
+  const btn = document.querySelector(".dark-toggle");
+  const code = btn.nextElementSibling.innerText;
+  cursor: pointer;
+  display: block;
+  display: inline-block;
+  document.body.classList.toggle("dark-mode");
+  font-family: "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  margin-top: 10px;
+  margin-top: 20px;
+  margin: 0;
+  margin: 16px 0;
+  margin: 20px auto;
+  max-width: 900px;
+  navigator.clipboard.writeText(code).then(() => {
+  openSUSE menggunakan <code>zypper</code> sebagai package manager.  
+  overflow-x: auto;
+  padding: 0;
+  padding: 10px;
+  padding: 16px;
+  padding: 18px;
+  padding: 20px;
+  padding: 5px 10px;
+  padding: 6px 12px;
+  padding: 8px 14px;
+  position: absolute;
+  position: fixed;
+  position: relative;
+  right: 12px;
+  right: 8px;
+  text-align: center;
+  text-decoration: none;
+  top: 12px;
+  top: 8px;
+  transition: background 0.3s, color 0.3s;
+  });
+# Tambahkan repo utama (OSS dan Non-OSS) dengan mirrorlist
+# opensuse-mirror.sh (gunakan mirror list openSUSE otomatis)
+.copy-btn {
+.dark-mode h2 { color: #90caf9; }
+.dark-mode header { background: #0d47a1; }
+.dark-mode { background: #121212; color: #eaeaea; }
+.dark-toggle {
+.download-btn {
+.download-btn:hover { background: #1976d2; }
+.note {
+/* Dark mode */
+<!DOCTYPE html>
 </body>
 </html>
-
+</p>
+</pre>
+<body>
+<code class="language-bash">#!/bin/bash
+<div class="note">⚠️ Jalankan dengan <code>sudo</code> agar bisa mengubah file repo di <code>/etc/zypp/repos.d</code>.</div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<h1>⚡ Skrip opensuse-mirror.sh</h1>
+<h2>Kode Skrip</h2>
+<h2>Penjelasan</h2>
+<head>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<meta name="date" content="2025-09-28">
+<meta property="article:published_time" content="2025-09-16T11:00:00+08:00"></head>
+<p>
+<p>Gunakan mirror list resmi openSUSE agar lebih cepat</p>
+<pre>
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>opensuse-mirror.sh — Mirror Tercepat untuk openSUSE</title>
+OS_VERSION=$(grep VERSION_ID /etc/os-release | cut -d '"' -f2)
+body {
+btn.textContent = "Copied!";
+echo "[DONE] Repo openSUSE sekarang menggunakan mirror tercepat!"</code>
+echo "[INFO] Backup repo lama..."
+echo "[INFO] Mengatur repo menggunakan mirrorlist..."
+echo "[INFO] Refresh repo..."
+footer {
+function copyCode(btn) {
+function toggleDarkMode() {
+h2 { color: #1976d2; }
+header h1 {
+header {
+main {
+pre code {
+pre {
+set -e
+setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+sudo cp /etc/zypp/repos.d/*.repo /etc/zypp/repos.d/backup/ 2>/dev/null || true
+sudo mkdir -p /etc/zypp/repos.d/backup
+sudo zypper ar -f \
+sudo zypper ref
+sudo zypper rr -a
+}
+🄯 2025 • opensuse-mirror.sh — gunakan dengan hati-hati, selalu backup repo sebelum mengubah.

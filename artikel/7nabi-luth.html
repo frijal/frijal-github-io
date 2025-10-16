@@ -1,130 +1,107 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Nabi Luth ‘Alaihissalam</title>
-  <meta name="description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
-  <meta name="author" content="Sharifah Syazreen Al-Idrus" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://frijal.pages.dev/artikel/7nabi-luth.html" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Nabi Luth ‘Alaihissalam | RamadahanTales" />
-  <meta property="og:description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/7nabi-luth.html" />
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieab6j4dCsqn2HslgHBNilmmNb0tNZ0HzB75YTpc-xsyHMhEXJfF0OfCqwsVqgyHrg7CuQq86stqQ3aJasG6tJlKKgtJcUgofel0syyTbCqR-oINALFHRtnfMEotERcbj_o2oULOel1ewXvgPTId7r7DdD2mvDTAc3aaAiveps99WAVqrEPv7qBeVp-Fk/s1600/Luth.jpg" />
-  <meta property="og:site_name" content="Frijal" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nabi Luth ‘Alaihissalam | RamadahanTales" />
-  <meta name="twitter:description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
-  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieab6j4dCsqn2HslgHBNilmmNb0tNZ0HzB75YTpc-xsyHMhEXJfF0OfCqwsVqgyHrg7CuQq86stqQ3aJasG6tJlKKgtJcUgofel0syyTbCqR-oINALFHRtnfMEotERcbj_o2oULOel1ewXvgPTId7r7DdD2mvDTAc3aaAiveps99WAVqrEPv7qBeVp-Fk/s1600/Luth.jpg" />
-  <meta name="twitter:site" content="@frijal" />
-  <script>
-    // Lazy-load gambar via IntersectionObserver
-    function initLazyLoad(){
-      const imgs = document.querySelectorAll('.gallery img[data-src]');
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){
               const img = entry.target;
-              img.src = img.dataset.src;
               img.removeAttribute('data-src');
+              img.src = img.dataset.src;
               observer.unobserve(img);
-            }
-          });
-        }, { rootMargin: '200px' });
-        imgs.forEach(img=>observer.observe(img));
-      } else {
-        // Fallback for older browsers
-        imgs.forEach(img => {
-            img.src = img.dataset.src;
+            if(entry.isIntersecting){
             img.removeAttribute('data-src');
-        });
-      }
-    }
-    // Lightbox dengan navigasi panah
-    function initLightbox(){
-      const figures = Array.from(document.querySelectorAll('.gallery figure'));
-      const lb = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lbImage');
-      const btnPrev = document.getElementById('lbPrev');
-      const btnNext = document.getElementById('lbNext');
-      const btnClose = document.getElementById('lbClose');
-      let current = 0;
-      function show(index){
+            img.src = img.dataset.src;
+            }
+          entries.forEach(entry=>{
+          });
+        // Fallback for older browsers
         const img = figures[index].querySelector('img');
-        lbImg.src = img.src || img.dataset.src || '';
-      }
-      function open(index){
-        current = index;
-        show(current);
-        lb.classList.add('active');
-        lb.setAttribute('aria-hidden','false');
-      }
-      function close(){
-        lb.classList.remove('active');
-        lb.setAttribute('aria-hidden','true');
-      }
-      function prev(){
-        current = (current - 1 + figures.length) % figures.length;
-        show(current);
-      }
-      function next(){
+        const link = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+        const link = 'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
+        const link = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+        const observer = new IntersectionObserver(entries=>{
         current = (current + 1) % figures.length;
-        show(current);
-      }
-      figures.forEach(fig=>{
+        current = (current - 1 + figures.length) % figures.length;
+        current = index;
+        e.preventDefault();
         fig.addEventListener('click', ()=>open(parseInt(fig.dataset.index,10)));
-      });
-      btnPrev.addEventListener('click', e=>{ e.stopPropagation(); prev(); });
-      btnNext.addEventListener('click', e=>{ e.stopPropagation(); next(); });
-      btnClose.addEventListener('click', e=>{ e.stopPropagation(); close(); });
-      lb.addEventListener('click', e=>{
-        if(e.target === lb) close();
-      });
-      window.addEventListener('keydown', e=>{
         if(!lb.classList.contains('active')) return;
-        if(e.key === 'Escape') close();
         if(e.key === 'ArrowLeft') prev();
         if(e.key === 'ArrowRight') next();
-      });
-    }
-    // Share buttons
-    function initShare(){
-      const url = document.querySelector('link[rel="canonical"]')?.href || location.href;
+        if(e.key === 'Escape') close();
+        if(e.target === lb) close();
+        imgs.forEach(img => {
+        imgs.forEach(img=>observer.observe(img));
+        lb.classList.add('active');
+        lb.classList.remove('active');
+        lb.setAttribute('aria-hidden','false');
+        lb.setAttribute('aria-hidden','true');
+        lbImg.src = img.src || img.dataset.src || '';
+        show(current);
+        window.open(link, '_blank');
+        });
+        }, { rootMargin: '200px' });
+      btnClose.addEventListener('click', e=>{ e.stopPropagation(); close(); });
+      btnNext.addEventListener('click', e=>{ e.stopPropagation(); next(); });
+      btnPrev.addEventListener('click', e=>{ e.stopPropagation(); prev(); });
+      const btnClose = document.getElementById('lbClose');
+      const btnNext = document.getElementById('lbNext');
+      const btnPrev = document.getElementById('lbPrev');
+      const figures = Array.from(document.querySelectorAll('.gallery figure'));
+      const imgs = document.querySelectorAll('.gallery img[data-src]');
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImage');
       const title = document.querySelector('meta[property="og:title"]')?.content || document.title;
-      document.getElementById('shareWhatsApp').addEventListener('click', e=>{
-        e.preventDefault();
-        const link = 'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
-        window.open(link, '_blank');
-      });
-      document.getElementById('shareTwitter').addEventListener('click', e=>{
-        e.preventDefault();
-        const link = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
-        window.open(link, '_blank');
-      });
+      const url = document.querySelector('link[rel="canonical"]')?.href || location.href;
       document.getElementById('shareFacebook').addEventListener('click', e=>{
-        e.preventDefault();
-        const link = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
-        window.open(link, '_blank');
-      });
-    }
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('shareTwitter').addEventListener('click', e=>{
+      document.getElementById('shareWhatsApp').addEventListener('click', e=>{
+      figures.forEach(fig=>{
+      function close(){
+      function next(){
+      function open(index){
+      function prev(){
+      function show(index){
+      if ('IntersectionObserver' in window) {
       initLazyLoad();
       initLightbox();
       initShare();
+      lb.addEventListener('click', e=>{
+      let current = 0;
+      window.addEventListener('keydown', e=>{
+      }
+      } else {
+      });
+    // Init
+    // Lazy-load gambar via IntersectionObserver
+    // Lightbox dengan navigasi panah
+    // Share buttons
+    document.addEventListener('DOMContentLoaded', () => {
+    function initLazyLoad(){
+    function initLightbox(){
+    function initShare(){
+    }
     });
   </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/7nabi-luth.html" />
+  <meta charset="utf-8" />
+  <meta name="author" content="Sharifah Syazreen Al-Idrus" />
+  <meta name="description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
+  <meta name="robots" content="index, follow" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieab6j4dCsqn2HslgHBNilmmNb0tNZ0HzB75YTpc-xsyHMhEXJfF0OfCqwsVqgyHrg7CuQq86stqQ3aJasG6tJlKKgtJcUgofel0syyTbCqR-oINALFHRtnfMEotERcbj_o2oULOel1ewXvgPTId7r7DdD2mvDTAc3aaAiveps99WAVqrEPv7qBeVp-Fk/s1600/Luth.jpg" />
+  <meta name="twitter:site" content="@frijal" />
+  <meta name="twitter:title" content="Nabi Luth ‘Alaihissalam | RamadahanTales" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta property="og:description" content="Kisah Nabi Luth ‘Alaihissalam: dakwah di kota Sodom, ujian besar, dan pelajaran untuk kembali pada fitrah." />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieab6j4dCsqn2HslgHBNilmmNb0tNZ0HzB75YTpc-xsyHMhEXJfF0OfCqwsVqgyHrg7CuQq86stqQ3aJasG6tJlKKgtJcUgofel0syyTbCqR-oINALFHRtnfMEotERcbj_o2oULOel1ewXvgPTId7r7DdD2mvDTAc3aaAiveps99WAVqrEPv7qBeVp-Fk/s1600/Luth.jpg" />
+  <meta property="og:site_name" content="Frijal" />
+  <meta property="og:title" content="Nabi Luth ‘Alaihissalam | RamadahanTales" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/7nabi-luth.html" />
+  <script>
+  <title>Nabi Luth ‘Alaihissalam</title>
+<!DOCTYPE html>
 </body>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

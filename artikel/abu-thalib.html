@@ -1,94 +1,73 @@
-<!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
+
+ 
+(() => {
+// Script 2: Lightbox & Copy Link
+:root{--emerald:#2a9d8f;--emerald-soft:#1f746b;--gold:#ffd166;--gold-soft:#e7bd57;--ink:#073b4c;--rose:#e76f51;--bg0:#0b1615;--bg1:#0f1c1b;--bg2:#102021;--text:#eaf3f3;--muted:#c8d8d7;--card:#0c1719;--line:#1a4c4a;--shadow:0 14px 36px rgba(0, 0, 0, 0.35)}*{box-sizing:border-box}body,html{margin:0;padding:0;background:radial-gradient(1200px 380px at 12% -10%,rgba(42,157,143,.18),transparent),radial-gradient(900px 320px at 88% 0,rgba(255,209,102,.14),transparent),linear-gradient(180deg,var(--bg0),var(--bg1) 40%,var(--bg2));color:var(--text);font:16px/1.72 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline}header.site{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(0deg,rgba(12,28,29,.85),rgba(12,28,29,.55));border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.bar{width:min(1040px,92vw);margin:0 auto;padding:14px 10px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--emerald),var(--gold));box-shadow:var(--shadow)}.title{margin:0;font-size:1.15rem;letter-spacing:.2px}.meta{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#0a1a1c;color:var(--muted)}.wrap{width:min(980px,92vw);margin:0 auto;padding:24px 0 80px}main.card{margin-top:18px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#0c181a,#0a1517);box-shadow:var(--shadow)}.hero{padding:32px 22px 18px;background:radial-gradient(900px 250px at 20% 10%,rgba(231,111,81,.1),transparent),radial-gradient(700px 220px at 80% 0,rgba(42,157,143,.16),transparent)}.hero h2{margin:0 0 8px;font-size:clamp(1.6rem,4.8vw,2.5rem)}.hero p{margin:0;color:var(--muted);max-width:72ch}article.content{padding:24px 22px;position:relative}article.content p{margin:0 0 16px}article.content h3{margin:22px 0 8px;font-size:1.18rem;color:#e8f1f1}.hook{display:inline-block;margin:6px 0 14px;padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(42,157,143,.18),rgba(255,209,102,.12));border:1px solid var(--line);color:#dfeeee}.aside{margin:18px 0;padding:14px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:#e7edff;box-shadow:var(--shadow)}.timeline{border-left:3px dashed var(--emerald);padding-left:14px;margin:20px 0}.t-item{position:relative;margin:14px 0}.t-item::before{content:"";position:absolute;left:-12px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:1px solid var(--emerald-soft);box-shadow:0 0 0 4px rgba(255,209,102,.12)}.t-label{display:inline-flex;gap:8px;align-items:center;font-size:.92rem;color:var(--muted)}.t-tag{padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:#0b1a1b;color:#e7f4f3}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:20px 0}.gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow);cursor:zoom-in;transition:transform .15s ease,box-shadow .15s ease}.gallery img:hover{transform:translateY(-2px);box-shadow:0 18px 32px rgba(0,0,0,.4)}.lightbox{position:fixed;inset:0;background:rgba(6,14,18,.88);display:none;align-items:center;justify-content:center;z-index:1000}.lightbox.active{display:flex}.lightbox img{max-width:min(92vw,1200px);max-height:82vh;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow)}.lightbox .caption{margin-top:12px;color:var(--muted);text-align:center;max-width:80ch}.lightbox .nav{position:absolute;inset:auto 0 8% 0;display:flex;justify-content:center;gap:12px}.btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:#0f2730;color:var(--text);border:1px solid var(--line);padding:10px 14px;border-radius:10px}.btn:hover{background:#123241}.share{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}.share a,.share button{border:none}footer.site{margin-top:24px;padding:18px 22px;color:var(--muted)}.btn-sitemap{position:fixed;left:14px;top:30%;transform:translateY(-50%);z-index:800}.btn-home{position:fixed;right:14px;bottom:20%;transform:translateY(50%);z-index:800}@media (max-width:640px){.pill{padding:6px 10px;font-size:.9rem}.gallery img{height:160px}.btn-home,.btn-sitemap{opacity:.94}}
 <!-- prettier-ignore -->
-<title>Kisah Abu Thalib: Penopang yang Teguh</title> 
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Abu Thalib—paman Nabi yang menjaga dengan cinta. Dari Syam hingga ‘Aamul Huzn, kisah keteguhan yang meneduhkan Makkah.">
-<meta name="keywords" content="Abu Thalib, Abdul Muthalib, Buhaira, tahun kesedihan, Makkah, sejarah Islam, Nabi Muhammad, Quraisy">
-<meta name="author" content="Fakhrul">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#2A9D8F">
+<!doctype html>
+</body>
+</html>
+</script>
+</style>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
+<head>
+<html lang="id">
+<link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
 <link rel="canonical" href="https://frijal.pages.dev/artikel/abu-thalib.html">
 <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
-
-<meta property="og:title" content="Kisah Abu Thalib: Penopang yang Teguh">
-<meta property="og:description" content="Paman Nabi yang menjaga dengan cinta—dari Syam hingga ‘Aamul Huzn. Keteguhan yang meneduhkan Makkah.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://frijal.pages.dev/artikel/abu-thalib.html">
-<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgI7HKpBB9FO7YifmjH0UcgD4-Xhs4VY5bZkJ2vGhpxnaXIKbootdqmOHbwR3VkNr0iXtEp6yIMYO8oxwsGTWMQPvhnx-XqRZdreZd-MCJZqsPdgYJy8RZa100ojBpraUOJuN715HY8h6MrtE_QVgE4iPG92fa_jdHf34bkyD-840d0c9KsYYLuYLQUkqo/s1600/Thalib.jpg">
-<meta property="og:site_name" content="Frijal">
-<meta property="og:locale" content="id_ID">
-
+<meta charset="utf-8">
+<meta name="author" content="Fakhrul">
+<meta name="date" content="2025-09-27">
+<meta name="description" content="Abu Thalib—paman Nabi yang menjaga dengan cinta. Dari Syam hingga ‘Aamul Huzn, kisah keteguhan yang meneduhkan Makkah.">
+<meta name="keywords" content="Abu Thalib, Abdul Muthalib, Buhaira, tahun kesedihan, Makkah, sejarah Islam, Nabi Muhammad, Quraisy">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#2A9D8F">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kisah Abu Thalib: Penopang yang Teguh">
 <meta name="twitter:description" content="Penopang Nabi dengan cinta—Syam, tanda-tanda, dan ‘Aamul Huzn. Kisah yang meneduhkan hati.">
 <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgI7HKpBB9FO7YifmjH0UcgD4-Xhs4VY5bZkJ2vGhpxnaXIKbootdqmOHbwR3VkNr0iXtEp6yIMYO8oxwsGTWMQPvhnx-XqRZdreZd-MCJZqsPdgYJy8RZa100ojBpraUOJuN715HY8h6MrtE_QVgE4iPG92fa_jdHf34bkyD-840d0c9KsYYLuYLQUkqo/s1600/Thalib.jpg">
 <meta name="twitter:site" content="@frijal">
- 
-<style>
-:root{--emerald:#2a9d8f;--emerald-soft:#1f746b;--gold:#ffd166;--gold-soft:#e7bd57;--ink:#073b4c;--rose:#e76f51;--bg0:#0b1615;--bg1:#0f1c1b;--bg2:#102021;--text:#eaf3f3;--muted:#c8d8d7;--card:#0c1719;--line:#1a4c4a;--shadow:0 14px 36px rgba(0, 0, 0, 0.35)}*{box-sizing:border-box}body,html{margin:0;padding:0;background:radial-gradient(1200px 380px at 12% -10%,rgba(42,157,143,.18),transparent),radial-gradient(900px 320px at 88% 0,rgba(255,209,102,.14),transparent),linear-gradient(180deg,var(--bg0),var(--bg1) 40%,var(--bg2));color:var(--text);font:16px/1.72 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline}header.site{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(0deg,rgba(12,28,29,.85),rgba(12,28,29,.55));border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.bar{width:min(1040px,92vw);margin:0 auto;padding:14px 10px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--emerald),var(--gold));box-shadow:var(--shadow)}.title{margin:0;font-size:1.15rem;letter-spacing:.2px}.meta{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#0a1a1c;color:var(--muted)}.wrap{width:min(980px,92vw);margin:0 auto;padding:24px 0 80px}main.card{margin-top:18px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#0c181a,#0a1517);box-shadow:var(--shadow)}.hero{padding:32px 22px 18px;background:radial-gradient(900px 250px at 20% 10%,rgba(231,111,81,.1),transparent),radial-gradient(700px 220px at 80% 0,rgba(42,157,143,.16),transparent)}.hero h2{margin:0 0 8px;font-size:clamp(1.6rem,4.8vw,2.5rem)}.hero p{margin:0;color:var(--muted);max-width:72ch}article.content{padding:24px 22px;position:relative}article.content p{margin:0 0 16px}article.content h3{margin:22px 0 8px;font-size:1.18rem;color:#e8f1f1}.hook{display:inline-block;margin:6px 0 14px;padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(42,157,143,.18),rgba(255,209,102,.12));border:1px solid var(--line);color:#dfeeee}.aside{margin:18px 0;padding:14px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:#e7edff;box-shadow:var(--shadow)}.timeline{border-left:3px dashed var(--emerald);padding-left:14px;margin:20px 0}.t-item{position:relative;margin:14px 0}.t-item::before{content:"";position:absolute;left:-12px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:1px solid var(--emerald-soft);box-shadow:0 0 0 4px rgba(255,209,102,.12)}.t-label{display:inline-flex;gap:8px;align-items:center;font-size:.92rem;color:var(--muted)}.t-tag{padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:#0b1a1b;color:#e7f4f3}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:20px 0}.gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:1px solid var(--line);box-shadow:var(--shadow);cursor:zoom-in;transition:transform .15s ease,box-shadow .15s ease}.gallery img:hover{transform:translateY(-2px);box-shadow:0 18px 32px rgba(0,0,0,.4)}.lightbox{position:fixed;inset:0;background:rgba(6,14,18,.88);display:none;align-items:center;justify-content:center;z-index:1000}.lightbox.active{display:flex}.lightbox img{max-width:min(92vw,1200px);max-height:82vh;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow)}.lightbox .caption{margin-top:12px;color:var(--muted);text-align:center;max-width:80ch}.lightbox .nav{position:absolute;inset:auto 0 8% 0;display:flex;justify-content:center;gap:12px}.btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:#0f2730;color:var(--text);border:1px solid var(--line);padding:10px 14px;border-radius:10px}.btn:hover{background:#123241}.share{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px}.share a,.share button{border:none}footer.site{margin-top:24px;padding:18px 22px;color:var(--muted)}.btn-sitemap{position:fixed;left:14px;top:30%;transform:translateY(-50%);z-index:800}.btn-home{position:fixed;right:14px;bottom:20%;transform:translateY(50%);z-index:800}@media (max-width:640px){.pill{padding:6px 10px;font-size:.9rem}.gallery img{height:160px}.btn-home,.btn-sitemap{opacity:.94}}
-</style>
-<meta name="date" content="2025-09-27">
-
+<meta name="twitter:title" content="Kisah Abu Thalib: Penopang yang Teguh">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:description" content="Paman Nabi yang menjaga dengan cinta—dari Syam hingga ‘Aamul Huzn. Keteguhan yang meneduhkan Makkah.">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgI7HKpBB9FO7YifmjH0UcgD4-Xhs4VY5bZkJ2vGhpxnaXIKbootdqmOHbwR3VkNr0iXtEp6yIMYO8oxwsGTWMQPvhnx-XqRZdreZd-MCJZqsPdgYJy8RZa100ojBpraUOJuN715HY8h6MrtE_QVgE4iPG92fa_jdHf34bkyD-840d0c9KsYYLuYLQUkqo/s1600/Thalib.jpg">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Frijal">
+<meta property="og:title" content="Kisah Abu Thalib: Penopang yang Teguh">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://frijal.pages.dev/artikel/abu-thalib.html">
+<script defer src="/ext/iposbrowser.js"></script>
 <script>
-// Script 2: Lightbox & Copy Link
-(() => {
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<style>
+<title>Kisah Abu Thalib: Penopang yang Teguh</title> 
+a = document.getElementById("close"),
+alert("Gagal menyalin link")
+await navigator.clipboard.writeText(location.href), g.textContent = "✅ Tersalin!", setTimeout(() => g.textContent = "🔗 Salin Link", 1500)
+c = document.getElementById("lightbox-img"),
+d((o + 1) % t.length)
+d((o - 1 + t.length) % t.length)
+e = document.getElementById("prev"),
+e.target === n && r()
+function d(e) {
+function m() {
+function r() {
+function s() {
+g.addEventListener("click", async () => {
+i = document.getElementById("lightbox-caption"),
+l = document.getElementById("next"),
+let g = document.getElementById("copy-link");
 let t = Array.from(document.querySelectorAll("#gallery img")),
 n = document.getElementById("lightbox"),
-c = document.getElementById("lightbox-img"),
-i = document.getElementById("lightbox-caption"),
-e = document.getElementById("prev"),
-l = document.getElementById("next"),
-a = document.getElementById("close"),
-o = 0;
-
-function d(e) {
-o = e, e = t[o], c.src = e.src, c.alt = e.alt || "", i.textContent = e.dataset.caption || "", n.classList.add("active")
-}
-
-function r() {
-n.classList.remove("active")
-}
-
-function s() {
-d((o - 1 + t.length) % t.length)
-}
-
-function m() {
-d((o + 1) % t.length)
-}
-t.forEach((e, t) => e.addEventListener("click", () => d(t))), e.addEventListener("click", s), l.addEventListener("click", m), a.addEventListener("click", r), n.addEventListener("click", e => {
-e.target === n && r()
-}), document.addEventListener("keydown", e => {
 n.classList.contains("active") && ("ArrowLeft" === e.key && s(), "ArrowRight" === e.key && m(), "Escape" === e.key) && r()
-});
-let g = document.getElementById("copy-link");
-g.addEventListener("click", async () => {
+n.classList.remove("active")
+o = 0;
+o = e, e = t[o], c.src = e.src, c.alt = e.alt || "", i.textContent = e.dataset.caption || "", n.classList.add("active")
+t.forEach((e, t) => e.addEventListener("click", () => d(t))), e.addEventListener("click", s), l.addEventListener("click", m), a.addEventListener("click", r), n.addEventListener("click", e => {
 try {
-await navigator.clipboard.writeText(location.href), g.textContent = "✅ Tersalin!", setTimeout(() => g.textContent = "🔗 Salin Link", 1500)
-} catch (e) {
-alert("Gagal menyalin link")
 }
+} catch (e) {
 })
 })()
-</script>
-
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
+}), document.addEventListener("keydown", e => {
+});

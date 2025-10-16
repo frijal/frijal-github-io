@@ -1,526 +1,354 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi</title>
-    <meta
-      name="description"
-      content="Review Gemini AI, model LLM dari Google yang unggul untuk belajar dan riset. Dengan context window 1 juta token dan fitur NotebookLM, Gemini mempermudah pemahaman dokumen dan pembuatan catatan."
-    />
-    <meta
-      name="keywords"
-      content="Gemini AI, Google AI, LLM, NotebookLM, AI untuk belajar, riset AI, review AI, AI Indonesia"
-    />
-    <meta name="author" content="Frijal" />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/gemini-ai-terbaik.html"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-    />
-    <meta
-      property="og:title"
-      content="Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi"
-    />
-    <meta
-      property="og:description"
-      content="Dengan Gemini 1.5 Pro, Google memperkenalkan context window satu juta token, menjadikannya LLM terbaik untuk percakapan panjang, cocok untuk meringkas buku atau dokumen besar."
-    />
-    <meta
-      property="og:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
-    />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/gemini-ai-terbaik.html"
-    />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Frijal's Page" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi"
-    />
-    <meta
-      name="twitter:description"
-      content="Dengan Gemini 1.5 Pro, Google memperkenalkan context window satu juta token, menjadikannya LLM terbaik untuk percakapan panjang, cocok untuk meringkas buku atau dokumen besar."
-    />
-    <meta
-      name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO0kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <style>
-      :root {
-        --bg-color: #121212;
-        --primary-text-color: #e0e0e0;
-        --secondary-text-color: #b3b3b3;
-        --accent-color: #f7b500;
-        /* Warna aksen yang berbeda untuk Gemini */
-        --surface-color: #1e1e1e;
-        --border-color: #2c2c2c;
-        --link-color: #ffda6a;
-      }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        line-height: 1.7;
-        font-size: 16px;
-      }
-
-      .container {
-        max-width: 900px;
-        /* Disesuaikan untuk 1 kolom */
-        margin: 0 auto;
-        padding: 2rem 1rem;
-      }
-
-      h1,
-      h2 {
-        color: var(--accent-color);
-        margin-bottom: 1rem;
-        font-weight: 700;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        text-align: center;
-        border-bottom: 2px solid var(--border-color);
-        padding-bottom: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      h2 {
-        font-size: 1.8rem;
-        margin-top: 2.5rem;
-      }
-
-      p,
-      ul {
-        margin-bottom: 1rem;
-        color: var(--secondary-text-color);
-      }
-
-      ul {
-        padding-left: 20px;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-      }
-
-      strong {
-        color: var(--accent-color);
-      }
-
-      a {
-        color: var(--link-color);
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      a:hover {
-        color: var(--accent-color);
-      }
-
-      .gallery {
-        margin: 2rem 0;
-        text-align: center;
-      }
-
-      .gallery img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 12px;
-        cursor: pointer;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .gallery img:hover {
-        transform: scale(1.03);
-        box-shadow: 0 12px 35px rgba(247, 181, 0, 0.2);
-      }
-
-      /* Lightbox CSS */
-      .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .lightbox-content {
-        margin: auto;
-        display: block;
-        max-width: 90vw;
-        max-height: 90vh;
-      }
-
-      .lightbox-close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-
-      .lightbox-close:hover {
-        color: var(--accent-color);
-      }
-
-      .lightbox-nav {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -50px;
-        color: white;
-        font-weight: bold;
-        font-size: 2rem;
-        transition: 0.3s;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-
-      .lightbox-prev {
-        left: 0;
-        border-radius: 0 3px 3px 0;
-      }
-
-      .lightbox-next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-      }
-
-      .lightbox-nav:hover {
-        background-color: rgba(247, 181, 0, 0.2);
-      }
-
-      hr {
-        border: 0;
-        height: 1px;
-        background: var(--border-color);
-        margin: 2.5rem 0;
-      }
-
-      /* User Info & Social Share */
-      .info-section,
-      .social-share {
-        background-color: var(--surface-color);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-top: 2rem;
-        border: 1px solid var(--border-color);
-      }
-
-      .info-section h3,
-      .social-share h3 {
-        color: var(--primary-text-color);
-        margin-top: 0;
-        margin-bottom: 1rem;
-      }
-
-      #user-info-display {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-
-      .info-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .info-item i {
-        font-size: 1.5rem;
-        color: var(--accent-color);
-      }
-
-      .social-share-icons a {
-        font-size: 2rem;
-        margin-right: 1.5rem;
-        color: var(--secondary-text-color);
-        transition: transform 0.3s, color 0.3s;
-      }
-
-      .social-share-icons a:hover {
-        transform: scale(1.2);
-        color: var(--accent-color);
-      }
-
-      /* Facebook Comments */
-      .fb-comments {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem;
-      }
-
-      /* Responsive Design */
-      @media screen and (max-width: 768px) {
-        h1 {
-          font-size: 2rem;
-        }
-
-        h2 {
-          font-size: 1.5rem;
-        }
-
-        .container {
-          padding: 1.5rem 0.5rem;
-        }
-
-        .social-share-icons a {
-          font-size: 1.8rem;
-          margin-right: 1rem;
-        }
-
-        #user-info-display {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 1rem;
-        }
-      }
-    </style>
-    <meta
-      property="og:image:alt"
-      content="Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi"
-    />
-    <meta
-      itemprop="image"
-      content="https://frijal.pages.dev/img/gemini-ai-terbaik.webp"
-    />
-<link rel="stylesheet" href="/ext/marquee-url.css">
-      <meta property="article:published_time" content="2025-10-14T18:15:06.393+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-</head>
-  <body>
-    <main class="container">
-      <article>
-        <h1>Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
-        <p>
-          Sejak diluncurkannya <strong>Gemini 1.5 Pro</strong>, Google berhasil
-          bikin gebrakan baru dengan memperkenalkan <strong>context window</strong> sebesar
-          satu juta token! Ini adalah pencapaian luar biasa di saat model AI
-          terbaik lainnya cuma bisa sampai beberapa ratus ribu token. Jelas
-          banget, ini menjadikan Gemini salah satu LLM (<em>Large Language Models</em>)
-          terbaik buat percakapan yang panjang dan kompleks.
-        </p>
-        <p>
-          Dengan <strong>context window</strong> sebesar itu, kamu bisa banget pakai Gemini
-          setiap kali perlu memasukkan teks yang super besar, misalnya seluruh
-          isi buku, untuk diringkas atau dianalisis. Jadi, nggak perlu lagi
-          pusing sama batasan teks!
-        </p>
-        <div class="gallery">
-          <img
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
-            data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
-            alt="Tampilan antarmuka Gemini AI"
-            loading="lazy"
-            class="gallery-item"
-          />
-        </div>
-        <h2>NotebookLM: Partner Terbaik Buat Riset dan Catatan 📝</h2>
-        <p>
-          Tapi yang paling bikin Gemini beda itu ada di fitur
-          <strong>NotebookLM</strong>. Ini adalah alat riset dan pencatat yang
-          pakai AI buat bantuin kamu memahami dan mengolah dokumen. Setelah kamu
-          upload semua sumber materi, kamu bisa langsung ngobrol sama
-          NotebookLM. Dia bakal kasih jawaban berdasarkan materi referensimu,
-          lengkap dengan kutipan sumbernya!
-        </p>
-        <p>
-          Bukan cuma itu, NotebookLM juga bisa jadi pemandu belajarmu. Dia bakal
-          bantu kamu menghubungkan berbagai informasi dan memahami apa pun yang
-          ingin kamu pelajari. Fitur <strong>Audio Overview</strong>-nya juga
-          sangat membantu, lho! Kamu bisa mengubah catatan-catatanmu jadi
-          *podcast*, bikin proses belajar jadi lebih asyik dan efektif. Jelas,
-          ini adalah alat belajar yang powerful banget!
-        </p>
-        <hr />
-        <section class="social-share">
-          <h3>Jaga Data Pribadi Tetap Aman</h3>
-          <div class="social-share-icons">
-            <a
+    
+        
+                  lazyImage.classList.remove('lazy');
+                  lazyImage.src = lazyImage.dataset.src;
+                  lazyImageObserver.unobserve(lazyImage);
+                  let lazyImage = entry.target;
+                if (entry.isIntersecting) {
+                }
+              ><i class="fab fa-facebook"></i
+              ><i class="fab fa-linkedin"></i
+              ><i class="fab fa-telegram"></i
+              ><i class="fab fa-twitter"></i
+              ><i class="fab fa-whatsapp"></i
+              entries.forEach((entry) => {
               href="#"
               id="share-fb"
-              target="_blank"
-              title="Bagikan ke Facebook"
-              ><i class="fab fa-facebook"></i
-            ></a>
-            <a
-              href="#"
+              id="share-linkedin"
+              id="share-telegram"
               id="share-twitter"
-              target="_blank"
-              title="Bagikan ke Twitter"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              href="#"
               id="share-whatsapp"
               target="_blank"
-              title="Bagikan ke WhatsApp"
-              ><i class="fab fa-whatsapp"></i
-            ></a>
-            <a
-              href="#"
-              id="share-telegram"
-              target="_blank"
-              title="Bagikan ke Telegram"
-              ><i class="fab fa-telegram"></i
-            ></a>
-            <a
-              href="#"
-              id="share-linkedin"
-              target="_blank"
+              title="Bagikan ke Facebook"
               title="Bagikan ke LinkedIn"
-              ><i class="fab fa-linkedin"></i
+              title="Bagikan ke Telegram"
+              title="Bagikan ke Twitter"
+              title="Bagikan ke WhatsApp"
+              });
+            (entries, observer) => {
+            <a
             ></a>
-          </div>
-        </section>
-        <hr />
-        <section class="comments-section">
-          <h2>Jaga Data Pribadi Tetap Aman️</h2>
-          <div
+            alt="Tampilan antarmuka Gemini AI"
             class="fb-comments"
+            class="gallery-item"
+            currentSlideIndex = 0;
+            currentSlideIndex = galleryItems.length - 1;
+            currentSlideIndex = index;
             data-href="https://frijal.pages.dev/artikel/gemini-ai-terbaik.html"
-            data-width="100%"
             data-numposts="5"
-          ></div>
-        </section>
-      </article>
-    </main>
-    <div id="myLightbox" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <img class="lightbox-content" id="lightboxImg" />
-      <a class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</a>
-      <a class="lightbox-next" onclick="changeSlide(1)">&#10095;</a>
-    </div>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // --- Lightbox Gallery ---
-        const lightbox = document.getElementById('myLightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const closeBtn = document.querySelector('.lightbox-close');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        let currentSlideIndex = 0;
-        
-        galleryItems.forEach((item, index) => {
-          item.addEventListener('click', () => {
+            data-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
+            data-width="100%"
+            galleryItems.length > 1 ? 'block' : 'none';
+            lazyImageObserver.observe(lazyImage);
             lightbox.style.display = 'flex';
             lightboxImg.src = item.dataset.src;
-            currentSlideIndex = index;
+            loading="lazy"
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
             updateNavButtons();
-          });
-        });
-        
-        closeBtn.addEventListener('click', () => {
-          lightbox.style.display = 'none';
-        });
-        
-        window.changeSlide = (n) => {
-          currentSlideIndex += n;
-          if (currentSlideIndex >= galleryItems.length) {
-            currentSlideIndex = 0;
-          }
-          if (currentSlideIndex < 0) {
-            currentSlideIndex = galleryItems.length - 1;
-          }
-          lightboxImg.src = galleryItems[currentSlideIndex].dataset.src;
-          updateNavButtons();
-        };
-
-        const updateNavButtons = () => {
-          document.querySelector('.lightbox-prev').style.display =
-            galleryItems.length > 1 ? 'block' : 'none';
-          document.querySelector('.lightbox-next').style.display =
-            galleryItems.length > 1 ? 'block' : 'none';
-        };
-
-        // --- Lazy Loading ---
-        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-        if ('IntersectionObserver' in window) {
-          let lazyImageObserver = new IntersectionObserver(
-            (entries, observer) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  let lazyImage = entry.target;
-                  lazyImage.src = lazyImage.dataset.src;
-                  lazyImage.classList.remove('lazy');
-                  lazyImageObserver.unobserve(lazyImage);
-                }
-              });
             }
-          );
-          lazyImages.forEach((lazyImage) => {
-            lazyImageObserver.observe(lazyImage);
-          });
-        }
-
-        // --- Social Sharing ---
-        const pageUrl = encodeURIComponent(
           'https://frijal.pages.dev/artikel/gemini-ai-terbaik.html'
-        );
-        const pageTitle = encodeURIComponent(document.title);
-        
-        document.getElementById('share-fb').href =
-          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
-        document.getElementById('share-twitter').href =
-          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
-        document.getElementById('share-whatsapp').href =
+          );
+          *podcast*, bikin proses belajar jadi lebih asyik dan efektif. Jelas,
+          />
+          </div>
+          <div
+          <div class="social-share-icons">
+          <h2>Jaga Data Pribadi Tetap Aman️</h2>
+          <h3>Jaga Data Pribadi Tetap Aman</h3>
+          <img
+          <strong>NotebookLM</strong>. Ini adalah alat riset dan pencatat yang
+          ></div>
+          Bukan cuma itu, NotebookLM juga bisa jadi pemandu belajarmu. Dia bakal
+          Dengan <strong>context window</strong> sebesar itu, kamu bisa banget pakai Gemini
+          NotebookLM. Dia bakal kasih jawaban berdasarkan materi referensimu,
+          Sejak diluncurkannya <strong>Gemini 1.5 Pro</strong>, Google berhasil
+          Tapi yang paling bikin Gemini beda itu ada di fitur
           `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`;
-        document.getElementById('share-telegram').href =
           `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
-        document.getElementById('share-linkedin').href =
+          `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+          `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
           `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+          align-items: flex-start;
+          banget, ini menjadikan Gemini salah satu LLM (<em>Large Language Models</em>)
+          bantu kamu menghubungkan berbagai informasi dan memahami apa pun yang
+          bikin gebrakan baru dengan memperkenalkan <strong>context window</strong> sebesar
+          currentSlideIndex += n;
+          document.querySelector('.lightbox-next').style.display =
+          document.querySelector('.lightbox-prev').style.display =
+          flex-direction: column;
+          font-size: 1.5rem;
+          font-size: 1.8rem;
+          font-size: 2rem;
+          gap: 1rem;
+          if (currentSlideIndex < 0) {
+          if (currentSlideIndex >= galleryItems.length) {
+          ingin kamu pelajari. Fitur <strong>Audio Overview</strong>-nya juga
+          ini adalah alat belajar yang powerful banget!
+          isi buku, untuk diringkas atau dianalisis. Jadi, nggak perlu lagi
+          item.addEventListener('click', () => {
+          lazyImages.forEach((lazyImage) => {
+          lengkap dengan kutipan sumbernya!
+          let lazyImageObserver = new IntersectionObserver(
+          lightbox.style.display = 'none';
+          lightboxImg.src = galleryItems[currentSlideIndex].dataset.src;
+          margin-right: 1rem;
+          padding: 1.5rem 0.5rem;
+          pakai AI buat bantuin kamu memahami dan mengolah dokumen. Setelah kamu
+          pusing sama batasan teks!
+          sangat membantu, lho! Kamu bisa mengubah catatan-catatanmu jadi
+          satu juta token! Ini adalah pencapaian luar biasa di saat model AI
+          setiap kali perlu memasukkan teks yang super besar, misalnya seluruh
+          terbaik buat percakapan yang panjang dan kompleks.
+          terbaik lainnya cuma bisa sampai beberapa ratus ribu token. Jelas
+          updateNavButtons();
+          upload semua sumber materi, kamu bisa langsung ngobrol sama
+          }
+          });
+        #user-info-display {
+        );
+        --accent-color: #f7b500;
+        --bg-color: #121212;
+        --border-color: #2c2c2c;
+        --link-color: #ffda6a;
+        --primary-text-color: #e0e0e0;
+        --secondary-text-color: #b3b3b3;
+        --surface-color: #1e1e1e;
+        -webkit-user-select: none;
+        .container {
+        .social-share-icons a {
+        /* Disesuaikan untuk 1 kolom */
+        /* Warna aksen yang berbeda untuk Gemini */
+        // --- Lazy Loading ---
+        // --- Lightbox Gallery ---
+        // --- Social Sharing ---
+        </div>
+        </p>
+        </section>
+        <div class="gallery">
+        <h1>Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi</h1>
+        <h2>NotebookLM: Partner Terbaik Buat Riset dan Catatan 📝</h2>
+        <hr />
+        <p>
+        <section class="comments-section">
+        <section class="social-share">
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(247, 181, 0, 0.2);
+        background-color: var(--bg-color);
+        background-color: var(--surface-color);
+        background: var(--border-color);
+        background: white;
+        border-bottom: 2px solid var(--border-color);
+        border-radius: 0 3px 3px 0;
+        border-radius: 12px;
+        border-radius: 3px 0 0 3px;
+        border: 0;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 12px 35px rgba(247, 181, 0, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        closeBtn.addEventListener('click', () => {
+        color: #f1f1f1;
+        color: var(--accent-color);
+        color: var(--link-color);
+        color: var(--primary-text-color);
+        color: var(--secondary-text-color);
+        color: white;
+        const closeBtn = document.querySelector('.lightbox-close');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const lightbox = document.getElementById('myLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const pageTitle = encodeURIComponent(document.title);
+        const pageUrl = encodeURIComponent(
+        const updateNavButtons = () => {
+        cursor: pointer;
+        display: block;
+        display: flex;
+        display: none;
+        document.getElementById('share-fb').href =
+        document.getElementById('share-linkedin').href =
+        document.getElementById('share-telegram').href =
+        document.getElementById('share-twitter').href =
+        document.getElementById('share-whatsapp').href =
+        flex-wrap: wrap;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-size: 1.8rem;
+        font-size: 16px;
+        font-size: 2.5rem;
+        font-size: 2rem;
+        font-size: 40px;
+        font-weight: 700;
+        font-weight: bold;
+        galleryItems.forEach((item, index) => {
+        gap: 0.5rem;
+        gap: 1.5rem;
+        h1 {
+        h2 {
+        height: 100%;
+        height: 1px;
+        height: auto;
+        if ('IntersectionObserver' in window) {
+        justify-content: center;
+        left: 0;
+        let currentSlideIndex = 0;
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        margin-right: 1.5rem;
+        margin-top: -50px;
+        margin-top: 0;
+        margin-top: 2.5rem;
+        margin-top: 2rem;
+        margin: 0 auto;
+        margin: 0;
+        margin: 2.5rem 0;
+        margin: 2rem 0;
+        margin: auto;
+        max-height: 90vh;
+        max-width: 100%;
+        max-width: 900px;
+        max-width: 90vw;
+        overflow: auto;
+        padding-bottom: 1rem;
+        padding-left: 20px;
+        padding: 0;
+        padding: 1.5rem;
+        padding: 16px;
+        padding: 1rem;
+        padding: 2rem 1rem;
+        position: absolute;
+        position: fixed;
+        right: 0;
+        right: 35px;
+        text-align: center;
+        text-decoration: none;
+        top: 0;
+        top: 15px;
+        top: 50%;
+        transform: scale(1.03);
+        transform: scale(1.2);
+        transition: 0.3s;
+        transition: color 0.3s;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s, color 0.3s;
+        user-select: none;
+        width: 100%;
+        width: auto;
+        window.changeSlide = (n) => {
+        z-index: 1000;
+        }
+        });
+        };
+      #user-info-display {
+      * {
+      .container {
+      .fb-comments {
+      .gallery img {
+      .gallery img:hover {
+      .gallery {
+      .info-item i {
+      .info-item {
+      .info-section h3,
+      .info-section,
+      .lightbox {
+      .lightbox-close {
+      .lightbox-close:hover {
+      .lightbox-content {
+      .lightbox-nav {
+      .lightbox-nav:hover {
+      .lightbox-next {
+      .lightbox-prev {
+      .social-share h3 {
+      .social-share {
+      .social-share-icons a {
+      .social-share-icons a:hover {
+      /* Facebook Comments */
+      /* Lightbox CSS */
+      /* Responsive Design */
+      /* User Info & Social Share */
+      :root {
+      </article>
+      <a class="lightbox-next" onclick="changeSlide(1)">&#10095;</a>
+      <a class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</a>
+      <article>
+      <img class="lightbox-content" id="lightboxImg" />
+      <meta property="article:published_time" content="2025-10-14T18:15:06.393+00:00">
+      <span class="lightbox-close">&times;</span>
+      @media screen and (max-width: 768px) {
+      a {
+      a:hover {
+      body {
+      content="Dengan Gemini 1.5 Pro, Google memperkenalkan context window satu juta token, menjadikannya LLM terbaik untuk percakapan panjang, cocok untuk meringkas buku atau dokumen besar."
+      content="Gemini AI, Google AI, LLM, NotebookLM, AI untuk belajar, riset AI, review AI, AI Indonesia"
+      content="Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi"
+      content="Review Gemini AI, model LLM dari Google yang unggul untuk belajar dan riset. Dengan context window 1 juta token dan fitur NotebookLM, Gemini mempermudah pemahaman dokumen dan pembuatan catatan."
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO0kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
+      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT6g_iOZl1Ooh4YIvHTbLTaBiUbW1uBRM8qrsO3kXJtczJ-RrUHsRtuaNVtg6ACEZtFeq3qAI-8Bnv1AiZI6Yqimd4y-0B2G9DNtGBGYYj0KC1bzjfpUAFML_zgmEEXEGXo_vaNRlbMVNjSJBaxFfcpObZDGWzXDq1S4NJVJOfUt_kGZsnHetCCknwbco/s1600/gemini-ai.png"
+      content="https://frijal.pages.dev/artikel/gemini-ai-terbaik.html"
+      content="https://frijal.pages.dev/img/gemini-ai-terbaik.webp"
+      document.addEventListener('DOMContentLoaded', function () {
+      h1 {
+      h1,
+      h2 {
+      hr {
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      href="https://frijal.pages.dev/artikel/gemini-ai-terbaik.html"
+      itemprop="image"
+      li {
+      name="description"
+      name="keywords"
+      name="twitter:description"
+      name="twitter:image"
+      name="twitter:title"
+      p,
+      property="og:description"
+      property="og:image"
+      property="og:image:alt"
+      property="og:title"
+      property="og:url"
+      rel="canonical"
+      rel="icon"
+      rel="stylesheet"
+      strong {
+      ul {
+      }
       });
+    />
+    </div>
+    </main>
     </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
+    </style>
+    <div id="myLightbox" class="lightbox">
+    <link
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <main class="container">
+    <meta
+    <meta charset="UTF-8" />
+    <meta name="author" content="Frijal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta property="og:site_name" content="Frijal's Page" />
+    <meta property="og:type" content="article" />
+    <script>
+    <style>
+    <title>Gemini – Jagoan Terbaik Buat Belajar dan Eksplorasi</title>
   </body>
+  <body>
+  <head>
+<!doctype html>
+</head>
 </html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<div id="iposbrowser"></div>
+<html lang="id">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>

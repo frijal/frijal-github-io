@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Penaklukan Mesir (19–21 H / 640–642 M): Dari Madinah ke Alexandria, lahirnya Fusthath</title>
+    <meta name="description" content="Kisah lengkap penaklukan Mesir: visi Amr bin al-‘Ash, restu Umar, pengepungan Babilon, jatuhnya Alexandria, berdirinya Fusthath, dan dampak besar bagi dunia Islam.">
+    <meta name="author" content="Frijal">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Penaklukan Mesir, Amr bin al-‘Ash, Umar bin Khattab, Babilon, Alexandria, Fusthath, Koptik, Bizantium, sejarah Islam, Khilafah Rasyidun">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/penaklukan-mesir.html">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png">
+    
+    <meta property="og:title" content="Penaklukan Mesir (19–21 H / 640–642 M): Dari Madinah ke Alexandria, lahirnya Fusthath">
+    <meta property="og:description" content="Dari restu Umar hingga keberanian Zubair: penaklukan Mesir yang menegakkan keadilan dan melahirkan pusat baru peradaban Islam.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/penaklukan-mesir.html">
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXQPncwr2iGTDs4wiRigJ0iVJmW3rvQdnbJAdESBypi8qD3AGunwes_wkm4dg7G-7rsF3ptuf7NU0cIPjTm8C5BTVmANlT8rNAVoXhwPARGN2dju4KfodBbbvbbnQyorwepD-KppZ2r6_udGWYYjZvtrvK_TDeZauKB3Ecxv3Ozu45AjhLtzbSeOyvHzU/s1600/bizantium.jpg">
+    <meta property="og:site_name" content="Frijal">
+    <meta property="og:locale" content="id_ID">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Penaklukan Mesir (19–21 H / 640–642 M): Dari Madinah ke Alexandria, lahirnya Fusthath">
+    <meta name="twitter:description" content="Strategi, keberanian, dan keadilan: bagaimana Mesir menjadi lumbung Khilafah dan lahirnya Fusthath.">
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXQPncwr2iGTDs4wiRigJ0iVJmW3rvQdnbJAdESBypi8qD3AGunwes_wkm4dg7G-7rsF3ptuf7NU0cIPjTm8C5BTVmANlT8rNAVoXhwPARGN2dju4KfodBbbvbbnQyorwepD-KppZ2r6_udGWYYjZvtrvK_TDeZauKB3Ecxv3Ozu45AjhLtzbSeOyvHzU/s1600/bizantium.jpg">
+    
+    <meta name="theme-color" content="#2a163f">
+    
+    <script>
+      // Lightbox gallery logic (Disederhanakan)
+      (function(){
+        const figures = Array.from(document.querySelectorAll('figure img'));
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbClose = document.getElementById('lbClose');
+        const lbPrev = document.getElementById('lbPrev');
+        const lbNext = document.getElementById('lbNext');
+        let idx = 0;
+        
+        function open(i){
+          if (figures.length === 0) return;
+          idx = i;
+          lbImg.src = figures[idx].src; 
+          lbImg.alt = figures[idx].alt || '';
+          lb.classList.add('open');
+        }
+        
+        function close(){ lb.classList.remove('open'); }
+        
+        function prev(){ open((idx-1+figures.length)%figures.length); }
+        function next(){ open((idx+1)%figures.length); }
+        
+        figures.forEach((img,i)=>{ img.addEventListener('click', ()=>open(i)); });
+        lbClose.addEventListener('click', close);
+        lb.addEventListener('click', (e)=>{ if(e.target===lb || e.target===lbImg) close(); });
+        
+        document.addEventListener('keydown', (e)=>{
+          if(!lb.classList.contains('open')) return;
+          if(e.key==='Escape') close();
+          if(e.key==='ArrowLeft') prev();
+          if(e.key==='ArrowRight') next();
+        });
+        
+        lbPrev.addEventListener('click', prev);
+        lbNext.addEventListener('click', next);
+      })();
+    </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+  </body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<script defer src="/ext/iposbrowser.js"></script>

@@ -1,615 +1,415 @@
-<!doctype html>
-<html lang="id">
-  <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<!-- prettier-ignore -->
-<title>E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan</title>
 
-<meta
-  name="description"
-  content="Penjelasan e‑Learning: istilah lain, definisi para ahli, keunggulan, contoh skenario penggunaan, tips implementasi, serta tanya‑jawab. Disusun dengan bahasa sederhana dan visual interaktif."
-/>
-<link
-  rel="canonical"
-  href="https://frijal.pages.dev/artikel/e-learning.html"
-/>
-<link
-  rel="icon"
-  href="https://frijal.pages.dev/favicon.ico"
-  type="image/x-icon"
-/>
-<meta property="og:type" content="article" />
-<meta
-  property="og:title"
-  content="E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan"
-/>
-<meta
-  property="og:description"
-  content="Ringkasan e‑Learning: istilah, definisi, keunggulan, contoh, dan tips implementasi. Dilengkapi komentar Facebook, tombol berbagi, dan info sistem."
-/>
-<meta
-  property="og:url"
-  content="https://frijal.pages.dev/artikel/e-learning.html"
-/>
-<meta property="og:locale" content="id_ID" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta
-  name="twitter:title"
-  content="E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan"
-/>
-<meta
-  name="twitter:description"
-  content="Ringkasan e‑Learning: istilah, definisi, keunggulan, contoh, dan tips implementasi."
-/>
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
-  integrity="sha512-Mq9P6YjYsm2JMV8Q+r5e5s6NY68zJ0R3z4dv5/1w5z/3H6wRM9mC4u4Gz0V7XvO6ilH2h1eQ8q5Q8gW2+oE5ug=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-<style>
-  :root {
---bg: #0f172a;
---bg-soft: #111827;
---card: #0b1220;
---muted: #93a4b0;
---text: #e5f0ff;
---brand: #6ee7b7;
---brand-2: #60a5fa;
---accent: #f472b6;
---warning: #f59e0b;
---success: #22c55e;
---danger: #ef4444;
---shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
---radius: 14px;
---maxw: 1200px;
-  }
-  * {
-box-sizing: border-box;
-  }
-  body,
-  html {
-height: 100%;
-  }
-  body {
-margin: 0;
-font-family:
-  ui-sans-serif,
-  system-ui,
-  -apple-system,
-  Segoe UI,
-  Roboto,
-  Ubuntu,
-  Cantarell,
-  Noto Sans,
-  Helvetica Neue,
-  Arial,
+  
   "Apple Color Emoji",
   "Segoe UI Emoji";
-color: var(--text);
-background:
-  radial-gradient(
-1200px 600px at 10% -10%,
-rgba(96, 165, 250, 0.18),
-transparent 60%
+  #btn-home-left svg,
+  #btn-home-left {
+  #btn-home-left,
+  #btn-home-left:hover,
+  #btn-home-right svg {
+  #btn-home-right {
+  #btn-home-right:hover {
+  #lightbox img {
+  #lightbox {
+  #lightbox.active {
+  ((a.className = "copy-btn"),
+  ((document.getElementById("current-url").textContent =
+  ((document.getElementById("y").textContent = new Date().getFullYear()),
+  (a.appendChild(e), a.classList.add("active"));
+  (a.textContent = "Tersalin ✓"),
+  (e.forEach((t) => {
+  (e.preventDefault(),
+  (n((a = Number(e.dataset.v))),
   ),
-  radial-gradient(
-900px 600px at 110% 10%,
-rgba(110, 231, 183, 0.12),
-transparent 50%
-  ),
-  linear-gradient(160deg, #0a0f1e 0, #0f172a 45%, #0b1220 100%);
-  }
-  header.hero {
-width: 100%;
-min-height: 48vh;
-display: grid;
-place-items: center;
-text-align: center;
-padding: 36px 16px;
-background:
-  radial-gradient(
-800px 400px at 50% 0,
-rgba(96, 165, 250, 0.08),
-transparent 60%
-  ),
-  linear-gradient(180deg, rgba(96, 165, 250, 0.08), transparent 60%);
-border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  .hero-inner {
-max-width: var(--maxw);
-width: 100%;
-  }
-  .eyebrow {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-padding: 6px 12px;
-border-radius: 999px;
-background: rgba(96, 165, 250, 0.12);
-color: #cfe3ff;
-font-weight: 600;
-letter-spacing: 0.2px;
-margin-bottom: 14px;
-border: 1px solid rgba(96, 165, 250, 0.28);
-  }
-  .hero h1 {
-font-size: clamp(26px, 4vw, 46px);
-margin: 8px 0 10px;
-line-height: 1.18;
-background: linear-gradient(90deg, #dbeafe, #bbf7d0, #fbcfe8);
--webkit-background-clip: text;
-background-clip: text;
-color: transparent;
-text-shadow: 0 0 24px rgba(96, 165, 250, 0.18);
-  }
-  .hero p {
-font-size: clamp(15px, 1.6vw, 18px);
-color: var(--muted);
-margin: 0 auto 18px;
-max-width: 760px;
-  }
-  .meta {
-display: flex;
-gap: 14px;
-justify-content: center;
-flex-wrap: wrap;
-color: #c6d5e6;
-font-size: 14px;
-opacity: 0.9;
-  }
-  .container {
-max-width: var(--maxw);
-margin: 0 auto;
-padding: 28px 16px 70px;
-  }
-  .grid {
-display: grid;
-gap: 18px;
-grid-template-columns: 1.2fr 0.8fr;
-  }
-  @media (max-width: 980px) {
-.grid {
-  grid-template-columns: 1fr;
-}
-  }
-  .card {
-background: linear-gradient(
-  180deg,
-  rgba(255, 255, 255, 0.03),
-  rgba(255, 255, 255, 0.01)
-);
-border: 1px solid rgba(255, 255, 255, 0.06);
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-overflow: hidden;
-  }
-  .card .inner {
-padding: 18px 18px 22px;
-  }
-  .card h2 {
-margin: 8px 0 10px;
-font-size: clamp(20px, 2.2vw, 26px);
-letter-spacing: 0.2px;
-  }
-  .card p {
-color: #cfe3ff;
-margin: 8px 0 12px;
-  }
-  .card ul {
-margin: 10px 0 0 0;
-padding: 0 0 0 18px;
-color: #d7e8ff;
-  }
-  .card li {
-margin: 8px 0;
-  }
+  * {
+  -apple-system,
   .badge {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-font-size: 12px;
-color: #cbe7ff;
-background: rgba(96, 165, 250, 0.12);
-padding: 6px 10px;
-border-radius: 999px;
-border: 1px solid rgba(96, 165, 250, 0.28);
-  }
+  .card .inner {
+  .card h2 {
+  .card h2::after {
+  .card li {
+  .card p {
+  .card ul {
+  .card {
+  .catch(() => {}));
+  .container {
+  .copy-btn {
+  .copy-btn:hover {
+  .eyebrow {
   .gallery {
-display: grid;
-gap: 12px;
-grid-template-columns: repeat(3, 1fr);
-padding: 12px;
-  }
-  @media (max-width: 760px) {
-.gallery {
-  grid-template-columns: 1fr 1fr;
-}
-  }
-  @media (max-width: 480px) {
-.gallery {
-  grid-template-columns: 1fr;
-}
-  }
-  .img-wrap {
-position: relative;
-overflow: hidden;
-border-radius: 12px;
-aspect-ratio: 16/9;
-background: #0b1220;
-border: 1px solid rgba(255, 255, 255, 0.06);
-cursor: zoom-in;
-  }
-  .img-wrap img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-transform: scale(1.02);
-transition: transform 0.35s ease;
-  }
-  .img-wrap:hover img {
-transform: scale(1.06);
-  }
+  .getElementById("fb-comments")
+  .grid {
+  .hero h1 {
+  .hero p {
+  .hero-inner {
   .img-cap {
-position: absolute;
-inset: auto 8px 8px 8px;
-background: linear-gradient(
+  .img-wrap img {
+  .img-wrap {
+  .img-wrap:hover img {
+  .kvs .ico {
+  .kvs .kv small {
+  .kvs .kv {
+  .kvs {
+  .meta {
+  .meta-sys {
+  .pill a {
+  .pill a:hover {
+  .pill {
+  .rating {
+  .rating-result {
+  .setAttribute("data-href", currentUrl),
+  .share a {
+  .share a:hover {
+  .share {
+  .share({
+  .small-muted {
+  .star {
+  .star.active {
+  .star:hover {
+  .two-col {
   180deg,
+  90deg,
+  :root {
+  </div>
+  </section>
+  <div>
+  <head>
+  <link
+  @media (max-width: 480px) {
+  @media (max-width: 720px) {
+  @media (max-width: 760px) {
+  @media (max-width: 920px) {
+  @media (max-width: 980px) {
+  Arial,
+  Cantarell,
+  FB.XFBML.parse();
+  Helvetica Neue,
+  Noto Sans,
+  Roboto,
+  Segoe UI,
+  Ubuntu,
+  a.classList.remove("active");
+  background 0.3s ease,
+  body {
+  body,
+  box-shadow 0.2s ease;
+  class="fb-comments"
+  content="E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan"
+  content="Penjelasan e‑Learning: istilah lain, definisi para ahli, keunggulan, contoh skenario penggunaan, tips implementasi, serta tanya‑jawab. Disusun dengan bahasa sederhana dan visual interaktif."
+  content="Ringkasan e‑Learning: istilah, definisi, keunggulan, contoh, dan tips implementasi. Dilengkapi komentar Facebook, tombol berbagi, dan info sistem."
+  content="Ringkasan e‑Learning: istilah, definisi, keunggulan, contoh, dan tips implementasi."
+  content="https://frijal.pages.dev/artikel/e-learning.html"
+  crossorigin="anonymous"
+  data-href=""
+  data-numposts="5"
+  data-width="100%"
+  e.addEventListener("mouseenter", () => n(Number(e.dataset.v))),
+  e.addEventListener("mouseleave", () => n(a)));
+  e.forEach((e) => {
+  footer {
+  for (e.src = t.src, e.alt = t.alt; a.firstChild; )
+  function n(a) {
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  header.hero {
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+  href="https://frijal.pages.dev/artikel/e-learning.html"
+  href="https://frijal.pages.dev/favicon.ico"
+  html {
+  id="fb-comments"
+  if ("undefined" != typeof FB)
+  integrity="sha512-LmNld8Fj0RzTeqkQ5w0tXGx4r4K9H8w6f8tV5bJzS0XH5Cw6g9tFQfF3r2d9z+H2Q1K1tH5yH1vTn7m1eTn0Sg=="
+  integrity="sha512-Mq9P6YjYsm2JMV8Q+r5e5s6NY68zJ0R3z4dv5/1w5z/3H6wRM9mC4u4Gz0V7XvO6ilH2h1eQ8q5Q8gW2+oE5ug=="
+  let a = document.createElement("button");
+  let currentUrl = window.location.href;
+  let e = Array.from(document.querySelectorAll("#rating-stars .star")),
+  let e = document.querySelectorAll(".gallery img"),
+  linear-gradient(160deg, #0a0f1e 0, #0f172a 45%, #0b1220 100%);
+  linear-gradient(180deg, rgba(96, 165, 250, 0.08), transparent 60%);
+  name="description"
+  name="twitter:description"
+  name="twitter:title"
+  navigator.share &&
+  pre {
+  property="og:description"
+  property="og:title"
+  property="og:url"
+  radial-gradient(
+  referrerpolicy="no-referrer"
+  rel="canonical"
+  rel="icon"
+  rel="stylesheet"
   rgba(0, 0, 0, 0) 0,
   rgba(2, 6, 23, 0.85) 40%,
   rgba(2, 6, 23, 0.98) 100%
-);
-border-radius: 10px;
-padding: 8px 10px;
-font-size: 12px;
-color: #cfe3ff;
-  }
-  .pill {
-display: inline-flex;
-gap: 10px;
-align-items: center;
-flex-wrap: wrap;
-  }
-  .pill a {
-text-decoration: none;
-color: #07121f;
-font-weight: 700;
-background: linear-gradient(90deg, #60a5fa, #34d399);
-border-radius: 999px;
-padding: 10px 14px;
-font-size: 14px;
-box-shadow: 0 8px 20px rgba(52, 211, 153, 0.25);
-transition:
-  transform 0.15s ease,
-  box-shadow 0.2s ease;
-  }
-  .pill a:hover {
-transform: translateY(-1px);
-box-shadow: 0 12px 24px rgba(52, 211, 153, 0.32);
-  }
-  .two-col {
-display: grid;
-gap: 18px;
-grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 920px) {
-.two-col {
-  grid-template-columns: 1fr;
-}
-  }
-  pre {
-background: #0b1328 !important;
-border-radius: 12px !important;
-border: 1px solid rgba(255, 255, 255, 0.06);
-padding: 14px !important;
-overflow: auto;
-  }
-  .copy-btn {
-margin-top: 8px;
-background: #0ea5e9;
-color: #fff;
-border: 0;
-border-radius: 10px;
-padding: 8px 12px;
-cursor: pointer;
-font-weight: 700;
-box-shadow: 0 8px 18px rgba(14, 165, 233, 0.35);
-  }
-  .copy-btn:hover {
-filter: brightness(1.05);
-  }
-  .rating {
-display: flex;
-align-items: center;
-gap: 8px;
-flex-wrap: wrap;
-  }
-  .star {
-font-size: 28px;
-color: #64748b;
-cursor: pointer;
-transition: transform 0.1s ease;
-  }
-  .star.active {
-color: #f59e0b;
-  }
-  .star:hover {
-transform: scale(1.08);
-  }
-  .rating-result {
-color: #cfe3ff;
-margin-left: 6px;
-  }
-  .share {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-  }
-  .share a {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-color: #06121e;
-text-decoration: none;
-font-weight: 700;
-border-radius: 12px;
-padding: 10px 12px;
-background: linear-gradient(90deg, #a78bfa, #f472b6);
-border: 1px solid rgba(255, 255, 255, 0.14);
-box-shadow: 0 10px 22px rgba(164, 120, 253, 0.25);
-  }
-  .share a:hover {
-filter: brightness(1.05);
-  }
-  .meta-sys {
-display: grid;
-gap: 12px;
-grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 720px) {
-.meta-sys {
-  grid-template-columns: 1fr;
-}
-  }
-  .kvs {
-display: flex;
-align-items: center;
-gap: 12px;
-padding: 10px 12px;
-background: rgba(255, 255, 255, 0.03);
-border: 1px solid rgba(255, 255, 255, 0.06);
-border-radius: 12px;
-  }
-  .kvs .ico {
-width: 28px;
-height: 28px;
-display: grid;
-place-items: center;
-  }
-  .kvs .kv {
-font-size: 14px;
-color: #cfe3ff;
-  }
-  .kvs .kv small {
-display: block;
-color: var(--muted);
-  }
-  footer {
-border-top: 1px solid rgba(255, 255, 255, 0.06);
-background: linear-gradient(
-  180deg,
-  rgba(255, 255, 255, 0.02),
   rgba(255, 255, 255, 0.01)
-);
-padding: 26px 16px 90px;
-color: #cfe3ff;
-text-align: center;
-  }
-  #btn-home-left,
-  #btn-home-right {
-position: fixed;
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background-color: #0ea5e9;
-color: #001524;
-padding: 10px 12px;
-border-radius: 999px;
-text-decoration: none;
-font-family: inherit;
-font-size: 14px;
-font-weight: 800;
-box-shadow: 0 14px 28px rgba(14, 165, 233, 0.35);
-transition:
-  background 0.3s ease,
+  rgba(255, 255, 255, 0.02),
+  rgba(255, 255, 255, 0.03),
+  setTimeout(() => (a.textContent = "Salin kode"), 1500));
+  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
+  system-ui,
+  transform 0.15s ease,
   transform 0.2s ease,
-  box-shadow 0.2s ease;
-z-index: 9999;
-  }
-  #btn-home-left:hover,
-  #btn-home-right:hover {
-background-color: #22d3ee;
-transform: translateY(-1px) scale(1.03);
-box-shadow: 0 16px 34px rgba(34, 211, 238, 0.34);
-  }
-  #btn-home-left {
-left: 10px;
-top: 30%;
-transform: translateY(-50%);
-  }
-  #btn-home-right {
-right: 10px;
-bottom: 20%;
-transform: translateY(50%);
-  }
-  #btn-home-left svg,
-  #btn-home-right svg {
-width: 20px;
-height: 20px;
-fill: #001524;
-  }
-  .small-muted {
-color: var(--muted);
-  }
-  .card h2::after {
-content: "";
-display: block;
-width: 68px;
-height: 3px;
-margin-top: 8px;
-background: linear-gradient(
-  90deg,
-  var(--brand-2),
-  var(--brand),
+  try {
+  type="image/x-icon"
+  ui-sans-serif,
+  var e = document.createElement("img");
+  var e,
   var(--accent)
+  var(--brand),
+  var(--brand-2),
+  }
+  } catch (e) {
+  })
+  }),
+  });
+(((e = document.createElement("a")).href = "#"),
+(() => {
+(a.textContent = "Salin kode"),
+(await navigator.clipboard.writeText(e.textContent),
+(e.addEventListener("click", () => {
+(e.innerHTML = "<span>🔗</span><span>Bagikan Cepat</span>"),
+(t.textContent = `Terima kasih! Anda memberi ${a} bintang.`));
+(window.fbAsyncInit = function () {
 );
-border-radius: 999px;
-opacity: 0.8;
-  }
-  #lightbox {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.95);
-display: none;
-justify-content: center;
-align-items: center;
-z-index: 10000;
-cursor: zoom-out;
-opacity: 0;
-transition: opacity 0.3s ease;
-  }
-  #lightbox.active {
-display: flex;
-opacity: 1;
-  }
-  #lightbox img {
-max-width: 90%;
-max-height: 90%;
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-  }
+--accent: #f472b6;
+--bg-soft: #111827;
+--bg: #0f172a;
+--brand-2: #60a5fa;
+--brand: #6ee7b7;
+--card: #0b1220;
+--danger: #ef4444;
+--maxw: 1200px;
+--muted: #93a4b0;
+--radius: 14px;
+--shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+--success: #22c55e;
+--text: #e5f0ff;
+--warning: #f59e0b;
+-webkit-background-clip: text;
+.gallery {
+.grid {
+.meta-sys {
+.two-col {
+/>
+1200px 600px at 10% -10%,
+800px 400px at 50% 0,
+900px 600px at 110% 10%,
+<!-- prettier-ignore -->
+<!doctype html>
+</body>
+</div>
+</footer>
+</html>
+</main>
+</script>
 </style>
 <div
-  class="fb-comments"
-  id="fb-comments"
-  data-href=""
-  data-width="100%"
-  data-numposts="5"
-></div>
-<script>
-  let currentUrl = window.location.href;
-  ((document.getElementById("current-url").textContent =
-currentUrl),
-document
-  .getElementById("fb-comments")
-  .setAttribute("data-href", currentUrl),
-(window.fbAsyncInit = function () {
-  if ("undefined" != typeof FB)
-try {
-  FB.XFBML.parse();
-} catch (t) {}
-}));
-</script>
-  </div>
-</div>
-  </section>
-  
-</main>
-<div id="lightbox"></div>
-
-<footer>
-  <div>
-🄯 <span id="y"></span> • E‑Learning Guide • Dibuat dengan semangat
-berbagi
-  </div>
-</footer>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
-  integrity="sha512-LmNld8Fj0RzTeqkQ5w0tXGx4r4K9H8w6f8tV5bJzS0XH5Cw6g9tFQfF3r2d9z+H2Q1K1tH5yH1vTn7m1eTn0Sg=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-<script>
-  ((document.getElementById("y").textContent = new Date().getFullYear()),
-document.querySelectorAll("pre code").forEach((e, t) => {
-  let a = document.createElement("button");
-  ((a.className = "copy-btn"),
-(a.textContent = "Salin kode"),
-a.addEventListener("click", async () => {
-  try {
-(await navigator.clipboard.writeText(e.textContent),
-  (a.textContent = "Tersalin ✓"),
-  setTimeout(() => (a.textContent = "Salin kode"), 1500));
-  } catch (e) {
-a.textContent = "Gagal menyalin";
-  }
-}),
-e.closest("pre").insertAdjacentElement("afterend", a));
-}),
-(() => {
-  let e = Array.from(document.querySelectorAll("#rating-stars .star")),
-t = document.getElementById("rating-result"),
-a = 0;
-  function n(a) {
-e.forEach((e, t) => e.classList.toggle("active", t < a));
-  }
-  e.forEach((e) => {
-(e.addEventListener("click", () => {
-  (n((a = Number(e.dataset.v))),
-(t.textContent = `Terima kasih! Anda memberi ${a} bintang.`));
-}),
-  e.addEventListener("mouseenter", () => n(Number(e.dataset.v))),
-  e.addEventListener("mouseleave", () => n(a)));
-  });
-})(),
-(() => {
-  var e,
-t = document.getElementById("share-links");
-  navigator.share &&
-(((e = document.createElement("a")).href = "#"),
-(e.innerHTML = "<span>🔗</span><span>Bagikan Cepat</span>"),
-e.addEventListener("click", (e) => {
-  (e.preventDefault(),
-navigator
-  .share({
-title: document.title,
-text: "Cek ringkasan e‑Learning ini!",
-url: location.href,
-  })
-  .catch(() => {}));
-}),
-t.appendChild(e));
-})(),
-detect(),
-document.addEventListener("DOMContentLoaded", () => {
-  let e = document.querySelectorAll(".gallery img"),
-a = document.getElementById("lightbox");
-  (e.forEach((t) => {
-t.addEventListener("click", () => {
-  var e = document.createElement("img");
-  for (e.src = t.src, e.alt = t.alt; a.firstChild; )
-a.removeChild(a.firstChild);
-  (a.appendChild(e), a.classList.add("active"));
-});
-  }),
-a.addEventListener("click", () => {
-  a.classList.remove("active");
-}));
-}));
-</script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<div id="lightbox"></div>
+<footer>
+<html lang="id">
+<link
+<meta
+<meta charset="UTF-8" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta property="og:locale" content="id_ID" />
+<meta property="og:type" content="article" />
+<script
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
+<script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<style>
+<title>E‑Learning: Istilah, Definisi, Keunggulan, dan Contoh Penerapan</title>
+></div>
+></script>
+a = 0;
+a = document.getElementById("lightbox");
+a.addEventListener("click", () => {
+a.addEventListener("click", async () => {
+a.removeChild(a.firstChild);
+a.textContent = "Gagal menyalin";
+align-items: center;
+aspect-ratio: 16/9;
+background-clip: text;
+background-color: #0ea5e9;
+background-color: #22d3ee;
+background-color: rgba(0, 0, 0, 0.95);
+background:
+background: #0b1220;
+background: #0b1328 !important;
+background: #0ea5e9;
+background: linear-gradient(
+background: linear-gradient(90deg, #60a5fa, #34d399);
+background: linear-gradient(90deg, #a78bfa, #f472b6);
+background: linear-gradient(90deg, #dbeafe, #bbf7d0, #fbcfe8);
+background: rgba(255, 255, 255, 0.03);
+background: rgba(96, 165, 250, 0.12);
+berbagi
+border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+border-radius: 10px;
+border-radius: 12px !important;
+border-radius: 12px;
+border-radius: 999px;
+border-radius: var(--radius);
+border-top: 1px solid rgba(255, 255, 255, 0.06);
+border: 0;
+border: 1px solid rgba(255, 255, 255, 0.06);
+border: 1px solid rgba(255, 255, 255, 0.14);
+border: 1px solid rgba(96, 165, 250, 0.28);
+bottom: 20%;
+box-shadow: 0 10px 22px rgba(164, 120, 253, 0.25);
+box-shadow: 0 12px 24px rgba(52, 211, 153, 0.32);
+box-shadow: 0 14px 28px rgba(14, 165, 233, 0.35);
+box-shadow: 0 16px 34px rgba(34, 211, 238, 0.34);
+box-shadow: 0 8px 18px rgba(14, 165, 233, 0.35);
+box-shadow: 0 8px 20px rgba(52, 211, 153, 0.25);
+box-shadow: var(--shadow);
+box-sizing: border-box;
+color: #001524;
+color: #06121e;
+color: #07121f;
+color: #64748b;
+color: #c6d5e6;
+color: #cbe7ff;
+color: #cfe3ff;
+color: #d7e8ff;
+color: #f59e0b;
+color: #fff;
+color: transparent;
+color: var(--muted);
+color: var(--text);
+content: "";
+currentUrl),
+cursor: pointer;
+cursor: zoom-in;
+cursor: zoom-out;
+detect(),
+display: block;
+display: flex;
+display: grid;
+display: inline-flex;
+display: none;
+document
+document.addEventListener("DOMContentLoaded", () => {
+document.querySelectorAll("pre code").forEach((e, t) => {
+e.addEventListener("click", (e) => {
+e.closest("pre").insertAdjacentElement("afterend", a));
+e.forEach((e, t) => e.classList.toggle("active", t < a));
+fill: #001524;
+filter: brightness(1.05);
+flex-wrap: wrap;
+font-family:
+font-family: inherit;
+font-size: 12px;
+font-size: 14px;
+font-size: 28px;
+font-size: clamp(15px, 1.6vw, 18px);
+font-size: clamp(20px, 2.2vw, 26px);
+font-size: clamp(26px, 4vw, 46px);
+font-weight: 600;
+font-weight: 700;
+font-weight: 800;
+gap: 10px;
+gap: 12px;
+gap: 14px;
+gap: 18px;
+gap: 8px;
+grid-template-columns: 1.2fr 0.8fr;
+grid-template-columns: 1fr 1fr;
+grid-template-columns: repeat(3, 1fr);
+height: 100%;
+height: 20px;
+height: 28px;
+height: 3px;
+inset: auto 8px 8px 8px;
+justify-content: center;
+left: 0;
+left: 10px;
+letter-spacing: 0.2px;
+line-height: 1.18;
+margin-bottom: 14px;
+margin-left: 6px;
+margin-top: 8px;
+margin: 0 auto 18px;
+margin: 0 auto;
+margin: 0;
+margin: 10px 0 0 0;
+margin: 8px 0 10px;
+margin: 8px 0 12px;
+margin: 8px 0;
+max-height: 90%;
+max-width: 760px;
+max-width: 90%;
+max-width: var(--maxw);
+min-height: 48vh;
+navigator
+object-fit: cover;
+opacity: 0.8;
+opacity: 0.9;
+opacity: 0;
+opacity: 1;
+overflow: auto;
+overflow: hidden;
+padding: 0 0 0 18px;
+padding: 10px 12px;
+padding: 10px 14px;
+padding: 12px;
+padding: 14px !important;
+padding: 18px 18px 22px;
+padding: 26px 16px 90px;
+padding: 28px 16px 70px;
+padding: 36px 16px;
+padding: 6px 10px;
+padding: 6px 12px;
+padding: 8px 10px;
+padding: 8px 12px;
+place-items: center;
+position: absolute;
+position: fixed;
+position: relative;
+rgba(110, 231, 183, 0.12),
+rgba(96, 165, 250, 0.08),
+rgba(96, 165, 250, 0.18),
+right: 10px;
+t = document.getElementById("rating-result"),
+t = document.getElementById("share-links");
+t.addEventListener("click", () => {
+t.appendChild(e));
+text-align: center;
+text-decoration: none;
+text-shadow: 0 0 24px rgba(96, 165, 250, 0.18);
+text: "Cek ringkasan e‑Learning ini!",
+title: document.title,
+top: 0;
+top: 30%;
+transform: scale(1.02);
+transform: scale(1.06);
+transform: scale(1.08);
+transform: translateY(-1px) scale(1.03);
+transform: translateY(-1px);
+transform: translateY(-50%);
+transform: translateY(50%);
+transition:
+transition: opacity 0.3s ease;
+transition: transform 0.1s ease;
+transition: transform 0.35s ease;
+transparent 50%
+transparent 60%
+try {
+url: location.href,
+width: 100%;
+width: 20px;
+width: 28px;
+width: 68px;
+z-index: 10000;
+z-index: 9999;
+}
+} catch (t) {}
+})(),
+}));
+}),
+});
+🄯 <span id="y"></span> • E‑Learning Guide • Dibuat dengan semangat

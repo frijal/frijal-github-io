@@ -1,106 +1,91 @@
-<!doctype html>
-<html lang="id">
-<head>
+
   <!-- Basic -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <!-- JSON-LD Structured Data -->
+  <!-- Open Graph -->
+  <!-- Twitter Card -->
   <!-- prettier-ignore -->
-<title>Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi</title>
-  <meta name="description" content="Mengulas keistimewaan Ramadhan, turunnya kitab-kitab suci, para pahlawan muslim, dan momen kemerdekaan Indonesia. Santai, ceria, dan penuh syukur.">
+  </script>
   <link rel="canonical" href="https://frijal.pages.dev/artikel/islam-indonesia-merdeka-ramadhan.html">
   <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="description" content="Mengulas keistimewaan Ramadhan, turunnya kitab-kitab suci, para pahlawan muslim, dan momen kemerdekaan Indonesia. Santai, ceria, dan penuh syukur.">
   <meta name="theme-color" content="#12c2e9">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Frijal Articles">
-  <meta property="og:title" content="Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi">
-  <meta property="og:description" content="Mengulas keistimewaan Ramadhan, turunnya kitab-kitab suci, para pahlawan muslim, dan momen kemerdekaan Indonesia.">
-  <meta property="og:url" content="https://frijal.pages.dev/artikel/islam-indonesia-merdeka-ramadhan.html">
-  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/1200px-Flag_of_Indonesia.svg.png">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi">
   <meta name="twitter:description" content="Turunnya kitab-kitab, pahlawan muslim, peristiwa Ramadhan, hingga 17 Agustus: rangkum hangat dan inspiratif.">
   <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/1200px-Flag_of_Indonesia.svg.png">
-
-  <!-- JSON-LD Structured Data -->
+  <meta name="twitter:title" content="Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta property="og:description" content="Mengulas keistimewaan Ramadhan, turunnya kitab-kitab suci, para pahlawan muslim, dan momen kemerdekaan Indonesia.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/1200px-Flag_of_Indonesia.svg.png">
+  <meta property="og:site_name" content="Frijal Articles">
+  <meta property="og:title" content="Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/islam-indonesia-merdeka-ramadhan.html">
   <script>
-
-
-// Share links
-(function share(){
-  const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
-  const title = encodeURIComponent(document.title);
-  const text = encodeURIComponent('Baca: Islam, Indonesia Merdeka, dan Ramadhan - rangkum hangat & inspiratif:');
+  ];
+  close.addEventListener('click', closeLB);
+  const btnCopy = document.getElementById('btn-copy');
+  const close = document.getElementById('lb-close');
+  const gallery = [...document.querySelectorAll('#gallery a')];
+  const img = document.getElementById('lb-img');
+  const lb = document.getElementById('lightbox');
+  const next = document.getElementById('lb-next');
   const pairs = [
-['share-wa','https://wa.me/?text='+text+'%20'+url],
-['share-wa-2','https://wa.me/?text='+text+'%20'+url],
-['share-x','https://twitter.com/intent/tweet?url='+url+'&text='+title],
-['share-x-2','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+  const prev = document.getElementById('lb-prev');
+  const text = encodeURIComponent('Baca: Islam, Indonesia Merdeka, dan Ramadhan - rangkum hangat & inspiratif:');
+  const title = encodeURIComponent(document.title);
+  const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
+  document.addEventListener('keydown', e=>{
+  function closeLB(){
+  function move(delta){
+  function open(i){
+  gallery.forEach((a,i)=>a.addEventListener('click', e=>{ e.preventDefault(); open(i); }));
+  if(btnCopy){
+  lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+  let idx = 0;
+  next.addEventListener('click', ()=>move(1));
+  pairs.forEach(([id,href])=>{ const a=document.getElementById(id); if(a) a.href=href; });
+  prev.addEventListener('click', ()=>move(-1));
+  try{
+  }
+  });
+  }catch{ alert('Gagal menyalin tautan.'); }
+(function lightbox(){
+(function share(){
+// Lightbox
+// Share links
+<!doctype html>
+</body>
+</html>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<head>
+<html lang="id">
+<script defer src="/ext/iposbrowser.js"></script>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section>
+<title>Islam, Indonesia Merdeka, dan Ramadhan - syukur, sejarah, dan inspirasi</title>
 ['share-fb','https://www.facebook.com/sharer/sharer.php?u='+url],
 ['share-fb-2','https://www.facebook.com/sharer/sharer.php?u='+url],
 ['share-ln','https://www.linkedin.com/sharing/share-offsite/?url='+url],
 ['share-ln-2','https://www.linkedin.com/sharing/share-offsite/?url='+url]
-  ];
-  pairs.forEach(([id,href])=>{ const a=document.getElementById(id); if(a) a.href=href; });
-  const btnCopy = document.getElementById('btn-copy');
-  if(btnCopy){
-btnCopy.addEventListener('click', async ()=>{
-  try{
+['share-wa','https://wa.me/?text='+text+'%20'+url],
+['share-wa-2','https://wa.me/?text='+text+'%20'+url],
+['share-x','https://twitter.com/intent/tweet?url='+url+'&text='+title],
+['share-x-2','https://twitter.com/intent/tweet?url='+url+'&text='+title],
 await navigator.clipboard.writeText(decodeURIComponent(url));
+btnCopy.addEventListener('click', async ()=>{
 btnCopy.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/></svg><span>Tautan disalin</span>';
-  }catch{ alert('Gagal menyalin tautan.'); }
-});
-  }
-})();
-
-// Lightbox
-(function lightbox(){
-  const gallery = [...document.querySelectorAll('#gallery a')];
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lb-img');
-  const close = document.getElementById('lb-close');
-  const prev = document.getElementById('lb-prev');
-  const next = document.getElementById('lb-next');
-  let idx = 0;
-
-  function open(i){
-idx = i;
-const href = gallery[idx].getAttribute('href');
 const alt = gallery[idx].querySelector('img')?.getAttribute('alt') || '';
-img.src = href; img.alt = alt;
-lb.classList.add('open');
-  }
-  function move(delta){
+const href = gallery[idx].getAttribute('href');
 idx = (idx + delta + gallery.length) % gallery.length;
-open(idx);
-  }
-  function closeLB(){
-lb.classList.remove('open'); img.src=''; img.alt='';
-  }
-  gallery.forEach((a,i)=>a.addEventListener('click', e=>{ e.preventDefault(); open(i); }));
-  close.addEventListener('click', closeLB);
-  prev.addEventListener('click', ()=>move(-1));
-  next.addEventListener('click', ()=>move(1));
-  lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
-  document.addEventListener('keydown', e=>{
+idx = i;
 if(!lb.classList.contains('open')) return;
-if(e.key==='Escape') closeLB();
 if(e.key==='ArrowLeft') move(-1);
 if(e.key==='ArrowRight') move(1);
-  });
+if(e.key==='Escape') closeLB();
+img.src = href; img.alt = alt;
+lb.classList.add('open');
+lb.classList.remove('open'); img.src=''; img.alt='';
+open(idx);
 })();
-  </script>
-
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-</body>
-</html>
+});
