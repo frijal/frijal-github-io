@@ -112,7 +112,7 @@ const generateRSS = async () => {
     const items = itemsArr
       .map((it) => {
         const enclosure = it.imageLoc
-          ? `    <enclosure url="${it.imageLoc}" length="0" type="image/jpeg" />`
+          ? `    <enclosure url="${it.imageLoc}" length="0" type="image/webp" />`
           : ''
         return `    <item>
       <title><![CDATA[${it.title}]]></title>
