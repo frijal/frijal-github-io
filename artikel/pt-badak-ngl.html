@@ -37,22 +37,15 @@
 
         * {
             box-sizing: border-box
-        }
-
         html,
         body {
             height: 100%
-        }
-
-        body {
             margin: 0;
             background: linear-gradient(180deg, #04102a 0%, #081528 40%, #07111c 100%);
             color: #e6eef8;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.6;
-        }
-
         .wrap {
             max-width: var(--max-width);
             margin: 40px auto;
@@ -60,206 +53,126 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
             border-radius: calc(var(--radius) + 6px);
             box-shadow: 0 10px 40px rgba(2, 6, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
-        }
-
         header.site-head {
             display: flex;
             gap: 18px;
             align-items: center;
             margin-bottom: 18px;
-        }
-
         .logo {
             width: 68px;
             height: 68px;
             border-radius: 12px;
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            display: flex;
-            align-items: center;
             justify-content: center;
             flex: 0 0 68px;
             box-shadow: 0 6px 18px rgba(15, 40, 60, 0.35);
             font-weight: 700;
             font-size: 20px;
             color: white;
-        }
-
         h1 {
             font-size: 22px;
             margin: 0
-        }
-
         p.lead {
             margin: 6px 0 0;
             color: var(--muted);
             font-size: 14px
-        }
-
         /* Dihapus: CSS grid 2 kolom, diubah menjadi 1 kolom */
         .grid {
             display: block;
             margin-top: 22px;
-        }
-
         @media (max-width:980px) {
             .wrap {
                 margin: 18px;
                 padding: 18px
             }
-        }
-
         .article, .card {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
             padding: 20px;
-            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.02);
             margin-bottom: 20px; /* Tambahkan margin untuk memisahkan section */
-        }
         
         .meta-row {
-            display: flex;
             gap: 12px;
-            align-items: center;
             margin-bottom: 14px;
-            color: var(--muted);
             font-size: 13px
-        }
-
         .chip {
             background: var(--glass);
             padding: 6px 10px;
             border-radius: 999px;
             font-weight: 600;
-            color: var(--muted);
             display: inline-flex;
-            align-items: center;
             gap: 8px;
-        }
-
         article h2 {
             margin-top: 0
-        }
-
         .content p {
             margin: 0 0 12px
-        }
-
         .important {
             background: linear-gradient(90deg, rgba(66, 165, 245, 0.08), rgba(96, 165, 250, 0.06));
             padding: 12px;
             border-radius: 10px;
             border: 1px solid rgba(66, 165, 245, 0.06);
             color: #dff2ff
-        }
-
         /* sidebar/aside dihapus */
-
         .share-buttons {
-            display: flex;
             flex-wrap: wrap;
-            gap: 8px;
             margin-top: 10px
-        }
-
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             padding: 8px 12px;
-            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.03);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
             cursor: pointer;
             color: inherit;
             text-decoration: none;
-            font-weight: 600;
             font-size: 13px;
-        }
-
         .btn svg {
             width: 18px;
             height: 18px;
             opacity: 0.95
-        }
-
         .meta-info {
             margin-top: 12px;
-            font-size: 13px;
-            color: var(--muted);
-            display: flex;
             flex-direction: column;
             gap: 8px
-        }
-
         .info-row {
-            display: flex;
             gap: 10px;
-            align-items: center;
             justify-content: space-between
-        }
-
         footer.footer {
             margin-top: 20px;
             padding-top: 18px;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            color: var(--muted);
-            font-size: 13px
-        }
-
         .comments-wrap {
             margin-top: 18px;
-            border-radius: 12px;
-            padding: 12px;
             background: rgba(0, 0, 0, 0.18);
             border: 1px solid rgba(255, 255, 255, 0.02)
-        }
-
         .copy-link {
             margin-left: auto;
             background: transparent;
             border: 1px dashed rgba(255, 255, 255, 0.05);
-            padding: 6px 10px;
             border-radius: 8px;
             font-weight: 600
-        }
-
         .kbd {
             background: rgba(255, 255, 255, 0.02);
             padding: 4px 8px;
             border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
             font-family: monospace;
             font-size: 12px
-        }
-
         /* small screens */
         @media (max-width:480px) {
             h1 {
                 font-size: 18px
-            }
-
             .logo {
                 width: 56px;
                 height: 56px
-            }
-        }
-
         /* accessibility focus */
         .btn:focus,
         .copy-link:focus {
             outline: 3px solid rgba(66, 165, 245, 0.16);
             outline-offset: 2px
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canonicalUrl = document.getElementById('canonical-link').href || window.location.href.split('#')[0];
             const pageTitle = document.title;
             const nowISO = new Date().toISOString();
-
             // --- 1. Populate URL & Date Fields ---
             const encodedUrl = encodeURIComponent(canonicalUrl);
             document.getElementById('current-url').textContent = canonicalUrl;
@@ -268,14 +181,12 @@
             
             const fbComments = document.getElementById('fb-comments');
             if (fbComments) fbComments.setAttribute('data-href', canonicalUrl);
-
             // --- 2. Share buttons behavior ---
             const shareText = encodeURIComponent("Baca tentang PT Badak NGL — lokasi & fakta singkat");
             document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
             document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${encodedUrl}`;
             document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodedUrl}`;
             document.getElementById('share-tg').href = `https://t.me/share/url?url=${encodedUrl}&text=${shareText}`;
-
             // --- 3. Copy Link ---
             document.getElementById('btn-copy-link').addEventListener('click', async (e)=>{
                 try{
@@ -285,9 +196,7 @@
                 }
                 catch(err){
                     prompt('Gagal menyalin. Salin manual:', canonicalUrl);
-                }
             });
-
             // --- 4. JSON-LD Update ---
             // a. Update Article
             try{
@@ -296,26 +205,19 @@
                 ld.mainEntityOfPage['@id'] = canonicalUrl;
                 ld.dateModified = nowISO;
                 ldArticleScript.textContent = JSON.stringify(ld, null, 2);
-            }
             catch(e){ console.warn('Gagal mengisi JSON-LD Article otomatis', e); }
-
             // b. Update Breadcrumb
-            try{
                 const ldBreadcrumbScript = document.getElementById('ld-breadcrumb-template');
                 const ld = JSON.parse(ldBreadcrumbScript.textContent);
                 ld.itemListElement[2].item = canonicalUrl;
                 ldBreadcrumbScript.textContent = JSON.stringify(ld, null, 2);
-            }
             catch(e){ console.warn('Gagal mengisi JSON-LD Breadcrumb otomatis', e); }
-
             // c. Inject FAQPage
             const faqs = [];
             document.querySelectorAll('#faq details').forEach((d) => {
                 const q = d.querySelector('summary')?.textContent || '';
                 const a = d.querySelector('p')?.textContent || '';
                 if (q && a) faqs.push({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } });
-            });
-
             if (faqs.length > 0) {
                 const jsonldFAQ = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs };
                 const script = document.createElement('script');
@@ -323,20 +225,13 @@
                 script.id = 'ld-faq';
                 script.text = JSON.stringify(jsonldFAQ, null, 2);
                 document.head.appendChild(script);
-            }
-
             // Dihapus: Skrip deteksi Browser & OS dan IP (fungsi anonim terakhir)
-            
             // Reload FB plugin
             if (typeof FB !== 'undefined') { FB.XFBML.parse(); }
-
         });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

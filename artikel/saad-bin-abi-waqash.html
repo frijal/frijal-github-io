@@ -46,7 +46,6 @@
       const btnRight = document.querySelector('.lb-arrow.right');
       const btnClose = document.querySelector('.lb-close');
       let current = -1;
-
       function open(idx) {
         const fig = figures[idx];
         if (!fig) return;
@@ -57,21 +56,15 @@
         current = idx;
         updateArrows();
         document.body.style.overflow = 'hidden';
-      }
-
       function close() {
         lightbox.style.display = 'none';
         lightbox.setAttribute('aria-hidden', 'true');
         lbImg.src = '';
         current = -1;
         document.body.style.overflow = '';
-      }
-
       function updateArrows() {
         btnLeft.style.display = (current > 0) ? 'flex' : 'none';
         btnRight.style.display = (current < figures.length - 1) ? 'flex' : 'none';
-      }
-
       figures.forEach((fig, i) => {
         fig.addEventListener('click', () => open(i));
         fig.addEventListener('keydown', (e) => {
@@ -81,19 +74,16 @@
           }
         });
       });
-
       btnLeft.addEventListener('click', (e) => { e.stopPropagation(); if (current > 0) open(current - 1); });
       btnRight.addEventListener('click', (e) => { e.stopPropagation(); if (current < figures.length - 1) open(current + 1); });
       btnClose.addEventListener('click', close);
       lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
-
       document.addEventListener('keydown', (e) => {
         if (lightbox.style.display === 'flex') {
           if (e.key === 'ArrowLeft' && current > 0) open(current - 1);
           if (e.key === 'ArrowRight' && current < figures.length - 1) open(current + 1);
           if (e.key === 'Escape') close();
         }
-      });
     });
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
@@ -101,9 +91,5 @@
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

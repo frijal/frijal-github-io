@@ -11,7 +11,6 @@
     <meta name="robots" content="index, follow" />
     
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%233b82f6' d='M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 15h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V8h4v2z'/></svg>" type="image/svg+xml" />
-    
     <meta property="og:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
     <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
     <meta property="og:type" content="article" />
@@ -19,7 +18,6 @@
     <meta property="og:site_name" content="Frijal Command Line Guides" />
     <meta property="og:image" content="https://frijal.pages.dev/img/ffmpeg-panduan-interaktif.webp" />
     <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
-    
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Panduan FFmpeg Lengkap: Audio & Video Interaktif" />
     <meta name="twitter:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi dan penjelasan parameter." />
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     "#framerate":"framerate-content",
     "#tips":"tips-content"
   };
-
   const loadContent=(hash)=>{
     navLinks.forEach(l=>l.classList.remove("active-nav"));
     contentDisplay.innerHTML="";
@@ -63,20 +60,15 @@ document.addEventListener("DOMContentLoaded",()=>{
       const welcomeTemplate=document.getElementById("welcome-content");
       contentDisplay.appendChild(welcomeTemplate.content.cloneNode(true));
     }
-  };
-
   navigation.addEventListener("click",e=>{if(e.target.tagName==="A"){e.preventDefault();window.location.hash=e.target.hash;}});
   window.addEventListener("hashchange",()=>loadContent(window.location.hash));
-
   contentDisplay.addEventListener("click",t=>{
     if(t.target.classList.contains("copy-btn")){
       const codeEl=t.target.nextElementSibling.querySelector("code");
       if(codeEl) navigator.clipboard.writeText(codeEl.innerText.trim())
       .then(()=>{const btn=t.target,orig=btn.innerText;btn.innerText="Disalin!";setTimeout(()=>btn.innerText=orig,2000);})
       .catch(err=>console.error("Gagal menyalin",err));
-    }
   });
-
   if(window.location.hash) loadContent(window.location.hash);
   else loadContent("");
 });
@@ -86,9 +78,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

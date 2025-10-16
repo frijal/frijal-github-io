@@ -22,7 +22,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const pageUrl = encodeURIComponent(document.querySelector('link[rel="canonical"]').href || window.location.href);
     const pageTitle = encodeURIComponent(document.title);
-    
     // Social Sharing
     document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
     document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
@@ -43,26 +42,20 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     lazyImages.forEach(img => observer.observe(img));
-    
     // Lightbox Logic
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
-    
     document.querySelector('.lightbox-trigger').addEventListener('click', (e) => {
         e.preventDefault();
         // Mengambil src dari gambar di dalam trigger
         const imgSrc = e.currentTarget.querySelector('img').src; 
         lightboxImage.src = imgSrc;
         lightbox.classList.add('active');
-    });
-    
     lightbox.addEventListener('click', (e) => {
         // Hanya tutup jika klik di background lightbox
         if (e.target === lightbox || e.target === lightboxImage) {
             lightbox.classList.remove('active');
         }
-    });
-
     // Facebook Comments URL
     const canonicalUrl = decodeURIComponent(pageUrl);
     const fbComments = document.querySelector('.fb-comments');
@@ -73,9 +66,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

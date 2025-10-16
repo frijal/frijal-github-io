@@ -54,7 +54,6 @@
         const lbImg = document.getElementById('lightbox-img');
         const lbCap = document.getElementById('lb-cap');
         let idx = -1;
-
         function openAt(i){
           idx = i;
           const el = gallery[idx];
@@ -63,40 +62,29 @@
           lbCap.textContent = el.dataset.caption || '';
           lb.classList.add('open');
         }
-
         function closeLb(){
           lb.classList.remove('open');
           lbImg.src = '';
           lbCap.textContent = '';
           idx = -1;
-        }
-
         function prev(){ 
           if (idx > 0) openAt(idx - 1); 
           else if (idx === 0) openAt(gallery.length - 1); // loop
-        }
-
         function next(){ 
           if (idx < gallery.length - 1) openAt(idx + 1); 
           else if (idx === gallery.length - 1) openAt(0); // loop
-        }
-
         gallery.forEach((el, i)=> el.addEventListener('click', ()=> openAt(i)));
         document.getElementById('lb-close').addEventListener('click', closeLb);
         document.getElementById('lb-prev').addEventListener('click', prev);
         document.getElementById('lb-next').addEventListener('click', next);
-        
         lb.addEventListener('click', (e)=> { 
           // Tutup hanya jika mengklik background, bukan gambar atau kontrol
           if (e.target === lb || e.target.closest('.lb-controls')) closeLb(); 
-        });
-
         window.addEventListener('keydown', (e)=>{
           if (!lb.classList.contains('open')) return;
           if (e.key === 'Escape') closeLb();
           if (e.key === 'ArrowLeft') prev();
           if (e.key === 'ArrowRight') next();
-        });
             
         // --- Fallback Lazy-load untuk browser lama ---
         if (!('loading' in HTMLImageElement.prototype)) {
@@ -104,16 +92,11 @@
           lazyImgs.forEach(img => {
             const src = img.getAttribute('src');
             if (src) { const i = new Image(); i.src = src; i.onload = () => { img.src = src; }; }
-          });
-        }
       })();
     });
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

@@ -9,14 +9,11 @@
 <meta name="keywords" content="ImageMagick, manipulasi gambar, resize, convert, rotate, watermark, batch, CLI, tutorial, guide" />
 <meta name="author" content="Frijal" />
 <meta name="robots" content="index, follow" />
-
 <link rel="canonical" href="https://frijal.pages.dev/artikel/imagemagick-guide.html" />
-
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" href="/icon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-
 <meta property="og:locale" content="id_ID" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Panduan ImageMagick Interaktif: Manipulasi Gambar CLI" />
@@ -27,19 +24,16 @@
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Ilustrasi Panduan Interaktif ImageMagick" />
-
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Panduan ImageMagick Interaktif: Manipulasi Gambar CLI" />
 <meta name="twitter:description" content="Panduan interaktif ImageMagick lengkap dengan contoh perintah manipulasi gambar: resize, convert, rotate, watermark, batch, dan efek." />
 <meta name="twitter:image" content="https://frijal.pages.dev/imagemagick-guide.jpg" />
 <meta name="twitter:site" content="@frijal" /> <meta property="fb:app_id" content="1471267430691023" />
-
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const navigation=document.getElementById("navigation");
   const contentDisplay=document.getElementById("content-display");
   const navLinks=document.querySelectorAll(".nav-link");
-
   const contentMap={
     "#convert":"convert-content",
     "#resize":"resize-content",
@@ -49,7 +43,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     "#effects":"effects-content",
     "#tips":"tips-content"
   };
-
   const loadContent=(hash)=>{
     navLinks.forEach(l=>l.classList.remove("active-nav"));
     contentDisplay.innerHTML="";
@@ -62,20 +55,15 @@ document.addEventListener("DOMContentLoaded",()=>{
       const welcomeTemplate=document.getElementById("welcome-content");
       contentDisplay.appendChild(welcomeTemplate.content.cloneNode(true));
     }
-  };
-
   navigation.addEventListener("click",e=>{if(e.target.tagName==="A"){e.preventDefault();window.location.hash=e.target.hash;}});
   window.addEventListener("hashchange",()=>loadContent(window.location.hash));
-
   contentDisplay.addEventListener("click",t=>{
     if(t.target.classList.contains("copy-btn")){
       const codeEl=t.target.nextElementSibling.querySelector("code");
       if(codeEl) navigator.clipboard.writeText(codeEl.innerText.trim())
       .then(()=>{const btn=t.target,orig=btn.innerText;btn.innerText="Disalin!";setTimeout(()=>btn.innerText=orig,2000);})
       .catch(err=>console.error("Gagal menyalin",err));
-    }
   });
-
   if(window.location.hash) loadContent(window.location.hash);
   else loadContent("");
 });
@@ -85,9 +73,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

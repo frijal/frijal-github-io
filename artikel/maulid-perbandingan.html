@@ -43,36 +43,28 @@
         color:var(--fg);
         background:radial-gradient(1200px 600px at 0% 0%, rgba(139,92,246,.25), transparent 55%),radial-gradient(900px 500px at 100% 0%, rgba(245,158,11,.20), transparent 55%),linear-gradient(180deg, var(--bg) 0%, #0d0920 100%);
         font:16px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      }
       .wrap{
         width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px 80px;
-      }
       header.hero{
         position:relative; padding: min(15vh,140px) 20px 24px; text-align:center;
-      }
       .title{
         margin:0 0 10px; font-weight:900; letter-spacing:-.02em;
         font-size: clamp(28px, 4.6vw, 54px);
         background: linear-gradient(90deg, #fff, #ffd89a 40%, #c4b5fd 80%);
         -webkit-background-clip: text; background-clip: text; color: transparent;
         text-shadow: 0 10px 30px rgba(245,158,11,.25);
-      }
       .subtitle{
         margin:0 auto; max-width:900px; color:var(--soft);
         font-size: clamp(14px, 1.6vw, 18px);
-      }
       .meta{
         display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px;
-      }
       .pill{
         padding:6px 12px; border-radius:999px; border:1px solid var(--border);
         background: linear-gradient(90deg, rgba(139,92,246,.14), rgba(245,158,11,.14));
         color:#fff;
-      }
       /* layout */
       .grid{
         display:grid; grid-template-columns: 1.4fr .8fr; gap:24px;
-      }
       @media (max-width: 980px){ .grid{ grid-template-columns: 1fr } }
       .card{
         background: var(--card);
@@ -80,12 +72,10 @@
         border-radius: var(--radius);
         box-shadow: var(--shadow);
         overflow: hidden;
-      }
       .card .head{
         padding:14px 18px;
         background: linear-gradient(90deg, rgba(245,158,11,.14), rgba(139,92,246,.14));
         border-bottom:1px solid var(--border);
-      }
       .card .head h2{ margin:0; font-size:20px; letter-spacing:-.2px }
       .card .body{ padding:18px }
       .card .body p { margin: 0 0 12px }
@@ -107,11 +97,9 @@
       .gallery figcaption{
         position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-size:13px; color:#fff;
         background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
-      }
       .lightbox{
         position:fixed; inset:0; display:none; place-items:center; padding:24px; z-index:9998;
         background: rgba(5,3,15,.7); backdrop-filter: blur(6px);
-      }
       .lightbox.open{ display:grid }
       .lightbox figure{ margin:0; max-width:96vw; max-height:88vh; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#000; box-shadow: var(--shadow) }
       .lightbox img{ display:block; max-width:100%; max-height:88vh; object-fit:contain }
@@ -130,7 +118,6 @@
       .copy-btn{
         position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
         background: linear-gradient(90deg, var(--brand), var(--brand2)); color:#190a2b; font-weight:800; box-shadow: var(--shadow)
-      }
       /* footer info Dihapus dari CSS */
       /* floating home buttons Dihapus dari CSS */
     </style>
@@ -153,10 +140,8 @@
       </section>
       
     </main>
-    
     <footer>
     </footer>
-    
     <div class="lightbox" id="lightbox">
       <figure>
         <button class="close" id="lb-close" aria-label="Tutup">Tutup ✕</button>
@@ -164,7 +149,6 @@
         <figcaption id="lb-cap" style="color:#e5e7eb; padding:10px 12px"></figcaption>
       </figure>
     </div>
-    
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         // Lightbox gallery
@@ -189,12 +173,9 @@
             lb.classList.add('open');
             document.body.style.overflow='hidden';
           }
-          
           function close() {
             lb.classList.remove('open'); 
             document.body.style.overflow='';
-          }
-          
           function init() {
             // Ambil semua elemen img di dalam gallery
             images = Array.from(gallery.querySelectorAll('img'));
@@ -203,12 +184,9 @@
             images.forEach((img, i) => {
               img.addEventListener('click', () => open(i));
             });
-            
             lbClose.addEventListener('click', close);
             lb.addEventListener('click', e=>{ if(e.target===lb) close(); });
             document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
-          }
-          
           init();
         })();
         
@@ -235,11 +213,8 @@
                         e.preventDefault();
                         window.open(link.href, '_blank', 'noopener,noreferrer');
                     });
-                }
             }
           });
-        })();
-        
         // Copy button (untuk snippet)
         document.addEventListener('click', (e)=>{
           if (e.target.matches('.copy-btn')) {
@@ -251,16 +226,11 @@
                 e.target.textContent = 'Copied!';
                 setTimeout(()=> e.target.textContent = old, 1200);
               });
-            }
-          }
         });
       });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

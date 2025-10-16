@@ -32,15 +32,11 @@
 
         * {
             box-sizing: border-box
-        }
-
         body {
             margin: 0;
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
             background: linear-gradient(180deg, #f7fafc 0, #fff 100%);
             color: #0b1220
-        }
-
         .container {
             max-width: 900px; /* Disesuaikan untuk 1 kolom */
             margin: 24px auto;
@@ -48,8 +44,6 @@
             background: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-        }
-
         header {
             display: flex;
             flex-direction: column; /* Ubah ke kolom tunggal */
@@ -57,7 +51,6 @@
             align-items: center;
             text-align: center;
             margin-bottom: 24px;
-        }
         
         .hero-thumb {
             width: 100%; /* Ambil lebar penuh */
@@ -66,117 +59,74 @@
             overflow: hidden;
             box-shadow: 0 8px 30px rgba(2, 6, 23, .06);
             background: #e6eef3;
-        }
-
         .hero-thumb img {
             width: 100%;
             height: auto;
             object-fit: cover;
             display: block
-        }
-
         h1 {
             font-size: 28px;
             margin: 0 0 8px
-        }
-
         .meta {
             color: var(--muted);
             font-size: 14px;
             margin-bottom: 14px
-        }
-
         .summary {
             font-size: 1.1em;
             line-height: 1.7;
             color: #24303a;
             margin-bottom: 20px;
-        }
-
         main {
             display: block; /* Menghapus grid */
-        }
-
         article {
-            background: #fff;
             padding: 24px;
-            border-radius: 12px;
             box-shadow: 0 6px 22px rgba(11, 18, 32, .04);
-            margin-bottom: 20px;
-        }
-
         .card {
-            background: #fff;
             padding: 18px;
             border-radius: 10px;
             margin-bottom: 16px;
             box-shadow: 0 4px 18px rgba(11, 18, 32, .04);
-        }
-
         h2 {
             font-size: 20px;
             margin-top: 4px
-        }
-
         ul {
             padding-left: 18px
-        }
-
         .share {
-            display: flex;
             gap: 8px;
             flex-wrap: wrap
-        }
-
         .btn {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
             padding: 8px 12px;
-            border-radius: 8px;
             border: 1px solid #e6eef3;
-            background: #fff;
             cursor: pointer;
             font-size: 14px
-        }
-
         .btn svg {
             width: 18px;
             height: 18px
-        }
-
         footer {
             margin-top: 28px;
-            text-align: center;
             font-size: 13px;
             color: var(--muted)
-        }
-        
         .comments-wrap {
              margin-top: 20px;
              padding-top: 20px;
              border-top: 1px dashed #e0e0e0;
-        }
     </style>
     <script>
         // Ambil URL unik halaman saat ini
         const currentUrl = document.querySelector('link[rel="canonical"]').href || window.location.href;
         const encodedTitle = encodeURIComponent(document.title);
         const encodedUrl = encodeURIComponent(currentUrl);
-
         // 1. Update elemen Halaman dan Meta Tags
         // document.getElementById("current-url-display").textContent = currentUrl; // Dihapus karena elemennya dihapus
-        
         // Update data-href untuk Facebook Comments
         document.getElementById('fb-comments').setAttribute('data-href', currentUrl);
-        
         // 2. Share buttons
         // Tambahkan rel="noopener" untuk keamanan pada window.open
         document.getElementById('share-fb').addEventListener('click', () => {window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
         document.getElementById('share-x').addEventListener('click', () => {window.open(`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`, '_blank', 'noopener,width=700,height=500');});
         document.getElementById('share-wa').addEventListener('click', () => {window.open(`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`, '_blank', 'noopener');});
         document.getElementById('share-tg').addEventListener('click', () => {window.open(`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`, '_blank', 'noopener');});
-        
         document.getElementById('copy-link').addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText(currentUrl);
@@ -185,7 +135,6 @@
                 prompt('Salin link ini:', currentUrl)
             }
         });
-        
         // 3. Update dateModified di JSON-LD
         document.addEventListener('DOMContentLoaded', () => {
             const schemaArticle = document.getElementById('schema-article');
@@ -193,7 +142,6 @@
                 const json = JSON.parse(schemaArticle.text);
                 json.dateModified = new Date().toISOString().split('T')[0];
                 schemaArticle.text = JSON.stringify(json);
-            }
             
             // 4. Build FAQPage JSON-LD (Hanya menginjeksikan FAQPage)
             const faqs = [];
@@ -202,21 +150,15 @@
                 const a = d.querySelector('p')?.innerText || '';
                 if (q && a) faqs.push({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } });
             });
-
             if (faqs.length > 0) {
                 const jsonldFAQ = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs };
                 const script = document.createElement('script');
                 script.type = 'application/ld+json';
                 script.text = JSON.stringify(jsonldFAQ);
                 document.head.appendChild(script);
-            }
-        });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

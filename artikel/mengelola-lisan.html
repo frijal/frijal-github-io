@@ -33,14 +33,11 @@
             if(currentUrlSpan) currentUrlSpan.textContent = currentUrl;
             const fbCommentsDiv = document.getElementById("fb-comments");
             if(fbCommentsDiv) fbCommentsDiv.setAttribute("data-href", currentUrl);
-
             // Reload FB plugin if SDK is already loaded
             if (typeof FB !== 'undefined') {try { FB.XFBML.parse(); } catch(e) { /* ignore */ }}
-
             // Social Sharing Button Generation (karena HTML asli tidak ada tombolnya, kita generate)
             setupSocialSharing(currentUrl);
         });
-
         function setupSocialSharing(url) {
             const shareContainer = document.getElementById('share-buttons');
             if (!shareContainer) return;
@@ -56,7 +53,6 @@
                 telegram: { icon: `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.69 8.54l-1.63 7.63c-.15.7-.58.87-1.14.54l-2.43-1.78l-1.17 1.12c-.13.13-.24.24-.48.24l.17-2.48l4.46-4.04c.19-.17-.03-.27-.27-.1l-5.5 3.44l-2.37-.74c-.69-.22-.7-.73.14-1.07l9.42-3.61c.58-.22 1.04.14.87.8z"/></svg>`, class: 'share-tg', link: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}` }
                 // Tambahkan platform lain di sini jika perlu
             };
-
             let buttonsHtml = '';
             for (const key in platforms) {
                 buttonsHtml += `<a href="${platforms[key].link}" rel="noreferrer" class="${platforms[key].class}" title="Bagikan ke ${key.charAt(0).toUpperCase() + key.slice(1)}" target="_blank">${platforms[key].icon}</a>`;
@@ -66,9 +62,6 @@
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

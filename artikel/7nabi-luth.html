@@ -55,25 +55,18 @@
       function show(index){
         const img = figures[index].querySelector('img');
         lbImg.src = img.src || img.dataset.src || '';
-      }
       function open(index){
         current = index;
         show(current);
         lb.classList.add('active');
         lb.setAttribute('aria-hidden','false');
-      }
       function close(){
         lb.classList.remove('active');
         lb.setAttribute('aria-hidden','true');
-      }
       function prev(){
         current = (current - 1 + figures.length) % figures.length;
-        show(current);
-      }
       function next(){
         current = (current + 1) % figures.length;
-        show(current);
-      }
       figures.forEach(fig=>{
         fig.addEventListener('click', ()=>open(parseInt(fig.dataset.index,10)));
       });
@@ -82,14 +75,11 @@
       btnClose.addEventListener('click', e=>{ e.stopPropagation(); close(); });
       lb.addEventListener('click', e=>{
         if(e.target === lb) close();
-      });
       window.addEventListener('keydown', e=>{
         if(!lb.classList.contains('active')) return;
         if(e.key === 'Escape') close();
         if(e.key === 'ArrowLeft') prev();
         if(e.key === 'ArrowRight') next();
-      });
-    }
     // Share buttons
     function initShare(){
       const url = document.querySelector('link[rel="canonical"]')?.href || location.href;
@@ -98,18 +88,10 @@
         e.preventDefault();
         const link = 'https://wa.me/?text=' + encodeURIComponent(title + ' ' + url);
         window.open(link, '_blank');
-      });
       document.getElementById('shareTwitter').addEventListener('click', e=>{
-        e.preventDefault();
         const link = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
-        window.open(link, '_blank');
-      });
       document.getElementById('shareFacebook').addEventListener('click', e=>{
-        e.preventDefault();
         const link = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
-        window.open(link, '_blank');
-      });
-    }
     // Init
     document.addEventListener('DOMContentLoaded', () => {
       initLazyLoad();
@@ -122,9 +104,5 @@
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

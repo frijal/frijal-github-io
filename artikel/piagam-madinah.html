@@ -11,18 +11,12 @@
     <link
       rel="canonical"
       href="https://frijal.pages.dev/artikel/piagam-madinah.html"
-    />
-    <link
       rel="icon"
       href="https://frijal.pages.dev/favicon.ico"
       type="image/x-icon"
-    />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Piagam Madinah — Konstitusi Pertama yang Menyatukan Madinah" />
-    <meta
       property="og:description"
-      content="Ringkasan modern tentang Piagam Madinah: latar sejarah, isi pokok, otentisitas, komentar ahli, dan relevansinya bagi konsep konstitusi dan multikulturalisme masa kini."
-    />
     <meta property="og:image" content="https://frijal.pages.dev/img/piagam-madinah.webp" />
     <meta property="og:url" content="https://frijal.pages.dev/artikel/piagam-madinah.html" id="meta-og-url" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -46,7 +40,6 @@
       
       /* PERBAIKAN: Mengatur .grid selalu menjadi 1 kolom */
       .grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-      
       article.card{background:var(--card);padding:28px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
       article .meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-bottom:12px}
       article h2{margin:6px 0 12px}
@@ -55,18 +48,14 @@
       .callout{background:#f1f5f9;padding:12px 16px;border-left:4px solid var(--accent);border-radius:8px;margin:12px 0}
       ul,ol{margin:0 0 12px 20px}
       blockquote{margin:10px 0;padding:10px 12px;background:#fbfdff;border-left:4px solid #e6eef8;border-radius:6px}
-      
       /* ASIDE: Mengubahnya menjadi bagian dari kolom tunggal */
       aside.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
-      
       .info-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #eef2f7}
       .info-row:last-child{border-bottom:0}.small{font-size:13px;color:var(--muted)}
       footer{padding:18px 0;background:transparent}
       .footer-inner{width:min(1100px,95%);margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between}
       /* Menghapus media query yang membuat 2 kolom */
     </style>
-    
-    
               <div style="margin-top:8px;font-size:13px;color:var(--muted)">URL halaman saat ini: <span id="current-url">—</span></div>
             </div>
           </article>
@@ -80,15 +69,12 @@
           </aside>
         </div>
       </main>
-      
       <footer>
         <div class="footer-inner container">
           <div class="small muted">🄯 <span id="year">2025</span> SejarahIslam.id</div>
           <div class="small muted">Catatan: Artikel ini bersifat ringkasan; untuk kajian mendalam, rujuk karya primer dan studi akademis.</div>
-        </div>
       </footer>
     </div>
-    
     <script>
       // Dynamic metadata & FB comments url logic (dibersihkan dan disederhanakan)
       document.addEventListener('DOMContentLoaded', function() {
@@ -105,11 +91,9 @@
         if (fb) fb.setAttribute('data-href', canonicalUrl);
         const cur = document.getElementById('current-url'); 
         if (cur) cur.textContent = canonicalUrl;
-        
         // Memastikan meta tag og:url diset
         const metaOg = document.getElementById('meta-og-url'); 
         if (metaOg) metaOg.setAttribute('content', canonicalUrl);
-
         // Memuat ulang komentar Facebook secara manual (optional, jika SDK sudah dimuat)
         window.addEventListener('load', ()=>{
           if (window.FB && FB.XFBML && typeof FB.XFBML.parse === 'function'){
@@ -120,9 +104,6 @@
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

@@ -45,39 +45,31 @@
             background: radial-gradient(1200px 600px at 80% 0%, #0c162d 10%, var(--bg) 60%);
             color: var(--text);
             line-height: 1.7;
-        }
         .container {
             max-width: var(--maxw);
             margin: 0 auto;
             padding: 1.2rem;
-        }
         header.article-header {
             padding: 2rem 1rem 1rem;
-        }
         header.article-header h1 {
             margin: 0 0 0.5rem;
             font-size: clamp(1.6rem, 4vw, 2.2rem);
             letter-spacing: 0.2px;
-        }
         header.article-header p.subtitle {
             margin: 0.2rem 0 1rem;
             color: var(--muted);
             font-size: 1rem;
-        }
         .card {
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.00));
             border: 1px solid var(--border);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-        }
         .article-content {
             padding: 1rem;
-        }
         .article-content p {
             font-size: clamp(1rem, 2vw, 1.05rem);
             margin: 1rem 0;
-        }
         .article-content .quote {
             border-left: 3px solid var(--accent);
             padding-left: 0.75rem;
@@ -85,29 +77,22 @@
             font-style: italic;
             background: rgba(34, 197, 94, 0.06);
             border-radius: 8px;
-        }
         .gallery {
             display: grid;
             grid-template-columns: 1fr;
             gap: 0.75rem;
-            margin: 1rem 0;
-        }
         .gallery img {
             width: 100%;
             height: auto;
             display: block;
             border-radius: 12px;
-            border: 1px solid var(--border);
             background: #0b1220;
-        }
         .thumb {
             cursor: zoom-in;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
         .thumb:hover {
             transform: scale(1.01);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-        }
         .lightbox {
             position: fixed;
             inset: 0;
@@ -116,24 +101,18 @@
             justify-content: center;
             background: rgba(0, 0, 0, 0.8);
             z-index: 20;
-        }
         .lightbox.open { display: flex; }
         .lightbox img {
             max-width: 92vw;
             max-height: 86vh;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
         .lightbox .nav {
             position: absolute;
-            width: 100%;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             justify-content: space-between;
             padding: 0 1rem;
             user-select: none;
-        }
         .lightbox .btn {
             background: rgba(255, 255, 255, 0.12);
             color: #fff;
@@ -142,47 +121,28 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
             cursor: pointer;
             font-weight: 600;
-        }
         .lightbox .btn:hover { background: rgba(255, 255, 255, 0.22); }
         .lightbox .close {
-            position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #fff;
             padding: 0.4rem 0.7rem;
-            border-radius: 999px;
-            cursor: pointer;
-        }
         .share-row {
-            display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
-            margin: 1rem 0;
-        }
         .share-btn {
             display: inline-flex;
-            align-items: center;
             gap: 0.5rem;
             padding: 0.45rem 0.75rem;
-            border: 1px solid var(--border);
             border-radius: 9px;
-            color: var(--text);
             text-decoration: none;
             background: rgba(255, 255, 255, 0.04);
-            font-weight: 600;
-        }
         .share-btn:hover { background: rgba(255, 255, 255, 0.10); }
         footer {
             margin: 2rem 0 5rem;
-            color: var(--muted);
             font-size: 0.95rem;
-        }
         .fb-comments { margin-top: 1rem; }
         @media (min-width: 700px) {
             .article-content { padding: 1.2rem 1.4rem; }
-        }
     </style>
     <script>
         // Share links
@@ -205,7 +165,6 @@
             });
         })();
         // Galeri + Lightbox
-        (function() {
             const thumbs = Array.from(document.querySelectorAll(".thumb"));
             if (thumbs.length === 0) return; // Exit if no gallery
             const lb = document.getElementById("lightbox");
@@ -222,48 +181,33 @@
             }
             function move(delta) {
                 idx = (idx + delta + thumbs.length) % thumbs.length;
-                lbImg.src = thumbs[idx].dataset.full || thumbs[idx].src;
-            }
             function shut() {
                 lb.classList.remove("open");
                 document.body.style.overflow = "";
-            }
             thumbs.forEach((t, i) => t.addEventListener("click", () => open(i)));
             prev.addEventListener("click", () => move(-1));
             next.addEventListener("click", () => move(1));
             close.addEventListener("click", shut);
             lb.addEventListener("click", (e) => {
                 if (e.target === lb) shut();
-            });
             window.addEventListener("keydown", (e) => {
                 if (!lb.classList.contains("open")) return;
                 if (e.key === "Escape") shut();
                 if (e.key === "ArrowLeft") move(-1);
                 if (e.key === "ArrowRight") move(1);
-            });
-        })();
         // Lazy-load hint
-        (function() {
             document.querySelectorAll("img").forEach(img => {
                 if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
-            });
-        })();
         // Set FB comment URL
         (function(){
             const fbComments = document.querySelector('.fb-comments');
             if(fbComments) {
                 fbComments.setAttribute('data-href', location.href);
-            }
-        })();
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

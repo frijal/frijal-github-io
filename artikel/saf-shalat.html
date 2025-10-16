@@ -83,7 +83,6 @@
 <script>
   // Inisialisasi Tahun (Dipertahankan)
   document.getElementById("y").textContent = new Date().getFullYear();
-
   // Logika Tombol Salin (Dipertahankan)
   document.querySelectorAll("pre code").forEach((e) => {
     let t = e.parentElement.nextElementSibling;
@@ -99,19 +98,16 @@
       });
     }
   });
-
   // Logika Pembagian (Dipertahankan dan Diperbaiki target)
   (function() {
     const url = encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || location.href);
     const title = encodeURIComponent(document.title);
     const shareLinks = document.getElementById('share-links');
-
     if (shareLinks) {
         shareLinks.querySelectorAll('a').forEach(a => {
             const platform = a.querySelector('span:nth-child(2)').textContent.toLowerCase().trim();
             let href = '#';
             const text = title + '%20' + url;
-
             if (platform.includes('facebook')) {
                 href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
             } else if (platform.includes('twitter') || platform.includes('x')) {
@@ -120,21 +116,16 @@
                 href = `https://wa.me/?text=${text}`;
             } else if (platform.includes('telegram')) {
                 href = `https://t.me/share/url?url=${url}&text=${title}`;
-            }
             // Untuk IG, Threads, TikTok, kita biarkan tautan ke homepage sesuai kode Anda, tapi pastikan rel/target aman.
             
             a.href = href;
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
         });
-    }
   })();
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

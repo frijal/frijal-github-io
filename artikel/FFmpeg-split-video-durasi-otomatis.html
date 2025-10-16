@@ -21,37 +21,25 @@
             background-color: var(--bg-light);
             color: var(--text-light);
             transition: background-color 0.5s, color 0.5s;
-        }
-
         body.dark {
             background-color: var(--bg-dark);
             color: var(--text-dark);
-        }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
-        }
-
         h1 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 30px;
             color: var(--accent);
-        }
-
         h2 {
             margin-top: 30px;
             font-size: 1.8rem;
             color: var(--secondary);
-        }
-
         p {
             font-size: 1.2rem;
             line-height: 1.6;
-        }
-
         pre {
             background: linear-gradient(120deg, #f0f8ff, #ffe4e1);
             padding: 15px;
@@ -60,8 +48,6 @@
             position: relative;
             font-family: monospace;
             font-size: 1.1rem;
-        }
-
         .copy-btn {
             position: absolute;
             top: 10px;
@@ -72,58 +58,41 @@
             padding: 5px 10px;
             border-radius: 8px;
             cursor: pointer;
-        }
-
         .copy-btn:hover {
             opacity: 0.8;
-        }
-
         #toggleDark {
             position: fixed;
             top: 30%;
             right: 15px;
             background-color: var(--secondary);
-            color: #fff;
-            border: none;
             padding: 10px 15px;
             border-radius: 10px;
-            cursor: pointer;
             z-index: 1000;
-        }
-
         /* Menghapus info-box dan info-item karena deteksi pengguna dihapus */
         /*
         .info-box {
             margin-top: 50px;
             padding: 20px;
             background: linear-gradient(120deg, #ffe4e1, #f0f8ff);
-            border-radius: 12px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            font-size: 1.1rem;
-        }
         .info-item {
-            display: flex;
             align-items: center;
             gap: 10px;
-        }
         .info-item img {
             width: 32px;
             height: 32px;
             object-fit: contain;
             border-radius: 6px;
-        }
         */
-
         @media(max-width:600px){
             h1 {font-size:2rem;}
             h2 {font-size:1.5rem;}
             p {font-size:1rem;}
             pre {font-size:1rem;}
             /* .info-item img {width:24px;height:24px;} */
-        }
     </style>
     <meta name="date" content="2025-09-28">
     <meta property="og:image" content="https://frijal.pages.dev/img/FFmpeg-split-video-durasi-otomatis.webp">
@@ -133,15 +102,11 @@
     <meta itemprop="image" content="https://frijal.pages.dev/img/FFmpeg-split-video-durasi-otomatis.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
     <meta property="article:published_time" content="2025-10-14T18:15:06.377+00:00">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <button id="toggleDark">Toggle Dark Mode</button>
     <div class="container">
         <h1>FFmpeg: Split Video Otomatis</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
         <p>Gunakan perintah FFmpeg berikut untuk membagi video menjadi beberapa bagian otomatis berdasarkan durasi tertentu:</p>
         <pre><code id="ffmpegCode">#!/bin/bash
@@ -158,7 +123,6 @@ while (( $(echo "$START < $LEN" | bc -l) )); do
 done</code>
             <button class="copy-btn" onclick="copyCode()">Copy</button>
         </pre>
-
         <h2>Penjelasan Script</h2>
         <p><strong>INPUT="input.mp4"</strong>: Nama file video yang akan dibagi.</p>
         <p><strong>DURATION=20</strong>: Durasi setiap bagian video dalam detik.</p>
@@ -168,7 +132,6 @@ done</code>
         <p><strong>-t</strong>: Durasi potongan.</p>
         <p><strong>-c copy</strong>: Menyalin stream tanpa re-encoding untuk mempercepat proses.</p>
     </div>
-
     <script>
         // Dark mode auto + toggle
         const body = document.body;
@@ -177,19 +140,14 @@ done</code>
         document.getElementById('toggleDark').addEventListener('click', ()=>{
             body.classList.toggle('dark');
         });
-
         // Copy syntax
         function copyCode(){
             const code = document.getElementById('ffmpegCode').textContent;
             navigator.clipboard.writeText(code);
             alert("Syntax copied!");
-        }
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

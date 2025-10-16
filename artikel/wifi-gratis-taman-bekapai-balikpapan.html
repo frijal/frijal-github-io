@@ -55,7 +55,6 @@
         });
       }
     })();
-    
     // Lightweight lightbox
     (function lightbox(){
       const gallery = [...document.querySelectorAll('#gallery a')];
@@ -71,13 +70,10 @@
         const alt = gallery[idx].querySelector('img')?.getAttribute('alt') || '';
         img.src = href; img.alt = alt;
         lb.classList.add('open');
-      }
       function move(delta){
         idx = (idx + delta + gallery.length) % gallery.length;
         open(idx);
-      }
       function closeLB(){lb.classList.remove('open'); img.src=''; img.alt='';}
-      
       gallery.forEach((a,i)=>{a.addEventListener('click', e=>{ e.preventDefault(); open(i); });});
       close.addEventListener('click', closeLB);
       prev.addEventListener('click', ()=>move(-1));
@@ -89,13 +85,9 @@
         if(e.key==='ArrowLeft') move(-1);
         if(e.key==='ArrowRight') move(1);
       });
-    })();
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

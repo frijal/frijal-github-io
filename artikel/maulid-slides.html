@@ -13,7 +13,6 @@
   <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png">
   <meta name="theme-color" content="#dc5a00">
-
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Slide Web: Sejarah & Pro-Kontra Maulid Nabi">
@@ -21,14 +20,12 @@
   <meta property="og:url" content="https://frijal.pages.dev/artikel/maulid-slides.html">
   <meta property="og:image" content="">
   <meta property="og:locale" content="id_ID">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Slide Web: Sejarah & Pro-Kontra Maulid Nabi">
   <meta name="twitter:description" content="Slide siap pakai untuk mengajar/diskusi: ringkas, visual, dan interaktif.">
   <meta name="twitter:image" content="">
   <meta name="twitter:site" content="@frijal">
-
   <!-- CSS: Template baru (sunset neon, slide fullscreen scroll-snap) -->
   <style>
 :root{
@@ -56,14 +53,11 @@ radial-gradient(1200px 560px at 110% -10%, rgba(175,0,45,.22), transparent 60%),
 linear-gradient(180deg, #0a0611 0%, #140b20 100%);
   font:16px/1.7 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   overflow-x:hidden;
-}
-
 /* Slide container */
 .slides{
   scroll-snap-type: y mandatory;
   height: 100dvh;
   overflow-y: auto;
-}
 section.slide{
   scroll-snap-align: start;
   min-height: 100dvh;
@@ -71,30 +65,24 @@ section.slide{
   place-items: center;
   padding: 22px;
   position: relative;
-}
 .content{
   width: 100%;
   max-width: var(--maxw);
-  display: grid;
   grid-template-columns: 1.1fr .9fr;
   gap: 24px;
   align-items: start;
-}
 @media (max-width: 980px){
   .content{ grid-template-columns: 1fr }
-}
 .card{
   background: var(--panel);
   border:1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
-}
 .head{
   padding:14px 18px;
   background: linear-gradient(90deg, rgba(255,122,24,.16), rgba(175,0,45,.16));
   border-bottom:1px solid var(--border);
-}
 .head h2{ margin:0; font-size:20px; letter-spacing:-.2px }
 .body{ padding:18px }
 .title{
@@ -103,26 +91,20 @@ section.slide{
   background: linear-gradient(90deg,#fff,#ffd2b0 45%,#ff9fb3 90%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   text-shadow: 0 12px 38px rgba(255,122,24,.28);
-}
 .subtitle{ text-align:center; color:var(--muted); max-width: 900px; margin: 0 auto 10px }
 .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:10px 0 0 }
 .chip{ padding:6px 12px; border-radius:999px; border:1px solid var(--border); background: rgba(255,255,255,.06) }
-
 .bullets{ margin:0; padding-left: 18px }
 .bullets li{ margin: 8px 0 }
 .call{
   padding:12px 14px; border-radius:12px; border:1px dashed var(--border);
   background: linear-gradient(90deg, rgba(255,122,24,.12), rgba(175,0,45,.12));
-}
 .tag{ display:inline-block; padding:2px 8px; border-radius:8px; border:1px solid var(--border); font-size:12px; background: rgba(255,255,255,.06) }
 .tag.ok{ background: rgba(34,197,94,.16) } .tag.bad{ background: rgba(239,68,68,.16) } .tag.note{ background: rgba(245,158,11,.16) }
-
 /* Slide navigation hints */
 .nav-hint{
   position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
   color: var(--muted); font-size: 12px; opacity: .9;
-}
-
 /* Gallery & Lightbox */
 .gallery{ display:grid; gap:12px; grid-template-columns: repeat(3,1fr) }
 @media (max-width:780px){ .gallery{ grid-template-columns: repeat(2,1fr) } }
@@ -133,17 +115,14 @@ section.slide{
 .gallery figcaption{
   position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-size:13px; color:#fff9f4;
   background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
-}
 .lightbox{
   position:fixed; inset:0; display:none; place-items:center; padding:24px; z-index:9998;
   background: rgba(10,6,17,.75); backdrop-filter: blur(6px);
-}
 .lightbox.open{ display:grid }
 .lightbox figure{ margin:0; max-width:96vw; max-height:88vh; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:#000; box-shadow: var(--shadow) }
 .lightbox img{ display:block; max-width:100%; max-height:88vh; object-fit:contain }
 .lightbox .close{ position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
   font-weight:800; background:linear-gradient(90deg, var(--brand), var(--brand2)); color:#1b0c10 }
-
 /* Share bar */
 .share{ display:flex; gap:10px; flex-wrap:wrap }
 .share a{ display:inline-flex; gap:8px; align-items:center; text-decoration:none; color:#fff; font-weight:800; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.16); transition: transform .15s ease }
@@ -151,31 +130,24 @@ section.slide{
 .fb{ background:#1877F2 } .tw{ background:#1DA1F2 } .x{ background:#0F1419 }
 .wa{ background:#25D366 } .tg{ background:#229ED9 } .ig{ background:#E1306C }
 .th{ background:#000 } .tt{ background:#010101 }
-
 /* Code highlight + copy */
 pre code{ display:block; border-radius:14px }
 .codewrap{ position:relative }
 .copy-btn{
   position:absolute; top:10px; right:10px; padding:6px 10px; border-radius:10px; border:none; cursor:pointer;
   background: linear-gradient(90deg, var(--brand), var(--brand2)); color:#140b0f; font-weight:800; box-shadow: var(--shadow)
-}
-
 /* Footer info */
 footer{
-  position: relative;
   padding: 18px 22px 80px;
   color: var(--muted);
   border-top: 1px dashed var(--border);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-}
 .sys{
   display:grid; gap:16px; grid-template-columns: 1.2fr .8fr; max-width:var(--maxw); margin: 0 auto;
-}
 @media (max-width:780px){ .sys{ grid-template-columns: 1fr } }
 .chip{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; border:1px solid var(--border); background: rgba(255,255,255,.05); margin-right:8px }
 .flag{ display:inline-flex; gap:10px; align-items:center; padding:8px 12px; border-radius:12px; border:1px solid var(--border); background: rgba(255,255,255,.05) }
 .flag img{ width:28px; height:20px; object-fit:cover; border-radius:4px }
-
 /* Tombol Home (perbaikan snippet agar berfungsi) */
 #btn-home-left, #btn-home-right{
   position: fixed; display: inline-flex; align-items: center; gap:6px;
@@ -183,13 +155,11 @@ footer{
   text-decoration:none; font-family:inherit; font-size:14px; font-weight:900;
   box-shadow: 0 12px 26px rgba(255,122,24,.35);
   transition: background .3s ease, transform .2s ease; z-index: 9999;
-}
 #btn-home-left:hover, #btn-home-right:hover{ background-color:#ff9a4a; transform: scale(1.05) }
 #btn-home-left{ left:10px; top:30%; transform: translateY(-50%) }
 #btn-home-right{ right:10px; bottom:20%; transform: translateY(50%) }
 #btn-home-left svg, #btn-home-right svg{ width:18px; height:18px; fill: currentColor }
   </style>
-
   <!-- Highlight.js -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark-dimmed.min.css">
   
@@ -203,19 +173,14 @@ window.fbAsyncInit = function() {
   if (typeof FB !== 'undefined') {
 try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
   }
-}
   </script>
 </div>
   </div>
 </article>
-  </div>
   <div class="nav-hint">Diskusikan dengan adab dan data</div>
 </section>
-  </div>
-
   <footer>
   </footer>
-
   <!-- Lightbox modal -->
   <div class="lightbox" id="lightbox">
 <figure>
@@ -223,16 +188,11 @@ try { FB.XFBML.parse(); } catch(e) { /* ignore */ }
   <img id="lb-img" alt="">
   <figcaption id="lb-cap" style="color:#e5e7eb; padding:10px 12px"></figcaption>
 </figure>
-  </div>
-
   <!-- JSON-LD: Article -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Slide Web: Sejarah & Pro-Kontra Maulid Nabi","description":"Slide presentasi interaktif: latar belakang, timeline, pro-kontra ulama, dan hikmah Maulid Nabi.","inLanguage":"id-ID","author":{"@type":"Person","name":"Fakhrul","image":"https://frijal.pages.dev/img/maulid-slides.webp"},"publisher":{"@type":"Organization","name":"Frijal Media","logo":{"@type":"ImageObject","url":"https://frijal.pages.dev/ext/icons/favicon.png","image":"https://frijal.pages.dev/img/maulid-slides.webp"},"image":"https://frijal.pages.dev/img/maulid-slides.webp"},"image":"https://frijal.pages.dev/assets/og-maulid-slides.jpg","dateModified":"2025-09-18","datePublished":"2025-09-18","mainEntityOfPage":{"@type":"WebPage","@id":"https://frijal.pages.dev/artikel/maulid-slides.html","image":"https://frijal.pages.dev/img/maulid-slides.webp"}}</script>
-
   <!-- JSON-LD: Breadcrumb -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://frijal.pages.dev/","image":"https://frijal.pages.dev/img/maulid-slides.webp"},{"@type":"ListItem","position":2,"name":"Artikel","item":"https://frijal.pages.dev/artikel/","image":"https://frijal.pages.dev/img/maulid-slides.webp"},{"@type":"ListItem","position":3,"name":"Slide Maulid Nabi","item":"https://frijal.pages.dev/artikel/maulid-slides.html","image":"https://frijal.pages.dev/img/maulid-slides.webp"}],"image":"https://frijal.pages.dev/img/maulid-slides.webp"}</script>
-
   <!-- Skrip: Lightbox, Share, UA parsing, IP & Flag, Copy -->
-  <script>
 // Lightbox
 (function(){
   const lb = document.getElementById('lightbox');
@@ -253,9 +213,7 @@ a.addEventListener('click', e=>{
   lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
 })();
-
 // Share links (gunakan canonical)
-(function(){
   const url = encodeURIComponent('https://frijal.pages.dev/artikel/maulid-slides.html');
   const title = encodeURIComponent('Slide Web: Maulid Nabi');
   const s = document.getElementById('share') || document;
@@ -272,9 +230,6 @@ a.addEventListener('click', e=>{
   Object.entries(map).forEach(([sel,href])=>{
 const a = s.querySelector ? s.querySelector(sel) : null;
 if (a) a.href = href;
-  });
-})();
-
 // Copy buttons
 document.addEventListener('click', (e)=>{
   if (e.target.matches('.copy-btn')) {
@@ -285,17 +240,8 @@ if (navigator.clipboard && text) {
 const old = e.target.textContent;
 e.target.textContent = 'Copied!';
 setTimeout(()=> e.target.textContent = old, 1200);
-  });
-}
-  }
-});
-
-  </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

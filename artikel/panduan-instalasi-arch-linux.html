@@ -11,20 +11,17 @@
     <!-- Favicon & Theme -->
     <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#171e29">
-
     <!-- Open Graph -->
     <meta property="og:title" content="🐧 Panduan Instalasi Arch Linux untuk Pemula">
     <meta property="og:description" content="Panduan santai & interaktif instalasi Arch Linux, cocok untuk pemula. Lengkap dengan galeri dan tips.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://frijal.pages.dev/artikel/panduan-instalasi-arch-linux.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/a/AVvXsEggq0PZHyxy8mW2W2r2VvqWjeDBlGN60lJBL8sSq4n0E7ISKE7JQ87NwuSwDsP0W7Loj9602iaX_2IM1aPzukeY_Kf34NnnEuwUiIUGN3uKwSqScdHAEpJyw7Kwzn8eB8rhkG1zgRMxWmyz_PMSmsfk9pOc2cg8fV0Nu5TDvjVcR9-HXw18NgYWgKaTNUo">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="🐧 Panduan Instalasi Arch Linux untuk Pemula">
     <meta name="twitter:description" content="Panduan santai & interaktif instalasi Arch Linux, cocok untuk pemula. Lengkap dengan galeri dan tips.">
     <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/a/AVvXsEggq0PZHyxy8mW2W2r2VvqWjeDBlGN60lJBL8sSq4n0E7ISKE7JQ87NwuSwDsP0W7Loj9602iaX_2IM1aPzukeY_Kf34NnnEuwUiIUGN3uKwSqScdHAEpJyw7Kwzn8eB8rhkG1zgRMxWmyz_PMSmsfk9pOc2cg8fV0Nu5TDvjVcR9-HXw18NgYWgKaTNUo">
-
     <!-- JSON-LD -->
     <script type="application/ld+json">
     {
@@ -40,7 +37,6 @@
     
     <!-- Prism.js CSS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
-
     <!-- Styles: 1 kolom, dark theme -->
     <style>
         :root {
@@ -58,7 +54,6 @@
             background: var(--bg); color: var(--fg);
             font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
             margin: 0; scroll-behavior: smooth;
-        }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
         img { max-width: 100%; height: auto; border-radius: 8px; }
@@ -67,7 +62,6 @@
             padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
             background: rgba(23, 30, 41, 0.7); backdrop-filter: blur(8px);
             position: sticky; top: 0; z-index: 10;
-        }
         .brand { font-weight: bold; font-size: 1.2rem; }
         main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
         .col { width: 100%; max-width: var(--maxw); }
@@ -92,33 +86,27 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
         <header class="site">
             <div class="brand">🐧 frijal.github.io</div>
         </header>
-
         <main>
             <div class="col">
                 <article>
                     <h1>Panduan Instalasi Arch Linux untuk Pemula</h1>
 <div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
                     <p class="lead">Arch Linux terkenal karena pendekatannya yang minimalis dan "user-centric". Panduan ini akan memandu Anda melalui proses instalasi menggunakan skrip <code>archinstall</code> yang ramah pemula.</p>
-
                     <div class="share-bar">
                         <button class="btn-share" data-share="twitter">Twitter</button>
                         <button class="btn-share" data-share="facebook">Facebook</button>
                         <button class="btn-share" data-share="whatsapp">WhatsApp</button>
                         <button class="btn-share" id="copyLink">Salin Tautan</button>
                     </div>
-
                     <div class="gallery">
                         <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEggq0PZHyxy8mW2W2r2VvqWjeDBlGN60lJBL8sSq4n0E7ISKE7JQ87NwuSwDsP0W7Loj9602iaX_2IM1aPzukeY_Kf34NnnEuwUiIUGN3uKwSqScdHAEpJyw7Kwzn8eB8rhkG1zgRMxWmyz_PMSmsfk9pOc2cg8fV0Nu5TDvjVcR9-HXw18NgYWgKaTNUo" alt="Logo Arch Linux"></figure>
                         <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEhA1Ci6WzGQQrtKIumixaj1D0Tm_jP-n9A3WeAx2hWjlIzkvienrLTd04PgRDYqGHgmbxXc9WQ-ALbSJQKSWgRPzFN9l1HoiepRl1uDDmcAJ74hMxmh5HbN7wqCf16zG55SFT68hWYd-80s7zozk7rX8cC6JS2inc5oJ_ceuT7lReaS8RJBkbEAg9BiriM" alt="Menu archinstall"></figure>
-                    </div>
                     
                     <h2>Persiapan Instalasi</h2>
                     <ol>
@@ -126,7 +114,6 @@
                         <li><strong>Buat USB Bootable:</strong> Gunakan alat seperti Balena Etcher, Rufus, atau perintah <code>dd</code> untuk menulis file ISO ke USB drive.</li>
                         <li><strong>Boot dari USB:</strong> Nyalakan komputer Anda dari USB drive. Anda akan disambut oleh command line dengan user <code>root@archiso</code>.</li>
                     </ol>
-
                     <h2>Menjalankan Installer (<code>archinstall</code>)</h2>
                     <p>Di terminal, cukup ketik perintah berikut untuk memulai installer berbasis teks:</p>
                     <pre class="language-bash"><code id="code1">archinstall</code><button class="copy-btn" data-target="code1">Salin</button></pre>
@@ -137,34 +124,26 @@
                         <li><strong>Profile:</strong> Pilih tipe instalasi (misalnya, Desktop) dan Desktop Environment (seperti GNOME, KDE, XFCE).</li>
                         <li><strong>Kernel:</strong> Untuk pemula, pilihan default <code>linux</code> sudah sangat baik. Pilihan lain seperti <code>linux-lts</code> (stabilitas) atau <code>linux-zen</code> (gaming) tersedia untuk kebutuhan spesifik.</li>
                     </ul>
-
                     <figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi4EmofxXckZowCG4_vmdGeHfS40RvEBsVyyQvghKf7fgWbOxsQSjRCri4QVyBLmFQ194ftEAA1JWWVh31Zjhf-Di-ZagudvPHbpS1PFfcoAhv6fI-sGBo4rU_kWPR8Tn-5GgOAKLVvzXj4TnvymegM_CdtSUF_2MUWzRDfA8_SzS3j0umq6xFQuE6qQLA" alt="Pilihan Desktop Environment di archinstall"></figure>
-                    
                     <h2>Menyelesaikan Instalasi</h2>
                     <p>Setelah semua konfigurasi selesai, pilih opsi "Install". Skrip akan menampilkan ringkasan pilihan Anda. Tekan Enter untuk memulai proses. Setelah selesai, reboot sistem Anda dengan perintah:</p>
                     <pre class="language-bash"><code id="code2">reboot</code><button class="copy-btn" data-target="code2">Salin</button></pre>
-                    
                     <h2>Kesimpulan</h2>
                     <p>Arch Linux menawarkan kebebasan penuh untuk membangun sistem yang ringan dan sesuai keinginan Anda. Berkat skrip <code>archinstall</code>, proses yang dulu menantang kini menjadi jauh lebih mudah diakses oleh pemula. Selamat mencoba!</p>
                 </article>
             </div>
         </main>
-
         <footer class="site">
             <small>🄯 2025 frijal.github.io · Selamat menikmati sistem Linux "milik Anda sendiri"!</small>
         </footer>
     </div>
-    
     <div class="lightbox" id="lightbox">
         <img id="lightbox-img" alt="Gambar diperbesar">
-    </div>
     <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #3e4e58; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
-
     <script>
     (function(){
         const toast = document.getElementById('toast');
         function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
-
         const shareMap = {
             twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
             facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -181,29 +160,20 @@
         
         document.getElementById('copyLink')?.addEventListener('click', () => {
             navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
-        });
-
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const galleryImages = Array.from(document.querySelectorAll('figure img'));
         let currentIndex = 0;
-        
         function openLightbox(index) {
             currentIndex = index;
             lbImg.src = galleryImages[currentIndex].src;
             lb.classList.add('open');
-        }
-        
         galleryImages.forEach((el, index) => {
             el.addEventListener('click', () => openLightbox(index));
-        });
-
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
         window.addEventListener('keydown', (e) => {
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
-        });
-
         document.querySelectorAll('.copy-btn').forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 const targetId = btn.getAttribute('data-target');
@@ -211,16 +181,9 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
-        });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

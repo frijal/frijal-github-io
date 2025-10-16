@@ -38,7 +38,6 @@ lazyImages.forEach(function(img){lazyImageObserver.observe(img);});
   } else {
 lazyImages.forEach(function(img){img.src = img.dataset.src;});
   }
-});
 
 // Lightbox
 const galeriList = [
@@ -46,18 +45,12 @@ const galeriList = [
 src: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgp_8Zxe0NHVNnksjbbAwoJ4t-LhEgVwV8nC5rsRr8bENdouGt-rHDGpmZlV8KkLjGDm4MQlktyQd1Ant0NIEm1VltyIWBIEi3imgusZcsZ-_E8ZZqBmYJ_Uc1dEZaqqD8Ic7NQfXkJ964VjiHWkbBtBXgEJYPFTS547kuTRXNgwjJSTeUCjVmPMp_oAqs/s1600/jumat.jpg",
 alt: "Masjid di hari Jumat"
   },
-  {
 src: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
 alt: "Al-Quran dan kopi Jumat"
-  },
-  {
 src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
 alt: "Langit biru Jumat sore"
-  },
-  {
 src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
 alt: "Jamaah Shalat Jumat"
-  }
 ];
 let lightboxIndex = 0;
 function showLightbox(idx){
@@ -65,27 +58,19 @@ function showLightbox(idx){
   document.getElementById("lightbox-img").src = galeriList[idx].src;
   document.getElementById("lightbox-img").alt = galeriList[idx].alt;
   document.getElementById("lightbox").classList.add("active");
-}
 function closeLightbox(){
   document.getElementById("lightbox").classList.remove("active");
   document.getElementById("lightbox-img").src = "";
-}
 function prevLightbox(){
   lightboxIndex = (lightboxIndex+galeriList.length-1)%galeriList.length;
   showLightbox(lightboxIndex);
-}
 function nextLightbox(){
   lightboxIndex = (lightboxIndex+1)%galeriList.length;
-  showLightbox(lightboxIndex);
-}
 document.addEventListener('keydown', function(e){
   if(document.getElementById("lightbox").classList.contains('active')){
 if(e.key==="Escape") closeLightbox();
 if(e.key==="ArrowLeft") prevLightbox();
 if(e.key==="ArrowRight") nextLightbox();
-  }
-});
-
 // Share
 function shareTo(platform) {
   const url = encodeURIComponent(window.location.href);
@@ -97,18 +82,10 @@ case 'fb': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`; bre
 case 'tw': shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`; break;
 case 'tg': shareUrl = `https://t.me/share/url?url=${url}&text=${title}`; break;
 case 'ln': shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`; break;
-  }
   window.open(shareUrl, "", "noopener");
-}
-
-
-});
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

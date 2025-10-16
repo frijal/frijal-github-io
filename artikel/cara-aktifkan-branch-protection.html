@@ -11,20 +11,17 @@
     <!-- Favicon & Theme -->
     <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#1e293b">
-
     <!-- Open Graph -->
     <meta property="og:title" content="Cara Mengaktifkan Branch Protection di GitHub">
     <meta property="og:description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib melalui Pull Request.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://frijal.pages.dev/artikel/cara-aktifkan-branch-protection.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cara Mengaktifkan Branch Protection di GitHub">
     <meta name="twitter:description" content="Panduan lengkap cara mengaktifkan branch protection di GitHub agar perubahan wajib melalui Pull Request.">
     <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ370qCptJsD7-fxr6zLl_xT9VpZhvoN8Z-thmLcNfCK-s2VIhdivD7hcTYRVGZwGJPXwkwDGn-1t9OucGSDFdHYUVPI2T7jcEoLwBPjNcvFwl3MURH3N_5ln473zIFTzfLESXX9lDsmxQ7UCrAIUyupi6RVFBGEzwFf8ylVV6s4OaxLqNYhHyYb_w6uk/s1600/maxresdefault.jpg">
-
     <!-- JSON-LD -->
     <script type="application/ld+json">
     {
@@ -55,7 +52,6 @@
             background: var(--bg); color: var(--fg);
             font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
             margin: 0; scroll-behavior: smooth;
-        }
         a { color: var(--accent-2); text-decoration: none; }
         a:hover { text-decoration: underline; }
         img { max-width: 100%; height: auto; border-radius: 8px; }
@@ -64,7 +60,6 @@
             padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
             background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px);
             position: sticky; top: 0; z-index: 10;
-        }
         .brand { font-weight: bold; font-size: 1.2rem; }
         main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
         .col { width: 100%; max-width: var(--maxw); }
@@ -89,14 +84,12 @@
         <header class="site">
             <div class="brand">🚀 Frijal Artikel</div>
         </header>
-
         <main>
             <div class="col">
                 <article>
                     <h1>Cara Mengaktifkan Branch Protection di GitHub</h1>
 <div id="iposbrowser"></div>
                     <p class="lead">Panduan ini akan menunjukkan cara mengaktifkan <strong>branch protection</strong> di GitHub. Fitur ini sangat penting untuk memastikan semua perubahan pada branch utama (seperti <code>main</code> atau <code>master</code>) melalui proses review via <strong>Pull Request (PR)</strong>.</p>
-
                     <div class="share-bar">
                         <button class="btn-share" data-share="twitter">Twitter</button>
                         <button class="btn-share" data-share="facebook">Facebook</button>
@@ -107,14 +100,11 @@
                     <h2>1. Masuk ke Pengaturan Repositori</h2>
                     <p>Buka repositori Anda di GitHub, lalu klik tab <strong>Settings</strong>.</p>
                     <figure><img src="https://frijal.pages.dev/artikel/repo-settings-tab.png" alt="Akses Settings"></figure>
-                    
                     <h2>2. Pilih Menu Branches</h2>
                     <p>Di menu navigasi sebelah kiri, pilih <strong>Branches</strong>. Kemudian, klik tombol <strong>Add branch protection rule</strong>.</p>
                     <figure><img src="https://frijal.pages.dev/artikel/repo-settings-branches.png" alt="Menu Branches"></figure>
-                    
                     <h2>3. Tentukan Branch yang Akan Dilindungi</h2>
                     <p>Pada kolom <code>Branch name pattern</code>, ketik nama branch yang ingin Anda lindungi, misalnya <code>main</code>. Anda juga bisa menggunakan wildcard seperti <code>release/*</code> untuk melindungi semua branch yang diawali dengan "release/".</p>
-                    
                     <h2>4. Aktifkan Aturan Proteksi</h2>
                     <p>Centang opsi-opsi yang Anda butuhkan. Beberapa yang paling umum adalah:</p>
                     <ul>
@@ -123,28 +113,22 @@
                         <li><strong>Include administrators:</strong> Menerapkan aturan ini bahkan untuk admin repositori.</li>
                     </ul>
                     <figure><img src="https://frijal.pages.dev/artikel/repo-settings-branches-pr-rule.png" alt="Aktifkan aturan Pull Request"></figure>
-
                     <h2>5. Simpan Aturan</h2>
                     <p>Klik tombol <strong>Create</strong> atau <strong>Save changes</strong> di bagian bawah halaman. Setelah ini, setiap upaya untuk melakukan `push` langsung ke branch `main` akan diblokir, dan semua perubahan harus diajukan melalui Pull Request.</p>
                 </article>
             </div>
         </main>
-
         <footer class="site">
             <small>🄯 2025 Frijal · Menjaga kualitas kode bersama.</small>
         </footer>
     </div>
-    
     <div class="lightbox" id="lightbox">
         <img id="lightbox-img" alt="Gambar diperbesar">
-    </div>
     <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #334155; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
-
     <script>
     (function(){
         const toast = document.getElementById('toast');
         function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
-
         const shareMap = {
             twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
             facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -161,33 +145,23 @@
         
         document.getElementById('copyLink')?.addEventListener('click', () => {
             navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
-        });
-
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const galleryImages = Array.from(document.querySelectorAll('figure img'));
         let currentIndex = 0;
-        
         function openLightbox(index) {
             currentIndex = index;
             lbImg.src = galleryImages[currentIndex].src;
             lb.classList.add('open');
-        }
-        
         galleryImages.forEach((el, index) => {
             el.addEventListener('click', () => openLightbox(index));
-        });
-
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
         window.addEventListener('keydown', (e) => {
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
-        });
     })();
-    </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

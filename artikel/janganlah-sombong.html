@@ -33,24 +33,19 @@
         
         /* PERBAIKAN: Mengubah grid menjadi 1 kolom mutlak */
         .grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-        
         article.card{background:var(--card);padding:28px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
         article .meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-bottom:10px}
         article h2{margin:6px 0 12px; color:var(--accent);}
         article p{margin:0 0 12px}.section-title{font-weight:700;margin-top:16px;margin-bottom:8px; color:#333;}
         .hadith{background:#f1f5f9;padding:12px 16px;border-left:4px solid var(--accent);border-radius:8px;margin:12px 0}
         ul, ol{margin:0 0 12px 20px}
-        
         /* ASIDE: Mengubah aside menjadi style card biasa */
         aside.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.04)}
-        
         .info-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eef2f7}
         .info-row:last-child{border-bottom:0}.small{font-size:13px;color:var(--muted)}
         footer{padding:18px 0;background:transparent}.footer-inner{width:min(1100px,95%);margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between}
-        
         /* Navigasi mengambang Dihapus dari CSS */
     </style>
-    
     <script>
         // Set tanggal dan tahun dinamis
         document.addEventListener('DOMContentLoaded', function() {
@@ -60,10 +55,8 @@
             document.getElementById('updated-time').textContent = updatedTime;
             document.getElementById('date-side').textContent = new Date().toLocaleDateString('id-ID');
             document.getElementById('year').textContent = new Date().getFullYear();
-            
             // Set URL untuk elemen dinamis
             document.getElementById("current-url").textContent = canonicalUrl;
-            
             // Set data-href FB Comments
             const fbComments = document.getElementById("fb-comments");
             if (fbComments) fbComments.setAttribute("data-href", canonicalUrl);
@@ -78,9 +71,6 @@
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

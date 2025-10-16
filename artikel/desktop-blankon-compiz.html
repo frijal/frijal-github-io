@@ -11,7 +11,6 @@
     <!-- Favicon & Theme -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🕹️%3C/text%3E%3C/svg%3E">
     <meta name="theme-color" content="#12142a">
-
     <!-- Open Graph -->
     <meta property="og:title" content="Eksperimen Desktop BlankOn + Compiz, Gnome-Do, xfishtank, Epiphany & Shiretoko">
     <meta property="og:description" content="Catatan santai tentang menyusun desktop seru dengan BlankOn, Compiz, Gnome-Do, xfishtank, Nautilus, dan dua browser.">
@@ -36,7 +35,6 @@
     
     <!-- Prism.js CSS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
-
     <!-- Styles: 1 kolom, "Synthwave" dark theme -->
     <style>
         :root {
@@ -54,7 +52,6 @@
             background: var(--bg); color: var(--fg);
             font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
             margin: 0; scroll-behavior: smooth;
-        }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
         img { max-width: 100%; height: auto; border-radius: 8px; }
@@ -63,7 +60,6 @@
             padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
             background: rgba(14, 15, 26, 0.7); backdrop-filter: blur(8px);
             position: sticky; top: 0; z-index: 10;
-        }
         .brand { font-weight: bold; font-size: 1.2rem; }
         main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
         .col { width: 100%; max-width: var(--maxw); }
@@ -88,33 +84,26 @@
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
         <header class="site">
             <div class="brand"> nostalgic.OS</div>
         </header>
-
         <main>
             <div class="col">
                 <article>
                     <h1>Eksperimen Desktop BlankOn: Compiz, Gnome-Do, dan XFishtank</h1>
 <div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
                     <p class="lead">Sebuah catatan santai tentang mengisi waktu luang dengan mengoprek desktop BlankOn. Eksperimen ini menggabungkan efek visual Compiz, peluncur aplikasi Gnome-Do, dan hiasan "akuarium" xfishtank.</p>
-
                     <div class="share-bar">
                         <button class="btn-share" data-share="twitter">Twitter</button>
                         <button class="btn-share" data-share="facebook">Facebook</button>
                         <button class="btn-share" data-share="whatsapp">WhatsApp</button>
                         <button class="btn-share" id="copyLink">Salin Tautan</button>
                     </div>
-
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/f9lBsTXsoco" title="Rekaman Desktop BlankOn + Compiz" allowfullscreen></iframe>
-                    </div>
-
                     <h2>Komponen Utama Setup</h2>
                     <ul>
                         <li><strong>Distro:</strong> BlankOn (berbasis Debian)</li>
@@ -128,8 +117,6 @@
                         <figure><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop" alt="Gnome-Do meluncurkan aplikasi"></figure>
                         <figure><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=800&auto=format&fit=crop" alt="Efek jendela Compiz"></figure>
                         <figure><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="Nautilus & workspace"></figure>
-                    </div>
-                    
                     <h2>Contoh Perintah Instalasi</h2>
                     <p>Perintah ini adalah contoh untuk sistem berbasis Debian/Ubuntu. Nama paket dapat bervariasi tergantung rilis distro Anda.</p>
                     <pre class="language-bash"><code id="code1">sudo apt update
@@ -138,26 +125,20 @@ sudo apt install compiz compiz-plugins-extra gnome-do xfishtank recordmydesktop<
                 </article>
             </div>
         </main>
-
         <footer class="site">
             <small>🄯 2024 frijal.github.io · Eksperimen desktop untuk mengisi waktu luang.</small>
         </footer>
     </div>
-    
     <div class="lightbox" id="lightbox">
         <img id="lightbox-img" alt="Gambar diperbesar">
-    </div>
     <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #2a2c5a; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
-    
     <!-- Prism.js Core for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
     <script>
     (function(){
         const toast = document.getElementById('toast');
         function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
-
         const shareMap = {
             twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
             facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -174,29 +155,20 @@ sudo apt install compiz compiz-plugins-extra gnome-do xfishtank recordmydesktop<
         
         document.getElementById('copyLink')?.addEventListener('click', () => {
             navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
-        });
-
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const galleryImages = Array.from(document.querySelectorAll('.gallery img'));
         let currentIndex = 0;
-        
         function openLightbox(index) {
             currentIndex = index;
             lbImg.src = galleryImages[currentIndex].src.replace('w=600', 'w=1600'); // Load larger image for lightbox
             lb.classList.add('open');
-        }
-        
         galleryImages.forEach((el, index) => {
             el.addEventListener('click', () => openLightbox(index));
-        });
-
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
         window.addEventListener('keydown', (e) => {
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
-        });
-
         document.querySelectorAll('.copy-btn').forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 const targetId = btn.getAttribute('data-target');
@@ -204,16 +176,9 @@ sudo apt install compiz compiz-plugins-extra gnome-do xfishtank recordmydesktop<
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
-        });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

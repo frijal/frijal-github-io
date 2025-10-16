@@ -7,74 +7,44 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>Panduan pakai banyak AI chatbot</title>
-    <meta
       name="description"
       content="Jangan bergantung ke satu AI chatbot saja. Tiap LLM punya kekuatan dan kelemahan. Halaman 1 kolom dark-mode, responsif, widescreen, mobile-friendly, dengan SEO lengkap, galeri, lightbox, share, komentar Facebook, dan deteksi perangkat/IP."
-    />
     <link
       rel="canonical"
       href="https://frijal.pages.dev/artikel/jangan-taruh-semua-telur-satu-keranjang.html"
-    />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#0c111a" />
-    <link
       rel="icon"
       href="https://frijal.pages.dev/ext/icons/favicon-32.png"
       sizes="32x32"
-    />
-    <link
-      rel="icon"
       href="https://frijal.pages.dev/ext/icons/favicon-16.png"
       sizes="16x16"
-    />
-    <link
       rel="apple-touch-icon"
       href="https://frijal.pages.dev/ext/icons/apple-touch-icon.png"
       sizes="180x180"
-    />
-    <link
       rel="mask-icon"
       href="https://frijal.pages.dev/favicon.svg"
       color="#00d1b2"
-    />
     <meta name="msapplication-TileColor" content="#0c111a" />
-    <meta
       property="og:title"
       content="Jangan taruh semua telur di satu keranjang"
-    />
-    <meta
       property="og:description"
       content="Tiap LLM punya plus minus. Coba alternatif kalau satu chatbot buntu. Lihat galeri, tips, dan komentar."
-    />
     <meta property="og:type" content="article" />
-    <meta
       property="og:url"
       content="https://frijal.pages.dev/artikel/jangan-taruh-semua-telur-satu-keranjang.html"
-    />
-    <meta
       property="og:image"
       content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixJG3kWuEgLqPIqZrOvcR6PC-i-wa19ViIdqtvpJJQGjSG6ponPSX0OZZzwbcfe-gAKrLj1-Qhx9HvLYicgdaPfDnrEl_Ucg5e1xaASkpa97UdGHhILbQDH0OmUErWdM3t2yle54RKDfEpYV4PWpzqthG16F4cwAmYExI71BDMJJsyb6EDfkJUGU6NgQw/s1600/chtgpt.png"
-    />
     <meta property="og:site_name" content="Frijal Artikel" />
     <meta property="article:section" content="AI & Chatbots" />
     <meta property="article:tag" content="LLM, Chatbot" />
-    <meta
       property="article:published_time"
       content="2025-10-06T08:41:00+08:00"
-    />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
       name="twitter:title"
-      content="Jangan taruh semua telur di satu keranjang"
-    />
-    <meta
       name="twitter:description"
       content="Kalau satu chatbot nggak klik, ganti ke yang lain. Tiap model beda kemampuan."
-    />
-    <meta
       name="twitter:image"
-      content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixJG3kWuEgLqPIqZrOvcR6PC-i-wa19ViIdqtvpJJQGjSG6ponPSX0OZZzwbcfe-gAKrLj1-Qhx9HvLYicgdaPfDnrEl_Ucg5e1xaASkpa97UdGHhILbQDH0OmUErWdM3t2yle54RKDfEpYV4PWpzqthG16F4cwAmYExI71BDMJJsyb6EDfkJUGU6NgQw/s1600/chtgpt.png"
-    />
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         // Share links
@@ -87,18 +57,14 @@
         })();
 
         // Lightbox for gallery
-        (() => {
           const imgs = Array.from(document.querySelectorAll('figure.gallery img'));
           const overlay = document.getElementById('lightbox');
           if (!imgs.length || !overlay) return;
-
           const imgEl = document.getElementById('lightbox-img');
           const prevBtn = document.getElementById('prev');
-
           const nextBtn = document.getElementById('next');
           const closeBtn = document.getElementById('close');
           let currentIndex = 0;
-
           function openLightbox(index) {
             currentIndex = index;
             imgEl.src = imgs[currentIndex].src;
@@ -106,18 +72,11 @@
             overlay.classList.add('open');
             document.body.style.overflow = 'hidden';
           }
-
           function closeLightbox() {
             overlay.classList.remove('open');
             document.body.style.overflow = '';
-          }
-
           function move(delta) {
             currentIndex = (currentIndex + delta + imgs.length) % imgs.length;
-            imgEl.src = imgs[currentIndex].src;
-            imgEl.alt = imgs[currentIndex].alt || 'Gambar diperbesar';
-          }
-
           imgs.forEach((img, i) => {
             img.addEventListener('click', () => openLightbox(i));
           });
@@ -127,22 +86,15 @@
           closeBtn.addEventListener('click', closeLightbox);
           overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeLightbox();
-          });
-
           document.addEventListener('keydown', (e) => {
             if (!overlay.classList.contains('open')) return;
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') prevBtn.click();
             if (e.key === 'ArrowRight') nextBtn.click();
-          });
-        })();
       });
     </script>
     <script src="/ext/marquee-url.js" defer></script>
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

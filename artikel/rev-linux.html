@@ -11,20 +11,17 @@
     <!-- Favicon & Theme -->
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d2/Anthon_Open_Source_Community_LOGO.svg" type="image/svg+xml">
     <meta name="theme-color" content="#1a212e">
-
     <!-- Open Graph -->
     <meta property="og:title" content="Membaca Teks Terbalik dengan Perintah rev di Linux">
     <meta property="og:description" content="Panduan lengkap membaca teks terbalik menggunakan perintah rev di Linux.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://frijal.pages.dev/artikel/rev-linux.html">
     <meta property="og:image" content="https://frijal.pages.dev/assets/og/rev-linux.jpg">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Membaca Teks Terbalik dengan Perintah rev di Linux">
     <meta name="twitter:description" content="Panduan lengkap membaca teks terbalik menggunakan perintah rev di Linux.">
     <meta name="twitter:image" content="https://frijal.pages.dev/assets/og/rev-linux.jpg">
-
     <!-- JSON-LD -->
     <script type="application/ld+json">
     {
@@ -39,7 +36,6 @@
     
     <!-- Prism.js CSS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
-
     <!-- Styles: 1 kolom, dark theme -->
     <style>
         :root {
@@ -57,7 +53,6 @@
             background: var(--bg); color: var(--fg);
             font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
             margin: 0; scroll-behavior: smooth;
-        }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
         .wrap { min-height: 100vh; display: flex; flex-direction: column; }
@@ -65,7 +60,6 @@
             padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
             background: rgba(26, 33, 46, 0.7); backdrop-filter: blur(8px);
             position: sticky; top: 0; z-index: 10;
-        }
         .brand { font-weight: bold; font-size: 1.2rem; }
         main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
         .col { width: 100%; max-width: var(--maxw); }
@@ -89,40 +83,33 @@
         <header class="site">
             <div class="brand">🐧 Frijal Artikel</div>
         </header>
-
         <main>
             <div class="col">
                 <article>
                     <h1>Membaca Teks Terbalik dengan Perintah `rev` di Linux</h1>
 <div id="iposbrowser"></div>
                     <p class="lead">Pernah menemukan teks yang urutan hurufnya terbalik dan sulit dibaca? Linux memiliki solusi unik dan sederhana untuk masalah ini: perintah `rev`.</p>
-
                     <div class="share-bar">
                         <button class="btn-share" data-share="twitter">Twitter</button>
                         <button class="btn-share" data-share="facebook">Facebook</button>
                         <button class="btn-share" data-share="whatsapp">WhatsApp</button>
                         <button class="btn-share" id="copyLink">Salin Tautan</button>
                     </div>
-
                     <h2>Contoh Kasus</h2>
                     <p>Misalnya, Anda memiliki teks berikut yang tampak aneh:</p>
                     <pre class="language-bash"><code id="code1">.mumu araces xuniL anuggneP nagned nakgnidnabid swodniW isarepO metsiS</code><button class="copy-btn" data-target="code1">Salin</button></pre>
                     
                     <h2>Cara Membaca dengan `rev`</h2>
                     <p>Ada dua cara umum untuk menggunakan `rev`:</p>
-                    
                     <h3>1. Dari File</h3>
                     <p>Simpan teks terbalik di atas ke dalam sebuah file, misalnya <code>teks.txt</code>, lalu jalankan perintah:</p>
                     <pre class="language-bash"><code id="code2">rev teks.txt</code><button class="copy-btn" data-target="code2">Salin</button></pre>
-                    
                     <h3>2. Menggunakan Pipe</h3>
                     <p>Anda juga bisa langsung membalikkan teks menggunakan pipe (`|`) dari perintah lain, seperti `echo`:</p>
                     <pre class="language-bash"><code id="code3">echo ".mumu araces xuniL" | rev</code><button class="copy-btn" data-target="code3">Salin</button></pre>
-                    
                     <p>Kedua metode di atas akan menghasilkan output yang sudah dibalik dan dapat dibaca dengan normal:</p>
                     <pre class="language-bash"><code>Sistem Operasi Windows dibandingkan dengan Pengguna Linux secara umum.
 Linux secara umum.</code></pre>
-
                     <h2>Manfaat dan Kegunaan</h2>
                     <ul>
                         <li>Membaca dokumen atau teks yang sengaja atau tidak sengaja terbalik.</li>
@@ -133,23 +120,18 @@ Linux secara umum.</code></pre>
                 </article>
             </div>
         </main>
-
         <footer class="site">
             <small>🄯 2025 Frijal • Perintah kecil, manfaat besar.</small>
         </footer>
     </div>
-    
     <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #222f3e; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
-    
     <!-- Prism.js Core for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
     <script>
     (function(){
         const toast = document.getElementById('toast');
         function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
-
         const shareMap = {
             twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
             facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -166,8 +148,6 @@ Linux secara umum.</code></pre>
         
         document.getElementById('copyLink')?.addEventListener('click', () => {
             navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
-        });
-
         document.querySelectorAll('.copy-btn').forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 const targetId = btn.getAttribute('data-target');
@@ -175,14 +155,9 @@ Linux secara umum.</code></pre>
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
-        });
     })();
-    </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-
-

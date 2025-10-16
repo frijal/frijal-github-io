@@ -15,13 +15,11 @@
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://frijal.pages.dev/artikel/kpli-balikpapan.html">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04">
   <meta name="twitter:description" content="KPLI Balikpapan mengadakan rilis party Ubuntu 16.04 bersama pelajar SMK.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg">
-
   <!-- CSS -->
   <style>
 body {
@@ -36,7 +34,6 @@ header {
   background: #2c3e50;
   color: #fff;
   padding: 40px 20px;
-}
 header h1 { margin: 0; font-size: 2.4rem; }
 .container { max-width: 1100px; margin: auto; padding: 20px; }
 .gallery {
@@ -44,28 +41,21 @@ header h1 { margin: 0; font-size: 2.4rem; }
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
   margin: 20px 0;
-}
 .gallery img {
   width: 100%; height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
-}
 .gallery img:hover { transform: scale(1.05); }
 pre { background: #2d2d2d; color: #eee; border-radius: 6px; padding: 12px; }
 button.copy-btn {
   background: #3498db; border: none; color: #fff;
   padding: 6px 12px; border-radius: 4px;
   cursor: pointer; margin-top: 6px;
-}
 footer {
   margin-top: 40px;
   padding: 20px;
-  text-align: center;
-  background: #2c3e50;
-  color: #fff;
   font-size: 0.9rem;
-}
 /* Tombol Home */
 #btn-home-left, #btn-home-right {
   position: fixed;
@@ -76,7 +66,6 @@ footer {
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: background 0.3s, transform 0.2s;
   z-index: 9999;
-}
 #btn-home-left:hover, #btn-home-right:hover { background: #2980b9; transform: scale(1.05); }
 #btn-home-left { left: 10px; top: 30%; transform: translateY(-50%); }
 #btn-home-right { right: 10px; bottom: 20%; transform: translateY(50%); }
@@ -85,46 +74,30 @@ footer {
 .sysinfo { margin-top: 20px; font-size: 0.9rem; text-align: center; }
 .flag { width: 20px; height: 14px; vertical-align: middle; margin-left: 4px; }
   </style>
-
   <!-- Prism.js -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
   
 </div>
   </div>
-
   <footer>
 <div class="sysinfo" id="sysinfo"></div>
 <p>🄯 2025 KPLI Balikpapan. Dibuat untuk edukasi Linux & Open Source.</p>
   </footer>
-
   <script>
 function copyCommand() {
   const text = "sudo apt update && sudo apt upgrade -y";
   navigator.clipboard.writeText(text).then(() => alert("Perintah disalin ke clipboard!"));
-}
-
 // FB Comments current URL
 const currentUrl = window.location.href;
 document.getElementById("current-url").textContent = currentUrl;
 document.getElementById("fb-comments").setAttribute("data-href", currentUrl);
   </script>
-
   <!-- JSON-LD -->
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Kegiatan KPLI Balikpapan – Rilis Party Ubuntu 16.04","author":{"@type":"Person","name":"KPLI Balikpapan","image":"https://frijal.pages.dev/img/kpli-balikpapan.webp"},"publisher":{"@type":"Organization","name":"KPLI Indonesia","image":"https://frijal.pages.dev/img/kpli-balikpapan.webp"},"datePublished":"2016-06-12","image":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0G0CmQTaZs6urVT76FlTnTwKBRrmggA4euVQHZLzHV0on0D8-iffJla7vs01N56H21vRo_D158UcBRxhqF6-AVdS1AgJsAILQjyxVUKufjAXh6Scf_MKhfLcuRvhmDUqkKXBuDe2OmA5L/s1600/IMG_20160612_141504.jpg"}</script>
-
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

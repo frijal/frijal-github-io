@@ -13,10 +13,8 @@
   <meta name="keywords" content="kejujuran, bisnis, berkah, Islam, amanah, dagang, hadis, Qur'an">
   <meta name="author" content="Fakhrul">
   <meta name="robots" content="index, follow">
-
   <!-- Favicon -->
   <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png">
-
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Kejujuran: Pondasi Bisnis yang Berkah">
@@ -24,13 +22,11 @@
   <meta property="og:url" content="https://frijal.pages.dev/artikel/kejujuran-bisnis.html">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzwLoRDwZlC0AaGsO4QHO7PjdnR2QF9Px33NkbQL4tx0SjKUyJnJAi7F-zx3hPK5Bai0nZ6FBbBCwFGiqaETWlElV4I6nYd7Z4kvhsU4Y9t5XNFzq0_XZ_a7ZKgmxzlf0ryQG4eunBvFvlpAM8yac564k1_5UuiBTcIeF7Hk-mhtVVC_yB9PxrZBfiylM/s16000/n1.jpg">
   <meta property="og:site_name" content="frijal.pages.dev">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Kejujuran: Pondasi Bisnis yang Berkah">
   <meta name="twitter:description" content="Refleksi santai tentang kejujuran dalam bisnis: godaan, bahaya kebohongan kecil, teguran untuk pedagang, dan menemukan berkah.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzwLoRDwZlC0AaGsO4QHO7PjdnR2QF9Px33NkbQL4tx0SjKUyJnJAi7F-zx3hPK5Bai0nZ6FBbBCwFGiqaETWlElV4I6nYd7Z4kvhsU4Y9t5XNFzq0_XZ_a7ZKgmxzlf0ryQG4eunBvFvlpAM8yac564k1_5UuiBTcIeF7Hk-mhtVVC_yB9PxrZBfiylM/s16000/n1.jpg">
-
   <!-- JSON-LD Article -->
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -42,8 +38,6 @@
   </div>
   <button class="btn close" id="close" aria-label="Tutup">Tutup ✕</button>
 </div>
-  </div>
-
   <!-- Interaksi & utilitas -->
   <script>
 // Share links builder
@@ -59,11 +53,7 @@ if(a.classList.contains('fb')) a.href = "https://www.facebook.com/sharer/sharer.
 if(a.classList.contains('ln')) a.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
   });
 })();
-
-
-
 // Lightbox interactions
-(function(){
   var galleryImgs = Array.from(document.querySelectorAll('.gallery figure img'));
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lightboxImg');
@@ -79,27 +69,20 @@ document.body.style.overflow = 'hidden';
 lb.classList.remove('open');
 lb.setAttribute('aria-hidden', 'true');
 document.body.style.overflow = '';
-  }
   function prev(){ idx = (idx - 1 + galleryImgs.length) % galleryImgs.length; lbImg.src = galleryImgs[idx].src; }
   function next(){ idx = (idx + 1) % galleryImgs.length; lbImg.src = galleryImgs[idx].src; }
-
   document.getElementById('close').addEventListener('click', close);
   document.getElementById('prev').addEventListener('click', prev);
   document.getElementById('next').addEventListener('click', next);
   lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
   galleryImgs.forEach(function(img, i){
 img.addEventListener('click', function(){ open(i); });
-  });
   document.addEventListener('keydown', function(e){
 if(!lb.classList.contains('open')) return;
 if(e.key === 'Escape') close();
 if(e.key === 'ArrowLeft') prev();
 if(e.key === 'ArrowRight') next();
-  });
-})();
-
 // Progressive lazy-load enhancement (IntersectionObserver fallback)
-(function(){
   if('loading' in HTMLImageElement.prototype) return; // native supported
   var imgs = document.querySelectorAll('.gallery img[loading="lazy"], .content img[loading="lazy"]');
   var io = new IntersectionObserver(function(entries, obs){
@@ -108,26 +91,13 @@ entries.forEach(function(entry){
 var img = entry.target;
 img.src = img.getAttribute('src');
 obs.unobserve(img);
-  }
 });
-  });
   imgs.forEach(function(img){ io.observe(img); });
-})();
   </script>
-
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

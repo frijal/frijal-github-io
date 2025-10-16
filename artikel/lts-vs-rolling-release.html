@@ -37,23 +37,19 @@
                 --card: #1a1a1a;
                 --border: #333;
             }
-        }
         body {
             font-family: "Inter", system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--fg);
             line-height: 1.7;
             margin: 0;
-        }
         main {
             max-width: 900px;
             margin: auto;
             padding: 2rem;
-        }
         h1, h2, h3 {
             color: var(--accent);
             line-height: 1.3;
-        }
         h1 { font-size: 2.5rem; margin-bottom: .5em; }
         h2 { margin-top: 2em; font-size: 1.7rem; }
         p { margin: 1em 0; }
@@ -62,7 +58,6 @@
             height: auto;
             border-radius: .5em;
             margin: 1em 0;
-        }
         a { color: var(--accent); text-decoration: none; }
         a:hover { text-decoration: underline; }
         .card {
@@ -71,15 +66,12 @@
             border-radius: .75em;
             padding: 1.5em;
             margin-bottom: 2em;
-        }
         .share-buttons {
             display: flex; gap: .75em; flex-wrap: wrap; justify-content: center; margin: 1.5em 0;
-        }
         .share-buttons a {
             display: inline-flex; align-items: center; justify-content: center;
             width: 40px; height: 40px; border-radius: 50%;
             color: #fff; transition: transform .2s;
-        }
         .share-buttons a:hover { transform: translateY(-3px); }
         .fb { background: #1877f2; }
         .tw { background: #1da1f2; }
@@ -90,14 +82,10 @@
 <meta property="og:image:alt" content="LTS vs Rolling Release: Manakah yang Lebih Baik untuk Anda?">
   <meta itemprop="image" content="https://frijal.pages.dev/img/lts-vs-rolling-release.webp">
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <main>
         <h1>LTS vs Rolling Release: Memahami Dua Filosofi Rilis di Dunia Linux</h1>
-<div id="iposbrowser"></div>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
         <p>Jika kamu baru mengenal dunia Linux, mungkin sering mendengar istilah <strong>LTS</strong> dan <strong>Rolling Release</strong>. Keduanya adalah model rilis sistem operasi yang punya filosofi berbeda. Artikel ini akan membahas keduanya secara santai tapi tetap teknis, agar kamu bisa memilih mana yang paling cocok untuk kebutuhanmu.</p>
         
@@ -109,15 +97,11 @@
             <p>Inilah pilihan ideal bagi server, perusahaan, atau pengguna rumahan yang lebih suka sistem yang “pasang dan jalan”. Kamu tidak perlu khawatir sistem tiba-tiba rusak setelah update besar. Semua diuji dengan ketat sebelum dirilis.</p>
         </div>
 
-        <div class="card">
             <h2>Apa Itu Rolling Release?</h2>
             <p>Beda dari LTS, <strong>Rolling Release</strong> adalah model rilis yang terus bergulir. Tidak ada versi tetap seperti “Arch 2025” — sistem akan terus diperbarui sedikit demi sedikit. Dengan model ini, kamu selalu punya perangkat lunak versi terbaru tanpa perlu instalasi ulang atau upgrade mayor.</p>
             <p>Contoh paling terkenal adalah <strong>Arch Linux</strong>. Begitu kamu memasangnya, sistemmu akan selalu up-to-date selama kamu rutin menjalankan perintah pembaruan. Tak perlu menunggu rilis tahunan — semua fitur baru langsung tersedia begitu dikembangkan.</p>
             <img loading="lazy" src="https://placehold.co/900x450/3182ce/ffffff?text=Inovasi+Rolling+Release" alt="Ilustrasi pembaruan kontinu di Rolling Release">
             <p>Tapi tentu ada risiko. Karena perubahan lebih sering, potensi bug baru juga meningkat. Pengguna Rolling Release perlu lebih proaktif membaca catatan rilis dan siap mengatasi masalah kecil yang mungkin muncul.</p>
-        </div>
-
-        <div class="card">
             <h2>Perbandingan: Stabilitas vs Kebaruan</h2>
             <p>Kedua model ini punya tujuan sama: memberikan sistem yang aman, cepat, dan bisa diandalkan. Bedanya hanya pada cara mereka mencapainya.</p>
             <ul>
@@ -125,9 +109,6 @@
                 <li><strong>Rolling Release</strong> menekankan kebaruan dan fleksibilitas. Ideal untuk pengembang, power user, atau mereka yang suka mengikuti teknologi terbaru.</li>
             </ul>
             <p>Sebagai contoh, jika kamu menggunakan Ubuntu LTS, sistemmu tidak akan berubah drastis selama lima tahun. Tapi di Arch Linux, kernel dan aplikasi akan diperbarui hampir setiap minggu. Dua filosofi berbeda — keduanya benar tergantung kebutuhan.</p>
-        </div>
-
-        <div class="card">
             <h2>Perintah Pembaruan di Terminal</h2>
             <p>Berikut contoh sederhana untuk memahami perbedaannya lewat perintah terminal:</p>
             <h3>Ubuntu (LTS)</h3>
@@ -135,41 +116,24 @@
             <h3>Arch Linux (Rolling)</h3>
             <pre><code>sudo pacman -Syu</code></pre>
             <p>Di Ubuntu, pembaruan fokus pada keamanan dan stabilitas. Di Arch, hampir semua paket bisa berubah setiap kali kamu memperbarui sistem. Itulah esensi “rolling”.</p>
-        </div>
-
-        <div class="card">
             <h2>Tren Tahun 2025: Hibrida Mulai Populer</h2>
             <p>Menariknya, banyak distro mulai menggabungkan dua filosofi ini. Ubuntu, misalnya, membuka akses mudah ke paket baru melalui <em>Flatpak</em> dan <em>Snap</em>. Sementara Arch menyediakan <em>snapshot</em> stabil agar pengguna baru tak perlu takut memulai.</p>
             <p>Artinya, dunia Linux tidak lagi sekaku dulu — pengguna bisa memilih tingkat kebaruan yang mereka inginkan tanpa harus berpindah distro. Pendekatan hibrida ini memberi keseimbangan antara stabilitas dan inovasi.</p>
-        </div>
-
-        <div class="card">
             <h2>Kesimpulan</h2>
             <p>Pada akhirnya, tidak ada yang benar-benar “lebih baik”. Jika kamu butuh sistem yang bisa diandalkan dan jarang bermasalah, pilih <strong>LTS</strong>. Tapi jika kamu senang bereksperimen dan ingin selalu memakai versi terbaru, <strong>Rolling Release</strong> bisa jadi pilihan yang menyenangkan.</p>
             <p>Linux memberi kebebasan untuk memilih sesuai gaya dan kebutuhanmu. Dan di situlah keindahannya — tidak ada batas untuk bereksperimen.</p>
-        </div>
-
         <div class="share-buttons">
             <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/lts-vs-rolling-release.html" title="Bagikan ke Facebook" target="_blank">f</a>
             <a class="tw" href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/lts-vs-rolling-release.html&text=LTS%20vs%20Rolling%20Release" title="Bagikan ke Twitter" target="_blank">t</a>
             <a class="wa" href="https://api.whatsapp.com/send?text=LTS%20vs%20Rolling%20Release%20-%20https://frijal.pages.dev/artikel/lts-vs-rolling-release.html" title="Bagikan ke WhatsApp" target="_blank">w</a>
             <a class="tg" href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/lts-vs-rolling-release.html&text=LTS%20vs%20Rolling%20Release" title="Bagikan ke Telegram" target="_blank">tg</a>
-        </div>
-        
         <footer>
             <p>Dipublikasikan pada 28 September 2025</p>
-            
             
         </footer>
     </main>
     
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0bb2f59d9dcf463c95e36513eecb4585"}'></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

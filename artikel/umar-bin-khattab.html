@@ -41,25 +41,20 @@ lazyImgs.forEach(img => observer.observe(img));
 } else {
 // fallback: just load all
 lazyImgs.forEach(img => img.src = img.dataset.src);
-}
-});
 
 // Lightbox Gallery
 const galleryImgs = Array.from(document.querySelectorAll('.gallery img'));
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 let lightboxIndex = 0;
-
 function showLightbox(idx) {
 lightboxIndex = idx;
 lightboxImg.src = galleryImgs[idx].dataset.src || galleryImgs[idx].src;
 lightboxImg.alt = galleryImgs[idx].alt;
 lightbox.classList.add('open');
 document.body.style.overflow = 'hidden';
-}
 galleryImgs.forEach((img, idx) => {
 img.addEventListener('click', () => showLightbox(idx));
-});
 document.getElementById('lightbox-close').onclick = () => {
 lightbox.classList.remove('open');
 document.body.style.overflow = '';
@@ -67,21 +62,15 @@ document.body.style.overflow = '';
 document.getElementById('lightbox-prev').onclick = (e) => {
 e.stopPropagation();
 showLightbox((lightboxIndex - 1 + galleryImgs.length) % galleryImgs.length);
-};
 document.getElementById('lightbox-next').onclick = (e) => {
-e.stopPropagation();
 showLightbox((lightboxIndex + 1) % galleryImgs.length);
-};
 lightbox.onclick = function(e){
 if(e.target === lightbox) document.getElementById('lightbox-close').click();
-};
 document.addEventListener('keydown', function(e){
 if(!lightbox.classList.contains('open')) return;
 if(e.key === "Escape") document.getElementById('lightbox-close').click();
 if(e.key === "ArrowLeft") document.getElementById('lightbox-prev').click();
 if(e.key === "ArrowRight") document.getElementById('lightbox-next').click();
-});
-
 // Share Buttons
 function shareTo(platform) {
 const url = encodeURIComponent(window.location.href);
@@ -92,21 +81,15 @@ window.open(`https://www.facebook.com/sharer.php?u=${url}`, '_blank');
 window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
 } else if (platform === "whatsapp") {
 window.open(`https://wa.me/?text=${title}%20${url}`, '_blank');
-}
-}
 function copyLink() {
 navigator.clipboard.writeText(window.location.href)
 .then(()=>alert("Link artikel sudah disalin!"))
 .catch(()=>prompt("Salin manual:", window.location.href));
-}
 window.shareTo = shareTo;
 window.copyLink = copyLink;
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

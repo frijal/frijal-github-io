@@ -11,24 +11,20 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
 <text y='.9em' font-size='90'>📄</text>
   </svg>" type="image/svg+xml">
-
   <!-- SEO -->
   <meta name="description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien. Lengkap dengan contoh perintah, keunggulan, dan tips praktis.">
   <link rel="canonical" href="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
-
   <!-- Open Graph -->
   <meta property="og:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
   <meta property="og:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://frijal.pages.dev/artikel/menggabungkan-pdf-dengan-pdftk.html">
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Menggabungkan Berkas PDF dengan PDFtk: Panduan Lengkap">
   <meta name="twitter:description" content="Panduan lengkap cara menggabungkan berkas PDF dengan PDFtk secara cepat, ringan, dan efisien.">
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjouMbtCK2wk9GrvGIi2_OA93KxmgdLT5CUHLjids3SalPctBVMtK6fIGiUO3nJE5tgXWh3v7stdMwccC-EAMkJ0I_rAKIsjHTp5nb7RIGQaMdx1OufN1sJpX6-qGH8St8ZxJxuVrkCwH/s1600/article-logo.png">
-
   <!-- CSS -->
   <style>
 :root {
@@ -41,22 +37,17 @@ body {
   margin: 0; padding: 0;
   background: var(--bg);
   color: #111;
-}
 header {
   background: var(--primary);
   color: white;
   padding: 20px;
   text-align: center;
-}
 main {
   max-width: 960px;
   margin: auto;
-  padding: 20px;
   background: white;
-}
 h1, h2 {
   color: var(--primary);
-}
 pre {
   position: relative;
   background: #2d2d2d;
@@ -64,63 +55,43 @@ pre {
   padding: 12px;
   border-radius: 8px;
   overflow-x: auto;
-}
 button.copy-btn {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: var(--primary);
-  color: white;
   border: none;
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 4px;
   font-size: 12px;
-}
 .share-buttons {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-}
 .share-buttons a {
   text-decoration: none;
   padding: 8px 12px;
-  border-radius: 8px;
   font-size: 14px;
-  background: var(--primary);
-  color: white;
-}
 footer {
   margin-top: 40px;
-  padding: 20px;
-  font-size: 14px;
-  text-align: center;
   color: var(--muted);
-}
 .env-info {
   margin-top: 12px;
   font-size: 13px;
   background: #f1f5f9;
   padding: 10px;
   border-radius: 6px;
-}
 .env-info svg {
   width: 20px; height: 20px;
   vertical-align: middle;
   margin-right: 6px;
-}
 .article-image {
-  text-align: center;
   margin: 20px 0;
-}
 .article-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-}
   </style>
-
   <!-- Prism.js for syntax highlighting -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
   
@@ -132,25 +103,19 @@ window.fbAsyncInit = function() {
   if (typeof FB !== 'undefined') {
 try { FB.XFBML.parse(); } catch(e) {}
   }
-}
   </script>
 </div>
-
 <!-- Informasi Lingkungan -->
 <div class="env-info" id="env-info">
   <p><strong>Info Lingkungan:</strong></p>
   <div id="browser-info"></div>
   <div id="os-info"></div>
   <div id="ip-info"></div>
-</div>
   </main>
-
   <footer>
 <p>🄯 2025 Pelan Kiri. Semua Hak Dilindungi.</p>
   </footer>
-
   <!-- Script Copy -->
-  <script>
 document.querySelectorAll(".copy-btn").forEach(btn => {
   btn.addEventListener("click", () => {
 const code = btn.previousElementSibling.innerText;
@@ -159,10 +124,7 @@ btn.textContent = "Copied!";
 setTimeout(()=>btn.textContent="Copy", 1500);
   });
 });
-  </script>
-
   <!-- Browser & OS Info + IP & Flag -->
-  <script>
 function detectOS() {
   const ua = navigator.userAgent;
   if (ua.includes("Win")) return "Windows";
@@ -171,18 +133,14 @@ function detectOS() {
   if (/Android/i.test(ua)) return "Android";
   if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
   return "Unknown OS";
-}
 function detectBrowser() {
-  const ua = navigator.userAgent;
   if (ua.includes("Firefox/")) return "Mozilla Firefox";
   if (ua.includes("Chrome/")) return "Google Chrome";
   if (ua.includes("Safari/") && !ua.includes("Chrome/")) return "Safari";
   if (ua.includes("Edg/")) return "Microsoft Edge";
   return "Unknown Browser";
-}
 document.getElementById("browser-info").innerHTML = "🌐 Browser: " + detectBrowser();
 document.getElementById("os-info").innerHTML = "💻 Sistem Operasi: " + detectOS();
-
 fetch("https://ipapi.co/json/")
   .then(res=>res.json())
   .then(data=>{
@@ -191,13 +149,8 @@ document.getElementById("ip-info").innerHTML =
   " <img src='https://flagcdn.com/24x18/" + data.country_code.toLowerCase() + ".png'>";
   })
   .catch(()=>{document.getElementById("ip-info").textContent="Tidak dapat memuat IP";});
-  </script>
-
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

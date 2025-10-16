@@ -39,27 +39,22 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.7;
-        }
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
-        }
         header { text-align: center; padding: 3rem 1.5rem; }
         h1 {
             font-size: clamp(2rem, 5vw, 3rem);
             color: var(--heading-color);
             margin: 0 0 0.5rem 0;
             line-height: 1.2;
-        }
         header .subtitle { font-size: 1.1rem; color: var(--accent-color); }
         h2 {
             font-size: 1.75rem;
-            color: var(--heading-color);
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
             margin-top: 3rem;
-        }
         code {
             background-color: #374151;
             padding: 0.2em 0.4em;
@@ -67,7 +62,6 @@
             font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 0.9em;
             color: #a5f3fc;
-        }
         pre {
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
@@ -75,15 +69,12 @@
             padding: 1em;
             overflow-x: auto;
             box-shadow: var(--shadow);
-        }
         pre code { padding: 0; background: none; }
         .callout {
-            background-color: var(--card-color);
             border-left: 4px solid var(--accent-color);
             padding: 1em 1.5em;
             margin: 1.5rem 0;
             border-radius: 0 8px 8px 0;
-        }
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
         .gallery a { display: block; overflow: hidden; border-radius: 8px; box-shadow: var(--shadow); }
         .gallery img { width: 100%; height: auto; display: block; transition: transform 0.3s ease; }
@@ -105,13 +96,11 @@
         hr { border: 0; height: 1px; background-color: var(--border-color); margin: 3rem 0; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>⚙️ Panduan Lengkap: Skrip Otomatis Perbaikan HTML</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
             <div id="iposbrowser"></div>
             <p class="subtitle">Sebuah rangkuman perjalanan dari error hingga solusi final dengan Python & BeautifulSoup.</p>
@@ -130,7 +119,6 @@ error: externally-managed-environment</code></pre>
 python3 -m venv venv
 # 2. Aktifkan lingkungan tersebut
 source venv/bin/activate</code></pre>
-                <hr>
                 <h2>Tahap 2: Error Shell yang Tidak Kompatibel 🐟</h2>
                 <p>Setelah membuat `venv`, beberapa pengguna (terutama pengguna `fish` shell) akan menemukan error baru saat mencoba mengaktifkannya. Untungnya, `venv` sudah menyediakan solusinya.</p>
                 <h3>Solusi: Gunakan Skrip Aktivasi yang Tepat</h3>
@@ -138,7 +126,6 @@ source venv/bin/activate</code></pre>
                 <pre><code># Perintah aktivasi yang benar untuk fish shell
 source venv/bin/activate.fish</code></pre>
                 <p>Setelah perintah ini, terminal Anda akan menampilkan `(venv)` di depannya, menandakan Anda sudah berada di lingkungan virtual.</p>
-                <hr>
                 <h2>Tahap 3: Skrip Final Perbaikan HTML 🐍</h2>
                 <p>Setelah berhasil mengatasi masalah lingkungan, inilah skrip final `fix_html.py` yang kita kembangkan. Skrip ini tidak hanya memperbaiki error struktural, tetapi juga membersihkan spasi berlebih dan membuat file log yang rapi.</p>
                 <div class="callout">
@@ -161,7 +148,6 @@ source venv/bin/activate.fish</code></pre>
                 });
             });
             lazyImages.forEach(img => lazyImageObserver.observe(img));
-        }
 
         // --- Lightbox ---
         const gallery = document.querySelector('.gallery');
@@ -170,7 +156,6 @@ source venv/bin/activate.fish</code></pre>
             const lbImg = document.getElementById('lb-img');
             const images = Array.from(gallery.querySelectorAll('a'));
             let currentIndex = 0;
-
             function showImage(index) {
                 if (images.length === 0 || !images[index]) return;
                 const imgLink = images[index];
@@ -178,7 +163,6 @@ source venv/bin/activate.fish</code></pre>
                 lbImg.alt = imgLink.dataset.caption || 'Gambar diperbesar';
                 currentIndex = index;
             }
-
             gallery.addEventListener('click', e => {
                 e.preventDefault();
                 const link = e.target.closest('a');
@@ -187,8 +171,6 @@ source venv/bin/activate.fish</code></pre>
                     lightbox.classList.add('open');
                     showImage(index);
                 }
-            });
-
             document.getElementById('lb-close')?.addEventListener('click', () => lightbox.classList.remove('open'));
             document.getElementById('lb-prev')?.addEventListener('click', () => showImage((currentIndex - 1 + images.length) % images.length));
             document.getElementById('lb-next')?.addEventListener('click', () => showImage((currentIndex + 1) % images.length));
@@ -199,9 +181,6 @@ source venv/bin/activate.fish</code></pre>
                     if (e.key === 'Escape') lightbox.classList.remove('open');
                     if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
                     if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
-                }
-            });
-        }
         
         // --- Dynamic Share Buttons ---
         const shareContainer = document.getElementById('share-container');
@@ -217,22 +196,16 @@ source venv/bin/activate.fish</code></pre>
                 'Facebook': `https://www.facebook.com/sharer/sharer.php?u=${url}`,
                 'Twitter': `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
                 'WhatsApp': `https://wa.me/?text=${title}%20${url}`,
-            };
             for (const [name, link] of Object.entries(platforms)) {
                 const a = document.createElement('a');
                 a.href = link; a.target = '_blank'; a.rel = 'noopener noreferrer';
                 a.title = `Bagikan ke ${name}`;
                 a.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="${icons[name]}"></path></svg>`;
                 shareContainer.appendChild(a);
-            }
-        }
     });
     </script>
     <script src="/ext/marquee-url.js" defer></script>
     <script src="/ext/iposbrowser.js" defer></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

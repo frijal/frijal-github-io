@@ -12,7 +12,6 @@
     <meta name="robots" content="index, follow" />
     
     <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%233b82f6' d='M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 15h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V8h4v2z'/></svg>" type="image/svg+xml" />
-    
     <meta property="og:title" content="Panduan Interaktif FFmpeg Visual: Audio &amp; Video" />
     <meta property="og:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi proses untuk konversi, trim, dan manipulasi media." />
     <meta property="og:type" content="article" />
@@ -20,19 +19,16 @@
     <meta property="og:site_name" content="Frijal Command Line Guides" />
     <meta property="og:image" content="https://frijal.pages.dev/img/panduan-interaktif-ffmpeg.webp" />
     <meta property="og:image:alt" content="Visualisasi Konversi Media FFmpeg di Command Line" />
-    
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Panduan Interaktif FFmpeg Visual: Audio &amp; Video" />
     <meta name="twitter:description" content="Kumpulan perintah FFmpeg yang mudah disalin, lengkap dengan visualisasi dan penjelasan parameter." />
     <meta name="twitter:image" content="https://frijal.pages.dev/img/panduan-interaktif-ffmpeg.webp" />
     <meta name="twitter:site" content="@frijal" />
-    
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     const navigation = document.getElementById("navigation");
     const contentDisplay = document.getElementById("content-display");
     const navLinks = document.querySelectorAll(".nav-link");
-    
     // Map hash to template IDs
     const contentMap = {
         "#ffmpeg-convert":"ffmpeg-convert-content",
@@ -45,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "#ffmpeg-mp4-webm":"ffmpeg-mp4-webm-content",
         "#ffmpeg-batch-video":"ffmpeg-batch-video-content"
     };
-
     function loadContent(hash){
         contentDisplay.innerHTML = "";
         navLinks.forEach(l => l.classList.remove("active-nav"));
@@ -55,26 +50,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if(template){
             contentDisplay.appendChild(template.content.cloneNode(true));
         }
-        
         if(navLinks.length > 0 && contentMap[hash]){
             const targetLink = document.querySelector(`a[href="${hash}"]`);
             if (targetLink) targetLink.classList.add("active-nav");
-        }
-        
         // Attempt to parse FB comments for dynamic content
         if (typeof FB !== 'undefined' && FB.XFBML && typeof FB.XFBML.parse === 'function'){
             FB.XFBML.parse();
-        }
-
         // Update current URL display and Facebook comments data-href
         const currentCanonicalUrl = "https://frijal.pages.dev/artikel/panduan-interaktif-ffmpeg.html";
         const currentUrlEl = document.getElementById("current-url");
         if (currentUrlEl) currentUrlEl.textContent = currentCanonicalUrl + hash;
     }
-
     // Hash change
     window.addEventListener("hashchange", ()=>{ loadContent(window.location.hash); });
-
     // Initial load
     const initialHash = window.location.hash;
     if (initialHash) {
@@ -87,9 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.hash = firstHash; // Set hash for history
         } else { 
             loadContent("#welcome"); 
-        }
-    }
-    
     // Copy button handler
     contentDisplay.addEventListener("click", (e)=>{
         if(e.target.classList.contains("copy-btn")){
@@ -109,23 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.error("Gagal menyalin: ", err);
                 });
             }
-        }
     });
-
     // Facebook SDK manual parse (for initial load)
     window.fbAsyncInit = function () {
         if (typeof FB !== 'undefined') {
             try {FB.XFBML.parse();} catch (t) {}
-        }
-    };
 });
 </script>
-
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

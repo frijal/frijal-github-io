@@ -25,43 +25,30 @@
       toast.classList.add("opacity-100"),
       setTimeout(() => toast.classList.remove("opacity-100"), 1500));
     }
-    
     function openLightbox(t) {
       ((document.getElementById("lightbox-img").src = t),
       (document.getElementById("lightbox").style.display = "flex"));
-    }
-    
     function closeLightbox() {
       document.getElementById("lightbox").style.display = "none";
-    }
-    
     document.querySelectorAll(".accordion-button").forEach((e) => {
       e.addEventListener("click", () => {
         var t = e.nextElementSibling;
         t.style.display = "block" === t.style.display ? "none" : "block";
       });
     });
-    
     function copyCode(targetId) {
       var t = document.getElementById(targetId);
       if (t) {
         navigator.clipboard.writeText(t.innerText).then(() => showToast("Kode disalin!"));
       }
-    }
-    
     // Dihapus: Logic fetch IP/Browser
-    
     document.addEventListener('keydown', (e) => {
         if (document.getElementById('lightbox').style.display === 'flex' && e.key === 'Escape') {
             closeLightbox();
         }
-    });
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

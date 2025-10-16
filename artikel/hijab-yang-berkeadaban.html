@@ -11,13 +11,11 @@
   <link rel="canonical" href="https://frijal.pages.dev/artikel/hijab-yang-berkeadaban.html" />
   <meta name="date" content="2025-09-28" />
   
-
   <!-- Favicon -->
   <link rel="icon" href="https://frijal.pages.dev/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/favicon.svg" />
   <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
   <meta name="theme-color" content="#7c3aed" />
-
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Hijab Berkeadaban: Panduan Ringkas, Etis, dan Mudah Dipahami" />
@@ -26,16 +24,13 @@
   <meta property="og:locale" content="id_ID" />
   <meta property="og:image" content="https://frijal.pages.dev/img/hijab-yang-berkeadaban.webp" />
   <meta property="og:image:alt" content="Hijab Berkeadaban: Panduan Ringkas, Etis, dan Mudah Dipahami" />
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hijab Berkeadaban: Panduan Ringkas, Etis, dan Mudah Dipahami" />
   <meta name="twitter:description" content="Prinsip hijab yang santun, kesalahan umum yang perlu dihindari, dan langkah perbaikan yang realistis." />
   <meta name="twitter:image" content="https://frijal.pages.dev/img/hijab-yang-berkeadaban.webp" />
-
   <!-- Itemprop -->
   <meta itemprop="image" content="https://frijal.pages.dev/img/hijab-yang-berkeadaban.webp" />
-
   <!-- JSON-LD: Article -->
   <script>
 // 0) Pastikan OG/Twitter image terisi (fallback ke artikel*.jpg)
@@ -51,10 +46,6 @@ if (!val || !val.trim()) el.setAttribute("content", fallback);
   setIfEmpty('meta[name="twitter:image"]');
   setIfEmpty('meta[itemprop="image"]');
 })();
-
-
-})();
-
 // 3) Reading progress bar
 (function progress(){
   const bar = document.getElementById("progress");
@@ -63,11 +54,8 @@ const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 const percent = height ? (scrollTop/height)*100 : 0;
 bar.style.width = percent + "%";
-  };
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
-})();
-
 // 4) Lightbox untuk galeri (panah + keyboard)
 (function lightbox(){
   const images = Array.from(document.querySelectorAll(".gallery img"));
@@ -89,16 +77,13 @@ bar.style.width = percent + "%";
   const prevBtn = lb.querySelector(".lb-prev");
   const nextBtn = lb.querySelector(".lb-next");
   let index = 0;
-
   const open = (i) => {
 index = i;
 img.src = images[index].src;
 lb.classList.add("active");
-  };
   const close = () => lb.classList.remove("active");
   const prev = () => open((index - 1 + images.length) % images.length);
   const next = () => open((index + 1) % images.length);
-
   images.forEach((el, i) => el.addEventListener("click", () => open(i)));
   closeBtn.addEventListener("click", close);
   prevBtn.addEventListener("click", prev);
@@ -110,8 +95,6 @@ if (e.key === "Escape") close();
 if (e.key === "ArrowLeft") prev();
 if (e.key === "ArrowRight") next();
   });
-})();
-
 // 5) Share handlers
 (function share(){
   const url = encodeURIComponent("https://frijal.pages.dev/artikel/hijab-yang-berkeadaban.html");
@@ -128,15 +111,9 @@ e.preventDefault();
 navigator.clipboard.writeText(decodeURIComponent(url)).then(()=>{
   c.textContent = "Tersalin!"; setTimeout(()=>{ c.textContent = "Salin Link"; },1500);
 }).catch(()=>{ alert("Gagal menyalin tautan"); });
-  });
-})();
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-  
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

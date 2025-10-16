@@ -12,20 +12,17 @@
     <!-- Favicon -->
     <link rel="icon" href="https://www.debian.org/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#A80030">
-
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Membagikan Aplikasi Debian dengan dpkg-repack">
     <meta property="og:description" content="Cara mudah membagikan aplikasi di Debian menggunakan dpkg-repack, bahkan tanpa internet. Simpan aplikasi ke flashdisk dan bagikan ke teman Anda.">
     <meta property="og:url" content="https://frijal.pages.dev/artikel/membagikan-aplikasi-debian-dengan-dpkg-repack.html">
     <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXkQ4RV9Tth0kWya0PHABpWb3t8BO44elqA6FCyCKyvy1kDSR1zdKH_EUZoXzCL6g3fNsWsvRVWrpz7Og0v2vKnU0P97Sm4PBJAwg7QKWrNpZAsvvpG09i11vihjMKisfzDQt1gt-hHxqw/s1600/dpkg-repack.jpg">
-
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Membagikan Aplikasi Debian dengan dpkg-repack">
     <meta name="twitter:description" content="Cara mudah membagikan aplikasi di Debian menggunakan dpkg-repack, bahkan tanpa internet.">
     <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXkQ4RV9Tth0kWya0PHABpWb3t8BO44elqA6FCyCKyvy1kDSR1zdKH_EUZoXzCL6g3fNsWsvRVWrpz7Og0v2vKnU0P97Sm4PBJAwg7QKWrNpZAsvvpG09i11vihjMKisfzDQt1gt-hHxqw/s1600/dpkg-repack.jpg">
-
     <!-- JSON-LD -->
     <script type="application/ld+json">
     {
@@ -38,7 +35,6 @@
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://frijal.pages.dev/artikel/membagikan-aplikasi-debian-dengan-dpkg-repack.html" }
     }
     </script>
-
     <!-- Styles: 1 kolom, dark theme, Debian-inspired -->
     <style>
         :root {
@@ -57,7 +53,6 @@
             height: 100%; background: var(--bg); color: var(--fg);
             font: 16px/var(--lh) system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
             margin: 0; scroll-behavior: smooth;
-        }
         a { color: var(--accent-2); text-decoration: none; }
         a:hover { text-decoration: underline; }
         img { max-width: 100%; height: auto; border-radius: 8px; }
@@ -65,7 +60,6 @@
         header.site {
             padding: 24px 20px 8px; border-bottom: 1px solid var(--border);
             background: linear-gradient(180deg, #1a181c, #121013);
-        }
         .brand { display: flex; align-items: center; gap: 12px; font-weight: bold; }
         .brand svg { width: 28px; height: 28px; }
         main { display: flex; justify-content: center; padding: 28px 16px 60px; }
@@ -91,7 +85,6 @@
         footer.site { padding: 20px; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
 <link rel="stylesheet" href="/ext/marquee-url.css">
-<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -101,12 +94,10 @@
                 <strong>bak.xo.je</strong>
             </div>
         </header>
-
         <main>
             <div class="col">
                 <article>
                     <h1>Membagikan Aplikasi Debian dengan dpkg-repack</h1>
-<div id="iposbrowser"></div>
 <div id="iposbrowser"></div>
                     <p class="lead">Banyak pengguna Debian rajin membersihkan cache APT, tapi bagaimana jika ingin berbagi aplikasi tanpa koneksi internet? Solusinya sederhana: gunakan <code>dpkg-repack</code>.</p>
                     
@@ -115,49 +106,36 @@
                         <button class="btn-share" data-share="facebook"><svg viewBox="0 0 24 24"><path d="M13.5 9h2.2l.3-2.6h-2.5V5.1c0-.8.2-1.3 1.4-1.3h1.2V1.5c-.2 0-.9-.1-1.9-.1-1.8 0-3 1.1-3 3.2v2h-2v2.6h2v7.6h2.6V9z" fill="currentColor"/></svg><span>Facebook</span></button>
                         <button class="btn-share" data-share="whatsapp"><svg viewBox="0 0 24 24"><path d="M20 3.9A10 10 0 0 0 3.9 20L2 22l2-.6A10 10 0 0 0 12 22a10 10 0 0 0 8-18.1zM12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm4.6-5.9c-.3-.2-1.7-.8-1.9-.9s-.4-.1-.6.1c-.2.2-.6.7-.8.9-.1.2-.3.2-.6.1a6.4 6.4 0 0 1-3.5-3.1c-.3-.6.3-.5.9-1.6.1-.2 0-.4 0-.5l-.4-1c-.1-.2-.2-.3-.4-.3h-.4c-.2 0-.4.1-.6.3-.9.9-1 2.3-.3 3.7s2.6 3.2 4.9 4c.5.2 1 .2 1.3.2.4 0 1.2-.4 1.4-1 .2-.7.2-1 .1-1.1z" fill="currentColor"/></svg><span>WhatsApp</span></button>
                     </div>
-
                     <p>Bayangkan Anda ingin memperlihatkan aplikasi baru di laptop, lalu teman Anda juga ingin memasangnya. Tidak ada internet, tidak bawa repositori, hanya ada flashdisk kosong. Di sinilah <code>dpkg-repack</code> menjadi pahlawan.</p>
-                    
                     <figure>
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXkQ4RV9Tth0kWya0PHABpWb3t8BO44elqA6FCyCKyvy1kDSR1zdKH_EUZoXzCL6g3fNsWsvRVWrpz7Og0v2vKnU0P97Sm4PBJAwg7QKWrNpZAsvvpG09i11vihjMKisfzDQt1gt-hHxqw/s1600/dpkg-repack.jpg" alt="Ilustrasi dpkg-repack Debian">
                     </figure>
-
                     <h2>Langkah-langkah Menggunakan dpkg-repack</h2>
                     <p>Prosesnya sangat mudah dan hanya memerlukan beberapa perintah di terminal.</p>
-                    
                     <h3>1. Instalasi <code>dpkg-repack</code></h3>
                     <p>Pastikan paket <code>dpkg-repack</code> sudah terpasang. Jika belum, Anda perlu koneksi internet untuk menginstalnya sekali ini saja.</p>
                     <pre><code id="code1">sudo apt-get install dpkg-repack</code><button class="copy-btn" data-target="code1">Salin</button></pre>
-
                     <h3>2. Buat Ulang Paket .deb</h3>
                     <p>Gunakan perintah <code>dpkg-repack</code> diikuti dengan nama paket yang ingin Anda bagikan. Contoh, untuk memaketkan ulang pemutar musik <strong>Amarok</strong>:</p>
                     <pre><code id="code2">dpkg-repack amarok</code><button class="copy-btn" data-target="code2">Salin</button></pre>
                     <p>Setelah perintah dijalankan, file <code>amarok_VERSION_ARCH.deb</code> akan muncul di direktori Anda saat ini. Cukup salin file .deb tersebut ke flashdisk dan bagikan ke teman Anda!</p>
-                    
                     <h3>Tips: Menggunakan Fakeroot</h3>
                     <p>Jika Anda ingin menjalankan perintah tanpa <code>sudo</code>, Anda bisa menggunakan bantuan <strong>fakeroot</strong>. Ini berguna untuk menghindari masalah perizinan.</p>
                     <pre><code id="code3">fakeroot -u dpkg-repack nama-paket</code><button class="copy-btn" data-target="code3">Salin</button></pre>
                 </article>
-            </div>
         </main>
-
         <footer class="site">
             <small>🄯 2025 Linux Tips ID · Berbagi aplikasi jadi mudah, bahkan tanpa internet.</small>
         </footer>
     </div>
-
     <div class="lightbox" id="lightbox">
         <img id="lightbox-img" alt="Gambar diperbesar">
-    </div>
-
     <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #2a3a50; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
-
     <script>
     (function(){
         // Toast Notification
         const toast = document.getElementById('toast');
         function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
-
         // Share Buttons
         const shareMap = {
             twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
@@ -170,7 +148,6 @@
                 if (url) window.open(url, '_blank', 'noopener,noreferrer');
             });
         });
-
         // Lightbox
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
@@ -178,14 +155,10 @@
             el.addEventListener('click', () => {
                 lbImg.src = el.src;
                 lb.classList.add('open');
-            });
-        });
         function closeLb(){ lb.classList.remove('open'); }
         lb.addEventListener('click', closeLb);
         window.addEventListener('keydown', (e) => {
             if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
-        });
-
         // Copy-to-clipboard
         document.querySelectorAll('.copy-btn').forEach(btn=>{
             btn.addEventListener('click', ()=>{
@@ -194,16 +167,9 @@
                 if (codeEl) {
                     navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
                 }
-            });
-        });
     })();
-    </script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
-

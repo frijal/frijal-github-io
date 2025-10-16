@@ -51,38 +51,27 @@
         const closeBtn = lb.querySelector(".lb-close");
         const prevBtn = lb.querySelector(".lb-prev");
         const nextBtn = lb.querySelector(".lb-next");
-        
         let index = 0;
-        
         const open = (i) => {
           index = i;
           img.src = images[index].src; // Menggunakan src yang sudah dimuat oleh Lazy Load
           lb.classList.add("active");
-        };
-        
         const close = () => lb.classList.remove("active");
-        
         const prev = () => open((index - 1 + images.length) % images.length);
         const next = () => open((index + 1) % images.length);
-        
         images.forEach((el, i) => el.addEventListener("click", () => open(i)));
-        
         closeBtn.addEventListener("click", close);
         prevBtn.addEventListener("click", prev);
         nextBtn.addEventListener("click", next);
-        
         lb.addEventListener("click", (e) => { 
           if (e.target === lb || e.target === closeBtn) close(); 
         }); 
-        
         document.addEventListener("keydown", (e) => {
           if (!lb.classList.contains("active")) return;
           if (e.key === "Escape") close();
           if (e.key === "ArrowLeft") prev();
           if (e.key === "ArrowRight") next();
         });
-      })();
-      
       // 3) Share handlers
       (function share(){
         const url = encodeURIComponent("https://frijal.pages.dev/artikel/sungai-terpanjang-indonesia.html");
@@ -91,11 +80,9 @@
         const t = document.getElementById("share-twitter");
         const f = document.getElementById("share-facebook");
         const c = document.getElementById("share-copy");
-        
         w.href = `https://wa.me/?text=${text}%20${url}`;
         t.href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
         f.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        
         c.addEventListener("click", (e) => {
           e.preventDefault();
           navigator.clipboard.writeText(decodeURIComponent(url)).then(()=>{
@@ -105,9 +92,6 @@
             // Fallback for older browsers
             console.error("Gagal menyalin tautan");
           });
-        });
-      })();
-      
       // 4) Lazy Load Images - Digunakan untuk memuat gambar galeri
       document.addEventListener('DOMContentLoaded', () => {
         const lazyImages = document.querySelectorAll('img[loading="lazy"]');
@@ -125,16 +109,12 @@
             });
         }, {
             rootMargin: '0px 0px 50px 0px' // Muat 50px sebelum masuk viewport
-        });
     
         lazyImages.forEach(img => observer.observe(img));
       });
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

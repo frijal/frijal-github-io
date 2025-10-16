@@ -14,7 +14,6 @@
   <!-- Canonical + favicon -->
   <link rel="canonical" href="https://frijal.pages.dev/artikel/ffmpeg-rekam-desktop-ffmpeg.html" />
   <link rel="icon" href="https://frijal.pages.dev/ext/icons/favicon.png" type="image/png" />
-
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="FRIJAL Artikel" />
@@ -22,17 +21,14 @@
   <meta property="og:description" content="Rekam seluruh aktivitas desktop Linux pakai FFmpeg langsung dari Terminal. Desain satu kolom lebar, interaktif, dan mobile-friendly." />
   <meta property="og:url" content="https://frijal.pages.dev/artikel/ffmpeg-rekam-desktop-ffmpeg.html" />
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhinZKoTjXHcKVP_Yktl5T_ulZOHnLuCmIPvoRcGuWMDsCoPoL-aG2swRc4NwR8iOOE4OSQmr_LrU1_0j-aKLu4Yp4hSRZ_VDRZxGe8w04y8pB4yXe_SVQg1REJa9-HEkrK-qpnXkCTH0xn/s1600/Batu-Ampar_003.jpeg" />
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Screencast Desktop Super Gampang di Linux pakai FFmpeg" />
   <meta name="twitter:description" content="Rekam seluruh aktivitas desktop Linux pakai FFmpeg langsung dari Terminal. Desain satu kolom lebar, interaktif, dan mobile-friendly." />
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhinZKoTjXHcKVP_Yktl5T_ulZOHnLuCmIPvoRcGuWMDsCoPoL-aG2swRc4NwR8iOOE4OSQmr_LrU1_0j-aKLu4Yp4hSRZ_VDRZxGe8w04y8pB4yXe_SVQg1REJa9-HEkrK-qpnXkCTH0xn/s1600/Batu-Ampar_003.jpeg" />
-
   <!-- JSON-LD Article -->
   <!-- Interaksi, lazy-load, share, env info -->
   <script>
-
 // Copy buttons
 document.querySelectorAll('.copy').forEach(btn=>{
   btn.addEventListener('click', ()=>{
@@ -43,8 +39,6 @@ navigator.clipboard.writeText(text).then(()=>{
   setTimeout(()=>btn.textContent = old, 1200);
 });
   });
-});
-
 // Native lazy + IntersectionObserver fallback
 const lazyImgs = document.querySelectorAll('img[data-src]');
 if('IntersectionObserver' in window){
@@ -56,13 +50,11 @@ el.src = el.dataset.src;
 el.removeAttribute('data-src');
 obs.unobserve(el);
   }
-});
   }, {rootMargin: '200px'});
   lazyImgs.forEach(img=>io.observe(img));
 } else {
   lazyImgs.forEach(img=>img.src = img.dataset.src);
 }
-
 // Lightbox
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightbox-img');
@@ -73,11 +65,9 @@ document.getElementById('gallery').addEventListener('click', (e)=>{
   if(!src) return;
   lbImg.src = src;
   lb.classList.add('active');
-});
 document.querySelector('.close-lightbox').addEventListener('click', ()=>lb.classList.remove('active'));
 lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('active'); });
 window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lb.classList.remove('active'); });
-
 // Share URLs
 const url = encodeURIComponent(location.href);
 const title = encodeURIComponent(document.title);
@@ -87,12 +77,8 @@ document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?
 document.getElementById('share-telegram').href = `https://t.me/share/url?url=${url}&text=${title}`;
 document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
   </script>
-
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

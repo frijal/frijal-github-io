@@ -23,14 +23,12 @@
   <meta property="og:image:alt" content="Sultan Murad III">
   <meta property="article:section" content="Sejarah">
   <meta property="article:tag" content="Utsmani, Murad III, Topkapi, Zaman Wanita Istana, Taqi al-Din, Observatorium Istanbul">
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sultan Murad III – Antara Cahaya Ilmu dan Bayangan Kemewahan">
   <meta name="twitter:description" content="Kisah Sultan Murad III: lahir di Topkapi, naik tahta 1574, masa Zaman Wanita Istana, perang panjang melawan Safawi, patron ilmu dan seni, hingga akhir hidup yang menggetarkan.">
   <meta name="twitter:image" id="twitter-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3IgbPpZosJndNo77Bxa3hNF-GYnNkiQHS9l6hLnDCvTCXeZxRC7aVmwCpvD27kqntqSQ4pqprU_1PO_T_qmyJLP9exTW7QgSQGFHKSFH-QdSQ9DgXEGeba-oDL36nf25Tnr6ZStlculh0qyUlTVt6IF4nyvrMGDHonSwr3fnt2fYbpcQhXZxuk5jPPQ0/s1600/Murad.jpg">
   <meta name="twitter:site" content="@frijal">
-
   <!-- CSS: Single-column wide fullscreen, responsive, interactive -->
   <style>
 :root {
@@ -53,7 +51,6 @@ body {
   background: radial-gradient(1200px 600px at 10% 0%, #0f141f 0%, #0d0f13 60%, #0b0d12 100%);
   color: var(--text);
   line-height: var(--lh);
-}
 a { color: var(--brand); text-decoration: none }
 a:hover { text-decoration: underline }
 img { max-width: 100%; height: auto; border-radius: 12px }
@@ -61,54 +58,44 @@ main {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 24px clamp(16px, 4vw, 32px) 80px;
-}
 header.hero {
   position: relative;
   padding: 32px 0 16px;
   border-bottom: 1px solid #243041;
-}
 header.hero h1 {
   margin: 0 0 8px;
   font-size: clamp(28px, 4.6vw, 44px);
   letter-spacing: 0.2px;
   line-height: 1.22;
-}
 .dek {
   color: var(--muted);
   font-size: clamp(15px, 2.6vw, 18px);
   margin: 8px 0 16px;
-}
 .meta-line {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 18px;
   align-items: center;
-  color: var(--muted);
   font-size: 14px;
-}
 .chip {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 12px; border-radius: 999px;
   background: #0f1624; border: 1px solid #203046;
-}
 .chip svg { width: 18px; height: 18px }
 .content {
   margin-top: 24px;
   display: grid; gap: 20px;
-}
 .block {
   background: linear-gradient(180deg,#141b27,#101622);
   border: 1px solid #213048;
   border-radius: 16px;
   padding: clamp(16px, 3vw, 24px);
   box-shadow: 0 30px 80px rgba(0,0,0,0.35);
-}
 .block h2 {
   font-size: clamp(20px, 3.6vw, 28px);
   margin: 0 0 10px;
   border-left: 4px solid var(--brand);
   padding-left: 10px;
-}
 .separator { margin: 12px 0 }
 .quote {
   padding: 12px 14px;
@@ -117,21 +104,16 @@ header.hero h1 {
   color: #f6f7fb;
   border-radius: 8px;
   font-style: italic;
-}
 /* Gallery */
 .gallery {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-}
 .gallery figure {
-  margin: 0;
-  position: relative;
   overflow: hidden;
   border-radius: 14px;
   border: 1px solid #22344f;
   background: #0f1522;
-}
 .gallery figcaption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -139,7 +121,6 @@ header.hero h1 {
   background: linear-gradient(180deg, transparent, rgba(0,0,0,0.55));
   color: #eef2f7;
   font-size: 13px;
-}
 .zoomable { cursor: zoom-in }
 /* Lightbox */
 .lightbox {
@@ -147,53 +128,42 @@ header.hero h1 {
   display: none; align-items: center; justify-content: center;
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(2px);
-}
 .lightbox.open { display: flex }
 .lightbox img { max-width: min(92vw, 1300px); max-height: 86vh; border-radius: 12px }
 .lb-nav {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 24px;
-}
 .lb-btn {
   width: 44px; height: 44px;
   display: grid; place-items: center;
   border-radius: 999px; background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.18);
   color: #fff; cursor: pointer;
-}
 .lb-close {
   position: absolute; top: 18px; right: 18px;
   width: 40px; height: 40px;
-}
 .lb-index {
   position: absolute; bottom: 18px; left: 50%;
   transform: translateX(-50%);
   background: rgba(0,0,0,0.55);
   color: #fff; padding: 6px 10px; border-radius: 999px; font-size: 12px;
   border: 1px solid rgba(255,255,255,0.2);
-}
 /* Share strip */
 .share-strip {
   display: flex; flex-wrap: wrap; gap: 10px;
   margin-top: 8px;
-}
 .share-btn {
-  display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-radius: 999px;
   background: #102035; border: 1px solid #223650; color: #eaf1f7;
   cursor: pointer; font-size: 14px;
-}
 .share-btn svg { width: 18px; height: 18px }
 .copy-ok { color: #9ae6b4 }
 /* Floating controls */
 .float-btn {
   position: fixed; z-index: 40;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 999px;
   background: #0f1a2b; color: #dfe7f0; border: 1px solid #284364;
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-}
 .btn-sitemap { left: 16px; top: 30% }
 .btn-home { right: 16px; bottom: 20% }
 .float-btn svg { width: 18px; height: 18px }
@@ -201,23 +171,18 @@ header.hero h1 {
 .comments {
   margin-top: 10px;
   background: #101827; border: 1px solid #243654; border-radius: 14px; padding: 12px;
-}
 /* Focus & motion pref */
 :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px }
 @media (min-width: 1200px) {
   :root { --maxw: 980px }
-}
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important }
-}
   </style>
-
   <!-- Structured data: Article (will be hydrated safely in JS) -->
   <!-- JS: SEO hydration, share, lightbox, info chips (browser/OS/IP/flag), accessibility, fallbacks -->
   <script>
 (function() {
   const safe = (f) => { try { f(); } catch (e) { /* diam, tetap jalan */ } };
-
   // Canonical & OG/Twitter url/image meta auto from current location
   safe(() => {
 const url = new URL(window.location.href);
@@ -225,68 +190,51 @@ const canonical = document.querySelector('#canonical-link');
 const ogUrl = document.querySelector('#og-url');
 const ogImg = document.querySelector('#og-image');
 const twImg = document.querySelector('#twitter-image');
-
 if (canonical) canonical.href = url.href;
 if (ogUrl) ogUrl.content = url.href;
-
 // Fallback image if none found in article: use artikel/*.jpg derived from path
 const path = url.pathname; // e.g., /artikel/sultan-murad-iii.html
 const jpgFallback = path.endsWith('.html')
   ? url.origin + path.replace('.html', '.jpg')
   : url.origin + '/artikel/fallback.jpg';
-
 // Detect first content image
 const articleImg = document.querySelector('#hero-image');
 const hasHero = !!(articleImg && articleImg.src);
-
 const finalImg = hasHero ? articleImg.src : jpgFallback;
 if (ogImg) ogImg.content = finalImg;
 if (twImg) twImg.content = finalImg;
-
 // Update LD+JSON image too
 const ld = document.querySelector('#ld-json');
 if (ld) {
   const data = JSON.parse(ld.textContent);
   data.image = finalImg;
   ld.textContent = JSON.stringify(data);
-}
   });
-
   // Estimate read time from text length (rough, Bahasa-friendly)
-  safe(() => {
 const text = document.body.innerText || "";
 const words = text.trim().split(/\s+/).length;
 const min = Math.max(3, Math.round(words / 200)); // ~200 kata/menit
 const el = document.querySelector('#read-time span');
 if (el) el.textContent = `Waktu baca: ~${min} menit`;
-  });
-
   // Info chips: browser & OS
-  safe(() => {
 const ua = navigator.userAgent;
 const browserEl = document.querySelector('[data-browser]');
 const osEl = document.querySelector('[data-os]');
-
 const browser = /Edg\//.test(ua) ? 'Microsoft Edge'
   : /Chrome\//.test(ua) ? 'Google Chrome'
   : /Safari\//.test(ua) && !/Chrome\//.test(ua) ? 'Safari'
   : /Firefox\//.test(ua) ? 'Firefox'
   : /OPR\//.test(ua) ? 'Opera'
   : 'Browser';
-
 const os = /Windows NT/.test(ua) ? 'Windows'
  : /Mac OS X/.test(ua) ? 'macOS'
  : /Android/.test(ua) ? 'Android'
  : /iPhone|iPad|iPod/.test(ua) ? 'iOS'
  : /Linux/.test(ua) ? 'Linux'
  : 'OS';
-
 if (browserEl) browserEl.textContent = browser;
 if (osEl) osEl.textContent = os;
-  });
-
   // IP + Country flag (graceful fallback; timeout 2500ms)
-  safe(() => {
 const ipEl = document.querySelector('[data-ip]');
 const flagEl = document.querySelector('[data-flag]');
 const timeout = (ms) => new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms));
@@ -313,17 +261,12 @@ if (flagEl) flagEl.textContent = '🏳️';
 const ccToFlagEmoji = (code) =>
   code.replace(/./g, c => String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1F1E6));
 fetchIPInfo();
-  });
-
   // Share buttons
-  safe(() => {
 const current = window.location.href;
 const title = document.title;
 const strip = document.querySelector('.share-strip');
 const ok = document.querySelector('.copy-ok');
-
 const open = (u) => window.open(u, '_blank', 'noopener,noreferrer');
-
 strip?.addEventListener('click', (e) => {
   const btn = e.target.closest('.share-btn');
   if (!btn) return;
@@ -333,20 +276,13 @@ navigator.clipboard?.writeText(current).then(() => {
   if (ok) { ok.hidden = false; setTimeout(() => ok.hidden = true, 1500); }
 });
 return;
-  }
   if (navigator.share && (type === 'facebook' || type === 'twitter')) {
 navigator.share({ title, url: current }).catch(() => {});
-return;
-  }
   if (type === 'facebook') open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(current)}`);
   if (type === 'twitter') open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(current)}`);
   if (type === 'whatsapp') open(`https://wa.me/?text=${encodeURIComponent(title + ' ' + current)}`);
   if (type === 'telegram') open(`https://t.me/share/url?url=${encodeURIComponent(current)}&text=${encodeURIComponent(title)}`);
-});
-  });
-
   // Lightbox gallery with arrow keys
-  safe(() => {
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-image');
 const lbIndex = document.getElementById('lb-index');
@@ -355,28 +291,20 @@ const next = lb.querySelector('.lb-next');
 const close = lb.querySelector('.lb-close');
 const items = Array.from(document.querySelectorAll('.gallery img, #hero-image'));
 let idx = 0;
-
 const openAt = (i) => {
   idx = i;
   lbImg.src = items[idx].src;
   lb.classList.add('open');
   lbIndex.textContent = `${idx+1} / ${items.length}`;
   document.body.style.overflow = 'hidden';
-};
 const closeLb = () => {
   lb.classList.remove('open');
   lbImg.src = '';
   document.body.style.overflow = '';
-};
 const step = (d) => {
   idx = (idx + d + items.length) % items.length;
-  lbImg.src = items[idx].src;
-  lbIndex.textContent = `${idx+1} / ${items.length}`;
-};
-
 document.querySelectorAll('.zoomable').forEach((fig, i) => {
   fig.addEventListener('click', () => openAt(i));
-});
 prev.addEventListener('click', () => step(-1));
 next.addEventListener('click', () => step(+1));
 close.addEventListener('click', closeLb);
@@ -386,35 +314,19 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeLb();
   if (e.key === 'ArrowLeft') step(-1);
   if (e.key === 'ArrowRight') step(+1);
-});
-  });
-
   // If main image fails, fall back to /artikel/*.jpg
-  safe(() => {
 const img = document.getElementById('hero-image');
 if (!img) return;
 img.addEventListener('error', () => {
   const url = new URL(window.location.href);
   const fallback = url.origin + url.pathname.replace('.html', '.jpg');
   if (img.src !== fallback) img.src = fallback;
-});
-  });
 })();
   </script>
-
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

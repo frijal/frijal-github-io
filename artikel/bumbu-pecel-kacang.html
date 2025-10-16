@@ -19,9 +19,7 @@
     <meta name="twitter:title" content="Bumbu Pecel Kacang — Pengertian, Bahan &amp; Cara Membuat">
     <meta name="twitter:description" content="Bumbu pecel kacang: resep, bahan, cara membuat dan tips menyajikan pecel yang enak.">
     <meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/e/e8/Pecel_Hariadhi.JPG">
-    
     <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="%23e76f51"/><text x="50" y="58" font-size="40" text-anchor="middle" fill="white" font-family="Arial,Helvetica,sans-serif">P</text></svg>'>
-
     <style>
         :root{--bg:#0f1724;--card:#0b1220;--accent:#e76f51;--muted:#9aa4b2;--glass:rgba(255, 255, 255, 0.03)}
         body,html{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#071022 0,#071a2a 100%);color:#e6eef6}
@@ -44,13 +42,10 @@
         footer{margin-top:28px;color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:8px}
         @media (max-width:900px){.grid{grid-template-columns:1fr}.hero-img{flex-basis:40%}}
     </style>
-    
     <script>
     const currentUrl = "https://frijal.pages.dev/bumbu-pecel-kacang.html";
-
     // 1. Set URL Display
     document.getElementById("current-url").textContent = currentUrl;
-
     // 2. Populate FAQ from JSON-LD
     try {
         const faqJson = JSON.parse(document.getElementById("ld-faq").textContent);
@@ -64,7 +59,6 @@
     } catch (t) {
         console.warn("JSON-LD FAQ processing error", t);
     }
-
     // 3. Social Share & Copy Link Logic
     document.getElementById("copy-link").addEventListener("click", async () => {
         try {
@@ -74,31 +68,21 @@
             prompt("Salin link berikut:", currentUrl);
         }
     });
-    
     const title = encodeURIComponent(document.title);
     const url = encodeURIComponent(currentUrl);
-    
     document.getElementById("btn-share-facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + url;
     document.getElementById("btn-share-twitter").href = `https://x.com/intent/tweet?text=${title}&url=` + url;
     document.getElementById("btn-share-whatsapp").href = `https://api.whatsapp.com/send?text=${title}%20` + url;
     document.getElementById("btn-share-telegram").href = `https://t.me/share/url?url=${url}&text=` + title;
-    
     document.getElementById("btn-share-instagram").addEventListener("click", () => {
         alert("Instagram tidak mendukung share URL langsung. Silakan salin link dan bagikan di aplikasi.");
-    });
-    
     document.querySelectorAll(".btn").forEach(t => {
         if (t.tagName === "A") {
             t.target = "_blank";
             t.rel = "noopener noreferrer";
-        }
-    });
 </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

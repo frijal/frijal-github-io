@@ -11,20 +11,17 @@
   <link rel="canonical" id="canonical-link" href="https://frijal.pages.dev/artikel/keutamaan-membela-kehormatan-saudara.html" />
   <meta name="description" content="Nilai pahala besar saat membela kehormatan saudara dari gosip dan fitnah. Implementasi nyata, empati, dan solidaritas dalam kehidupan sehari-hari." />
   <meta name="theme-color" content="#0b0f13" />
-
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Keutamaan Membela Kehormatan Saudara: Jalan Pintas Menjauhi Api Neraka!" />
   <meta property="og:description" content="Nilai pahala besar saat membela kehormatan saudara dari gosip dan fitnah. Implementasi nyata, empati, dan solidaritas dalam kehidupan sehari-hari." />
   <meta property="og:url" id="og-url" content="https://frijal.pages.dev/artikel/keutamaan-membela-kehormatan-saudara.html" />
   <meta property="og:image" id="og-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhm3-ep9kd4RiSx6zMzmvDIQc1GLLu88xH3eJZ73VklHFxEfSvICaCgl-UaJ0R5oJtDajgOCMzGU2uzDvYRsOwqTIy9dcqvKHoggVK-Rg3I1IVdPUV2eH60GU7IL-CMiJNnMXyc1xKur3-19pXQL1nUZyGeDZ6XnxHtI2ft9_gOP0w1f8rY35BlywY0k44/s1600/membela.jpg" />
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Keutamaan Membela Kehormatan Saudara: Jalan Pintas Menjauhi Api Neraka!" />
   <meta name="twitter:description" content="Nilai pahala besar saat membela kehormatan saudara dari gosip dan fitnah. Implementasi nyata, empati, dan solidaritas dalam kehidupan sehari-hari." />
   <meta name="twitter:image" id="twitter-image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhm3-ep9kd4RiSx6zMzmvDIQc1GLLu88xH3eJZ73VklHFxEfSvICaCgl-UaJ0R5oJtDajgOCMzGU2uzDvYRsOwqTIy9dcqvKHoggVK-Rg3I1IVdPUV2eH60GU7IL-CMiJNnMXyc1xKur3-19pXQL1nUZyGeDZ6XnxHtI2ft9_gOP0w1f8rY35BlywY0k44/s1600/membela.jpg" />
-
   <!-- JSON-LD Article -->
   <script>
 // Canonical & OG URL from current location
@@ -47,7 +44,6 @@ document.getElementById('twitter-image').setAttribute('content', src);
   // Safety fallback if image neither loads nor errors quickly
   setTimeout(() => { if (!ogSet) setOG(heroImg.currentSrc || heroImg.src || fallbackImg); }, 1500);
 })();
-
 // Gallery lazy-load already using loading="lazy"; add lightbox with arrows
 (function galleryLightbox() {
   const figures = Array.from(document.querySelectorAll('.gallery figure'));
@@ -57,23 +53,17 @@ document.getElementById('twitter-image').setAttribute('content', src);
   const next = document.getElementById('next');
   const close = document.getElementById('close');
   let index = 0;
-
   const open = (i) => {
 index = i;
 lbImg.src = figures[index].dataset.src;
 lb.classList.add('open');
 lb.setAttribute('aria-hidden', 'false');
-  };
   const move = (dir) => {
 index = (index + dir + figures.length) % figures.length;
-lbImg.src = figures[index].dataset.src;
-  };
   const shut = () => {
 lb.classList.remove('open');
 lb.setAttribute('aria-hidden', 'true');
 lbImg.src = '';
-  };
-
   figures.forEach((f, i) => f.addEventListener('click', () => open(i)));
   prev.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
@@ -85,8 +75,6 @@ if (e.key === 'Escape') shut();
 if (e.key === 'ArrowLeft') move(-1);
 if (e.key === 'ArrowRight') move(1);
   });
-})();
-
 // Simple share handlers
 (function sharing() {
   const url = encodeURIComponent(location.href);
@@ -94,26 +82,14 @@ if (e.key === 'ArrowRight') move(1);
   document.getElementById('share-twitter').addEventListener('click', () => {
 const href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
 window.open(href, '_blank', 'noopener,noreferrer');
-  });
   document.getElementById('share-fb').addEventListener('click', () => {
 const href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-window.open(href, '_blank', 'noopener,noreferrer');
-  });
   document.getElementById('share-wa').addEventListener('click', () => {
 const href = `https://wa.me/?text=${title}%0A${url}`;
-window.open(href, '_blank', 'noopener,noreferrer');
-  });
-})();
-
-
 });
-})();
   </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>

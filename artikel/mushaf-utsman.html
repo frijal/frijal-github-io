@@ -11,7 +11,6 @@
 
   <!-- Favicon (ganti sesuai asetmu) -->
   <link rel="icon" href="https://frijal.pages.dev/favicon.png" type="image/png" />
-
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Mushaf Utsman bin Affan: Kisah, Desain, dan Persebaran" />
@@ -20,16 +19,13 @@
   <meta property="og:locale" content="id_ID" />
   <meta property="og:url" content="https://frijal.pages.dev/artikel/mushaf-utsman.html" />
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqO49Ig6_Mw3477c9zsZhx47wpp9KOrNvsYV6hJMdOz5hPfRHVNR5sOpdi0eC5dPMMBOjQ1qKJyyPqCsByu84uHCdpIJ1-o_C8jg7zq3RFD0ZLswFy_yvTuSc2-khJgCYRU3cDsInh2Q3uAa494tcOL3DX63F2PBiW3bKo6WjhyphenhyphenWaUuqaq73fhk1Dt4ik/s1600/Mushaf-Utsman-bin-Affan.jpg" />
-
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mushaf Utsman bin Affan: Kisah, Desain, dan Persebaran" />
   <meta name="twitter:description" content="Ngulik Mushaf Utsman bin Affan: ukuran raksasa, gaya tulisan awal Hijriyah, sejarah penyalinan, plus galeri foto interaktif." />
   <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqO49Ig6_Mw3477c9zsZhx47wpp9KOrNvsYV6hJMdOz5hPfRHVNR5sOpdi0eC5dPMMBOjQ1qKJyyPqCsByu84uHCdpIJ1-o_C8jg7zq3RFD0ZLswFy_yvTuSc2-khJgCYRU3cDsInh2Q3uAa494tcOL3DX63F2PBiW3bKo6WjhyphenhyphenWaUuqaq73fhk1Dt4ik/s1600/Mushaf-Utsman-bin-Affan.jpg" />
-
   <!-- JSON-LD Article -->
   </article>
-
   <aside aria-label="Info interaktif">
 <h3>Info perangkat dan lokasi</h3>
 <div class="info">
@@ -40,63 +36,44 @@
 <div class="row"><span><b>IP / Kota</b></span><span id="kv-ip">Mendeteksi…</span></div>
 <div class="row"><span><b>Negara</b></span><span id="kv-cc"><span class="flag">🏳️</span> —</span></div>
   </div>
-
   <div class="hr"></div>
-
   <h3>Fun facts singkat</h3>
   <ul>
 <li><b>Ukuran raksasa:</b> setinggi kira-kira anak SD kelas awal—benar-benar monumental.</li>
 <li><b>Tanpa titik:</b> menuntut kejelian qira’ah dan tradisi hafalan yang kuat.</li>
 <li><b>Standarisasi:</b> pengiriman mushaf ke pusat-pusat kota kunci menyatukan bacaan.</li>
   </ul>
-
-  <div class="hr"></div>
-
   <h3>Dokumentasi</h3>
   <p>Kalau kamu punya foto detail atau referensi manuskrip lain, kirimkan—biar kita tambah ke galeri.</p>
 </div>
   </aside>
 </main>
-  </div>
-
   <div class="lightbox" role="dialog" aria-modal="true" aria-label="Penampil gambar">
 <div class="lb-inner">
   <div class="lb-toolbar">
 <div style="display:flex;align-items:center;gap:8px">
   <span id="lb-counter">1 / 1</span>
-</div>
 <button class="lb-close" aria-label="Tutup" title="Tutup">
   ✕
 </button>
-  </div>
   <div class="lb-stage">
 <img id="lb-image" alt="Tampilan besar">
 <div class="lb-nav" aria-hidden="true">
   <button class="lb-btn" id="lb-prev" title="Sebelumnya" aria-label="Sebelumnya">⟨</button>
   <button class="lb-btn" id="lb-next" title="Berikutnya" aria-label="Berikutnya">⟩</button>
-</div>
-  </div>
   <div class="lb-toolbar" style="justify-content:center">
 <small style="color:#c7d2feaa">Klik di luar gambar untuk menutup</small>
-  </div>
-</div>
-  </div>
-
   <footer>
 <div class="container">
   <p>🄯 <span id="year"></span> frijal.pages.dev — Artikel: Mushaf Utsman bin Affan</p>
-</div>
   </footer>
-
   <!-- Scripts -->
   <script>
 // Helper: safe query
 const $ = (sel, ctx=document) => ctx.querySelector(sel);
 const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
-
 // Year
 $('#year').textContent = new Date().getFullYear();
-
 // Share links
 const pageUrl = encodeURIComponent(location.href);
 const pageTitle = encodeURIComponent(document.title);
@@ -111,7 +88,6 @@ $('#share-copy').addEventListener('click', (e)=>{
 alert('Tautan disalin. Silakan tempel di mana pun!');
   });
 });
-
 // UA parsing (sederhana)
 (function(){
   const ua = navigator.userAgent;
@@ -119,7 +95,6 @@ alert('Tautan disalin. Silakan tempel di mana pun!');
   const kvBrowser = $('#kv-browser');
   const kvOS = $('#kv-os');
   const kvRes = $('#kv-res');
-
   function detectBrowser(){
 if (/edg/i.test(ua)) return 'Microsoft Edge';
 if (/chrome|crios/i.test(ua)) return 'Chrome';
@@ -138,24 +113,18 @@ if (plat.includes('Win')) return 'Windows';
 if (plat.includes('Mac')) return 'macOS';
 if (plat.includes('Linux')) return 'Linux';
 return 'OS tidak dikenal';
-  }
   kvBrowser.textContent = detectBrowser();
   kvOS.textContent = detectOS();
   kvRes.textContent = `${window.screen.width}×${window.screen.height}`;
   window.addEventListener('resize', ()=> kvRes.textContent = `${window.screen.width}×${window.screen.height}`);
 })();
-
 // IP + Geo (graceful)
-(function(){
   const ipEl = $('#kv-ip');
   const ccEl = $('#kv-cc');
-
   function ccToEmoji(cc){
 if (!cc || cc.length !== 2) return '🏳️';
 const codePoints = [...cc.toUpperCase()].map(c => 127397 + c.charCodeAt());
 return String.fromCodePoint(...codePoints);
-  }
-
   // Try ipapi.co first
   fetch('https://ipapi.co/json/')
 .then(r => r.ok ? r.json() : Promise.reject())
@@ -167,22 +136,14 @@ return String.fromCodePoint(...codePoints);
 .catch(()=>{
   // Fallback: ipinfo.io
   fetch('https://ipinfo.io/json?token=')
-.then(r => r.ok ? r.json() : Promise.reject())
 .then(d=>{
   const cc = (d.country || '').toUpperCase();
   const flag = ccToEmoji(cc);
   ipEl.textContent = `${d.ip || '—'} / ${(d.city || '—')}`;
   ccEl.innerHTML = `<span class="flag">${flag}</span> ${cc || '—'}`;
-})
-.catch(()=>{
   ipEl.textContent = 'Tidak tersedia';
   ccEl.innerHTML = `<span class="flag">🏳️</span> —`;
-});
-});
-})();
-
 // Lightbox
-(function(){
   const items = $$('.gallery .thumb img').map((img, idx)=>({
 thumb: img.src, full: img.dataset.full || img.src, alt: img.alt || `Gambar ${idx+1}`
   }));
@@ -193,7 +154,6 @@ thumb: img.src, full: img.dataset.full || img.src, alt: img.alt || `Gambar ${idx
   const btnNext = $('#lb-next');
   const btnClose = $('.lb-close');
   let i = 0;
-
   function render(){
 if (!items.length) return;
 imgEl.src = items[i].full;
@@ -201,15 +161,12 @@ imgEl.alt = items[i].alt;
 counter.textContent = `${i+1} / ${items.length}`;
 btnPrev.disabled = (items.length<=1);
 btnNext.disabled = (items.length<=1);
-  }
   function openAt(idx){ i = idx; render(); lb.classList.add('open'); document.body.style.overflow='hidden' }
   function close(){ lb.classList.remove('open'); document.body.style.overflow='' }
   function prev(){ i = (i - 1 + items.length) % items.length; render() }
   function next(){ i = (i + 1) % items.length; render() }
-
   $$('.gallery .thumb img').forEach((img, idx)=>{
 img.addEventListener('click', ()=>openAt(idx));
-  });
   btnClose.addEventListener('click', close);
   lb.addEventListener('click', (e)=>{ if(e.target === lb) close(); });
   btnPrev.addEventListener('click', prev);
@@ -219,35 +176,18 @@ if(!lb.classList.contains('open')) return;
 if(e.key === 'Escape') close();
 if(e.key === 'ArrowLeft') prev();
 if(e.key === 'ArrowRight') next();
-  });
-})();
   </script>
-
   <!-- Set FB comments href ke current URL -->
   <script>document.querySelector('.fb-comments').setAttribute('data-href',location.href)</script>
-
   <!-- Auto-ensure og:image, twitter:image, og:url -->
-  <script>
 document.addEventListener("DOMContentLoaded",()=>{
   let s=(document.querySelector("main section img")||{}).src||"";
   ["og:image","twitter:image"].forEach((p,j)=>document.head.appendChild(document.querySelector((j?"meta[name=":"meta[property=")+`"${p}"]`)||Object.assign(document.createElement("meta"),{[j?"name":"property"]:p,content:s})));
   document.head.appendChild(document.querySelector('meta[property="og:url"]')||Object.assign(document.createElement("meta"),{property:"og:url",content:location.href}))
-});
-  </script>
-
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script src="/ext/marquee-url.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class='search-floating-container'><input type='text' id='floatingSearchInput' placeholder='cari artikel...' autocomplete='off'><span id='floatingSearchClear' class='clear-button'></body>times;</span><div id='floatingSearchResults' class='floating-results-container'></div></div>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>

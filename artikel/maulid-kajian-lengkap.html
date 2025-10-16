@@ -25,7 +25,6 @@
     <meta name="twitter:description" content="Fatwa, spektrum pendapat ulama, dan perkembangan sejarah Maulid Nabi—dibahas padat, jernih, dan berimbang.">
     <meta name="twitter:site" content="@frijal">
     <meta name="twitter:image" content="https://frijal.pages.dev/img/maulid-kajian-lengkap.webp">
-
     <script>
         // Skrip Copy Button
         document.addEventListener("click",e=>{
@@ -41,7 +40,6 @@
                 }
             }
         });
-
         // Skrip Lightbox
         (function lightbox(){
             let n=document.getElementById("lightbox"),
@@ -50,56 +48,44 @@
                 t=document.getElementById("lb-close"),
                 gallery=document.querySelectorAll('.gallery figure'),
                 currentIdx=0;
-
             function open(idx){
                 currentIdx = idx;
                 const figure = gallery[idx];
                 const link = figure.querySelector('a') || figure;
-
                 o.src = link.getAttribute('href') || link.querySelector('img').src;
                 r.textContent = figure.querySelector('figcaption')?.textContent || '';
                 n.classList.add("open");
                 document.body.style.overflow="hidden";
-            }
             
             function move(delta){
                 currentIdx = (currentIdx + delta + gallery.length) % gallery.length;
                 open(currentIdx);
-            }
-
             function closeLB(){
                 n.classList.remove("open");
                 o.src="";
                 r.textContent="";
                 document.body.style.overflow="";
-            }
-            
             gallery.forEach((fig, idx)=>{
                 fig.addEventListener("click", e=>{
                     e.preventDefault();
                     open(idx);
                 });
             });
-
             if(t) t.addEventListener("click", closeLB);
             document.getElementById('lb-prev')?.addEventListener('click', ()=>move(-1));
             document.getElementById('lb-next')?.addEventListener('click', ()=>move(1));
-
             n.addEventListener("click",t=>{t.target===n&&closeLB()});
             document.addEventListener("keydown",t=>{"Escape"===t.key&&closeLB()});
         })();
-
         // Skrip Share URL & FB Comments Data
         (function shareAndFB(){
             let url=encodeURIComponent(document.querySelector('link[rel=canonical]')?.href || window.location.href),
                 title=encodeURIComponent("Kajian Lengkap Maulid Nabi"),
                 n=document.getElementById("share");
-
             // Set current URL display and FB data-href
             const currentHref = decodeURIComponent(url);
             document.getElementById("current-url").textContent = currentHref;
             document.getElementById("fb-comments").setAttribute("data-href", currentHref);
-
             // Set share links
             Object.entries({
                 ".fb":`https://www.facebook.com/sharer/sharer.php?u=${url}`,
@@ -113,8 +99,6 @@
             }).forEach(([t,e])=>{
                 const a=n.querySelector(t);
                 if(a) a.href=e;
-            });
-        })();
         
         // Load PrismJS scripts
         (()=>{
@@ -123,20 +107,14 @@
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js");
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js");
             t("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js");
-        })();
-        
         // Ensure FB XFBML.parse runs after SDK loads
         window.fbAsyncInit = function() {
             if (typeof FB !== 'undefined') {
                 try {FB.XFBML.parse();} catch (t) {}
-            }
         };
     </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><div id="kategori-aktif"></div><script src="/ext/marquee-url.js"></script><script defer src="/ext/iposbrowser.js"></script>
-<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
