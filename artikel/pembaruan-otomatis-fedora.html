@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pembaruan Otomatis Fedora: Perlukah?</title>
     <meta name="description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya." />
-    <link rel="canonical" href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html" />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html" />
 
     <!-- Favicon & Theme -->
-    <link rel="icon" href="https://frijal.github.io/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="https://frijal.pages.dev/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0f121a" />
 
     <!-- Open Graph -->
@@ -92,6 +92,7 @@
         .copy-btn:hover { background: var(--accent); }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -103,6 +104,7 @@
             <div class="col">
                 <article>
                     <h1>Pembaruan Otomatis di Fedora: Perlukah Diaktifkan?</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">Mengaktifkan pembaruan otomatis di Fedora adalah keputusan yang bergantung pada kebutuhan dan toleransi risiko Anda. Tidak ada jawaban mutlak, tetapi panduan ini akan membantu Anda membuat pilihan yang tepat.</p>
 
                     <div class="share-bar">
@@ -157,7 +159,7 @@ systemctl status dnf-automatic.timer</code><button class="copy-btn" data-target=
         </main>
 
         <footer class="site">
-            <small>© 2025 frijal.github.io · Panduan berdasarkan dokumentasi resmi Fedora Project.</small>
+            <small>🄯 2025 frijal.github.io · Panduan berdasarkan dokumentasi resmi Fedora Project.</small>
         </footer>
     </div>
     
@@ -214,6 +216,9 @@ systemctl status dnf-automatic.timer</code><button class="copy-btn" data-target=
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
