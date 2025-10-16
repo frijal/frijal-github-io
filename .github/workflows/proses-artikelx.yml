@@ -44,7 +44,7 @@ jobs:
           node ext/inject-meta.js || true
           # Tambahkan step lain jika perlu
 
-            - name: Tambahkan CSS/JS & div tambahan
+      - name: Tambahkan CSS/JS & div tambahan
         run: |
           echo "🧩 Menambahkan elemen tambahan ke file HTML (dengan pengecekan duplikat)..."
           for file in $TARGET_FOLDER/*.html; do
