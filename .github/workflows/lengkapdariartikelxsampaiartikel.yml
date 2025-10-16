@@ -1,0 +1,152 @@
+name: 🔄 Proses ArtikelX & Smart Build
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "artikelx/*.html"
+      - "ext/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  proses_artikel:
+    name: 🧩 Proses Artikel Baru
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧭 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🪄 Jalankan Find-and-Replace
+        run: |
+          shopt -s nullglob
+          for file in artikelx/*.html; do
+            echo "🪄 Memproses $file"
+            perl -pi -w -e 's#frijal.github.io/#frijal.pages.dev/#g' "$file"
+            perl -pi -w -e 's#bak.xo.je/#frijal.pages.dev/#g' "$file"
+            perl -pi -w -e 's#https://frijal.pages.dev/assets/apple-touch-icon.png#https://frijal.pages.dev/ext/icons/apple-touch-icon.png#g' "$file"
+            perl -pi -w -e 's#YOUR_APP_ID#1471267430691023#g' "$file"
+            perl -pi -w -e 's#YOUR_FACEBOOK_APP_ID#1471267430691023#g' "$file"
+            perl -pi -w -e 's#nama_twitter_anda#frijal#g' "$file"
+            perl -pi -w -e 's/©/🄯/g' "$file"
+            perl -pi -w -e 's#Komentar#Jaga Data Pribadi Tetap Aman.#g' "$file"
+            perl -pi -w -e 's#Bak Xo Je#Jaga Data Pribadi Tetap Aman.#g' "$file"
+          done
+          shopt -u nullglob
+
+      - name: 🧱 Tambahkan CSS/JS & Elemen Tambahan
+        run: |
+          shopt -s nullglob
+          echo "🧩 Menambahkan elemen tambahan ke file HTML (dengan pengecekan duplikat)..."
+          for file in artikelx/*.html; do
+            echo "🔧 Memproses: $file"
+
+            # 1️⃣ CSS
+            if ! grep -q '<link rel="stylesheet" href="/ext/marquee-url.css">' "$file"; then
+              sed -i '/<\/head>/i <link rel="stylesheet" href="/ext/marquee-url.css">' "$file"
+            fi
+
+            # 2️⃣ div iposbrowser
+            if ! grep -q '<div id="iposbrowser"></div>' "$file"; then
+              sed -i '/<\/h1>/a <div id="iposbrowser"></div>' "$file"
+            fi
+
+            # 3️⃣ floating search
+            if ! grep -q 'class="search-floating-container"' "$file"; then
+              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
+            fi
+
+            # 4️⃣ marquee + js
+            if ! grep -q 'id="related-marquee-section"' "$file"; then
+              sed -i '/<\/body>/i <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>' "$file"
+            fi
+
+            # 5️⃣ iposbrowser.js
+            if ! grep -q '/ext/iposbrowser.js' "$file"; then
+              sed -i '/<\/body>/i <script defer src="/ext/iposbrowser.js"></script>' "$file"
+            fi
+          done
+          shopt -u nullglob
+
+      - name: 📂 Pindahkan ke folder artikel/
+        run: |
+          echo "📦 Memindahkan file dari artikelx/ ke artikel/"
+          mkdir -p artikel
+          mv -f artikelx/*.html artikel/ || true
+
+      - name: 💾 Commit hasil proses
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          if git diff --quiet; then
+            echo "✅ Tidak ada perubahan dari proses artikel."
+          else
+            git add artikelx artikel
+            git commit -m "🧱 Proses ArtikelX otomatis"
+            git push
+          fi
+
+  smart_build:
+    name: ⚙️ Smart Build & Deploy
+    runs-on: ubuntu-latest
+    needs: proses_artikel
+
+    steps:
+      - name: 🔍 Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔎 Check for Relevant Changes
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            src:
+              - 'artikel/**'
+              - 'ext/**'
+              - 'img/**'
+              - 'index.html'
+              - 'sitemap.html'
+              - 'feed.html'
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: |
+          [ -f package.json ] && npm ci || echo "No package.json found — skipping install."
+
+      - name: 🧭 Generate metadata, sitemap, RSS, index
+        if: steps.filter.outputs.src == 'true'
+        run: |
+          node ext/generator.js || true
+          node ext/rss.js || true
+
+      - name: 📸 Generate screenshots
+        if: steps.filter.outputs.src == 'true'
+        run: |
+          npm install puppeteer --no-save
+          node ext/screenshot-puppeteer.js
+
+      - name: 🧹 Cleanup
+        if: steps.filter.outputs.src == 'true'
+        run: rm -rf tmp/ __pycache__/
+
+      - name: 💾 Commit hasil build
+        if: steps.filter.outputs.src == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "🤖 Auto-build update (Smart Trigger)"
+          git push || echo "No changes to push"
+
+      - name: ✅ Skip message
+        if: steps.filter.outputs.src == 'false'
+        run: echo "✅ Tidak ada perubahan relevan, build dilewati."
