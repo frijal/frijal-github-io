@@ -24,13 +24,13 @@ jobs:
           DELETED_COUNT=0
           
           # Loop melalui semua file .jpg di dalam folder img/
-          for jpg_file in img/*.jpg; do
-            # Jika tidak ada file jpg sama sekali, hentikan loop
-            [ -e "$jpg_file" ] || continue
+          for jpg_file in img/*.webp; do
+            # Jika tidak ada file webp sama sekali, hentikan loop
+            [ -e "$webp_file" ] || continue
 
             # Ambil nama file dasar (tanpa ekstensi dan path)
-            # Contoh: dari "img/judul-artikel.jpg" menjadi "judul-artikel"
-            base_name=$(basename "$jpg_file" .jpg)
+            # Contoh: dari "img/judul-artikel.webp" menjadi "judul-artikel"
+            base_name=$(basename "$webp_file" .webp)
             
             # Buat path file HTML yang seharusnya ada
             # Contoh: "artikel/judul-artikel.html"
@@ -38,8 +38,8 @@ jobs:
             
             # Cek jika file HTML tersebut TIDAK ada
             if [ ! -f "$html_file" ]; then
-              echo "-> Yatim: '$jpg_file' tidak memiliki artikel '$html_file'. Menghapus..."
-              rm "$jpg_file"
+              echo "-> Yatim: '$webp_file' tidak memiliki artikel '$html_file'. Menghapus..."
+              rm "$webp_file"
               DELETED_COUNT=$((DELETED_COUNT + 1))
             fi
           done
@@ -55,7 +55,7 @@ jobs:
           commit_message: |
             chore(cleanup): Hapus ${{ steps.cleanup.outputs.deleted_count }} gambar yatim
 
-            Membersihkan file .jpg di folder /img yang tidak lagi memiliki
+            Membersihkan file .webp di folder /img yang tidak lagi memiliki
             file .html yang sesuai di folder /artikel.
           branch: ${{ github.ref_name }}
-          file_pattern: img/*.jpg
+          file_pattern: img/*.webp
