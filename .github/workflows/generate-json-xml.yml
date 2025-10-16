@@ -65,18 +65,27 @@ jobs:
         run: |
           npm install puppeteer --no-save
           node ext/screenshot-puppeteer.js
-
-      - name: '8. Cleanup temporary files'
+          
+      - name: '8. Commit screenshots'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add img/
+          git diff --cached --quiet || git commit -m "📸 Add article screenshots"
+          git push
+      
+      - name: '9. Cleanup temporary files'
         run: rm -rf tmp/ __pycache__/
 
-      - name: '9. Show Published Links & Summary'
+      - name: '10. Show Published Links & Summary'
         if: always()
         run: |
           echo "✅ File yang di-generate (seharusnya):"
           echo "🔗 artikel.json: https://frijal.pages.dev/artikel.json"
           echo "🔗 sitemap.xml : https://frijal.pages.dev/sitemap.xml"
           echo "🔗 rss.xml     : https://frijal.pages.dev/rss.xml"
-          echo "📊 Jumlah total artikel saat ini:"
-          # === Cara menghitung file kembali ke 'artikel/' ===
-          COUNT=$(ls artikel/*.html 2>/dev/null | wc -l)
-          echo "➡️  $COUNT artikel di folder artikel/"
+          echo "📊 Jumlah total artikel dan cover saat ini:"
+          COUNTHTML=$(ls artikel/*.html 2>/dev/null | wc -l)
+          echo "➡️  $COUNTHTML artikel di folder artikel/"
+          COUNTWEBP=$(ls img/*.webp 2>/dev/null | wc -l)
+          echo "➡️  $COUNTWEBP cover di folder img/"
