@@ -36,7 +36,7 @@ jobs:
           declare -A counts
           
           # Loop untuk menghitung ekstensi spesifik di kedua folder
-          for ext in html jpg png; do
+          for ext in html webp png; do
             counts[$ext]=$(find $TARGETS -maxdepth 1 -type f -iname "*.$ext" | wc -l)
           done
           
@@ -61,7 +61,7 @@ jobs:
             echo "LAPORAN KONTEN: artikel & img ($DATE)"
             echo "================================="
             echo "Total File: ${{ steps.counts.outputs.all }}"
-            echo "HTML=${{ steps.counts.outputs.html }}, JPG=${{ steps.counts.outputs.jpg }}, PNG=${{ steps.counts.outputs.png }}"
+            echo "HTML=${{ steps.counts.outputs.html }}, webp=${{ steps.counts.outputs.webp }}, PNG=${{ steps.counts.outputs.png }}"
             echo ""
             echo "Ringkasan per ekstensi (di semua folder):"
             find $TARGETS -maxdepth 1 -type f -print \
@@ -89,20 +89,20 @@ jobs:
         run: |
           mkdir -p ext
           html=${{ steps.counts.outputs.html }}
-          jpg=${{ steps.counts.outputs.jpg }}
-          color=$(if (( html > jpg )); then echo red; elif (( html < jpg )); then echo green; else echo blue; fi)
+          webp=${{ steps.counts.outputs.webp }}
+          color=$(if (( html > webp )); then echo red; elif (( html < webp )); then echo green; else echo blue; fi)
 
           jq -n --arg m "$html" \
             '{schemaVersion:1, label:"artikel", message:$m, color:"blue"}' \
             > ext/html_count_badge.json
 
-          jq -n --arg m "$jpg" \
+          jq -n --arg m "$webp" \
             '{schemaVersion:1, label:"cover", message:$m, color:"green"}' \
-            > ext/jpg_count_badge.json
+            > ext/webp_count_badge.json
 
-          jq -n --arg mh "$html" --arg mj "$jpg" --arg c "$color" \
-            '{schemaVersion:1, label:"html/jpg", message:("\($mh) / \($mj)"), color:$c}' \
-            > ext/html_jpg_badge.json
+          jq -n --arg mh "$html" --arg mj "$webp" --arg c "$color" \
+            '{schemaVersion:1, label:"html/webp", message:("\($mh) / \($mj)"), color:$c}' \
+            > ext/html_webp_badge.json
 
       - name: Rotate Reports
         # Tidak perlu modifikasi, logika pembersihan tetap sama
