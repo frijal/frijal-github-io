@@ -44,11 +44,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Periksa apakah ada perubahan
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "🔄 Menyimpan perubahan..."
-            git add artikel/**/*.html
-            git commit -m "🧹 Bersihkan baris duplikat (panjang > 12 karakter)"
-            git push
+            git add artikel/**/*.html || true
+            git commit -m "🧹 Bersihkan baris duplikat (panjang > 12 karakter)" || true
+            git push || true
             echo "NO_CHANGES=false" >> $GITHUB_ENV
           else
             echo "✅ Tidak ada perubahan ditemukan."
@@ -66,6 +67,6 @@ jobs:
             PR ini dibuat otomatis oleh workflow manual untuk menghapus
             baris duplikat **yang panjangnya lebih dari 12 karakter**
             di semua file **artikel/*.html**.
-            
+
             🔧 Baris duplikat pendek (≤12 karakter) tetap dibiarkan.
             ⚙️ PR ini dibuat di branch aktif yang sama (tanpa membuat branch baru).
