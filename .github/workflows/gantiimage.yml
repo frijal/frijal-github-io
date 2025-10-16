@@ -30,12 +30,12 @@ jobs:
       - name: Ganti URL artikel → img untuk .jpg
         run: |
           find "${{ github.event.inputs.target_folder }}" -type f -name "*.html" \
-            -exec sed -i 's|https://frijal\.pages\.dev/artikel/\([^"]*\.jpg\)|https://frijal.pages.dev/img/\1|g' {} +
+            -exec sed -i 's|https://frijal\.pages\.dev/artikel/\([^"]*\.webp\)|https://frijal.pages.dev/img/\1|g' {} +
 
       - name: Commit perubahan
         run: |
           git add .
-          git commit -m "Ganti URL artikel → img untuk .jpg"
+          git commit -m "Ganti URL artikel → img untuk .webp"
           git push origin ${{ env.BRANCH_NAME }}
 
       - name: Buat Pull Request
@@ -44,8 +44,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.BRANCH_NAME }}
           base: main
-          title: "Ganti URL artikel → img untuk .jpg"
+          title: "Ganti URL artikel → img untuk .webp"
           body: |
             Perubahan otomatis:
-            - Mengganti URL `https://frijal.pages.dev/artikel/*.jpg` menjadi `https://frijal.pages.dev/img/*.jpg`
+            - Mengganti URL `https://frijal.pages.dev/artikel/*.webp` menjadi `https://frijal.pages.dev/img/*.webp`
             - Folder yang diproses: `${{ github.event.inputs.target_folder }}`
