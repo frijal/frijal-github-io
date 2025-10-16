@@ -1,42 +1,76 @@
-name: 🧹 Bersihkan Baris Duplikat HTML (Manual PR)
+name: 🧹 Hapus Duplikat Elemen HTML (Manual PR)
 
 on:
   workflow_dispatch:
+    inputs:
+      target_folder:
+        description: "Folder target berisi file .html yang ingin dibersihkan"
+        required: true
+        default: "artikel"
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  clean-and-pr:
+  clean-duplicates:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout kode
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🧹 Hapus baris duplikat (panjang > 12 karakter)
+      - name: 🧽 Hapus duplikat elemen HTML
         run: |
-          echo "🔍 Memproses semua file HTML di folder artikel/"
-          FILES=$(find artikel -type f -name "*.html" 2>/dev/null || true)
+          set -euo pipefail
+          TARGET_FOLDER="${{ github.event.inputs.target_folder }}"
+          echo "🧹 Menghapus elemen duplikat di folder: $TARGET_FOLDER"
 
-          if [ -z "$FILES" ]; then
-            echo "⚠️ Tidak ditemukan file HTML di folder artikel/, skip proses."
-            echo "NO_CHANGES=true" >> $GITHUB_ENV
-            exit 0
+          ELEMENTS=(
+            '<link rel="stylesheet" href="/ext/marquee-url.css">'
+            '<div id="iposbrowser"></div>'
+            '<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>'
+            '<section id="related-marquee-section"><div id="related-marquee-container"></div></section>'
+            '<script defer src="/ext/marquee-url.js"></script>'
+            '<script defer src="/ext/iposbrowser.js"></script>'
+          )
+
+          if [[ ! -d "$TARGET_FOLDER" ]]; then
+            echo "❌ Folder '$TARGET_FOLDER' tidak ditemukan."
+            exit 1
           fi
 
-          for file in $FILES; do
-            echo "🧹 Membersihkan: $file"
-            awk '{
-              if (length($0) > 12) {
-                if (!seen[$0]++) print
-              } else {
-                print
-              }
-            }' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+          find "$TARGET_FOLDER" -type f -name "*.html" | while read -r file; do
+            echo "🔧 Memproses: $file"
+            TMP_FILE="${file}.tmp"
+            cp "$file" "$TMP_FILE"
+
+            for element in "${ELEMENTS[@]}"; do
+              COUNT=$(grep -F "$element" "$TMP_FILE" | wc -l || true)
+              if (( COUNT > 1 )); then
+                echo "⚠️  Ditemukan $COUNT duplikat untuk elemen:"
+                echo "    $element"
+                awk -v e="$element" '{
+                  if (index($0, e)) {
+                    if (!seen[e]++) print $0
+                  } else {
+                    print $0
+                  }
+                }' "$TMP_FILE" > "${TMP_FILE}.clean"
+                mv "${TMP_FILE}.clean" "$TMP_FILE"
+              fi
+            done
+
+            if ! cmp -s "$file" "$TMP_FILE"; then
+              mv "$TMP_FILE" "$file"
+              echo "✅ Perubahan diterapkan pada $file"
+            else
+              rm -f "$TMP_FILE"
+              echo "✅ Tidak ada duplikat pada $file"
+            fi
+            echo "----------------------------------"
           done
 
       - name: 💾 Commit perubahan jika ada
@@ -44,12 +78,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Periksa apakah ada perubahan
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "🔄 Menyimpan perubahan..."
-            git add artikel/**/*.html || true
-            git commit -m "🧹 Bersihkan baris duplikat (panjang > 12 karakter)" || true
-            git push || true
+            git add ${{ github.event.inputs.target_folder }}/**/*.html || true
+            git commit -m "🧹 Hapus duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
+            git push
             echo "NO_CHANGES=false" >> $GITHUB_ENV
           else
             echo "✅ Tidak ada perubahan ditemukan."
@@ -62,11 +95,16 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          title: "🧹 Pembersihan Baris Duplikat (panjang > 12 karakter)"
+          title: "🧹 Bersihkan Duplikat Elemen HTML di folder ${{ github.event.inputs.target_folder }}"
           body: |
-            PR ini dibuat otomatis oleh workflow manual untuk menghapus
-            baris duplikat **yang panjangnya lebih dari 12 karakter**
-            di semua file **artikel/*.html**.
+            Workflow ini otomatis membersihkan file **${{ github.event.inputs.target_folder }}/*.html**
+            dari elemen-elemen duplikat berikut (hanya menyisakan satu per file):
 
-            🔧 Baris duplikat pendek (≤12 karakter) tetap dibiarkan.
-            ⚙️ PR ini dibuat di branch aktif yang sama (tanpa membuat branch baru).
+            - `<link rel="stylesheet" href="/ext/marquee-url.css">`
+            - `<div id="iposbrowser"></div>`
+            - `<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>`
+            - `<section id="related-marquee-section"><div id="related-marquee-container"></div></section>`
+            - `<script defer src="/ext/marquee-url.js"></script>`
+            - `<script defer src="/ext/iposbrowser.js"></script>`
+
+            PR ini dibuat otomatis tanpa branch baru.
