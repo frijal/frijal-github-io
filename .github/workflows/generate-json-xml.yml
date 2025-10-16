@@ -39,39 +39,39 @@ jobs:
         env:
           RSS_LIMIT: 30
 
-      - name: '6. Generate Article Cover Images'
-        run: |
-          echo "Mempersiapkan server untuk screenshot..."
-          npm install http-server
-          nohup ./node_modules/.bin/http-server . -p 8080 --silent &
-          sleep 2
+   #   - name: '6. Generate Article Cover Images'
+    #    run: |
+    #      echo "Mempersiapkan server untuk screenshot..."
+   #       npm install http-server
+    #      nohup ./node_modules/.bin/http-server . -p 8080 --silent &
+   #       sleep 2
 
-          echo "Mulai memproses file HTML untuk screenshot..."
-          PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.56.0-jammy"
+   #       echo "Mulai memproses file HTML untuk screenshot..."
+     #     PLAYWRIGHT_IMAGE="mcr.microsoft.com/playwright:v1.56.0-jammy"
 
           # === Loop sekarang mencari file di folder 'artikel/' ===
-          find artikel -name "*.html" | while read -r HTML_FILE; do
-            BASE_NAME=$(basename "$HTML_FILE" .html)
-            FINAL_PATH="img/${BASE_NAME}.jpg"
-            TEMP_OUTPUT="temp_screenshot.jpg"
+  #        find artikel -name "*.html" | while read -r HTML_FILE; do
+     #       BASE_NAME=$(basename "$HTML_FILE" .html)
+    #        FINAL_PATH="img/${BASE_NAME}.jpg"
+   #         TEMP_OUTPUT="temp_screenshot.jpg"
             
-            if [ -f "$FINAL_PATH" ]; then
-              echo "✅ Screenshot sudah ada: $FINAL_PATH. Dilewati."
-            else
-              echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
-              LOCAL_URL="http://localhost:8080/$HTML_FILE"
+    #        if [ -f "$FINAL_PATH" ]; then
+    #         echo "✅ Screenshot sudah ada: $FINAL_PATH. Dilewati."
+  #          else
+  #            echo "⏳ Mengambil screenshot untuk: $HTML_FILE"
+   #           LOCAL_URL="http://localhost:8080/$HTML_FILE"
               
-              docker run --rm --network host -v "${PWD}:/workspace" -w /workspace "$PLAYWRIGHT_IMAGE" \
-                bash -c "npm install playwright && node ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'"
+    #          docker run --rm --network host -v "${PWD}:/workspace" -w /workspace "$PLAYWRIGHT_IMAGE" \
+    #            bash -c "npm install playwright && node ext/screenshot.js '$LOCAL_URL' '$TEMP_OUTPUT'"
               
-              if [ -f "$TEMP_OUTPUT" ]; then
-                mv "$TEMP_OUTPUT" "$FINAL_PATH"
-                echo "✅ Screenshot baru berhasil disimpan: $FINAL_PATH"
-              else
-                echo "❌ Gagal membuat screenshot untuk $HTML_FILE."
-              fi
-            fi
-          done
+  #            if [ -f "$TEMP_OUTPUT" ]; then
+   #             mv "$TEMP_OUTPUT" "$FINAL_PATH"
+   #             echo "✅ Screenshot baru berhasil disimpan: $FINAL_PATH"
+   #           else
+     #           echo "❌ Gagal membuat screenshot untuk $HTML_FILE."
+    #          fi
+    #       fi
+  #        done
 
       - name: '7. Commit and Push All Generated Files'
         run: |
