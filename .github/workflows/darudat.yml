@@ -78,7 +78,7 @@ jobs:
 
             # 3️⃣ Tambahkan floating search container sebelum </body> jika belum ada
             if ! grep -q 'class="search-floating-container"' "$file"; then
-              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">&times;</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
+              sed -i '/<\/body>/i <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>' "$file"
             else
               echo "⏭️  search-floating-container sudah ada, lewati."
             fi
