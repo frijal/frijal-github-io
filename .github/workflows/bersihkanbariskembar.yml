@@ -17,12 +17,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Hapus baris duplikat di setiap file HTML
+      - name: Hapus baris duplikat (panjang > 12 karakter)
         run: |
           echo "🔍 Memproses file HTML di folder artikel/"
           find artikel -type f -name "*.html" | while read -r file; do
             echo "🧹 Membersihkan: $file"
-            awk '!seen[$0]++' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+            # Hapus duplikat hanya jika panjang baris > 12 karakter
+            awk 'length($0) > 12 { 
+                    if (!seen[$0]++) print 
+                 } 
+                 length($0) <= 12 {
+                    print
+                 }' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
           done
 
       - name: Commit perubahan jika ada
@@ -31,7 +37,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add artikel/**/*.html
-            git commit -m "🧹 Bersihkan baris duplikat di file HTML"
+            git commit -m "🧹 Bersihkan baris duplikat (panjang > 12 karakter)"
             git push
           else
             echo "✅ Tidak ada perubahan ditemukan."
@@ -44,9 +50,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          title: "🧹 Pembersihan Baris Duplikat HTML"
+          title: "🧹 Pembersihan Baris Duplikat (panjang > 12 karakter)"
           body: |
             PR ini dibuat otomatis oleh workflow manual untuk menghapus
-            baris duplikat di semua file **artikel/*.html**.
-            - Setiap baris identik hanya disimpan satu kali.
+            baris duplikat **yang panjangnya lebih dari 12 karakter**
+            di semua file **artikel/*.html**.
+            - Baris duplikat pendek (≤12 karakter) tetap dibiarkan.
             - PR ini dibuat dari branch aktif yang sama.
