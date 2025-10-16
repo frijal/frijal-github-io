@@ -1,4 +1,4 @@
-name: 🧹 Hapus Duplikat Elemen HTML (Manual PR)
+name: 🧹 Hapus Duplikat Elemen HTML (Smart + Manual PR)
 
 on:
   workflow_dispatch:
@@ -22,11 +22,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🧽 Hapus duplikat elemen HTML
+      - name: 🧽 Bersihkan elemen duplikat (toleran spasi & format)
         run: |
           set -euo pipefail
           TARGET_FOLDER="${{ github.event.inputs.target_folder }}"
-          echo "🧹 Menghapus elemen duplikat di folder: $TARGET_FOLDER"
+          echo "🧹 Membersihkan elemen duplikat di folder: $TARGET_FOLDER"
 
           ELEMENTS=(
             '<link rel="stylesheet" href="/ext/marquee-url.css">'
@@ -46,31 +46,44 @@ jobs:
             echo "🔧 Memproses: $file"
             TMP_FILE="${file}.tmp"
             cp "$file" "$TMP_FILE"
+            dos2unix "$TMP_FILE" 2>/dev/null || true
 
             for element in "${ELEMENTS[@]}"; do
-              COUNT=$(grep -F "$element" "$TMP_FILE" | wc -l || true)
+              # Hilangkan spasi berlebih & normalisasi
+              pattern=$(echo "$element" | tr -d '\n' | sed 's/[[:space:]]\+/ /g')
+              COUNT=$(grep -E -o "$(echo "$pattern" | sed 's/[\"\/]/\\&/g')" "$TMP_FILE" | wc -l || true)
               if (( COUNT > 1 )); then
                 echo "⚠️  Ditemukan $COUNT duplikat untuk elemen:"
                 echo "    $element"
-                awk -v e="$element" '{
-                  if (index($0, e)) {
-                    if (!seen[e]++) print $0
-                  } else {
-                    print $0
-                  }
-                }' "$TMP_FILE" > "${TMP_FILE}.clean"
-                mv "${TMP_FILE}.clean" "$TMP_FILE"
+
+                # Hapus semua kemunculan lalu tambahkan 1 kembali
+                sed -i "/$(echo "$pattern" | sed 's/[\"\/]/\\&/g')/d" "$TMP_FILE"
+                echo "$element" >> "$TMP_FILE"
               fi
             done
 
-            if ! cmp -s "$file" "$TMP_FILE"; then
-              mv "$TMP_FILE" "$file"
+            # Rapikan file hasil
+            sort -u "$TMP_FILE" | uniq > "${TMP_FILE}.clean"
+            if ! cmp -s "$file" "${TMP_FILE}.clean"; then
+              mv "${TMP_FILE}.clean" "$file"
               echo "✅ Perubahan diterapkan pada $file"
             else
-              rm -f "$TMP_FILE"
+              rm -f "$TMP_FILE" "${TMP_FILE}.clean"
               echo "✅ Tidak ada duplikat pada $file"
             fi
             echo "----------------------------------"
+          done
+
+      - name: 🔎 Cek duplikat manual
+        run: |
+          TARGET="${{ github.event.inputs.target_folder }}"
+          echo "🔍 Menampilkan jumlah elemen duplikat tersisa di folder: $TARGET"
+          find "$TARGET" -type f -name "*.html" | while read -r file; do
+            echo "📄 $file"
+            echo -n "   <div id=\"iposbrowser\"></div> : "
+            grep -F '<div id="iposbrowser"></div>' "$file" | wc -l
+            echo -n "   <script defer src=\"/ext/iposbrowser.js\"></script> : "
+            grep -F '<script defer src="/ext/iposbrowser.js"></script>' "$file" | wc -l
           done
 
       - name: 💾 Commit perubahan jika ada
@@ -83,7 +96,7 @@ jobs:
           git diff --cached --quiet
           if [[ $? -ne 0 ]]; then
             echo "🔄 Menyimpan perubahan..."
-            git commit -m "🧹 Hapus duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
+            git commit -m "🧹 Bersihkan duplikat elemen HTML di folder ${{ github.event.inputs.target_folder }}"
             git push
             echo "NO_CHANGES=false" >> $GITHUB_ENV
           else
@@ -101,7 +114,7 @@ jobs:
           title: "🧹 Bersihkan Duplikat Elemen HTML di folder ${{ github.event.inputs.target_folder }}"
           body: |
             Workflow ini otomatis membersihkan file **${{ github.event.inputs.target_folder }}/*.html**
-            dari elemen-elemen duplikat berikut (hanya menyisakan satu per file):
+            dari elemen-elemen duplikat berikut (toleran format & spasi):
 
             - `<link rel="stylesheet" href="/ext/marquee-url.css">`
             - `<div id="iposbrowser"></div>`
