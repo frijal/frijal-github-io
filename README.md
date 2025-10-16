@@ -70,7 +70,7 @@ Aku <strong>tidak bertanggung jawab</strong> atas klaim, kerusakan, atau masalah
 
 <div align=center>
 
-![thumbnail](/thumbnail.jpg?raw=true)
+![thumbnail](/thumbnail.webp?raw=true)
 
 </div>
 
