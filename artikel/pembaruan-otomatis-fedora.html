@@ -6,19 +6,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Pembaruan Otomatis Fedora: Perlukah? | frijal.github.io</title>
   <meta name="description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya." />
-  <link rel="canonical" href="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html" />
+  <link rel="canonical" href="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html" />
 
   <!-- Favicon -->
-  <link rel="icon" href="https://frijal.github.io/assets/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="https://frijal.github.io/favicon.svg" />
-  <link rel="apple-touch-icon" href="https://frijal.github.io/icon.png" />
+  <link rel="icon" href="https://frijal.pages.dev/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="https://frijal.pages.dev/favicon.svg" />
+  <link rel="apple-touch-icon" href="https://frijal.pages.dev/icon.png" />
   <meta name="theme-color" content="#2458a2" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
   <meta property="og:description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya." />
-  <meta property="og:url" content="https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html" />
+  <meta property="og:url" content="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html" />
   <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg" />
 
   <!-- Twitter Card -->
@@ -35,10 +35,10 @@
     "headline": "Pembaruan Otomatis Fedora: Perlukah?",
     "image": ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg"],
     "author": {"@type": "Person","name": "Frijal"},
-    "publisher": {"@type": "Organization","name": "frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.github.io/assets/favicon.ico"}},
+    "publisher": {"@type": "Organization","name": "frijal.github.io","logo":{"@type":"ImageObject","url":"https://frijal.pages.dev/assets/favicon.ico"}},
     "datePublished": "2025-09-21",
     "dateModified": "2025-09-21",
-    "mainEntityOfPage": "https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html"
+    "mainEntityOfPage": "https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html"
   }
   </script>
 
@@ -123,6 +123,7 @@
     .lightbox img { max-width:92vw; max-height:92vh; border-radius:16px; box-shadow:0 24px 80px rgba(0,0,0,.5); }
     footer.site{margin-top:40px; border-top:1px solid rgba(255,255,255,.12); background: rgba(15,18,26,.6); backdrop-filter: blur(8px)}
   </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
   <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #2a3a50; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
@@ -143,6 +144,7 @@
   <main class="wrap">
     <article class="card" id="konten" role="main">
       <h1>Pembaruan Otomatis Fedora: Perlukah?</h1>
+<div id="iposbrowser"></div>
       <p class="lead">Panduan ini membahas keputusan mengaktifkan pembaruan otomatis di Fedora, berdasarkan artikel dari Fedora Project. Tidak ada jawaban mutlak, semua tergantung pada kebutuhan dan kesiapan Anda sebagai administrator sistem.</p>
 
       <figure id="main-image">
@@ -211,7 +213,7 @@ systemctl status dnf-automatic.timer</code></pre>
 
   <footer class="site">
     <div class="wrap">
-      <p class="muted">© 2025 frijal.github.io • Panduan berdasarkan dokumentasi resmi Fedora Project.</p>
+      <p class="muted">🄯 2025 frijal.github.io • Panduan berdasarkan dokumentasi resmi Fedora Project.</p>
     </div>
   </footer>
 
@@ -242,7 +244,7 @@ systemctl status dnf-automatic.timer</code></pre>
     });
 
     // Share Links
-    const shareUrl = 'https://frijal.github.io/artikel/pembaruan-otomatis-fedora.html';
+    const shareUrl = 'https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html';
     const shareText = encodeURIComponent('Pembaruan Otomatis Fedora: Perlukah?');
     const shareContainer = document.getElementById('share');
     const setHref = (sel, url) => shareContainer.querySelector(sel)?.setAttribute('href', url);
@@ -251,6 +253,9 @@ systemctl status dnf-automatic.timer</code></pre>
     setHref('.tw', `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${shareText}`);
     setHref('.ln', `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`);
   </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
