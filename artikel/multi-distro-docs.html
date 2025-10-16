@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Manajemen Dokumen di Multi-Distro Linux | bak.xo.je</title>
     <meta name="description" content="Tips mengelola dokumen saat memasang banyak Distro dalam satu komputer. Gunakan partisi besar dan softlink agar dokumen tidak duplikat dan mudah diakses.">
-    <link rel="canonical" href="https://bak.xo.je/artikel/multi-distro-docs.html">
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/multi-distro-docs.html">
 
     <!-- Favicon & Theme -->
-    <link rel="icon" href="https://bak.xo.je/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#161d28">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Manajemen Dokumen di Multi-Distro">
     <meta property="og:description" content="Tips mengelola dokumen saat memasang banyak Distro dalam satu komputer. Gunakan partisi besar dan softlink agar dokumen tidak duplikat dan mudah diakses.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://bak.xo.je/artikel/multi-distro-docs.html">
-    <meta property="og:image" content="https://bak.xo.je/thumbnail.jpg">
+    <meta property="og:url" content="https://frijal.pages.dev/artikel/multi-distro-docs.html">
+    <meta property="og:image" content="https://frijal.pages.dev/thumbnail.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Manajemen Dokumen di Multi-Distro">
     <meta name="twitter:description" content="Tips mengelola dokumen saat memasang banyak Distro dalam satu komputer. Gunakan partisi besar dan softlink agar dokumen tidak duplikat dan mudah diakses.">
-    <meta name="twitter:image" content="https://bak.xo.je/thumbnail.jpg">
+    <meta name="twitter:image" content="https://frijal.pages.dev/thumbnail.jpg">
 
     <!-- JSON-LD -->
     <script type="application/ld+json">
@@ -90,6 +90,7 @@
         .copy-btn:hover { background: var(--accent); }
         footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
+<link rel="stylesheet" href="/ext/marquee-url.css">
 </head>
 <body>
     <div class="wrap">
@@ -101,6 +102,7 @@
             <div class="col">
                 <article>
                     <h1>Manajemen Dokumen di Lingkungan Multi-Distro</h1>
+<div id="iposbrowser"></div>
                     <p class="lead">Bagi Anda yang hobi memasang banyak distro Linux dalam satu komputer (multi-boot), seringkali muncul masalah duplikasi dokumen. Solusinya adalah dengan membuat partisi data terpusat dan menggunakan symbolic link.</p>
 
                     <div class="share-bar">
@@ -137,7 +139,7 @@ ln -s /media/data/Documents ~/Documents</code><button class="copy-btn" data-targ
         </main>
 
         <footer class="site">
-            <small>© 2025 bak.xo.je · Manajemen data cerdas untuk para penggemar multi-boot.</small>
+            <small>🄯 2025 bak.xo.je · Manajemen data cerdas untuk para penggemar multi-boot.</small>
         </footer>
     </div>
     
@@ -204,6 +206,9 @@ ln -s /media/data/Documents ~/Documents</code><button class="copy-btn" data-targ
         });
     })();
     </script>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput"></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
 
