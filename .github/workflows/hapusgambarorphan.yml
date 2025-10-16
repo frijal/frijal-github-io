@@ -1,60 +1,53 @@
 # .github/workflows/cleanup-orphan-images.yml
-
 name: Pembersihan Gambar Orphan
 
 on:
   schedule:
-    # Setiap hari pukul 06:00 WITA (UTC+8) → 22:00 UTC hari sebelumnya
-    # Dijalankan satu jam setelah workflow laporan konten
+    # Setiap hari pukul 06:00 WITA (22:00 UTC hari sebelumnya)
     - cron: '0 22 * * *'
-  workflow_dispatch: # Agar bisa dijalankan manual untuk testing
+  workflow_dispatch: # Bisa dijalankan manual
 
 jobs:
   cleanup_images:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Cari dan Hapus Gambar Yatim
+      - name: Cari dan Hapus Gambar Orphan
         id: cleanup
         run: |
-          echo "Memulai proses pembersihan gambar yatim..."
+          echo "🧹 Memulai proses pembersihan gambar Orphan..."
           DELETED_COUNT=0
-          
-          # Loop melalui semua file .webp di dalam folder img/
+
+          # Loop semua file .webp di img/
           for webp_file in img/*.webp; do
-            # Jika tidak ada file webp sama sekali, hentikan loop
             [ -e "$webp_file" ] || continue
 
-            # Ambil nama file dasar (tanpa ekstensi dan path)
-            # Contoh: dari "img/judul-artikel.webp" menjadi "judul-artikel"
             base_name=$(basename "$webp_file" .webp)
-            
-            # Buat path file HTML yang seharusnya ada
-            # Contoh: "artikel/judul-artikel.html"
             html_file="artikel/${base_name}.html"
-            
-            # Cek jika file HTML tersebut TIDAK ada
+
             if [ ! -f "$html_file" ]; then
-              echo "-> Yatim: '$webp_file' tidak memiliki artikel '$html_file'. Menghapus..."
-              rm "$webp_file"
+              echo "-> Orphan: '$webp_file' tidak memiliki artikel '$html_file'. Menghapus..."
+              git rm "$webp_file"
               DELETED_COUNT=$((DELETED_COUNT + 1))
             fi
           done
-          
-          echo "Proses selesai. Total file yang dihapus: $DELETED_COUNT."
+
+          echo "✅ Proses selesai. Total file yang dihapus: $DELETED_COUNT."
           echo "deleted_count=$DELETED_COUNT" >> $GITHUB_OUTPUT
 
       - name: Commit Hasil Pembersihan
-        # Hanya jalankan langkah ini jika ada file yang dihapus
-        if: steps.cleanup.outputs.deleted_count > 0
+        if: steps.cleanup.outputs.deleted_count != '0'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: |
-            chore(cleanup): Hapus ${{ steps.cleanup.outputs.deleted_count }} gambar yatim
-
+            chore(cleanup): Hapus ${{ steps.cleanup.outputs.deleted_count }} gambar orphan
             Membersihkan file .webp di folder /img yang tidak lagi memiliki
             file .html yang sesuai di folder /artikel.
           branch: ${{ github.ref_name }}
