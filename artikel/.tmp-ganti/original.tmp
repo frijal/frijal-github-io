@@ -1,261 +1,224 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <!-- Basic SEO -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pembaruan Otomatis Fedora: Perlukah?</title>
+    <meta name="description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, praktik terbaik, dan alternatif lainnya." />
+    <link rel="canonical" href="https://frijal.pages.dev/artikel/pembaruan-otomatis-fedora.html" />
 
-    <title>Multimedia & Editing</title>
-    <meta
-      name="description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
-    />
-    <link rel="canonical" href="https://frijal.pages.dev/artikel/-/multimedia-and-editing.html" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📽</text></svg>"
-    />
+    <!-- Favicon & Theme -->
+    <link rel="icon" href="https://frijal.pages.dev/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f121a" />
 
-    <meta property="og:title" content="Multimedia & Editing" />
-    <meta
-      property="og:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
-    />
-    <meta
-      property="og:image"
-      content="https://frijal.github.io/thumbnail.jpg"
-    />
-    <meta property="og:image:alt" content="Multimedia & Editing" />
-    <meta property="og:url" content="https://frijal.pages.dev/artikel/-/multimedia-and-editing.html" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:site_name"
-      content="Jaga Data Pribadi Supaya Tetap Aman"
-    />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+    <meta property="og:description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, dan praktik terbaik." />
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg" />
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Multimedia & Editing" />
-    <meta
-      name="twitter:description"
-      content="Kumpulan lengkap artikel, tutorial, dan catatan tentang topik Multimedia & Editing."
-    />
-    <meta
-      name="twitter:image"
-      content="https://frijal.github.io/thumbnail.jpg"
-    />
+    <meta name="twitter:title" content="Pembaruan Otomatis Fedora: Perlukah?" />
+    <meta name="twitter:description" content="Panduan Fedora Linux mengenai pembaruan otomatis, termasuk kapan aman, cara konfigurasi dnf-automatic, dan praktik terbaik." />
+    <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/ext/marquee-url.css" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Pembaruan Otomatis Fedora: Perlukah?",
+      "author": { "@type": "Person", "name": "Frijal" },
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg",
+      "datePublished": "2025-09-21",
+      "publisher": { "@type": "Organization", "name": "frijal.pages.dev" }
+    }
+    </script>
+    
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
 
+    <!-- Styles: 1 kolom, dark theme -->
     <style>
-      :root {
-        --bg-color: #121212;
-        --surface-color: #1e1e1e;
-        --primary-text-color: #e0e0e0;
-        --secondary-text-color: #b3b3b3;
-        --accent-color: #3da9fc; /* Aksen Biru */
-        --border-color: #2c2c2c;
-        --shadow-color: rgba(61, 169, 252, 0.1);
-      }
-      @media (prefers-color-scheme: light) {
         :root {
-          --bg-color: #f4f4f9;
-          --surface-color: #ffffff;
-          --primary-text-color: #212121;
-          --secondary-text-color: #666666;
-          --accent-color: #007bff;
-          --border-color: #e0e0e0;
-          --shadow-color: rgba(0, 123, 255, 0.15);
+            --bg: #0f121a;
+            --fg: #e8ecf8;
+            --muted: #a4b1c9;
+            --accent: #2458a2; /* Fedora Blue */
+            --accent-2: #5da9f3;
+            --card: #1a2233;
+            --border: #2a3a50;
+            --shadow: 0 10px 30px rgba(0,0,0,.35);
+            --maxw: 900px;
         }
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        line-height: 1.7;
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-      }
-      h1 {
-        text-align: center;
-        color: var(--accent-color);
-        margin-bottom: 2.5rem;
-        font-size: 2.5rem;
-      }
-      #article-grid {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr;
-      }
-      @media (min-width: 600px) {
-        #article-grid {
-          grid-template-columns: repeat(2, 1fr);
+        html, body {
+            background: var(--bg); color: var(--fg);
+            font: 16px/1.7 Inter, system-ui, sans-serif;
+            margin: 0; scroll-behavior: smooth;
         }
-      }
-      @media (min-width: 1024px) {
-        #article-grid {
-          grid-template-columns: repeat(4, 1fr);
+        a { color: var(--accent-2); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wrap { min-height: 100vh; display: flex; flex-direction: column; }
+        header.site {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+            background: rgba(15, 18, 26, 0.7); backdrop-filter: blur(8px);
+            position: sticky; top: 0; z-index: 10;
         }
-      }
-      .article-card {
-        background-color: var(--surface-color);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-        text-decoration: none;
-      }
-      .article-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px var(--shadow-color);
-      }
-      .card-thumbnail {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        background-color: #333;
-        overflow: hidden;
-      }
-      .card-thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .card-content {
-        padding: 1.5rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-      }
-      .card-content h2 {
-        color: var(--primary-text-color);
-        margin-bottom: 0.5rem;
-        font-size: 1.25rem;
-      }
-      .card-content p {
-        color: var(--secondary-text-color);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
-      .card-meta {
-        margin-top: auto;
-        font-size: 0.8rem;
-        color: var(--secondary-text-color);
-      }
-      #loading,
-      .message {
-        text-align: center;
-        margin-top: 3rem;
-        font-style: italic;
-        color: var(--secondary-text-color);
-      }
+        .brand { font-weight: bold; font-size: 1.2rem; }
+        main { display: flex; justify-content: center; padding: 2rem 1rem 4rem; flex-grow: 1; }
+        .col { width: 100%; max-width: var(--maxw); }
+        article { background: var(--card); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 2rem; }
+        article h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; margin: 0 0 10px; color: var(--accent-2); }
+        article h2 { font-size: 1.5rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .lead { color: var(--muted); margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .share-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 1.5rem 0; }
+        .btn-share { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: #2a3a50; color: var(--fg); cursor: pointer; text-decoration: none; }
+        .btn-share:hover { background: #3a4f6a; }
+        .note { border-left: 4px solid var(--accent); background: rgba(36, 88, 162, 0.1); padding: 1rem; border-radius: 8px; margin: 1.5rem 0; }
+        figure { margin: 1.5rem 0; text-align: center; }
+        figure img { cursor: zoom-in; }
+        details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; background: rgba(255,255,255,0.03); }
+        summary { font-weight: bold; cursor: pointer; padding: 1rem; }
+        .accordion-content { padding: 0 1rem 1rem; }
+        .lightbox { position: fixed; inset: 0; background: rgba(15,18,26,.9); display: none; align-items: center; justify-content: center; z-index: 9999; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
+        pre[class*="language-"] { position: relative; padding: 1.25rem; border-radius: 8px; margin-top: 1rem; }
+        code { font-family: 'Fira Code', 'Consolas', monospace; }
+        .copy-btn { position: absolute; top: 12px; right: 12px; background: #2a3a50; border: none; color: var(--fg); padding: 5px 10px; border-radius: 5px; font-size: 12px; cursor: pointer; }
+        .copy-btn:hover { background: var(--accent); }
+        footer.site { padding: 1.5rem; color: var(--muted); border-top: 1px solid var(--border); text-align: center; }
     </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 id="page-title">Memuat Artikel...</h1>
-      <div id="loading"></div>
-      <div id="article-grid"></div>
-    </div>
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+    <div class="wrap">
+        <header class="site">
+            <div class="brand">🚀 Panduan Fedora</div>
+        </header>
 
-    <section id="related-marquee-section">
-      <div id="related-marquee-container"></div>
-    </section>
-    <div class="search-floating-container">
-      <input
-        type="text"
-        id="floatingSearchInput"
-        placeholder="cari artikel..."
-        autocomplete="off"
-      />
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
-      <div id="floatingSearchResults" class="floating-results-container"></div>
-    </div>
+        <main>
+            <div class="col">
+                <article>
+                    <h1>Pembaruan Otomatis di Fedora: Perlukah Diaktifkan?</h1>
+<div id="iposbrowser"></div>
+                    <p class="lead">Mengaktifkan pembaruan otomatis di Fedora adalah keputusan yang bergantung pada kebutuhan dan toleransi risiko Anda. Tidak ada jawaban mutlak, tetapi panduan ini akan membantu Anda membuat pilihan yang tepat.</p>
 
-    <script src="/ext/marquee-url.js"></script>
+                    <div class="share-bar">
+                        <button class="btn-share" data-share="twitter">Twitter</button>
+                        <button class="btn-share" data-share="facebook">Facebook</button>
+                        <button class="btn-share" data-share="whatsapp">WhatsApp</button>
+                        <button class="btn-share" id="copyLink">Salin Tautan</button>
+                    </div>
+
+                    <figure>
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG8lggntpG6-9NKbxcg8vCOSSZR3cwzcHG3B6ncSiiYTikP7W3KPlsEjluY8p3SneHPr6okbd65gHylHbXRoztBT_beWLqyrkvJ2RKvcw_1LOp8SJjc7_g1DUrjM30NX7ykpgRpuEM-nNaNOW4Zpoj9BcE9W6gpzOAJIyeNEAuupH5p_lFe2xLip5MDtw/s1600/229-wallpaper.jpg" alt="Ilustrasi Pembaruan Otomatis Fedora">
+                    </figure>
+
+                    <h2>Kapan Sebaiknya Dihindari?</h2>
+                    <p>Secara umum, jika mesin Anda adalah server kritis yang tidak boleh mengalami waktu henti tak terencana, <strong>hindari pembaruan otomatis</strong>. Pembaruan yang gagal dapat menyebabkan layanan penting mati mendadak dan memerlukan intervensi manual.</p>
+
+                    <h2>Kapan Boleh Dipertimbangkan?</h2>
+                    <p>Pembaruan otomatis cocok jika mesin Anda memenuhi kriteria berikut:</p>
+                    <ul>
+                        <li>Jarang Anda akses untuk pembaruan manual.</li>
+                        <li>Bukan mesin yang kritis, sehingga waktu henti sesekali tidak menjadi masalah.</li>
+                        <li>Anda siap jika suatu saat harus datang langsung ke lokasi untuk perbaikan.</li>
+                        <li>Tidak memiliki data tak tergantikan atau sudah memiliki cadangan yang memadai.</li>
+                    </ul>
+                    
+                    <div class="note">
+                        <p>Jika kondisi di atas terpenuhi, pembaruan otomatis adalah pilihan yang baik untuk menjaga keamanan sistem Anda tanpa perlu pemantauan rutin.</p>
+                    </div>
+
+                    <h2>Cara Mengaktifkan dengan <code>dnf-automatic</code></h2>
+                    <p>Di Fedora, kita bisa menggunakan paket <code>dnf-automatic</code> untuk mengunduh dan menginstal pembaruan secara terjadwal.</p>
+                    
+                    <details>
+                        <summary>Langkah 1: Instalasi dan Konfigurasi</summary>
+                        <div class="accordion-content">
+                            <p>Instal paketnya, lalu edit file konfigurasi di <code>/etc/dnf/automatic.conf</code>. Pastikan opsi <code>apply_updates</code> diatur ke <code>yes</code>.</p>
+                            <pre class="language-bash"><code id="code1">sudo dnf install dnf-automatic
+sudo nano /etc/dnf/automatic.conf</code><button class="copy-btn" data-target="code1">Salin</button></pre>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>Langkah 2: Jalankan dan Aktifkan Layanan</summary>
+                        <div class="accordion-content">
+                            <p>Gunakan <code>systemctl</code> untuk mengaktifkan dan menjalankan timer yang akan memicu pembaruan secara otomatis.</p>
+                            <pre class="language-bash"><code id="code2">sudo systemctl enable --now dnf-automatic.timer
+systemctl status dnf-automatic.timer</code><button class="copy-btn" data-target="code2">Salin</button></pre>
+                        </div>
+                    </details>
+                </article>
+            </div>
+        </main>
+
+        <footer class="site">
+            <small>🄯 2025 frijal.pages.dev · Panduan berdasarkan dokumentasi resmi Fedora Project.</small>
+        </footer>
+    </div>
+    
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" alt="Gambar diperbesar">
+    </div>
+    <div id="toast" style="position:fixed; bottom:20px; right:20px; background: #2a3a50; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1001; opacity: 0; transition: opacity 0.3s;"></div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const TARGET_CATEGORY = '📽️ Multimedia & Editing';
-        const DATA_URL = '../../artikel.json';
-        const articleGrid = document.getElementById('article-grid');
-        const loadingIndicator = document.getElementById('loading');
-        const pageTitle = document.getElementById('page-title');
+    (function(){
+        const toast = document.getElementById('toast');
+        function showToast(msg){ toast.textContent=msg; toast.style.opacity = '1'; setTimeout(()=>toast.style.opacity='0', 2000); }
 
-        const fetchAndDisplayCategory = async () => {
-          const titleText = TARGET_CATEGORY.replace(/^[^\w\s]*/, '').trim();
-          pageTitle.textContent = titleText;
-
-          try {
-            const response = await fetch(
-              `${DATA_URL}?v=${new Date().getTime()}`
-            );
-            if (!response.ok) throw new Error(`Status ${response.status}`);
-
-            const allData = await response.json();
-            const articles = allData[TARGET_CATEGORY];
-
-            if (!articles || articles.length === 0) {
-              articleGrid.innerHTML = `<p class="message">Tidak ada artikel ditemukan untuk kategori "${TARGET_CATEGORY}".</p>`;
-              return;
-            }
-
-            let articlesHTML = '';
-            articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
-
-            articles.forEach((article) => {
-              const [title, url, image, pubDate, description] = article;
-              const formattedDate = new Intl.DateTimeFormat('id-ID', {
-                dateStyle: 'long',
-              }).format(new Date(pubDate));
-
-              articlesHTML += `
-                            <a href="../${url}" class="article-card">
-                                <div class="card-thumbnail">
-                                    <img src="${image}" alt="${title}" loading="lazy">
-                                </div>
-                                <div class="card-content">
-                                    <h2>${title}</h2>
-                                    <p>${(description || '...').substring(0, 100)}...</p>
-                                    <span class="card-meta">${formattedDate}</span>
-                                </div>
-                            </a>
-                        `;
-            });
-
-            articleGrid.innerHTML = articlesHTML;
-          } catch (error) {
-            console.error('Terjadi kesalahan:', error);
-            articleGrid.innerHTML = `<p class="message" style="color: #ff6b6b;">Oops! Gagal memuat data artikel.</p>`;
-          } finally {
-            loadingIndicator.style.display = 'none';
-          }
+        const shareMap = {
+            twitter: url => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(document.title)}`,
+            facebook: url => `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            whatsapp: url => `https://wa.me/?text=${encodeURIComponent(document.title + " " + location.href)}`
         };
-        fetchAndDisplayCategory();
-      });
+        document.querySelectorAll('.btn-share').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const shareType = btn.dataset.share;
+                if (!shareType) return;
+                const url = shareMap[shareType]?.(location.href);
+                if (url) window.open(url, '_blank', 'noopener,noreferrer');
+            });
+        });
+        
+        document.getElementById('copyLink')?.addEventListener('click', () => {
+            navigator.clipboard.writeText(location.href).then(() => showToast('Tautan disalin!'));
+        });
+
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('figure img').forEach(el => {
+            el.addEventListener('click', () => {
+                lbImg.src = el.src;
+                lb.classList.add('open');
+            });
+        });
+        function closeLb(){ lb.classList.remove('open'); }
+        lb.addEventListener('click', closeLb);
+        window.addEventListener('keydown', (e) => {
+            if (lb.classList.contains('open') && e.key === 'Escape') closeLb();
+        });
+
+        document.querySelectorAll('.copy-btn').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const targetId = btn.getAttribute('data-target');
+                const codeEl = document.getElementById(targetId);
+                if (codeEl) {
+                    navigator.clipboard.writeText(codeEl.innerText).then(()=> showToast('Kode disalin!'));
+                }
+            });
+        });
+    })();
     </script>
-  </body>
+<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
+<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
+<script defer src="/ext/iposbrowser.js"></script>
+</body>
 </html>
+
