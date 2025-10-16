@@ -23,8 +23,8 @@ jobs:
           echo "Memulai proses pembersihan gambar yatim..."
           DELETED_COUNT=0
           
-          # Loop melalui semua file .jpg di dalam folder img/
-          for jpg_file in img/*.webp; do
+          # Loop melalui semua file .webp di dalam folder img/
+          for webp_file in img/*.webp; do
             # Jika tidak ada file webp sama sekali, hentikan loop
             [ -e "$webp_file" ] || continue
 
