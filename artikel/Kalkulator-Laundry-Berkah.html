@@ -175,7 +175,7 @@
       <tr id="header-row">
         <th>#</th>
         <th>Nama Barang</th>
-        <th>Jumlah (boleh pakai koma)</th>
+        <th>Jumlah Kilogram</th>
         <th>Harga (Rp)</th>
         <th class="kolom-diskon">Diskon (%)</th>
         <th>Subtotal (Rp)</th>
@@ -225,8 +225,8 @@ function tambahBaris(data = {}) {
   tr.innerHTML = `
     <td>${nomor}</td>
     <td><input type="text" value="${data.nama || ''}" placeholder="Nama Barang" required></td>
-    <td><input type="text" class="jumlah" value="${data.jumlah || ''}" placeholder="Jumlah (boleh pakai koma)" required></td>
-    <td><input type="number" class="harga" value="${data.harga || ''}" placeholder="Harga (Rp)" required></td>
+    <td><input type="text" class="jumlah" value="${data.jumlah || ''}" placeholder="Berat, Kilogram" required></td>
+    <td><input type="number" class="harga" value="${data.harga || ''}" placeholder="Harga" required></td>
     <td class="kolom-diskon"><input type="number" class="diskon" value="${data.diskon || ''}" placeholder="Diskon (%)"></td>
     <td>Rp <output class="subtotal">${data.subtotal || '0'}</output></td>
     <td><button onclick="hapusBaris(this)">❌</button></td>`;
@@ -394,8 +394,5 @@ function resetForm() {
 window.addEventListener("load", muatDariLocalStorage);
 </script>
 
-<div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
-<section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
-<script defer src="/ext/iposbrowser.js"></script>
 </body>
 </html>
