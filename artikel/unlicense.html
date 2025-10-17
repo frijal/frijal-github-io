@@ -1,159 +1,339 @@
 <!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum</title>
-    <meta
-      name="description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <link
-      rel="icon"
-      href="https://frijal.pages.dev/favicon.ico"
-      type="image/x-icon"
-    />
-    <link
-      rel="canonical"
-      href="https://frijal.pages.dev/artikel/unlicense.html"
-    />
-    <meta
-      property="og:title"
-      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
-    />
-    <meta
-      property="og:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://frijal.pages.dev/artikel/unlicense.html"
-    />
-    <meta
-      property="og:image"
-      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
-    />
-    <meta property="og:site_name" content="frijal.pages.dev" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum"
-    />
-    <meta
-      name="twitter:description"
-      content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon."
-    />
-    <meta
-      name="twitter:image"
-      content="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png"
-    />
-    <script>
-      // Menggunakan DOMContentLoaded tunggal untuk inisialisasi yang benar
-      document.addEventListener('DOMContentLoaded', () => {
-        // Tahun dinamis
-        document.getElementById('year').textContent = new Date().getFullYear();
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum</title>
+  <meta name="description" content="Lisensi UNLICENSE adalah dedikasi domain publik agar karya dapat digunakan tanpa batasan. Penjelasan, karakteristik, alasan menggunakan, dan contoh ikon.">
+  <link rel="icon" href="https://frijal.pages.dev/favicon.ico" type="image/x-icon">
 
-        // Lightbox gallery
-        (function () {
-          const gallery = document.getElementById('gallery');
-          const lb = document.getElementById('lightbox');
-          const lbImg = document.getElementById('lightbox-img');
-          const lbClose = document.getElementById('lbClose');
-          const lbPrev = document.getElementById('lbPrev');
-          const lbNext = document.getElementById('lbNext');
-          let images = [];
-          let idx = 0;
+  <style>
+    :root{
+      --bg:#0f1419;
+      --fg:#e6edf3;
+      --muted:#9aa5b1;
+      --primary:#2ea44f;
+      --card:#11161c;
+      --border:#233143;
+      --link:#2ea44f;
+      --maxw: 880px;
+    }
+    html,body{
+      background:var(--bg);
+      color:var(--fg);
+      font-family: system-ui, sans-serif;
+      margin:0;
+      padding:0;
+      min-height:100%;
+    }
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 32px 20px 120px;
+    }
+    header{
+      padding: 16px 0 8px;
+    }
+    header h1{
+      font-size: clamp(1.6rem, 2.2vw + 1rem, 2.4rem);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+    header p{
+      margin: 0;
+      color: var(--muted);
+    }
+    .meta{
+      display:flex;
+      gap:12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    .licon{
+      display:flex;
+      align-items: center;
+      gap:14px;
+      flex-wrap: wrap;
+    }
+    .licon svg{
+      width: 128px;
+      height: 128px;
+      stroke: var(--fg);
+      fill: var(--fg);
+    }
+    a{
+      color: var(--link);
+      text-decoration: none;
+    }
+    a:hover{text-decoration: underline;}
+    .section-title{
+      font-size: 1.3rem;
+      margin: 22px 0 8px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+    }
+    ul,ol{margin: 8px 0 8px 22px}
+    li{margin: 6px 0}
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .gallery figure{
+      margin:0;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0c1117;
+    }
+    .gallery img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .caption{
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 8px 10px 10px;
+    }
+    /* Lightbox */
+    .lightbox{
+      position: fixed;
+      inset:0;
+      backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox.active{ display:flex; }
+    .lightbox-content{
+      position: relative;
+      max-width: min(92vw, 1200px);
+      max-height: 86vh;
+    }
+    .lightbox img{
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lb-close, .lb-prev, .lb-next{
+      position:absolute;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      user-select: none;
+    }
+    .lb-close:hover, .lb-prev:hover, .lb-next:hover{ background: rgba(255,255,255,0.24); }
+    .lb-close:active, .lb-prev:active, .lb-next:active{ transform: scale(0.98); }
+    .lb-close{ top: 14px; right: 14px; }
+    .lb-prev{ left: 12px; top: 50%; transform: translateY(-50%); }
+    .lb-next{ right: 12px; top: 50%; transform: translateY(-50%); }
 
-          // Function untuk membuka lightbox
-          function open(i) {
-            idx = i;
-            // Menggunakan data-full (resolusi tinggi) atau src (fallback)
-            lbImg.src = images[idx].dataset.full || images[idx].src;
-            lb.classList.add('active');
-            lb.setAttribute('aria-hidden', 'false');
-          }
+    /* Share buttons statis */
+    .share{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .share a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius: 10px;
+      background: #101821;
+      color:#fff;
+    }
+    .share svg{
+      width:18px;height:18px;fill:#fff;
+    }
 
-          function close() {
-            lb.classList.remove('active');
-            lb.setAttribute('aria-hidden', 'true');
-            lbImg.src = '';
-          }
+    footer{
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
+<meta property="og:image" content="https://frijal.pages.dev/img/unlicense.webp">
+  <meta property="og:image:alt" content="UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://frijal.pages.dev/img/unlicense.webp">
+  <meta itemprop="image" content="https://frijal.pages.dev/img/unlicense.webp">
+<link rel="stylesheet" href="/ext/marquee-url.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>UNLICENSE: Dedikasi Domain Publik untuk Kebebasan Maksimum</h1>
+<div id="iposbrowser"></div>
+      <p>Halaman satu kolom, responsif, dengan metadata SEO lengkap, galeri, lightbox, share statis, dan konten lengkap.</p>
+      <div class="meta">
+        <span>📅 Diperbarui: <time datetime="2025-10-03">3 Oktober 2025</time></span>
+        <span>✍️ Penulis: Fakhrul</span>
+        <span>🔖 Kategori: Lisensi & Domain Publik</span>
+      </div>
+    </header>
 
-          function prev() {
-            open((idx - 1 + images.length) % images.length);
-          }
+    <!-- UNLICENSE Icon + Intro -->
+    <section class="card licon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="196" height="196" aria-label="UNLICENSE Icon">
+        <circle id="circle-border" cx="98" cy="98" r="98"/>
+        <circle id="circle-inside" cx="98" cy="98" r="78" fill="white"/>
+        <circle id="c-border" cx="98" cy="98" r="55" />
+        <circle id="c-inside" cx="98" cy="98" r="30" fill="white"/>
+        <rect id="c-cut" width="31" height="25" x="123" y="85" fill="white"/>
+        <rect id="bar-margin" width="31" height="123" transform="rotate(45,0,174) translate(0,-10)" fill="white"/>
+        <rect id="bar" width="25" height="175" transform="rotate(45, 0, 178) translate(0, -35)"/>
+      </svg>
+      <div>
+        <p>
+          Lisensi UNLICENSE adalah dedikasi domain publik yang memungkinkan pengembang untuk melepaskan hak cipta karya mereka sepenuhnya, menjadikannya tersedia untuk penggunaan tanpa batasan. Inti dari UNLICENSE adalah pengabaian hak cipta untuk melepaskan karya ke domain publik, bahkan di wilayah hukum yang tidak mengizinkan domain publik tradisional.
+        </p>
+        <p>
+          UNLICENSE cocok untuk kamu yang ingin karyanya benar-benar bebas dipakai, dimodifikasi, dan didistribusikan tanpa kewajiban atribusi. Hal ini membuat adopsi karya lebih mudah dan cepat, terutama untuk skrip, snippet, template, atau proyek pembelajaran yang tujuannya memang berbagi pengetahuan tanpa hambatan.
+        </p>
+      </div>
+    </section>
 
-          function next() {
-            open((idx + 1) % images.length);
-          }
+    <!-- Karakteristik Utama -->
+    <section class="card">
+      <h2 class="section-title">Karakteristik utama</h2>
+      <ul>
+        <li><strong>Dedikasi domain publik:</strong>
+          UNLICENSE bertujuan untuk melepaskan karya ke domain publik, mirip dengan bagaimana karya dalam domain publik dapat digunakan tanpa restriksi.
+        </li>
+        <li><strong>Mengizinkan penggunaan tanpa batasan:</strong>
+          Lisensi ini dirancang untuk memungkinkan penggunaan, modifikasi, dan distribusi perangkat lunak tanpa memerlukan atribusi, tidak seperti beberapa lisensi permisif lainnya.
+        </li>
+        <li><strong>Dirancang untuk melepaskan hak cipta:</strong>
+          Alat ini secara eksplisit melepaskan semua klaim hak cipta dan hak terkait, sehingga karya tersebut berada di domain publik.
+        </li>
+        <li><strong>Dirilis pada Hari Domain Publik:</strong>
+          UNLICENSE pertama kali diterbitkan pada 1 Januari 2010, yang merupakan Hari Domain Publik di Amerika Serikat, untuk menggarisbawahi tujuannya.
+        </li>
+      </ul>
+    </section>
 
-          function init() {
-            images = Array.from(gallery.querySelectorAll('img'));
+    <!-- Mengapa Menggunakan -->
+    <section class="card">
+      <h2 class="section-title">Mengapa menggunakan UNLICENSE?</h2>
+      <ul>
+        <li><strong>Kebebasan maksimum:</strong>
+          Untuk memastikan karya Anda sepenuhnya gratis untuk digunakan oleh siapa saja untuk tujuan apa pun, bahkan di wilayah hukum yang mungkin tidak secara jelas mengakui domain publik.
+        </li>
+        <li><strong>Tanpa kewajiban lisensi:</strong>
+          Untuk memberikan pengguna kebebasan maksimum dalam menggunakan karya Anda tanpa kewajiban lisensi.
+        </li>
+      </ul>
+      <p>
+        Sebagai pelengkap, kamu bisa menambahkan file <code>UNLICENSE</code> di root repo agar niat dedikasi ke domain publik terbaca jelas oleh pengguna, package manager, dan platform hosting. Pastikan juga dokumentasi menyebutkan risiko umum (misalnya tanpa jaminan/garansi), agar pengguna memahami konsekuensinya.
+      </p>
+    </section>
 
-            // Inisialisasi event listener untuk setiap gambar galeri
-            images.forEach((img, i) => {
-              img.addEventListener('click', () => open(i));
-            });
+    <!-- Galeri Foto dengan lazy-load -->
+    <section class="card">
+      <h2 class="section-title">Galeri icon dan contoh penggunaan</h2>
+      <div class="gallery">
+        <figure>
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/PD-icon-black.svg/2048px-PD-icon-black.svg.png" alt="Ikon UNLICENSE contoh 1">
+          <figcaption class="caption">Ikon UNLICENSE variasi gaya.</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/PinkCopyleft.svg/2048px-PinkCopyleft.svg.png" alt="Ikon UNLICENSE contoh 2">
+          <figcaption class="caption">Contoh badge UNLICENSE di README.</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-Sound.svg/2048px-PD-Sound.svg.png" alt="Ikon UNLICENSE contoh 3">
+          <figcaption class="caption">Integrasi UNLICENSE dalam proyek publik.</figcaption>
+        </figure>
+      </div>
+      <!-- Lightbox -->
+      <div class="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+          <img id="lb-img" src="" alt="">
+          <button class="lb-close" aria-label="Tutup">✖</button>
+          <button class="lb-prev" aria-label="Sebelumnya">◀</button>
+          <button class="lb-next" aria-label="Berikutnya">▶</button>
+        </div>
+      </div>
+    </section>
 
-            // Event listeners navigasi lightbox
-            lbClose.addEventListener('click', close);
-            lbPrev.addEventListener('click', prev);
-            lbNext.addEventListener('click', next);
+    <!-- Share statis -->
+    <section class="card">
+      <h2 class="section-title">Bagikan halaman ini</h2>
+      <div class="share">
+        <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/unlicense.html&text=UNLICENSE" target="_blank" rel="noopener">X</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://frijal.pages.dev/artikel/unlicense.html" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://frijal.pages.dev/artikel/unlicense.html" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://wa.me/?text=UNLICENSE%20https://frijal.pages.dev/artikel/unlicense.html" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
 
-            // Menutup lightbox saat klik di luar gambar
-            lb.addEventListener('click', (e) => {
-              if (e.target === lb) close();
-            });
+    <footer>
+      <p>Lisensi konten halaman: UNLICENSE — dedikasi domain publik. Tidak ada garansi; gunakan dengan bijak.</p>
+      <p>&#127279; <span id="year"></span> frijal.pages.dev — Halaman dirancang untuk satu kolom, responsif, dan ramah SEO.</p>
+    </footer>
+  </div>
 
-            // Navigasi keyboard
-            document.addEventListener('keydown', (e) => {
-              if (!lb.classList.contains('active')) return;
-              if (e.key === 'Escape') close();
-              if (e.key === 'ArrowLeft') prev();
-              if (e.key === 'ArrowRight') next();
-            });
+  <script>
+    // Tahun dinamis
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-            // Implementasi Lazy Load (memastikan gambar dimuat)
-            const lazyObserver = new IntersectionObserver((entries, obs) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  const img = entry.target;
-                  // Jika gambar memiliki data-full, muat gambar utama (src)
-                  if (img.dataset.full && !img.src.includes(img.dataset.full)) {
-                    // Dalam kasus ini, diasumsikan src sudah diisi dengan gambar kecil
-                  }
-                  obs.unobserve(img);
-                }
-              });
-            });
-            images.forEach(img => lazyObserver.observe(img));
-          }
+    // Lightbox gallery
+    (function(){
+      const gallery = document.querySelectorAll('.gallery img');
+      const lightbox = document.querySelector('.lightbox');
+      const lbImg = document.getElementById('lb-img');
+      const lbClose = lightbox.querySelector('.lb-close');
+      const lbPrev = lightbox.querySelector('.lb-prev');
+      const lbNext = lightbox.querySelector('.lb-next');
 
-          init();
-        })();
+      let idx = 0;
 
-        // Share links
-        (function () {
-          const url = encodeURIComponent(
-            document.querySelector('link[rel=canonical]')?.href || location.href
-          );
-          const title = encodeURIComponent(document.title);
-          const x = document.getElementById('share-x');
-          const fb = document.getElementById('share-fb');
-          const li = document.getElementById('share-li');
-          const wa = document.getElementById('share-wa');
+      function show(i){
+        idx = i;
+        lbImg.src = gallery[idx].src;
+        lightbox.classList.add('active');
+      }
+      function close(){ lightbox.classList.remove('active'); }
 
-          x.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-          fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-          li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-          wa.href = `https://wa.me/?text=${title}%20${url}`;
-        })();
+      gallery.forEach((img, i) => img.addEventListener('click', ()=>show(i)));
+      lbClose.addEventListener('click', close);
+      lbPrev.addEventListener('click', ()=>show((idx-1+gallery.length)%gallery.length));
+      lbNext.addEventListener('click', ()=>show((idx+1)%gallery.length));
+      lightbox.addEventListener('click', e => { if(e.target===lightbox) close(); });
+      document.addEventListener('keydown', e => {
+        if(!lightbox.classList.contains('active')) return;
+        if(e.key==='Escape') close();
+        if(e.key==='ArrowLeft') lbPrev.click();
+        if(e.key==='ArrowRight') lbNext.click();
       });
-    </script>
-
+    })();
+  </script>
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
-  </body>
+</body>
 </html>
+
