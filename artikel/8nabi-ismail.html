@@ -109,19 +109,9 @@
     .share .icon-btn{
       display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #263043;border-radius:999px;background:#0e1420;color:#dfe7f3;font-size:14px
     }
-    .fixed-links .sitemap{
-      position:fixed;left:12px;top:30%;
-      transform:translateY(-30%);z-index:999;background:#0e1420;border:1px solid #263043;color:#cfe9dd
-    }
-    .fixed-links .home{
-      position:fixed;right:12px;bottom:20%;z-index:999;background:#0e1420;border:1px solid #263043;color:#cfe9dd
-    }
     footer{
       margin:24px 0;color:var(--muted);text-align:center
     }
-    /* Facebook comments container aesthetics */
-    .comments{
-      margin-top:22px;padding:16px;border-radius:12px;background:#111725;border:1px solid #223044
     }
     /* Responsive niceties */
     @media (min-width:900px){
@@ -135,26 +125,13 @@
     <meta property="article:published_time" content="2025-10-17T08:24:29.836+00:00">
 </head>
 <body>
-  <!-- Floating navigation buttons -->
-  <div class="fixed-links">
-    <a class="btn sitemap" href="https://frijal.pages.dev/sitemap.html" aria-label="Lihat Sitemap">🗺️ Sitemap</a>
-    <a class="btn home" href="https://frijal.pages.dev" aria-label="Kembali ke Home">🏠 Home</a>
-  </div>
-
+  
   <div id="top" class="wrap">
     <main class="container" role="main">
       <header class="hero" role="banner">
         <h1>Nabi Ismail ‘Alaihissalam</h1>
 <div id="iposbrowser"></div>
         <p class="sub">#RamadahanTales oleh: Saudari Sharifah Syazreen Al-Idrus</p>
-
-        <!-- Info chips: Browser, OS, IP, Negara -->
-        <div class="meta-chips" id="info-chips" aria-label="Info perangkat">
-          <span class="chip"><strong>Browser:</strong> <span id="chip-browser">-</span></span>
-          <span class="chip"><strong>OS:</strong> <span id="chip-os">-</span></span>
-          <span class="chip"><strong>IP:</strong> <span id="chip-ip">-</span></span>
-          <span class="chip"><span class="flag" id="chip-flag">🏳️</span> <strong>Negara:</strong> <span id="chip-country">-</span></span>
-        </div>
       </header>
 
       <section class="grid-1">
@@ -249,13 +226,6 @@
               <button class="icon-btn" id="copy-link">🔗 Salin Link</button>
             </div>
           </div>
-
-          <!-- Jaga Data Pribadi Tetap Aman. Facebook -->
-          <div class="comments">
-            <h3>Jaga Data Pribadi Tetap Aman.</h3>
-            <div id="fb-root"></div>
-            <div class="fb-comments" data-href="https://frijal.pages.dev/artikel/8nabi-ismail.html" data-width="100%" data-numposts="5"></div>
-          </div>
         </article>
 
         <footer>
@@ -265,16 +235,9 @@
     </main>
   </div>
 
-  <!-- Facebook SDK (pastikan app_id tersedia di konfigurasi domain jika diperlukan) -->
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v19.0">
-  </script>
-
   <script>
     // Utility: get current URL
     const CANONICAL = document.querySelector('link[rel="canonical"]')?.href || location.href;
-
-
 
     // Gallery lightbox
     const gallery = Array.from(document.querySelectorAll('#gallery img'));
