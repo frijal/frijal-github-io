@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Konfigurasi
-HOST = "frijal.github.io"
+HOST = "frijal.pages.dev"
 KEY = "f8399d60e90d46a6945577b73ff3f778"
 KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
 
