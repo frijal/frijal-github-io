@@ -12,6 +12,7 @@ Allow: /
 Allow: /artikel/
 Allow: /ext/
 Allow: /img/
+Allow: /artikel/-/
 
 # 🚫 BLOKIR semua folder non-publik, sistem, dan sementara
 Disallow: /artikelx/
@@ -29,13 +30,11 @@ Disallow: /LICENSE
 Disallow: /.nojekyll
 Disallow: /wrangler.toml
 
-# 🚫 Folder kategori otomatis (-) tidak perlu diindeks
-Disallow: /artikel/-/
-
 # ✅ IZINKAN halaman sitemap dan feed
 Allow: /sitemap.xml
 Allow: /rss.xml
 Allow: /feed.html
+Allow: /artikel.json
 
 # ✅ Tautan ke peta situs
 Sitemap: https://frijal.pages.dev/sitemap.xml
