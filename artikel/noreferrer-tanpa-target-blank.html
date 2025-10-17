@@ -159,9 +159,6 @@ footer {
 <p>Panduan santai tapi lengkap + demo interaktif</p>
   </header>
 
-  <a href="https://frijal.pages.dev/sitemap.html" class="btn-sitemap">🗺</a>
-  <a href="https://frijal.pages.dev" class="btn-home">🏠</a>
-
   <main>
 <h2>🔹 Dampak yang tetap ada</h2>
 <p>
@@ -209,21 +206,12 @@ footer {
 </div>
 
 <h2>💬 Jaga Data Pribadi Tetap Aman.</h2>
-
-
-<h2>🔍 Deteksi Lingkungan</h2>
-<div class="env-info" id="env-info">
-  Memuat info browser, OS, dan lokasi...
-</div>
   </main>
 
   <footer>
 🄯 2025 Frijal Blog • Artikel edukasi HTML
   </footer>
 
-  <!-- Facebook SDK -->
-  
-  <!-- JS untuk lightbox -->
   <script>
 const gallery = document.querySelectorAll('.gallery img');
 const lightbox = document.getElementById('lightbox');
@@ -247,48 +235,7 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) lightbox.style.display = 'none';
 });
   </script>
-
-  <!-- JS deteksi browser, OS, lokasi -->
-  <script>
-function getBrowserInfo() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Firefox")) return "🦊 Firefox";
-  if (ua.includes("Chrome")) return "🌐 Chrome";
-  if (ua.includes("Safari") && !ua.includes("Chrome")) return "🍎 Safari";
-  if (ua.includes("Edg")) return "🔵 Edge";
-  return "❓ Browser lain";
-}
-function getOSInfo() {
-  const ua = navigator.userAgent;
-  if (ua.includes("Win")) return "🖥 Windows";
-  if (ua.includes("Mac")) return "🍏 macOS";
-  if (ua.includes("Linux")) return "🐧 Linux";
-  if (/Android/i.test(ua)) return "🤖 Android";
-  if (/iPhone|iPad|iPod/i.test(ua)) return "📱 iOS";
-  return "❓ OS lain";
-}
-async function getLocation() {
-  try {
-const res = await fetch("https://ipapi.co/json/");
-const data = await res.json();
-return `📍 ${data.city}, ${data.country_name} (${data.country_code})`;
-  } catch {
-return "Lokasi tidak bisa dideteksi";
-  }
-}
-async function showEnv() {
-  const info = document.getElementById("env-info");
-  const browser = getBrowserInfo();
-  const os = getOSInfo();
-  const loc = await getLocation();
-  info.textContent = `${browser} • ${os} • ${loc}`;
-}
-showEnv();
-  </script>
-
-
-
-
+ 
 <div class="search-floating-container"><input type="text" id="floatingSearchInput" placeholder="cari artikel..." autocomplete="off"><span id="floatingSearchClear" class="clear-button">❌</span><div id="floatingSearchResults" class="floating-results-container"></div></div>
 <section id="related-marquee-section"><div id="related-marquee-container"></div></section><script defer src="/ext/marquee-url.js"></script>
 <script defer src="/ext/iposbrowser.js"></script>
