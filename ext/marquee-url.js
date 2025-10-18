@@ -133,7 +133,7 @@ function initFloatingSearch(allArticlesData) {
     const results = searchArticles(query, allArticlesData)
     resultsContainer.innerHTML = ''
     if (results.length > 0) {
-      results.slice(0, 10).forEach((item) => {
+      results.slice(0, 20).forEach((item) => {
         const link = document.createElement('a')
         link.href = `/artikel/${item.url}`
         link.innerHTML = `${item.title} <small>${item.category}</small>`
