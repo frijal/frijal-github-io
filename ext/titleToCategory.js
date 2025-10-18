@@ -19,7 +19,7 @@ export const categories = [
     ]
   },
   {
-    "name": "🏞️ Budaya"", ""Kuliner & Lifestyle",
+    "name": "🏞️ Budaya, Kuliner & Lifestyle",
     "keywords": [
     "Kehidupan", "Kuliner", "Makanan", "Gaya Hidup", "Budaya", "Komunitas", "Blogger", "Open Source", "Pendidikan", "Ujian Nasional", "PPDB", "SKTM", "Hoaks", "Tabayun", "Etika Digital", "Keadilan Akses", "Keuangan", "Uang", "Duit", "Internet", "WiFi Gratis", "Perjalanan", "Lokal", "Balikpapan", "Bontang", "Samarinda", "WiGO", "JNE", "Respiro", "Unboxing", "Kesehatan", "Disiplin Diri", "Produktivitas", "Stres", "Rencana", "Refleksi Sosial", "Geografi", "Sungai"
       
