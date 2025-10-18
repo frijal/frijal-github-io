@@ -2,9 +2,9 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Impor fungsi dan data kategori yang ada dari file target
-// Pastikan titleToCategory.js sudah mengekspor 'categories'
 import { titleToCategory, categories } from './titleToCategory.js';
 
 // --- Konfigurasi ---
@@ -13,17 +13,34 @@ const __dirname = path.dirname(__filename);
 const ARTIKEL_JSON_PATH = path.join(__dirname, '..', 'artikel.json');
 const CATEGORY_FILE_PATH = path.join(__dirname, 'titleToCategory.js');
 
-// Kata-kata umum yang akan diabaikan
-const stopWords = new Set([
-    'dan', 'di', 'ke', 'dari', 'yang', 'ini', 'itu', 'untuk', 'dengan', 'adalah',
-    'pada', 'juga', 'saat', 'serta', 'namun', 'tidak', 'tapi', 'atau', 'akan',
-    'sudah', 'telah', 'bisa', 'dapat', 'seperti', 'cara', 'anda', 'dalam',
-    'sebagai', 'lebih', 'para', 'sebuah', 'menjadi', 'tersebut', 'tentang',
-    'kepada', 'karena', 'oleh', 'saat', 'sehingga', 'saja', 'lain', 'nya'
-]);
+// --- Setup AI Gemini ---
+// Ambil API Key dari GitHub Secrets
+const API_KEY = process.env.GEMINI_API_KEY;
+if (!API_KEY) {
+    console.error("❌ Variabel GEMINI_API_KEY tidak ditemukan. Pastikan sudah diatur di GitHub Secrets.");
+    process.exit(1);
+}
+const genAI = new GoogleGenerativeAI(API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+// Fungsi baru untuk mendapatkan keyword dari AI
+async function getKeywordsFromAI(text) {
+    const prompt = `Analisis teks berikut dan berikan 3-5 kata kunci (keywords) yang paling relevan. Jawab HANYA dengan kata kunci yang dipisahkan koma, dalam bahasa Indonesia, dan gunakan huruf kecil semua. Contoh: 'teknologi, ai, produktivitas'. Teks: "${text}"`;
+
+    try {
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const keywordsText = response.text();
+        return keywordsText.split(',').map(k => k.trim()).filter(k => k); // Bersihkan dan ubah ke array
+    } catch (error) {
+        console.warn(`⚠️ Gagal menganalisis teks dengan AI: "${text}". Error: ${error.message}`);
+        return []; // Kembalikan array kosong jika gagal
+    }
+}
+
 
 async function main() {
-    console.log("🚀 Memulai analisis untuk memperbarui keywords dari JUDUL (arr[0])...");
+    console.log("🚀 Memulai analisis untuk memperbarui keywords menggunakan AI...");
 
     const existingKeywords = new Set(categories.flatMap(cat => cat.keywords));
     console.log(`🔍 Ditemukan ${existingKeywords.size} keyword yang sudah ada.`);
@@ -41,26 +58,26 @@ async function main() {
     const allArticles = Object.values(articleData).flat();
 
     for (const article of allArticles) {
-        const title = article[0]; // --- DIUBAH: Sekarang menganalisis judul (arr[0]) ---
-        
+        const title = article[0];
         if (!title || typeof title !== 'string') continue;
 
+        // Tentukan kategori artikel ini menggunakan fungsi yang ada
         const categoryName = titleToCategory(title);
-        const words = title.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
 
-        for (const word of words) {
-            if (
-                word.length > 3 &&
-                !stopWords.has(word) &&
-                !existingKeywords.has(word) &&
-                !/^\d+$/.test(word)
-            ) {
+        // --- MENGGUNAKAN FUNGSI AI ---
+        console.log(`🤖 Menganalisis judul: "${title}"`);
+        const aiKeywords = await getKeywordsFromAI(title);
+
+        for (const word of aiKeywords) {
+            if (word.length > 2 && !existingKeywords.has(word)) {
                 if (!newKeywordsByCategory[categoryName]) {
                     newKeywordsByCategory[categoryName] = new Set();
                 }
                 newKeywordsByCategory[categoryName].add(word);
             }
         }
+        // Beri jeda 1 detik antar request API untuk menghindari rate limit
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     let keywordsAddedCount = 0;
@@ -81,8 +98,6 @@ async function main() {
 
     console.log(`\n🔥 Ditemukan dan akan ditambahkan ${keywordsAddedCount} keyword baru.`);
 
-    // Buat ulang konten file titleToCategory.js secara dinamis
-    // PENTING: Struktur ini mengharuskan titleToCategory.js juga mengekspor 'categories'
     const newFileContent = `// titleToCategory.js
 export const categories = ${JSON.stringify(categories, null, 2)};
 
