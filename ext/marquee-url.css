@@ -161,7 +161,40 @@
     gap: 10px;         /* Memberi jarak antar tombol */
 }
 
-/* Gaya untuk setiap tombol emoji di dalam kontainer */
+.floating-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between; /* Memisahkan link kategori dan tombol ikon */
+    align-items: center;
+    pointer-events: none; /* Agar tidak mengganggu klik di tengah layar */
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 10px;
+    pointer-events: auto; /* Mengaktifkan kembali klik pada tombol */
+}
+
+.category-link {
+    background: rgba(30, 30, 30, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+}
+
+.category-link:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
 .btn-emoji {
     display: flex;
     justify-content: center;
@@ -169,11 +202,11 @@
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: var(--bg, #ccc); /* Menggunakan variabel CSS untuk background */
-    font-size: 24px; /* Ukuran emoji */
+    background: var(--bg, #ccc);
+    font-size: 24px;
     text-decoration: none;
     transition: transform 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Menambah bayangan agar lebih menonjol */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-emoji:hover {
