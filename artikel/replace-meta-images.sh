@@ -22,7 +22,7 @@ find . -type f -name "*.html" | while read -r FILE; do
   s|"https://frijal\.pages\.dev/assets/(.*?)\.png"|"https://frijal.pages.dev/img/\1.webp"|g;  
   s|"https://frijal\.pages\.dev/assets/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g; 
    
-  s|https://upload.wikimedia.org/wikipedia/commons/e/e8/Pecel_Hariadhi.JPG|https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqBhQtbv1A3W1wzkw3pOE15P8XKWMq_niShyphenhyphenwy687lsd-Jt0glqJLpRCKJVtClGC586Sli2ywjLVmQI03MHuuTfvB2LWSqondit9OD75fkj1A0WPscGDDKSM122IeEzOca5BhKFaPLz72Xi3RqKRtBl4kY4NnmqTOb1kcktCkA7euB9UbJbeavXDtXhm8/s1600/Pecel_Hariadhi.webp|g;    
+  s|https://i.ibb.co/L5hY6bX/xfce-infographic-image.jpg|https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEwXRdmiz34VXRa3Xc5MpggCjskgA78kpzCI1aVgn6anxe6k9-9qIZnYJLJr6Afqs2H9EUb4Y33zw2M0rhe0UDChnUZ229867ZjBKO55RDcQQB-MApYsE0FUckvPRmFVZqaK43-N1s64aY4navaGE1oPeQU2e3m1v3Zy8TJ4r4-axyv4nNo5VPRo3cVDY/s1600/317-wallpaper.png|g;    
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
