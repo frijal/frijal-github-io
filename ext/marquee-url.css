@@ -3,6 +3,7 @@
    ========================================================== */
 
 /* --- (1) MARQUEE ARTIKEL TERKAIT --- */
+/* --- (1) GAYA UNTUK MARQUEE ARTIKEL TERKAIT --- */
 #related-marquee-section {
   position: fixed;
   bottom: 0;
@@ -12,38 +13,53 @@
   overflow: hidden;
   pointer-events: none;
 }
+
 #related-marquee-container {
   overflow: hidden;
   white-space: nowrap;
-  padding: 8px 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  padding: 0; /* Padding dihapus */
+  /* Background dan backdrop-filter dihapus */
 }
+
 #related-marquee-container .marquee-content {
   display: inline-block;
-  animation: marquee-scroll 150s linear infinite; /* Durasi dipercepat */
+  animation: marquee-scroll 1500s linear infinite;
   pointer-events: auto;
+  padding: 8px 0; /* Padding dipindahkan ke sini agar ada sedikit ruang vertikal */
 }
+
 #related-marquee-container:hover .marquee-content {
   animation-play-state: paused;
 }
+
 #related-marquee-container a {
-  color: #fff;
+  color: #fff; /* Warna teks putih dipertahankan */
   text-decoration: none;
   margin-right: 30px;
   font-weight: 400;
   font-size: 0.85em;
   opacity: 0.8;
   transition: opacity 0.3s;
+  /* Tambahan: bayangan teks untuk keterbacaan */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
+
 #related-marquee-container a:hover {
   opacity: 1;
   font-weight: 700;
 }
+
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Animasi lebih efisien */
+  100% { transform: translateX(-50%); }
+}
+
+/* Penyesuaian tema untuk mode terang (opsional) */
+@media (prefers-color-scheme: light) {
+    #related-marquee-container a {
+        color: #000; /* Ganti warna teks menjadi hitam di mode terang */
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* Bayangan terang */
+    }
 }
 
 /* --- (2) KOLOM PENCARIAN MELAYANG --- */
@@ -84,9 +100,9 @@
 /* --- (3) GAYA UNTUK NAVIGASI MELAYANG (BARU & GABUNGAN) --- */
 .floating-nav {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
+    bottom: 5%;
+    left: 15px;
+    right: 15px;
     z-index: 998;
     display: flex;
     justify-content: space-between;
@@ -109,7 +125,7 @@ a.category-link {
     color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 5%;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;

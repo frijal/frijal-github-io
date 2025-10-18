@@ -189,12 +189,12 @@ function initNavIcons(allArticlesData, currentFilename) {
             <a id="category-link" class="category-link"></a>
         </div>
         <div class="nav-right">
-            <a id="prev-article" title="Sebelumnya" class="btn-emoji">◀️</a>
-            <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi" class="btn-emoji">🗺️</a>
+           <a id="next-article" title="Berikutnya" class="btn-emoji">▶️</a>
+            <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi" class="btn-emoji">📄</a>
             <a href="https://frijal.pages.dev" title="Home" class="btn-emoji">🏠</a>
             <a href="https://frijal.pages.dev/feed.html" title="Update harian" class="btn-emoji">📡</a>
-            <a id="next-article" title="Berikutnya" class="btn-emoji">▶️</a>
-        </div>
+             <a id="prev-article" title="Sebelumnya" class="btn-emoji">◀️</a>
+                    </div>
     `;
     document.body.appendChild(navContainer);
 
@@ -266,7 +266,7 @@ async function initializeApp() {
 
     const clearButton = document.getElementById('floatingSearchClear');
     if (clearButton) {
-      clearButton.innerHTML = '&times;';
+      clearButton.innerHTML = '❌';
     }
 
     // Inisialisasi semua fitur
