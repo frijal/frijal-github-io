@@ -23,7 +23,7 @@
 
 #related-marquee-container .marquee-content {
   display: inline-block;
-  animation: marquee-scroll 2000s linear infinite;
+  animation: marquee-scroll 1600s linear infinite;
   pointer-events: auto;
   padding: 8px 0; /* Padding dipindahkan ke sini agar ada sedikit ruang vertikal */
 }
@@ -100,7 +100,7 @@
 /* --- (3) GAYA UNTUK NAVIGASI MELAYANG (BARU & GABUNGAN) --- */
 .floating-nav {
     position: fixed;
-    bottom: 5%;
+    bottom: 10%;
     left: 15px;
     right: 15px;
     z-index: 998;
@@ -112,7 +112,7 @@
 
 .nav-left, .nav-right {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     pointer-events: auto;
 }
 
