@@ -264,17 +264,17 @@
       const CATEGORY_ICON_MAP = [
         { key: 'Linux, Open Source & Multimedia', icon: '🐧', cls: 'linux' },
         { key: 'Sejarah & Religi', icon: '📚', cls: 'religi' },
-        { key: 'Lainnya', icon: '🗂️', cls: 'lainnya' },
+        { key: 'Lainnya', icon: '🔆', cls: 'lainnya' },
         { key: 'Kuliner, Gaya Hidup & Kesehatan', icon: '🍜', cls: 'multimedia' },
-        { key: 'Catatan & Opini Sosial', icon: '🏞️', cls: 'catatan' },
-        { key: 'Teknologi Web, AI & Umum', icon: '💻', cls: 'windows' },
+        { key: 'Catatan & Opini Sosial', icon: '📢', cls: 'catatan' },
+        { key: 'Teknologi Web, AI & Umum', icon: '🖥️', cls: 'windows' },
       ]
 
       function getIconAndClass(categoryName) {
         const found = CATEGORY_ICON_MAP.find((m) =>
           categoryName.includes(m.key),
         )
-        return found ? found : { icon: '📂', cls: 'default' }
+        return found ? found : { icon: '⛔', cls: 'default' }
       }
 
       function categoryToId(categoryName) {
@@ -330,7 +330,7 @@
 
         const image = document.createElement('img')
         image.src = thumbnailUrl
-        image.alt = `Gambar artikel: ${title}`
+        image.alt = `${title}`
         image.loading = 'lazy'
 
         const content = document.createElement('div')
@@ -354,13 +354,13 @@
           // Tambahkan tombol "Terbaru" di awal
           {
             name: 'Artikel Terbaru',
-            icon: '🔥',
+            icon: '💥',
             cls: 'latest',
             url: '#terbaru',
           },
           {
             name: 'Daftar Isi',
-            icon: '📑',
+            icon: '📃',
             cls: 'sitemap',
             url: 'https://frijal.pages.dev/sitemap.html',
           },
@@ -382,11 +382,11 @@
         allNavItems.push(
           {
             name: 'RSS Feed',
-            icon: '📰',
+            icon: '📡',
             cls: 'rss',
             url: 'https://frijal.pages.dev/feed.html',
           },
-          { name: 'Kembali ke atas', icon: '↑↑', cls: 'up', url: '#top' },
+          { name: 'Kembali ke atas', icon: '⚠️↑', cls: 'up', url: '#top' },
         )
 
         // Render semua tombol

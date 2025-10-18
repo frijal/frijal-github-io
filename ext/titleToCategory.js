@@ -19,13 +19,13 @@ const categories = [
     ]
   },
   {
-    name: "🏞️ Catatan & Opini Sosial",
+    name: "📢 Catatan & Opini Sosial",
     keywords: [
       "aci", "adaro", "artikel", "bisnis", "bukalapak", "catatan", "cpns", "cuti", "duit", "ekspedisi", "fenomena", "foss kaltim", "golput", "grobogan", "harian", "ibu", "indonesia", "iwan fals", "jatos", "jne", "kasih", "kejujuran", "kerja", "kota", "kopdar", "kreativitas", "nostalgia", "opini", "organisasi", "peradaban", "perencanaan", "perusahaan", "perjalanan", "poac", "ppdb", "produktifitas", "pt", "rencana", "renungan", "sktm", "sosial", "uang", "ujian nasional"
     ]
   },
   {
-    name: "💻 Teknologi Web, AI & Umum",
+    name: "🖥️ Teknologi Web, AI & Umum",
     keywords: [
       "ai", "amd", "baterai", "bootloader", "branch", "browser", "build", "canva", "chatgpt", "claude", "cleanup", "cli", "codespaces", "cpu", "curl", "eula", "excel", "gemini", "git", "github", "gorilla glass", "grammarly", "hdd", "head", "header", "html", "jasper", "jaringan", "javascript", "js", "keyring", "laptop", "learning", "lisensi", "meta", "mic", "notion", "npm", "optimasi", "osborne1", "phishing", "piracy", "push", "quickbooks", "refresh", "robots.txt", "samba", "shutdown", "software", "spreadsheet", "ssh", "ssd", "terminal", "tidio", "tools", "virtualbox", "web", "wifi", "windows", "winget", "workflow", "yml", "yaml"]
   }
@@ -36,5 +36,5 @@ export function titleToCategory(title) {
   const found = categories.find(cat =>
     cat.keywords.some(k => t.includes(k))
   );
-  return found ? found.name : "🗂️ Lainnya";
+  return found ? found.name : "🔆 Lainnya";
 }
