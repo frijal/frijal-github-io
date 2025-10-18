@@ -32,7 +32,7 @@
     <meta property="og:locale" content="id_ID" />
     <meta
       property="og:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
+      content="https://frijal.pages.dev/thumbnail.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -47,7 +47,7 @@
     <meta name="twitter:creator" content="@frijal" />
     <meta
       name="twitter:image"
-      content="https://frijal.pages.dev/thumbnail.jpg"
+      content="https://frijal.pages.dev/thumbnail.webp"
     />
     <meta name="yandex-verification" content="23ccce4eb7032007" />
     <meta name="google-site-verification" content="9Jwla8V71mwNNZ4NNPThsK_BHpWn6quXWSs_VjPAflA" />
@@ -259,7 +259,7 @@
       const IDX_IMAGE = 2
       const IDX_DATE = 3
       const IDX_DESCRIPTION = 4
-      const DEFAULT_THUMBNAIL = '/thumbnail.jpg'
+      const DEFAULT_THUMBNAIL = '/thumbnail.webp'
 
       const CATEGORY_ICON_MAP = [
         { key: 'Linux, Open Source & Multimedia', icon: '🐧', cls: 'linux' },
@@ -462,7 +462,7 @@
 
             const latestHeading = document.createElement('h2')
             latestHeading.id = 'terbaru'
-            latestHeading.textContent = 'Artikel Terbaru 🔥'
+            latestHeading.textContent = 'Artikel Terbaru 💥'
             latestSection.appendChild(latestHeading)
 
             const latestGrid = document.createElement('div')
@@ -513,8 +513,8 @@
           // 5. Bangun navigasi cepat
           createQuickNav(allCategories)
         } catch (error) {
-          console.error('Ada masalah saat memuat artikel.json:', error)
-          mainContainer.innerHTML = `<p style="text-align: center; color: red;">Maaf, gagal memuat daftar artikel. (${error.message})</p>`
+          console.error('Ada kendala saat memuat artikel.json:', error)
+          mainContainer.innerHTML = `<p style="text-align: center; color: red;">gagal memuat daftar artikel. (${error.message})</p>`
         }
       })
     </script>
