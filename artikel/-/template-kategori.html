@@ -82,37 +82,39 @@
         padding: 0;
       }
       body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--bg-color);
-        color: var(--primary-text-color);
-        line-height: 1.7;
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-      }
-     /* === PERUBAHAN DI SINI === */
-      .sticky-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        padding: 1.5rem 0;
-        /* Tanpa background, tapi dengan backdrop-filter untuk keterbacaan */
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px); /* Untuk Safari */
-        margin-bottom: 1rem; /* Jarak antara header dan grid */
-      }
-      h1 {
-        text-align: center;
-        color: var(--accent-color);
-        font-size: 2.5rem;
-        margin: 0; /* Margin dipindahkan ke .sticky-header */
-      }
-      /* === AKHIR PERUBAHAN === */
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text-color);
+    line-height: 1.7;
+    transition: background-color 0.3s, color 0.3s;
+    /* Hapus padding-top dari body jika ada */
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem; /* Padding atas bisa dikurangi atau dihilangkan */
+}
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    /* Tanpa background, tapi dengan backdrop-filter untuk keterbacaan */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Untuk Safari */
+    border-bottom: 1px solid var(--border-color); /* Tambahkan garis tipis pemisah */
+}
+.header-content {
+    max-width: 1200px; /* Samakan dengan max-width .container */
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem;
+}
+h1 {
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    margin: 0;
+}
       #article-grid {
         display: grid;
         gap: 1.5rem;
@@ -187,12 +189,16 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1 id="page-title">Memuat Artikel...</h1>
-      <div id="loading"></div>
-      <div id="article-grid"></div>
+   <header class="sticky-header">
+    <div class="header-content">
+        <h1 id="page-title">Memuat Artikel...</h1>
     </div>
+</header>
 
+<div class="container">
+    <div id="loading"></div>
+    <div id="article-grid"></div>
+</div>
     <section id="related-marquee-section">
       <div id="related-marquee-container"></div>
     </section>
