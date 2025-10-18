@@ -1,0 +1,30 @@
+name: 🧠 Perbarui Keywords Kategori (Otomatis)
+
+on:
+  workflow_dispatch: # Izinkan untuk dijalankan secara manual
+
+jobs:
+  update-keywords:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Beri izin untuk melakukan commit
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Jalankan Skrip Analisis dan Update Keywords
+        run: node ext/updateTitleToCategory.js
+
+      - name: Commit dan Push Perubahan
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(keywords): Perbarui keywords kategori secara otomatis"
+          file_pattern: ext/titleToCategory.js
+          skip_empty_commit: true
