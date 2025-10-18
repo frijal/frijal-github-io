@@ -29,7 +29,11 @@ find . -type f -name "*.html" | while read -r FILE; do
   
   s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;  
   s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;
-  s|<meta property="og:image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;  
+  s|<meta property="og:image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  
+  s|<meta property="og:image" id="og-image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta property="og:image" id="og-image" content="https://frijal.pages.dev/img/\1.webp">|g;  
+  s|<meta property="og:image" id="og-image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta property="og:image" id="og-image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta property="og:image" id="og-image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta property="og:image" id="og-image" content="https://frijal.pages.dev/img/\1.webp">|g;  
 
   ' "$FILE"
 
