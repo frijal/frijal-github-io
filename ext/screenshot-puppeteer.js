@@ -7,17 +7,21 @@ const ARTIKEL_DIR = "artikel";
 const IMG_DIR = "img";
 const EXT = "webp"; // bisa ganti ke 'jpeg' jika mau
 
+// Dimensi target untuk screenshot
+const TARGET_WIDTH = 1200;
+const TARGET_HEIGHT = 675;
+
 async function takeScreenshot(url, outputPath) {
   const browser = await puppeteer.launch({
     headless: "new",
-    defaultViewport: { width: 1280, height: 800 },
+    // Mengatur defaultViewport sesuai dimensi target
+    defaultViewport: { width: TARGET_WIDTH, height: TARGET_HEIGHT },
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-
   const page = await browser.newPage();
+
   try {
     const response = await page.goto(url, { waitUntil: "networkidle0", timeout: 30000 });
-
     if (!response || response.status() !== 200) {
       console.error(`[❌] Gagal memuat ${url} (status ${response?.status()})`);
       return;
@@ -27,8 +31,10 @@ async function takeScreenshot(url, outputPath) {
       path: outputPath,
       type: EXT === "webp" ? "webp" : "jpeg",
       quality: 90,
+      // Karena kita sudah mengatur defaultViewport, tidak perlu lagi mengaturnya di sini
+      // fullPage: false, // Pastikan fullPage false agar menggunakan viewport yang kita set
     });
-    console.log(`[✅] Screenshot disimpan: ${outputPath}`);
+    console.log(`[✅] Screenshot (${TARGET_WIDTH}x${TARGET_HEIGHT}) disimpan: ${outputPath}`);
   } catch (err) {
     console.error(`[⚠️] Gagal screenshot ${url}: ${err.message}`);
   } finally {
@@ -63,7 +69,6 @@ async function main() {
     // Delay 1 detik antar screenshot untuk mengurangi beban
     await new Promise(r => setTimeout(r, 1000));
   }
-
   console.log("🎉 Semua screenshot selesai diproses!");
 }
 
