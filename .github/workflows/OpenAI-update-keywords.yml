@@ -22,7 +22,7 @@ jobs:
         run: npm install openai
 
       - name: Run update script
-        run: node ext/updateTitleToCategory.js
+        run: node ext/updateKeywords.js
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
