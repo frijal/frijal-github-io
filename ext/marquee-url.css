@@ -151,32 +151,43 @@
   color: #333;
 }
 
-/* Kontainer untuk menampung semua tombol */
-.floating-nav-container {
-    position: fixed;   /* Membuat elemen menempel di layar */
-    bottom: 5%;        /* Jarak 5% dari bawah */
-    right: 5%;         /* Jarak 5% dari kanan */
-    z-index: 1000;     /* Memastikan tombol selalu di atas konten lain */
-    display: flex;     /* Membuat tombol di dalamnya berjajar rapi */
-    gap: 10px;         /* Memberi jarak antar tombol */
+/* Kontainer untuk tombol ikon di sisi kanan */
+.nav-right {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Menyusun item secara vertikal */
+    gap: 16px;
+    pointer-events: auto;
 }
 
-.floating-nav {
+/* Tombol emoji individual (tanpa background) */
+.btn-emoji {
+    background: none;
+    box-shadow: none;
+    border: none;
+    font-size: 2rem; /* Diperbarui sesuai permintaan */
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+.btn-emoji:hover {
+    transform: scale(1.2);
+}
+
+/* Link kategori di pojok kiri bawah */
+.nav-left {
     position: fixed;
     bottom: 20px;
     left: 20px;
-    right: 20px;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between; /* Memisahkan link kategori dan tombol ikon */
-    align-items: center;
-    pointer-events: none; /* Agar tidak mengganggu klik di tengah layar */
-}
-
-.nav-left, .nav-right {
-    display: flex;
-    gap: 10px;
-    pointer-events: auto; /* Mengaktifkan kembali klik pada tombol */
+    pointer-events: auto;
 }
 
 .category-link {
@@ -193,24 +204,6 @@
 
 .category-link:hover {
     background: rgba(50, 50, 50, 0.9);
-}
-
-.btn-emoji {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--bg, #ccc);
-    font-size: 24px;
-    text-decoration: none;
-    transition: transform 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.btn-emoji:hover {
-    transform: scale(1.1);
 }
 
 /* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH --- */
