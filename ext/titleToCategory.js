@@ -19,7 +19,7 @@ const categories = [
     ]
   },
   {
-    name: "📰 Catatan & Opini Sosial",
+    name: "🏞️ Catatan & Opini Sosial",
     keywords: [
       "aci", "adaro", "artikel", "bisnis", "bukalapak", "catatan", "cpns", "cuti", "duit", "ekspedisi", "fenomena", "foss kaltim", "golput", "grobogan", "harian", "ibu", "indonesia", "iwan fals", "jatos", "jne", "kasih", "kejujuran", "kerja", "kota", "kopdar", "kreativitas", "nostalgia", "opini", "organisasi", "peradaban", "perencanaan", "perusahaan", "perjalanan", "poac", "ppdb", "produktifitas", "pt", "rencana", "renungan", "sktm", "sosial", "uang", "ujian nasional"
     ]

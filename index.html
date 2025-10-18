@@ -110,10 +110,7 @@
       .nav-button.catatan:hover .nav-icon {
         animation: pulse 0.6s ease;
       }
-      .nav-button.budaya:hover .nav-icon {
-        transform: translateY(-2px) scale(1.1);
-      }
-
+    
       @keyframes wobble {
         0%,
         100% {
@@ -265,13 +262,12 @@
       const DEFAULT_THUMBNAIL = '/thumbnail.jpg'
 
       const CATEGORY_ICON_MAP = [
-        { key: 'Linux & Open Source', icon: '🐧', cls: 'linux' },
-        { key: 'Islam & Kehidupan', icon: '📚', cls: 'religi' },
+        { key: 'Linux, Open Source & Multimedia', icon: '🐧', cls: 'linux' },
+        { key: 'Sejarah & Religi', icon: '📚', cls: 'religi' },
         { key: 'Lainnya', icon: '🗂️', cls: 'lainnya' },
-        { key: 'Multimedia & Editing', icon: '📽️', cls: 'multimedia' },
-        { key: 'Catatan & Sosial', icon: '📰', cls: 'catatan' },
-        { key: 'Budaya, Kuliner & Lifestyle', icon: '🏞️', cls: 'budaya' },
-        { key: 'Windows & Teknologi Umum', icon: '💻', cls: 'windows' },
+        { key: 'Kuliner, Gaya Hidup & Kesehatan', icon: '🍜', cls: 'multimedia' },
+        { key: 'Catatan & Opini Sosial', icon: '🏞️', cls: 'catatan' },
+        { key: 'Teknologi Web, AI & Umum', icon: '💻', cls: 'windows' },
       ]
 
       function getIconAndClass(categoryName) {
