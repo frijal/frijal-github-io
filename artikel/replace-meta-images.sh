@@ -18,6 +18,10 @@ find . -type f -name "*.html" | while read -r FILE; do
   s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
   s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
   s|<meta name="twitter:image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  
+  s|<meta name="twitter:image" id="twitter-image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta name="twitter:image" id="twitter-image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta name="twitter:image" id="twitter-image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta name="twitter:image" id="twitter-image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta name="twitter:image" id="twitter-image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta name="twitter:image" id="twitter-image" content="https://frijal.pages.dev/img/\1.webp">|g;
 
   s|<meta itemprop="image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta itemprop="image" content="https://frijal.pages.dev/img/\1.webp">|g;
   s|<meta itemprop="image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta itemprop="image" content="https://frijal.pages.dev/img/\1.webp">|g;
