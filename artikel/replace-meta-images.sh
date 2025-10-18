@@ -15,12 +15,18 @@ find . -type f -name "*.html" | while read -r FILE; do
   BEFORE_HASH=$(sha1sum "$FILE" | awk '{print $1}')
 
   perl -pi -e '
-  s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta name="twitter:image" content="https://frijal.pages.dev/artikel/\1.webp">|g;
-  s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/artikel/\1.webp">|g;
+  s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta name="twitter:image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+
   s|<meta itemprop="image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta itemprop="image" content="https://frijal.pages.dev/img/\1.webp">|g;
   s|<meta itemprop="image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta itemprop="image" content="https://frijal.pages.dev/img/\1.webp">|g;
-  s|<meta name="twitter:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta name="twitter:image" content="https://frijal.pages.dev/img/\1.webp">|g;
-  s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;  
+  s|<meta itemprop="image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta itemprop="image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  
+  s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;  
+  s|<meta property="og:image" content="https://frijal\.pages\.dev/artikel/(.*?)\.webp">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;
+  s|<meta property="og:image" content="https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|<meta property="og:image" content="https://frijal.pages.dev/img/\1.webp">|g;  
+
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
