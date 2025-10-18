@@ -1,0 +1,89 @@
+name: 🧹 Auto Clean Old Branches
+
+on:
+  schedule:
+    # Jalan setiap hari jam 03:00 pagi (WIB) = 20:00 UTC hari sebelumnya
+    - cron: '0 20 * * *'
+  workflow_dispatch: # Bisa dijalankan manual juga
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gh jq
+
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth setup-git
+
+      - name: Delete branches older than 3 days
+        id: cleanup
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔍 Mencari branch yang lebih tua dari 3 hari..."
+          NOW=$(date -u +%s)
+          THRESHOLD=$((NOW - 3*24*3600)) # 3 hari (dalam detik)
+          LOGFILE="cleanup_log.txt"
+
+          echo "🧹 Laporan Pembersihan Branch - $(date -u)" > $LOGFILE
+          echo "" >> $LOGFILE
+
+          # Ambil semua branch dan waktu update-nya
+          gh api repos/${{ github.repository }}/branches --paginate --jq '.[] | {name: .name, updated: .commit.commit.committer.date}' |
+          jq -c '. | select(.name != "main" and .name != "master" and .name != "dev")' > branches.json
+
+          DELETED=0
+          TOTAL=$(cat branches.json | wc -l)
+
+          while read -r line; do
+            NAME=$(echo "$line" | jq -r '.name')
+            UPDATED=$(echo "$line" | jq -r '.updated')
+            UPDATED_TS=$(date -d "$UPDATED" +%s)
+
+            if [ "$UPDATED_TS" -lt "$THRESHOLD" ]; then
+              echo "🗑️ Menghapus branch lama: $NAME (terakhir update $UPDATED)"
+              echo "- 🗑️ **$NAME** (terakhir update: $UPDATED UTC)" >> $LOGFILE
+              gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$NAME || true
+              DELETED=$((DELETED + 1))
+            fi
+          done < branches.json
+
+          if [ "$DELETED" -eq 0 ]; then
+            echo "✅ Tidak ada branch yang dihapus hari ini." >> $LOGFILE
+          else
+            echo "" >> $LOGFILE
+            echo "✨ Total $DELETED branch dihapus dari $TOTAL branch yang diperiksa." >> $LOGFILE
+          fi
+
+          echo "::set-output name=deleted::$DELETED"
+          echo "::set-output name=logfile::$LOGFILE"
+
+      - name: Update Maintenance Log issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LOGFILE="${{ steps.cleanup.outputs.logfile }}"
+          DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
+
+          # Cek apakah issue "Maintenance Log" sudah ada
+          ISSUE_NUMBER=$(gh issue list --limit 100 --state all --search "Maintenance Log in:title" --json number --jq '.[0].number')
+
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "🆕 Membuat issue baru 'Maintenance Log'..."
+            gh issue create --title "Maintenance Log" --body "📘 Log pembersihan otomatis dimulai pada $DATE."
+            ISSUE_NUMBER=$(gh issue list --limit 1 --state open --search "Maintenance Log in:title" --json number --jq '.[0].number')
+          fi
+
+          echo "📝 Menambahkan catatan hasil pembersihan ke issue #$ISSUE_NUMBER"
+          gh issue comment $ISSUE_NUMBER --body "$(cat $LOGFILE)"
