@@ -22,7 +22,7 @@ find . -type f -name "*.html" | while read -r FILE; do
   s|"https://frijal\.pages\.dev/assets/(.*?)\.png"|"https://frijal.pages.dev/img/\1.webp"|g;  
   s|"https://frijal\.pages\.dev/assets/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g; 
    
-  s|html-vs-header.webp|head-vs-header.webp|g;    
+  s|thumbnail.png|thumbnail.webp|g;    
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
