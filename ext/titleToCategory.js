@@ -1,5 +1,5 @@
 // titleToCategory.js
-const categories = [
+export const categories = [
   {
     "name": "📽️ Multimedia & Editing",
     "keywords": [
