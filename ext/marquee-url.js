@@ -159,77 +159,74 @@ function initFloatingSearch(allArticlesData) {
 }
 
 function initNavIcons(allArticlesData, currentFilename) {
-  const iconContainer = document.createElement('div')
-  iconContainer.className = 'ikon-kanan-bawah'
-  iconContainer.innerHTML = `
-    <a id="next-article" href="#" title="Berikutnya" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
-        ▶️ </a>
-    <a href="https://frijal.pages.dev/feed.html" title="Update harian" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
-        📡 </a>
-    <a href="https://frijal.pages.dev" title="Home" class="btn-emoji" style="--bg: linear-gradient(135deg, #388E3C, #66BB6A);">
-        🏠 </a>
-    <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
-        🗺️ </a>
-    <a id="prev-article" href="#" title="Sebelumnya" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
-        ◀️ </a>
-    `
-  document.body.appendChild(iconContainer)
-
-  let currentCategoryName = null
-  let articlesInCurrentCategory = []
-  let currentIndexInCategory = -1
-
-  for (const [category, articles] of Object.entries(allArticlesData)) {
-    const idx = articles.findIndex((a) => a[1] === currentFilename)
-    if (idx !== -1) {
-      currentCategoryName = category
-      articlesInCurrentCategory = articles
-      currentIndexInCategory = idx
-      break
+    // Helper function untuk membuat slug URL kategori
+    function generateCategoryUrl(name) {
+        const noEmoji = name.replace(/^[^\w\s]*/, '').trim();
+        return noEmoji.toLowerCase()
+            .replace(/ & /g, '-and-')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-');
     }
-  }
 
-  function generateCategoryUrl(name) {
-    const noEmoji = name.replace(/^[^\w\s]*/, '').trim()
-    const slug = noEmoji
-      .toLowerCase()
-      .replace(/ & /g, '-and-')
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-    return `${slug}.html`
-  }
+    let articlesInCategory = [];
+    let currentIndexInCategory = -1;
+    let currentCategoryName = null;
 
-  if (currentCategoryName) {
-    const categoryLink = document.createElement('a')
-    categoryLink.className = 'kategori-kiri-bawah'
-    categoryLink.textContent = currentCategoryName
-    const categoryUrl = generateCategoryUrl(currentCategoryName)
-    categoryLink.href = `/artikel/-/${categoryUrl}`
-    document.body.appendChild(categoryLink)
+    // 1. Cari kategori dan indeks artikel saat ini
+    for (const [category, articles] of Object.entries(allArticlesData)) {
+        // Urutkan artikel di dalam kategori berdasarkan tanggal terbaru
+        articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
+        const idx = articles.findIndex(a => a[1] === currentFilename);
+        if (idx !== -1) {
+            currentCategoryName = category;
+            articlesInCategory = articles;
+            currentIndexInCategory = idx;
+            break;
+        }
+    }
 
-    setTimeout(() => categoryLink.classList.add('visible'), 100)
-  }
+    // Jika artikel tidak ditemukan, jangan lakukan apa-apa
+    if (currentIndexInCategory === -1) return;
 
-  if (!articlesInCurrentCategory.length) {
-    document.getElementById('next-article').style.display = 'none'
-    document.getElementById('prev-article').style.display = 'none'
-    return
-  }
+    // 2. Tentukan artikel sebelumnya dan berikutnya (logika non-sirkular)
+    const prevArticle = currentIndexInCategory > 0 ? articlesInCategory[currentIndexInCategory - 1] : null;
+    const nextArticle = currentIndexInCategory < articlesInCategory.length - 1 ? articlesInCategory[currentIndexInCategory + 1] : null;
 
-  const total = articlesInCurrentCategory.length
-  const nextBtn = document.getElementById('next-article')
-  const prevBtn = document.getElementById('prev-article')
+    // 3. Buat satu kontainer navigasi terpadu
+    const navContainer = document.createElement('div');
+    navContainer.className = 'floating-nav'; // Satu kelas untuk semua
 
-  const nextIndex = (currentIndexInCategory + 1) % total
-  const prevIndex = (currentIndexInCategory - 1 + total) % total
-  const nextArticle = articlesInCurrentCategory[nextIndex]
-  const prevArticle = articlesInCurrentCategory[prevIndex]
+    // 4. Bangun HTML secara dinamis
+    // Tombol akan muncul hanya jika ada artikel sebelum/sesudahnya
+    navContainer.innerHTML = `
+        <div class="nav-left">
+            <a href="/artikel/-/${generateCategoryUrl(currentCategoryName)}" class="category-link" title="Kategori: ${currentCategoryName}">
+                ${currentCategoryName}
+            </a>
+        </div>
+        <div class="nav-right">
+            ${nextArticle ? `
+            <a href="/artikel/${nextArticle[1]}" title="Berikutnya: ${nextArticle[0]}" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
+                ▶️
+            </a>` : ''}
+            <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
+                ⛔
+            </a>
+            <a href="https://frijal.pages.dev" title="Home" class="btn-emoji" style="--bg: linear-gradient(135deg, #388E3C, #66BB6A);">
+                🏠
+            </a>
+            <a href="https://frijal.pages.dev/feed.html" title="Update harian" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
+                📡
+            </a>
+            ${prevArticle ? `
+            <a href="/artikel/${prevArticle[1]}" title="Sebelumnya: ${prevArticle[0]}" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
+                ◀️
+            </a>` : ''}
+        </div>
+    `;
 
-  nextBtn.href = `/artikel/${nextArticle[1]}`
-  prevBtn.href = `/artikel/${prevArticle[1]}`
-  nextBtn.title = `${nextArticle[0]} - ${currentCategoryName}`
-  prevBtn.title = `${prevArticle[0]} - ${currentCategoryName}`
+    document.body.appendChild(navContainer);
 }
 
 // -------------------------------------------------------------------
