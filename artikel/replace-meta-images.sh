@@ -19,8 +19,10 @@ find . -type f -name "*.html" | while read -r FILE; do
   s|"https://frijal\.pages\.dev/artikel/(.*?)\.webp"|"https://frijal.pages.dev/img/\1.webp"|g;
   s|"https://frijal\.pages\.dev/img/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g;
   s|"https://frijal\.pages\.dev/assets/og/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g; 
-  
-  s|noreferrer-cover.webp|noreferrer-tanpa-target.webp|g;    
+  s|"https://frijal\.pages\.dev/assets/(.*?)\.png"|"https://frijal.pages.dev/img/\1.webp"|g;  
+  s|"https://frijal\.pages\.dev/assets/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g; 
+   
+  s|blankon-rote-logo|zsync-blankon|g;    
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
