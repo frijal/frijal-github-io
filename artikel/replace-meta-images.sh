@@ -22,7 +22,7 @@ find . -type f -name "*.html" | while read -r FILE; do
   s|"https://frijal\.pages\.dev/assets/(.*?)\.png"|"https://frijal.pages.dev/img/\1.webp"|g;  
   s|"https://frijal\.pages\.dev/assets/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g; 
    
-  s|blankon-rote-logo|zsync-blankon|g;    
+  s|https://upload.wikimedia.org/wikipedia/commons/e/e8/Pecel_Hariadhi.JPG|https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqBhQtbv1A3W1wzkw3pOE15P8XKWMq_niShyphenhyphenwy687lsd-Jt0glqJLpRCKJVtClGC586Sli2ywjLVmQI03MHuuTfvB2LWSqondit9OD75fkj1A0WPscGDDKSM122IeEzOca5BhKFaPLz72Xi3RqKRtBl4kY4NnmqTOb1kcktCkA7euB9UbJbeavXDtXhm8/s1600/Pecel_Hariadhi.webp|g;    
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
