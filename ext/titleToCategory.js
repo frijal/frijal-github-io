@@ -1,5 +1,5 @@
 // titleToCategory.js
-const categories = [
+export const categories = [
   {
     name: "📽️ Multimedia & Editing",
     keywords: ["audio", "codec", "convert", "cut", "deoldify", "durasi", "ffmpeg", "film", "format", "foto", "gabung", "gambar", "ghostscript", "handbrake", "imagemagick", "kompres", "mewarnai", "mp3", "multimedia", "ogg", "pdf", "pdftk", "potong", "preset", "rekam", "resize", "scan", "split", "video", "vlc", "watermark"]
