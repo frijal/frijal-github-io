@@ -1,40 +1,33 @@
 // titleToCategory.js
-export const categories = [
+const categories = [
   {
-    "name": "📽️ Multimedia & Editing",
-    "keywords": [
-    "Video", "Gambar", "Audio", "Editor", "Konversi", "Watermark", "VLC", "ImageMagick", "FFmpeg", "PDFtk", "OpenOffice", "LibreOffice", "Pictory.ai", "Lumen5", "Canva Magic Studio", "Desain Grafis", "Video Marketing", "Kolase Gambar", "Potong Gambar", "Gabung Gambar", "Ekstrak Gambar", "Format Gambar", "Preset Lightroom", "Perbaikan Foto", "Rotasi Video", "Menyatukan Film", "Audio Sistem", "Rekam Layar"      
+    name: "🐧 Linux, Open Source & Multimedia",
+    keywords: [
+      "apt", "arch", "audio", "aur", "blankon", "bootable", "bsd", "cachyos", "chroot", "codec", "compiz", "conky", "convert", "cooling", "debian", "desktop", "distro", "dpkg", "ffmpeg", "fedora", "film", "flatpak", "foss", "garuda", "ghostscript", "gimp", "gnome", "grub", "handbrake", "imagemagick", "iptv", "kde", "kernel", "komunitas", "kompres", "kpli", "libreoffice", "linux", "lts", "mageia", "mirror", "multimedia", "mx-linux", "nixos", "ogg", "open source", "openoffice", "opensuse", "oss", "pacman", "paru", "pdf", "pdftk", "perl", "potong", "preset", "rekam", "repo", "rescuezilla", "resize", "rsync", "scan", "sebarubuntu", "slackware", "solaris", "split", "tar", "ubuntu", "usb", "ventoy", "video", "vlc", "watermark", "webp", "wine", "xfce", "yum", "zorin", "zsync"
     ]
   },
   {
-    "name": "📚 Islam & Kehidupan",
-    "keywords": [
-    "Islam", "Sejarah Islam", "Sahabat Nabi", "Khalifah", "Perang Uhud", "Zaid bin Tsabit", "Umar bin Khattab", "Utsman bin Affan", "Uqbah bin Nāfi‘ al-Fihrī", "Qordoba", "Andalusia", "Ilmuwan Muslim", "Al-Khwārizmī", "Al-Qur'an", "Hadits", "Hijrah", "Jihad", "Maulid Nabi", "Pro Kontra Maulid", "Tabayun", "Hoaks", "Hukum Hari Kelahiran", "Bid'ah", "Tasyabbuh"            
-    ]
-  },
-   {
-    "name": "🐧 Linux & Open Source",
-    "keywords": [
-    "inux", "GNU/Linux", "Ubuntu", "Debian", "Fedora", "Arch Linux", "Manjaro", "Xfce", "Zorin OS", "Desktop Environment (DE)", "Terminal", "Command Line Interface (CLI)", "Shell Script", "Kernel", "Driver", "Dual-boot", "Virtualisasi", "Wine", "Ventoy", "rsync", "dpkg-repack", "pip", "chroot", "ImageMagick", "FFmpeg", "PDFtk", "LibreOffice", "OpenOffice", "Repository", "AUR", "Paket", "Instalasi", "Optimasi", "Troubleshooting", "Partisi", "NTFS", "Caja", "WiFi Realtek", "XPenguins", "Solaris", "Open Source Software (OSS)", "GNOME", "KDE", "Wayland", "X11", "Bootable USB", "ISO", "Daily Build", "ZSync", "LTS (Long Term Support)", "Rolling Release", "Software Center", "Update", "Keamanan", "Stabilitas", "Komunitas Linux", "Pengguna Awam", "Migrasi", "Interoperabilitas"      
+    name: "📚 Sejarah & Religi",
+    keywords: [
+      "adab", "akidah", "andalusia", "aqidah", "baghdad", "bahtera", "barqa", "bilal", "doa", "fatih", "fiqh", "fitnah", "ghibah", "hadis", "haki", "halal", "haram", "hijab", "hijrah", "hijriyah", "hittin", "hukum", "ibnu batutah", "iman", "imam", "islam", "istighfar", "janji", "jumat", "khwarizmi", "madinah", "masjid", "masyitoh", "maulid", "mesir", "muhammadiyah", "mukjizat", "murad", "musa", "muslim", "mushaf", "nabi", "nuh", "pahlawan", "penaklukan", "perjanjian", "pertempuran", "persia", "piagam", "quran", "qunut", "ramadhan", "risalah", "sabar", "saf", "sahabat", "salam", "salman", "sejarah", "seljuk", "shalat", "shalahuddin", "syariat", "sombong", "sunnah", "surga", "tabut", "tabayun", "tauhid", "uhud", "umar", "utsman", "utsmaniyah", "yarmuk", "yerusalem", "zaid"
     ]
   },
   {
-    "name": "🏞️ Budaya, Kuliner & Lifestyle",
-    "keywords": [
-    "Kehidupan", "Kuliner", "Makanan", "Gaya Hidup", "Budaya", "Komunitas", "Blogger", "Open Source", "Pendidikan", "Ujian Nasional", "PPDB", "SKTM", "Hoaks", "Tabayun", "Etika Digital", "Keadilan Akses", "Keuangan", "Uang", "Duit", "Internet", "WiFi Gratis", "Perjalanan", "Lokal", "Balikpapan", "Bontang", "Samarinda", "WiGO", "JNE", "Respiro", "Unboxing", "Kesehatan", "Disiplin Diri", "Produktivitas", "Stres", "Rencana", "Refleksi Sosial", "Geografi", "Sungai"
-      
+    name: "🍜 Kuliner, Gaya Hidup & Kesehatan",
+    keywords: [
+      "angkringan", "bahagia", "bali", "bandara", "bekapai", "berkendara", "boker", "camilan", "gaya hidup", "gerimis", "hotel", "jagung", "jogja", "kesehatan", "kopi", "kerupuk", "kuliner", "kurma", "laundry", "metode", "minuman", "motor", "niat", "ngopi", "obat", "ojol", "pecel", "pencernaan", "pijat", "psikotes", "respiro", "sakit", "sembelit", "sikat", "susu", "tidur", "touring", "unboxing", "wanita", "wisata"
     ]
   },
   {
-    "name": "📰 Catatan & Sosial",
-    "keywords": [      
+    name: "📰 Catatan & Opini Sosial",
+    keywords: [
+      "aci", "adaro", "artikel", "bisnis", "bukalapak", "catatan", "cpns", "cuti", "duit", "ekspedisi", "fenomena", "foss kaltim", "golput", "grobogan", "harian", "ibu", "indonesia", "iwan fals", "jatos", "jne", "kasih", "kejujuran", "kerja", "kota", "kopdar", "kreativitas", "nostalgia", "opini", "organisasi", "peradaban", "perencanaan", "perusahaan", "perjalanan", "poac", "ppdb", "produktifitas", "pt", "rencana", "renungan", "sktm", "sosial", "uang", "ujian nasional"
     ]
   },
   {
-    "name": "💻 Windows & Teknologi Umum",
-    "keywords": [
-    "Windows", "Windows 11", "Optimasi Sistem", "CPU Lawas", "Startup Program", "Storage Sense", "Winget", "Instalasi Massal", "PowerShell", "Microsoft Store", "Chocolatey", "Refresh Desktop", "Perbandingan OS", "Migrasi", "Kompatibilitas", "Update Windows", "Misteri Update", "Wizard Installer"      
-    ]
+    name: "💻 Teknologi Web, AI & Umum",
+    keywords: [
+      "ai", "amd", "baterai", "bootloader", "branch", "browser", "build", "canva", "chatgpt", "claude", "cleanup", "cli", "codespaces", "cpu", "curl", "eula", "excel", "gemini", "git", "github", "gorilla glass", "grammarly", "hdd", "head", "header", "html", "jasper", "jaringan", "javascript", "js", "keyring", "laptop", "learning", "lisensi", "meta", "mic", "notion", "npm", "optimasi", "osborne1", "phishing", "piracy", "push", "quickbooks", "refresh", "robots.txt", "samba", "shutdown", "software", "spreadsheet", "ssh", "ssd", "terminal", "tidio", "tools", "virtualbox", "web", "wifi", "windows", "winget", "workflow", "yml", "yaml"]
   }
 ];
 
