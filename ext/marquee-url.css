@@ -25,7 +25,7 @@
   display: inline-block;
   animation: marquee-scroll 1600s linear infinite;
   pointer-events: auto;
-  padding: 8px 0; /* Padding dipindahkan ke sini agar ada sedikit ruang vertikal */
+  padding: 12px 0; /* Padding dipindahkan ke sini agar ada sedikit ruang vertikal */
 }
 
 #related-marquee-container:hover .marquee-content {
