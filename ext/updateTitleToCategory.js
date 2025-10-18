@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Impor fungsi dan data kategori yang ada dari file target
+// Pastikan titleToCategory.js sudah mengekspor 'categories'
 import { titleToCategory, categories } from './titleToCategory.js';
 
 // --- Konfigurasi ---
@@ -22,13 +23,11 @@ const stopWords = new Set([
 ]);
 
 async function main() {
-    console.log("🚀 Memulai analisis untuk memperbarui keywords...");
+    console.log("🚀 Memulai analisis untuk memperbarui keywords dari JUDUL (arr[0])...");
 
-    // 1. Kumpulkan semua keyword yang sudah ada
     const existingKeywords = new Set(categories.flatMap(cat => cat.keywords));
     console.log(`🔍 Ditemukan ${existingKeywords.size} keyword yang sudah ada.`);
 
-    // 2. Baca dan parse file artikel.json
     let articleData;
     try {
         const fileContent = await fs.readFile(ARTIKEL_JSON_PATH, 'utf8');
@@ -38,20 +37,16 @@ async function main() {
         process.exit(1);
     }
 
-    // 3. Analisis deskripsi dan kelompokkan keyword baru berdasarkan kategori
     const newKeywordsByCategory = {};
     const allArticles = Object.values(articleData).flat();
 
     for (const article of allArticles) {
-        const title = article[0];
-        const description = article[4];
+        const title = article[0]; // --- DIUBAH: Sekarang menganalisis judul (arr[0]) ---
+        
+        if (!title || typeof title !== 'string') continue;
 
-        if (!description || typeof description !== 'string') continue;
-
-        // Tentukan kategori artikel ini menggunakan fungsi yang ada
         const categoryName = titleToCategory(title);
-
-        const words = description.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
+        const words = title.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
 
         for (const word of words) {
             if (
@@ -60,7 +55,6 @@ async function main() {
                 !existingKeywords.has(word) &&
                 !/^\d+$/.test(word)
             ) {
-                // Inisialisasi Set jika belum ada
                 if (!newKeywordsByCategory[categoryName]) {
                     newKeywordsByCategory[categoryName] = new Set();
                 }
@@ -69,14 +63,13 @@ async function main() {
         }
     }
 
-    // 4. Tambahkan keyword baru ke dalam struktur data 'categories'
     let keywordsAddedCount = 0;
     for (const category of categories) {
         const newKeywords = newKeywordsByCategory[category.name];
         if (newKeywords && newKeywords.size > 0) {
             const originalSize = category.keywords.length;
             const updatedKeywords = new Set([...category.keywords, ...newKeywords]);
-            category.keywords = Array.from(updatedKeywords).sort(); // Tambahkan, unikkan, dan urutkan
+            category.keywords = Array.from(updatedKeywords).sort();
             keywordsAddedCount += category.keywords.length - originalSize;
         }
     }
@@ -88,11 +81,11 @@ async function main() {
 
     console.log(`\n🔥 Ditemukan dan akan ditambahkan ${keywordsAddedCount} keyword baru.`);
 
-    // 5. Buat ulang konten file titleToCategory.js secara dinamis
+    // Buat ulang konten file titleToCategory.js secara dinamis
+    // PENTING: Struktur ini mengharuskan titleToCategory.js juga mengekspor 'categories'
     const newFileContent = `// titleToCategory.js
-const categories = ${JSON.stringify(categories, null, 2)};
+export const categories = ${JSON.stringify(categories, null, 2)};
 
-// Langsung ekspor fungsi dengan kata kunci 'export'
 export function titleToCategory(title) {
   const t = title.toLowerCase();
   const found = categories.find(cat =>
@@ -102,7 +95,6 @@ export function titleToCategory(title) {
 }
 `;
 
-    // 6. Tulis ulang (overwrite) file titleToCategory.js
     try {
         await fs.writeFile(CATEGORY_FILE_PATH, newFileContent, 'utf8');
         console.log(`\n✨ File ${CATEGORY_FILE_PATH} berhasil diperbarui dengan ${keywordsAddedCount} keyword baru!`);
