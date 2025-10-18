@@ -2,16 +2,41 @@ const visitedLinks = JSON.parse(localStorage.getItem('visitedLinks') || '[]')
 let grouped = {}
 
 const categoryColors = [
-  'linear-gradient(90deg, #d32f2f, #f44336)', // Red
-  'linear-gradient(90deg, #1976d2, #2196f3)', // Blue
-  'linear-gradient(90deg, #00796b, #009688)', // Teal
-  'linear-gradient(90deg, #f57c00, #ff9800)', // Orange
-  'linear-gradient(90deg, #388e3c, #4caf50)', // Green
-  'linear-gradient(90deg, #c2185b, #e91e63)', // Pink
-  'linear-gradient(90deg, #0288d1, #03a9f4)', // Light Blue
-  'linear-gradient(90deg, #fbc02d, #ffeb3b)', // Yellow
-  'linear-gradient(90deg, #cddc39, #8bc34a)', // Lime
-  'linear-gradient(90deg, #607d8b, #9e9e9e)', // Blue Grey
+'linear-gradient(90deg,#004d40,#26a69a)',
+'linear-gradient(90deg,#00796b,#009688)',    
+'linear-gradient(90deg,#009688,#4db6ac)',   
+'linear-gradient(90deg,#00acc1,#26c6da)',   
+'linear-gradient(90deg,#01579b,#00897b)',
+'linear-gradient(90deg,#0288d1,#03a9f4)',   
+'linear-gradient(90deg,#0d47a1,#00bcd4)',
+'linear-gradient(90deg,#0d47a1,#1976d2)',   
+'linear-gradient(90deg,#1565c0,#64b5f6)',    
+'linear-gradient(90deg,#1976d2,#2196f3)',    
+'linear-gradient(90deg,#1a237e,#3949ab)',
+'linear-gradient(90deg,#1b5e20,#4caf50)',
+'linear-gradient(90deg,#212121,#616161)',
+'linear-gradient(90deg,#2196f3,#00bcd4)',   
+'linear-gradient(90deg,#2e7d32,#8bc34a)',
+'linear-gradient(90deg,#33691e,#8bc34a)',   
+'linear-gradient(90deg,#37474f,#b0bec5)',   
+'linear-gradient(90deg,#388e3c,#4caf50)',   
+'linear-gradient(90deg,#3e2723,#a1887f)',   
+'linear-gradient(90deg,#3e2723,#ffc107)',
+'linear-gradient(90deg,#455a64,#212121)',   
+'linear-gradient(90deg,#4caf50,#2e7d32)',   
+'linear-gradient(90deg,#607d8b,#9e9e9e)',   
+'linear-gradient(90deg,#6d4c41,#ffb300)',   
+'linear-gradient(90deg,#880e4f,#ec407a)',
+'linear-gradient(90deg,#b71c1c,#ff7043)',
+'linear-gradient(90deg,#b71c1c,#ff7043)',   
+'linear-gradient(90deg,#c2185b,#e91e63)',   
+'linear-gradient(90deg,#cddc39,#8bc34a)',   
+'linear-gradient(90deg,#d32f2f,#f44336)',   
+'linear-gradient(90deg,#d84315,#ffca28)',   
+'linear-gradient(90deg,#e65100,#ffab00)',
+'linear-gradient(90deg,#f57c00,#ff9800)',  
+'linear-gradient(90deg,#fbc02d,#ffeb3b)',   
+'linear-gradient(90deg,#ff9800,#f44336)',
 ]
 
 function shuffle(array) {
