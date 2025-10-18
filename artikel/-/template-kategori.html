@@ -95,12 +95,24 @@
         margin: 0 auto;
         padding: 2rem 1.5rem;
       }
+     /* === PERUBAHAN DI SINI === */
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 1.5rem 0;
+        /* Tanpa background, tapi dengan backdrop-filter untuk keterbacaan */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px); /* Untuk Safari */
+        margin-bottom: 1rem; /* Jarak antara header dan grid */
+      }
       h1 {
         text-align: center;
         color: var(--accent-color);
-        margin-bottom: 2.5rem;
         font-size: 2.5rem;
+        margin: 0; /* Margin dipindahkan ke .sticky-header */
       }
+      /* === AKHIR PERUBAHAN === */
       #article-grid {
         display: grid;
         gap: 1.5rem;
@@ -191,7 +203,7 @@
         placeholder="cari artikel..."
         autocomplete="off"
       />
-      <span id="floatingSearchClear" class="clear-button">&times;</span>
+      <span id="floatingSearchClear" class="clear-button">❌</span>
       <div id="floatingSearchResults" class="floating-results-container"></div>
     </div>
 
