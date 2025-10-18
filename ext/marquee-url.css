@@ -10,6 +10,7 @@
   width: 100%;
   z-index: 1000;
   overflow: hidden;
+  pointer-events: none; /* Biarkan klik menembus ke elemen di bawahnya */
 }
 
 #related-marquee-container {
@@ -21,6 +22,7 @@
 #related-marquee-container .marquee-content {
   display: inline-block;
   animation: marquee-scroll 15000s linear infinite;
+  pointer-events: auto; /* Aktifkan kembali pointer untuk link */
 }
 
 #related-marquee-container:hover .marquee-content {
@@ -46,12 +48,8 @@
 }
 
 @keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 /* --- (2) GAYA UNTUK KOLOM PENCARIAN MELAYANG --- */
@@ -151,54 +149,30 @@
   color: #333;
 }
 
-/* Kontainer untuk tombol ikon di sisi kanan */
-.nav-right {
+
+/* --- (3) GAYA UNTUK IKON NAVIGASI DI KANAN BAWAH --- */
+.ikon-kanan-bawah {
     position: fixed;
     bottom: 5%;
     right: 15px;
-    transform: translateY(-50%);
-    z-index: 1000;
+    z-index: 998;
     display: flex;
-    flex-direction: column; /* Menyusun item secara vertikal */
-    gap: 16px;
-    pointer-events: auto;
+    flex-direction: column; /* Susun vertikal */
+    gap: 12px;
 }
 
-/* Tombol emoji individual (tanpa background) */
-.btn-emoji {
-    font-size: 1rem; /* Diperbarui sesuai permintaan */
-    transition: transform 0.2s ease;
-    padding: 0;
-    width: auto;
-    height: auto;
-}
-
-/* Link kategori di pojok kiri bawah */
-.nav-left {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1000;
-    pointer-events: auto;
-}
-
-.category-link {
-    background: rgba(30, 30, 30, 0.7);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
+.ikon-kanan-bawah .btn-emoji {
+    font-size: 2rem;
     text-decoration: none;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: background 0.2s;
+    transition: transform 0.2s ease;
 }
 
-.btn-emoji:hover {
+.ikon-kanan-bawah .btn-emoji:hover {
     transform: scale(1.2);
 }
 
-/* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH --- */
+
+/* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH (DIPERTAHANKAN) --- */
 a.kategori-kiri-bawah {
   position: fixed;
   bottom: 5%;
@@ -209,7 +183,7 @@ a.kategori-kiri-bawah {
   font-weight: 600;
   z-index: 998;
   text-decoration: none;
-  opacity: 30;
+  opacity: 0; /* Mulai dari tidak terlihat */
   transform: translateY(10px);
   transition:
     opacity 0.5s ease,
@@ -224,8 +198,7 @@ a.kategori-kiri-bawah.visible {
   transform: translateY(0);
 }
 
-/* --- (5) PENYESUAIAN TEMA & RESPONSIVITAS --- */
-
+/* --- (5) PENYESUAIAN TEMA (DIPERTAHANKAN) --- */
 /* Aturan default (Mode Gelap) */
 a.kategori-kiri-bawah {
   background-color: rgba(0, 0, 0, 0.7);
@@ -239,11 +212,11 @@ a.kategori-kiri-bawah:hover {
 /* Aturan khusus saat Mode Terang aktif */
 @media (prefers-color-scheme: light) {
   a.kategori-kiri-bawah {
-    background-color: #e9ecef; /* Latar belakang terang */
-    color: #212121; /* Warna teks gelap */
+    background-color: #e9ecef;
+    color: #212121;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   a.kategori-kiri-bawah:hover {
-    background-color: #dee2e6; /* Efek hover lebih gelap */
+    background-color: #dee2e6;
   }
 }

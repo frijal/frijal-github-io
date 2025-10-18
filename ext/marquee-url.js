@@ -175,7 +175,6 @@ function initNavIcons(allArticlesData, currentFilename) {
 
     // 1. Cari kategori dan indeks artikel saat ini
     for (const [category, articles] of Object.entries(allArticlesData)) {
-        // Urutkan artikel di dalam kategori berdasarkan tanggal terbaru
         articles.sort((a, b) => new Date(b[3]) - new Date(a[3]));
         const idx = articles.findIndex(a => a[1] === currentFilename);
         if (idx !== -1) {
@@ -185,53 +184,57 @@ function initNavIcons(allArticlesData, currentFilename) {
             break;
         }
     }
-
-    // Jika artikel tidak ditemukan, jangan lakukan apa-apa
+    
+    // Keluar jika artikel tidak ditemukan
     if (currentIndexInCategory === -1) return;
 
-    // 2. Tentukan artikel sebelumnya dan berikutnya (logika non-sirkular)
-    const prevArticle = currentIndexInCategory > 0 ? articlesInCategory[currentIndexInCategory - 1] : null;
-    const nextArticle = currentIndexInCategory < articlesInCategory.length - 1 ? articlesInCategory[currentIndexInCategory + 1] : null;
+    // 2. Perbarui link kategori di kiri bawah
+    const categoryLink = document.getElementById('category-link');
+    if (categoryLink && currentCategoryName) {
+        categoryLink.textContent = currentCategoryName;
+        categoryLink.href = `/artikel/-/${generateCategoryUrl(currentCategoryName)}`;
+        categoryLink.title = `Kategori: ${currentCategoryName}`;
+        setTimeout(() => categoryLink.classList.add('visible'), 100);
+    }
+    
+    // Ambil elemen tombol dari HTML
+    const prevBtn = document.getElementById('prev-article');
+    const nextBtn = document.getElementById('next-article');
+    const totalArticles = articlesInCategory.length;
 
-    // 3. Buat satu kontainer navigasi terpadu
-    const navContainer = document.createElement('div');
-    navContainer.className = 'floating-nav'; // Satu kelas untuk semua
+    // 3. Penanganan kasus jika hanya ada satu artikel (atau tidak ada)
+    if (totalArticles <= 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        return; // Selesai, tidak perlu proses lebih lanjut
+    }
 
-    // 4. Bangun HTML secara dinamis
-    // Tombol akan muncul hanya jika ada artikel sebelum/sesudahnya
-    navContainer.innerHTML = `
-        <div class="nav-left">
-            <a href="/artikel/-/${generateCategoryUrl(currentCategoryName)}" class="category-link" title="Kategori: ${currentCategoryName}">
-                ${currentCategoryName}
-            </a>
-        </div>
-        <div class="nav-right">
-            ${nextArticle ? `
-            <a href="/artikel/${nextArticle[1]}" title="Berikutnya: ${nextArticle[0]}" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
-                ▶️
-            </a>` : ''}
-            <a href="https://frijal.pages.dev/sitemap.html" title="Daftar Isi" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
-                ⛔
-            </a>
-            <a href="https://frijal.pages.dev" title="Home" class="btn-emoji" style="--bg: linear-gradient(135deg, #388E3C, #66BB6A);">
-                🏠
-            </a>
-            <a href="https://frijal.pages.dev/feed.html" title="Update harian" class="btn-emoji" style="--bg: linear-gradient(135deg, #FF6F00, #FFA726);">
-                📡
-            </a>
-            ${prevArticle ? `
-            <a href="/artikel/${prevArticle[1]}" title="Sebelumnya: ${prevArticle[0]}" class="btn-emoji" style="--bg: linear-gradient(135deg, #1976D2, #64B5F6);">
-                ◀️
-            </a>` : ''}
-        </div>
-    `;
+    // --- DIUBAH: Logika untuk infinite loop ---
+    // 4. Hitung indeks berikutnya dan sebelumnya menggunakan modulo
+    const nextIndex = (currentIndexInCategory + 1) % totalArticles;
+    const prevIndex = (currentIndexInCategory - 1 + totalArticles) % totalArticles;
+    
+    const nextArticle = articlesInCategory[nextIndex];
+    const prevArticle = articlesInCategory[prevIndex];
 
-    document.body.appendChild(navContainer);
+    // 5. Update link dan title untuk tombol navigasi
+    if (prevBtn && prevArticle) {
+        prevBtn.href = `/artikel/${prevArticle[1]}`;
+        prevBtn.title = `Sebelumnya: ${prevArticle[0]}`;
+        prevBtn.style.display = 'flex'; // Pastikan tombol terlihat
+    }
+
+    if (nextBtn && nextArticle) {
+        nextBtn.href = `/artikel/${nextArticle[1]}`;
+        nextBtn.title = `Berikutnya: ${nextArticle[0]}`;
+        nextBtn.style.display = 'flex'; // Pastikan tombol terlihat
+    }
 }
 
 // -------------------------------------------------------------------
 // FUNGSI UTAMA & PEMICU (MAIN & TRIGGER)
 // -------------------------------------------------------------------
+
 async function initializeApp() {
   try {
     const response = await fetch('/artikel.json')
