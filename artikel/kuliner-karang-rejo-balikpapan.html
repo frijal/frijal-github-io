@@ -18,59 +18,57 @@
   <meta name="twitter:description" content="Jelajahi deretan warung makan malam di sepanjang Jalan Dr. Soetomo Balikpapan. Cocok untuk pecinta kuliner malam!">
   <meta name="twitter:image" content="https://frijal.pages.dev/img/kuliner-karang-rejo-balikpapan.webp">
 
-
   <style>
-    :root { color-scheme: dark; }
+    :root { color-scheme: light; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0d0d0d;
-      color: #e5e5e5;
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      color: #222;
       margin: 0;
       padding: 0;
-      line-height: 1.7;
+      line-height: 1.8;
     }
     header {
       text-align: center;
-      background: linear-gradient(135deg,#141414,#222);
+      background: linear-gradient(90deg,#2196f3,#00bcd4);
       padding: 2rem 1rem;
-      border-bottom: 2px solid #333;
+      border-bottom: 4px solid #1976d2;
     }
     header h1 {
-      font-size: 2rem;
-      color: #ffb347;
+      font-size: 2.2rem;
+      color: #fff;
       margin: 0;
     }
     header p {
-      color: #aaa;
-      font-style: italic;
+      color: #e0f7fa;
       margin-top: .5rem;
+      font-style: italic;
     }
     section {
-      max-width: 850px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
     section h2 {
-      color: #ffd479;
-      border-left: 4px solid #ffb347;
-      padding-left: .5rem;
+      color: #1976d2;
+      border-left: 5px solid #00bcd4;
+      padding-left: .6rem;
       margin-bottom: .8rem;
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1rem;
     }
     .gallery img {
       width: 100%;
-      height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: transform .3s ease, box-shadow .3s ease;
     }
     .gallery img:hover {
       transform: scale(1.03);
-      box-shadow: 0 0 12px rgba(255,180,80,0.5);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
     .lightbox {
       display: none;
@@ -78,7 +76,7 @@
       z-index: 1000;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
     }
@@ -94,7 +92,6 @@
       font-size: 2rem;
       color: #fff;
       cursor: pointer;
-      user-select: none;
       background: rgba(0,0,0,0.4);
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
@@ -104,19 +101,18 @@
     .nav-next { right: 5%; }
     .share {
       text-align: center;
-      margin-top: 2rem;
+      margin: 2rem 0;
     }
     .share a {
       display: inline-block;
       margin: 0 10px;
-      filter: grayscale(100%) brightness(0.8);
+      filter: grayscale(100%) brightness(0.9);
       transition: filter .3s;
     }
     .share a:hover { filter: none; }
     .share img {
       width: 32px;
       height: 32px;
-      vertical-align: middle;
     }
     p { text-align: justify; }
   </style>
@@ -149,7 +145,7 @@
     <a href="https://twitter.com/intent/tweet?url=https://frijal.pages.dev/artikel/kuliner-karang-rejo-balikpapan.html&text=Street%20Food%20Night%20di%20Balikpapan" target="_blank" rel="noopener">
       <img loading="lazy" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter">
     </a>
-    <a href="https://api.whatsapp.com/send?text=Street%20Food%20Night%20Balikpapan%20https://frijal.pages.dev/artikel/kuliner-karang-rejo-balikpapan.html" target="_blank" rel="noopener">
+        <a href="https://api.whatsapp.com/send?text=Street%20Food%20Night%20Balikpapan%20https://frijal.pages.dev/artikel/kuliner-karang-rejo-balikpapan.html" target="_blank" rel="noopener">
       <img loading="lazy" src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
     </a>
     <a href="https://t.me/share/url?url=https://frijal.pages.dev/artikel/kuliner-karang-rejo-balikpapan.html" target="_blank" rel="noopener">
@@ -196,7 +192,9 @@
       }
     });
   </script>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7712823fe6754f0daf640ab98e1d8967"}'></script>
+
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" 
+          data-cf-beacon='{"token": "7712823fe6754f0daf640ab98e1d8967"}'></script>
 </body>
 </html>
 
