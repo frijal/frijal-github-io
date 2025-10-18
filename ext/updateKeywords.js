@@ -1,110 +1,111 @@
-// updateKeywords.js
+// ext/updateTitleToCategory.js
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import OpenAI from "openai";
 
-// --- Konfigurasi path ---
+// Impor fungsi dan data kategori yang ada dari file target
+import { titleToCategory, categories } from "./titleToCategory.js";
+
+// --- Konfigurasi Path ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const ARTIKEL_JSON_PATH = path.join(__dirname, "artikel.json");
-const CATEGORY_FILE_PATH = path.join(__dirname, "ext", "titleToCategory.js");
+const ARTIKEL_JSON_PATH = path.join(__dirname, "..", "artikel.json");
+const CATEGORY_FILE_PATH = path.join(__dirname, "titleToCategory.js");
 
-// --- Setup Azure OpenAI ---
-// Pastikan Secrets di GitHub sudah diisi:
-// AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, AZURE_OPENAI_DEPLOYMENT
-const client = new OpenAI({
-  apiKey: process.env.AZURE_OPENAI_KEY,
-  baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT}`,
-  defaultQuery: { "api-version": "2024-08-01-preview" },
-  defaultHeaders: { "api-key": process.env.AZURE_OPENAI_KEY },
-});
+// --- Setup OpenAI ---
+// Ambil API Key dari GitHub Secrets
+const API_KEY = process.env.OPENAI_API_KEY;
+if (!API_KEY) {
+  console.error("❌ Variabel OPENAI_API_KEY tidak ditemukan. Pastikan sudah diatur di GitHub Secrets.");
+  process.exit(1);
+}
+const client = new OpenAI({ apiKey: API_KEY });
 
-// --- Fungsi untuk generate keyword ---
+// --- Fungsi untuk mendapatkan keyword dari AI ---
 async function getKeywordsFromAI(text) {
-  const prompt = `Analisis teks berikut dan berikan 3-5 kata kunci (keywords) paling relevan.
-Jawab HANYA dengan kata kunci dipisahkan koma, bahasa Indonesia, huruf kecil semua.
+  const prompt = `Analisis teks berikut dan berikan 3-5 kata kunci (keywords) yang paling relevan.
+Jawab HANYA dengan kata kunci yang dipisahkan koma, dalam bahasa Indonesia, huruf kecil semua.
 Contoh: 'teknologi, ai, produktivitas'.
 Teks: "${text}"`;
 
   try {
     const response = await client.chat.completions.create({
+      model: "gpt-4o-mini", // bisa diganti dengan model lain sesuai kebutuhan
       messages: [{ role: "user", content: prompt }],
-      model: process.env.AZURE_OPENAI_DEPLOYMENT,
       temperature: 0.3,
       max_tokens: 100,
     });
 
     const keywordsText = response.choices[0].message.content;
     return keywordsText.split(",").map(k => k.trim()).filter(Boolean);
-  } catch (err) {
-    console.warn(`⚠️ Gagal analisis "${text}": ${err.message}`);
+  } catch (error) {
+    console.warn(`⚠️ Gagal menganalisis teks dengan AI: "${text}". Error: ${error.message}`);
     return [];
   }
 }
 
 // --- Main ---
 async function main() {
-  console.log("🚀 Mulai generate keyword dengan Azure OpenAI...");
+  console.log("🚀 Memulai analisis untuk memperbarui keywords menggunakan OpenAI...");
 
-  let artikel;
+  const existingKeywords = new Set(categories.flatMap(cat => cat.keywords));
+  console.log(`🔍 Ditemukan ${existingKeywords.size} keyword yang sudah ada.`);
+
+  let articleData;
   try {
-    const raw = await fs.readFile(ARTIKEL_JSON_PATH, "utf8");
-    artikel = JSON.parse(raw);
-  } catch (err) {
-    console.error(`❌ Gagal baca ${ARTIKEL_JSON_PATH}: ${err.message}`);
+    const fileContent = await fs.readFile(ARTIKEL_JSON_PATH, "utf8");
+    articleData = JSON.parse(fileContent);
+  } catch (error) {
+    console.error(`❌ Gagal membaca ${ARTIKEL_JSON_PATH}:`, error.message);
     process.exit(1);
   }
 
-  // Baca file kategori lama
-  let categories = [];
-  try {
-    const oldFile = await fs.readFile(CATEGORY_FILE_PATH, "utf8");
-    const match = oldFile.match(/export const categories = (.*?);\n/s);
-    if (match) {
-      categories = JSON.parse(match[1]);
-    }
-  } catch {
-    console.warn("⚠️ File kategori lama tidak ditemukan, mulai dari kosong.");
-  }
+  const newKeywordsByCategory = {};
+  const allArticles = Object.values(articleData).flat();
 
-  const existingKeywords = new Set(categories.flatMap(cat => cat.keywords));
-  const allArticles = Object.values(artikel).flat();
+  for (const article of allArticles) {
+    const title = article[0];
+    if (!title || typeof title !== "string") continue;
 
-  for (const art of allArticles) {
-    const title = art[0];
-    if (!title) continue;
+    // Tentukan kategori artikel ini menggunakan fungsi yang ada
+    const categoryName = titleToCategory(title);
 
-    console.log(`🤖 Analisis judul: "${title}"`);
-    const keywords = await getKeywordsFromAI(title);
+    // --- MENGGUNAKAN FUNGSI AI ---
+    console.log(`🤖 Menganalisis judul: "${title}"`);
+    const aiKeywords = await getKeywordsFromAI(title);
 
-    // Tentukan kategori berdasarkan titleToCategory lama
-    const t = title.toLowerCase();
-    let category = categories.find(cat =>
-      cat.keywords.some(k => t.includes(k))
-    );
-    if (!category) {
-      category = { name: "🗂️ Lainnya", keywords: [] };
-      categories.push(category);
-    }
-
-    for (const kw of keywords) {
-      if (kw.length > 2 && !existingKeywords.has(kw)) {
-        category.keywords.push(kw);
-        existingKeywords.add(kw);
+    for (const word of aiKeywords) {
+      if (word.length > 2 && !existingKeywords.has(word)) {
+        if (!newKeywordsByCategory[categoryName]) {
+          newKeywordsByCategory[categoryName] = new Set();
+        }
+        newKeywordsByCategory[categoryName].add(word);
       }
     }
-
-    await new Promise(r => setTimeout(r, 1000));
+    // Beri jeda 1 detik antar request API untuk menghindari rate limit
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  // Sort keywords tiap kategori
-  for (const cat of categories) {
-    cat.keywords = Array.from(new Set(cat.keywords)).sort();
+  let keywordsAddedCount = 0;
+  for (const category of categories) {
+    const newKeywords = newKeywordsByCategory[category.name];
+    if (newKeywords && newKeywords.size > 0) {
+      const originalSize = category.keywords.length;
+      const updatedKeywords = new Set([...category.keywords, ...newKeywords]);
+      category.keywords = Array.from(updatedKeywords).sort();
+      keywordsAddedCount += category.keywords.length - originalSize;
+    }
   }
 
-  // Tulis ulang file persis format Anda
-  const newFile = `// titleToCategory.js
+  if (keywordsAddedCount === 0) {
+    console.log("\n✅ Tidak ada keyword baru yang signifikan untuk ditambahkan. File tidak diubah.");
+    return;
+  }
+
+  console.log(`\n🔥 Ditemukan dan akan ditambahkan ${keywordsAddedCount} keyword baru.`);
+
+  const newFileContent = `// titleToCategory.js
 export const categories = ${JSON.stringify(categories, null, 2)};
 
 export function titleToCategory(title) {
@@ -116,8 +117,13 @@ export function titleToCategory(title) {
 }
 `;
 
-  await fs.writeFile(CATEGORY_FILE_PATH, newFile, "utf8");
-  console.log(`✨ File ${CATEGORY_FILE_PATH} berhasil diperbarui.`);
+  try {
+    await fs.writeFile(CATEGORY_FILE_PATH, newFileContent, "utf8");
+    console.log(`\n✨ File ${CATEGORY_FILE_PATH} berhasil diperbarui dengan ${keywordsAddedCount} keyword baru!`);
+  } catch (error) {
+    console.error(`❌ Gagal menulis ulang file ${CATEGORY_FILE_PATH}:`, error.message);
+    process.exit(1);
+  }
 }
 
 main();
