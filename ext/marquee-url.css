@@ -23,7 +23,7 @@
 
 #related-marquee-container .marquee-content {
   display: inline-block;
-  animation: marquee-scroll 1500s linear infinite;
+  animation: marquee-scroll 2000s linear infinite;
   pointer-events: auto;
   padding: 8px 0; /* Padding dipindahkan ke sini agar ada sedikit ruang vertikal */
 }
