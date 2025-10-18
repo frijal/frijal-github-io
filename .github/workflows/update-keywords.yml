@@ -1,14 +1,14 @@
-name: 🧠 Perbarui Keywords Kategori (Otomatis)
+name: 🧠 Perbarui Keywords Kategori (AI)
 
 on:
-  workflow_dispatch: # Izinkan untuk dijalankan secara manual
+  workflow_dispatch:
 
 jobs:
   update-keywords:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # Beri izin untuk melakukan commit
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -19,12 +19,18 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Dependencies
+        run: npm install @google/generative-ai
+
       - name: Jalankan Skrip Analisis dan Update Keywords
+        # Masukkan API Key dari GitHub Secret ke dalam environment skrip
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node ext/updateTitleToCategory.js
 
       - name: Commit dan Push Perubahan
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(keywords): Perbarui keywords kategori secara otomatis"
+          commit_message: "chore(keywords): Perbarui keywords kategori via AI"
           file_pattern: ext/titleToCategory.js
           skip_empty_commit: true
