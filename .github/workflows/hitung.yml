@@ -19,15 +19,13 @@ jobs:
       - name: Setup Variables
         id: vars
         run: |
-          # === MODIFIKASI: Target sekarang adalah dua folder ===
           TARGETS="artikel img"
           DATE=$(date +'%m-%d')
-          # Laporan akan diberi nama generik karena targetnya > 1
           REPORT="mini/${DATE}-laporan_konten.txt"
           
           echo "report_path=$REPORT" >> $GITHUB_OUTPUT
-          echo "targets=$TARGETS"      >> $GITHUB_OUTPUT
-          echo "date=$DATE"          >> $GITHUB_OUTPUT
+          echo "targets=$TARGETS"     >> $GITHUB_OUTPUT
+          echo "date=$DATE"           >> $GITHUB_OUTPUT
 
       - name: Count Files by Extension
         id: counts
@@ -53,7 +51,6 @@ jobs:
           DATE="${{ steps.vars.outputs.date }}"
           TARGETS="${{ steps.vars.outputs.targets }}"
           
-          # Prefix khusus untuk folder artikel
           PREFIX_ARTIKEL="https://frijal.pages.dev/artikel/"
           
           mkdir -p "$(dirname "$REPORT")"
@@ -85,27 +82,26 @@ jobs:
           sudo apt-get install -y jq
 
       - name: Buat Badge JSON
-        # Tidak perlu modifikasi di sini, karena sudah menggunakan output dari langkah 'counts'
         run: |
-          mkdir -p ext
+          # Pastikan folder 'mini' ada
+          mkdir -p mini
           html=${{ steps.counts.outputs.html }}
           webp=${{ steps.counts.outputs.webp }}
           color=$(if (( html > webp )); then echo red; elif (( html < webp )); then echo green; else echo blue; fi)
 
           jq -n --arg m "$html" \
             '{schemaVersion:1, label:"artikel", message:$m, color:"blue"}' \
-            > ext/html_count_badge.json
+            > mini/html_count_badge.json
 
           jq -n --arg m "$webp" \
             '{schemaVersion:1, label:"cover", message:$m, color:"green"}' \
-            > ext/webp_count_badge.json
+            > mini/webp_count_badge.json
 
           jq -n --arg mh "$html" --arg mj "$webp" --arg c "$color" \
             '{schemaVersion:1, label:"html/webp", message:("\($mh) / \($mj)"), color:$c}' \
-            > ext/html_webp_badge.json
+            > mini/html_webp_badge.json
 
       - name: Rotate Reports
-        # Tidak perlu modifikasi, logika pembersihan tetap sama
         run: |
           mkdir -p mini
           mapfile -t files < <(ls -1t mini/*-laporan_*.txt 2>/dev/null)
@@ -116,10 +112,7 @@ jobs:
       - name: Commit Jika Ada Perubahan
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: >
-            chore: update laporan & badge untuk artikel dan img
+          commit_message: "chore: update laporan & badge konten"
           branch: ${{ github.ref_name }}
-          file_pattern: |
-            mini/*
-            ext/*
+          file_pattern: mini/*
           skip_empty_commit: true
