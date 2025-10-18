@@ -170,3 +170,28 @@ a.category-link:hover {
     .btn-emoji { font-size: 1.8rem; }
     a.category-link { font-size: 12px; padding: 6px 12px; }
 }
+
+/* --- GAYA TEKS MARQUEE --- */
+
+/* Gaya default (untuk latar gelap) */
+#related-marquee-container a {
+  color: #fff; /* Teks putih */
+  text-decoration: none;
+  margin-right: 30px;
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+#related-marquee-container a:hover {
+  opacity: 1;
+  font-weight: 700;
+}
+
+/* Gaya saat JS mendeteksi latar belakang terang */
+#related-marquee-container.theme-light a {
+  color: #000; /* Teks hitam */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}

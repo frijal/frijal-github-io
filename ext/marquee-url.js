@@ -12,6 +12,44 @@
 // -------------------------------------------------------------------
 // FUNGSI-FUNGSI BANTUAN (HELPER FUNCTIONS)
 // -------------------------------------------------------------------
+// marquee-url.js
+
+/**
+ * FUNGSI BARU: Menyesuaikan warna teks marquee berdasarkan latar belakang body.
+ */
+function adaptMarqueeTextColor() {
+    const marqueeContainer = document.getElementById('related-marquee-container');
+    if (!marqueeContainer) return;
+
+    // Ambil warna latar belakang yang sedang diterapkan pada body
+    const bodyBgColor = getComputedStyle(document.body).backgroundColor;
+
+    // Fungsi untuk mengecek apakah sebuah warna (dalam format rgb) terang atau gelap
+    function isColorLight(rgbColor) {
+        if (!rgbColor || !rgbColor.startsWith('rgb')) {
+            // Jika warna tidak terdefinisi atau transparan, anggap gelap (teks putih)
+            return false;
+        }
+        
+        // Ekstrak nilai R, G, B dari string "rgb(r, g, b)"
+        const [r, g, b] = rgbColor.match(/\d+/g).map(Number);
+        
+        // Hitung luminance (kecerahan) berdasarkan formula standar
+        // Nilai di atas 128 umumnya dianggap terang
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+        
+        return luminance > 128;
+    }
+
+    // Tentukan warna teks berdasarkan kecerahan latar belakang
+    if (isColorLight(bodyBgColor)) {
+        // Jika latar belakang terang, buat teks marquee menjadi gelap
+        marqueeContainer.classList.add('theme-light');
+    } else {
+        // Jika latar belakang gelap, buat teks marquee menjadi terang
+        marqueeContainer.classList.remove('theme-light');
+    }
+}
 
 function isMobileDevice() {
   return (
@@ -273,6 +311,8 @@ async function initializeApp() {
     initCategoryMarquee(allArticlesData, currentFilename);
     initFloatingSearch(allArticlesData);
     initNavIcons(allArticlesData, currentFilename);
+    
+adaptMarqueeTextColor();
 
   } catch (error) {
     console.error('Gagal menginisialisasi aplikasi:', error);
