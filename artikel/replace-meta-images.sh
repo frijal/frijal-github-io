@@ -15,10 +15,10 @@ find . -type f -name "*.html" | while read -r FILE; do
   BEFORE_HASH=$(sha1sum "$FILE" | awk '{print $1}')
 
   perl -pi -e '
-  s|"https://frijal\.pages\.dev/artikel/(.*?)\.jpg">|"https://frijal.pages.dev/img/\1.webp">|g;
-  s|"https://frijal\.pages\.dev/artikel/(.*?)\.webp">|"https://frijal.pages.dev/img/\1.webp">|g;
-s|"https://frijal\.pages\.dev/img/(.*?)\.jpg">|"https://frijal.pages.dev/img/\1.webp">|g;
-  s|"https://frijal\.pages\.dev/assets/og/(.*?)\.jpg">|"https://frijal.pages.dev/img/\1.webp">|g;
+  s|"https://frijal\.pages\.dev/artikel/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g;
+  s|"https://frijal\.pages\.dev/artikel/(.*?)\.webp"|"https://frijal.pages.dev/img/\1.webp"|g;
+  s|"https://frijal\.pages\.dev/img/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g;
+  s|"https://frijal\.pages\.dev/assets/og/(.*?)\.jpg"|"https://frijal.pages.dev/img/\1.webp"|g;  
   ' "$FILE"
 
   AFTER_HASH=$(sha1sum "$FILE" | awk '{print $1}')
