@@ -151,17 +151,6 @@
   color: #333;
 }
 
-/* --- (3) GAYA UNTUK IKON NAVIGASI --- */
-.ikon-kanan-bawah {
-  position: fixed;
-  bottom: 5%;
-  right: 10px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
 .btn-emoji {
     display: flex;
     justify-content: center;
@@ -177,20 +166,6 @@
 
 .btn-emoji:hover {
     transform: scale(1.1);
-}
-
-.ikon-kanan-bawah a {
-  display: block;
-  max-width: 3em;
-  transition: transform 0.2s ease;
-}
-
-.ikon-kanan-bawah svg {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* --- (4) GAYA UNTUK TAUTAN KATEGORI DI KIRI BAWAH --- */
@@ -240,17 +215,5 @@ a.kategori-kiri-bawah:hover {
   }
   a.kategori-kiri-bawah:hover {
     background-color: #dee2e6; /* Efek hover lebih gelap */
-  }
-}
-
-/* Aturan untuk ikon navigasi lainnya */
-@media (max-width: 400px) {
-  .ikon-kanan-bawah a {
-    max-width: 2.4em;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  .ikon-kanan-bawah svg {
-    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.2);
   }
 }
