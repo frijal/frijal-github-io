@@ -22,7 +22,7 @@ if (!API_KEY) {
 }
 const genAI = new GoogleGenerativeAI(API_KEY);
 // GANTI NAMA MODEL DI SINI
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-preview" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 // Fungsi baru untuk mendapatkan keyword dari AI
 async function getKeywordsFromAI(text) {
