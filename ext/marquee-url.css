@@ -162,6 +162,23 @@
   gap: 1em;
 }
 
+.btn-emoji {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--bg, #ccc); /* Menggunakan variabel CSS untuk background */
+    font-size: 24px; /* Ukuran emoji */
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.btn-emoji:hover {
+    transform: scale(1.1);
+}
+
 .ikon-kanan-bawah a {
   display: block;
   max-width: 3em;
